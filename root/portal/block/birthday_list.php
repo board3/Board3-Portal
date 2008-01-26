@@ -42,9 +42,9 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
       }      
       }
        
-      if( $portal_config['allow_birthdays_ahead'] > 0 )
+      if( $portal_config['portal_birthdays_ahead'] > 0 )
       {
-        if ( $user_birthday >= ($today + 86400) && $user_birthday <= ($today + ($portal_config['allow_birthdays_ahead'] * 86400) ) )
+        if ( $user_birthday >= ($today + 86400) && $user_birthday <= ($today + ($portal_config['portal_birthdays_ahead'] * 86400) ) )
         {
          if ($row['user_colour'])
          {
@@ -71,8 +71,8 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 // Assign index specific vars
 $template->assign_vars(array(
    'BIRTHDAY_LIST'   => $birthday_list,
-   'BIRTHDAYS_AHEAD_LIST'   => ( $portal_config['allow_birthdays_ahead'] > 0 ) ? $birthday_ahead_list : '',
-   'L_BIRTHDAYS_AHEAD'   => sprintf($user->lang['BIRTHDAYS_AHEAD'], $portal_config['allow_birthdays_ahead']),
+   'BIRTHDAYS_AHEAD_LIST'   => ( $portal_config['portal_birthdays_ahead'] > 0 ) ? $birthday_ahead_list : '',
+   'L_BIRTHDAYS_AHEAD'   => sprintf($user->lang['BIRTHDAYS_AHEAD'], $portal_config['portal_birthdays_ahead']),
    'S_DISPLAY_BIRTHDAY_LIST'   => ($config['load_birthdays']) ? true : false,
    )
 );
