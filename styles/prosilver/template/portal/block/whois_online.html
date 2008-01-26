@@ -1,0 +1,21 @@
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="topiclist">
+			<li class="header"><dl><dt><!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a><!-- ELSE -->{L_WHO_IS_ONLINE}<!-- ENDIF --></dt></dl></li>
+		</ul>
+		<ul class="topiclist forums">
+			<li><dl>
+				<dd class="posts_portal"  style="border-left:0px">
+				<!-- IF S_DISPLAY_ONLINE_LIST -->
+					<p style="font-size: 90%; margin: 0 5px 0 5px;">{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
+					<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>
+				<!-- ENDIF -->
+				</dd>
+			</dl></li>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+
+<br />
