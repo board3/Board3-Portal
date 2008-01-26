@@ -5,10 +5,17 @@
 	<tr class="row1">
 		<td>
 		<!-- BEGIN announcements_row -->
+		<!-- IF announcements_row.S_NO_TOPICS -->
+					<table class="tablebg" cellspacing="1" width="100%">
+						<tr>
+							{L_NO_ANNOUNCEMENTS}
+						</tr>
+					</table>
+		<!-- ELSE -->
 			<table class="tablebg" cellspacing="1" width="100%">
 				<tr>
 					<td class="cat">
-						{announcements_row.ATTACH_ICON_IMG}<!-- IF announcements_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --><a href="{announcements_row.U_VIEW_COMMENTS}"><strong>{announcements_row.TITLE}</strong></a>
+						<!-- IF announcements_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {announcements_row.ATTACH_ICON_IMG}<!-- IF announcements_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --><a href="{announcements_row.U_VIEW_COMMENTS}"><strong>{announcements_row.TITLE}</strong></a>
 					</td>
 				</tr>
 				<tr class="row1">
@@ -28,7 +35,8 @@
 				</tr>
 			</table>
 			<!-- IF announcements_row.S_NOT_LAST --><br /><!-- ENDIF -->
-			<!-- END announcements_row -->
+		<!-- ENDIF -->
+		<!-- END announcements_row -->
 		</td>
 	</tr>
 </table>

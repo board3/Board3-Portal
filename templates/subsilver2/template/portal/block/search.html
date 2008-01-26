@@ -1,10 +1,9 @@
-
-<script language="JavaScript" type="text/javascript">
+<script type="text/javascript">
 <!--
 function qsearch_onSubmit()
 {
-	qs_enginename = document.qsearch_form.qsearch_select.value;
-	qs_keywords = document.qsearch_form.keywords.value;
+	qs_enginename = document.getElementById('qsearch_select').value;
+	qs_keywords = document.getElementById('searchfield').value;
 	switch( qs_enginename )
 	{
 	case 'site':
@@ -49,9 +48,12 @@ function qsearch_onSubmit()
 	</tr>
 	<tr class="row1">
 		<td>
-			<form name="qsearch_form" id="searchform" method="post" action="{U_SEARCH}" onSubmit="return qsearch_onSubmit();">
-			<input type="text" tabindex="1" name="keywords" id="searchfield" size="22" maxlength="40" value="" class="inputbox autowidth" /><br /> <br />
-			<select name="qsearch_select">
+			<form id="qsearch_form" method="post" action="{U_SEARCH}" onsubmit="return qsearch_onSubmit();">
+			<p>
+			<input type="text" tabindex="6" name="keywords" id="searchfield" size="22" maxlength="40" class="inputbox autowidth" />
+			</p>
+			<p>
+			<select id="qsearch_select">
 				<optgroup label="{L_SH_SITE}">
 					<option value="site" style="background-color: #EEEEEE;">{L_SH_POSTS}</option>
 					<option value="author" style="background-color: #EEEEEE;">{L_SH_AUTHOR}</option>
@@ -69,6 +71,7 @@ function qsearch_onSubmit()
 			<input type="hidden" name="search_fields" value="all" />
 			<input type="hidden" name="show_results" value="topics" />
 			<input type="submit" value="{L_SH}" class="button2" />
+			</p>
 			</form>
 			<hr />
 			<a href="{U_SEARCH}">{L_SH_ADV}</a>
