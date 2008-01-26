@@ -31,27 +31,35 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'INSTALLER_CONVERT'					=> 'Convert',
-	'INSTALLER_CONVERT_MENU'			=> 'Convertmenu',
-	'INSTALLER_CONVERT_NOTE'			=> 'Convert MOD to v%s',
-	'INSTALLER_CONVERT_PREFIX'			=> 'Prefix of phpBB2-installation',
-	'INSTALLER_CONVERT_SUCCESSFUL'		=> 'Convert of the MOD to v%s was successful.<br />Now copy the image-files of album/upload and album/upload/cache of your phpbb2-Installation into the one\'s of the phpBB3',
-	'INSTALLER_CONVERT_UNSUCCESSFUL'	=> 'Convert of the MOD to v%s was <strong>not</strong> successful.',
-	'INSTALLER_CONVERT_UNSUCCESSFUL2'	=> 'You didn\'t insert a prefix of your phpBB2-installation.',
-	'INSTALLER_CONVERT_WELCOME'			=> 'Welcome to the Convertmenu',
-	'INSTALLER_CONVERT_WELCOME_NOTE'	=> 'When you choose to convert the MOD, we try to copy the data of your older phpBB2 Installation.',
 
-	'INSTALLER_INTRO'					=> 'Intro',
-	'INSTALLER_INTRO_WELCOME'			=> 'Welcome to the MOD Installation',
-	'INSTALLER_INTRO_WELCOME_NOTE'		=> 'Please choose what you want to do.',
-
+	'INSTALLER_MENU'					=> 'PInUp Menu',
+	'INSTALLER_MENU_START'				=> 'Start',
+	'INSTALLER_UNINSTALL'				=> 'Uninstall',
+	'INSTALLER_UPDATE'					=> 'Update',
 	'INSTALLER_INSTALL'					=> 'Install',
+
+	'INSTALLER_INTRO_TITLE'					=> 'Portal Install/Update Utility',
+	'INSTALLER_INTRO_NOTE'			=> 'Welcome to the Portal Install/Update Utility, hereby known as PInUp',
+
+	'INSTALLER_MENU_DONE'				=> 'Latest Version',
+	'INSTALLER_MENU_DONE_TEXT'			=> 'You already have version %s installed, please delete the install_portal folder and return to your <a href="%s">forums</a>.',
+
+	'INSTALLER_INSTALL_TITLE'			=> 'PInUp Install',
+	'INSTALLER_INSTALL_NOTE'			=> 'When you choose to install the MOD, any database of previous versions will be dropped.',
 	'INSTALLER_INSTALL_MENU'			=> 'Installmenu',
 	'INSTALLER_INSTALL_SUCCESSFUL'		=> 'Installation of the MOD v%s was successful.',
 	'INSTALLER_INSTALL_UNSUCCESSFUL'	=> 'Installation of the MOD v%s was <strong>not</strong> successful.',
 	'INSTALLER_INSTALL_VERSION'			=> 'Install MOD v%s',
-	'INSTALLER_INSTALL_WELCOME'			=> 'Welcome to the Installationmenu',
-	'INSTALLER_INSTALL_WELCOME_NOTE'	=> 'When you choose to install the MOD, any database of previous versions will be dropped.',
+	'INSTALLER_INSTALL_START'			=> 'Please click <a href="%s">Install</a> to start the install utility.',
+
+	'INSTALLER_UPDATE_TITLE'			=> 'PInUp Update',
+	'INSTALLER_UPDATE_NOTE'				=> 'Update MOD from v%s to v%s',
+
+	'INSTALLER_UNINSTALL_TITLE'			=> 'PInUp Uninstall',
+	'INSTALLER_UNINSTALL_NOTE'		=> 'Welcome to the Updatemenu',
+	'INSTALLER_UNINSTALL_SUCCESSFUL'	=> 'Installation of the MOD v%s was successful.',
+
+
 
 	'INSTALLER_NEEDS_FOUNDER'			=> 'You must be logged in as a founder.',
 
@@ -60,8 +68,17 @@ $lang = array_merge($lang, array(
 	'INSTALLER_UPDATE_NOTE'				=> 'Update MOD from v%s to v%s',
 	'INSTALLER_UPDATE_SUCCESSFUL'		=> 'Update of the MOD from v%s to v%s was successful.',
 	'INSTALLER_UPDATE_UNSUCCESSFUL'		=> 'Update of the MOD from v%s to v%s was <strong>not</strong> successful.',
-	'INSTALLER_UPDATE_VERSION'			=> 'Update MOD from v',
-	'INSTALLER_UPDATE_WELCOME'			=> 'Welcome to the Updatemenu',
+	'INSTALLER_UPDATE_VERSION'			=> 'Update MOD from v%s',
+	'INSTALLER_UPDATE_TO'				=> 'Update to',
+	'INSTALLER_UPDATE_START'			=> 'Please click <a href="%s">Update</a> to start the update utility.',
+
+	'INSTALLER_UNINSTALL_OLDVERSION'	=> 'Sorry, PInUp does not support the uninstallation of the origonal phpBB3 Portal.',
+
+	'INSTALLER_ERROR'					=> 'PInUp Error',
+
+	'INSTALLER_USEFUL_INFO'				=> 'Please delete the /install_portal directory.',
+
+	'INSTALLER_UNINSTALL_USEFUL_INFO'	=> 'Remember to delete the portal files and remove the file edits.',
 
 	'WARNING'							=> 'Warning',
 ));
