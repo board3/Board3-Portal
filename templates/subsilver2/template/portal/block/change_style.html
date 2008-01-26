@@ -1,0 +1,28 @@
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_BOARD_STYLE}</th>
+	</tr>
+	<tr class="row1">
+		<td>
+			<script language="JavaScript" type="text/JavaScript">
+			<!--
+			// borrowed from forumimages.com !!
+			function jumpMenu(targ, selObj, restore)
+			{
+				eval(targ + ".location='" + selObj.options[selObj.selectedIndex].value + "'");
+				if (restore) selObj.selectedIndex = 0;
+			}
+			//-->
+			</script>
+			<form method="get" name="jumpbox" action="bb3portal.php" onsubmit="if(document.jumpbox.f.value == -1){return false;}">
+				<select name="demo" onchange="jumpMenu('self',this,0)" class="input">
+					<option selected="selected" disabled="disabled">{L_STYLE_CHOOSE}</option>
+					<!-- BEGIN styles-->
+					<option value="{styles.U_STYLE}">{styles.STYLE_NAME}</option>
+					<!-- END styles -->
+				</select>
+			</form>
+		</td>
+	</tr>
+</table>
+<br />

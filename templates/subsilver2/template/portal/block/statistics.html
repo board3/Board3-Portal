@@ -1,0 +1,38 @@
+
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_STATISTICS}</th>
+	</tr>
+	<tr class="row1">
+		<td>
+		<!-- IF S_USER_LOGGED_IN -->
+		<!--
+		<strong>{L_ST_NEW}</strong><br />
+		{L_ST_NEW_POSTS} <strong>{S_NEW_POSTS}</strong><br />
+		{L_ST_NEW_TOPICS} <strong>{S_NEW_TOPIC}</strong><br />
+		{L_ST_NEW_ANNS} <strong>{S_NEW_ANN}</strong><br />
+		{L_ST_NEW_STICKYS} <strong>{S_NEW_SCT}</strong><br /><br />
+		-->
+		<!-- ENDIF -->
+		<strong>{L_ST_TOP}</strong><br />
+		{TOTAL_POSTS}<br />
+		{TOTAL_TOPICS}<br />
+		{L_ST_TOP_ANNS} <strong>{S_ANN}</strong><br />
+		{L_ST_TOP_STICKYS} <strong>{S_SCT}</strong><br />
+		{L_ST_TOT_ATTACH} <strong>{S_TOT_ATTACH}</strong><br />
+		
+		<hr align="left" width="85%" />
+		{TOPICS_PER_DAY}<br />
+		{POSTS_PER_DAY}<br />
+		{USERS_PER_DAY}<br />
+		{TOPICS_PER_USER}<br />
+		{POSTS_PER_USER}<br />
+		{POSTS_PER_TOPIC}<br />
+		<hr align="left" width="85%" />
+		
+		{TOTAL_USERS}<br />
+		{NEWEST_USER}
+		</td>
+	</tr>
+</table>
+<br />

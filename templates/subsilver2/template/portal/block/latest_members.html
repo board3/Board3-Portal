@@ -1,0 +1,17 @@
+
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_LATEST_MEMBERS}</th>
+	</tr>
+	<tr class="row1">
+		<td>
+			<span style="float:left;"><strong>{L_USERNAME}</strong></span>
+			<span style="float:right;padding-right:10px;"><strong>{L_JOINED}</strong></span><br />
+			<!-- BEGIN latest_members -->
+			<span style="float:left;"><a href="{latest_members.U_USERNAME}"><span<!-- IF latest_members.USERNAME_COLOR -->{latest_members.USERNAME_COLOR}<!-- ENDIF -->>{latest_members.USERNAME}</span></a></span>
+			<span style="float:right;padding-right:10px;">{latest_members.JOINED}</span><br style="clear:both" />
+			<!-- END latest_members -->
+		</td>
+	</tr>
+</table>
+<br />

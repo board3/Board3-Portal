@@ -1,0 +1,37 @@
+<!-- IF .news_row -->
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="topiclist">
+			<li class="header"><dl><dt>{L_LATEST_NEWS}</dt></dl></li>
+		</ul>
+		<ul class="topiclist forums">
+			<li>
+			<dl>
+				<dd class="posts_portal"  style="border-left:0px">
+				<ul class="news">
+					<!-- BEGIN news_row -->
+					<li>
+						<span style="float: left; margin: 0 0 0 5px;"><img src="{T_THEME_PATH}/images/arrow_right.gif" alt="&raquo;"/> 
+						<!-- <a href="{news_row.U_VIEW_COMMENTS}"><strong style="font-size:1.1em;">{news_row.TITLE}</strong></a>  -->
+						<!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG}  <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}" title="{L_JUMP_NEWEST}"><strong style="font-size:1.1em;">{news_row.TITLE}</strong></a></span>
+						<span style="float: right; margin: 0 5px 0 0;">{L_LAST_POST} {L_POST_BY_AUTHOR}: <strong><a href="{news_row.U_USER_PROFILE}">{news_row.POSTER}</a></strong></span>
+						<br style="clear:both" />
+						<span style="float: left; margin: 0 0 0 14px;">
+							<a href="{news_row.U_VIEW_COMMENTS}" title="{L_JUMP_FIRST}"><span style="font-size:0.9em;"><em>{L_COMMENTS}: {news_row.REPLIES}</em></span></a>
+							<span style="font-size:0.9em;"><em>{L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS}</em></span>
+						</span>
+						<span style="float: right; margin: 0 5px 0 0;">{L_POSTED_ON_DATE} <strong>{news_row.TIME}</strong></span>
+						<!-- IF news_row.S_NOT_LAST --><hr style="margin: 0px 0px 3px 0px;" /><!-- ENDIF -->						
+					</li>
+					<!-- END news_row -->
+				</ul>
+				</dd>
+			</dl>
+			</li>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<br style="clear:both" />
+<!-- ENDIF -->

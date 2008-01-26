@@ -1,0 +1,37 @@
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_LATEST_NEWS}</th>
+	</tr>
+	<tr class="row1">
+		<td>
+		<!-- BEGIN news_row -->
+		<!-- IF news_row.S_NO_TOPICS -->
+			<center><span class="gensmall"><strong>{L_NO_NEWS}</strong></span></center>
+		<!-- ELSE -->
+			<table class="tablebg" cellspacing="1" width="100%">
+				<tr>
+					<td class="cat">{news_row.ATTACH_ICON_IMG}<!-- IF news_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_VIEW_COMMENTS}"><strong>{news_row.TITLE}</strong></a></td>
+				</tr>
+				<tr class="row1">
+					<td>
+						<span class="gensmall" style="float: left;">{L_POSTED_BY}: <strong><a href="{news_row.U_USER_PROFILE}">{news_row.POSTER}</a></strong></span>
+						<span class="gensmall" style="float: right;">{news_row.TIME}</span>
+						<br /><br />
+						{news_row.TEXT}
+						<br /><br />
+					</td>
+				</tr>
+				<tr class="row1">
+					<td>
+					<span style="float: left;">{L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS} &nbsp;&bull;&nbsp; <a href="{news_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}: {news_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{news_row.U_POST_COMMENT}">{L_POST_REPLY}</a></span>
+					<span style="float: right;">{news_row.OPEN}<a href="{news_row.U_READ_FULL}">{news_row.L_READ_FULL}</a>{news_row.CLOSE} <a href="#wrap" class="top" title="{L_BACK_TO_TOP}">{L_BACK_TO_TOP}</a></span>
+					</td>
+				</tr>
+			</table>
+		<!-- ENDIF -->
+		<!-- IF news_row.S_NOT_LAST --><br /><!-- ENDIF -->
+		<!-- END news_row -->
+		</td>
+	</tr>
+</table>
+<br />

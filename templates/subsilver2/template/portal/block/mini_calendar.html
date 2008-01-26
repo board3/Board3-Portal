@@ -1,0 +1,58 @@
+
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_MINI_CAL_CALENDAR}</th>
+	</tr>
+	<tr class="row1">
+		<td>	
+			<table width="100%" cellspacing="1">
+			<tr>
+				<td align="left" colspan="2">{U_PREV_MONTH}</td>
+				<td colspan="3" align="center"><span class="genmed">{L_MINI_CAL_MONTH}</span></td>
+				<td align="right" colspan="2">{U_NEXT_MONTH}</td>
+			</tr>
+			<tr>
+				<td width="16%"><span class="gensmall" style="color:#0000FF">{L_MINI_CAL_SUN}</span></td>
+				<td width="14%"><span class="gensmall" style="color:#0000FF">{L_MINI_CAL_MON}</span></td>
+				<td width="14%"><span class="gensmall" style="color:#0000FF">{L_MINI_CAL_TUE}</span></td>
+				<td width="14%"><span class="gensmall" style="color:#0000FF">{L_MINI_CAL_WED}</span></td>
+				<td width="14%"><span class="gensmall" style="color:#0000FF">{L_MINI_CAL_THU}</span></td>
+				<td width="14%"><span class="gensmall">{L_MINI_CAL_FRI}</span></td>
+				<td width="14%"><span class="gensmall" style="color:#FF0000">{L_MINI_CAL_SAT}</span></td>
+			</tr>
+			<!-- BEGIN mini_cal_row -->
+			<tr>
+				<!-- BEGIN mini_cal_days -->
+				<td class="row1" align="center"><span class="gensmall">{mini_cal_row.mini_cal_days.MINI_CAL_DAY}</span></td>
+				<!-- END mini_cal_days -->
+			</tr>
+			<!-- END mini_cal_row -->
+			</table>
+			<hr />
+
+			<table class="tablebg" width="100%" cellspacing="1">
+				<!-- BEGIN mini_cal_holiday -->
+				<tr>
+				<td class="row1" align="left"><span class="gensmall">{mini_cal_holiday.MINI_CAL_HOLIDAYS}</span></td>
+				</tr>
+				<!-- BEGINELSE -->
+				<tr>
+				<td class="row1"></td>
+				</tr>
+				<!-- END mini_cal_holiday -->
+			</table>
+
+			<table class="tablebg" width="100%" cellspacing="1">
+			<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+			<tr>
+			<td class="row1" align="left">
+				<span class="gensmall"><!-- IF BIRTHDAY_LIST -->{L_CONGRATULATIONS}: <strong>{BIRTHDAY_LIST}</strong><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF --></span>
+			</td>
+			</tr>
+			<!-- ENDIF -->
+			</table>			
+
+		</td>
+	</tr>
+</table>
+<br />

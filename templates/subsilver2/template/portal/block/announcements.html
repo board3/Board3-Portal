@@ -1,0 +1,35 @@
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_LATEST_ANNOUNCEMENTS}</th>
+	</tr>
+	<tr class="row1">
+		<td>
+		<!-- BEGIN announcements_row -->
+			<table class="tablebg" cellspacing="1" width="100%">
+				<tr>
+					<td class="cat">
+						{announcements_row.ATTACH_ICON_IMG}<!-- IF announcements_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --><a href="{announcements_row.U_VIEW_COMMENTS}"><strong>{announcements_row.TITLE}</strong></a>
+					</td>
+				</tr>
+				<tr class="row1">
+					<td>
+						<span class="gensmall" style="float: left;">{L_POSTED_BY}: <strong><a href="{announcements_row.U_USER_PROFILE}">{announcements_row.POSTER}</a></strong></span>
+						<span class="gensmall" style="float: right;">{announcements_row.TIME}</span>
+						<br /><br />
+						{announcements_row.TEXT}
+						<br /><br />
+					</td>
+				</tr>
+				<tr class="row1">
+					<td>
+					<span style="float: left;">{L_TOPIC_VIEWS}: {announcements_row.TOPIC_VIEWS} &nbsp;&bull;&nbsp; <a href="{announcements_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}: {announcements_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{announcements_row.U_POST_COMMENT}">{L_POST_REPLY}</a></span>
+					<span style="float: right;">{announcements_row.OPEN}<a href="{announcements_row.U_READ_FULL}">{announcements_row.L_READ_FULL}</a>{announcements_row.CLOSE} <a href="#wrap" class="top" title="{L_BACK_TO_TOP}">{L_BACK_TO_TOP}</a></span>
+					</td>
+				</tr>
+			</table>
+			<!-- IF announcements_row.S_NOT_LAST --><br /><!-- ENDIF -->
+			<!-- END announcements_row -->
+		</td>
+	</tr>
+</table>
+<br />
