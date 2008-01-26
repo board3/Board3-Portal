@@ -66,7 +66,10 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAIN_MENU_EXPLAIN'				=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_USER_MENU'						=> 'Benutzermenü / Login Box',
 	'PORTAL_USER_MENU_EXPLAIN'				=> 'Diesen Block auf dem Portal anzeigen.',
-	
+
+	// Birthdays
+    'BIRTHDAYS_AHEAD'           			=> 'In den n�chsten %s Tagen',
+    'NO_BIRTHDAYS_AHEAD'        			=> 'In diesem Zeitraum hat kein Mitglied Geburtstag',	
 
 	// random member
 	'PORTAL_RANDOM_MEMBER'					=> 'Zufälliges Profil',

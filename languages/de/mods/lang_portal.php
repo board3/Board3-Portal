@@ -56,6 +56,10 @@ $lang = array_merge($lang, array(
 	'WIO_GUEST'			=> 'Gäste',
 	//'RECORD_ONLINE_USERS'=> 'View record: <strong>%1$s</strong><br />%2$s',
 
+	// Birthdays
+    'BIRTHDAYS_AHEAD'           => 'In den n�chsten %s Tagen',
+    'NO_BIRTHDAYS_AHEAD'        => 'In diesem Zeitraum hat kein Mitglied Geburtstag',
+
 	// user menu
 	'USER_MENU'			=> 'Benutzer Menü',
 	'UM_LOG_ME_IN'		=> 'Mich bei jedem Besuch automatisch anmelden',
