@@ -1,0 +1,30 @@
+
+<form action="{S_LOGIN_ACTION}" method="post">
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></th>
+	</tr>
+	<tr class="row1">
+		<td>
+
+			<span class="genmed">{L_USERNAME}:</span><br />
+			<input type="text" tabindex="1" name="username" id="username" size="20" maxlength="40" value="" class="inputbox autowidth" /><br /><br /> 
+			<span class="genmed">{L_PASSWORD}:</span><br />
+			<input type="password" tabindex="2" id="password" name="password" size="20" maxlength="25" class="inputbox autowidth" /> 
+		
+			<!-- IF S_DISPLAY_FULL_LOGIN -->			
+			<br /><br />
+			<!-- IF S_AUTOLOGIN_ENABLED -->
+			<input type="checkbox" class="radio" name="autologin" tabindex="3" /> <span class="gensmall">{L_UM_LOG_ME_IN}</span><br />
+			<!-- ENDIF -->
+			<input type="checkbox" class="radio" name="viewonline" tabindex="4" /> <span class="gensmall">{L_UM_HIDE_ME}</span><br />
+			<!-- ENDIF -->		
+
+			<br />
+			<input type="hidden" name="redirect" value="{U_PORTAL}" />
+			<input type="submit" name="login" tabindex="6" value="{L_LOGIN}" class="button1" />
+			
+		</td>
+	</tr>
+</table>
+<br />

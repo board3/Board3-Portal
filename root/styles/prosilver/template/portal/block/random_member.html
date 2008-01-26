@@ -1,0 +1,28 @@
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+			<h3>{L_RND_MEMBER}</h3>
+			<!-- BEGIN random_member -->
+			<span style="float:left;font-size:12px;">
+				<img src="portal/images/member.gif" height="15" width="15" alt="{random_member.USERNAME}" /> <a href="{random_member.U_VIEW_PROFILE}"><!-- IF random_member.USER_COLOR --><span style="color: {random_member.USER_COLOR}; font-weight: bold;"><!-- ELSE --><span><!-- ENDIF -->{random_member.USERNAME}</span></a>
+			</span>
+			<span style="float:right;"></span>
+			<!-- //IF random_member.AVATAR_IMG --><br /><br /><a href="{random_member.U_VIEW_PROFILE}">{random_member.AVATAR_IMG}</a><!-- //ENDIF -->
+			<!-- IF random_member.RANK_TITLE --><br /><small>{random_member.RANK_TITLE}</small><br /><!-- ENDIF -->
+			<!-- IF random_member.RANK_IMG -->{random_member.RANK_IMG}<br /><!-- ENDIF -->
+			<span style="float:left;">{L_RND_JOIN}:</span><span style="float:right;padding-right:10px;">{random_member.JOINED}</span><br />
+			<span style="float:left;">{L_RND_POSTS}:</span><span style="float:right;padding-right:10px;">{random_member.USER_POSTS}</span><br />
+			<!-- IF random_member.USER_OCC -->
+			<span style="float:left;">{L_RND_OCC}:</span><span style="float:right;padding-right:10px;">{random_member.USER_OCC}</span><br />
+			<!-- ENDIF -->
+			<!-- IF random_member.USER_FROM -->
+			<span style="float:left;">{L_RND_FROM}:</span><span style="float:right;padding-right:10px;">{random_member.USER_FROM}</span><br />
+			<!-- ENDIF -->
+			<!-- IF random_member.U_WWW -->
+			<span style="float:left;"><a href="{random_member.U_WWW}" title="{random_member.U_WWW}" target="_blank">{L_RND_WWW}</a></span><span style="float:right;"></span><br />
+			<!-- ENDIF -->
+			<!-- END random_member -->	
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<br style="clear:both" />

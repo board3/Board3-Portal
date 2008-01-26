@@ -1,0 +1,39 @@
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+			<h3>{L_M_MENU}</h3>
+  
+   <div id="navigation" style="padding-top:0px">
+  			
+			
+				<strong>{L_M_CONTENT}</strong>
+				<ul>
+					<li><a href="{U_INDEX}">{L_INDEX}</a></li>
+					<li><a href="{U_SEARCH}">{L_SEARCH}</a></li>
+					<!-- IF not S_USER_LOGGED_IN -->
+					<li><a href="{U_REGISTER}">{L_REGISTER}</a></li>
+					<!-- ENDIF -->
+					<li><a href="{U_MEMBERLIST}">{L_MEMBERLIST}</a></li>
+					<li><a href="{U_TEAM}">{L_THE_TEAM}</a></li>
+					<!-- IF U_MCP -->
+					<li><a href="{U_MCP}">{L_MCP}</a></li>
+					<!-- ENDIF -->
+					<!-- IF U_ACP -->
+					<li><a href="{U_ACP}">{L_M_ACP}</a></li>
+					<!-- ENDIF -->
+				</ul>
+				<br />
+
+				<strong>{L_M_HELP}</strong>
+				<ul>
+					<li><a href="{U_FAQ}">{L_FAQ}</a></li>
+					<li><a href="faq.php?mode=bbcode">{L_M_BBCODE}</a></li>
+					<li><a href="ucp.php?mode=terms">{L_M_TERMS}</a></li>
+					<li><a href="ucp.php?mode=privacy">{L_M_PRV}</a></li>
+				</ul>
+			</div>
+
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<br style="clear:both" />

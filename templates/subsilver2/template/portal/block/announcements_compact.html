@@ -1,0 +1,26 @@
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_LATEST_ANNOUNCEMENTS}</th>
+	</tr>
+	<!-- BEGIN announcements_row -->
+	<!-- IF announcements_row.S_NO_TOPICS -->
+	<tr class="row1">
+		<td styl="text-align:center;">
+			<span class="gensmall"><strong>{L_NO_NEWS}</strong></span>
+		</td>
+	</tr>
+	<!-- ELSE -->
+	<tr class="row1">
+		<td>
+			&#187&nbsp;<a href="{announcements_row.U_VIEW_COMMENTS}"><strong style="font-size:1.1em;">{announcements_row.TITLE}</strong></a>
+			<br />
+			<span style="float: left;font-size:0.9em;">
+				<a href="{announcements_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}"><em>{L_COMMENTS}: {announcements_row.REPLIES}</em></a>
+			</span>
+			<span style="float: right;">{announcements_row.TIME}</span>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- END announcements_row -->
+</table>
+<br />

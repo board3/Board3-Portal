@@ -1,0 +1,212 @@
+<!-- DEFINE $S_IN_PORTAL = 1 -->
+<!-- INCLUDE overall_header.html -->
+
+<!-- $Id$ //-->
+
+<!--
+.gensmall {
+	margin: 1px 1px;
+	font-size: 10px;
+}
+
+small, .small {
+	font-size:10px; 
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Container for sub-navigation list */
+#navigation {
+	padding-top: 0px;
+	font-size: 1.1em;
+}
+
+/* Link styles for the sub-section links */
+#navigation a {
+	color: #105289;
+	font-weight: normal;
+	padding: 1px;
+	display:block;
+}
+
+#navigation a:hover {
+	color: #d31141;
+}
+//-->
+
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+<!-- [+] left block area -->
+	<td width="{PORTAL_LEFT_COLLUMN}" valign="top" style="padding-right:6px;">
+	
+		<!-- INCLUDE portal/block/main_menu.html -->
+		
+		<!-- IF S_DISPLAY_SEARCH -->
+			<!-- INCLUDE portal/block/search.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_ADS_SMALL -->
+			<!-- INCLUDE portal/block/ads_small.html -->
+		<!-- ENDIF -->
+	
+		<!-- IF S_DISPLAY_CHANGE_STYLE -->
+			<!-- INCLUDE portal/block/change_style.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_PAY_S -->
+			<!-- INCLUDE portal/block/donation/donation_small.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_LATEST_MEMBERS -->
+			<!-- INCLUDE portal/block/latest_members.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_TOP_POSTERS -->
+			<!-- INCLUDE portal/block/top_poster.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_RANDOM_MEMBER -->
+			<!-- INCLUDE portal/block/random_member.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_CLOCK -->
+			<!-- INCLUDE portal/block/clock.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_MINICAL -->        
+			<!-- INCLUDE portal/block/mini_calendar.html -->
+		<!-- ENDIF -->		
+
+		<!-- IF S_DISPLAY_LINK_US -->
+			<!-- INCLUDE portal/block/link_us.html -->
+		<!-- ENDIF -->		
+
+		<!-- IF S_DISPLAY_LINKS -->
+			<!-- INCLUDE portal/block/links.html -->
+		<!-- ENDIF -->		
+
+		<!-- IF S_DISPLAY_LAST_BOTS and S_LAST_VISITED_BOTS -->
+			<!-- INCLUDE portal/block/latest_bots.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_BIRTHDAY_LIST and BIRTHDAY_LIST -->
+			<!-- INCLUDE portal/block/birthday_list.html -->
+		<!-- ENDIF -->
+
+	</td>
+<!-- [-] left block area -->
+	<td width="4" valign="top"></td>
+
+<!-- [+] center block area -->
+	<td valign="top">
+
+		<!-- IF S_DISPLAY_WELCOME -->
+			<!-- INCLUDE portal/block/welcome.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_ADS_CENTER -->
+			<!-- INCLUDE portal/block/ads_center.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_PAY_C -->
+			<!-- INCLUDE portal/block/donation/donation.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_RECENT -->
+			<!-- INCLUDE portal/block/recent.html -->
+		<!-- ENDIF -->			
+
+		<!-- IF S_DISPLAY_POLL and S_HAS_POLL -->
+			<!-- INCLUDE portal/block/poll.html -->
+		<!-- ENDIF -->		
+
+		<!-- IF S_DISPLAY_ANNOUNCEMENTS -->
+		<!-- IF S_ANNOUNCE_COMPACT -->
+			<!-- INCLUDE portal/block/announcements_compact.html -->
+		<!-- ELSE -->
+			<!-- INCLUDE portal/block/announcements.html -->
+		<!-- ENDIF -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_NEWS -->
+		<!-- IF S_NEWS_COMPACT -->
+			<!-- INCLUDE portal/block/news_compact.html -->
+		<!-- ELSE -->
+			<!-- INCLUDE portal/block/news.html -->
+		<!-- ENDIF -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_WORDGRAPH -->
+			<!-- INCLUDE portal/block/wordgraph.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_JUMPBOX -->
+			<!-- INCLUDE portal/block/jumpbox.html -->
+		<!-- ENDIF -->	
+
+	</td>
+<!-- [-] center block area -->
+	<td width="4" valign="top"></td>
+
+<!-- [+] right block area -->
+	<td width="{PORTAL_RIGHT_COLLUMN}" valign="top" style="padding-left:6px;">
+	
+	<!--// [+] latest files => only for site version
+		<div class="panel">
+			<div class="inner">
+				<span class="corners-top"><span></span></span>
+					<h3>Latest Files</h3>
+					<span style="font-weight: bold">Latest version:</span> 1.1.0b<br />
+					<span style="font-weight: bold">Released:</span> 2007-08-01<br /><br />
+					<span style="font-weight: bold">Download:</span><br /> 
+					<a href="http://www.phpbb3portal.com/viewtopic.php?f=4&t=9">phpbb3-portal.110b.tar.gz</a><br /><br />
+					<span style="font-weight: bold">Development:</span><br /> 
+					<a href="http://www.phppbb3ortal.com">phpbb3portal.com</a><br />
+					<a href="http://sourceforge.net/projects/canverportal/" rel="nofollow">SourceForge Project</a>
+				<span class="corners-bottom"><span></span></span>
+			</div>
+		</div>
+		<br clear="all" />
+[-] latest files => only for site version //-->
+
+		<!-- IF not S_USER_LOGGED_IN -->
+		<!-- INCLUDE portal/block/login_box.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_USER_LOGGED_IN -->
+		<!-- INCLUDE portal/block/user_menu.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_FRIENDS and S_ZEBRA_ENABLED and S_USER_LOGGED_IN -->
+		<!-- INCLUDE portal/block/online_friends.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_ADVANCED_STAT -->
+		<!-- INCLUDE portal/block/statistics.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_ONLINE_LIST -->
+		<!-- INCLUDE portal/block/whois_online.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_LEADERS -->
+		<!-- INCLUDE portal/block/leaders.html -->
+		<!-- ENDIF -->		
+
+		<!-- IF S_DISPLAY_ATTACHMENTS -->
+		<!-- INCLUDE portal/block/attachments.html -->
+		<!-- ENDIF -->		
+
+		<!-- IF S_DISPLAY_ACTIVE_TOPIC -->
+		<!--INCLUDE portal/block/active.html-->
+		<!-- ENDIF -->
+		
+		<!--INCLUDE portal/block/_sample_block_design.html-->
+
+	</td>
+<!-- [-] right block area -->
+</tr>
+</table>
+<!--// phpBB3 Portal by Sevdin Filiz, www.phpbb3portal.com //-->
+<!-- INCLUDE overall_footer.html -->

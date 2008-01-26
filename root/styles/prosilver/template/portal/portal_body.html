@@ -1,0 +1,178 @@
+<!-- DEFINE $S_IN_PORTAL = 1 -->
+<!-- INCLUDE overall_header.html -->
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+<!-- [+] left block area -->
+	<td valign="top" style="width: {PORTAL_LEFT_COLLUMN}px; padding-right:6px;">
+		<br style="clear:both" />
+
+		<!-- IF S_DISPLAY_MAINMENU -->
+		<!-- INCLUDE portal/block/main_menu.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+			<!-- INCLUDE portal/block/birthday_list.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_CLOCK -->
+			<!-- INCLUDE portal/block/clock.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_PORTALSEARCH -->
+			<!-- INCLUDE portal/block/search.html -->
+		<!-- ENDIF -->		
+		
+		<!-- IF S_DISPLAY_RANDOM_MEMBER -->
+			<!-- INCLUDE portal/block/random_member.html -->
+		<!-- ENDIF -->
+		
+		
+<!-- IF not S_IS_BOT and S_USER_LOGGED_IN -->
+		<!-- IF S_DISPLAY_ATTACHMENTS -->
+			<!-- INCLUDE portal/block/attachments.html -->
+		<!-- ENDIF -->
+<!-- ENDIF -->		
+
+		<!-- IF S_ADS_SMALL -->
+			<!-- INCLUDE portal/block/ads_small.html -->
+		<!-- ENDIF -->
+
+<!-- IF S_STYLE_OPTIONS -->
+		<!-- IF S_DISPLAY_CHANGE_STYLE -->
+			<!-- INCLUDE portal/block/change_style.html -->
+		<!-- ENDIF -->
+<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_TOP_POSTERS -->
+			<!-- INCLUDE portal/block/top_poster.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_LATEST_MEMBERS -->
+			<!-- INCLUDE portal/block/latest_members.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_LINK_US -->
+			<!-- INCLUDE portal/block/link_us.html -->
+		<!-- ENDIF -->
+		
+	</td>
+<!-- [-] left block area -->
+	<td style="width:4px;" valign="top"></td>
+
+<!-- [+] center block area -->
+	<td valign="top">
+	<br style="clear:both" />
+
+		<!-- IF S_DISPLAY_WELCOME -->
+			<!-- IF S_DISPLAY_WELCOME_GUEST and S_USER_LOGGED_IN -->
+			<!-- ELSE -->
+			<!-- INCLUDE portal/block/welcome.html -->
+			<!-- ENDIF -->
+		<!-- ENDIF -->
+
+		<!-- IF S_ADS_CENTER -->
+			<!-- INCLUDE portal/block/ads_center.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_RECENT -->
+			<!-- INCLUDE portal/block/recent.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_ANNOUNCEMENTS -->
+		<!-- IF S_ANNOUNCE_COMPACT -->
+			<!-- INCLUDE portal/block/announcements_compact.html -->
+		<!-- ELSE -->
+			<!-- INCLUDE portal/block/announcements.html -->
+		<!-- ENDIF -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_NEWS -->
+		<!-- IF S_NEWS_COMPACT -->
+			<!-- INCLUDE portal/block/news_compact.html -->
+		<!-- ELSE -->
+			<!-- INCLUDE portal/block/news.html -->
+		<!-- ENDIF -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_POLL and S_HAS_POLL -->
+			<!-- INCLUDE portal/block/poll.html -->
+		<!-- ENDIF -->
+
+        	<!-- IF S_DISPLAY_ONLINE_PORTAL_LIST -->
+			<!-- INCLUDE portal/block/whois_online.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_PAY_C -->
+			<!-- INCLUDE portal/block/donation/donation.html -->
+		<!-- ENDIF -->
+		
+       	<!-- IF S_DISPLAY_WORDGRAPH -->
+			<!-- INCLUDE portal/block/wordgraph.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_JUMPBOX -->
+			<!-- INCLUDE portal/block/jumpbox.html -->
+		<!-- ENDIF -->
+		
+		<br /><div class="copyright">{L_PORTAL_COPY}</div>
+	</td>
+                         
+<!-- [-] center block area -->
+	<td style="width:4px;" valign="top"> </td>
+
+<!-- [+] right block area -->
+	<td valign="top" style="width: {PORTAL_RIGHT_COLLUMN}px; padding-left:6px;">
+		<br style="clear:both" />
+
+	<!-- IF S_DISPLAY_USERMENU -->
+		<!-- IF not S_USER_LOGGED_IN -->
+			<!-- INCLUDE portal/block/login_box.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_USER_LOGGED_IN -->
+			<!-- INCLUDE portal/block/user_menu.html -->
+		<!-- ENDIF -->
+	<!-- ENDIF -->
+
+		<!-- IF not S_IS_BOT and S_USER_LOGGED_IN and S_ZEBRA_ENABLED and S_DISPLAY_FRIENDS -->
+			<!-- INCLUDE portal/block/online_friends.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_ADVANCED_STAT -->
+			<!-- INCLUDE portal/block/statistics.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_ACTIVE_TOPIC -->
+			<!--INCLUDE portal/block/active.html-->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_MINICAL -->
+			<!-- INCLUDE portal/block/mini_calendar.html -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_LEADERS -->
+			<!-- INCLUDE portal/block/leaders.html -->
+		<!-- ENDIF -->
+		
+          <!-- IF S_DISPLAY_LAST_BOTS and S_LAST_VISITED_BOTS -->
+			<!-- INCLUDE portal/block/latest_bots.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_LINKS -->
+			<!-- INCLUDE portal/block/links.html -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_PAY_S -->
+			<!-- INCLUDE portal/block/donation/donation_small.html -->
+		<!-- ENDIF -->
+
+			<!-- //INCLUDE portal/block/_sample_block_design.html-->
+
+	</td>
+<!-- [-] right block area -->
+</tr>
+</table>
+
+<!--// board3 Portal by www.board3.de //-->
+<!-- INCLUDE overall_footer.html -->

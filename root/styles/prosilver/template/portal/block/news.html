@@ -1,0 +1,35 @@
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="topiclist">
+			<li class="header"><dl><dt>{L_LATEST_NEWS}</dt></dl></li>
+		</ul>
+		<ul class="topiclist forums">
+			<li><dl>
+				<dd class="posts_portal"  style="border-left:0px">
+				<!-- BEGIN news_row -->
+					<!-- IF news_row.S_NO_TOPICS -->
+					<span class="gensmall" style="text-align: center; margin: 0 0 0 5px;"><strong>{L_NO_NEWS}</strong></span>
+					<!-- ELSE -->
+					<div class="postbody postbody_portal" style="width: 100%">
+						<h4 class="first"><span style="margin: 0 0 0 5px"><!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_VIEW_COMMENTS}"><strong>{news_row.TITLE}</strong></a></span></h4>
+						<ul class="linklist">
+							<li><span style="margin: 0 0 0 5px">{L_POSTED_BY}: <strong><a href="{news_row.U_USER_PROFILE}">{news_row.POSTER}</a></strong></span></li>
+							<li class="rightside"><span style="margin: 0 5px 0 0;">{news_row.TIME}</span></li>
+						</ul>		
+						<br />
+						<div class="content"><div style="float: left; margin: 0 0 0 5px">{news_row.TEXT}</div></div><br />
+						<span style="float: left; margin: 0 0 0 5px">{L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS} &nbsp;&bull;&nbsp; <a href="{news_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}: {news_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{news_row.U_POST_COMMENT}">{L_POST_REPLY}</a></span>
+						<span style="float: right; margin: 0 5px 5px 0">{news_row.OPEN}<a href="{news_row.U_READ_FULL}">{news_row.L_READ_FULL}</a>{news_row.CLOSE}</span>
+					</div>
+					<div class="back2top"><span style="float: right; margin: 0 5px 0 0"><a href="#wrap" class="top" title="{L_BACK_TO_TOP}">{L_BACK_TO_TOP}</a></span></div>
+					<!-- IF news_row.S_NOT_LAST --><hr /><!-- ENDIF -->
+					<!-- ENDIF -->
+				<!-- END news_row -->
+				</dd>
+			</dl></li>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<br style="clear:both" />

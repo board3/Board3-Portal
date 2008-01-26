@@ -1,0 +1,24 @@
+
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_FRIENDS}</th>
+	</tr>
+	<tr class="row1">
+		<td>
+			<strong style="color:green">{L_FRIENDS_ONLINE}</strong><br />
+			<!-- BEGIN friends_online -->
+			<img src="portal/images/member.gif" /> {friends_online.USERNAME_FULL}<br /><br />				
+			<!-- BEGINELSE -->
+			{L_NO_FRIENDS_ONLINE}<br /><br />
+			<!-- END friends_online -->
+
+			<strong style="color:red">{L_FRIENDS_OFFLINE}</strong><br />
+			<!-- BEGIN friends_offline -->
+			<img src="portal/images/member.gif" /> {friends_offline.USERNAME_FULL}<br />
+			<!-- BEGINELSE -->
+			{L_NO_FRIENDS_OFFLINE}
+			<!-- END friends_offline -->
+		</td>
+	</tr>
+</table>
+<br />
