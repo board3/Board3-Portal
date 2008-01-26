@@ -159,8 +159,12 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_POLLS_SETTINGS_EXPLAIN'	=> 'Here you can change your poll information and certain specific options.',
 	'PORTAL_POLL_TOPIC'					=> 'Display poll blocks',
 	'PORTAL_POLL_TOPIC_EXPLAIN'			=> 'Display this block on portal.',
-	'PORTAL_POLL_TOPIC_ID'				=> 'Poll topic id',
-	'PORTAL_POLL_TOPIC_ID_EXPLAIN'		=> 'The id of the topic from wich the poll should be displayed. Only one ID number / poll is possible.',
+	'PORTAL_POLL_TOPIC_ID'				=> 'Poll forum id(s)',
+	'PORTAL_POLL_TOPIC_ID_EXPLAIN'		=> 'The id(s) of the forums from which the polls should be displayed. Use a comma to separate multiple forums, or leave blank to use all available forums.',
+	'PORTAL_POLL_LIMIT'					=> 'Poll display limit',
+	'PORTAL_POLL_LIMIT_EXPLAIN'			=> 'The number of polls you would like to display on the portal page.',
+	'PORTAL_POLL_ALLOW_VOTE'			=> 'Allow voting',
+	'PORTAL_POLL_ALLOW_VOTE_EXPLAIN'	=> 'Allow users with the required permissions to vote from the portal page.',
 
 	// most poster
 	'ACP_PORTAL_MOST_POSTER_INFO'				=> 'Most poster',

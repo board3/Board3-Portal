@@ -189,7 +189,9 @@ class acp_portal
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_POLLS_SETTINGS',
 						'portal_poll_topic'					=> array('lang' => 'PORTAL_POLL_TOPIC'					,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_poll_topic_id'				=> array('lang' => 'PORTAL_POLL_TOPIC_ID'				,	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
+						'portal_poll_topic_id'				=> array('lang' => 'PORTAL_POLL_TOPIC_ID'				,	'validate' => 'string',		'type' => 'text:10:200',	'explain' => true),
+						'portal_poll_limit'					=> array('lang' => 'PORTAL_POLL_LIMIT'					,	'validate' => 'int',		'type' => 'text:3:3',	 	'explain' => true),
+						'portal_poll_allow_vote'			=> array('lang' => 'PORTAL_POLL_ALLOW_VOTE'				,	'validate' => 'ibool',		'type' => 'radio:yes_no',	 'explain' => true),
 					)
 				);
 			break;

@@ -170,8 +170,14 @@ $lang = array_merge($lang, array(
 	'POSTS_PER_TOPIC_OTHER'	=> 'Posts per topic: <strong>%d</strong>',
 	'POSTS_PER_TOPIC_ZERO'	=> 'Posts per topic: <strong>0</strong>',
 
+	// Poll
+	'POLL'					=> 'Poll',
+	'LATEST_POLLS'			=> 'Latest Polls',
+	'NO_OPTIONS'			=> 'This poll has no available options.',
+	'NO_POLL'				=> 'No polls available',
+	'RETURN_PORTAL'			=> '%sReturn to the portal%s',
+
 	// other
-	'POLL'		=> 'Poll',
 	'CLOCK'		=> 'Clock',
 	'SPONSOR'	=> 'Sponsors',
 	

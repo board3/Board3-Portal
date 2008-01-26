@@ -163,8 +163,14 @@ $lang = array_merge($lang, array(
 	'POSTS_PER_TOPIC_OTHER'	=> 'Beiträge pro Thema: <strong>%d</strong>',
 	'POSTS_PER_TOPIC_ZERO'	=> 'Beiträge pro Thema: <strong>0</strong>',
 
-	// other
+	// Poll
 	'POLL'		=> 'Umfrage',
+	'LATEST_POLLS'			=> 'Latest Polls',
+	'NO_OPTIONS'			=> 'This poll has no available options.',
+	'NO_POLL'				=> 'No polls available',
+	'RETURN_PORTAL'			=> '%sReturn to the portal%s',
+
+	// other
 	'CLOCK'		=> 'Uhr',
 	'SPONSOR'	=> 'Sponsoren',
 	'PORTAL_COPY'	=> '<a href="http://www.board3.de" title="board3.de">board3 Portal</a> - based on <a href="http://www.phpbb3portal.com" title="phpBB3 Portal">phpBB3 Portal</a>',
