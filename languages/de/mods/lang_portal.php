@@ -34,6 +34,11 @@ $lang = array_merge($lang, array(
 	'PORTAL'				=> 'Portal',
 	'WELCOME'				=> 'Willkommen',
 
+	'PORTAL_ERROR'			=> 'Portal Error',
+	'PORTAL_DELETE_DIR'		=> 'Please delete the portal installation directory: %s',
+	'PORTAL_UPDATE'			=> 'Portal Update',
+	'PORTAL_UPDATE_TEXT'	=> 'There\'s an update for portal waiting to be installed! Install <a href="%1$s">%2$s</a>!',
+
 	// news & global announcements
 	'LATEST_ANNOUNCEMENTS'	=> 'Letzte Bekanntmachung',
 	'LATEST_NEWS'				=> 'Aktuelle Beiträge',
