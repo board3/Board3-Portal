@@ -36,18 +36,19 @@ $lang = array_merge($lang, array(
 
 	// news & global announcements
 	'LATEST_ANNOUNCEMENTS'	=> 'Letzte Bekanntmachung',
-	'LATEST_NEWS'			=> 'Aktuelle Beiträge',
-	'READ_FULL'				=> 'alles lesen',
-	'NO_NEWS'				=> 'Keine neuen Beiträge',
+	'LATEST_NEWS'				=> 'Aktuelle Beiträge',
+	'READ_FULL'					=> 'alles lesen',
+	'NO_NEWS'					=> 'Keine neuen Beiträge',
 	'NO_ANNOUNCEMENTS'		=> 'Keine Bekanntmachung',
-	'POSTED_BY'				=> 'Autor',
-	'COMMENTS'				=> 'Antworten',
+	'POSTED_BY'					=> 'Autor',
+	'COMMENTS'					=> 'Antworten',
 	'VIEW_COMMENTS'			=> 'Antworten anzeigen',
-	'POST_REPLY'			=> 'Antwort schreiben',
-	'TOPIC_VIEWS'			=> 'Zugriffe',
-	'JUMP_NEWEST'			=> 'Zum letzten Beitrag springen',
-	'JUMP_FIRST'			=> 'Zum ersten Beitrag springen',
-	'JUMP_TO_POST'			=> 'Rufe den Beitrag auf',
+	'POST_REPLY'					=> 'Antwort schreiben',
+	'TOPIC_VIEWS'				=> 'Zugriffe',
+	'JUMP_NEWEST'				=> 'Zum letzten Beitrag springen',
+	'JUMP_FIRST'					=> 'Zum ersten Beitrag springen',
+	'JUMP_TO_POST'				=> 'Rufe den Beitrag auf',
+	'BACK'							=> 'Zurück',
 
 	// who is online
 	'WIO_TOTAL'			=> 'Insgesamt',
@@ -57,8 +58,8 @@ $lang = array_merge($lang, array(
 	//'RECORD_ONLINE_USERS'=> 'View record: <strong>%1$s</strong><br />%2$s',
 
 	// Birthdays
-    'BIRTHDAYS_AHEAD'           => 'In den nächsten %s Tagen',
-    'NO_BIRTHDAYS_AHEAD'        => 'In diesem Zeitraum hat kein Mitglied Geburtstag',
+	 'BIRTHDAYS_AHEAD'			  => 'In den nächsten %s Tagen',
+	 'NO_BIRTHDAYS_AHEAD'		  => 'In diesem Zeitraum hat kein Mitglied Geburtstag',
 
 	// user menu
 	'USER_MENU'			=> 'Benutzer Menü',
@@ -195,7 +196,7 @@ $lang = array_merge($lang, array(
 
 // if you change the first day of the week in constants.php, you should change values for the short day names accordingly
 // e.g. FDOW = Sunday -> $lang['mini_cal']['day'][1] = 'Su'; ... $lang['mini_cal']['day'][7] = 'Sa'; 
-//      FDOW = Monday -> $lang['mini_cal']['day'][1] = 'Mo'; ... $lang['mini_cal']['day'][7] = 'Su'; 
+//		FDOW = Monday -> $lang['mini_cal']['day'][1] = 'Mo'; ... $lang['mini_cal']['day'][7] = 'Su'; 
 	'mini_cal'	=> array(
 		'day'	=> array(
 			'1'	=> 'Mo',
