@@ -24,6 +24,99 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('mods/lang_portal');
 
+$load_center = true;
+
+if( is_dir( $phpbb_root_path . 'install_portal/' ) === TRUE )
+{
+	if( is_file( $phpbb_root_path . 'install_portal/install.php' ) === TRUE )
+	{
+		include $phpbb_root_path . 'install_portal/install.php';
+
+		if( version_compare( $current_version, $portal_config['portal_version'], '<=' ) === TRUE )
+		{
+			$template->assign_vars(array(
+				'S_DISPLAY_GENERAL'	=> true,
+				'GEN_TITLE'   		=> $user->lang['PORTAL_ERROR'],
+				'GEN_MESSAGE' 		=> sprintf( $user->lang['PORTAL_DELETE_DIR'], $phpbb_root_path . 'install_portal' )
+			));
+		}
+		else
+		{
+			$template->assign_vars(array(
+				'S_DISPLAY_GENERAL'	=> true,
+				'GEN_TITLE'   		=> $user->lang['PORTAL_UPDATE'],
+				'GEN_MESSAGE' 		=> sprintf( $user->lang['PORTAL_UPDATE_TEXT'], $phpbb_root_path . 'install_portal/install.php', $current_version )
+			));
+		}
+
+		$load_center = false;
+	}
+}
+
+if( $load_center === TRUE )
+{
+	if ($portal_config['portal_recent']) 
+	{ 
+		include($phpbb_root_path . 'portal/block/recent.'.$phpEx);
+	}
+	
+	if ($portal_config['portal_wordgraph'])
+	{
+		include($phpbb_root_path . 'portal/block/wordgraph.'.$phpEx);
+	}
+	
+	if ($portal_config['portal_poll_topic'])
+	{
+		include($phpbb_root_path . 'portal/block/poll.'.$phpEx);
+	}
+	
+	if ($portal_config['portal_welcome'])
+	{
+		$template->assign_vars(array(
+			'S_DISPLAY_WELCOME' 	=> true,
+			'PORTAL_WELCOME_INTRO'   => str_replace("\n", "<br />", $portal_config['portal_welcome_intro']),
+		));
+	}
+	
+	if ($portal_config['portal_welcome_guest'])
+	{
+		$template->assign_vars(array(
+			'S_DISPLAY_WELCOME_GUEST' => true,
+		));
+	}
+	
+	if ($portal_config['portal_announcements'])
+	{
+		include($phpbb_root_path . 'portal/block/announcements.'.$phpEx);
+		$template->assign_vars(array(
+			'S_ANNOUNCE_COMPACT' => ($portal_config['portal_announcements_style']) ? true : false,
+		));
+	}
+	
+	if ($portal_config['portal_news'])
+	{
+		include($phpbb_root_path . 'portal/block/news.'.$phpEx);
+		$template->assign_vars(array(
+			'S_NEWS_COMPACT' => ($portal_config['portal_news_style']) ? true : false,
+		));
+	}
+
+	/*
+	if ($portal_config['portal_ads_center'])
+	{
+		$template->assign_vars(array(
+			'S_ADS_CENTER' 		=> ($portal_config['portal_ads_center_box']) ? true : false,
+		//	'ADS_CENTER_BOX'	=> $portal_config['portal_ads_center_box'],
+		));
+	}
+	*/
+
+	if ($portal_config['portal_whois_online'])
+	{
+		include($phpbb_root_path . 'portal/block/whois_online.'.$phpEx);
+	}
+}
+
 // show login box and user menu
 
 	// only registered user see user menu
@@ -65,11 +158,6 @@ if ($portal_config['portal_attachments'])
 	include($phpbb_root_path . 'portal/block/attachments.'.$phpEx);
 }
 
-if ($portal_config['portal_recent']) 
-{ 
-	include($phpbb_root_path . 'portal/block/recent.'.$phpEx);
-}
-
 if ($portal_config['portal_advanced_stat'])
 {
 	include($phpbb_root_path . 'portal/block/statistics.'.$phpEx);
@@ -88,16 +176,6 @@ if ($portal_config['portal_link_us'])
 if ($portal_config['portal_leaders'])
 {
 	include($phpbb_root_path . 'portal/block/leaders.'.$phpEx);
-}
-
-if ($portal_config['portal_wordgraph'])
-{
-	include($phpbb_root_path . 'portal/block/wordgraph.'.$phpEx);
-}
-
-if ($portal_config['portal_poll_topic'])
-{
-	include($phpbb_root_path . 'portal/block/poll.'.$phpEx);
 }
 
 if ($portal_config['portal_load_last_visited_bots'])
@@ -125,11 +203,6 @@ if ($portal_config['portal_friends'])
 	include($phpbb_root_path . 'portal/block/friends.'.$phpEx);
 }
 
-if ($portal_config['portal_whois_online'])
-{
-	include($phpbb_root_path . 'portal/block/whois_online.'.$phpEx);
-}
-
 if ($portal_config['portal_change_style'])
 {
 	include($phpbb_root_path . 'portal/block/change_style.'.$phpEx);
@@ -150,38 +223,8 @@ if ($portal_config['portal_links'])
 	));
 }
 
-if ($portal_config['portal_welcome'])
-{
-	$template->assign_vars(array(
-		'S_DISPLAY_WELCOME' 	=> true,
-		'PORTAL_WELCOME_INTRO'   => str_replace("\n", "<br />", $portal_config['portal_welcome_intro']),
-	));
-}
 
-if ($portal_config['portal_welcome_guest'])
-{
-	$template->assign_vars(array(
-		'S_DISPLAY_WELCOME_GUEST' => true,
-	));
-}
-
-if ($portal_config['portal_announcements'])
-{
-	include($phpbb_root_path . 'portal/block/announcements.'.$phpEx);
-	$template->assign_vars(array(
-		'S_ANNOUNCE_COMPACT' => ($portal_config['portal_announcements_style']) ? true : false,
-	));
-}
-
-if ($portal_config['portal_news'])
-{
-	include($phpbb_root_path . 'portal/block/news.'.$phpEx);
-	$template->assign_vars(array(
-		'S_NEWS_COMPACT' => ($portal_config['portal_news_style']) ? true : false,
-	));
-}
-
-if ($portal_config['portal_pay_s_block'] or $portal_config['portal_pay_c_block'])
+if ($portal_config['portal_pay_s_block'] or ( $portal_config['portal_pay_c_block'] && $load_center === TRUE ) )
 {
 	include($phpbb_root_path . 'portal/block/donate.'.$phpEx);
 }
@@ -194,22 +237,13 @@ if ($portal_config['portal_ads_small'])
 	//	'ADS_SMALL_BOX'	=> $portal_config['portal_ads_small_box'],
 	));
 }
-
-if ($portal_config['portal_ads_center'])
-{
-	$template->assign_vars(array(
-		'S_ADS_CENTER' 		=> ($portal_config['portal_ads_center_box']) ? true : false,
-	//	'ADS_CENTER_BOX'	=> $portal_config['portal_ads_center_box'],
-	));
-}
 */
 
 $template->assign_vars(array(
-	'S_DISPLAY_JUMPBOX' 	=> true, // SQL + ACP eklenecek
+	'S_DISPLAY_JUMPBOX' 	=> $load_center, // SQL + ACP eklenecek
 	'PORTAL_LEFT_COLLUMN' 	=> $portal_config['portal_left_collumn_width'],
 	'PORTAL_RIGHT_COLLUMN' 	=> $portal_config['portal_right_collumn_width'],
 ));
-
 
 // output page
 page_header($user->lang['PORTAL']);
