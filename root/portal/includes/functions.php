@@ -467,7 +467,7 @@ function get_sub_taged_string($str, $bbuid, $maxlen) {
       $ntext .= $sr;
       $last = $sr;
     }
-    $sl = trim(substr($sl, strlen($sr), strlen($sl)-strlen($sr)));
+    $sl = substr($sl, strlen($sr), strlen($sl)-strlen($sr));
   }
 
   $ret = trim($ret) . '...';
