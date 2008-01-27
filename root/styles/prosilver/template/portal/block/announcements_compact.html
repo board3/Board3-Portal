@@ -22,7 +22,7 @@
 						<span style="float: right; margin: 0 5px 0 0;">{L_POST_BY_AUTHOR}: <strong><a href="{announcements_row.U_USER_PROFILE}">{announcements_row.POSTER}</a></strong></span>
 						<br style="clear:both" />
 						<span style="float: left; margin: 0 0 0 14px;">
-							<a href="{announcements_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}"><span style="font-size:0.9em;"><em>{L_COMMENTS}: {announcements_row.REPLIES}</em></span></a>
+							<!-- IF S_CAN_READ --><a href="{announcements_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}"><span style="font-size:0.9em;"><em>{L_COMMENTS}: {announcements_row.REPLIES}</em></span></a><!-- ENDIF -->
 							<span style="font-size:0.9em;"><em>{L_TOPIC_VIEWS}: {announcements_row.TOPIC_VIEWS}</em></span>
 						</span>
 						<span style="float: right; margin: 0 5px 0 0;">{L_POSTED_ON_DATE} <strong>{announcements_row.TIME}</strong></span>	      
