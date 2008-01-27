@@ -82,7 +82,7 @@ else
 			'REPLIES'			=> $fetch_news[$i]['topic_replies'],
 			'TOPIC_VIEWS'		=> $fetch_news[$i]['topic_views'],
 			'U_LAST_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($forum_id) ? 'f=' . $forum_id . '&amp;' : '') . 'p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
-			'U_VIEW_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 't=' . $topic_id,
+			'U_VIEW_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 't=' . $topic_id),
 			'U_POST_COMMENT'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;' . (($forum_id) ? 'f=' . $forum_id . '&amp;' : '') . 't=' . $topic_id),
 			'U_READ_FULL'		=> append_sid("{$phpbb_root_path}portal.$phpEx", 'announcement=' . $i),
 			'L_READ_FULL'		=> $read_full,
