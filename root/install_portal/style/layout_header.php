@@ -29,6 +29,10 @@ if( !defined('IN_PHPBB') || !defined('IN_PORTAL_INSTALL') )
 		<div class="panel">
 			<span class="corners-top"><span></span></span>
 				<div id="content">
+<?php
+	if( isset($mode) && isset($old_version) && isset($phpbb3portal) )
+	{
+?>
 					<div id="menu">
 						<ul>
 							<li class="header"><?php echo $user->lang['INSTALLER_MENU']; ?></li>
@@ -43,5 +47,8 @@ if( $old_version != 0 && $phpbb3portal === false )
 ?>
 						</ul>
 					</div>
+<?php
+}
+?>
 					<div id="main">
 						<a name="maincontent"></a>
