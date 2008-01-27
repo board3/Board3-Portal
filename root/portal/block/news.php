@@ -65,6 +65,7 @@ if($news < 0)
 
 			$template->assign_block_vars('news_row', array(
 				'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
+				'FORUM_NAME'		=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '',
 				'TITLE'				=> $fetch_news[$i]['topic_title'],
 				'POSTER'			=> $fetch_news[$i]['username'],
 				'U_USER_PROFILE'	=> (($fetch_news[$i]['user_type'] == USER_NORMAL || $fetch_news[$i]['user_type'] == USER_FOUNDER) && $fetch_news[$i]['user_id'] != ANONYMOUS) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $fetch_news[$i]['user_id']) : '',
@@ -101,7 +102,7 @@ else
 
 	$template->assign_block_vars('news_row', array(
 		'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
-		//'FORUM_NAME'		=> $fetch_news[$i]['forum_name'],
+		'FORUM_NAME'		=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '',
 		'TITLE'				=> $fetch_news[$i]['topic_title'],
 		'POSTER'			=> $fetch_news[$i]['username'],
 		'TIME'				=> $fetch_news[$i]['topic_time'],

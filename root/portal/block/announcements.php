@@ -71,10 +71,11 @@ if($news < 0)
 			$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
 			$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 	
-			$forum_id = ( $forum_id == 0 ) ? $g_forum_id : $forum_id;
+			$real_forum_id = ( $forum_id == 0 ) ? $g_forum_id : $forum_id;
 	
 			$template->assign_block_vars('announcements_row', array(
 				'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
+				'FORUM_NAME'		=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '',
 				'TITLE'				=> $fetch_news[$i]['topic_title'],
 				'POSTER'			=> $fetch_news[$i]['username'],
 				'U_USER_PROFILE'	=> (($fetch_news[$i]['user_type'] == USER_NORMAL || $fetch_news[$i]['user_type'] == USER_FOUNDER) && $fetch_news[$i]['user_id'] != ANONYMOUS) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $fetch_news[$i]['user_id']) : '',
@@ -82,9 +83,9 @@ if($news < 0)
 				'TEXT'				=> $fetch_news[$i]['post_text'],
 				'REPLIES'			=> $fetch_news[$i]['topic_replies'],
 				'TOPIC_VIEWS'		=> $fetch_news[$i]['topic_views'],
-				'U_LAST_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($forum_id) ? 'f=' . $forum_id . '&amp;' : '') . 'p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
+				'U_LAST_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 'p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
 				'U_VIEW_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 't=' . $topic_id),
-				'U_POST_COMMENT'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;' . (($forum_id) ? 'f=' . $forum_id . '&amp;' : '') . 't=' . $topic_id),
+				'U_POST_COMMENT'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;' . (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id),
 				'U_READ_FULL'		=> append_sid("{$phpbb_root_path}portal.$phpEx", 'announcement=' . $i),
 				'L_READ_FULL'		=> $read_full,
 				'OPEN'				=> $open_bracket,
@@ -113,7 +114,8 @@ else
 
 
 	$template->assign_block_vars('announcements_row', array( 	 
-		'ATTACH_ICON_IMG'       => ($fetch_news[$i]['attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '', 	 
+		'ATTACH_ICON_IMG'       => ($fetch_news[$i]['attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
+		'FORUM_NAME'			=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '', 	 
 		'TITLE'                 => $fetch_news[$i]['topic_title'], 	 
 		'POSTER'                => $fetch_news[$i]['username'], 	 
 		'TIME'                  => $fetch_news[$i]['topic_time'], 	 
