@@ -57,7 +57,7 @@ $lang = array_merge($lang, array(
 	//'RECORD_ONLINE_USERS'=> 'View record: <strong>%1$s</strong><br />%2$s',
 
 	// Birthdays
-    'BIRTHDAYS_AHEAD'           => 'In den nächsten %s Tagen',
+    'BIRTHDAYS_AHEAD'           => 'In den nÃ¤chsten %s Tagen',
     'NO_BIRTHDAYS_AHEAD'        => 'In diesem Zeitraum hat kein Mitglied Geburtstag',
 
 	// user menu
