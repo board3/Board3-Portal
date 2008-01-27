@@ -218,6 +218,7 @@ if( $poll_forums === TRUE )
 			$poll_has_options = false;
 
 			$topic_id = (int) $data['topic_id'];
+			$forum_id = (int) $data['forum_id'];
 
 			$cur_voted_id = array();
 			if( $portal_config['portal_poll_allow_vote'] )
@@ -282,8 +283,6 @@ if( $poll_forums === TRUE )
 
 			$db->sql_freeresult($poll_result);
 			
-			$forum_id = (int) $data['forum_id'];
-
 			$make_poll_view = array();
 			
 			if( in_array($topic_id, $poll_view_ar) === FALSE )
