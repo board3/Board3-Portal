@@ -18,7 +18,7 @@
 					<li>
 						<span style="float: left; margin: 0 0 0 5px;"><img src="{T_THEME_PATH}/images/arrow_right.gif" alt=""/> 
 						<!-- IF announcements_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {announcements_row.ATTACH_ICON_IMG} <!-- IF announcements_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF -->
-						<a href="{announcements_row.U_VIEW_COMMENTS}" title="{announcements_row.TITLE}"><strong style="font-size:1.1em;">{announcements_row.TITLE}</strong></a></span>
+						<a href="{announcements_row.U_VIEW_COMMENTS}" title="<!-- IF announcements_row.FORUM_NAME -->{announcements_row.FORUM_NAME} &nbsp;&bull;&nbsp; <!-- ENDIF -->{announcements_row.TITLE}"><strong style="font-size:1.1em;"><!-- IF announcements_row.FORUM_NAME -->{announcements_row.FORUM_NAME} &nbsp;&bull;&nbsp; <!-- ENDIF -->{announcements_row.TITLE}</strong></a></span>
 						<span style="float: right; margin: 0 5px 0 0;">{L_POST_BY_AUTHOR}: <strong><a href="{announcements_row.U_USER_PROFILE}">{announcements_row.POSTER}</a></strong></span>
 						<br style="clear:both" />
 						<span style="float: left; margin: 0 0 0 14px;">
