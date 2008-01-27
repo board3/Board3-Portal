@@ -4,16 +4,10 @@
 	</tr>
 	<tr class="row1">
 		<td>
-			<span style="float:left;">{L_WIO_TOTAL}:</span><span style="float:right;padding-right:10px;">{TOTAL_ONLINE_USERS}</span><br /><hr />
-			<span style="float:left;">{L_WIO_REGISTERED}:</span><span style="float:right;padding-right:10px;">{VISIBLE_ONLINE}</span><br />
-			<span style="float:left;">{L_WIO_HIDDEN}:</span><span style="float:right;padding-right:10px;">{HIDDEN_ONLINE}</span><br />
-			<span style="float:left;">{L_WIO_GUEST}:</span><span style="float:right;padding-right:10px;">{GUEST_ONLINE}</span><br />
-			<small>
-				<br />{RECORD_USERS}<br /><br />{LOGGED_IN_USER_LIST}
-				<!-- IF LEGEND --><br /><br />
-				{L_LEGEND} :: {LEGEND}
+				<!-- IF S_DISPLAY_ONLINE_LIST -->
+					<p style="font-size: 90%; margin: 0 5px 0 5px;">{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
+					<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>
 				<!-- ENDIF -->
-			</small>
 		</td>
 	</tr>
 </table>

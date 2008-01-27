@@ -125,6 +125,21 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL -->]]></action>
       </edit>
       <edit>
+        <find><![CDATA[	<div id="datebar">
+		<table width="100%" cellspacing="0">
+		<tr>
+			<td class="gensmall"><!-- IF S_USER_LOGGED_IN -->{LAST_VISIT_DATE}<!-- ENDIF --></td>
+			<td class="gensmall" align="{S_CONTENT_FLOW_END}">{CURRENT_TIME}<br /></td>
+		</tr>
+		</table>
+	</div>]]></find>
+        <action type="after-add"><![CDATA[<!-- ENDIF -->]]></action>
+      </edit>
+      <edit>
+        <find><![CDATA[<div id="wrapcentre">]]></find>
+        <action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL -->]]></action>
+      </edit>
+      <edit>
         <find><![CDATA[	<!-- INCLUDE breadcrumbs.html -->
 
 	<br />]]></find>
