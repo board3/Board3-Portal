@@ -48,6 +48,7 @@ $lang = array_merge($lang, array(
 	'JUMP_NEWEST'			=> 'Jump to newest post',
 	'JUMP_FIRST'			=> 'Jump to first post',
 	'JUMP_TO_POST'			=> 'Jump to post',
+	'BACK'							=> 'Back',
 
 	// who is online
 	'WIO_TOTAL'			=> 'Total',

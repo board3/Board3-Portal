@@ -95,6 +95,9 @@ else
 			$topic_id = $fetch_news[$i]['topic_id'];
 			$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
 			$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
+       		$open_bracket = '[ ';
+       		$close_bracket = ' ]';
+       		$read_full = $user->lang['BACK'];
 
 	$template->assign_block_vars('news_row', array(
 		'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
@@ -111,6 +114,10 @@ else
 		'U_POST_COMMENT'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id']),
 		'S_POLL'			=> $fetch_news[$i]['poll'],
 		'S_UNREAD_INFO'		=> $unread_topic,
+		'U_READ_FULL'      => append_sid("{$phpbb_root_path}portal.$phpEx", ''),
+		'L_READ_FULL'      => $read_full,      
+		'OPEN'            => $open_bracket,
+		'CLOSE'            => $close_bracket,
 	));
 }
 
