@@ -46,49 +46,53 @@ function phpbb_fetch_posts($forum_sql, $number_of_posts, $text_length, $time, $t
 
 
 		$sql = 'SELECT
-				t.forum_id,
-				t.topic_id,
-				t.topic_last_post_id,
-				t.topic_last_post_time,
-				t.topic_time,
-				t.topic_title,
-				t.topic_attachment,
-				t.topic_views,
-				t.poll_title,
-				t.topic_replies,
-				t.forum_id,
-				t.topic_poster,
-				u.username,
-				u.user_id,
-				u.user_type,
-				u.user_colour,
-				p.post_id,
-				p.post_time,
-				p.post_text,
-				p.post_attachment,
-				p.enable_smilies,
-				p.enable_bbcode,
-				p.enable_magic_url,
-				p.bbcode_bitfield,
-				p.bbcode_uid,
-				f.forum_name
-			FROM
-				' . TOPICS_TABLE . ' AS t,
-				' . USERS_TABLE . ' AS u,
-				' . POSTS_TABLE . ' AS p,
-				' . FORUMS_TABLE . ' AS f
-			WHERE
-				' . $topic_type . '
-				' . $from_forum . '
-				' . $post_time . '
-				t.topic_poster = u.user_id AND
-				t.topic_first_post_id = p.post_id AND
-				t.topic_status <> 2 AND
-				t.topic_approved = 1 AND
-				t.forum_id = f.forum_id
-
-						 ORDER BY
-			t.topic_time DESC';
+					t.forum_id,
+					t.topic_id,
+					t.topic_last_post_id,
+					t.topic_last_post_time,
+					t.topic_time,
+					t.topic_title,
+					t.topic_attachment,
+					t.topic_views,
+					t.poll_title,
+					t.topic_replies,
+					t.topic_poster,
+					u.username,
+					u.user_id,
+					u.user_type,
+					u.user_colour,
+					p.post_id,
+					p.post_time,
+					p.post_text,
+					p.post_attachment,
+					p.enable_smilies,
+					p.enable_bbcode,
+					p.enable_magic_url,
+					p.bbcode_bitfield,
+					p.bbcode_uid,
+					f.forum_name
+				FROM
+					' . TOPICS_TABLE . ' AS t
+				LEFT JOIN
+					' . USERS_TABLE . ' as u
+				ON
+					t.topic_poster = u.user_id
+				LEFT JOIN
+					' . FORUMS_TABLE . ' as f
+				ON
+					t.forum_id=f.forum_id
+				LEFT JOIN
+					' . POSTS_TABLE . ' as p
+				ON
+					t.topic_first_post_id = p.post_id
+				WHERE
+					' . $topic_type . '
+					' . $from_forum . '
+					' . $post_time . '
+					t.topic_status <> 2 AND
+					t.topic_approved = 1
+				ORDER BY
+					t.topic_time DESC';
 
 
 	// query the database
@@ -219,7 +223,7 @@ function phpbb_fetch_posts($forum_sql, $number_of_posts, $text_length, $time, $t
 				t.topic_last_post_id = p.post_id AND
 				t.topic_status <> 2 AND
 				t.topic_approved = 1 AND
-				t.forum_id = f.forum_id
+				f.forum_id = t.forum_id
 
 						 ORDER BY
 			t.topic_last_post_time DESC';
