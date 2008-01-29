@@ -12,9 +12,9 @@
 					<span class="gensmall" style="text-align: center; margin: 0 0 0 5px;"><strong>{L_NO_NEWS}</strong></span>
 					<!-- ELSE -->
 					<div class="postbody postbody_portal" style="width: 100%">
-						<h4 class="first"><span style="margin: 0 0 0 5px"><!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_VIEW_COMMENTS}"><strong><!-- IF news_row.FORUM_NAME -->{news_row.FORUM_NAME} &nbsp;&bull;&nbsp; <!-- ENDIF -->{news_row.TITLE}</strong></a></span></h4>
+						<h4 class="first"><span style="margin: 0 0 0 5px"><!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_VIEW_COMMENTS}"><strong>{news_row.TITLE}</strong></a></span></h4>
 						<ul class="linklist">
-							<li><span style="margin: 0 0 0 5px">{L_POSTED_BY}: <strong><a href="{news_row.U_USER_PROFILE}">{news_row.POSTER}</a></strong></span></li>
+							<li><span style="margin: 0 0 0 5px">{L_POSTED_BY}: <strong><a href="{news_row.U_USER_PROFILE}">{news_row.POSTER}</a></strong><!-- IF news_row.FORUM_NAME --> &nbsp;&bull;&nbsp; {L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong><!-- ENDIF --></span></li>
 							<li class="rightside"><span style="margin: 0 5px 0 0;">{news_row.TIME}</span></li>
 						</ul>		
 						<br />
