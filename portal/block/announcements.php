@@ -9,14 +9,14 @@
 */
 if (!defined('IN_PHPBB'))
 {
-   exit;
+	exit;
 }
 
 if (!defined('IN_PORTAL'))
 {
-   exit;
+	exit;
 }
-
+	
 // Get cleaned up list... return only those forums not having the f_read permission
 $forum_ary = $auth->acl_getf('!f_read', true);
 $forum_ary = array_unique(array_keys($forum_ary));
@@ -83,6 +83,7 @@ if($news < 0)
 				'TEXT'				=> $fetch_news[$i]['post_text'],
 				'REPLIES'			=> $fetch_news[$i]['topic_replies'],
 				'TOPIC_VIEWS'		=> $fetch_news[$i]['topic_views'],
+				'U_VIEWFORUM'		=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $fetch_news[$i]['forum_id']),
 				'U_LAST_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 'p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
 				'U_VIEW_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 't=' . $topic_id),
 				'U_POST_COMMENT'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;' . (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id),
@@ -92,7 +93,7 @@ if($news < 0)
 				'CLOSE'				=> $close_bracket,
 				'S_NOT_LAST'		=> ($i < count($fetch_news) - 1) ? true : false,
 				'S_POLL'			=> $fetch_news[$i]['poll'],
-	//			'MINI_POST_IMG'		=> $user->img('icon_post_target', 'POST'),
+//				'MINI_POST_IMG'		=> $user->img('icon_post_target', 'POST'),
 				'S_UNREAD_INFO'		=> $unread_topic,
 			));
 		}
@@ -112,25 +113,25 @@ else
 	$close_bracket = ' ]';
 	$read_full = $user->lang['BACK'];
 
-
 	$template->assign_block_vars('announcements_row', array( 	 
-		'ATTACH_ICON_IMG'       => ($fetch_news[$i]['attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
+		'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
 		'FORUM_NAME'			=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '', 	 
-		'TITLE'                 => $fetch_news[$i]['topic_title'], 	 
-		'POSTER'                => $fetch_news[$i]['username'], 	 
-		'TIME'                  => $fetch_news[$i]['topic_time'], 	 
-		'TEXT'                  => $fetch_news[$i]['post_text'], 	 
-		'REPLIES'               => $fetch_news[$i]['topic_replies'], 	 
-		'TOPIC_VIEWS'           => $fetch_news[$i]['topic_views'], 	 
-		'U_LAST_COMMENTS'       => append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($forum_id) ? 'f=' . $forum_id . '&amp;' : '') . 'p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']), 	 
-		'U_VIEW_COMMENTS'       => append_sid("{$phpbb_root_path}viewtopic.$phpEx", 't=' . $topic_id), 	 
-		'U_POST_COMMENT'        => append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;' . (($forum_id) ? 'f=' . $forum_id . '&amp;' : '') . 't=' . $topic_id), 	 
-		'S_POLL'                => $fetch_news[$i]['poll'], 	 
-		'S_UNREAD_INFO'         => $unread_topic,
-		'U_READ_FULL'      => append_sid("{$phpbb_root_path}portal.$phpEx", ''),
-		'L_READ_FULL'      => $read_full,      
-		'OPEN'            => $open_bracket,
-		'CLOSE'            => $close_bracket,
+		'TITLE'						=> $fetch_news[$i]['topic_title'], 	 
+		'POSTER'					=> $fetch_news[$i]['username'], 	 
+		'TIME'						=> $fetch_news[$i]['topic_time'], 	 
+		'TEXT'						=> $fetch_news[$i]['post_text'], 	 
+		'REPLIES'					=> $fetch_news[$i]['topic_replies'], 	 
+		'TOPIC_VIEWS'			=> $fetch_news[$i]['topic_views'],
+		'U_VIEWFORUM'			=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $fetch_news[$i]['forum_id']),
+		'U_LAST_COMMENTS'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($forum_id) ? 'f=' . $forum_id . '&amp;' : '') . 'p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']), 	 
+		'U_VIEW_COMMENTS'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 't=' . $topic_id), 	 
+		'U_POST_COMMENT'		=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;' . (($forum_id) ? 'f=' . $forum_id . '&amp;' : '') . 't=' . $topic_id), 	 
+		'S_POLL'					=> $fetch_news[$i]['poll'], 	 
+		'S_UNREAD_INFO'			=> $unread_topic,
+		'U_READ_FULL'			=> append_sid("{$phpbb_root_path}portal.$phpEx", ''),
+		'L_READ_FULL'				=> $read_full,		
+		'OPEN'						=> $open_bracket,
+		'CLOSE'					=> $close_bracket,
 
 	));
 }
