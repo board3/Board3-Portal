@@ -31,39 +31,56 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'INSTALLER_CONVERT'					=> 'Konvertieren',
-	'INSTALLER_CONVERT_MENU'			=> 'Konvertierung',
-	'INSTALLER_CONVERT_NOTE'			=> 'Konvertiere MOD zu v%s',
-	'INSTALLER_CONVERT_PREFIX'			=> 'Präfix der phpBB2-Installation',
-	'INSTALLER_CONVERT_SUCCESSFUL'		=> 'Konvertierung des MODs zu v%s war erfolgreich.<br />Kopiere nun die Bilder aus den Verzeichnissen album/upload und album/upload/cache aus der phpBB2-Installation in die der phpBB3-Installation.',
-	'INSTALLER_CONVERT_UNSUCCESSFUL'	=> 'Konvertierung des MODs zu v%s war <strong>nicht</strong> erfolgreich.',
-	'INSTALLER_CONVERT_UNSUCCESSFUL2'	=> 'Du hast kein Präfix für die phpBB2-Installation eingefügt.',
-	'INSTALLER_CONVERT_WELCOME'			=> 'Willkommen zur Konvertierung',
-	'INSTALLER_CONVERT_WELCOME_NOTE'	=> 'Wenn du den MOD konvertierst, kopieren wir die Daten aus deine phpBB2-Installation in die phpBB3-Installation.',
+	
+	'INSTALLER_MENU'						=> 'PInUp Menü',
+	'INSTALLER_MENU_START'				=> 'Start',
+	'INSTALLER_UNINSTALL'					=> 'Deinstallieren',
+	'INSTALLER_UPDATE'						=> 'Aktualisieren',
+	'INSTALLER_INSTALL'						=> 'Installiere',
 
-	'INSTALLER_INTRO'					=> 'Intro',
-	'INSTALLER_INTRO_WELCOME'			=> 'Willkommen zur MOD-Installation',
-	'INSTALLER_INTRO_WELCOME_NOTE'		=> 'Bitte wähle aus, was du tun möchtest.',
+	'INSTALLER_INTRO_TITLE'				=> 'Portal Install/Update Utility (PInUp)',
+	'INSTALLER_INTRO_NOTE'				=> 'Willkommen in der Portal Installation von Board3, wir begrüßen Sie herzlich an Board',
 
-	'INSTALLER_INSTALL'					=> 'Installieren',
-	'INSTALLER_INSTALL_MENU'			=> 'Installation',
-	'INSTALLER_INSTALL_SUCCESSFUL'		=> 'Installation der MOD v%s war erfolgreich.',
-	'INSTALLER_INSTALL_UNSUCCESSFUL'	=> 'Installation der MOD v%s war <strong>nicht</strong> erfolgreich.',
+	'INSTALLER_MENU_DONE'					=> 'Aktuelle Version',
+	'INSTALLER_MENU_DONE_TEXT'			=> 'Du hast bereits Version %s installiert, bitte lösche das Verzeichnis install_portal folder. Zurück zu deinem <a href="%s">Forum</a>.',
+
+	'INSTALLER_INSTALL_TITLE'				=> 'PInUp Installation',
+	'INSTALLER_INSTALL_NOTE'				=> 'Sobald du die Installation dieses Mods startest, werden eventuelle vorige Versionen aus der Datenbank entfernt.',
+	'INSTALLER_INSTALL_MENU'				=> 'Installations Menü',
+	'INSTALLER_INSTALL_SUCCESSFUL'		=> 'Die Installation des MOD v%s war erfolgreich.',
+	'INSTALLER_INSTALL_UNSUCCESSFUL'	=> 'Die Installation des MOD v%s war <strong>nicht</strong> erfolgreich.',
 	'INSTALLER_INSTALL_VERSION'			=> 'Installiere MOD v%s',
-	'INSTALLER_INSTALL_WELCOME'			=> 'Willkommen zur Installation',
-	'INSTALLER_INSTALL_WELCOME_NOTE'	=> 'Wenn du den MOD installierst, werden möglicherweise vorhandene Datenbanktabellen mit gleichem Namen gelöscht.',
+	'INSTALLER_INSTALL_START'			=> 'Bitte klicke auf <a href="%s">"Installieren"</a> um die Installation zu starten.',
+
+	'INSTALLER_UPDATE_TITLE'				=> 'PInUp Aktualisierung',
+	'INSTALLER_UPDATE_NOTE'				=> 'Aktualisiere MOD von v%s to v%s',
+
+	'INSTALLER_UNINSTALL_TITLE'			=> 'PInUp Deinstallation',
+	'INSTALLER_UNINSTALL_NOTE'			=> 'Wikommen im Aktualisierungs Menü',
+	'INSTALLER_UNINSTALL_SUCCESSFUL'	=> 'Die Deinstallation des MODs v%s war erfolgreich.',
+
+
 
 	'INSTALLER_NEEDS_FOUNDER'			=> 'Du musst als Gründer eingeloggt sein.',
 
-	'INSTALLER_UPDATE'					=> 'Update',
+	'INSTALLER_UPDATE'						=> 'Update',
 	'INSTALLER_UPDATE_MENU'				=> 'Updatemenü',
 	'INSTALLER_UPDATE_NOTE'				=> 'Update MOD von v%s nach v%s',
 	'INSTALLER_UPDATE_SUCCESSFUL'		=> 'Update der MOD von v%s nach v%s war erfolgreich.',
-	'INSTALLER_UPDATE_UNSUCCESSFUL'		=> 'Update der MOD von v%s nach v%s war <strong>nicht</strong> erfolgreich.',
+	'INSTALLER_UPDATE_UNSUCCESSFUL'	=> 'Update der MOD von v%s nach v%s war <strong>nicht</strong> erfolgreich.',
 	'INSTALLER_UPDATE_VERSION'			=> 'Update MOD von v',
-	'INSTALLER_UPDATE_WELCOME'			=> 'Willkommen zum Update',
+	'INSTALLER_UPDATE_TO'					=> 'Aktualisiere auf',
+	'INSTALLER_UPDATE_START'				=> 'Bitte klicke <a href="%s">"Aktualisieren"</a> um die Aktualisierung zu starten.',
 
-	'WARNING'							=> 'Warnung',
+	'INSTALLER_UNINSTALL_OLDVERSION'	=> 'Tut mir leid, PInUp unterstützt nicht die Deinstallierung des original phpBB3 Portals.',
+	
+	'INSTALLER_ERROR'						=> 'PInUp Fehler',
+
+	'INSTALLER_USEFUL_INFO'				=> 'Bitte lösche das /install_portal Verzeichnis.',
+
+	'INSTALLER_UNINSTALL_USEFUL_INFO'	=> 'Denke daran die Portal Dateien und Dateiänderungen am Originalsystem zu löschen.',
+
+	'WARNING'									=> 'Warnung',
 ));
 
 ?>

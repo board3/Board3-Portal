@@ -172,10 +172,10 @@ $lang = array_merge($lang, array(
 
 	// Poll
 	'POLL'		=> 'Umfrage',
-	'LATEST_POLLS'			=> 'Latest Polls',
-	'NO_OPTIONS'			=> 'This poll has no available options.',
-	'NO_POLL'				=> 'No polls available',
-	'RETURN_PORTAL'			=> '%sReturn to the portal%s',
+	'LATEST_POLLS'			=> 'Neueste Umfragen',
+	'NO_OPTIONS'			=> 'Diese Umfrage verfügt über keine Optionen.',
+	'NO_POLL'				=> 'Zur Zeit keine Umfragen vorhanden',
+	'RETURN_PORTAL'			=> '%sZurück zum Portal%s',
 
 	// other
 	'CLOCK'		=> 'Uhr',
