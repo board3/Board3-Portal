@@ -5,7 +5,7 @@ $current_version = '0.1.1';
 // If only checking version, exit.
 if( defined('IN_PHPBB') )
 {
-	exit;
+	return;
 }
 
 define('IN_PHPBB', true);
