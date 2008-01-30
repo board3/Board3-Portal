@@ -26,26 +26,26 @@ $user->setup('mods/lang_portal');
 
 $load_center = true;
 
-if( is_dir( $phpbb_root_path . 'install_portal/' ) === TRUE )
+if ( is_dir( $phpbb_root_path . 'install_portal/' ) === TRUE )
 {
-	if( is_file( $phpbb_root_path . 'install_portal/install.php' ) === TRUE )
+	if ( is_file( $phpbb_root_path . 'install_portal/install.php' ) === TRUE )
 	{
 		include $phpbb_root_path . 'install_portal/install.php';
 
-		if( version_compare( $current_version, $portal_config['portal_version'], '<=' ) === TRUE )
+		if ( version_compare( $current_version, $portal_config['portal_version'], '<=' ) === TRUE )
 		{
 			$template->assign_vars(array(
 				'S_DISPLAY_GENERAL'	=> true,
-				'GEN_TITLE'   		=> $user->lang['PORTAL_ERROR'],
-				'GEN_MESSAGE' 		=> sprintf( $user->lang['PORTAL_DELETE_DIR'], $phpbb_root_path . 'install_portal' )
+				'GEN_TITLE'				=> $user->lang['PORTAL_ERROR'],
+				'GEN_MESSAGE'			=> sprintf( $user->lang['PORTAL_DELETE_DIR'], $phpbb_root_path . 'install_portal' )
 			));
 		}
 		else
 		{
 			$template->assign_vars(array(
 				'S_DISPLAY_GENERAL'	=> true,
-				'GEN_TITLE'   		=> $user->lang['PORTAL_UPDATE'],
-				'GEN_MESSAGE' 		=> sprintf( $user->lang['PORTAL_UPDATE_TEXT'], $phpbb_root_path . 'install_portal/install.php', $current_version )
+				'GEN_TITLE'				=> $user->lang['PORTAL_UPDATE'],
+				'GEN_MESSAGE'			=> sprintf( $user->lang['PORTAL_UPDATE_TEXT'], $phpbb_root_path . 'install_portal/install.php', $current_version )
 			));
 		}
 
@@ -53,7 +53,7 @@ if( is_dir( $phpbb_root_path . 'install_portal/' ) === TRUE )
 	}
 }
 
-if( $load_center === TRUE )
+if ( $load_center === TRUE )
 {
 	if ($portal_config['portal_recent']) 
 	{ 
@@ -240,7 +240,7 @@ if ($portal_config['portal_ads_small'])
 */
 
 $template->assign_vars(array(
-	'S_DISPLAY_JUMPBOX' 	=> $load_center, // SQL + ACP eklenecek
+	'S_DISPLAY_JUMPBOX' 	=> $load_center,
 	'PORTAL_LEFT_COLLUMN' 	=> $portal_config['portal_left_collumn_width'],
 	'PORTAL_RIGHT_COLLUMN' 	=> $portal_config['portal_right_collumn_width'],
 ));
