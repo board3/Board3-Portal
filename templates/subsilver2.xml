@@ -25,16 +25,16 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
     <author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.</author-notes>
     <author-group>
       <author>
-        <realname>Kevin</realname>
-        <email>nospam@breest.net</email>
-        <username>saint_hh</username>
+        <realname>Ice</realname>
+        <email></email>
+        <username>avaren</username>
         <homepage>http://www.board3.de</homepage>
         <contributions />
       </author>
       <author>
-        <realname>Ice</realname>
-        <email></email>
-        <username>avaren</username>
+        <realname>Kevin</realname>
+        <email>nospam@breest.net</email>
+        <username>saint_hh</username>
         <homepage>http://www.board3.de</homepage>
         <contributions />
       </author>
@@ -55,8 +55,8 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
     </author-group>
     <mod-version>
       <major>0</major>
-      <minor>1</minor>
-      <revision>1</revision>
+      <minor>2</minor>
+      <revision>0</revision>
     </mod-version>
     <installation>
       <level>easy</level>

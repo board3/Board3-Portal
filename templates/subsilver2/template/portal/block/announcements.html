@@ -15,12 +15,17 @@
 			<table class="tablebg" cellspacing="1" width="100%">
 				<tr>
 					<td class="cat">
-						<!-- IF announcements_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {announcements_row.ATTACH_ICON_IMG}<!-- IF announcements_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --><a href="{announcements_row.U_VIEW_COMMENTS}"><strong><!-- IF announcements_row.FORUM_NAME -->{announcements_row.FORUM_NAME} &nbsp;&bull;&nbsp; <!-- ENDIF -->{announcements_row.TITLE}</strong></a>
+						<!-- IF announcements_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {announcements_row.ATTACH_ICON_IMG}<!-- IF announcements_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --><a href="{announcements_row.U_VIEW_COMMENTS}"><strong>{announcements_row.TITLE}</strong></a>
 					</td>
 				</tr>
 				<tr class="row1">
 					<td>
-						<span class="gensmall" style="float: left;">{L_POSTED_BY}: <strong><a href="{announcements_row.U_USER_PROFILE}">{announcements_row.POSTER}</a></strong></span>
+						<span class="gensmall" style="float: left;">{L_POSTED_BY}: <strong><a href="{announcements_row.U_USER_PROFILE}">{announcements_row.POSTER}</a></strong>
+							<!-- IF announcements_row.FORUM_NAME --> &nbsp;&bull;&nbsp; {L_FORUM}: <strong><a href="{announcements_row.U_VIEWFORUM}">{announcements_row.FORUM_NAME}</a></strong>
+							<!-- ELSE -->
+								 &nbsp;&bull;&nbsp; {L_GLOBAL_ANNOUNCEMENT}
+							<!-- ENDIF -->
+						</span>
 						<span class="gensmall" style="float: right;">{announcements_row.TIME}</span>
 						<br /><br />
 						{announcements_row.TEXT}

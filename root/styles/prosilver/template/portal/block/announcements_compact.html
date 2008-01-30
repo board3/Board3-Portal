@@ -23,13 +23,15 @@
 						<br style="clear:both" />
 						<!-- IF announcements_row.FORUM_NAME -->
 						<span style="float: left; font-size:1.0em; margin: 2px 0 0 28px;">{L_FORUM}: <strong><a href="{announcements_row.U_VIEWFORUM}">{announcements_row.FORUM_NAME}</a></strong></span>
-						<br style="clear:both" />
+						<!-- ELSE -->
+						<span style="float: left; font-size:1.0em; margin: 2px 0 0 28px;">{L_GLOBAL_ANNOUNCEMENT}</span>
 						<!-- ENDIF -->
+						<span style="float: right; margin: 0 5px 0 0;">{L_POSTED_ON_DATE} <strong>{announcements_row.TIME}</strong></span>	   
+						<br style="clear:both" />
 						<span style="float: left; margin: 0 0 0 28px;">
 							<!-- IF S_CAN_READ --><a href="{announcements_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}"><span style="font-size:0.9em;"><em>{L_COMMENTS}: {announcements_row.REPLIES}</em></span></a><!-- ENDIF -->
 							<span style="font-size:0.9em;"><em>{L_TOPIC_VIEWS}: {announcements_row.TOPIC_VIEWS}</em></span>
-						</span>
-						<span style="float: right; margin: 0 5px 0 0;">{L_POSTED_ON_DATE} <strong>{announcements_row.TIME}</strong></span>	      
+						</span>   
 					<!-- IF announcements_row.S_NOT_LAST --><hr style="margin: 0px 0px 3px 0px;" /><!-- ENDIF -->     
 					</li>
 					<!-- ENDIF -->

@@ -13,14 +13,14 @@
 	<tr class="row1">
 		<td>
 			<span style="float: left;">
-				<!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG}  <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}" title="{L_JUMP_NEWEST}"><strong style="font-size:1.1em;"><!-- IF news_row.FORUM_NAME -->{news_row.FORUM_NAME} &nbsp;&bull;&nbsp; <!-- ENDIF -->{news_row.TITLE}</strong></a>
+				<!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG}  <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}" title="{L_JUMP_NEWEST}"><strong style="font-size:1.1em;">{news_row.TITLE}</strong></a>
 			</span>
 			<span style="float: right;font-size:0.9em; margin: 0 5px 0 0;">{L_LAST_POST} {L_POST_BY_AUTHOR}: <strong><a href="{news_row.U_USER_PROFILE}">{news_row.POSTER}</a></strong></span>
 						<br style="clear:both" />
-						<span style="float: left; margin: 0 0 0 22px; font-size:0.9em;">
-							<a href="{news_row.U_VIEW_COMMENTS}" title="{L_JUMP_FIRST}">{L_COMMENTS}: {news_row.REPLIES}</a> {L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS}
-						</span>
+						<!-- IF news_row.FORUM_NAME --><span style="float: left; font-size:1.0em; margin: 2px 0 0 22px;">{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong></span><!-- ENDIF -->
 						<span style="float: right; margin: 0 5px 0 0;">{L_POSTED_ON_DATE} <strong>{news_row.TIME}</strong></span>
+						<br style="clear:both" />
+						<span style="float: left; margin: 0 0 0 22px; font-size:0.9em;"><a href="{news_row.U_VIEW_COMMENTS}" title="{L_JUMP_FIRST}">{L_COMMENTS}: {news_row.REPLIES}</a> {L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS}</span>
 		</td>
 	</tr>
 	<!-- ENDIF -->
