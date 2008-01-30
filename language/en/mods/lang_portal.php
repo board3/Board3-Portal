@@ -41,6 +41,7 @@ $lang = array_merge($lang, array(
 
 	// news & global announcements
 	'LATEST_ANNOUNCEMENTS'	=> 'Latest global announcements',
+	'GLOBAL_ANNOUNCEMENT'	=> 'Global announcement',
 	'LATEST_NEWS'			=> 'Latest news',
 	'READ_FULL'				=> 'Read all',
 	'NO_NEWS'				=> 'No news',
