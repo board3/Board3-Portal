@@ -24,6 +24,13 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
     <author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.</author-notes>
     <author-group>
       <author>
+        <realname>Ice</realname>
+        <email></email>
+        <username>avaren</username>
+        <homepage>http://www.board3.de</homepage>
+        <contributions />
+      </author>
+      <author>
         <realname>Kevin</realname>
         <email>nospam@breest.net</email>
         <username>saint_hh</username>
@@ -44,17 +51,10 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <homepage>http://www.digitalfotografie-foren.de</homepage>
         <contributions />
       </author>
-      <author>
-        <realname>Sevdin Filiz - original phpBB3 Portal developement</realname>
-        <email></email>
-        <username>angelside</username>
-        <homepage>http://www.phpbb3portal.com</homepage>
-        <contributions />
-      </author>
     </author-group>
     <mod-version>
       <major>0</major>
-      <minor>1</minor>
+      <minor>2</minor>
       <revision>0</revision>
     </mod-version>
     <installation>
@@ -67,6 +67,32 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
       </target-version>
     </installation>
     <history>
+      <entry>
+        <date>2008-02-03</date>
+        <rev-version>
+          <major>0</major>
+          <minor>2</minor>
+          <revision>0</revision>
+        </rev-version>
+        <changelog lang="en-GB">
+          <change>added subsilver2 templates (valid XHTML 1.0 Strict)</change>
+          <change>added upcoming birthdays, configurable in ACP / thanks to Kendoo</change>
+          <change>complete rewrite of the poll system - checking user permissions, multible polls and more</change>
+          <change>added forum names with link in news and announcements boxes</change>
+          <change>added portal log messages in the ACP</change>
+          <change>fixed several bugs: http://www.board3.de/bugtracker/viewcat.php?c=1</change>
+          <change>updated the MySQL installer</change>
+        </changelog>
+        <changelog lang="de">
+          <change>subsilver2 Templates hinzugefügt (valid XHTML 1.0 Strict)</change>
+          <change>Kommende Geburtstage, konfigurierbar im ACP / vielen Dank an Kendoo</change>
+          <change>Die Umfragen wurden komplett überarbeitet - Benutzer Berechtigungen werden geprüft, mehrere Abstimmungen sind möglich und mehr</change>
+          <change>Foren Namen mit Link in die aktuellen Beiträge und Bekanntmachungen hinzugefügt</change>
+		<change>Portal Log Meldungen im ACP hinzugefügt</change>
+          <change>Diverse Bugs gefixt: http://www.board3.de/bugtracker/viewcat.php?c=1</change>
+          <change>Der MySQL Installer wurde überarbeitet</change>
+        </changelog>
+      </entry>
       <entry>
         <date>2008-01-15</date>
         <rev-version>
@@ -81,8 +107,8 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
           <change>fixed several bugs</change>
           <change>added several language variables</change>
           <change>changed the language file path to /en/mods/</change>
-          <change>updatet the install instructions</change>
-          <change>updatet the MySQL installer</change>
+          <change>updated the install instructions</change>
+          <change>updated the MySQL installer</change>
         </changelog>
         <changelog lang="de">
           <change>Änderungen von "phpBB3 Portal 1.1.0Beta" zu "board3 Portal - based on phpBB3 Portal Version 1.0.0":</change>
@@ -122,6 +148,12 @@ Order Allow,Deny
 Deny from All
 </Files>]]></find>
         <action type="after-add"><![CDATA[DirectoryIndex portal.php index.php index.html index.htm]]></action>
+      </edit>
+    </open>
+    <open src="adm/index.php">
+      <edit>
+        <find><![CDATA[// End session management]]></find>
+        <action type="after-add"><![CDATA[$user->add_lang('mods/lang_portal_acp_logs');]]></action>
       </edit>
     </open>
     <open src="includes/constants.php">

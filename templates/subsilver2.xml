@@ -67,36 +67,6 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <target-minor allow="exact">0</target-minor>
       </target-version>
     </installation>
-    <history>
-      <entry>
-        <date>2008-01-15</date>
-        <rev-version>
-          <major>0</major>
-          <minor>1</minor>
-          <revision>0</revision>
-        </rev-version>
-        <changelog lang="en-GB">
-          <change>Changes from "phpBB3 Portal 1.1.0Beta" to "board3 Portal - based on phpBB3 Portal Version 1.0.0":</change>
-          <change>completet all missing ACP Control for several boxes</change>
-          <change>valid XHTML 1.0 Strict template</change>
-          <change>fixed several bugs</change>
-          <change>added several language variables</change>
-          <change>changed the language file path to /en/mods/</change>
-          <change>updatet the install instructions</change>
-          <change>updatet the MySQL installer</change>
-        </changelog>
-        <changelog lang="de">
-          <change>Änderungen von "phpBB3 Portal 1.1.0Beta" zu "board3 Portal - based on phpBB3 Portal Version 1.0.0":</change>
-          <change>Die ACP Verwaltung für diverse Boxen komplettiert</change>
-          <change>valid XHTML 1.0 Strict Template</change>
-          <change>Diverse Bugs gefixt</change>
-          <change>Diverse Sprachvariablen hinzugefügt</change>
-          <change>Pfad für die Sprachdateien ins Mod System integriert</change>
-          <change>Die Installationanweisungen komplett überarbeitet</change>
-          <change>Den MySQL Installer komplett überarbeitet</change>
-        </changelog>
-      </entry>
-    </history>
     <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
   </header>
   <action-group>
