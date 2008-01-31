@@ -17,29 +17,10 @@ if (!defined('IN_PORTAL'))
 	exit;
 }
 	
-// Get cleaned up list... return only those forums not having the f_read permission
-$forum_ary = $auth->acl_getf('!f_read', true);
-$forum_ary = array_unique(array_keys($forum_ary));
-
-// Determine first forum the user is able to read into - for global announcement link
-$sql = 'SELECT forum_id
-	FROM ' . FORUMS_TABLE . '
-	WHERE forum_type = ' . FORUM_POST;
-
-if (sizeof($forum_ary))
-{
-	$sql .= ' AND ' . $db->sql_in_set('forum_id', $forum_ary, true);
-}
-$result = $db->sql_query_limit($sql, 1);
-$g_forum_id = (int) $db->sql_fetchfield('forum_id');
-$db->sql_freeresult($result);
-
-$can_read = ( $g_forum_id == 0 ) ? false : true;
-
 $news = request_var('announcement', -1); 	 
 if($news < 0) 	 
 {
-	$fetch_news = phpbb_fetch_posts('', $portal_config['portal_number_of_announcements'], $portal_config['portal_announcements_length'], $portal_config['portal_announcements_day'], 'announcements');
+	$fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_forum'], $portal_config['portal_number_of_announcements'], $portal_config['portal_announcements_length'], $portal_config['portal_announcements_day'], 'announcements');
 		
 	if (count($fetch_news) == 0)
 	{
@@ -47,6 +28,8 @@ if($news < 0)
 			'S_NO_TOPICS'	=> true,
 			'S_NOT_LAST'	=> false
 		));
+
+		$template->assign_var('S_CAN_READ', $can_read);
 	}
 	else
 	{
@@ -71,7 +54,7 @@ if($news < 0)
 			$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
 			$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 	
-			$real_forum_id = ( $forum_id == 0 ) ? $g_forum_id : $forum_id;
+			$real_forum_id = ( $forum_id == 0 ) ? $fetch_news[$i]['global_id']: $forum_id;
 	
 			$template->assign_block_vars('announcements_row', array(
 				'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
@@ -101,8 +84,7 @@ if($news < 0)
 } 	 
 else 	 
 { 	 
-	#$fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_config['portal_number_of_news'], 0, 0, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news'); 	 
-	$fetch_news = phpbb_fetch_posts('', $portal_config['portal_number_of_announcements'], 0, 0, 'announcements');
+	$fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_config['portal_number_of_news'], $portal_config['portal_news_length'], 0, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news'); 	 
 
 	$i = $news;
 	$forum_id = $fetch_news[$i]['forum_id'];
@@ -140,7 +122,6 @@ $template->assign_vars(array(
 	'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 	'READ_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_NEWEST_POST'),
 	'S_DISPLAY_ANNOUNCEMENTS'	=> true,
-	'S_CAN_READ'				=> $can_read,
 ));
 
 ?>
