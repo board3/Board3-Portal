@@ -59,7 +59,7 @@ $lang = array_merge($lang, array(
 	'INSTALLER_UNINSTALL_NOTE'			=> 'Welcome to the Updatemenu',
 	'INSTALLER_UNINSTALL_SUCCESSFUL'	=> 'Installation of the MOD v%s was successful.',
 
-	'INSTALLER_NEEDS_FOUNDER'			=> 'You must be logged in as a founder.<br /><a href="/ucp.php?mode=login"><strong>Go to login</strong>',
+	'INSTALLER_NEEDS_FOUNDER'			=> 'You must be logged in as a founder.<br /><a href="../ucp.php?mode=login"><strong>Go to login</strong>',
 
 	'INSTALLER_UPDATE'						=> 'Update',
 	'INSTALLER_UPDATE_MENU'				=> 'Updatemenu',
