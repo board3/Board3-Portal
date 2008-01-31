@@ -2,15 +2,13 @@
 	<tr>
 		<th>{L_LATEST_ANNOUNCEMENTS}</th>
 	</tr>
-	<tr class="row1">
-		<td>
 		<!-- BEGIN announcements_row -->
 		<!-- IF announcements_row.S_NO_TOPICS -->
-					<table class="tablebg" cellspacing="1" width="100%">
-						<tr>
-							{L_NO_ANNOUNCEMENTS}
-						</tr>
-					</table>
+			<tr class="row1">
+				<td>
+				<span class="gensmall"><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
+				</td>
+			</tr>
 		<!-- ELSE -->
 			<table class="tablebg" cellspacing="1" width="100%">
 				<tr>
@@ -42,7 +40,5 @@
 			<!-- IF announcements_row.S_NOT_LAST --><br /><!-- ENDIF -->
 		<!-- ENDIF -->
 		<!-- END announcements_row -->
-		</td>
-	</tr>
 </table>
 <br />
