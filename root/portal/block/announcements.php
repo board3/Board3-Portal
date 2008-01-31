@@ -29,7 +29,7 @@ if($news < 0)
 			'S_NOT_LAST'	=> false
 		));
 
-		$template->assign_var('S_CAN_READ', $can_read);
+		$template->assign_var('S_CAN_READ', false);
 	}
 	else
 	{
