@@ -17,8 +17,8 @@ if (!defined('IN_PORTAL'))
 	exit;
 }
 	
-$news = request_var('announcement', -1); 	 
-if($news < 0) 	 
+$announcement = request_var('announcement', -1); 	 
+if($announcement < 0) 	 
 {
 	$fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_forum'], $portal_config['portal_number_of_announcements'], $portal_config['portal_announcements_length'], $portal_config['portal_announcements_day'], 'announcements');
 		
@@ -84,9 +84,9 @@ if($news < 0)
 } 	 
 else 	 
 { 	 
-	$fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_config['portal_number_of_news'], $portal_config['portal_news_length'], 0, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news'); 	 
+	$fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_forum'], $portal_config['portal_number_of_announcements'], 0, $portal_config['portal_announcements_day'], 'announcements'); 	 
 
-	$i = $news;
+	$i = $announcement;
 	$forum_id = $fetch_news[$i]['forum_id'];
 	$topic_id = $fetch_news[$i]['topic_id'];
 	$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
