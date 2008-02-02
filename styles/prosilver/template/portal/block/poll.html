@@ -4,7 +4,7 @@
 	</ul>
 
 	<div class="panel">
-		<div class="inner"><span class="corners-top"><span></span></span>
+		<div class="inner">
 	<!-- IF S_HAS_POLL -->
 		<!-- BEGIN poll -->
 			<!-- IF poll.S_CAN_VOTE --><form method="post" action="{poll.S_POLL_ACTION}"><!-- ENDIF -->
@@ -58,17 +58,11 @@
 			<hr />
 		<!-- END poll -->
 	<!-- ELSE -->
-		<div class="panel">
-			<div class="inner"><span class="corners-top"><span></span></span>
-	
 			<div class="content">
-				<p>{L_NO_POLL}</p>
+				<span style=" font-size:1.2em; float: left; margin: 5px 0 0 2px;"><strong>{L_NO_POLL}</strong></span>
 			</div>
-	
-			<span class="corners-bottom"><span></span></span></div>
-		</div>
 	<!-- ENDIF -->
-		<span class="corners-bottom"><span></span></span></div>
+		</div>
 	</div>
 <span class="corners-bottom"><span></span></span></div>
 <br style="clear:both" />
