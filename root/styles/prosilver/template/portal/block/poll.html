@@ -2,10 +2,9 @@
 	<ul class="topiclist">
 		<li class="header"><dl><dt>{L_POLL}</dt></dl></li>
 	</ul>
-
+	<!-- IF S_HAS_POLL -->
 	<div class="panel">
 		<div class="inner">
-	<!-- IF S_HAS_POLL -->
 		<!-- BEGIN poll -->
 			<!-- IF poll.S_CAN_VOTE --><form method="post" action="{poll.S_POLL_ACTION}"><!-- ENDIF -->
 				<div class="content">
@@ -57,12 +56,18 @@
 			<!-- IF poll.S_CAN_VOTE --></form><!-- ENDIF -->
 			<hr />
 		<!-- END poll -->
-	<!-- ELSE -->
-			<div class="content">
-				<span style=" font-size:1.2em; float: left; margin: 5px 0 0 2px;"><strong>{L_NO_POLL}</strong></span>
-			</div>
-	<!-- ENDIF -->
 		</div>
 	</div>
+	<!-- ELSE -->
+	<div class="inner">
+		<ul class="topiclist forums">
+			<li><dl>
+				<dd class="posts_portal"  style="border-left:0px">
+				<p style="margin: 0 5px 0 5px;"><strong>{L_NO_POLL}</strong></p>
+				</dd>
+			</dl></li>
+		</ul>
+	</div>
+	<!-- ENDIF -->
 <span class="corners-bottom"><span></span></span></div>
 <br style="clear:both" />
