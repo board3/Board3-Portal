@@ -28,9 +28,9 @@ $load_center = true;
 
 if ( is_dir( $phpbb_root_path . 'install_portal/' ) === TRUE )
 {
-	if ( is_file( $phpbb_root_path . 'install_portal/install.php' ) === TRUE )
+	if ( is_file( $phpbb_root_path . 'install_portal/install.'.$phpEx ) === TRUE )
 	{
-		include $phpbb_root_path . 'install_portal/install.php';
+		include $phpbb_root_path . 'install_portal/install.'.$phpEx;
 
 		if ( version_compare( $current_version, $portal_config['portal_version'], '<=' ) === TRUE )
 		{
@@ -45,7 +45,7 @@ if ( is_dir( $phpbb_root_path . 'install_portal/' ) === TRUE )
 			$template->assign_vars(array(
 				'S_DISPLAY_GENERAL'	=> true,
 				'GEN_TITLE'				=> $user->lang['PORTAL_UPDATE'],
-				'GEN_MESSAGE'			=> sprintf( $user->lang['PORTAL_UPDATE_TEXT'], $phpbb_root_path . 'install_portal/install.php', $current_version )
+				'GEN_MESSAGE'			=> sprintf( $user->lang['PORTAL_UPDATE_TEXT'], $phpbb_root_path . 'install_portal/install.'.$phpEx, $current_version )
 			));
 		}
 
