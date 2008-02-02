@@ -16,15 +16,52 @@ if (!defined('IN_PHPBB'))
 }
 
 // Get portal config
-$sql = 'SELECT *
-	FROM ' . PORTAL_CONFIG_TABLE;
-$result = $db->sql_query($sql);
-
-while( $row = $db->sql_fetchrow($result) )
+function obtain_portal_config()
 {
-	$portal_config_name = $row['config_name'];
-	$portal_config_value = $row['config_value'];
-	$portal_config[$portal_config_name] = $portal_config_value;
+	global $db, $cache;
+
+	if (($portal_config = $cache->get('portal_config')) !== true)
+	{
+		$portal_config = $cached_portal_config = array();
+
+		$sql = 'SELECT config_name, config_value
+			FROM ' . PORTAL_CONFIG_TABLE;
+		$result = $db->sql_query($sql);
+
+		while ($row = $db->sql_fetchrow($result))
+		{
+			$cached_portal_config[$row['config_name']] = $row['config_value'];
+			$portal_config[$row['config_name']] = $row['config_value'];
+		}
+		$db->sql_freeresult($result);
+
+		$cache->put('portal_config', $cached_portal_config);
+	}
+
+	return $portal_config;
+}
+
+/**
+* Set config value. Creates missing config entry.
+*/
+function set_portal_config($config_name, $config_value)
+{
+	global $db, $cache, $portal_config;
+
+	$sql = 'UPDATE ' . PORTAL_CONFIG_TABLE . "
+		SET config_value = '" . $db->sql_escape($config_value) . "'
+		WHERE config_name = '" . $db->sql_escape($config_name) . "'";
+	$db->sql_query($sql);
+
+	if (!$db->sql_affectedrows() && !isset($portal_config[$config_name]))
+	{
+		$sql = 'INSERT INTO ' . PORTAL_CONFIG_TABLE . ' ' . $db->sql_build_array('INSERT', array(
+			'config_name'	=> $config_name,
+			'config_value'	=> $config_value));
+		$db->sql_query($sql);
+	}
+
+	$portal_config[$config_name] = $config_value;
 }
 
 // 
