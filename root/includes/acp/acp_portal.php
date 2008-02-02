@@ -9,35 +9,6 @@
 *
 */
 
-/**
-* Set config value. Creates missing config entry.
-*/
-function set_portal_config($config_name, $config_value, $is_dynamic = false)
-{
-	global $db, $cache, $config;
-
-	$sql = 'UPDATE ' . PORTAL_CONFIG_TABLE . "
-		SET config_value = '" . $db->sql_escape($config_value) . "'
-		WHERE config_name = '" . $db->sql_escape($config_name) . "'";
-	$db->sql_query($sql);
-
-	if (!$db->sql_affectedrows() && !isset($config[$config_name]))
-	{
-		$sql = 'INSERT INTO ' . PORTAL_CONFIG_TABLE . ' ' . $db->sql_build_array('INSERT', array(
-			'config_name'	=> $config_name,
-			'config_value'	=> $config_value,
-			'is_dynamic'	=> ($is_dynamic) ? 1 : 0));
-		$db->sql_query($sql);
-	}
-
-	$config[$config_name] = $config_value;
-
-	if (!$is_dynamic)
-	{
-		$cache->destroy('config');
-	}
-}
-
 class acp_portal
 {
 	var $u_action;
@@ -48,17 +19,11 @@ class acp_portal
 		global $db, $user, $template;
 		global $config, $portal_config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
-		// Get portal config
-		$sql = 'SELECT *
-			FROM ' . PORTAL_CONFIG_TABLE;
-		$result = $db->sql_query($sql);
+		$phpEx = (empty($phpEx)) ? substr(strrchr(__FILE__, '.'), 1) : $phpEx;
+		
+		require '../portal/includes/functions.'.$phpEx;
 
-		while( $row = $db->sql_fetchrow($result) )
-		{
-			$config_name = $row['config_name'];
-			$config_value = $row['config_value'];
-			$config[$config_name] = $config_value;
-		}
+		$portal_config = obtain_portal_config();
 
 		$user->add_lang('mods/lang_portal_acp');
 
@@ -262,7 +227,7 @@ class acp_portal
 			$user->add_lang($display_vars['lang']);
 		}
 
-		$this->new_config = $config;
+		$this->new_config = $portal_config;
 		$cfg_array = (isset($_REQUEST['config'])) ? utf8_normalize_nfc(request_var('config', array('' => ''), true)) : $this->new_config;
 		$error = array();
 
@@ -284,13 +249,6 @@ class acp_portal
 			}
 
 			$this->new_config[$config_name] = $config_value = $cfg_array[$config_name];
-
-			if ($config_name == 'email_function_name')
-			{
-				$this->new_config['email_function_name'] = trim(str_replace(array('(', ')'), array('', ''), $this->new_config['email_function_name']));
-				$this->new_config['email_function_name'] = (empty($this->new_config['email_function_name']) || !function_exists($this->new_config['email_function_name'])) ? 'mail' : $this->new_config['email_function_name'];
-				$config_value = $this->new_config['email_function_name'];
-			}
 
 			if ($submit)
 			{
