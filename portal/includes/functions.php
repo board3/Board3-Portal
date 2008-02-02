@@ -298,7 +298,7 @@ function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $
 					LEFT JOIN
 						' . POSTS_TABLE . ' as p
 					ON
-						t.topic_first_post_id = p.post_id
+						t.topic_last_post_id = p.post_id
 					WHERE
 						' . $topic_type . '
 						' . $post_time . '
