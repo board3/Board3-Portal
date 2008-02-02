@@ -2,13 +2,11 @@
 	<tr>
 		<th>{L_LATEST_NEWS}</th>
 	</tr>
+	<tr class="row1">
+		<td>
 		<!-- BEGIN news_row -->
 		<!-- IF news_row.S_NO_TOPICS -->
-			<tr class="row1">
-				<td>
-				<span class="gensmall"><strong>{L_NO_NEWS}</strong></span>
-				</td>
-			</tr>
+			<span class="gensmall"><strong>{L_NO_NEWS}</strong></span>
 		<!-- ELSE -->
 			<table class="tablebg" cellspacing="1" width="100%">
 				<tr>
@@ -33,5 +31,7 @@
 		<!-- ENDIF -->
 		<!-- IF news_row.S_NOT_LAST --><br /><!-- ENDIF -->
 		<!-- END news_row -->
+		</td>
+	</tr>
 </table>
 <br />
