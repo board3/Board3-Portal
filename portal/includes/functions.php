@@ -290,7 +290,7 @@ function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $
 					LEFT JOIN
 						' . USERS_TABLE . ' as u
 					ON
-						t.topic_poster = u.user_id
+						t.topic_last_poster_id = u.user_id
 					LEFT JOIN
 						' . FORUMS_TABLE . ' as f
 					ON
