@@ -50,10 +50,10 @@ function qsearch_onSubmit()
 		<td>
 			<form id="qsearch_form" method="post" action="{U_SEARCH}" onsubmit="return qsearch_onSubmit();">
 			<p>
-			    <input type="text" tabindex="5" name="keywords" id="searchfield" size="22" maxlength="40" title="{L_SEARCH_KEYWORDS}" class="inputbox search" value="<!-- IF SEARCH_WORDS-->{SEARCH_WORDS}<!-- ELSE -->{L_SEARCH_MINI}<!-- ENDIF -->" onclick="if(this.value=='{LA_SEARCH_MINI}')this.value='';" onblur="if(this.value=='')this.value='{LA_SEARCH_MINI}';" />
+			    <input type="text" tabindex="6" name="keywords" id="searchfield" size="22" maxlength="40" title="{L_SEARCH_KEYWORDS}" class="inputbox search" value="<!-- IF SEARCH_WORDS-->{SEARCH_WORDS}<!-- ELSE -->{L_SEARCH_MINI}<!-- ENDIF -->" onclick="if(this.value=='{LA_SEARCH_MINI}')this.value='';" onblur="if(this.value=='')this.value='{LA_SEARCH_MINI}';" />
 			</p>
 			<p>
-			<select id="qsearch_select" tabindex="6">
+			<select id="qsearch_select" tabindex="7">
 				<optgroup label="{L_SH_SITE}">
 					<option value="site" style="background-color: #EEEEEE;">{L_SH_POSTS}</option>
 					<option value="author" style="background-color: #EEEEEE;">{L_SH_AUTHOR}</option>
@@ -70,7 +70,7 @@ function qsearch_onSubmit()
 			<!-- &nbsp; -->
 			<input type="hidden" name="search_fields" value="all" />
 			<input type="hidden" name="show_results" value="topics" />
-			<input type="submit" value="{L_SH}" class="button2" tabindex="7" />
+			<input type="submit" value="{L_SH}" class="button2" tabindex="8" />
 			</p>
 			</form>
 			<hr />
