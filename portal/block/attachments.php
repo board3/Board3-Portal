@@ -22,6 +22,7 @@ if (!defined('IN_PORTAL'))
 // Just grab all attachment info from database
 $sql = 'SELECT *
 	FROM ' . ATTACHMENTS_TABLE . '
+	WHERE topic_id <> 0
 	ORDER BY filetime ' . ((!$config['display_order']) ? 'DESC' : 'ASC') . ', post_msg_id ASC';
 $result = $db->sql_query_limit($sql, $portal_config['portal_attachments_number']);
 
