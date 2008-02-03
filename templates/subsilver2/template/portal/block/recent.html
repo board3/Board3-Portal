@@ -3,9 +3,9 @@
 		<th colspan="3">{L_RECENT_TOPIC}</th>
 	</tr>
 	<tr>
-		<td class="row1"><strong>{L_RECENT_ANN}</strong></td>
-		<td class="row1"><strong>{L_RECENT_HOT_TOPIC}</strong></td>
-		<td class="row1"><strong>{L_RECENT_TOPIC}</strong></td>
+		<!-- IF .latest_announcements --><td class="row1"><strong>{L_RECENT_ANN}</strong></td><!-- ENDIF -->
+		<!-- IF .latest_hot_topics --><td class="row1"><strong>{L_RECENT_HOT_TOPIC}</strong></td><!-- ENDIF -->
+		<!-- IF .latest_topics --><td class="row1"><strong>{L_RECENT_TOPIC}</strong></td><!-- ENDIF -->
 	</tr>
 	<tr>
 		<!-- IF .latest_announcements -->
