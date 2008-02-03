@@ -201,6 +201,7 @@ if( $poll_forums === TRUE )
 			FROM ' . TOPICS_TABLE . ' t, ' . FORUMS_TABLE . " f
 			WHERE t.forum_id = f.forum_id AND t.topic_approved = 1 AND t.poll_start > 0
 			{$where}
+			AND t.topic_moved_id = 0
 			ORDER BY t.poll_start DESC";
 
 	$limit = ( isset($portal_config['portal_poll_limit']) ) ? $portal_config['portal_poll_limit'] : 3;

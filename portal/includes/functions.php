@@ -190,6 +190,7 @@ function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $
 						' . $post_time . '
 						AND t.topic_status <> 2
 						AND t.topic_approved = 1
+						AND t.topic_moved_id = 0
 						' . $str_where .'
 					ORDER BY
 						' . $topic_order;
