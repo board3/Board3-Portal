@@ -86,7 +86,7 @@ function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $
 
 		if( sizeof($forum_from) )
 		{
-			foreach( $allow_access as $acc_id => $acc_data )
+			foreach( $allow_access as $acc_id )
 			{
 				if( in_array($acc_id, $forum_from ) )
 				{
@@ -100,7 +100,7 @@ function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $
 		}
 		else
 		{
-			foreach( $allow_access as $acc_id => $acc_data )
+			foreach( $allow_access as $acc_id )
 			{
 				
 				$str_where .= "t.forum_id = $acc_id OR ";
@@ -245,24 +245,24 @@ function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $
 					$bbcode->bbcode_second_pass($message, $row['bbcode_uid'], $row['bbcode_bitfield']);
 				}
 				$message = smiley_text($message); // Always process smilies after parsing bbcodes
-				$posts[$i]['post_text']= ap_validate($message);	
 
-				$posts[$i]['topic_id'] = $row['topic_id'];
-				$posts[$i]['topic_last_post_id'] = $row['topic_last_post_id'];
-				$posts[$i]['forum_id'] = $row['forum_id'];
-				$posts[$i]['topic_replies'] = $row['topic_replies'];
-				$posts[$i]['topic_time'] = $user->format_date($row['topic_time']);
-				$posts[$i]['topic_last_post_time'] = $row['topic_last_post_time'];
-				$posts[$i]['topic_title'] = $row['topic_title'];
-				$posts[$i]['username'] = $row['username'];
-				$posts[$i]['user_id'] = $row['user_id'];
-				$posts[$i]['user_type'] = $row['user_type'];
-				$posts[$i]['user_user_colour'] = $row['user_colour'];
-				$posts[$i]['poll'] = ($row['poll_title']) ? true : false;
-				$posts[$i]['attachment'] = ($row['topic_attachment']) ? true : false;
-				$posts[$i]['topic_views'] = ($row['topic_views']);
-				$posts[$i]['forum_name'] = ($row['forum_name']);
-				$posts[$i]['global_id'] = ($global_f);
+				$posts[$i]['post_text']				= ap_validate($message);
+				$posts[$i]['topic_id']				= $row['topic_id'];
+				$posts[$i]['topic_last_post_id']	= $row['topic_last_post_id'];
+				$posts[$i]['forum_id']				= $row['forum_id'];
+				$posts[$i]['topic_replies'] 		= $row['topic_replies'];
+				$posts[$i]['topic_time']			= $user->format_date($row['topic_time']);
+				$posts[$i]['topic_last_post_time']	= $row['topic_last_post_time'];
+				$posts[$i]['topic_title']			= $row['topic_title'];
+				$posts[$i]['username']				= $row['username'];
+				$posts[$i]['user_id']				= $row['user_id'];
+				$posts[$i]['user_type']				= $row['user_type'];
+				$posts[$i]['user_user_colour']		= $row['user_colour'];
+				$posts[$i]['poll']					= ($row['poll_title']) ? true : false;
+				$posts[$i]['attachment']			= ($row['topic_attachment']) ? true : false;
+				$posts[$i]['topic_views']			= $row['topic_views'];
+				$posts[$i]['forum_name']			= $row['forum_name'];
+				$posts[$i]['global_id']				= $global_f;
 										
 				$i++;
 			}
