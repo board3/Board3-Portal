@@ -42,7 +42,7 @@ if( $user->data['is_registered'] && $user->data['user_type'] == USER_FOUNDER )
 	if( $db->sql_affectedrows($result) > 0  )
 	{
 		$version = $db->sql_fetchrow( $result );
-		$old_version = $version['version'];
+		$old_version = strtolower($version['version']);
 	}
 	else
 	{
@@ -55,7 +55,7 @@ if( $user->data['is_registered'] && $user->data['user_type'] == USER_FOUNDER )
 		{
 			$version = $db->sql_fetchrow( $result );
 			$phpbb3portal = true;
-			$old_version = ( strtolower($version['version']) == '1.1.0.b' ) ? '1.1.0b' : $version['version'] ;
+			$old_version = ( strtolower($version['version']) == '1.1.0.b' ) ? '1.1.0b' : strtolower($version['version']) ;
 		}
 	}
 	$db->sql_freeresult( $result );
