@@ -71,16 +71,16 @@ include($phpbb_root_path . 'includes/message_parser.'.$phpEx);
 function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $type)
 {
 	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield;
-
-	$posts = array();
 	
-	$post_time = ($time == 0) ? '' : 't.topic_last_post_time > ' . (time() - $time * 86400) . ' AND';
+	$posts = array();
+
+	$post_time = ($time == 0) ? '' : 'AND t.topic_last_post_time > ' . (time() - $time * 86400);
 
 	$forum_from = ( strpos($forum_from, ',') !== FALSE ) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 
 	$str_where = '';
 
-	$allow_access = $auth->acl_getf('f_read', true);
+	$allow_access = array_unique(array_keys($auth->acl_getf('f_read', true)));
 
 	if( sizeof($allow_access) ){
 
@@ -100,7 +100,7 @@ function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $
 		}
 		else
 		{
-			foreach( $allow_access as $acc_id => $acc_bool )
+			foreach( $allow_access as $acc_id => $acc_data )
 			{
 				
 				$str_where .= "t.forum_id = $acc_id OR ";
@@ -111,186 +111,72 @@ function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $
 			}
 		}
 
-		if ($type == 'announcements')
+		if( strlen($str_where) > 0 )
 		{
-			// only global announcements for announcements block
-			$topic_type = '(( t.topic_type = ' . POST_ANNOUNCE . ') OR ( t.topic_type = ' . POST_GLOBAL . ')) AND';
-	
-			if( strlen($str_where) > 0 )
-			{
-				$str_where = ( strlen($str_where) > 0 ) ? 'AND (t.forum_id = 0 OR ' . substr($str_where, 0, -4) . ')' : '';
 
-				$sql = 'SELECT
-							t.forum_id,
-							t.topic_id,
-							t.topic_last_post_id,
-							t.topic_last_post_time,
-							t.topic_time,
-							t.topic_title,
-							t.topic_attachment,
-							t.topic_views,
-							t.poll_title,
-							t.topic_replies,
-							t.topic_poster,
-							u.username,
-							u.user_id,
-							u.user_type,
-							u.user_colour,
-							p.post_id,
-							p.post_time,
-							p.post_text,
-							p.post_attachment,
-							p.enable_smilies,
-							p.enable_bbcode,
-							p.enable_magic_url,
-							p.bbcode_bitfield,
-							p.bbcode_uid,
-							f.forum_name
-						FROM
-							' . TOPICS_TABLE . ' AS t
-						LEFT JOIN
-							' . USERS_TABLE . ' as u
-						ON
-							t.topic_poster = u.user_id
-						LEFT JOIN
-							' . FORUMS_TABLE . ' as f
-						ON
-							t.forum_id=f.forum_id
-						LEFT JOIN
-							' . POSTS_TABLE . ' as p
-						ON
-							t.topic_first_post_id = p.post_id
-						WHERE
-							' . $topic_type . '
-							' . $post_time . '
-							t.topic_status <> 2 AND
-							t.topic_approved = 1
-							' . $str_where .'
-						ORDER BY
-							t.topic_time DESC';
-		
-		
-				// query the database
-				if(!($result = $db->sql_query_limit($sql, $number_of_posts)))
-				{
-					die('Could not query topic information for board3 Portal announcements section');
-				}
-			
-				//
-				// fetch all postings
-				//
-				
-				// Instantiate BBCode if need be
-				if ($bbcode_bitfield !== '')
-				{
-					$phpEx = substr(strrchr(__FILE__, '.'), 1);
-					include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
-					$bbcode = new bbcode(base64_encode($bbcode_bitfield));
-				}
-				$i = 0;
-				while ( ($row = $db->sql_fetchrow($result)) && ( ($i < $number_of_posts) || ($number_of_posts == '0') ) )
-				{
-						if ($row['user_id'] != ANONYMOUS && $row['user_colour'])
-						{
-							$row['username'] = '<b style="color:#' . $row['user_colour'] . '">' . $row['username'] . '</b>';
-						}
-						$posts[$i]['bbcode_uid'] = $row['bbcode_uid'];
-						$len_check = $row['post_text'];
-						$maxlen = $text_length;
-						if (($text_length != 0) && (strlen($len_check) > $text_length))
-						{
-								$posts[$i]['post_text'] = censor_text(get_sub_taged_string(str_replace("\n", '<br/> ', $row['post_text']), $row['bbcode_uid'], $maxlen));
-								$posts[$i]['striped'] = true;
-						} else $posts[$i]['post_text'] = censor_text($row['post_text']);
-			
-						$posts[$i]['topic_id'] = $row['topic_id'];
-						$posts[$i]['topic_last_post_id'] = $row['topic_last_post_id'];
-						$posts[$i]['forum_id'] = $row['forum_id'];
-						$posts[$i]['topic_replies'] = $row['topic_replies'];
-						$posts[$i]['topic_time'] = $user->format_date($row['topic_time']);
-						$posts[$i]['topic_last_post_time'] = $row['topic_last_post_time'];
-						$posts[$i]['topic_title'] = $row['topic_title'];
-						$posts[$i]['username'] = $row['username'];
-						$posts[$i]['user_id'] = $row['user_id'];
-						$posts[$i]['user_type'] = $row['user_type'];
-						$posts[$i]['user_user_colour'] = $row['user_colour'];
-						$posts[$i]['poll'] = ($row['poll_title']) ? true : false;
-						$posts[$i]['attachment'] = ($row['topic_attachment']) ? true : false;
-						$posts[$i]['topic_views'] = ($row['topic_views']);
-						$posts[$i]['forum_name'] = ($row['forum_name']);
-						$posts[$i]['global_id'] = ($global_f);
-			
-						$message = $posts[$i]['post_text'];
-						$message = str_replace("\n", '<br />', $message);
-						
-					
-						if ($auth->acl_get('f_html', $row['forum_id'])) 
-						{
-							$message = preg_replace('#<!\-\-(.*?)\-\->#is', '', $message); // Remove Comments from post content
-						}
-						// Second parse bbcode here
-						if ($row['bbcode_bitfield'])
-						{
-							$bbcode->bbcode_second_pass($message, $row['bbcode_uid'], $row['bbcode_bitfield']);
-						}
-						$message = smiley_text($message); // Always process smilies after parsing bbcodes
-						$posts[$i]['post_text']= ap_validate($message);	
-						$i++;
-				}
-			}
-			// return the result
-			return $posts;
-			}
-		
-			// news - get last post
-		
-			else if ($type == 'news_all')
+			switch( $type )
 			{
-				// not show global announcements
-				$topic_type = '( t.topic_type != ' . POST_ANNOUNCE . ' ) AND ( t.topic_type != ' . POST_GLOBAL . ') AND';
+				case "announcements":
+
+					$topic_type = '(( t.topic_type = ' . POST_ANNOUNCE . ') OR ( t.topic_type = ' . POST_GLOBAL . '))';
+					$str_where = ( strlen($str_where) > 0 ) ? 'AND (t.forum_id = 0 OR ' . substr($str_where, 0, -4) . ')' : '';
+					$user_link = 't.topic_poster = u.user_id';
+					$post_link = 't.topic_first_post_id = p.post_id';
+					$topic_order = 't.topic_time DESC';
+
+				break;
+				case "news":
+
+					$topic_type = 't.topic_type = ' . POST_NORMAL;
+					$str_where = 'AND (' . substr($str_where, 0, -4) . ')';
+					$user_link = 't.topic_last_poster_id = u.user_id';
+					$post_link = 't.topic_last_post_id = p.post_id';
+					$topic_order = 't.topic_last_post_time DESC';
+
+				break;
+				case "news_all":
+
+					$topic_type = '( t.topic_type != ' . POST_ANNOUNCE . ' ) AND ( t.topic_type != ' . POST_GLOBAL . ')';
+					$str_where = 'AND (' . substr($str_where, 0, -4) . ')';
+					$user_link = 't.topic_last_poster_id = u.user_id';
+					$post_link = 't.topic_last_post_id = p.post_id';
+					$topic_order = 't.topic_last_post_time DESC';
+
+				break;
 			}
-			else
-			{
-				// only normal topic
-				$topic_type = 't.topic_type = ' . POST_NORMAL . ' AND';
-			}
-		
-	
-		$str_where = 'AND (' . substr($str_where, 0, -4) . ')';	
-	
-		$sql = 'SELECT
-				t.forum_id,
-					t.topic_id,
-					t.topic_last_post_id,
-					t.topic_last_post_time,
-					t.topic_time,
-					t.topic_title,
-					t.topic_attachment,
-					t.topic_views,
-					t.poll_title,
-					t.topic_replies,
-					t.forum_id,
-					t.topic_poster,
-					u.username,
-					u.user_id,
-					u.user_type,
-					u.user_colour,
-					p.post_id,
-					p.post_time,
-					p.post_text,
-					p.post_attachment,
-					p.enable_smilies,
-					p.enable_bbcode,
-					p.enable_magic_url,
-					p.bbcode_bitfield,
-					p.bbcode_uid,
-					f.forum_name
+
+			$sql = 'SELECT
+						t.forum_id,
+						t.topic_id,
+						t.topic_last_post_id,
+						t.topic_last_post_time,
+						t.topic_time,
+						t.topic_title,
+						t.topic_attachment,
+						t.topic_views,
+						t.poll_title,
+						t.topic_replies,
+						t.topic_poster,
+						u.username,
+						u.user_id,
+						u.user_type,
+						u.user_colour,
+						p.post_id,
+						p.post_time,
+						p.post_text,
+						p.post_attachment,
+						p.enable_smilies,
+						p.enable_bbcode,
+						p.enable_magic_url,
+						p.bbcode_bitfield,
+						p.bbcode_uid,
+						f.forum_name
 					FROM
 						' . TOPICS_TABLE . ' AS t
 					LEFT JOIN
 						' . USERS_TABLE . ' as u
 					ON
-						t.topic_last_poster_id = u.user_id
+						' . $user_link . '
 					LEFT JOIN
 						' . FORUMS_TABLE . ' as f
 					ON
@@ -298,57 +184,74 @@ function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $
 					LEFT JOIN
 						' . POSTS_TABLE . ' as p
 					ON
-						t.topic_last_post_id = p.post_id
+						' . $post_link . '
 					WHERE
 						' . $topic_type . '
 						' . $post_time . '
-						t.topic_status <> 2 AND
-						t.topic_approved = 1
-						' . $str_where . '
-				ORDER BY
-					t.topic_last_post_time DESC';
+						AND t.topic_status <> 2
+						AND t.topic_approved = 1
+						' . $str_where .'
+					ORDER BY
+						' . $topic_order;
+
+			if( $number_of_posts == '' OR $number_of_posts == 0)
+			{
+				$result = $db->sql_query($sql);
+			}
+			else
+			{
+				$result = $db->sql_query_limit($sql, $number_of_posts);
+			}
+
+			// Instantiate BBCode if need be
+			if ($bbcode_bitfield !== '')
+			{
+				$phpEx = substr(strrchr(__FILE__, '.'), 1);
+				include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+				$bbcode = new bbcode(base64_encode($bbcode_bitfield));
+			}
 	
-		// query the database
-		if(!($result = $db->sql_query_limit($sql, $number_of_posts)))
-		{
-			die('Could not query topic information for board Portal news section');
-		}
-	
-		//
-		// fetch all postings
-		//
-		
-		// Instantiate BBCode if need be
-		if ($bbcode_bitfield !== '')
-		{
-			$phpEx = substr(strrchr(__FILE__, '.'), 1);
-			include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
-			$bbcode = new bbcode(base64_encode($bbcode_bitfield));
-		}
-		$i = 0;
-		while ( ($row = $db->sql_fetchrow($result)) && ( ($i < $number_of_posts) || ($number_of_posts == '0') ) )
-		{
-			if ( ($auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0') )
+			$i = 0;
+
+			while ( $row = $db->sql_fetchrow($result) )
 			{
 				if ($row['user_id'] != ANONYMOUS && $row['user_colour'])
 				{
 					$row['username'] = '<b style="color:#' . $row['user_colour'] . '">' . $row['username'] . '</b>';
 				}
+
 				$posts[$i]['bbcode_uid'] = $row['bbcode_uid'];
 				$len_check = $row['post_text'];
 				$maxlen = $text_length;
+
 				if (($text_length != 0) && (strlen($len_check) > $text_length))
 				{
-						$posts[$i]['post_text'] = censor_text(get_sub_taged_string(str_replace("\n", '<br/> ', $row['post_text']), $row['bbcode_uid'], $maxlen));
-						$posts[$i]['striped'] = true;
-				} else $posts[$i]['post_text'] = censor_text($row['post_text']);
-				
-	
+					$message = censor_text(get_sub_taged_string(str_replace("\n", '<br/> ', $row['post_text']), $row['bbcode_uid'], $maxlen));
+					$posts[$i]['striped'] = true;
+				}
+				else 
+				{
+					$message = censor_text( str_replace("\n", '<br/> ', $row['post_text']) );
+				}
+
+				if ($auth->acl_get('f_html', $row['forum_id'])) 
+				{
+					$message = preg_replace('#<!\-\-(.*?)\-\->#is', '', $message); // Remove Comments from post content
+				}
+
+				// Second parse bbcode here
+				if ($row['bbcode_bitfield'])
+				{
+					$bbcode->bbcode_second_pass($message, $row['bbcode_uid'], $row['bbcode_bitfield']);
+				}
+				$message = smiley_text($message); // Always process smilies after parsing bbcodes
+				$posts[$i]['post_text']= ap_validate($message);	
+
 				$posts[$i]['topic_id'] = $row['topic_id'];
 				$posts[$i]['topic_last_post_id'] = $row['topic_last_post_id'];
 				$posts[$i]['forum_id'] = $row['forum_id'];
 				$posts[$i]['topic_replies'] = $row['topic_replies'];
-				$posts[$i]['topic_time'] = $user->format_date($row['topic_last_post_time']);
+				$posts[$i]['topic_time'] = $user->format_date($row['topic_time']);
 				$posts[$i]['topic_last_post_time'] = $row['topic_last_post_time'];
 				$posts[$i]['topic_title'] = $row['topic_title'];
 				$posts[$i]['username'] = $row['username'];
@@ -359,32 +262,14 @@ function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $
 				$posts[$i]['attachment'] = ($row['topic_attachment']) ? true : false;
 				$posts[$i]['topic_views'] = ($row['topic_views']);
 				$posts[$i]['forum_name'] = ($row['forum_name']);
-	
-				$message = $posts[$i]['post_text'];
-				$message = str_replace("\n", '<br/> ', $message);
-				
-			
-				if ($auth->acl_get('f_html', $row['forum_id'])) 
-				{
-					$message = preg_replace('#<!\-\-(.*?)\-\->#is', '', $message); // Remove Comments from post content
-				}
-				// Second parse bbcode here
-				if ($row['bbcode_bitfield'])
-				{
-					$bbcode->bbcode_second_pass($message, $row['bbcode_uid'], $row['bbcode_bitfield']);
-				}
-				$message = smiley_text($message); // Always process smilies after parsing bbcodes
-				$posts[$i]['post_text']= ap_validate($message);
+				$posts[$i]['global_id'] = ($global_f);
+										
 				$i++;
 			}
 		}
-		// return the result
-		return $posts;
 	}
-	else
-	{
-		return array();
-	}
+
+	return $posts;
 }
 
 /**
