@@ -27,7 +27,7 @@ $mode = request_var('mode', '');
 
 $page_title = 'Board3portal v' . $current_version;
 
-if( $user->data['is_registered'] && $user->data['user_type'] == USER_ADMIN ) 	 
+if( $user->data['is_registered'] && $auth->acl_get('a_board') ) 	 
 {
 	$version_array = array('0.1.0', 'p3p1.2.2', 'p3p1.2.1', 'p3p1.2.0', 'p3p1.1.0b');
 	
