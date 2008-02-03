@@ -55,7 +55,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
     <mod-version>
       <major>0</major>
       <minor>2</minor>
-      <revision>0</revision>
+      <revision>1</revision>
     </mod-version>
     <installation>
       <level>easy</level>
@@ -67,6 +67,25 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
       </target-version>
     </installation>
     <history>
+      <entry>
+        <date>2008-02-03</date>
+        <rev-version>
+          <major>0</major>
+          <minor>2</minor>
+          <revision>1</revision>
+        </rev-version>
+        <changelog lang="en-GB">
+          <change>Fixed a news/announcements permissions bug</change>
+          <change>Fixed a bug when no news posts were viewable due to account permissions</change>
+          <change>Fixed a bug in announcements/news/polls due to shadow topics left after a topic is moved</change>
+          <change>No longer required to be a founder to update/install, just an admin with "board" permissions</change>
+        </changelog>
+        <changelog lang="de">
+          <change>Fehler in der Berechtigungserkennung bei den aktuellen Beiträgen / Bekanntmachungen gefixt</change>
+          <change>Fehler bei den aktuellen Beiträgen / Bekanntmachungen / Abstimmungen gefixt</change>
+          <change>Man braucht nun nicht mehr als Gründer angemeldet zu sein</change>
+        </changelog>
+      </entry>
       <entry>
         <date>2008-02-03</date>
         <rev-version>
@@ -225,6 +244,10 @@ $lang = array_merge($lang, array(
       </edit>
     </open>
     <open src="styles/prosilver/template/overall_header.html">
+      <edit>
+        <find><![CDATA[<!-- IF not $S_IN_PORTAL -->]]></find>
+        <action type="replace-with"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
+      </edit>
       <edit>
         <find><![CDATA[<a class="icon-home" href="{U_PORTAL}">{L_PORTAL}</a> &#187; <a href="{U_INDEX}" accesskey="h">{L_INDEX}</a>]]></find>
         <action type="replace-with"><![CDATA[<li class="icon-home"><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <a href="{U_INDEX}" accesskey="h">{L_INDEX}</a>]]></action>

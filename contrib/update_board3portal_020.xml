@@ -160,19 +160,15 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
      <file from="root/styles/prosilver/template/portal/block/*.*" to="styles/prosilver/template/portal/block/*.*" />
      <file from="root/styles/prosilver/template/portal/block/donation/*.*" to="styles/prosilver/template/portal/block/donation/*.*" />
     </copy>
-    <open src="adm/index.php">
-      <edit>
-        <find><![CDATA[// End session management]]></find>
-        <action type="after-add"><![CDATA[$user->add_lang('mods/lang_portal_acp_logs');]]></action>
-      </edit>
-    </open>
     <open src="styles/prosilver/template/overall_header.html">
       <edit>
         <find><![CDATA[<!-- IF not $S_IN_PORTAL -->]]></find>
         <action type="replace-with"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
       </edit>
     </open>
-    <diy-instructions lang="en-gb">Browse to install_portal/install.php and run the installer, after successfull installation delete the installer.</diy-instructions>
-    <diy-instructions lang="de">install_portal/install.php aufrufen und ausführen, nach erfolgreicher Installation löschen</diy-instructions>
+    <diy-instructions lang="en-gb">No need to run the installer.
+Please rember to do the same changes in subsilver2!</diy-instructions>
+    <diy-instructions lang="de">Die install_portal/install.php muß nicht ausgeführt werden.
+Bitte daran denken die Änderungen auch im subsilver2 Style vorzunehmen!</diy-instructions>
   </action-group>
 </mod>

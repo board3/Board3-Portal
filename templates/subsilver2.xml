@@ -56,7 +56,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
     <mod-version>
       <major>0</major>
       <minor>2</minor>
-      <revision>0</revision>
+      <revision>1</revision>
     </mod-version>
     <installation>
       <level>easy</level>
@@ -92,7 +92,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
 		</tr>
 		</table>
 	</div>]]></find>
-        <action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL -->]]></action>
+        <action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
       </edit>
       <edit>
         <find><![CDATA[	<div id="datebar">
@@ -107,7 +107,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
       </edit>
       <edit>
         <find><![CDATA[<div id="wrapcentre">]]></find>
-        <action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL -->]]></action>
+        <action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
       </edit>
       <edit>
         <find><![CDATA[	<!-- INCLUDE breadcrumbs.html -->
