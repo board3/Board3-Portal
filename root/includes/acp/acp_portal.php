@@ -266,9 +266,13 @@ class acp_portal
 		$this->tpl_name = 'acp_board';
 		$this->page_title = $display_vars['title'];
 
+		$title_explain = $user->lang[$display_vars['title'] . '_EXPLAIN'];
+
+		$title_explain .= ( $display_vars['title'] == 'ACP_PORTAL_GENERAL_INFO' ) ? '<br /><br />' . sprintf($user->lang['ACP_PORTAL_VERSION'], $portal_config['portal_version']) : '';
+
 		$template->assign_vars(array(
 			'L_TITLE'			=> $user->lang[$display_vars['title']],
-			'L_TITLE_EXPLAIN'	=> $user->lang[$display_vars['title'] . '_EXPLAIN'],
+			'L_TITLE_EXPLAIN'	=> $title_explain,
 
 			'S_ERROR'			=> (sizeof($error)) ? true : false,
 			'ERROR_MSG'			=> implode('<br />', $error),

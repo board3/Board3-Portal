@@ -41,6 +41,7 @@ $lang = array_merge($lang, array(
 	// general
 	'ACP_PORTAL_GENERAL_INFO'				=> 'Portal administration',
 	'ACP_PORTAL_GENERAL_INFO_EXPLAIN'		=> 'Thank you for choosing board3 Portal. On this page you can manage the portal of your board. The screens inhere will give you a quick overview of all the various portal settings. The links on the left hand side of this screen allow you to control every aspect of your portal experience.',
+	'ACP_PORTAL_VERSION'					=> 'Version v%s',
 	'ACP_PORTAL_GENERAL_SETTINGS'			=> 'General settings',
 	'ACP_PORTAL_GENERAL_SETTINGS_EXPLAIN'	=> 'Here you can change your general and certain specific options.',
 	'PORTAL_ADVANCED_STAT'					=> 'Advanced statistics block',
