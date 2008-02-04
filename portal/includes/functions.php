@@ -253,7 +253,7 @@ function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $
 				$posts[$i]['topic_last_post_id']	= $row['topic_last_post_id'];
 				$posts[$i]['forum_id']				= $row['forum_id'];
 				$posts[$i]['topic_replies'] 		= $row['topic_replies'];
-				$posts[$i]['topic_time']			= $user->format_date($row['topic_time']);
+				$posts[$i]['topic_time']			= $user->format_date($row['post_time']);
 				$posts[$i]['topic_last_post_time']	= $row['topic_last_post_time'];
 				$posts[$i]['topic_title']			= $row['topic_title'];
 				$posts[$i]['username']				= $row['username'];
