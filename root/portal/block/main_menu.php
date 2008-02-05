@@ -19,5 +19,12 @@ if (!defined('IN_PORTAL'))
 {
    exit;
 }
-//we main delete this aswell? Oo
+
+$template->assign_vars(array(
+	'S_DISPLAY_MAINMENU' 	=> true,
+	'U_M_BBCODE'   => append_sid("{$phpbb_root_path}faq.$phpEx", 'mode=bbcode'),
+	'U_M_TERMS'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=terms'),
+	'U_M_PRV'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=privacy'),
+));
+
 ?>

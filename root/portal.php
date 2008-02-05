@@ -122,21 +122,19 @@ if ( $load_center === TRUE )
 
 // show login box and user menu
 
-	// only registered user see user menu
-	if ($user->data['is_registered'])
-	{
-		include($phpbb_root_path . 'portal/block/user_menu.'.$phpEx);
-	}
-	else
-	{
-		include($phpbb_root_path . 'portal/block/login_box.'.$phpEx);
-	}
+// only registered user see user menu
+if ($user->data['is_registered'])
+{
+	include($phpbb_root_path . 'portal/block/user_menu.'.$phpEx);
+}
+else
+{
+	include($phpbb_root_path . 'portal/block/login_box.'.$phpEx);
+}
 
 if ($portal_config['portal_main_menu'])
 {
-	$template->assign_vars(array(
-		'S_DISPLAY_MAINMENU' 	=> true,
-	));
+	include($phpbb_root_path . 'portal/block/main_menu.'.$phpEx);
 }
 
 if ($portal_config['portal_user_menu'])
