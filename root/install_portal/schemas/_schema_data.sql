@@ -53,7 +53,7 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_anno
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_global_announcements_forum', '2');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_wordgraph_word_counts', '0');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_wordgraph_max_words', '80');
-INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_wordgraph', '1');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_wordgraph', '0');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_wordgraph_ratio', '18');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_minicalendar', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_minicalendar_today_color', '//FF0000');
