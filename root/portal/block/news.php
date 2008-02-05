@@ -117,7 +117,7 @@ else
 		'U_POST_COMMENT'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id']),
 		'S_POLL'				=> $fetch_news[$i]['poll'],
 		'S_UNREAD_INFO'		=> $unread_topic,
-		'U_READ_FULL'      	=> append_sid("{$phpbb_root_path}portal.$phpEx", ''),
+		'U_READ_FULL'      	=> append_sid("{$phpbb_root_path}portal.$phpEx"),
 		'L_READ_FULL'      	=> $read_full,      
 		'OPEN'            		=> $open_bracket,
 		'CLOSE'            		=> $close_bracket,
