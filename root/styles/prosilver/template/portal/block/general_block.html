@@ -2,7 +2,11 @@
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
 			<h3>{GEN_TITLE}</h3>
+               <!-- IF U_RESTORE_PERMISSIONS --> &bull;
+               <a href="{U_RESTORE_PERMISSIONS}">{L_RESTORE_PERMISSIONS}</a>
+			<!-- ELSE -->
 			{GEN_MESSAGE}
+               <!-- ENDIF -->
 		<span class="corners-bottom"><span></span></span>
 	</div>
 </div>
