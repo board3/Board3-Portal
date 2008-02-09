@@ -6,7 +6,9 @@
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
     <title lang="en-gb">board3 Portal - based on phpBB3 Portal</title>
     <title lang="de">board3 Portal - basierend auf phpBB3 Portal</title>
-    <description lang="en-gb">Adds a portal to your forum.
+    <description lang="en-gb">Norwegian Translation by delta221 - http://www.scannernytt.net
+
+Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
 
 Included language files:
@@ -16,11 +18,6 @@ Included language files:
 » Norwegian (nb)
 
 This portal is based on the phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3portal.com )
-</description>
-    <description lang="de">Fügt ein Portal deinem Forum hinzu.
-Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werden können.
-
-Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3portal.com )
 </description>
     <author-notes lang="en-gb">i hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de</author-notes>
     <author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.</author-notes>
@@ -72,9 +69,8 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
   </header>
   <action-group>
     <copy>
-     <file from="languages/de/mods/*.*" to="language/de/mods/*.*" />
+     <file from="languages/nb/mods/*.*" to="language/nb/mods/*.*" />
     </copy>
     <diy-instructions lang="en-gb">See general install.xml file</diy-instructions>
-    <diy-instructions lang="de">Siehe install.xml</diy-instructions>
   </action-group>
 </mod>
