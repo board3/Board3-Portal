@@ -20,7 +20,7 @@ class acp_portal_info
 		return array(
 			'filename'	=> 'acp_portal',
 			'title'		=> 'ACP_PORTAL_INFO',
-			'version'	=> '0.1.0',
+			'version'	=> '0.3.0',
 			'modes'		=> array(
 				'general'		=> array('title' => 'ACP_PORTAL_GENERAL_INFO', 'auth' => 'acl_a_board', 'cat' => array('ACP_BOARD_CONFIGURATION')),
 				'news'			=> array('title' => 'ACP_PORTAL_NEWS_INFO', 'auth' => 'acl_a_board', 'cat' => array('ACP_BOARD_CONFIGURATION')),
