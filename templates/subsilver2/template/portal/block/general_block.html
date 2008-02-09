@@ -1,10 +1,18 @@
 <table class="tablebg" cellspacing="1" width="100%">
 	<tr>
+	<!-- IF U_RESTORE_PERMISSIONS -->
+		<th>{L_INFORMATION}</th>
+	</tr>
+	<tr class="row1">
+		<td>
+			&bull; <a href="{U_RESTORE_PERMISSIONS}">{L_RESTORE_PERMISSIONS}</a>
+	<!-- ELSE -->
 		<th>{GEN_TITLE}</th>
 	</tr>
 	<tr class="row1">
 		<td>
 			{GEN_MESSAGE}
+	<!-- ENDIF -->
 		</td>
 	</tr>
 </table>
