@@ -241,7 +241,6 @@ if ($portal_config['portal_ads_small'])
 */
 
 $template->assign_vars(array(
-	'S_DISPLAY_JUMPBOX' 	=> $load_center,
 	'PORTAL_LEFT_COLLUMN' 	=> $portal_config['portal_left_collumn_width'],
 	'PORTAL_RIGHT_COLLUMN' 	=> $portal_config['portal_right_collumn_width'],
 ));
