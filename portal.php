@@ -114,7 +114,7 @@ if ( $load_center === TRUE )
 	}
 	*/
 
-	if ($portal_config['portal_whois_online'])
+	if ($config['load_online'] && $config['load_online_time'] && $portal_config['portal_whois_online'])
 	{
 		include($phpbb_root_path . 'portal/block/whois_online.'.$phpEx);
 	}
