@@ -16,6 +16,8 @@ if (!defined('IN_PHPBB'))
    exit;
 }
 
+include_once($phpbb_root_path . 'includes/functions_display.' . $phpEx);
+
 // Get portal config
 function obtain_portal_config()
 {
@@ -293,88 +295,6 @@ function character_limit(&$title, $limit = 0)
 	  return $title;
    }
 }
-
-/**
-* Get user avatar  / barroved from RC4
-*
-* @param string $avatar Users assigned avatar name
-* @param int $avatar_type Type of avatar
-* @param string $avatar_width Width of users avatar
-* @param string $avatar_height Height of users avatar
-* @param string $alt Optional language string for alt tag within image, can be a language key or text
-*
-* @return string Avatar image
-*/
-function get_user_avatar($avatar, $avatar_type, $avatar_width, $avatar_height, $alt = 'USER_AVATAR')
-{
-	global $user, $portal_config, $config, $phpbb_root_path, $phpEx;
-
-	if (empty($avatar) || !$avatar_type)
-	{
-		return '';
-	}
-
-	$avatar_img = '';
-
-	switch ($avatar_type)
-	{
-		case AVATAR_UPLOAD:
-			$avatar_img = $phpbb_root_path . "download/file.$phpEx?avatar=";
-		break;
-
-		case AVATAR_GALLERY:
-			$avatar_img = $phpbb_root_path . $config['avatar_gallery_path'] . '/';
-		break;
-	}
-
-	$avatar_img .= $avatar;
-	return '<img src="' . $avatar_img . '" width="' . $avatar_width . '" height="' . $avatar_height . '" alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
-}
-
-/**
-* Get user rank title and image  / barroved from RC4
-*
-* @param int $user_rank the current stored users rank id
-* @param int $user_posts the users number of posts
-* @param string &$rank_title the rank title will be stored here after execution
-* @param string &$rank_img the rank image as full img tag is stored here after execution
-* @param string &$rank_img_src the rank image source is stored here after execution
-*
-*/
-function get_user_rank($user_rank, $user_posts, &$rank_title, &$rank_img, &$rank_img_src)
-{
-	global $ranks, $config;
-
-	if (empty($ranks))
-	{
-		global $cache;
-		$ranks = $cache->obtain_ranks();
-	}
-
-	if (!empty($user_rank))
-	{
-		$rank_title = (isset($ranks['special'][$user_rank]['rank_title'])) ? $ranks['special'][$user_rank]['rank_title'] : '';
-		$rank_img = (!empty($ranks['special'][$user_rank]['rank_image'])) ? '<img src="' . $config['ranks_path'] . '/' . $ranks['special'][$user_rank]['rank_image'] . '" alt="' . $ranks['special'][$user_rank]['rank_title'] . '" title="' . $ranks['special'][$user_rank]['rank_title'] . '" />' : '';
-		$rank_img_src = (!empty($ranks['special'][$user_rank]['rank_image'])) ? $config['ranks_path'] . '/' . $ranks['special'][$user_rank]['rank_image'] : '';
-	}
-	else
-	{
-		if (!empty($ranks['normal']))
-		{
-			foreach ($ranks['normal'] as $rank)
-			{
-				if ($user_posts >= $rank['rank_min'])
-				{
-					$rank_title = $rank['rank_title'];
-					$rank_img = (!empty($rank['rank_image'])) ? '<img src="' . $config['ranks_path'] . '/' . $rank['rank_image'] . '" alt="' . $rank['rank_title'] . '" title="' . $rank['rank_title'] . '" />' : '';
-					$rank_img_src = (!empty($rank['rank_image'])) ? $config['ranks_path'] . '/' . $rank['rank_image'] : '';
-					break;
-				}
-			}
-		}
-	}
-}
-
 
 // Don't let them mess up the complete portal layout in cut messages and do some real AP magic
 
