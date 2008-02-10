@@ -169,11 +169,11 @@ small, .small {
 
 	<!-- IF S_DISPLAY_USERMENU -->
 		<!-- IF not S_USER_LOGGED_IN -->
-		<!-- INCLUDE portal/block/login_box.html -->
+			<!-- INCLUDE portal/block/login_box.html -->
 		<!-- ENDIF -->
 
-		<!-- IF S_USER_LOGGED_IN -->
-		<!-- INCLUDE portal/block/user_menu.html -->
+		<!-- IF not S_IS_BOT and S_USER_LOGGED_IN -->
+			<!-- INCLUDE portal/block/user_menu.html -->
 		<!-- ENDIF -->
 	<!-- ENDIF -->
 
