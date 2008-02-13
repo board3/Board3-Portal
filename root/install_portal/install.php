@@ -209,7 +209,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 		break;
 	
 		default:
-			trigger_error('Sorry, unsupported DBMS found.');
+			trigger_error('Sorry, unsupported DBMS found: ' . $db->sql_layer);
 		break;
 	}
 	
@@ -252,10 +252,10 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 						}
 					break;
 					case 'mssql':
-						$sql = 'if exists (select * from sysobjects where name = ' . $table_prefix . 'portal_config)
-						drop table ' . $table_prefix . 'portal_config';
-						$result = $db->sql_query($sql);
-						$db->sql_freeresult($result);
+					case 'mssql_odbc':
+						$db_schema = 'mssql';
+						$delimiter = 'GO';
+						$comments = 'remove_comments';
 					break;
 				}
 		
