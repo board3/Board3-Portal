@@ -90,7 +90,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_ANNOUNCEMENTS_LENGTH'					=> 'Maximal Länge der Bekanntmachungen',
 	'PORTAL_ANNOUNCEMENTS_LENGTH_EXPLAIN'			=> '0 bedeutet unbegrenzt',
 	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'			=> 'ID des Forums der Bekanntmachungen',
-	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM_EXPLAIN'	=> 'Die Nummer des Forums, aus dem die Bekanntmachungen angezeigt werden sollen. Frei lassen um aus allen Foren anzeigen zu lassen. Mit Komma trennen wenn mehrere, ausgewählte Foren angezeigt werden soll, z.B. 1,2,5',
+	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM_EXPLAIN'	=> 'Die Nummer des Forums, aus dem die Bekanntmachungen angezeigt werden sollen. Frei lassen um aus allen Foren anzeigen zu lassen. Mit Komma trennen wenn aus mehreren, ausgewählten Foren angezeigt werden soll, z.B. 1,2,5',
 
 	// news
 	'ACP_PORTAL_NEWS_INFO'								=> 'Aktuelle Beiträge',
@@ -190,7 +190,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_ATTACHMENTS_NUMBER'								=> 'Anzahl der anzuzeigenden Dateianhänge',
 	'PORTAL_ATTACHMENTS_NUMBER_EXPLAIN'					=> '0 bedeutet unbegrenzt',
 	'PORTAL_ATTACHMENTS_FORUM_IDS'							=> 'Dateianhänge Foren ID(s)',
-	'PORTAL_ATTACHMENTS_FORUM_IDS_EXPLAIN'				=> 'Die Nummer des Forums, aus dem die Dateianhänge angezeigt werden sollen. Frei lassen um aus allen Foren anzeigen zu lassen. Mit Komma trennen wenn mehrere, ausgewählte Foren angezeigt werden soll, z.B. 1,2,5',
+	'PORTAL_ATTACHMENTS_FORUM_IDS_EXPLAIN'				=> 'Die Nummer des Forums, aus dem die Dateianhänge angezeigt werden sollen. Frei lassen um aus allen Foren anzeigen zu lassen. Mit Komma trennen wenn aus mehreren, ausgewählten Foren angezeigt werden soll, z.B. 1,2,5',
 	
 	// friends
 	'ACP_PORTAL_FRIENDS_INFO'							=> 'Freunde',
