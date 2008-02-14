@@ -20,8 +20,6 @@ if (!defined('IN_PORTAL'))
    exit;
 }
 
-$portal_config['portal_attachments_forum_ids'] = '2';
-
 $attach_forums = false;
 $where = '';
 
