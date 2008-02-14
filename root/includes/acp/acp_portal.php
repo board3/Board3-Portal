@@ -135,7 +135,8 @@ class acp_portal
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS',
 						'portal_attachments'				=> array('lang' => 'PORTAL_ATTACHMENTS'				  ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_attachments_number'			=> array('lang' => 'PORTAL_ATTACHMENTS_NUMBER'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+						'portal_attachments_number'	=> array('lang' => 'PORTAL_ATTACHMENTS_NUMBER'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+						'portal_attachments_forum_ids'	=> array('lang' => 'PORTAL_ATTACHMENTS_FORUM_IDS',	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
 					)
 				);
 			break;

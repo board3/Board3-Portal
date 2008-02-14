@@ -189,6 +189,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_ATTACHMENTS_EXPLAIN'                  				=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_ATTACHMENTS_NUMBER'								=> 'Anzahl der anzuzeigenden Dateianhänge',
 	'PORTAL_ATTACHMENTS_NUMBER_EXPLAIN'					=> '0 bedeutet unbegrenzt',
+	'PORTAL_ATTACHMENTS_FORUM_IDS'							=> 'Dateianhänge Foren ID(s)',
+	'PORTAL_ATTACHMENTS_FORUM_IDS_EXPLAIN'				=> 'Die Nummer des Forums, aus dem die Dateianhänge angezeigt werden sollen. Frei lassen um aus allen Foren anzeigen zu lassen. Mit Komma trennen wenn mehrere, ausgewählte Foren angezeigt werden soll, z.B. 1,2,5',
 	
 	// friends
 	'ACP_PORTAL_FRIENDS_INFO'							=> 'Freunde',
