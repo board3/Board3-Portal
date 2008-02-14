@@ -7,4 +7,7 @@ $sql_update['0.2.0'] = array(
 	"INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_birthdays_ahead', '7')",
 );
 
+$sql_update['0.2.2'] = array(
+	"INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('pportal_attachments_forum_ids', '')",
+);
 ?>
