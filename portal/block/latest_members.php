@@ -30,9 +30,7 @@ $result = $db->sql_query_limit($sql, $portal_config['portal_max_last_member']);
 while( ($row = $db->sql_fetchrow($result)) && ($row['username']) )
 {
 	$template->assign_block_vars('latest_members', array(
-		'USERNAME'		=> censor_text($row['username']),
-		'USERNAME_COLOR'=> ($row['user_colour']) ? ' style="color:#' . $row['user_colour'] .'"' : '',
-		'U_USERNAME'	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $row['user_id']),
+		'USERNAME_FULL'	=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
 		'JOINED'		=> $user->format_date($row['user_regdate'], $format = 'd M'),
 	));
 }

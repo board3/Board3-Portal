@@ -33,9 +33,7 @@ while( ($row = $db->sql_fetchrow($result)) && ($row['username']) )
 {
 	$template->assign_block_vars('top_poster', array(
 		'S_SEARCH_ACTION'=> append_sid("{$phpbb_root_path}search.$phpEx", 'author_id=' . $row['user_id'] . '&amp;sr=posts'),
-		'USERNAME'		=> censor_text($row['username']),
-		'USERNAME_COLOR'=> ($row['user_colour']) ? ' style="color:#' . $row['user_colour'] .'"' : '',
-		'U_USERNAME'	=> append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $row['user_id']),
+		'USERNAME_FULL'=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
 		'POSTER_POSTS'	=> $row['user_posts'],
 		)
 	);
