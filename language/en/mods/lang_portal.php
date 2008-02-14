@@ -124,10 +124,10 @@ $lang = array_merge($lang, array(
 	'LATEST_MEMBERS'	=> 'Latest members',
 
 	// make donation
-	'DONATION' 		=> 'Make donation',
+	'DONATION' 		=> 'Make a donation',
 	'DONATION_TEXT'	=> 'is a formation suplying services with no intention of any revenue. Anyone who wants to support this formation can do it by donating so that the cost of server, the domain and etc. could be paid of.',
 	'PAY_MSG'		=> 'After selecting the amount which you want to donate from the menu, you can go on by clicking on the picture of PayPal.',
-	'PAY_ITEM'		=> 'Make donation', // paypal item
+	'PAY_ITEM'		=> 'Make a donation', // paypal item
 
 	// main menu
 	'M_MENU' 	=> 'Menu',
