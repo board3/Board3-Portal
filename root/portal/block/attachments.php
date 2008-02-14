@@ -19,12 +19,30 @@ if (!defined('IN_PORTAL'))
 {
    exit;
 }
+$where = '';
+$allowed_forums = array_unique(array_keys($auth->acl_getf('f_read', true)));
+foreach( $allowed_forums as $allowed_id )
+{
+	$where .= 't.forum_id = \'' . $allowed_id . '\' OR ';
+}
+if( $where != '' )
+{
+	$where = 'AND (' . substr($where, 0, -4) . ')';
+}
 
 // Just grab all attachment info from database
-$sql = 'SELECT *
-	FROM ' . ATTACHMENTS_TABLE . '
-	WHERE topic_id <> 0
-	ORDER BY filetime ' . ((!$config['display_order']) ? 'DESC' : 'ASC') . ', post_msg_id ASC';
+$sql = 'SELECT
+			a.*,
+			t.forum_id
+		FROM
+			' . ATTACHMENTS_TABLE . ' a,
+			' . TOPICS_TABLE . ' t
+		WHERE
+			a.topic_id <> 0
+			AND a.topic_id = t.topic_id
+			' . $where . '
+		ORDER BY
+			filetime ' . ((!$config['display_order']) ? 'DESC' : 'ASC') . ', post_msg_id ASC';
 $result = $db->sql_query_limit($sql, $portal_config['portal_attachments_number']);
 
 while ($row = $db->sql_fetchrow($result))
