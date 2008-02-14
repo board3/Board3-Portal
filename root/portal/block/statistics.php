@@ -72,10 +72,6 @@ $total_posts		= $config['num_posts'];
 $total_topics		= $config['num_topics'];
 $total_users		= $config['num_users'];
 
-// no last user color, no more SQL codes ;)
-$newest_user		= $config['newest_username'];
-$newest_uid			= $config['newest_user_id'];
-
 $l_total_user_s 	= ($total_users == 0) ? 'TOTAL_USERS_ZERO' : 'TOTAL_USERS_OTHER';
 $l_total_post_s 	= ($total_posts == 0) ? 'TOTAL_POSTS_ZERO' : 'TOTAL_POSTS_OTHER';
 $l_total_topic_s	= ($total_topics == 0) ? 'TOTAL_TOPICS_ZERO' : 'TOTAL_TOPICS_OTHER';
@@ -133,7 +129,7 @@ $template->assign_vars(array(
 	'TOTAL_POSTS'	=> sprintf($user->lang[$l_total_post_s], $total_posts),
 	'TOTAL_TOPICS'	=> sprintf($user->lang[$l_total_topic_s], $total_topics),
 	'TOTAL_USERS'	=> sprintf($user->lang[$l_total_user_s], $total_users),
-	'NEWEST_USER'	=> sprintf($user->lang['NEWEST_USER'], '<a href="' . append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $newest_uid) . '" style="color: #' . $config['newest_user_colour'] . ';">' . $newest_user . '</a>'),
+	'NEWEST_USER'	=> sprintf($user->lang['NEWEST_USER'], get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
 	'S_ANN'			=> get_db_stat('announcmenttotal'),
 	'S_SCT'			=> get_db_stat('stickytotal'),
 	'S_TOT_ATTACH'	=> get_db_stat('attachmentstotal'),
