@@ -194,6 +194,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_ATTACHMENTS_EXPLAIN'						=> 'Display this block on portal.',
 	'PORTAL_ATTACHMENTS_NUMBER'							=> 'Limit of displayed attachments',
 	'PORTAL_ATTACHMENTS_NUMBER_EXPLAIN'					=> '0 means infinite',
+	'PORTAL_ATTACHMENTS_FORUM_IDS'							=> 'Attachments forum id(s)',
+	'PORTAL_ATTACHMENTS_FORUM_IDS_EXPLAIN'				=> 'The id(s) of the forums from which the attachments should be displayed. Use a comma to separate multiple forums, or leave blank to use all available forums.',
 	
 	// friends
 	'ACP_PORTAL_FRIENDS_INFO'				=> 'Friends',
