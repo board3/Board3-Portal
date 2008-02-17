@@ -61,10 +61,13 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_mini
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_attachments', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_attachments_number', '8');
 
-# Version 0.1.1 #
+# Version 0.2.1 #
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_poll_limit', '3');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_poll_allow_vote', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_birthdays_ahead', '7');
+
+# Version 0.2.2 #
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_attachments_forum_ids', '');
 
 # POSTGRES COMMIT #
 
