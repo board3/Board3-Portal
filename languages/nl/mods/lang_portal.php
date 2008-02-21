@@ -50,6 +50,7 @@ $lang = array_merge($lang, array(
 	'JUMP_NEWEST'			=> 'Ga naar het nieuwste bericht',
 	'JUMP_FIRST'			=> 'Ga naar het eerste bericht',
 	'JUMP_TO_POST'			=> 'Ga naar het bericht',
+	'BACK'                        => 'Terug',
 
 	// who is online
 	'WIO_TOTAL'			=> 'Totaal',
