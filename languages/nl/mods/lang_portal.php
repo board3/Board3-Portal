@@ -59,6 +59,10 @@ $lang = array_merge($lang, array(
 	'WIO_GUEST'			=> 'Gasten',
 	//'RECORD_ONLINE_USERS'=> 'Bekijk het record: <strong>%1$s</strong><br />%2$s',
 
+	// Birthday 
+	'BIRTHDAYS_AHEAD'              => 'In de komende %s dagen', 
+	'NO_BIRTHDAYS_AHEAD'           => 'Zijn er geen jarigen.', 
+
 	// user menu
 	'USER_MENU'			=> 'Gebruikersmenu',
 	'UM_LOG_ME_IN'		=> 'herriner mij',
