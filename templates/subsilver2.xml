@@ -97,6 +97,14 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
       </edit>
       <edit>
+        <find><![CDATA[<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN --> &nbsp;<span style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->]]></find>
+        <action type="before-add"><![CDATA[<!-- ENDIF -->]]></action>
+      </edit>
+      <edit>
+        <find><![CDATA[<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN --> &nbsp;<span style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->]]></find>
+        <action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
+      </edit>
+      <edit>
         <find><![CDATA[	<div id="datebar">
 		<table width="100%" cellspacing="0">
 		<tr>
