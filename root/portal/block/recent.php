@@ -44,6 +44,7 @@ $sql = 'SELECT topic_title, forum_id, topic_id
 	WHERE topic_status <> ' . FORUM_LINK . '
 		AND topic_approved = 1 
 		AND ( topic_type = ' . POST_ANNOUNCE . ' OR topic_type = ' . POST_GLOBAL . ' )
+		AND topic_moved_id = 0
 		' . $sql_where . '
 	ORDER BY topic_time DESC';
 
@@ -70,6 +71,7 @@ $sql = 'SELECT topic_title, forum_id, topic_id
 	FROM ' . TOPICS_TABLE . '
 	WHERE topic_approved = 1 
 		AND topic_replies >=' . $config['hot_threshold'] . '
+		AND topic_moved_id = 0
 		' . $sql_where . '
 	ORDER BY topic_time DESC';
 
@@ -97,6 +99,7 @@ $sql = 'SELECT topic_title, forum_id, topic_id
 	WHERE topic_status <> ' . FORUM_LINK . '
 		AND topic_approved = 1 
 		AND topic_type = ' . POST_NORMAL . '
+		AND topic_moved_id = 0
 		' . $sql_where . '
 	ORDER BY topic_time DESC';
 
