@@ -73,7 +73,7 @@ include($phpbb_root_path . 'includes/message_parser.'.$phpEx);
 // fetch post for news & announce
 function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $type)
 {
-	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield;
+	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode;
 	
 	$posts = array();
 
