@@ -220,7 +220,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_WELCOME_SETTINGS_EXPLAIN'			=> 'Hier kannst du die Einstellungen für die Willkommens Nachricht ändern.',
 	'PORTAL_WELCOME_INTRO'								=> 'Willkommens Nachricht',
 	'PORTAL_WELCOME_GUEST'								=> 'Willkommens Nachricht nur für Gäste?',
-	'PORTAL_WELCOME_INTRO_EXPLAIN'					=> 'Ändere hier die Willkommens Nachricht (nur Text). Max. 600 Zeichen!',
+	'PORTAL_WELCOME_INTRO_EXPLAIN'					=> 'Ändere hier die Willkommens Nachricht (BBCode ist erlaubt). Max. 600 Zeichen!',
 
 	// ads
 	'ACP_PORTAL_ADS_INFO'									=> 'Werbung',

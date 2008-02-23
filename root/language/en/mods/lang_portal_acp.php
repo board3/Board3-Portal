@@ -225,7 +225,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_WELCOME_SETTINGS_EXPLAIN'	=> 'Here you can change welcome messages and certain specific options.',
 	'PORTAL_WELCOME_INTRO'					=> 'Welcome message',
 	'PORTAL_WELCOME_GUEST'					=> 'Welcome message only for guests?',
-	'PORTAL_WELCOME_INTRO_EXPLAIN'			=> 'Change the welcome (plain text only). Max. 600 characters!',
+	'PORTAL_WELCOME_INTRO_EXPLAIN'			=> 'Change the welcome message (BBCode is allowed). Max. 600 characters!',
 
 	// minicalendar
 	'ACP_PORTAL_MINICALENDAR_INFO'				=> 'Mini calendar',
