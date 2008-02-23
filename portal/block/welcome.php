@@ -24,9 +24,7 @@ $allow_bbcode = 1;
 $allow_urls = 1;
 $allow_smilies = 1;
 
-$text = $portal_config['portal_welcome_intro'];
-
-$message_parser = new parse_message($text);
+$message_parser = new parse_message($portal_config['portal_welcome_intro']);
 $message_parser->parse($allow_bbcode, $allow_urls, $allow_smilies);
 
 $text = $message_parser->message;
