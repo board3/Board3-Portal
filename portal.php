@@ -75,10 +75,7 @@ if ( $load_center === TRUE )
 	
 	if ($portal_config['portal_welcome'])
 	{
-		$template->assign_vars(array(
-			'S_DISPLAY_WELCOME' 	=> true,
-			'PORTAL_WELCOME_INTRO'   => str_replace("\n", "<br />", $portal_config['portal_welcome_intro']),
-		));
+		include($phpbb_root_path . 'portal/block/welcome.'.$phpEx);
 	}
 	
 	if ($portal_config['portal_welcome_guest'])
