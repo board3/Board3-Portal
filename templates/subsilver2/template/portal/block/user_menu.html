@@ -10,12 +10,18 @@
 				<!-- IF RANK_TITLE --><br /><small>{RANK_TITLE}</small><!-- ENDIF -->
 				<!-- IF RANK_IMG --><br />{RANK_IMG}<!-- ENDIF -->
 			</div><hr />
-		
+		<!-- IF S_DISPLAY_SEARCH -->
 			<a href="{U_NEW_POSTS}">{L_NEW_POSTS}</a><br />
 			<a href="{U_SELF_POSTS}">{L_SELF_POSTS}</a><br />
+		<!-- ENDIF -->
+		<!-- IF U_UM_BOOKMARKS -->
 			<a href="{U_UM_BOOKMARKS}">{L_UM_BOOKMARKS}</a><br />
+		<!-- ENDIF -->
 			<a href="{U_UM_MAIN_SUBSCRIBED}">{L_UM_MAIN_SUBSCRIBED}</a><br />
-			<a href="{U_PRIVATEMSGS}">{PRIVATE_MESSAGE_INFO}</a><hr />
+		<!-- IF S_DISPLAY_PM -->
+			<a href="{U_PRIVATEMSGS}">{PRIVATE_MESSAGE_INFO}</a>
+		<!-- ENDIF -->
+			<hr />
 			
 			<a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a>
 		</td>
