@@ -79,7 +79,7 @@ $template->assign_vars(array(
 
 	'U_NEW_POSTS'			=> append_sid($phpbb_root_path . 'search.' . $phpEx . '?search_id=newposts'),
 	'U_SELF_POSTS'			=> append_sid($phpbb_root_path . 'search.' . $phpEx . '?search_id=egosearch'),
-	'U_UM_BOOKMARKS'		=> append_sid($phpbb_root_path . 'ucp.' . $phpEx . '?i=main&amp;mode=bookmarks'),
+	'U_UM_BOOKMARKS'      => ($config['allow_bookmarks']) ? append_sid("{$phpbb_root_path}ucp.$phpEx", "i=main&amp;mode=bookmarks") : '',
 	'U_UM_MAIN_SUBSCRIBED'	=> append_sid($phpbb_root_path . 'ucp.' . $phpEx . '?i=main&amp;mode=subscribed'),
 	'U_PRIVATE_MESSAGES'	=> append_sid($phpbb_root_path . 'ucp.' . $phpEx . '?i=pm&amp;folder=inbox'),
 ));
