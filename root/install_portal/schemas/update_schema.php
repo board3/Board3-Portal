@@ -10,4 +10,10 @@ $sql_update['0.2.0'] = array(
 $sql_update['0.2.2'] = array(
 	"INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_attachments_forum_ids', '')",
 );
+
+$sql_update['0.2.3'] = array(
+	"INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_announcements_persmissions', '1')",
+	"INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_news_persmissions', '1')",
+);
+
 ?>

@@ -96,6 +96,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_ANNOUNCEMENTS_LENGTH_EXPLAIN'		=> '0 means infinite',
 	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'			=> 'Global global announcements forum ID',
 	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM_EXPLAIN'	=> 'Forum we pull the articles from, leave blank to pull from all forums, separate by comma for multi-forums, eg. 1,2,5',
+	'PORTAL_ANNOUNCEMENTS_PERMISSIONS'			=> 'Enable/disable permissions',
+	'PORTAL_ANNOUNCEMENTS_PERMISSIONS_EXPLAIN'	=> 'Take forum viewing permissions into account when displaying announcements',
 
 	// news
 	'ACP_PORTAL_NEWS_INFO'				=> 'News',
@@ -115,6 +117,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_NEWS_FORUM_EXPLAIN'			=> 'Forum we pull the articles from, leave blank to pull from all forums, separate by comma for multi-forums, eg. 1,2,5',
 	'PORTAL_EXCLUDE_FORUM'				=> 'Exclude Forum ID',
 	'PORTAL_EXCLUDE_FORUM_EXPLAIN'		=> 'Forum we pull the articles from, leave blank to pull from all forums, separate by comma for multi-forums, eg. 1,2,5',
+	'PORTAL_NEWS_PERMISSIONS'			=> 'Enable/disable permissions',
+	'PORTAL_NEWS_PERMISSIONS_EXPLAIN'	=> 'Take forum viewing permissions into account when displaying news',
 
 	// recent topics
 	'ACP_PORTAL_RECENT_INFO'				=> 'Recent topics',

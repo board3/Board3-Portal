@@ -33,7 +33,7 @@ $template->assign_vars(array(
 $news = request_var('news', -1);
 if($news < 0)
 {
-	$fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_config['portal_number_of_news'], $portal_config['portal_news_length'], 0, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news');
+	$fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_config['portal_news_permissions'], $portal_config['portal_number_of_news'], $portal_config['portal_news_length'], 0, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news');
 
 	if (count($fetch_news) == 0)
 	{
@@ -91,7 +91,7 @@ if($news < 0)
 }
 else
 {
-	$fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_config['portal_number_of_news'], 0, 0, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news');
+	$fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_config['portal_news_permissions'], $portal_config['portal_number_of_news'], 0, 0, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news');
 
 	$i = $news;
 			$forum_id = $fetch_news[$i]['forum_id'];

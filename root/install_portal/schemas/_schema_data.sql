@@ -69,5 +69,9 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_birt
 # Version 0.2.2 #
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_attachments_forum_ids', '');
 
+# Version 0.2.3 #
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_announcements_permissions', '1');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_news_permissions', '1');
+
 # POSTGRES COMMIT #
 

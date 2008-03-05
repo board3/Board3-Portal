@@ -71,12 +71,13 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_NEWS_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_NEWS_SETTINGS',
-						'portal_news'						=> array('lang' => 'PORTAL_NEWS'							,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_news_style'					=> array('lang' => 'PORTAL_NEWS_STYLE'					,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_show_all_news'				=> array('lang' => 'PORTAL_SHOW_ALL_NEWS'				,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_number_of_news'				=> array('lang' => 'PORTAL_NUMBER_OF_NEWS'			  ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-						'portal_news_length'				=> array('lang' => 'PORTAL_NEWS_LENGTH'				  ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-						'portal_news_forum'					=> array('lang' => 'PORTAL_NEWS_FORUM'					,	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
+						'portal_news'						=> array('lang' => 'PORTAL_NEWS'					,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_news_style'					=> array('lang' => 'PORTAL_NEWS_STYLE'				,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_show_all_news'				=> array('lang' => 'PORTAL_SHOW_ALL_NEWS'			,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_number_of_news'				=> array('lang' => 'PORTAL_NUMBER_OF_NEWS'			,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+						'portal_news_length'				=> array('lang' => 'PORTAL_NEWS_LENGTH'				,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+						'portal_news_forum'					=> array('lang' => 'PORTAL_NEWS_FORUM'				,	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
+						'portal_news_permissions'			=> array('lang' => 'PORTAL_NEWS_PERMISSIONS'		,	'validate' => 'bool',		'type' => 'radio:yes_no',	 'explain' => true),
 					)
 				);
 			break;
@@ -85,12 +86,13 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
-						'portal_announcements'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS'				 ,	'validate' => 'bool',  	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_announcements_style'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_STYLE'		 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_number_of_announcements'	=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'	,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-						'portal_announcements_day'			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-						'portal_announcements_length'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-						'portal_global_announcements_forum'	=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM',	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
+						'portal_announcements'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS'				,	'validate' => 'bool',  	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_announcements_style'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_STYLE'		 	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_number_of_announcements'	=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+						'portal_announcements_day'			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+						'portal_announcements_length'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+						'portal_global_announcements_forum'	=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'text:10:200',	'explain' => true),
+						'portal_announcements_permissions'	=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 					)
 				);
 			break;
