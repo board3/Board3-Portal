@@ -71,7 +71,7 @@ function set_portal_config($config_name, $config_value)
 include($phpbb_root_path . 'includes/message_parser.'.$phpEx);
 
 // fetch post for news & announce
-function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $type)
+function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type)
 {
 	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode;
 	
@@ -83,7 +83,12 @@ function phpbb_fetch_posts($forum_from, $number_of_posts, $text_length, $time, $
 
 	$str_where = '';
 
-	$allow_access = array_unique(array_keys($auth->acl_getf('f_read', true)));
+	if( $permissions )
+	{
+		$allow_access = array_unique(array_keys($auth->acl_getf('f_read', true)));
+	} else {
+		$allow_access = array_unique(array_keys($auth->acl_getf('f_', true)));
+	}
 
 	if( sizeof($allow_access) ){
 

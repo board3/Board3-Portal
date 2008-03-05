@@ -21,7 +21,7 @@ if (!defined('IN_PORTAL'))
 $announcement = request_var('announcement', -1); 	 
 if($announcement < 0) 	 
 {
-	$fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_forum'], $portal_config['portal_number_of_announcements'], $portal_config['portal_announcements_length'], $portal_config['portal_announcements_day'], 'announcements');
+	$fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_forum'], $portal_config['portal_announcements_permissions'], $portal_config['portal_number_of_announcements'], $portal_config['portal_announcements_length'], $portal_config['portal_announcements_day'], 'announcements');
 		
 	if (count($fetch_news) == 0)
 	{
@@ -85,7 +85,7 @@ if($announcement < 0)
 } 	 
 else 	 
 { 	 
-	$fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_forum'], $portal_config['portal_number_of_announcements'], 0, $portal_config['portal_announcements_day'], 'announcements'); 	 
+	$fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_forum'], $portal_config['portal_announcements_permissions'], $portal_config['portal_number_of_announcements'], 0, $portal_config['portal_announcements_day'], 'announcements'); 	 
 
 	$i = $announcement;
 	$forum_id = $fetch_news[$i]['forum_id'];
