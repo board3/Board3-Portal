@@ -23,9 +23,9 @@ if (!defined('IN_PORTAL'))
 $sql = 'SELECT *
 	FROM ' . USERS_TABLE . '
 	WHERE user_type <> ' . USER_IGNORE . '
-		AND user_inactive_time = 0
+		AND user_type <> ' . USER_INACTIVE . '
 	ORDER BY RAND() 
-	LIMIT 0,1';
+	LIMIT 1';
 $result = $db->sql_query($sql);
 $row = $db->sql_fetchrow($result);
 
