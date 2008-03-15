@@ -91,6 +91,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_ANNOUNCEMENTS_LENGTH_EXPLAIN'			=> '0 bedeutet unbegrenzt',
 	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'			=> 'ID des Forums der Bekanntmachungen',
 	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM_EXPLAIN'	=> 'Die Nummer des Forums, aus dem die Bekanntmachungen angezeigt werden sollen. Frei lassen um aus allen Foren anzeigen zu lassen. Mit Komma trennen wenn aus mehreren, ausgewählten Foren angezeigt werden soll, z.B. 1,2,5',
+	'PORTAL_ANNOUNCEMENTS_PERMISSIONS'				=> 'Berechtigungen prüfen anschalten?',
+	'PORTAL_ANNOUNCEMENTS_PERMISSIONS_EXPLAIN'	=> 'Berücksichtigt Berechtigungen beim Anzeigen der Bekanntmachungen',
 
 	// news
 	'ACP_PORTAL_NEWS_INFO'								=> 'Aktuelle Beiträge',
@@ -110,6 +112,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_NEWS_FORUM_EXPLAIN'						=> 'Die Nummer des Forums, aus dem die Beiträge angezeigt werden sollen. Frei lassen um aus allen Foren anzeigen zu lassen. Mit Komma trennen wenn aus mehreren, ausgewählten Foren angezeigt werden soll, z.B. 1,2,5',
 	'PORTAL_EXCLUDE_FORUM'								=> 'ID der auszuschließenden Foren',
 	'PORTAL_EXCLUDE_FORUM_EXPLAIN'					=> 'Die Nummer der Foren, aus denen Beiträge nicht angezeigt werden sollen. Frei lassen um aus allen Foren anzeigen zu lassen. Mit Komma trennen wenn mehrere Foren ausgeschlossen werden sollen, z.B. 1,2,5',
+	'PORTAL_NEWS_PERMISSIONS'							=> 'Berechtigungen prüfen anschalten?',
+	'PORTAL_NEWS_PERMISSIONS_EXPLAIN'				=> 'Berücksichtigt Berechtigungen beim Anzeigen der aktuellen Beiträge',
 
 	// recent topics
 	'ACP_PORTAL_RECENT_INFO'								=> 'Neueste Themen',
