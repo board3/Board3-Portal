@@ -168,6 +168,12 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <action type="after-add"><![CDATA[$user->add_lang('mods/lang_portal_acp_logs');]]></action>
       </edit>
     </open>
+	<open src="includes/session.php">
+      <edit>
+        <find><![CDATA[if (!empty($_GET['style']) && $auth->acl_get('a_styles'))]]></find>
+        <action type="replace-with"><![CDATA[if (!empty($_GET['style']))]]></action>
+      </edit>
+    </open>
     <open src="styles/prosilver/template/overall_header.html">
       <edit>
         <find><![CDATA[<!-- IF not $S_IN_PORTAL -->]]></find>

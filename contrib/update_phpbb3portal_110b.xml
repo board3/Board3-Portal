@@ -221,6 +221,12 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
         <action type="before-add"><![CDATA[		'U_PORTAL'				=> append_sid("{$phpbb_root_path}portal.$phpEx"),]]></action>
       </edit>
     </open>
+	<open src="includes/session.php">
+      <edit>
+        <find><![CDATA[if (!empty($_GET['style']) && $auth->acl_get('a_styles'))]]></find>
+        <action type="replace-with"><![CDATA[if (!empty($_GET['style']))]]></action>
+      </edit>
+    </open>
     <open src="language/en/acp/common.php">
       <edit>
         <find><![CDATA[// phpBB3 Portal by phpbb3portal.com
