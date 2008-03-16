@@ -13,11 +13,13 @@
 					<td class="cat"><!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_VIEW_COMMENTS}"><strong>{news_row.TITLE}</strong></a></td>
 				</tr>
 				<tr class="row1">
-					<td>
+					<td style="padding:5px 5px 5px 5px;">
 						<span class="gensmall" style="float: left;">{L_POSTED_BY}: <strong><a href="{news_row.U_USER_PROFILE}">{news_row.POSTER}</a></strong><!-- IF news_row.FORUM_NAME --> &nbsp;&bull;&nbsp; {L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong><!-- ENDIF --></span>
 						<span class="gensmall" style="float: right;">{news_row.TIME}</span>
 						<br /><br />
+						<div class="postbody">
 						{news_row.TEXT}
+						</div>
 						<br /><br />
 					</td>
 				</tr>
