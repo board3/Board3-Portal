@@ -72,6 +72,14 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_atta
 # Version 0.2.3 #
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_announcements_permissions', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_news_permissions', '1');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_custom_center', '0');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_custom_small', '0');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_custom_code_center', '');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_custom_code_small', '');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_custom_center_bbcode', '0');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_custom_small_bbcode', '0');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_custom_center_headline', 'Headline center box');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_custom_small_headline', 'Headline small box');
 
 # POSTGRES COMMIT #
 

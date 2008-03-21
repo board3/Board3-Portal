@@ -231,6 +231,27 @@ $lang = array_merge($lang, array(
 	'PORTAL_WELCOME_GUEST'					=> 'Welcome message only for guests?',
 	'PORTAL_WELCOME_INTRO_EXPLAIN'			=> 'Change the welcome message (BBCode is allowed). Max. 600 characters!',
 
+	// custom
+	'ACP_PORTAL_CUSTOM_INFO'								=> 'Custom block',
+	'ACP_PORTAL_CUSTOM_SETTINGS'							=> 'Custom blocks settings',
+	'ACP_PORTAL_CUSTOM_SETTINGS_EXPLAIN'				=> 'Here you can change your custom blocks. These blocks could be filled with HTML or BBCode for several purposes like advertisement, videos, images, flash or text. Just insert the needed code.',
+	'PORTAL_CUSTOM_SMALL_HEADLINE'						=> 'Headline for the small custom block',
+	'PORTAL_CUSTOM_SMALL_HEADLINE_EXPLAIN'				=> 'Here you can change the headline for the small custom block.',
+	'PORTAL_CUSTOM_SMALL'									=> 'Display the small custom block',
+	'PORTAL_CUSTOM_SMALL_EXPLAIN'							=> 'Display this block on portal.',
+	'PORTAL_CUSTOM_SMALL_BBCODE'							=> 'Activate BBCode for the small custom Block',
+	'PORTAL_CUSTOM_SMALL_BBCODE_EXPLAIN'				=> 'BBCode could be used in this Box. If BBCode is not activated, HTML will be parsed.',
+	'PORTAL_CUSTOM_CODE_SMALL'							=> 'Code for the small custom block',
+	'PORTAL_CUSTOM_CODE_SMALL_EXPLAIN'					=> 'Change the Code for the small custom Block (HTML or BBCode) here.',
+	'PORTAL_CUSTOM_CENTER'									=> 'Display the center custom block',
+	'PORTAL_CUSTOM_CENTER_EXPLAIN'						=> 'Display this block on portal.',
+	'PORTAL_CUSTOM_CENTER_HEADLINE'						=> 'Headline for the center custom block',
+	'PORTAL_CUSTOM_CENTER_HEADLINE_EXPLAIN'			=> 'Here you can change the headline for the center custom block.',
+	'PORTAL_CUSTOM_CENTER_BBCODE'						=> 'Activate BBCode for the center custom Block',
+	'PORTAL_CUSTOM_CENTER_BBCODE_EXPLAIN'				=> 'BBCode could be used in this Box. If BBCode is not activated, HTML will be parsed.',
+	'PORTAL_CUSTOM_CODE_CENTER'							=> 'Code for the center custom block',
+	'PORTAL_CUSTOM_CODE_CENTER_EXPLAIN'				=> 'Change the Code for the small custom Block (HTML or BBCode) here.',
+
 	// minicalendar
 	'ACP_PORTAL_MINICALENDAR_INFO'				=> 'Mini calendar',
 	'ACP_PORTAL_MINICALENDAR_SETTINGS'			=> 'Mini calendar settings',

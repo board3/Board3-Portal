@@ -464,6 +464,17 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 					'module_auth'		=> ''
 				);
 				$modules->update_module_data($minicalendar);
+				$customblock = array(
+					'module_basename'	=> 'portal',
+					'module_enabled'	=> 1,
+					'module_display'	=> 1,
+					'parent_id'			=> $portal['module_id'],
+					'module_class'		=> 'acp',
+					'module_langname'	=> 'ACP_PORTAL_CUSTOM_INFO',
+					'module_mode'		=> 'customblock',
+					'module_auth'		=> ''
+				);
+				$modules->update_module_data($customblock);
 				// clear cache and log what we did
 				$cache->purge();
 				add_log('admin', $page_title . ' installed');
@@ -603,7 +614,8 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 							OR module_langname = 'ACP_PORTAL_POLLS_INFO'
 							OR module_langname = 'ACP_PORTAL_BOTS_INFO'
 							OR module_langname = 'ACP_PORTAL_MOST_POSTER_INFO'
-							OR module_langname = 'ACP_PORTAL_MINICALENDAR_INFO'";
+							OR module_langname = 'ACP_PORTAL_MINICALENDAR_INFO'
+							OR module_langname = 'ACP_PORTAL_CUSTOM_INFO'";
 					$result = $db->sql_query($sql);
 					while ($row = $db->sql_fetchrow($result))
 					{
@@ -800,6 +812,17 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 						'module_auth'		=> ''
 					);
 					$modules->update_module_data($minicalendar);
+					$customblock = array(
+						'module_basename'	=> 'portal',
+						'module_enabled'	=> 1,
+						'module_display'	=> 1,
+						'parent_id'			=> $portal['module_id'],
+						'module_class'		=> 'acp',
+						'module_langname'	=> 'ACP_PORTAL_CUSTOM_INFO',
+						'module_mode'		=> 'customblock',
+						'module_auth'		=> ''
+					);
+					$modules->update_module_data($customblock);					
 		
 					// clear cache and log what we did
 					$cache->purge();
@@ -903,7 +926,8 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 							OR module_langname = 'ACP_PORTAL_POLLS_INFO'
 							OR module_langname = 'ACP_PORTAL_BOTS_INFO'
 							OR module_langname = 'ACP_PORTAL_MOST_POSTER_INFO'
-							OR module_langname = 'ACP_PORTAL_MINICALENDAR_INFO'";
+							OR module_langname = 'ACP_PORTAL_MINICALENDAR_INFO'
+							OR module_langname = 'ACP_PORTAL_CUSTOM_INFO'";
 					$result = $db->sql_query($sql);
 					while ($row = $db->sql_fetchrow($result))
 					{
