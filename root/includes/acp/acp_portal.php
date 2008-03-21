@@ -196,20 +196,24 @@ class acp_portal
 					 )
 				);
 			break;
-/*
-			case 'ads':
+
+			case 'customblock':
 				$display_vars = array(
-					'title'	=> 'ACP_PORTAL_ADS_SETTINGS',
+					'title'	=> 'ACP_PORTAL_CUSTOM_SETTINGS',
 					'vars'	=> array(
-						'legend1'							=> 'ACP_PORTAL_ADS_SETTINGS',
-						'portal_ads_small'					=> array('lang' => 'PORTAL_ADS_SMALL'						 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						//'portal_ads_small_box'			=> array('lang' => 'PORTAL_ADS_SMALL_BOX'				 ,	'validate' => 'string',	'type' => 'textarea:8:8',	 'explain' => true),
-						'portal_ads_center'					=> array('lang' => 'PORTAL_ADS_CENTER'						 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						//'portal_ads_center_box'			=> array('lang' => 'PORTAL_ADS_CENTER_BOX'				 ,	'validate' => 'string',	'type' => 'textarea:8:8',	 'explain' => true),
+						'legend1'								=> 'ACP_PORTAL_CUSTOM_SETTINGS',
+						'portal_custom_small'					=> array('lang' => 'PORTAL_CUSTOM_SMALL'						,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_custom_small_headline'		=> array('lang' => 'PORTAL_CUSTOM_SMALL_HEADLINE'			,	'validate' => 'string',  'type' => 'text:40:200',	  'explain' => true),
+						'portal_custom_small_bbcode'		=> array('lang' => 'PORTAL_CUSTOM_SMALL_BBCODE'				,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_custom_code_small'			=> array('lang' => 'PORTAL_CUSTOM_CODE_SMALL'				,	'validate' => 'string',	'type' => 'textarea:6:6',	 'explain' => true),
+						'portal_custom_center'				=> array('lang' => 'PORTAL_CUSTOM_CENTER'						,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_custom_center_headline'		=> array('lang' => 'PORTAL_CUSTOM_CENTER_HEADLINE'			,	'validate' => 'string',  'type' => 'text:40:200',	  'explain' => true),
+						'portal_custom_center_bbcode'		=> array('lang' => 'PORTAL_CUSTOM_CENTER_BBCODE'			,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_custom_code_center'			=> array('lang' => 'PORTAL_CUSTOM_CODE_CENTER'				,	'validate' => 'string',	'type' => 'textarea:6:6',	 'explain' => true),
 					 )
 				);
 			break;
-*/
+
 		  case 'minicalendar':
 				$display_vars = array(
 					'title'	=> 'ACP_PORTAL_MINICALENDAR_SETTINGS',

@@ -46,6 +46,7 @@ $lang = array_merge($lang, array(
 	'LOG_CONFIG_BOTS'					=> '<strong>Portal: Altered last visited bots settings</strong>',
 	'LOG_CONFIG_POSTER'				=> '<strong>Portal: Altered most posters settings</strong>',
 	'LOG_CONFIG_MINICALENDAR'		=> '<strong>Portal: Altered mini calendar settings</strong>',
+	'LOG_CONFIG_CUSTOMBLOCK'		=> '<strong>Portal: Altered custom block settings</strong>',
 
 ));
 

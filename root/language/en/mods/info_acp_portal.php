@@ -35,7 +35,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_BOTS_INFO'						=> 'Last visited bots',
 	'ACP_PORTAL_MOST_POSTER_INFO'				=> 'Most posters',
 	'ACP_PORTAL_WELCOME_INFO'					=> 'Welcome message',
-	'ACP_PORTAL_ADS_INFO'						=> 'Advertisement',
+	'ACP_PORTAL_CUSTOM_INFO'					=> 'Custom block',
 	'ACP_PORTAL_MINICALENDAR_INFO'				=> 'Mini calendar',
 ));
 

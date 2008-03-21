@@ -101,15 +101,10 @@ if ( $load_center === TRUE )
 		));
 	}
 
-	/*
-	if ($portal_config['portal_ads_center'])
+	if ($portal_config['portal_custom_center'] or $portal_config['portal_custom_small'])
 	{
-		$template->assign_vars(array(
-			'S_ADS_CENTER' 		=> ($portal_config['portal_ads_center_box']) ? true : false,
-		//	'ADS_CENTER_BOX'	=> $portal_config['portal_ads_center_box'],
-		));
+		include($phpbb_root_path . 'portal/block/custom.'.$phpEx);
 	}
-	*/
 
 	if ($config['load_online'] && $config['load_online_time'] && $portal_config['portal_whois_online'])
 	{
@@ -226,16 +221,6 @@ if ($portal_config['portal_pay_s_block'] or ( $portal_config['portal_pay_c_block
 {
 	include($phpbb_root_path . 'portal/block/donate.'.$phpEx);
 }
-
-/*
-if ($portal_config['portal_ads_small'])
-{
-	$template->assign_vars(array(
-		'S_ADS_SMALL' 	=> ($portal_config['portal_ads_small_box']) ? true : false,
-	//	'ADS_SMALL_BOX'	=> $portal_config['portal_ads_small_box'],
-	));
-}
-*/
 
 $template->assign_vars(array(
 	'PORTAL_LEFT_COLLUMN' 	=> $portal_config['portal_left_collumn_width'],
