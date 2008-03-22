@@ -857,6 +857,24 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 						}
 					}
 					unset($portal_update_array, $sql_update);
+
+					// create new acp modules
+					$modules = new acp_modules();
+					$sql = 'SELECT module_id FROM ' . MODULES_TABLE . " WHERE module_langname = 'ACP_PORTAL_INFO' LIMIT 1";
+					$result = $db->sql_query($sql);
+					$portal = $db->sql_fetchrow($result);
+					$customblock = array(
+						'module_basename'   => 'portal',
+						'module_enabled'   => 1,
+						'module_display'   => 1,
+						'parent_id'         => $portal['module_id'],
+						'module_class'      => 'acp',
+						'module_langname'   => 'ACP_PORTAL_CUSTOM_INFO',
+						'module_mode'      => 'customblock',
+						'module_auth'      => ''
+					);
+					$modules->update_module_data($customblock);   
+
 					$updated = true;
 				}
 			}
