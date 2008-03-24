@@ -201,11 +201,12 @@ class acp_portal
 				$display_vars = array(
 					'title'	=> 'ACP_PORTAL_CUSTOM_SETTINGS',
 					'vars'	=> array(
-						'legend1'								=> 'ACP_PORTAL_CUSTOM_SETTINGS',
+						'legend1'								=> 'ACP_PORTAL_CUSTOM_SMALL_SETTINGS',
 						'portal_custom_small'					=> array('lang' => 'PORTAL_CUSTOM_SMALL'						,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_custom_small_headline'		=> array('lang' => 'PORTAL_CUSTOM_SMALL_HEADLINE'			,	'validate' => 'string',  'type' => 'text:40:200',	  'explain' => true),
 						'portal_custom_small_bbcode'		=> array('lang' => 'PORTAL_CUSTOM_SMALL_BBCODE'				,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_custom_code_small'			=> array('lang' => 'PORTAL_CUSTOM_CODE_SMALL'				,	'validate' => 'string',	'type' => 'textarea:6:6',	 'explain' => true),
+						'legend2'								=> 'ACP_PORTAL_CUSTOM_CENTER_SETTINGS',
 						'portal_custom_center'				=> array('lang' => 'PORTAL_CUSTOM_CENTER'						,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_custom_center_headline'		=> array('lang' => 'PORTAL_CUSTOM_CENTER_HEADLINE'			,	'validate' => 'string',  'type' => 'text:40:200',	  'explain' => true),
 						'portal_custom_center_bbcode'		=> array('lang' => 'PORTAL_CUSTOM_CENTER_BBCODE'			,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
