@@ -179,6 +179,7 @@ $lang = array_merge($lang, array(
 	'RETURN_PORTAL'					=> '%sZurück zum Portal%s',
 
 	// other
+	'VIEWING_PORTAL'         => 'Betrachtet das Portal',
 	'CLOCK'		=> 'Uhr',
 	'SPONSOR'	=> 'Sponsoren',
 	'PORTAL_COPY'					=> '<a href="http://www.board3.de" title="board3.de">board3 Portal</a> - based on <a href="http://www.phpbb3portal.com" title="phpBB3 Portal">phpBB3 Portal</a>',

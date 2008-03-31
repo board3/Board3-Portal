@@ -187,6 +187,7 @@ $lang = array_merge($lang, array(
 	'RETURN_PORTAL'			=> '%sReturn to the portal%s',
 
 	// other
+	'VIEWING_PORTAL'         => 'Portal page',
 	'CLOCK'		=> 'Clock',
 	'SPONSOR'	=> 'Sponsors',
 	

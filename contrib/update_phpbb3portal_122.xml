@@ -195,6 +195,19 @@ Deny from All
 DirectoryIndex portal.php index.php index.html index.htm]]></action>
       </edit>
     </open>
+	<open src="viewonline.php">
+      <edit>
+        <find><![CDATA[		case 'report':
+			$location = $user->lang['REPORTING_POST'];
+			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
+		break;]]></find>
+        <action type="after-add"><![CDATA[		case 'portal':
+			$user->add_lang('mods/lang_portal');
+			$location = $user->lang['VIEWING_PORTAL'];
+			$location_url = append_sid("{$phpbb_root_path}portal.$phpEx");
+		break;]]></action>
+      </edit>
+    </open>
     <open src="adm/index.php">
       <edit>
         <find><![CDATA[$user->add_lang('acp/portal');]]></find>
