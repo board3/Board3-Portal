@@ -192,7 +192,7 @@ class acp_portal
 						'legend1'							=> 'ACP_PORTAL_WELCOME_SETTINGS',
 						'portal_welcome'					=> array('lang' => 'PORTAL_WELCOME'						 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_welcome_guest'				=> array('lang' => 'PORTAL_WELCOME_GUEST'						 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_welcome_intro'				=> array('lang' => 'PORTAL_WELCOME_INTRO'				 ,	'validate' => 'string',	'type' => 'textarea:6:6',	 'explain' => true),
+						'portal_welcome_intro'				=> array('lang' => 'PORTAL_WELCOME_INTRO'				 ,	'type' => 'textarea:6:6',	 'explain' => true),
 					 )
 				);
 			break;
@@ -205,12 +205,12 @@ class acp_portal
 						'portal_custom_small'					=> array('lang' => 'PORTAL_CUSTOM_SMALL'						,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_custom_small_headline'		=> array('lang' => 'PORTAL_CUSTOM_SMALL_HEADLINE'			,	'validate' => 'string',  'type' => 'text:40:200',	  'explain' => true),
 						'portal_custom_small_bbcode'		=> array('lang' => 'PORTAL_CUSTOM_SMALL_BBCODE'				,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_custom_code_small'			=> array('lang' => 'PORTAL_CUSTOM_CODE_SMALL'				,	'validate' => 'string',	'type' => 'textarea:6:6',	 'explain' => true),
+						'portal_custom_code_small'			=> array('lang' => 'PORTAL_CUSTOM_CODE_SMALL'				,	'type' => 'textarea:6:6',	 'explain' => true),
 						'legend2'								=> 'ACP_PORTAL_CUSTOM_CENTER_SETTINGS',
 						'portal_custom_center'				=> array('lang' => 'PORTAL_CUSTOM_CENTER'						,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_custom_center_headline'		=> array('lang' => 'PORTAL_CUSTOM_CENTER_HEADLINE'			,	'validate' => 'string',  'type' => 'text:40:200',	  'explain' => true),
 						'portal_custom_center_bbcode'		=> array('lang' => 'PORTAL_CUSTOM_CENTER_BBCODE'			,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_custom_code_center'			=> array('lang' => 'PORTAL_CUSTOM_CODE_CENTER'				,	'validate' => 'string',	'type' => 'textarea:6:6',	 'explain' => true),
+						'portal_custom_code_center'			=> array('lang' => 'PORTAL_CUSTOM_CODE_CENTER'				,	'type' => 'textarea:6:6',	 'explain' => true),
 					 )
 				);
 			break;
