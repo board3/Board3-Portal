@@ -44,7 +44,8 @@ if($news < 0)
 	}
 	else
 	{
-		for ($i = 0; $i < count($fetch_news); $i++)
+		$count = count($fetch_news)-1;
+		for ($i = 0; $i < $count; $i++)
 		{
 			if( isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true )
 			{

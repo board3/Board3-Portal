@@ -34,7 +34,8 @@ if($announcement < 0)
 	}
 	else
 	{
-		for ($i = 0; $i < count($fetch_news); $i++)
+		$count = count($fetch_news)-1;
+		for ($i = 0; $i < $count; $i++)
 		{
 			if( isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true )
 			{
@@ -55,7 +56,7 @@ if($announcement < 0)
 			$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
 			$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 	
-			$real_forum_id = ( $forum_id == 0 ) ? $fetch_news[$i]['global_id']: $forum_id;
+			$real_forum_id = ( $forum_id == 0 ) ? $fetch_news['global_id']: $forum_id;
 	
 			$template->assign_block_vars('announcements_row', array(
 				'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
