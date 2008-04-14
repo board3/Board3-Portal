@@ -267,7 +267,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		$posts[$i]['attachment']			= ($row['topic_attachment']) ? true : false;
 		$posts[$i]['topic_views']			= $row['topic_views'];
 		$posts[$i]['forum_name']			= $row['forum_name'];
-		$posts[$i]['global_id']				= $global_f;
+		$posts['global_id']					= $global_f;
 								
 		$i++;
 	}
