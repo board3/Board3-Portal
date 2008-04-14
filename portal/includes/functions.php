@@ -94,15 +94,15 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	
 	if( sizeof($forum_from) )
 	{
-		$disallow_access = array_diff($forum_from, $disallow_access);
+		$disallow_access = array_diff($forum_from, $disallow_access);		
+		if( !sizeof($disallow_access) )
+		{
+			return array();
+		}
 		
 		foreach( $disallow_access as $acc_id )
 		{
 			$str_where .= "t.forum_id = $acc_id OR ";
-			if( $global_f === FALSE )
-			{				
-				$global_f = $acc_id;
-			}
 		}
 	}
 	else
@@ -110,10 +110,6 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		foreach( $disallow_access as $acc_id )
 		{
 			$str_where .= "t.forum_id <> $acc_id OR ";
-			if( $global_f === FALSE )
-			{				
-				$global_f = $acc_id;
-			}
 		}
 	}
 
@@ -249,6 +245,11 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$bbcode->bbcode_second_pass($message, $row['bbcode_uid'], $row['bbcode_bitfield']);
 		}
 		$message = smiley_text($message); // Always process smilies after parsing bbcodes
+		
+		if( $global_f === FALSE )
+		{				
+			$global_f = $row['forum_id'];
+		}
 
 		$posts[$i]['post_text']				= ap_validate($message);
 		$posts[$i]['topic_id']				= $row['topic_id'];
