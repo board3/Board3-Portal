@@ -90,7 +90,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		$disallow_access = array();
 	}
 
-	$global_f = FALSE;
+	$global_f = 0;
 	
 	if( sizeof($forum_from) )
 	{
@@ -246,7 +246,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		}
 		$message = smiley_text($message); // Always process smilies after parsing bbcodes
 		
-		if( $global_f === FALSE )
+		if( $global_f < 1 )
 		{				
 			$global_f = $row['forum_id'];
 		}
