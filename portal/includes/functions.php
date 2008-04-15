@@ -89,7 +89,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	} else {
 		$disallow_access = array();
 	}
-
+	
 	$global_f = 0;
 	
 	if( sizeof($forum_from) )
@@ -109,16 +109,16 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	{
 		foreach( $disallow_access as $acc_id )
 		{
-			$str_where .= "t.forum_id <> $acc_id OR ";
+			$str_where .= "t.forum_id <> $acc_id AND ";
 		}
 	}
-
+	
 	switch( $type )
 	{
 		case "announcements":
 
 			$topic_type = '(( t.topic_type = ' . POST_ANNOUNCE . ') OR ( t.topic_type = ' . POST_GLOBAL . '))';
-			$str_where = ( strlen($str_where) > 0 ) ? 'AND (t.forum_id = 0 OR ' . substr($str_where, 0, -4) . ')' : '';
+			$str_where = ( strlen($str_where) > 0 ) ? 'AND (t.forum_id = 0 OR (' . trim(substr($str_where, 0, -4)) . '))' : '';
 			$user_link = 't.topic_poster = u.user_id';
 			$post_link = 't.topic_first_post_id = p.post_id';
 			$topic_order = 't.topic_time DESC';
@@ -127,7 +127,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		case "news":
 
 			$topic_type = 't.topic_type = ' . POST_NORMAL;
-			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . substr($str_where, 0, -4) . ')' : '';
+			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
 			$user_link = 't.topic_last_poster_id = u.user_id';
 			$post_link = 't.topic_last_post_id = p.post_id';
 			$topic_order = 't.topic_last_post_time DESC';
@@ -135,8 +135,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		break;
 		case "news_all":
 
-			$topic_type = '( t.topic_type != ' . POST_ANNOUNCE . ' ) AND ( t.topic_type != ' . POST_GLOBAL . ')';
-			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . substr($str_where, 0, -4) . ')' : '';
+			$topic_type = '( t.topic_type <> ' . POST_ANNOUNCE . ' ) AND ( t.topic_type <> ' . POST_GLOBAL . ')';
+			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
 			$user_link = 't.topic_last_poster_id = u.user_id';
 			$post_link = 't.topic_last_post_id = p.post_id';
 			$topic_order = 't.topic_last_post_time DESC';
@@ -251,27 +251,35 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$global_f = $row['forum_id'];
 		}
 
-		$posts[$i]['post_text']				= ap_validate($message);
-		$posts[$i]['topic_id']				= $row['topic_id'];
-		$posts[$i]['topic_last_post_id']	= $row['topic_last_post_id'];
-		$posts[$i]['forum_id']				= $row['forum_id'];
-		$posts[$i]['topic_replies'] 		= $row['topic_replies'];
-		$posts[$i]['topic_time']			= $user->format_date($row['post_time']);
-		$posts[$i]['topic_last_post_time']	= $row['topic_last_post_time'];
-		$posts[$i]['topic_title']			= $row['topic_title'];
-		$posts[$i]['username']				= $row['username'];
-		$posts[$i]['user_id']				= $row['user_id'];
-		$posts[$i]['user_type']				= $row['user_type'];
-		$posts[$i]['user_user_colour']		= $row['user_colour'];
-		$posts[$i]['poll']					= ($row['poll_title']) ? true : false;
-		$posts[$i]['attachment']			= ($row['topic_attachment']) ? true : false;
-		$posts[$i]['topic_views']			= $row['topic_views'];
-		$posts[$i]['forum_name']			= $row['forum_name'];
-		$posts['global_id']					= $global_f;
+		$posts[$i] = array(
+			'post_text'				=> ap_validate($message),
+			'topic_id'				=> $row['topic_id'],
+			'topic_last_post_id'	=> $row['topic_last_post_id'],
+			'forum_id'				=> $row['forum_id'],
+			'topic_replies'			=> $row['topic_replies'],
+			'topic_time'			=> $user->format_date($row['post_time']),
+			'topic_last_post_time'	=> $row['topic_last_post_time'],
+			'topic_title'			=> $row['topic_title'],
+			'username'				=> $row['username'],
+			'user_id'				=> $row['user_id'],
+			'user_type'				=> $row['user_type'],
+			'user_user_colour'		=> $row['user_colour'],
+			'poll'					=> ($row['poll_title']) ? true : false,
+			'attachment'			=> ($row['topic_attachment']) ? true : false,
+			'topic_views'			=> $row['topic_views'],
+			'forum_name'			=> $row['forum_name']
+		);
+		$posts['global_id'] = $global_f;
 								
 		$i++;
 	}
-	return $posts;
+	
+	if( $global_f < 1 )
+	{
+		return array();
+	} else {
+		return $posts;
+	}
 }
 
 /**
