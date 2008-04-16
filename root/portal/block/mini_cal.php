@@ -56,7 +56,7 @@ $template->set_filenames(array(
 ));
 
 // initialise some variables
-$mini_cal_today = date('Ymd', time());
+$mini_cal_today = date('Ymd', time() + $user->timezone + $user->dst - date('Z'));
 $s_cal_month = ($mini_cal_month != 0) ? $mini_cal_month . ' month' : $mini_cal_today;
 $mini_cal->getMonth($s_cal_month);
 $mini_cal_count=MINI_CAL_FDOW;
