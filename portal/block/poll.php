@@ -198,11 +198,12 @@ $where = ($where !== '') ? "AND ({$where})" : '';
 if( $poll_forums === TRUE )
 {
 	
-	$sql = 'SELECT t.poll_title, t.poll_start, t.topic_id, t.forum_id, t.poll_length, t.poll_vote_change, t.poll_max_options, t.topic_status, f.forum_status
-			FROM ' . TOPICS_TABLE . ' t, ' . FORUMS_TABLE . " f
+	$sql = 'SELECT t.poll_title, t.poll_start, t.topic_id,  t.topic_first_post_id, t.forum_id, t.poll_length, t.poll_vote_change, t.poll_max_options, t.topic_status, f.forum_status, p.bbcode_bitfield, p.bbcode_uid
+			FROM ' . TOPICS_TABLE . ' t, ' . POSTS_TABLE . ' p, ' . FORUMS_TABLE . " f
 			WHERE t.forum_id = f.forum_id AND t.topic_approved = 1 AND t.poll_start > 0
 			{$where}
 			AND t.topic_moved_id = 0
+			AND p.post_id = t.topic_first_post_id
 			ORDER BY t.poll_start DESC";
 
 	$limit = ( isset($portal_config['portal_poll_limit']) ) ? $portal_config['portal_poll_limit'] : 3;
@@ -300,6 +301,28 @@ if( $poll_forums === TRUE )
 			$viewtopic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
 
 			$poll_end = $data['poll_length'] + $data['poll_start'];
+			
+// Parse BBCode title
+
+			if ($data['bbcode_bitfield'])
+			{
+				$poll_bbcode = new bbcode();
+			}
+			else
+			{
+				$poll_bbcode = false;
+			}
+
+			$data['poll_title'] = censor_text($data['poll_title']);
+
+			if ($poll_bbcode !== false)
+			{
+				$poll_bbcode->bbcode_second_pass($data['poll_title'], $data['bbcode_uid'], $data['bbcode_bitfield']);
+			}
+
+			$data['poll_title'] = bbcode_nl2br($data['poll_title']);
+			$data['poll_title'] = smiley_text($data['poll_title']);
+			unset($poll_bbcode);			
 
 			$template->assign_block_vars('poll', array(
 				'S_POLL_HAS_OPTIONS' => $poll_has_options,
@@ -326,6 +349,28 @@ if( $poll_forums === TRUE )
 			{
 				$option_pct = ($poll_total_votes > 0) ? $pd['poll_option_total'] / $poll_total_votes : 0;
 				$option_pct_txt = sprintf("%.1d%%", ($option_pct * 100));
+				
+			// Parse BBCode option text
+
+			if ($data['bbcode_bitfield'])
+			{
+				$poll_bbcode = new bbcode();
+			}
+			else
+			{
+				$poll_bbcode = false;
+			}
+
+			$pd['poll_option_text'] = censor_text($pd['poll_option_text']);
+
+			if ($poll_bbcode !== false)
+			{
+				$poll_bbcode->bbcode_second_pass($pd['poll_option_text'], $data['bbcode_uid'], $data['bbcode_bitfield']);
+			}
+
+			$pd['poll_option_text'] = bbcode_nl2br($pd['poll_option_text']);
+			$pd['poll_option_text'] = smiley_text($pd['poll_option_text']);
+			unset($poll_bbcode);				
 
 				$template->assign_block_vars('poll.poll_option', array(
 					'POLL_OPTION_ID' 		=> $pd['poll_option_id'],
