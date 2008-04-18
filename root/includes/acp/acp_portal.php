@@ -53,6 +53,7 @@ class acp_portal
 						'portal_birthdays'					=> array('lang' => 'PORTAL_BIRTHDAYS'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_birthdays_ahead'			=> array('lang' => 'PORTAL_BIRTHDAYS_AHEAD'		, 'validate' => 'int'	, 'type' => 'text:3:3'	, 'explain' => true),
 						'portal_random_member'				=> array('lang' => 'PORTAL_RANDOM_MEMBER'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
+						'portal_forum_index'				=> array('lang' => 'PORTAL_FORUM_INDEX'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_whois_online'				=> array('lang' => 'PORTAL_WHOIS_ONLINE'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_change_style'				=> array('lang' => 'PORTAL_CHANGE_STYLE'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_main_menu'					=> array('lang' => 'PORTAL_MAIN_MENU'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),

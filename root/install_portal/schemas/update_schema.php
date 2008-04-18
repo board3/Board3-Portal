@@ -22,6 +22,7 @@ $sql_update['0.2.3'] = array(
 	"INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_custom_small_bbcode', '0')",
 	"INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_custom_center_headline', 'Headline center box')",
 	"INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_custom_small_headline', 'Headline small box')",
+	"INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_forum_index', '0')",
 );
 
 ?>
