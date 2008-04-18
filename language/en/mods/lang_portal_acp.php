@@ -75,6 +75,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAIN_MENU_EXPLAIN'				=> 'Display this block on portal.',
 	'PORTAL_USER_MENU'						=> 'User menu / Login box',
 	'PORTAL_USER_MENU_EXPLAIN'				=> 'Display this block on portal.',
+	'PORTAL_FORUM_INDEX'							=> 'Forum Index (Forum list)',
+	'PORTAL_FORUM_INDEX_EXPLAIN'					=> 'Display this block on portal.',
 
 	// random member
 	'PORTAL_RANDOM_MEMBER'					=> 'Random member block',
