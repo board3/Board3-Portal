@@ -103,6 +103,10 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		foreach( $disallow_access as $acc_id )
 		{
 			$str_where .= "t.forum_id = $acc_id OR ";
+			if( $type == 'announcements' && $global_f < 1 && $acc_id > 0 )
+			{
+				$global_f = $acc_id;
+			}
 		}
 	}
 	else
@@ -143,7 +147,28 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 
 		break;
 	}
-
+	
+	if( $type == 'announcements' && $global_f < 1 )
+	{
+		$sql = 'SELECT
+					forum_id
+				FROM
+					' . FORUMS_TABLE . ' 
+					' . ( ( strlen($str_where) > 0 ) ? 'WHERE' . substr($str_where, 4) : '' ) . '
+				ORDER BY
+					forum_id';
+		$result = $db->sql_query_limit($sql, 1);
+		
+		if ($db->sql_affectedrows() > 0)
+		{
+			$row = $db->sql_fetchrow($result);
+			$global_f = $row['forum_id'];
+		} else {
+			return array();
+		}
+	}
+	
+	
 	$sql = 'SELECT
 				t.forum_id,
 				t.topic_id,
