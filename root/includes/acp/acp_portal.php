@@ -20,9 +20,7 @@ class acp_portal
 		global $db, $user, $template;
 		global $config, $portal_config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
-		$phpEx = (empty($phpEx)) ? substr(strrchr(__FILE__, '.'), 1) : $phpEx;
-		
-		require '../portal/includes/functions.'.$phpEx;
+		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
 
 		$portal_config = obtain_portal_config();
 
