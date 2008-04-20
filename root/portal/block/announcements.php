@@ -63,6 +63,7 @@ if($announcement < 0)
 				'FORUM_NAME'		=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '',
 				'TITLE'				=> $fetch_news[$i]['topic_title'],
 				'POSTER'			=> $fetch_news[$i]['username'],
+				'POSTER_FULL'		=> $fetch_news[$i]['username_full'],
 				'U_USER_PROFILE'	=> (($fetch_news[$i]['user_type'] == USER_NORMAL || $fetch_news[$i]['user_type'] == USER_FOUNDER) && $fetch_news[$i]['user_id'] != ANONYMOUS) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $fetch_news[$i]['user_id']) : '',
 				'TIME'				=> $fetch_news[$i]['topic_time'],
 				'TEXT'				=> $fetch_news[$i]['post_text'],
