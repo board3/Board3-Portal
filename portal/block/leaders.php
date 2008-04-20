@@ -141,33 +141,6 @@ while ($row = $db->sql_fetchrow($result))
 $db->sql_freeresult($result);
 
 
-/*we may delete this?
-// Generate online information for user
-if ($config['load_onlinetrack'] && sizeof($id_cache))
-{
-	$sql = 'SELECT session_user_id, MAX(session_time) as online_time, MIN(session_viewonline) AS viewonline
-		FROM ' . SESSIONS_TABLE . '
-		WHERE ' . $db->sql_in_set('session_user_id', $id_cache) . '
-		GROUP BY session_user_id';
-	$result = $db->sql_query($sql);
-
-	$update_time = $config['load_online_time'] * 60;
-	while ($row = $db->sql_fetchrow($result))
-	{
-		$user_cache[$row['session_user_id']]['online'] = (time() - $update_time < $row['online_time'] && (($row['viewonline'] && $user_cache[$row['session_user_id']]['viewonline']) || $auth->acl_get('u_viewonline'))) ? true : false;
-	}
-	$db->sql_freeresult($result);
-}
-unset($id_cache);
-
-// Assign specific vars
-$template->assign_vars(array(
-	'ONLINE_IMG'=> ($poster_id == ANONYMOUS || !$config['load_onlinetrack']) ? '' : (($user_cache[$poster_id]['online']) ? $user->img('icon_user_online', 'ONLINE') : $user->img('icon_user_offline', 'OFFLINE')),
-	'S_ONLINE'	=> ($poster_id == ANONYMOUS || !$config['load_onlinetrack']) ? false : (($user_cache[$poster_id]['online']) ? true : false),
-));
-*/
-
-
 $template->assign_vars(array(
 	'S_DISPLAY_LEADERS' => true,
 ));

@@ -39,7 +39,7 @@ $user_id = (int) $row['user_id'];
 $colour = $row['user_colour'];
 
 $template->assign_block_vars('random_member', array(
-	//'USERNAME_FULL'		=> get_username_string('full', $user_id, $username, $colour),
+	'USERNAME_FULL'		=> get_username_string('full', $user_id, $username, $colour),
 	'USERNAME'			=> get_username_string('username', $user_id, $username, $colour),
 	'USER_COLOR'		=> get_username_string('colour', $user_id, $username, $colour),
 	'U_VIEW_PROFILE'	=> get_username_string('profile', $user_id, $username, $colour),

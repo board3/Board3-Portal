@@ -3,7 +3,7 @@
 		<span class="corners-top"><span></span></span>
 			<h3>{L_RND_MEMBER}</h3>
 			<!-- BEGIN random_member -->
-			<span style="float:left;"><img src="portal/images/member.gif" height="15" width="15" alt="{random_member.USERNAME}" /></span><span style="float:left; font-size:12px; padding-left:5px; padding-top:1px;"><a href="{random_member.U_VIEW_PROFILE}"><!-- IF random_member.USER_COLOR --><span style="color: {random_member.USER_COLOR}; font-weight: bold;"><!-- ELSE --><span><!-- ENDIF -->{random_member.USERNAME}</span></a></span><br style="clear:both" />
+			<span style="float:left;"><img src="portal/images/member.gif" height="15" width="15" alt="{random_member.USERNAME}" /></span><span style="float:left; font-size:12px; padding-left:5px; padding-top:1px;">{random_member.USERNAME_FULL}</span><br style="clear:both" />
 			<!-- IF random_member.AVATAR_IMG --><a href="{random_member.U_VIEW_PROFILE}">{random_member.AVATAR_IMG}</a><br style="clear:both" /><!-- ENDIF -->
 			<!-- IF random_member.RANK_TITLE --><small>{random_member.RANK_TITLE}</small><br style="clear:both" /><!-- ENDIF -->
 			<!-- IF random_member.RANK_IMG -->{random_member.RANK_IMG}<br style="clear:both" /><!-- ENDIF -->

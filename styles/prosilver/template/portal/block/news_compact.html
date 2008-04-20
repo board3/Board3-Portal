@@ -18,7 +18,7 @@
 					<li>
 						<span style="float: left; margin: 0 0 0 5px;"><img src="{T_THEME_PATH}/images/arrow_right.gif" alt=""/> 
 						<!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG}  <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}" title="{L_JUMP_NEWEST}"><strong style="font-size:1.1em;">{news_row.TITLE}</strong></a></span>
-						<span style="float: right; margin: 0 5px 0 0;">{L_LAST_POST} {L_POST_BY_AUTHOR}: <strong><a href="{news_row.U_USER_PROFILE}">{news_row.POSTER}</a></strong></span>
+						<span style="float: right; margin: 0 5px 0 0;">{L_LAST_POST} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL}</span>
 						<br style="clear:both" />
 						<!-- IF news_row.FORUM_NAME -->
 						<span style="float: left; font-size:1.0em; margin: 2px 0 0 28px;">{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong></span>
@@ -29,7 +29,7 @@
 							<a href="{news_row.U_VIEW_COMMENTS}" title="{L_JUMP_FIRST}"><span style="font-size:0.9em;"><em>{L_COMMENTS}: {news_row.REPLIES}</em></span></a>
 							<span style="font-size:0.9em;"><em>{L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS}</em></span>
 						</span>
-						<!-- IF news_row.S_NOT_LAST --><hr style="margin: 0px 0px 3px 0px;" /><!-- ENDIF -->						
+						<!-- IF news_row.S_NOT_LAST --><hr style="margin: 0px 0px 3px 0px;" /><!-- ENDIF -->
 					</li>
 					<!-- ENDIF -->
 					<!-- END news_row -->
