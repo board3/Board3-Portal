@@ -363,6 +363,11 @@ function get_next_word($str) {
   return $ret;
 }
 
+function get_next_bbhtml_part($str) {
+  $lim =  substr($str,0,strpos($str,'>')+1);
+	return substr($str,0,strpos($str, $lim, strlen($lim))+strlen($lim));
+}
+
 function get_sub_taged_string($str, $bbuid, $maxlen) {
   $sl = $str;
   $ret = '';
@@ -377,9 +382,12 @@ function get_sub_taged_string($str, $bbuid, $maxlen) {
     $sr = '';
     if (substr($sl, 0, 1) == '[') $sr = substr($sl,0,strpos($sl,']')+1);
     /* GESCHLOSSENE HTML-TAGS BEACHTEN */
-    if (substr($sl, 0, 1) == '<') {
-      $sr = substr($sl,0,strpos($sl,'>')+1);
-      $ret .= $sr;
+    if (substr($sl, 0, 2) == '<!') {
+			$sr = get_next_bbhtml_part($sl);
+			$ret .= $sr;
+		} else if (substr($sl, 0, 1) == '<') {
+      	$sr = substr($sl,0,strpos($sl,'>')+1);
+				$ret .= $sr;
     } else if (is_valid_bbtag($sr, $bbuid)) {
       if ($sr[1] == '/') {
         /* entfernt das endtag aus dem tag array */
