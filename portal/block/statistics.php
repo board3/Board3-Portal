@@ -79,12 +79,12 @@ $l_total_topic_s	= ($total_topics == 0) ? 'TOTAL_TOPICS_ZERO' : 'TOTAL_TOPICS_OT
 // avarage stat
 $board_days = ( time() - $config['board_startdate'] ) / 86400;
 
-$topics_per_day		= round($total_topics / $board_days, 0);
-$posts_per_day		= round($total_posts / $board_days, 0);
+$topics_per_day		= ($total_topics) ? round($total_topics / $board_days, 0) : 0;
+$posts_per_day		= ($total_posts) ? round($total_posts / $board_days, 0) : 0;
 $users_per_day		= round($total_users / $board_days, 0);
-$topics_per_user	= round($total_topics / $total_users, 0);
-$posts_per_user		= round($total_posts / $total_users, 0);
-$posts_per_topic	= round($total_posts / $total_topics, 0);
+$topics_per_user	= ($total_topics) ? round($total_topics / $total_users, 0) : 0;
+$posts_per_user		= ($total_posts) ? round($total_posts / $total_users, 0) : 0;
+$posts_per_topic	= ($total_topics) ? round($total_posts / $total_topics, 0) : 0;
 
 if ($topics_per_day > $total_topics)
 {
