@@ -153,8 +153,10 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		$sql = 'SELECT
 					forum_id
 				FROM
-					' . FORUMS_TABLE . ' 
-					' . ( ( strlen($str_where) > 0 ) ? 'WHERE' . substr($str_where, 4) : '' ) . '
+					' . FORUMS_TABLE . '
+				WHERE
+					forum_type = ' . FORUM_POST . '
+					' . $str_where . '
 				ORDER BY
 					forum_id';
 		$result = $db->sql_query_limit($sql, 1);
