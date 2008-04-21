@@ -280,7 +280,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$global_f = $row['forum_id'];
 		}
 
-		$posts[$i] = array_merge($posts, array(
+		$posts[$i] = array_merge($posts[$i], array(
 			'post_text'				=> ap_validate($message),
 			'topic_id'				=> $row['topic_id'],
 			'topic_last_post_id'	=> $row['topic_last_post_id'],
