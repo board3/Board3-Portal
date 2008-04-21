@@ -100,8 +100,9 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			return array();
 		}
 		
-		foreach( $disallow_access as $acc_id )
+		foreach( $disallow_access as $acc_id)
 		{
+			$acc_id = (int) $acc_id;
 			$str_where .= "t.forum_id = $acc_id OR ";
 			if( $type == 'announcements' && $global_f < 1 && $acc_id > 0 )
 			{
@@ -113,6 +114,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	{
 		foreach( $disallow_access as $acc_id )
 		{
+			$acc_id = (int) $acc_id;
 			$str_where .= "t.forum_id <> $acc_id AND ";
 		}
 	}
@@ -151,13 +153,13 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	if( $type == 'announcements' && $global_f < 1 )
 	{
 		$sql = 'SELECT
-					f.forum_id
-				FROM ' . FORUMS_TABLE . ' f, ' . TOPICS_TABLE . ' t
+					forum_id
+				FROM ' . FORUMS_TABLE . '
 				WHERE
-					f.forum_type = ' . FORUM_POST . '
-					' . $str_where . '
+					forum_type = ' . FORUM_POST . '
+					' . str_replace('t.', '', $str_where) . '
 				ORDER BY
-					f.forum_id';
+					forum_id';
 		$result = $db->sql_query_limit($sql, 1);
 		
 		if ($db->sql_affectedrows() > 0)
