@@ -154,7 +154,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	{
 		$sql = 'SELECT
 					forum_id
-				FROM ' . FORUMS_TABLE . '
+				FROM
+					' . FORUMS_TABLE . '
 				WHERE
 					forum_type = ' . FORUM_POST . '
 					' . str_replace('t.', '', $str_where) . '
