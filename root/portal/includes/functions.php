@@ -151,14 +151,13 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	if( $type == 'announcements' && $global_f < 1 )
 	{
 		$sql = 'SELECT
-					forum_id
-				FROM
-					' . FORUMS_TABLE . '
+					f.forum_id
+				FROM ' . FORUMS_TABLE . ' f, ' . TOPICS_TABLE . ' t
 				WHERE
-					forum_type = ' . FORUM_POST . '
+					f.forum_type = ' . FORUM_POST . '
 					' . $str_where . '
 				ORDER BY
-					forum_id';
+					f.forum_id';
 		$result = $db->sql_query_limit($sql, 1);
 		
 		if ($db->sql_affectedrows() > 0)
