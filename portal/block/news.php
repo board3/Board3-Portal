@@ -109,6 +109,7 @@ else
 		'FORUM_NAME'		=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '',
 		'TITLE'					=> $fetch_news[$i]['topic_title'],
 		'POSTER'				=> $fetch_news[$i]['username'],
+		'POSTER_FULL'			=> $fetch_news[$i]['username_full'],
 		'TIME'					=> $fetch_news[$i]['topic_time'],
 		'TEXT'					=> $fetch_news[$i]['post_text'],
 		'REPLIES'				=> $fetch_news[$i]['topic_replies'],
