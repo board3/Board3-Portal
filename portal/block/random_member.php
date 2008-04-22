@@ -20,13 +20,35 @@ if (!defined('IN_PORTAL'))
    exit;
 }
 
-$sql = 'SELECT *
-	FROM ' . USERS_TABLE . '
-	WHERE user_type <> ' . USER_IGNORE . '
-		AND user_type <> ' . USER_INACTIVE . '
-	ORDER BY RAND() 
-	LIMIT 1';
-$result = $db->sql_query($sql);
+	switch ($db->sql_layer)
+	{
+		case 'postgres':
+			$sql = 'SELECT *
+			FROM ' . USERS_TABLE . '
+			WHERE user_type <> ' . USER_IGNORE . '
+			AND user_type <> ' . USER_INACTIVE . '
+			ORDER BY RANDOM()';
+		break;
+	
+		case 'mssql':
+		case 'mssql_odbc':
+			$sql = 'SELECT *
+			FROM ' . USERS_TABLE . '
+			WHERE user_type <> ' . USER_IGNORE . '
+			AND user_type <> ' . USER_INACTIVE . '
+			ORDER BY NEWID()';
+		break;
+	
+		default:
+			$sql = 'SELECT *
+			FROM ' . USERS_TABLE . '
+			WHERE user_type <> ' . USER_IGNORE . '
+			AND user_type <> ' . USER_INACTIVE . '
+			ORDER BY RAND()';
+		break;
+	}
+
+$result = $db->sql_query_limit($sql, 1);
 $row = $db->sql_fetchrow($result);
 
 $avatar_img = get_user_avatar($row['user_avatar'], $row['user_avatar_type'], $row['user_avatar_width'], $row['user_avatar_height']);
