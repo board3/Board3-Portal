@@ -20,7 +20,7 @@ if (empty($lang) || !is_array($lang))
 }
 
 // DEVELOPERS PLEASE NOTE
-//
+//s
 // All language files should use UTF-8 as their encoding and the files must not contain a BOM.
 //
 // Placeholders can now contain order information, e.g. instead of
@@ -60,7 +60,7 @@ $lang = array_merge($lang, array(
 	'INSTALLER_UNINSTALL_NOTE'			=> 'Wikommen im Aktualisierungs Menü',
 	'INSTALLER_UNINSTALL_SUCCESSFUL'	=> 'Die Deinstallation des MODs v%s war erfolgreich.',
 
-	'INSTALLER_NEEDS_ADMIN'			=> 'Du musst als Gründer eingeloggt sein.<br /><a href="../ucp.php?mode=login"><strong>Zum Login</strong></a>',
+	'INSTALLER_NEEDS_ADMIN'			=> 'Du musst als Administrator eingeloggt sein.<br /><a href="../ucp.php?mode=login"><strong>Zum Login</strong></a>',
 
 	'INSTALLER_UPDATE'						=> 'Update',
 	'INSTALLER_UPDATE_MENU'				=> 'Updatemenü',
@@ -77,7 +77,7 @@ $lang = array_merge($lang, array(
 
 	'INSTALLER_USEFUL_INFO'				=> 'Bitte lösche das /install_portal Verzeichnis.',
 
-	'INSTALLER_UNINSTALL_USEFUL_INFO'	=> 'Denke daran die Portal Dateien und Dateiänderungen am Originalsystem zu löschen.',
+	'INSTALLER_UNINSTALL_USEFUL_INFO'	=> 'Denke daran die Portal Dateien zu löschen und Dateiänderungen am Originalsystem rückgängig zu machen.',
 
 	'WARNING'									=> 'Warnung',
 ));
