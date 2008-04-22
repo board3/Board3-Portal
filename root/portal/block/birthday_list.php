@@ -22,11 +22,25 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 {
 	$now = getdate(time() + $user->timezone + $user->dst - date('Z'));
 	$today = (mktime(0, 0, 0, $now['mon'], $now['mday'], $now['year']));
+	
+	switch ($db->sql_layer)
+	{
+		case 'mssql':
+		case 'mssql_odbc':
+			$sql = 'SELECT user_id, username, user_colour, user_birthday
+			FROM ' . USERS_TABLE . "
+			WHERE user_birthday <> ''
+			AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ') ORDER BY user_birthday ASC';
+		break;
+	
+		default:
+			$sql = 'SELECT user_id, username, user_colour, user_birthday
+			FROM ' . USERS_TABLE . "
+			WHERE user_birthday <> ''
+			AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ') ORDER BY SUBSTRING(user_birthday FROM 4 FOR 2) ASC, SUBSTRING(user_birthday FROM 1 FOR 2) ASC, username_clean ASC';
+		break;
+	}
 	 
-	$sql = 'SELECT user_id, username, user_colour, user_birthday
-	FROM ' . USERS_TABLE . "
-	WHERE user_birthday <> ''
-	AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ') ORDER BY SUBSTRING(user_birthday FROM 4 FOR 2) ASC, SUBSTRING(user_birthday FROM 1 FOR 2) ASC, username_clean ASC';
 	$result = $db->sql_query($sql);
 
 	while ($row = $db->sql_fetchrow($result))
