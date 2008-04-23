@@ -8,7 +8,7 @@
 			<!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --> <strong style="font-size:1.1em;">{L_POLL}: </strong><!-- ENDIF -->
 			<a href="{news_row.U_VIEW_COMMENTS}" title="{news_row.TITLE}"><strong style="font-size:1.1em;">{news_row.TITLE}</strong></a>
 			<br style="clear:both" />
-			<span style="float: left;">{L_POST_BY_AUTHOR} {news_row.POSTER_FULL} {L_POSTED_ON_DATE} {news_row.TIME}</span>
+			<span style="float: left;">{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL} {L_POSTED_ON_DATE} {news_row.TIME}</span>
 			<!-- IF news_row.PAGINATION --><span style="float: right; font-size:0.9em;"> [ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {news_row.PAGINATION} ] </span><!-- ENDIF -->
 			<br style="clear:both" />
 			<!-- IF news_row.FORUM_NAME -->{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong><!-- ENDIF -->
