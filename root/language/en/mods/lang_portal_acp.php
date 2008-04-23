@@ -100,6 +100,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM_EXPLAIN'	=> 'Forum we pull the articles from, leave blank to pull from all forums, separate by comma for multi-forums, eg. 1,2,5',
 	'PORTAL_ANNOUNCEMENTS_PERMISSIONS'			=> 'Enable/disable permissions',
 	'PORTAL_ANNOUNCEMENTS_PERMISSIONS_EXPLAIN'	=> 'Take forum viewing permissions into account when displaying announcements',
+	'PORTAL_ANNOUNCEMENTS_ARCHIVE'				=> 'Enable the announcements archive system',
+	'PORTAL_ANNOUNCEMENTS_ARCHIVE_EXPLAIN'		=> 'If enabled the announcements archive system / page numbers will be displayed.',
 
 	// news
 	'ACP_PORTAL_NEWS_INFO'				=> 'News',
@@ -108,7 +110,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_NEWS'						=> 'Display news block',
 	'PORTAL_NEWS_EXPLAIN'				=> 'Display this block on portal.',
 	'PORTAL_NEWS_STYLE'					=> 'Compact news block style',
-	'PORTAL_NEWS_STYLE_EXPLAIN'			=> 'If select yes use compact style for news, no is large style.',
+	'PORTAL_NEWS_STYLE_EXPLAIN'			=> 'If select yes use compact style for news, no is large style (text view).',
 	'PORTAL_SHOW_ALL_NEWS'				=> 'Show all of the articles in this forum',
 	'PORTAL_SHOW_ALL_NEWS_EXPLAIN'		=> 'Including stickies.',
 	'PORTAL_NUMBER_OF_NEWS'				=> 'Number of news articles on portal',
@@ -121,6 +123,10 @@ $lang = array_merge($lang, array(
 	'PORTAL_EXCLUDE_FORUM_EXPLAIN'		=> 'Forum we pull the articles from, leave blank to pull from all forums, separate by comma for multi-forums, eg. 1,2,5',
 	'PORTAL_NEWS_PERMISSIONS'			=> 'Enable/disable permissions',
 	'PORTAL_NEWS_PERMISSIONS_EXPLAIN'	=> 'Take forum viewing permissions into account when displaying news',
+	'PORTAL_NEWS_SHOW_LAST'				=> 'Show the newest post',
+	'PORTAL_NEWS_SHOW_LAST_EXPLAIN'		=> 'When activated, the newest post will be shown in the text view. When deactivated, the first post of the topic will be shown.<br />In the compact news block style the link will lead to the newest post.',
+	'PORTAL_NEWS_ARCHIVE'				=> 'Enable the news archive system',
+	'PORTAL_NEWS_ARCHIVE_EXPLAIN'		=> 'If enabled the news archive system / page numbers will be displayed.',
 
 	// recent topics
 	'ACP_PORTAL_RECENT_INFO'				=> 'Recent topics',

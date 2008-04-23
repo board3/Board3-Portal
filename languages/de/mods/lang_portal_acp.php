@@ -77,7 +77,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_RANDOM_MEMBER'							=> 'Zufälliges Profil',
 	'PORTAL_RANDOM_MEMBER_EXPLAIN'				=> 'Diesen Block auf dem Portal anzeigen.',
 
-	// global announcements
+	// announcements
 	'ACP_PORTAL_ANNOUNCE_INFO'							=> 'Bekanntmachungen',
 	'ACP_PORTAL_ANNOUNCE_SETTINGS'					=> 'Einstellungen für Bekanntmachungen',
 	'ACP_PORTAL_ANNOUNCE_SETTINGS_EXPLAIN'			=> 'Hier kannst du die Einstellungen für die Bekanntmachungen ändern.',
@@ -95,6 +95,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM_EXPLAIN'	=> 'Die Nummer des Forums, aus dem die Bekanntmachungen angezeigt werden sollen. Frei lassen um aus allen Foren anzeigen zu lassen. Mit Komma trennen wenn aus mehreren, ausgewählten Foren angezeigt werden soll, z.B. 1,2,5',
 	'PORTAL_ANNOUNCEMENTS_PERMISSIONS'				=> 'Berechtigungen prüfen anschalten?',
 	'PORTAL_ANNOUNCEMENTS_PERMISSIONS_EXPLAIN'	=> 'Berücksichtigt Berechtigungen beim Anzeigen der Bekanntmachungen',
+	'PORTAL_ANNOUNCEMENTS_ARCHIVE'				=> 'Das Archivsystem für die Bekanntmachungen aktivieren',
+	'PORTAL_ANNOUNCEMENTS_ARCHIVE_EXPLAIN'		=> 'Wenn aktiviert, wird das Archivsystem / Seitenzahlen angezeigt.',
 
 	// news
 	'ACP_PORTAL_NEWS_INFO'								=> 'Aktuelle Beiträge',
@@ -103,7 +105,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_NEWS'											=> 'Aktuelle Beiträge anzeigen',
 	'PORTAL_NEWS_EXPLAIN'									=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_NEWS_STYLE'									=> 'Kompakter Block Style',
-	'PORTAL_NEWS_STYLE_EXPLAIN'						=> 'Wenn ja angewählt ist, wird die kompakte Ansicht für die aktuellen Beiträge angezeigt, nein ist die große Ansicht.',
+	'PORTAL_NEWS_STYLE_EXPLAIN'						=> 'Wenn ja angewählt ist, wird die kompakte Ansicht für die aktuellen Beiträge angezeigt, nein ist die Textansicht.',
 	'PORTAL_SHOW_ALL_NEWS'								=> 'Zeige alle Beiträge dieses Forums',
 	'PORTAL_SHOW_ALL_NEWS_EXPLAIN'					=> 'Inklusive Wichtigen.',
 	'PORTAL_NUMBER_OF_NEWS'								=> 'Anzahl der Beiträge auf dem Portal',
@@ -116,6 +118,10 @@ $lang = array_merge($lang, array(
 	'PORTAL_EXCLUDE_FORUM_EXPLAIN'					=> 'Die Nummer der Foren, aus denen Beiträge nicht angezeigt werden sollen. Frei lassen um aus allen Foren anzeigen zu lassen. Mit Komma trennen wenn mehrere Foren ausgeschlossen werden sollen, z.B. 1,2,5',
 	'PORTAL_NEWS_PERMISSIONS'							=> 'Berechtigungen prüfen anschalten?',
 	'PORTAL_NEWS_PERMISSIONS_EXPLAIN'				=> 'Berücksichtigt Berechtigungen beim Anzeigen der aktuellen Beiträge',
+	'PORTAL_NEWS_SHOW_LAST'							=> 'Den neuesten Beitrag anzeigen',
+	'PORTAL_NEWS_SHOW_LAST_EXPLAIN'					=> 'Wenn aktiviert, wird der neueste Beitrag in der Textansicht angezeigt. Wenn deaktiviert, wird der erste Beitrag des Themas angezeigt.<br />Im kompakten Block Style wird der Themenlink bei aktivierter Einstellung auf den neuesten Beitrag gesetzt. Ansonsten auf den Ersten.',
+	'PORTAL_NEWS_ARCHIVE'							=> 'Das Archivsystem für die aktuellen Beiträge aktivieren',
+	'PORTAL_NEWS_ARCHIVE_EXPLAIN'					=> 'Wenn aktiviert, wird das Archivsystem / Seitenzahlen angezeigt.',
 
 	// recent topics
 	'ACP_PORTAL_RECENT_INFO'								=> 'Neueste Themen',
