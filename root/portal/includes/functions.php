@@ -243,7 +243,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 
 		if ($number_of_posts <> 0)
 		{
-			$result = $db->sql_query($sql, $number_of_posts, $start);
+			$result = $db->sql_query_limit($sql, $number_of_posts, $start);
 		} else {
 			$result = $db->sql_query($sql);
 		}
