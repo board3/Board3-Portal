@@ -77,6 +77,8 @@ class acp_portal
 						'portal_news_length'				=> array('lang' => 'PORTAL_NEWS_LENGTH'				,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_news_forum'					=> array('lang' => 'PORTAL_NEWS_FORUM'				,	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
 						'portal_news_permissions'			=> array('lang' => 'PORTAL_NEWS_PERMISSIONS'		,	'validate' => 'bool',		'type' => 'radio:yes_no',	 'explain' => true),
+						'portal_news_show_last'				=> array('lang' => 'PORTAL_NEWS_SHOW_LAST'			,	'validate' => 'bool',		'type' => 'radio:yes_no',	 'explain' => true),
+						'portal_news_archive'				=> array('lang' => 'PORTAL_NEWS_ARCHIVE'			,	'validate' => 'bool',		'type' => 'radio:yes_no',	 'explain' => true),
 					)
 				);
 			break;
@@ -92,6 +94,7 @@ class acp_portal
 						'portal_announcements_length'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 						'portal_global_announcements_forum'	=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'text:10:200',	'explain' => true),
 						'portal_announcements_permissions'	=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_announcements_archive'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE'		,	'validate' => 'bool',		'type' => 'radio:yes_no',	 'explain' => true),
 					)
 				);
 			break;

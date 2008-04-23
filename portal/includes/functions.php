@@ -71,7 +71,7 @@ function set_portal_config($config_name, $config_value)
 include($phpbb_root_path . 'includes/message_parser.'.$phpEx);
 
 // fetch post for news & announce
-function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type)
+function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0)
 {
 	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode;
 	
@@ -118,6 +118,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$str_where .= "t.forum_id <> $acc_id AND ";
 		}
 	}
+
+$portal_config = obtain_portal_config();
 	
 	switch( $type )
 	{
@@ -135,7 +137,16 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$topic_type = 't.topic_type = ' . POST_NORMAL;
 			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
 			$user_link = 't.topic_last_poster_id = u.user_id';
-			$post_link = 't.topic_last_post_id = p.post_id';
+
+			if ( $portal_config['portal_news_show_last'] )
+				{
+				$post_link = 't.topic_last_post_id = p.post_id';
+				}
+			else
+				{
+				$post_link = 't.topic_first_post_id = p.post_id';
+				}			
+			
 			$topic_order = 't.topic_last_post_time DESC';
 
 		break;
@@ -144,7 +155,16 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$topic_type = '( t.topic_type <> ' . POST_ANNOUNCE . ' ) AND ( t.topic_type <> ' . POST_GLOBAL . ')';
 			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
 			$user_link = 't.topic_last_poster_id = u.user_id';
-			$post_link = 't.topic_last_post_id = p.post_id';
+
+			if ( $portal_config['portal_news_show_last'] )
+				{
+				$post_link = 't.topic_last_post_id = p.post_id';
+				}
+			else
+				{
+				$post_link = 't.topic_first_post_id = p.post_id';
+				}
+			
 			$topic_order = 't.topic_last_post_time DESC';
 
 		break;
@@ -223,14 +243,13 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			ORDER BY
 				' . $topic_order;
 
-	if( $number_of_posts == '' OR $number_of_posts == 0)
-	{
+		if ($number_of_posts <> 0)
+		{
+			$sql .= '
+				LIMIT
+					'.$start.',' . $number_of_posts;
+		} 
 		$result = $db->sql_query($sql);
-	}
-	else
-	{
-		$result = $db->sql_query_limit($sql, $number_of_posts);
-	}
 
 	// Instantiate BBCode if need be
 	if ($bbcode_bitfield !== '')
@@ -283,7 +302,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		$posts[$i] = array_merge($posts[$i], array(
 			'post_text'				=> ap_validate($message),
 			'topic_id'				=> $row['topic_id'],
-			'topic_last_post_id'	=> $row['topic_last_post_id'],
+			'topic_last_post_id'	=> $row['post_id'],
 			'forum_id'				=> $row['forum_id'],
 			'topic_replies'			=> $row['topic_replies'],
 			'topic_time'			=> $user->format_date($row['post_time']),
@@ -430,6 +449,101 @@ function get_sub_taged_string($str, $bbuid, $maxlen) {
 function ap_validate($str) {
   $s = str_replace('<br />', '<br/>', $str);
   return str_replace('</li><br/>', '</li>', $s);
+}
+
+/**
+* Pagination routine, generates page number sequence
+* tpl_prefix is for using different pagination blocks at one page
+*/
+function generate_portal_pagination($base_url, $num_items, $per_page, $start_item, $type, $add_prevnext_text = false, $tpl_prefix = '')
+{
+	global $template, $user;
+
+	switch( $type )
+	{
+		case "announcements":
+			$pagination_type = 'ap';
+		break;
+		case "news":
+		case "news_all":
+			$pagination_type = 'np';
+		break;
+	}
+	
+	// Make sure $per_page is a valid value
+	$per_page = ($per_page <= 0) ? 1 : $per_page;
+
+	$seperator = '<span class="page-sep">' . $user->lang['COMMA_SEPARATOR'] . '</span>';
+	$total_pages = ceil($num_items / $per_page);
+
+	if ($total_pages == 1 || !$num_items)
+	{
+		return false;
+	}
+
+	$on_page = floor($start_item / $per_page) + 1;
+	$url_delim = (strpos($base_url, '?') === false) ? '?' : '&amp;';
+
+	$page_string = ($on_page == 1) ? '<strong>1</strong>' : '<a href="' . $base_url . '">1</a>';
+
+	if ($total_pages > 5)
+	{
+		$start_cnt = min(max(1, $on_page - 4), $total_pages - 5);
+		$end_cnt = max(min($total_pages, $on_page + 4), 6);
+
+		$page_string .= ($start_cnt > 1) ? ' ... ' : $seperator;
+
+		for ($i = $start_cnt + 1; $i < $end_cnt; $i++)
+		{
+			$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . '">' . $i . '</a>';
+			if ($i < $end_cnt - 1)
+			{
+				$page_string .= $seperator;
+			}
+		}
+
+		$page_string .= ($end_cnt < $total_pages) ? ' ... ' : $seperator;
+	}
+	else
+	{
+		$page_string .= $seperator;
+
+		for ($i = 2; $i < $total_pages; $i++)
+		{
+			$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . '">' . $i . '</a>';
+			if ($i < $total_pages)
+			{
+				$page_string .= $seperator;
+			}
+		}
+	}
+
+	$page_string .= ($on_page == $total_pages) ? '<strong>' . $total_pages . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($total_pages - 1) * $per_page) . '">' . $total_pages . '</a>';
+
+	if ($add_prevnext_text)
+	{
+		if ($on_page != 1)
+		{
+			$page_string = '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($on_page - 2) * $per_page) . '">' . $user->lang['PREVIOUS'] . '</a>&nbsp;&nbsp;' . $page_string;
+		}
+
+		if ($on_page != $total_pages)
+		{
+			$page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . ($on_page * $per_page) . '">' . $user->lang['NEXT'] . '</a>';
+		}
+	}
+
+	$template->assign_vars(array(
+		$tpl_prefix . 'BASE_URL'		=> $base_url,
+		'A_' . $tpl_prefix . 'BASE_URL'	=> addslashes($base_url),
+		$tpl_prefix . 'PER_PAGE'		=> $per_page,
+
+		$tpl_prefix . 'PREVIOUS_PAGE'	=> ($on_page == 1) ? '' : $base_url . "{$url_delim}" . $pagination_type . '=' . (($on_page - 2) * $per_page),
+		$tpl_prefix . 'NEXT_PAGE'		=> ($on_page == $total_pages) ? '' : $base_url . "{$url_delim}" . $pagination_type . '=' . ($on_page * $per_page),
+		$tpl_prefix . 'TOTAL_PAGES'		=> $total_pages,
+	));
+
+	return $page_string;
 }
 
 ?>

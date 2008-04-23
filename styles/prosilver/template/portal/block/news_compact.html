@@ -1,44 +1,62 @@
+<!-- BEGIN news_row -->
+<!-- IF news_row.S_FIRST_ROW or news_row.S_NO_TOPICS -->
 <div class="forabg">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
 		<ul class="topiclist">
 			<li class="header"><dl><dt>{L_LATEST_NEWS}</dt></dl></li>
 		</ul>
-		<ul class="topiclist forums">
-			<li>
+		<ul class="topiclist topics">
+<!-- ENDIF -->
+			<li class="row<!-- IF news_row.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
 			<dl>
-				<dd class="posts_portal"  style="border-left:0px">
-				<ul class="news">
-					<!-- BEGIN news_row -->
-					<!-- IF news_row.S_NO_TOPICS -->
-					<li>
-					<span class="gensmall" style="text-align: center; margin: 0 0 0 5px;"><strong>{L_NO_NEWS}</strong></span>
-					</li>
-					<!-- ELSE -->
-					<li>
-						<span style="float: left; margin: 0 0 0 5px;"><img src="{T_THEME_PATH}/images/arrow_right.gif" alt=""/> 
-						<!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG}  <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}" title="{L_JUMP_NEWEST}"><strong style="font-size:1.1em;">{news_row.TITLE}</strong></a></span>
-						<span style="float: right; margin: 0 5px 0 0;">{L_LAST_POST} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL}</span>
-						<br style="clear:both" />
-						<!-- IF news_row.FORUM_NAME -->
-						<span style="float: left; font-size:1.0em; margin: 2px 0 0 28px;">{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong></span>
-						<!-- ENDIF -->
-						<span style="float: right; margin: 0 5px 0 0;">{L_POSTED_ON_DATE} <strong>{news_row.TIME}</strong></span>
-						<br style="clear:both" />
-						<span style="float: left; margin: 0 0 0 28px;">
-							<a href="{news_row.U_VIEW_COMMENTS}" title="{L_JUMP_FIRST}"><span style="font-size:0.9em;"><em>{L_COMMENTS}: {news_row.REPLIES}</em></span></a>
-							<span style="font-size:0.9em;"><em>{L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS}</em></span>
-						</span>
-						<!-- IF news_row.S_NOT_LAST --><hr style="margin: 0px 0px 3px 0px;" /><!-- ENDIF -->
-					</li>
+				<dt style="border-left:0px; width: 99%">							
+					<img src="{T_THEME_PATH}/images/arrow_right.gif" alt=""/> 
+					<!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG}  <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}" title="{L_JUMP_NEWEST}" class="topictitle">{news_row.TITLE}</a>
+					<br style="clear:both" />
+					<!-- IF news_row.PAGINATION --><strong class="pagination"><span>{news_row.PAGINATION}</span></strong><!-- ENDIF -->
+					{L_LAST_POST} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL} {L_POSTED_ON_DATE} {news_row.TIME}
+					<br style="clear:both" />
+					<!-- IF news_row.FORUM_NAME -->
+					{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong>
+					<br style="clear:both" />
 					<!-- ENDIF -->
-					<!-- END news_row -->
-				</ul>
-				</dd>
+						<span style="float: left; font-size:0.9em;"><a href="{news_row.U_VIEW_COMMENTS}" title="{L_JUMP_FIRST}"><em>{L_COMMENTS}: {news_row.REPLIES}</em></a>
+						<em>&nbsp;&bull;&nbsp;{L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS}</em></span>
+				</dt>
+			</dl>
+			</li>
+<!-- IF news_row.S_LAST_ROW -->
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<!-- ENDIF -->
+<!-- BEGINELSE -->
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="topiclist">
+			<li class="header"><dl><dt>{L_LATEST_NEWS}</dt></dl></li>
+		</ul>
+		<ul class="topiclist topics">
+			<li class="bg3">
+			<dl>
+				<dt style="border-left:0px; width: 99%">				
+					<span class="gensmall" style="font-weight: bold;">{L_NO_NEWS}</span>
+				</dt>
 			</dl>
 			</li>
 		</ul>
 		<span class="corners-bottom"><span></span></span>
 	</div>
 </div>
+<!-- END news_row -->
+<!-- IF NP_PAGINATION or TOTAL_NEWS -->
+<div class="pagination">
+	{TOTAL_NEWS}
+	<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; <span>{NP_PAGINATION}</span><!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+</div>
+<br />
+<!-- ENDIF -->
 <br style="clear:both" />
