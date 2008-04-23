@@ -73,7 +73,7 @@ include($phpbb_root_path . 'includes/message_parser.'.$phpEx);
 // fetch post for news & announce
 function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0)
 {
-	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode;
+	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode, $portal_config;
 	
 	$posts = array();
 
@@ -118,8 +118,6 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$str_where .= "t.forum_id <> $acc_id AND ";
 		}
 	}
-
-$portal_config = obtain_portal_config();
 	
 	switch( $type )
 	{
