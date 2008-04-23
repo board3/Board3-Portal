@@ -161,6 +161,7 @@ if($news < 0)
 			if ($portal_config['portal_number_of_news'] <> 0 && $portal_config['portal_news_archive'])
 			{
 				$template->assign_vars(array(
+					'POSTED_BY_TEXT'	=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
 					'NP_PAGINATION'		=> $pagination,
 					'TOTAL_NEWS'		=> ($total_news == 1) ? $user->lang['VIEW_FORUM_TOPIC'] : sprintf($user->lang['VIEW_FORUM_TOPICS'], $total_news),
 					'NP_PAGE_NUMBER'	=> on_page($total_news, $portal_config['portal_number_of_news'], $start))

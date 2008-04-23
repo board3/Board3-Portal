@@ -15,7 +15,7 @@
 					<!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG}  <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}" title="{L_JUMP_NEWEST}" class="topictitle">{news_row.TITLE}</a>
 					<br style="clear:both" />
 					<!-- IF news_row.PAGINATION --><strong class="pagination"><span>{news_row.PAGINATION}</span></strong><!-- ENDIF -->
-					{L_LAST_POST} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL} {L_POSTED_ON_DATE} {news_row.TIME}
+					{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL} {L_POSTED_ON_DATE} {news_row.TIME}
 					<br style="clear:both" />
 					<!-- IF news_row.FORUM_NAME -->
 					{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong>
