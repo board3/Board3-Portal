@@ -245,11 +245,10 @@ $portal_config = obtain_portal_config();
 
 		if ($number_of_posts <> 0)
 		{
-			$sql .= '
-				LIMIT
-					'.$start.',' . $number_of_posts;
-		} 
-		$result = $db->sql_query($sql);
+			$result = $db->sql_query($sql, $number_of_posts, $start);
+		} else {
+			$result = $db->sql_query($sql);
+		}
 
 	// Instantiate BBCode if need be
 	if ($bbcode_bitfield !== '')
