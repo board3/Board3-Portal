@@ -54,7 +54,7 @@ if ( $portal_config['portal_announcements_archive'] )
 		{
 			$acc_id = (int) $acc_id;
 			$str_where .= "forum_id = $acc_id OR ";
-			if( $type == 'announcements' && $global_f < 1 && $acc_id > 0 )
+			if( $global_f < 1 && $acc_id > 0 )
 			{
 				$global_f = $acc_id;
 			}
