@@ -134,17 +134,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 
 			$topic_type = 't.topic_type = ' . POST_NORMAL;
 			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
-			$user_link = 't.topic_last_poster_id = u.user_id';
-
-			if ( $portal_config['portal_news_show_last'] )
-				{
-				$post_link = 't.topic_last_post_id = p.post_id';
-				}
-			else
-				{
-				$post_link = 't.topic_first_post_id = p.post_id';
-				}			
-			
+			$user_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ;
+			$post_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ;
 			$topic_order = 't.topic_last_post_time DESC';
 
 		break;
@@ -152,17 +143,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 
 			$topic_type = '( t.topic_type <> ' . POST_ANNOUNCE . ' ) AND ( t.topic_type <> ' . POST_GLOBAL . ')';
 			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
-			$user_link = 't.topic_last_poster_id = u.user_id';
-
-			if ( $portal_config['portal_news_show_last'] )
-				{
-				$post_link = 't.topic_last_post_id = p.post_id';
-				}
-			else
-				{
-				$post_link = 't.topic_first_post_id = p.post_id';
-				}
-			
+			$user_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ;
+			$post_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ;
 			$topic_order = 't.topic_last_post_time DESC';
 
 		break;
