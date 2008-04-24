@@ -3,6 +3,7 @@
 		<th>{L_LATEST_NEWS}</th>
 	</tr>
 	<!-- BEGIN news_row -->
+	<!-- IF not news_row.S_NO_TOPICS  -->
 	<tr class="row<!-- IF news_row.S_ROW_COUNT is even -->1<!-- ELSE -->2<!-- ENDIF -->">
 		<td>
 			<!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --> <strong style="font-size:1.1em;">{L_POLL}: </strong><!-- ENDIF -->
@@ -17,12 +18,13 @@
 			<em>&nbsp;&bull;&nbsp;{L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS}</em></span>
 		</td>
 	</tr>
-	<!-- BEGINELSE -->
+	<!-- ELSE -->
 	<tr class="row1">
 		<td>
 			<span class="gensmall"><strong>{L_NO_NEWS}</strong></span>
 		</td>
 	</tr>
+	<!-- ENDIF -->
 	<!-- END news_row -->
 </table>
 <br />

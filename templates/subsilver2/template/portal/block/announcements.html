@@ -5,6 +5,7 @@
 	<tr class="row1">
 		<td>
 		<!-- BEGIN announcements_row -->
+		<!-- IF not announcements_row.S_NO_TOPICS  -->
 			<table class="tablebg" cellspacing="1" width="100%">
 				<tr>
 					<td class="cat">
@@ -38,8 +39,9 @@
 				</tr>
 			</table>
 		<br />
-		<!-- BEGINELSE -->
+		<!-- ELSE -->
 			<span class="gensmall"><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
+		<!-- ENDIF -->
 		<!-- END announcements_row -->
 	<!-- IF AP_PAGINATION or TOTAL_ANNOUNCEMENTS -->
 	<hr />

@@ -5,6 +5,7 @@
 	<tr class="row1">
 		<td>
 		<!-- BEGIN news_row -->
+		<!-- IF not news_row.S_NO_TOPICS  -->
 			<table class="tablebg" cellspacing="1" width="100%">
 				<tr>
 					<td class="cat">
@@ -33,8 +34,9 @@
 				</tr>
 			</table>
 			<br />
-		<!-- BEGINELSE -->
+		<!-- ELSE -->
 			<span class="gensmall"><strong>{L_NO_NEWS}</strong></span>
+		<!-- ENDIF -->
 		<!-- END news_row -->
 	<!-- IF NP_PAGINATION or TOTAL_NEWS -->
 	<hr />

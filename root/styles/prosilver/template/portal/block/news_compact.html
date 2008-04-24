@@ -1,5 +1,6 @@
 <!-- BEGIN news_row -->
-<!-- IF news_row.S_FIRST_ROW or news_row.S_NO_TOPICS -->
+<!-- IF not news_row.S_NO_TOPICS  -->
+<!-- IF news_row.S_FIRST_ROW  -->
 <div class="forabg">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
@@ -32,7 +33,7 @@
 	</div>
 </div>
 <!-- ENDIF -->
-<!-- BEGINELSE -->
+<!-- ELSE  -->
 <div class="forabg">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
@@ -40,7 +41,7 @@
 			<li class="header"><dl><dt>{L_LATEST_NEWS}</dt></dl></li>
 		</ul>
 		<ul class="topiclist topics">
-			<li class="bg3">
+			<li class="bg2">
 			<dl>
 				<dt style="border-left:0px; width: 99%">				
 					<span class="gensmall" style="font-weight: bold;">{L_NO_NEWS}</span>
@@ -51,6 +52,7 @@
 		<span class="corners-bottom"><span></span></span>
 	</div>
 </div>
+<!-- ENDIF -->
 <!-- END news_row -->
 <!-- IF NP_PAGINATION or TOTAL_NEWS -->
 <div class="pagination">
