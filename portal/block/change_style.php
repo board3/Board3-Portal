@@ -55,9 +55,10 @@ $style = request_var('style', 0);
 
 		$db->sql_freeresult($result);
 
-// Assign specific vars
+
+		// Assign specific vars
 $template->assign_vars(array(
-	'S_STYLE_OPTIONS'			=> ($config['override_user_style']) ? '' : style_select($data['style']),
+	'S_STYLE_OPTIONS'			=> ($config['override_user_style']) ? '' : style_select($user->data['user_style']),
 	'S_DISPLAY_CHANGE_STYLE'	=> true,
 ));
 
