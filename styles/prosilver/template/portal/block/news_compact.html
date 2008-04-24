@@ -28,6 +28,16 @@
 			</dl>
 			</li>
 <!-- IF news_row.S_LAST_ROW -->
+<!-- IF NP_PAGINATION or TOTAL_NEWS -->
+<li class="row<!-- IF news_row.S_ROW_COUNT is even --> bg2<!-- ELSE --> bg1<!-- ENDIF -->">
+	<div class="topic-actions">
+		<div class="pagination">
+			{TOTAL_NEWS}
+			<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; <span>{NP_PAGINATION}</span><!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --> &nbsp;
+		</div>
+	</div>
+</li>
+<!-- ENDIF -->
 		</ul>
 		<span class="corners-bottom"><span></span></span>
 	</div>
@@ -54,11 +64,5 @@
 </div>
 <!-- ENDIF -->
 <!-- END news_row -->
-<!-- IF NP_PAGINATION or TOTAL_NEWS -->
-<div class="pagination">
-	{TOTAL_NEWS}
-	<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; <span>{NP_PAGINATION}</span><!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
-</div>
-<br />
-<!-- ENDIF -->
+
 <br style="clear:both" />
