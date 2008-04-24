@@ -34,7 +34,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
       </author>
       <author>
         <realname>Kevin</realname>
-        <email>nospam@breest.net</email>
+        <email></email>
         <username>saint_hh</username>
         <homepage>http://www.board3.de</homepage>
         <contributions />
@@ -53,22 +53,63 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <homepage>http://www.digitalfotografie-foren.de</homepage>
         <contributions />
       </author>
+	     <author>
+        <realname>Christian_N</realname>
+        <email></email>
+        <username></username>
+        <homepage>http://www.phpbb-projekt.de</homepage>
+        <contributions />
+      </author>
     </author-group>
     <mod-version>
       <major>0</major>
-      <minor>2</minor>
-      <revision>1</revision>
+      <minor>3</minor>
+      <revision>0</revision>
     </mod-version>
     <installation>
       <level>easy</level>
       <time>600</time>
       <target-version>
-        <target-primary>3.0.0</target-primary>
+        <target-primary>3.0.1</target-primary>
         <target-major allow="exact">3</target-major>
         <target-minor allow="exact">0</target-minor>
       </target-version>
     </installation>
     <history>
+      <entry>
+        <date>2008-05-04</date>
+        <rev-version>
+          <major>0</major>
+          <minor>3</minor>
+          <revision>0</revision>
+        </rev-version>
+        <changelog lang="en-GB">
+          <change>Tons of bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
+		  <change>Adaptions to phpBB 3.0.1</change>
+          <change>BBCode is now allowed in welcome message</change>
+          <change>Two custom blocks added, which can be filled with BBCode or HTML in the ACP. To use with ads, videos, images, whatever.</change>
+          <change>Complete rework of the News / Announcements. Implemented a achive system and pagnition. You can choose if you want to have the first or the newest post displayed in news.</change>
+		  <change>Full MSSQL support</change>
+		  <change>Forum list on the portal added</change>
+		  <change>Show "Portal page" in "who is online"</change>
+		  <change>Option to disable user permission check for News / Announcements</change>
+		  <change>Style changer added</change>
+		  <change>Attachment block: display attachments from one or more specific forums + attachments permission check added</change>
+        </changelog>
+        <changelog lang="de">
+          <change>Haufenweise bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
+		  <change>An phpBB 3.0.1 angepasst</change>
+          <change>Es kann nun BBCode in der Willkommens Nachricht benutzt werden</change>
+          <change>Zwei anpassbare Blöcke hinzu gefügt, die im ACP mit BBCode oder HTML gefüllt werden könen. Für Werbung, Videos, Bilder, was auch immer.</change>
+          <change>Aktuelle Beiträge und Bekanntmachungen wurden komplett überarbeitet. Es wurde ein Archivsystem und die Anzeige von Seitenzahlen hinzu gefügt. Zusätzlich kann man nun wählen ob man der Ersten oder Neuesten Beitrag bei den aktuellen Beiträgen angezeigt bekommen möchte.</change>
+		  <change>MSSQL Unterstützung</change>
+		  <change>Forum Liste auf dem Portal hinzugefügt</change>
+		  <change>Anzeige "Betrachtet das Portal" in "Wer ist online?"</change>
+		  <change>Option die Berechtigungsprüfung für aktuelle Beiträge / Bekanntmachungen ab zu stellen</change>
+		  <change>"Mein Board-Style" hinzugefügt</change>
+		  <change>Dateianhänge: Anhänge aus einem oder mehreren bestimmten Foren anzeigen lassen + Berechtigungsprüfung hinzugefügt.</change>
+        </changelog>
+      </entry>	
       <entry>
         <date>2008-02-03</date>
         <rev-version>
@@ -218,14 +259,14 @@ Deny from All
         <action type="before-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
       </edit>
       <edit>
-        <find><![CDATA[<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a><!-- BEGIN navlinks --> <strong>&#8249;</strong> <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a><!-- END navlinks --></li>]]></find>
+        <find><![CDATA[<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a> <!-- BEGIN navlinks --> <strong>&#8249;</strong> <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a><!-- END navlinks --></li>]]></find>
         <inline-edit>
           <inline-find><![CDATA[<li class="icon-home">]]></inline-find>
           <inline-action type="after-add"><![CDATA[<a href="{U_PORTAL}">{L_PORTAL}</a> &#187; ]]></inline-action>
         </inline-edit>
       </edit>
       <edit>
-        <find><![CDATA[						<li class="icon-logout"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="l">{L_LOGIN_LOGOUT}</a></li>
+        <find><![CDATA[<li class="icon-logout"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="l">{L_LOGIN_LOGOUT}</a></li>
 				<!-- ENDIF -->
 			</ul>
 
