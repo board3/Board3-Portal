@@ -31,6 +31,16 @@
 			</dl>
 			</li>
 <!-- IF announcements_row.S_LAST_ROW -->
+<!-- IF AP_PAGINATION or TOTAL_ANNOUNCEMENTS -->
+<li class="row<!-- IF announcements_row.S_ROW_COUNT is even --> bg2<!-- ELSE --> bg1<!-- ENDIF -->">
+	<div class="topic-actions">
+		<div class="pagination">
+			{TOTAL_ANNOUNCEMENTS}
+			<!-- IF AP_PAGE_NUMBER --><!-- IF AP_PAGINATION --> &bull; {AP_PAGE_NUMBER} &bull; <span>{AP_PAGINATION}</span><!-- ELSE --> &bull; {AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+		</div>
+	</div>
+</li>
+<!-- ENDIF -->
 		</ul>
 		<span class="corners-bottom"><span></span></span>
 	</div>
@@ -57,11 +67,4 @@
 </div>
 <!-- ENDIF -->
 <!-- END announcements_row -->
-<!-- IF AP_PAGINATION or TOTAL_ANNOUNCEMENTS -->
-<div class="pagination">
-	{TOTAL_ANNOUNCEMENTS}
-	<!-- IF AP_PAGE_NUMBER --><!-- IF AP_PAGINATION --> &bull; {AP_PAGE_NUMBER} &bull; <span>{AP_PAGINATION}</span><!-- ELSE --> &bull; {AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
-</div>
-<br />
-<!-- ENDIF -->
 <br style="clear:both" />
