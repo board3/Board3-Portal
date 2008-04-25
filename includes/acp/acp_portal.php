@@ -28,6 +28,8 @@ class acp_portal
 
 		$action = request_var('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;
+		
+		$this->new_config = $portal_config;
 
 		/**
 		*	Validation types are:
@@ -47,11 +49,10 @@ class acp_portal
 						'portal_leaders'					=> array('lang' => 'PORTAL_LEADERS'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_clock'						=> array('lang' => 'PORTAL_CLOCK'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_link_us'					=> array('lang' => 'PORTAL_LINK_US'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'portal_links'						=> array('lang' => 'PORTAL_LINKS'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_birthdays'					=> array('lang' => 'PORTAL_BIRTHDAYS'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_birthdays_ahead'			=> array('lang' => 'PORTAL_BIRTHDAYS_AHEAD'		, 'validate' => 'int'	, 'type' => 'text:3:3'	, 'explain' => true),
 						'portal_random_member'				=> array('lang' => 'PORTAL_RANDOM_MEMBER'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'portal_forum_index'				=> array('lang' => 'PORTAL_FORUM_INDEX'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
+						'forum_index'				=> array('lang' => 'PORTAL_FORUM_INDEX'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_whois_online'				=> array('lang' => 'PORTAL_WHOIS_ONLINE'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_change_style'				=> array('lang' => 'PORTAL_CHANGE_STYLE'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_main_menu'					=> array('lang' => 'PORTAL_MAIN_MENU'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
@@ -70,15 +71,15 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_NEWS_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_NEWS_SETTINGS',
-						'portal_news'						=> array('lang' => 'PORTAL_NEWS'					,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_news_style'					=> array('lang' => 'PORTAL_NEWS_STYLE'				,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_show_all_news'				=> array('lang' => 'PORTAL_SHOW_ALL_NEWS'			,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_number_of_news'				=> array('lang' => 'PORTAL_NUMBER_OF_NEWS'			,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-						'portal_news_length'				=> array('lang' => 'PORTAL_NEWS_LENGTH'				,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-						'portal_news_forum'					=> array('lang' => 'PORTAL_NEWS_FORUM'				,	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
-						'portal_news_permissions'			=> array('lang' => 'PORTAL_NEWS_PERMISSIONS'		,	'validate' => 'bool',		'type' => 'radio:yes_no',	 'explain' => true),
-						'portal_news_show_last'				=> array('lang' => 'PORTAL_NEWS_SHOW_LAST'			,	'validate' => 'bool',		'type' => 'radio:yes_no',	 'explain' => true),
-						'portal_news_archive'				=> array('lang' => 'PORTAL_NEWS_ARCHIVE'			,	'validate' => 'bool',		'type' => 'radio:yes_no',	 'explain' => true),
+						'portal_news'						=> array('lang' => 'PORTAL_NEWS',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_news_style'					=> array('lang' => 'PORTAL_NEWS_STYLE',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_show_all_news'				=> array('lang' => 'PORTAL_SHOW_ALL_NEWS',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_number_of_news'				=> array('lang' => 'PORTAL_NUMBER_OF_NEWS',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+						'portal_news_length'				=> array('lang' => 'PORTAL_NEWS_LENGTH',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+						'portal_news_forum'					=> array('lang' => 'PORTAL_NEWS_FORUM',	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
+						'portal_news_permissions'			=> array('lang' => 'PORTAL_NEWS_PERMISSIONS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_news_show_last'             => array('lang' => 'PORTAL_NEWS_SHOW_LAST',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_news_archive'               => array('lang' => 'PORTAL_NEWS_ARCHIVE',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 					)
 				);
 			break;
@@ -87,14 +88,14 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
-						'portal_announcements'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS'				,	'validate' => 'bool',  	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_announcements'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS'				,	'validate' => 'bool', 	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_announcements_style'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_STYLE'		 	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_number_of_announcements'	=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 						'portal_announcements_day'			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 						'portal_announcements_length'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 						'portal_global_announcements_forum'	=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'text:10:200',	'explain' => true),
 						'portal_announcements_permissions'	=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_announcements_archive'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE'		,	'validate' => 'bool',		'type' => 'radio:yes_no',	 'explain' => true),
+						'portal_announcements_archive'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 					)
 				);
 			break;
@@ -103,7 +104,7 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_RECENT_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_RECENT_SETTINGS',
-						'portal_recent'			 			=> array('lang' => 'PORTAL_RECENT'				  	 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_recent'			 			=> array('lang' => 'PORTAL_RECENT'				 	 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_max_topics'					=> array('lang' => 'PORTAL_MAX_TOPIC'					 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_recent_title_limit'			=> array('lang' => 'PORTAL_RECENT_TITLE_LIMIT'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_exclude_forums'				=> array('lang' => 'PORTAL_EXCLUDE_FORUM'				,	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
@@ -127,8 +128,8 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_PAYPAL_SETTINGS',
 					'vars'	=> array(
 						'legend2'							=> 'ACP_PORTAL_PAYPAL_SETTINGS',
-						'portal_pay_c_block'				=> array('lang' => 'PORTAL_PAY_C_BLOCK'				  ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_pay_s_block'				=> array('lang' => 'PORTAL_PAY_S_BLOCK'				  ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_pay_c_block'				=> array('lang' => 'PORTAL_PAY_C_BLOCK'				 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_pay_s_block'				=> array('lang' => 'PORTAL_PAY_S_BLOCK'				 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_pay_acc'					=> array('lang' => 'PORTAL_PAY_ACC'						,	'validate' => 'string',		'type' => 'text:25:100',	 'explain' => true),
 					)
 				);
@@ -138,7 +139,7 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS',
-						'portal_attachments'				=> array('lang' => 'PORTAL_ATTACHMENTS'				  ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_attachments'				=> array('lang' => 'PORTAL_ATTACHMENTS'				 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_attachments_number'	=> array('lang' => 'PORTAL_ATTACHMENTS_NUMBER'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_attachments_forum_ids'	=> array('lang' => 'PORTAL_ATTACHMENTS_FORUM_IDS',	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
 					)
@@ -149,7 +150,7 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_MEMBERS_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_MEMBERS_SETTINGS',
-						'portal_latest_members'				=> array('lang' => 'PORTAL_LATEST_MEMBERS'			  ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_latest_members'				=> array('lang' => 'PORTAL_LATEST_MEMBERS'			 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_max_last_member'			=> array('lang' => 'PORTAL_MAX_LAST_MEMBER'			 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 					)
 				);
@@ -182,7 +183,7 @@ class acp_portal
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_MOST_POSTER_SETTINGS',
 						'portal_top_posters'				=> array('lang' => 'PORTAL_TOP_POSTERS'					,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_max_most_poster'			=> array('lang' => 'PORTAL_MAX_MOST_POSTER'			  ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+						'portal_max_most_poster'			=> array('lang' => 'PORTAL_MAX_MOST_POSTER'			 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 					)
 				);
 			break;
@@ -205,28 +206,98 @@ class acp_portal
 					'vars'	=> array(
 						'legend1'								=> 'ACP_PORTAL_CUSTOM_SMALL_SETTINGS',
 						'portal_custom_small'					=> array('lang' => 'PORTAL_CUSTOM_SMALL'						,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_custom_small_headline'		=> array('lang' => 'PORTAL_CUSTOM_SMALL_HEADLINE'			,	'validate' => 'string',  'type' => 'text:40:200',	  'explain' => true),
+						'portal_custom_small_headline'		=> array('lang' => 'PORTAL_CUSTOM_SMALL_HEADLINE'			,	'validate' => 'string', 'type' => 'text:40:200',	 'explain' => true),
 						'portal_custom_small_bbcode'		=> array('lang' => 'PORTAL_CUSTOM_SMALL_BBCODE'				,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_custom_code_small'			=> array('lang' => 'PORTAL_CUSTOM_CODE_SMALL'				,	'type' => 'textarea:6:6',	 'explain' => true),
 						'legend2'								=> 'ACP_PORTAL_CUSTOM_CENTER_SETTINGS',
 						'portal_custom_center'				=> array('lang' => 'PORTAL_CUSTOM_CENTER'						,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_custom_center_headline'		=> array('lang' => 'PORTAL_CUSTOM_CENTER_HEADLINE'			,	'validate' => 'string',  'type' => 'text:40:200',	  'explain' => true),
+						'portal_custom_center_headline'		=> array('lang' => 'PORTAL_CUSTOM_CENTER_HEADLINE'			,	'validate' => 'string', 'type' => 'text:40:200',	 'explain' => true),
 						'portal_custom_center_bbcode'		=> array('lang' => 'PORTAL_CUSTOM_CENTER_BBCODE'			,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_custom_code_center'			=> array('lang' => 'PORTAL_CUSTOM_CODE_CENTER'				,	'type' => 'textarea:6:6',	 'explain' => true),
 					 )
 				);
 			break;
 
-		  case 'minicalendar':
+			case 'minicalendar':
 				$display_vars = array(
 					'title'	=> 'ACP_PORTAL_MINICALENDAR_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_MINICALENDAR_SETTINGS',
 						'portal_minicalendar'				=> array('lang' => 'PORTAL_MINICALENDAR'					 ,	'validate' => 'bool',	 'type' => 'radio:yes_no',	'explain' => true),
-						'portal_minicalendar_today_color'	=> array('lang' => 'PORTAL_MINICALENDAR_TODAY_COLOR'	 ,	'validate' => 'string',  'type' => 'text:10:10',	  'explain' => true),
-						'portal_minicalendar_day_link_color'	=> array('lang' => 'PORTAL_MINICALENDAR_DAY_LINK_COLOR' ,	'validate' => 'string',  'type' => 'text:10:10',	  'explain' => true),
+						'portal_minicalendar_today_color'	=> array('lang' => 'PORTAL_MINICALENDAR_TODAY_COLOR'	 ,	'validate' => 'string', 'type' => 'text:10:10',	 'explain' => true),
+						'portal_minicalendar_day_link_color'	=> array('lang' => 'PORTAL_MINICALENDAR_DAY_LINK_COLOR' ,	'validate' => 'string', 'type' => 'text:10:10',	 'explain' => true),
 					)
 				);
+			break;
+			case 'links':
+				$display_vars = array(
+					'title'	=> 'ACP_PORTAL_LINKS_SETTINGS',
+					'vars'	=> array(
+						'legend1'							=> 'ACP_PORTAL_LINKS_SETTINGS',
+						'portal_links'						=> array('lang' => 'PORTAL_LINKS', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
+					)
+				);
+				// Links require preprocessing
+				
+				$links = ( strlen($portal_config['portal_links_array']) ) ? utf_unserialize($portal_config['portal_links_array']) : array() ;
+				$this->link_num = count( $links );
+				
+				$lid = request_var('link', 0);
+
+				switch( $action )
+				{
+					case 'delete':
+						if($lid > 0)
+						{
+							if($lid < $this->link_num)
+							{
+								for($i = $lid+1; $i <= $this->link_num; ++$i)
+								{
+									$links[$i-1] = $links[$i];
+								}
+							}
+							unset($links[$this->link_num]);
+							set_portal_config('portal_links_array', serialize($links));
+						}
+					break;
+					case 'add':
+						$this->link_num = $this->link_num + 1;
+						$links[$this->link_num] = array( 'url' => '', 'text' => '' );
+						set_portal_config('portal_links_array', serialize($links));
+					break;
+					case 'moveup':
+						if($lid > 1 && isset($links[$lid]))
+						{
+							$temp = $links[$lid];
+							$links[$lid] = $links[$lid-1];
+							$links[$lid-1] = $temp;
+							unset($temp);
+							set_portal_config('portal_links_array', serialize($links));
+						}
+					break;
+					case 'movedown':
+						if($lid > 0 && $lid < $this->link_num && isset($links[$lid]))
+						{
+							$temp = $links[$lid];
+							$links[$lid] = $links[$lid+1];
+							$links[$lid+1] = $temp;
+							unset($temp);
+							set_portal_config('portal_links_array', serialize($links));
+						}
+					break;
+				}
+				
+				ksort( $links );
+				reset( $links );
+				
+				foreach($links as $link_id => $link_data)
+				{
+					$key = 'portal_link_'.$link_id;
+					$display_vars['vars'][$key] = array('lang' => 'PORTAL_LINK_TEXT', 'type' => 'custom', 'method' => 'createLink', 'explain' => true);
+					$this->new_config[$key] = array('key' => $link_id, 'text' => $link_data['text'], 'url' => $link_data['url']);
+				}
+				
+				$display_vars['vars']['portal_links_add'] = array('lang' => 'PORTAL_ADD_LINK_TEXT', 'type' => 'custom', 'method' => 'addLink', 'explain' => true);
 			break;
 			default:
 				trigger_error('NO_MODE', E_USER_ERROR);
@@ -238,23 +309,41 @@ class acp_portal
 			$user->add_lang($display_vars['lang']);
 		}
 
-		$this->new_config = $portal_config;
 		$cfg_array = (isset($_REQUEST['config'])) ? utf8_normalize_nfc(request_var('config', array('' => ''), true)) : $this->new_config;
 		$error = array();
-
+		
 		// We validate the complete config if whished
 		validate_config_vars($display_vars['vars'], $cfg_array, $error);
-
+		
 		// Do not write values if there is an error
 		if (sizeof($error))
 		{
 			$submit = false;
 		}
+		if ($submit)
+		{
+			switch( $mode )
+			{
+				case 'links':
+					$links = array();
+
+					for($i = 1; $i <= $this->link_num; ++$i)
+					{
+						$links[$i] = array(
+							'url' => $cfg_array['portal_link_'.$i.'_url'],
+							'text' => $cfg_array['portal_link_'.$i.'_text'],
+						);
+					}					
+					$display_vars['vars']['portal_links_array'] = '';
+					$cfg_array['portal_links_array'] = serialize($links);
+				break;
+			}
+		}
 
 		// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
 		foreach ($display_vars['vars'] as $config_name => $null)
 		{
-			if (!isset($cfg_array[$config_name]) || strpos($config_name, 'legend') !== false)
+			if (!isset($cfg_array[$config_name]) || strpos($config_name, 'legend') || ($type == 'links' && strpos($config_name, 'portal_link_') ) !== false)
 			{
 				continue;
 			}
@@ -331,6 +420,32 @@ class acp_portal
 			unset($display_vars['vars'][$config_key]);
 		}
 	}
+	
+	function createLink($value, $key)
+	{
+		global $user, $phpEx;
+		$icon_up		=	'<a href="'.append_sid("{$phpbb_root_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=moveup&amp;link='.$value['key']).'"><img src="' . $phpbb_admin_path . 'images/icon_up.gif" alt="' . $user->lang['MOVE_UP'] . '" title="' . $user->lang['MOVE_UP'] . '" /></a>';
+		$icon_up_d		=	'<img src="' . $phpbb_admin_path . 'images/icon_up_disabled.gif" alt="' . $user->lang['MOVE_UP'] . '" title="' . $user->lang['MOVE_UP'] . '" />';
+		$icon_down		=	'<a href="'.append_sid("{$phpbb_root_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=movedown&amp;link='.$value['key']).'"><img src="' . $phpbb_admin_path . 'images/icon_down.gif" alt="' . $user->lang['MOVE_DOWN'] . '" title="' . $user->lang['MOVE_DOWN'] . '" /></a>';
+		$icon_down_d	=	'<img src="' . $phpbb_admin_path . 'images/icon_down_disabled.gif" alt="' . $user->lang['MOVE_DOWN'] . '" title="' . $user->lang['MOVE_DOWN'] . '" />';
+		$icon_del		=	'<a href="'.append_sid("{$phpbb_root_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=delete&amp;link='.$value['key']).'"><img src="' . $phpbb_admin_path . 'images/icon_delete.gif" alt="' . $user->lang['DELETE'] . '" title="' . $user->lang['DELETE'] . '" /></a>';
+
+		return '<input id="' . $key . '_text" type="text" size="40" maxlength="255" name="config[' . $key . '_text]" value="' . $value['text'] . '" /> <input id="' . $key . '_url" type="text" size="40" maxlength="255" name="config[' . $key . '_url]" value="' . $value['url'] . '" /> ' . $icon_del . ' ' . ( ($value['key'] < $this->link_num) ? $icon_down : $icon_down_d ) . ' ' . ( ($value['key'] > 1) ? $icon_up : $icon_up_d );
+	}
+	
+	function addLink($value, $key)
+	{
+		global $user, $phpEx;
+		
+		$link = append_sid("{$phpbb_root_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=add');
+		
+		return '<a href="'.$link.'">'.$user->lang['PORTAL_LINK_ADD'].'</a>';
+	}
+}
+
+function utf_unserialize($serial_str) {
+    $out = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str );
+    return unserialize($out);   
 }
 
 ?>

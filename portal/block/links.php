@@ -20,6 +20,19 @@ if (!defined('IN_PORTAL'))
    exit;
 }
 
+$links = ( strlen($portal_config['portal_links_array']) > 0 ) ? unserialize($portal_config['portal_links_array']) : array();
+
+ksort( $links );
+reset( $links );
+
+foreach( $links as $link_id => $link_data )
+{
+	$template->assign_block_vars('link', array(
+		'URL' => $link_data['url'],
+		'TEXT' => $link_data['text'],
+	));
+}
+
 $template->assign_vars(array(
 	'S_DISPLAY_LINKS' => true,
 ));
