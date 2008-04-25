@@ -431,98 +431,99 @@ function ap_validate($str) {
 }
 
 /**
-* Pagination routine, generates page number sequence
-* tpl_prefix is for using different pagination blocks at one page
+* Pagination routine, generates archive number sequence
 */
-function generate_portal_pagination($base_url, $num_items, $per_page, $start_item, $type, $add_prevnext_text = false, $tpl_prefix = '')
-{
-	global $template, $user;
+    function generate_portal_pagination($base_url, $num_items, $per_page, $start_item, $type, $add_prevnext_text = false, $tpl_prefix = '')
+    {
+       global $template, $user;
 
-	switch( $type )
-	{
-		case "announcements":
-			$pagination_type = 'ap';
-		break;
-		case "news":
-		case "news_all":
-			$pagination_type = 'np';
-		break;
-	}
-	
-	// Make sure $per_page is a valid value
-	$per_page = ($per_page <= 0) ? 1 : $per_page;
+       switch( $type )
+       {
+          case "announcements":
+             $pagination_type = 'ap';
+             $anker = '#a0';
+          break;
+          case "news":
+          case "news_all":
+             $pagination_type = 'np';
+             $anker = '#n0';
+          break;
+       }
+       
+       // Make sure $per_page is a valid value
+       $per_page = ($per_page <= 0) ? 1 : $per_page;
 
-	$seperator = '<span class="page-sep">' . $user->lang['COMMA_SEPARATOR'] . '</span>';
-	$total_pages = ceil($num_items / $per_page);
+       $seperator = '<span class="page-sep">' . $user->lang['COMMA_SEPARATOR'] . '</span>';
+       $total_pages = ceil($num_items / $per_page);
 
-	if ($total_pages == 1 || !$num_items)
-	{
-		return false;
-	}
+       if ($total_pages == 1 || !$num_items)
+       {
+          return false;
+       }
 
-	$on_page = floor($start_item / $per_page) + 1;
-	$url_delim = (strpos($base_url, '?') === false) ? '?' : '&amp;';
+       $on_page = floor($start_item / $per_page) + 1;
+       $url_delim = (strpos($base_url, '?') === false) ? '?' : '&amp;';
 
-	$page_string = ($on_page == 1) ? '<strong>1</strong>' : '<a href="' . $base_url . '">1</a>';
+       $page_string = ($on_page == 1) ? '<strong>1</strong>' : '<a href="' . $base_url . $anker .'">1</a>';
 
-	if ($total_pages > 5)
-	{
-		$start_cnt = min(max(1, $on_page - 4), $total_pages - 5);
-		$end_cnt = max(min($total_pages, $on_page + 4), 6);
+       if ($total_pages > 5)
+       {
+          $start_cnt = min(max(1, $on_page - 4), $total_pages - 5);
+          $end_cnt = max(min($total_pages, $on_page + 4), 6);
 
-		$page_string .= ($start_cnt > 1) ? ' ... ' : $seperator;
+          $page_string .= ($start_cnt > 1) ? ' ... ' : $seperator;
 
-		for ($i = $start_cnt + 1; $i < $end_cnt; $i++)
-		{
-			$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . '">' . $i . '</a>';
-			if ($i < $end_cnt - 1)
-			{
-				$page_string .= $seperator;
-			}
-		}
+          for ($i = $start_cnt + 1; $i < $end_cnt; $i++)
+          {
+             $page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . $anker . '">' . $i . '</a>';
+             if ($i < $end_cnt - 1)
+             {
+                $page_string .= $seperator;
+             }
+          }
 
-		$page_string .= ($end_cnt < $total_pages) ? ' ... ' : $seperator;
-	}
-	else
-	{
-		$page_string .= $seperator;
+          $page_string .= ($end_cnt < $total_pages) ? ' ... ' : $seperator;
+       }
+       else
+       {
+          $page_string .= $seperator;
 
-		for ($i = 2; $i < $total_pages; $i++)
-		{
-			$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . '">' . $i . '</a>';
-			if ($i < $total_pages)
-			{
-				$page_string .= $seperator;
-			}
-		}
-	}
+          for ($i = 2; $i < $total_pages; $i++)
+          {
+             $page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . $anker . '">' . $i . '</a>';
+             if ($i < $total_pages)
+             {
+                $page_string .= $seperator;
+             }
+          }
+       }
 
-	$page_string .= ($on_page == $total_pages) ? '<strong>' . $total_pages . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($total_pages - 1) * $per_page) . '">' . $total_pages . '</a>';
+       $page_string .= ($on_page == $total_pages) ? '<strong>' . $total_pages . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($total_pages - 1) * $per_page) . $anker . '">' . $total_pages . '</a>';
 
-	if ($add_prevnext_text)
-	{
-		if ($on_page != 1)
-		{
-			$page_string = '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($on_page - 2) * $per_page) . '">' . $user->lang['PREVIOUS'] . '</a>&nbsp;&nbsp;' . $page_string;
-		}
+       if ($add_prevnext_text)
+       {
+          if ($on_page != 1)
+          {
+             $page_string = '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($on_page - 2) * $per_page) . $anker . '">' . $user->lang['PREVIOUS'] . '</a>&nbsp;&nbsp;' . $page_string;
+          }
 
-		if ($on_page != $total_pages)
-		{
-			$page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . ($on_page * $per_page) . '">' . $user->lang['NEXT'] . '</a>';
-		}
-	}
+          if ($on_page != $total_pages)
+          {
+             $page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . ($on_page * $per_page) . $anker . '">' . $user->lang['NEXT'] . '</a>';
+          }
+       }
 
-	$template->assign_vars(array(
-		$tpl_prefix . 'BASE_URL'		=> $base_url,
-		'A_' . $tpl_prefix . 'BASE_URL'	=> addslashes($base_url),
-		$tpl_prefix . 'PER_PAGE'		=> $per_page,
+       $template->assign_vars(array(
+          $tpl_prefix . 'BASE_URL'      => $base_url,
+          'A_' . $tpl_prefix . 'BASE_URL'   => addslashes($base_url),
+          $tpl_prefix . 'PER_PAGE'      => $per_page,
 
-		$tpl_prefix . 'PREVIOUS_PAGE'	=> ($on_page == 1) ? '' : $base_url . "{$url_delim}" . $pagination_type . '=' . (($on_page - 2) * $per_page),
-		$tpl_prefix . 'NEXT_PAGE'		=> ($on_page == $total_pages) ? '' : $base_url . "{$url_delim}" . $pagination_type . '=' . ($on_page * $per_page),
-		$tpl_prefix . 'TOTAL_PAGES'		=> $total_pages,
-	));
+          $tpl_prefix . 'PREVIOUS_PAGE'   => ($on_page == 1) ? '' : $base_url . "{$url_delim}" . $pagination_type . '=' . (($on_page - 2) * $per_page) . $anker,
+          $tpl_prefix . 'NEXT_PAGE'      => ($on_page == $total_pages) ? '' : $base_url . "{$url_delim}" . $pagination_type . '=' . ($on_page * $per_page) . $anker,
+          $tpl_prefix . 'TOTAL_PAGES'      => $total_pages,
+       ));
 
-	return $page_string;
-}
+       return $page_string;
+    }
 
 ?>
