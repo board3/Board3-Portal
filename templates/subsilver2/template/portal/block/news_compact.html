@@ -3,7 +3,13 @@
 		<th>{L_LATEST_NEWS}</th>
 	</tr>
 	<!-- BEGIN news_row -->
-	<!-- IF not news_row.S_NO_TOPICS  -->
+	<!-- IF news_row.S_NO_TOPICS  -->
+	<tr class="row1">
+		<td>
+			<span class="gensmall"><strong>{L_NO_NEWS}</strong></span>
+		</td>
+	</tr>
+	<!-- ELSE -->
 	<tr class="row<!-- IF news_row.S_ROW_COUNT is even -->1<!-- ELSE -->2<!-- ENDIF -->">
 		<td>
 			<!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --> <strong style="font-size:1.1em;">{L_POLL}: </strong><!-- ENDIF -->
@@ -18,22 +24,15 @@
 			<em>&nbsp;&bull;&nbsp;{L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS}</em></span>
 		</td>
 	</tr>
-	<!-- ELSE -->
-	<tr class="row1">
-		<td>
-			<span class="gensmall"><strong>{L_NO_NEWS}</strong></span>
-		</td>
+	<!-- ENDIF -->
+	<!-- IF news_row.S_LAST_ROW -->
+	<!-- IF NP_PAGINATION or TOTAL_NEWS -->
+	<tr class="row<!-- IF news_row.S_ROW_COUNT is even -->2<!-- ELSE -->1<!-- ENDIF -->">
+		<td class="gensmall" valign="middle" align="right" nowrap="nowrap">{TOTAL_NEWS}
+		<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; <span>{NP_PAGINATION}</span><!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
 	</tr>
+	<!-- ENDIF -->
 	<!-- ENDIF -->
 	<!-- END news_row -->
 </table>
 <br />
-<!-- IF NP_PAGINATION or TOTAL_NEWS -->
-<table width="100%" cellspacing="0">
-<tr>
-	<td class="gensmall" valign="middle" align="right" nowrap="nowrap">{TOTAL_NEWS}
-	<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; <span>{NP_PAGINATION}</span><!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
-</tr>
-</table>
-<br />
-<!-- ENDIF -->

@@ -3,7 +3,13 @@
 		<th>{L_LATEST_ANNOUNCEMENTS}</th>
 	</tr>
 	<!-- BEGIN announcements_row -->
-	<!-- IF not announcements_row.S_NO_TOPICS  -->
+	<!-- IF announcements_row.S_NO_TOPICS  -->
+	<tr class="row1">
+		<td>
+			<span class="gensmall"><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
+		</td>
+	</tr>
+	<!-- ELSE -->
 	<tr class="row<!-- IF announcements_row.S_ROW_COUNT is even -->1<!-- ELSE -->2<!-- ENDIF -->">
 		<td>
 
@@ -23,22 +29,15 @@
 			<em>&nbsp;&bull;&nbsp;{L_TOPIC_VIEWS}: {announcements_row.TOPIC_VIEWS}</em></span>
 		</td>
 	</tr>
-	<!-- ELSE -->
-	<tr class="row1">
-		<td>
-			<span class="gensmall"><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
-		</td>
+	<!-- ENDIF -->
+	<!-- IF announcements_row.S_LAST_ROW -->
+	<!-- IF AP_PAGINATION or TOTAL_ANNOUNCEMENTS -->
+	<tr class="row<!-- IF announcements_row.S_ROW_COUNT is even -->2<!-- ELSE -->1<!-- ENDIF -->">
+		<td class="gensmall" valign="middle" align="right" nowrap="nowrap">{TOTAL_ANNOUNCEMENTS}
+		<!-- IF AP_PAGE_NUMBER --><!-- IF AP_PAGINATION --> &bull; {AP_PAGE_NUMBER} &bull; <span>{AP_PAGINATION}</span><!-- ELSE --> &bull; {AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
 	</tr>
+	<!-- ENDIF -->
 	<!-- ENDIF -->
 	<!-- END announcements_row -->
 </table>
 <br />
-<!-- IF AP_PAGINATION or TOTAL_ANNOUNCEMENTS -->
-<table width="100%" cellspacing="0">
-<tr>
-	<td class="gensmall" valign="middle" align="right" nowrap="nowrap">{TOTAL_ANNOUNCEMENTS}
-	<!-- IF AP_PAGE_NUMBER --><!-- IF AP_PAGINATION --> &bull; {AP_PAGE_NUMBER} &bull; <span>{AP_PAGINATION}</span><!-- ELSE --> &bull; {AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
-</tr>
-</table>
-<br />
-<!-- ENDIF -->
