@@ -36,6 +36,7 @@ class acp_portal_info
 				'poster'		=> array('title' => 'ACP_PORTAL_MOST_POSTER_INFO', 'auth' => 'acl_a_board', 'cat' => array('ACP_BOARD_CONFIGURATION')),
 				'customblock'	=> array('title' => 'ACP_PORTAL_CUSTOM_INFO', 'auth' => 'acl_a_board', 'cat' => array('ACP_BOARD_CONFIGURATION')),
 				'minicalendar'	=> array('title' => 'ACP_PORTAL_MINICALENDAR_INFO', 'auth' => 'acl_a_board', 'cat' => array('ACP_BOARD_CONFIGURATION')),
+				'links'			=> array('title' => 'ACP_PORTAL_LINKS_INFO', 'auth' => 'acl_a_board', 'cat' => array('ACP_BOARD_CONFIGURATION')),
 			),
 		);
 	}

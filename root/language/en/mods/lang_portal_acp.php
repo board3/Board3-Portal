@@ -53,8 +53,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_CLOCK_EXPLAIN'					=> 'Display this block on portal.',
 	'PORTAL_LINK_US'						=> 'Link us block',
 	'PORTAL_LINK_US_EXPLAIN'				=> 'Display this block on portal.',
-	'PORTAL_LINKS'							=> 'Links block',
-	'PORTAL_LINKS_EXPLAIN'					=> 'Display this block on portal.',
 	'PORTAL_BIRTHDAYS'						=> 'Birthday block',
 	'PORTAL_BIRTHDAYS_EXPLAIN'				=> 'Display this block on portal.',
 	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Birthdays ahead days',
@@ -238,6 +236,18 @@ $lang = array_merge($lang, array(
 	'PORTAL_WELCOME_INTRO'					=> 'Welcome message',
 	'PORTAL_WELCOME_GUEST'					=> 'Welcome message only for guests?',
 	'PORTAL_WELCOME_INTRO_EXPLAIN'			=> 'Change the welcome message (BBCode is allowed).',
+	
+	// links
+	'ACP_PORTAL_LINKS_INFO' 			=> 'Links',
+	'ACP_PORTAL_LINKS_SETTINGS' 		=> 'Link Settings',
+	'ACP_PORTAL_LINKS_SETTINGS_EXPLAIN' => 'Set up the link block links.',
+	'PORTAL_LINKS'						=> 'Links block',
+	'PORTAL_LINKS_EXPLAIN'				=> 'Display this block on portal.',
+	'PORTAL_LINK_TEXT'					=> 'Text/URL',
+	'PORTAL_LINK_TEXT_EXPLAIN'			=> 'The text followed by the url for the link. Use the buttons to delete and reorder the links.',
+	'PORTAL_ADD_LINK_TEXT'				=> 'Add link',
+	'PORTAL_ADD_LINK_TEXT_EXPLAIN'		=> 'Click the text to create a new link.',
+	'PORTAL_LINK_ADD'					=> '<strong>Add</strong>',
 
 	// custom
 	'ACP_PORTAL_CUSTOM_INFO'								=> 'Custom block',

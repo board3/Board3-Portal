@@ -227,10 +227,7 @@ if ($portal_config['portal_clock'])
 
 if ($portal_config['portal_links'])
 {
-//	include($phpbb_root_path . 'portal/block/links.'.$phpEx);
-	$template->assign_vars(array(
-		'S_DISPLAY_LINKS' => true,
-	));
+	include($phpbb_root_path . 'portal/block/links.'.$phpEx);
 }
 
 

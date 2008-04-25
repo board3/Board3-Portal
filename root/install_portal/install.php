@@ -822,7 +822,18 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 						'module_mode'		=> 'customblock',
 						'module_auth'		=> ''
 					);
-					$modules->update_module_data($customblock);					
+					$modules->update_module_data($customblock);
+					$linkblock = array(
+						'module_basename'   => 'portal',
+						'module_enabled'   => 1,
+						'module_display'   => 1,
+						'parent_id'         => $portal['module_id'],
+						'module_class'      => 'acp',
+						'module_langname'   => 'ACP_PORTAL_LINKS_INFO',
+						'module_mode'      => 'links',
+						'module_auth'      => ''
+					);
+					$modules->update_module_data($linkblock);					
 		
 					// clear cache and log what we did
 					$cache->purge();
@@ -873,7 +884,18 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 						'module_mode'      => 'customblock',
 						'module_auth'      => ''
 					);
-					$modules->update_module_data($customblock);   
+					$modules->update_module_data($customblock);
+					$linkblock = array(
+						'module_basename'   => 'portal',
+						'module_enabled'   => 1,
+						'module_display'   => 1,
+						'parent_id'         => $portal['module_id'],
+						'module_class'      => 'acp',
+						'module_langname'   => 'ACP_PORTAL_LINKS_INFO',
+						'module_mode'      => 'links',
+						'module_auth'      => ''
+					);
+					$modules->update_module_data($linkblock); 
 
 					$updated = true;
 				}
