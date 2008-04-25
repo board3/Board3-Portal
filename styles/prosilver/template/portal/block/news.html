@@ -6,7 +6,13 @@
 		</ul>
 			<div class="postbody" style="width: 100%">
 				<!-- BEGIN news_row -->
-				<!-- IF not news_row.S_NO_TOPICS  -->
+				<!-- IF news_row.S_NO_TOPICS  -->				
+				<div class="post bg2">
+					<div class="inner"><span class="corners-top"><span></span></span>
+						<span style="text-align: center;"><strong>{L_NO_NEWS}</strong></span>
+					<span class="corners-bottom"><span></span></span></div>
+				</div>
+				<!-- ELSE -->
 				<div class="post <!-- IF news_row.S_ROW_COUNT is odd -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
 					<div class="inner"><span class="corners-top"><span></span></span>
 						<h4 class="first"><a name="n{news_row.N_ID}"></a><!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}"><strong>{news_row.TITLE}</strong></a></h4>
@@ -27,6 +33,7 @@
 						<div class="back2top"><a href="#wrap" class="top" title="{L_BACK_TO_TOP}">{L_BACK_TO_TOP}</a></div>
 					<!-- IF news_row.S_NOT_LAST --><br style="clear:both" /><!-- ENDIF -->
 					<!-- IF news_row.S_LAST_ROW -->
+					<!-- IF not news_row.S_NO_TOPICS  -->	
 					<!-- IF NP_PAGINATION or TOTAL_NEWS -->
 						<hr class="dashed" />
 						<div class="pagination">
@@ -35,12 +42,7 @@
 						</div>
 					<!-- ENDIF -->
 					<!-- ENDIF -->
-					<span class="corners-bottom"><span></span></span></div>
-				</div>
-				<!-- ELSE -->
-				<div class="post bg2">
-					<div class="inner"><span class="corners-top"><span></span></span>
-						<span style="text-align: center;"><strong>{L_NO_NEWS}</strong></span>
+					<!-- ENDIF -->
 					<span class="corners-bottom"><span></span></span></div>
 				</div>
 				<!-- ENDIF -->

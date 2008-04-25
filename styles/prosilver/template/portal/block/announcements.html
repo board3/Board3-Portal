@@ -6,7 +6,13 @@
 		</ul>
 			<div class="postbody" style="width: 100%">
 				<!-- BEGIN announcements_row -->
-				<!-- IF not announcements_row.S_NO_TOPICS  -->
+				<!-- IF announcements_row.S_NO_TOPICS  -->
+				<div class="post bg2">
+					<div class="inner"><span class="corners-top"><span></span></span>
+						<span style="text-align: center;"><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
+					<span class="corners-bottom"><span></span></span></div>
+				</div>
+				<!-- ELSE -->
 				<div class="post <!-- IF announcements_row.S_ROW_COUNT is odd -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
 					<div class="inner"><span class="corners-top"><span></span></span>
 						<h4 class="first"><a name="a{announcements_row.A_ID}"></a><!-- IF announcements_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {announcements_row.ATTACH_ICON_IMG} <!-- IF announcements_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --><a href="{announcements_row.U_VIEW_COMMENTS}"><strong>{announcements_row.TITLE}</strong></a></h4>
@@ -41,12 +47,6 @@
 						</div>
 					<!-- ENDIF -->
 					<!-- ENDIF -->
-					<span class="corners-bottom"><span></span></span></div>
-				</div>
-				<!-- ELSE -->
-				<div class="post bg2">
-					<div class="inner"><span class="corners-top"><span></span></span>
-						<span style="text-align: center;"><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
 					<span class="corners-bottom"><span></span></span></div>
 				</div>
 				<!-- ENDIF -->
