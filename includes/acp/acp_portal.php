@@ -298,6 +298,7 @@ class acp_portal
 				}
 				
 				$display_vars['vars']['portal_link_add'] = array('lang' => 'PORTAL_ADD_LINK_TEXT', 'type' => 'custom', 'method' => 'addLink', 'explain' => true);
+				$this->new_config['portal_link_add'] = '';
 			break;
 			default:
 				trigger_error('NO_MODE', E_USER_ERROR);
