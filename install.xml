@@ -54,9 +54,9 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <contributions />
       </author>
 	     <author>
-        <realname>Christian_N</realname>
+        <realname>Christian</realname>
         <email></email>
-        <username></username>
+        <username>Christian_N</username>
         <homepage>http://www.phpbb-projekt.de</homepage>
         <contributions />
       </author>
@@ -86,6 +86,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <changelog lang="en-GB">
           <change>Tons of bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
 		  <change>Adaptions to phpBB 3.0.1</change>
+		  <change>The link block can be edited in the ACP: add, delete links and order position</change>
           <change>BBCode is now allowed in welcome message</change>
           <change>Two custom blocks added, which can be filled with BBCode or HTML in the ACP. To use with ads, videos, images, whatever.</change>
           <change>Complete rework of the News / Announcements. Implemented a achive system and pagnition. You can choose if you want to have the first or the newest post displayed in news.</change>
@@ -99,6 +100,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <changelog lang="de">
           <change>Haufenweise bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
 		  <change>An phpBB 3.0.1 angepasst</change>
+		  <change>Der Link Block kann nun über das ACP verwaltet werden: erstellen, löschen und positionieren von Links</change>
           <change>Es kann nun BBCode in der Willkommens Nachricht benutzt werden</change>
           <change>Zwei anpassbare Blöcke hinzu gefügt, die im ACP mit BBCode oder HTML gefüllt werden könen. Für Werbung, Videos, Bilder, was auch immer.</change>
           <change>Aktuelle Beiträge und Bekanntmachungen wurden komplett überarbeitet. Es wurde ein Archivsystem und die Anzeige von Seitenzahlen hinzu gefügt. Zusätzlich kann man nun wählen ob man der Ersten oder Neuesten Beitrag bei den aktuellen Beiträgen angezeigt bekommen möchte.</change>

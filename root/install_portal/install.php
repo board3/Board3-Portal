@@ -1,6 +1,6 @@
 <?php
 
-$current_version = '0.2.3';
+$current_version = '0.3.0';
 
 // If only checking version, exit.
 if( defined('IN_PHPBB') )
@@ -29,7 +29,7 @@ $page_title = 'Board3portal v' . $current_version;
 
 if( $user->data['is_registered'] && $auth->acl_get('a_board') ) 	 
 {
-	$version_array = array('0.1.0', 'p3p1.2.2', 'p3p1.2.1', 'p3p1.2.0', 'p3p1.1.0b');
+	$version_array = array('0.1.0', '0.2.0', '0.2.1', 'p3p1.2.2', 'p3p1.2.1', 'p3p1.2.0', 'p3p1.1.0b');
 	
 	$old_version = 0;
 	$phpbb3portal = false;
@@ -475,6 +475,17 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 					'module_auth'		=> ''
 				);
 				$modules->update_module_data($customblock);
+				$linkblock = array(
+					'module_basename'	=> 'portal',
+					'module_enabled'	=> 1,
+					'module_display'	=> 1,
+					'parent_id'			=> $portal['module_id'],
+					'module_class'		=> 'acp',
+					'module_langname'	=> 'ACP_PORTAL_LINKS_INFO',
+					'module_mode'		=> 'links',
+					'module_auth'		=> ''
+				);
+				$modules->update_module_data($linkblock);
 				// clear cache and log what we did
 				$cache->purge();
 				add_log('admin', $page_title . ' installed');
@@ -615,7 +626,8 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 							OR module_langname = 'ACP_PORTAL_BOTS_INFO'
 							OR module_langname = 'ACP_PORTAL_MOST_POSTER_INFO'
 							OR module_langname = 'ACP_PORTAL_MINICALENDAR_INFO'
-							OR module_langname = 'ACP_PORTAL_CUSTOM_INFO'";
+							OR module_langname = 'ACP_PORTAL_CUSTOM_INFO'
+							OR module_langname = 'ACP_PORTAL_LINKS_INFO'";
 					$result = $db->sql_query($sql);
 					while ($row = $db->sql_fetchrow($result))
 					{
@@ -967,7 +979,9 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 							OR module_langname = 'ACP_PORTAL_BOTS_INFO'
 							OR module_langname = 'ACP_PORTAL_MOST_POSTER_INFO'
 							OR module_langname = 'ACP_PORTAL_MINICALENDAR_INFO'
-							OR module_langname = 'ACP_PORTAL_CUSTOM_INFO'";
+							OR module_langname = 'ACP_PORTAL_CUSTOM_INFO'
+							OR module_langname = 'ACP_PORTAL_LINKS_INFO'
+							";
 					$result = $db->sql_query($sql);
 					while ($row = $db->sql_fetchrow($result))
 					{
