@@ -18,7 +18,7 @@ class acp_portal
 	function main($id, $mode)
 	{
 		global $db, $user, $template;
-		global $config, $portal_config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $type;
+		global $config, $portal_config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
 		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
 
@@ -297,7 +297,7 @@ class acp_portal
 					$this->new_config[$key] = array('key' => $link_id, 'text' => $link_data['text'], 'url' => $link_data['url']);
 				}
 				
-				$display_vars['vars']['portal_links_add'] = array('lang' => 'PORTAL_ADD_LINK_TEXT', 'type' => 'custom', 'method' => 'addLink', 'explain' => true);
+				$display_vars['vars']['portal_link_add'] = array('lang' => 'PORTAL_ADD_LINK_TEXT', 'type' => 'custom', 'method' => 'addLink', 'explain' => true);
 			break;
 			default:
 				trigger_error('NO_MODE', E_USER_ERROR);
@@ -343,7 +343,7 @@ class acp_portal
 		// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
 		foreach ($display_vars['vars'] as $config_name => $null)
 		{
-			if (!isset($cfg_array[$config_name]) || strpos($config_name, 'legend') || ($type == 'links' && strpos($config_name, 'portal_link_') ) !== false)
+			if (!isset($cfg_array[$config_name]) || strpos($config_name, 'legend') || ($mode == 'links' && strpos($config_name, 'portal_link_') ) !== false)
 			{
 				continue;
 			}
