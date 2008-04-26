@@ -1,6 +1,6 @@
 <table class="tablebg" cellspacing="1" width="100%">
 	<tr>
-		<th colspan="3">{L_RECENT_TOPIC}</th>
+		<th colspan="<!-- IF .latest_hot_topics and .latest_announcements -->3<!-- ELSEIF .latest_announcements or .latest_hot_topics -->2<!-- ELSE -->1<!-- ENDIF -->">{L_RECENT_TOPIC}</th>
 	</tr>
 	<tr>
 		<!-- IF .latest_announcements --><td class="row1"><strong>{L_RECENT_ANN}</strong></td><!-- ENDIF -->
