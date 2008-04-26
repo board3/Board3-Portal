@@ -52,8 +52,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_CLOCK_EXPLAIN'							=> 'Die Uhr auf dem Portal anzeigen.',
 	'PORTAL_LINK_US'									=> 'Verlink uns',
 	'PORTAL_LINK_US_EXPLAIN'							=> 'Diesen Block auf dem Portal anzeigen.',
-	'PORTAL_LINKS'										=> 'Links',
-	'PORTAL_LINKS_EXPLAIN'								=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_BIRTHDAYS'									=> 'Geburtstage',
 	'PORTAL_BIRTHDAYS_EXPLAIN'						=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_BIRTHDAYS_AHEAD'						=> 'Anstehende Geburtstage',
@@ -233,6 +231,18 @@ $lang = array_merge($lang, array(
 	'PORTAL_WELCOME_INTRO'								=> 'Willkommens Nachricht',
 	'PORTAL_WELCOME_GUEST'								=> 'Willkommens Nachricht nur für Gäste?',
 	'PORTAL_WELCOME_INTRO_EXPLAIN'					=> 'Ändere hier die Willkommens Nachricht (BBCode ist erlaubt).',
+	
+	// links
+	'ACP_PORTAL_LINKS_INFO' 			=> 'Links',
+	'ACP_PORTAL_LINKS_SETTINGS' 		=> 'Links Einstellungen',
+	'ACP_PORTAL_LINKS_SETTINGS_EXPLAIN' => 'Einstellungen für die Links ändern.',
+	'PORTAL_LINKS'						=> 'Links',
+	'PORTAL_LINKS_EXPLAIN'				=> 'Diesen Block auf dem Portal anzeigen.',
+	'PORTAL_LINK_TEXT'					=> 'Text/URL',
+	'PORTAL_LINK_TEXT_EXPLAIN'			=> 'In der oberen Spalte den Text eingeben, in der unteren den Link. Benutze die Buttons um die Links zu löschen oder zu ordnen. Vergiss nicht das http:// !',
+	'PORTAL_ADD_LINK_TEXT'				=> 'Neuen Link erstellen',
+	'PORTAL_ADD_LINK_TEXT_EXPLAIN'		=> 'Klicke auf den Text um einen neuen Link zu erstellen.',
+	'PORTAL_LINK_ADD'					=> '<strong>Link erstellen</strong>',
 
 	// custom
 	'ACP_PORTAL_CUSTOM_INFO'								=> 'Aktiver Block',

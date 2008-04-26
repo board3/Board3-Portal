@@ -33,20 +33,21 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'LOG_CONFIG_GENERAL'				=> '<strong>Portal: Altered general settings</strong>',
-	'LOG_CONFIG_NEWS'					=> '<strong>Portal: Altered news settings</strong>',
-	'LOG_CONFIG_ANNOUNCEMENTS'	=> '<strong>Portal: Altered announcements settings</strong>',
-	'LOG_CONFIG_WELCOME'				=> '<strong>Portal: Altered welcome message settings</strong>',
+	'LOG_CONFIG_GENERAL'			=> '<strong>Portal: Altered general settings</strong>',
+	'LOG_CONFIG_NEWS'				=> '<strong>Portal: Altered news settings</strong>',
+	'LOG_CONFIG_ANNOUNCEMENTS'		=> '<strong>Portal: Altered announcements settings</strong>',
+	'LOG_CONFIG_WELCOME'			=> '<strong>Portal: Altered welcome message settings</strong>',
 	'LOG_CONFIG_RECENT'				=> '<strong>Portal: Altered recent topics settings</strong>',
 	'LOG_CONFIG_WORDGRAPH'			=> '<strong>Portal: Altered wordgraph settings</strong>',
 	'LOG_CONFIG_PAYPAL'				=> '<strong>Portal: Altered paypal donations settings</strong>',
 	'LOG_CONFIG_ATTACHMENTS'		=> '<strong>Portal: Altered attachments settings</strong>',
-	'LOG_CONFIG_MEMBERS'				=> '<strong>Portal: Altered latest members settings</strong>',
-	'LOG_CONFIG_POLLS'					=> '<strong>Portal: Altered poll settings</strong>',
-	'LOG_CONFIG_BOTS'					=> '<strong>Portal: Altered last visited bots settings</strong>',
+	'LOG_CONFIG_MEMBERS'			=> '<strong>Portal: Altered latest members settings</strong>',
+	'LOG_CONFIG_POLLS'				=> '<strong>Portal: Altered poll settings</strong>',
+	'LOG_CONFIG_BOTS'				=> '<strong>Portal: Altered last visited bots settings</strong>',
 	'LOG_CONFIG_POSTER'				=> '<strong>Portal: Altered most posters settings</strong>',
 	'LOG_CONFIG_MINICALENDAR'		=> '<strong>Portal: Altered mini calendar settings</strong>',
 	'LOG_CONFIG_CUSTOMBLOCK'		=> '<strong>Portal: Altered custom block settings</strong>',
+	'LOG_CONFIG_LINKS'				=> '<strong>Portal: Altered links block settings</strong>',
 
 ));
 
