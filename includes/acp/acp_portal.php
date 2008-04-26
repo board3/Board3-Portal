@@ -18,7 +18,7 @@ class acp_portal
 	function main($id, $mode)
 	{
 		global $db, $user, $template;
-		global $config, $portal_config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+		global $config, $portal_config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $type;
 
 		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
 
@@ -52,7 +52,7 @@ class acp_portal
 						'portal_birthdays'					=> array('lang' => 'PORTAL_BIRTHDAYS'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_birthdays_ahead'			=> array('lang' => 'PORTAL_BIRTHDAYS_AHEAD'		, 'validate' => 'int'	, 'type' => 'text:3:3'	, 'explain' => true),
 						'portal_random_member'				=> array('lang' => 'PORTAL_RANDOM_MEMBER'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'forum_index'				=> array('lang' => 'PORTAL_FORUM_INDEX'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
+						'portal_forum_index'				=> array('lang' => 'PORTAL_FORUM_INDEX'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_whois_online'				=> array('lang' => 'PORTAL_WHOIS_ONLINE'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_change_style'				=> array('lang' => 'PORTAL_CHANGE_STYLE'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_main_menu'					=> array('lang' => 'PORTAL_MAIN_MENU'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
@@ -423,21 +423,21 @@ class acp_portal
 	
 	function createLink($value, $key)
 	{
-		global $user, $phpEx;
-		$icon_up		=	'<a href="'.append_sid("{$phpbb_root_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=moveup&amp;link='.$value['key']).'"><img src="' . $phpbb_admin_path . 'images/icon_up.gif" alt="' . $user->lang['MOVE_UP'] . '" title="' . $user->lang['MOVE_UP'] . '" /></a>';
+		global $user, $phpEx, $phpbb_admin_path;
+		$icon_up		=	'<a href="'.append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=moveup&amp;link='.$value['key']).'"><img src="' . $phpbb_admin_path . 'images/icon_up.gif" alt="' . $user->lang['MOVE_UP'] . '" title="' . $user->lang['MOVE_UP'] . '" /></a>';
 		$icon_up_d		=	'<img src="' . $phpbb_admin_path . 'images/icon_up_disabled.gif" alt="' . $user->lang['MOVE_UP'] . '" title="' . $user->lang['MOVE_UP'] . '" />';
-		$icon_down		=	'<a href="'.append_sid("{$phpbb_root_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=movedown&amp;link='.$value['key']).'"><img src="' . $phpbb_admin_path . 'images/icon_down.gif" alt="' . $user->lang['MOVE_DOWN'] . '" title="' . $user->lang['MOVE_DOWN'] . '" /></a>';
+		$icon_down		=	'<a href="'.append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=movedown&amp;link='.$value['key']).'"><img src="' . $phpbb_admin_path . 'images/icon_down.gif" alt="' . $user->lang['MOVE_DOWN'] . '" title="' . $user->lang['MOVE_DOWN'] . '" /></a>';
 		$icon_down_d	=	'<img src="' . $phpbb_admin_path . 'images/icon_down_disabled.gif" alt="' . $user->lang['MOVE_DOWN'] . '" title="' . $user->lang['MOVE_DOWN'] . '" />';
-		$icon_del		=	'<a href="'.append_sid("{$phpbb_root_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=delete&amp;link='.$value['key']).'"><img src="' . $phpbb_admin_path . 'images/icon_delete.gif" alt="' . $user->lang['DELETE'] . '" title="' . $user->lang['DELETE'] . '" /></a>';
+		$icon_del		=	'<a href="'.append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=delete&amp;link='.$value['key']).'"><img src="' . $phpbb_admin_path . 'images/icon_delete.gif" alt="' . $user->lang['DELETE'] . '" title="' . $user->lang['DELETE'] . '" /></a>';
 
 		return '<input id="' . $key . '_text" type="text" size="40" maxlength="255" name="config[' . $key . '_text]" value="' . $value['text'] . '" /> <input id="' . $key . '_url" type="text" size="40" maxlength="255" name="config[' . $key . '_url]" value="' . $value['url'] . '" /> ' . $icon_del . ' ' . ( ($value['key'] < $this->link_num) ? $icon_down : $icon_down_d ) . ' ' . ( ($value['key'] > 1) ? $icon_up : $icon_up_d );
 	}
 	
 	function addLink($value, $key)
 	{
-		global $user, $phpEx;
+		global $user, $phpEx, $phpbb_admin_path;
 		
-		$link = append_sid("{$phpbb_root_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=add');
+		$link = append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=add');
 		
 		return '<a href="'.$link.'">'.$user->lang['PORTAL_LINK_ADD'].'</a>';
 	}

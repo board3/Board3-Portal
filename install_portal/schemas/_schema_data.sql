@@ -85,6 +85,7 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_news
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_news_archive', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_announcements_archive', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_links_array', 'a:2:{i:1;a:2:{s:4:"text";s:9:"Board3.de";s:3:"url";s:21:"http://www.board3.de/";}i:2;a:2:{s:4:"text";s:9:"phpBB.com";s:3:"url";s:21:"http://www.phpbb.com/";}}');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_links_add', '');
 
 # POSTGRES COMMIT #
 
