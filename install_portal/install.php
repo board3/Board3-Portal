@@ -880,34 +880,26 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 						}
 					}
 					unset($portal_update_array, $sql_update);
-
+					
 					// create new acp modules
 					$modules = new acp_modules();
 					$sql = 'SELECT module_id FROM ' . MODULES_TABLE . " WHERE module_langname = 'ACP_PORTAL_INFO' LIMIT 1";
 					$result = $db->sql_query($sql);
 					$portal = $db->sql_fetchrow($result);
-					$customblock = array(
-						'module_basename'   => 'portal',
-						'module_enabled'   => 1,
-						'module_display'   => 1,
-						'parent_id'         => $portal['module_id'],
-						'module_class'      => 'acp',
-						'module_langname'   => 'ACP_PORTAL_CUSTOM_INFO',
-						'module_mode'      => 'customblock',
-						'module_auth'      => ''
-					);
-					$modules->update_module_data($customblock);
-					$linkblock = array(
-						'module_basename'   => 'portal',
-						'module_enabled'   => 1,
-						'module_display'   => 1,
-						'parent_id'         => $portal['module_id'],
-						'module_class'      => 'acp',
-						'module_langname'   => 'ACP_PORTAL_LINKS_INFO',
-						'module_mode'      => 'links',
-						'module_auth'      => ''
-					);
-					$modules->update_module_data($linkblock); 
+					
+					foreach( $mod_update as $mod_ver => $mod_data )
+					{
+						if( version_compare($old_version, $mod_ver, ">=") === TRUE )
+						{
+							continue;
+						} else {
+							foreach( $mod_data as $mod_config)
+							{
+								$mod_config['parent_id'] = $portal['module_id'];
+								$modules->update_module_data($mod_config);
+							}
+						}
+					}
 
 					$updated = true;
 				}
