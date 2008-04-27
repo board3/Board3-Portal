@@ -110,6 +110,7 @@ $lang = array_merge($lang, array(
 	
 	// attachments
 	'DOWNLOADS'						=> 'Downloads',
+	'NO_ATTACHMENTS'                => 'Keine Dateianhänge',
 
 	// links
 	'LINKS'								=> 'Links',
