@@ -35,6 +35,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'LOG_CONFIG_GENERAL'				=> '<strong>Portal: Oppdatert generelle innstillinger</strong>',
 	'LOG_CONFIG_NEWS'					=> '<strong>Portal: Oppdatert nyhets innstillinger</strong>',
+	'LOG_CONFIG_LINKS'            => '<strong>Portal: Oppdatert link blokk innstillinger</strong>',
 	'LOG_CONFIG_ANNOUNCEMENTS'	=> '<strong>Portal: Oppdatert annonserings innstillinger</strong>',
 	'LOG_CONFIG_WELCOME'				=> '<strong>Portal: Oppdatert velkommen melding innstillinger</strong>',
 	'LOG_CONFIG_RECENT'				=> '<strong>Portal: Oppdatert seneste emner innstillinger</strong>',
@@ -46,7 +47,8 @@ $lang = array_merge($lang, array(
 	'LOG_CONFIG_BOTS'					=> '<strong>Portal: Oppdatert sist besøkte boter innstillinger</strong>',
 	'LOG_CONFIG_POSTER'				=> '<strong>Portal: Oppdatert topp poster innstillinger</strong>',
 	'LOG_CONFIG_MINICALENDAR'		=> '<strong>Portal: Oppdatert mini kalenderens innstillinger</strong>',
-
+  'LOG_CONFIG_GALLERY'	=> '<strong>Portal: Oppdatert galleri blokk innstillinger</strong>'
+  'LOG_CONFIG_CUSTOMBLOCK'      => '<strong>Portal: Editerte egendefinerte blokk innstillinger</strong>',
 ));
 
 ?>

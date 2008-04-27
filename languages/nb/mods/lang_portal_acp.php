@@ -44,6 +44,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_GENERAL_INFO_EXPLAIN'		=> 'Takk for at du valgte board3 Portalen.På denne siden kan du gjøre innstillinger på portalen din. Linken på venstre side gir deg mulighet til og gjøre innstillnger i portalen.',
 	'ACP_PORTAL_GENERAL_SETTINGS'			=> 'Generelle innstillinger',
 	'ACP_PORTAL_GENERAL_SETTINGS_EXPLAIN'	=> 'Her kan du editere blokker og andre ting i portalen.',
+	'ACP_PORTAL_VERSION'                  => '<strong>Board3 Portal Versjon v%s</strong>',
 	'PORTAL_ADVANCED_STAT'					=> 'Avansert statistikk',
 	'PORTAL_ADVANCED_STAT_EXPLAIN'			=> 'Vis denne blokken i portalen.',
 	'PORTAL_LEADERS'						=> 'Ledere / admin',
@@ -52,8 +53,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_CLOCK_EXPLAIN'					=> 'Vis denne blokken i portalen.',
 	'PORTAL_LINK_US'						=> 'Link til oss',
 	'PORTAL_LINK_US_EXPLAIN'				=> 'Vis denne blokken i portalen.',
-	'PORTAL_LINKS'							=> 'Linker',
-	'PORTAL_LINKS_EXPLAIN'					=> 'Vis denne blokken i portalen.',
 	'PORTAL_BIRTHDAYS'						=> 'Bursdager',
 	'PORTAL_BIRTHDAYS_EXPLAIN'				=> 'Vis denne blokken i portalen.',
 	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Bursdager som venter',
@@ -74,6 +73,28 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAIN_MENU_EXPLAIN'				=> 'Vis denne blokken i portalen.',
 	'PORTAL_USER_MENU'						=> 'Brukermeny / Login boks',
 	'PORTAL_USER_MENU_EXPLAIN'				=> 'Vis denne blokken i portalen.',
+ 
+ // custom
+   'ACP_PORTAL_CUSTOM_INFO'             => 'Egendefinert blokk',
+   'ACP_PORTAL_CUSTOM_SETTINGS'         => 'Egendefinerte blokk innstillinger',
+   'ACP_PORTAL_CUSTOM_SETTINGS_EXPLAIN' => 'Her kan du editere dine engendefinerte blokker. Disse blokkene kan fylles med HTML eller BBCode for mange bruksområder som annonseringer, videoer, bilder, flash eller tekst. Bare legg inn nødvendige koden.',
+   'ACP_PORTAL_CUSTOM_CENTER_SETTINGS'  => 'Her kan du endre innstillinger for senter blokken',
+   'PORTAL_CUSTOM_SMALL_HEADLINE'       => 'Overskrift for liten egendefinert blokk',
+   'PORTAL_CUSTOM_SMALL_HEADLINE_EXPLAIN' => 'Her kan du endre overskrift for liten egendefinert blokk.',
+   'PORTAL_CUSTOM_SMALL'                 => 'Vis liten egendefinert blokk',
+   'PORTAL_CUSTOM_SMALL_EXPLAIN'         => 'Vis denne blokken i portalen.',
+   'PORTAL_CUSTOM_SMALL_BBCODE'          => 'Aktiver BBCode for liten egendefinert blokk',
+   'PORTAL_CUSTOM_SMALL_BBCODE_EXPLAIN'  => 'BBCode kan brukes i denne blokken. Hvis ikke BBCode er aktivert, vil HTML bli parsed.',
+   'PORTAL_CUSTOM_CODE_SMALL'            => 'Kode for liten egendefinert blokk',
+   'PORTAL_CUSTOM_CODE_SMALL_EXPLAIN'    => 'Skift kode for liten egendefinert blokk (HTML eller BBCode) her.',
+   'PORTAL_CUSTOM_CENTER'                => 'Vis senter egendefinert blokk',
+   'PORTAL_CUSTOM_CENTER_EXPLAIN'        => 'Vis denne blokken i portalen.',
+   'PORTAL_CUSTOM_CENTER_HEADLINE'       => 'Overskrift for senter egendefinert blokk',
+   'PORTAL_CUSTOM_CENTER_HEADLINE_EXPLAIN' => 'Her kan du endre overskrift for senter egendefinert blokk.',
+   'PORTAL_CUSTOM_CENTER_BBCODE'         => 'Aktiver BBCode for egendefinert senter blokk',
+   'PORTAL_CUSTOM_CENTER_BBCODE_EXPLAIN' => 'BBCode kan brukes i denne boksen. hvis ikke BBCode er aktivert, vil HTML bli parsed.',
+   'PORTAL_CUSTOM_CODE_CENTER'           => 'Kode for senter egendefinert blokk',
+   'PORTAL_CUSTOM_CODE_CENTER_EXPLAIN'   => 'Skift kode for liten egendefinert blokk (HTML eller BBCode) her.',
 
 	// random member
 	'PORTAL_RANDOM_MEMBER'					=> 'Tilfeldig medlem',
@@ -93,8 +114,10 @@ $lang = array_merge($lang, array(
 	'PORTAL_ANNOUNCEMENTS_DAY_EXPLAIN'			=> '0 betyr ubegrenset',
 	'PORTAL_ANNOUNCEMENTS_LENGTH'				=> 'Max lengde på globale annonseringer',
 	'PORTAL_ANNOUNCEMENTS_LENGTH_EXPLAIN'		=> '0 betyr ubegrenset',
+	 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'         => 'Aktiver/Deaktiver tillatelser',
+   'PORTAL_ANNOUNCEMENTS_PERMISSIONS_EXPLAIN'   => 'Ta hensyn til forumrettigheter for visning av annonseringer',
 	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'			=> 'Globale annonseringer forum ID',
-	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM_EXPLAIN'	=> 'Skriv inn ID til forumet du vil ha globale annonseringer i fra, ikke skriv inn noe hvis du vil ha artikkler fra alle forum, separer med komma for multi-forum, eg. 1,2,5',
+	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM_EXPLAIN'	=> 'Skriv inn ID til forumet du vil ha globale annonseringer i fra, ikke skriv inn noe hvis du vil ha artikkler fra alle forum, separer med komma for og bruke flere forum, eg. 1,2,5.',
 
 	// news
 	'ACP_PORTAL_NEWS_INFO'				=> 'Nyheter',
@@ -111,9 +134,11 @@ $lang = array_merge($lang, array(
 	'PORTAL_NEWS_LENGTH'				=> 'Max lengde for nyhets artikkel',
 	'PORTAL_NEWS_LENGTH_EXPLAIN'		=> '0 betyr ubegrenset',
 	'PORTAL_NEWS_FORUM'					=> 'Nyhets Forum ID',
-	'PORTAL_NEWS_FORUM_EXPLAIN'			=> 'Skriv inn ID til forumet du vil ha nyheter i fra, ikke skriv inn noe hvis du vil ha artikkler fra alle forum, separer med komma for multi-forum, eg. 1,2,5',
+	'PORTAL_NEWS_FORUM_EXPLAIN'			=> 'Skriv inn ID til forumet du vil ha nyheter i fra, ikke skriv inn noe hvis du vil ha artikkler fra alle forum, separer med komma for og bruke flere forum, eg. 1,2,5.',
+  'PORTAL_NEWS_PERMISSIONS'         => 'Aktiver/Deaktiver tillatelser',
+  'PORTAL_NEWS_PERMISSIONS_EXPLAIN'   => 'Ta hensyn til forumrettigheter for visning av nyheter',
 	'PORTAL_EXCLUDE_FORUM'				=> 'Ekskluder Forum ID',
-	'PORTAL_EXCLUDE_FORUM_EXPLAIN'		=> 'Skriv inn ID til forumet du vil ha siste emner i fra, ikke skriv inn noe hvis du vil ha artikkler fra alle forum, separer med komma for multi-forum, eg. 1,2,5',
+	'PORTAL_EXCLUDE_FORUM_EXPLAIN'		=> 'Skriv inn ID til forumet du vil ha siste emner i fra, ikke skriv inn noe hvis du vil ha artikkler fra alle forum, separer med komma for og bruke flere forum, eg. 1,2,5.',
 
 	// recent topics
 	'ACP_PORTAL_RECENT_INFO'				=> 'Siste emner',
@@ -193,7 +218,9 @@ $lang = array_merge($lang, array(
 	'PORTAL_ATTACHMENTS_EXPLAIN'						=> 'Vis denne blokken i portalen.',
 	'PORTAL_ATTACHMENTS_NUMBER'							=> 'Antall viste vedlegg',
 	'PORTAL_ATTACHMENTS_NUMBER_EXPLAIN'					=> '0 betyr ubegrenset',
-	
+	'PORTAL_ATTACHMENTS_FORUM_IDS'         => 'Veleggs forum id(er)',
+  'PORTAL_ATTACHMENTS_FORUM_IDS_EXPLAIN'  => 'Skriv inn ID(er) til forumene du vil vise vedlegg i fra, ikke skriv inn noe hvis du vil ha vedlegg fra alle forum, separer med komma for og bruke flere forum, eg.1,2,5.',
+
 	// friends
 	'ACP_PORTAL_FRIENDS_INFO'				=> 'Venner',
 	'ACP_PORTAL_FRIENDS_SETTINGS'			=> 'Venner innstillinger',
@@ -222,7 +249,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_WELCOME_SETTINGS_EXPLAIN'	=> 'Her kan du editere velkomst meldingen.',
 	'PORTAL_WELCOME_INTRO'					=> 'Velkomst melding',
 	'PORTAL_WELCOME_GUEST'					=> 'Velkomst melding kun for gjester?',
-	'PORTAL_WELCOME_INTRO_EXPLAIN'			=> 'Editer velkomst melding (kun vanlig tekst). Max. 600 bokstaver!',
+  'PORTAL_WELCOME_INTRO_EXPLAIN' => 'Editer velkomst meldingen (BBCode er tilatt). Max. 600 bokstaver!',
 
 	// minicalendar
 	'ACP_PORTAL_MINICALENDAR_INFO'				=> 'Mini kalender',
@@ -235,7 +262,30 @@ $lang = array_merge($lang, array(
 	'PORTAL_MINICALENDAR_DAY_LINK_COLOR'		=> 'Dag link farge',
 	'PORTAL_MINICALENDAR_DAY_LINK_COLOR_EXPLAIN'=> 'HEX eller navngitte farger er tillatt slik som #FFFFFF for vit, eller fargenavn som f.eks blå.',
 
+// Gallery
+'ACP_PORTAL_GALLERY_SETTINGS' => 'Innstillinger for galleri',
+'ACP_PORTAL_GALLERY_SETTINGS_EXPLAIN' => 'Her kan du se innstillinger for galleri blokken.',
+'ACP_PORTAL_GALLERY_SETTINGS_RIGHT' => 'Instillinger for høyre galleri blokk',
+'ACP_PORTAL_GALLERY_SETTINGS_CENTER' => 'Innstilling for midtre galleri blokk',
+'PORTAL_GALLERY' => 'Vis galleri blokk',
+'PORTAL_GALLERY_EXPLAIN' => 'Vis denne blokken i portalen.',
+'PORTAL_IMAGES_NUMBER' => 'Antall bilder og vise',
+'PORTAL_IMAGES_SORT' => 'Tilfeldige bilder Show',
+'PORTAL_IMAGES_SORT_EXPLAIN' => 'For siste bilde velg "nei"',
+'PORTAL_ALBUM_ID' => 'ID på albumene',
+'PORTAL_ALBUM_ID_EXPLAIN' => 'Skriv inn ID til albumet du vil ha siste bilder i fra, ikke skriv inn noe hvis du vil ha bilder fra alle album, separer med komma for og bruke flere album, eg.1,2,5.',
 
+  // links
+   'ACP_PORTAL_LINKS_INFO'          => 'Link',
+   'ACP_PORTAL_LINKS_SETTINGS'       => 'Link Innstillinger',
+   'ACP_PORTAL_LINKS_SETTINGS_EXPLAIN' => 'Sett opp link blokk linker.',
+   'PORTAL_LINKS'                  => 'Link blokk',
+   'PORTAL_LINKS_EXPLAIN'            => 'Vis denne blokken i portalen.',
+   'PORTAL_LINK_TEXT'               => 'Tekst/URL',
+   'PORTAL_LINK_TEXT_EXPLAIN'         => 'Tekst og URL for linken.Bruk knappene for og slette og reorganisere linkene. Ikke glem http:// !',
+   'PORTAL_ADD_LINK_TEXT'            => 'Legg til link',
+   'PORTAL_ADD_LINK_TEXT_EXPLAIN'      => 'Klikk på teksten for og lage en ny link.',
+   'PORTAL_LINK_ADD'               => '<strong>Legg til</strong>',
 ));
 
 ?>

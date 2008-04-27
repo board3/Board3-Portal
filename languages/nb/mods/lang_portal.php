@@ -35,7 +35,7 @@ $lang = array_merge($lang, array(
 	// General
 	'PORTAL'				=> 'Portal',
 	'WELCOME'				=> 'Velkommen',
-
+  'VIEWING_PORTAL' => 'Portal side',
 	'PORTAL_ERROR'			=> 'Portal Feil',
 	'PORTAL_DELETE_DIR'		=> 'Vær vennlig og slette portal installasjons katalogen: %s',
 	'PORTAL_UPDATE'			=> 'Portal Oppdatering',
@@ -63,11 +63,12 @@ $lang = array_merge($lang, array(
 	'WIO_REGISTERED'	=> 'Registrerte',
 	'WIO_HIDDEN'		=> 'Skjulte',
 	'WIO_GUEST'			=> 'Gjest',
+	
 	//'RECORD_ONLINE_USERS'=> 'View record: <strong>%1$s</strong><br />%2$s',
 
 	// Birthday
 	'BIRTHDAYS_AHEAD'              => 'I de neste %s dager',
-	'NO_BIRTHDAYS_AHEAD'        => 'I denne perioden, har ingen medlemmer har bursdag.',
+	'NO_BIRTHDAYS_AHEAD'        => 'I denne perioden, har ingen medlemmer bursdag.',
 
 	// user menu
 	'USER_MENU'			=> 'Brukermeny',
@@ -78,11 +79,11 @@ $lang = array_merge($lang, array(
 
 	// statistics
 	/*
-	'ST_NEW'		=> 'New',
-	'ST_NEW_POSTS'	=> 'New post',
-	'ST_NEW_TOPICS'	=> 'New topic',
-	'ST_NEW_ANNS'	=> 'New announcment',
-	'ST_NEW_STICKYS'=> 'New sticky',
+	'ST_NEW'		=> 'Ny',
+	'ST_NEW_POSTS'	=> 'Nytt innlegg',
+	'ST_NEW_TOPICS'	=> 'Nytt emne',
+	'ST_NEW_ANNS'	=> 'Ny annonering',
+	'ST_NEW_STICKYS'=> 'Ny kleblig',
 	*/
 	'ST_TOP'		=> 'Totalt',
 	'ST_TOP_ANNS'	=> 'Totale annonseringer',
@@ -99,9 +100,9 @@ $lang = array_merge($lang, array(
 	
 	// recent
 	'RECENT_NEWS'		=> 'Siste',
-	'RECENT_TOPIC'		=> 'Siste tema',
+	'RECENT_TOPIC'		=> 'Siste emner',
 	'RECENT_ANN'		=> 'Nye kunngjøringer',
-	'RECENT_HOT_TOPIC'	=> 'Siste populære tema',
+	'RECENT_HOT_TOPIC'	=> 'Siste populære emner',
 
 	// random member
 	'RND_MEMBER'	=> 'Tilfeldig medlem',
@@ -125,7 +126,7 @@ $lang = array_merge($lang, array(
 
 	// make donation
 	'DONATION' 		=> 'Donér',
-	'DONATION_TEXT'	=> 'er et konsept som forsyner massene uten baktanker om økonomisk profitt. Alle som ønsker å støtte driften av denne site kan gjøre det så utgifter til serverleie, doméne o.s.v. kan bli dekket.',
+	'DONATION_TEXT'	=> 'er et konsept som forsyner massene uten baktanker om økonomisk profitt. Alle som ønsker å støtte driften av denne siden kan gjøre det så utgifter til serverleie, doméne o.s.v. kan bli dekket.',
 	'PAY_MSG'		=> 'Etter at du har valgt hvilket beløp du ønsker å donére fra menyen, så kan du klikke videre på PayPal-knappen.',
 	'PAY_ITEM'		=> 'Donér', // paypal item
 
@@ -152,7 +153,7 @@ $lang = array_merge($lang, array(
 	'NO_FRIENDS_ONLINE'		=> 'Ingen venner online',
 	
 	// last bots
-	'LAST_VISITED_BOTS'		=> 'Siste %s besøkte boter',
+	'LAST_VISITED_BOTS'		=> 'Siste %s boter på besøk',
 	
 	// wordgraph
 	'WORDGRAPH'				=> 'Ordstokk',
@@ -166,19 +167,27 @@ $lang = array_merge($lang, array(
 	'NO_MODERATORS_P'		=> 'Ingen moderatorer',
 
 	// average Statistics
-	'TOPICS_PER_DAY_OTHER'	=> 'Tema pr dag: <strong>%d</strong>',
-	'TOPICS_PER_DAY_ZERO'	=> 'Tema pr dag: <strong>0</strong>',
+	'TOPICS_PER_DAY_OTHER'	=> 'Emne pr dag: <strong>%d</strong>',
+	'TOPICS_PER_DAY_ZERO'	=> 'Emne pr dag: <strong>0</strong>',
 	'POSTS_PER_DAY_OTHER'	=> 'Innlegg pr dag: <strong>%d</strong>',
 	'POSTS_PER_DAY_ZERO'	=> 'Innlegg pr dag: <strong>0</strong>',
 	'USERS_PER_DAY_OTHER'	=> 'Brukere pr dag: <strong>%d</strong>',
 	'USERS_PER_DAY_ZERO'	=> 'Brukere pr dag: <strong>0</strong>',
-	'TOPICS_PER_USER_OTHER'	=> 'Tema pr bruker: <strong>%d</strong>',
-	'TOPICS_PER_USER_ZERO'	=> 'Tema pr bruker: <strong>0</strong>',
+	'TOPICS_PER_USER_OTHER'	=> 'Emne pr bruker: <strong>%d</strong>',
+	'TOPICS_PER_USER_ZERO'	=> 'Emne pr bruker: <strong>0</strong>',
 	'POSTS_PER_USER_OTHER'	=> 'Innlegg pr bruker: <strong>%d</strong>',
 	'POSTS_PER_USER_ZERO'	=> 'Innlegg pr bruker: <strong>0</strong>',
-	'POSTS_PER_TOPIC_OTHER'	=> 'Innlegg pr tema: <strong>%d</strong>',
-	'POSTS_PER_TOPIC_ZERO'	=> 'Innlegg pr tema: <strong>0</strong>',
+	'POSTS_PER_TOPIC_OTHER'	=> 'Innlegg pr emne: <strong>%d</strong>',
+	'POSTS_PER_TOPIC_ZERO'	=> 'Innlegg pr emne: <strong>0</strong>',
 
+//Gallery
+'RANDOM_IMAGE' => 'Tilfeldig bilde',
+'RANDOM_IMAGES' => 'Tilfeldige bilder',
+'RECENT_IMAGE' => 'Siste bilde',
+'RECENT_IMAGES' => 'Siste bilder',
+'IMAGE_TITLE' => 'Tittel',
+'POSTER' => 'Forfatter',
+'NO_IMAGES' => 'Ingen bilder',
 	
       // poll
 	'LATEST_POLLS'			=> 'Siste avstemninger',
