@@ -116,7 +116,8 @@ $lang = array_merge($lang, array(
 	'TOP_POSTER'	=> 'Topp postere',
 	
 	// attachments
-	'DOWNLOADS'	=> 'Nedlastninger',
+	'DOWNLOADS'			=> 'Nedlastninger',
+	'NO_ATTACHMENTS'	=> 'Ingen vedlegg',
 
 	// links
 	'LINKS'	=> 'Linker',
