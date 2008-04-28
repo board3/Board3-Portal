@@ -44,6 +44,8 @@ $lang = array_merge($lang, array(
 	// news & global announcements
 	'LATEST_ANNOUNCEMENTS'	=> 'En Son Genel Duyurular',
 	'GLOBAL_ANNOUNCEMENT'	=> 'Genel Duyurular',
+	'VIEW_LATEST_ANNOUNCEMENT'   => '1 duyuru',
+	'VIEW_LATEST_ANNOUNCEMENTS'   => '%d duyuru',
 	'LATEST_NEWS'			=> 'En Son Haberler',
 	'READ_FULL'				=> 'Hepsini Oku',
 	'NO_NEWS'				=> 'Haber Yok',
@@ -64,6 +66,7 @@ $lang = array_merge($lang, array(
 	'WIO_HIDDEN'		=> 'Gizli',
 	'WIO_GUEST'			=> 'Misafir',
 	//'RECORD_ONLINE_USERS'=> '<strong>%1$s</strong><br />%2$s numaralı kayıdı gör',
+	'VIEWING_PORTAL'         => 'Portal sayfası',
 
 	// Birthday
 	'BIRTHDAYS_AHEAD'              => 'Takip eden %s günde',
@@ -115,10 +118,12 @@ $lang = array_merge($lang, array(
 	'TOP_POSTER'	=> 'En çok mesaj gönderenler',
 	
 	// attachments
-	'DOWNLOADS'	=> 'Downloads',
+	'DOWNLOADS'			=> 'Downloads',
+	'NO_ATTACHMENTS'	=> 'Ek yok',
 
 	// links
 	'LINKS'	=> 'Linkler',
+	'NO_LINKS' => 'Bağlantı yok',
 
 	// latest members
 	'LATEST_MEMBERS'	=> 'En yeni üyeler',

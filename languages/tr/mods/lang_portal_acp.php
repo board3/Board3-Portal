@@ -44,6 +44,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_GENERAL_INFO_EXPLAIN'		=> 'Board3 Portalı seçtiğiniz için teşekkürler. Bu sayfada forumunuzun portalını yönetebileceksiniz. Bu sayfadaki pencereler, portal ayarlarınızın özet bilgilerini verecektir. Ekranın solundaki bağlantılar ile portalınızın bütün özelliklerine ulaşabilirsiniz.',
 	'ACP_PORTAL_GENERAL_SETTINGS'			=> 'Genel ayarlar',
 	'ACP_PORTAL_GENERAL_SETTINGS_EXPLAIN'	=> 'Buradan, genel ve bazı özel seçenekleri değiştirebilirsiniz.',
+	'ACP_PORTAL_VERSION'					=> '<strong>Board3 Portal Versiyon v%s</strong>',
 	'PORTAL_ADVANCED_STAT'					=> 'Ayrıntılı İstatistik Bloğu',
 	'PORTAL_ADVANCED_STAT_EXPLAIN'			=> 'Bu bloğu portalda gösterir.',
 	'PORTAL_LEADERS'						=> 'Lider Takım bloğu',
@@ -52,8 +53,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_CLOCK_EXPLAIN'					=> 'Bu bloğu portalda gösterir.',
 	'PORTAL_LINK_US'						=> 'Bize link verin bloğu',
 	'PORTAL_LINK_US_EXPLAIN'				=> 'Bu bloğu portalda gösterir.',
-	'PORTAL_LINKS'							=> 'Bağlantılar bloğu',
-	'PORTAL_LINKS_EXPLAIN'					=> 'Bu bloğu portalda gösterir.',
 	'PORTAL_BIRTHDAYS'						=> 'Doğumgünü bloğu',
 	'PORTAL_BIRTHDAYS_EXPLAIN'				=> 'Bu bloğu portalda gösterir.',
 	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Yakındaki doğumgünleri bloğu',
@@ -74,12 +73,14 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAIN_MENU_EXPLAIN'				=> 'Bu bloğu portalda gösterir.',
 	'PORTAL_USER_MENU'						=> 'Kullanıcı menüsü / Giriş yap kutusu',
 	'PORTAL_USER_MENU_EXPLAIN'				=> 'Bu bloğu portalda gösterir.',
+	'PORTAL_FORUM_INDEX'					=> 'Forum İndex (Forum listesi)',
+	'PORTAL_FORUM_INDEX_EXPLAIN'			=> 'Bu bloğu portalda gösterir.',
 
 	// random member
 	'PORTAL_RANDOM_MEMBER'					=> 'Rastgele üye bloğu',
 	'PORTAL_RANDOM_MEMBER_EXPLAIN'			=> 'Bu bloğu portalda gösterir.',
 
-	// global announcements
+	// announcements
 	'ACP_PORTAL_ANNOUNCE_INFO'					=> 'Genel Duyurular',
 	'ACP_PORTAL_ANNOUNCE_SETTINGS'				=> 'Genel duyurular ayarları',
 	'ACP_PORTAL_ANNOUNCE_SETTINGS_EXPLAIN'		=> 'Burada genel duyuruları bilgilerinizi ve bazı özel seçenekleri değiştirebilirsiniz.',
@@ -95,6 +96,10 @@ $lang = array_merge($lang, array(
 	'PORTAL_ANNOUNCEMENTS_LENGTH_EXPLAIN'		=> '0 (sıfır) sınırsız anlamına gelir',
 	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'			=> 'Genel global announcements forum ID',
 	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM_EXPLAIN'	=> 'Başlıkları alacağımız Forumu buraya yazabilirsiniz. Bütün forumları seçili hale getirmek için boş bırakın. Birkaç değişik forum yazmak için forum isimlerinin arasına virgül koyun, örnek : 1,2,5',
+	'PORTAL_ANNOUNCEMENTS_PERMISSIONS'			=> 'İzinleri Aç/Kapa',
+    'PORTAL_ANNOUNCEMENTS_PERMISSIONS_EXPLAIN'	=> 'Duyuruları gösterirken Ana Forumda kullanılan izin şablonlarını dikkate alır',
+	'PORTAL_ANNOUNCEMENTS_ARCHIVE'				=> 'Duyuru arşivleme sistemini aç',
+	'PORTAL_ANNOUNCEMENTS_ARCHIVE_EXPLAIN'		=> 'Arşivlemeye izin verilirse, sayfa numaraları gösterilecektir.',
 
 	// news
 	'ACP_PORTAL_NEWS_INFO'				=> 'Haberler',
@@ -114,6 +119,12 @@ $lang = array_merge($lang, array(
 	'PORTAL_NEWS_FORUM_EXPLAIN'			=> 'Başlıkları alacağımız Forumu buraya yazabilirsiniz. Bütün forumları seçili hale getirmek için boş bırakın. Birkaç değişik forum yazmak için forum isimlerinin arasına virgül koyun, örnek : 1,2,5',
 	'PORTAL_EXCLUDE_FORUM'				=> 'Exclude Forum ID',
 	'PORTAL_EXCLUDE_FORUM_EXPLAIN'		=> 'Başlıkları alacağımız Forumu buraya yazabilirsiniz. Bütün forumları seçili hale getirmek için boş bırakın. Birkaç değişik forum yazmak için forum isimlerinin arasına virgül koyun, örnek : 1,2,5',
+	'PORTAL_NEWS_PERMISSIONS'			=> 'İzinleri Aç/Kapa',
+    'PORTAL_NEWS_PERMISSIONS_EXPLAIN'	=> 'Haberleri gösterirken Ana Forumda kullanılan izin şablonlarını dikkate alır',
+	'PORTAL_NEWS_SHOW_LAST'				=> 'En yeni mesajı göster',
+	'PORTAL_NEWS_SHOW_LAST_EXPLAIN'		=> 'Bu aktive edilirse, En yeni mesaj yazı halinde gösterilecektir. Bu seçenek kapatılırsa, ilgili başlığın ilk mesajı gösterilecek <br /> Küçük haber bloğunda gösterilen link en yeni mesaja yönlendirilecektir.',
+	'PORTAL_NEWS_ARCHIVE'				=> 'Haber arşivleme sistemini aç',
+	'PORTAL_NEWS_ARCHIVE_EXPLAIN'		=> 'Arşivlemeye izin verilirse, sayfa numaraları gösterilecektir.',
 
 	// recent topics
 	'ACP_PORTAL_RECENT_INFO'				=> 'En Yeni Başlıklar',
@@ -193,6 +204,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_ATTACHMENTS_EXPLAIN'						=> 'Bu bloğu portalda gösterir.',
 	'PORTAL_ATTACHMENTS_NUMBER'							=> 'Gösterilecek Ek sayısı',
 	'PORTAL_ATTACHMENTS_NUMBER_EXPLAIN'					=> '0 (sıfır) sınırsız anlamına gelir',
+	'PORTAL_ATTACHMENTS_FORUM_IDS'						=> 'Eklenti Forum Numarası(s)',
+    'PORTAL_ATTACHMENTS_FORUM_IDS_EXPLAIN'				=> 'Eklentileri alacağımız Forumu buraya yazabilirsiniz. Bütün forumları seçili hale getirmek için boş bırakın. Birkaç değişik forum yazmak için forum isimlerinin arasına virgül koyun, örnek : 1,2,5',
 	
 	// friends
 	'ACP_PORTAL_FRIENDS_INFO'				=> 'Arkadaşlar',
@@ -222,7 +235,43 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_WELCOME_SETTINGS_EXPLAIN'	=> 'Burada Hoşgeldin bilgilerinizi ve bazı özel seçenekleri değiştirebilirsiniz.',
 	'PORTAL_WELCOME_INTRO'					=> 'Hoşgeldin mesajı',
 	'PORTAL_WELCOME_GUEST'					=> 'Hoşgeldiniz mesajını sadece ziyaretciler mi görsün ?',
-	'PORTAL_WELCOME_INTRO_EXPLAIN'			=> 'Hoşgeldin mesajını değiştirin (düz yazı sadece), en fazla 600 harf!',
+	'PORTAL_WELCOME_INTRO_EXPLAIN'         => 'Hoşgeldin mesajını değiştirin (BBCode kullanabilirsiniz).',
+	
+	    // custom
+	'ACP_PORTAL_CUSTOM_INFO'					=> 'Serbest Blok',
+	'ACP_PORTAL_CUSTOM_SETTINGS'				=> 'Serbest blok ayarları',
+	'ACP_PORTAL_CUSTOM_SETTINGS_EXPLAIN'		=> 'Serbest Blok ayarlarınızı buradan değiştirebilirsiniz. Bu bloğa, HTML, BBCode yerleştirebilirsiniz. Reklam, video, resimi flash veya yazı için kullanabilirsiniz. Gerekli kodu yerleştirmeniz yeterlidir.',
+	'ACP_PORTAL_CUSTOM_SMALL_SETTINGS'			=> 'Serbest blok için küçültülmüş blok ayarları',
+	'PORTAL_CUSTOM_SMALL_HEADLINE'				=> 'Küçük serbest blok için başlık',
+	'PORTAL_CUSTOM_SMALL_HEADLINE_EXPLAIN'		=> 'Küçük serbest blok başlığını buradan değiştirebilirsiniz.',
+	'PORTAL_CUSTOM_SMALL'						=> 'Küçük serbest bloğu göster',
+	'PORTAL_CUSTOM_SMALL_EXPLAIN'				=> 'Bu bloğu portalda gösterir.',
+	'PORTAL_CUSTOM_SMALL_BBCODE'				=> 'Küçük serbest blok için BBCode_lara izin ver',
+	'PORTAL_CUSTOM_SMALL_BBCODE_EXPLAIN'		=> 'Bu kutuda BBCode kullanılabilir. BBCode aktif değilse yerine HTML kullanılacaktır.',
+	'PORTAL_CUSTOM_CODE_SMALL'					=> 'Küçük serbest blok için kod',
+	'PORTAL_CUSTOM_CODE_SMALL_EXPLAIN'			=> 'Küçük serbest blok kodlarını (HTML veya BBCode) buradan değiştirebilirsiniz.',
+	'ACP_PORTAL_CUSTOM_CENTER_SETTINGS'			=> 'Orta bölge için Serbest Blok ayarları',
+	'PORTAL_CUSTOM_CENTER'						=> 'Orta Bölge Serbest Bloğunu göster',
+	'PORTAL_CUSTOM_CENTER_EXPLAIN'				=> 'Bu bloğu portalda gösterir.',
+	'PORTAL_CUSTOM_CENTER_HEADLINE'				=> 'Orta  Bölge Serbest Blok için başlık',
+	'PORTAL_CUSTOM_CENTER_HEADLINE_EXPLAIN'		=> 'Orta Bölge Serbest Blok başlığını buradan değiştirebilirsiniz.',
+	'PORTAL_CUSTOM_CENTER_BBCODE'				=> 'Orta Bölge Serbest Blok için BBCode_lara izin ver',
+	'PORTAL_CUSTOM_CENTER_BBCODE_EXPLAIN'		=> 'Bu kutuda BBCode kullanılabilir. BBCode aktif değilse yerine HTML kullanılacaktır.',
+	'PORTAL_CUSTOM_CODE_CENTER'					=> 'Orta Bölge Serbest Blok için kod',
+	'PORTAL_CUSTOM_CODE_CENTER_EXPLAIN'			=> 'Orta Bölge Serbest Blok kodlarını (HTML veya BBCode) buradan değiştirebilirsiniz.',
+	
+    // links
+	'ACP_PORTAL_LINKS_INFO'				=> 'Bağlantılar',
+	'ACP_PORTAL_LINKS_SETTINGS'			=> 'Bağlantı ayarları',
+	'ACP_PORTAL_LINKS_SETTINGS_EXPLAIN'	=> 'Bağlantı bloğundaki bağlantıları ayarlar.',
+	'PORTAL_LINKS'						=> 'Bağlatılar bloğu',
+	'PORTAL_LINKS_EXPLAIN'				=> 'Bu bloğu portalda gösterir.',
+	'PORTAL_LINK_TEXT'					=> 'Yazı/URL',
+	'PORTAL_LINK_TEXT_EXPLAIN'			=> 'Yazıdan sonra bağlantı için gereki URL gelecek. Bağlantılarının sırasını değiştirmek için düğmleri kullanın. <strong>http://</strong> koymayı unutmayın !',
+	'PORTAL_ADD_LINK_TEXT'				=> 'Bağlantı ekle',
+	'PORTAL_ADD_LINK_TEXT_EXPLAIN'		=> 'Yeni bağlantı oluşturmak için yazıya tıkla.',
+	'PORTAL_LINK_ADD'					=> '<strong>Ekle</strong>',
+
 
 	// minicalendar
 	'ACP_PORTAL_MINICALENDAR_INFO'				=> 'Küçük Takvim',

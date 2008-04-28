@@ -46,6 +46,8 @@ $lang = array_merge($lang, array(
 	'LOG_CONFIG_BOTS'					=> '<strong>Portal: Değiştirilmiş bots ayarları</strong>',
 	'LOG_CONFIG_POSTER'				=> '<strong>Portal:Değiştirilmiş en çok mesaj gönderenler ayarı</strong>',
 	'LOG_CONFIG_MINICALENDAR'		=> '<strong>Portal: Değiştirilmiş takvim ayarları</strong>',
+	'LOG_CONFIG_CUSTOMBLOCK'		=> '<strong>Portal: Serbest blok ayarları değiştirildi</strong>',
+	'LOG_CONFIG_LINKS'            => '<strong>Portal: Bağlantı bloğu ayarları değiştirildi</strong>',
 
 ));
 

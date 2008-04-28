@@ -37,6 +37,8 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_WELCOME_INFO'					=> 'Hoşgeldiniz Mesajı',
 	'ACP_PORTAL_ADS_INFO'						=> 'Reklam',
 	'ACP_PORTAL_MINICALENDAR_INFO'				=> 'Mini Takvim',
+	'ACP_PORTAL_LINKS_INFO'						=> 'Bağlantılar',
+	'ACP_PORTAL_CUSTOM_INFO'					=> 'Serbest Blok',
 ));
 
 ?>
