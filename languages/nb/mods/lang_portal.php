@@ -121,6 +121,7 @@ $lang = array_merge($lang, array(
 
 	// links
 	'LINKS'	=> 'Linker',
+	'NO_LINKS' => 'Ingen Linker',
 
 	// latest members
 	'LATEST_MEMBERS'	=> 'Siste registrerte',
