@@ -52,8 +52,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_CLOCK_EXPLAIN'					=> 'Zobrazit tento blok na portálu.',
 	'PORTAL_LINK_US'						=> 'Blok Odkaz na naše stránky',
 	'PORTAL_LINK_US_EXPLAIN'				=> 'Zobrazit tento blok na portálu.',
-	'PORTAL_LINKS'							=> 'Blok Odkazy',
-	'PORTAL_LINKS_EXPLAIN'					=> 'Zobrazit tento blok na portálu.',
 	'PORTAL_BIRTHDAYS'						=> 'Blok Narozeniny',
 	'PORTAL_BIRTHDAYS_EXPLAIN'				=> 'Zobrazit tento blok na portálu.',
 	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Počet dní',
@@ -97,29 +95,29 @@ $lang = array_merge($lang, array(
 	'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM_EXPLAIN'	=> 'Články se berou z fóra, nechte prázdné pro všechna fóra, oddělte čárkou pro více fór, např. 1,2,5',
 
 	// news
-	'ACP_PORTAL_NEWS_INFO'				=> 'Novinky',
-	'ACP_PORTAL_NEWS_SETTINGS'			=> 'Nastaveni novinek',
-	'ACP_PORTAL_NEWS_SETTINGS_EXPLAIN'	=> 'Zde můžete změnit nastavení Novinek a další specifická nastavení.',
-	'PORTAL_NEWS'						=> 'Blok zobrazení Novinek',
+	'ACP_PORTAL_NEWS_INFO'				=> 'Poslední příspěvky',
+	'ACP_PORTAL_NEWS_SETTINGS'			=> 'Nastaveni Posledních příspěvků',
+	'ACP_PORTAL_NEWS_SETTINGS_EXPLAIN'	=> 'Zde můžete změnit nastavení Posldních příspěvků a další specifická nastavení.',
+	'PORTAL_NEWS'						=> 'Blok zobrazení Posledních příspěvků',
 	'PORTAL_NEWS_EXPLAIN'				=> 'Zobrazit tento blok na portálu.',
-	'PORTAL_NEWS_STYLE'					=> 'Blok kompaktního stylu novinek',
+	'PORTAL_NEWS_STYLE'					=> 'Blok kompaktního stylu Posledních příspěvků',
 	'PORTAL_NEWS_STYLE_EXPLAIN'			=> 'Když je vybráno Ano, bude pro novinky použit kompaktní styl, v případě vybrání Ne bude použit objemný styl.',
 	'PORTAL_SHOW_ALL_NEWS'				=> 'Zobrazit všechny články v tomto fóru',
 	'PORTAL_SHOW_ALL_NEWS_EXPLAIN'		=> 'Včetně důležitých a oznámení.',
-	'PORTAL_NUMBER_OF_NEWS'				=> 'Počet článků s novinkami na portálu',
+	'PORTAL_NUMBER_OF_NEWS'				=> 'Počet článků s posledními příspěvky na portálu',
 	'PORTAL_NUMBER_OF_NEWS_EXPLAIN'		=> '0 znamená neomezený počet',
-	'PORTAL_NEWS_LENGTH'				=> 'Maximální délka článku s novinkami',
+	'PORTAL_NEWS_LENGTH'				=> 'Maximální délka článku s posledními příspěvky',
 	'PORTAL_NEWS_LENGTH_EXPLAIN'		=> '0 znamená neomezený počet',
-	'PORTAL_NEWS_FORUM'					=> 'ID novinek z fóra',
-	'PORTAL_NEWS_FORUM_EXPLAIN'			=> 'Články se berou z fóra, nechte prázdné pro všechna fóra, oddělte čárkou pro více fór, např. 1,2,5',
+	'PORTAL_NEWS_FORUM'					=> 'ID příspěvků z fóra',
+	'PORTAL_NEWS_FORUM_EXPLAIN'			=> 'Příspěvky se berou z fóra, nechte prázdné pro všechna fóra, oddělte čárkou pro více fór, např. 1,2,5',
 	'PORTAL_EXCLUDE_FORUM'				=> 'Vyloučit ID fóra',
-	'PORTAL_EXCLUDE_FORUM_EXPLAIN'		=> 'Články se berou z fóra, nechte prázdné pro všechna fóra, oddělte čárkou pro více fór, např. 1,2,5',
+	'PORTAL_EXCLUDE_FORUM_EXPLAIN'		=> 'Příspěvky se berou z fóra, nechte prázdné pro všechna fóra, oddělte čárkou pro více fór, např. 1,2,5',
 
 	// recent topics
-	'ACP_PORTAL_RECENT_INFO'				=> 'Poslední témata',
-	'ACP_PORTAL_RECENT_SETTINGS'			=> 'Nastavení Posledních témat',
-	'ACP_PORTAL_RECENT_SETTINGS_EXPLAIN'	=> 'Zde můžete změnit nastavení Posledních témat a další specifická nastavení.',
-	'PORTAL_RECENT'							=> 'Blok zobrazení Posledních témat',
+	'ACP_PORTAL_RECENT_INFO'				=> 'Poslední články',
+	'ACP_PORTAL_RECENT_SETTINGS'			=> 'Nastavení Posledních článků',
+	'ACP_PORTAL_RECENT_SETTINGS_EXPLAIN'	=> 'Zde můžete změnit nastavení Posledních článků a další specifická nastavení.',
+	'PORTAL_RECENT'							=> 'Blok zobrazení Posledních článků',
 	'PORTAL_RECENT_EXPLAIN'					=> 'Zobrazit tento blok na portálu.',
 	'PORTAL_MAX_TOPIC'						=> 'Omezení počtu posledních oznámení/vzrušujících témat',
 	'PORTAL_MAX_TOPIC_EXPLAIN'				=> '0 znamená neomezený počet',
@@ -222,7 +220,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_WELCOME_SETTINGS_EXPLAIN'	=> 'Zde můžete změnit nastavení Vítejte a další specifická nastavení.',
 	'PORTAL_WELCOME_INTRO'					=> 'Uvítací zpráva',
 	'PORTAL_WELCOME_GUEST'					=> 'Uvítací zpráva pouze pro návštěvníky?',
-	'PORTAL_WELCOME_INTRO_EXPLAIN'			=> 'Změňte uvítání (jen obyčejný text). Max. 600 znaků!',
+	'PORTAL_WELCOME_INTRO_EXPLAIN'			=> 'Změňte uvítání (lze použít i BCode). Max. 600 znaků!',
 
 	// minicalendar
 	'ACP_PORTAL_MINICALENDAR_INFO'				=> 'Kalendář',
@@ -235,6 +233,64 @@ $lang = array_merge($lang, array(
 	'PORTAL_MINICALENDAR_DAY_LINK_COLOR'		=> 'Barva odkazu na den',
 	'PORTAL_MINICALENDAR_DAY_LINK_COLOR_EXPLAIN'=> 'Barvy se zadávají v HEXa tvaru jako např. #FFFFFF pro bílou, nebo anglickým pojmenováním, např. vilolet.',
 
+   // new version of the portal
+   'ACP_PORTAL_VERSION'                  => '<strong>Verze portálu v%s</strong>',
+   'PORTAL_ATTACHMENTS_FORUM_IDS'                     => 'ID fór(a) s přílohami',
+   'PORTAL_ATTACHMENTS_FORUM_IDS_EXPLAIN'            => 'ID fór(a), jejichž přílohy mají být zobrazeny. K oddělení jednotlivých čísel použijte čárku nebo nechte prázdné pro všechna dostupná fóra.',   
+   'PORTAL_NEWS_PERMISSIONS'         => 'Povolit/zakázat povolení',
+   'PORTAL_NEWS_PERMISSIONS_EXPLAIN'   => 'Brát v potaz povolení k prohlížení fór při zobrazování posledních příspěvků',
+   'PORTAL_ANNOUNCEMENTS_PERMISSIONS'         => 'Povolit/zakázat povolení',
+   'PORTAL_ANNOUNCEMENTS_PERMISSIONS_EXPLAIN'   => 'Brát v potaz povolení k prohlížení fór při zobrazování oznámení',
+   
+   // custom
+   'ACP_PORTAL_CUSTOM_INFO'                        => 'Uživatelský blok',
+   'ACP_PORTAL_CUSTOM_SETTINGS'                     => 'nastavení Uživatelského bloku',
+   'ACP_PORTAL_CUSTOM_SETTINGS_EXPLAIN'            => 'Zde můžete změnit nastavení Uživatelského bloku. Do těchto bloků je možné vložit HTML kód nebo BBCode pro různé účely, jako např. pro účely reklamy, obrázků, videa apod. Stačí jen vložit příslušný kód.',
+   'ACP_PORTAL_CUSTOM_SMALL_SETTINGS'                     => 'Nastavení Uživatelského bloku pro malý blok',
+   'PORTAL_CUSTOM_SMALL_HEADLINE'                  => 'Nadpis pro malý uživatelský blok',
+   'PORTAL_CUSTOM_SMALL_HEADLINE_EXPLAIN'            => 'Zde můžete měnit nadpis pro malý uživatelský blok.',
+   'PORTAL_CUSTOM_SMALL'                           => 'Zobrazit malý uživatelský blok',
+   'PORTAL_CUSTOM_SMALL_EXPLAIN'                     => 'Zobrazit tento blok na portálu.',
+   'PORTAL_CUSTOM_SMALL_BBCODE'                     => 'Povolit použití BBCodu v malém uživatelském bloku',
+   'PORTAL_CUSTOM_SMALL_BBCODE_EXPLAIN'            => 'Může zde být použit BBCode. Pokud není jeho použití povoleno, kód se převede na HTML.',
+   'PORTAL_CUSTOM_CODE_SMALL'                     => 'Kód pro malý uživatelský blok',
+   'PORTAL_CUSTOM_CODE_SMALL_EXPLAIN'               => 'Zde změňte kód pro malý uživatelský blok (HTML nebo BBCode).',
+   'ACP_PORTAL_CUSTOM_CENTER_SETTINGS'                     => 'nastavení uživatelského bloku pro střední blok',
+   'PORTAL_CUSTOM_CENTER'                           => 'obrazit střední uživatelský blok',
+   'PORTAL_CUSTOM_CENTER_EXPLAIN'                  => 'Zobrazit tento blok na portálu.',
+   'PORTAL_CUSTOM_CENTER_HEADLINE'                  => 'Nadpis pro střední uživatelský blok',
+   'PORTAL_CUSTOM_CENTER_HEADLINE_EXPLAIN'         => 'Zde můžete měnit nadpis pro střední uživatelský blok.',
+   'PORTAL_CUSTOM_CENTER_BBCODE'                  => 'Povolit použití BBCodu ve středním uživatelském bloku',
+   'PORTAL_CUSTOM_CENTER_BBCODE_EXPLAIN'            => 'Může zde být použit BBCode. Pokud není jeho použití povoleno, kód se převede na HTML.',
+   'PORTAL_CUSTOM_CODE_CENTER'                     => 'Kód pro střední uživatelský blok',
+   'PORTAL_CUSTOM_CODE_CENTER_EXPLAIN'            => 'Zde změňte kód pro střední uživatelský blok (HTML nebo BBCode).',         
+   
+   'PORTAL_FORUM_INDEX'                     => 'Hlavní stránka fóra (seznam jednotlivých fór)',
+   'PORTAL_FORUM_INDEX_EXPLAIN'               => 'Zobrazit tento blok na portálu.',   
+   
+   // global announcements
+   'PORTAL_ANNOUNCEMENTS_ARCHIVE'            => 'Povolit archivační systém pro oznámení',
+   'PORTAL_ANNOUNCEMENTS_ARCHIVE_EXPLAIN'      => 'Pokud je archivační systém pro oznámení povolen, budou zobrazena čísla stránek.',   
+   
+   // news
+   'PORTAL_NEWS_SHOW_LAST'            => 'Zobrazit nejnovější příspěvek',
+   'PORTAL_NEWS_SHOW_LAST_EXPLAIN'      => 'Pokud je tato funkčnost povolena, bude nejnovější příspěvek zobrazen v textovém tvaru. Pokud je tato funkčnost zakázána, bude zobrazen první příspěvek tématu.<br />pokud je aktivován kompaktní styl bloku Posledních příspěvků, odkaz povede na nejnovější příspěvek.',
+   'PORTAL_NEWS_ARCHIVE'            => 'Povolit archivační systém nejnovějších příspěvků',
+   'PORTAL_NEWS_ARCHIVE_EXPLAIN'      => 'Pokud je archivační systém nejnovějších příspěvků povolen, budou zobrazena čísla stránek.',   
+   
+   // links
+   'ACP_PORTAL_LINKS_INFO'          => 'Odkazy',
+   'ACP_PORTAL_LINKS_SETTINGS'       => 'Nastavení Odkazů',
+   'ACP_PORTAL_LINKS_SETTINGS_EXPLAIN' => 'Nastavení jednotlivých odkazů.',
+   'PORTAL_LINKS'                  => 'Blok Odkazy',
+   'PORTAL_LINKS_EXPLAIN'            => 'Zobrazit tento blok na portálu.',
+   'PORTAL_LINK_TEXT'               => 'Text/URL',
+   'PORTAL_LINK_TEXT_EXPLAIN'         => 'Text následovaný url pro příslušný odkaz. Pro smazání a přeskupení odkazů použijte tlačítka. Nezapomeňte na http:// !',
+   'PORTAL_ADD_LINK_TEXT'            => 'Přidat odkaz',
+   'PORTAL_ADD_LINK_TEXT_EXPLAIN'      => 'Klikněte na text pro vytvoření nového odkazu.',
+   'PORTAL_LINK_ADD'               => '<strong>Přidat</strong>',   
+   
+   
 
 ));
 

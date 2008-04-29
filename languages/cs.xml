@@ -11,11 +11,9 @@ It has several boxes wich can be turned on an off in the ACP and certain setting
 
 Included language files:
 » English (en)
+» Czech (cs)
 » German (de)
-» Dutch (nl)
 » Norwegian (nb)
-» Spanish (es)
-» Czech (cz)
 » Turkish (tr)
 
 This portal is based on the phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3portal.com )
@@ -75,7 +73,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
   </header>
   <action-group>
     <copy>
-     <file from="languages/cz/mods/*.*" to="language/cz/mods/*.*" />
+     <file from="languages/cs/mods/*.*" to="language/cs/mods/*.*" />
     </copy>
     <diy-instructions lang="en-gb">See general install.xml file</diy-instructions>
     <diy-instructions lang="de">Siehe install.xml</diy-instructions>

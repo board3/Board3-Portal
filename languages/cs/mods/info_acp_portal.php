@@ -24,8 +24,8 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_INFO'							=> 'Portál',
 	'ACP_PORTAL_GENERAL_INFO'					=> 'Hlavní',
 	'ACP_PORTAL_ANNOUNCE_INFO'					=> 'Globální oznámení',
-	'ACP_PORTAL_NEWS_INFO'						=> 'Novinky',
-	'ACP_PORTAL_RECENT_INFO'					=> 'Poslední témata',
+	'ACP_PORTAL_NEWS_INFO'						=> 'Poslední příspěvky',
+	'ACP_PORTAL_RECENT_INFO'					=> 'Poslední články',
 	'ACP_PORTAL_WORDGRAPH_INFO'					=> 'Wordgraph',
 	'ACP_PORTAL_GENERAL_INFO'					=> 'Základní nastavení',
 	'ACP_PORTAL_PAYPAL_INFO'					=> 'Paypal příspěvky',
@@ -37,6 +37,8 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_WELCOME_INFO'					=> 'Uvítací zpráva',
 	'ACP_PORTAL_ADS_INFO'						=> 'Reklama',
 	'ACP_PORTAL_MINICALENDAR_INFO'				=> 'Kalendář',
+	'ACP_PORTAL_LINKS_INFO'						=> 'Odkazy',
+	'ACP_PORTAL_CUSTOM_INFO'					=> 'Uživatelský blok',
 ));
 
 ?>

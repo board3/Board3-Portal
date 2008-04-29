@@ -44,7 +44,7 @@ $lang = array_merge($lang, array(
 	// news & global announcements
 	'LATEST_ANNOUNCEMENTS'	=> 'Poslední globální oznámení',
 	'GLOBAL_ANNOUNCEMENT'	=> 'Globální oznámení',
-	'LATEST_NEWS'			=> 'Poslední novinky',
+	'LATEST_NEWS'			=> 'Poslední příspěvky',
 	'READ_FULL'				=> 'Přečíst celé',
 	'NO_NEWS'				=> 'Žádné novinky',
 	'NO_ANNOUNCEMENTS'		=> 'Žádná globální oznámení',
@@ -95,7 +95,7 @@ $lang = array_merge($lang, array(
 	'SH_POSTS'	=> 'příspěvky',
 	'SH_AUTHOR'	=> 'autor',
 	'SH_ENGINE'	=> 'vyhledávače',
-	'SH_ADV'	=> 'pokročilé vyhledávání',
+	'SH_ADV'	=> 'pokročilé hledání',
 	
 	// recent
 	'RECENT_NEWS'		=> 'Poslední články',
@@ -117,6 +117,7 @@ $lang = array_merge($lang, array(
 	
 	// attachments
 	'DOWNLOADS'	=> 'Počet stažení',
+	'FILESIZEPORTAL'	=> 'Velikost',
 
 	// links
 	'LINKS'	=> 'Odkazy',
@@ -133,6 +134,7 @@ $lang = array_merge($lang, array(
 	// main menu
 	'M_MENU' 	=> 'Menu',
 	'M_CONTENT'	=> 'Obsah',
+	'M_GALLERY'		=> 'Galerie',
 	'M_ACP'		=> 'Administrace',
 	'M_HELP'	=> 'Nápověda',
 	'M_BBCODE'	=> 'Průvodce BBCode',
@@ -142,7 +144,7 @@ $lang = array_merge($lang, array(
 
 	// link us
 	'LINK_US'		=> 'Odkaz na naše stránky',
-	'LINK_US_TXT'	=> 'Prosím, odkazujte na naše stránky <strong>%s</strong>. Použijte následující HTML kód:',
+	'LINK_US_TXT'	=> 'Prosím, odkazujte na naše stránky <strong>%s</strong>. Použijte k tomu následující HTML kód:',
 
 	// friends
 	'FRIENDS'				=> 'Přátelé',
@@ -167,18 +169,18 @@ $lang = array_merge($lang, array(
 	'NO_MODERATORS_P'		=> 'Žádní moderátoři',
 
 	// average Statistics
-	'TOPICS_PER_DAY_OTHER'	=> 'Témat za den: <strong>%d</strong>',
-	'TOPICS_PER_DAY_ZERO'	=> 'Témat za den: <strong>0</strong>',
-	'POSTS_PER_DAY_OTHER'	=> 'Příspěvků za den: <strong>%d</strong>',
-	'POSTS_PER_DAY_ZERO'	=> 'Příspěvků za den: <strong>0</strong>',
-	'USERS_PER_DAY_OTHER'	=> 'Uživatelů za den: <strong>%d</strong>',
-	'USERS_PER_DAY_ZERO'	=> 'Uživatelů za den: <strong>0</strong>',
-	'TOPICS_PER_USER_OTHER'	=> 'Témat na uživatele: <strong>%d</strong>',
-	'TOPICS_PER_USER_ZERO'	=> 'Témat na uživatele: <strong>0</strong>',
-	'POSTS_PER_USER_OTHER'	=> 'Příspěvků na uživatele: <strong>%d</strong>',
-	'POSTS_PER_USER_ZERO'	=> 'Příspěvků na uživatele: <strong>0</strong>',
-	'POSTS_PER_TOPIC_OTHER'	=> 'Příspěvků na téma: <strong>%d</strong>',
-	'POSTS_PER_TOPIC_ZERO'	=> 'Příspěvků na téma: <strong>0</strong>',
+	'TOPICS_PER_DAY_OTHER'	=> 'Témat za den <strong>%d</strong>',
+	'TOPICS_PER_DAY_ZERO'	=> 'Témat za den <strong>0</strong>',
+	'POSTS_PER_DAY_OTHER'	=> 'Příspěvků za den <strong>%d</strong>',
+	'POSTS_PER_DAY_ZERO'	=> 'Příspěvků za den <strong>0</strong>',
+	'USERS_PER_DAY_OTHER'	=> 'Uživatelů za den <strong>%d</strong>',
+	'USERS_PER_DAY_ZERO'	=> 'Uživatelů za den <strong>0</strong>',
+	'TOPICS_PER_USER_OTHER'	=> 'Témat na uživatele <strong>%d</strong>',
+	'TOPICS_PER_USER_ZERO'	=> 'Témat na uživatele <strong>0</strong>',
+	'POSTS_PER_USER_OTHER'	=> 'Příspěvků na uživatele <strong>%d</strong>',
+	'POSTS_PER_USER_ZERO'	=> 'Příspěvků na uživatele <strong>0</strong>',
+	'POSTS_PER_TOPIC_OTHER'	=> 'Příspěvků na téma <strong>%d</strong>',
+	'POSTS_PER_TOPIC_ZERO'	=> 'Příspěvků na téma <strong>0</strong>',
 
 	// Poll
 	'POLL'					=> 'Ankety',
@@ -190,6 +192,13 @@ $lang = array_merge($lang, array(
 	// other
 	'CLOCK'		=> 'Hodiny',
 	'SPONSOR'	=> 'Sponzoři',
+	
+	// new version of the portal
+	'VIEWING_PORTAL'         => 'Stránka portálu',
+	'VIEW_LATEST_ANNOUNCEMENT'   => '1 oznámení',
+  'VIEW_LATEST_ANNOUNCEMENTS'   => '%d oznámení',
+  'NO_ATTACHMENTS'                  => 'Žádné přílohy',
+  'NO_LINKS' => 'No links',
 	
 	/**
 	* DO NOT REMOVE or CHANGE
@@ -205,7 +214,7 @@ $lang = array_merge($lang, array(
 	'Mini_Cal_events'		=> 'Blížící se události',
 	'Mini_Cal_no_events'	=> 'Nic',
 	'Mini_cal_this_event'	=> 'Tento měsíc dovolená',
-	'View_next_month'		=> 'příští měsíc',
+	'View_next_month'		=> 'následující měsíc',
 	'View_previous_month'	=> 'předchozí měsíc',
 
 // uses MySQL DATE_FORMAT - %c  long_month, numeric (1..12) - %e  Day of the long_month, numeric (0..31)
