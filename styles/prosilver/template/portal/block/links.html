@@ -5,9 +5,13 @@
 			<h3>{L_LINKS}</h3>
 			<div class="panel" style="margin-bottom: 0px;">
 				<ul class="ul-link">
+				<!-- IF .link -->
 					<!-- BEGIN link -->
 					<li><a href="{link.URL}" title="{link.TEXT}">{link.TEXT}</a></li>
 					<!-- END link -->
+				<!-- ELSE -->
+						<span style="float:left;" class="gensmall"><strong>{L_NO_LINKS}</strong></span><br />
+				<!-- ENDIF -->
 				</ul>
 			</div>
 		<span class="corners-bottom"><span></span></span>
