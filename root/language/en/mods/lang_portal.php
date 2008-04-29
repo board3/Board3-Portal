@@ -121,8 +121,9 @@ $lang = array_merge($lang, array(
 	'NO_ATTACHMENTS'	=> 'No attachments',
 
 	// links
-	'LINKS'	=> 'Links',
-
+	'LINKS'				=> 'Links',
+	'NO_LINKS'			=> 'No links', 
+	
 	// latest members
 	'LATEST_MEMBERS'	=> 'Latest members',
 

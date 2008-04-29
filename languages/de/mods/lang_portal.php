@@ -113,7 +113,8 @@ $lang = array_merge($lang, array(
 	'NO_ATTACHMENTS'                => 'Keine Dateianhänge',
 
 	// links
-	'LINKS'								=> 'Links',
+	'LINKS'							=> 'Links',
+	'NO_LINKS'						=> 'Keine Links vorhanden', 
 
 	// latest members
 	'LATEST_MEMBERS'				=> 'Neue Mitglieder',
