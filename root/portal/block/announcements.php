@@ -141,7 +141,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 				}
 		
 				$template->assign_block_vars('announcements_row', array(
-					'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
+					'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
 					'FORUM_NAME'		=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '',
 					'TITLE'				=> $fetch_news[$i]['topic_title'],
 					'POSTER'			=> $fetch_news[$i]['username'],
@@ -196,7 +196,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 			}	
 			
 			$template->assign_block_vars('announcements_row', array( 	 
-				'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
+				'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
 				'FORUM_NAME'			=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '', 	 
 				'TITLE'					=> $fetch_news[$i]['topic_title'], 	 
 				'POSTER'				=> $fetch_news[$i]['username'],

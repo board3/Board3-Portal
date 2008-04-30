@@ -33,7 +33,7 @@
 			<dl>
 				<dt style="border-left:0px; width: 99%">							
 					<a name="n{news_row.N_ID}"></a><img src="{T_THEME_PATH}/images/arrow_right.gif" alt=""/> 
-					<!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG}  <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}" title="{L_JUMP_NEWEST}" class="topictitle">{news_row.TITLE}</a>
+					<!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG}  <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}" title="{S_NEWEST_OR_FIRST}" class="topictitle">{news_row.TITLE}</a>
 					<br style="clear:both" />
 					<!-- IF news_row.PAGINATION --><strong class="pagination"><span>{news_row.PAGINATION}</span></strong><!-- ENDIF -->
 					{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL} {L_POSTED_ON_DATE} {news_row.TIME}

@@ -163,7 +163,7 @@ if ($portal_config['portal_search'])
 	include($phpbb_root_path . 'portal/block/search.'.$phpEx);
 }
 
-if ($portal_config['portal_attachments'])
+if ($portal_config['portal_attachments'] && $config['allow_attachments'])
 {
 	include($phpbb_root_path . 'portal/block/attachments.'.$phpEx);
 }
