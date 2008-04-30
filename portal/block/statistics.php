@@ -132,7 +132,7 @@ $template->assign_vars(array(
 	'NEWEST_USER'	=> sprintf($user->lang['NEWEST_USER'], get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
 	'S_ANN'			=> get_db_stat('announcmenttotal'),
 	'S_SCT'			=> get_db_stat('stickytotal'),
-	'S_TOT_ATTACH'	=> get_db_stat('attachmentstotal'),
+	'S_TOT_ATTACH'	=> ($config['allow_attachments']) ? get_db_stat('attachmentstotal') : 0,
 	
 	// avarage stat
 	'TOPICS_PER_DAY'	=> sprintf($user->lang[$l_topics_per_day_s], $topics_per_day),
