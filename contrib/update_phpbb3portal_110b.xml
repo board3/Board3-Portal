@@ -4,16 +4,17 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.0.xsd">
   <header>
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-    <title lang="en-gb">board3 Portal - based on phpBB3 Portal</title>
-    <title lang="de">board3 Portal - basierend auf phpBB3 Portal</title>
+    <title lang="en-gb">board3 Portal</title>
+    <title lang="de">board3 Portal</title>
     <description lang="en-gb">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
 
 Included language files:
 » English (en)
+» Czech (cs)
 » German (de)
-» Dutch (nl)
 » Norwegian (nb)
+» Turkish (tr)
 
 This portal is based on the phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3portal.com )
 </description>
@@ -62,9 +63,9 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
       </author>
     </author-group>
     <mod-version>
-      <major>0</major>
-      <minor>3</minor>
-      <revision>0</revision>
+      <major>1</major>
+      <minor>0</minor>
+      <revision>0 RC1</revision>
     </mod-version>
     <installation>
       <level>easy</level>
@@ -79,12 +80,12 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
       <entry>
         <date>2008-05-04</date>
         <rev-version>
-          <major>0</major>
-          <minor>3</minor>
-          <revision>0</revision>
+          <major>1</major>
+          <minor>0</minor>
+          <revision>0 RC1</revision>
         </rev-version>
         <changelog lang="en-GB">
-          <change>Tons of bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
+          <change>Many bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
 		  <change>Adaptions to phpBB 3.0.1</change>
 		  <change>The link block can be edited in the ACP: add, delete links and order position</change>
           <change>BBCode is now allowed in welcome message</change>
@@ -98,7 +99,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
 		  <change>Attachment block: display attachments from one or more specific forums + attachments permission check added</change>
         </changelog>
         <changelog lang="de">
-          <change>Haufenweise bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
+          <change>Viele bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
 		  <change>An phpBB 3.0.1 angepasst</change>
 		  <change>Der Link Block kann nun über das ACP verwaltet werden: erstellen, löschen und positionieren von Links</change>
           <change>Es kann nun BBCode in der Willkommens Nachricht benutzt werden</change>
@@ -111,7 +112,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
 		  <change>"Mein Board-Style" hinzugefügt</change>
 		  <change>Dateianhänge: Anhänge aus einem oder mehreren bestimmten Foren anzeigen lassen + Berechtigungsprüfung hinzugefügt.</change>
         </changelog>
-      </entry>
+      </entry>	
       <entry>
         <date>2008-02-03</date>
         <rev-version>

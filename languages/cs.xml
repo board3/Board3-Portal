@@ -4,8 +4,8 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.0.xsd">
   <header>
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-    <title lang="en-gb">board3 Portal - based on phpBB3 Portal</title>
-    <title lang="de">board3 Portal - basierend auf phpBB3 Portal</title>
+    <title lang="en-gb">board3 Portal</title>
+    <title lang="de">board3 Portal</title>
     <description lang="en-gb">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
 
@@ -35,7 +35,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
       </author>
       <author>
         <realname>Kevin</realname>
-        <email>nospam@breest.net</email>
+        <email></email>
         <username>saint_hh</username>
         <homepage>http://www.board3.de</homepage>
         <contributions />
@@ -54,17 +54,24 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <homepage>http://www.digitalfotografie-foren.de</homepage>
         <contributions />
       </author>
+	     <author>
+        <realname>Christian</realname>
+        <email></email>
+        <username>Christian_N</username>
+        <homepage>http://www.phpbb-projekt.de</homepage>
+        <contributions />
+      </author>
     </author-group>
     <mod-version>
-      <major>0</major>
-      <minor>2</minor>
-      <revision>1</revision>
+      <major>1</major>
+      <minor>0</minor>
+      <revision>0 RC1</revision>
     </mod-version>
     <installation>
       <level>easy</level>
       <time>60</time>
       <target-version>
-        <target-primary>3.0.0</target-primary>
+        <target-primary>3.0.1</target-primary>
         <target-major allow="exact">3</target-major>
         <target-minor allow="exact">0</target-minor>
       </target-version>
