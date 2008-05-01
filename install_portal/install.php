@@ -1,6 +1,6 @@
 <?php
 
-$current_version = '0.3.0';
+$current_version = '1.0.0RC1';
 
 // If only checking version, exit.
 if( defined('IN_PHPBB') )
@@ -29,7 +29,7 @@ $page_title = 'Board3portal v' . $current_version;
 
 if( $user->data['is_registered'] && $auth->acl_get('a_board') ) 	 
 {
-	$version_array = array('0.1.0', '0.2.0', '0.2.1', '0.2.2', 'p3p1.2.2', 'p3p1.2.1', 'p3p1.2.0', 'p3p1.1.0b');
+	$version_array = array('0.1.0', '0.2.0', '0.2.1', '0.2.2', '0.3.0', 'p3p1.2.2', 'p3p1.2.1', 'p3p1.2.0', 'p3p1.1.0b');
 	
 	$old_version = 0;
 	$phpbb3portal = false;
