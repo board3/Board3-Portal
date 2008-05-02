@@ -53,7 +53,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 			$forum_from = ( strpos($forum_from, ',') !== FALSE ) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 
 			$time = ( $portal_config['portal_announcements_day'] == 0 ) ? 0 : $portal_config['portal_announcements_day'];
-			$post_time = ($time == 0) ? '' : 'AND topic_last_post_time > ' . (time() - $time * 86400);
+			$post_time = ($time == 0) ? '' : 'AND topic_time > ' . (time() - $time * 86400);
 			
 			$str_where = '';
 

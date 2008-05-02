@@ -77,7 +77,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	
 	$posts = array();
 
-	$post_time = ($time == 0) ? '' : 'AND t.topic_last_post_time > ' . (time() - $time * 86400);
+	$post_time = ($time == 0) ? '' : 'AND t.topic_time > ' . (time() - $time * 86400);
 
 	$forum_from = ( strpos($forum_from, ',') !== FALSE ) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 
