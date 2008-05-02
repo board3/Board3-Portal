@@ -33,19 +33,21 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
+    'LOG_CONFIG_CUSTOMBLOCK'            => '<strong>Portaal: aangepasteblok-instellingen aangepast</strong>',
 	'LOG_CONFIG_GENERAL'				=> '<strong>Portaal: algemene instellingen aangepast</strong>',
+	'LOG_CONFIG_LINKS'                  => '<strong>Portaal: linksblok-instellingen aangepast</strong>',
 	'LOG_CONFIG_NEWS'					=> '<strong>Portaal: nieuwsinstellingen aangepast</strong>',
-	'LOG_CONFIG_ANNOUNCEMENTS'	=> '<strong>Portaal: mededelingeninstellingen aangepast</strong>',
+	'LOG_CONFIG_ANNOUNCEMENTS'			=> '<strong>Portaal: mededelingeninstellingen aangepast</strong>',
 	'LOG_CONFIG_WELCOME'				=> '<strong>Portaal: welkomstbericht aangepast</strong>',
-	'LOG_CONFIG_RECENT'				=> '<strong>Portaal: recente onderwerpeninstellingen aangepast</strong>',
-	'LOG_CONFIG_WORDGRAPH'			=> '<strong>Portaal: wordgraphinstellingen aangepast</strong>',
-	'LOG_CONFIG_PAYPAL'				=> '<strong>Portaal: paypal donatiesinstellingen aangepast</strong>',
-	'LOG_CONFIG_ATTACHMENTS'		=> '<strong>Portaal: bijlageninstellingen aangepast</strong>',
+	'LOG_CONFIG_RECENT'					=> '<strong>Portaal: recente onderwerpeninstellingen aangepast</strong>',
+	'LOG_CONFIG_WORDGRAPH'				=> '<strong>Portaal: woordgrafiekinstellingen aangepast</strong>',
+	'LOG_CONFIG_PAYPAL'					=> '<strong>Portaal: paypal donatiesinstellingen aangepast</strong>',
+	'LOG_CONFIG_ATTACHMENTS'			=> '<strong>Portaal: bijlageninstellingen aangepast</strong>',
 	'LOG_CONFIG_MEMBERS'				=> '<strong>Portaal: laatste gebruikersinstellingen aangepast</strong>',
 	'LOG_CONFIG_POLLS'					=> '<strong>Portaal: peilingeninstellingen aangepast</strong>',
 	'LOG_CONFIG_BOTS'					=> '<strong>Portaal: laatst bezochte botsinstellingen aangepast</strong>',
-	'LOG_CONFIG_POSTER'				=> '<strong>Portaal: meeste berichtenplaatsers-instellingen aangepast</strong>',
-	'LOG_CONFIG_MINICALENDAR'		=> '<strong>Portaal: mini-kalenderinstellingen aangepast</strong>',
+	'LOG_CONFIG_POSTER'					=> '<strong>Portaal: meeste berichtenplaatsers-instellingen aangepast</strong>',
+	'LOG_CONFIG_MINICALENDAR'			=> '<strong>Portaal: mini-kalenderinstellingen aangepast</strong>',
 
 ));
 

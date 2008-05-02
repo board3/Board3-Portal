@@ -36,8 +36,16 @@ $lang = array_merge($lang, array(
 	'PORTAL'				=> 'Portaal',
 	'WELCOME'				=> 'Welkom',
 
+	'PORTAL_ERROR'			=> 'Portaal-fout',
+	'PORTAL_DELETE_DIR'		=> 'Verwijder de portaal installatie map: %s',
+	'PORTAL_UPDATE'			=> 'Portaal Update',
+	'PORTAL_UPDATE_TEXT'	=> 'Er wacht een update voor het portaal om geinstalleerd te worden! Installeer <a href="%1$s">%2$s</a>!',
+
 	// news & global announcements
 	'LATEST_ANNOUNCEMENTS'	=> 'Laatste forummededelingen',
+	'GLOBAL_ANNOUNCEMENT'	=> 'Forummededelingen',
+	'VIEW_LATEST_ANNOUNCEMENT'   => '1 mededeling',
+    'VIEW_LATEST_ANNOUNCEMENTS'   => '%d mededelingen',
 	'LATEST_NEWS'			=> 'Laatste nieuws',
 	'READ_FULL'				=> 'Lees alles',
 	'NO_NEWS'				=> 'Er is geen nieuws',
@@ -50,7 +58,7 @@ $lang = array_merge($lang, array(
 	'JUMP_NEWEST'			=> 'Ga naar het nieuwste bericht',
 	'JUMP_FIRST'			=> 'Ga naar het eerste bericht',
 	'JUMP_TO_POST'			=> 'Ga naar het bericht',
-	'BACK'                        => 'Terug',
+	'BACK'					=> 'Terug',
 
 	// who is online
 	'WIO_TOTAL'			=> 'Totaal',
@@ -59,17 +67,17 @@ $lang = array_merge($lang, array(
 	'WIO_GUEST'			=> 'Gasten',
 	//'RECORD_ONLINE_USERS'=> 'Bekijk het record: <strong>%1$s</strong><br />%2$s',
 
-	// Birthday 
-	'BIRTHDAYS_AHEAD'              => 'In de komende %s dagen', 
-	'NO_BIRTHDAYS_AHEAD'           => 'Zijn er geen jarigen.', 
+	// Birthday
+	'BIRTHDAYS_AHEAD'           => 'In de aankomende %s dagen',
+	'NO_BIRTHDAYS_AHEAD'        => 'In deze periode zijn er geen leden met een verjaardag.',
 
 	// user menu
-	'USER_MENU'			=> 'Gebruikersmenu',
-	'UM_LOG_ME_IN'		=> 'herriner mij',
-	'UM_HIDE_ME'		=> 'Verberg mij',
-	'UM_MAIN_SUBSCRIBED'=> 'Abonnementen',
-	'UM_BOOKMARKS'		=> 'Favorieten',
-
+	'USER_MENU'			     => 'Gebruikersmenu',
+	'UM_LOG_ME_IN'		     => 'Herinner mij',
+	'UM_HIDE_ME'		     => 'Verberg mij',
+	'UM_MAIN_SUBSCRIBED'     => 'Abonnementen',
+	'UM_BOOKMARKS'		     => 'Favorieten',
+	
 	// statistics
 	/*
 	'ST_NEW'		=> 'Nieuw',
@@ -84,7 +92,7 @@ $lang = array_merge($lang, array(
 	'ST_TOT_ATTACH'	=> 'Aantal bijlagen',
 
 	// search
-	'SH'		=> 'ok',
+	'SH'		=> 'Ok',
 	'SH_SITE'	=> 'forums',
 	'SH_POSTS'	=> 'berichten',
 	'SH_AUTHOR'	=> 'auteur',
@@ -106,7 +114,7 @@ $lang = array_merge($lang, array(
 	'RND_WWW'		=> 'Website',
 
 	// top poster
-	'TOP_POSTER'	=> 'Hoogste berichtenplaatsers',
+	'TOP_POSTER'	=> 'Meeste berichtenplaatsers',
 	
 	// attachments
 	'DOWNLOADS'	=> 'Downloads',
@@ -132,7 +140,7 @@ $lang = array_merge($lang, array(
 	'M_TERMS'	=> 'Gebruiksvoorwaarden',
 	'M_PRV'		=> 'Privacybeleid',
 	'M_SEARCH'	=> 'Zoeken',
-
+	
 	// link us
 	'LINK_US'		=> 'Link naar ons',
 	'LINK_US_TXT'	=> 'Voel vrij om te linken naar <strong>%s</strong>. Gebruik dan de volgende HTML:',
@@ -149,7 +157,7 @@ $lang = array_merge($lang, array(
 	'LAST_VISITED_BOTS'		=> 'Laatst %s bezochten zoekrobots',
 	
 	// wordgraph
-	'WORDGRAPH'				=> 'Wordgraph',
+	'WORDGRAPH'				=> 'Woordgrafiek',
 
 	// change style
 	'BOARD_STYLE'			=> 'Forumstijl',
@@ -172,17 +180,25 @@ $lang = array_merge($lang, array(
 	'POSTS_PER_USER_ZERO'	=> 'Berichten per gebruiker: <strong>0</strong>',
 	'POSTS_PER_TOPIC_OTHER'	=> 'Berichten per onderwerp: <strong>%d</strong>',
 	'POSTS_PER_TOPIC_ZERO'	=> 'Berichten per onderwerp: <strong>0</strong>',
+	
+	// Poll
+	'POLL'					=> 'Peiling',
+	'LATEST_POLLS'			=> 'Laatste peilingen',
+	'NO_OPTIONS'			=> 'Deze peiling heeft geen beschikbare opties.',
+	'NO_POLL'				=> 'Geen peilingen beschikbaar',
+	'RETURN_PORTAL'			=> '%sGa terug naar het portaal%s',
 
 	// other
-	'POLL'		=> 'Peiling',
-	'CLOCK'		=> 'Klok',
-	'SPONSOR'	=> 'Sponsors',
+	'VIEWING_PORTAL'      => 'Portaalpagina',
+	'CLOCK'		          => 'Klok',
+	'SPONSOR'	          => 'Sponsors',
+	'NO_ATTACHMENTS'      => 'Geen bijlagen',
+	'NO_LINKS'            => 'Geen links',
 	
 	/**
 	* DO NOT REMOVE or CHANGE
 	*/
-	'PORTAL_COPY'	=> '<a href="http://www.board3.de" title="board3.de">board3 Portal</a> - based on <a href="http://www.phpbb3portal.com" title="phpBB3 Portal">phpBB3 Portal</a><br />
-  Vertaald door <a href="http://www.phpBBservice.nl" title="phpBBservice.nl Nederlands supportforum">phpBBservice.nl</a>',
+	'PORTAL_COPY'	=> '<a href="http://www.board3.de" title="board3.de">board3 Portal</a> - gebaseerd op <a href="http://www.phpbb3portal.com" title="phpBB3 Portal">phpBB3 Portal</a><br />Vertaald door <a href="http://www.phpBBservice.nl" title="phpBBservice.nl Nederlands supportforum">phpBBservice.nl</a>',
 	)
 );
 

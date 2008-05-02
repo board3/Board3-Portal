@@ -26,7 +26,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_ANNOUNCE_INFO'					=> 'Forummededelingen',
 	'ACP_PORTAL_NEWS_INFO'						=> 'Nieuws',
 	'ACP_PORTAL_RECENT_INFO'					=> 'Recente onderwerpen',
-	'ACP_PORTAL_WORDGRAPH_INFO'					=> 'Wordgraph',
+	'ACP_PORTAL_WORDGRAPH_INFO'					=> 'Woordgrafiek',
 	'ACP_PORTAL_GENERAL_INFO'					=> 'Algemene instellingen',
 	'ACP_PORTAL_PAYPAL_INFO'					=> 'Paypal donaties',
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'		=> 'Bijlagen',
@@ -36,7 +36,9 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_MOST_POSTER_INFO'				=> 'Meeste berichtenplaatsers',
 	'ACP_PORTAL_WELCOME_INFO'					=> 'Welkomsbericht',
 	'ACP_PORTAL_ADS_INFO'						=> 'Adertenties',
+	'ACP_PORTAL_CUSTOM_INFO'                    => 'Aangepast-blok',
 	'ACP_PORTAL_MINICALENDAR_INFO'				=> 'Mini-kalender',
+	'ACP_PORTAL_LINKS_INFO'						=> 'Links',
 ));
 
 ?>

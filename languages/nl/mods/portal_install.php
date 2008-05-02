@@ -35,52 +35,53 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 
 	'INSTALLER_MENU'						=> 'PInUpmenu',
-	'INSTALLER_MENU_START'				=> 'Start',
+	'INSTALLER_MENU_START'					=> 'Start',
 	'INSTALLER_UNINSTALL'					=> 'de-installeren',
 	'INSTALLER_UPDATE'						=> 'Update',
 	'INSTALLER_INSTALL'						=> 'Installeren',
 
-	'INSTALLER_INTRO_TITLE'				=> 'Portaal Installatie/update hulpmiddel',
-	'INSTALLER_INTRO_NOTE'				=> 'Welkom op de portaal installeer/update hulpmiddel, ookwel PInUp genoemt.',
+	'INSTALLER_INTRO_TITLE'				    => 'Portaal Installatie/update hulpmiddel',
+	'INSTALLER_INTRO_NOTE'				    => 'Welkom op de portaal installeer/update hulpmiddel, ook wel PInUp genoemt.',
 
 	'INSTALLER_MENU_DONE'					=> 'Laatste versie',
-	'INSTALLER_MENU_DONE_TEXT'			=> 'Je hebt al versie %s geïnstalleerd, verwijder de install_portal map en keer terug naar de <a href="%s">indexpagina</a>.',
+	'INSTALLER_MENU_DONE_TEXT'				=> 'Je hebt al versie %s geÃ¯nstalleerd, verwijder de install_portal map en keer terug naar de <a href="%s">indexpagina</a>.',
 
 	'INSTALLER_INSTALL_TITLE'				=> 'PInUp Installatie',
 	'INSTALLER_INSTALL_NOTE'				=> 'Wanneer je kiest om deze MOD te installeren, zullen vorige versies van de database worden verwijderd.',
 	'INSTALLER_INSTALL_MENU'				=> 'Installatiemenu',
-	'INSTALLER_INSTALL_SUCCESSFUL'		=> 'Installatie van de MOD v%s is succesvol gelukt.',
-	'INSTALLER_INSTALL_UNSUCCESSFUL'	=> 'Installatie van de MOD v%s is <strong>niet</strong> succesvol gelukt.',
-	'INSTALLER_INSTALL_VERSION'			=> 'Installeer MOD v%s',
-	'INSTALLER_INSTALL_START'			=> 'Klik op <a href="%s">Installatie</a> om te starten met de installatie.',
+	'INSTALLER_INSTALL_SUCCESSFUL'			=> 'Installatie van de MOD v%s is succesvol gelukt.',
+	'INSTALLER_INSTALL_UNSUCCESSFUL'		=> 'Installatie van de MOD v%s is <strong>niet</strong> succesvol gelukt.',
+	'INSTALLER_INSTALL_VERSION'				=> 'Installeer MOD v%s',
+	'INSTALLER_INSTALL_START'				=> 'Klik op <a href="%s">Installatie</a> om te starten met de installatie.',
 
 	'INSTALLER_UPDATE_TITLE'				=> 'PInUp update',
-	'INSTALLER_UPDATE_NOTE'				=> 'Update MOD van v%s naar v%s',
+	'INSTALLER_UPDATE_NOTE'				    => 'Update MOD van v%s naar v%s',
 
-	'INSTALLER_UNINSTALL_TITLE'			=> 'PInUp de-installeren',
-	'INSTALLER_UNINSTALL_NOTE'			=> 'Welkom bij het updatemenu',
-	'INSTALLER_UNINSTALL_SUCCESSFUL'	=> 'Installatie van de MOD v%s is succesvol gelukt.',
+	'INSTALLER_UNINSTALL_TITLE'			    => 'PInUp de-installeren',
+	'INSTALLER_UNINSTALL_NOTE'			    => 'Welkom bij het updatemenu',
+	'INSTALLER_UNINSTALL_SUCCESSFUL'	    => 'Installatie van de MOD v%s is succesvol gelukt.',
 
-	'INSTALLER_NEEDS_ADMIN'			=> 'Je moet aangemeld zijn als beheerder.<br /><a href="../ucp.php?mode=login"><strong>ga je aanmelden</strong>.',
+	'INSTALLER_NEEDS_ADMIN'			        => 'Je moet aangemeld zijn als beheerder.<br /><a href="../ucp.php?mode=login"><strong>ga je aanmelden</strong>.',
 
 	'INSTALLER_UPDATE'						=> 'Update',
-	'INSTALLER_UPDATE_MENU'				=> 'Updatemenu',
-	'INSTALLER_UPDATE_NOTE'				=> 'Update MOD van v%s naar v%s',
-	'INSTALLER_UPDATE_SUCCESSFUL'		=> 'Update van de MOD van v%s naar v%s is succesvol gelukt.',
-	'INSTALLER_UPDATE_UNSUCCESSFUL'	=> 'Update van de MOD van v%s naar v%s is <strong>niet</strong> succesvol gelukt.',
-	'INSTALLER_UPDATE_VERSION'			=> 'Update MOD van v%s',
+	'INSTALLER_UPDATE_MENU'					=> 'Updatemenu',
+	'INSTALLER_UPDATE_NOTE'					=> 'Update MOD van v%s naar v%s',
+	'INSTALLER_UPDATE_SUCCESSFUL'			=> 'Update van de MOD van v%s naar v%s is succesvol gelukt.',
+	'INSTALLER_UPDATE_UNSUCCESSFUL'			=> 'Update van de MOD van v%s naar v%s is <strong>niet</strong> succesvol gelukt.',
+	'INSTALLER_UPDATE_VERSION'				=> 'Update MOD van v%s',
 	'INSTALLER_UPDATE_TO'					=> 'Update naar',
 	'INSTALLER_UPDATE_START'				=> 'Klik op <a href="%s">update</a> om te beginnen met de update.',
 
-	'INSTALLER_UNINSTALL_OLDVERSION'	=> 'Sorry, PInUp ondersteunt niet de de-installatie van de orginele phpBB3 Portal.',
+	'INSTALLER_UNINSTALL_OLDVERSION'	    => 'Sorry, PInUp ondersteunt niet de de-installatie van de orginele phpBB3 Portal.',
 
 	'INSTALLER_ERROR'						=> 'PInUp fout',
 
-	'INSTALLER_USEFUL_INFO'				=> 'Verwijder de /install_portal map.',
+	'INSTALLER_USEFUL_INFO'				    => 'Verwijder de /install_portal map.',
+   
+	'INSTALLER_UNINSTALL_USEFUL_INFO'	    => 'Vergeet niet om de portal bestanden en de aanpassingen van bestanden te verwijderen.',
 
-	'INSTALLER_UNINSTALL_USEFUL_INFO'	=> 'Vergeet niet om de portal bestanden en de aanpassingen van bestanden te verwijderen.',
-
-	'WARNING'									=> 'Waarschuwing',
+	'WARNING'						        => 'Waarschuwing',
+	
 ));
 
 ?>
