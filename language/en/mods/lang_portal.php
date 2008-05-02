@@ -87,9 +87,9 @@ $lang = array_merge($lang, array(
 	'ST_NEW_STICKYS'=> 'New sticky',
 	*/
 	'ST_TOP'		=> 'Total',
-	'ST_TOP_ANNS'	=> 'Total announcment',
-	'ST_TOP_STICKYS'=> 'Total sticky',
-	'ST_TOT_ATTACH'	=> 'Total attachments',
+	'ST_TOP_ANNS'	=> 'Total announcment:',
+	'ST_TOP_STICKYS'=> 'Total sticky:',
+	'ST_TOT_ATTACH'	=> 'Total attachments:',
 
 	// search
 	'SH'		=> 'go',
