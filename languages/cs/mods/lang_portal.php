@@ -6,7 +6,6 @@
 * @version $Id$
 * @copyright (c) kevin / saint ( http://www.board3.de/ ), (c) Ice, (c) nickvergessen ( http://www.flying-bits.org/ ), (c) redbull254 ( http://www.digitalfotografie-foren.de )
 * @based on: phpBB3 Portal by Sevdin Filiz, www.phpbb3portal.com
-* @translator (c) ( JirkaX)
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
@@ -161,7 +160,7 @@ $lang = array_merge($lang, array(
 	'WORDGRAPH'				=> 'Graf slov',
 
 	// change style
-	'BOARD_STYLE'			=> 'Styl boardu',
+	'BOARD_STYLE'			=> 'Styl zobrazení portálu',
 	'STYLE_CHOOSE'			=> 'Vyber styl',
 		
 	// team
@@ -198,7 +197,7 @@ $lang = array_merge($lang, array(
 	'VIEW_LATEST_ANNOUNCEMENT'   => '1 oznámení',
   'VIEW_LATEST_ANNOUNCEMENTS'   => '%d oznámení',
   'NO_ATTACHMENTS'                  => 'Žádné přílohy',
-  'NO_LINKS' => 'No links',
+  'NO_LINKS' => 'Žádné odkazy',
 	
 	/**
 	* DO NOT REMOVE or CHANGE

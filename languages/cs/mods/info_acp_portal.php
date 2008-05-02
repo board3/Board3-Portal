@@ -6,7 +6,6 @@
 * @version $Id$
 * @copyright (c) kevin / saint ( http://www.board3.de/ ), (c) Ice, (c) nickvergessen ( http://www.flying-bits.org/ ), (c) redbull254 ( http://www.digitalfotografie-foren.de )
 * @based on: phpBB3 Portal by Sevdin Filiz, www.phpbb3portal.com
-* @translator (c) ( JirkaX)
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
@@ -37,8 +36,8 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_WELCOME_INFO'					=> 'Uvítací zpráva',
 	'ACP_PORTAL_ADS_INFO'						=> 'Reklama',
 	'ACP_PORTAL_MINICALENDAR_INFO'				=> 'Kalendář',
-	'ACP_PORTAL_LINKS_INFO'						=> 'Odkazy',
-	'ACP_PORTAL_CUSTOM_INFO'					=> 'Uživatelský blok',
+	'ACP_PORTAL_LINKS_INFO'                  => 'Odkazy',
+	'ACP_PORTAL_CUSTOM_INFO'               => 'Uživatelský blok',
 ));
 
 ?>

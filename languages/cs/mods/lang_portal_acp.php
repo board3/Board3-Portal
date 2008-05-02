@@ -6,7 +6,6 @@
 * @version $Id$
 * @copyright (c) kevin / saint ( http://www.board3.de/ ), (c) Ice, (c) nickvergessen ( http://www.flying-bits.org/ ), (c) redbull254 ( http://www.digitalfotografie-foren.de )
 * @based on: phpBB3 Portal by Sevdin Filiz, www.phpbb3portal.com
-* @translator (c) ( JirkaX)
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
@@ -63,7 +62,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_WHOIS_ONLINE'							=> 'Blok Kdo je online?',
 	'PORTAL_WHOIS_ONLINE_EXPLAIN'					=> 'Zobrazit tento blok na portálu.',
 	'PORTAL_CHANGE_STYLE'							=> 'Změna stylu',
-	'PORTAL_CHANGE_STYLE_EXPLAIN'					=> 'Zobrazit tento blok na portálu.<br /><span style="color:red">Prosím, mějte na mysli:</span> if "Přepsat uživatelský styl:" v nastavení boardu na "Ano", tento blok <u>nebude zobrazen</u>, nazávisle na tomto nastavení.',
+	'PORTAL_CHANGE_STYLE_EXPLAIN'					=> 'Zobrazit tento blok na portálu.<br /><span style="color:red">Prosím, mějte na mysli:</span> Pokud je volba "Vždy použít výchozí styl" v menu Nastavení fóra zvolena "Ano", tento blok <u>nebude zobrazen</u>, nazávisle na tomto nastavení.',
 	'PORTAL_FRIENDS'						=> 'Blok Přátelé',
 	'PORTAL_FRIENDS_EXPLAIN'				=> 'Zobrazit tento blok na portálu.',
 	'PORTAL_MAX_ONLINE_FRIENDS'				=> 'Limit počtu zobrazených přátel',
@@ -244,7 +243,7 @@ $lang = array_merge($lang, array(
    
    // custom
    'ACP_PORTAL_CUSTOM_INFO'                        => 'Uživatelský blok',
-   'ACP_PORTAL_CUSTOM_SETTINGS'                     => 'nastavení Uživatelského bloku',
+   'ACP_PORTAL_CUSTOM_SETTINGS'                     => 'Nastavení Uživatelského bloku',
    'ACP_PORTAL_CUSTOM_SETTINGS_EXPLAIN'            => 'Zde můžete změnit nastavení Uživatelského bloku. Do těchto bloků je možné vložit HTML kód nebo BBCode pro různé účely, jako např. pro účely reklamy, obrázků, videa apod. Stačí jen vložit příslušný kód.',
    'ACP_PORTAL_CUSTOM_SMALL_SETTINGS'                     => 'Nastavení Uživatelského bloku pro malý blok',
    'PORTAL_CUSTOM_SMALL_HEADLINE'                  => 'Nadpis pro malý uživatelský blok',
@@ -252,18 +251,18 @@ $lang = array_merge($lang, array(
    'PORTAL_CUSTOM_SMALL'                           => 'Zobrazit malý uživatelský blok',
    'PORTAL_CUSTOM_SMALL_EXPLAIN'                     => 'Zobrazit tento blok na portálu.',
    'PORTAL_CUSTOM_SMALL_BBCODE'                     => 'Povolit použití BBCodu v malém uživatelském bloku',
-   'PORTAL_CUSTOM_SMALL_BBCODE_EXPLAIN'            => 'Může zde být použit BBCode. Pokud není jeho použití povoleno, kód se převede na HTML.',
+   'PORTAL_CUSTOM_SMALL_BBCODE_EXPLAIN'            => 'Může zde být použit BBCode. Pokud není jeho použití povoleno, lze vložit HTML kód.',
    'PORTAL_CUSTOM_CODE_SMALL'                     => 'Kód pro malý uživatelský blok',
    'PORTAL_CUSTOM_CODE_SMALL_EXPLAIN'               => 'Zde změňte kód pro malý uživatelský blok (HTML nebo BBCode).',
-   'ACP_PORTAL_CUSTOM_CENTER_SETTINGS'                     => 'nastavení uživatelského bloku pro střední blok',
-   'PORTAL_CUSTOM_CENTER'                           => 'obrazit střední uživatelský blok',
+   'ACP_PORTAL_CUSTOM_CENTER_SETTINGS'                     => 'Nastavení uživatelského bloku pro prostřední blok',
+   'PORTAL_CUSTOM_CENTER'                           => 'Zobrazit prostřední uživatelský blok',
    'PORTAL_CUSTOM_CENTER_EXPLAIN'                  => 'Zobrazit tento blok na portálu.',
-   'PORTAL_CUSTOM_CENTER_HEADLINE'                  => 'Nadpis pro střední uživatelský blok',
-   'PORTAL_CUSTOM_CENTER_HEADLINE_EXPLAIN'         => 'Zde můžete měnit nadpis pro střední uživatelský blok.',
-   'PORTAL_CUSTOM_CENTER_BBCODE'                  => 'Povolit použití BBCodu ve středním uživatelském bloku',
-   'PORTAL_CUSTOM_CENTER_BBCODE_EXPLAIN'            => 'Může zde být použit BBCode. Pokud není jeho použití povoleno, kód se převede na HTML.',
-   'PORTAL_CUSTOM_CODE_CENTER'                     => 'Kód pro střední uživatelský blok',
-   'PORTAL_CUSTOM_CODE_CENTER_EXPLAIN'            => 'Zde změňte kód pro střední uživatelský blok (HTML nebo BBCode).',         
+   'PORTAL_CUSTOM_CENTER_HEADLINE'                  => 'Nadpis pro prostřední uživatelský blok',
+   'PORTAL_CUSTOM_CENTER_HEADLINE_EXPLAIN'         => 'Zde můžete měnit nadpis pro prostřední uživatelský blok.',
+   'PORTAL_CUSTOM_CENTER_BBCODE'                  => 'Povolit použití BBCodu v prostředním uživatelském bloku',
+   'PORTAL_CUSTOM_CENTER_BBCODE_EXPLAIN'            => 'Může zde být použit BBCode. Pokud není jeho použití povoleno, lze vložit HTML kód.',
+   'PORTAL_CUSTOM_CODE_CENTER'                     => 'Kód pro prostřední uživatelský blok',
+   'PORTAL_CUSTOM_CODE_CENTER_EXPLAIN'            => 'Zde změňte kód pro prostřední uživatelský blok (HTML nebo BBCode).',         
    
    'PORTAL_FORUM_INDEX'                     => 'Hlavní stránka fóra (seznam jednotlivých fór)',
    'PORTAL_FORUM_INDEX_EXPLAIN'               => 'Zobrazit tento blok na portálu.',   
@@ -274,7 +273,7 @@ $lang = array_merge($lang, array(
    
    // news
    'PORTAL_NEWS_SHOW_LAST'            => 'Zobrazit nejnovější příspěvek',
-   'PORTAL_NEWS_SHOW_LAST_EXPLAIN'      => 'Pokud je tato funkčnost povolena, bude nejnovější příspěvek zobrazen v textovém tvaru. Pokud je tato funkčnost zakázána, bude zobrazen první příspěvek tématu.<br />pokud je aktivován kompaktní styl bloku Posledních příspěvků, odkaz povede na nejnovější příspěvek.',
+   'PORTAL_NEWS_SHOW_LAST_EXPLAIN'      => 'Pokud je tato funkčnost povolena, bude zobrazen nejnovější příspěvek. Pokud je tato funkčnost zakázána, bude zobrazen první příspěvek tématu.<br />Pokud je aktivován kompaktní styl bloku Posledních příspěvků, odkaz povede na nejnovější příspěvek.',
    'PORTAL_NEWS_ARCHIVE'            => 'Povolit archivační systém nejnovějších příspěvků',
    'PORTAL_NEWS_ARCHIVE_EXPLAIN'      => 'Pokud je archivační systém nejnovějších příspěvků povolen, budou zobrazena čísla stránek.',   
    
@@ -287,7 +286,7 @@ $lang = array_merge($lang, array(
    'PORTAL_LINK_TEXT'               => 'Text/URL',
    'PORTAL_LINK_TEXT_EXPLAIN'         => 'Text následovaný url pro příslušný odkaz. Pro smazání a přeskupení odkazů použijte tlačítka. Nezapomeňte na http:// !',
    'PORTAL_ADD_LINK_TEXT'            => 'Přidat odkaz',
-   'PORTAL_ADD_LINK_TEXT_EXPLAIN'      => 'Klikněte na text pro vytvoření nového odkazu.',
+   'PORTAL_ADD_LINK_TEXT_EXPLAIN'      => 'Klikněte na Přidat pro vytvoření nového odkazu.',
    'PORTAL_LINK_ADD'               => '<strong>Přidat</strong>',   
    
    
