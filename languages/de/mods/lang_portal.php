@@ -79,9 +79,9 @@ $lang = array_merge($lang, array(
 
 	// statistics
 	'ST_TOP'							=> 'Insgesamt',
-	'ST_TOP_ANNS'					=> 'Bekanntmachungen insgesamt',
-	'ST_TOP_STICKYS'				=> 'Wichtig insgesamt',
-	'ST_TOT_ATTACH'				=> 'Dateianhänge insgesamt',
+	'ST_TOP_ANNS'					=> 'Bekanntmachungen insgesamt:',
+	'ST_TOP_STICKYS'				=> 'Wichtig insgesamt:',
+	'ST_TOT_ATTACH'				=> 'Dateianhänge insgesamt:',
 
 	// search
 	'SH'								=> 'Los',
