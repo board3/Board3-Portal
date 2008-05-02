@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="../modx.prosilver.en.xsl"?>
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
-<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.0.xsd">
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.0.1.xsd">
   <header>
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
     <title lang="en-gb">board3 Portal</title>
@@ -12,6 +12,7 @@ It has several boxes wich can be turned on an off in the ACP and certain setting
 Included language files:
 » English (en)
 » Czech (cs)
+» Dutch (nl)
 » German (de)
 » Norwegian (nb)
 » Turkish (tr)
@@ -78,7 +79,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
     </installation>
     <history>
       <entry>
-        <date>2008-05-04</date>
+        <date>2008-05-03</date>
         <rev-version>
           <major>1</major>
           <minor>0</minor>
