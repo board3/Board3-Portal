@@ -77,9 +77,9 @@ class acp_portal
 						'portal_number_of_news'				=> array('lang' => 'PORTAL_NUMBER_OF_NEWS',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_news_length'				=> array('lang' => 'PORTAL_NEWS_LENGTH',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_news_forum'					=> array('lang' => 'PORTAL_NEWS_FORUM',	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
-						'portal_news_permissions'			=> array('lang' => 'PORTAL_NEWS_PERMISSIONS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_news_show_last'             => array('lang' => 'PORTAL_NEWS_SHOW_LAST',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_news_archive'               => array('lang' => 'PORTAL_NEWS_ARCHIVE',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_news_permissions'			=> array('lang' => 'PORTAL_NEWS_PERMISSIONS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 					)
 				);
 			break;
@@ -93,9 +93,9 @@ class acp_portal
 						'portal_number_of_announcements'	=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 						'portal_announcements_day'			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 						'portal_announcements_length'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-						'portal_global_announcements_forum'	=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'text:10:200',	'explain' => true),
-						'portal_announcements_permissions'	=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_global_announcements_forum'	=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'text:10:200',	'explain' => true),						
 						'portal_announcements_archive'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_announcements_permissions'	=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 					)
 				);
 			break;
@@ -353,7 +353,27 @@ class acp_portal
 
 			if ($submit)
 			{
-				set_portal_config($config_name, $config_value);
+				if (confirm_box(true))
+				{
+					switch( $mode )
+					{
+						case 'news':
+							set_portal_config('portal_news_permissions', 0);
+						break;
+						case 'announcements':
+							set_portal_config('portal_announcements_permissions', 0);
+						break;
+					}
+				} elseif( ($config_name == 'portal_news_permissions' && $config_value == '0' && $portal_config['portal_news_permissions'] == '1') || ($config_name == 'portal_announcements_permissions' && $config_value == '0' && $portal_config['portal_announcements_permissions'] == '1') ) {
+					$s_hidden_fields = build_hidden_fields(array(
+					'i'			=> $id,
+					'mode'		=> $mode,
+					'submit'	=> $submit,
+					));
+					confirm_box(false, $user->lang['CONFIRM_OPERATION'], $s_hidden_fields);
+				} else {
+					set_portal_config($config_name, $config_value);
+				}
 			}
 		}
 
