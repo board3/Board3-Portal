@@ -13,6 +13,9 @@ function qsearch_onSubmit()
 	case 'author':
 		window.open('search.php?author=' + qs_keywords, '_self', '');
 		return false;
+	case 'wikipedia':
+		window.open('http://en.wikipedia.org/wiki/Spezial:Search?search=' + qs_keywords, '_wikipedia', '');
+		return false;
 	case 'google':
 		window.open('http://www.google.com/search?q=' + qs_keywords, '_google', '');
 		return false;
@@ -59,12 +62,13 @@ function qsearch_onSubmit()
 					<option value="author" style="background-color: #EEEEEE;">{L_SH_AUTHOR}</option>
 				</optgroup>
 				<optgroup label="{L_SH_ENGINE}">
-					<option value="google" style="background-color: #FEF2D6;">google</option>
-					<option value="yahoo" style="background-color: #FEF2D6;">yahoo</option>
-					<option value="msnlive" style="background-color: #FEF2D6;">msnlive</option>
-					<option value="altavista" style="background-color: #FEF2D6;">altavista</option>
-					<option value="lycos" style="background-color: #FEF2D6;">lycos</option>
-					<option value="odp" style="background-color: #FEF2D6;">open directory</option>
+					<option value="wikipedia" style="background-color: #FEF2D6;">Wikipedia</option>
+					<option value="google" style="background-color: #FEF2D6;">Google</option>
+					<option value="yahoo" style="background-color: #FEF2D6;">Yahoo</option>
+					<option value="msnlive" style="background-color: #FEF2D6;">MSNlive</option>
+					<option value="altavista" style="background-color: #FEF2D6;">Altavista</option>
+					<option value="lycos" style="background-color: #FEF2D6;">Lycos</option>
+					<option value="odp" style="background-color: #FEF2D6;">Open directory</option>
 				</optgroup>
 			</select>
 			<input type="hidden" name="search_fields" value="all" />
