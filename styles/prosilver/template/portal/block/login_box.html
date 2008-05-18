@@ -1,9 +1,9 @@
 <!--version $Id$ //-->
 <form action="{S_LOGIN_ACTION}" method="post">
-<div class="panel">
+<div class="portal-panel">
 	<div class="inner">
-		<span class="corners-top"><span></span></span>
-			<h3><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></h3>
+		<span class="portal-corners-top"><span></span></span>
+			<h3><a href="{U_LOGIN_LOGOUT}"><img src="{T_THEME_PATH}/images/portal/portal_login.gif" width="17px" height="18px" alt=""/>&nbsp;{L_LOGIN_LOGOUT}</a></h3>
 
 			<span class="genmed">{L_USERNAME}:</span><br />
 			<input type="text" tabindex="1" name="username" id="username" size="25" value="" class="inputbox autowidth" /><br /><br /> 
@@ -24,7 +24,7 @@
 			<input type="hidden" name="redirect" value="{U_PORTAL}" />
 			<input type="submit" name="login" tabindex="5" value="{L_LOGIN}" class="button1" />
 			
-		<span class="corners-bottom"><span></span></span>
+		<span class="portal-corners-bottom"><span></span></span>
 	</div>
 </div>
 </form>
