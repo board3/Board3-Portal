@@ -67,7 +67,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
     <mod-version>
       <major>1</major>
       <minor>0</minor>
-      <revision>0 RC1</revision>
+      <revision>0</revision>
     </mod-version>
     <installation>
       <level>easy</level>

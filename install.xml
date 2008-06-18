@@ -66,7 +66,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
     <mod-version>
       <major>1</major>
       <minor>0</minor>
-      <revision>0 RC1</revision>
+      <revision>0</revision>
     </mod-version>
     <installation>
       <level>easy</level>
@@ -83,7 +83,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <rev-version>
           <major>1</major>
           <minor>0</minor>
-          <revision>0 RC1</revision>
+          <revision>0</revision>
         </rev-version>
         <changelog lang="en-GB">
           <change>Many bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
