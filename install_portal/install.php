@@ -39,9 +39,9 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 			FROM ' . PORTAL_CONFIG_TABLE . "
 			WHERE config_name = 'portal_version'";
 	$result = @$db->sql_query_limit( $sql, 1 );
-	if( $db->sql_affectedrows($result) > 0  )
+	$version = $db->sql_fetchrow( $result );
+	if( sizeof( $version ) )
 	{
-		$version = $db->sql_fetchrow( $result );
 		$old_version = strtolower($version['version']);
 	}
 	else
@@ -51,9 +51,9 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 				FROM ' . CONFIG_TABLE . "
 				WHERE config_name = 'portal_version'";
 		$result = @$db->sql_query_limit( $sql, 1 );
-		if( $db->sql_affectedrows($result) > 0 )
+		$version = $db->sql_fetchrow( $result );
+		if( sizeof( $version ) )
 		{
-			$version = $db->sql_fetchrow( $result );
 			$phpbb3portal = true;
 			$old_version = ( strtolower($version['version']) == '1.1.0.b' ) ? '1.1.0b' : strtolower($version['version']) ;
 		}
