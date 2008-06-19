@@ -163,13 +163,15 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 					forum_id';
 		$result = $db->sql_query_limit($sql, 1);
 		
-		if ($db->sql_affectedrows() > 0)
+		
+		
+		$row = $db->sql_fetchrow($result);
+		if( !sizeof( $row ) )
 		{
-			$row = $db->sql_fetchrow($result);
-			$global_f = $row['forum_id'];
-		} else {
 			return array();
 		}
+		$global_f = $row['forum_id'];
+		
 	}
 	
 	
