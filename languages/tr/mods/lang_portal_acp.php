@@ -188,13 +188,13 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAX_MOST_POSTER'					=> 'Gösterilecek en çok mesaj gönderen sayısı',
 	'PORTAL_MAX_MOST_POSTER_EXPLAIN'			=> '0 (sıfır) sınırsız anlamına gelir',
 
-	// left and right column width 
-	'ACP_PORTAL_column_WIDTH_INFO'				=> 'Kolon genişliği',
-	'ACP_PORTAL_column_WIDTH_SETTINGS'			=> 'Sol ve sağ kolon genişliği ayarları',
-	'PORTAL_LEFT_column_WIDTH'					=> 'Sol kolonun genişlik değeri',
-	'PORTAL_LEFT_column_WIDTH_EXPLAIN'			=> 'Sol kolonun genişliğini değiştir X pixel olarak değiştir, tavsiye edilen genişlik 180 pixeldir',
-	'PORTAL_RIGHT_column_WIDTH'				=> 'Sağ kolonun genişlik değeri',
-	'PORTAL_RIGHT_column_WIDTH_EXPLAIN'		=> 'Sağ kolonun genişliğini değiştir X pixel olarak değiştir, tavsiye edilen genişlik 180 pixeldir',
+	// left and right collumn width 
+	'ACP_PORTAL_COLLUMN_WIDTH_INFO'				=> 'Kolon genişliği',
+	'ACP_PORTAL_COLLUMN_WIDTH_SETTINGS'			=> 'Sol ve sağ kolon genişliği ayarları',
+	'PORTAL_LEFT_COLLUMN_WIDTH'					=> 'Sol kolonun genişlik değeri',
+	'PORTAL_LEFT_COLLUMN_WIDTH_EXPLAIN'			=> 'Sol kolonun genişliğini değiştir X pixel olarak değiştir, tavsiye edilen genişlik 180 pixeldir',
+	'PORTAL_RIGHT_COLLUMN_WIDTH'				=> 'Sağ kolonun genişlik değeri',
+	'PORTAL_RIGHT_COLLUMN_WIDTH_EXPLAIN'		=> 'Sağ kolonun genişliğini değiştir X pixel olarak değiştir, tavsiye edilen genişlik 180 pixeldir',
 
 	// attachments    
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'				=> 'Ekler',

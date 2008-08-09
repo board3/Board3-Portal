@@ -42,10 +42,10 @@ $lang = array_merge($lang, array(
 	'PORTAL_UPDATE_TEXT'	=> 'There\'s an update for portal waiting to be installed! Install <a href="%1$s">%2$s</a>!',
 
 	// news & global announcements
-	'LATEST_ANNOUNCEMENTS'		=> 'Latest global announcements',
-	'GLOBAL_ANNOUNCEMENT'		=> 'Global announcement',
-	'VIEW_LATEST_ANNOUNCEMENT'	=> '1 announcement',
-	'VIEW_LATEST_ANNOUNCEMENTS'	=> '%d announcements',
+	'LATEST_ANNOUNCEMENTS'	=> 'Latest global announcements',
+	'GLOBAL_ANNOUNCEMENT'	=> 'Global announcement',
+	'VIEW_LATEST_ANNOUNCEMENT'   => '1 announcement',
+	'VIEW_LATEST_ANNOUNCEMENTS'   => '%d announcements',
 	'LATEST_NEWS'			=> 'Latest news',
 	'READ_FULL'				=> 'Read all',
 	'NO_NEWS'				=> 'No news',
@@ -58,7 +58,7 @@ $lang = array_merge($lang, array(
 	'JUMP_NEWEST'			=> 'Jump to newest post',
 	'JUMP_FIRST'			=> 'Jump to first post',
 	'JUMP_TO_POST'			=> 'Jump to post',
-	'BACK'					=> 'Back',
+	'BACK'							=> 'Back',
 
 	// who is online
 	'WIO_TOTAL'			=> 'Total',
@@ -73,8 +73,8 @@ $lang = array_merge($lang, array(
 
 	// user menu
 	'USER_MENU'			=> 'User menu',
-	'UM_LOG_ME_IN'		=> 'Remember me',
-	'UM_HIDE_ME'		=> 'Hide me',
+	'UM_LOG_ME_IN'		=> 'remember me',
+	'UM_HIDE_ME'		=> 'hide me',
 	'UM_MAIN_SUBSCRIBED'=> 'Subscribed',
 	'UM_BOOKMARKS'		=> 'Bookmarks',
 
@@ -87,17 +87,17 @@ $lang = array_merge($lang, array(
 	'ST_NEW_STICKYS'=> 'New sticky',
 	*/
 	'ST_TOP'		=> 'Total',
-	'ST_TOP_ANNS'	=> 'Total Announcements:',
-	'ST_TOP_STICKYS'=> 'Total Stickies:',
-	'ST_TOT_ATTACH'	=> 'Total Attachments:',
+	'ST_TOP_ANNS'	=> 'Total announcment:',
+	'ST_TOP_STICKYS'=> 'Total sticky:',
+	'ST_TOT_ATTACH'	=> 'Total attachments:',
 
 	// search
-	'SH'		=> 'Go',
-	'SH_SITE'	=> 'Forums',
-	'SH_POSTS'	=> 'Posts',
-	'SH_AUTHOR'	=> 'Author',
-	'SH_ENGINE'	=> 'Search engines',
-	'SH_ADV'	=> 'Advanced search',
+	'SH'		=> 'go',
+	'SH_SITE'	=> 'forums',
+	'SH_POSTS'	=> 'posts',
+	'SH_AUTHOR'	=> 'author',
+	'SH_ENGINE'	=> 'search engines',
+	'SH_ADV'	=> 'advanced search',
 	
 	// recent
 	'RECENT_NEWS'		=> 'Recent',
@@ -129,7 +129,7 @@ $lang = array_merge($lang, array(
 
 	// make donation
 	'DONATION' 		=> 'Make a donation',
-	'DONATION_TEXT'	=> 'is a group suplying services with no intention of any revenue. Anyone who wants to support this group can do so by donating so that the cost of server, the domain etc. could be taken care of.',
+	'DONATION_TEXT'	=> 'is a formation suplying services with no intention of any revenue. Anyone who wants to support this formation can do it by donating so that the cost of server, the domain and etc. could be paid of.',
 	'PAY_MSG'		=> 'After selecting the amount which you want to donate from the menu, you can go on by clicking on the picture of PayPal.',
 	'PAY_ITEM'		=> 'Make a donation', // paypal item
 
@@ -209,8 +209,8 @@ $lang = array_merge($lang, array(
 	'Mini_Cal_events'		=> 'Upcoming Events',
 	'Mini_Cal_no_events'	=> 'None',
 	'Mini_cal_this_event'	=> 'This month holiday events',
-	'View_next_month'		=> 'Next month',
-	'View_previous_month'	=> 'Previous month',
+	'View_next_month'		=> 'next month',
+	'View_previous_month'	=> 'previous month',
 
 // uses MySQL DATE_FORMAT - %c  long_month, numeric (1..12) - %e  Day of the long_month, numeric (0..31)
 // see http://www.mysql.com/doc/D/a/Date_and_time_functions.html for more details

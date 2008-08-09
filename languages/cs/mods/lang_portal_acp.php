@@ -174,13 +174,13 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAX_MOST_POSTER'					=> 'Kolik největších přispěvovatelů se má zobrazit',
 	'PORTAL_MAX_MOST_POSTER_EXPLAIN'			=> '0 znamená neomezený počet',
 
-	// left and right column width 
-	'ACP_PORTAL_column_WIDTH_INFO'				=> 'Šířka sloupce',
-	'ACP_PORTAL_column_WIDTH_SETTINGS'			=> 'Nastavení šířky levého a pravého sloupce',
-	'PORTAL_LEFT_column_WIDTH'					=> 'Hodnota šířky levého sloupce',
-	'PORTAL_LEFT_column_WIDTH_EXPLAIN'			=> 'Nastavte šířku levého sloupce v pixelech, doporučená hodnota je 180',
-	'PORTAL_RIGHT_column_WIDTH'				=> 'Hodnota šířky pravého sloupce',
-	'PORTAL_RIGHT_column_WIDTH_EXPLAIN'		=> 'Nastavte šířku pravého sloupce v pixelech, doporučená hodnota je 180',
+	// left and right collumn width 
+	'ACP_PORTAL_COLLUMN_WIDTH_INFO'				=> 'Šířka sloupce',
+	'ACP_PORTAL_COLLUMN_WIDTH_SETTINGS'			=> 'Nastavení šířky levého a pravého sloupce',
+	'PORTAL_LEFT_COLLUMN_WIDTH'					=> 'Hodnota šířky levého sloupce',
+	'PORTAL_LEFT_COLLUMN_WIDTH_EXPLAIN'			=> 'Nastavte šířku levého sloupce v pixelech, doporučená hodnota je 180',
+	'PORTAL_RIGHT_COLLUMN_WIDTH'				=> 'Hodnota šířky pravého sloupce',
+	'PORTAL_RIGHT_COLLUMN_WIDTH_EXPLAIN'		=> 'Nastavte šířku pravého sloupce v pixelech, doporučená hodnota je 180',
 
 	// attachments    
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'				=> 'Přílohy',
@@ -228,9 +228,9 @@ $lang = array_merge($lang, array(
 	'PORTAL_MINICALENDAR'						=> 'Blok zobrazení Kalendáře',
 	'PORTAL_MINICALENDAR_EXPLAIN'				=> 'Zobrazit tento blok na portálu.',
 	'PORTAL_MINICALENDAR_TODAY_COLOR'			=> 'Aktivovat jinou barvu pro každý den',
-	'PORTAL_MINICALENDAR_TODAY_COLOR_EXPLAIN'	=> 'Barvy se zadávají v HEXa tvaru jako např. #FFFFFF pro bílou, nebo anglickým pojmenováním, např. violet.',
+	'PORTAL_MINICALENDAR_TODAY_COLOR_EXPLAIN'	=> 'Barvy se zadávají v HEXa tvaru jako např. #FFFFFF pro bílou, nebo anglickým pojmenováním, např. vilolet.',
 	'PORTAL_MINICALENDAR_DAY_LINK_COLOR'		=> 'Barva odkazu na den',
-	'PORTAL_MINICALENDAR_DAY_LINK_COLOR_EXPLAIN'=> 'Barvy se zadávají v HEXa tvaru jako např. #FFFFFF pro bílou, nebo anglickým pojmenováním, např. violet.',
+	'PORTAL_MINICALENDAR_DAY_LINK_COLOR_EXPLAIN'=> 'Barvy se zadávají v HEXa tvaru jako např. #FFFFFF pro bílou, nebo anglickým pojmenováním, např. vilolet.',
 
    // new version of the portal
    'ACP_PORTAL_VERSION'                  => '<strong>Verze portálu v%s</strong>',
