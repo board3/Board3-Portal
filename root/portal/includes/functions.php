@@ -174,63 +174,70 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		
 	}
 	
-	
-	$sql = 'SELECT
-				t.forum_id,
-				t.topic_id,
-				t.topic_last_post_id,
-				t.topic_last_post_time,
-				t.topic_time,
-				t.topic_title,
-				t.topic_attachment,
-				t.topic_views,
-				t.poll_title,
-				t.topic_replies,
-				t.topic_poster,
-				u.username,
-				u.user_id,
-				u.user_type,
-				u.user_colour,
-				p.post_id,
-				p.post_time,
-				p.post_text,
-				p.post_attachment,
-				p.enable_smilies,
-				p.enable_bbcode,
-				p.enable_magic_url,
-				p.bbcode_bitfield,
-				p.bbcode_uid,
-				f.forum_name
-			FROM
-				' . TOPICS_TABLE . ' AS t
-			LEFT JOIN
-				' . USERS_TABLE . ' as u
-			ON
-				' . $user_link . '
-			LEFT JOIN
-				' . FORUMS_TABLE . ' as f
-			ON
-				t.forum_id=f.forum_id
-			LEFT JOIN
-				' . POSTS_TABLE . ' as p
-			ON
-				' . $post_link . '
-			WHERE
-				' . $topic_type . '
+	$sql_array = array(
+		'SELECT' => 't.forum_id,
+			t.topic_id,
+			t.topic_last_post_id,
+			t.topic_last_post_time,
+			t.topic_time,
+			t.topic_title,
+			t.topic_attachment,
+			t.topic_views,
+			t.poll_title,
+			t.topic_replies,
+			t.topic_poster,
+			u.username,
+			u.user_id,
+			u.user_type,
+			u.user_colour,
+			p.post_id,
+			p.post_time,
+			p.post_text,
+			p.post_attachment,
+			p.enable_smilies,
+			p.enable_bbcode,
+			p.enable_magic_url,
+			p.bbcode_bitfield,
+			p.bbcode_uid,
+			f.forum_name',
+			
+		'FROM' => array(
+			TOPICS_TABLE => 't',
+		),
+		
+		'LEFT_JOIN' => array(
+			array(
+				'FROM' => array(USERS_TABLE => 'u'),
+				'ON' => $user_link,
+			),
+			array(
+				'FROM' => array(FORUMS_TABLE => 'f'),
+				'ON' => 't.forum_id=f.forum_id',
+			),
+			array(
+				'FROM' => array(POSTS_TABLE => 'p'),
+				'ON' => $post_link,
+			),
+		),
+		
+		'WHERE' => $topic_type . '
 				' . $post_time . '
 				AND t.topic_status <> 2
 				AND t.topic_approved = 1
 				AND t.topic_moved_id = 0
-				' . $str_where .'
-			ORDER BY
-				' . $topic_order;
+				' . $str_where,
+				
+		'ORDER_BY' => $topic_order,	
+	);
+					
+	$sql = $db->sql_build_query('SELECT', $sql_array);
 
-		if ($number_of_posts <> 0)
-		{
-			$result = $db->sql_query_limit($sql, $number_of_posts, $start);
-		} else {
-			$result = $db->sql_query($sql);
-		}
+	if ($number_of_posts <> 0)
+	{
+		$result = $db->sql_query_limit($sql, $number_of_posts, $start);
+	} else {
+		$result = $db->sql_query($sql);
+	}
 
 	// Instantiate BBCode if need be
 	if ($bbcode_bitfield !== '')
