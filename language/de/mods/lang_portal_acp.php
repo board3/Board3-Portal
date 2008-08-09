@@ -183,13 +183,13 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAX_MOST_POSTER'							=> 'Anzahl der anzuzeigenden Vielschreiber',
 	'PORTAL_MAX_MOST_POSTER_EXPLAIN'				=> '0 bedeutet unbegrenzt',
 
-	// left and right collumn width 
-	'ACP_PORTAL_COLLUMN_WIDTH_INFO'					=> 'Spaltenbreite',
-	'ACP_PORTAL_COLLUMN_WIDTH_SETTINGS'			=> 'Breiteneinstellung der rechten und linken Spalte',
-	'PORTAL_LEFT_COLLUMN_WIDTH'						=> 'Breite der linken Spalte',
-	'PORTAL_LEFT_COLLUMN_WIDTH_EXPLAIN'				=> 'Ändere hier die Breite der linken Spalte in Pixel, empfohlener Wert 180',
-	'PORTAL_RIGHT_COLLUMN_WIDTH'						=> 'Breite der rechten Spalte',
-	'PORTAL_RIGHT_COLLUMN_WIDTH_EXPLAIN'			=> 'Ändere hier die Breite der rechten Spalte in Pixel, empfohlener Wert 180',
+	// left and right column width 
+	'ACP_PORTAL_column_WIDTH_INFO'					=> 'Spaltenbreite',
+	'ACP_PORTAL_column_WIDTH_SETTINGS'			=> 'Breiteneinstellung der rechten und linken Spalte',
+	'PORTAL_LEFT_column_WIDTH'						=> 'Breite der linken Spalte',
+	'PORTAL_LEFT_column_WIDTH_EXPLAIN'				=> 'Ändere hier die Breite der linken Spalte in Pixel, empfohlener Wert 180',
+	'PORTAL_RIGHT_column_WIDTH'						=> 'Breite der rechten Spalte',
+	'PORTAL_RIGHT_column_WIDTH_EXPLAIN'			=> 'Ändere hier die Breite der rechten Spalte in Pixel, empfohlener Wert 180',
 
 	// attachments    
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'					=> 'Dateianhänge',
