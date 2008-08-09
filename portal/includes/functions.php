@@ -249,6 +249,20 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$row['username'] = '<b style="color:#' . $row['user_colour'] . '">' . $row['username'] . '</b>';
 		}
 
+		// Pull attachment data
+		$sql2 = 'SELECT *
+		   FROM ' . ATTACHMENTS_TABLE . '
+		   WHERE `post_msg_id` = '. $row['post_id'] .'
+		   AND in_message = 0';
+		            
+		$result2 = $db->sql_query($sql2);
+
+		while ($row2 = $db->sql_fetchrow($result2))
+		{
+		   $attachments[] = $row2;
+		}
+		$db->sql_freeresult($result2);
+		
 		$posts[$i]['bbcode_uid'] = $row['bbcode_uid'];
 		$len_check = $row['post_text'];
 		$maxlen = $text_length;
@@ -272,6 +286,10 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		if ($row['bbcode_bitfield'])
 		{
 			$bbcode->bbcode_second_pass($message, $row['bbcode_uid'], $row['bbcode_bitfield']);
+		}
+		if (!empty($attachments))
+		{
+		   parse_attachments($row['forum_id'], $message, $attachments, $update_count);
 		}
 		$message = smiley_text($message); // Always process smilies after parsing bbcodes
 		
