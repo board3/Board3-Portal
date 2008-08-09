@@ -84,6 +84,7 @@ if( $attach_forums === TRUE )
 			'POST_IDS'			=> (!empty($post_ids[$row['attach_id']])) ? $post_ids[$row['attach_id']] : '',
 			'POST_MSG_ID'		=> $row['post_msg_id'], // grab post ID to redirect to post
 			'U_FILE'			=> append_sid($phpbb_root_path . 'download/file.' . $phpEx, 'id=' . $row['attach_id']),
+			'U_TOPIC'			=> append_sid($phpbb_root_path . 'viewtopic.'.$phpEx, 'p='.$row['post_msg_id'].'#p'.$row['post_msg_id']),
 		));
 	}
 	$db->sql_freeresult($result);
