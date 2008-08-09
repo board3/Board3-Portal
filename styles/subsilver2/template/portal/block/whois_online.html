@@ -1,0 +1,15 @@
+<!--version $Id$ //-->
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th><!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a><!-- ELSE -->{L_WHO_IS_ONLINE}<!-- ENDIF --></th>
+	</tr>
+	<tr class="row1">
+		<td>
+				<!-- IF S_DISPLAY_ONLINE_LIST -->
+					<p style="font-size: 90%; margin: 0 5px 0 5px;">{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
+					<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>
+				<!-- ENDIF -->
+		</td>
+	</tr>
+</table>
+<br />

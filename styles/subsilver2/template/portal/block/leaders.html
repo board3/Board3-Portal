@@ -1,0 +1,43 @@
+<!--version $Id$ //-->
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_THE_TEAM}</th>
+	</tr>
+	<tr class="row3">
+		<td>
+			<strong>{L_ADMINISTRATORS}</strong>
+		</td>
+	</tr>
+	<!-- BEGIN admin -->
+	<tr  class="row1">
+		<td>
+			<span style="float:left;"><img src="portal/images/member.gif" height="15" width="15" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{admin.USERNAME_FULL}</strong></span><br style="clear:both" />
+		</td>
+	</tr>
+	<!-- BEGINELSE -->
+	<tr  class="row1">
+		<td>
+			{L_NO_ADMINISTRATORS_P}
+		</td>
+	</tr>
+	<!-- END admin -->
+	<tr  class="row3">
+		<td>
+			<strong>{L_MODERATORS}</strong>
+		</td>
+	</tr>
+	<!-- BEGIN mod -->
+	<tr  class="row1">
+		<td>
+			<span style="float:left;"><img src="portal/images/member.gif" height="15" width="15" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{mod.USERNAME_FULL}</strong></span><br style="clear:both" />
+		</td>
+	</tr>
+	<!-- BEGINELSE -->
+	<tr  class="row1">
+		<td>
+			{L_NO_MODERATORS_P}
+		</td>
+	</tr>
+	<!-- END mod -->
+</table>
+<br />

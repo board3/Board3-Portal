@@ -1,0 +1,43 @@
+<!--version $Id$ //-->
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_LATEST_ANNOUNCEMENTS}</th>
+	</tr>
+	<!-- BEGIN announcements_row -->
+	<!-- IF announcements_row.S_NO_TOPICS  -->
+	<tr class="row1">
+		<td>
+			<span class="gensmall"><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
+		</td>
+	</tr>
+	<!-- ELSE -->
+	<tr class="row<!-- IF announcements_row.S_ROW_COUNT is even -->1<!-- ELSE -->2<!-- ENDIF -->">
+		<td>
+				<a name="a{announcements_row.A_ID}"></a><!-- IF announcements_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {announcements_row.ATTACH_ICON_IMG} <!-- IF announcements_row.S_POLL --> <strong style="font-size:1.1em;">{L_POLL}: </strong><!-- ENDIF -->
+				<a href="{announcements_row.U_VIEW_COMMENTS}" title="{announcements_row.TITLE}"><strong style="font-size:1.1em;">{announcements_row.TITLE}</strong></a>
+				<br style="clear:both" />
+				<span style="float: left;">{L_POSTED} {L_POST_BY_AUTHOR}: {announcements_row.POSTER_FULL} {L_POSTED_ON_DATE} {announcements_row.TIME}</span>
+				<!-- IF announcements_row.PAGINATION --><span style="float: right; font-size:0.9em;"> [ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {announcements_row.PAGINATION} ] </span><!-- ENDIF -->
+			<br style="clear:both" />
+			<!-- IF announcements_row.FORUM_NAME -->
+				{L_FORUM}: <strong><a href="{announcements_row.U_VIEWFORUM}">{announcements_row.FORUM_NAME}</a></strong>
+			<!-- ELSE -->
+				{L_GLOBAL_ANNOUNCEMENT}
+			<!-- ENDIF -->
+			<br style="clear:both" />
+			<span style="float: left; font-size:0.9em;"><a href="{announcements_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}"><em>{L_COMMENTS}: {announcements_row.REPLIES}</em></a>
+			<em>&nbsp;&bull;&nbsp;{L_TOPIC_VIEWS}: {announcements_row.TOPIC_VIEWS}</em></span>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF announcements_row.S_LAST_ROW -->
+	<!-- IF AP_PAGINATION or TOTAL_ANNOUNCEMENTS -->
+	<tr class="row<!-- IF announcements_row.S_ROW_COUNT is even -->2<!-- ELSE -->1<!-- ENDIF -->">
+		<td class="gensmall" valign="middle" align="right" nowrap="nowrap">{TOTAL_ANNOUNCEMENTS}
+		<!-- IF AP_PAGE_NUMBER --><!-- IF AP_PAGINATION --> &bull; {AP_PAGE_NUMBER} &bull; <span>{AP_PAGINATION}</span><!-- ELSE --> &bull; {AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- ENDIF -->
+	<!-- END announcements_row -->
+</table>
+<br />

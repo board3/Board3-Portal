@@ -1,0 +1,27 @@
+<!--version $Id$ //-->
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_BIRTHDAYS}</th>
+	</tr>
+	<tr class="row1">
+		<td>
+			<!-- IF BIRTHDAY_LIST -->
+			<strong>{L_CONGRATULATIONS}:<br />{BIRTHDAY_LIST}</strong>
+			<!-- ELSE -->
+			{L_NO_BIRTHDAYS}
+			<!-- ENDIF -->
+		</td>
+	</tr>
+	<tr class="row1">
+		<td>
+			<strong>{L_BIRTHDAYS_AHEAD}:</strong>
+			<br />
+			<!-- IF BIRTHDAYS_AHEAD_LIST -->
+			{BIRTHDAYS_AHEAD_LIST}
+			<!-- ELSE -->
+			{L_NO_BIRTHDAYS_AHEAD}
+			<!-- ENDIF -->
+		</td>
+	</tr>
+</table>
+<br />

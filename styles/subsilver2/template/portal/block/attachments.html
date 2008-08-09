@@ -1,0 +1,23 @@
+<!--version $Id$ //-->
+    <table class="tablebg" cellspacing="1" width="100%">
+       <tr>
+          <th>{L_ATTACHMENTS}</th>
+       </tr>
+       <tr class="row1">
+          <td>
+             <!-- IF .attach -->
+             <span style="float:left;"><strong>{L_FILENAME}</strong></span>
+             <span style="float:right;padding-right:10px;"><strong>{L_FILESIZE}</strong></span><br />
+                <!-- BEGIN attach -->
+                <span style="float:left;" class="gensmall"><img src="portal/images/icon_topic_attach.gif" alt="" />&nbsp;<a href="viewtopic.php?p={attach.POST_MSG_ID}#p{attach.POST_MSG_ID}" ><strong>{attach.REAL_FILENAME}</strong></a></span><br style="clear:both" />
+             <span style="float:left;">{L_FILESIZE}:</span><span style="float:right;" class="gensmall"><strong>{attach.FILESIZE}</strong></span><br style="clear:both" />
+             <span style="float:left;">{L_DOWNLOADS}:</span><span style="float:right;" class="gensmall"><strong>{attach.DOWNLOAD_COUNT}</strong></span><br style="clear:both" />
+             <hr />
+                <!-- END attach -->
+             <!-- ELSE -->
+             <span style="float:left;" class="gensmall"><strong>{L_NO_ATTACHMENTS}</strong></span>
+             <!-- ENDIF -->
+          </td>
+       </tr>
+    </table>
+    <br />
