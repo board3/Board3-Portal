@@ -64,7 +64,7 @@
        'PORTAL_WHOIS_ONLINE'                     => 'Bloc Qui est en ligne?',
        'PORTAL_WHOIS_ONLINE_EXPLAIN'               => 'Montrer ce Bloc sur le portail.',
        'PORTAL_CHANGE_STYLE'                     => 'Bloc Styles',
-       'PORTAL_CHANGE_STYLE_EXPLAIN'               => 'Montrer ce Bloc sur le portail.<br /><span style="color:red">SVP notez:</span> si "Annuler le style de l\'utilisateur:" dans les réglages du forum est sur "Oui", Ce Bloc <u>ne sera pas montré</u>, indépendamment de ces réglages.',
+       'PORTAL_CHANGE_STYLE_EXPLAIN'               => 'Montrer ce Bloc sur le portail.<br /><span style="color:red">SVP notez:</span> si "Annuler le style de l\'utilisateur:" dans les réglages du forum est sur "Oui", Ce Bloc <strong>ne sera pas montré</strong>, indépendamment de ces réglages.',
        'PORTAL_FRIENDS'                  => 'Bloc Amis',
        'PORTAL_FRIENDS_EXPLAIN'            => 'Montrer ce Bloc sur le portail.',
        'PORTAL_MAX_ONLINE_FRIENDS'            => 'Nombre d\'amis effichés.',

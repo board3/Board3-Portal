@@ -62,7 +62,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_WHOIS_ONLINE'							=> 'Blok Kdo je online?',
 	'PORTAL_WHOIS_ONLINE_EXPLAIN'					=> 'Zobrazit tento blok na portálu.',
 	'PORTAL_CHANGE_STYLE'							=> 'Změna stylu',
-	'PORTAL_CHANGE_STYLE_EXPLAIN'					=> 'Zobrazit tento blok na portálu.<br /><span style="color:red">Prosím, mějte na mysli:</span> Pokud je volba "Vždy použít výchozí styl" v menu Nastavení fóra zvolena "Ano", tento blok <u>nebude zobrazen</u>, nazávisle na tomto nastavení.',
+	'PORTAL_CHANGE_STYLE_EXPLAIN'					=> 'Zobrazit tento blok na portálu.<br /><span style="color:red">Prosím, mějte na mysli:</span> Pokud je volba "Vždy použít výchozí styl" v menu Nastavení fóra zvolena "Ano", tento blok <strong>nebude zobrazen</strong>, nazávisle na tomto nastavení.',
 	'PORTAL_FRIENDS'						=> 'Blok Přátelé',
 	'PORTAL_FRIENDS_EXPLAIN'				=> 'Zobrazit tento blok na portálu.',
 	'PORTAL_MAX_ONLINE_FRIENDS'				=> 'Limit počtu zobrazených přátel',

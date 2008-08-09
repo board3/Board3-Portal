@@ -64,7 +64,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_WHOIS_ONLINE'							=> 'Hvem er pålogget?',
 	'PORTAL_WHOIS_ONLINE_EXPLAIN'					=> 'Vis denne blokken i portalen.',
 	'PORTAL_CHANGE_STYLE'							=> 'Skift stil',
-	'PORTAL_CHANGE_STYLE_EXPLAIN'					=> 'Vis denne blokken i portalen.<br /><span style="color:red">Please note:</span> if "Override user style:" in the board settings is set to "Yes", this block <u>wont be displayed</u>, independent of this settings.',
+	'PORTAL_CHANGE_STYLE_EXPLAIN'					=> 'Vis denne blokken i portalen.<br /><span style="color:red">Please note:</span> if "Override user style:" in the board settings is set to "Yes", this block <strong>wont be displayed</strong>, independent of this settings.',
 	'PORTAL_FRIENDS'						=> 'Venner',
 	'PORTAL_FRIENDS_EXPLAIN'				=> 'Vis denne blokken i portalen.',
 	'PORTAL_MAX_ONLINE_FRIENDS'				=> 'Antall venner du vil vise i blokken i portalen',

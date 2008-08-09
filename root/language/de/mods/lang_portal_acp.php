@@ -63,7 +63,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_WHOIS_ONLINE'								=> 'Wer ist online?',
 	'PORTAL_WHOIS_ONLINE_EXPLAIN'					=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_CHANGE_STYLE'							=> 'Styleswitcher',
-	'PORTAL_CHANGE_STYLE_EXPLAIN'					=> 'Diesen Block auf dem Portal anzeigen.<br /><span style="color:red">Achtung:</span> wenn in den Board Einstellungen "Benutzer-Style überschreiben:" auf "ja" gesetzt wird, wird dieser Block unabängig von diesen Einstellungen <u>nicht angezeigt</u>.',
+	'PORTAL_CHANGE_STYLE_EXPLAIN'					=> 'Diesen Block auf dem Portal anzeigen.<br /><span style="color:red">Achtung:</span> wenn in den Board Einstellungen "Benutzer-Style überschreiben:" auf "ja" gesetzt wird, wird dieser Block unabängig von diesen Einstellungen <strong>nicht angezeigt</strong>.',
 	'PORTAL_MAIN_MENU'								=> 'Hauptmenü',
 	'PORTAL_MAIN_MENU_EXPLAIN'						=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_USER_MENU'								=> 'Benutzermenü / Login Box',

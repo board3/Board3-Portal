@@ -66,7 +66,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_WHOIS_ONLINE'	=> '¿Quién está conectado?',
 	'PORTAL_WHOIS_ONLINE_EXPLAIN'	=> 'Mostrar este bloque en el portal.',
 	'PORTAL_CHANGE_STYLE'	=> 'Cambiar estilos',
-	'PORTAL_CHANGE_STYLE_EXPLAIN'	=> 'Mostrar este bloque en el portal.<br /><span style="color:red">Porfavor tome nota:</span> Si "Sobreescribe el estilo de usuario:" en la configuración del foro is esta puesto en "Si", este bloque <u>no sera mostrado</u>, independientemente de esta configuración.',
+	'PORTAL_CHANGE_STYLE_EXPLAIN'	=> 'Mostrar este bloque en el portal.<br /><span style="color:red">Porfavor tome nota:</span> Si "Sobreescribe el estilo de usuario:" en la configuración del foro is esta puesto en "Si", este bloque <strong>no sera mostrado</strong>, independientemente de esta configuración.',
 	'PORTAL_FRIENDS'	=> 'Mostrar bloque de amigos',
 	'PORTAL_FRIENDS_EXPLAIN'	=> 'Muestra bloque de adjuntos',
 	'PORTAL_MAX_ONLINE_FRIENDS'	=> 'Límite de amigos a mostrar',
