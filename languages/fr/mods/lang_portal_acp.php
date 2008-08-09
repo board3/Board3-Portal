@@ -188,13 +188,13 @@
        'PORTAL_MAX_MOST_POSTER'               => 'Nombre de posteurs affichés',
        'PORTAL_MAX_MOST_POSTER_EXPLAIN'         => '0 pour sans limite',
 
-       // left and right collumn width
-       'ACP_PORTAL_COLLUMN_WIDTH_INFO'            => 'Largeur colonne',
-       'ACP_PORTAL_COLLUMN_WIDTH_SETTINGS'         => 'Réglage largeur colonnes Gauche et Droite du portail',
-       'PORTAL_LEFT_COLLUMN_WIDTH'               => 'Valeur de la largeur de la colonne de gauche',
-       'PORTAL_LEFT_COLLUMN_WIDTH_EXPLAIN'         => 'Changer la largeur de la colonne de gauche en pixels, valeur recommandée 180',
-       'PORTAL_RIGHT_COLLUMN_WIDTH'            => 'Valeur de la largeur de la colonne de droite',
-       'PORTAL_RIGHT_COLLUMN_WIDTH_EXPLAIN'      => 'Changer la largeur de la colonne de droite en pixels, valeur recommandée 180',
+       // left and right column width
+       'ACP_PORTAL_column_WIDTH_INFO'            => 'Largeur colonne',
+       'ACP_PORTAL_column_WIDTH_SETTINGS'         => 'Réglage largeur colonnes Gauche et Droite du portail',
+       'PORTAL_LEFT_column_WIDTH'               => 'Valeur de la largeur de la colonne de gauche',
+       'PORTAL_LEFT_column_WIDTH_EXPLAIN'         => 'Changer la largeur de la colonne de gauche en pixels, valeur recommandée 180',
+       'PORTAL_RIGHT_column_WIDTH'            => 'Valeur de la largeur de la colonne de droite',
+       'PORTAL_RIGHT_column_WIDTH_EXPLAIN'      => 'Changer la largeur de la colonne de droite en pixels, valeur recommandée 180',
 
        // attachments   
        'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'            => 'Fichiers joints',
@@ -279,9 +279,9 @@
        'PORTAL_MINICALENDAR'                  => 'Montrer le Bloc Mini calendrier',
        'PORTAL_MINICALENDAR_EXPLAIN'            => 'Montrer ce Bloc sur le portail.',
        'PORTAL_MINICALENDAR_TODAY_COLOR'         => 'Couleur du jour actif',
-       'PORTAL_MINICALENDAR_TODAY_COLOR_EXPLAIN'   => 'Code HEX des couleurs comme #FFFFFF pour Blanc, ou noms des couleurs comme par exemple vilolet.',
+       'PORTAL_MINICALENDAR_TODAY_COLOR_EXPLAIN'   => 'Code HEX des couleurs comme #FFFFFF pour Blanc, ou noms des couleurs comme par exemple violet.',
        'PORTAL_MINICALENDAR_DAY_LINK_COLOR'      => 'Couleur du lien jour',
-       'PORTAL_MINICALENDAR_DAY_LINK_COLOR_EXPLAIN'=> 'Code HEX des couleurs comme #FFFFFF pour Blanc, ou noms des couleurs comme par exemple vilolet.',
+       'PORTAL_MINICALENDAR_DAY_LINK_COLOR_EXPLAIN'=> 'Code HEX des couleurs comme #FFFFFF pour Blanc, ou noms des couleurs comme par exemple violet.',
 
 
     ));

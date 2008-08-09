@@ -237,8 +237,8 @@ if ($portal_config['portal_pay_s_block'] or ( $portal_config['portal_pay_c_block
 }
 
 $template->assign_vars(array(
-	'PORTAL_LEFT_COLLUMN' 	=> $portal_config['portal_left_collumn_width'],
-	'PORTAL_RIGHT_COLLUMN' 	=> $portal_config['portal_right_collumn_width'],
+	'PORTAL_LEFT_column' 	=> $portal_config['portal_left_column_width'],
+	'PORTAL_RIGHT_column' 	=> $portal_config['portal_right_column_width'],
 ));
 
 // output page

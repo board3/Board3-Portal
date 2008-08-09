@@ -202,13 +202,13 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAX_MOST_POSTER'					=> 'Hvor mange postere vil du vise',
 	'PORTAL_MAX_MOST_POSTER_EXPLAIN'			=> '0 betyr ubegrenset',
 
-	// left and right collumn width 
-	'ACP_PORTAL_COLLUMN_WIDTH_INFO'				=> 'Kolonne bredde',
-	'ACP_PORTAL_COLLUMN_WIDTH_SETTINGS'			=> 'Venstre og høyre kolonne bredde innstillinger',
-	'PORTAL_LEFT_COLLUMN_WIDTH'					=> 'Bredde verdi for venstre kolonne',
-	'PORTAL_LEFT_COLLUMN_WIDTH_EXPLAIN'			=> 'Skift bredde i venstre kolonne i pixel, rekommandert verdi 180',
-	'PORTAL_RIGHT_COLLUMN_WIDTH'				=> 'Høyde verdi for høyre kolonne',
-	'PORTAL_RIGHT_COLLUMN_WIDTH_EXPLAIN'		=> 'Skift høyde i høyre kolonne i pixel, rekommandert verdi 180',
+	// left and right column width 
+	'ACP_PORTAL_column_WIDTH_INFO'				=> 'Kolonne bredde',
+	'ACP_PORTAL_column_WIDTH_SETTINGS'			=> 'Venstre og høyre kolonne bredde innstillinger',
+	'PORTAL_LEFT_column_WIDTH'					=> 'Bredde verdi for venstre kolonne',
+	'PORTAL_LEFT_column_WIDTH_EXPLAIN'			=> 'Skift bredde i venstre kolonne i pixel, rekommandert verdi 180',
+	'PORTAL_RIGHT_column_WIDTH'				=> 'Høyde verdi for høyre kolonne',
+	'PORTAL_RIGHT_column_WIDTH_EXPLAIN'		=> 'Skift høyde i høyre kolonne i pixel, rekommandert verdi 180',
 
 	// attachments    
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'				=> 'Vedlegg',

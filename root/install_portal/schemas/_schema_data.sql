@@ -26,8 +26,8 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_whoi
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_change_style', '0');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_main_menu', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_user_menu', '1');
-INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_right_collumn_width', '180');
-INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_left_collumn_width', '180');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_right_column_width', '180');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_left_column_width', '180');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_poll_topic', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_poll_topic_id', '');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_last_visited_bots_number', '1');

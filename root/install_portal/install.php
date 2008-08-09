@@ -1,6 +1,6 @@
 <?php
 
-$current_version = '1.0.0';
+$current_version = '1.0.0RC2';
 
 // If only checking version, exit.
 if( defined('IN_PHPBB') )
