@@ -277,11 +277,6 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$message = censor_text( str_replace("\n", '<br/> ', $row['post_text']) );
 		}
 
-		if ($auth->acl_get('f_html', $row['forum_id'])) 
-		{
-			$message = preg_replace('#<!\-\-(.*?)\-\->#is', '', $message); // Remove Comments from post content
-		}
-
 		// Second parse bbcode here
 		if ($row['bbcode_bitfield'])
 		{
