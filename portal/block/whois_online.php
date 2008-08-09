@@ -83,7 +83,7 @@ if ($config['load_online'] && $config['load_online_time'] && $display_online_lis
 	{
 		if ($db->sql_layer === 'sqlite')
 		{
-			$sql = 'SELECT COUNT(session_ip) as num_guests
+			$sql = 'SELECT sizeof(session_ip) as num_guests
 				FROM (
 					SELECT DISTINCT s.session_ip
 						FROM ' . SESSIONS_TABLE . ' s
@@ -94,7 +94,7 @@ if ($config['load_online'] && $config['load_online_time'] && $display_online_lis
 		}
 		else
 		{
-			$sql = 'SELECT COUNT(DISTINCT s.session_ip) as num_guests
+			$sql = 'SELECT sizeof(DISTINCT s.session_ip) as num_guests
 				FROM ' . SESSIONS_TABLE . ' s
 				WHERE s.session_user_id = ' . ANONYMOUS . '
 					AND s.session_time >= ' . (time() - ($config['load_online_time'] * 60)) . 

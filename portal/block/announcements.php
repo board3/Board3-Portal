@@ -34,7 +34,7 @@ $portal_announcement_length = ($announcement < 0) ? $portal_config['portal_annou
 $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_forum'], $portal_config['portal_announcements_permissions'], $portal_config['portal_number_of_announcements'], $portal_announcement_length, $portal_config['portal_announcements_day'], 'announcements', $start);
 
 	// Any announcements present? If not terminate it here.
-	if (count($fetch_news) == 0)
+	if (sizeof($fetch_news) == 0)
 	{
 		$template->assign_block_vars('announcements_row', array(
 			'S_NO_TOPICS'	=> true,
@@ -95,7 +95,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 
 			$str_where = ( strlen($str_where) > 0 ) ? 'AND (forum_id = 0 OR (' . trim(substr($str_where, 0, -4)) . '))' : '';
 			
-			$sql = 'SELECT COUNT(topic_id) AS num_topics
+			$sql = 'SELECT sizeof(topic_id) AS num_topics
 				FROM ' . TOPICS_TABLE . '
 				WHERE ((topic_type = ' . POST_GLOBAL . ')
 					OR topic_type = ' . POST_ANNOUNCE . ')
@@ -112,7 +112,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 		if($announcement < 0)
 		// Show the announcements overview 
 		{
-			$count = count($fetch_news)-1;
+			$count = sizeof($fetch_news)-1;
 			for ($i = 0; $i < $count; $i++)
 			{
 				if( isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true )
@@ -163,7 +163,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 					'L_READ_FULL'		=> $read_full,
 					'OPEN'				=> $open_bracket,
 					'CLOSE'				=> $close_bracket,
-					'S_NOT_LAST'		=> ($i < count($fetch_news) - 1) ? true : false,
+					'S_NOT_LAST'		=> ($i < sizeof($fetch_news) - 1) ? true : false,
 					'S_POLL'			=> $fetch_news[$i]['poll'],
 					'S_UNREAD_INFO'		=> $unread_topic,
 					'PAGINATION'		=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),

@@ -40,7 +40,7 @@ $portal_news_length = ($news < 0) ? $portal_config['portal_news_length'] : 0;
 $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_config['portal_news_permissions'], $portal_config['portal_number_of_news'], $portal_news_length, 0, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news', $start);
 
 	// Any news present? If not terminate it here.
-	if (count($fetch_news) == 0)
+	if (sizeof($fetch_news) == 0)
 	{
 		$template->assign_block_vars('news_row', array(
 			'S_NO_TOPICS'	=> true,
@@ -93,7 +93,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 
 			$topic_type = ($portal_config['portal_show_all_news']) ? '( topic_type <> ' . POST_ANNOUNCE . ' ) AND ( topic_type <> ' . POST_GLOBAL . ')' : 'topic_type = ' . POST_NORMAL;
 
-			$sql = 'SELECT COUNT(topic_id) AS num_topics
+			$sql = 'SELECT sizeof(topic_id) AS num_topics
 				FROM ' . TOPICS_TABLE . '
 				WHERE ' . $topic_type . '
 					AND topic_approved = 1
@@ -107,7 +107,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 		if($news < 0)
 		// Show the news overview
 		{
-			$count = count($fetch_news)-1;
+			$count = sizeof($fetch_news)-1;
 			for ($i = 0; $i < $count; $i++)
 			{
 				if( isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true )
@@ -155,7 +155,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 					'L_READ_FULL'		=> $read_full,
 					'OPEN'				=> $open_bracket,
 					'CLOSE'				=> $close_bracket,
-					'S_NOT_LAST'		=> ($i < count($fetch_news) - 1) ? true : false,
+					'S_NOT_LAST'		=> ($i < sizeof($fetch_news) - 1) ? true : false,
 					'S_POLL'			=> $fetch_news[$i]['poll'],
 					'S_UNREAD_INFO'		=> $unread_topic,
 					'PAGINATION'		=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),
