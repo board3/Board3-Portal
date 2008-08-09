@@ -5,7 +5,7 @@ if( !defined('IN_PHPBB') || !defined('IN_PORTAL_INSTALL') )
 	exit;
 }
 
-include 'style/layout_header.' . $phpEx;
+include $phpbb_root_path.'install_portal/style/layout_header.' . $phpEx;
 
 if( $confirm == 1 )
 {
@@ -40,6 +40,6 @@ else
 <?php
 }
 
-include 'style/layout_footer.' . $phpEx;
+include $phpbb_root_path.'install_portal/style/layout_footer.' . $phpEx;
 
 ?>
