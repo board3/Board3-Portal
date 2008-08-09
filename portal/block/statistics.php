@@ -27,8 +27,8 @@ function get_db_stat($mode)
 
 	switch( $mode )
 	{
-		case 'announcmenttotal':
-			$sql = 'SELECT sizeof(distinct t.topic_id) AS announcment_total
+		case 'announcementtotal':
+			$sql = 'SELECT sizeof(distinct t.topic_id) AS announcement_total
 				FROM ' . TOPICS_TABLE . ' t, ' . POSTS_TABLE . ' p
 				WHERE t.topic_type = ' . POST_ANNOUNCE . '
 					AND p.post_id = t.topic_first_post_id';
@@ -54,8 +54,8 @@ function get_db_stat($mode)
  
 	switch ( $mode )
 	{
-		case 'announcmenttotal':
-			return $row['announcment_total'];
+		case 'announcementtotal':
+			return $row['announcement_total'];
 		break;
 		case 'stickytotal':
 			return $row['sticky_total'];
@@ -130,7 +130,7 @@ $template->assign_vars(array(
 	'TOTAL_TOPICS'	=> sprintf($user->lang[$l_total_topic_s], $total_topics),
 	'TOTAL_USERS'	=> sprintf($user->lang[$l_total_user_s], $total_users),
 	'NEWEST_USER'	=> sprintf($user->lang['NEWEST_USER'], get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
-	'S_ANN'			=> get_db_stat('announcmenttotal'),
+	'S_ANN'			=> get_db_stat('announcementtotal'),
 	'S_SCT'			=> get_db_stat('stickytotal'),
 	'S_TOT_ATTACH'	=> ($config['allow_attachments']) ? get_db_stat('attachmentstotal') : 0,
 	

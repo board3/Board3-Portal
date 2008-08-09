@@ -50,6 +50,11 @@ $mod_update['0.3.0'] = array(
 		'module_mode'      => 'links',
 		'module_auth'      => ''
 	),
-	);
+);
+
+$sql_update['1.0.0RC1'] = array(
+	"UPDATE phpbb_portal_config SET config_name = 'portal_right_column_width' config_name = 'portal_right_collumn_width'",
+	"UPDATE phpbb_portal_config SET config_name = 'portal_left_column_width' config_name = 'portal_left_collumn_width'",,
+);
 
 ?>

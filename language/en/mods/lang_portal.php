@@ -73,8 +73,8 @@ $lang = array_merge($lang, array(
 
 	// user menu
 	'USER_MENU'			=> 'User menu',
-	'UM_LOG_ME_IN'		=> 'remember me',
-	'UM_HIDE_ME'		=> 'hide me',
+	'UM_LOG_ME_IN'		=> 'Remember me',
+	'UM_HIDE_ME'		=> 'Hide me',
 	'UM_MAIN_SUBSCRIBED'=> 'Subscribed',
 	'UM_BOOKMARKS'		=> 'Bookmarks',
 
@@ -83,26 +83,26 @@ $lang = array_merge($lang, array(
 	'ST_NEW'		=> 'New',
 	'ST_NEW_POSTS'	=> 'New post',
 	'ST_NEW_TOPICS'	=> 'New topic',
-	'ST_NEW_ANNS'	=> 'New announcment',
+	'ST_NEW_ANNS'	=> 'New announcement',
 	'ST_NEW_STICKYS'=> 'New sticky',
 	*/
 	'ST_TOP'		=> 'Total',
-	'ST_TOP_ANNS'	=> 'Total announcment:',
-	'ST_TOP_STICKYS'=> 'Total sticky:',
-	'ST_TOT_ATTACH'	=> 'Total attachments:',
+	'ST_TOP_ANNS'	=> 'Total Announcements:',
+	'ST_TOP_STICKYS'=> 'Total Stickies:',
+	'ST_TOT_ATTACH'	=> 'Total Attachments:',
 
 	// search
-	'SH'		=> 'go',
-	'SH_SITE'	=> 'forums',
-	'SH_POSTS'	=> 'posts',
-	'SH_AUTHOR'	=> 'author',
-	'SH_ENGINE'	=> 'search engines',
-	'SH_ADV'	=> 'advanced search',
+	'SH'		=> 'Go',
+	'SH_SITE'	=> 'Forums',
+	'SH_POSTS'	=> 'Posts',
+	'SH_AUTHOR'	=> 'Author',
+	'SH_ENGINE'	=> 'Search engines',
+	'SH_ADV'	=> 'Advanced search',
 	
 	// recent
 	'RECENT_NEWS'		=> 'Recent',
 	'RECENT_TOPIC'		=> 'Recent topic',
-	'RECENT_ANN'		=> 'Recent announcment',
+	'RECENT_ANN'		=> 'Recent announcement',
 	'RECENT_HOT_TOPIC'	=> 'Recent popular topic',
 
 	// random member
@@ -129,7 +129,7 @@ $lang = array_merge($lang, array(
 
 	// make donation
 	'DONATION' 		=> 'Make a donation',
-	'DONATION_TEXT'	=> 'is a formation suplying services with no intention of any revenue. Anyone who wants to support this formation can do it by donating so that the cost of server, the domain and etc. could be paid of.',
+	'DONATION_TEXT'	=> 'is a group suplying services with no intention of any revenue. Anyone who wants to support this group can do so by donating so that the cost of server, the domain etc. can be covered.',
 	'PAY_MSG'		=> 'After selecting the amount which you want to donate from the menu, you can go on by clicking on the picture of PayPal.',
 	'PAY_ITEM'		=> 'Make a donation', // paypal item
 
@@ -210,7 +210,7 @@ $lang = array_merge($lang, array(
 	'Mini_Cal_no_events'	=> 'None',
 	'Mini_cal_this_event'	=> 'This month holiday events',
 	'View_next_month'		=> 'next month',
-	'View_previous_month'	=> 'previous month',
+	'View_previous_month'	=> 'Previous month',
 
 // uses MySQL DATE_FORMAT - %c  long_month, numeric (1..12) - %e  Day of the long_month, numeric (0..31)
 // see http://www.mysql.com/doc/D/a/Date_and_time_functions.html for more details
