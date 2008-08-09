@@ -5,7 +5,7 @@ if( !defined('IN_PHPBB') || !defined('IN_PORTAL_INSTALL') )
 	exit;
 }
 
-include 'style/layout_header.php';
+include $phpbb_root_path.'install_portal/style/layout_header.' . $phpEx;
 
 
 
@@ -32,6 +32,6 @@ case 'none':
 <?php
 break;
 }
-include 'style/layout_footer.php';
+include $phpbb_root_path.'style/layout_footer.' . $phpEx;
 
 ?>
