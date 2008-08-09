@@ -146,7 +146,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_PAY_S_BLOCK'					=> 'Display paypal small block',
 	'PORTAL_PAY_S_BLOCK_EXPLAIN'			=> 'Display this block on the portal.',
 	'PORTAL_PAY_ACC'						=> 'Paypal account to use',
-	'PORTAL_PAY_ACC_EXPLAIN'				=> 'Enter your on Paypal used e-mail address eg. xxx@xxx.com',
+	'PORTAL_PAY_ACC_EXPLAIN'				=> 'Enter your Paypal e-mail address eg. xxx@xxx.com',
 
 	// last member
 	'ACP_PORTAL_MEMBERS_INFO'				=> 'Latest members',
