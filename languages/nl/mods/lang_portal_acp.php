@@ -1,4 +1,4 @@
-<?php
+column<?php
 
 /**
 *
@@ -188,13 +188,13 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAX_MOST_POSTER'					=> 'Hoeveel meeste berichtenplaatsers wil je weergeven',
 	'PORTAL_MAX_MOST_POSTER_EXPLAIN'			=> '0 betekend geen limiet',
 
-	// left and right collumn width 
-	'ACP_PORTAL_COLLUMN_WIDTH_INFO'				=> 'Tabel-breedte',
-	'ACP_PORTAL_COLLUMN_WIDTH_SETTINGS'			=> 'Links en rechter tabel-breedte instellingen',	
-	'PORTAL_LEFT_COLLUMN_WIDTH'					=> 'Breedte waarde van de linker-tabel',
-	'PORTAL_LEFT_COLLUMN_WIDTH_EXPLAIN'			=> 'Verander de breedte van de linker-tabel in pixels, de waarde 180 is aanbevolen',
-	'PORTAL_RIGHT_COLLUMN_WIDTH'				=> 'Breedte waarde van de rechter-tabel',
-	'PORTAL_RIGHT_COLLUMN_WIDTH_EXPLAIN'		=> 'Verander de breedte van de rechter-tabel in pixels, de waarde 180 is aanbevolen',
+	// left and right  width 
+	'ACP_PORTAL_COLUMN_WIDTH_INFO'				=> 'Tabel-breedte',
+	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'			=> 'Links en rechter tabel-breedte instellingen',	
+	'PORTAL_LEFT_COLUMN_WIDTH'					=> 'Breedte waarde van de linker-tabel',
+	'PORTAL_LEFT_COLUMN_WIDTH_EXPLAIN'			=> 'Verander de breedte van de linker-tabel in pixels, de waarde 180 is aanbevolen',
+	'PORTAL_RIGHT_COLUMN_WIDTH'				=> 'Breedte waarde van de rechter-tabel',
+	'PORTAL_RIGHT_COLUMN_WIDTH_EXPLAIN'		=> 'Verander de breedte van de rechter-tabel in pixels, de waarde 180 is aanbevolen',
 
 	// attachments    
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'				=> 'Bijlagen',

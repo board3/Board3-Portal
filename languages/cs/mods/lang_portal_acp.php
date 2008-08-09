@@ -174,13 +174,13 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAX_MOST_POSTER'					=> 'Kolik největších přispěvovatelů se má zobrazit',
 	'PORTAL_MAX_MOST_POSTER_EXPLAIN'			=> '0 znamená neomezený počet',
 
-	// left and right collumn width 
-	'ACP_PORTAL_COLLUMN_WIDTH_INFO'				=> 'Šířka sloupce',
-	'ACP_PORTAL_COLLUMN_WIDTH_SETTINGS'			=> 'Nastavení šířky levého a pravého sloupce',
-	'PORTAL_LEFT_COLLUMN_WIDTH'					=> 'Hodnota šířky levého sloupce',
-	'PORTAL_LEFT_COLLUMN_WIDTH_EXPLAIN'			=> 'Nastavte šířku levého sloupce v pixelech, doporučená hodnota je 180',
-	'PORTAL_RIGHT_COLLUMN_WIDTH'				=> 'Hodnota šířky pravého sloupce',
-	'PORTAL_RIGHT_COLLUMN_WIDTH_EXPLAIN'		=> 'Nastavte šířku pravého sloupce v pixelech, doporučená hodnota je 180',
+	// left and right column width 
+	'ACP_PORTAL_COLUMN_WIDTH_INFO'				=> 'Šířka sloupce',
+	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'			=> 'Nastavení šířky levého a pravého sloupce',
+	'PORTAL_LEFT_COLUMN_WIDTH'					=> 'Hodnota šířky levého sloupce',
+	'PORTAL_LEFT_COLUMN_WIDTH_EXPLAIN'			=> 'Nastavte šířku levého sloupce v pixelech, doporučená hodnota je 180',
+	'PORTAL_RIGHT_COLUMN_WIDTH'				=> 'Hodnota šířky pravého sloupce',
+	'PORTAL_RIGHT_COLUMN_WIDTH_EXPLAIN'		=> 'Nastavte šířku pravého sloupce v pixelech, doporučená hodnota je 180',
 
 	// attachments    
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'				=> 'Přílohy',

@@ -26,8 +26,8 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_whoi
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_change_style', '0');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_main_menu', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_user_menu', '1');
-INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_right_collumn_width', '180');
-INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_left_collumn_width', '180');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_right__width', '180');
+INSERT INTO phpbb_portal_config (config_name, config_valuecolumn) VALUES ('portal_left__width', '180');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_poll_topic', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_poll_topic_id', '');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_last_visited_bots_number', '1');
@@ -38,7 +38,7 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_pay_
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_recent', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_recent_title_limit', '100');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_max_topics', '10');
-INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_exclude_forums', '');
+INSERT INTO phpbb_portal_config (config_name, config_valuecolumn) VALUES ('portal_exclude_forums', '');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_news_forum', '');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_news_length', '250');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_number_of_news', '5');

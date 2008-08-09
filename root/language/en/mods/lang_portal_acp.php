@@ -83,7 +83,7 @@ $lang = array_merge($lang, array(
 	// global announcements
 	'ACP_PORTAL_ANNOUNCE_INFO'					=> 'Global announcements',
 	'ACP_PORTAL_ANNOUNCE_SETTINGS'				=> 'Global announcements settings',
-	'ACP_PORTAL_ANNOUNCE_SETTINGS_EXPLAIN'		=> 'Here you can change your global announcment information and certain specific options.',
+	'ACP_PORTAL_ANNOUNCE_SETTINGS_EXPLAIN'		=> 'Here you can change your global announcement information and certain specific options.',
 	'PORTAL_ANNOUNCEMENTS'						=> 'Display global announcements',
 	'PORTAL_ANNOUNCEMENTS_EXPLAIN'				=> 'Display this block on portal.',
 	'PORTAL_ANNOUNCEMENTS_STYLE'				=> 'Compact global announcements block style',
@@ -188,13 +188,13 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAX_MOST_POSTER'					=> 'How many most posters to display',
 	'PORTAL_MAX_MOST_POSTER_EXPLAIN'			=> '0 means infinite',
 
-	// left and right collumn width 
-	'ACP_PORTAL_COLLUMN_WIDTH_INFO'				=> 'Collumn width',
-	'ACP_PORTAL_COLLUMN_WIDTH_SETTINGS'			=> 'Left and right collumn width settings',
-	'PORTAL_LEFT_COLLUMN_WIDTH'					=> 'Width value of the left collumn',
-	'PORTAL_LEFT_COLLUMN_WIDTH_EXPLAIN'			=> 'Change the width of left collumn in pixel, recommended value 180',
-	'PORTAL_RIGHT_COLLUMN_WIDTH'				=> 'Width value of the right collumn',
-	'PORTAL_RIGHT_COLLUMN_WIDTH_EXPLAIN'		=> 'Change the width of right collumn in pixel, recommended value 180',
+	// left and right column width 
+	'ACP_PORTAL_COLUMN_WIDTH_INFO'				=> 'Column width',
+	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'			=> 'Left and right column width settings',
+	'PORTAL_LEFT_COLUMN_WIDTH'					=> 'Width value of the left column',
+	'PORTAL_LEFT_COLUMN_WIDTH_EXPLAIN'			=> 'Change the width of left column in pixel, recommended value 180',
+	'PORTAL_RIGHT_COLUMN_WIDTH'				=> 'Width value of the right column',
+	'PORTAL_RIGHT_COLUMN_WIDTH_EXPLAIN'		=> 'Change the width of right column in pixel, recommended value 180',
 
 	// attachments    
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'				=> 'Attachments',

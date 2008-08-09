@@ -83,7 +83,7 @@
        'ST_NEW'      => 'New',
        'ST_NEW_POSTS'   => 'New post',
        'ST_NEW_TOPICS'   => 'New topic',
-       'ST_NEW_ANNS'   => 'New announcment',
+       'ST_NEW_ANNS'   => 'New announcement',
        'ST_NEW_STICKYS'=> 'New sticky',
        */
        'ST_TOP'      => 'Total',

@@ -60,9 +60,9 @@ class acp_portal
 						'portal_friends'					=> array('lang' => 'PORTAL_FRIENDS'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_max_online_friends'			=> array('lang' => 'PORTAL_MAX_ONLINE_FRIENDS'	, 'validate' => 'int'	, 'type' => 'text:3:3'		, 'explain' => true),	
 
-						'legend2'							=> 'ACP_PORTAL_COLLUMN_WIDTH_SETTINGS',
-						'portal_left_collumn_width'			=> array('lang' => 'PORTAL_LEFT_COLLUMN_WIDTH'	,	'validate' => 'int'	, 'type' => 'text:3:3',		 'explain' => true),
-						'portal_right_collumn_width'		=> array('lang' => 'PORTAL_RIGHT_COLLUMN_WIDTH'	,	'validate' => 'int'	, 'type' => 'text:3:3',		 'explain' => true),
+						'legend2'							=> 'ACP_PORTAL_COLUMN_WIDTH_SETTINGS',
+						'portal_left_column_width'			=> array('lang' => 'PORTAL_LEFT_COLUMN_WIDTH'	,	'validate' => 'int'	, 'type' => 'text:3:3',		 'explain' => true),
+						'portal_right_column_width'		=> array('lang' => 'PORTAL_RIGHT_COLUMN_WIDTH'	,	'validate' => 'int'	, 'type' => 'text:3:3',		 'explain' => true),
 					)
 				);
 			break;
