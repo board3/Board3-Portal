@@ -240,7 +240,7 @@ class acp_portal
 				// Links require preprocessing
 				
 				$links = ( strlen($portal_config['portal_links_array']) ) ? utf_unserialize($portal_config['portal_links_array']) : array() ;
-				$this->link_num = count( $links );
+				$this->link_num = sizeof( $links );
 				
 				$lid = request_var('link', 0);
 

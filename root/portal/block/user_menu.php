@@ -26,7 +26,7 @@ if (!defined('IN_PORTAL'))
 if ($user->data['is_registered'])
 {
 	// new posts since last visit
-	$sql = "SELECT COUNT(distinct post_id) as total
+	$sql = "SELECT sizeof(distinct post_id) as total
 		FROM " . POSTS_TABLE . "
 		WHERE post_time >= " . $user->data['session_last_visit'];
 	$result = $db->sql_query($sql);

@@ -23,7 +23,7 @@ if (!defined('IN_PORTAL'))
 $words_array = array();
 
 // Get words and number of those words
-$sql = 'SELECT l.word_text, COUNT(*) AS word_count  
+$sql = 'SELECT l.word_text, sizeof(*) AS word_count  
 	FROM ' . SEARCH_WORDLIST_TABLE . ' AS l, ' . SEARCH_WORDMATCH_TABLE . ' AS m
 	WHERE m.word_id = l.word_id 
 	GROUP BY m.word_id 
