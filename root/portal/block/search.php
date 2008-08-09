@@ -22,7 +22,7 @@ if (!defined('IN_PORTAL'))
 
 $template->assign_vars(array(
 	'S_DISPLAY_PORTALSEARCH' => true,
-	'S_SEARCH_ACTION'	=> "{$phpbb_root_path}search.$phpEx",
+	'S_SEARCH_ACTION'	=> append_sid("{$phpbb_root_path}search.$phpEx"),
 	
 ));
 
