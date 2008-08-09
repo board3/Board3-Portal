@@ -14,7 +14,7 @@ define('IN_PORTAL_INSTALL', true);
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 $phpbb_root_path = '../';
-$portal_root_path = '../portal/';
+$portal_root_path = $phpbb_root_path.'portal/';
 
 include($phpbb_root_path . 'common.'.$phpEx);
 include($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
@@ -597,10 +597,10 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 					{
 						if (isset($config[$row['config_name']]))
 						{
-							$sql2 = 'UPDATE ' . PORTAL_CONFIG_TABLE . " SET config_value = '" . $config[$row['config_name']] . "' WHERE config_name = '" . $row['config_name'] . "' LIMIT 1";
-							$db->sql_query($sql2);
-							$sql3 = 'DELETE FROM ' . CONFIG_TABLE . " WHERE config_name = '" . $row['config_name'] . "' LIMIT 1";
-							$db->sql_query($sql3);
+							$sql2 = 'UPDATE ' . PORTAL_CONFIG_TABLE . " SET config_value = '" . $config[$row['config_name']] . "' WHERE config_name = '" . $row['config_name'] . "'";
+							$db->sql_query_limit($sql2, 1);
+							$sql3 = 'DELETE FROM ' . CONFIG_TABLE . " WHERE config_name = '" . $row['config_name'] . "'";
+							$db->sql_query_limit($sql3, 1);
 						}
 					}
 					$db->sql_freeresult($result);
@@ -856,7 +856,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 				{
 					$portal_update_array = array();
 	
-					include 'schemas/update_schema.php';
+					include $phpbb_root_path.'schemas/update_schema.'.$phpEx;
 					
 					foreach( $sql_update as $sql_ver => $sql_data )
 					{

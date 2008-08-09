@@ -168,12 +168,10 @@ if (!defined('IN_MINI_CAL'))
         		AND topic_calendar_time <> 0
         		$mini_cal_auth_sql
             ORDER BY 
-                t.topic_calendar_time ASC
-            LIMIT 
-                0," . MINI_CAL_LIMIT;
+                t.topic_calendar_time ASC";
     
         // did we get a result? 
-    	if( $result = $db->sql_query($sql) )
+    	if( $result = $db->sql_query_limit($sql, MINI_CAL_LIMIT) )
     	{
            $template->assign_block_vars('switch_mini_cal_events', array());
            if ( $db->sql_numrows($result) > 0 )
