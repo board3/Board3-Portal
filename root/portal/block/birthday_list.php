@@ -52,7 +52,7 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 			$birthday_list .= get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']);
 			if ($age = (int) substr($row['user_birthday'], -4))
 			{
-				$birthday_list .= ' (' . ($now['year'] - $age) . ');
+				$birthday_list .= ' (' . ($now['year'] - $age) . ')';
 			}
 			$birthday_list .= '<br />'."\n";
 		}
