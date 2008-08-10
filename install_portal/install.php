@@ -66,7 +66,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 	{
 		$check_mode = 'install';
 	}
-	elseif( $phpbb3portal === TRUE || version_compare( $old_version, $current_version, "<" ) === TRUE )
+	elseif( $phpbb3portal === TRUE || version_compare( strtolower($old_version), strtolower($current_version), "<" ) === TRUE )
 	{
 		$check_mode = 'update';
 	}
@@ -261,7 +261,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 				}
 		
 				// locate the schema files
-				$dbms_schema = 'schemas/_' . $db_schema . '_schema.sql';
+				$dbms_schema = $phpbb_root_path.'install_portal/schemas/_' . $db_schema . '_schema.sql';
 				$sql_query = @file_get_contents($dbms_schema);
 				$sql_query = preg_replace('#phpbb_#i', $table_prefix, $sql_query);
 				$comments($sql_query);
@@ -280,7 +280,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 			
 				// Now for the data
 		
-				$sql_query = @file_get_contents('schemas/_schema_data.sql');
+				$sql_query = @file_get_contents($phpbb_root_path.'install_portal/schemas/_schema_data.sql');
 				switch ($db->sql_layer)
 				{
 					case 'mssql':
@@ -544,7 +544,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 					}
 	
 					// locate the schema files
-					$dbms_schema = 'schemas/_' . $db_schema . '_schema.sql';
+					$dbms_schema = $phpbb_root_path.'install_portal/schemas/_' . $db_schema . '_schema.sql';
 					$sql_query = @file_get_contents($dbms_schema);
 					$sql_query = preg_replace('#phpbb_#i', $table_prefix, $sql_query);
 					$comments($sql_query);
@@ -563,7 +563,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 				
 					// Start by inserting default data
 			
-					$sql_query = @file_get_contents('schemas/_schema_data.sql');
+					$sql_query = @file_get_contents($phpbb_root_path.'install_portal/schemas/_schema_data.sql');
 					switch ($db->sql_layer)
 					{
 						case 'mssql':
@@ -856,11 +856,11 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 				{
 					$portal_update_array = array();
 	
-					include $phpbb_root_path.'schemas/update_schema.'.$phpEx;
-					
+					include $phpbb_root_path.'install_portal/schemas/update_schema.'.$phpEx;
+
 					foreach( $sql_update as $sql_ver => $sql_data )
 					{
-						if( version_compare($old_version, $sql_ver, ">=") === TRUE )
+						if( version_compare(strtolower($old_version), strtolower($sql_ver), ">=") === TRUE )
 						{
 							continue;
 						} else {
