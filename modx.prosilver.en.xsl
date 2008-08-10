@@ -1,34 +1,34 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- MODX by the phpBB MOD Team XSL file v1.0.1 copyright 2005-2007 the phpBB MOD Team. 
-	$Id: modx.prosilver.en.xsl 1729 2008-04-07 20:00:54Z HighwayofLife $ -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- MODX by the phpBB MOD Team XSL file v1.2.0 copyright 2005-2008 the phpBB MOD Team.
+	$Id: modx.prosilver.en.xsl 1897 2008-06-16 00:37:40Z jelly_doughnut $ 
+	Updated on 2008-06-06 at 4:00PM by primehalo to fix several bugs.
+-->
 <!DOCTYPE xsl:stylesheet[
 	<!ENTITY nbsp "&#160;">
 ]>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns:mod="http://www.phpbb.com/mods/xml/modx-1.0.1.xsd">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:mod="http://www.phpbb.com/mods/xml/modx-1.2.0.xsd">
 	<xsl:output method="html" omit-xml-declaration="no" indent="yes" />
-<xsl:variable name="title" select="mod:mod/mod:header/mod:title" />
-<xsl:variable name="version">
-<xsl:for-each select="mod:mod/mod:header/mod:mod-version">
-	<xsl:call-template name="give-version">
-		</xsl:call-template>
+	<xsl:variable name="title" select="mod:mod/mod:header/mod:title" />
+	<xsl:variable name="version">
+	<xsl:for-each select="mod:mod/mod:header/mod:mod-version">
+		<xsl:value-of select="current()" />
 	</xsl:for-each>
-</xsl:variable>
+	</xsl:variable>
 	<xsl:template match="mod:mod">
 		<html xmlns="http://www.w3.org/1999/xhtml">
-			<head>
-				<meta http-equiv="Content-Language" content="en" />
-				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-				<style>
-
+		<head>
+		<meta http-equiv="Content-Language" content="en" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css">
 /*  phpBB 3.0 Admin Style Sheet
-	------------------------------------------------------------------------
+	–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 	Original author:	subBlue ( http://www.subblue.com/ )
 	Copyright 2007 phpBB Group ( http://www.phpbb.com/ )
-	------------------------------------------------------------------------
-*/
+	–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+	*/
 
 /* General markup styles
----------------------------------------- */
+––––––––––––––––––––––––––––––*/
 * {
 	/* Reset browsers default margin, padding and font sizes */
 	margin: 0;
@@ -40,7 +40,7 @@ body, div, p, th, td, li, dd {
 	font-size: x-small;
 	voice-family: "\"}\"";
 	voice-family: inherit;
-	font-size: small
+	font-size: 100%;
 }
 
 html>body, html>div, html>p, html>th, html>td, html>li, html>dd {
@@ -60,7 +60,7 @@ body {
 	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	color: #536482;
 	background: #DBD7D1;
-	font-size: 62.5%;	/* This sets the default font size to be equivalent to 10px */
+	font-size: 82.5%;	/* This sets the default font size to be equivalent to 10px */
 	margin: 10px 15px;
 }
 
@@ -91,15 +91,15 @@ h2, caption {
 h3, h4, h5 {
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	font-size: 1.20em;
-	text-decoration: none; 
-	line-height: 1.20em; 
+	text-decoration: none;
+	line-height: 1.20em;
 	margin-top: 10px;
 }
 
 p {
 	margin-bottom: 0.7em;
 	line-height: 1.40em;
-	font-size: 0.90em;
+	font-size: 1.0em;
 }
 
 ul {
@@ -119,8 +119,8 @@ hr {
 	height: 1px;
 }
 
-.small { 
-	font-size: 0.85em; 
+.small {
+	font-size: 0.85em;
 }
 
 /* General links  */
@@ -140,7 +140,7 @@ a:active {
 }
 
 /* Main blocks
----------------------------------------- */
+––––––––––––––––––––––––––––––––––––––––*/
 #wrap {
 	padding: 0 0 15px 0;
 	min-width: 615px;
@@ -183,7 +183,7 @@ a:active {
 }
 
 #content {
-	padding: 30px 10px 10px;
+	padding: 0px 10px 10px;
 	position: relative;
 }
 
@@ -204,12 +204,12 @@ a:active {
 	margin: 0;
 }
 
-* html #main { 
-	height: 350px; 
+* html #main {
+	height: 350px;
 }
 
 /* Main Panel
----------------------------------------- */
+–––––––––––––––––––––––––––––––––––––––– */
 #acp {
 	margin: 4px 0;
 	padding: 3px 1px;
@@ -223,7 +223,7 @@ a:active {
 	padding: 0;
 }
 
-span.corners-top, span.corners-bottom, 
+span.corners-top, span.corners-bottom,
 span.corners-top span, span.corners-bottom span {
 	font-size: 1px;
 	line-height: 1px;
@@ -260,10 +260,10 @@ span.corners-bottom span {
 }
 
 /* General form styles
-----------------------------------------*/
+––––––––––––––––––––––––––––––––––––––––*/
 fieldset {
 	margin: 15px 0;
-	padding: 10px;
+	padding: 1px;
 	border-top: 1px solid #D7D7D7;
 	border-right: 1px solid #CCCCCC;
 	border-bottom: 1px solid #CCCCCC;
@@ -284,20 +284,22 @@ fieldset {
 }
 
 fieldset p {
-	font-size: 0.85em;
+	font-size: 1.0em;
 }
 
 legend {
-	padding: 1px 0;
+	padding: 1px 3px;
 	font-family: Tahoma,arial,Verdana,Sans-serif;
-	font-size: 0.85em;
+	font-size: 1.06em;
 	font-weight: bold;
 	color: #115098;
-	position: relative;
+/*	position: relative;*/
 	text-transform: capitalize;
 	line-height: 1.00em;
 	top: 0em;
 	vertical-align: middle;
+
+
 }
 
 /* Hide from macIE \*/
@@ -353,7 +355,9 @@ fieldset.nobg {
 	/*width: 100%;*/
 }
 
-.mod-about span.corners-top, .mod-about span.corners-bottom, 
+
+
+.mod-about span.corners-top, .mod-about span.corners-bottom,
 .mod-about span.corners-top span, .mod-about span.corners-bottom span {
 	font-size: 1px;
 	line-height: 1px;
@@ -390,27 +394,43 @@ fieldset.nobg {
 }
 
 /* END PROSILVER ADMIN PANEL STYLESHEET */
-	
+
 #language { width: 130px; }
-		
-.mod-about { margin: 10px 0; }
-.mod-about dl, .mod-about p, .mod-about h2, .mod-about h3, .mod-about div { margin: 5px 8px; }
-.mod-about div.inner { margin: 0px; }
-		
+
+.mod-about-padding { 0px 8px; }
+.mod-about { margin: 10px 4px; }
+.mod-about dt { font-weight:bold; padding-right:4px; }
+.mod-about dl { margin: 0px 8px; }
+.mod-about div { margin: 3px 8px; } 
+/*div.inner .mod-about dl { margin: 0px 0px; }*/
+/*.nopadding { margin: 0px 0px; }*/
+
+.mod-history {font-size: 82.5%; } /* Mod histories can get pretty long, so I'm making that font a bit smaller */
+
 #modDisclaimer .mod-about, #other-notes.mod-about { background-color: #EECCCC; }
 #other-notes.mod-about strong.red { color: #DD3333; }
-		
-span.key { font-size: 10px; height: 14px; width: 18px; border: outset 2px #999999; background-color: #EEEECC; display: block; float: left; text-align: center; font-weight: bold; margin-right: 5px; }
-		
+
+span.key { font-size: 10px; height: 16px; line-height: 14px; width: 18px; border: outset 2px #999999; background-color: #EEEECC; display: block; float: left; text-align: center; font-weight: bold; margin-right: 5px; }
+
 .mod-edit { background-color: #D6E6F6; border: solid 1px #336699; margin: 10px 0; padding: 0 10px; }
 .mod-inlineedit { background-color: #DDEEFF; border: solid 1px #6699CC; margin: 10px 0; padding: 0 10px; }
-		
-dl.author-info dd { margin-left: 100px; }
+
+dl.author-info dd { margin-left: 100px; margin-bottom: 8px; }
 
 ol#file-copy { padding: 5px;  margin-left: 20px; margin-bottom: 10px; }
 ol#file-copy li { margin-left: 30px; }
 ol#file-copy span { font-weight: bold; }
-		
+ol#file-copy dt {margin-right: 5px;
+float: none !important }
+ol#file-copy dl {width: 100%}
+
+
+h2#lang-fca { margin-left:5px; }
+h2#lang-edts { margin-left:5px; }
+h2#lang-diy { margin-left:5px; }
+h2#lang-sql { margin-left:5px; }
+
+
 /* Code block */
 div.codebox {
 	padding: 3px;
@@ -428,13 +448,18 @@ div.codebox div.codeHead {
 	display: block;
 }
 
+div.codebox div.codeHead a.codeSelect {
+	padding-left: 4px;
+}
+
 blockquote div.codebox {
 	margin-left: 0;
 }
 
 div.codebox pre {
 	/* Also see tweaks.css */
-	overflow: auto;
+	width:100%;
+	overflow-x: scroll;
 	display: block;
 	height: auto;
 	max-height: 200px;
@@ -442,183 +467,188 @@ div.codebox pre {
 	padding-top: 5px;
 	font: 0.9em Monaco, "Andale Mono","Courier New", Courier, mono;
 	line-height: 1.3em;
-	color: #8b8b8b;
+	color: #606060;
 	margin: 2px 0;
 }
-</style>
 
-<script type="text/javascript">
-var i = 0;
-var box = new Array();
-  
-/* passed from xslt */
+dt {
+	float: left;
+	width: auto;
+}
 
-<xsl:for-each select="mod:header">
-var documentLanguages = new Array(<xsl:for-each select="mod:title">'<xsl:value-of select="@lang" />'<xsl:if test="position()!=last()">,</xsl:if></xsl:for-each>);
-  <xsl:for-each select="mod:author-group">
-  var authors = <xsl:value-of select="count(mod:author)"/>;
-  var authors_ll = new Array();
-    i = 0;
-    <xsl:for-each select="mod:author">
-      authors_ll[i] = '<xsl:value-of select="generate-id()"/>';
-      i += 1;
-    </xsl:for-each>
-  </xsl:for-each>
+.rtl dt {
+	float: right;
+}
 
-  var mhes = 0;
-  var mhes_ll = new Array();
-  var mhcls = 0;
-  var mhcls_ll = new Array();
-  <xsl:for-each select="mod:history/mod:entry">
-    mhes_ll[mhes] = '<xsl:value-of select="generate-id()"/>';
-    mhes++;
-    <xsl:if test="count(mod:changelog) > 1">
-      mhcls_ll[mhes] = '<xsl:value-of select="generate-id()"/>';
-      mhcls++;
-    </xsl:if>
-  </xsl:for-each>
-</xsl:for-each>
+dd { color: #666666;}
+dd + dd { padding-top: 5px;}
+dt span { padding: 0 5px 0 0;}
+.rtl dt span { padding: 0 0 0 5px;}
+div.endMOD { padding: 0 5px; }
+		</style>
+		<title>phpBB MOD &#187; <xsl:value-of select="$title" /></title>
+		<script type="text/javascript">
+					var i = 0;
+					var box = new Array();
 
-var opens = 0;
-var opens_ll = new Array();
-<xsl:for-each select="mod:action-group/mod:open">
-  opens_ll[opens] = '<xsl:value-of select="generate-id()"/>';
-  opens++;
-</xsl:for-each>
+					/* passed from xslt */
 
-var codes = 0;
-var codes_ll = new Array();
-<xsl:for-each select="mod:action-group/mod:sql">
-  box[codes] = '<xsl:value-of select="generate-id()"/>';
-  codes_ll[codes] = '<xsl:value-of select="generate-id()"/>';
-  codes++;
-</xsl:for-each>
+					<xsl:for-each select="mod:header">
+						var documentLanguages = new Array(<xsl:for-each select="mod:title">'<xsl:value-of select="@lang" />'<xsl:if test="position()!=last()">,</xsl:if></xsl:for-each>);
+						<xsl:for-each select="mod:author-group">
+							var authors = <xsl:value-of select="count(mod:author)"/>;
+							var authors_ll = new Array();
+							i = 0;
+							<xsl:for-each select="mod:author">
+								authors_ll[i] = '<xsl:value-of select="generate-id()"/>';
+								i += 1;
+							</xsl:for-each>
+						</xsl:for-each>
 
-var finds = 0;
-var finds_ll = new Array();
-var regex = 0;
-var regex_ll = new Array();
-var ifinds = 0;
-var ifinds_ll = new Array();
-var iregex = 0;
-var iregex_ll = new Array();
-var addafters = 0;
-var addafters_ll = new Array();
-var iaddafters = 0;
-var iaddafters_ll = new Array();
-var addbefores = 0;
-var addbefores_ll = new Array();
-var iaddbefores = 0;
-var iaddbefores_ll = new Array();
-var replacewiths = 0;
-var replacewiths_ll = new Array();
-var ireplacewiths = 0;
-var ireplacewiths_ll = new Array();
-var increments = 0;
-var increments_ll = new Array();
-var iincrements = 0;
-var iincrements_ll = new Array();
+						var mhes = 0;
+						var mhes_ll = new Array();
+						var mhcls = 0;
+						var mhcls_ll = new Array();
+						<xsl:for-each select="mod:history/mod:entry">
+							mhes_ll[mhes] = '<xsl:value-of select="generate-id()"/>';
+							mhes++;
+							<xsl:if test="count(mod:changelog) > 1">
+								mhcls_ll[mhes] = '<xsl:value-of select="generate-id()"/>';
+								mhcls++;
+							</xsl:if>
+						</xsl:for-each>
+					</xsl:for-each>
 
-var comments = 0;
-var comments_ll = new Array();
-<xsl:for-each select="mod:action-group/mod:open/mod:edit">
-  <xsl:for-each select="mod:find">
-    finds_ll[finds] = '<xsl:value-of select="generate-id()"/>';
-    finds++;
-    <xsl:if test="@type = 'regex'">
-      regex_ll[regex] = '<xsl:value-of select="generate-id()"/>';
-      regex++;
-    </xsl:if>
-  </xsl:for-each>
-  <xsl:if test="count(mod:comment) > 0">
-    comments_ll[comments] = '<xsl:value-of select="generate-id()"/>';
-    comments++;
-  </xsl:if>
-	<xsl:for-each select="mod:find|mod:action">
-		box[codes] = '<xsl:value-of select="generate-id()"/>';
-    codes_ll[codes] = '<xsl:value-of select="generate-id()"/>';
-    codes++;
+					var opens = 0;
+					var opens_ll = new Array();
+					<xsl:for-each select="mod:action-group/mod:open">
+						opens_ll[opens] = '<xsl:value-of select="generate-id()"/>';
+						opens++;
+					</xsl:for-each>
 
-    <xsl:if test="name() = 'action'">
-      <xsl:if test="@type = 'after-add'">
-        addafters_ll[addafters] = '<xsl:value-of select="generate-id()"/>';
-        addafters++;
-      </xsl:if>
-      <xsl:if test="@type = 'before-add'">
-        addbefores_ll[addbefores] = '<xsl:value-of select="generate-id()"/>';
-        addbefores++;
-      </xsl:if>
-      <xsl:if test="@type = 'replace-with'">
-        replacewiths_ll[replacewiths] = '<xsl:value-of select="generate-id()"/>';
-        replacewiths++;
-      </xsl:if>
-      <xsl:if test="@type = 'operation'">
-        increments_ll[increments] = '<xsl:value-of select="generate-id()"/>';
-        increments++;
-      </xsl:if>
-    </xsl:if>
+					var codes = 0;
+					var codes_ll = new Array();
+					<xsl:for-each select="mod:action-group/mod:sql">
+						box[codes] = '<xsl:value-of select="generate-id()"/>';
+						codes_ll[codes] = '<xsl:value-of select="generate-id()"/>';
+						codes++;
+					</xsl:for-each>
 
-  </xsl:for-each>
-	<xsl:for-each select="mod:inline-edit">
-    <xsl:for-each select="mod:inline-find">
-      ifinds_ll[ifinds] = '<xsl:value-of select="generate-id()"/>';
-      ifinds++;
-      <xsl:if test="@type = 'regex'">
-        iregex_ll[iregex] = '<xsl:value-of select="generate-id()"/>';
-        iregex++;
-      </xsl:if>
-    </xsl:for-each>
-		<xsl:for-each select="mod:inline-find|mod:inline-action">
-			box[codes] = '<xsl:value-of select="generate-id()"/>';
-      codes_ll[codes] = '<xsl:value-of select="generate-id()"/>';
-      codes++;
+					var finds = 0;
+					var finds_ll = new Array();
+					var regex = 0;
+					var regex_ll = new Array();
+					var ifinds = 0;
+					var ifinds_ll = new Array();
+					var iregex = 0;
+					var iregex_ll = new Array();
+					var addafters = 0;
+					var addafters_ll = new Array();
+					var iaddafters = 0;
+					var iaddafters_ll = new Array();
+					var addbefores = 0;
+					var addbefores_ll = new Array();
+					var iaddbefores = 0;
+					var iaddbefores_ll = new Array();
+					var replacewiths = 0;
+					var replacewiths_ll = new Array();
+					var ireplacewiths = 0;
+					var ireplacewiths_ll = new Array();
+					var increments = 0;
+					var increments_ll = new Array();
+					var iincrements = 0;
+					var iincrements_ll = new Array();
 
-      <xsl:if test="name() = 'inline-action'">
-        <xsl:if test="@type = 'after-add'">
-          iaddafters_ll[iaddafters] = '<xsl:value-of select="generate-id()"/>';
-          iaddafters++;
-        </xsl:if>
-        <xsl:if test="@type = 'before-add'">
-          iaddbefores_ll[iaddbefores] = '<xsl:value-of select="generate-id()"/>';
-          iaddbefores++;
-        </xsl:if>
-        <xsl:if test="@type = 'replace-with'">
-          ireplacewiths_ll[ireplacewiths] = '<xsl:value-of select="generate-id()"/>';
-          ireplacewiths++;
-        </xsl:if>
-        <xsl:if test="@type = 'operation'">
-          iincrements_ll[iincrements] = '<xsl:value-of select="generate-id()"/>';
-          iincrements++;
-        </xsl:if>
-      </xsl:if>
-      
-      
-    </xsl:for-each>
-	</xsl:for-each>
-</xsl:for-each>
- 
- <xsl:for-each select="mod:action-group/mod:diy-instructions">
-  codes_ll[codes] = '<xsl:value-of select="generate-id()"/>';
-  codes++;
-</xsl:for-each>
-  
-var copies = 0;
-var copies_ll = new Array();
-<xsl:for-each select="mod:action-group/mod:copy/mod:file">
-  copies_ll[copies] = '<xsl:value-of select="generate-id()"/>';
-  copies++;
-</xsl:for-each>
+					var comments = 0;
+					var comments_ll = new Array();
+					<xsl:for-each select="mod:action-group/mod:open/mod:edit">
+						<xsl:for-each select="mod:find">
+							finds_ll[finds] = '<xsl:value-of select="generate-id()"/>';
+							finds++;
+						</xsl:for-each>
+						<xsl:if test="count(mod:comment) > 0">
+							comments_ll[comments] = '<xsl:value-of select="generate-id()"/>';
+							comments++;
+						</xsl:if>
+						<xsl:for-each select="mod:find|mod:action">
+							box[codes] = '<xsl:value-of select="generate-id()"/>';
+							codes_ll[codes] = '<xsl:value-of select="generate-id()"/>';
+							codes++;
 
-  <xsl:text disable-output-escaping="yes">
+							<xsl:if test="name() = 'action'">
+								<xsl:if test="@type = 'after-add'">
+									addafters_ll[addafters] = '<xsl:value-of select="generate-id()"/>';
+									addafters++;
+								</xsl:if>
+								<xsl:if test="@type = 'before-add'">
+									addbefores_ll[addbefores] = '<xsl:value-of select="generate-id()"/>';
+									addbefores++;
+								</xsl:if>
+								<xsl:if test="@type = 'replace-with'">
+									replacewiths_ll[replacewiths] = '<xsl:value-of select="generate-id()"/>';
+									replacewiths++;
+								</xsl:if>
+								<xsl:if test="@type = 'operation'">
+									increments_ll[increments] = '<xsl:value-of select="generate-id()"/>';
+									increments++;
+								</xsl:if>
+							</xsl:if>
+
+						</xsl:for-each>
+						<xsl:for-each select="mod:inline-edit">
+							<xsl:for-each select="mod:inline-find">
+								ifinds_ll[ifinds] = '<xsl:value-of select="generate-id()"/>';
+								ifinds++;
+								<xsl:if test="@type = 'regex'">
+									iregex_ll[iregex] = '<xsl:value-of select="generate-id()"/>';
+									iregex++;
+								</xsl:if>
+							</xsl:for-each>
+							<xsl:for-each select="mod:inline-find|mod:inline-action">
+								box[codes] = '<xsl:value-of select="generate-id()"/>';
+								codes_ll[codes] = '<xsl:value-of select="generate-id()"/>';
+								codes++;
+								<xsl:if test="name() = 'inline-action'">
+									<xsl:if test="@type = 'after-add'">
+										iaddafters_ll[iaddafters] = '<xsl:value-of select="generate-id()"/>';
+										iaddafters++;
+									</xsl:if>
+									<xsl:if test="@type = 'before-add'">
+										iaddbefores_ll[iaddbefores] = '<xsl:value-of select="generate-id()"/>';
+										iaddbefores++;
+									</xsl:if>
+									<xsl:if test="@type = 'replace-with'">
+										ireplacewiths_ll[ireplacewiths] = '<xsl:value-of select="generate-id()"/>';
+										ireplacewiths++;
+									</xsl:if>
+									<xsl:if test="@type = 'operation'">
+										iincrements_ll[iincrements] = '<xsl:value-of select="generate-id()"/>';
+										iincrements++;
+									</xsl:if>
+								</xsl:if>
+							</xsl:for-each>
+						</xsl:for-each>
+					</xsl:for-each>
+
+					 <xsl:for-each select="mod:action-group/mod:diy-instructions">
+						box[codes] = '<xsl:value-of select="generate-id()" />';
+						codes_ll[codes] = '<xsl:value-of select="generate-id()"/>';
+						codes++;
+					</xsl:for-each>
+
+					var copies = 0;
+					var copies_ll = new Array();
+					<xsl:for-each select="mod:action-group/mod:copy/mod:file">
+						copies_ll[copies] = '<xsl:value-of select="generate-id()"/>';
+						copies++;
+					</xsl:for-each>
+
+					<xsl:text disable-output-escaping="yes">
 <![CDATA[
 // The following line from http://www.ryancooper.com/resources/keycode.asp
-document.onkeydown = mod_doKeyPress;
+document.onkeydown = mod_do_keypress;
 
 var host = "http://www.phpbb.com/mods/modx/i18n/";
-
-var xhr = null;
-var xhr_lang = null;
-var remoteData = null;
 
 var enStrings = "h1=Installation Instructions for \n" +
 "V=Version \n" +
@@ -686,11 +716,14 @@ var enStrings = "h1=Installation Instructions for \n" +
 "diyt=These are manual instructions that cannot be performed automatically. You should follow these instructions carefully.\n" +
 "eom=Save all files. End of MOD.\n" +
 "eomt=You have finished the installation for this MOD. Upload all changed files to your website. If the installation went bad, simply restore your backed up files.\n" +
-"slg=Select Language:\n" +
+"slg=Select Language : \n" +
+"dbms=Select Database Type : \n" +
 "foot=MOD UA XSLT File Copyright &#169; 2007 The phpBB Group, this MOD is copyright to the authors listed above.\n" +
 "regex=This find contains an advanced feature known as regular expressions, click here to learn more.\n" +
 "mhe-v= - Version \n" +
 "mh=MOD History\n" +
+"addtl-modx=Additional MODX Files\n" +
+"imn=This MOD has no additional MODX files.\n"+
 "atm=About this MOD";
 
 var currentLanguage = "en";
@@ -718,35 +751,21 @@ var arrClasCnt = new Array(
 
 var languages = new Array('en');
 
-function inArray(array, value)
-// Returns true if the passed value is found in the
-// array.  Returns false if it is not.
-{
-    var i;
-    for (i=0; i < array.length; i++) {
-        // Matches identical (===), not just similar (==).
-        if (array[i] === value) {
-            return true;
-        }
-    }
-    return false;
-};
-
 function startup()
 {
-	xhr = createXHR();
-
+	sql_dropdown();
+	change_dbms();
 	changeLanguage(currentLanguage);
 	document.getElementById('lang-selector').style.display = "block";
 }
 
 function changeLanguage(langCode)
 {
-  langCode = langCode.toLowerCase();
+	langCode = langCode.toLowerCase();
 	currentLanguage = langCode.split('-')[0];
 	if (currentLanguage.toLowerCase() != 'en') // if change, only include up to first dash
 	{
-		loadLanguage();
+		load_language();
 		xslLanguage(langCode);
 		return;
 	}
@@ -758,187 +777,289 @@ function changeLanguage(langCode)
 	}
 }
 
-function xslLanguage(langCode)
+
+function load_languages()
 {
-		i18nedEls = new Array('title','description','author-notes','diy');
-		var c, h;
-		for (c in comments_ll)
+	if (languagesLoaded)
+	{
+		return;
+	}
+	languagesLoaded = true;
+
+	$divname = document.getElementById('language');
+	var loadingItem = document.createElement('option');
+	$divname.appendChild(loadingItem);
+	loadingItem.innerHTML = 'Loading...';
+	$divname.remove(0);
+
+	$output = 'load_languages';
+	cachernd = parseInt(Math.random() * 99999999); // cache
+	send('', host + 'languages.txt?rnd=' + cachernd);
+}
+
+function load_language()
+{
+	$output = 'load_language';
+	cachernd = parseInt(Math.random() * 99999999); // cache
+	send('', host + currentLanguage + '.txt?rnd=' + cachernd);
+}
+
+/*****************
+* AJAX Functions *
+*****************/
+
+var $xmlhttp = http_object();
+var $finished = 0;
+var $send_queue = new Array();
+var $running = false;
+
+var $divname;
+var $newform;
+var $newurl;
+var $output;
+
+function http_object()
+{
+	if (window.XMLHttpRequest)
+	{
+		return new XMLHttpRequest();
+	}
+	else if (window.ActiveXObject)
+	{
+		return new ActiveXObject("Microsoft.XMLHTTP");
+	}
+}
+
+function send($action, $url, $form, $div, $clear)
+{
+	$newform = $form;
+	$newurl = $url;
+
+	$send_queue.push("handle_send($newurl, $newform)");
+
+	if (!$running)
+	{
+		run_ajax();
+	}
+
+	return;
+}
+
+function run_ajax()
+{
+	$running = true;
+	for ($i = 0; $i < $send_queue.length; $i++)
+	{
+		if ($xmlhttp.readyState == 4 || $xmlhttp.readyState == 0)
 		{
-			i18nedEls.push('mod-comment[' + comments_ll[c] + ']');
+			eval($send_queue[$i]);
 		}
-    for (h in mhcls_ll)
+		else
 		{
-			i18nedEls.push('mhcl[' + mhcls_ll[h] + ']');
+			$xmlhttp.onreadystatechange = check_state;
 		}
-		
-		// force to english of MODX if the MOD doesn't have a translation of the selected language
-		if (!inArray(documentLanguages, langCode))
+	}
+}
+
+function check_state()
+{
+	if ($xmlhttp.readyState == 4 || $xmlhtt.readyState == 0)
+	{
+		eval($send_queue[$finished]);
+	}
+	else
+	{
+		$xmlhttp.onreadystatechange = check_state;
+	}
+}
+
+function handle_send($url, $f)
+{
+	if ($xmlhttp.readyState == 4 || $xmlhttp.readyState == 0)
+	{
+		$param = '';
+
+		try
 		{
-			langCode = 'en';
+			netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserRead");
+			$allowed = true;
 		}
-		
-		var i;
-		for (i in i18nedEls)
+		catch (e)
+		{}
+
+		try
 		{
-			xslLangEl(langCode, i18nedEls[i]);
+
+			$xmlhttp.open('POST', $url, true);
+			$xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			$xmlhttp.onreadystatechange = handle_return;
+			$xmlhttp.send($param);
 		}
+		catch (e)
+		{
+			$divname = document.getElementById('language');
+			var loadingItem = document.createElement('option');
+			$divname.appendChild(loadingItem);
+			loadingItem.innerHTML = 'Unavailable';
+			$divname.remove(0);
+			$divname.disabled = true;
+		}
+	}
+
+	return;
+}
+
+function handle_return()
+{
+	if ($xmlhttp.readyState == 4)
+	{
+		ajax_output($xmlhttp.responseText);
+
+		$finished++;
+
+		if ($send_queue[$finished])
+		{
+			check_state();
+		}
+		else
+		{
+			$send_queue = new Array();
+			$finished = 0;
+			$running = false;
+		}
+	}
+	return;
+}
+
+/*********************
+* END AJAX Functions *
+*********************/
+
+function ajax_output($response)
+{
+	switch ($output)
+	{
+		case 'load_language':
+			var texts = $response.replace("\r\n", "\n").split("\n");
+			applyLanguage(texts);
+		break;
+
+		case 'load_languages':
+			languages = $response.replace("\r", "").split("\n");
+
+			var i, l, s = 0;
+			documentLanguages.sort();
+			for (i in languages)
+			{
+				languages[i] = languages[i].replace("\r", "");
+				languages[i] = languages[i].split("=");
+
+				var langItem = document.createElement('option');
+				$divname.appendChild(langItem);
+				langItem.value = languages[i][0];
+				var iso = languages[i][0].split('-');
+				langItem.innerHTML = languages[i][1];
+				if (iso.length == 2)
+				{
+					langItem.innerHTML += ' [' + iso[1].toUpperCase() + ']';
+				}
+				if (languages[i][0] == currentLanguage)
+				{
+					$divname.selectedIndex = s;
+					$divname.text = languages[i][1];
+				}
+
+				s++;
+			}
+
+			$divname.focus();
+			$divname.onchange =
+			function()
+			{
+				changeLanguage(this.value.replace(" ", ""));
+			};
+			$divname.remove(0);
+		break;
+	}
+
 }
 
 function xslLangEl(langCode, element)
 {
-		var i;
-		var currentEl = document.getElementById(element);
-    try
-    {
-		  for (i in currentEl.childNodes)
-		  {
-			  try
-			  {
-					split = currentEl.childNodes[i].lang.toLowerCase().split('-')[0];			  	
-				  if (currentEl.childNodes[i].lang.toLowerCase() == langCode.toLowerCase() || split == langCode.toLowerCase())
-				  {
-					  currentEl.childNodes[i].style.display = 'inline';
-				  }
-				  else
-				  {
-					  currentEl.childNodes[i].style.display = 'none';
-				  }
-			  }
-			  catch (o) {}
-		  }
-    } catch (o) {}
-}
-
-function loadLanguages()
-{
-	if (languagesLoaded) return;
-	languagesLoaded = true;
-
-	try {
-		netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserRead");
-	} catch (e) { }
-
-	var langSel = document.getElementById('language');        
-	var loadingItem = document.createElement('option');                            
-	langSel.appendChild(loadingItem);
-	loadingItem.innerHTML = 'Loading...';
-	langSel.remove(0);
-
-	cacheRnd=parseInt(Math.random()*99999999); // cache
-	xhr.open("GET", host + "languages.txt?rnd=" + cacheRnd, true); 
-
-	xhr.onreadystatechange = function()
-	{ 
-		if(xhr.readyState == 4)
-		{
-			if(xhr.status == 200)
-			{   
-				languages = xhr.responseText.replace("\r", "").split("\n");
-
-				var i, l, s = 0;
-				documentLanguages.sort();
-				for (i in languages)
-				{
-					languages[i] = languages[i].replace("\r", "");
-					languages[i] = languages[i].split("=");
-
-					var langItem = document.createElement('option');                            
-					langSel.appendChild(langItem);
-					langItem.value = languages[i][0];
-					var iso = languages[i][0].split('-');
-					langItem.innerHTML = languages[i][1];
-					if (iso.length == 2)
-					{
-						langItem.innerHTML += ' [' + iso[1].toUpperCase() + ']';
-					}
-					if (languages[i][0] == currentLanguage)
-					{
-						langSel.selectedIndex = s;
-						langSel.text = languages[i][1];
-					}
-
-					s++;
-				}
-					
-				langSel.focus();
-				langSel.onchange =
-				function()
-				{
-					changeLanguage(this.value.replace(" ", ""));
-				};
-				langSel.remove(0);
-			}	
-		} 
-	}; 
-
-	xhr.send(null);
-}
-
-function showLanguages()
-{
-	loadLanguages();
-}
-
-function createXHR()
-{
-	try {
-		netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserRead");
-	} catch (e) { }
-
-	var req = null;
-	if(window.XMLHttpRequest)
+	var i;
+	var currentEl = document.getElementById(element);
+	try
 	{
-		req = new XMLHttpRequest;
-	}
-	else
-	{
-		var cases = ["Msxml2.XMLHTTP","MSXML2.XMLHTTP.5.0","MSXML2.XMLHTTP.4.0","MSXML2.XMLHTTP.3.0","MICROSOFT.XMLHTTP.1.0","MICROSOFT.XMLHTTP.1","MICROSOFT.XMLHTTP"];
-    var i = 0;
-		for(i in cases)
+		for (i in currentEl.childNodes)
 		{
-			var casei=cases[i];
 			try
 			{
-				req = new ActiveXObject(casei);
+				split = currentEl.childNodes[i].lang.toLowerCase().split('-')[0];
+				if (currentEl.childNodes[i].lang.toLowerCase() == langCode.toLowerCase() || split == langCode.toLowerCase())
+				{
+					currentEl.childNodes[i].style.display = '';
+					if (currentEl.childNodes[i].firstChild && currentEl.childNodes[i].firstChild.className == 'link-group-lang')
+					{
+						currentEl.childNodes[i].firstChild.style.display = 'none';
+					}
+				}
+				else
+				{
+					currentEl.childNodes[i].style.display = 'none';
+				}
 			}
-			catch(o)
+			catch (o) {}
+		}
+	} catch (o) {}
+}
+
+function xslLanguage(langCode)
+{
+	i18nedEls = new Array('title','description','author-notes','diy','link-group');
+	var c, h;
+	for (c in comments_ll)
+	{
+		i18nedEls.push('mod-comment[' + comments_ll[c] + ']');
+	}
+
+	for (h in mhcls_ll)
+	{
+		i18nedEls.push('mhcl[' + mhcls_ll[h] + ']');
+	}
+
+	// force to english of MODX if the MOD doesn't have a translation of the selected language
+	if (!in_array(documentLanguages, langCode))
+	{
+		langCode = 'en';
+	}
+
+	var i;
+	for (i in i18nedEls)
+	{
+		xslLangEl(langCode, i18nedEls[i]);
+	}
+}
+
+function in_array(array, value, position)
+{
+	var i;
+	for (i = 0; i < array.length; i++)
+	{
+		// Matches identical (===), not just similar (==).
+		if (array[i] === value)
+		{
+			if (position)
 			{
-				req = null;
+				return i;
 			}
-			if(req)
+			else
 			{
-				break;
+				return true;
 			}
 		}
 	}
-	return req;
-}
-	
-function loadLanguage()
-{
-	try {
-		netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserRead");
-	} catch (e) { }
-
-	xhr_lang = createXHR();
-		
-	cacheRnd=parseInt(Math.random()*99999999); // cache
-	xhr_lang.open("GET", host + currentLanguage + ".txt?rnd=" + cacheRnd, true);
-		
-	xhr_lang.onreadystatechange = function()
-	{ 
-		if(xhr_lang.readyState == 4)
-		{
-			if(xhr_lang.status == 200)
-			{   
-				var texts = xhr_lang.responseText.replace("\r\n", "\n").split("\n");
-				applyLanguage(texts);
-			}	
-		} 
-	}; 
-
-	xhr_lang.send(null);
-}
+	return false;
+};
 
 function applyLanguage(texts)
 {
@@ -946,23 +1067,27 @@ function applyLanguage(texts)
 	for (i in texts)
 	{
 		var lang = texts[i].split("=");
-		if (lang.length < 2) continue;
+		if (lang.length < 2)
+		{
+			continue;
+		}
 		try
 		{
 			var j;
 			var jflag = false;
 			for (j = 0; j < arrClasCnt.length; j++)
 			{
-        var sw = '-' + lang[0];
+				var sw = '-' + lang[0];
 				if (sw.match('-' + arrClasCnt[j][0]))
 				{
 					var k;
 					for (k = 0; k < arrClasCnt[j][2].length; k++)
 					{
-            try
-            {
-						document.getElementById('lang-' + lang[0] + '[' + arrClasCnt[j][2][k] + ']').innerHTML = lang[1];
-            } catch (e) {}
+						try
+						{
+							document.getElementById('lang-' + lang[0] + '[' + arrClasCnt[j][2][k] + ']').innerHTML = lang[1];
+						}
+						catch (e){}
 					}
 					jflag = true;
 				}
@@ -973,17 +1098,20 @@ function applyLanguage(texts)
 				var append = '';
 				for (p = 1; p < lang.length; p++)
 				{
-					if (p > 1) lang[p] = '=' + lang[p];
+					if (p > 1)
+					{
+						lang[p] = '=' + lang[p];
+					}
 					append += lang[p];
 				}
 				document.getElementById('lang-' + lang[0]).innerHTML = append;
 			}
 		}
-		catch (o) {}
+		catch (o){}
 	}
 }
 
-function selectCode(a)
+function select_code(a)
 {
 	// Get ID of code block
 	var e = a.parentNode.parentNode.getElementsByTagName('PRE')[0];
@@ -997,26 +1125,15 @@ var selectedElement = -1;
 var boxes = box.length;
 var pre_count = 0;
 
-function SXBB_IsIEMac()
-{
-	// Any better way to detect IEMac?
-	var ua = String(navigator.userAgent).toLowerCase();
-	if( document.all && ua.indexOf("mac") >= 0 )
-	{
-		return true;
-	}
-	return false;
-}
-
 function select_text(id)
 {
 	var o = document.getElementById(id);
-	if( !o )
+	if(!o)
 	{
 		return;
 	}
-	
-  // Not IE
+
+	// Not IE
 	if (window.getSelection)
 	{
 		var s = window.getSelection();
@@ -1051,19 +1168,15 @@ function select_text(id)
 		r.select();
 	}
 
-	find_selected(id);
-	return o;
-}
-
-function find_selected(id)
-{
-	for( x = 0; x < box.length; x++ )
+	for(x = 0; x < box.length; x++)
 	{
-		if ( box[x] == id )
+		if (box[x] == id)
 		{
 			selectedElement = x;
 		}
 	}
+
+	return o;
 }
 
 // function findPosY taken from http://www.quirksmode.org/js/findpos.html
@@ -1088,7 +1201,10 @@ function findPosY(obj)
 function selectNextBox()
 {
 	selectedElement += 1;
-	if (selectedElement >= boxes) selectedElement = 0;
+	if (selectedElement >= boxes)
+	{
+		selectedElement = 0;
+	}
 	obj = select_text(box[selectedElement]);
 	window.scrollTo(0, findPosY(obj) - 100);
 }
@@ -1096,7 +1212,10 @@ function selectNextBox()
 function selectPrevBox()
 {
 	selectedElement -= 1;
-	if (selectedElement < 0) selectedElement = boxes - 1;
+	if (selectedElement < 0)
+	{
+		selectedElement = boxes - 1;
+	}
 	obj = select_text(box[selectedElement]);
 	window.scrollTo(0, findPosY(obj) - 100);
 }
@@ -1108,421 +1227,535 @@ function selectFirstBox()
 	window.scrollTo(0, findPosY(obj) - 100);
 }
 
-function mod_doKeyPress(e)
+function mod_do_keypress(e)
 {
 	/* section from w3 schools starts here http://www.w3schools.com/jsref/jsref_onkeypress.asp */
 	var keynum;
 	/* section from w3 schools ends here */
 
 	// The following line from http://www.ryancooper.com/resources/keycode.asp
-	if (window.event) keynum = window.event.keyCode;
-	else if (e) keynum = e.which;
+	if (window.event)
+	{
+		keynum = window.event.keyCode;
+	}
+	else if (e)
+	{
+		keynum = e.which;
+	}
 
-	if (keynum == 84 || keynum == 40) // t / down keys
+	switch (keynum)
 	{
-		selectNextBox();
-		return false;
+		// t / down keys
+		case 84:
+		case 40:
+			selectNextBox();
+			return false;
+		break;
+		//up key
+		case 38:
+			selectPrevBox();
+			return false;
+		break;
+		case 83:
+		case 37:
+			selectFirstBox();
+			return false;
+		break;
 	}
-	if (keynum == 38) //up key
-	{
-		selectPrevBox();
-		return false;
-	}
-	if (keynum == 83 || keynum == 37)
-	{
-		selectFirstBox();
-		return false;
-	}
-	return true; // true allows browser to take care of any further key press combinations such as ctrl + c
+	return true; // true allows browser to take care of any further key press combinations such as (ctrl|cmd) + c
 }
-//-->]]></xsl:text>
-</script>
-				<title>phpBB MOD &#187; <xsl:value-of select="$title" /></title>
-			</head>
-      <body class="ltr" onload="startup()">
-        <div id="debug"></div>
-        <div id="wrap">
-          <div id="page-header">
-            <h1><span id="lang-h1">Installation Instructions for </span>'<xsl:value-of select="$title" />' <span id="lang-V">Version </span><xsl:value-of select="$version" /></h1>
-            <form method="post" action="" id="lang-selector" style="display: none;">
-              <fieldset class="nobg">
-                <label for="language">
-                  <span id="lang-slg">Select Language:</span>
-                </label>
-                <select id="language" name="language" onclick="showLanguages()">
-                  <option value="en" selected="selected">English</option>
-                </select>
-              </fieldset>
-            </form>
-          </div>
-          <div id="page-body">
-            <div id="acp">
-              <div class="panel">
-                <span class="corners-top">
-                  <span></span>
-                </span>
-                <div id="content">
-                  <div id="main">
-                    <fieldset class="permissions" id="perm00">
-            <xsl:for-each select="mod:header">
-							<xsl:call-template name="give-header"></xsl:call-template>
-						</xsl:for-each>
-                    </fieldset>
-                    <hr />
-                    <fieldset class="permissions" id="Fieldset1">
-							<xsl:for-each select="mod:action-group">
-								<xsl:call-template name="give-actions"></xsl:call-template>
-							</xsl:for-each>
-              <hr />
-              <div class="endMOD">
-                <h2 id="lang-eom">Save all files. End of MOD.</h2>
-                <p id="lang-eomt">You have finished the installation for this MOD. Upload all changed files to your website. If the installation went bad, simply restore your backed up files.</p>
-              </div>
 
-            </fieldset>
-        </div>
-      </div>
-      <span class="corners-bottom">
-        <span></span>
-      </span>
-    </div>
-  </div>
-</div>
-<div id="page-footer">
-  <p class="copyright" style="text-align: center; font-size: 10px;" id="lang-foot">MOD UA XSLT File Copyright &#169; 2007 The phpBB Group, this MOD is copyright to the authors listed above.</p>
-</div>
-</div>
-</body>
+/**
+ * Update the MODX with the selected dbms
+ *
+ */
+function change_dbms($form)
+{
+	$type = new Array();
+	$type[0] = '';
+	$type[1] = 'mysql';
+	$type[2] = 'mysql_41';
+	$type[3] = 'mysql_40';
+	$type[4] = 'firebird';
+	$type[5] = 'mssql';
+	$type[6] = 'oracle';
+	$type[7] = 'postgres';
+	$type[8] = 'sqllite';
+
+	$exists = 0;
+	$tags = document.getElementsByTagName('dbms');
+
+	if ($form)
+	{
+		sql_display($form.value);
+	}
+	else
+	{
+		if ($tags.length > 0)
+		{
+			for ($i = 0; $i < $tags.length; $i++)
+			{
+				$dbms = $tags[$i].attributes['type'].nodeValue;
+
+				if (!$dbms)
+				{
+					continue;
+				}
+
+				$position = in_array($type, $dbms, true);
+				if ($position !== false)
+				{
+					if ($exists > 0 && $position < $exists)
+					{
+						$exists = $position;
+					}
+					else if ($exists == 0)
+					{
+						$exists = $position;
+					}
+				}
+			}
+
+			if ($exists > 0)
+			{
+				sql_display($type[$exists]);
+			}
+		}
+	}
+
+	return;
+}
+
+/**
+ * display the dbms specific sql data with the dbms we have selected
+ *
+ */
+function sql_display($value)
+{
+	$tags = document.getElementsByTagName('dbms');
+
+	// show the dbms of type we have selected, hide all others except for non dbms specific
+	for ($i = 0; $i < $tags.length; $i++)
+	{
+		$dbms = $tags[$i].attributes['type'].nodeValue;
+
+		if (!$dbms)
+		{
+			continue;
+		}
+
+		if ($dbms == $value)
+		{
+			$tags[$i].style.display = '';
+		}
+		else
+		{
+			$tags[$i].style.display = 'none';
+		}
+	}
+}
+
+/**
+ * load the sql dropdown with all the database types supported by this MODX file
+ *
+ */
+function sql_dropdown()
+{
+	var $dbms_element = document.getElementById('dbms');
+	var $dbms_selector = document.getElementById('dbms-selector');
+	if (!$dbms_element || !$dbms_selector)
+	{
+		return;
+	}
+
+	$type = new Array();
+	$type[0] = 'mysql';
+	$type[1] = 'mysql_41';
+	$type[2] = 'mysql_40';
+	$type[3] = 'firebird';
+	$type[4] = 'mssql';
+	$type[5] = 'oracle';
+	$type[6] = 'postgres';
+	$type[7] = 'sqllite';
+
+	$options = new Array();
+	$tags = document.getElementsByTagName('dbms');
+
+	// show the dbms of type we have selected, hide all others except for non dbms specific
+	for ($i = 0; $i < $tags.length; $i++)
+	{
+		$dbms = $tags[$i].attributes['type'].nodeValue;
+		$position = in_array($type, $dbms, true);
+
+		if (!$dbms)
+		{
+			continue;
+		}
+		else if ($position !== false)
+		{
+			$options[$position] = '<option value=' + $dbms + '>' + $dbms + '</option>';
+		}
+	}
+
+	if ($options.length > 0)
+	{
+		$selects = '';
+
+		// sort options and output in the correct order
+		for ($i = 0; $i < $type.length; $i++)
+		{
+			if ($options[$i])
+			{
+				$selects += $options[$i];
+			}
+		}
+		$dbms_element.innerHTML = $selects;
+	}
+	else
+	{
+		$dbms_selector.style.display = 'none';
+	}
+}
+						//-->]]>
+					</xsl:text>
+				</script>
+		</head>
+		<body class="ltr" onload="startup()">
+		<div id="debug"></div>
+		<div id="wrap">
+			<div id="page-header">
+				<h1><span id="lang-h1">Installation Instructions for </span>'<xsl:value-of select="$title" />' <span id="lang-V">Version </span><xsl:value-of select="$version" /></h1>
+				<form method="post" action="" id="lang-selector" style="display: none;">
+					<fieldset class="nobg">
+					<label for="language"> <span id="lang-slg">Select Language:</span> </label>
+					<select id="language" name="language" onclick="load_languages()">
+						<option value="en" selected="selected">English</option>
+					</select>
+					</fieldset>
+				</form>
+			</div>
+			<div id="page-body">
+				<div id="acp">
+					<div class="panel"> <span class="corners-top"> <span></span> </span>
+						<div id="content">
+							<div id="main">
+								<xsl:for-each select="mod:header">
+									<xsl:call-template name="give-header">
+									</xsl:call-template>
+								</xsl:for-each>
+								<hr />
+								<fieldset class="permissions" id="Fieldset1">
+								<xsl:for-each select="mod:action-group">
+									<xsl:call-template name="give-actions">
+									</xsl:call-template>
+								</xsl:for-each>
+								<hr />
+								<div class="endMOD">
+									<h2 id="lang-eom">Save all files. End of MOD.</h2>
+									<p id="lang-eomt">You have finished the installation for this MOD. Upload all changed files to your website. If the installation went bad, simply restore your backed up files.</p>
+								</div>
+								</fieldset>
+							</div>
+						</div>
+						<span class="corners-bottom"> <span></span> </span> </div>
+				</div>
+			</div>
+			<div id="page-footer">
+				<p class="copyright" style="text-align: center; font-size: 10px;" id="lang-foot">MOD UA XSLT File Copyright &#169; 2008 The phpBB Group.  This MOD is copyright to the authors listed above.</p>
+			</div>
+		</div>
+		</body>
 		</html>
 	</xsl:template>
 	<xsl:template name="give-header">
-    <h2 id="lang-atm">About this MOD</h2>
-    <dl>
-      <dt id="lang-t">Title:</dt>
-      <dd class="mod-about">
-        <div class="inner">
-          <span class="corners-top"><span></span></span>
-				<xsl:if test="count(mod:title) > 1">
-					<dl id="title">
-						<xsl:for-each select="mod:title">
-								<dt>
-									<xsl:value-of select="@lang" />
-								</dt>
-								<dd style='white-space:pre;' lang="{@lang}">
-									<p><xsl:value-of select="current()" /></p>
-								</dd>
-						</xsl:for-each>
-					</dl>
-				</xsl:if>
-				<xsl:if test="count(mod:title) = 1">
-					<p lang="{@lang}" style="white-space:pre;">
-						<xsl:value-of select="mod:title" />
-					</p>
-				</xsl:if>
-          <span class="corners-bottom"><span></span></span>
-        </div>
-      </dd>
-		<dt id="lang-d">Description:</dt>
-		<dd class="mod-about">
-			<div class="inner">
+		<fieldset>
+		<legend id="lang-atm">About this MOD</legend>
+			<div class="mod-about">
 				<span class="corners-top"><span></span></span>
-				<xsl:if test="count(mod:description) > 1">
-					<dl id="description">
-						<xsl:for-each select="mod:description">
-							<dt>
-								<xsl:value-of select="@lang" />
-							</dt>
-							<dd lang="{@lang}">
-								<p>
+				<dl>
+					<dt id="lang-t">Title:</dt>
+					<dd>
+						<xsl:if test="count(mod:title) > 1">
+							<dl id="title" class="nopadding">
+								<xsl:for-each select="mod:title">
+									<dt><xsl:value-of select="@lang" /></dt>
+									<dd style='white-space:pre;' lang="{@lang}">
+										<p><xsl:value-of select="current()" /></p>
+									</dd>
+								</xsl:for-each>
+							</dl>
+						</xsl:if>
+						<xsl:if test="count(mod:title) = 1">
+							<p lang="{@lang}" style='white-space:pre;'><xsl:value-of select="mod:title" /></p>
+						</xsl:if>
+					</dd>
+					<dt id="lang-d">Description:</dt>
+					<dd>
+							<xsl:if test="count(mod:description) > 1">
+								<dl id="description" class="nopadding">
+									<xsl:for-each select="mod:description">
+										<dt><xsl:value-of select="@lang" /></dt>
+										<dd lang="{@lang}">
+											<p>
+												<xsl:call-template name="add-line-breaks">
+													<xsl:with-param name="string">
+														<xsl:value-of select="current()" />
+													</xsl:with-param>
+												</xsl:call-template>
+											</p>
+										</dd>
+									</xsl:for-each>
+								</dl>
+							</xsl:if>
+							<xsl:if test="count(mod:description) = 1">
+								<p lang="{@lang}">
 									<xsl:call-template name="add-line-breaks">
 										<xsl:with-param name="string">
-											<xsl:value-of select="current()" />
+											<xsl:value-of select="mod:description" />
 										</xsl:with-param>
 									</xsl:call-template>
 								</p>
-							</dd>
-						</xsl:for-each>
-					</dl>
-				</xsl:if>
-				<xsl:if test="count(mod:description) = 1">
-					<p lang="{@lang}" style="white-space:pre;">
-						<xsl:call-template name="add-line-breaks">
-							<xsl:with-param name="string">
-								<xsl:value-of select="mod:description" />
-							</xsl:with-param>
-						</xsl:call-template>
-					</p>
-				</xsl:if>
+							</xsl:if>
+					</dd>
+					<dt id="lang-aV">Version:</dt>
+					<dd class="mod-about">
+						<p>
+							<xsl:for-each select="mod:mod-version">
+								<xsl:value-of select="$version" />
+							</xsl:for-each>
+						</p>
+					</dd>
+					<xsl:for-each select="mod:installation">
+						<xsl:call-template name="give-installation"></xsl:call-template>
+					</xsl:for-each>
+				</dl>
 				<span class="corners-bottom"><span></span></span>
 			</div>
-		</dd>
-		<dt id="lang-aV">Version:</dt>
-			<dd class="mod-about">
-				<div class="inner">
-					<span class="corners-top"><span></span></span>
-          <p>
-            <xsl:for-each select="mod:mod-version">
-              <xsl:call-template name="give-version"></xsl:call-template>
-            </xsl:for-each>
-          </p>
-          <span class="corners-bottom"><span></span></span>
-        </div>
-      </dd>
-			<xsl:for-each select="mod:installation">
-				<xsl:call-template name="give-installation"></xsl:call-template>
-			</xsl:for-each>
-		</dl>
+		</fieldset>
+		<fieldset>
 		<xsl:for-each select="mod:author-group">
-      <xsl:if test="count(mod:author) > 1"><h3 id="lang-aus">Authors</h3></xsl:if>
-      <xsl:if test="count(mod:author) = 1"><h3 id="lang-au">Author</h3></xsl:if>
+			<xsl:if test="count(mod:author) > 1">
+				<legend id="lang-aus">Authors</legend>
+			</xsl:if>
+			<xsl:if test="count(mod:author) = 1">
+				<legend id="lang-au">Author</legend>
+			</xsl:if>
 			<xsl:call-template name="give-authors"></xsl:call-template>
 		</xsl:for-each>
-    <h3 id="lang-fte">Files to Edit</h3>
+		</fieldset>
+		<h3 id="lang-fte">Files to Edit</h3>
 		<xsl:for-each select="../mod:action-group">
 			<xsl:call-template name="give-files-to-edit"></xsl:call-template>
 		</xsl:for-each>
-    <h3 id="lang-icf">Included Files</h3>
+		<h3 id="lang-icf">Included Files</h3>
 		<xsl:if test="count(../mod:action-group/mod:copy/mod:file) = 0">
 			<p id="lang-icfn">No files have been included with this MOD.</p>
 		</xsl:if>
 		<xsl:for-each select="../mod:action-group">
 			<xsl:call-template name="give-files-included"></xsl:call-template>
 		</xsl:for-each>
+		<h3 id="lang-addtl-modx">Additional MODX Files</h3>
+		<xsl:if test="count(mod:link-group/mod:link) = 0">
+			<p id="lang-imn">This MOD has no additional MODX files.</p>
+		</xsl:if>
+		<ul class="link-group" id="link-group">
+			<xsl:for-each select="mod:link-group/mod:link">
+				<li lang="{@lang}"><span class="link-group-lang"><xsl:value-of select="@lang" />&nbsp;</span><strong style="text-transform: capitalize;"><xsl:value-of select="@type" />:</strong>&nbsp;<a href="{@href}"><xsl:value-of select="current()" /></a></li>
+			</xsl:for-each>
+		</ul>
 		<hr />
-    <div id="modDisclaimer">
-      <h3 id="lang-dcl">Disclaimer</h3>
-      <div class="mod-about">
-        <div class="inner">
-          <span class="corners-top">
-            <span></span>
-          </span>
-          <p>
-            <span id="lang-dclt">For security purposes, please check: <a href="http://www.phpbb.com/mods/">http://www.phpbb.com/mods/</a> for the latest version of this MOD. Downloading this MOD from other sites could cause malicious code to enter into your phpBB Forum. As such, phpBB will not offer support for MODs not offered in our MODs database, located at: <a href="http://www.phpbb.com/mods/">http://www.phpbb.com/mods/</a></span>
-          </p>
-          <span class="corners-bottom">
-            <span></span>
-          </span>
-        </div>
-      </div>
-    </div>
-    <h3 id="lang-ant">Author Notes</h3>
-	<div class="mod-about">
-		<div class="inner">
+		<div id="modDisclaimer">
+			<h3 id="lang-dcl">Disclaimer</h3>
+			<div class="mod-about">
+				<span class="corners-top"><span></span></span>
+					<div class="mod-about-padding">
+					<p><span id="lang-dclt">For security purposes, please check: <a href="http://www.phpbb.com/mods/">http://www.phpbb.com/mods/</a>for the latest version of this MOD. Downloading this MOD from other sites could cause malicious code to enter into your phpBB Forum. As such, phpBB will not offer support for MODs not offered in our MODs database, located at: <a href="http://www.phpbb.com/mods/">http://www.phpbb.com/mods/</a></span></p>
+					</div>
+					<span class="corners-bottom"><span></span></span>
+			</div>
+		</div>
+		<h3 id="lang-ant">Author Notes</h3>
+		<div class="mod-about">
 			<span class="corners-top"><span></span></span>
-			<xsl:if test="count(mod:author-notes) > 1">
-				<dl id="author-notes">
-					<xsl:for-each select="mod:author-notes">
-						<dt>
-							<xsl:value-of select="@lang" />
-						</dt>
-						<dd lang="{@lang}">
-							<xsl:call-template name="add-line-breaks">
-								<xsl:with-param name="string">
-									<xsl:value-of select="current()" />
-								</xsl:with-param>
-							</xsl:call-template>
-						</dd>
-					</xsl:for-each>
-				</dl>
-			</xsl:if>
-			<xsl:if test="count(mod:author-notes) = 1">
-				<dl lang="{@lang}" style="white-space:pre;" id="author-notes">
+				<xsl:if test="count(mod:author-notes) > 1">
+					<dl id="author-notes">
+						<xsl:for-each select="mod:author-notes">
+							<dt><xsl:value-of select="@lang" /></dt>
+							<dd lang="{@lang}">
+								<xsl:call-template name="add-line-breaks">
+									<xsl:with-param name="string">
+										<xsl:value-of select="current()" />
+									</xsl:with-param>
+								</xsl:call-template>
+							</dd>
+						</xsl:for-each>
+					</dl>
+				</xsl:if>
+				<xsl:if test="count(mod:author-notes) = 1">
+				<div class="mod-about-padding">
 					<xsl:call-template name="add-line-breaks">
 						<xsl:with-param name="string">
 							<xsl:value-of select="mod:author-notes" />
 						</xsl:with-param>
 					</xsl:call-template>
-				</dl>
-			</xsl:if>
-			<span class="corners-bottom"><span></span></span>
+				</div>
+				</xsl:if>
+				<span class="corners-bottom"><span></span></span>
 		</div>
-	</div>
-    <div>
-      <xsl:for-each select="mod:history">
-        <xsl:call-template name="give-mod-history"></xsl:call-template>
-      </xsl:for-each>
-      <h3 id="lang-lic">License</h3>
-      <div class="mod-about">
-        <div class="inner">
-          <span class="corners-top"><span></span></span>
-          <p><span id="lang-lict">This MOD has been licensed under the following license:</span></p>
-          <p style="white-space:pre;">
-            <a href="license.txt"><xsl:value-of select="mod:license" /></a>
-          </p>
-          <span class="corners-bottom"><span></span></span>
-        </div>
-      </div>
-      <h3 id="lang-ont">Other Notes</h3>
-      <div class="mod-about" id="other-notes">
-        <div class="inner">
-          <span class="corners-top">
-            <span></span>
-          </span>
-          <p><span id="lang-ontt1">Before adding this MOD to your forum, you should back up all files related to this MOD</span></p>
-          <p>
-            <span id="lang-ontt2">This MOD was designed for phpBB</span><xsl:value-of select="mod:installation/mod:target-version/mod:target-primary" /><span id="lang-ontt3"> and may not function as stated on other phpBB versions. MODs for phpBB3.0 will <strong>not</strong> work on phpBB2.0 and vice versa.</span>
-          </p>
-          <xsl:for-each select="./mod:mod-version">
-          <xsl:if test="mod:minor mod 2 != 0 or mod:major = 0 or (@stage != '' and @stage != 'stable')">
-            <p>
-              <strong class="red">
-                <span id="lang-onttq">This MOD is development quality. It is not recommended that you install it on a live forum.</span>
-              </strong>
-            </p>
-          </xsl:if>
-          </xsl:for-each>
-          <span class="corners-bottom">
-            <span></span>
-          </span>
-        </div>
-      </div>
-      <div id="mod-support">
-        <h4>
-          <span id="lang-isp"></span>
-        </h4>
-        <div class="mod-about">
-          <div class="inner">
-            <span class="corners-top">
-              <span></span>
-            </span>
-            <p>
-              <span id="lang-ispt"></span>
-            </p>
-            <span class="corners-bottom">
-              <span></span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+		<div>
+			<xsl:for-each select="mod:history">
+				<xsl:call-template name="give-mod-history"></xsl:call-template>
+			</xsl:for-each>
+			<h3 id="lang-lic">License</h3>
+			<div class="mod-about">
+				<span class="corners-top"><span></span></span>
+					<div class="mod-about-padding">
+					<p><span id="lang-lict">This MOD has been licensed under the following license:</span></p>
+					<p style='white-space:pre;'><a href="license.txt"><xsl:value-of select="mod:license" /></a></p>
+					</div>
+					<span class="corners-bottom"><span></span></span>
+			</div>
+			<h3 id="lang-ont">Other Notes</h3>
+			<div class="mod-about" id="other-notes">
+				<span class="corners-top"><span></span></span>
+					<div class="mod-about-padding">
+					<p><span id="lang-ontt1">Before adding this MOD to your forum, you should back up all files related to this MOD</span></p>
+					<p><span id="lang-ontt2">This MOD was designed for phpBB</span>&nbsp;<xsl:value-of select="mod:installation/mod:target-version/mod:target-primary" /><span id="lang-ontt3"> and may not function as stated on other phpBB versions. MODs for phpBB3.0 will <strong>not</strong> work on phpBB2.0 and vice versa.</span></p>
+					<xsl:for-each select="./mod:mod-version">
+						<xsl:if test="substring(current(), 3, 1) mod 2 != 0 or substring(current(), 0, 1) = 0">
+							<p><strong class="red"><span id="lang-onttq">This MOD is development quality. It is not recommended that you install it on a live forum.</span></strong></p>
+						</xsl:if>
+					</xsl:for-each>
+					</div>
+					<span class="corners-bottom"><span></span></span>
+			</div>
+			<div id="mod-support">
+				<h4><span id="lang-isp"></span></h4>
+				<div class="mod-about">
+					<span class="corners-top"><span></span></span>
+						<div class="mod-about-padding">
+						<p><span id="lang-ispt"></span></p>
+						</div>
+						<span class="corners-bottom"><span></span></span>
+				</div>
+			</div>
+		</div>
 	</xsl:template>
 	<xsl:template name="give-authors">
 		<xsl:for-each select="mod:author">
-      <div class="mod-about">
-        <div class="inner">
-          <span class="corners-top"><span></span></span>
-			<xsl:call-template name="give-author"></xsl:call-template>
-          <span class="corners-bottom"><span></span></span>
-		</div>
-	</div>
+			<div class="mod-about">
+				<span class="corners-top"><span></span></span>
+					<xsl:call-template name="give-author"></xsl:call-template>
+					<span class="corners-bottom"><span></span></span>
+			</div>
 		</xsl:for-each>
 	</xsl:template>
 	<xsl:template name="give-author">
-    <dl class="author-info">
-      <dt id="lang-a-un[{generate-id()}]">Username:</dt>
-			<dd>
-				<a href="http://www.phpbb.com/community/memberlist.php?mode=viewprofile&amp;un={mod:username}">
-					<xsl:value-of select="mod:username" />
-				</a>
-			</dd>
+		<dl class="author-info">
+			<dt id="lang-a-un[{generate-id()}]">Username:</dt>
+			<dd><a href="http://www.phpbb.com/phpBB/profile.php?mode=viewprofile&amp;un={translate(mod:username, ' ', '+')}"><xsl:value-of select="mod:username" /></a></dd>
 			<xsl:if test="mod:email != 'N/A' and mod:email != 'n/a' and mod:email != ''">
-        <dt id="lang-a-e[{generate-id()}]">Email:</dt>
-				<dd>
-					<a href="mailto:{mod:email}">
-						<xsl:value-of select="mod:email" />
-					</a>
-				</dd>
+				<dt id="lang-a-e[{generate-id()}]">Email:</dt>
+				<dd><a href="mailto:{mod:email}"><xsl:value-of select="mod:email" /></a></dd>
 			</xsl:if>
-      <dt id="lang-a-n[{generate-id()}]">Name:</dt>
-			<dd>
-				<xsl:value-of select="mod:realname" />
-			</dd>
+			<dt id="lang-a-n[{generate-id()}]">Name:</dt>
+			<dd><xsl:value-of select="mod:realname" /></dd>
 			<xsl:if test="mod:homepage != 'N/A' and mod:homepage != 'n/a' and mod:homepage!=''">
-        <dt id="lang-a-h[{generate-id()}]">WWW:</dt>
+				<dt id="lang-a-h[{generate-id()}]">WWW:</dt>
+				<dd><a href="{mod:homepage}"><xsl:value-of select="mod:homepage" /></a></dd>
+			</xsl:if>
+			<xsl:if test="count(mod:contributions) > 0 and count(mod:contributions/mod:status) > 0">
+				<dt id="lang-a-c[{generate-id()}]">Contributions:</dt>
 				<dd>
-					<a href="{mod:homepage}">
-						<xsl:value-of select="mod:homepage" />
-					</a>
+					<xsl:if test="count(mod:contributions/mod:status) > 0">
+						<xsl:value-of select="mod:contributions/mod:status" /><br />
+						From:<xsl:value-of select="mod:contributions/mod:from" /><br />
+						To:<xsl:value-of select="mod:contributions/mod:to" />
+					</xsl:if>
 				</dd>
 			</xsl:if>
 		</dl>
 		<br />
 	</xsl:template>
-	<xsl:template name="give-version">
-    <xsl:choose>
-      <xsl:when test="@stage = 'beta'">
-        <xsl:value-of select="concat(mod:major, '.', mod:minor, ' ', 'Beta ', mod:revision, mod:release)" />
-      </xsl:when>
-      <xsl:when test="@stage = 'alpha'">
-        <xsl:value-of select="concat(mod:major, '.', mod:minor, ' ', 'Alpha ', mod:revision, mod:release)" />
-      </xsl:when>
-      <xsl:when test="@stage = 'release-candidate'">
-        <xsl:value-of select="concat(mod:major, '.', mod:minor, ' ', 'RC', mod:revision, mod:release)" />
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="concat(mod:major, '.', mod:minor, '.', mod:revision, mod:release)" />
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
 	<xsl:template name="give-installation">
 		<dt id="lang-il">Installation Level:</dt>
 		<dd class="mod-about">
 			<div class="inner">
-				<span class="corners-top"><span></span></span>
-			<xsl:if test="mod:level='easy'"><p id="lang-ile">Easy</p></xsl:if>
-			<xsl:if test="mod:level='intermediate'"><p id="lang-ili">Intermediate</p></xsl:if>
-			<xsl:if test="mod:level='advanced'"><p id="lang-ila">Advanced</p></xsl:if>
-        <span class="corners-bottom"><span></span></span>
-      </div>
-    </dd>
+				<xsl:if test="mod:level='easy'">
+					<p id="lang-ile">Easy</p>
+				</xsl:if>
+				<xsl:if test="mod:level='intermediate'">
+					<p id="lang-ili">Intermediate</p>
+				</xsl:if>
+				<xsl:if test="mod:level='advanced'">
+					<p id="lang-ila">Advanced</p>
+				</xsl:if>
+			</div>
+		</dd>
 		<dt id="lang-it">Installation Time:</dt>
 		<dd class="mod-about">
 			<div class="inner">
-				<span class="corners-top"><span></span></span>
-        <p>~<xsl:value-of select="floor(mod:time div 60)" /> <span id="lang-mint">minutes</span></p>
-        <span class="corners-bottom">
-          <span></span>
-        </span>
-      </div>
-    </dd>
+				<p>~<xsl:value-of select="floor(mod:time div 60)" /><span id="lang-mint">minutes</span></p>
+			</div>
+		</dd>
 	</xsl:template>
 	<xsl:template name="give-mod-history">
 		<xsl:if test="count(mod:entry) > 0">
-			<h3 id="lang-mh">MOD History</h3>
-			<dl>
-				<xsl:for-each select="mod:entry">
-					<xsl:call-template name="give-history-entry"></xsl:call-template>
-				</xsl:for-each>
-			</dl>
+			<fieldset>
+			<legend id="lang-mh">MOD History</legend>
+			<xsl:for-each select="mod:entry">
+				<xsl:call-template name="give-history-entry"></xsl:call-template>
+			</xsl:for-each>
+			</fieldset>
 		</xsl:if>
 	</xsl:template>
 	<xsl:template name="give-history-entry">
-    <div class="mod-about">
-      <div class="inner"><span class="corners-top"><span></span></span>
-		<dt><p><strong><xsl:value-of select="substring(mod:date,1,10)" /><span id="lang-mhe-v[{generate-id()}]"> - Version </span><xsl:for-each select="mod:rev-version"><xsl:call-template name="give-version"></xsl:call-template></xsl:for-each></strong></p></dt>
-		<dd>
-			<xsl:if test="count(mod:changelog) > 1">
-        <dl id="mhcl[{generate-id()}]">
-				<xsl:for-each select="mod:changelog">
-					<xsl:call-template name="give-history-entry-changelog"></xsl:call-template>
-				</xsl:for-each>
-        </dl>
-			</xsl:if>
-			<xsl:if test="count(mod:changelog) = 1">
-				<xsl:for-each select="mod:changelog">
-					<xsl:call-template name="give-history-entry-changelog-single"></xsl:call-template>
-				</xsl:for-each>
-			</xsl:if>
-		</dd>
-        <span class="corners-bottom"><span></span></span></div>
-      </div>
+		<div class="mod-about">
+			<span class="corners-top"><span></span></span>
+			<dl class="mod-history">
+				<dt>
+					<p><strong><xsl:value-of select="substring(mod:date,1,10)" /><span id="lang-mhe-v[{generate-id()}]"> - Version</span>
+						<xsl:for-each select="mod:rev-version">
+							<xsl:value-of select="current()" />
+						</xsl:for-each>
+						</strong></p>
+				</dt>
+				<dd><br clear="all" />
+					<xsl:if test="count(mod:changelog) > 1">
+						<dl id="mhcl[{generate-id()}]">
+							<xsl:for-each select="mod:changelog">
+								<xsl:call-template name="give-history-entry-changelog"></xsl:call-template>
+							</xsl:for-each>
+						</dl>
+					</xsl:if>
+					<xsl:if test="count(mod:changelog) = 1">
+						<xsl:for-each select="mod:changelog">
+							<xsl:call-template name="give-history-entry-changelog-single"></xsl:call-template>
+						</xsl:for-each>
+					</xsl:if>
+				</dd>
+			</dl>
+				<span class="corners-bottom"><span></span></span>
+		</div>
 	</xsl:template>
 	<xsl:template name="give-history-entry-changelog">
-			<dt>
-				<xsl:value-of select="@lang" />
-			</dt>
-			<dd lang="{@lang}">
-				<ul>
-					<xsl:for-each select="mod:change">
-						<li><p><xsl:value-of select="current()" /></p></li>
-					</xsl:for-each>
-				</ul>
-			</dd>
+		<dt><xsl:value-of select="@lang" /></dt>
+		<dd lang="{@lang}">
+			<ul>
+				<xsl:for-each select="mod:change">
+					<li>
+						<p><xsl:value-of select="current()" /></p>
+					</li>
+				</xsl:for-each>
+			</ul>
+		</dd>
 	</xsl:template>
 	<xsl:template name="give-history-entry-changelog-single">
 		<ul>
 			<xsl:for-each select="mod:change">
-				<li><p><xsl:value-of select="current()" /></p></li>
+				<li>
+					<p><xsl:value-of select="current()" /></p>
+				</li>
 			</xsl:for-each>
 		</ul>
 	</xsl:template>
@@ -1541,218 +1774,228 @@ function mod_doKeyPress(e)
 		</ul>
 	</xsl:template>
 	<xsl:template name="give-file">
-		<li>
-			<xsl:value-of select="@src" />
-			<xsl:if test="position()!=last()">,</xsl:if>
-		</li>
+		<li><xsl:value-of select="@src" /><xsl:if test="position()!=last()">,</xsl:if></li>
 	</xsl:template>
 	<xsl:template name="give-file-copy">
 		<xsl:for-each select="mod:file">
-			<li>
-				<xsl:value-of select="@from" />
-				<xsl:if test="position()!=last()">,</xsl:if>
+			<li><xsl:value-of select="@from" />
+				<xsl:if test="position()!=last()">,
+				</xsl:if>
 			</li>
 		</xsl:for-each>
 	</xsl:template>
+
 	<xsl:template name="give-actions">
 		<xsl:if test="count(mod:sql) > 0">
-      <h2 id="lang-sql">SQL</h2>
-    </xsl:if>
-		<div id="sql" class="mod-about">
-       <div class="inner">
+			<form method="post" action="" id="dbms-selector">
+				<fieldset class="nobg">
+					<label for="dbms"> <span id="lang-dbms">Select Database Type:</span> </label>
+					<select id="dbms" name="dbms" onchange="change_dbms(this)">
+						<option value="mysql_41" selected="selected">MySQL 41</option>
+						<option value="mysql_40">MySQL 40</option>
+						<option value="firebird">Firebird</option>
+						<option value="mssql">MSSQL</option>
+						<option value="oracle">Oracle</option>
+						<option value="postgres">Postgres</option>
+						<option value="sqllite">SQLLite</option>
+					</select>
+				</fieldset>
+			</form>
+			<h2 id="lang-sql">SQL</h2>
+			<div id="sql" class="mod-about">
 				<span class="corners-top"><span></span></span>
-		<xsl:for-each select="mod:sql">			
-			<xsl:call-template name="give-sql"></xsl:call-template>			
-		</xsl:for-each>
-         </div>
-				<span class="corners-bottom"><span></span></span>
-		</div>
+					<xsl:for-each select="mod:sql">
+						<xsl:call-template name="give-sql"></xsl:call-template>
+					</xsl:for-each>
+				<span class="corners-bottom"><span></span></span></div>
+		</xsl:if>
 		<xsl:if test="count(mod:copy) > 0">
-      <xsl:for-each select="mod:copy">
-        <xsl:call-template name="give-filez"></xsl:call-template>
-      </xsl:for-each>
-    </xsl:if>
-    <h2 id="lang-edts">Edits</h2>
-		<p>
-			<span class="key">s</span><span class="key">↑</span><span class="key">↓</span></p>
-		<p>
-			<span id="lang-edtt">Use your keyboard to navigate the code boxes. You may also hit '<em>s</em>' on your keyboard to go to the first code box.</span>
-		</p>
-		<div class="mod-about" id="edits">
+			<xsl:for-each select="mod:copy">
+				<xsl:call-template name="give-filez"></xsl:call-template>
+			</xsl:for-each>
+		</xsl:if>
+		<xsl:if test="count(mod:open) > 0">
+		<h2 id="lang-edts">Edits</h2>
+		<p><span class="key">s</span><span class="key">↑</span><span class="key">↓</span></p>
+		<p><span id="lang-edtt">Use your keyboard to navigate the code boxes. You may also hit '<em>s</em>' on your keyboard to go to the first code box.</span></p>
+		<div id="edits">
 			<div class="inner">
-				<span class="corners-top"><span></span></span>
-		<xsl:for-each select="mod:open">
-			<xsl:call-template name="give-fileo"></xsl:call-template>
-		</xsl:for-each>
-        <span class="corners-bottom"><span></span></span>
+				<xsl:for-each select="mod:open">
+					<xsl:call-template name="give-fileo"></xsl:call-template>
+				</xsl:for-each>
 			</div>
 		</div>
+		</xsl:if>
 		<xsl:call-template name="give-manual"></xsl:call-template>
 	</xsl:template>
 	<xsl:template name="give-sql">
-		<div class="content">
-					<div class="codebox">
-						<div class="codeHead"><span id="lang-cde-c[{generate-id()}]">Code:</span><a href="#" onclick="selectCode(this); return false;"><span id="lang-cde-sa[{generate-id()}]">Select All</span></a></div>
-						<div class="codePre"><pre id="{generate-id()}"><xsl:value-of select="current()" /></pre></div>
+		<dbms type="{@dbms}">
+			<div class="content">
+				<xsl:if test="@dbms != ''">
+					<xsl:value-of select="@dbms" />:
+				</xsl:if>
+				<div class="codebox">
+					<div class="codeHead"><span id="lang-cde-c[{generate-id()}]">Code:</span><a href="#" onclick="select_code(this); return false;" class="codeSelect"><span id="lang-cde-sa[{generate-id()}]">Select All</span></a></div>
+					<div class="codePre">
+						<pre id="{generate-id()}"><xsl:value-of select="current()" /></pre>
 					</div>
-      </div>
+				</div>
+			</div>
+		</dbms>
 	</xsl:template>
 	<xsl:template name="give-manual">
-    <xsl:if test="count(mod:diy-instructions) > 0">
-    <div class="mod-about">
-	<div class="inner">
-		<span class="corners-top"><span></span></span>
-		<h2 id="lang-diy">DIY Instructions</h2>
-		<p><span id="lang-diyt">These are manual instructions that cannot be performed automatically. You should follow these instructions carefully.</span></p>
-		<div id="diy">
-		<xsl:for-each select="mod:diy-instructions">
-      <div lang="{@lang}">
-				<div class="content">
-				 <div class="codebox">
-				  <div class="codeHead"><span id="lang-cde-c[{generate-id()}]">Code:</span><a href="#" onclick="selectCode(this); return false;"><span id="lang-cde-sa[{generate-id()}]">Select All</span></a></div>
-				  <div class="codePre"><pre id="{generate-id()}"><xsl:value-of select="current()" /></pre></div>
-				 </div>
-        </div>
+		<xsl:if test="count(mod:diy-instructions) > 0">
+			<h2 id="lang-diy">DIY Instructions</h2>
+			<div class="mod-about">
+				<span class="corners-top"><span></span></span>
+					<div class="mod-about-padding">
+					<p><span id="lang-diyt">These are manual instructions that cannot be performed automatically. You should follow these instructions carefully.</span></p>
+					</div>
+					<div id="diy">
+						<xsl:for-each select="mod:diy-instructions">
+							<div lang="{@lang}" style="margin:0;">
+								<div class="content">
+									<div class="codebox">
+										<div class="codeHead"><span id="lang-cde-c[{generate-id()}]">Code:</span><a href="#" onclick="select_code(this); return false;" class="codeSelect"><span id="lang-cde-sa[{generate-id()}]">Select All</span></a></div>
+										<div class="codePre">
+											<pre id="{generate-id()}"><xsl:value-of select="current()" /></pre>
+										</div>
+									</div>
+								</div>
+							</div>
+						</xsl:for-each>
+					</div>
+				<span class="corners-bottom"><span></span></span>
 			</div>
-		</xsl:for-each>
-    </div>
-    <span class="corners-bottom">
-      <span></span>
-    </span>
-  </div>
-</div>
-</xsl:if>
+		</xsl:if>
 	</xsl:template>
 	<xsl:template name="give-fileo">
-		<div class="editFile">
-      <h3><span id="lang-opn[{generate-id()}]">Open:</span>&nbsp;<xsl:value-of select="@src" /></h3>
-			<xsl:for-each select="mod:edit">
-        <div class="mod-edit">
-          <xsl:if test="count(mod:comment) > 0">
-          <div class="mod-comment">
-          <h4 id="lang-cm-cmt[{generate-id()}]">Comments</h4>
-            <dl id="mod-comment[{generate-id()}]">
-              <xsl:for-each select="mod:comment">
-                <dt>
-                  <span><xsl:if test="count(../mod:comment) > 1"><xsl:value-of select="@lang" /></xsl:if></span>
-                </dt>
-                <dd lang="{@lang}"><xsl:value-of select="current()" />
-                </dd>
-              </xsl:for-each>
-            </dl>
-            </div>
-          </xsl:if>
-					<xsl:for-each select="mod:find|mod:action|mod:inline-edit">
-						<xsl:if test="name() = 'find'">
-              <h4 id="lang-fnd[{generate-id()}]">Find</h4>
-              <p><span id="lang-fndt[{generate-id()}]"><strong>Tip:</strong> This may be a partial find and not the whole line.</span>
-<xsl:if test="@type = 'regex'">
-									<br />
-									<em id="lang-regex[{generate-id()}]">This find contains an advanced feature known as regular expressions, click here to learn more.</em>
-								</xsl:if>
-</p>
-          <div class="codebox">
-						<div class="codeHead"><span id="lang-cde-c[{generate-id()}]">Code:</span><a href="#" onclick="selectCode(this); return false;"><span id="lang-cde-sa[{generate-id()}]">Select All</span></a></div>
-						<div class="codePre"><pre id="{generate-id()}"><xsl:value-of select="current()" /></pre></div>
-					</div>
-						</xsl:if>
-						<xsl:if test="name() = 'action'">
-							<xsl:if test="@type = 'after-add'">
-                <h4 id="lang-aft[{generate-id()}]">Add after</h4>
-                <p><span id="lang-aftt[{generate-id()}]"><strong>Tip:</strong> Add these lines on a new blank line after the preceding line(s) to find.</span></p>
-							</xsl:if>
-							<xsl:if test="@type = 'before-add'">
-                <h4 id="lang-bef[{generate-id()}]">Add before</h4>
-                <p>
-                  <span id="lang-beft[{generate-id()}]"><strong>Tip:</strong> Add these lines on a new blank line before the preceding line(s) to find.</span>
-                </p>
-							</xsl:if>
-							<xsl:if test="@type = 'replace-with'">
-                <h4 id="lang-rplw[{generate-id()}]">Replace With</h4>
-                <p><span id="lang-rplwt[{generate-id()}]"><strong>Tip:</strong> Replace the preceding line(s) to find with the following lines.</span></p>
-							</xsl:if>
-							<xsl:if test="@type = 'operation'">
-                <h4 id="lang-inc[{generate-id()}]">Increment</h4>
-                <p>
-                  <span id="lang-inct[{generate-id()}]"><strong>Tip:</strong> This allows you to alter integers. For help on what each operator means, click here.</span>
-                </p>
-							</xsl:if>
-					<div class="codebox">
-						<div class="codeHead"><span id="lang-cde-c[{generate-id()}]">Code:</span><a href="#" onclick="selectCode(this); return false;"><span id="lang-cde-sa[{generate-id()}]">Select All</span></a></div>
-						<div class="codePre"><pre id="{generate-id()}"><xsl:value-of select="current()" /></pre></div>
-					</div>
-						</xsl:if>
-						<xsl:if test="name() = 'inline-edit'">
-              <div class="mod-inlineedit">
-								<xsl:for-each select="mod:inline-find|mod:inline-action|mod:inline-comment">
-									<xsl:if test="name() = 'inline-find'">
-                    <h5 id="lang-ifnd[{generate-id()}]">In-line Find</h5>
-                    <p>
-                      <span id="lang-ifndt[{generate-id()}]"><strong>Tip:</strong> This is a partial match of a line for in-line operations.</span>
-<xsl:if test="@type = 'regex'">
-												<br />
-												<em id="lang-regex[{generate-id()}]">This find contains an advanced feature known as regular expressions, click here to learn more.</em>
+		<div class="mod-about"><span class="corners-top"><span></span></span>
+			<div class="editFile">
+				<h3><span id="lang-opn[{generate-id()}]">Open:</span>&nbsp;<xsl:value-of select="@src" /></h3>
+				<xsl:for-each select="mod:edit">
+					<div class="mod-edit">
+						<xsl:if test="count(mod:comment) > 0">
+							<div class="mod-comment">
+								<h4 id="lang-cm-cmt[{generate-id()}]">Comments</h4>
+								<dl id="mod-comment[{generate-id()}]">
+									<xsl:for-each select="mod:comment">
+										<dt><span>
+											<xsl:if test="count(../mod:comment) > 1">
+												<xsl:value-of select="@lang" />
 											</xsl:if>
-</p>
-					<div class="codebox">
-						<div class="codeHead"><span id="lang-cde-c[{generate-id()}]">Code:</span><a href="#" onclick="selectCode(this); return false;"><span id="lang-cde-sa[{generate-id()}]">Select All</span></a></div>
-						<div class="codePre"><pre id="{generate-id()}"><xsl:value-of select="current()" /></pre></div>
-					</div>
-									</xsl:if>
-									<xsl:if test="name() = 'inline-action'">
-										<xsl:if test="@type = 'after-add'">
-                      <h5 id="lang-iaft[{generate-id()}]">In-line Add after</h5>
-                      <p>
-                        <span id="lang-iaftt[{generate-id()}]"></span>
-                      </p>
-										</xsl:if>
-										<xsl:if test="@type = 'before-add'">
-                      <h5 id="lang-ibef[{generate-id()}]">In-line Add before</h5>
-                      <p>
-                        <span id="lang-ibeft[{generate-id()}]"></span>
-                      </p>
-										</xsl:if>
-										<xsl:if test="@type = 'replace-with'">
-                      <h5 id="lang-irplw[{generate-id()}]">In-line Replace With</h5>
-                      <p>
-                        <span id="lang-irplwt[{generate-id()}]"></span>
-                      </p>
-										</xsl:if>
-										<xsl:if test="@type = 'operation'">
-                      <h5 id="lang-iinc[{generate-id()}]">In-line Increment</h5>
-                      <p>
-                        <span id="lang-iinct[{generate-id()}]"><strong>Tip:</strong> This allows you to alter integers. For help on what each operator means, click here.</span>
-                      </p>
-										</xsl:if>
-					<div class="codebox">
-						<div class="codeHead"><span id="lang-cde-c[{generate-id()}]">Code:</span><a href="#" onclick="selectCode(this); return false;"><span id="lang-cde-sa[{generate-id()}]">Select All</span></a></div>
-						<div class="codePre"><pre id="{generate-id()}"><xsl:value-of select="current()" /></pre></div>
-					</div>
-									</xsl:if>
-									<xsl:if test="name() = 'inline-comment'">
-          <dl id="comment[{generate-id()}]">
-						<dt><span id="lang-cm-cmt[{generate-id()}]">Comments</span>&nbsp;<span><xsl:value-of select="@lang" /></span></dt>
-						<dd lang="{@lang}"><xsl:value-of select="current()" /></dd>
-					</dl>
-									</xsl:if>
-								</xsl:for-each>
+											</span></dt>
+										<dd lang="{@lang}"><xsl:value-of select="current()" /></dd>
+									</xsl:for-each>
+								</dl>
 							</div>
 						</xsl:if>
-					</xsl:for-each>
-				</div>
-			</xsl:for-each>
-		</div>
+						<xsl:for-each select="mod:find|mod:action|mod:inline-edit">
+							<xsl:if test="name() = 'find'">
+								<h4 id="lang-fnd[{generate-id()}]">Find</h4>
+								<p><span id="lang-fndt[{generate-id()}]"><strong>Tip:</strong>This may be a partial find and not the whole line.</span>
+									<xsl:if test="@type = 'regex'">
+										<br />
+										<em id="lang-regex[{generate-id()}]">This find contains an advanced feature known as regular expressions, click here to learn more.</em>
+									</xsl:if>
+								</p>
+								<div class="codebox">
+									<div class="codeHead"><span id="lang-cde-c[{generate-id()}]">Code:</span><a href="#" onclick="select_code(this); return false;" class="codeSelect"><span id="lang-cde-sa[{generate-id()}]">Select All</span></a></div>
+									<div class="codePre">
+										<pre id="{generate-id()}"><xsl:value-of select="current()" /></pre>
+									</div>
+								</div>
+							</xsl:if>
+							<xsl:if test="name() = 'action'">
+								<xsl:if test="@type = 'after-add'">
+									<h4 id="lang-aft[{generate-id()}]">Add after</h4>
+									<p><span id="lang-aftt[{generate-id()}]"><strong>Tip:</strong>Add these lines on a new blank line after the preceding line(s) to find.</span></p>
+								</xsl:if>
+								<xsl:if test="@type = 'before-add'">
+									<h4 id="lang-bef[{generate-id()}]">Add before</h4>
+									<p><span id="lang-beft[{generate-id()}]"><strong>Tip:</strong>Add these lines on a new blank line before the preceding line(s) to find.</span></p>
+								</xsl:if>
+								<xsl:if test="@type = 'replace-with'">
+									<h4 id="lang-rplw[{generate-id()}]">Replace With</h4>
+									<p><span id="lang-rplwt[{generate-id()}]"><strong>Tip:</strong>Replace the preceding line(s) to find with the following lines.</span></p>
+								</xsl:if>
+								<xsl:if test="@type = 'operation'">
+									<h4 id="lang-inc[{generate-id()}]">Increment</h4>
+									<p><span id="lang-inct[{generate-id()}]"><strong>Tip:</strong>This allows you to alter integers. For help on what each operator means, click here.</span></p>
+								</xsl:if>
+								<div class="codebox">
+									<div class="codeHead"><span id="lang-cde-c[{generate-id()}]">Code:</span><a href="#" onclick="select_code(this); return false;" class="codeSelect"><span id="lang-cde-sa[{generate-id()}]">Select All</span></a></div>
+									<div class="codePre">
+										<pre id="{generate-id()}"><xsl:value-of select="current()" /></pre>
+									</div>
+								</div>
+							</xsl:if>
+							<xsl:if test="name() = 'inline-edit'">
+								<div class="mod-inlineedit">
+									<xsl:for-each select="mod:inline-find|mod:inline-action|mod:inline-comment">
+										<xsl:if test="name() = 'inline-find'">
+											<h5 id="lang-ifnd[{generate-id()}]">In-line Find</h5>
+											<p><span id="lang-ifndt[{generate-id()}]"><strong>Tip:</strong>This is a partial match of a line for in-line operations.</span>
+												<xsl:if test="@type = 'regex'">
+													<br />
+													<em id="lang-regex[{generate-id()}]">This find contains an advanced feature known as regular expressions, click here to learn more.</em>
+												</xsl:if>
+											</p>
+											<div class="codebox">
+												<div class="codeHead"><span id="lang-cde-c[{generate-id()}]">Code:</span><a href="#" onclick="select_code(this); return false;" class="codeSelect"><span id="lang-cde-sa[{generate-id()}]">Select All</span></a></div>
+												<div class="codePre">
+													<pre id="{generate-id()}"><xsl:value-of select="current()" /></pre>
+												</div>
+											</div>
+										</xsl:if>
+										<xsl:if test="name() = 'inline-action'">
+											<xsl:if test="@type = 'after-add'">
+												<h5 id="lang-iaft[{generate-id()}]">In-line Add after</h5>
+												<p><span id="lang-iaftt[{generate-id()}]"></span></p>
+											</xsl:if>
+											<xsl:if test="@type = 'before-add'">
+												<h5 id="lang-ibef[{generate-id()}]">In-line Add before</h5>
+												<p><span id="lang-ibeft[{generate-id()}]"></span></p>
+											</xsl:if>
+											<xsl:if test="@type = 'replace-with'">
+												<h5 id="lang-irplw[{generate-id()}]">In-line Replace With</h5>
+												<p><span id="lang-irplwt[{generate-id()}]"></span></p>
+											</xsl:if>
+											<xsl:if test="@type = 'operation'">
+												<h5 id="lang-iinc[{generate-id()}]">In-line Increment</h5>
+												<p><span id="lang-iinct[{generate-id()}]"><strong>Tip:</strong>This allows you to alter integers. For help on what each operator means, click here.</span></p>
+											</xsl:if>
+											<div class="codebox">
+												<div class="codeHead"><span id="lang-cde-c[{generate-id()}]">Code:</span><a href="#" onclick="select_code(this); return false;" class="codeSelect"><span id="lang-cde-sa[{generate-id()}]">Select All</span></a></div>
+												<div class="codePre">
+													<pre id="{generate-id()}"><xsl:value-of select="current()" /></pre>
+												</div>
+											</div>
+										</xsl:if>
+										<xsl:if test="name() = 'inline-comment'">
+											<dl id="comment[{generate-id()}]">
+												<dt><span id="lang-cm-cmt[{generate-id()}]">Comments</span>&nbsp;<span><xsl:value-of select="@lang" /></span></dt>
+												<dd lang="{@lang}"><xsl:value-of select="current()" /></dd>
+											</dl>
+										</xsl:if>
+									</xsl:for-each>
+								</div>
+							</xsl:if>
+						</xsl:for-each>
+					</div>
+				</xsl:for-each>
+			</div>
+			<span class="corners-bottom"><span></span></span></div>
 	</xsl:template>
 	<xsl:template name="give-filez">
-    <h2 id="lang-fca">File Copy</h2>
-    <ol id="file-copy">
+		<h2 id="lang-fca">File Copy</h2>
+		<ol id="file-copy">
 			<xsl:for-each select="mod:file">
-      <li>
-				<dl>
-				<dt><span id="lang-c-copy[{generate-id()}]">Copy:</span>&nbsp;<xsl:value-of select="@from" /></dt>
-				<dd><span id="lang-c-to[{generate-id()}]">To:</span>&nbsp;<xsl:value-of select="@to" /></dd>
-				</dl>
-			</li>
+				<li><dl>
+						<dt><span id="lang-c-copy[{generate-id()}]">Copy:</span>&nbsp;<xsl:value-of select="@from" /></dt>
+						<dd><span id="lang-c-to[{generate-id()}]">To:</span>&nbsp;<xsl:value-of select="@to" /></dd>
+					</dl>
+				</li>
 			</xsl:for-each>
 		</ol>
 	</xsl:template>
@@ -1761,11 +2004,9 @@ function mod_doKeyPress(e)
 		<xsl:param name="string" select="." />
 		<xsl:choose>
 			<xsl:when test="contains($string, '&#xA;')">
-				<xsl:value-of select="substring-before($string, '&#xA;')" />
-				<br />
+				<xsl:value-of select="substring-before($string, '&#xA;')" /><br />
 				<xsl:call-template name="add-line-breaks">
-					<xsl:with-param name="string" select="substring-after($string, '&#xA;')" />
-				</xsl:call-template>
+					<xsl:with-param name="string" select="substring-after($string, '&#xA;')" /></xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="$string" />
