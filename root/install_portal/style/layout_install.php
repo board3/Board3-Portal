@@ -23,7 +23,7 @@ else
 
 <h1><?php echo $user->lang['INSTALLER_INSTALL_TITLE']; ?></h1>
 <p><?php echo $user->lang['INSTALLER_INSTALL_NOTE']; ?></p>
-<form id="acp_board" method="post" action="<?php echo append_sid('install.'.$phpEx, 'mode=install'); ?>">
+<form id="acp_board" method="post" action="<?php echo append_sid($phpbb_root_path.'install_portal/install.'.$phpEx, 'mode=install'); ?>">
 	<fieldset>
 		<legend><?php echo $user->lang['INSTALLER_INSTALL']; ?></legend>
 		<dl>

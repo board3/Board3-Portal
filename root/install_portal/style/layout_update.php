@@ -26,7 +26,7 @@ else
 
 <h1><?php echo $user->lang['INSTALLER_UPDATE_TITLE']; ?></h1>
 <p><?php echo sprintf($user->lang['INSTALLER_UPDATE_NOTE'], $old_version, $current_version); ?></p>
-<form id="acp_board" method="post" action="<?php echo append_sid('install.'.$phpEx, 'mode=update'); ?>">
+<form id="acp_board" method="post" action="<?php echo append_sid($phpbb_root_path.'install_portal/install.'.$phpEx, 'mode=update'); ?>">
 	<fieldset>
 		<legend><?php echo $user->lang['INSTALLER_UPDATE']; ?></legend>
 		<dl>
