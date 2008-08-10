@@ -23,7 +23,7 @@ else
 
 <h1><?php echo $user->lang['INSTALLER_INSTALL_TITLE']; ?></h1>
 <p><?php echo $user->lang['INSTALLER_INSTALL_NOTE']; ?></p>
-<form id="acp_board" method="post" action="install.php?mode=install">
+<form id="acp_board" method="post" action="<?php echo append_sid('install.'.$phpEx, 'mode=install'); ?>">
 	<fieldset>
 		<legend><?php echo $user->lang['INSTALLER_INSTALL']; ?></legend>
 		<dl>
@@ -31,8 +31,8 @@ else
 			<dd><label><input name="confirm" value="1" class="radio" type="radio" /><?php echo $user->lang['YES']; ?></label><label><input name="confirm" value="0" checked="checked" class="radio" type="radio" /><?php echo $user->lang['NO']; ?></label></dd>
 		</dl>
 		<p class="submit-buttons">
-			<input class="button1" id="submit" name="submit" value="Submit" type="submit" />&nbsp;
-			<input class="button2" id="reset" name="reset" value="Reset" type="reset" />
+			<input class="button1" id="submit" name="submit" value="<?php echo $user->lang['SUBMIT']; ?>" type="submit" />&nbsp;
+			<input class="button2" id="reset" name="reset" value="<?php echo $user->lang['RESET']; ?>" type="reset" />
 		</p>
 	</fieldset>
 </form>

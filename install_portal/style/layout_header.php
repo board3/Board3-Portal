@@ -22,7 +22,6 @@ if( !defined('IN_PHPBB') || !defined('IN_PORTAL_INSTALL') )
 	<div id="page-header">
 		<h1><?php echo $page_title; ?></h1>
 		<p><a href="<?php echo $phpbb_root_path . '">' . $user->lang['INDEX']; ?></a></p>
-		<p id="skip"><a href="#acp">Skip to content</a></p>
 	</div>
 	<div id="page-body">
 		<div id="acp">
@@ -41,7 +40,7 @@ if( !defined('IN_PHPBB') || !defined('IN_PORTAL_INSTALL') )
 if( $old_version != 0 && $phpbb3portal === false )
 {
 ?>
-							<li<?php echo ( ($mode == 'uninstall') ? ' id="activemenu"' : '' ); ?>><a href="install.<?php echo $phpEx; ?>?mode=uninstall"><span><?php echo $user->lang['INSTALLER_UNINSTALL']; ?></span></a></li>
+							<li<?php echo ( ($mode == 'uninstall') ? ' id="activemenu"' : '' ); ?>><a href="<?php echo append_sid('install.'.$phpEx, 'mode=uninstall'); ?>"><span><?php echo $user->lang['INSTALLER_UNINSTALL']; ?></span></a></li>
 <?php
 }
 ?>
