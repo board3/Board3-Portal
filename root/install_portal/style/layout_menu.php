@@ -32,6 +32,6 @@ case 'none':
 <?php
 break;
 }
-include $phpbb_root_path.'style/layout_footer.' . $phpEx;
+include $phpbb_root_path.'install_portal/style/layout_footer.' . $phpEx;
 
 ?>
