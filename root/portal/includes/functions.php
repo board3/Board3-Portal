@@ -251,7 +251,6 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 
 	while ( $row = $db->sql_fetchrow($result) )
 	{
-		$row['username'] = get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</b>';
 
 		// Pull attachment data
 		$sql2 = 'SELECT *
