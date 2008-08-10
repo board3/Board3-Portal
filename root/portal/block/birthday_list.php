@@ -63,8 +63,9 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 				$birthday_ahead_list .= '<span title="' . $user->format_date($user_birthday, 'd M') . '">' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</span>';
 				if ( $age = (int) substr($row['user_birthday'], -4) )
 				{
-					$birthday_ahead_list .= ' (' . ($now['year'] - $age) . ')<br />'."\n";
+					$birthday_ahead_list .= ' (' . ($now['year'] - $age) . ')';
 				}
+				$birthday_ahead_list .= '<br />'."\n";
 			}
 		}
 	}
