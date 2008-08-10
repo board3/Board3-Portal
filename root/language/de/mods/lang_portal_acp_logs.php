@@ -35,18 +35,18 @@ $lang = array_merge($lang, array(
 	'LOG_CONFIG_GENERAL'				=> '<strong>Portal: Allgemeine Einstellungen geändert</strong>',
 	'LOG_CONFIG_NEWS'					=> '<strong>Portal: Einstellungen für Aktuelle Beiträge geändert</strong>',
 	'LOG_CONFIG_ANNOUNCEMENTS'	=> '<strong>Portal: Einstellungen für Bekanntmachungen geändert</strong>',
-	'LOG_CONFIG_WELCOME'				=> '<strong>Portal: Einstellungen für die Willkommens Nachricht geändert</strong>',
+	'LOG_CONFIG_WELCOME'			=> '<strong>Portal: Einstellungen für die Willkommens-Nachricht geändert</strong>',
 	'LOG_CONFIG_RECENT'				=> '<strong>Portal: Einstellungen für Aktuelles geändert</strong>',
 	'LOG_CONFIG_WORDGRAPH'			=> '<strong>Portal: Einstellungen für den Wordgraph geändert</strong>',
-	'LOG_CONFIG_PAYPAL'				=> '<strong>Portal: Einstellungen für PayPal Spenden geändert</strong>',
+	'LOG_CONFIG_PAYPAL'				=> '<strong>Portal: Einstellungen für PayPal-Spenden geändert</strong>',
 	'LOG_CONFIG_ATTACHMENTS'		=> '<strong>Portal: Einstellungen für Dateianhänge geändert</strong>',
 	'LOG_CONFIG_MEMBERS'				=> '<strong>Portal: Einstellungen für die neuesten Mitglieder geändert</strong>',
 	'LOG_CONFIG_POLLS'					=> '<strong>Portal: Einstellungen für die Umfragen geändert</strong>',
-	'LOG_CONFIG_BOTS'					=> '<strong>Portal: Einstellungen für die letzten Bots geändert</strong>',
+	'LOG_CONFIG_BOTS'				=> '<strong>Portal: Einstellungen für Letzte Bots geändert</strong>',
 	'LOG_CONFIG_POSTER'				=> '<strong>Portal: Einstellungen für die Vielschreiber geändert</strong>',
-	'LOG_CONFIG_MINICALENDAR'		=> '<strong>Portal: Einstellungen für den Mini Kalender geändert</strong>',
+	'LOG_CONFIG_MINICALENDAR'		=> '<strong>Portal: Einstellungen für den Mini-Kalender geändert</strong>',
 	'LOG_CONFIG_CUSTOMBLOCK'		=> '<strong>Portal: Einstellungen für den Aktiven Block geändert</strong>',
-	'LOG_CONFIG_LINKS'				=> '<strong>Portal: Einstellungen für den Links Block geändert</strong>',
+	'LOG_CONFIG_LINKS'				=> '<strong>Portal: Einstellungen für den Links-Block geändert</strong>',
 
 ));
 

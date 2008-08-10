@@ -35,9 +35,9 @@ $lang = array_merge($lang, array(
 	'PORTAL'							=> 'Portal',
 	'WELCOME'						=> 'Willkommen',
 
-	'PORTAL_ERROR'					=> 'Portal Fehler',
+	'PORTAL_ERROR'				=> 'Portal-Fehler',
 	'PORTAL_DELETE_DIR'			=> 'Bitte lösche das Portal Installationsverzeichnis: %s',
-	'PORTAL_UPDATE'					=> 'Portal Update',
+	'PORTAL_UPDATE'				=> 'Portal Update',
 	'PORTAL_UPDATE_TEXT'			=> 'Es steht ein Update für das Portal zur Installation bereit! <a href="%1$s">Installiere Board3 Portal Version %2$s</a>!',
 
 	// news & global announcements
@@ -71,7 +71,7 @@ $lang = array_merge($lang, array(
 	 'NO_BIRTHDAYS_AHEAD'			=> 'In diesem Zeitraum hat kein Mitglied Geburtstag',
 
 	// user menu
-	'USER_MENU'						=> 'Benutzer Menü',
+	'USER_MENU'					=> 'Benutzer-Menü',
 	'UM_LOG_ME_IN'					=> 'Mich bei jedem Besuch automatisch anmelden',
 	'UM_HIDE_ME'						=> 'Meinen Online-Status während dieser Sitzung verbergen',
 	'UM_MAIN_SUBSCRIBED'			=> 'Benachrichtigungen verwalten',
@@ -121,9 +121,9 @@ $lang = array_merge($lang, array(
 
 	// make donation
 	'DONATION' 						=> 'Spenden',
-	'DONATION_TEXT'					=> 'ist eine Webseite ohne jedes Gewinninteresse. Jeder, der dieses Projekt unterstützen möchte, kann dies mit einer kleinen Spende tun, damit die Rechnungen für den Server, die Domain, etc. bezahlt werden können.',
-	'PAY_MSG'							=> 'Klicke auf das PayPal Bild, nachdem Du den Betrag, den Du spenden möchtest, aus dem Menü ausgewählt hast.',
-	'PAY_ITEM' 						=> 'Freiwillige Foren Spende',
+	'DONATION_TEXT'				=> 'ist eine Webseite ohne jedes Gewinninteresse. Jeder der dieses Projekt unterstützen möchte, kann dies mit einer kleinen Spende tun, damit die Rechnungen für den Server, die Domain, etc. bezahlt werden können.',
+	'PAY_MSG'					=> 'Klicke auf das PayPal-Bild, nachdem Du den Betrag, den Du spenden möchtest, aus dem Menü ausgewählt hast.',
+	'PAY_ITEM' 					=> 'Freiwillige Foren-Spende',
 
 	// main menu
 	'M_MENU' 							=> 'Menü',
