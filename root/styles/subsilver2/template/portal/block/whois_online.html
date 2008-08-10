@@ -1,15 +1,20 @@
 <!--version $Id$ //-->
-<table class="tablebg" cellspacing="1" width="100%">
+<table class="tablebg" width="100%" cellspacing="1">
+<tr>
+	<td class="cat" colspan="2"><!-- IF U_VIEWONLINE --><h4><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h4><!-- ELSE --><h4>{L_WHO_IS_ONLINE}</h4><!-- ENDIF --></td>
+</tr>
+<tr>
+<!-- IF LEGEND -->
+	<td class="row1" rowspan="2" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
+<!-- ELSE -->
+	<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
+<!-- ENDIF -->
+	<td class="row1" width="100%"><span class="genmed">{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /><br />{LOGGED_IN_USER_LIST}</span></td>
+</tr>
+<!-- IF LEGEND -->
 	<tr>
-		<th><!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a><!-- ELSE -->{L_WHO_IS_ONLINE}<!-- ENDIF --></th>
+		<td class="row1"><b class="gensmall">{L_LEGEND} :: {LEGEND}</b></td>
 	</tr>
-	<tr class="row1">
-		<td>
-				<!-- IF S_DISPLAY_ONLINE_LIST -->
-					<p style="font-size: 90%; margin: 0 5px 0 5px;">{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
-					<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>
-				<!-- ENDIF -->
-		</td>
-	</tr>
+<!-- ENDIF -->
 </table>
-<br />
+<br clear="all" />
