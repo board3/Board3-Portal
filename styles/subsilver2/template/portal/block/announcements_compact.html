@@ -13,7 +13,7 @@
 	<!-- ELSE -->
 	<tr class="row<!-- IF announcements_row.S_ROW_COUNT is even -->1<!-- ELSE -->2<!-- ENDIF -->">
 		<td>
-				<a name="a{announcements_row.A_ID}"></a><!-- IF announcements_row.S_UNREAD_INFO --><a href="{announcements_row.U_VIEW_COMMENTS}#unread">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_row.U_VIEW_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {announcements_row.ATTACH_ICON_IMG} <!-- IF announcements_row.S_POLL --> <strong style="font-size:1.1em;">{L_POLL}: </strong><!-- ENDIF -->
+				<a name="a{announcements_row.A_ID}"></a><!-- IF announcements_row.S_UNREAD_INFO --><a href="{announcements_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_row.U_VIEW_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {announcements_row.ATTACH_ICON_IMG} <!-- IF announcements_row.S_POLL --> <strong style="font-size:1.1em;">{L_POLL}: </strong><!-- ENDIF -->
 				<a href="{announcements_row.U_VIEW_COMMENTS}" title="{announcements_row.TITLE}"><strong style="font-size:1.1em;">{announcements_row.TITLE}</strong></a>
 				<br style="clear:both" />
 				<span style="float: left;">{L_POSTED} {L_POST_BY_AUTHOR}: {announcements_row.POSTER_FULL} {L_POSTED_ON_DATE} {announcements_row.TIME}</span>
