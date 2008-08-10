@@ -158,6 +158,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 					'U_VIEWFORUM'		=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $fetch_news[$i]['forum_id']),
 					'U_LAST_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 'p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
 					'U_VIEW_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 't=' . $topic_id),
+					'U_VIEW_UNREAD'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 't=' . $topic_id . '&amp;view=unread#unread'),
 					'U_POST_COMMENT'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;' . (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id),
 					'U_READ_FULL'		=> append_sid("{$phpbb_root_path}portal.$phpEx", $read_full_url),
 					'L_READ_FULL'		=> $read_full,
