@@ -40,16 +40,16 @@ $lang = array_merge($lang, array(
 	'INSTALLER_INSTALL'						=> 'Installiere',
 
 	'INSTALLER_INTRO_TITLE'				=> 'Portal Install/Update Utility (PInUp)',
-	'INSTALLER_INTRO_NOTE'				=> 'Willkommen in der Portal Installation von Board3, wir begrüßen Sie herzlich an Board',
+	'INSTALLER_INTRO_NOTE'				=> 'Willkommen in der Portal-Installation von Board3, wir begrüßen dich herzlich an Board',
 
 	'INSTALLER_MENU_DONE'					=> 'Aktuelle Version',
-	'INSTALLER_MENU_DONE_TEXT'			=> 'Du hast bereits Version %s installiert, bitte lösche das Verzeichnis install_portal folder. Zurück zu deinem <a href="%s">Forum</a>.',
+	'INSTALLER_MENU_DONE_TEXT'			=> 'Du hast bereits Version %s installiert, bitte lösche das Verzeichnis install_portal. Zurück zu deinem <a href="%s">Forum</a>.',
 
 	'INSTALLER_INSTALL_TITLE'				=> 'PInUp Installation',
-	'INSTALLER_INSTALL_NOTE'				=> 'Sobald du die Installation dieses Mods startest, werden eventuelle vorige Versionen aus der Datenbank entfernt.',
-	'INSTALLER_INSTALL_MENU'				=> 'Installations Menü',
-	'INSTALLER_INSTALL_SUCCESSFUL'		=> 'Die Installation des MOD v%s war erfolgreich.',
-	'INSTALLER_INSTALL_UNSUCCESSFUL'	=> 'Die Installation des MOD v%s war <strong>nicht</strong> erfolgreich.',
+	'INSTALLER_INSTALL_NOTE'			=> 'Sobald du die Installation dieses Mods startest, werden eventuelle Vorversionen aus der Datenbank entfernt.',
+	'INSTALLER_INSTALL_MENU'			=> 'Installations-Menü',
+	'INSTALLER_INSTALL_SUCCESSFUL'		=> 'Die Installation der MOD v%s war erfolgreich.',
+	'INSTALLER_INSTALL_UNSUCCESSFUL'	=> 'Die Installation der MOD v%s war <strong>nicht</strong> erfolgreich.',
 	'INSTALLER_INSTALL_VERSION'			=> 'Installiere MOD v%s',
 	'INSTALLER_INSTALL_START'			=> 'Bitte klicke auf <a href="%s">"Installieren"</a> um die Installation zu starten.',
 
@@ -57,13 +57,13 @@ $lang = array_merge($lang, array(
 	'INSTALLER_UPDATE_NOTE'				=> 'Aktualisiere MOD von v%s to v%s',
 
 	'INSTALLER_UNINSTALL_TITLE'			=> 'PInUp Deinstallation',
-	'INSTALLER_UNINSTALL_NOTE'			=> 'Wikommen im Aktualisierungs Menü',
+	'INSTALLER_UNINSTALL_NOTE'			=> 'Willkommen im Aktualisierungs-Menü',
 	'INSTALLER_UNINSTALL_SUCCESSFUL'	=> 'Die Deinstallation des MODs v%s war erfolgreich.',
 
 	'INSTALLER_NEEDS_ADMIN'			=> 'Du musst als Administrator eingeloggt sein.<br /><a href="../ucp.php?mode=login"><strong>Zum Login</strong></a>',
 
 	'INSTALLER_UPDATE'						=> 'Update',
-	'INSTALLER_UPDATE_MENU'				=> 'Updatemenü',
+	'INSTALLER_UPDATE_MENU'				=> 'Update-Menü',
 	'INSTALLER_UPDATE_NOTE'				=> 'Update MOD von v%s nach v%s',
 	'INSTALLER_UPDATE_SUCCESSFUL'		=> 'Update der MOD von v%s nach v%s war erfolgreich.',
 	'INSTALLER_UPDATE_UNSUCCESSFUL'	=> 'Update der MOD von v%s nach v%s war <strong>nicht</strong> erfolgreich.',
@@ -71,13 +71,13 @@ $lang = array_merge($lang, array(
 	'INSTALLER_UPDATE_TO'					=> 'Aktualisiere auf',
 	'INSTALLER_UPDATE_START'				=> 'Bitte klicke <a href="%s">"Aktualisieren"</a> um die Aktualisierung zu starten.',
 
-	'INSTALLER_UNINSTALL_OLDVERSION'	=> 'Tut mir leid, PInUp unterstützt nicht die Deinstallierung des original phpBB3 Portals.',
+	'INSTALLER_UNINSTALL_OLDVERSION'	=> 'Tut mir leid, PInUp unterstützt nicht die Deinstallation des Original-phpBB3-Portals.',
 	
 	'INSTALLER_ERROR'						=> 'PInUp Fehler',
 
 	'INSTALLER_USEFUL_INFO'				=> 'Bitte lösche das /install_portal Verzeichnis.',
 
-	'INSTALLER_UNINSTALL_USEFUL_INFO'	=> 'Denke daran die Portal Dateien zu löschen und Dateiänderungen am Originalsystem rückgängig zu machen.',
+	'INSTALLER_UNINSTALL_USEFUL_INFO'	=> 'Denke daran die Portal-Dateien zu löschen und Dateiänderungen am Originalsystem rückgängig zu machen.',
 
 	'WARNING'									=> 'Warnung',
 ));
