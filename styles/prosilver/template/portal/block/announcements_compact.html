@@ -33,7 +33,7 @@
 			<dl>
 				<dt style="border-left:0px; width: 99%">				
 					<a name="a{announcements_row.A_ID}"></a><img src="{T_THEME_PATH}/images/arrow_right.gif" alt=""/> 
-						<!-- IF announcements_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {announcements_row.ATTACH_ICON_IMG} <!-- IF announcements_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF -->
+						<!-- IF announcements_row.S_UNREAD_INFO --><a href="{announcements_row.U_VIEW_COMMENTS}#unread">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_row.U_VIEW_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {announcements_row.ATTACH_ICON_IMG} <!-- IF announcements_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF -->
 						<a href="{announcements_row.U_VIEW_COMMENTS}" title="{announcements_row.TITLE}" class="topictitle">{announcements_row.TITLE}</a>
 						<br style="clear:both" />
 						<!-- IF announcements_row.PAGINATION --><strong class="pagination"><span>{announcements_row.PAGINATION}</span></strong><!-- ENDIF -->

@@ -13,7 +13,7 @@
 	<!-- ELSE -->
 	<tr class="row<!-- IF news_row.S_ROW_COUNT is even -->1<!-- ELSE -->2<!-- ENDIF -->">
 		<td>
-			<a name="n{news_row.N_ID}"></a><!-- IF news_row.S_UNREAD_INFO -->{NEWEST_POST_IMG}<!-- ELSE -->{READ_POST_IMG}<!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --> <strong style="font-size:1.1em;">{L_POLL}: </strong><!-- ENDIF -->
+			<a name="n{news_row.N_ID}"></a><!-- IF news_row.S_UNREAD_INFO --><a href="{news_row.U_VIEW_COMMENTS}#unread">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news_row.U_VIEW_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --> <strong style="font-size:1.1em;">{L_POLL}: </strong><!-- ENDIF -->
 			<a href="{news_row.U_VIEW_COMMENTS}" title="{S_NEWEST_OR_FIRST}"><strong style="font-size:1.1em;">{news_row.TITLE}</strong></a>
 			<br style="clear:both" />
 			<span style="float: left;">{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL} {L_POSTED_ON_DATE} {news_row.TIME}</span>
