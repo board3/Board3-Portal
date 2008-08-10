@@ -66,6 +66,8 @@ Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werde
 	<target-version>3.0.2</target-version>
     </installation>
 	 <link-group>
+		<link type="dependency" lang="en-gb" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
+		<link type="dependency" lang="de" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal unterstützt MOD Version Check. Um dieses Feature zu nutzen, muss dieser Mod installiert sein.</link>
 	 	<link type="template" lang="de" href="xml/subsilver2.xml">subsilver2</link>
 		<link type="template" lang="en-gb" href="xml/subsilver2.xml">subsilver2</link>
 		<link type="language" lang="de" href="xml/de.xml">Deutsch</link>
@@ -194,6 +196,7 @@ Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werde
   <action-group>
     <copy>
      <file from="root/portal.php" to="portal.php" />
+	 <file from="root/adm/mods/board3_portal_check_version.php" to="adm/mods/board3_portal_check_version.php" />
      <file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />
      <file from="root/includes/acp/info/acp_portal.php" to="includes/acp/info/acp_portal.php" />
      <file from="root/install_portal/*.*" to="install_portal/*.*" />
