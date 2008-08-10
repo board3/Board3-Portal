@@ -93,7 +93,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 
 			$topic_type = ($portal_config['portal_show_all_news']) ? '( topic_type <> ' . POST_ANNOUNCE . ' ) AND ( topic_type <> ' . POST_GLOBAL . ')' : 'topic_type = ' . POST_NORMAL;
 
-			$sql = 'SELECT sizeof(topic_id) AS num_topics
+			$sql = 'SELECT COUNT(topic_id) AS num_topics
 				FROM ' . TOPICS_TABLE . '
 				WHERE ' . $topic_type . '
 					AND topic_approved = 1

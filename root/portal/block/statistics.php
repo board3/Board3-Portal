@@ -28,19 +28,19 @@ function get_db_stat($mode)
 	switch( $mode )
 	{
 		case 'announcementtotal':
-			$sql = 'SELECT sizeof(distinct t.topic_id) AS announcement_total
+			$sql = 'SELECT COUNT(distinct t.topic_id) AS announcement_total
 				FROM ' . TOPICS_TABLE . ' t, ' . POSTS_TABLE . ' p
 				WHERE t.topic_type = ' . POST_ANNOUNCE . '
 					AND p.post_id = t.topic_first_post_id';
 		break;
 		case 'stickytotal':
-			$sql = 'SELECT sizeof(distinct t.topic_id) AS sticky_total
+			$sql = 'SELECT COUNT(distinct t.topic_id) AS sticky_total
 				FROM ' . TOPICS_TABLE . ' t, ' . POSTS_TABLE . ' p
 				WHERE t.topic_type = ' . POST_STICKY . '
 					AND p.post_id = t.topic_first_post_id';
 		break;
 		case 'attachmentstotal':
-			$sql = 'SELECT sizeof(attach_id) AS attachments_total
+			$sql = 'SELECT COUNT(attach_id) AS attachments_total
 					FROM ' . ATTACHMENTS_TABLE;
 		break;
 	}
