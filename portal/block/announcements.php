@@ -95,7 +95,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 
 			$str_where = ( strlen($str_where) > 0 ) ? 'AND (forum_id = 0 OR (' . trim(substr($str_where, 0, -4)) . '))' : '';
 			
-			$sql = 'SELECT sizeof(topic_id) AS num_topics
+			$sql = 'SELECT COUNT(topic_id) AS num_topics
 				FROM ' . TOPICS_TABLE . '
 				WHERE ((topic_type = ' . POST_GLOBAL . ')
 					OR topic_type = ' . POST_ANNOUNCE . ')
