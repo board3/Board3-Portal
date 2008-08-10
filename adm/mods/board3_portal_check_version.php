@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: mod_version_check_version.php
+* @version $Id$
 * @copyright (c) 2007 StarTrekGuide
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
