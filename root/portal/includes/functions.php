@@ -258,7 +258,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		$sql2 = 'SELECT *
 		   FROM ' . ATTACHMENTS_TABLE . '
 		   WHERE `post_msg_id` = '. $row['post_id'] .'
-		   AND in_message = 0';
+		   AND in_message = 0
+		   ORDER BY filetime DESC';
 		            
 		$result2 = $db->sql_query($sql2);
 
