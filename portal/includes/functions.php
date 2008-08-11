@@ -73,7 +73,7 @@ include($phpbb_root_path . 'includes/message_parser.'.$phpEx);
 // fetch post for news & announce
 function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0)
 {
-	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode, $portal_config;
+	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode, $portal_config, $config;
 	
 	$posts = array();
 
@@ -254,20 +254,23 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	while ( $row = $db->sql_fetchrow($result) )
 	{
 
-		// Pull attachment data
-		$sql2 = 'SELECT *
-		   FROM ' . ATTACHMENTS_TABLE . '
-		   WHERE `post_msg_id` = '. $row['post_id'] .'
-		   AND in_message = 0
-		   ORDER BY filetime DESC';
-		            
-		$result2 = $db->sql_query($sql2);
-
-		while ($row2 = $db->sql_fetchrow($result2))
+		if( $config['allow_attachments'] )
 		{
-		   $attachments[] = $row2;
+			// Pull attachment data
+			$sql2 = 'SELECT *
+			   FROM ' . ATTACHMENTS_TABLE . '
+			   WHERE `post_msg_id` = '. $row['post_id'] .'
+			   AND in_message = 0
+			   ORDER BY filetime DESC';
+			            
+			$result2 = $db->sql_query($sql2);
+
+			while ($row2 = $db->sql_fetchrow($result2))
+			{
+			   $attachments[] = $row2;
+			}
+			$db->sql_freeresult($result2);
 		}
-		$db->sql_freeresult($result2);
 		
 		$posts[$i]['bbcode_uid'] = $row['bbcode_uid'];
 		$len_check = $row['post_text'];
