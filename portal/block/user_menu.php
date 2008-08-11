@@ -81,7 +81,6 @@ $template->assign_vars(array(
 	'U_SELF_POSTS'			=> append_sid($phpbb_root_path . 'search.' . $phpEx . '?search_id=egosearch'),
 	'U_UM_BOOKMARKS'      => ($config['allow_bookmarks']) ? append_sid("{$phpbb_root_path}ucp.$phpEx", "i=main&amp;mode=bookmarks") : '',
 	'U_UM_MAIN_SUBSCRIBED'	=> append_sid($phpbb_root_path . 'ucp.' . $phpEx . '?i=main&amp;mode=subscribed'),
-	'U_PRIVATE_MESSAGES'   => ($config['allow_privmsg'] && $auth->acl_get('u_sendpm') && ($auth->acl_gets('a_', 'm_') || $auth->acl_getf_global('m_'))) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox') : '',
 ));
 
 ?>
