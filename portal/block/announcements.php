@@ -168,7 +168,18 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 					'S_POLL'			=> $fetch_news[$i]['poll'],
 					'S_UNREAD_INFO'		=> $unread_topic,
 					'PAGINATION'		=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),
+					'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 				));
+
+				if( !empty($fetch_news[$i]['attachments']) )
+				{
+					foreach ($fetch_news[$i]['attachments'] as $attachment)
+					{
+						$template->assign_block_vars('announcements_row.attachment', array(
+							'DISPLAY_ATTACHMENT'	=> $attachment)
+						);
+					}
+				}
 				
 				if ($portal_config['portal_number_of_announcements'] <> 0 && $portal_config['portal_announcements_archive'])
 				{
@@ -221,7 +232,18 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 				'OPEN'					=> $open_bracket,
 				'CLOSE'					=> $close_bracket,
 				'PAGINATION'			=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),
+				'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? 'yes' : 'no',
 			));
+			
+			if( !empty($fetch_news[$i]['attachments']) )
+			{
+				foreach ($fetch_news[$i]['attachments'] as $attachment)
+				{
+					$template->assign_block_vars('announcements_row.attachment', array(
+						'DISPLAY_ATTACHMENT'	=> $attachment)
+					);
+				}
+			}
 			
 			if ($portal_config['portal_number_of_announcements'] <> 0 && $portal_config['portal_announcements_archive'])
 			{

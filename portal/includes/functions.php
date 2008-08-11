@@ -254,6 +254,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	while ( $row = $db->sql_fetchrow($result) )
 	{
 
+		$attachments = array();
 		if( $config['allow_attachments'] )
 		{
 			// Pull attachment data
@@ -301,7 +302,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		{				
 			$global_f = $row['forum_id'];
 		}
-
+		
 		$posts[$i] = array_merge($posts[$i], array(
 			'post_text'				=> ap_validate($message),
 			'topic_id'				=> $row['topic_id'],
@@ -319,7 +320,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			'poll'					=> ($row['poll_title']) ? true : false,
 			'attachment'			=> ($row['topic_attachment']) ? true : false,
 			'topic_views'			=> $row['topic_views'],
-			'forum_name'			=> $row['forum_name']
+			'forum_name'			=> $row['forum_name'],
+			'attachments'			=> (!empty($attachments)) ? $attachments : array(),
 		));
 		$posts['global_id'] = $global_f;
 								

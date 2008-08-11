@@ -147,6 +147,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 					'REPLIES'			=> $fetch_news[$i]['topic_replies'],
 					'TOPIC_VIEWS'		=> $fetch_news[$i]['topic_views'],
 					'N_ID'				=> $i,
+					'BAD' 					=> 'BOOBS',
 					'U_VIEWFORUM'		=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $fetch_news[$i]['forum_id']),
 					'U_LAST_COMMENTS'   => append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id'] . '&amp;p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
 					'U_VIEW_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id']),
@@ -160,7 +161,18 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 					'S_POLL'			=> $fetch_news[$i]['poll'],
 					'S_UNREAD_INFO'		=> $unread_topic,
 					'PAGINATION'		=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),
+					'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 				));
+				
+				if( !empty($fetch_news[$i]['attachments']) )
+				{
+					foreach ($fetch_news[$i]['attachments'] as $attachment)
+					{
+						$template->assign_block_vars('news_row.attachment', array(
+							'DISPLAY_ATTACHMENT'	=> $attachment)
+						);
+					}
+				}
 				
 				if ($portal_config['portal_number_of_news'] <> 0 && $portal_config['portal_news_archive'])
 				{
@@ -213,7 +225,18 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 				'OPEN'            	=> $open_bracket,
 				'CLOSE'            	=> $close_bracket,
 				'PAGINATION'		=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),
+				'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 			));
+			
+			if( !empty($fetch_news[$i]['attachments']) )
+			{
+				foreach ($fetch_news[$i]['attachments'] as $attachment)
+				{
+					$template->assign_block_vars('news_row.attachment', array(
+						'DISPLAY_ATTACHMENT'	=> $attachment)
+					);
+				}
+			}
 			
 			if ($portal_config['portal_number_of_news'] <> 0 && $portal_config['portal_news_archive'])
 			{

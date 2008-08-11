@@ -34,6 +34,14 @@
 							<br />
 							{announcements_row.TEXT}
 						</div>
+						<!-- IF announcements_row.S_HAS_ATTACHMENTS -->
+						<dl class="attachbox">
+						<dt>{L_ATTACHMENTS}</dt>
+						<!-- BEGIN attachment -->
+						<dd>{announcements_row.attachment.DISPLAY_ATTACHMENT}</dd>
+						<!-- END attachment -->
+						</dl>
+						<!-- ENDIF -->
 						<br style="clear:both" />
 						<span style="float: left;">{L_TOPIC_VIEWS}: {announcements_row.TOPIC_VIEWS} &nbsp;&bull;&nbsp; <a href="{announcements_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}: {announcements_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{announcements_row.U_POST_COMMENT}">{L_POST_REPLY}</a></span>
 						<span style="float: right; margin: 0 0 5px 0">{announcements_row.OPEN}<a href="{announcements_row.U_READ_FULL}">{announcements_row.L_READ_FULL}</a>{announcements_row.CLOSE}</span>

@@ -19,7 +19,7 @@
 						<h4 class="first"><a name="n{news_row.N_ID}"></a><!-- IF news_row.S_UNREAD_INFO --><a href="{news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news_row.U_VIEW_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}"><strong>{news_row.TITLE}</strong></a></h4>
 						<!-- IF news_row.PAGINATION --><strong class="pagination"><span>{news_row.PAGINATION}</span></strong><!-- ENDIF -->
 						<ul class="linklist">
-							<li>{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL} {L_POSTED_ON_DATE} {news_rownews_row.TIME}</li>
+							<li>{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL} {L_POSTED_ON_DATE} {news_row.TIME}</li>
 						</ul>
 						<ul class="linklist">
 							<li>{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong></li>
@@ -28,6 +28,14 @@
 							<br />
 							{news_row.TEXT}
 						</div>
+						<!-- IF news_row.S_HAS_ATTACHMENTS -->
+						<dl class="attachbox">
+						<dt>{L_ATTACHMENTS}</dt>
+						<!-- BEGIN attachment -->
+						<dd>{news_row.attachment.DISPLAY_ATTACHMENT}</dd>
+						<!-- END attachment -->
+						</dl>
+						<!-- ENDIF -->
 						<br style="clear:both" />
 						<span style="float: left;">{L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS} &nbsp;&bull;&nbsp; <a href="{news_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}: {news_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{news_row.U_POST_COMMENT}">{L_POST_REPLY}</a></span>			
 						<span style="float: right; margin: 0 0 5px 0">{news_row.OPEN}<a href="{news_row.U_READ_FULL}">{news_row.L_READ_FULL}</a>{news_row.CLOSE}</span>

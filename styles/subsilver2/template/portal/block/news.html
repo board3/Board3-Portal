@@ -25,6 +25,20 @@
 						<div class="postbody">
 						{news_row.TEXT}
 						</div>
+						<!-- IF news_row.S_HAS_ATTACHMENTS -->
+							<br clear="all" /><br />
+
+							<table class="tablebg" width="100%" cellspacing="1">
+							<tr>
+								<td class="row3"><b class="genmed">{L_ATTACHMENTS}: </b></td>
+							</tr>
+							<!-- BEGIN attachment -->
+								<tr>
+									<!-- IF news_row.attachment.S_ROW_COUNT is even --><td class="row2"><!-- ELSE --><td class="row1"><!-- ENDIF -->{news_row.attachment.DISPLAY_ATTACHMENT}</td>
+								</tr>
+							<!-- END attachment -->
+							</table>
+						<!-- ENDIF -->
 						<br /><br />
 						<!-- IF news_row.PAGINATION --><span style="float: right;">[ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {news_row.PAGINATION} ]</span><!-- ENDIF -->
 					</td>
