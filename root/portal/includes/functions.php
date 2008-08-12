@@ -224,7 +224,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		
 		'WHERE' => $topic_type . '
 				' . $post_time . '
-				AND t.topic_status <> 2
+				AND t.topic_status <> ' . ITEM_MOVED . '
 				AND t.topic_approved = 1
 				AND t.topic_moved_id = 0
 				' . $str_where,
