@@ -9,7 +9,7 @@
 		<br style="clear:both" />
 
 		<!-- IF S_DISPLAY_MAINMENU -->
-		<!-- INCLUDE portal/block/main_menu.html -->
+			<!-- INCLUDE portal/block/main_menu.html -->
 		<!-- ENDIF -->
 		
 		<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
@@ -36,11 +36,9 @@
 			<!-- INCLUDE portal/block/custom_small.html -->
 		<!-- ENDIF -->
 
-<!-- IF S_STYLE_OPTIONS -->
-		<!-- IF S_DISPLAY_CHANGE_STYLE -->
-			<!-- INCLUDE portal/block/change_style.html -->
+		<!-- IF S_STYLE_OPTIONS and S_DISPLAY_CHANGE_STYLE -->
+				<!-- INCLUDE portal/block/change_style.html -->
 		<!-- ENDIF -->
-<!-- ENDIF -->
 
 		<!-- IF S_DISPLAY_TOP_POSTERS -->
 			<!-- INCLUDE portal/block/top_poster.html -->
@@ -73,31 +71,32 @@
 		<!-- IF S_DISPLAY_WELCOME -->
 			<!-- IF S_DISPLAY_WELCOME_GUEST and S_USER_LOGGED_IN -->
 			<!-- ELSE -->
-			<!-- INCLUDE portal/block/welcome.html -->
+				<!-- INCLUDE portal/block/welcome.html -->
 			<!-- ENDIF -->
 		<!-- ENDIF -->
 
 		<!-- IF S_CUSTOM_CENTER -->
 			<!-- INCLUDE portal/block/custom_center.html -->
 		<!-- ENDIF -->
+
 		<!-- IF S_DISPLAY_RECENT -->
 			<!-- INCLUDE portal/block/recent.html -->
 		<!-- ENDIF -->
 
 		<!-- IF S_DISPLAY_ANNOUNCEMENTS -->
-		<!-- IF S_ANNOUNCE_COMPACT -->
-			<!-- INCLUDE portal/block/announcements_compact.html -->
-		<!-- ELSE -->
-			<!-- INCLUDE portal/block/announcements.html -->
-		<!-- ENDIF -->
+			<!-- IF S_ANNOUNCE_COMPACT -->
+				<!-- INCLUDE portal/block/announcements_compact.html -->
+			<!-- ELSE -->
+				<!-- INCLUDE portal/block/announcements.html -->
+			<!-- ENDIF -->
 		<!-- ENDIF -->
 
 		<!-- IF S_DISPLAY_NEWS -->
-		<!-- IF S_NEWS_COMPACT -->
-			<!-- INCLUDE portal/block/news_compact.html -->
-		<!-- ELSE -->
-			<!-- INCLUDE portal/block/news.html -->
-		<!-- ENDIF -->
+			<!-- IF S_NEWS_COMPACT -->
+				<!-- INCLUDE portal/block/news_compact.html -->
+			<!-- ELSE -->
+				<!-- INCLUDE portal/block/news.html -->
+			<!-- ENDIF -->
 		<!-- ENDIF -->
 
 		<!-- IF S_DISPLAY_POLL -->
@@ -106,12 +105,12 @@
 		
 		<!-- IF S_DISPLAY_PORTAL_FORUM_INDEX -->		
 			<!-- IF S_DISPLAY_SEARCH or (S_USER_LOGGED_IN and not S_IS_BOT) -->
-				<ul class="linklist">
+					<ul class="linklist">
 				<!-- IF S_DISPLAY_SEARCH -->
-				<li><a href="{U_SEARCH_UNANSWERED}">{L_SEARCH_UNANSWERED}</a><!-- IF S_USER_LOGGED_IN --> &bull; <a href="{U_SEARCH_NEW}">{L_SEARCH_NEW}</a><!-- ENDIF --> &bull; <a href="{U_SEARCH_ACTIVE_TOPICS}">{L_SEARCH_ACTIVE_TOPICS}</a></li>
+					<li><a href="{U_SEARCH_UNANSWERED}">{L_SEARCH_UNANSWERED}</a><!-- IF S_USER_LOGGED_IN --> &bull; <a href="{U_SEARCH_NEW}">{L_SEARCH_NEW}</a><!-- ENDIF --> &bull; <a href="{U_SEARCH_ACTIVE_TOPICS}">{L_SEARCH_ACTIVE_TOPICS}</a></li>
 				<!-- ENDIF -->
 			<!-- IF not S_IS_BOT and U_MARK_FORUMS --><li class="rightside"><a href="{U_MARK_FORUMS}" accesskey="m">{L_MARK_FORUMS_READ}</a></li><!-- ENDIF -->
-				</ul>
+					</ul>
 			<!-- ENDIF -->
 
 			<!-- INCLUDE forumlist_body.html -->
@@ -181,8 +180,6 @@
 		<!-- IF S_DISPLAY_PAY_S -->
 			<!-- INCLUDE portal/block/donation/donation_small.html -->
 		<!-- ENDIF -->
-
-			<!-- //INCLUDE portal/block/_sample_block_design.html-->
 
 	</td>
 <!-- [-] right block area -->
