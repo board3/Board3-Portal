@@ -41,7 +41,7 @@ small, .small {
 	<td width="{PORTAL_LEFT_COLUMN}px" valign="top" style="padding-right:6px;">
 	
 		<!-- IF S_DISPLAY_MAINMENU -->
-		<!-- INCLUDE portal/block/main_menu.html -->
+			<!-- INCLUDE portal/block/main_menu.html -->
 		<!-- ENDIF -->
 		
 		<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
@@ -68,11 +68,9 @@ small, .small {
 			<!-- INCLUDE portal/block/custom_small.html -->
 		<!-- ENDIF -->		
 
-<!-- IF S_STYLE_OPTIONS -->
-		<!-- IF S_DISPLAY_CHANGE_STYLE -->
+		<!-- IF S_STYLE_OPTIONS and S_DISPLAY_CHANGE_STYLE -->
 			<!-- INCLUDE portal/block/change_style.html -->
-		<!-- ENDIF -->
-<!-- ENDIF -->		
+		<!-- ENDIF -->		
 
 		<!-- IF S_DISPLAY_TOP_POSTERS -->
 			<!-- INCLUDE portal/block/top_poster.html -->
@@ -104,8 +102,8 @@ small, .small {
 		<!-- IF S_DISPLAY_WELCOME -->
 			<!-- IF S_DISPLAY_WELCOME_GUEST and S_USER_LOGGED_IN -->
 			<!-- ELSE -->
-			<!-- INCLUDE portal/block/welcome.html -->
-		<!-- ENDIF -->
+				<!-- INCLUDE portal/block/welcome.html -->
+			<!-- ENDIF -->
 		<!-- ENDIF -->
 
 		<!-- IF S_CUSTOM_CENTER -->
@@ -117,19 +115,19 @@ small, .small {
 		<!-- ENDIF -->			
 
 		<!-- IF S_DISPLAY_ANNOUNCEMENTS -->
-		<!-- IF S_ANNOUNCE_COMPACT -->
-			<!-- INCLUDE portal/block/announcements_compact.html -->
-		<!-- ELSE -->
-			<!-- INCLUDE portal/block/announcements.html -->
-		<!-- ENDIF -->
+			<!-- IF S_ANNOUNCE_COMPACT -->
+				<!-- INCLUDE portal/block/announcements_compact.html -->
+			<!-- ELSE -->
+				<!-- INCLUDE portal/block/announcements.html -->
+			<!-- ENDIF -->
 		<!-- ENDIF -->
 		
 		<!-- IF S_DISPLAY_NEWS -->
-		<!-- IF S_NEWS_COMPACT -->
-			<!-- INCLUDE portal/block/news_compact.html -->
-		<!-- ELSE -->
-			<!-- INCLUDE portal/block/news.html -->
-		<!-- ENDIF -->
+			<!-- IF S_NEWS_COMPACT -->
+				<!-- INCLUDE portal/block/news_compact.html -->
+			<!-- ELSE -->
+				<!-- INCLUDE portal/block/news.html -->
+			<!-- ENDIF -->
 		<!-- ENDIF -->
 
 		<!-- IF S_DISPLAY_POLL -->
@@ -193,11 +191,11 @@ small, .small {
 	<!-- ENDIF -->
 
 		<!-- IF not S_IS_BOT and S_USER_LOGGED_IN and S_ZEBRA_ENABLED and S_DISPLAY_FRIENDS -->
-		<!-- INCLUDE portal/block/online_friends.html -->
+			<!-- INCLUDE portal/block/online_friends.html -->
 		<!-- ENDIF -->
 
 		<!-- IF S_DISPLAY_ADVANCED_STAT -->
-		<!-- INCLUDE portal/block/statistics.html -->
+			<!-- INCLUDE portal/block/statistics.html -->
 		<!-- ENDIF -->
 
 		<!-- IF S_DISPLAY_MINICAL -->
@@ -205,7 +203,7 @@ small, .small {
 		<!-- ENDIF -->
 
 		<!-- IF S_DISPLAY_LEADERS -->
-		<!-- INCLUDE portal/block/leaders.html -->
+			<!-- INCLUDE portal/block/leaders.html -->
 		<!-- ENDIF -->		
 
           <!-- IF S_DISPLAY_LAST_BOTS and S_LAST_VISITED_BOTS -->
