@@ -136,7 +136,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
 			$user_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ;
 			$post_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ;
-			$topic_order = 't.topic_last_post_time DESC';
+			$topic_order = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
 
 		break;
 		case "news_all":
@@ -145,7 +145,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
 			$user_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ;
 			$post_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ;
-			$topic_order = 't.topic_last_post_time DESC';
+			$topic_order = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
 
 		break;
 	}
