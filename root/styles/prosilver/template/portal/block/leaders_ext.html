@@ -1,0 +1,18 @@
+<!--version $Id: leaders.html 236 2008-05-18 15:50:06Z kevin74 $ //-->
+<div class="portal-panel">
+	<div class="inner">
+		<span class="portal-corners-top"><span></span></span>
+			<h3><img src="{T_THEME_PATH}/images/portal/portal_team.gif" width="18px" height="18px" alt=""/>&nbsp;{L_THE_TEAM}</h3>
+			<!-- BEGIN group -->
+				<strong><a href="{group.U_GROUP}" style="color: #{group.GROUP_COLOUR};" class="username-coloured">{group.GROUP_NAME}</a></strong><br />
+				<!-- BEGIN member -->
+					<span style="float:left;"><img src="portal/images/member.gif" height="15" width="15" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{group.member.USERNAME_FULL}</strong></span><br style="clear:both" />
+				<!-- END memeber -->
+				<br style="clear:both" />
+			<!-- BEGINELSE -->
+				{L_NO_GROUPS_P}
+			<!-- END group -->
+		<span class="portal-corners-bottom"><span></span></span>
+	</div>
+</div>
+<br style="clear:both" />
