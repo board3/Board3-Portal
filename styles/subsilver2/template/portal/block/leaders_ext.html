@@ -1,0 +1,27 @@
+<!--version $Id: leaders.html 216 2008-04-29 07:23:22Z kevin74 $ //-->
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_THE_TEAM}</th>
+	</tr>
+	<!-- BEGIN group -->
+		<tr class="row3">
+			<td>
+				<strong><a href="{group.U_GROUP}" style="color: #{group.GROUP_COLOUR};" class="username-coloured">{group.GROUP_NAME}</a></strong>
+			</td>
+		</tr>
+		<!-- BEGIN member -->
+			<tr  class="row1">
+				<td>
+					<span style="float:left;"><img src="portal/images/member.gif" height="15" width="15" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{group.member.USERNAME_FULL}</strong></span><br style="clear:both" />
+				</td>
+			</tr>
+		<!-- END memeber -->
+	<!-- BEGINELSE -->
+		<tr  class="row1">
+			<td>
+				{L_NO_GROUPS_P}
+			</td>
+		</tr>
+	<!-- END group -->			
+</table>
+<br />
