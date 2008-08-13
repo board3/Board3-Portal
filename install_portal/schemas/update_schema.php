@@ -55,6 +55,7 @@ $mod_update['0.3.0'] = array(
 $sql_update['1.0.0RC2'] = array(
 	"UPDATE phpbb_portal_config SET config_name = 'portal_right_column_width' WHERE config_name = 'portal_right_collumn_width'",
 	"UPDATE phpbb_portal_config SET config_name = 'portal_left_column_width' WHERE config_name = 'portal_left_collumn_width'",
+	"INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_leaders_ext', '0');",
 );
 
 ?>

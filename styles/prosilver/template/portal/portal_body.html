@@ -143,15 +143,15 @@
 	<td valign="top" style="width: {PORTAL_RIGHT_COLUMN}px; padding-left:6px;">
 		<br style="clear:both" />
 
-	<!-- IF S_DISPLAY_USERMENU -->
-		<!-- IF not S_USER_LOGGED_IN -->
-			<!-- INCLUDE portal/block/login_box.html -->
-		<!-- ENDIF -->
+		<!-- IF S_DISPLAY_USERMENU -->
+			<!-- IF not S_USER_LOGGED_IN -->
+				<!-- INCLUDE portal/block/login_box.html -->
+			<!-- ENDIF -->
 
-		<!-- IF not S_IS_BOT and S_USER_LOGGED_IN -->
-			<!-- INCLUDE portal/block/user_menu.html -->
+			<!-- IF not S_IS_BOT and S_USER_LOGGED_IN -->
+				<!-- INCLUDE portal/block/user_menu.html -->
+			<!-- ENDIF -->
 		<!-- ENDIF -->
-	<!-- ENDIF -->
 
 		<!-- IF not S_IS_BOT and S_USER_LOGGED_IN and S_ZEBRA_ENABLED and S_DISPLAY_FRIENDS -->
 			<!-- INCLUDE portal/block/online_friends.html -->
@@ -165,11 +165,13 @@
 			<!-- INCLUDE portal/block/mini_calendar.html -->
 		<!-- ENDIF -->
 		
-		<!-- IF S_DISPLAY_LEADERS -->
+		<!-- IF S_DISPLAY_LEADERS_EXT -->
+			<!-- INCLUDE portal/block/leaders_ext.html -->
+		<!-- ELSEIF S_DISPLAY_LEADERS -->
 			<!-- INCLUDE portal/block/leaders.html -->
 		<!-- ENDIF -->
 		
-          <!-- IF S_DISPLAY_LAST_BOTS and S_LAST_VISITED_BOTS -->
+        <!-- IF S_DISPLAY_LAST_BOTS and S_LAST_VISITED_BOTS -->
 			<!-- INCLUDE portal/block/latest_bots.html -->
 		<!-- ENDIF -->
 

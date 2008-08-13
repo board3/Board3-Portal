@@ -183,7 +183,11 @@ if ($portal_config['portal_link_us'])
 	include($phpbb_root_path . 'portal/block/link_us.'.$phpEx);
 }
 
-if ($portal_config['portal_leaders'])
+if ($portal_config['portal_leaders'] && $portal_config['portal_leaders_ext'])
+{
+	include($phpbb_root_path . 'portal/block/leaders_ext.'.$phpEx);
+}
+elseif ($portal_config['portal_leaders'])
 {
 	include($phpbb_root_path . 'portal/block/leaders.'.$phpEx);
 }

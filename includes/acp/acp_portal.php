@@ -47,6 +47,7 @@ class acp_portal
 						'portal_advanced_stat'				=> array('lang' => 'PORTAL_ADVANCED_STAT'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_search'						=> array('lang' => 'PORTAL_SEARCH'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_leaders'					=> array('lang' => 'PORTAL_LEADERS'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
+						'portal_leaders_ext'				=> array('lang' => 'PORTAL_LEADERS_EXT'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_clock'						=> array('lang' => 'PORTAL_CLOCK'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_link_us'					=> array('lang' => 'PORTAL_LINK_US'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_birthdays'					=> array('lang' => 'PORTAL_BIRTHDAYS'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
