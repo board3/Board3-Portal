@@ -158,8 +158,9 @@ $lang = array_merge($lang, array(
 	'STYLE_CHOOSE'					=> 'Wähle einen Style',
 		
 	// team
-	'NO_ADMINISTRATORS_P'		=> 'Keine Administratoren',
-	'NO_MODERATORS_P'				=> 'Keine Moderatoren',
+	'NO_ADMINISTRATORS_P'	=> 'Keine Administratoren',
+	'NO_MODERATORS_P'		=> 'Keine Moderatoren',
+	'NO_GROUPS_P'			=> 'Keine Groupen',
 
 	// average Statistics
 	'TOPICS_PER_DAY_OTHER'		=> 'Themen pro Tag: <strong>%d</strong>',
