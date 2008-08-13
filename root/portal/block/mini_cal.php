@@ -141,8 +141,8 @@ $prev_qs = setQueryStringVal('m', $mini_cal_month -1);
 $next_qs = setQueryStringVal('m', $mini_cal_month +1);
 $down = $mini_cal_month - 1;
 $up = $mini_cal_month + 1;
-$prev_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m=$down") . '"><img src="' . "{$phpbb_root_path}portal/images/mini_cal_icon_left_arrow.png" . '" title="' . $user->lang['View_previous_month'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
-$next_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m=$up") . '"><img src="' . "{$phpbb_root_path}portal/images/mini_cal_icon_right_arrow.png" . '" title="' . $user->lang['View_next_month'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
+$prev_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m=$down") . '"><img src="' . "{$phpbb_root_path}{T_THEME_PATH}/images/portal/mini_cal_icon_left_arrow.png" . '" title="' . $user->lang['View_previous_month'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
+$next_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m=$up") . '"><img src="' . "{$phpbb_root_path}{T_THEME_PATH}/images/portal/mini_cal_icon_right_arrow.png" . '" title="' . $user->lang['View_next_month'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
 
 $template->assign_vars(array(
 	'S_DISPLAY_MINICAL' => true,
