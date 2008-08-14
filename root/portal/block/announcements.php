@@ -232,7 +232,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 				'OPEN'					=> $open_bracket,
 				'CLOSE'					=> $close_bracket,
 				'PAGINATION'			=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),
-				'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? 'yes' : 'no',
+				'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 			));
 			
 			if( !empty($fetch_news[$i]['attachments']) )
