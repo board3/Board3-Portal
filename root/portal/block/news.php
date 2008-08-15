@@ -134,6 +134,44 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 				{
 					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_news, $portal_config['portal_number_of_news'], $start, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news');
 				}
+								
+				// Determining topic icons code  borrowed from nickvergessens NV_recent_topics - http://www.flying-bits.org
+				$replies = ($auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
+				
+				$folder_img = $folder_alt = $topic_type = $folder = $folder_new = '';
+					switch ($fetch_news[$i]['topic_type'])
+					{
+						case POST_STICKY:
+							$topic_type = $user->lang['VIEW_TOPIC_STICKY'];
+							$folder = 'sticky_read';
+							$folder_new = 'sticky_unread';
+						break;
+						case POST_ANNOUNCE:
+							$topic_type = $user->lang['VIEW_TOPIC_ANNOUNCEMENT'];
+							$folder = 'announce_read';
+							$folder_new = 'announce_unread';
+						break;
+						default:
+							$topic_type = '';
+							$folder = 'topic_read';
+							$folder_new = 'topic_unread';
+						if ($config['hot_threshold'] && $replies >= $config['hot_threshold'] && $fetch_news[$i]['topic_status'] != ITEM_LOCKED)
+							{
+								$folder .= '_hot';
+								$folder_new .= '_hot';
+							}
+						break;
+					}
+	
+			if ($fetch_news[$i]['topic_status'] == ITEM_LOCKED)
+			{
+				$topic_type = $user->lang['VIEW_TOPIC_LOCKED'];
+				$folder .= '_locked';
+				$folder_new .= '_locked';
+			}
+
+			$folder_img = ($unread_topic) ? $folder_new : $folder;
+			$folder_alt = ($unread_topic) ? 'NEW_POSTS' : (($fetch_news[$i]['topic_status'] == ITEM_LOCKED) ? 'TOPIC_LOCKED' : 'NO_NEW_POSTS');
 				
 				$template->assign_block_vars('news_row', array(
 					'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
@@ -141,13 +179,18 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 					'TITLE'				=> $fetch_news[$i]['topic_title'],
 					'POSTER'			=> $fetch_news[$i]['username'],
 					'POSTER_FULL'		=> $fetch_news[$i]['username_full'],
+					'USERNAME_FULL_LAST'	=> $fetch_news[$i]['username_full_last'],	
 					'U_USER_PROFILE'	=> (($fetch_news[$i]['user_type'] == USER_NORMAL || $fetch_news[$i]['user_type'] == USER_FOUNDER) && $fetch_news[$i]['user_id'] != ANONYMOUS) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $fetch_news[$i]['user_id']) : '',
 					'TIME'				=> $fetch_news[$i]['topic_time'],
+					'LAST_POST_TIME'		=> $user->format_date($fetch_news[$i]['topic_last_post_time']),
 					'TEXT'				=> $fetch_news[$i]['post_text'],
 					'REPLIES'			=> $fetch_news[$i]['topic_replies'],
 					'TOPIC_VIEWS'		=> $fetch_news[$i]['topic_views'],
 					'N_ID'				=> $i,
-					'BAD' 					=> 'BOOBS',
+					'TOPIC_FOLDER_IMG'		=> $user->img($folder_img, $folder_alt),
+					'TOPIC_FOLDER_IMG_SRC'  => $user->img($folder_img, $folder_alt, false, '', 'src'),
+					'TOPIC_FOLDER_IMG_ALT'  => $user->lang[$folder_alt],
+					'FOLDER_IMG'			=> $user->img('topic_read', 'NO_NEW_POSTS'),
 					'U_VIEWFORUM'		=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $fetch_news[$i]['forum_id']),
 					'U_LAST_COMMENTS'   => append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id'] . '&amp;p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
 					'U_VIEW_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id']),

@@ -134,18 +134,19 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 
 			$topic_type = 't.topic_type = ' . POST_NORMAL;
 			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
-			$user_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ;
-			$post_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ;
-			$topic_order = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+			$user_link = ( $portal_config['portal_news_style'] ) ? 't.topic_poster = u.user_id' : (( $portal_config['portal_news_show_last'] ) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
+			$post_link = ( $portal_config['portal_news_style'] ) ? 't.topic_first_post_id = p.post_id' : (( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
+			$topic_order = 't.topic_last_post_time DESC' ;
+
 
 		break;
 		case "news_all":
 
 			$topic_type = '( t.topic_type <> ' . POST_ANNOUNCE . ' ) AND ( t.topic_type <> ' . POST_GLOBAL . ')';
 			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
-			$user_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ;
-			$post_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ;
-			$topic_order = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+			$user_link = ( $portal_config['portal_news_style'] ) ? 't.topic_poster = u.user_id' : (( $portal_config['portal_news_show_last'] ) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
+			$post_link = ( $portal_config['portal_news_style'] ) ? 't.topic_first_post_id = p.post_id' : (( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
+			$topic_order = 't.topic_last_post_time DESC' ;
 
 		break;
 	}
@@ -185,7 +186,13 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			t.topic_views,
 			t.poll_title,
 			t.topic_replies,
+			t.topic_replies_real,
 			t.topic_poster,
+			t.topic_type,
+			t.topic_status,
+			t.topic_last_poster_name,
+			t.topic_last_poster_id,
+			t.topic_last_poster_colour,
 			u.username,
 			u.user_id,
 			u.user_type,
@@ -307,13 +314,17 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			'post_text'				=> ap_validate($message),
 			'topic_id'				=> $row['topic_id'],
 			'topic_last_post_id'	=> $row['post_id'],
+			'topic_type'			=> $row['topic_type'],
+			'topic_status'			=> $row['topic_status'],
 			'forum_id'				=> $row['forum_id'],
 			'topic_replies'			=> $row['topic_replies'],
+			'topic_replies_real'	=> $row['topic_replies_real'],
 			'topic_time'			=> $user->format_date($row['post_time']),
 			'topic_last_post_time'	=> $row['topic_last_post_time'],
 			'topic_title'			=> $row['topic_title'],
 			'username'				=> $row['username'],
 			'username_full'			=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour'], $row['post_username']),
+			'username_full_last'	=> get_username_string('full', $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour'], $row['topic_last_poster_name']),
 			'user_id'				=> $row['user_id'],
 			'user_type'				=> $row['user_type'],
 			'user_colour'			=> $row['user_colour'],
