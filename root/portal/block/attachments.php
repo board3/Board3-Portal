@@ -69,7 +69,7 @@ if( $attach_forums === TRUE )
 
 	while ($row = $db->sql_fetchrow($result))
 	{
-		$size_lang = ($row['filesize'] >= 1048576) ? $user->lang['MB'] : (($row['filesize'] >= 1024) ? $user->lang['KB'] : $user->lang['BYTES']);
+		$size_lang = ($row['filesize'] >= 1048576) ? $user->lang['MIB'] : (($row['filesize'] >= 1024) ? $user->lang['KIB'] : $user->lang['BYTES']);
 		$row['filesize'] = ($row['filesize'] >= 1048576) ? round((round($row['filesize'] / 1048576 * 100) / 100), 2) : (($row['filesize'] >= 1024) ? round((round($row['filesize'] / 1024 * 100) / 100), 2) : $row['filesize']);
 
 		$replace = str_replace(array('_','.zip','.jpg','.gif','.png','.ZIP','.JPG','.GIF','.PNG','.','-'), ' ', $row['real_filename']);
