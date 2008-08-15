@@ -38,13 +38,6 @@
 }
 /* Round cornered boxes and backgrounds
 ---------------------------------------- */
-* html span.portal-corners-top, * html span.portal-corners-bottom { 
-    background-image: url("{T_THEME_PATH}/images/portal/corners_left.gif"); 
-}
-* html span.portal-corners-top span, * html span.portal-corners-bottom span { 
-    background-image: url("{T_THEME_PATH}/images/portal/corners_right.gif"); 
-}
-
 span.portal-corners-top {
 	background-image: url("{T_THEME_PATH}/images/portal/corners_left.png");
 	background-position: 0 0;
@@ -83,36 +76,19 @@ margin: 0 -10px;
 
 /*inner corners*/
 
-* html span.portal-corners-top-inner, * html span.portal-corners-bottom-inner { 
-    background-image: url("{T_THEME_PATH}/images/portal/corners_left1.gif"); 
-}
-* html span.portal-corners-top-inner span, * html span.portal-corners-bottom-inner span { 
-    background-image: url("{T_THEME_PATH}/images/portal/corners_right1.gif"); 
-}
-
 span.portal-corners-top-inner {
-	background-image: url("{T_THEME_PATH}/images/portal/corners_left1.png");
-	background-position: 0 0;
 	margin: 0 -10px;
 }
 
-span.portal-corners-top-inner span {
-	background-image: url("{T_THEME_PATH}/images/portal/corners_right1.png");
-	background-position: 100% 0;
-}
+span.portal-corners-top-inner span {}
 
 span.portal-corners-bottom-inner {
-	background-image: url("{T_THEME_PATH}/images/portal/corners_left1.png");
-	background-position: 0 100%;
 	margin: 0 -10px;
 	clear: both;
 }
 
 
-span.portal-corners-bottom-inner span {
-	background-image: url("{T_THEME_PATH}/images/portal/corners_right1.png");
-	background-position: 100% 100%;
-}
+span.portal-corners-bottom-inner span {}
 
 span.portal-corners-top-inner, span.portal-corners-bottom-inner, span.portal-corners-top-inner span, span.portal-corners-bottom-inner span {
 	font-size: 1px;
