@@ -21,30 +21,37 @@
 </div>
 <!-- ELSE  -->
 <!-- IF news_row.S_FIRST_ROW  -->
+<a name="n{news_row.N_ID}"></a>
 <div class="forabg">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
 		<ul class="topiclist">
-			<li class="header"><dl><dt>{L_LATEST_NEWS}</dt></dl></li>
+			<li class="header">
+				<dl class="icon">
+
+					<dt>{L_LATEST_NEWS}</dt>
+					<dd class="posts">{L_REPLIES}</dd>
+					<dd class="views">{L_VIEWS}</dd>
+					<dd class="lastpost"><span>{L_LAST_POST}</span></dd>
+				</dl>	
+			</li>
 		</ul>
 		<ul class="topiclist topics">
 <!-- ENDIF -->
 			<li class="row<!-- IF news_row.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
-			<dl>
-				<dt style="border-left:0px; width: 99%">							
-					<a name="n{news_row.N_ID}"></a><img src="{T_THEME_PATH}/images/arrow_right.gif" alt=""/> 
-					<!-- IF news_row.S_UNREAD_INFO --><a href="{news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news_row.U_VIEW_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {news_row.ATTACH_ICON_IMG}  <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}" title="{S_NEWEST_OR_FIRST}" class="topictitle">{news_row.TITLE}</a>
-					<br style="clear:both" />
+			<dl class="icon" style="background-image: url({news_row.TOPIC_FOLDER_IMG_SRC}); background-repeat: no-repeat;">
+				<dt style="<!-- IF news_row.TOPIC_ICON_IMG -->background-image: url({T_ICONS_PATH}{news_row.TOPIC_ICON_IMG}); background-repeat: no-repeat;<!-- ENDIF -->" title="{news_row.TOPIC_FOLDER_IMG_ALT}"><!-- IF news_row.S_UNREAD_TOPIC --><a href="{news_row.U_NEWEST_POST}">{NEWEST_POST_IMG}</a> <!-- ENDIF --><!-- IF news_row.ATTACH_ICON_IMG -->{news_row.ATTACH_ICON_IMG} <!-- ENDIF --><a href="{news_row.U_VIEW_COMMENTS}" title="{news_row.TITLE}" class="topictitle">{news_row.TITLE}</a><!-- IF U_VIEW_UNREAD_POST and not S_IS_BOT --> &bull; <a href="{U_VIEW_UNREAD_POST}">{L_VIEW_UNREAD_POST}</a> &bull; <!-- ENDIF -->
 					<!-- IF news_row.PAGINATION --><strong class="pagination"><span>{news_row.PAGINATION}</span></strong><!-- ENDIF -->
-					{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL} {L_POSTED_ON_DATE} {news_row.TIME}
-					<br style="clear:both" />
+					<br />{L_POSTED} {L_POST_BY_AUTHOR} {news_row.POSTER_FULL} {L_POSTED_ON_DATE} {news_row.TIME}
 					<!-- IF news_row.FORUM_NAME -->
-					{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong>
-					<br style="clear:both" />
+						<br />{L_FORUM}: <a href="{news_row.U_VIEWFORUM}" style="font-weight: bold;">{news_row.FORUM_NAME}</a>
 					<!-- ENDIF -->
-						<span style="float: left; font-size:0.9em;"><a href="{news_row.U_VIEW_COMMENTS}" title="{L_JUMP_FIRST}"><em>{L_COMMENTS}: {news_row.REPLIES}</em></a>
-						<em>&nbsp;&bull;&nbsp;{L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS}</em></span>
 				</dt>
+				<dd class="posts">{news_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
+				<dd class="views">{news_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
+				<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn><!-- IF news_row.S_UNREAD_INFO --><a href="{news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news_row.U_VIEW_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {L_POST_BY_AUTHOR} {news_row.USERNAME_FULL_LAST}<br />
+				{L_POSTED_ON_DATE} {news_row.LAST_POST_TIME}</span>
+				</dd>
 			</dl>
 			</li>
 <!-- IF news_row.S_LAST_ROW -->
