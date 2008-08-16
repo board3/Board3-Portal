@@ -13,7 +13,7 @@
 				<tr>
 					<td class="cat">
 					<a name="n{news_row.N_ID}"></a>
-						<!-- IF news_row.S_UNREAD_INFO --><a href="{news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news_row.U_VIEW_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><!-- IF news_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{news_row.TOPIC_ICON_IMG}" width="{news_row.TOPIC_ICON_IMG_WIDTH}" height="{news_row.TOPIC_ICON_IMG_HEIGHT}" alt="" /> <!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}"><strong>{news_row.TITLE}</strong></a></td>
+						<!-- IF news_row.S_UNREAD_INFO --><a href="{news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><!-- IF news_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{news_row.TOPIC_ICON_IMG}" width="{news_row.TOPIC_ICON_IMG_WIDTH}" height="{news_row.TOPIC_ICON_IMG_HEIGHT}" alt="" /> <!-- ENDIF --><a href="{news_row.U_LAST_COMMENTS}"><strong>{news_row.TITLE}</strong></a></td>
 				</tr>
 				<tr class="row<!-- IF news_row.S_ROW_COUNT is odd -->1<!-- ELSE -->2<!-- ENDIF -->">
 					<td style="padding:5px 5px 5px 5px;">

@@ -49,7 +49,7 @@
 				</dt>
 				<dd class="posts">{news_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
 				<dd class="views">{news_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
-				<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn><!-- IF news_row.S_UNREAD_INFO --><a href="{news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news_row.U_VIEW_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {L_POST_BY_AUTHOR} {news_row.USERNAME_FULL_LAST}<br />
+				<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn><!-- IF news_row.S_UNREAD_INFO --><a href="{news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {L_POST_BY_AUTHOR} {news_row.USERNAME_FULL_LAST}<br />
 				{L_POSTED_ON_DATE} {news_row.LAST_POST_TIME}</span>
 				</dd>
 			</dl>
