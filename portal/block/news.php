@@ -20,13 +20,13 @@ if (!defined('IN_PORTAL'))
    exit;
 }
 
-
 $template->assign_vars(array(
 	'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 	'READ_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_NEWEST_POST'),
 	'GOTO_PAGE_IMG'				=> $user->img('icon_post_target', 'GOTO_PAGE'),
 	'S_NEWEST_OR_FIRST'			=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
 	'POSTED_BY_TEXT'			=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
+	'S_TOPIC_ICONS'				=> true,
 	'S_DISPLAY_NEWS'			=> true,
 ));
 
@@ -39,12 +39,13 @@ $start = ($start < 0) ? 0 : $start;
 $portal_news_length = ($news < 0) ? $portal_config['portal_news_length'] : 0;
 $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_config['portal_news_permissions'], $portal_config['portal_number_of_news'], $portal_news_length, 0, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news', $start);
 
+
 	// Any news present? If not terminate it here.
 	if (sizeof($fetch_news) == 0)
 	{
 		$template->assign_block_vars('news_row', array(
 			'S_NO_TOPICS'	=> true,
-			'S_NOT_LAST'	=> false
+			'S_NOT_LAST'	=> false,
 		));
 	}
 	else
@@ -171,12 +172,11 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 
 					$folder_img = ($unread_topic) ? $folder_new : $folder;
 					$folder_alt = ($unread_topic) ? 'NEW_POSTS' : (($fetch_news[$i]['topic_status'] == ITEM_LOCKED) ? 'TOPIC_LOCKED' : 'NO_NEW_POSTS');
-			
+					
 					// Grab icons
 					$icons = $cache->obtain_icons();
 					$forum_data = $db->sql_fetchrow($result);
 					$s_display_active = ($forum_data['forum_type'] == FORUM_CAT && ($forum_data['forum_flags'] & FORUM_FLAG_ACTIVE_TOPICS)) ? true : false;
-
 				
 				$template->assign_block_vars('news_row', array(
 					'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
