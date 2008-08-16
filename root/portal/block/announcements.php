@@ -22,6 +22,7 @@ $template->assign_vars(array(
 	'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 	'READ_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_NEWEST_POST'),
 	'GOTO_PAGE_IMG'				=> $user->img('icon_post_target', 'GOTO_PAGE'),
+	'S_DISPLAY_NEWS'			=> true,
 	'S_DISPLAY_ANNOUNCEMENTS'	=> true,
 ));
 	
