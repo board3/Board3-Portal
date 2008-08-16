@@ -208,7 +208,6 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 					'L_READ_FULL'		=> $read_full,
 					'OPEN'				=> $open_bracket,
 					'CLOSE'				=> $close_bracket,
-					'S_TOPIC_ICONS'			=> ($s_display_active && sizeof($active_forum_ary)) ? max($active_forum_ary['enable_icons']) : (($forum_data['enable_icons']) ? true : false),
 					'S_NOT_LAST'		=> ($i < sizeof($fetch_news) - 1) ? true : false,
 					'S_POLL'			=> $fetch_news[$i]['poll'],
 					'S_UNREAD_INFO'		=> $unread_topic,
