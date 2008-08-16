@@ -82,6 +82,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	$forum_from = ( strpos($forum_from, ',') !== FALSE ) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 
 	$str_where = '';
+	
+	$topic_icons = array();
 
 	if( $permissions == TRUE )
 	{
@@ -209,7 +211,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			p.enable_magic_url,
 			p.bbcode_bitfield,
 			p.bbcode_uid,
-			f.forum_name',
+			f.forum_name,
+			f.enable_icons',
 			
 		'FROM' => array(
 			TOPICS_TABLE => 't',
@@ -314,6 +317,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$global_f = $row['forum_id'];
 		}
 		
+		$topic_icons[] = $row['enable_icons'];
+		
 		$posts[$i] = array_merge($posts[$i], array(
 			'post_text'				=> ap_validate($message),
 			'topic_id'				=> $row['topic_id'],
@@ -344,6 +349,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 								
 		$i++;
 	}
+	
+	$posts['topic_icons'] = max($topic_icons);
 	
 	if( $global_f < 1 )
 	{

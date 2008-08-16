@@ -39,7 +39,7 @@
 				<td class="row1" width="50" align="center"><p class="topicdetails">{announcements_row.REPLIES}</p></td>
 				<td class="row2" width="50" align="center"><p class="topicdetails">{announcements_row.TOPIC_VIEWS}</p></td>
 				<td class="row1" width="140" align="center">
-					<p class="topicdetails"><!-- IF announcements_row.S_UNREAD_INFO --><a href="{announcements_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_row.U_VIEW_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF -->
+					<p class="topicdetails"><!-- IF announcements_row.S_UNREAD_INFO --><a href="{announcements_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF -->
 					{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {announcements_row.USERNAME_FULL_LAST}
 					</p>
 					<p class="topicdetails" style="white-space: nowrap;">{L_POSTED_ON_DATE} {announcements_row.LAST_POST_TIME}</p>

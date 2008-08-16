@@ -26,7 +26,6 @@ $template->assign_vars(array(
 	'GOTO_PAGE_IMG'				=> $user->img('icon_post_target', 'GOTO_PAGE'),
 	'S_NEWEST_OR_FIRST'			=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
 	'POSTED_BY_TEXT'			=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
-	'S_TOPIC_ICONS'				=> true,
 	'S_DISPLAY_NEWS'			=> true,
 ));
 
@@ -228,6 +227,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 				if ($portal_config['portal_number_of_news'] <> 0 && $portal_config['portal_news_archive'])
 				{
 					$template->assign_vars(array(
+						'S_TOPIC_ICONS'		=> $fetch_news['topic_icons'],
 						'NP_PAGINATION'		=> $pagination,
 						'TOTAL_NEWS'		=> ($total_news == 1) ? $user->lang['VIEW_FORUM_TOPIC'] : sprintf($user->lang['VIEW_FORUM_TOPICS'], $total_news),
 						'NP_PAGE_NUMBER'	=> on_page($total_news, $portal_config['portal_number_of_news'], $start))
@@ -293,6 +293,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 			{
 				$template->assign_vars(array(
 					'NP_PAGINATION'		=> $pagination,
+					'S_TOPIC_ICONS'		=> $fetch_news['topic_icons'],
 					'TOTAL_NEWS'		=> ($total_news == 1) ? $user->lang['VIEW_FORUM_TOPIC'] : sprintf($user->lang['VIEW_FORUM_TOPICS'], $total_news),
 					'NP_PAGE_NUMBER'	=> on_page($total_news, $portal_config['portal_number_of_news'], $start))
 				);

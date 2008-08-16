@@ -22,7 +22,6 @@ $template->assign_vars(array(
 	'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 	'READ_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_NEWEST_POST'),
 	'GOTO_PAGE_IMG'				=> $user->img('icon_post_target', 'GOTO_PAGE'),
-	'S_DISPLAY_NEWS'			=> true,
 	'S_DISPLAY_ANNOUNCEMENTS'	=> true,
 ));
 	
@@ -240,6 +239,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 				if ($portal_config['portal_number_of_announcements'] <> 0 && $portal_config['portal_announcements_archive'])
 				{
 					$template->assign_vars(array(
+						'S_TOPIC_ICONS'			=> $fetch_news['topic_icons'],
 						'AP_PAGINATION'			=> $pagination,
 						'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
 						'AP_PAGE_NUMBER'		=> on_page($total_announcements, $portal_config['portal_number_of_announcements'], $start))
@@ -304,6 +304,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 			if ($portal_config['portal_number_of_announcements'] <> 0 && $portal_config['portal_announcements_archive'])
 			{
 				$template->assign_vars(array(
+					'S_TOPIC_ICONS'			=> $fetch_news['topic_icons'],
 					'AP_PAGINATION'			=> $pagination,
 					'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
 					'AP_PAGE_NUMBER'		=> on_page($total_announcements, $portal_config['portal_number_of_announcements'], $start))
