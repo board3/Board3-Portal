@@ -112,7 +112,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 		if($announcement < 0)
 		// Show the announcements overview 
 		{
-			$count = $fetch_news['topic_count']
+			$count = $fetch_news['topic_count'];
 			for ($i = 0; $i < $count; $i++)
 			{
 				if( isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true )
