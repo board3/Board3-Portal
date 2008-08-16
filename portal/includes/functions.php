@@ -193,6 +193,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			t.topic_last_poster_name,
 			t.topic_last_poster_id,
 			t.topic_last_poster_colour,
+			t.icon_id,
 			u.username,
 			u.user_id,
 			u.user_type,
@@ -238,6 +239,9 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 				
 		'ORDER_BY' => $topic_order,	
 	);
+					
+	$sql_array['LEFT_JOIN'][] = array('FROM' => array(TOPICS_POSTED_TABLE => 'tp'), 'ON' => 'tp.topic_id = t.topic_id AND tp.user_id = ' . $user->data['user_id']);
+	$sql_array['SELECT'] .= ', tp.topic_posted';
 					
 	$sql = $db->sql_build_query('SELECT', $sql_array);
 
@@ -315,6 +319,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			'topic_id'				=> $row['topic_id'],
 			'topic_last_post_id'	=> $row['post_id'],
 			'topic_type'			=> $row['topic_type'],
+			'topic_posted'			=> (isset($row['topic_posted']) && $row['topic_posted']) ? true : false,
+			'icon_id'				=> $row['icon_id'],
 			'topic_status'			=> $row['topic_status'],
 			'forum_id'				=> $row['forum_id'],
 			'topic_replies'			=> $row['topic_replies'],

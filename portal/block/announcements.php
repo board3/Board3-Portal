@@ -143,37 +143,32 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $portal_config['portal_number_of_announcements'], $start, 'announcements');
 				}
 				
-                // Determining topic icons code  borrowed from nickvergessens NV_recent_topics - http://www.flying-bits.org
-				$replies = ($auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
-				
-				$folder_img = $folder_alt = $topic_type = $folder = $folder_new = '';
-					switch ($fetch_news[$i]['topic_type'])
-					{
-						case POST_GLOBAL:
-							$topic_type = $user->lang['VIEW_TOPIC_GLOBAL'];
-							$folder = 'global_read';
-							$folder_new = 'global_unread';
-						break;
-						case POST_ANNOUNCE:
-							$topic_type = $user->lang['VIEW_TOPIC_ANNOUNCEMENT'];
-							$folder = 'announce_read';
-							$folder_new = 'announce_unread';
-						break;
-						default:
-							$topic_type = '';
-							$folder = 'topic_read';
-							$folder_new = 'topic_unread';
-						if ($config['hot_threshold'] && $replies >= $config['hot_threshold'] && $fetch_news[$i]['topic_status'] != ITEM_LOCKED)
-							{
-								$folder .= '_hot';
-								$folder_new .= '_hot';
-							}
-						break;
-					}
+
+			$replies = ($auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
+			$folder_img = $folder_alt = $topic_type = $folder = $folder_new = '';
+				switch ($fetch_news[$i]['topic_type'])
+				{
+					case POST_GLOBAL:
+						$folder = 'global_read';
+						$folder_new = 'global_unread';
+					break;
+					case POST_ANNOUNCE:
+						$folder = 'announce_read';
+						$folder_new = 'announce_unread';
+					break;
+					default:
+						$folder = 'topic_read';
+						$folder_new = 'topic_unread';
+					if ($config['hot_threshold'] && $replies >= $config['hot_threshold'] && $fetch_news[$i]['topic_status'] != ITEM_LOCKED)
+						{
+							$folder .= '_hot';
+							$folder_new .= '_hot';
+						}
+					break;
+				}
 	
 			if ($fetch_news[$i]['topic_status'] == ITEM_LOCKED)
 			{
-				$topic_type = $user->lang['VIEW_TOPIC_LOCKED'];
 				$folder .= '_locked';
 				$folder_new .= '_locked';
 			}
@@ -181,8 +176,18 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 			{
 				$global_announce_list[$fetch_news[$i]['topic_id']] = true;
 			}
+			if ($fetch_news[$i]['topic_posted'])
+			{
+				$folder .= '_mine';
+				$folder_new .= '_mine';
+			}
 			$folder_img = ($unread_topic) ? $folder_new : $folder;
 			$folder_alt = ($unread_topic) ? 'NEW_POSTS' : (($fetch_news[$i]['topic_status'] == ITEM_LOCKED) ? 'TOPIC_LOCKED' : 'NO_NEW_POSTS');
+			
+					// Grab icons
+					$icons = $cache->obtain_icons();
+					$forum_data = $db->sql_fetchrow($result);
+					$s_display_active = ($forum_data['forum_type'] == FORUM_CAT && ($forum_data['forum_flags'] & FORUM_FLAG_ACTIVE_TOPICS)) ? true : false;
 				                
 				$template->assign_block_vars('announcements_row', array(
 					'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
@@ -202,6 +207,9 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_foru
 					'TOPIC_FOLDER_IMG_SRC'  => $user->img($folder_img, $folder_alt, false, '', 'src'),
 					'TOPIC_FOLDER_IMG_ALT'  => $user->lang[$folder_alt],
 				   	'FOLDER_IMG'			=> $user->img('topic_read', 'NO_NEW_POSTS'),
+					'TOPIC_ICON_IMG'		=> (!empty($icons[$fetch_news[$i]['icon_id']])) ? $icons[$fetch_news[$i]['icon_id']]['img'] : '',
+					'TOPIC_ICON_IMG_WIDTH'	=> (!empty($icons[$fetch_news[$i]['icon_id']])) ? $icons[$fetch_news[$i]['icon_id']]['width'] : '',
+					'TOPIC_ICON_IMG_HEIGHT'	=> (!empty($icons[$fetch_news[$i]['icon_id']])) ? $icons[$fetch_news[$i]['icon_id']]['height'] : '',
 					'U_VIEWFORUM'			=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $fetch_news[$i]['forum_id']),
 					'U_LAST_COMMENTS'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id . '&amp;p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
 					'U_VIEW_COMMENTS'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id),
