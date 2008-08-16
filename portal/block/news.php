@@ -107,7 +107,7 @@ $fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_con
 		if($news < 0)
 		// Show the news overview
 		{
-			$count = sizeof($fetch_news)-1;
+			$count = $fetch_news['topic_count'];
 			for ($i = 0; $i < $count; $i++)
 			{
 				if( isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true )
