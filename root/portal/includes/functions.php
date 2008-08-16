@@ -351,6 +351,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	}
 	
 	$posts['topic_icons'] = max($topic_icons);
+	$posts['topic_count'] = $i;
 	
 	if( $global_f < 1 )
 	{
