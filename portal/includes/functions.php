@@ -496,12 +496,12 @@ function ap_validate($str) {
        {
           case "announcements":
              $pagination_type = 'ap';
-             $anker = '#a0';
+             $anker = '#a';
           break;
           case "news":
           case "news_all":
              $pagination_type = 'np';
-             $anker = '#n0';
+             $anker = '#n';
           break;
        }
        
