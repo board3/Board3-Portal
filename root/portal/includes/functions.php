@@ -84,6 +84,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	$str_where = '';
 	
 	$topic_icons = array();
+	
+	$have_icons = 0;
 
 	if( $permissions == TRUE )
 	{
@@ -137,7 +139,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$topic_type = 't.topic_type = ' . POST_NORMAL;
 			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
 			$user_link = ( $portal_config['portal_news_style'] ) ? 't.topic_poster = u.user_id' : (( $portal_config['portal_news_show_last'] ) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
-			$post_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ;
+			$post_link = ( $portal_config['portal_news_style'] ) ? 't.topic_first_post_id = p.post_id' : (( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
 			$topic_order = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
 
 
@@ -147,7 +149,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			$topic_type = '( t.topic_type <> ' . POST_ANNOUNCE . ' ) AND ( t.topic_type <> ' . POST_GLOBAL . ')';
 			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
 			$user_link = ( $portal_config['portal_news_style'] ) ? 't.topic_poster = u.user_id' : (( $portal_config['portal_news_show_last'] ) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
-			$post_link = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ;
+			$post_link = ( $portal_config['portal_news_style'] ) ? 't.topic_first_post_id = p.post_id' : (( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
 			$topic_order = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
 
 		break;
@@ -318,11 +320,12 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		}
 		
 		$topic_icons[] = $row['enable_icons'];
+		$have_icons = ( $row['icon_id'] > 0 ) ? 1 : $have_icons;
 		
 		$posts[$i] = array_merge($posts[$i], array(
 			'post_text'				=> ap_validate($message),
 			'topic_id'				=> $row['topic_id'],
-			'topic_last_post_id'	=> $row['post_id'],
+			'topic_last_post_id'	=> $row['topic_last_post_id'],
 			'topic_type'			=> $row['topic_type'],
 			'topic_posted'			=> (isset($row['topic_posted']) && $row['topic_posted']) ? true : false,
 			'icon_id'				=> $row['icon_id'],
@@ -350,7 +353,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		$i++;
 	}
 	
-	$posts['topic_icons'] = max($topic_icons);
+	$posts['topic_icons'] = ( max($topic_icons) > 0 && $have_icons ) ? true : false;
+
 	$posts['topic_count'] = $i;
 	
 	if( $global_f < 1 )
