@@ -129,7 +129,7 @@ else
 	
 			$real_forum_id = ( $forum_id == 0 ) ? $fetch_news['global_id']: $forum_id;
 			
-			$read_full_url = (isset($_GET['ap'])) ? 'ap='. $start . '&amp;announcement=' . $i . '#a' . $i : 'announcement=' . $i . '#a' . $i;
+			$read_full_url = (isset($_GET['ap'])) ? 'ap='. $start . '&amp;announcement=#a' : 'announcement=#a';
 			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 			if ( $portal_config['portal_announcements_archive'] )
 			{
@@ -251,7 +251,7 @@ else
 		$close_bracket = ' ]';
 		$read_full = $user->lang['BACK'];
 
-		$read_full_url = (isset($_GET['ap'])) ? append_sid("{$phpbb_root_path}portal.$phpEx", "ap=$start#a$i") : append_sid("{$phpbb_root_path}portal.$phpEx#a$i");
+		$read_full_url = (isset($_GET['ap'])) ? append_sid("{$phpbb_root_path}portal.$phpEx", "ap=$start#a") : append_sid("{$phpbb_root_path}portal.$phpEx#a");
 		$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 		if ( $portal_config['portal_announcements_archive'] )
 		{
