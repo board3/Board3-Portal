@@ -13,9 +13,9 @@
 					<!-- IF S_DISPLAY_SEARCH -->
 					<li><a href="{U_SEARCH}">{L_SEARCH}</a></li>
 					<!-- ENDIF -->
-					<!-- IF not S_USER_LOGGED_IN -->
-					<li><a href="{U_REGISTER}">{L_REGISTER}</a></li>
-					<!-- ENDIF -->
+                   <!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED -->
+                   <li><a href="{U_REGISTER}">{L_REGISTER}</a></li>
+                   <!-- ENDIF -->
 					<li><a href="{U_MEMBERLIST}">{L_MEMBERLIST}</a></li>
 					<li><a href="{U_TEAM}">{L_THE_TEAM}</a></li>
 					<!-- IF U_MCP -->
