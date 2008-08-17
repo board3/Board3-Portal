@@ -25,13 +25,33 @@ if (!defined('IN_PORTAL'))
 //
 if ($user->data['is_registered'])
 {
-	// new posts since last visit
-	$sql = "SELECT COUNT(distinct post_id) as total
-		FROM " . POSTS_TABLE . "
-		WHERE post_time >= " . $user->data['session_last_visit'];
+	if ($auth->acl_get('m_approve'))
+	{
+		$m_approve_fid_ary = array(-1);
+		$m_approve_fid_sql = '';
+	}
+	else if ($auth->acl_getf_global('m_approve'))
+	{
+		$m_approve_fid_ary = array_diff(array_keys($auth->acl_getf('!m_approve', true)), $ex_fid_ary);
+		$m_approve_fid_sql = ' AND (p.post_approved = 1' . ((sizeof($m_approve_fid_ary)) ? ' OR ' . $db->sql_in_set('p.forum_id', $m_approve_fid_ary, true) : '') . ')';
+	}
+	else
+	{
+		$m_approve_fid_ary = array();
+		$m_approve_fid_sql = ' AND p.post_approved = 1';
+	}
+	
+	$ex_fid_ary = array_unique(array_merge(array_keys($auth->acl_getf('!f_read', true)), array_keys($auth->acl_getf('!f_search', true))));
+	
+	$sql = 'SELECT COUNT(distinct t.topic_id) as total
+				FROM ' . TOPICS_TABLE . ' t
+				WHERE t.topic_last_post_time > ' . $user->data['user_lastvisit'] . '
+					AND t.topic_moved_id = 0
+					' . str_replace(array('p.', 'post_'), array('t.', 'topic_'), $m_approve_fid_sql) . '
+					' . ((sizeof($ex_fid_ary)) ? 'AND ' . $db->sql_in_set('t.forum_id', $ex_fid_ary, true) : '');
 	$result = $db->sql_query($sql);
 	$new_posts_count = (int) $db->sql_fetchfield('total');
-		
+	
 	// your post number
 	$sql = "SELECT user_posts
 		FROM " . USERS_TABLE . "
