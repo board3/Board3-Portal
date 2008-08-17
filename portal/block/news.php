@@ -119,7 +119,7 @@ else
 			$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
 			$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 			
-			$read_full_url = (isset($_GET['np'])) ? 'np='. $start . '&amp;news=' . $i . '#n' . $i : 'news=' . $i . '#n' . $i;
+			$read_full_url = (isset($_GET['np'])) ? 'np='. $start . '&amp;news=#n' : 'news=#n' ;
 			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 			if ( $portal_config['portal_news_archive'] )
 			{
@@ -237,7 +237,7 @@ else
 		$close_bracket = ' ]';
 		$read_full = $user->lang['BACK'];
 				
-		$read_full_url = (isset($_GET['np'])) ? append_sid("{$phpbb_root_path}portal.$phpEx", "np=$start#n$i") : append_sid("{$phpbb_root_path}portal.$phpEx#n$i");
+		$read_full_url = (isset($_GET['np'])) ? append_sid("{$phpbb_root_path}portal.$phpEx", "np=$start#n") : append_sid("{$phpbb_root_path}portal.$phpEx#n");
 		$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 		if ( $portal_config['portal_news_archive'] )
 		{
