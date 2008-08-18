@@ -128,11 +128,30 @@ $lang = array_merge($lang, array(
 	'LATEST_MEMBERS'	=> 'Latest members',
 
 	// make donation
-	'DONATION' 		=> 'Make a donation',
+	'DONATION' 		=> 'PayPal donation',
 	'DONATION_TEXT'	=> 'is a group suplying services with no intention of any revenue. Anyone who wants to support this group can do so by donating so that the cost of server, the domain etc. can be covered.',
-	'PAY_MSG'		=> 'After selecting the amount which you want to donate from the menu, you can go on by clicking on the picture of PayPal.',
+	'PAY_MSG'		=> '',
 	'PAY_ITEM'		=> 'Make a donation', // paypal item
 
+	'AUD'						=> 'Australian Dollars (AUD)',
+	'CAD'						=> 'Canadian Dollars (CAD)',
+	'CZK'						=> 'Czech Koruna (CZK)',
+	'DKK'						=> 'Danish Kroner (DKK)',
+	'HKD'						=> 'Hong Kong Dollars (HKD)',
+	'HUF'						=> 'Hungarian Forint (HUF)',
+	'NZD'						=> 'New Zealand Dollars (NZD)',
+	'NOK'						=> 'Norwegian Kroner (NOK)',
+	'PLN'						=> 'Polish Zlotych (PLN)',
+	'GBP'						=> 'British Pounds (GBP)',
+	'SGD'						=> 'Singapore Dollars (SGD)',
+	'SEK'						=> 'Swedish Kronor (SEK)',
+	'CHF'						=> 'Swiss Francs (CHF)',
+	'JPY'						=> 'Japanese Yen (JPY)',
+	'USD'						=> 'U.S. Dollars (USD)',
+	'EUR'						=> 'Euros (EUR)',
+	'MXN'						=> 'Mexican Pesos (MXN)',
+	'ILS'						=> 'Israeli New Shekels (ILS)',
+	
 	// main menu
 	'M_MENU' 	=> 'Menu',
 	'M_CONTENT'	=> 'Content',
