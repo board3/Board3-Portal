@@ -83,7 +83,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 
 	$str_where = '';
 	
-	$topic_icons = array();
+	$topic_icons = array(0);
 	
 	$have_icons = 0;
 
@@ -353,7 +353,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		$i++;
 	}
 	
-	$posts['topic_icons'] = ( (!empty($topic_icons)) && $have_icons ) ? true : false;
+	$posts['topic_icons'] = ( (max($topic_icons) > 0 ) && $have_icons ) ? true : false;
 
 	$posts['topic_count'] = $i;
 	
