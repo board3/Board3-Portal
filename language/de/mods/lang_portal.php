@@ -120,10 +120,29 @@ $lang = array_merge($lang, array(
 	'LATEST_MEMBERS'				=> 'Neue Mitglieder',
 
 	// make donation
-	'DONATION' 						=> 'Spenden',
-	'DONATION_TEXT'				=> 'ist eine Webseite ohne jedes Gewinninteresse. Jeder der dieses Projekt unterstützen möchte, kann dies mit einer kleinen Spende tun, damit die Rechnungen für den Server, die Domain, etc. bezahlt werden können.',
-	'PAY_MSG'					=> 'Klicke auf das PayPal-Bild, nachdem Du den Betrag, den Du spenden möchtest, aus dem Menü ausgewählt hast.',
+	'DONATION' 					=> 'PayPal-Spenden',
+	'DONATION_TEXT'				=> 'ist eine Webseite ohne jedes Gewinninteresse. Jeder der dieses Projekt unterstützen möchte, kann dies mit einer kleinen PayPal-Spende tun, damit die Rechnungen für den Server, die Domain, etc. bezahlt werden können.',
+	'PAY_MSG'					=> 'Betrag bitte mit Punkt statt Komma trennen, z.B. 3.50',
 	'PAY_ITEM' 					=> 'Freiwillige Foren-Spende',
+
+	'AUD'						=> 'Australische Dollar (AUD)',
+	'CAD'						=> 'Kanadische Dollar (CAD)',
+	'CZK'						=> 'Tschechische Kronen (CZK)',
+	'DKK'						=> 'Dänische Kronen (DKK)',
+	'HKD'						=> 'Hongkong-Dollar (HKD)',
+	'HUF'						=> 'Ungarische Forint (HUF)',
+	'NZD'						=> 'Neuseeland-Dollar (NZD)',
+	'NOK'						=> 'Norwegische Kronen (NOK)',
+	'PLN'						=> 'Polnische Zloty (PLN)',
+	'GBP'						=> 'Britische Pfund (GBP)',
+	'SGD'						=> 'Singapur-Dollar (SGD)',
+	'SEK'						=> 'Schwedische Kronen (SEK)',
+	'CHF'						=> 'Schweizer Franken (CHF)',
+	'JPY'						=> 'Japanische Yen (JPY)',
+	'USD'						=> 'US-Dollar (USD)',
+	'EUR'						=> 'Euro (EUR)',
+	'MXN'						=> 'Mexikanische Pesos (MXN)',
+	'ILS'						=> 'Neue Israelische Schekel (ILS)',
 
 	// main menu
 	'M_MENU' 							=> 'Menü',
