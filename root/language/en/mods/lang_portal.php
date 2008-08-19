@@ -130,7 +130,7 @@ $lang = array_merge($lang, array(
 	// make donation
 	'DONATION' 		=> 'PayPal donation',
 	'DONATION_TEXT'	=> 'is a group suplying services with no intention of any revenue. Anyone who wants to support this group can do so by donating so that the cost of server, the domain etc. can be covered.',
-	'PAY_MSG'		=> '',
+	'PAY_MSG'       => 'Please use a decimal point (not a comma) as the separator, e.g. 3.50',
 	'PAY_ITEM'		=> 'Make a donation', // paypal item
 
 	'AUD'						=> 'Australian Dollars (AUD)',
