@@ -4,8 +4,8 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.0.xsd">
   <header>
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-    <title lang="en-gb">board3 Portal</title>
-    <title lang="de">board3 Portal</title>
+    <title lang="en-gb">board3 Portal - German language</title>
+    <title lang="de">board3 Portal - Deutsche Sprache</title>
     <description lang="en-gb">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
 

@@ -99,6 +99,7 @@ Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werde
 		  <change>Support for handymans MOD Version Check. To use this feature, this mod has to be installed.</change>
 		  <change>Update to ModX 1.2.0 - package structure adapted</change>
 		  <change>Language files rework</change>
+		  <change>PayPal block rework. All supported currencies can be chosen with a drop-down button. The amount to donate can be typed in.</change>
 		  <change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=8</change>
         </changelog>
 		<changelog lang="de">
@@ -110,6 +111,7 @@ Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werde
 		  <change>Handymans MOD Version Check wird nun unterstützt. Um den Update Check zu nutzen, muss dieser Mod installiert sein.</change>
 		  <change>Update auf ModX 1.2.0 - Packet Struktur angepasst.</change>
 		  <change>Sprachdateien wurden überarbeitet. (Danke an Thomas.d)</change>
+		  <change>PayPal überarbeitet. Alle von PayPal unterstützen Währungen können nun über einen Drop-Down-Button ausgewählt werden. Die zu spendende Summe kann man nun selbst eintippen.</change>
 		  <change>Bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=8</change>
         </changelog>
       </entry>	

@@ -4,8 +4,8 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.0.xsd">
   <header>
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-    <title lang="en-gb">board3 Portal</title>
-    <title lang="de">board3 Portal</title>
+    <title lang="en-gb">board3 Portal - Update from version 1.0.0RC1</title>
+    <title lang="de">board3 Portal - Update von Version 1.0.0RC1</title>
     <description lang="en-gb">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
 
@@ -89,12 +89,36 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
     </link-group>
     <history>
       <entry>
+	    <date>2008-08-20</date>
+		<rev-version>1.0.0RC2</rev-version>
+        <changelog lang="en-GB">
+          <change>Added new style / own CSS for easier style adaption - provided by Graphic Corner / Pfoti: www.graphic-corner.ch</change>
+		  <change>Normal and inline attachments are displayed properly now in news / announcements text view. (Thanks to connect for the inline attachments solution)</change>
+		  <change>Rework of the compact view of news / announcements. Topic folders and icons are now displayed. Complete style rework.</change>
+		  <change>#unread link for news / announcements. (Thanks to Mike, for pushing us in the right direction)</change>
+		  <change>Team bloc: possibillity to let non-system groups display</change>
+		  <change>Support for handymans MOD Version Check. To use this feature, this mod has to be installed.</change>
+		  <change>Update to ModX 1.2.0 - package structure adapted</change>
+		  <change>Language files rework</change>
+		  <change>PayPal block rework. All supported currencies can be chosen with a drop-down button. The amount to donate can be typed in.</change>
+		  <change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=8</change>
+        </changelog>
+		<changelog lang="de">
+          <change>Neuer Style mit eigener CSS, zur einfacheren Anpassbarkeit an andere Styles - erstellt von Graphic Corner / Pfoti: www.graphic-corner.ch</change>
+		  <change>Normale und inline Dateianhänge werden nun in der aktuellen Beiträge / Bekanntmachungen Text-Ansicht richtig angezeigt. (Danke an connect für die inline attachments Lösung)</change>
+		  <change>Die kompakte Ansicht der aktuellen Beiträge / Bekanntmachungen wurde komplett überarbeitet. "Topic Folders" und Themen Symbole werden nun angezeigt. Der Style wurde komplett überarbeitet.</change>
+		  <change>#unread Links für aktuelle Beiträge / Bekanntmachungen. (Danke an Mike, der uns in die richtige Richtung geschubst hat ;)</change>
+		  <change>Team block: auch nicht-system Gruppen können nun angezeigt werden</change>
+		  <change>Handymans MOD Version Check wird nun unterstützt. Um den Update Check zu nutzen, muss dieser Mod installiert sein.</change>
+		  <change>Update auf ModX 1.2.0 - Packet Struktur angepasst.</change>
+		  <change>Sprachdateien wurden überarbeitet. (Danke an Thomas.d)</change>
+		  <change>PayPal überarbeitet. Alle von PayPal unterstützen Währungen können nun über einen Drop-Down-Button ausgewählt werden. Die zu spendende Summe kann man nun selbst eintippen.</change>
+		  <change>Bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=8</change>
+        </changelog>
+      </entry>	
+      <entry>		
         <date>2008-05-03</date>
-        <rev-version>
-          <major>1</major>
-          <minor>0</minor>
-          <revision>0 RC1</revision>
-        </rev-version>
+		<rev-version>1.0.0RC1</rev-version>
         <changelog lang="en-GB">
           <change>Many bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
 		  <change>Adaptions to phpBB 3.0.1</change>
@@ -123,7 +147,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
 		  <change>"Mein Board-Style" hinzugefügt</change>
 		  <change>Dateianhänge: Anhänge aus einem oder mehreren bestimmten Foren anzeigen lassen + Berechtigungsprüfung hinzugefügt.</change>
         </changelog>
-      </entry>	
+      </entry>
       <entry>
         <date>2008-02-03</date>
         <rev-version>
