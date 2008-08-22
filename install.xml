@@ -222,7 +222,6 @@ Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werde
      <file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
      <file from="root/portal/index.html" to="portal/index.html" />
      <file from="root/portal/block/*.*" to="portal/block/*.*" />
-     <file from="root/portal/images/*.*" to="portal/images/*.*" />
      <file from="root/portal/includes/*.*" to="portal/includes/*.*" />
      <file from="root/portal/includes/mini_cal/*.*" to="portal/includes/mini_cal/*.*" />
      <file from="root/styles/prosilver/template/portal/*.*" to="styles/prosilver/template/portal/*.*" />
