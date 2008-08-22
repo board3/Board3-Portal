@@ -31,10 +31,10 @@
 			<li class="header">
 				<dl class="icon">
 
-					<dt>{L_LATEST_ANNOUNCEMENTS}</dt>
-					<dd class="posts">{L_REPLIES}</dd>
-					<dd class="views">{L_VIEWS}</dd>
-					<dd class="lastpost"><span>{L_LAST_POST}</span></dd>
+					<dt style="width: 44%">{L_LATEST_ANNOUNCEMENTS}</dt>
+					<dd class="posts" style="width: 11%">{L_REPLIES}</dd>
+					<dd class="views" style="width: 11%">{L_VIEWS}</dd>
+					<dd class="lastpost" style="width: 25%"><span>{L_LAST_POST}</span></dd>
 				</dl>	
 			</li>
 		</ul>
@@ -52,9 +52,9 @@
 						<br />{L_GLOBAL_ANNOUNCEMENT}
 					<!-- ENDIF -->
 				</dt>
-				<dd class="posts">{announcements_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
-				<dd class="views">{announcements_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
-				<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn><!-- IF announcements_row.S_UNREAD_INFO --><a href="{announcements_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {L_POST_BY_AUTHOR} {announcements_row.USERNAME_FULL_LAST}<br />
+				<dd class="posts" style="width: 11%">{announcements_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
+				<dd class="views" style="width: 11%">{announcements_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
+				<dd class="lastpost" style="width: 25%"><span><dfn>{L_LAST_POST}</dfn><!-- IF announcements_row.S_UNREAD_INFO --><a href="{announcements_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {L_POST_BY_AUTHOR} {announcements_row.USERNAME_FULL_LAST}<br />
 				{L_POSTED_ON_DATE} {announcements_row.LAST_POST_TIME}</span>
 				</dd>
 			</dl>
