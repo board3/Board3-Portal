@@ -25,6 +25,8 @@ if (!defined('IN_PORTAL'))
 //
 if ($user->data['is_registered'])
 {
+	$ex_fid_ary = array_unique(array_merge(array_keys($auth->acl_getf('!f_read', true)), array_keys($auth->acl_getf('!f_search', true))));
+	
 	if ($auth->acl_get('m_approve'))
 	{
 		$m_approve_fid_ary = array(-1);
@@ -40,8 +42,6 @@ if ($user->data['is_registered'])
 		$m_approve_fid_ary = array();
 		$m_approve_fid_sql = ' AND p.post_approved = 1';
 	}
-	
-	$ex_fid_ary = array_unique(array_merge(array_keys($auth->acl_getf('!f_read', true)), array_keys($auth->acl_getf('!f_search', true))));
 	
 	$sql = 'SELECT COUNT(distinct t.topic_id) as total
 				FROM ' . TOPICS_TABLE . ' t
