@@ -57,7 +57,7 @@ $lang = array_merge($lang, array(
 	'INSTALLER_UPDATE_NOTE'				=> 'Aktualisiere MOD von v%s to v%s',
 
 	'INSTALLER_UNINSTALL_TITLE'			=> 'PInUp Deinstallation',
-	'INSTALLER_UNINSTALL_NOTE'			=> 'Willkommen im Aktualisierungs-Menü',
+	'INSTALLER_UNINSTALL_NOTE'			=> 'Willkommen im Deinstallations-Menü',
 	'INSTALLER_UNINSTALL_SUCCESSFUL'	=> 'Die Deinstallation des MODs v%s war erfolgreich.',
 
 	'INSTALLER_NEEDS_ADMIN'			=> 'Du musst als Administrator eingeloggt sein.<br /><a href="../ucp.php?mode=login"><strong>Zum Login</strong></a>',

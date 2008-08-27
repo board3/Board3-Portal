@@ -58,8 +58,8 @@ $lang = array_merge($lang, array(
 	'INSTALLER_UPDATE_NOTE'				=> 'Update MOD from v%s to v%s',
 
 	'INSTALLER_UNINSTALL_TITLE'			=> 'PInUp Uninstall',
-	'INSTALLER_UNINSTALL_NOTE'			=> 'Welcome to the Updatemenu',
-	'INSTALLER_UNINSTALL_SUCCESSFUL'	=> 'Installation of the MOD v%s was successful.',
+	'INSTALLER_UNINSTALL_NOTE'			=> 'Welcome to the Uninstall menu',
+	'INSTALLER_UNINSTALL_SUCCESSFUL'	=> 'Uninstallation of the MOD v%s was successful.',
 
 	'INSTALLER_NEEDS_ADMIN'			=> 'You must be logged in as an admin.<br /><a href="../ucp.php?mode=login"><strong>Go to login</strong></a>',
 
@@ -72,7 +72,7 @@ $lang = array_merge($lang, array(
 	'INSTALLER_UPDATE_TO'					=> 'Update to',
 	'INSTALLER_UPDATE_START'				=> 'Please click <a href="%s">Update</a> to start the update utility.',
 
-	'INSTALLER_UNINSTALL_OLDVERSION'	=> 'Sorry, PInUp does not support the uninstallation of the origonal phpBB3 Portal.',
+	'INSTALLER_UNINSTALL_OLDVERSION'	=> 'Sorry, PInUp does not support the uninstallation of the original phpBB3 Portal.',
 
 	'INSTALLER_ERROR'						=> 'PInUp Error',
 

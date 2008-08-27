@@ -229,7 +229,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_WORDGRAPH_WORD_COUNTS'			=> 'Include count values to display',
 	'PORTAL_WORDGRAPH_WORD_COUNTS_EXPLAIN'	=> 'Display count values per word eg. (25).',
 	'PORTAL_WORDGRAPH_RATIO'				=> 'Used aspect ratio word size',
-	'PORTAL_WORDGRAPH_RATIO_EXPLAIN'		=> 'Change the aspect ratio (bigger/smaler) word size (default=18)',
+	'PORTAL_WORDGRAPH_RATIO_EXPLAIN'		=> 'Change the aspect ratio (bigger/smaller) word size (default=18)',
 
 	// welcome message
 	'ACP_PORTAL_WELCOME_INFO'				=> 'Welcome',
