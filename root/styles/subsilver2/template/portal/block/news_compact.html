@@ -2,7 +2,7 @@
 <div id="pagecontent">
 <table class="tablebg" cellspacing="1" width="100%">
 		<tr class="nav">
-			<td class="cat" colspan="<!-- IF S_TOPIC_ICONS -->6<!-- ELSE -->5<!-- ENDIF -->" valign="middle" align="center">{L_LATEST_NEWS} <a name="n"></a></td>
+			<td class="cat" colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_NEWS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->" valign="middle" align="center">{L_LATEST_NEWS} <a name="n"></a></td>
 		</tr>
 		<tr>
 			<!-- IF S_TOPIC_ICONS -->
@@ -10,8 +10,10 @@
 			<!-- ELSE -->
 				<th colspan="2">&nbsp;{L_TOPICS}&nbsp;</th>
 			<!-- ENDIF -->
+			<!-- IF S_DISPLAY_NEWS_RVS -->
 			<th>&nbsp;{L_REPLIES}&nbsp;</th>
 			<th>&nbsp;{L_VIEWS}&nbsp;</th>
+			<!-- ENDIF -->
 			<th>&nbsp;{L_LAST_POST}&nbsp;</th>
 		</tr>
 	<!-- BEGIN news_row -->
@@ -32,10 +34,13 @@
 					<!-- IF news_row.FORUM_NAME -->
 						<br />{L_FORUM}: <a href="{news_row.U_VIEWFORUM}" style="font-weight: bold;">{news_row.FORUM_NAME}</a>
 					<!-- ENDIF -->
+					<!-- IF not S_DISPLAY_NEWS_RVS --><!-- IF news_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}: <strong>{news_row.REPLIES}</strong>  &bull; {L_VIEWS}: <strong>{news_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
 					</p>
 				</td>
+				<!-- IF S_DISPLAY_NEWS_RVS -->
 				<td class="row1" width="50" align="center"><p class="topicdetails">{news_row.REPLIES}</p></td>
 				<td class="row2" width="50" align="center"><p class="topicdetails">{news_row.TOPIC_VIEWS}</p></td>
+				<!-- ENDIF -->
 				<td class="row1" width="140" align="center">
 					<p class="topicdetails"><!-- IF news_row.S_UNREAD_INFO --><a href="{news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF -->
 					{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {news_row.USERNAME_FULL_LAST}
@@ -47,7 +52,7 @@
 	<!-- IF news_row.S_LAST_ROW -->
 	<!-- IF NP_PAGINATION or TOTAL_NEWS -->
 	<tr class="row<!-- IF news_row.S_ROW_COUNT is even -->2<!-- ELSE -->1<!-- ENDIF -->">
-		<td class="gensmall" valign="middle" align="right" nowrap="nowrap" colspan="<!-- IF S_TOPIC_ICONS -->6<!-- ELSE -->5<!-- ENDIF -->">{TOTAL_NEWS}
+		<td class="gensmall" valign="middle" align="right" nowrap="nowrap" colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_NEWS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->">{TOTAL_NEWS}
 		<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; <span>{NP_PAGINATION}</span><!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
 	</tr>
 	<!-- ENDIF -->

@@ -77,10 +77,14 @@ $lang = array_merge($lang, array(
 	'PORTAL_USER_MENU_EXPLAIN'				=> 'Display this block on the portal.',
 	'PORTAL_FORUM_INDEX'					=> 'Forum Index (Forum list)',
 	'PORTAL_FORUM_INDEX_EXPLAIN'			=> 'Display this block on the portal.',
-
+	
 	// random member
 	'PORTAL_RANDOM_MEMBER'					=> 'Random member block',
 	'PORTAL_RANDOM_MEMBER_EXPLAIN'			=> 'Display this block on the portal.',
+	
+	// news and announcements
+	'PORTAL_SHOW_REPLIES_VIEWS'				=> '"Replies" and "Views" in extra columns',
+	'PORTAL_SHOW_REPLIES_VIEWS_EXPLAIN'		=> 'Setting for the compact global announcements block style.<br />If select yes the amound of replies and views will be displayed in extra columns. No is just two columns and the replies and views will be shown beside "Forum". Deactivate if you receive trouble with problems with diplaying.', 
 
 	// global announcements
 	'ACP_PORTAL_ANNOUNCE_INFO'					=> 'Global announcements',
@@ -229,7 +233,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_WORDGRAPH_WORD_COUNTS'			=> 'Include count values to display',
 	'PORTAL_WORDGRAPH_WORD_COUNTS_EXPLAIN'	=> 'Display count values per word eg. (25).',
 	'PORTAL_WORDGRAPH_RATIO'				=> 'Used aspect ratio word size',
-	'PORTAL_WORDGRAPH_RATIO_EXPLAIN'		=> 'Change the aspect ratio (bigger/smaller) word size (default=18)',
+	'PORTAL_WORDGRAPH_RATIO_EXPLAIN'		=> 'Change the aspect ratio (bigger/smaler) word size (default=18)',
 
 	// welcome message
 	'ACP_PORTAL_WELCOME_INFO'				=> 'Welcome',

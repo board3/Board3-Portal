@@ -89,5 +89,9 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_link
 # Version 1.0.0RC2 #
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_leaders_ext', '0');
 
+# Version 1.0.0RC3 #
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_show_announcements_replies_views', '1');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_show_news_replies_views', '1');
+
 # POSTGRES COMMIT #
 
