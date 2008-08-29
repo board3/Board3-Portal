@@ -60,7 +60,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <contributions />
       </author>
     </author-group>
- 	<mod-version>1.0.0RC2</mod-version>
+ 	<mod-version>1.0.0RC3</mod-version>
     <installation>
       <level>easy</level>
       <time>600</time>
@@ -72,6 +72,8 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
 	 	<link type="template" lang="de" href="subsilver2.xml">subsilver2</link>
 		<link type="template" lang="en-gb" href="subsilver2.xml">subsilver2</link>
 		<link type="language" lang="de" href="de.xml">Deutsch</link>
+		<link type="contrib" lang="en" href="../contrib/update_board3portal_100rc2.xml">Update instructions for Board3 Portal Version 1.0.0RC2</link>
+		<link type="contrib" lang="de" href="../contrib/update_board3portal_100rc2.xml">Updateanleitung für Board3 Portal Version 1.0.0RC2</link>
 		<link type="contrib" lang="en" href="../contrib/update_board3portal_100rc1.xml">Update instructions for Board3 Portal Version 1.0.0RC1</link>
 		<link type="contrib" lang="de" href="../contrib/update_board3portal_100rc1.xml">Updateanleitung für Board3 Portal Version 1.0.0RC1</link>
 		<link type="contrib" lang="en" href="../contrib/update_board3portal_021.xml">Update instructions for Board3 Portal Version 0.2.1</link>
@@ -93,6 +95,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
   <action-group>
     <copy>
       <file from="root/styles/subsilver2/template/portal/*.*" to="styles/subsilver2/template/portal/*.*" />
+	  <file from="root/styles/subsilver2/theme/images/portal/*.*" to="styles/subsilver2/theme/images/portal/*.*" />
     </copy>
     <open src="styles/subsilver2/template/breadcrumbs.html">
       <edit>
@@ -145,6 +148,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <action type="after-add"><![CDATA[<!-- ENDIF -->]]></action>
       </edit>
     </open>
-    <diy-instructions lang="en-gb">see normal install-file</diy-instructions>
+    <diy-instructions lang="en-gb">See general install.xml file</diy-instructions>
+    <diy-instructions lang="de">Siehe install.xml</diy-instructions>
   </action-group>
 </mod>

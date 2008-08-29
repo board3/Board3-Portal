@@ -59,7 +59,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <contributions />
       </author>
     </author-group>
-	<mod-version>1.0.0RC2</mod-version>
+	<mod-version>1.0.0RC3</mod-version>
     <installation>
       <level>easy</level>
       <time>600</time>
@@ -71,6 +71,8 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
 	 	<link type="template" lang="de" href="../xml/subsilver2.xml">subsilver2</link>
 		<link type="template" lang="en-gb" href="../xml/subsilver2.xml">subsilver2</link>
 		<link type="language" lang="de" href="../xml/de.xml">Deutsch</link>
+		<link type="contrib" lang="en" href="update_board3portal_100rc2.xml">Update instructions for Board3 Portal Version 1.0.0RC2</link>
+		<link type="contrib" lang="de" href="update_board3portal_100rc2.xml">Updateanleitung für Board3 Portal Version 1.0.0RC2</link>
 		<link type="contrib" lang="en" href="update_board3portal_100rc1.xml">Update instructions for Board3 Portal Version 1.0.0RC1</link>
 		<link type="contrib" lang="de" href="update_board3portal_100rc1.xml">Updateanleitung für Board3 Portal Version 1.0.0RC1</link>
 		<link type="contrib" lang="en" href="update_board3portal_021.xml">Update instructions for Board3 Portal Version 0.2.1</link>
@@ -88,6 +90,18 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
 		<link type="parent" lang="en" href="../install.xml">Install instructions</link>
     </link-group>
     <history>
+      <entry>
+	    <date>2008-08-31</date>
+		<rev-version>1.0.0RC3</rev-version>
+        <changelog lang="en-GB">
+          <change>Added switch to choose if "views" and "replies" should be diplayed in extra colums. To solve problems of distroyed layouts in compact view of news and announcements. e.g. with thin styles.</change>
+		  <change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=9</change>
+        </changelog>
+		<changelog lang="de">
+          <change>Spalten "Antworten" und "Zugriffe" können nun bei der kompakten Ansicht der aktuellen Beiträge / Bekanntmachungen ausgeblendet werden, um Probleme mit dem Layout bei z.B. schmalen Styles zu beheben.</change>
+		  <change>Bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=9</change>
+        </changelog>
+      </entry>
       <entry>
 	    <date>2008-08-20</date>
 		<rev-version>1.0.0RC2</rev-version>
@@ -377,9 +391,11 @@ $lang = array_merge($lang, array(
         <action type="after-add"><![CDATA[@import url("portal.css");]]></action>
       </edit>
     </open>	
-    <diy-instructions lang="en-gb">Browse to install_portal/install.php and run the installer, after successfull installation delete the installer.
-	You may delete the language/en/portal.php and language/en/acp/portal.php which are from the old MOD</diy-instructions>
-    <diy-instructions lang="de">install_portal/install.php aufrufen und ausführen, nach erfolgreicher Installation löschen
-	Du kannst die language/en/portal.php und language/en/acp/portal.php löschen, die sind von der alten MOD</diy-instructions>
+    <diy-instructions lang="en-gb">Browse to install_portal/install.php and run the installer, after successfull installation delete the installer.</diy-instructions>
+	<diy-instructions lang="en-gb">You may delete the language/en/portal.php and language/en/acp/portal.php which are from the old MOD</diy-instructions>
+	<diy-instructions lang="en-gb">Subsilver2 user: please upload the complete subsilver2 directory.</diy-instructions>
+    <diy-instructions lang="de">install_portal/install.php aufrufen und ausführen, nach erfolgreicher Installation löschen</diy-instructions>
+	<diy-instructions lang="de">Du kannst die language/en/portal.php und language/en/acp/portal.php löschen, die sind von der alten MOD</diy-instructions>
+	<diy-instructions lang="de">Subsilver2 User: bitte das komplette Verzeichnis subsilver2 mit den neuen Dateien überschreiben.</diy-instructions>
   </action-group>
 </mod>
