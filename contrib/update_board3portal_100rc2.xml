@@ -96,10 +96,12 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
 		<rev-version>1.0.0RC3</rev-version>
         <changelog lang="en-GB">
           <change>Added switch to choose if "views" and "replies" should be diplayed in extra colums. To solve problems of distroyed layouts in compact view of news and announcements. e.g. with thin styles.</change>
+		  <change>subsilver2 style rework</change>
 		  <change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=9</change>
         </changelog>
 		<changelog lang="de">
           <change>Spalten "Antworten" und "Zugriffe" können nun bei der kompakten Ansicht der aktuellen Beiträge / Bekanntmachungen ausgeblendet werden, um Probleme mit dem Layout bei z.B. schmalen Styles zu beheben.</change>
+		  <change>subsilver2 wurde überarbeitet</change>
 		  <change>Bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=9</change>
         </changelog>
       </entry>
