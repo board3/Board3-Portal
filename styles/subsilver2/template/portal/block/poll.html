@@ -11,7 +11,7 @@
 
 			<table class="tablebg" cellspacing="1" cellpadding="4" border="0" align="center" width="100%">
 				<tr>
-					<td class="cat">
+					<td class="cat" style="text-align: left">
 						<span class="gen"><b>{poll.POLL_QUESTION}</b></span><br /><span class="gensmall">{poll.L_POLL_LENGTH}</span>
 					</td>
 				</tr>
@@ -30,15 +30,15 @@
 									<!-- ENDIF -->
 								</td>
 							<!-- ENDIF -->
-								<td><span class="gen">{poll.poll_option.POLL_OPTION_CAPTION}</span></td>
-								<!-- IF poll.S_DISPLAY_RESULTS -->
-									<td dir="ltr">{POLL_LEFT_CAP_IMG}{poll.poll_option.POLL_OPTION_IMG}{POLL_RIGHT_CAP_IMG}</td>
+								<td style="text-align: left"><span class="gen">{poll.poll_option.POLL_OPTION_CAPTION}</span></td>
+							<!-- IF poll.S_DISPLAY_RESULTS -->
+									<td dir="ltr" style="text-align: left; white-space: nowrap">{POLL_LEFT_CAP_IMG}{poll.poll_option.POLL_OPTION_IMG}{POLL_RIGHT_CAP_IMG}</td>
 									<td class="gen" align="{S_CONTENT_FLOW_END}"><b>&nbsp;{poll.poll_option.POLL_OPTION_PERCENT}&nbsp;</b></td>
-									<td class="gen" align="center">[ {poll.poll_option.POLL_OPTION_RESULT} ]</td>
-									<!-- IF poll.poll_option.POLL_OPTION_VOTED -->
-										<td class="gensmall" valign="top"><b title="{L_POLL_VOTED_OPTION}">x</b></td>
-									<!-- ENDIF -->
+									<td class="gen" style="white-space: nowrap">[ {poll.poll_option.POLL_OPTION_RESULT} ]</td>
+								<!-- IF poll.poll_option.POLL_OPTION_VOTED -->
+									<td class="gensmall" valign="center"><b title="{L_POLL_VOTED_OPTION}">x</b></td>
 								<!-- ENDIF -->
+							<!-- ENDIF -->
 							</tr>
 						<!-- END poll_option -->
 						</table>
