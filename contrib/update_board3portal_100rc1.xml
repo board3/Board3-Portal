@@ -255,7 +255,6 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
      <file from="root/portal/includes/mini_cal/*.*" to="portal/includes/mini_cal/*.*" />
      <file from="root/styles/prosilver/template/portal/*.*" to="styles/prosilver/template/portal/*.*" />
      <file from="root/styles/prosilver/template/portal/block/*.*" to="styles/prosilver/template/portal/block/*.*" />
-     <file from="root/styles/prosilver/template/portal/block/donation/*.*" to="styles/prosilver/template/portal/block/donation/*.*" />
 	 <file from="root/styles/prosilver/theme/portal.css" to="styles/prosilver/theme/portal.css" />
 	 <file from="root/styles/prosilver/theme/images/portal/*.*" to="styles/prosilver/theme/images/portal/*.*" />
     </copy>
