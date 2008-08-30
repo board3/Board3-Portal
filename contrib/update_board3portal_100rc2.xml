@@ -255,7 +255,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
 	 <file from="root/styles/prosilver/template/portal/block/announcements_compact.html" to="styles/prosilver/template/portal/block/announcements_compact.html" />
 	 <file from="root/styles/prosilver/template/portal/block/news_compact.html" to="styles/prosilver/template/portal/block/news_compact.html" />
      <file from="root/styles/prosilver/template/portal/block/donation.html" to="styles/prosilver/template/portal/block/donation.html" />
-     <file from="root/styles/prosilver/template/portal/block/donation/donation_small.html" to="styles/prosilver/template/portal/block/donation_small.html" />
+     <file from="root/styles/prosilver/template/portal/block/donation_small.html" to="styles/prosilver/template/portal/block/donation_small.html" />
     </copy>
     <diy-instructions lang="en-gb">Browse to install_portal/install.php and run the installer, after successfull installation delete the installer.</diy-instructions>
 	<diy-instructions lang="en-gb">Subsilver2 user: please upload the complete subsilver2 directory.</diy-instructions>
