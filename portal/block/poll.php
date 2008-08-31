@@ -341,7 +341,7 @@ if( $poll_forums === TRUE )
 				'S_IS_MULTI_CHOICE'	=> ($data['poll_max_options'] > 1) ? true : false,
 				'S_POLL_ACTION'		=> $portalvote_url,
 		
-				'U_VIEW_RESULTS'	=> $portalpoll_url . '&amp;view=viewpoll',
+				'U_VIEW_RESULTS'   => $portalpoll_url . '&amp;view=viewpoll#viewpoll',
 				'U_VIEW_TOPIC'		=> $viewtopic_url
 			));
 
