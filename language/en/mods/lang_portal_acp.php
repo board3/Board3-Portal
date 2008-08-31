@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 	
 	// news and announcements
 	'PORTAL_SHOW_REPLIES_VIEWS'				=> 'Reply and view counts display',
-	'PORTAL_SHOW_REPLIES_VIEWS_EXPLAIN'		=> 'Setting for both the compact global announcements and news block.<br />If Yes, reply and view counts will be displayed in 2 extra columns. When No, replies and views will be shown beside the forum name. Select No if you have problems with the diplay of the extra columns due to the extra width required.', 
+	'PORTAL_SHOW_REPLIES_VIEWS_EXPLAIN'		=> 'Setting for the compact block.<br />If Yes, reply and view counts will be displayed in 2 extra columns. When No, replies and views will be shown beside the forum name. Select No if you have problems with the diplay of the extra columns due to the extra width required.', 
 
 	// global announcements
 	'ACP_PORTAL_ANNOUNCE_INFO'					=> 'Global announcements',
