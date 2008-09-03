@@ -82,9 +82,9 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
 		<link type="contrib" lang="en" href="../contrib/update_board3portal_010.xml">Update instructions for Board3 Portal Version 0.1.0</link>
 		<link type="contrib" lang="de" href="../contrib/update_board3portal_010.xml">Updateanleitung für Board3 Portal Version 0.1.0</link>
 		<link type="contrib" lang="en" href="../contrib/update_phpbb3portal_122.xml">Update instructions for phpBB3 Portal Version 1.2.2</link>
-		<link type="contrib" lang="de" href="../contrib/update_phpbb3portal_122.xml">Updateanleitung für Board3 Portal Version 1.2.2</link>
+		<link type="contrib" lang="de" href="../contrib/update_phpbb3portal_122.xml">Updateanleitung für phpBB3 Portal Version 1.2.2</link>
 		<link type="contrib" lang="en" href="../contrib/update_phpbb3portal_110b.xml">Update instructions for phpBB3 Portal Version 1.1.0b</link>
-		<link type="contrib" lang="de" href="../contrib/update_phpbb3portal_110b.xml">Updateanleitung für Board3 Portal Version 1.1.0b</link>
+		<link type="contrib" lang="de" href="../contrib/update_phpbb3portal_110b.xml">Updateanleitung für phpBB3 Portal Version 1.1.0b</link>
 		<link type="language" lang="en" href="de.xml">German</link>		
 		<link type="parent" lang="de" href="../install.xml">Installations-Anleitung</link>
 		<link type="parent" lang="en" href="../install.xml">Install instructions</link>
