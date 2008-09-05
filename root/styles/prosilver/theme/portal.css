@@ -131,9 +131,9 @@ border-bottom: 1px solid #90bade;
 border-left: 7px solid #6ACEFF;
 }
 
-* html #portal-navigation li a{ /*IE only */
-width: auto; /*IE 5*/
-w\idth: auto; /*185px minus all left/right paddings and margins*/
+/* IE6 FIX */
+* html .portal-navigation ul li{
+border-bottom: 1px solid #6ACEFF;
 }
 
 .portal-navigation li a:hover {
