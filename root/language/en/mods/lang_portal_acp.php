@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 	
 	// news and announcements
 	'PORTAL_SHOW_REPLIES_VIEWS'				=> 'Reply and view counts display',
-	'PORTAL_SHOW_REPLIES_VIEWS_EXPLAIN'		=> 'Setting for the compact block.<br />If Yes, reply and view counts will be displayed in 2 extra columns. When No, replies and views will be shown beside the forum name. Select No if you have problems with the diplay of the extra columns due to the extra width required.', 
+	'PORTAL_SHOW_REPLIES_VIEWS_EXPLAIN'		=> 'Setting for the compact block.<br />If Yes, reply and view counts will be displayed in 2 extra columns. When No, replies and views will be shown beside the forum name. Select No if you have problems with the display of the extra columns due to the extra width required.', 
 
 	// global announcements
 	'ACP_PORTAL_ANNOUNCE_INFO'					=> 'Global announcements',
@@ -233,7 +233,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_WORDGRAPH_WORD_COUNTS'			=> 'Include count values to display',
 	'PORTAL_WORDGRAPH_WORD_COUNTS_EXPLAIN'	=> 'Display count values per word eg. (25).',
 	'PORTAL_WORDGRAPH_RATIO'				=> 'Used aspect ratio word size',
-	'PORTAL_WORDGRAPH_RATIO_EXPLAIN'		=> 'Change the aspect ratio (bigger/smaler) word size (default=18)',
+	'PORTAL_WORDGRAPH_RATIO_EXPLAIN'		=> 'Change the aspect ratio (bigger/smaller) word size (default=18)',
 
 	// welcome message
 	'ACP_PORTAL_WELCOME_INFO'				=> 'Welcome',
