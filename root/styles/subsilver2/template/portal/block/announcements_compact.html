@@ -28,7 +28,7 @@
 					<!-- IF S_TOPIC_ICONS --><td class="row1" width="25" align="center"><!-- IF announcements_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{announcements_row.TOPIC_ICON_IMG}" width="{announcements_row.TOPIC_ICON_IMG_WIDTH}" height="{announcements_row.TOPIC_ICON_IMG_HEIGHT}" alt="" title="" /><!-- ENDIF --></td><!-- ENDIF -->
 				<td class="row1">
 				<!-- IF announcements_row.PAGINATION --><span style="float: right; font-size:0.9em;"> [ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {announcements_row.PAGINATION} ] </span><!-- ENDIF -->
-					{announcements_row.ATTACH_ICON_IMG} <!-- IF announcements_row.S_POLL --> <strong style="font-size:1.1em;">{L_POLL}: </strong><!-- ENDIF --><a title="{L_POSTED}: {announcements_row.FIRST_POST_TIME}" href="{announcements_row.U_VIEW_TOPIC}" class="topictitle">{announcements_row.TITLE}</a>
+					{announcements_row.ATTACH_ICON_IMG} <!-- IF announcements_row.S_POLL --> <strong style="font-size:1.1em;">{L_POLL}: </strong><!-- ENDIF --><a title="{L_POSTED}: {announcements_row.FIRST_POST_TIME}" href="{announcements_row.U_VIEW_COMMENTS}" class="topictitle">{announcements_row.TITLE}</a>
 					<p class="gensmall">{L_POSTED} {L_POST_BY_AUTHOR} {announcements_row.POSTER_FULL} {L_POSTED_ON_DATE} {announcements_row.TIME}
 					<!-- IF announcements_row.FORUM_NAME -->
 						<br />{L_FORUM}: <a href="{announcements_row.U_VIEWFORUM}" style="font-weight: bold;">{announcements_row.FORUM_NAME}</a>
