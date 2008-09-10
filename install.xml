@@ -58,7 +58,7 @@ Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werde
         <contributions />
       </author>
     </author-group>
-	<mod-version>1.0.0RC3</mod-version>
+	<mod-version>1.0.0</mod-version>
     <installation>
       <level>easy</level>
       <time>600</time>
@@ -88,6 +88,26 @@ Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werde
 		<link type="parent" lang="de" href="install.xml">Installations-Anleitung</link>
     </link-group>
     <history>
+	  <entry>
+	    <date>2008-09-09</date>
+		<rev-version>1.0.1</rev-version>
+        <changelog lang="en-GB">
+          <change>Release of version 1.0.1.</change>
+        </changelog>
+		<changelog lang="de">
+          <change>Release der Version 1.0.1.</change>
+        </changelog>
+      </entry>
+      <entry>
+	    <date>2008-09-08</date>
+		<rev-version>1.0.0</rev-version>
+        <changelog lang="en-GB">
+          <change>Release of version 1.</change>
+        </changelog>
+		<changelog lang="de">
+          <change>Release der Version 1.</change>
+        </changelog>
+      </entry>
       <entry>
 	    <date>2008-08-31</date>
 		<rev-version>1.0.0RC3</rev-version>
