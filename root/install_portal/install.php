@@ -882,8 +882,21 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 					
 					if( $old_version == '1.0.0' )
 					{
-						$portal_update_array[] = 'INSERT ' . PORTAL_CONFIG_TABLE . 	" (config_name, config_value) VALUES ('portal_show_announcements_replies_views', '1');",
-						$portal_update_array[] = 'INSERT ' . PORTAL_CONFIG_TABLE . 	" (config_name, config_value) VALUES ('portal_show_news_replies_views', '1');",
+						$sql_chk = 'SELECT config_value FROM ' . PORTAL_CONFIG_TABLE . "	WHERE config_name = 'portal_show_announcements_replies_views'";
+						$chk_result = @$db->sql_query_limit( $chk_sql, 1 );
+						$chk_config = $db->sql_fetchrow( $chk_result );
+						if( !sizeof( $chk_config ) )
+						{
+							$portal_update_array[] = 'INSERT ' . PORTAL_CONFIG_TABLE . 	" (config_name, config_value) VALUES ('portal_show_announcements_replies_views', '1');",
+						}
+						
+						$sql_chk = 'SELECT config_value FROM ' . PORTAL_CONFIG_TABLE . "	WHERE config_name = 'portal_show_news_replies_views'";
+						$chk_result = @$db->sql_query_limit( $chk_sql, 1 );
+						$chk_config = $db->sql_fetchrow( $chk_result );
+						if( !sizeof( $chk_config ) )
+						{
+							$portal_update_array[] = 'INSERT ' . PORTAL_CONFIG_TABLE . 	" (config_name, config_value) VALUES ('portal_show_news_replies_views', '1');",
+						}
 					}
 	
 					foreach($portal_update_array as $sql)
