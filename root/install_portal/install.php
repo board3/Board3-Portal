@@ -879,6 +879,12 @@ if( $user->data['is_registered'] && $auth->acl_get('a_board') )
 					}
 	
 					$portal_update_array[] = 'UPDATE ' . PORTAL_CONFIG_TABLE . " SET config_value='{$current_version}' WHERE config_name = 'portal_version'";
+					
+					if( $old_version == '1.0.0' )
+					{
+						$portal_update_array[] = 'INSERT ' . PORTAL_CONFIG_TABLE . 	" (config_name, config_value) VALUES ('portal_show_announcements_replies_views', '1');",
+						$portal_update_array[] = 'INSERT ' . PORTAL_CONFIG_TABLE . 	" (config_name, config_value) VALUES ('portal_show_news_replies_views', '1');",
+					}
 	
 					foreach($portal_update_array as $sql)
 					{
