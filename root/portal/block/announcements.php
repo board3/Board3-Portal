@@ -305,13 +305,19 @@ else
 	}
 }
 
+$topic_icons = false;
+if( isset($fetch_news['topic_icons']) )
+{
+	$topic_icons = true;
+}
+
 $template->assign_vars(array(
 	'NEWEST_POST_IMG'				=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 	'READ_POST_IMG'					=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
 	'GOTO_PAGE_IMG'					=> $user->img('icon_post_target', 'GOTO_PAGE'),
 	'S_DISPLAY_ANNOUNCEMENTS'		=> true,
 	'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ( $portal_config['portal_show_announcements_replies_views'] ) ? true : false,
-	'S_TOPIC_ICONS'					=> $fetch_news['topic_icons'],
+	'S_TOPIC_ICONS'					=> $topic_icons,
 ));
 
 ?>

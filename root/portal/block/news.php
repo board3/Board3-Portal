@@ -290,6 +290,12 @@ else
 	}
 }
 
+$topic_icons = false;
+if( isset($fetch_news['topic_icons']) )
+{
+	$topic_icons = true;
+}
+
 $template->assign_vars(array(
 	'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 	'READ_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
@@ -298,7 +304,7 @@ $template->assign_vars(array(
 	'POSTED_BY_TEXT'			=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
 	'S_DISPLAY_NEWS'			=> true,
 	'S_DISPLAY_NEWS_RVS'		=> ( $portal_config['portal_show_news_replies_views'] ) ? true : false,
-	'S_TOPIC_ICONS'				=> $fetch_news['topic_icons'],
+	'S_TOPIC_ICONS'				=> $topic_icons,
 ));
 
 ?>
