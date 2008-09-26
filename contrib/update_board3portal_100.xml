@@ -4,8 +4,8 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.1.xsd">
   <header>
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-    <title lang="en-gb">board3 Portal - Update from version 1.0.0RC2</title>
-    <title lang="de">board3 Portal - Update von Version 1.0.0RC2</title>
+    <title lang="en-gb">board3 Portal - Update from version 1.0.0</title>
+    <title lang="de">board3 Portal - Update von Version 1.0.0</title>
     <description lang="en-gb">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
 
@@ -270,7 +270,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
     <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
   </header>
   <action-group>
-    <copy>
+    <copy> 
      <file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />
      <file from="root/install_portal/*.*" to="install_portal/*.*" />
      <file from="root/install_portal/schemas/*.*" to="install_portal/schemas/*.*" />	 
@@ -286,6 +286,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
      <file from="root/styles/prosilver/template/portal/block/donation.html" to="styles/prosilver/template/portal/block/donation.html" />
      <file from="root/styles/prosilver/template/portal/block/donation_small.html" to="styles/prosilver/template/portal/block/donation_small.html" />
 	 <file from="root/styles/prosilver/template/portal/block/poll.html" to="styles/prosilver/template/portal/block/poll.html" />
+	 <file from="root/styles/prosilver/theme/portal.css" to="styles/prosilver/theme/portal.css" />
     </copy>
     <diy-instructions lang="en-gb">Browse to install_portal/install.php and run the installer, after successfull installation delete the installer.
 	Subsilver2 user: please upload the complete subsilver2 directory.</diy-instructions>

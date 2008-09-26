@@ -4,8 +4,8 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.1.xsd">
   <header>
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-    <title lang="en-gb">board3 Portal - Update from version 1.0.0RC2</title>
-    <title lang="de">board3 Portal - Update von Version 1.0.0RC2</title>
+    <title lang="en-gb">board3 Portal - Update from version 1.0.0RC3</title>
+    <title lang="de">board3 Portal - Update von Version 1.0.0RC3</title>
     <description lang="en-gb">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
 
@@ -271,25 +271,16 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
   </header>
   <action-group>
     <copy>
-     <file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />
-     <file from="root/install_portal/*.*" to="install_portal/*.*" />
-     <file from="root/install_portal/schemas/*.*" to="install_portal/schemas/*.*" />	 
-     <file from="root/language/en/mods/lang_portal_acp.php" to="language/en/mods/lang_portal_acp.php" />
-	 <file from="root/language/en/mods/portal_install.php" to="language/en/mods/portal_install.php" />
-     <file from="root/portal/block/announcements.php" to="portal/block/announcements.php" />
-     <file from="root/portal/block/news.php" to="portal/block/news.php" />
-     <file from="root/portal/block/user_menu.php" to="portal/block/user_menu.php" />
-	 <file from="root/portal/block/poll.php" to="portal/block/poll.php" />
-	 <file from="root/styles/prosilver/template/portal/portal_body.html" to="styles/prosilver/template/portal/portal_body.html" />
-	 <file from="root/styles/prosilver/template/portal/block/announcements_compact.html" to="styles/prosilver/template/portal/block/announcements_compact.html" />
-	 <file from="root/styles/prosilver/template/portal/block/news_compact.html" to="styles/prosilver/template/portal/block/news_compact.html" />
-     <file from="root/styles/prosilver/template/portal/block/donation.html" to="styles/prosilver/template/portal/block/donation.html" />
-     <file from="root/styles/prosilver/template/portal/block/donation_small.html" to="styles/prosilver/template/portal/block/donation_small.html" />
-	 <file from="root/styles/prosilver/template/portal/block/poll.html" to="styles/prosilver/template/portal/block/poll.html" />
+	 <file from="root/install_portal/*.*" to="install_portal/*.*" />
+     <file from="root/install_portal/schemas/*.*" to="install_portal/schemas/*.*" />	
+	 <file from="root/language/en/mods/lang_portal_acp.php" to="language/en/mods/lang_portal_acp.php" />
+	 <file from="root/portal/block/announcements.php" to="portal/block/announcements.php" />
+	 <file from="root/portal/block/news.php" to="portal/block/news.php" />
+	 <file from="root/styles/prosilver/theme/portal.css" to="styles/prosilver/theme/portal.css" />
     </copy>
     <diy-instructions lang="en-gb">Browse to install_portal/install.php and run the installer, after successfull installation delete the installer.
-	Subsilver2 user: please upload the complete subsilver2 directory.</diy-instructions>
+	subsilver2 user: please replace the root/styles/subsilver2/template/portal/block/announcements_compact.html file with the one from this package</diy-instructions>
     <diy-instructions lang="de">install_portal/install.php aufrufen und ausführen, nach erfolgreicher Installation löschen
-	Subsilver2 User: bitte das komplette Verzeichnis subsilver2 mit den neuen Dateien überschreiben.</diy-instructions>
+	subsilver2 User: bitte ersetze die root/styles/subsilver2/template/portal/block/announcements_compact.html Datei mit der aus diesem Paket</diy-instructions>
   </action-group>
 </mod>
