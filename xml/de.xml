@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.0.xsd">
+  <header>
+    <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+    <title lang="en-gb">board3 Portal - German language</title>
+    <title lang="de">board3 Portal - Deutsche Sprache</title>
+    <description lang="en-gb">Adds a portal to your forum.
+It has several boxes wich can be turned on an off in the ACP and certain settings.
+
+Included language files:
+» English (en)
+» German (de)
+
+More langages can be found in our International forums: http://www.board3.de/viewforum.php?f=13
+</description>
+    <description lang="de">Fügt ein Portal deinem Forum hinzu.
+Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werden können.
+
+Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3portal.com )
+</description>
+    <author-notes lang="en-gb">i hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de</author-notes>
+    <author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.</author-notes>
+    <author-group>
+      <author>
+        <realname>Ice</realname>
+        <email></email>
+        <username>avaren</username>
+        <homepage>http://www.board3.de</homepage>
+        <contributions />
+      </author>
+      <author>
+        <realname>Kevin</realname>
+        <email></email>
+        <username>saint_hh</username>
+        <homepage>http://www.board3.de</homepage>
+        <contributions />
+      </author>
+      <author>
+        <realname>(N/A)</realname>
+        <email>nickvergessen@gmx.de</email>
+        <username>nickvergessen</username>
+        <homepage>http://mods.flying-bits.org/</homepage>
+        <contributions />
+      </author>
+      <author>
+        <realname>Walter</realname>
+        <email>w.bobeth@digitalfotografie-foren.de</email>
+        <username>Redbull254</username>
+        <homepage>http://www.digitalfotografie-foren.de</homepage>
+        <contributions />
+      </author>
+	     <author>
+        <realname>Christian</realname>
+        <email></email>
+        <username>Christian_N</username>
+        <homepage>http://www.phpbb-projekt.de</homepage>
+        <contributions />
+      </author>
+    </author-group>
+	<mod-version>1.0.0RC3</mod-version>
+    <installation>
+      <level>easy</level>
+      <time>600</time>
+	<target-version>3.0.2</target-version>
+    </installation>
+	 <link-group>
+		<link type="dependency" lang="en-gb" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
+		<link type="dependency" lang="de" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal unterstützt MOD Version Check. Um dieses Feature zu nutzen, muss dieser Mod installiert sein.</link>
+	 	<link type="template" lang="de" href="subsilver2.xml">subsilver2</link>
+		<link type="template" lang="en-gb" href="subsilver2.xml">subsilver2</link>
+		<link type="language" lang="de" href="de.xml">Deutsch</link>
+		<link type="contrib" lang="en" href="../contrib/update_board3portal_100rc2.xml">Update instructions for Board3 Portal Version 1.0.0RC2</link>
+		<link type="contrib" lang="de" href="../contrib/update_board3portal_100rc2.xml">Updateanleitung für Board3 Portal Version 1.0.0RC2</link>
+		<link type="contrib" lang="en" href="../contrib/update_board3portal_100rc1.xml">Update instructions for Board3 Portal Version 1.0.0RC1</link>
+		<link type="contrib" lang="de" href="../contrib/update_board3portal_100rc1.xml">Updateanleitung für Board3 Portal Version 1.0.0RC1</link>
+		<link type="contrib" lang="en" href="../contrib/update_board3portal_021.xml">Update instructions for Board3 Portal Version 0.2.1</link>
+		<link type="contrib" lang="de" href="../contrib/update_board3portal_021.xml">Updateanleitung für Board3 Portal Version 0.2.1</link>
+		<link type="contrib" lang="en" href="../contrib/update_board3portal_020.xml">Update instructions for Board3 Portal Version 0.2.0</link>
+		<link type="contrib" lang="de" href="../contrib/update_board3portal_020.xml">Updateanleitung für Board3 Portal Version 0.2.0</link> 
+		<link type="contrib" lang="en" href="../contrib/update_board3portal_010.xml">Update instructions for Board3 Portal Version 0.1.0</link>
+		<link type="contrib" lang="de" href="../contrib/update_board3portal_010.xml">Updateanleitung für Board3 Portal Version 0.1.0</link>
+		<link type="contrib" lang="en" href="../contrib/update_phpbb3portal_122.xml">Update instructions for phpBB3 Portal Version 1.2.2</link>
+		<link type="contrib" lang="de" href="../contrib/update_phpbb3portal_122.xml">Updateanleitung für phpBB3 Portal Version 1.2.2</link>
+		<link type="contrib" lang="en" href="../contrib/update_phpbb3portal_110b.xml">Update instructions for phpBB3 Portal Version 1.1.0b</link>
+		<link type="contrib" lang="de" href="../contrib/update_phpbb3portal_110b.xml">Updateanleitung für phpBB3 Portal Version 1.1.0b</link>
+		<link type="language" lang="en" href="de.xml">German</link>		
+		<link type="parent" lang="de" href="../install.xml">Installations-Anleitung</link>
+		<link type="parent" lang="en" href="../install.xml">Install instructions</link>
+    </link-group>
+    <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
+  </header>
+  <action-group>
+    <copy>
+     <file from="root/language/de/mods/*.*" to="language/de/mods/*.*" />
+    </copy>
+    <diy-instructions lang="en-gb">See general install.xml file</diy-instructions>
+    <diy-instructions lang="de">Siehe install.xml</diy-instructions>
+  </action-group>
+</mod>

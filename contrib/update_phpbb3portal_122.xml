@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.0.xsd">
+  <header>
+    <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+    <title lang="en-gb">board3 Portal - Update from phpbb3portal 1.2.2</title>
+    <title lang="de">board3 Portal - Update von phpbb3portal 1.2.2</title>
+    <description lang="en-gb">Adds a portal to your forum.
+It has several boxes wich can be turned on an off in the ACP and certain settings.
+
+Included language files:
+» English (en)
+» German (de)
+
+More langages can be found in our International forums: http://www.board3.de/viewforum.php?f=13
+</description>
+    <description lang="de">Fügt ein Portal deinem Forum hinzu.
+Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werden können.
+
+Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3portal.com )
+</description>
+    <author-notes lang="en-gb">i hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de</author-notes>
+    <author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.</author-notes>
+    <author-group>
+      <author>
+        <realname>Ice</realname>
+        <email></email>
+        <username>avaren</username>
+        <homepage>http://www.board3.de</homepage>
+        <contributions />
+      </author>
+      <author>
+        <realname>Kevin</realname>
+        <email></email>
+        <username>saint_hh</username>
+        <homepage>http://www.board3.de</homepage>
+        <contributions />
+      </author>
+      <author>
+        <realname>(N/A)</realname>
+        <email>nickvergessen@gmx.de</email>
+        <username>nickvergessen</username>
+        <homepage>http://mods.flying-bits.org/</homepage>
+        <contributions />
+      </author>
+      <author>
+        <realname>Walter</realname>
+        <email>w.bobeth@digitalfotografie-foren.de</email>
+        <username>Redbull254</username>
+        <homepage>http://www.digitalfotografie-foren.de</homepage>
+        <contributions />
+      </author>
+	     <author>
+        <realname>Christian</realname>
+        <email></email>
+        <username>Christian_N</username>
+        <homepage>http://www.phpbb-projekt.de</homepage>
+        <contributions />
+      </author>
+    </author-group>
+	<mod-version>1.0.0RC3</mod-version>
+    <installation>
+      <level>easy</level>
+      <time>600</time>
+	<target-version>3.0.2</target-version>
+    </installation>
+	 <link-group>
+		<link type="dependency" lang="en-gb" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
+		<link type="dependency" lang="de" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal unterstützt MOD Version Check. Um dieses Feature zu nutzen, muss dieser Mod installiert sein.</link>
+	 	<link type="template" lang="de" href="../xml/subsilver2.xml">subsilver2</link>
+		<link type="template" lang="en-gb" href="../xml/subsilver2.xml">subsilver2</link>
+		<link type="language" lang="de" href="../xml/de.xml">Deutsch</link>
+		<link type="contrib" lang="en" href="update_board3portal_100rc2.xml">Update instructions for Board3 Portal Version 1.0.0RC2</link>
+		<link type="contrib" lang="de" href="update_board3portal_100rc2.xml">Updateanleitung für Board3 Portal Version 1.0.0RC2</link>
+		<link type="contrib" lang="en" href="update_board3portal_100rc1.xml">Update instructions for Board3 Portal Version 1.0.0RC1</link>
+		<link type="contrib" lang="de" href="update_board3portal_100rc1.xml">Updateanleitung für Board3 Portal Version 1.0.0RC1</link>
+		<link type="contrib" lang="en" href="update_board3portal_021.xml">Update instructions for Board3 Portal Version 0.2.1</link>
+		<link type="contrib" lang="de" href="update_board3portal_021.xml">Updateanleitung für Board3 Portal Version 0.2.1</link>
+		<link type="contrib" lang="en" href="update_board3portal_020.xml">Update instructions for Board3 Portal Version 0.2.0</link>
+		<link type="contrib" lang="de" href="update_board3portal_020.xml">Updateanleitung für Board3 Portal Version 0.2.0</link> 
+		<link type="contrib" lang="en" href="update_board3portal_010.xml">Update instructions for Board3 Portal Version 0.1.0</link>
+		<link type="contrib" lang="de" href="update_board3portal_010.xml">Updateanleitung für Board3 Portal Version 0.1.0</link>
+		<link type="contrib" lang="en" href="update_phpbb3portal_122.xml">Update instructions for phpBB3 Portal Version 1.2.2</link>
+		<link type="contrib" lang="de" href="update_phpbb3portal_122.xml">Updateanleitung für phpBB3 Portal Version 1.2.2</link>
+		<link type="contrib" lang="en" href="update_phpbb3portal_110b.xml">Update instructions for phpBB3 Portal Version 1.1.0b</link>
+		<link type="contrib" lang="de" href="update_phpbb3portal_110b.xml">Updateanleitung für phpBB3 Portal Version 1.1.0b</link>
+		<link type="language" lang="en" href="../xml/de.xml">German</link>		
+		<link type="parent" lang="de" href="../install.xml">Installations-Anleitung</link>
+		<link type="parent" lang="en" href="../install.xml">Install instructions</link>
+    </link-group>
+    <history>
+      <entry>
+	    <date>2008-08-31</date>
+		<rev-version>1.0.0RC3</rev-version>
+        <changelog lang="en-GB">
+          <change>Added switch to choose if "views" and "replies" should be diplayed in extra colums. To solve problems of distroyed layouts in compact view of news and announcements. e.g. with thin styles.</change>
+		  <change>subsilver2 style rework</change>
+		  <change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=9</change>
+        </changelog>
+		<changelog lang="de">
+          <change>Spalten "Antworten" und "Zugriffe" können nun bei der kompakten Ansicht der aktuellen Beiträge / Bekanntmachungen ausgeblendet werden, um Probleme mit dem Layout bei z.B. schmalen Styles zu beheben.</change>
+		  <change>subsilver2 wurde überarbeitet</change>
+		  <change>Bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=9</change>
+        </changelog>
+      </entry>
+      <entry>
+	    <date>2008-08-20</date>
+		<rev-version>1.0.0RC2</rev-version>
+        <changelog lang="en-GB">
+          <change>Added new style / own CSS for easier style adaption - provided by Graphic Corner / Pfoti: www.graphic-corner.ch</change>
+		  <change>Normal and inline attachments are displayed properly now in news / announcements text view. (Thanks to connect for the inline attachments solution)</change>
+		  <change>Rework of the compact view of news / announcements. Topic folders and icons are now displayed. Complete style rework.</change>
+		  <change>#unread link for news / announcements. (Thanks to Mike, for pushing us in the right direction)</change>
+		  <change>Team bloc: possibillity to let non-system groups display</change>
+		  <change>Support for handymans MOD Version Check. To use this feature, this mod has to be installed.</change>
+		  <change>Update to ModX 1.2.0 - package structure adapted</change>
+		  <change>Language files rework</change>
+		  <change>PayPal block rework. All supported currencies can be chosen with a drop-down button. The amount to donate can be typed in.</change>
+		  <change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=8</change>
+        </changelog>
+		<changelog lang="de">
+          <change>Neuer Style mit eigener CSS, zur einfacheren Anpassbarkeit an andere Styles - erstellt von Graphic Corner / Pfoti: www.graphic-corner.ch</change>
+		  <change>Normale und inline Dateianhänge werden nun in der aktuellen Beiträge / Bekanntmachungen Text-Ansicht richtig angezeigt. (Danke an connect für die inline attachments Lösung)</change>
+		  <change>Die kompakte Ansicht der aktuellen Beiträge / Bekanntmachungen wurde komplett überarbeitet. "Topic Folders" und Themen Symbole werden nun angezeigt. Der Style wurde komplett überarbeitet.</change>
+		  <change>#unread Links für aktuelle Beiträge / Bekanntmachungen. (Danke an Mike, der uns in die richtige Richtung geschubst hat ;)</change>
+		  <change>Team block: auch nicht-system Gruppen können nun angezeigt werden</change>
+		  <change>Handymans MOD Version Check wird nun unterstützt. Um den Update Check zu nutzen, muss dieser Mod installiert sein.</change>
+		  <change>Update auf ModX 1.2.0 - Packet Struktur angepasst.</change>
+		  <change>Sprachdateien wurden überarbeitet. (Danke an Thomas.d)</change>
+		  <change>PayPal überarbeitet. Alle von PayPal unterstützen Währungen können nun über einen Drop-Down-Button ausgewählt werden. Die zu spendende Summe kann man nun selbst eintippen.</change>
+		  <change>Bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=8</change>
+        </changelog>
+      </entry>	
+      <entry>		
+        <date>2008-05-03</date>
+		<rev-version>1.0.0RC1</rev-version>
+        <changelog lang="en-GB">
+          <change>Many bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
+		  <change>Adaptions to phpBB 3.0.1</change>
+		  <change>The link block can be edited in the ACP: add, delete links and order position</change>
+          <change>BBCode is now allowed in welcome message</change>
+          <change>Two custom blocks added, which can be filled with BBCode or HTML in the ACP. To use with ads, videos, images, whatever.</change>
+          <change>Complete rework of the News / Announcements. Implemented a achive system and pagnition. You can choose if you want to have the first or the newest post displayed in news.</change>
+		  <change>Full MSSQL support</change>
+		  <change>Forum list on the portal added</change>
+		  <change>Show "Portal page" in "who is online"</change>
+		  <change>Option to disable user permission check for News / Announcements</change>
+		  <change>Style changer added</change>
+		  <change>Attachment block: display attachments from one or more specific forums + attachments permission check added</change>
+        </changelog>
+        <changelog lang="de">
+          <change>Viele bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
+		  <change>An phpBB 3.0.1 angepasst</change>
+		  <change>Der Link Block kann nun über das ACP verwaltet werden: erstellen, löschen und positionieren von Links</change>
+          <change>Es kann nun BBCode in der Willkommens Nachricht benutzt werden</change>
+          <change>Zwei anpassbare Blöcke hinzu gefügt, die im ACP mit BBCode oder HTML gefüllt werden könen. Für Werbung, Videos, Bilder, was auch immer.</change>
+          <change>Aktuelle Beiträge und Bekanntmachungen wurden komplett überarbeitet. Es wurde ein Archivsystem und die Anzeige von Seitenzahlen hinzu gefügt. Zusätzlich kann man nun wählen ob man der Ersten oder Neuesten Beitrag bei den aktuellen Beiträgen angezeigt bekommen möchte.</change>
+		  <change>MSSQL Unterstützung</change>
+		  <change>Forum Liste auf dem Portal hinzugefügt</change>
+		  <change>Anzeige "Betrachtet das Portal" in "Wer ist online?"</change>
+		  <change>Option die Berechtigungsprüfung für aktuelle Beiträge / Bekanntmachungen ab zu stellen</change>
+		  <change>"Mein Board-Style" hinzugefügt</change>
+		  <change>Dateianhänge: Anhänge aus einem oder mehreren bestimmten Foren anzeigen lassen + Berechtigungsprüfung hinzugefügt.</change>
+        </changelog>
+      </entry>	
+      <entry>
+        <date>2008-02-03</date>
+		<rev-version>0.2.1</rev-version>
+        <changelog lang="en-GB">
+          <change>Fixed a news/announcements permissions bug</change>
+          <change>Fixed a bug when no news posts were viewable due to account permissions</change>
+          <change>Fixed a bug in announcements/news/polls due to shadow topics left after a topic is moved</change>
+          <change>No longer required to be a founder to update/install, just an admin with "board" permissions</change>
+        </changelog>
+        <changelog lang="de">
+          <change>Fehler in der Berechtigungserkennung bei den aktuellen Beiträgen / Bekanntmachungen gefixt</change>
+          <change>Fehler bei den aktuellen Beiträgen / Bekanntmachungen / Abstimmungen gefixt</change>
+          <change>Man braucht nun nicht mehr als Gründer angemeldet zu sein</change>
+        </changelog>
+      </entry>
+      <entry>
+        <date>2008-02-03</date>
+		<rev-version>0.2.0</rev-version>
+        <changelog lang="en-GB">
+          <change>added subsilver2 templates (valid XHTML 1.0 Strict)</change>
+          <change>added upcoming birthdays, configurable in ACP / thanks to Kendoo</change>
+          <change>complete rewrite of the poll system - checking user permissions, multible polls and more</change>
+          <change>added forum names with link in news and announcements boxes</change>
+          <change>added portal log messages in the ACP</change>
+          <change>fixed several bugs: http://www.board3.de/bugtracker/viewcat.php?c=1</change>
+          <change>updated the MySQL installer</change>
+        </changelog>
+        <changelog lang="de">
+          <change>subsilver2 Templates hinzugefügt (valid XHTML 1.0 Strict)</change>
+          <change>Kommende Geburtstage, konfigurierbar im ACP / vielen Dank an Kendoo</change>
+          <change>Die Umfragen wurden komplett überarbeitet - Benutzer Berechtigungen werden geprüft, mehrere Abstimmungen sind möglich und mehr</change>
+          <change>Foren Namen mit Link in die aktuellen Beiträge und Bekanntmachungen hinzugefügt</change>
+		<change>Portal Log Meldungen im ACP hinzugefügt</change>
+          <change>Diverse Bugs gefixt: http://www.board3.de/bugtracker/viewcat.php?c=1</change>
+          <change>Der MySQL Installer wurde überarbeitet</change>
+        </changelog>
+      </entry>
+      <entry>
+        <date>2008-01-15</date>
+		<rev-version>0.1.0</rev-version>	
+        <changelog lang="en-GB">
+          <change>Changes from "phpBB3 Portal 1.1.0Beta" to "board3 Portal - based on phpBB3 Portal Version 1.0.0":</change>
+          <change>completet all missing ACP Control for several boxes</change>
+          <change>valid XHTML 1.0 Strict template</change>
+          <change>fixed several bugs</change>
+          <change>added several language variables</change>
+          <change>changed the language file path to /en/mods/</change>
+          <change>updated the install instructions</change>
+          <change>updated the MySQL installer</change>
+        </changelog>
+        <changelog lang="de">
+          <change>Änderungen von "phpBB3 Portal 1.1.0Beta" zu "board3 Portal - based on phpBB3 Portal Version 1.0.0":</change>
+          <change>Die ACP Verwaltung für diverse Boxen komplettiert</change>
+          <change>valid XHTML 1.0 Strict Template</change>
+          <change>Diverse Bugs gefixt</change>
+          <change>Diverse Sprachvariablen hinzugefügt</change>
+          <change>Pfad für die Sprachdateien ins Mod System integriert</change>
+          <change>Die Installationanweisungen komplett überarbeitet</change>
+          <change>Den MySQL Installer komplett überarbeitet</change>
+        </changelog>
+      </entry>
+    </history>
+    <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
+  </header>
+  <action-group>
+    <copy>
+     <file from="root/portal.php" to="portal.php" />
+	 <file from="root/adm/mods/board3_portal_check_version.php" to="adm/mods/board3_portal_check_version.php" />
+     <file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />
+     <file from="root/includes/acp/info/acp_portal.php" to="includes/acp/info/acp_portal.php" />
+     <file from="root/install_portal/*.*" to="install_portal/*.*" />
+     <file from="root/install_portal/schemas/*.*" to="install_portal/schemas/*.*" />
+     <file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
+     <file from="root/portal/index.html" to="portal/index.html" />
+     <file from="root/portal/block/*.*" to="portal/block/*.*" />
+     <file from="root/portal/includes/*.*" to="portal/includes/*.*" />
+     <file from="root/portal/includes/mini_cal/*.*" to="portal/includes/mini_cal/*.*" />
+     <file from="root/styles/prosilver/template/portal/*.*" to="styles/prosilver/template/portal/*.*" />
+     <file from="root/styles/prosilver/template/portal/block/*.*" to="styles/prosilver/template/portal/block/*.*" />
+	 <file from="root/styles/prosilver/theme/portal.css" to="styles/prosilver/theme/portal.css" />
+	 <file from="root/styles/prosilver/theme/images/portal/*.*" to="styles/prosilver/theme/images/portal/*.*" />
+    </copy>
+    <open src=".htaccess">
+      <edit>
+        <find><![CDATA[# 
+# @package phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3portal.com )
+# @version $Id: .htaccess,v 1.7 2008/02/09 08:18:13 angelside Exp $
+# @copyright (c) Canver Software - www.canversoft.net
+# @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+# 
+
+DirectoryIndex portal.php index.php index.html index.htm
+
+<Files "config.php">
+Order Allow,Deny
+Deny from All
+</Files>
+
+<Files "common.php">
+Order Allow,Deny
+Deny from All
+</Files>]]></find>
+        <action type="replace-with"><![CDATA[<Files "config.php">
+Order Allow,Deny
+Deny from All
+</Files>
+
+<Files "common.php">
+Order Allow,Deny
+Deny from All
+</Files>
+
+DirectoryIndex portal.php index.php index.html index.htm]]></action>
+      </edit>
+    </open>
+	<open src="viewonline.php">
+      <edit>
+        <find><![CDATA[		case 'report':
+			$location = $user->lang['REPORTING_POST'];
+			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
+		break;]]></find>
+        <action type="after-add"><![CDATA[		case 'portal':
+			$user->add_lang('mods/lang_portal');
+			$location = $user->lang['VIEWING_PORTAL'];
+			$location_url = append_sid("{$phpbb_root_path}portal.$phpEx");
+		break;]]></action>
+      </edit>
+    </open>
+    <open src="adm/index.php">
+      <edit>
+        <find><![CDATA[$user->add_lang('acp/portal');]]></find>
+        <action type="replace-with"><![CDATA[]]></action>
+      </edit>
+      <edit>
+        <find><![CDATA[// End session management]]></find>
+        <action type="after-add"><![CDATA[$user->add_lang('mods/lang_portal_acp_logs');]]></action>
+      </edit>
+    </open>
+    <open src="includes/constants.php">
+      <edit>
+        <find><![CDATA[// Additional tables]]></find>
+        <action type="after-add"><![CDATA[define('PORTAL_CONFIG_TABLE',		$table_prefix . 'portal_config');]]></action>
+      </edit>
+    </open>
+    <open src="includes/functions.php">
+      <edit>
+        <find><![CDATA[//-- [+] MOD: phpBB3 Portal ---------------------------------------------
+//-- add
+//
+	$user->add_lang('portal');
+//
+//-- [-] MOD: phpBB3 Portal ---------------------------------------------]]></find>
+        <action type="replace-with"><![CDATA[]]></action>
+      </edit>
+      <edit>
+        <find><![CDATA[// The following assigns all _common_ variables that may be used at any point in a template.]]></find>
+        <action type="before-add"><![CDATA[	$user->add_lang('mods/lang_portal');]]></action>
+      </edit>
+      <edit>
+        <find><![CDATA[		'U_PORTAL'				=> append_sid("{$phpbb_root_path}portal.$phpEx"),
+		'S_PORTAL_COPY'			=> $user->lang['PORTAL_COPY'],]]></find>
+        <action type="replace-with"><![CDATA[]]></action>
+      </edit>
+      <edit>
+        <find><![CDATA['U_PRIVATEMSGS'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),]]></find>
+        <action type="before-add"><![CDATA[		'U_PORTAL'				=> append_sid("{$phpbb_root_path}portal.$phpEx"),]]></action>
+      </edit>
+    </open>
+	<open src="includes/session.php">
+      <edit>
+        <find><![CDATA[if (!empty($_GET['style']) && $auth->acl_get('a_styles'))]]></find>
+        <action type="replace-with"><![CDATA[if (!empty($_GET['style']))]]></action>
+      </edit>
+    </open>
+    <open src="language/en/acp/common.php">
+      <edit>
+        <find><![CDATA[// phpBB3 Portal by phpbb3portal.com
+$lang = array_merge($lang, array(
+   	'ACP_PORTAL_INFO'           			=> 'Portal',
+   	'ACP_PORTAL_GENERAL_INFO'   			=> 'General',
+    'ACP_PORTAL_ANNOUNCE_INFO'  			=> 'Global announcements',
+    'ACP_PORTAL_NEWS_INFO'      			=> 'News',
+   	'ACP_PORTAL_RECENT_INFO'    			=> 'Recent topics',	
+   	'ACP_PORTAL_WORDGRAPH_INFO'				=> 'Wordgraph',
+   	'ACP_PORTAL_GENERAL_INFO'      			=> 'General settings',
+    'ACP_PORTAL_PAYPAL_INFO'        		=> 'Paypal donations',	
+    'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'    => 'Attachments',
+    'ACP_PORTAL_MEMBERS_INFO'               => 'Latest members',
+    'ACP_PORTAL_POLLS_INFO'                 => 'Poll',	
+    'ACP_PORTAL_BOTS_INFO'                  => 'Last visited bots',
+    'ACP_PORTAL_MOST_POSTER_INFO'           => 'Most posters',
+    'ACP_PORTAL_WELCOME_INFO'               => 'Welcome message',
+	'ACP_PORTAL_ADS_INFO'           		=> 'Advertisement',
+    'ACP_PORTAL_MINICALENDAR_INFO'			=> 'Mini calendar',
+));]]></find>
+        <action type="replace-with"><![CDATA[]]></action>
+      </edit>
+    </open>
+    <open src="styles/prosilver/template/overall_header.html">
+      <edit>
+        <find><![CDATA[<!-- IF not $S_IN_PORTAL -->]]></find>
+        <action type="replace-with"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
+      </edit>
+    </open>
+    <open src="styles/prosilver/template/overall_footer.html">
+      <edit>
+        <find><![CDATA[<!-- IF S_PORTAL_COPY --><br />{S_PORTAL_COPY}<!-- ENDIF -->]]></find>
+        <action type="replace-with"><![CDATA[]]></action>
+      </edit>
+    </open>
+	<open src="styles/prosilver/theme/stylesheet.css">
+      <edit>
+        <find><![CDATA[@import url("colours.css");]]></find>
+        <action type="after-add"><![CDATA[@import url("portal.css");]]></action>
+      </edit>
+    </open>	
+    <diy-instructions lang="en-gb">Browse to install_portal/install.php and run the installer, after successfull installation delete the installer.
+	You may delete the language/en/portal.php and language/en/acp/portal.php which are from the old MOD
+	Subsilver2 user: please upload the complete subsilver2 directory.</diy-instructions>
+    <diy-instructions lang="de">install_portal/install.php aufrufen und ausführen, nach erfolgreicher Installation löschen
+	Du kannst die language/en/portal.php und language/en/acp/portal.php löschen, die sind von der alten MOD
+	Subsilver2 User: bitte das komplette Verzeichnis subsilver2 mit den neuen Dateien überschreiben.</diy-instructions>
+  </action-group>
+</mod>

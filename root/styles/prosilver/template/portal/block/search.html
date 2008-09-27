@@ -1,0 +1,84 @@
+<!--version $Id$ //-->
+<script type="text/javascript">
+<!--
+
+function qsearch_onSubmit()
+{
+	qs_enginename = document.getElementById('qsearch_select').value;
+	qs_keywords = document.getElementById('searchfield').value;
+	switch( qs_enginename )
+	{
+	case 'site':
+		break;
+	case 'author':
+		window.open('search.php?author=' + qs_keywords, '_self', '');
+		return false;
+	case 'wikipedia':
+		window.open('http://en.wikipedia.org/wiki/Spezial:Search?search=' + qs_keywords, '_wikipedia', '');
+		return false;
+	case 'google':
+		window.open('http://www.google.com/search?q=' + qs_keywords, '_google', '');
+		return false;
+	case 'yahoo':
+		window.open('http://search.yahoo.com/search?p=' + qs_keywords, '_yahoo', '');
+		return false;	
+	case 'msnlive':
+		window.open('http://search.live.com/results.aspx?q=' + qs_keywords, '_msnlive', '');
+		return false;
+	case 'altavista':
+		window.open('http://www.altavista.com/web/results?itag=ody&q=' + qs_keywords + '&kgs=0&kls=0', '_altavista', '');
+		return false;
+	case 'lycos':
+		window.open('http://search.lycos.com/?query=' + qs_keywords, '_lycos', '');
+		return false;
+	case 'odp':
+		window.open('http://search.dmoz.org/cgi-bin/search?search=' + qs_keywords, '_odp', '');
+		return false;
+	default:
+		if( (i = qsearch_findEngine(qs_enginename)) >= 0 )
+		{
+			window.open(qsearch_engines[i].url + qs_keywords, '_blank', '');
+			return false;
+		}
+		break;
+	}
+	return true;
+}
+//-->
+</script>
+
+<div class="portal-panel">
+	<div class="inner">
+		<span class="portal-corners-top"><span></span></span>
+			<h3><img src="{T_THEME_PATH}/images/portal/portal_search.gif" width="18px" height="17px" alt=""/>&nbsp;{L_SEARCH}</h3>
+			<form id="qsearch_form" method="post" action="{U_SEARCH}" onsubmit="return qsearch_onSubmit();">
+			<p>
+             <input type="text" tabindex="6" name="keywords" id="searchfield" size="22" maxlength="40" title="{L_SEARCH_KEYWORDS}" class="inputbox search" value="<!-- IF SEARCH_WORDS-->{SEARCH_WORDS}<!-- ELSE -->{L_SEARCH_MINI}<!-- ENDIF -->" onclick="if(this.value=='{LA_SEARCH_MINI}')this.value='';" onblur="if(this.value=='')this.value='{LA_SEARCH_MINI}';" />
+            </p>
+            <p>
+			<select id="qsearch_select" tabindex="7">
+				<optgroup label="{L_SH_SITE}">
+					<option value="site" style="background-color: #EEEEEE;">{L_SH_POSTS}</option>
+					<option value="author" style="background-color: #EEEEEE;">{L_SH_AUTHOR}</option>
+				</optgroup>
+				<optgroup label="{L_SH_ENGINE}">
+					<option value="wikipedia" style="background-color: #FEF2D6;">Wikipedia</option>
+					<option value="google" style="background-color: #FEF2D6;">Google</option>
+					<option value="yahoo" style="background-color: #FEF2D6;">Yahoo</option>
+					<option value="msnlive" style="background-color: #FEF2D6;">Msnlive</option>
+					<option value="altavista" style="background-color: #FEF2D6;">Altavista</option>
+					<option value="lycos" style="background-color: #FEF2D6;">Lycos</option>
+					<option value="odp" style="background-color: #FEF2D6;">Open directory</option>
+				</optgroup>
+			</select>
+			<input type="hidden" name="search_fields" value="all" />
+			<input type="hidden" name="show_results" value="topics" />
+			<input type="submit" value="{L_SH}" class="button2" tabindex="8" />
+            </p>
+			</form>
+            <p><a href="{U_SEARCH}">{L_SH_ADV}</a>
+		<span class="portal-corners-bottom"><span></span></span>
+            </p>
+	</div>
+</div>
+<br style="clear:both" />
