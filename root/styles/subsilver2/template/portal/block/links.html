@@ -1,0 +1,38 @@
+<!--version $Id$ //-->
+
+<!--
+.ul-link {
+	list-style: none;
+	margin: 0px 0px 0px 0;
+	padding: 0px 0px 0 0px;
+}
+.ul-link li{
+	margin: 0;
+	padding: 0 0 2px 15px;
+	background: url(portal/images/link.png) no-repeat left center;
+}
+.ul-link a {
+	padding: 0 0 0 4px;
+}
+//-->
+
+
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_LINKS}</th>
+	</tr>
+	<tr class="row1">
+		<td>
+			<ul class="ul-link">
+			<!-- IF .link -->
+				<!-- BEGIN link -->
+				<li><a href="{link.URL}" title="{link.TEXT}">{link.TEXT}</a></li>
+				<!-- END link -->
+			<!-- ELSE -->
+				<span style="float:left;" class="gensmall"><strong>{L_NO_LINKS}</strong></span><br />
+			<!-- ENDIF -->
+			</ul>
+		</td>
+	</tr>
+</table>
+<br />

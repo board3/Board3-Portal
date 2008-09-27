@@ -1,0 +1,22 @@
+<!--version $Id$ //-->
+<div class="portal-panel">
+	<div class="inner">
+		<span class="portal-corners-top"><span></span></span>
+			<h3><img src="{T_THEME_PATH}/images/portal/portal_linklist.gif" width="18px" height="18px" alt=""/>&nbsp;{L_LINKS}</h3>
+			<div class="portal-panel" style="margin-bottom: 0px;">
+			<div class="arrowlistmenu">
+				<ul>
+				<!-- IF .link -->
+					<!-- BEGIN link -->
+					<li><a href="{link.URL}" title="{link.TEXT}">{link.TEXT}</a></li>
+					<!-- END link -->
+				<!-- ELSE -->
+						<span style="float:left;" class="gensmall"><strong>{L_NO_LINKS}</strong></span><br />
+				<!-- ENDIF -->
+				</ul>
+				</div>
+			</div>
+		<span class="portal-corners-bottom"><span></span></span>
+	</div>
+</div>
+<br style="clear:both" />

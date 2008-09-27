@@ -1,0 +1,20 @@
+<!--version $Id$ //-->
+<table class="tablebg" width="100%" cellspacing="1">
+<tr>
+	<td class="cat" colspan="2"><!-- IF U_VIEWONLINE --><h4><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h4><!-- ELSE --><h4>{L_WHO_IS_ONLINE}</h4><!-- ENDIF --></td>
+</tr>
+<tr>
+<!-- IF LEGEND -->
+	<td class="row1" rowspan="2" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
+<!-- ELSE -->
+	<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
+<!-- ENDIF -->
+	<td class="row1" width="100%"><span class="genmed">{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /><br />{LOGGED_IN_USER_LIST}</span></td>
+</tr>
+<!-- IF LEGEND -->
+	<tr>
+		<td class="row1"><b class="gensmall">{L_LEGEND} :: {LEGEND}</b></td>
+	</tr>
+<!-- ENDIF -->
+</table>
+<br clear="all" />
