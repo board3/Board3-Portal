@@ -388,11 +388,23 @@ if( $poll_forums === TRUE )
 	$db->sql_freeresult($result);
 
 	$template->assign_vars(array(
-		'S_DISPLAY_POLL' => true,
 		'S_HAS_POLL' => $has_poll,
 		'POLL_LEFT_CAP_IMG'	=> $user->img('poll_left'),
 		'POLL_RIGHT_CAP_IMG'=> $user->img('poll_right'),
 	));
+	if (!isset($template->filename['poll_block']))
+	{
+		$template->set_filenames(array(
+			'poll_block'	=> 'portal/block/poll.html')
+		);
+	}
+
+	$block_temp = $template->assign_display('poll_block');
+
+	$template->assign_block_vars('portal_column_'.$block_pos, array(
+		'BLOCK_DATA'	=> $block_temp)
+	);
+	unset( $block_temp );
 }
 
 ?>

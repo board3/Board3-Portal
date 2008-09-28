@@ -71,14 +71,26 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 		}
 	}
 	$db->sql_freeresult($result);
+
+	// Assign index specific vars
+	$template->assign_vars(array(
+		'BIRTHDAY_LIST' => $birthday_list,
+		'BIRTHDAYS_AHEAD_LIST' => ( $portal_config['portal_birthdays_ahead'] > 0 ) ? $birthday_ahead_list : '',
+		'L_BIRTHDAYS_AHEAD' => sprintf($user->lang['BIRTHDAYS_AHEAD'], $portal_config['portal_birthdays_ahead']),
+	));
+
+	if (!isset($template->filename['birthday_list_block']))
+	{
+		$template->set_filenames(array(
+			'birthday_list_block'	=> 'portal/block/birthday_list.html')
+		);
+	}
+
+	$block_temp = $template->assign_display('birthday_list_block');
+
+	$template->assign_block_vars('portal_column_'.$block_pos, array(
+		'BLOCK_DATA'	=> $block_temp)
+	);
+	unset( $block_temp );
 }
-
-// Assign index specific vars
-$template->assign_vars(array(
-	'BIRTHDAY_LIST' => $birthday_list,
-	'BIRTHDAYS_AHEAD_LIST' => ( $portal_config['portal_birthdays_ahead'] > 0 ) ? $birthday_ahead_list : '',
-	'L_BIRTHDAYS_AHEAD' => sprintf($user->lang['BIRTHDAYS_AHEAD'], $portal_config['portal_birthdays_ahead']),
-	'S_DISPLAY_BIRTHDAY_LIST' => ($config['load_birthdays']) ? true : false,
-));
-
 ?>

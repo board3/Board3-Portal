@@ -297,14 +297,35 @@ if( isset($fetch_news['topic_icons']) )
 }
 
 $template->assign_vars(array(
-	'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
-	'READ_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
-	'GOTO_PAGE_IMG'				=> $user->img('icon_post_target', 'GOTO_PAGE'),
-	'S_NEWEST_OR_FIRST'			=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
-	'POSTED_BY_TEXT'			=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
-	'S_DISPLAY_NEWS'			=> true,
-	'S_DISPLAY_NEWS_RVS'		=> ( $portal_config['portal_show_news_replies_views'] ) ? true : false,
-	'S_TOPIC_ICONS'				=> $topic_icons,
+	'NEWEST_POST_IMG'		=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
+	'READ_POST_IMG'			=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
+	'GOTO_PAGE_IMG'			=> $user->img('icon_post_target', 'GOTO_PAGE'),
+	'S_NEWEST_OR_FIRST		=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
+	'POSTED_BY_TEXT'		=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
+	'S_DISPLAY_NEWS'		=> true,
+	'S_DISPLAY_NEWS_RVS'	=> ( $portal_config['portal_show_news_replies_views'] ) ? true : false,
+	'S_TOPIC_ICONS'			=> $topic_icons,
 ));
+
+if( $portal_config['portal_news_style'] )
+{
+	$template_file = 'portal/block/news_compact.html';
+} else {
+	$template_file = 'portal/block/news.html';
+}
+
+if (!isset($template->filename['news_block']))
+{
+	$template->set_filenames(array(
+		'news_block'	=> $template_file)
+	);
+}
+
+$block_temp = $template->assign_display('news_block');
+
+$template->assign_block_vars('portal_column_'.$block_pos, array(
+	'BLOCK_DATA'	=> $block_temp)
+);
+unset( $block_temp );
 
 ?>

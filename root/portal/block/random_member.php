@@ -79,8 +79,18 @@ $template->assign_block_vars('random_member', array(
 ));
 $db->sql_freeresult($result);
 
-$template->assign_vars(array(
-	'S_DISPLAY_RANDOM_MEMBER' => true,
-));
+if (!isset($template->filename['random_member_block']))
+{
+	$template->set_filenames(array(
+		'random_member_block'	=> 'portal/block/random_member.html')
+	);
+}
+
+$block_temp = $template->assign_display('random_member_block');
+
+$template->assign_block_vars('portal_column_'.$block_pos, array(
+	'BLOCK_DATA'	=> $block_temp)
+);
+unset( $block_temp );
 
 ?>

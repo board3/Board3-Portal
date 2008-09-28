@@ -20,26 +20,42 @@ if (!defined('IN_PORTAL'))
    exit;
 }
 
-if ($portal_config['portal_pay_acc'])
+if ($block_type == '')
 {
-	if ($portal_config['portal_pay_c_block'])
+	if (!isset($template->filename['donate_block']))
 	{
-		$template->assign_vars(array(
-			'S_DISPLAY_PAY_C' => true,
-		));
+		$template->set_filenames(array(
+			'donate_block'	=> 'portal/block/donation.html')
+		);
 	}
 
-	if ($portal_config['portal_pay_s_block'])
-	{
-		$template->assign_vars(array(
-			'S_DISPLAY_PAY_S' => true,
-		));
-	}
+	$block_temp = $template->assign_display('donate_block');
 
-	// Assign specific vars
-	$template->assign_vars(array(
-		'PAY_ACC' => $portal_config['portal_pay_acc'],
-	));
+	$template->assign_block_vars('portal_column_'.$block_pos, array(
+		'BLOCK_DATA'	=> $block_temp)
+	);
+	unset( $block_temp );
 }
+else
+{
+	if (!isset($template->filename['donate_side_block']))
+	{
+		$template->set_filenames(array(
+			'donate_side_block'	=> 'portal/block/donation_small.html')
+		);
+	}
+
+	$block_temp = $template->assign_display('donate_side_block');
+
+	$template->assign_block_vars('portal_column_'.$block_pos, array(
+		'BLOCK_DATA'	=> $block_temp)
+	);
+	unset( $block_temp );
+}
+
+// Assign specific vars
+$template->assign_vars(array(
+	'PAY_ACC' => $portal_config['portal_pay_acc'],
+));
 
 ?>

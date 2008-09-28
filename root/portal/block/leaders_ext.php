@@ -110,8 +110,17 @@ if( sizeof($groups) )
 		}
 	}
 }
-$template->assign_vars(array(
-	'S_DISPLAY_LEADERS_EXT' => true,
-));
+if (!isset($template->filename['leaders_ext_block']))
+{
+	$template->set_filenames(array(
+		'leaders_ext_block'	=> 'portal/block/leaders_ext.html')
+	);
+}
 
+$block_temp = $template->assign_display('leaders_ext_block');
+
+$template->assign_block_vars('portal_column_'.$block_pos, array(
+	'BLOCK_DATA'	=> $block_temp)
+);
+unset( $block_temp );
 ?>

@@ -12,85 +12,106 @@
 
 if (!defined('IN_PHPBB'))
 {
-   exit;
+	exit;
 }
 
 if (!defined('IN_PORTAL'))
 {
-   exit;
+	exit;
 }
 
 $allow_bbcode = 1;
 $allow_urls = 1;
 $allow_smilies = 1;
 
-// Center Box
-	if ($portal_config['portal_custom_center'])
+if ($block_type == '')
+{
+	// Center Box
+	if ($portal_config['portal_custom_center_bbcode'])
 	{
-		if ($portal_config['portal_custom_center_bbcode'])
-		{
-			$message_parser = new parse_message($portal_config['portal_custom_code_center']);
-			$message_parser->parse($allow_bbcode, $allow_urls, $allow_smilies);
+		$message_parser = new parse_message($portal_config['portal_custom_code_center']);
+		$message_parser->parse($allow_bbcode, $allow_urls, $allow_smilies);
 
-			$text_center = $message_parser->message;
-			$bbcode_uid = $message_parser->bbcode_uid;
-			$bbcode_bitfield = $message_parser->bbcode_bitfield; 
+		$text_center = $message_parser->message;
+		$bbcode_uid = $message_parser->bbcode_uid;
+		$bbcode_bitfield = $message_parser->bbcode_bitfield; 
 
-			$bbcode = new bbcode(base64_encode($bbcode_bitfield));
-			$text_center = censor_text($text_center);
-			$bbcode->bbcode_second_pass($text_center, $bbcode_uid, $bbcode_bitfield);
-			$text_center = bbcode_nl2br($text_center);
-			$text_center = smiley_text($text_center);
+		$bbcode = new bbcode(base64_encode($bbcode_bitfield));
+		$text_center = censor_text($text_center);
+		$bbcode->bbcode_second_pass($text_center, $bbcode_uid, $bbcode_bitfield);
+		$text_center = bbcode_nl2br($text_center);
+		$text_center = smiley_text($text_center);
 
-			       $template->assign_vars(array(
-					'PORTAL_CUSTOM_CENTER_CODE'   => $text_center,	
-			       ));
-		}
-		else
-		{
-			       $template->assign_vars(array(
-					'PORTAL_CUSTOM_CENTER_CODE'   => htmlspecialchars_decode($portal_config['portal_custom_code_center'],ENT_QUOTES),
-			       ));
-		}
-       $template->assign_vars(array(
-		'S_CUSTOM_CENTER' => true,		
-		'PORTAL_CUSTOM_CENTER_HEADLINE'	=> $portal_config['portal_custom_center_headline'],
-       ));
+				$template->assign_vars(array(
+				'PORTAL_CUSTOM_CENTER_CODE'	=> $text_center,	
+				));
+	}
+	else
+	{
+				$template->assign_vars(array(
+				'PORTAL_CUSTOM_CENTER_CODE'	=> htmlspecialchars_decode($portal_config['portal_custom_code_center'],ENT_QUOTES),
+				));
+	}
+	$template->assign_vars(array(	
+	'PORTAL_CUSTOM_CENTER_HEADLINE'	=> $portal_config['portal_custom_center_headline'],
+	));
+	
+	if (!isset($template->filename['custom_block']))
+	{
+		$template->set_filenames(array(
+			'custom_block'	=> 'portal/block/custom_center.html')
+		);
 	}
 
-// Small Box
-	if ($portal_config['portal_custom_small'])
+	$block_temp = $template->assign_display('custom_block');
+
+	$template->assign_block_vars('portal_column_'.$block_pos, array(
+		'BLOCK_DATA'	=> $block_temp)
+	);
+	unset( $block_temp );
+} else {
+	// Small Box
+	if ($portal_config['portal_custom_small_bbcode'])
 	{
-		if ($portal_config['portal_custom_small_bbcode'])
-		{
-			$message_parser = new parse_message($portal_config['portal_custom_code_small']);
-			$message_parser->parse($allow_bbcode, $allow_urls, $allow_smilies);
+		$message_parser = new parse_message($portal_config['portal_custom_code_small']);
+		$message_parser->parse($allow_bbcode, $allow_urls, $allow_smilies);
 
-			$text_small = $message_parser->message;
-			$bbcode_uid = $message_parser->bbcode_uid;
-			$bbcode_bitfield = $message_parser->bbcode_bitfield; 
+		$text_small = $message_parser->message;
+		$bbcode_uid = $message_parser->bbcode_uid;
+		$bbcode_bitfield = $message_parser->bbcode_bitfield; 
 
-			$bbcode = new bbcode(base64_encode($bbcode_bitfield));
-			$text_small = censor_text($text_small);
-			$bbcode->bbcode_second_pass($text_small, $bbcode_uid, $bbcode_bitfield);
-			$text_small = bbcode_nl2br($text_small);
-			$text_small = smiley_text($text_small);
+		$bbcode = new bbcode(base64_encode($bbcode_bitfield));
+		$text_small = censor_text($text_small);
+		$bbcode->bbcode_second_pass($text_small, $bbcode_uid, $bbcode_bitfield);
+		$text_small = bbcode_nl2br($text_small);
+		$text_small = smiley_text($text_small);
 
-			       $template->assign_vars(array(
-					'PORTAL_CUSTOM_SMALL_CODE'   => $text_small,
-			       ));
-		}
-		else
-		{
-			       $template->assign_vars(array(
-					'PORTAL_CUSTOM_SMALL_CODE'   => htmlspecialchars_decode($portal_config['portal_custom_code_small'],ENT_QUOTES),
-			       ));
-		}
-       $template->assign_vars(array(
-		'S_CUSTOM_SMALL' => true,
-		'PORTAL_CUSTOM_SMALL_HEADLINE'	=> $portal_config['portal_custom_small_headline'],
-       ));
-
+				$template->assign_vars(array(
+				'PORTAL_CUSTOM_SMALL_CODE'	=> $text_small,
+				));
+	}
+	else
+	{
+				$template->assign_vars(array(
+				'PORTAL_CUSTOM_SMALL_CODE'	=> htmlspecialchars_decode($portal_config['portal_custom_code_small'],ENT_QUOTES),
+				));
+	}
+	$template->assign_vars(array(
+	'PORTAL_CUSTOM_SMALL_HEADLINE'	=> $portal_config['portal_custom_small_headline'],
+	));
+	
+	if (!isset($template->filename['custom_side_block']))
+	{
+		$template->set_filenames(array(
+			'custom_side_block'	=> 'portal/block/custom_small.html')
+		);
 	}
 
+	$block_temp = $template->assign_display('custom_side_block');
+
+	$template->assign_block_vars('portal_column_'.$block_pos, array(
+		'BLOCK_DATA'	=> $block_temp)
+	);
+	unset( $block_temp );
+}
 ?>

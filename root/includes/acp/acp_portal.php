@@ -81,7 +81,7 @@ class acp_portal
 						'portal_news_show_last'             => array('lang' => 'PORTAL_NEWS_SHOW_LAST',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_news_archive'               => array('lang' => 'PORTAL_NEWS_ARCHIVE',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_news_permissions'			=> array('lang' => 'PORTAL_NEWS_PERMISSIONS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_show_news_replies_views'	=> array('lang' => 'PORTAL_SHOW_REPLIES_VIEWS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_show_news_replies_views'        => array('lang' => 'PORTAL_SHOW_REPLIES_VIEWS', 'validate' => 'bool',   'type' => 'radio:yes_no',       'explain' => true),
 					)
 				);
 			break;
@@ -89,16 +89,16 @@ class acp_portal
 				$display_vars = array(
 					'title'	=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
 					'vars'	=> array(
-						'legend1'									=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
-						'portal_announcements'						=> array('lang' => 'PORTAL_ANNOUNCEMENTS'				,	'validate' => 'bool', 	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_announcements_style'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_STYLE'		 	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_number_of_announcements'			=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-						'portal_announcements_day'					=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-						'portal_announcements_length'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-						'portal_global_announcements_forum'			=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'text:10:200',	'explain' => true),						
-						'portal_announcements_archive'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_announcements_permissions'			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_show_announcements_replies_views'	=> array('lang' => 'PORTAL_SHOW_REPLIES_VIEWS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'legend1'							=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
+						'portal_announcements'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS'				,	'validate' => 'bool', 	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_announcements_style'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_STYLE'		 	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_number_of_announcements'	=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+						'portal_announcements_day'			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+						'portal_announcements_length'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+						'portal_global_announcements_forum'	=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'text:10:200',	'explain' => true),						
+						'portal_announcements_archive'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_announcements_permissions'	=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_show_announcements_replies_views'       => array('lang' => 'PORTAL_SHOW_REPLIES_VIEWS', 'validate' => 'bool',   'type' => 'radio:yes_no',       'explain' => true),
 					)
 				);
 			break;

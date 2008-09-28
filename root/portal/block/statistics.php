@@ -125,7 +125,6 @@ $l_posts_per_topic_s = ($total_posts == 0) ? 'POSTS_PER_TOPIC_ZERO' : 'POSTS_PER
 
 // Assign specific vars
 $template->assign_vars(array(
-	'S_DISPLAY_ADVANCED_STAT' => true,
 	'TOTAL_POSTS'	=> sprintf($user->lang[$l_total_post_s], $total_posts),
 	'TOTAL_TOPICS'	=> sprintf($user->lang[$l_total_topic_s], $total_topics),
 	'TOTAL_USERS'	=> sprintf($user->lang[$l_total_user_s], $total_users),
@@ -142,5 +141,19 @@ $template->assign_vars(array(
 	'POSTS_PER_USER'	=> sprintf($user->lang[$l_posts_per_user_s], $posts_per_user),
 	'POSTS_PER_TOPIC'	=> sprintf($user->lang[$l_posts_per_topic_s], $posts_per_topic),
 ));
+
+if (!isset($template->filename['statistics_block']))
+{
+	$template->set_filenames(array(
+		'statistics_block'	=> 'portal/block/statistics.html')
+	);
+}
+
+$block_temp = $template->assign_display('statistics_block');
+
+$template->assign_block_vars('portal_column_'.$block_pos, array(
+	'BLOCK_DATA'	=> $block_temp)
+);
+unset( $block_temp );
 
 ?>

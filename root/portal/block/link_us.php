@@ -24,9 +24,22 @@ $u_link = $config['server_protocol'] . $config['server_name'] . $config['script_
 
 // Assign specific vars
 $template->assign_vars(array(
-	'S_DISPLAY_LINK_US' => true,
 	'LINK_US_TXT'		=> sprintf($user->lang['LINK_US_TXT'], $config['sitename']),
 	'U_LINK_US'			=> '&lt;a&nbsp;href=&quot;' . $u_link . '&quot;&nbsp;' . (($config['site_desc']) ? 'title=&quot;' . $config['site_desc'] . '&quot;' : '' ) . '&gt;' . (($config['sitename']) ? $config['sitename'] : $u_link ) . '&lt;/a&gt;',
 ));
+
+if (!isset($template->filename['link_us_block']))
+{
+	$template->set_filenames(array(
+		'link_us_block'	=> 'portal/block/link_us.html')
+	);
+}
+
+$block_temp = $template->assign_display('link_us_block');
+
+$template->assign_block_vars('portal_column_'.$block_pos, array(
+	'BLOCK_DATA'	=> $block_temp)
+);
+unset( $block_temp );
 
 ?>

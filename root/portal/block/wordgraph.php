@@ -69,9 +69,20 @@ foreach ( $words as $word )
 }
 
 $template->assign_vars(array(
-	'S_DISPLAY_WORDGRAPH'	=> true,
 	'L_WORDGRAPH'			=> $user->lang['WORDGRAPH'],
-	)
+));
+if (!isset($template->filename['wordgraph_block']))
+{
+	$template->set_filenames(array(
+		'wordgraph_block'	=> 'portal/block/wordgraph.html')
+	);
+}
+
+$block_temp = $template->assign_display('wordgraph_block');
+
+$template->assign_block_vars('portal_column_'.$block_pos, array(
+	'BLOCK_DATA'	=> $block_temp)
 );
+unset( $block_temp );
 
 ?>

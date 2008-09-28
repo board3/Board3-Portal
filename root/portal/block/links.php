@@ -33,8 +33,18 @@ foreach( $links as $link_id => $link_data )
 	));
 }
 
-$template->assign_vars(array(
-	'S_DISPLAY_LINKS' => true,
-));
+if (!isset($template->filename['links_block']))
+{
+	$template->set_filenames(array(
+		'links_block'	=> 'portal/block/links.html')
+	);
+}
+
+$block_temp = $template->assign_display('links_block');
+
+$template->assign_block_vars('portal_column_'.$block_pos, array(
+	'BLOCK_DATA'	=> $block_temp)
+);
+unset( $block_temp );
 
 ?>

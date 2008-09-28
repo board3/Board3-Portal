@@ -145,7 +145,6 @@ $prev_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m=$do
 $next_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m=$up") . '"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/mini_cal_icon_right_arrow.png' . '" title="' . $user->lang['View_next_month'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
 
 $template->assign_vars(array(
-	'S_DISPLAY_MINICAL' => true,
 	'L_MINI_CAL_MONTH' => $user->lang['mini_cal']['long_month'][$mini_cal->day[0][4]] . " " . $mini_cal->day[0][5],
 	'L_MINI_CAL_ADD_EVENT' => $user->lang['Mini_Cal_add_event'],
 	'L_MINI_CAL_CALENDAR' => $user->lang['Mini_Cal_calendar'], 
@@ -162,4 +161,17 @@ $template->assign_vars(array(
 	'U_NEXT_MONTH' => $next_month,
 ));
 
+if (!isset($template->filename['mini_cal_block']))
+{
+	$template->set_filenames(array(
+		'mini_cal_block'	=> 'portal/block/mini_calendar.html')
+	);
+}
+
+$block_temp = $template->assign_display('mini_cal_block');
+
+$template->assign_block_vars('portal_column_'.$block_pos, array(
+	'BLOCK_DATA'	=> $block_temp)
+);
+unset( $block_temp );
 ?>

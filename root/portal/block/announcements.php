@@ -315,9 +315,28 @@ $template->assign_vars(array(
 	'NEWEST_POST_IMG'				=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 	'READ_POST_IMG'					=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
 	'GOTO_PAGE_IMG'					=> $user->img('icon_post_target', 'GOTO_PAGE'),
-	'S_DISPLAY_ANNOUNCEMENTS'		=> true,
 	'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ( $portal_config['portal_show_announcements_replies_views'] ) ? true : false,
 	'S_TOPIC_ICONS'					=> $topic_icons,
 ));
 
+if( $portal_config['portal_announcements_style'] )
+{
+	$template_file = 'portal/block/announcements_compact.html';
+} else {
+	$template_file = 'portal/block/announcements.html';
+}
+
+if (!isset($template->filename['announcements_block']))
+{
+	$template->set_filenames(array(
+		'announcements_block'	=> $template_file)
+	);
+}
+
+$block_temp = $template->assign_display('announcements_block');
+
+$template->assign_block_vars('portal_column_'.$block_pos, array(
+	'BLOCK_DATA'	=> $block_temp)
+);
+unset( $block_temp );
 ?>

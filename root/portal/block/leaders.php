@@ -140,9 +140,17 @@ while ($row = $db->sql_fetchrow($result))
 }
 $db->sql_freeresult($result);
 
+if (!isset($template->filename['leaders_block']))
+{
+	$template->set_filenames(array(
+		'leaders_block'	=> 'portal/block/leaders.html')
+	);
+}
 
-$template->assign_vars(array(
-	'S_DISPLAY_LEADERS' => true,
-));
+$block_temp = $template->assign_display('leaders_block');
 
+$template->assign_block_vars('portal_column_'.$block_pos, array(
+	'BLOCK_DATA'	=> $block_temp)
+);
+unset( $block_temp );
 ?>

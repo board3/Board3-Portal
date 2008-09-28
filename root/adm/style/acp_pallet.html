@@ -1,0 +1,128 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_TITLE}</h1>
+
+<p>{L_TITLE_EXPLAIN}</p>
+
+<!-- IF S_LAYOUT_SETTINGS -->
+
+	<table cellspacing="1">
+		<caption>{L_PALLET_LAYOUT}</caption>
+		<col class="col1" /><col class="col2" /><col class="col1" />
+	<thead>
+	<tr>
+		<th>{L_COLUMN_LEFT}</th>
+		<th>{L_COLUMN_CENTER}</th>
+		<th>{L_COLUMN_RIGHT}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN table_row -->
+	<tr>
+		<td>
+			<!-- IF table_row.LEFT -->
+				<!-- IF table_row.S_LEFT_FIRST_ROW && not table_row.S_LEFT_LAST_ROW -->
+					{ICON_MOVE_UP_DISABLED}
+					<a href="{table_row.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF not table_row.S_LEFT_FIRST_ROW && not table_row.S_LEFT_LAST_ROW-->
+					<a href="{table_row.U_MOVE_UP}">{ICON_MOVE_UP}</a> 
+					<a href="{table_row.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a> 
+				<!-- ELSEIF table_row.S_LEFT_LAST_ROW && not table_row.S_LEFT_FIRST_ROW -->
+					<a href="{table_row.U_MOVE_UP}">{ICON_MOVE_UP}</a>	
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ELSE -->
+					{ICON_MOVE_UP_DISABLED}
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ENDIF -->
+				<!-- IF table_row.S_LEFT_ENABLED -->
+					{ICON_DELETE}
+				<!-- ELSE -->
+					{ICON_EDIT}
+				<!-- ENDIF -->
+				{table_row.LEFT}
+			<!-- ENDIF -->
+		</td>
+		<td>
+			<!-- IF table_row.CENTER -->
+				<!-- IF table_row.S_CENTER_FIRST_ROW && not table_row.S_CENTER_LAST_ROW -->
+					{ICON_MOVE_UP_DISABLED}
+					<a href="{table_row.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF not table_row.S_CENTER_FIRST_ROW && not table_row.S_CENTER_LAST_ROW-->
+					<a href="{table_row.U_MOVE_UP}">{ICON_MOVE_UP}</a> 
+					<a href="{table_row.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a> 
+				<!-- ELSEIF table_row.S_CENTER_LAST_ROW && not table_row.S_CENTER_FIRST_ROW -->
+					<a href="{table_row.U_MOVE_UP}">{ICON_MOVE_UP}</a>	
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ELSE -->
+					{ICON_MOVE_UP_DISABLED}
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ENDIF -->
+				<!-- IF table_row.S_CENTER_ENABLED -->
+					{ICON_DELETE}
+				<!-- ELSE -->
+					{ICON_EDIT}
+				<!-- ENDIF -->
+				{table_row.CENTER}
+			<!-- ENDIF -->
+		</td>
+		<td>
+			<!-- IF table_row.RIGHT-->
+				<!-- IF table_row.S_RIGHT_FIRST_ROW && not table_row.S_RIGHT_LAST_ROW -->
+					{ICON_MOVE_UP_DISABLED}
+					<a href="{table_row.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+				<!-- ELSEIF not table_row.S_RIGHT_FIRST_ROW && not table_row.S_RIGHT_LAST_ROW-->
+					<a href="{table_row.U_MOVE_UP}">{ICON_MOVE_UP}</a> 
+					<a href="{table_row.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a> 
+				<!-- ELSEIF table_row.S_RIGHT_LAST_ROW && not table_row.S_RIGHT_FIRST_ROW -->
+					<a href="{table_row.U_MOVE_UP}">{ICON_MOVE_UP}</a>	
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ELSE -->
+					{ICON_MOVE_UP_DISABLED}
+					{ICON_MOVE_DOWN_DISABLED}
+				<!-- ENDIF -->
+				<!-- IF table_row.S_RIGHT_ENABLED -->
+					{ICON_DELETE}
+				<!-- ELSE -->
+					{ICON_EDIT}
+				<!-- ENDIF -->
+				{table_row.RIGHT}
+			<!-- ENDIF -->
+		</td>
+	</tr>
+	<!-- END table_row -->
+	</tbody>
+	</table>
+	
+	<table cellspacing="1">
+		<caption>{L_PALLET_KEY}</caption>
+		<col class="col1" /><col class="col2" />
+	<thead>
+	<tr>
+		<th>{L_IMAGE}</th>
+		<th>{L_KEY}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>{ICON_EDIT}</td>
+		<td>Enable</td>
+	</tr>
+	<tr>
+		<td>{ICON_DELETE}</td>
+		<td>Disable</td>
+	</tr>
+	<tr>
+		<td>{ICON_MOVE_UP}</td>
+		<td>Move Up</td>
+	</tr>
+	<tr>
+		<td>{ICON_MOVE_DOWN}</td>
+		<td>Move Down</td>
+	</tr>
+	</tbody>
+	</table>
+	
+	
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

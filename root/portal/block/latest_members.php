@@ -36,8 +36,17 @@ while( ($row = $db->sql_fetchrow($result)) && ($row['username']) )
 }
 $db->sql_freeresult($result);
 
-$template->assign_vars(array(
-	'S_DISPLAY_LATEST_MEMBERS' => true,
-));
+if (!isset($template->filename['latest_members_block']))
+{
+	$template->set_filenames(array(
+		'latest_members_block'	=> 'portal/block/latest_members.html')
+	);
+}
 
+$block_temp = $template->assign_display('latest_members_block');
+
+$template->assign_block_vars('portal_column_'.$block_pos, array(
+	'BLOCK_DATA'	=> $block_temp)
+);
+unset( $block_temp );
 ?>

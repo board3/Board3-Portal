@@ -89,16 +89,18 @@ if( $attach_forums === TRUE )
 	}
 	$db->sql_freeresult($result);
 
-	// Assign specific vars
-	$template->assign_vars(array(
-		'S_DISPLAY_ATTACHMENTS'	=> true,
-	));
-} else {
-	// Assign specific vars
-	$template->assign_vars(array(
-		'S_DISPLAY_ATTACHMENTS'	=> false,
-	));
+	if (!isset($template->filename['attachments_block']))
+	{
+		$template->set_filenames(array(
+			'attachments_block'	=> 'portal/block/attachments.html')
+		);
+	}
+
+	$block_temp = $template->assign_display('attachments_block');
+
+	$template->assign_block_vars('portal_column_'.$block_pos, array(
+		'BLOCK_DATA'	=> $block_temp)
+	);
+	unset( $block_temp );
 }
-
-
 ?>

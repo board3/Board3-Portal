@@ -57,7 +57,19 @@ $db->sql_freeresult($result);
 // Assign specific vars
 $template->assign_vars(array(
 	'LAST_VISITED_BOTS'		=> sprintf($user->lang['LAST_VISITED_BOTS'], $portal_config['portal_last_visited_bots_number']),
-	'S_LAST_VISITED_BOTS'	=> ($portal_config['portal_load_last_visited_bots']) ? true : false,
 ));
 
+if (!isset($template->filename['latest_bots_block']))
+{
+	$template->set_filenames(array(
+		'latest_bots_block'	=> 'portal/block/latest_bots.html')
+	);
+}
+
+$block_temp = $template->assign_display('latest_bots_block');
+
+$template->assign_block_vars('portal_column_'.$block_pos, array(
+	'BLOCK_DATA'	=> $block_temp)
+);
+unset( $block_temp );
 ?>
