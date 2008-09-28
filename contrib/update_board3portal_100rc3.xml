@@ -276,6 +276,8 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
 	 <file from="root/language/en/mods/lang_portal_acp.php" to="language/en/mods/lang_portal_acp.php" />
 	 <file from="root/portal/block/announcements.php" to="portal/block/announcements.php" />
 	 <file from="root/portal/block/news.php" to="portal/block/news.php" />
+	 <file from="root/portal/includes/functions.php" to="portal/includes/functions.php" />
+	 <file from="root/styles/prosilver/template/portal/block/search.html" to="styles/prosilver/template/portal/block/search.html" />
 	 <file from="root/styles/prosilver/theme/portal.css" to="styles/prosilver/theme/portal.css" />
     </copy>
     <diy-instructions lang="en-gb">Browse to install_portal/install.php and run the installer, after successfull installation delete the installer.
