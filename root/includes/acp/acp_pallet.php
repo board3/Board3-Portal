@@ -24,6 +24,12 @@ class acp_pallet
 		$block_sql = 'SELECT * FROM phpbb_portal_blocks ORDER BY block_position ASC , block_order ASC';
 		$block_result = $db->sql_query($block_sql);
 		
+		$template->assign_vars(array(
+			'ICON_MOVE_RIGHT'				=> '<img src="' . $phpbb_admin_path . 'images/icon_right.gif" alt="' . $user->lang['MOVE_RIGHT'] . '" title="' . $user->lang['MOVE_RIGHT'] . '" />',
+			'ICON_MOVE_LEFT'			=> '<img src="' . $phpbb_admin_path . 'images/icon_left.gif" alt="' . $user->lang['MOVE_LEFT'] . '" title="' . $user->lang['MOVE_LEFT'] . '" />',
+		));
+
+		
 		$block_array = array();
 		
 		while ($block_row = $db->sql_fetchrow($block_result))
