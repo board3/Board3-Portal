@@ -96,7 +96,7 @@ if ($load_center == TRUE && $user->data['user_perm_from'] && $auth->acl_get('a_s
 
 if ( $load_center != TRUE )
 {
-	$where = ' AND block_type <> 1';
+	$where = ' AND block_type <> 0';
 } else {
 	$where = '';
 }
