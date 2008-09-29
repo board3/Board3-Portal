@@ -300,7 +300,7 @@ $template->assign_vars(array(
 	'NEWEST_POST_IMG'		=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 	'READ_POST_IMG'			=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
 	'GOTO_PAGE_IMG'			=> $user->img('icon_post_target', 'GOTO_PAGE'),
-	'S_NEWEST_OR_FIRST		=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
+	'S_NEWEST_OR_FIRST'		=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
 	'POSTED_BY_TEXT'		=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
 	'S_DISPLAY_NEWS'		=> true,
 	'S_DISPLAY_NEWS_RVS'	=> ( $portal_config['portal_show_news_replies_views'] ) ? true : false,
