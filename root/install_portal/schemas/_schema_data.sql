@@ -93,5 +93,7 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_lead
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_show_announcements_replies_views', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_show_news_replies_views', '1');
 
-# POSTGRES COMMIT #
+# Version 1.0.3 #
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_enable', '1');
 
+# POSTGRES COMMIT #
