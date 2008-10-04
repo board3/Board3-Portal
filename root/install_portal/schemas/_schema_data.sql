@@ -54,6 +54,7 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_link
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_show_announcements_replies_views', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_show_news_replies_views', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_welcome_guest', '1');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_enable', '1');
 
 # Inserts who have to be checked at a later stage of the block pallet feature #
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_leaders_ext', '0');

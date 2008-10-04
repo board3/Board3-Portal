@@ -44,6 +44,7 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_GENERAL_INFO',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_GENERAL_SETTINGS',
+						'portal_enable'						=> array('lang' => 'PORTAL_ENABLE'	,	 'validate' => 'bool',   'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_leaders_ext'				=> array('lang' => 'PORTAL_LEADERS_EXT'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_birthdays_ahead'			=> array('lang' => 'PORTAL_BIRTHDAYS_AHEAD'		, 'validate' => 'int'	, 'type' => 'text:3:3'	, 'explain' => true),
 						'portal_forum_index'				=> array('lang' => 'PORTAL_FORUM_INDEX'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
