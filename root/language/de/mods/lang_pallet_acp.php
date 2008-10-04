@@ -33,8 +33,19 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'MOVE_LEFT' =>	'Move left',
-	'MOVE_RIGHT' =>	'Move right',
+	'ACP_PALLET_LAYOUT'		=>	'Block Verwaltung',
+	'TITLE'		 			=>	'Block Verwaltung',
+	'TITLE_EXPLAIN' 		=>	'Hier kannst Du deine Blöcke verwalten, verschieben, hinzufügen und löschen.',
+	'PALLET_LAYOUT' 		=>	'Block Anordnung',
+	'COLUMN_LEFT' 			=>	'Linke Spalte',
+	'COLUMN_CENTER'			=>	'Mittlere Spalte',
+	'COLUMN_RIGHT'			=>	'Rechte Spalte',
+	'PALLET_KEY'			=>	'Legende',
+	'KEY'					=>	'Funktion',
+	'ENABLE'				=>	'Aktivieren',
+	'DISABLE'				=>	'Deaktivieren',
+	'MOVE_LEFT' 			=>	'Nach links',
+	'MOVE_RIGHT' 			=>	'Nach rechts',
 ));
 
 ?>
