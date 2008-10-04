@@ -11,7 +11,7 @@ CREATE TABLE phpbb_portal_config (
 
 # Table: 'phpbb_portal_blocks'
 CREATE TABLE phpbb_portal_blocks (
-	block_name varchar(64) NOT NULL,
+	block_name varbinary(64) NOT NULL,
 	block_type tinyint(1) DEFAULT '0' NOT NULL,
 	block_enabled tinyint(1) DEFAULT '0' NOT NULL,
 	block_position tinyint(1) DEFAULT '0' NOT NULL,

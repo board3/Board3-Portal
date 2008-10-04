@@ -101,7 +101,7 @@ if ( $load_center != TRUE )
 	$where = '';
 }
 
-$block_sql = 'SELECT * FROM phpbb_portal_blocks WHERE block_enabled = 1'.$where.' ORDER BY block_position ASC , block_order ASC';
+$block_sql = 'SELECT * FROM ' . PORTAL_BLOCKS_TABLE . ' WHERE block_enabled = 1'.$where.' ORDER BY block_position ASC , block_order ASC';
 $block_result = $db->sql_query($block_sql);
 
 while ($block_row = $db->sql_fetchrow($block_result))

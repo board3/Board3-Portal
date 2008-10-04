@@ -44,21 +44,9 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_GENERAL_INFO',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_GENERAL_SETTINGS',
-						'portal_advanced_stat'				=> array('lang' => 'PORTAL_ADVANCED_STAT'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'portal_search'						=> array('lang' => 'PORTAL_SEARCH'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'portal_leaders'					=> array('lang' => 'PORTAL_LEADERS'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_leaders_ext'				=> array('lang' => 'PORTAL_LEADERS_EXT'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'portal_clock'						=> array('lang' => 'PORTAL_CLOCK'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'portal_link_us'					=> array('lang' => 'PORTAL_LINK_US'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'portal_birthdays'					=> array('lang' => 'PORTAL_BIRTHDAYS'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_birthdays_ahead'			=> array('lang' => 'PORTAL_BIRTHDAYS_AHEAD'		, 'validate' => 'int'	, 'type' => 'text:3:3'	, 'explain' => true),
-						'portal_random_member'				=> array('lang' => 'PORTAL_RANDOM_MEMBER'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_forum_index'				=> array('lang' => 'PORTAL_FORUM_INDEX'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'portal_whois_online'				=> array('lang' => 'PORTAL_WHOIS_ONLINE'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'portal_change_style'				=> array('lang' => 'PORTAL_CHANGE_STYLE'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'portal_main_menu'					=> array('lang' => 'PORTAL_MAIN_MENU'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'portal_user_menu'					=> array('lang' => 'PORTAL_USER_MENU'	, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
-						'portal_friends'					=> array('lang' => 'PORTAL_FRIENDS'		, 'validate' => 'bool'	, 'type' => 'radio:yes_no'	, 'explain' => true),
 						'portal_max_online_friends'			=> array('lang' => 'PORTAL_MAX_ONLINE_FRIENDS'	, 'validate' => 'int'	, 'type' => 'text:3:3'		, 'explain' => true),	
 
 						'legend2'							=> 'ACP_PORTAL_COLUMN_WIDTH_SETTINGS',
@@ -72,7 +60,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_NEWS_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_NEWS_SETTINGS',
-						'portal_news'						=> array('lang' => 'PORTAL_NEWS',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_news_style'					=> array('lang' => 'PORTAL_NEWS_STYLE',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_show_all_news'				=> array('lang' => 'PORTAL_SHOW_ALL_NEWS',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_number_of_news'				=> array('lang' => 'PORTAL_NUMBER_OF_NEWS',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
@@ -90,7 +77,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
-						'portal_announcements'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS'				,	'validate' => 'bool', 	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_announcements_style'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_STYLE'		 	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_number_of_announcements'	=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 						'portal_announcements_day'			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
@@ -107,7 +93,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_RECENT_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_RECENT_SETTINGS',
-						'portal_recent'			 			=> array('lang' => 'PORTAL_RECENT'				 	 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_max_topics'					=> array('lang' => 'PORTAL_MAX_TOPIC'					 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_recent_title_limit'			=> array('lang' => 'PORTAL_RECENT_TITLE_LIMIT'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_exclude_forums'				=> array('lang' => 'PORTAL_EXCLUDE_FORUM'				,	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
@@ -119,7 +104,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_WORDGRAPH_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_WORDGRAPH_SETTINGS',
-						'portal_wordgraph'			 		=> array('lang' => 'PORTAL_WORDGRAPH'					 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_wordgraph_max_words'		=> array('lang' => 'PORTAL_WORDGRAPH_MAX_WORDS'	,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_wordgraph_word_counts'		=> array('lang' => 'PORTAL_WORDGRAPH_WORD_COUNTS'	,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_wordgraph_ratio'			=> array('lang' => 'PORTAL_WORDGRAPH_RATIO'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
@@ -131,8 +115,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_PAYPAL_SETTINGS',
 					'vars'	=> array(
 						'legend2'							=> 'ACP_PORTAL_PAYPAL_SETTINGS',
-						'portal_pay_c_block'				=> array('lang' => 'PORTAL_PAY_C_BLOCK'				 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_pay_s_block'				=> array('lang' => 'PORTAL_PAY_S_BLOCK'				 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_pay_acc'					=> array('lang' => 'PORTAL_PAY_ACC'						,	'validate' => 'string',		'type' => 'text:25:100',	 'explain' => true),
 					)
 				);
@@ -142,7 +124,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS',
-						'portal_attachments'				=> array('lang' => 'PORTAL_ATTACHMENTS'				 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_attachments_number'	=> array('lang' => 'PORTAL_ATTACHMENTS_NUMBER'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_attachments_forum_ids'	=> array('lang' => 'PORTAL_ATTACHMENTS_FORUM_IDS',	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
 					)
@@ -153,7 +134,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_MEMBERS_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_MEMBERS_SETTINGS',
-						'portal_latest_members'				=> array('lang' => 'PORTAL_LATEST_MEMBERS'			 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_max_last_member'			=> array('lang' => 'PORTAL_MAX_LAST_MEMBER'			 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 					)
 				);
@@ -185,7 +165,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_MOST_POSTER_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_MOST_POSTER_SETTINGS',
-						'portal_top_posters'				=> array('lang' => 'PORTAL_TOP_POSTERS'					,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_max_most_poster'			=> array('lang' => 'PORTAL_MAX_MOST_POSTER'			 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 					)
 				);
@@ -196,7 +175,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_WELCOME_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_WELCOME_SETTINGS',
-						'portal_welcome'					=> array('lang' => 'PORTAL_WELCOME'						 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_welcome_guest'				=> array('lang' => 'PORTAL_WELCOME_GUEST'						 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_welcome_intro'				=> array('lang' => 'PORTAL_WELCOME_INTRO'				 ,	'type' => 'textarea:6:6',	 'explain' => true),
 					 )
@@ -208,12 +186,10 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_CUSTOM_SETTINGS',
 					'vars'	=> array(
 						'legend1'								=> 'ACP_PORTAL_CUSTOM_SMALL_SETTINGS',
-						'portal_custom_small'					=> array('lang' => 'PORTAL_CUSTOM_SMALL'						,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_custom_small_headline'		=> array('lang' => 'PORTAL_CUSTOM_SMALL_HEADLINE'			,	'validate' => 'string', 'type' => 'text:40:200',	 'explain' => true),
 						'portal_custom_small_bbcode'		=> array('lang' => 'PORTAL_CUSTOM_SMALL_BBCODE'				,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_custom_code_small'			=> array('lang' => 'PORTAL_CUSTOM_CODE_SMALL'				,	'type' => 'textarea:6:6',	 'explain' => true),
 						'legend2'								=> 'ACP_PORTAL_CUSTOM_CENTER_SETTINGS',
-						'portal_custom_center'				=> array('lang' => 'PORTAL_CUSTOM_CENTER'						,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_custom_center_headline'		=> array('lang' => 'PORTAL_CUSTOM_CENTER_HEADLINE'			,	'validate' => 'string', 'type' => 'text:40:200',	 'explain' => true),
 						'portal_custom_center_bbcode'		=> array('lang' => 'PORTAL_CUSTOM_CENTER_BBCODE'			,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_custom_code_center'			=> array('lang' => 'PORTAL_CUSTOM_CODE_CENTER'				,	'type' => 'textarea:6:6',	 'explain' => true),
@@ -226,7 +202,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_MINICALENDAR_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_MINICALENDAR_SETTINGS',
-						'portal_minicalendar'				=> array('lang' => 'PORTAL_MINICALENDAR'					 ,	'validate' => 'bool',	 'type' => 'radio:yes_no',	'explain' => true),
 						'portal_minicalendar_today_color'	=> array('lang' => 'PORTAL_MINICALENDAR_TODAY_COLOR'	 ,	'validate' => 'string', 'type' => 'text:10:10',	 'explain' => true),
 						'portal_minicalendar_day_link_color'	=> array('lang' => 'PORTAL_MINICALENDAR_DAY_LINK_COLOR' ,	'validate' => 'string', 'type' => 'text:10:10',	 'explain' => true),
 					)
@@ -237,7 +212,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_LINKS_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_LINKS_SETTINGS',
-						'portal_links'						=> array('lang' => 'PORTAL_LINKS', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 					)
 				);
 				// Links require preprocessing

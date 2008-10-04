@@ -37,6 +37,8 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_CUSTOM_INFO'					=> 'Eigener Block',
 	'ACP_PORTAL_MINICALENDAR_INFO'				=> 'Mini-Kalender',
 	'ACP_PORTAL_LINKS_INFO'						=> 'Links',
+	'ACP_PALLET_LIST_INFO'						=> 'Block Verwaltung',
+	'ACP_PORTAL_LAYOUT_INFO'					=> 'Portal Layout',
 ));
 
 ?>

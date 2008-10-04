@@ -496,6 +496,29 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_auth'		=> ''
 				);
 				$modules->update_module_data($linkblock);
+				$palletlist = array(
+					'module_basename'	=> 'pallet',
+					'module_enabled'	=> 1,
+					'module_display'	=> 1,
+					'parent_id'			=> $portal['module_id'],
+					'module_class'		=> 'acp',
+					'module_langname'	=> 'ACP_PALLET_LIST_INFO',
+					'module_mode'		=> 'list',
+					'module_auth'		=> ''
+				);
+				$modules->update_module_data($palletlist);
+				$portallayout = array(
+					'module_basename'	=> 'pallet',
+					'module_enabled'	=> 1,
+					'module_display'	=> 1,
+					'parent_id'			=> $portal['module_id'],
+					'module_class'		=> 'acp',
+					'module_langname'	=> 'ACP_PORTAL_LAYOUT_INFO',
+					'module_mode'		=> 'layout',
+					'module_auth'		=> ''
+				);
+				$modules->update_module_data($portallayout);				
+
 				// clear cache and log what we did
 				$cache->purge();
 				add_log('admin', $page_title . ' installed');
@@ -855,7 +878,29 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_mode'      => 'links',
 						'module_auth'      => ''
 					);
-					$modules->update_module_data($linkblock);					
+					$modules->update_module_data($linkblock);
+					$palletlist = array(
+						'module_basename'	=> 'pallet',
+						'module_enabled'	=> 1,
+						'module_display'	=> 1,
+						'parent_id'			=> $portal['module_id'],
+						'module_class'		=> 'acp',
+						'module_langname'	=> 'ACP_PALLET_LIST_INFO',
+						'module_mode'		=> 'list',
+						'module_auth'		=> ''
+					);
+					$modules->update_module_data($palletlist);
+					$portallayout = array(
+						'module_basename'	=> 'pallet',
+						'module_enabled'	=> 1,
+						'module_display'	=> 1,
+						'parent_id'			=> $portal['module_id'],
+						'module_class'		=> 'acp',
+						'module_langname'	=> 'ACP_PORTAL_LAYOUT_INFO',
+						'module_mode'		=> 'layout',
+						'module_auth'		=> ''
+					);
+					$modules->update_module_data($portallayout);						
 		
 					// clear cache and log what we did
 					$cache->purge();
@@ -1010,6 +1055,8 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 							OR module_langname = 'ACP_PORTAL_MINICALENDAR_INFO'
 							OR module_langname = 'ACP_PORTAL_CUSTOM_INFO'
 							OR module_langname = 'ACP_PORTAL_LINKS_INFO'
+							OR module_langname = 'ACP_PALLET_LIST_INFO'
+							OR module_langname = 'ACP_PORTAL_LAYOUT_INFO'
 							";
 					$result = $db->sql_query($sql);
 					while ($row = $db->sql_fetchrow($result))

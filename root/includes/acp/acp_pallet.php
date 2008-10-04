@@ -21,7 +21,7 @@ class acp_pallet
 		
 		define('IN_PALLET_ACP', true);
 		
-		$block_sql = 'SELECT * FROM phpbb_portal_blocks ORDER BY block_position ASC , block_order ASC';
+		$block_sql = 'SELECT * FROM ' . PORTAL_BLOCKS_TABLE . ' ORDER BY block_position ASC , block_order ASC';
 		$block_result = $db->sql_query($block_sql);
 		
 		$template->assign_vars(array(
@@ -141,7 +141,7 @@ class acp_pallet
 			$template->assign_block_vars('table_row', $table_row);
 		}
 		
-		$l_title = 'ACP_ATTACHMENT_LAYOUT';
+		$l_title = 'ACP_PALLET_LAYOUT';
 		
 		$this->tpl_name = 'acp_pallet';
 		$this->page_title = $l_title;
