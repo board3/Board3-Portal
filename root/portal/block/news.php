@@ -165,9 +165,6 @@ else
 				
 				// Grab icons
 				$icons = $cache->obtain_icons();
-				// Not defined, delete these 2 lines?
-				//$forum_data = $db->sql_fetchrow($result);
-				//$s_display_active = ($forum_data['forum_type'] == FORUM_CAT && ($forum_data['forum_flags'] & FORUM_FLAG_ACTIVE_TOPICS)) ? true : false;
 			
 			$template->assign_block_vars('news_row', array(
 				'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
