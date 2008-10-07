@@ -144,7 +144,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_POLLS_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_POLLS_SETTINGS',
-						'portal_poll_topic'					=> array('lang' => 'PORTAL_POLL_TOPIC'					,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_poll_topic_id'				=> array('lang' => 'PORTAL_POLL_TOPIC_ID'				,	'validate' => 'string',		'type' => 'text:10:200',	'explain' => true),
 						'portal_poll_limit'					=> array('lang' => 'PORTAL_POLL_LIMIT'					,	'validate' => 'int',		'type' => 'text:3:3',	 	'explain' => true),
 						'portal_poll_allow_vote'			=> array('lang' => 'PORTAL_POLL_ALLOW_VOTE'				,	'validate' => 'ibool',		'type' => 'radio:yes_no',	 'explain' => true),
@@ -156,7 +155,6 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_BOTS_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_BOTS_SETTINGS',
-						'portal_load_last_visited_bots'		=> array('lang' => 'PORTAL_LOAD_LAST_VISITED_BOTS'	,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_last_visited_bots_number'	=> array('lang' => 'PORTAL_LAST_VISITED_BOTS_NUMBER' ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 					)
 				);

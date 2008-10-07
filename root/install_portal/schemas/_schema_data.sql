@@ -11,10 +11,8 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_max_
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_max_last_member', '8');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_right_column_width', '180');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_left_column_width', '180');
-INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_poll_topic', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_poll_topic_id', '');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_last_visited_bots_number', '1');
-INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_load_last_visited_bots', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_pay_acc', 'your@paypal.com');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_recent_title_limit', '100');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_max_topics', '10');
@@ -87,18 +85,20 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_foru
 # INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_user_menu', '1'); #
 # INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_pay_s_block', '0'); #
 # INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_pay_c_block', '0'); #
+# INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_load_last_visited_bots', '1'); #
+# INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_poll_topic', '1'); #
 
 # New inserts for portal_blocks table #
 INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('announcements', '0', '1', '1', '3');
 INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('attachments', '1', '1', '0', '5');
 INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('birthday_list', '1', '1', '0', '1');
-INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('change_style', '1', '1', '0', '7');
+INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('change_style', '1', '0', '0', '7');
 INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('clock', '1', '1', '0', '2');
-INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('custom', '0', '1', '1', '1');
-INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('custom', '1', '1', '0', '6');
-INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('donate', '0', '1', '1', '8');
-INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('donate', '1', '1', '2', '7');
-INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('forum_index', '0', '1', '1', '6');
+INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('custom', '0', '0', '1', '1');
+INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('custom', '1', '0', '0', '6');
+INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('donate', '0', '0', '1', '8');
+INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('donate', '1', '0', '2', '7');
+INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('forum_index', '0', '0', '1', '6');
 INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('friends', '1', '1', '2', '1');
 INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('jumpbox', '0', '1', '1', '10');
 INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('latest_bots', '1', '1', '2', '5');
@@ -116,9 +116,9 @@ INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_po
 INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('statistics', '1', '1', '2', '2');
 INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('top_posters', '1', '1', '0', '8');
 INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('user_menu', '1', '1', '2', '0');
-INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('welcome', '0', '0', '1', '0');
+INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('welcome', '0', '1', '1', '0');
 INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('whois_online', '0', '1', '1', '7');
-INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('wordgraph', '0', '1', '1', '9');
+INSERT INTO phpbb_portal_blocks (block_name, block_type, block_enabled, block_position, block_order) VALUES ('wordgraph', '0', '0', '1', '9');
 # Rename second custom and donate insert? #
 
 # POSTGRES COMMIT #
