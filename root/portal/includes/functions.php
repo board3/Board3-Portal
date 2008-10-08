@@ -581,4 +581,50 @@ function ap_validate($str) {
        return $page_string;
     }
 
+// Mini Cal.
+class calendar 
+{
+	var $dateYYY;						// year in numeric format (YYYY)
+	var $dateMM;						// month in numeric format (MM)
+	var $dateDD;						// day in numeric format (DD)
+	var $ext_dateMM;					// extended month (e.g. February)
+	var $daysMonth;						// count of days in month
+	var $stamp;							// timestamp
+	var $day;							// return array s.a.
+
+	/**
+	* convert date->timestamp
+	**/
+	function makeTimestamp($date) 
+	{
+		$this->stamp = strtotime($date);
+		return ($this->stamp);
+	}
+
+	/**
+	* get date listed in array
+	**/
+	function getMonth($callDate) 
+	{
+
+		$this->makeTimestamp($callDate);
+		$this->dateYYYY = date("Y", $this->stamp);
+		$this->dateMM = date("n", $this->stamp);
+		$this->ext_dateMM = date("F", $this->stamp);
+		$this->dateDD = date("d", $this->stamp);
+		$this->daysMonth = date("t", $this->stamp);
+    
+		for($i=1; $i < $this->daysMonth+1; $i++) 
+		{
+			$this->makeTimestamp("$i $this->ext_dateMM $this->dateYYYY");
+			$this->day[] = array(
+				"0" => "$i",
+				"1" => $this->dateMM,
+				"2" => $this->dateYYYY,
+				"3" => (date('w', $this->stamp))
+				);
+		}
+	}
+}	
+	
 ?>

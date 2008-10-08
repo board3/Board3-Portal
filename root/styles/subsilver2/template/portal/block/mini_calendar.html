@@ -1,7 +1,8 @@
 <!--version $Id$ //-->
+<a name="minical"></a>
 <table class="tablebg" cellspacing="1" width="100%">
 	<tr>
-		<th><span style="float: left"><img src="{T_THEME_PATH}/images/portal/portal_minical.png" width="16px" height="16px" alt="" />&nbsp;{L_MINI_CAL_CALENDAR}</span></th>
+		<th><span style="float: left"><img src="{T_THEME_PATH}/images/portal/portal_minical.png" width="16px" height="16px" alt="" />&nbsp;{L_MINI_CALENDAR}</span></th>
 	</tr>
 	<tr class="row1">
 		<td>	
@@ -12,13 +13,18 @@
 				<td align="right" colspan="2">{U_NEXT_MONTH}</td>
 			</tr>
 			<tr>
-				<td style="width: 14%;"><span class="gensmall" style="color:#0000FF">{L_MINI_CAL_SUN}</span></td>
-				<td style="width: 14%;"><span class="gensmall" style="color:#0000FF">{L_MINI_CAL_MON}</span></td>
-				<td style="width: 14%;"><span class="gensmall" style="color:#0000FF">{L_MINI_CAL_TUE}</span></td>
-				<td style="width: 14%;"><span class="gensmall" style="color:#0000FF">{L_MINI_CAL_WED}</span></td>
-				<td style="width: 14%;"><span class="gensmall" style="color:#0000FF">{L_MINI_CAL_THU}</span></td>
-				<td style="width: 14%;"><span class="gensmall">{L_MINI_CAL_FRI}</span></td>
-				<td style="width: 14%;"><span class="gensmall" style="color:#FF0000">{L_MINI_CAL_SAT}</span></td>
+			<!-- IF S_SUNDAY_FIRST -->
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_SUN}</span></td>
+			<!-- ENDIF -->
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_MON}</span></td>
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_TUE}</span></td>
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_WED}</span></td>
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_THU}</span></td>
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_FRI}</span></td>
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_SAT}</span></td>
+			<!-- IF not S_SUNDAY_FIRST -->
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_SUN}</span></td>
+			<!-- ENDIF -->
 			</tr>
 			<!-- BEGIN mini_cal_row -->
 			<tr>
@@ -28,23 +34,6 @@
 			</tr>
 			<!-- END mini_cal_row -->
 			</table>
-			<hr />
-
-			<!-- IF .mini_cal_holiday -->
-			<table class="tablebg" width="100%" cellspacing="1">
-				<!-- BEGIN mini_cal_holiday -->
-				<tr>
-				<td class="row1" align="left"><span class="gensmall">{mini_cal_holiday.MINI_CAL_HOLIDAYS}</span></td>
-				</tr>
-				<!-- BEGINELSE -->
-				<tr>
-				<td class="row1"></td>
-				</tr>
-				<!-- END mini_cal_holiday -->
-			</table>
-			<!-- ENDIF -->
-			
-
 		</td>
 	</tr>
 </table>

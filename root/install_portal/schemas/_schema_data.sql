@@ -30,8 +30,10 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_glob
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_wordgraph_word_counts', '0');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_wordgraph_max_words', '80');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_wordgraph_ratio', '18');
-INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_minicalendar_today_color', '//FF0000');
-INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_minicalendar_day_link_color', '//006F00');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_minicalendar_today_color', '#006F00');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_minicalendar_sunday_color', '#FF0000');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_long_month', '1');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_sunday_first', '0');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_attachments_number', '8');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_poll_limit', '3');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_poll_allow_vote', '1');
