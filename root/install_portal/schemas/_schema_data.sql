@@ -56,8 +56,8 @@ INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_word
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_wordgraph', '0');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_wordgraph_ratio', '18');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_minicalendar', '1');
-INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_minicalendar_today_color', '//FF0000');
-INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_minicalendar_day_link_color', '//006F00');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_minicalendar_today_color', '#FF0000');
+INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_minicalendar_day_link_color', '#006F00');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_attachments', '1');
 INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_attachments_number', '8');
 
