@@ -1,4 +1,5 @@
 <!--version $Id$ //-->
+<!-- BEGIN announcements_row -->
 <table class="tablebg" cellspacing="1" width="100%">
 		<tr class="nav">
 			<td class="cat" colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_ANNOUNCEMENTS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_ANNOUNCEMENTS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_ANNOUNCEMENTS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->" valign="middle" align="center">{L_LATEST_ANNOUNCEMENTS} <a name="a"></a></td>
@@ -15,7 +16,6 @@
 			<!-- ENDIF -->
 			<th>&nbsp;{L_LAST_POST}&nbsp;</th>
 		</tr>
-	<!-- BEGIN announcements_row -->
 	<!-- IF announcements_row.S_NO_TOPICS  -->
 	<tr class="row1">
 		<td>
@@ -58,6 +58,6 @@
 	</tr>
 	<!-- ENDIF -->
 	<!-- ENDIF -->
-	<!-- END announcements_row -->
 </table>
 <br />
+<!-- END announcements_row -->
