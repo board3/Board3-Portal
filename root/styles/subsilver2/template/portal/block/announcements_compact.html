@@ -1,5 +1,6 @@
 <!--version $Id$ //-->
 <!-- BEGIN announcements_row -->
+<!-- IF announcements_row.S_FIRST_ROW -->
 <table class="tablebg" cellspacing="1" width="100%">
 		<tr class="nav">
 			<td class="cat" colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_ANNOUNCEMENTS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_ANNOUNCEMENTS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_ANNOUNCEMENTS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->" valign="middle" align="center">{L_LATEST_ANNOUNCEMENTS} <a name="a"></a></td>
@@ -16,6 +17,7 @@
 			<!-- ENDIF -->
 			<th>&nbsp;{L_LAST_POST}&nbsp;</th>
 		</tr>
+<!-- ENDIF -->
 	<!-- IF announcements_row.S_NO_TOPICS  -->
 	<tr class="row1">
 		<td>
@@ -50,14 +52,14 @@
 				</td>		
 			</tr>
 	<!-- ENDIF -->
-	<!-- IF announcements_row.S_LAST_ROW -->
+<!-- IF announcements_row.S_LAST_ROW -->
 	<!-- IF AP_PAGINATION or TOTAL_ANNOUNCEMENTS -->
 	<tr class="row<!-- IF announcements_row.S_ROW_COUNT is even -->2<!-- ELSE -->1<!-- ENDIF -->">
 		<td class="gensmall" valign="middle" align="right" nowrap="nowrap"  colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_ANNOUNCEMENTS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_ANNOUNCEMENTS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_ANNOUNCEMENTS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->">{TOTAL_ANNOUNCEMENTS}
 		<!-- IF AP_PAGE_NUMBER --><!-- IF AP_PAGINATION --> &bull; {AP_PAGE_NUMBER} &bull; <span>{AP_PAGINATION}</span><!-- ELSE --> &bull; {AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
 	</tr>
 	<!-- ENDIF -->
-	<!-- ENDIF -->
 </table>
 <br />
+<!-- ENDIF -->
 <!-- END announcements_row -->

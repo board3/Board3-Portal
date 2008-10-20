@@ -1,11 +1,13 @@
 <!--version $Id$ //-->
 <!-- BEGIN announcements_row -->
+<!-- IF announcements_row.S_FIRST_ROW -->
 <div class="forabg">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
 		<ul class="topiclist">
 			<li class="header"><dl><dt>{L_LATEST_ANNOUNCEMENTS}</dt></dl></li>
 		</ul>
+<!-- ENDIF -->
 			<div class="postbody" style="width: 100%">
 				<!-- IF announcements_row.S_NO_TOPICS  -->
 				<div class="post bg2">
@@ -47,14 +49,13 @@
 						<span style="float: right; margin: 0 0 5px 0">{announcements_row.OPEN}<a href="{announcements_row.U_READ_FULL}">{announcements_row.L_READ_FULL}</a>{announcements_row.CLOSE}</span>
 						<div class="back2top"><a href="#wrap" class="top" title="{L_BACK_TO_TOP}">{L_BACK_TO_TOP}</a></div>
 					<!-- IF announcements_row.S_NOT_LAST --><br style="clear:both" /><!-- ENDIF -->
-					<!-- IF announcements_row.S_LAST_ROW -->
+<!-- IF announcements_row.S_LAST_ROW -->
 					<!-- IF AP_PAGINATION or TOTAL_ANNOUNCEMENTS -->
 						<hr class="dashed" />
 						<div class="pagination">
 							{TOTAL_ANNOUNCEMENTS}
 							<!-- IF AP_PAGE_NUMBER --><!-- IF AP_PAGINATION --> &bull; {AP_PAGE_NUMBER} &bull; <span>{AP_PAGINATION}</span><!-- ELSE --> &bull; {AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
 						</div>
-					<!-- ENDIF -->
 					<!-- ENDIF -->
 					<span class="portal-corners-bottom-inner"><span></span></span></div>
 				</div>
@@ -64,4 +65,5 @@
 	</div>
 </div>
 <br style="clear:both" />
+<!-- ENDIF -->
 <!-- END announcements_row -->
