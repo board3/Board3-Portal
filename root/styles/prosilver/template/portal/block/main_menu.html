@@ -16,7 +16,9 @@
                    <!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED -->
                    <li><a href="{U_REGISTER}">{L_REGISTER}</a></li>
                    <!-- ENDIF -->
+					<!-- IF not S_IS_BOT and S_DISPLAY_MEMBERLIST -->
 					<li><a href="{U_MEMBERLIST}">{L_MEMBERLIST}</a></li>
+					<!-- ENDIF -->
 					<li><a href="{U_TEAM}">{L_THE_TEAM}</a></li>
 					<!-- IF U_MCP -->
 					<li><a href="{U_MCP}">{L_MCP}</a></li>
