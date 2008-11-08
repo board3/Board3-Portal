@@ -1121,11 +1121,10 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 	
 	break;
 	}
-} else {
-	include($phpbb_root_path . 'install_portal/style/layout_header.'.$phpEx); 	 
-	echo '<h1>' . $user->lang['INSTALLER_ERROR'] . '</h1>'; 	 
-	echo '<p>' . $user->lang['INSTALLER_NEEDS_ADMIN'] . '</p>'; 	 
-	include($phpbb_root_path . 'install_portal/style/layout_footer.'.$phpEx); 	 
+}	
+else
+{
+	echo '<p>' . login_box('', $user->lang['INSTALLER_NEEDS_ADMIN']);
 }
 
 ?>
