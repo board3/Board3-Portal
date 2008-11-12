@@ -22,7 +22,7 @@ class board3_portal_check_version
 	function version()
 	{
 		global $portal_config, $phpbb_root_path, $phpEx;
-			include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
+			include_once($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
 			$portal_config = obtain_portal_config();
 
 		return array(
