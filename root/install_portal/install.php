@@ -938,6 +938,9 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						}
 					}
 
+					// clear cache and log what we did
+					$cache->purge();
+					add_log('admin', $page_title . ' updated');
 					$updated = true;
 				}
 			}
@@ -1050,8 +1053,11 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						$db->sql_query($sql);
 					}
 					$db->sql_freeresult($result);
-	
-					$installed = true;
+
+					// clear cache and log what we did
+					$cache->purge();
+					add_log('admin', $page_title . ' uninstalled');
+					$uninstalled = true;
 				}
 				else
 				{
