@@ -44,49 +44,33 @@ margin: 0 -10px;
 /*Portal-menu*/
 
 .portal-navigation{
-border: 1px solid black;
-border-bottom-width: 1px;
 width: auto;
 }
 
 .portal-navigation ul{
+list-style-type: none;
 margin: 0;
 padding: 0;
-list-style: none;
-font: normal 90% 'Trebuchet MS', 'Lucida Grande', Arial, sans-serif;
-font-size: 12px;
+margin-bottom: 8px; /*bottom spacing between each UL and rest of content*/
 }
 
-.portal-navigation li a{
+.portal-navigation ul li{
+padding-bottom: 2px; /*bottom spacing between menu items*/
+}
+
+.portal-navigation ul li a{
+background-image: url("{T_THEME_PATH}/images/portal/arrowbullet.gif");
+background-repeat: no-repeat;
+background-position: center left; /*custom bullet list image*/
 display: block;
-padding: 3px 0;
-padding-left: 9px;
-width: auto; /*185px minus all left/right paddings and margins*/
-text-decoration: none;
-color: white;
-background-color: #11A1E8;
-background-image: url("{T_THEME_PATH}/images/portal/bg_portalmenu.gif");
-border-bottom: 1px solid #90bade;
-border-left: 7px solid #6ACEFF;
-}
-
-/* IE6 FIX */
-* html .portal-navigation ul li{
-border-bottom: 1px solid #6ACEFF;
-}
-
-.portal-navigation li a:hover {
-background-color: #2586d7;
-background-image: url("{T_THEME_PATH}/images/portal/bg_portalmenu1.gif");
-border-left-color: #AA0000;
+padding: 2px 0;
+padding-left: 19px; /*link text is indented 19px*/
+font-weight: bold;
+font-size: 90%;
 }
 
 .portal-navigation div.menutitle{
-color: #000000;
-border-bottom: 1px solid #6ACEFF;
 padding: 1px 0;
-padding-left: 5px;
-background-color: #6ACEFF;
 font: bold 90% 'Trebuchet MS', 'Lucida Grande', Arial, sans-serif;
 font-size: 12px;
 }
