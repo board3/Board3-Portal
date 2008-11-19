@@ -13,67 +13,6 @@
 	padding: 0;
 }
 
-.portal-panel {
-	background-color: #DDE9F0;
-	color: #28313F;
-	margin-bottom: 4px;
-	padding: 0 10px;
-	color: #3f3f3f;
-}
-
-.portal-panel h3 {
-	margin: 0.5em 0;
-	border-bottom:solid 1px #0076B1;
-}
-
-.portal-panel p {
-	font-size: 1.2em;
-	margin-bottom: 1em;
-	line-height: 1.4em;
-}
-
-.portal-panel h4 {
-	margin: 0.4em 0;
-	border-bottom: 1px #3366CC dashed;
-}
-/* Round cornered boxes and backgrounds
----------------------------------------- */
-span.portal-corners-top {
-	background-image: url("{T_THEME_PATH}/images/corners_left.png");
-	background-position: 0 0;
-	margin: 0 -10px;
-}
-
-span.portal-corners-top span {
-	background-image: url("{T_THEME_PATH}/images/corners_right.png");
-	background-position: 100% 0;
-}
-
-span.portal-corners-bottom {
-	background-image: url("{T_THEME_PATH}/images/corners_left.png");
-	background-position: 0 100%;
-	margin: 0 -10px;
-	clear: both;
-}
-
-
-span.portal-corners-bottom span {
-	background-image: url("{T_THEME_PATH}/images/corners_right.png");
-	background-position: 100% 100%;
-}
-
-span.portal-corners-top, span.portal-corners-bottom, span.portal-corners-top span, span.portal-corners-bottom span {
-	font-size: 1px;
-	line-height: 1px;
-	display: block;
-	height: 5px;
-	background-repeat: no-repeat;
-}
-
-.panel span.portal-corners-top, .panel span.portal-corners-bottom {
-margin: 0 -10px;
-}
-
 /*inner corners*/
 
 span.portal-corners-top-inner {
