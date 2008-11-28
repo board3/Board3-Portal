@@ -304,7 +304,7 @@ else
 }
 
 $topic_icons = false;
-if( isset($fetch_news['topic_icons']) )
+if( !empty($fetch_news['topic_icons']) )
 {
 	$topic_icons = true;
 }
