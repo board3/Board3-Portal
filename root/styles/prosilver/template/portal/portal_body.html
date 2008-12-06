@@ -11,7 +11,9 @@
 		<!-- IF S_DISPLAY_MAINMENU -->
 			<!-- INCLUDE portal/block/main_menu.html -->
 		<!-- ENDIF -->
-		
+
+		<!-- INCLUDE portal/block/additional_blocks_left.html -->		
+
 		<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
 			<!-- INCLUDE portal/block/birthday_list.html -->
 		<!-- ENDIF -->
@@ -99,6 +101,8 @@
 			<!-- ENDIF -->
 		<!-- ENDIF -->
 
+		<!-- INCLUDE portal/block/additional_blocks_center.html -->		
+
 		<!-- IF S_DISPLAY_POLL -->
 			<!-- INCLUDE portal/block/poll.html -->
 		<!-- ENDIF -->
@@ -152,6 +156,8 @@
 				<!-- INCLUDE portal/block/user_menu.html -->
 			<!-- ENDIF -->
 		<!-- ENDIF -->
+
+		<!-- INCLUDE portal/block/additional_blocks_right.html -->
 
 		<!-- IF not S_IS_BOT and S_USER_LOGGED_IN and S_ZEBRA_ENABLED and S_DISPLAY_FRIENDS -->
 			<!-- INCLUDE portal/block/online_friends.html -->

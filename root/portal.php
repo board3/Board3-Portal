@@ -276,6 +276,8 @@ if ($portal_config['portal_pay_s_block'] or ( $portal_config['portal_pay_c_block
 	include($phpbb_root_path . 'portal/block/donate.'.$phpEx);
 }
 
+include($phpbb_root_path . 'portal/blocks/additional_blocks.'.$phpEx);
+
 $template->assign_vars(array(
 	'PORTAL_LEFT_COLUMN' 	=> $portal_config['portal_left_column_width'],
 	'PORTAL_RIGHT_COLUMN' 	=> $portal_config['portal_right_column_width'],

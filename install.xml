@@ -59,11 +59,11 @@ Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werde
         <contributions />
       </author>
     </author-group>
-	<mod-version>1.0.2</mod-version>
+	<mod-version>1.0.3</mod-version>
     <installation>
       <level>easy</level>
       <time>600</time>
-	<target-version>3.0.2</target-version>
+	<target-version>3.0.3</target-version>
     </installation>
 	 <link-group>
 		<link type="dependency" lang="en-gb" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
@@ -95,6 +95,14 @@ Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werde
 		<link type="parent" lang="de" href="install.xml">Installations-Anleitung</link>
     </link-group>
     <history>
+	  <entry>
+	    <date>2008-MM-DD</date>
+		<rev-version>1.0.3</rev-version>
+        <changelog lang="en-GB">
+        </changelog>
+		<changelog lang="de">
+        </changelog>
+      </entry>
 	  <entry>
 	    <date>2008-09-27</date>
 		<rev-version>1.0.2</rev-version>
@@ -309,8 +317,8 @@ Deny from All
     </open>
     <open src="adm/index.php">
       <edit>
-        <find><![CDATA[// End session management]]></find>
-        <action type="after-add"><![CDATA[$user->add_lang('mods/lang_portal_acp_logs');]]></action>
+        <find><![CDATA[require($phpbb_root_path . 'includes/functions_module.' . $phpEx);]]></find>
+        <action type="after-add"><![CDATA[require($phpbb_root_path . 'portal/includes/lang_adm_additional_blocks.' . $phpEx);]]></action>
       </edit>
     </open>
     <open src="includes/constants.php">
