@@ -330,11 +330,13 @@ Deny from All
     <open src="includes/functions.php">
       <edit>
         <find><![CDATA[// The following assigns all _common_ variables that may be used at any point in a template.]]></find>
-        <action type="before-add"><![CDATA[	$user->add_lang('mods/lang_portal');]]></action>
+        <action type="before-add"><![CDATA[	$user->add_lang('mods/lang_portal');
+			include_once($phpbb_root_path . 'portal/includes/functions.'.$phpEx);
+	$portal_config = obtain_portal_config();]]></action>
       </edit>
       <edit>
         <find><![CDATA['U_PRIVATEMSGS'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),]]></find>
-        <action type="before-add"><![CDATA[		'U_PORTAL'				=> append_sid("{$phpbb_root_path}portal.$phpEx"),]]></action>
+        <action type="before-add"><![CDATA[		'U_PORTAL'				=> ($portal_config['portal_enable']) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></action>
       </edit>
     </open>
 	<open src="includes/session.php">
@@ -352,7 +354,7 @@ Deny from All
         <find><![CDATA[<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a> <!-- BEGIN navlinks --> <strong>&#8249;</strong>]]></find>
         <inline-edit>
           <inline-find><![CDATA[<li class="icon-home">]]></inline-find>
-          <inline-action type="after-add"><![CDATA[<a href="{U_PORTAL}">{L_PORTAL}</a> &#187; ]]></inline-action>
+          <inline-action type="after-add"><![CDATA[<!-- IF U_PORTAL --><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <!-- ENDIF -->]]></inline-action>
         </inline-edit>
       </edit>
       <edit>
@@ -370,7 +372,7 @@ Deny from All
         <find><![CDATA[<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>]]></find>
         <inline-edit>
           <inline-find><![CDATA[<li class="icon-home">]]></inline-find>
-          <inline-action type="after-add"><![CDATA[<a href="{U_PORTAL}">{L_PORTAL}</a> &#187; ]]></inline-action>
+          <inline-action type="after-add"><![CDATA[<!-- IF U_PORTAL --><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <!-- ENDIF -->]]></inline-action>
         </inline-edit>
       </edit>
     </open>
