@@ -3,38 +3,6 @@
 
 <!--version $Id$ //-->
 
-<!--
-.gensmall {
-	margin: 1px 1px;
-	font-size: 10px;
-}
-
-small, .small {
-	font-size:10px; 
-	font-weight:bold;
-	font-family:Arial, Helvetica, sans-serif;
-}
-
-/* Container for sub-navigation list */
-#navigation {
-	padding-top: 0px;
-	font-size: 1.1em;
-}
-
-/* Link styles for the sub-section links */
-#navigation a {
-	color: #105289;
-	font-weight: normal;
-	padding: 1px;
-	display:block;
-}
-
-#navigation a:hover {
-	color: #d31141;
-}
-//-->
-
-
 <table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
 <tr>
 <!-- [+] left block area -->
@@ -43,7 +11,9 @@ small, .small {
 		<!-- IF S_DISPLAY_MAINMENU -->
 			<!-- INCLUDE portal/block/main_menu.html -->
 		<!-- ENDIF -->
-		
+
+		<!-- INCLUDE portal/block/additional_blocks_left.html -->			
+
 		<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
 			<!-- INCLUDE portal/block/birthday_list.html -->
 		<!-- ENDIF -->
@@ -130,6 +100,8 @@ small, .small {
 			<!-- ENDIF -->
 		<!-- ENDIF -->
 
+		<!-- INCLUDE portal/block/additional_blocks_center.html -->	
+
 		<!-- IF S_DISPLAY_POLL -->
 			<!-- INCLUDE portal/block/poll.html -->
 		<!-- ENDIF -->
@@ -187,6 +159,8 @@ small, .small {
 				<!-- INCLUDE portal/block/user_menu.html -->
 			<!-- ENDIF -->
 		<!-- ENDIF -->
+	
+		<!-- INCLUDE portal/block/additional_blocks_right.html -->	
 
 		<!-- IF not S_IS_BOT and S_USER_LOGGED_IN and S_ZEBRA_ENABLED and S_DISPLAY_FRIENDS -->
 			<!-- INCLUDE portal/block/online_friends.html -->
