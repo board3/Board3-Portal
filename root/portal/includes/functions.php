@@ -68,7 +68,7 @@ function set_portal_config($config_name, $config_value)
 }
 
 // 
-include($phpbb_root_path . 'includes/message_parser.'.$phpEx);
+include_once($phpbb_root_path . 'includes/message_parser.'.$phpEx);
 
 // fetch post for news & announce
 function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0)
