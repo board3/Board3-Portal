@@ -57,10 +57,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_CLOCK_EXPLAIN'					=> 'Display this block on the portal.',
 	'PORTAL_LINK_US'						=> 'Link us block',
 	'PORTAL_LINK_US_EXPLAIN'				=> 'Display this block on the portal.',
-	'PORTAL_BIRTHDAYS'						=> 'Birthday block',
-	'PORTAL_BIRTHDAYS_EXPLAIN'				=> 'Display this block on the portal.',
-	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Birthdays ahead days',
-	'PORTAL_BIRTHDAYS_AHEAD_EXPLAIN'		=> 'How many days to look ahead for birthdays.',
 	'PORTAL_SEARCH'							=> 'Search block',
 	'PORTAL_SEARCH_EXPLAIN'					=> 'Display this block on the portal.',
 	'PORTAL_WELCOME'						=> 'Welcome center block',
@@ -88,6 +84,14 @@ $lang = array_merge($lang, array(
 	'PORTAL_SHOW_REPLIES_VIEWS'				=> 'Reply and view counts display',
 	'PORTAL_SHOW_REPLIES_VIEWS_EXPLAIN'		=> 'Setting for the compact block.<br />If Yes, reply and view counts will be displayed in 2 extra columns. When No, replies and views will be shown beside the forum name. Select No if you have problems with the display of the extra columns due to the extra width required.', 
 
+	// birthdays
+	'ACP_PORTAL_BIRTHDAYS_SETTINGS'			=> 'Birthdays Settings',
+	'ACP_PORTAL_BIRTHDAYS_SETTINGS_EXPLAIN'	=> 'Here you can change your birthdays information and certain specific options.',
+	'PORTAL_BIRTHDAYS'						=> 'Birthday block',
+	'PORTAL_BIRTHDAYS_EXPLAIN'				=> 'Display this block on the portal.',
+	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Birthdays ahead days',
+	'PORTAL_BIRTHDAYS_AHEAD_EXPLAIN'		=> 'How many days to look ahead for birthdays.',
+	
 	// global announcements
 	'ACP_PORTAL_ANNOUNCE_INFO'					=> 'Global announcements',
 	'ACP_PORTAL_ANNOUNCE_SETTINGS'				=> 'Global announcements settings',

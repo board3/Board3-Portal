@@ -73,8 +73,29 @@ $sql_update['1.0.0RC3'] = array(
 	"INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_show_news_replies_views', '1');",
 );
 
-$sql_update['1.0.3'] = array(
+$sql_update['1.0.3RC1'] = array(
 	"INSERT INTO phpbb_portal_config (config_name, config_value) VALUES ('portal_enable', '1');",
+);
+
+$mod_update['1.0.3RC1'] = array(
+	'birthdayblock' => array(
+		'module_basename'   => 'portal',
+		'module_enabled'   => 1,
+		'module_display'   => 1,
+		'module_class'      => 'acp',
+		'module_langname'   => 'ACP_PORTAL_BIRTHDAYS_INFO',
+		'module_mode'      => 'birthdays',
+		'module_auth'      => 'acl_a_portal_manage'
+	),
+	'friendblock' => array(
+		'module_basename'   => 'portal',
+		'module_enabled'   => 1,
+		'module_display'   => 1,
+		'module_class'      => 'acp',
+		'module_langname'   => 'ACP_PORTAL_FRIENDS_INFO',
+		'module_mode'      => 'friends',
+		'module_auth'      => 'acl_a_portal_manage'
+	),
 );
 
 ?>

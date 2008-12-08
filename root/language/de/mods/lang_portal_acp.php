@@ -56,10 +56,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_CLOCK_EXPLAIN'					=> 'Die Uhr auf dem Portal anzeigen.',
 	'PORTAL_LINK_US'						=> 'Verlink uns',
 	'PORTAL_LINK_US_EXPLAIN'				=> 'Diesen Block auf dem Portal anzeigen.',
-	'PORTAL_BIRTHDAYS'						=> 'Geburtstage',
-	'PORTAL_BIRTHDAYS_EXPLAIN'				=> 'Diesen Block auf dem Portal anzeigen.',
-	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Anstehende Geburtstage',
-	'PORTAL_BIRTHDAYS_AHEAD_EXPLAIN'		=> 'Zeitraum für die Geburtstagsvorschau (Tage)',	
 	'PORTAL_SEARCH'							=> 'Suche',
 	'PORTAL_SEARCH_EXPLAIN'					=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_WELCOME'						=> 'Willkommen',
@@ -82,6 +78,14 @@ $lang = array_merge($lang, array(
 	// news and announcements
 	'PORTAL_SHOW_REPLIES_VIEWS'				=> '"Antworten" und "Zugriffe" in Extraspalten',
 	'PORTAL_SHOW_REPLIES_VIEWS_EXPLAIN'		=> 'Einstellung für den kompakter Bekanntmachungen-Block-Stil.<br />Wenn aktiviert, wird die Anzahl der Antworten und Zugriffe in gesonderten Spalten angezeigt. Wenn deaktiviert gibt es nur zwei Spalten und die Antworten und Zugriffe werden neben "Forum" angezeigt. Bei Darstellungsproblemen mit z.B. schmalen Styles bitte deaktivieren.', 
+	
+	// birthdays
+	'ACP_PORTAL_BIRTHDAYS_SETTINGS'			=> 'Einstellungen für den Geburtstage-Block',
+	'ACP_PORTAL_BIRTHDAYS_SETTINGS_EXPLAIN'	=> 'Hier kannst du die Einstellungen für den Geburtstage-Block ändern.',
+	'PORTAL_BIRTHDAYS'						=> 'Geburtstage',
+	'PORTAL_BIRTHDAYS_EXPLAIN'				=> 'Diesen Block auf dem Portal anzeigen.',
+	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Anstehende Geburtstage',
+	'PORTAL_BIRTHDAYS_AHEAD_EXPLAIN'		=> 'Zeitraum für die Geburtstagsvorschau (Tage)',	
 	
 	// announcements
 	'ACP_PORTAL_ANNOUNCE_INFO'					=> 'Bekanntmachungen',

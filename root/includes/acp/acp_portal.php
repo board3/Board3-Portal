@@ -44,23 +44,19 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_GENERAL_INFO',
 					'vars'	=> array(
 						'legend1'					=> 'ACP_PORTAL_GENERAL_SETTINGS',
-						'portal_advanced_stat'		=> array('lang' => 'PORTAL_ADVANCED_STAT',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_enable'				=> array('lang' => 'PORTAL_ENABLE',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_advanced_stat'		=> array('lang' => 'PORTAL_ADVANCED_STAT',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_search'				=> array('lang' => 'PORTAL_SEARCH',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_leaders'			=> array('lang' => 'PORTAL_LEADERS',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_leaders_ext'		=> array('lang' => 'PORTAL_LEADERS_EXT',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_clock'				=> array('lang' => 'PORTAL_CLOCK',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_link_us'			=> array('lang' => 'PORTAL_LINK_US',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_birthdays'			=> array('lang' => 'PORTAL_BIRTHDAYS',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_birthdays_ahead'	=> array('lang' => 'PORTAL_BIRTHDAYS_AHEAD',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 						'portal_random_member'		=> array('lang' => 'PORTAL_RANDOM_MEMBER',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_forum_index'		=> array('lang' => 'PORTAL_FORUM_INDEX',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_whois_online'		=> array('lang' => 'PORTAL_WHOIS_ONLINE',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_change_style'		=> array('lang' => 'PORTAL_CHANGE_STYLE',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_main_menu'			=> array('lang' => 'PORTAL_MAIN_MENU',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_user_menu'			=> array('lang' => 'PORTAL_USER_MENU',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_friends'			=> array('lang' => 'PORTAL_FRIENDS',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_max_online_friends'	=> array('lang' => 'PORTAL_MAX_ONLINE_FRIENDS',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 
 						'legend2'					=> 'ACP_PORTAL_COLUMN_WIDTH_SETTINGS',
 						'portal_left_column_width'	=> array('lang' => 'PORTAL_LEFT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
@@ -131,7 +127,7 @@ class acp_portal
 				$display_vars = array(
 					'title'	=> 'ACP_PORTAL_PAYPAL_SETTINGS',
 					'vars'	=> array(
-						'legend2'							=> 'ACP_PORTAL_PAYPAL_SETTINGS',
+						'legend1'							=> 'ACP_PORTAL_PAYPAL_SETTINGS',
 						'portal_pay_c_block'				=> array('lang' => 'PORTAL_PAY_C_BLOCK'				 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_pay_s_block'				=> array('lang' => 'PORTAL_PAY_S_BLOCK'				 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_pay_acc'					=> array('lang' => 'PORTAL_PAY_ACC'						,	'validate' => 'string',		'type' => 'text:25:100',	 'explain' => true),
@@ -222,6 +218,27 @@ class acp_portal
 				);
 			break;
 
+			case 'birthdays':
+				$display_vars = array(
+					'title'	=> 'ACP_PORTAL_BIRTHDAYS_SETTINGS',
+					'vars'	=> array(
+						'legend1'					=> 'ACP_PORTAL_BIRTHDAYS_SETTINGS',
+						'portal_birthdays'			=> array('lang' => 'PORTAL_BIRTHDAYS',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_birthdays_ahead'	=> array('lang' => 'PORTAL_BIRTHDAYS_AHEAD',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+					)
+				);
+			break;
+
+			case 'friends':
+				$display_vars = array(
+					'title'	=> 'ACP_PORTAL_FRIENDS_SETTINGS',
+					'vars'	=> array(
+						'legend1'					=> 'ACP_PORTAL_FRIENDS_SETTINGS',
+						'portal_friends'			=> array('lang' => 'PORTAL_FRIENDS',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_max_online_friends'	=> array('lang' => 'PORTAL_MAX_ONLINE_FRIENDS',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+					)
+				);
+			break;
 			case 'minicalendar':
 				$display_vars = array(
 					'title'	=> 'ACP_PORTAL_MINICALENDAR_SETTINGS',

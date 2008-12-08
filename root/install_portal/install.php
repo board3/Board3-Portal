@@ -10,7 +10,7 @@
 *
 */
 
-$current_version = '1.0.3';
+$current_version = '1.0.3RC1';
 
 // If only checking version, exit.
 if( defined('IN_PHPBB') )
@@ -28,6 +28,7 @@ $portal_root_path = $phpbb_root_path.'portal/';
 
 include($phpbb_root_path . 'common.'.$phpEx);
 include($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
+include($phpbb_root_path . 'includes/acp/auth.' . $phpEx);
 
 $user->session_begin();
 $auth->acl($user->data);
@@ -339,7 +340,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_GENERAL_INFO',
 					'module_mode'		=> 'general',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($general);
 				$news = array(
@@ -350,7 +351,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_NEWS_INFO',
 					'module_mode'		=> 'news',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($news);
 				$announcements = array(
@@ -361,7 +362,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_ANNOUNCE_INFO',
 					'module_mode'		=> 'announcements',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($announcements);
 				$welcome = array(
@@ -372,7 +373,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_WELCOME_INFO',
 					'module_mode'		=> 'welcome',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($welcome);
 				$recent = array(
@@ -383,7 +384,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_RECENT_INFO',
 					'module_mode'		=> 'recent',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($recent);
 				$wordgraph = array(
@@ -394,7 +395,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_WORDGRAPH_INFO',
 					'module_mode'		=> 'wordgraph',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($wordgraph);
 				$paypal = array(
@@ -405,7 +406,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_PAYPAL_INFO',
 					'module_mode'		=> 'paypal',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($paypal);
 				$attachments = array(
@@ -416,7 +417,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO',
 					'module_mode'		=> 'attachments',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($attachments);
 				$members = array(
@@ -427,7 +428,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_MEMBERS_INFO',
 					'module_mode'		=> 'members',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($members);
 				$polls = array(
@@ -438,7 +439,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_POLLS_INFO',
 					'module_mode'		=> 'polls',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($polls);
 				$bots = array(
@@ -449,7 +450,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_BOTS_INFO',
 					'module_mode'		=> 'bots',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($bots);
 				$poster = array(
@@ -460,7 +461,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_MOST_POSTER_INFO',
 					'module_mode'		=> 'poster',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($poster);
 				$minicalendar = array(
@@ -471,7 +472,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_MINICALENDAR_INFO',
 					'module_mode'		=> 'minicalendar',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($minicalendar);
 				$customblock = array(
@@ -482,7 +483,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_CUSTOM_INFO',
 					'module_mode'		=> 'customblock',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($customblock);
 				$linkblock = array(
@@ -493,9 +494,38 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					'module_class'		=> 'acp',
 					'module_langname'	=> 'ACP_PORTAL_LINKS_INFO',
 					'module_mode'		=> 'links',
-					'module_auth'		=> ''
+					'module_auth'		=> 'acl_a_portal_manage'
 				);
 				$modules->update_module_data($linkblock);
+				$friendblock = array(
+					'module_basename'	=> 'portal',
+					'module_enabled'	=> 1,
+					'module_display'	=> 1,
+					'parent_id'			=> $portal['module_id'],
+					'module_class'		=> 'acp',
+					'module_langname'	=> 'ACP_PORTAL_FRIENDS_INFO',
+					'module_mode'		=> 'friends',
+					'module_auth'		=> 'acl_a_portal_manage'
+				);
+				$modules->update_module_data($friendblock);
+				$birthdayblock = array(
+					'module_basename'	=> 'portal',
+					'module_enabled'	=> 1,
+					'module_display'	=> 1,
+					'parent_id'			=> $portal['module_id'],
+					'module_class'		=> 'acp',
+					'module_langname'	=> 'ACP_PORTAL_BIRTHDAYS_INFO',
+					'module_mode'		=> 'birthdays',
+					'module_auth'		=> 'acl_a_portal_manage'
+				);
+				$modules->update_module_data($birthdayblock);
+				$auth_admin = new auth_admin();
+				$auth_admin->acl_add_option(array(
+					'local'			=> array(),
+					'global'		=> array('a_portal_manage')
+				));
+				$cache->destroy('acl_options');
+
 				// clear cache and log what we did
 				$cache->purge();
 				add_log('admin', $page_title . ' installed');
@@ -637,7 +667,9 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 							OR module_langname = 'ACP_PORTAL_MOST_POSTER_INFO'
 							OR module_langname = 'ACP_PORTAL_MINICALENDAR_INFO'
 							OR module_langname = 'ACP_PORTAL_CUSTOM_INFO'
-							OR module_langname = 'ACP_PORTAL_LINKS_INFO'";
+							OR module_langname = 'ACP_PORTAL_LINKS_INFO'
+							OR module_langname = 'ACP_PORTAL_BIRTHDAYS_INFO'
+							OR module_langname = 'ACP_PORTAL_FRIENDS_INFO'";
 					$result = $db->sql_query($sql);
 					while ($row = $db->sql_fetchrow($result))
 					{
@@ -688,7 +720,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_INFO',
 						'module_mode'		=> '',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($portal);
 					$general = array(
@@ -699,7 +731,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_GENERAL_INFO',
 						'module_mode'		=> 'general',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($general);
 					$news = array(
@@ -710,7 +742,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_NEWS_INFO',
 						'module_mode'		=> 'news',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($news);
 					$announcements = array(
@@ -721,7 +753,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_ANNOUNCE_INFO',
 						'module_mode'		=> 'announcements',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($announcements);
 					$welcome = array(
@@ -732,7 +764,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_WELCOME_INFO',
 						'module_mode'		=> 'welcome',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($welcome);
 					$recent = array(
@@ -743,7 +775,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_RECENT_INFO',
 						'module_mode'		=> 'recent',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($recent);
 					$wordgraph = array(
@@ -754,7 +786,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_WORDGRAPH_INFO',
 						'module_mode'		=> 'wordgraph',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($wordgraph);
 					$paypal = array(
@@ -765,7 +797,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_PAYPAL_INFO',
 						'module_mode'		=> 'paypal',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($paypal);
 					$attachments = array(
@@ -776,7 +808,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO',
 						'module_mode'		=> 'attachments',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($attachments);
 					$members = array(
@@ -787,7 +819,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_MEMBERS_INFO',
 						'module_mode'		=> 'members',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($members);
 					$polls = array(
@@ -798,7 +830,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_POLLS_INFO',
 						'module_mode'		=> 'polls',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($polls);
 					$bots = array(
@@ -809,7 +841,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_BOTS_INFO',
 						'module_mode'		=> 'bots',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($bots);
 					$poster = array(
@@ -820,7 +852,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_MOST_POSTER_INFO',
 						'module_mode'		=> 'poster',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($poster);
 					$minicalendar = array(
@@ -831,7 +863,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_MINICALENDAR_INFO',
 						'module_mode'		=> 'minicalendar',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($minicalendar);
 					$customblock = array(
@@ -842,7 +874,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_class'		=> 'acp',
 						'module_langname'	=> 'ACP_PORTAL_CUSTOM_INFO',
 						'module_mode'		=> 'customblock',
-						'module_auth'		=> ''
+						'module_auth'		=> 'acl_a_portal_manage'
 					);
 					$modules->update_module_data($customblock);
 					$linkblock = array(
@@ -855,8 +887,37 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						'module_mode'      => 'links',
 						'module_auth'      => ''
 					);
-					$modules->update_module_data($linkblock);					
-		
+					$modules->update_module_data($linkblock);
+					$friendblock = array(
+						'module_basename'	=> 'portal',
+						'module_enabled'	=> 1,
+						'module_display'	=> 1,
+						'parent_id'			=> $portal['module_id'],
+						'module_class'		=> 'acp',
+						'module_langname'	=> 'ACP_PORTAL_FRIENDS_INFO',
+						'module_mode'		=> 'friends',
+						'module_auth'		=> 'acl_a_portal_manage'
+					);
+					$modules->update_module_data($friendblock);
+					$birthdayblock = array(
+						'module_basename'	=> 'portal',
+						'module_enabled'	=> 1,
+						'module_display'	=> 1,
+						'parent_id'			=> $portal['module_id'],
+						'module_class'		=> 'acp',
+						'module_langname'	=> 'ACP_PORTAL_BIRTHDAYS_INFO',
+						'module_mode'		=> 'birthdays',
+						'module_auth'		=> 'acl_a_portal_manage'
+					);
+					$modules->update_module_data($birthdayblock);	
+
+					$auth_admin = new auth_admin();
+					$auth_admin->acl_add_option(array(
+						'local'			=> array(),
+						'global'		=> array('a_portal_manage')
+					));
+					$cache->destroy('acl_options');	
+
 					// clear cache and log what we did
 					$cache->purge();
 					add_log('admin', $page_title . ' updated');
@@ -938,6 +999,47 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 						}
 					}
 
+					if( $old_version < '1.0.3RC1' )
+					{
+						$auth_admin = new auth_admin();
+						$auth_admin->acl_add_option(array(
+							'local'			=> array(),
+							'global'		=> array('a_portal_manage')
+						));
+						$cache->destroy('acl_options');
+					
+						// Update the ACP-Modules permissions
+						$sql = 'SELECT module_id FROM ' . MODULES_TABLE . "
+						WHERE module_langname = 'ACP_PORTAL_GENERAL_INFO'
+							OR module_langname = 'ACP_PORTAL_NEWS_INFO'
+							OR module_langname = 'ACP_PORTAL_ANNOUNCE_INFO'
+							OR module_langname = 'ACP_PORTAL_WELCOME_INFO'
+							OR module_langname = 'ACP_PORTAL_RECENT_INFO'
+							OR module_langname = 'ACP_PORTAL_WORDGRAPH_INFO'
+							OR module_langname = 'ACP_PORTAL_PAYPAL_INFO'
+							OR module_langname = 'ACP_PORTAL_ADS_INFO'
+							OR module_langname = 'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'
+							OR module_langname = 'ACP_PORTAL_MEMBERS_INFO'
+							OR module_langname = 'ACP_PORTAL_POLLS_INFO'
+							OR module_langname = 'ACP_PORTAL_BOTS_INFO'
+							OR module_langname = 'ACP_PORTAL_MOST_POSTER_INFO'
+							OR module_langname = 'ACP_PORTAL_MINICALENDAR_INFO'
+							OR module_langname = 'ACP_PORTAL_CUSTOM_INFO'
+							OR module_langname = 'ACP_PORTAL_LINKS_INFO'
+							OR module_langname = 'ACP_PORTAL_BIRTHDAYS_INFO'
+							OR module_langname = 'ACP_PORTAL_FRIENDS_INFO'
+							";
+						$result = $db->sql_query($sql);
+						while ($row = $db->sql_fetchrow($result))
+						{
+							$sql = 'UPDATE ' . MODULES_TABLE . "
+								SET module_auth = 'acl_a_portal_manage'
+								WHERE module_id = '{$row['module_id']}'";
+							$db->sql_query($sql);
+						}
+						$db->sql_freeresult($result);
+					}
+
 					// clear cache and log what we did
 					$cache->purge();
 					add_log('admin', $page_title . ' updated');
@@ -1013,6 +1115,8 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 							OR module_langname = 'ACP_PORTAL_MINICALENDAR_INFO'
 							OR module_langname = 'ACP_PORTAL_CUSTOM_INFO'
 							OR module_langname = 'ACP_PORTAL_LINKS_INFO'
+							OR module_langname = 'ACP_PORTAL_BIRTHDAYS_INFO'
+							OR module_langname = 'ACP_PORTAL_FRIENDS_INFO'
 							";
 					$result = $db->sql_query($sql);
 					while ($row = $db->sql_fetchrow($result))
@@ -1054,6 +1158,17 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 					}
 					$db->sql_freeresult($result);
 
+					$sql = 'SELECT auth_option_id FROM ' . ACL_OPTIONS_TABLE . "
+						WHERE auth_option = 'a_portal_manage'
+							";
+					$result = $db->sql_query($sql);
+					while ($row = $db->sql_fetchrow($result))
+					{
+						$sql = 'DELETE FROM ' . ACL_OPTIONS_TABLE . " WHERE auth_option_id = '{$row['auth_option_id']}'";
+						$db->sql_query($sql);
+					}
+					$db->sql_freeresult($result);
+
 					// clear cache and log what we did
 					$cache->purge();
 					add_log('admin', $page_title . ' uninstalled');
@@ -1083,7 +1198,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 } 
 else
 {
-	echo '<p>' . login_box('', $user->lang['INSTALLER_NEEDS_ADMIN']);
+	echo login_box('', $user->lang['INSTALLER_NEEDS_ADMIN']);
 }
 
 ?>

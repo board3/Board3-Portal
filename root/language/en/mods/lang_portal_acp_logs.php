@@ -48,7 +48,8 @@ $lang = array_merge($lang, array(
 	'LOG_CONFIG_MINICALENDAR'		=> '<strong>Portal: Altered mini calendar settings</strong>',
 	'LOG_CONFIG_CUSTOMBLOCK'		=> '<strong>Portal: Altered custom block settings</strong>',
 	'LOG_CONFIG_LINKS'				=> '<strong>Portal: Altered links block settings</strong>',
-
+	'LOG_CONFIG_FRIENDS'			=> '<strong>Portal: Altered friends block settings</strong>',
+	'LOG_CONFIG_BIRTHDAYS'			=> '<strong>Portal: Altered birthdays block settings</strong>',
 ));
 
 ?>
