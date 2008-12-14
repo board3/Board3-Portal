@@ -2,20 +2,20 @@
 <!-- BEGIN announcements_row -->
 <!-- IF announcements_row.S_FIRST_ROW -->
 <table class="tablebg" cellspacing="1" width="100%">
-		<tr class="nav">
-			<td class="cat" colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_ANNOUNCEMENTS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_ANNOUNCEMENTS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_ANNOUNCEMENTS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->" valign="middle" align="center">{L_LATEST_ANNOUNCEMENTS} <a name="a"></a></td>
-		</tr>
 		<tr>
+			<th colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_ANNOUNCEMENTS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_ANNOUNCEMENTS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_ANNOUNCEMENTS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->">{L_LATEST_ANNOUNCEMENTS} <a name="a"></a></th>
+		</tr>
+		<tr class="nav">
 			<!-- IF S_TOPIC_ICONS -->
-				<th colspan="3">&nbsp;{L_TOPICS}&nbsp;</th>
+				<td class="cat" align="center" colspan="3">&nbsp;{L_TOPICS}&nbsp;</td>
 			<!-- ELSE -->
-				<th colspan="2">&nbsp;{L_TOPICS}&nbsp;</th>
+				<td class="cat" align="center" colspan="2">&nbsp;{L_TOPICS}&nbsp;</td>
 			<!-- ENDIF -->
-			<!-- IF S_DISPLAY_ANNOUNCEMENTS_RVS -->
-			<th>&nbsp;{L_REPLIES}&nbsp;</th>
-			<th>&nbsp;{L_VIEWS}&nbsp;</th>
+			<!-- IF S_DISPLAY_NEWS_RVS -->
+			<td class="cat" align="center">&nbsp;{L_REPLIES}&nbsp;</td>
+			<td class="cat" align="center">&nbsp;{L_VIEWS}&nbsp;</td>
 			<!-- ENDIF -->
-			<th>&nbsp;{L_LAST_POST}&nbsp;</th>
+			<td class="cat" align="center">&nbsp;{L_LAST_POST}&nbsp;</td>
 		</tr>
 <!-- ENDIF -->
 	<!-- IF announcements_row.S_NO_TOPICS  -->
@@ -31,7 +31,7 @@
 				<td class="row1">
 				<!-- IF announcements_row.PAGINATION --><span style="float: right; font-size:0.9em;"> [ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {announcements_row.PAGINATION} ] </span><!-- ENDIF -->
 					{announcements_row.ATTACH_ICON_IMG} <!-- IF announcements_row.S_POLL --> <strong style="font-size:1.1em;">{L_POLL}: </strong><!-- ENDIF --><a title="{L_POSTED}: {announcements_row.FIRST_POST_TIME}" href="{announcements_row.U_VIEW_COMMENTS}" class="topictitle">{announcements_row.TITLE}</a>
-					<p class="gensmall">{L_POSTED} {L_POST_BY_AUTHOR} {announcements_row.POSTER_FULL} {L_POSTED_ON_DATE} {announcements_row.TIME}
+					<p class="gensmall">{L_POSTED} {L_POST_BY_AUTHOR} {announcements_row.POSTER_FULL} &raquo; {announcements_row.TIME}
 					<!-- IF announcements_row.FORUM_NAME -->
 						<br />{L_FORUM}: <a href="{announcements_row.U_VIEWFORUM}" style="font-weight: bold;">{announcements_row.FORUM_NAME}</a>
 			<!-- ELSE -->
@@ -45,10 +45,10 @@
 				<td class="row2" width="50" align="center"><p class="topicdetails">{announcements_row.TOPIC_VIEWS}</p></td>
 				<!-- ENDIF -->
 				<td class="row1" width="140" align="center">
-					<p class="topicdetails"><!-- IF announcements_row.S_UNREAD_INFO --><a href="{announcements_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF -->
-					{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {announcements_row.USERNAME_FULL_LAST}
+					<p class="topicdetails" style="white-space: nowrap;"> {announcements_row.LAST_POST_TIME}</p>
+					<p class="topicdetails">{announcements_row.USERNAME_FULL_LAST}
+						<!-- IF not S_IS_BOT --><!-- IF announcements_row.S_UNREAD_INFO --><a href="{announcements_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --><!-- ENDIF -->
 					</p>
-					<p class="topicdetails" style="white-space: nowrap;">{L_POSTED_ON_DATE} {announcements_row.LAST_POST_TIME}</p>
 				</td>		
 			</tr>
 	<!-- ENDIF -->
