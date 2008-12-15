@@ -156,7 +156,7 @@ $lang = array_merge($lang, array(
 
 	// link us
 	'LINK_US'							=> 'Link zu uns ',
-	'LINK_US_TXT'					=> 'Benutze bitte diesen Link zum  <strong>%s</strong>',
+	'LINK_US_TXT'					=> 'Benutze bitte diesen Link um <strong>%s</strong> bei dir zu verlinken:',
 
 	// friends
 	'FRIENDS'							=> 'Freunde',
@@ -167,7 +167,7 @@ $lang = array_merge($lang, array(
 	'NO_FRIENDS_ONLINE'			=> 'Keine Freunde online',
 	
 	// last bots
-	'LAST_VISITED_BOTS'			=> 'Die letzten %s Bot-Besuche',
+	'LAST_VISITED_BOTS'			=> 'Die letzten %s Bots',
 	
 	// wordgraph
 	'WORDGRAPH'						=> 'Wordgraph',

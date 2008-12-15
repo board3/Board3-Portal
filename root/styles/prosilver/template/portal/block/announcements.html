@@ -1,12 +1,14 @@
 <!--version $Id$ //-->
+<!-- BEGIN announcements_row -->
+<!-- IF announcements_row.S_FIRST_ROW -->
 <div class="forabg">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
 		<ul class="topiclist">
 			<li class="header"><dl><dt>{L_LATEST_ANNOUNCEMENTS}</dt></dl></li>
 		</ul>
+<!-- ENDIF -->
 			<div class="postbody" style="width: 100%">
-				<!-- BEGIN announcements_row -->
 				<!-- IF announcements_row.S_NO_TOPICS  -->
 				<div class="post bg2">
 					<div class="inner"><span class="portal-corners-top-inner"><span></span></span>
@@ -19,7 +21,7 @@
 						<h4 class="first"><a name="a"></a><a name="a{announcements_row.A_ID}"></a><!-- IF announcements_row.S_UNREAD_INFO --><a href="{announcements_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {announcements_row.ATTACH_ICON_IMG} <!-- IF announcements_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --><!-- IF announcements_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{announcements_row.TOPIC_ICON_IMG}" width="{announcements_row.TOPIC_ICON_IMG_WIDTH}" height="{announcements_row.TOPIC_ICON_IMG_HEIGHT}" alt="" /> <!-- ENDIF --><a href="{announcements_row.U_VIEW_COMMENTS}"><strong>{announcements_row.TITLE}</strong></a></h4>
 						<!-- IF announcements_row.PAGINATION --><strong class="pagination"><span>{announcements_row.PAGINATION}</span></strong><!-- ENDIF -->
 						<ul class="linklist">
-							<li>{L_POSTED} {L_POST_BY_AUTHOR}: {announcements_row.POSTER_FULL} {L_POSTED_ON_DATE}: {announcements_row.TIME}</li>
+							<li>{L_POSTED} {L_POST_BY_AUTHOR}: {announcements_row.POSTER_FULL} &raquo; {announcements_row.TIME}</li>
 						</ul>
 						<ul class="linklist">
 							<li>
@@ -47,7 +49,7 @@
 						<span style="float: right; margin: 0 0 5px 0">{announcements_row.OPEN}<a href="{announcements_row.U_READ_FULL}">{announcements_row.L_READ_FULL}</a>{announcements_row.CLOSE}</span>
 						<div class="back2top"><a href="#wrap" class="top" title="{L_BACK_TO_TOP}">{L_BACK_TO_TOP}</a></div>
 					<!-- IF announcements_row.S_NOT_LAST --><br style="clear:both" /><!-- ENDIF -->
-					<!-- IF announcements_row.S_LAST_ROW -->
+<!-- IF announcements_row.S_LAST_ROW -->
 					<!-- IF AP_PAGINATION or TOTAL_ANNOUNCEMENTS -->
 						<hr class="dashed" />
 						<div class="pagination">
@@ -55,13 +57,13 @@
 							<!-- IF AP_PAGE_NUMBER --><!-- IF AP_PAGINATION --> &bull; {AP_PAGE_NUMBER} &bull; <span>{AP_PAGINATION}</span><!-- ELSE --> &bull; {AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
 						</div>
 					<!-- ENDIF -->
-					<!-- ENDIF -->
 					<span class="portal-corners-bottom-inner"><span></span></span></div>
 				</div>
 				<!-- ENDIF -->
-				<!-- END announcements_row -->
 			</div>
 		<span class="corners-bottom"><span></span></span>
 	</div>
 </div>
 <br style="clear:both" />
+<!-- ENDIF -->
+<!-- END announcements_row -->
