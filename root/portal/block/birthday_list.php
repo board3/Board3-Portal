@@ -47,6 +47,13 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 	{
 		$birthdaydate = (gmdate('Y') . '-' . trim(substr($row['user_birthday'],3,-5)) . '-' . trim(substr($row['user_birthday'],0,-8) ));
 		$user_birthday = strtotime($birthdaydate);
+		
+		if( $user_birthday < $today )
+		{
+			$birthdaydate = (gmdate('Y')+1 . '-' . trim(substr($row['user_birthday'],3,-5)) . '-' . trim(substr($row['user_birthday'],0,-8) ));
+			$user_birthday = strtotime($birthdaydate);
+		}
+		
 		if($user_birthday == $today)
 		{
 			$birthday_list .= get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']);
