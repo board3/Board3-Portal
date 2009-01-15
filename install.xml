@@ -63,7 +63,7 @@ Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werde
     <installation>
       <level>easy</level>
       <time>600</time>
-	<target-version>3.0.3</target-version>
+	<target-version>3.0.4</target-version>
     </installation>
 	 <link-group>
 		<link type="dependency" lang="en-gb" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>

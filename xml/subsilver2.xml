@@ -60,11 +60,11 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <contributions />
       </author>
     </author-group>
- 	<mod-version>1.0.2</mod-version>
+ 	<mod-version>1.0.3</mod-version>
     <installation>
       <level>easy</level>
       <time>600</time>
-	<target-version>3.0.2</target-version>
+	<target-version>3.0.4</target-version>
     </installation>
 	 <link-group>
 		<link type="dependency" lang="en-gb" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
@@ -108,7 +108,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
         <find><![CDATA[<p class="breadcrumbs"><a href="{U_INDEX}">{L_INDEX}</a><!-- BEGIN navlinks --> &#187; ]]></find>
         <inline-edit>
           <inline-find><![CDATA[<a href="{U_INDEX}">{L_INDEX}</a>]]></inline-find>
-          <inline-action type="before-add"><![CDATA[<a href="{U_PORTAL}">{L_PORTAL}</a> &#187; ]]></inline-action>
+          <inline-action type="before-add"><![CDATA[<!-- IF U_PORTAL --><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <!-- ENDIF -->]]></inline-action>
         </inline-edit>
       </edit>
     </open>
