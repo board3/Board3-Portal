@@ -1,0 +1,84 @@
+<?php
+/**
+*
+* @package - Board3portal
+* @version $Id$
+* @copyright (c) kevin / saint ( www.board3.de/ ), (c) Ice, (c) nickvergessen ( www.flying-bits.org/ ), (c) redbull254 ( www.digitalfotografie-foren.de ), (c) Christian_N ( www.phpbb-projekt.de )
+* @installer based on: phpBB Gallery by nickvergessen, www.flying-bits.org
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+*
+*/
+
+/**
+* @ignore
+*/
+
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+if (!defined('IN_INSTALL'))
+{
+	exit;
+}
+
+$oudated_files = array(
+    'language/de/mods/portal_install.php',
+	'language/en/mods/portal_install.php',
+    'portal/images/bullet.gif',
+    'portal/images/clock.swf',
+    'portal/images/dot.gif',
+    'portal/images/icon_topic_attach.gif',
+    'portal/images/index.html',
+    'portal/images/link.png',
+    'portal/images/member.gif',
+    'portal/images/mini_cal_icon_left_arrow.png',
+    'portal/images/mini_cal_icon_right_arrow.png',
+    'portal/images/paypal.gif',
+	'portal/images/board3clock.swf',
+    'styles/prosilver/template/portal/block/active.html',
+    'styles/prosilver/template/portal/block/ads_center.html',
+    'styles/prosilver/template/portal/block/ads_small.html',
+    'styles/prosilver/template/portal/block/donation/donation.html',
+    'styles/prosilver/template/portal/block/donation/donation_small.html',
+    'styles/prosilver/template/portal/block/donation/index.html',
+    'styles/prosilver/template/portal/block/donation/paypal.html',
+    'styles/prosilver/template/portal/block/main_menu_bu.html',
+    'styles/prosilver/theme/images/portal/corners_left.gif',
+    'styles/prosilver/theme/images/portal/corners_left.png',
+    'styles/prosilver/theme/images/portal/corners_left1.gif',
+    'styles/prosilver/theme/images/portal/corners_left1.png',
+    'styles/prosilver/theme/images/portal/corners_right.gif',
+    'styles/prosilver/theme/images/portal/corners_right.png',
+    'styles/prosilver/theme/images/portal/corners_right1.gif',
+    'styles/prosilver/theme/images/portal/corners_right1.png',
+    'styles/subsilver2/template/portal/block/donation/donation.html',
+    'styles/subsilver2/template/portal/block/donation/donation_small.html',
+    'styles/subsilver2/template/portal/block/donation/index.html',
+    'styles/subsilver2/template/portal/block/donation/paypal.html',
+    'styles/prosilver/theme/images/portal/clock.swf',
+    'styles/subsilver2/theme/images/portal/bullet.gif',
+    'styles/subsilver2/theme/images/portal/clock.swf',
+    'styles/subsilver2/theme/images/portal/dot.gif',
+    'styles/subsilver2/theme/images/portal/link.png',
+    'styles/subsilver2/theme/images/portal/member.gif',
+    'styles/subsilver2/theme/images/portal/portal_attach.gif',
+    'styles/subsilver2/theme/images/portal/portal_birthday.gif',
+    'styles/subsilver2/theme/images/portal/portal_calendar.gif',
+    'styles/subsilver2/theme/images/portal/portal_clock.gif',
+    'styles/subsilver2/theme/images/portal/portal_friends.gif',
+    'styles/subsilver2/theme/images/portal/portal_linklist.gif',
+    'styles/subsilver2/theme/images/portal/portal_link_us.gif',
+    'styles/subsilver2/theme/images/portal/portal_login.gif',
+    'styles/subsilver2/theme/images/portal/portal_menu.gif',
+    'styles/subsilver2/theme/images/portal/portal_newmember.gif',
+    'styles/subsilver2/theme/images/portal/portal_paypal.gif',
+    'styles/subsilver2/theme/images/portal/portal_random.gif',
+    'styles/subsilver2/theme/images/portal/portal_search.gif',
+    'styles/subsilver2/theme/images/portal/portal_statistic.gif',
+    'styles/subsilver2/theme/images/portal/portal_style.gif',
+    'styles/subsilver2/theme/images/portal/portal_team.gif',
+    'styles/subsilver2/theme/images/portal/portal_topposter.gif',
+);
+
+?>

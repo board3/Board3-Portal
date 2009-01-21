@@ -382,7 +382,23 @@ Deny from All
 		<action type="after-add"><![CDATA[@import url("portal.css");]]></action>
       </edit>
     </open>
-    <diy-instructions lang="en-gb">Browse to install_portal/install.php and run the installer, after successfull installation delete the installer.</diy-instructions>
-    <diy-instructions lang="de">install_portal/install.php aufrufen und ausführen, nach erfolgreicher Installation löschen</diy-instructions>
+    <diy-instructions lang="de"><![CDATA[Rufe install/ auf und führe den Installer aus
+
+Aktualisiere deine Styles:
+    "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
+    "Administrations-Bereich" (ACP) > "Styles" > "Themes" > jedes > "Aktualisieren"
+    "Administrations-Bereich" (ACP) > "Styles" > "Grafiksammlungen" > jedes > "Aktualisieren"
+
+Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
+]]></diy-instructions>
+    <diy-instructions lang="en-gb"><![CDATA[Browse to install/ and run the installer
+
+Refresh your Styles:
+    "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
+    "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
+    "Administration Control Panel" (ACP) > "Styles" > "Imagesets" > each > "refresh"
+
+Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"	
+]]></diy-instructions>
   </action-group>
 </mod>
