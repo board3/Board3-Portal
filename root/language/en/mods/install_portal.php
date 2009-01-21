@@ -1,14 +1,13 @@
 <?php
 /**
 *
-* install_gallery [Deutsch]
-*
-* @package phpBB Gallery
+* @package - Board3portal
 * @version $Id$
-* @copyright (c) 2007 nickvergessen nickvergessen@gmx.de http://www.flying-bits.org
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @copyright (c) kevin / saint ( www.board3.de/ ), (c) Ice, (c) nickvergessen ( www.flying-bits.org/ ), (c) redbull254 ( www.digitalfotografie-foren.de ), (c) Christian_N ( www.phpbb-projekt.de )
+* @installer based on: phpBB Gallery by nickvergessen, www.flying-bits.org
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
-**/
+*/
 
 /**
 * DO NOT CHANGE
