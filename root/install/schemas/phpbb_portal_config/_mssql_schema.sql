@@ -13,7 +13,7 @@ GO
 CREATE TABLE [phpbb_portal_config] (
 	[config_name] [varchar] (255) DEFAULT ('') NOT NULL ,
 	[config_value] [text] DEFAULT ('') NOT NULL 
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
 ALTER TABLE [phpbb_portal_config] WITH NOCHECK ADD 
