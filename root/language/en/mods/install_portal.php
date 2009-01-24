@@ -32,7 +32,7 @@ $lang = array_merge($lang, array(
 	'MODULES_SELECT_4ACP'		=> 	'Parent module for the ACP',
 	'MODULES_SELECT_NONE'		=> 	'No parent module',
 
-	'STAGE_ADVANCED_EXPLAIN'		=> 	'Please select the parent modules for the Board3 Portal modules. Usually there is no need to change these settings.',
+	'STAGE_ADVANCED_EXPLAIN'        =>  'Please select the parent modules for the Board3 Portal modules. Usually there is no need to change the default settings.',
 	'STAGE_CREATE_TABLE_EXPLAIN'	=> 	'The Board3 Portal database tables have been created and initialized with basic values. Proceed to the next step to finish the Board3 Portal installation.',
 	'STAGE_ADVANCED_SUCCESSFUL'		=> 	'The Board3 Portal modules have been created. Proceed to finish the Board3 Portal installation.',
 	'STAGE_UNINSTALL'				=> 	'Uninstall',
