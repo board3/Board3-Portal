@@ -91,78 +91,62 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 	</header>
 	<action-group>
 		<copy>
-			<file from="root/portal.php" to="portal.php" />
-			<file from="root/adm/mods/board3_portal_check_version.php" to="adm/mods/board3_portal_check_version.php" />
-			<file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />
-			<file from="root/includes/acp/info/acp_portal.php" to="includes/acp/info/acp_portal.php" />
-			<file from="root/install/*.*" to="install/*.*" />
-			<file from="root/install/schemas/*.*" to="install/schemas/*.*" />
-			<file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
-			<file from="root/portal/index.html" to="portal/index.html" />
-			<file from="root/portal/block/*.*" to="portal/block/*.*" />
-			<file from="root/portal/includes/*.*" to="portal/includes/*.*" />
-			<file from="root/portal/includes/mini_cal/*.*" to="portal/includes/mini_cal/*.*" />
-			<file from="root/styles/prosilver/template/portal/*.*" to="styles/prosilver/template/portal/*.*" />
-			<file from="root/styles/prosilver/template/portal/block/*.*" to="styles/prosilver/template/portal/block/*.*" />
-			<file from="root/styles/prosilver/theme/portal.css" to="styles/prosilver/theme/portal.css" />
-			<file from="root/styles/prosilver/theme/images/portal/*.*" to="styles/prosilver/theme/images/portal/*.*" />
+			<file from="root/styles/subsilver2/template/portal/*.*" to="styles/subsilver2/template/portal/*.*" />
+			<file from="root/styles/subsilver2/theme/images/portal/*.*" to="styles/subsilver2/theme/images/portal/*.*" />
 		</copy>
-		<open src="viewonline.php">
+		<open src="styles/subsilver2/template/breadcrumbs.html">
 			<edit>
-				<find><![CDATA[		case 'report':
-			$location = $user->lang['REPORTING_POST'];
-			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
-		break;]]></find>
-				<action type="after-add"><![CDATA[		case 'portal':
-			$user->add_lang('mods/lang_portal');
-			$location = $user->lang['VIEWING_PORTAL'];
-			$location_url = append_sid("{$phpbb_root_path}portal.$phpEx");
-		break;]]></action>
+				<find><![CDATA[<p class="breadcrumbs"><a href="{U_INDEX}">{L_INDEX}</a><!-- BEGIN navlinks --> &#187; ]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[<a href="{U_INDEX}">{L_INDEX}</a>]]></inline-find>
+					<inline-action type="before-add"><![CDATA[<!-- IF U_PORTAL --><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <!-- ENDIF -->]]></inline-action>
+				</inline-edit>
 			</edit>
 		</open>
-		<open src="adm/index.php">
+		<open src="styles/subsilver2/template/overall_header.html">
 			<edit>
-				<find><![CDATA[// End session management]]></find>
-				<action type="after-add"><![CDATA[$user->add_lang('mods/lang_portal_acp_logs');]]></action>
+				<find><![CDATA[	<div id="logodesc">
+		<table width="100%" cellspacing="0">
+		<tr>
+			<td><a href="{U_INDEX}">{SITE_LOGO_IMG}</a></td>
+			<td width="100%" align="center"><h1>{SITENAME}</h1><span class="gen">{SITE_DESCRIPTION}</span></td>
+		</tr>
+		</table>
+	</div>]]></find>
+				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN --> &nbsp;<span style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->]]></find>
+				<action type="before-add"><![CDATA[<!-- ENDIF -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN --> &nbsp;<span style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->]]></find>
+				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	<div id="datebar">
+		<table width="100%" cellspacing="0">
+		<tr>
+			<td class="gensmall"><!-- IF S_USER_LOGGED_IN -->{LAST_VISIT_DATE}<!-- ENDIF --></td>
+			<td class="gensmall" align="{S_CONTENT_FLOW_END}">{CURRENT_TIME}<br /></td>
+		</tr>
+		</table>
+	</div>]]></find>
+				<action type="after-add"><![CDATA[<!-- ENDIF -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<div id="wrapcentre">]]></find>
+				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	<!-- INCLUDE breadcrumbs.html -->
+
+	<br />]]></find>
+				<action type="after-add"><![CDATA[<!-- ENDIF -->]]></action>
 			</edit>
 		</open>
-		<open src="includes/session.php">
-			<edit>
-				<find><![CDATA[if (!empty($_GET['style']) && $auth->acl_get('a_styles'))]]></find>
-				<action type="replace-with"><![CDATA[if (!empty($_GET['style']))]]></action>
-			</edit>
-		</open>
-		<open src="styles/prosilver/template/overall_header.html">
-			<edit>
-				<find><![CDATA[<!-- IF not $S_IN_PORTAL -->]]></find>
-				<action type="replace-with"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
-			</edit>
-		</open>
-		<open src="styles/prosilver/theme/stylesheet.css">
-			<edit>
-				<find><![CDATA[@import url("colours.css");]]></find>
-				<action type="after-add"><![CDATA[@import url("portal.css");]]></action>
-			</edit>
-		</open>
-		<diy-instructions lang="de"><![CDATA[Rufe install/ auf und führe den Installer aus
-
-Aktualisiere deine Styles:
-    "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
-    "Administrations-Bereich" (ACP) > "Styles" > "Themes" > jedes > "Aktualisieren"
-    "Administrations-Bereich" (ACP) > "Styles" > "Grafiksammlungen" > jedes > "Aktualisieren"
-
-Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
-
-Subsilver2 User: bitte das komplette Verzeichnis subsilver2 mit den neuen Dateien überschreiben.]]></diy-instructions>
-		<diy-instructions lang="en-gb"><![CDATA[Browse to install/ and run the installer
-
-Refresh your Styles:
-    "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
-    "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
-    "Administration Control Panel" (ACP) > "Styles" > "Imagesets" > each > "refresh"
-
-Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"	
-
-Subsilver2 user: please upload the complete subsilver2 directory.]]></diy-instructions>
+		
+		<diy-instructions lang="en-gb">See general install.xml file</diy-instructions>
+		<diy-instructions lang="de">Siehe install.xml</diy-instructions>
 	</action-group>
 </mod>
