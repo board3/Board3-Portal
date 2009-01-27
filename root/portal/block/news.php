@@ -21,7 +21,7 @@ if (!defined('IN_PORTAL'))
 }
 
 $news = request_var('news', -1);
-$news = ($news > $portal_config['portal_number_of_news']) ? -1 : $news;
+$news = ($news > $portal_config['portal_number_of_news'] -1) ? -1 : $news;
 $user->add_lang('viewforum');
 $start = request_var('np', 0);
 $start = ($start < 0) ? 0 : $start;
