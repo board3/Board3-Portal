@@ -79,7 +79,7 @@ $result = $db->sql_query_limit($sql, $portal_config['portal_max_online_friends']
 
 while ($row = $db->sql_fetchrow($result))
 {
-	$which = (time() - $update_time < $row['online_time'] && $row['viewonline'] && $row['user_allow_viewonline']) ? 'online' : 'offline';
+	$which = (time() - $update_time < $row['online_time'] && ($row['viewonline'] || $auth->acl_get('u_viewonline'))) ? 'online' : 'offline';
 	$s_display_friends = ($row['user_id']) ? true : false;
 	
 	$template->assign_block_vars("friends_{$which}", array(
