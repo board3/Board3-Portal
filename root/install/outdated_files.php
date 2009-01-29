@@ -23,8 +23,13 @@ if (!defined('IN_INSTALL'))
 }
 
 $oudated_files = array(
+	 '/install_portal.php',
     'language/de/mods/portal_install.php',
 	'language/en/mods/portal_install.php',
+    'language/de/acp/portal.php',
+    'language/de/portal.php',
+    'language/en/acp/portal.php',
+    'language/en/portal.php',
     'portal/images/bullet.gif',
     'portal/images/clock.swf',
     'portal/images/dot.gif',

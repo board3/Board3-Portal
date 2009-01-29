@@ -33,7 +33,7 @@ if (!empty($setmodules))
 		'module_type'		=> 'uninstall',
 		'module_title'		=> 'UNINSTALL',
 		'module_filename'	=> substr(basename(__FILE__), 0, -strlen($phpEx)-1),
-		'module_order'		=> 30,
+		'module_order'		=> 40,
 		'module_subs'		=> '',
 		'module_stages'		=> array('INTRO', 'UNINSTALL'),
 		'module_reqs'		=> ''
@@ -89,40 +89,7 @@ class install_uninstall extends module
 		$s_hidden_fields = '';
 
 		// Drop thes tables if existing
-		switch( $db->sql_layer )
-		{
-			case 'mysql4':
-			case 'mysqli':
-			case 'oracle':
-			case 'firebird':
-			case 'sqlite':
-			case 'mysql':
-				$sql = 'DROP TABLE IF EXISTS ' . $table_prefix . 'portal_config';
-				$result = $db->sql_query($sql);
-				$db->sql_freeresult($result);
-			break;
-			case '':
-				$sql = 'SELECT version() as version';
-				$result = $db->sql_query($sql);
-				$data = $db->sql_fetchrow($result);
-				if( version_compare($data['version'], '8.1.11', '>') === TRUE )
-				{
-					$sql = 'DROP TABLE IF EXISTS ' . $table_prefix . 'portal_config';
-					$result = $db->sql_query($sql);
-					$db->sql_freeresult($result);
-					} else {
-					$sql = 'DROP TABLE ' . $table_prefix . 'portal_config';
-					$result = @$db->sql_query($sql);
-					$db->sql_freeresult($result);
-				}
-			break;
-			case 'mssql':
-				$sql = 'if exists (select * from sysobjects where name = ' . $table_prefix . 'portal_config)
-				drop table ' . $table_prefix . 'portal_config';
-				$result = $db->sql_query($sql);
-				$db->sql_freeresult($result);
-			break;
-		}
+		b3p_drop_table(PORTAL_CONFIG_TABLE);
 
 		$sql = 'SELECT module_id FROM ' . MODULES_TABLE . "
 			WHERE module_langname = 'ACP_PORTAL_GENERAL_INFO'

@@ -57,6 +57,13 @@ $lang = array_merge($lang, array(
 	'SUPPORT_BODY'					=> 'Für die aktuelle, stabile Version des "Board3 Portal" wird kostenloser Support gewährt. Dieser umfasst:</p><ul><li>Installation</li><li>Technische Fragen</li><li>Probleme durch eventuelle Fehler in der Software</li><li>Aktualisierung von Release Candidates (RC) oder stabilen Versionen zur aktuellen stabilen Version</li></ul><p>Support gibt es in folgenden Foren:</p><ul><li><a href="http://www.board3.de/">board3.de - Homepage des MOD-Autor\'s Kevin</a></li><li><a href="http://www.phpbb.de/">phpbb.de</a></li><li><a href="http://www.phpbb.com/">phpbb.com</a></li></ul><p>',
 	'GOTO_INDEX'					=> 'Gehe zum Forum',
 	'GOTO_PORTAL'					=> 'Gehe zum Portal',
+
+	'CAT_CONVERT'					=> 'phpBB3 Portal konvertieren',
+	'CONVERT_P3P_INTRO'				=> 'Konverter vom „phpBB3 Portal“ zur „Board3 Portal“',
+	'STAGE_REMOVE_P3P'				=> 'phpBB3 Portal entfernen',
+	'STAGE_REMOVE_TABLE'			=> 'Datenbank-Tabellen entfernt',
+	'STAGE_REMOVE_TABLE_EXPLAIN'	=> 'Die vom phpBB3 Portal genutzten Datenbank-Tabellen wurden erfolgreich entfernt. Gehe weiter um die Installation des Board3 Portals abzuschließen.',
+	'CONVERT_COMPLETE_EXPLAIN'		=> 'Du hast nun dein phpBB3 Portal erfolgreich auf das Board3 Portal v%s konvertiert.<br />Bitte prüfe, ob alle Einträge richtig übernommen wurden, bevor du dein Board durch Löschen des „install“-Verzeichnisses freigibst.',
 ));
 
 ?>
