@@ -57,6 +57,13 @@ $lang = array_merge($lang, array(
 	'SUPPORT_BODY'		=> 	'Support for the latest stable version of the Board3 Portal is available free of charge for:</p><ul><li>Installation</li><li>Technical questions</li><li>Program-related issues</li><li>Updating Release Candidates (RC) or stable versions to the latest stable version</li></ul><p>You will find support in these forums:</p><ul><li><a href="http://www.board3.de/">board3.de - Homepage of Kevin - MOD author</a></li><li><a href="http://www.phpbb.de/">phpbb.de</a></li><li><a href="http://www.phpbb.com/">phpbb.com</a></li></ul><p>',
 	'GOTO_INDEX'		=> 	'Proceed to forum',
 	'GOTO_PORTAL'		=> 	'Proceed to Portal',
+	
+	'CAT_CONVERT'					=> 'Convert phpBB3 Portal',
+	'CONVERT_P3P_INTRO'				=> 'Converts your "phpBB3 Portal" to a "Board3 Portal"',
+	'STAGE_REMOVE_P3P'				=> 'Remove phpBB3 Portal',
+	'STAGE_REMOVE_TABLE'			=> 'Remove database-tables',
+	'STAGE_REMOVE_TABLE_EXPLAIN'	=> 'The phpBB3 Portal database-tables have been removed succesfully. Proceed to the next step to finish the Board3 Portal installation.',
+	'CONVERT_COMPLETE_EXPLAIN'		=> 'The phpBB3 Portal has been converted to Board3 Portal v%s succesfully.<br /><br /><strong>Now delete, move or rename the "install"-folder before you use your board. As long as this directory is present, you will only have access to your ACP.</strong>',
 ));
 
 ?>

@@ -63,7 +63,7 @@ $lang = array_merge($lang, array(
 	'STAGE_REMOVE_P3P'				=> 'phpBB3 Portal entfernen',
 	'STAGE_REMOVE_TABLE'			=> 'Datenbank-Tabellen entfernt',
 	'STAGE_REMOVE_TABLE_EXPLAIN'	=> 'Die vom phpBB3 Portal genutzten Datenbank-Tabellen wurden erfolgreich entfernt. Gehe weiter um die Installation des Board3 Portals abzuschließen.',
-	'CONVERT_COMPLETE_EXPLAIN'		=> 'Du hast nun dein phpBB3 Portal erfolgreich auf das Board3 Portal v%s konvertiert.<br />Bitte prüfe, ob alle Einträge richtig übernommen wurden, bevor du dein Board durch Löschen des „install“-Verzeichnisses freigibst.',
+	'CONVERT_COMPLETE_EXPLAIN'		=> 'Du hast nun dein phpBB3 Portal erfolgreich auf das Board3 Portal v%s konvertiert.<br /><br /><strong>Bitte lösche oder verschiebe jetzt das Installations-Verzeichnis "install" oder benenne es um, bevor du dein Board benutzt. Solange dieses Verzeichnis existiert, ist nur der Administrations-Bereich zugänglich.</strong>',
 ));
 
 ?>
