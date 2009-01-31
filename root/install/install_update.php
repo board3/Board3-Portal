@@ -243,7 +243,8 @@ class install_update extends module
 					WHERE module_langname = 'ACP_PORTAL_NEWS_INFO'";
 				$db->sql_query($sql);
 				$sql = 'UPDATE ' . MODULES_TABLE . " SET
-					module_auth = 'acl_a_portal_manage'
+					module_auth = 'acl_a_portal_manage',
+					module_langname = 'ACP_PORTAL_ANNOUNCEMENTS_INFO'
 					WHERE module_langname = 'ACP_PORTAL_ANNOUNCE_INFO'";
 				$db->sql_query($sql);
 				$sql = 'UPDATE ' . MODULES_TABLE . " SET
@@ -263,7 +264,8 @@ class install_update extends module
 					WHERE module_langname = 'ACP_PORTAL_PAYPAL_INFO'";
 				$db->sql_query($sql);
 				$sql = 'UPDATE ' . MODULES_TABLE . " SET
-					module_auth = 'acl_a_portal_manage'
+					module_auth = 'acl_a_portal_manage',
+					module_langname = 'ACP_PORTAL_ATTACHMENTS_INFO'
 					WHERE module_langname = 'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'";
 				$db->sql_query($sql);
 				$sql = 'UPDATE ' . MODULES_TABLE . " SET
@@ -279,7 +281,8 @@ class install_update extends module
 					WHERE module_langname = 'ACP_PORTAL_BOTS_INFO'";
 				$db->sql_query($sql);
 				$sql = 'UPDATE ' . MODULES_TABLE . " SET
-					module_auth = 'acl_a_portal_manage'
+					module_auth = 'acl_a_portal_manage',
+					module_langname = 'ACP_PORTAL_POSTER_INFO'
 					WHERE module_langname = 'ACP_PORTAL_MOST_POSTER_INFO'";
 				$db->sql_query($sql);
 				$sql = 'UPDATE ' . MODULES_TABLE . " SET
@@ -287,7 +290,8 @@ class install_update extends module
 					WHERE module_langname = 'ACP_PORTAL_MINICALENDAR_INFO'";
 				$db->sql_query($sql);
 				$sql = 'UPDATE ' . MODULES_TABLE . " SET
-					module_auth = 'acl_a_portal_manage'
+					module_auth = 'acl_a_portal_manage',
+					module_langname = 'ACP_PORTAL_CUSTOMBLOCK_INFO'
 					WHERE module_langname = 'ACP_PORTAL_CUSTOM_INFO'";
 				$db->sql_query($sql);
 				$sql = 'UPDATE ' . MODULES_TABLE . " SET
@@ -360,7 +364,7 @@ class install_update extends module
 				case '0.2.0':
 				case '0.2.1':
 				case '0.2.2':
-					$acp_portal_customblock = array('module_basename' => 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $portal_config['acp_parent_module'],	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_CUSTOM_INFO',	'module_mode' => 'customblock',	'module_auth' => 'acl_a_portal_manage');
+					$acp_portal_customblock = array('module_basename' => 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $portal_config['acp_parent_module'],	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_CUSTOMBLOCK_INFO',	'module_mode' => 'customblock',	'module_auth' => 'acl_a_portal_manage');
 					add_module($acp_portal_customblock);
 					$acp_portal_linkblock = array('module_basename'	=> 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $portal_config['acp_parent_module'],	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_LINKS_INFO',	'module_mode' => 'links',	'module_auth' => 'acl_a_portal_manage');
 					add_module($acp_portal_linkblock);

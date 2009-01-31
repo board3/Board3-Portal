@@ -33,18 +33,11 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'ACP_PORTAL_INFO_SETTINGS'			=> 'General settings',
-	'ACP_PORTAL_INFO_SETTINGS_EXPLAIN'	=> 'Thank you for choosing board3 Portal. On this page you can manage the portal of your board. The screens inhere will give you a quick overview of all the various portal settings. The links on the left hand side of this screen allow you to control every aspect of your portal experience.',
-
-	'ACP_PORTAL_SETTINGS'				=> 'Portal settings',
-	'ACP_PORTAL_SETTINGS_EXPLAIN'		=> 'Thank you for choosing board3 Portal. On this page you can manage the portal of your board. The screens inhere will give you a quick overview of all the various portal settings. The links on the left hand side of this screen allow you to control every aspect of your portal experience.',
-
 	// general
-	'ACP_PORTAL_GENERAL_INFO'				=> 'Portal administration',
-	'ACP_PORTAL_GENERAL_INFO_EXPLAIN'		=> 'Thank you for choosing board3 Portal. On this page you can manage the portal of your board. The screens inhere will give you a quick overview of all the various portal settings. The links on the left hand side of this screen allow you to control every aspect of your portal experience.',
+	'ACP_PORTAL_GENERAL_TITLE'				=> 'Portal administration',
+	'ACP_PORTAL_GENERAL_TITLE_EXPLAIN'		=> 'Thank you for choosing board3 Portal. On this page you can manage the portal of your board. The screens inhere will give you a quick overview of all the various portal settings. The links on the left hand side of this screen allow you to control every aspect of your portal experience.',
 	'ACP_PORTAL_VERSION'					=> '<strong>Board3 Portal Version v%s</strong>',
 	'ACP_PORTAL_GENERAL_SETTINGS'			=> 'General settings',
-	'ACP_PORTAL_GENERAL_SETTINGS_EXPLAIN'	=> 'Here you can change your general and certain specific options.',
 	'PORTAL_ENABLE'							=> 'Enable Portal',
 	'PORTAL_ENABLE_EXPLAIN'					=> 'Turns the whole portal off.',
 	'PORTAL_ADVANCED_STAT'					=> 'Advanced statistics block',
@@ -89,7 +82,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_BIRTHDAYS_AHEAD_EXPLAIN'		=> 'How many days to look ahead for birthdays.',
 	
 	// global announcements
-	'ACP_PORTAL_ANNOUNCE_INFO'					=> 'Global announcements',
 	'ACP_PORTAL_ANNOUNCE_SETTINGS'				=> 'Global announcements settings',
 	'ACP_PORTAL_ANNOUNCE_SETTINGS_EXPLAIN'		=> 'Here you can change your global announcement information and certain specific options.',
 	'PORTAL_ANNOUNCEMENTS'						=> 'Display global announcements',
@@ -110,7 +102,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_ANNOUNCEMENTS_ARCHIVE_EXPLAIN'		=> 'If enabled the announcements archive system / page numbers will be displayed.',
 
 	// news
-	'ACP_PORTAL_NEWS_INFO'				=> 'News',
 	'ACP_PORTAL_NEWS_SETTINGS'			=> 'News settings',
 	'ACP_PORTAL_NEWS_SETTINGS_EXPLAIN'	=> 'Here you can change your news information and certain specific options.',
 	'PORTAL_NEWS'						=> 'Display news block',
@@ -135,7 +126,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_NEWS_ARCHIVE_EXPLAIN'		=> 'If enabled the news archive system / page numbers will be displayed.',
 
 	// recent topics
-	'ACP_PORTAL_RECENT_INFO'				=> 'Recent topics',
 	'ACP_PORTAL_RECENT_SETTINGS'			=> 'Recent topics settings',
 	'ACP_PORTAL_RECENT_SETTINGS_EXPLAIN'	=> 'Here you can change your recent topics information and certain specific options.',
 	'PORTAL_RECENT'							=> 'Display recent topics block',
@@ -146,7 +136,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_RECENT_TITLE_LIMIT_EXPLAIN'		=> '0 means infinite',
 
 	// paypal
-	'ACP_PORTAL_PAYPAL_INFO'				=> 'Paypal',
 	'ACP_PORTAL_PAYPAL_SETTINGS'			=> 'Paypal settings',
 	'ACP_PORTAL_PAYPAL_SETTINGS_EXPLAIN'	=> 'Here you can change your Paypal information and certain specific options.',
 	'PORTAL_PAY_C_BLOCK'					=> 'Display paypal center block',
@@ -157,7 +146,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_PAY_ACC_EXPLAIN'				=> 'Enter your Paypal e-mail address eg. xxx@xxx.com',
 
 	// last member
-	'ACP_PORTAL_MEMBERS_INFO'				=> 'Latest members',
 	'ACP_PORTAL_MEMBERS_SETTINGS'			=> 'Latest members settings',
 	'ACP_PORTAL_MEMBERS_SETTINGS_EXPLAIN'	=> 'Here you can change your latest members information and certain specific options.',
 	'PORTAL_LATEST_MEMBERS'					=> 'Display latest members block',
@@ -166,7 +154,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAX_LAST_MEMBER_EXPLAIN'		=> '0 means infinite',
 
 	// bots
-	'ACP_PORTAL_BOTS_INFO'						=> 'Visiting bots',
 	'ACP_PORTAL_BOTS_SETTINGS'					=> 'Visiting bots settings',
 	'ACP_PORTAL_BOTS_SETTINGS_EXPLAIN'			=> 'Here you can change your visiting bots information and certain specific options.',
 	'PORTAL_LOAD_LAST_VISITED_BOTS'				=> 'Display visiting bots block',
@@ -175,7 +162,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_LAST_VISITED_BOTS_NUMBER_EXPLAIN'	=> '0 means infinite',
 
 	// polls   
-	'ACP_PORTAL_POLLS_INFO'				=> 'Poll',
 	'ACP_PORTAL_POLLS_SETTINGS'			=> 'Poll settings',
 	'ACP_PORTAL_POLLS_SETTINGS_EXPLAIN'	=> 'Here you can change your poll information and certain specific options.',
 	'PORTAL_POLL_TOPIC'					=> 'Display poll blocks',
@@ -188,7 +174,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_POLL_ALLOW_VOTE_EXPLAIN'	=> 'Allow users with the required permissions to vote from the portal page.',
 
 	// most poster
-	'ACP_PORTAL_MOST_POSTER_INFO'				=> 'Most poster',
 	'ACP_PORTAL_MOST_POSTER_SETTINGS'			=> 'Most poster settings',
 	'ACP_PORTAL_MOST_POSTER_SETTINGS_EXPLAIN'	=> 'Here you can change your most poster information and certain specific options.',
 	'PORTAL_TOP_POSTERS'                  		=> 'Display most/top posters block',
@@ -197,7 +182,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAX_MOST_POSTER_EXPLAIN'			=> '0 means infinite',
 
 	// left and right column width 
-	'ACP_PORTAL_COLUMN_WIDTH_INFO'		=> 'Column width',
 	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'	=> 'Left and right column width settings',
 	'PORTAL_LEFT_COLUMN_WIDTH'			=> 'Width value of the left column',
 	'PORTAL_LEFT_COLUMN_WIDTH_EXPLAIN'	=> 'Change the width of left column in pixel, recommended value 180',
@@ -205,7 +189,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_RIGHT_COLUMN_WIDTH_EXPLAIN'	=> 'Change the width of right column in pixel, recommended value 180',
 
 	// attachments    
-	'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'				=> 'Attachments',
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS'			=> 'Attachments settings',
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS_EXPLAIN'	=> 'Here you can change your attachments information and certain specific options.',
 	'PORTAL_ATTACHMENTS'								=> 'Display attachments block',
@@ -216,7 +199,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_ATTACHMENTS_FORUM_IDS_EXPLAIN'				=> 'The id(s) of the forums from which the attachments should be displayed. Use a comma to separate multiple forums, or leave blank to use all available forums.',
 	
 	// friends
-	'ACP_PORTAL_FRIENDS_INFO'				=> 'Friends',
 	'ACP_PORTAL_FRIENDS_SETTINGS'			=> 'Friends Settings',
 	'ACP_PORTAL_FRIENDS_SETTINGS_EXPLAIN'	=> 'Here you can change your friends information and certain specific options.',
 	'PORTAL_FRIENDS'						=> 'Display friends block',
@@ -225,7 +207,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAX_ONLINE_FRIENDS_EXPLAIN'		=> 'Limits the amound of displayed friends to the given value.',
 
 	// wordgraph
-	'ACP_PORTAL_WORDGRAPH_INFO'				=> 'Wordgraph',
 	'ACP_PORTAL_WORDGRAPH_SETTINGS'			=> 'Wordgraph settings',
 	'ACP_PORTAL_WORDGRAPH_SETTINGS_EXPLAIN'	=> 'Here you can change your wordgraph information and certain specific options.',
 	'PORTAL_WORDGRAPH'						=> 'Display wordgraph block',
@@ -238,7 +219,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_WORDGRAPH_RATIO_EXPLAIN'		=> 'Change the aspect ratio (bigger/smaller) word size (default=18)',
 
 	// welcome message
-	'ACP_PORTAL_WELCOME_INFO'				=> 'Welcome',
 	'ACP_PORTAL_WELCOME_SETTINGS'			=> 'Welcome settings',
 	'ACP_PORTAL_WELCOME_SETTINGS_EXPLAIN'	=> 'Here you can change welcome messages and certain specific options.',
 	'PORTAL_WELCOME_INTRO'					=> 'Welcome message',
@@ -246,7 +226,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_WELCOME_INTRO_EXPLAIN'			=> 'Change the welcome message (BBCode is allowed).',
 	
 	// links
-	'ACP_PORTAL_LINKS_INFO' 			=> 'Links',
 	'ACP_PORTAL_LINKS_SETTINGS' 		=> 'Link Settings',
 	'ACP_PORTAL_LINKS_SETTINGS_EXPLAIN' => 'Set up the link block links.',
 	'PORTAL_LINKS'						=> 'Links block',
@@ -258,7 +237,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_LINK_ADD'					=> '<strong>Add</strong>',
 
 	// custom
-	'ACP_PORTAL_CUSTOM_INFO'				=> 'Custom block',
 	'ACP_PORTAL_CUSTOM_SETTINGS'			=> 'Custom blocks settings',
 	'ACP_PORTAL_CUSTOM_SETTINGS_EXPLAIN'	=> 'Here you can change your custom blocks. These blocks could be filled with HTML or BBCode for several purposes like advertisement, videos, images, flash or text. Just insert the needed code.',
 	'ACP_PORTAL_CUSTOM_SMALL_SETTINGS'		=> 'Custom blocks settings for the small block',
@@ -281,7 +259,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_CUSTOM_CODE_CENTER_EXPLAIN'		=> 'Change the Code for the small custom Block (HTML or BBCode) here.',
 
 	// minicalendar
-	'ACP_PORTAL_MINICALENDAR_INFO'				=> 'Mini calendar',
 	'ACP_PORTAL_MINICALENDAR_SETTINGS'			=> 'Mini calendar settings',
 	'ACP_PORTAL_MINICALENDAR_SETTINGS_EXPLAIN'	=> 'Here you can change your mini calendar information and certain specific options.',
 	'PORTAL_MINICALENDAR'						=> 'Display mini calendar block',

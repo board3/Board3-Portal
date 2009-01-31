@@ -255,7 +255,7 @@ class install_install extends module
 			add_module($acp_portal_general);
 			$acp_portal_news = array('module_basename'	=> 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_NEWS_INFO',	'module_mode' => 'news',	'module_auth' => 'acl_a_portal_manage');
 			add_module($acp_portal_news);
-			$acp_portal_announcements = array('module_basename' => 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_ANNOUNCE_INFO',	'module_mode' => 'announcements',	'module_auth' => 'acl_a_portal_manage');
+			$acp_portal_announcements = array('module_basename' => 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_ANNOUNCEMENTS_INFO',	'module_mode' => 'announcements',	'module_auth' => 'acl_a_portal_manage');
 			add_module($acp_portal_announcements);
 			$acp_portal_welcome = array('module_basename'	=> 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_WELCOME_INFO',	'module_mode' => 'welcome',	'module_auth' => 'acl_a_portal_manage');
 			add_module($acp_portal_welcome);
@@ -265,7 +265,7 @@ class install_install extends module
 			add_module($acp_portal_wordgraph);
 			$acp_portal_paypal = array('module_basename' => 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_PAYPAL_INFO',	'module_mode' => 'paypal',	'module_auth' => 'acl_a_portal_manage');
 			add_module($acp_portal_paypal);
-			$acp_portal_attachments = array('module_basename'	=> 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO',	'module_mode' => 'attachments',	'module_auth' => 'acl_a_portal_manage');
+			$acp_portal_attachments = array('module_basename'	=> 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_ATTACHMENTS_INFO',	'module_mode' => 'attachments',	'module_auth' => 'acl_a_portal_manage');
 			add_module($acp_portal_attachments);
 			$acp_portal_members = array('module_basename'	=> 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_MEMBERS_INFO',	'module_mode' => 'members',	'module_auth' => 'acl_a_portal_manage');
 			add_module($acp_portal_members);
@@ -273,11 +273,11 @@ class install_install extends module
 			add_module($acp_portal_polls);
 			$acp_portal_bots = array('module_basename'	=> 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_BOTS_INFO',	'module_mode' => 'bots',	'module_auth' => 'acl_a_portal_manage');
 			add_module($acp_portal_bots);
-			$acp_portal_poster = array('module_basename' => 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_MOST_POSTER_INFO',	'module_mode' => 'poster',	'module_auth' => 'acl_a_portal_manage');
+			$acp_portal_poster = array('module_basename' => 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_POSTER_INFO',	'module_mode' => 'poster',	'module_auth' => 'acl_a_portal_manage');
 			add_module($acp_portal_poster);
 			$acp_portal_minicalendar = array('module_basename'	=> 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_MINICALENDAR_INFO',	'module_mode' => 'minicalendar',	'module_auth' => 'acl_a_portal_manage');
 			add_module($acp_portal_minicalendar);
-			$acp_portal_customblock = array('module_basename' => 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_CUSTOM_INFO',	'module_mode' => 'customblock',	'module_auth' => 'acl_a_portal_manage');
+			$acp_portal_customblock = array('module_basename' => 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_CUSTOMBLOCK_INFO',	'module_mode' => 'customblock',	'module_auth' => 'acl_a_portal_manage');
 			add_module($acp_portal_customblock);
 			$acp_portal_linkblock = array('module_basename'	=> 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_LINKS_INFO',	'module_mode' => 'links',	'module_auth' => 'acl_a_portal_manage');
 			add_module($acp_portal_linkblock);

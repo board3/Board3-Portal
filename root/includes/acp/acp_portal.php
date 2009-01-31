@@ -41,7 +41,7 @@ class acp_portal
 		{
 			case 'general':
 				$display_vars = array(
-					'title'	=> 'ACP_PORTAL_GENERAL_INFO',
+					'title'	=> 'ACP_PORTAL_GENERAL_TITLE',
 					'vars'	=> array(
 						'legend1'					=> 'ACP_PORTAL_GENERAL_SETTINGS',
 						'portal_enable'				=> array('lang' => 'PORTAL_ENABLE',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
@@ -400,7 +400,7 @@ class acp_portal
 
 		if ($submit)
 		{
-			add_log('admin', 'LOG_CONFIG_' . strtoupper($mode));
+			add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']);
 			trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link($this->u_action));
 		}
 
@@ -409,7 +409,7 @@ class acp_portal
 
 		$title_explain = $user->lang[$display_vars['title'] . '_EXPLAIN'];
 
-		$title_explain .= ( $display_vars['title'] == 'ACP_PORTAL_GENERAL_INFO' ) ? '<br /><br />' . sprintf($user->lang['ACP_PORTAL_VERSION'], $portal_config['portal_version']) : '';
+		$title_explain .= ( $display_vars['title'] == 'ACP_PORTAL_GENERAL_TITLE' ) ? '<br /><br />' . sprintf($user->lang['ACP_PORTAL_VERSION'], $portal_config['portal_version']) : '';
 
 		$template->assign_vars(array(
 			'L_TITLE'			=> $user->lang[$display_vars['title']],

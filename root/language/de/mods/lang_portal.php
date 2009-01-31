@@ -35,11 +35,6 @@ $lang = array_merge($lang, array(
 	'PORTAL'							=> 'Portal',
 	'WELCOME'						=> 'Willkommen',
 
-	'PORTAL_ERROR'				=> 'Portal-Fehler',
-	'PORTAL_DELETE_DIR'			=> 'Bitte lösche das Portal Installationsverzeichnis: %s',
-	'PORTAL_UPDATE'				=> 'Portal Update',
-	'PORTAL_UPDATE_TEXT'			=> 'Es steht ein Update für das Portal zur Installation bereit! <a href="%1$s">Installiere Board3 Portal Version %2$s</a>!',
-
 	// news & global announcements
 	'LATEST_ANNOUNCEMENTS'		=> 'Letzte Bekanntmachung',
 	'GLOBAL_ANNOUNCEMENT'		=> 'Globale Bekanntmachung',
@@ -58,13 +53,6 @@ $lang = array_merge($lang, array(
 	'JUMP_FIRST'						=> 'Zum ersten Beitrag springen',
 	'JUMP_TO_POST'					=> 'Rufe den Beitrag auf',
 	'BACK'								=> 'Zurück',
-
-	// who is online
-	'WIO_TOTAL'						=> 'Insgesamt',
-	'WIO_REGISTERED'				=> 'Registrierte Benutzer',
-	'WIO_HIDDEN'						=> 'Unsichtbare Benutzer',
-	'WIO_GUEST'						=> 'Gäste',
-	//'RECORD_ONLINE_USERS'=> 'View record: <strong>%1$s</strong><br />%2$s',
 
 	// Birthdays
 	 'BIRTHDAYS_AHEAD'				=> 'In den nächsten %s Tagen',
@@ -206,6 +194,10 @@ $lang = array_merge($lang, array(
 	'VIEWING_PORTAL'         => 'Betrachtet das Portal',
 	'CLOCK'		=> 'Uhr',
 	'SPONSOR'	=> 'Sponsoren',
+	
+	/**
+	* DO NOT REMOVE or CHANGE
+	*/
 	'PORTAL_COPY'					=> '<a href="http://www.board3.de" title="board3.de">board3 Portal</a> - based on <a href="http://www.phpbb3portal.com" title="phpBB3 Portal">phpBB3 Portal</a>',
 	)
 );
@@ -213,10 +205,6 @@ $lang = array_merge($lang, array(
 // mini calendar
 $lang = array_merge($lang, array(
 	'Mini_Cal_calendar'				=> 'Kalender',
-	'Mini_Cal_add_event'				=> 'Termin eintragen',
-	'Mini_Cal_events'					=> 'Kommende Termine',
-	'Mini_Cal_no_events'				=> 'Keine',
-	'Mini_cal_this_event'				=> 'Ferientermine',
 	'View_next_month'				=> 'nächster Monat',
 	'View_previous_month'			=> 'voriger Monat',
 

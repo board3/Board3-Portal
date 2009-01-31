@@ -147,10 +147,7 @@ $next_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m=$up
 $template->assign_vars(array(
 	'S_DISPLAY_MINICAL' => true,
 	'L_MINI_CAL_MONTH' => $user->lang['mini_cal']['long_month'][$mini_cal->day[0][4]] . " " . $mini_cal->day[0][5],
-	'L_MINI_CAL_ADD_EVENT' => $user->lang['Mini_Cal_add_event'],
 	'L_MINI_CAL_CALENDAR' => $user->lang['Mini_Cal_calendar'], 
-	'L_MINI_CAL_EVENTS' => $user->lang['Mini_Cal_events'], 
-	'L_MINI_CAL_NO_EVENTS' => $user->lang['Mini_Cal_no_events'],
 	'L_MINI_CAL_SUN' => $user->lang['mini_cal']['day'][1], 
 	'L_MINI_CAL_MON' => $user->lang['mini_cal']['day'][2], 
 	'L_MINI_CAL_TUE' => $user->lang['mini_cal']['day'][3], 

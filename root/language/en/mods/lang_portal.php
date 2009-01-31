@@ -36,11 +36,6 @@ $lang = array_merge($lang, array(
 	'PORTAL'				=> 'Portal',
 	'WELCOME'				=> 'Welcome',
 
-	'PORTAL_ERROR'			=> 'Portal Error',
-	'PORTAL_DELETE_DIR'		=> 'Please delete the portal installation directory: %s',
-	'PORTAL_UPDATE'			=> 'Portal Update',
-	'PORTAL_UPDATE_TEXT'	=> 'There\'s an update for portal waiting to be installed! Install <a href="%1$s">%2$s</a>!',
-
 	// news & global announcements
 	'LATEST_ANNOUNCEMENTS'	=> 'Latest global announcements',
 	'GLOBAL_ANNOUNCEMENT'	=> 'Global announcement',
@@ -60,13 +55,6 @@ $lang = array_merge($lang, array(
 	'JUMP_TO_POST'			=> 'Jump to post',
 	'BACK'							=> 'Back',
 
-	// who is online
-	'WIO_TOTAL'			=> 'Total',
-	'WIO_REGISTERED'	=> 'Registered',
-	'WIO_HIDDEN'		=> 'Hidden',
-	'WIO_GUEST'			=> 'Guest',
-	//'RECORD_ONLINE_USERS'=> 'View record: <strong>%1$s</strong><br />%2$s',
-
 	// Birthday
 	'BIRTHDAYS_AHEAD'              => 'In the next %s days',
 	'NO_BIRTHDAYS_AHEAD'        => 'In this period, no members have a birthday.',
@@ -79,13 +67,6 @@ $lang = array_merge($lang, array(
 	'UM_BOOKMARKS'		=> 'Bookmarks',
 
 	// statistics
-	/*
-	'ST_NEW'		=> 'New',
-	'ST_NEW_POSTS'	=> 'New post',
-	'ST_NEW_TOPICS'	=> 'New topic',
-	'ST_NEW_ANNS'	=> 'New announcement',
-	'ST_NEW_STICKYS'=> 'New sticky',
-	*/
 	'ST_TOP'		=> 'Total',
 	'ST_TOP_ANNS'	=> 'Total Announcements:',
 	'ST_TOP_STICKYS'=> 'Total Stickies:',
@@ -225,10 +206,6 @@ $lang = array_merge($lang, array(
 // mini calendar
 $lang = array_merge($lang, array(
 	'Mini_Cal_calendar'		=> 'Calendar',
-	'Mini_Cal_add_event'	=> 'Add Event',
-	'Mini_Cal_events'		=> 'Upcoming Events',
-	'Mini_Cal_no_events'	=> 'None',
-	'Mini_cal_this_event'	=> 'This month holiday events',
 	'View_next_month'		=> 'next month',
 	'View_previous_month'	=> 'Previous month',
 

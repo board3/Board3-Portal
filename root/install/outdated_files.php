@@ -26,6 +26,8 @@ $oudated_files = array(
 	 '/install_portal.php',
     'language/de/mods/portal_install.php',
 	'language/en/mods/portal_install.php',
+    'language/de/mods/lang_portal_acp_logs.php',
+	'language/en/mods/lang_portal_acp_logs.php',
     'language/de/acp/portal.php',
     'language/de/portal.php',
     'language/en/acp/portal.php',

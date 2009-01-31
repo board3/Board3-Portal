@@ -15,6 +15,6 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-$user->add_lang('mods/lang_portal_acp_logs');
+$user->add_lang('mods/info_acp_portal');
 
 ?>
