@@ -56,6 +56,7 @@ class acp_portal
 						'portal_whois_online'		=> array('lang' => 'PORTAL_WHOIS_ONLINE',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_change_style'		=> array('lang' => 'PORTAL_CHANGE_STYLE',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_main_menu'			=> array('lang' => 'PORTAL_MAIN_MENU',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_phpbb_menu'			=> array('lang' => 'PORTAL_PHPBB_MENU',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_user_menu'			=> array('lang' => 'PORTAL_USER_MENU',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 
 						'legend2'					=> 'ACP_PORTAL_COLUMN_WIDTH_SETTINGS',

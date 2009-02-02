@@ -60,6 +60,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_CHANGE_STYLE_EXPLAIN'			=> 'Display this block on the portal.<br /><span style="color:red">Please note:</span> If "Override user style:" in the board settings is set to "Yes", this block <strong>will not be displayed</strong>, independent of this setting.',
 	'PORTAL_MAIN_MENU'						=> 'Main menu',
 	'PORTAL_MAIN_MENU_EXPLAIN'				=> 'Display this block on the portal.',
+	'PORTAL_PHPBB_MENU'						=> 'phpBB menu',
+	'PORTAL_PHPBB_MENU_EXPLAIN'				=> 'Display the phpBB Header on the portal.',
 	'PORTAL_USER_MENU'						=> 'User menu / Login box',
 	'PORTAL_USER_MENU_EXPLAIN'				=> 'Display this block on the portal.',
 	'PORTAL_FORUM_INDEX'					=> 'Forum Index (Forum list)',

@@ -113,7 +113,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</tr>
 		</table>
 	</div>]]></find>
-				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
+				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_PHPBB_MENU -->]]></action>
 			</edit>
 			<edit>
 				<find><![CDATA[<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN --> &nbsp;<span style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->]]></find>
@@ -121,7 +121,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			</edit>
 			<edit>
 				<find><![CDATA[<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN --> &nbsp;<span style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->]]></find>
-				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
+				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_PHPBB_MENU -->]]></action>
 			</edit>
 			<edit>
 				<find><![CDATA[	<div id="datebar">
@@ -136,7 +136,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			</edit>
 			<edit>
 				<find><![CDATA[<div id="wrapcentre">]]></find>
-				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></action>
+				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_PHPBB_MENU -->]]></action>
 			</edit>
 			<edit>
 				<find><![CDATA[	<!-- INCLUDE breadcrumbs.html -->

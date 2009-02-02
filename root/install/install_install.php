@@ -205,7 +205,8 @@ class install_install extends module
 
 		// Added 1.0.3
 		set_portal_config('portal_enable', '1');
-
+		set_portal_config('portal_phpbb_menu', '0');
+		
 		$auth_admin = new auth_admin();
 		$auth_admin->acl_add_option(array(
 			'local'			=> array(),

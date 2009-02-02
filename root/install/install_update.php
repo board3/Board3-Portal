@@ -223,6 +223,7 @@ class install_update extends module
 			case '1.0.1':
 			case '1.0.2':
 				set_portal_config('portal_enable', '1');
+				set_portal_config('portal_phpbb_menu', '0');
 				set_portal_config('portal_minicalendar_today_color', '#FF0000');
 				set_portal_config('portal_minicalendar_day_link_color', '#006F00');
 

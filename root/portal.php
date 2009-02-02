@@ -63,6 +63,12 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('mods/lang_portal');
 
+if ($portal_config['portal_phpbb_menu'])
+{
+	$template->assign_vars(array(
+		'S_DISPLAY_PHPBB_MENU' => true,
+	));
+}
 
 if ($portal_config['portal_forum_index']) 
 { 

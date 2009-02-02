@@ -59,6 +59,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_CHANGE_STYLE_EXPLAIN'			=> 'Diesen Block auf dem Portal anzeigen.<br /><span style="color:red">Achtung:</span> wenn in den Board-Einstellungen "Benutzer-Style überschreiben:" auf "ja" gesetzt ist, wird dieser Block unabhängig von seinen Einstellungen <strong>nicht angezeigt</strong>.',
 	'PORTAL_MAIN_MENU'						=> 'Hauptmenü',
 	'PORTAL_MAIN_MENU_EXPLAIN'				=> 'Diesen Block auf dem Portal anzeigen.',
+	'PORTAL_PHPBB_MENU'						=> 'phpBB-Menü',
+	'PORTAL_PHPBB_MENU_EXPLAIN'				=> 'Den phpBB Header auf dem Portal anzeigen.',
 	'PORTAL_USER_MENU'						=> 'Benutzer-Menü / Login Box',
 	'PORTAL_USER_MENU_EXPLAIN'				=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_FORUM_INDEX'					=> 'Foren Index (Foren Liste)',
