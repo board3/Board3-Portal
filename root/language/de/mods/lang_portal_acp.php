@@ -272,7 +272,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_CUSTOM_CENTER_HEADLINE_EXPLAIN'		=> 'Hier kannst du die Überschrift der Box ändern.',
 	'PORTAL_CUSTOM_CENTER_BBCODE'				=> 'BBCode für die mittlere Box aktivieren',
 	'PORTAL_CUSTOM_CENTER_BBCODE_EXPLAIN'		=> 'BBCode kann dann in dieser Box benutzt werden. Ansonsten wird HTML direkt ausgegeben.',
-	'PORTAL_CUSTOM_CODE_CENTER'					=> 'Code für den kleinen eigenen Block',
+	'PORTAL_CUSTOM_CODE_CENTER'					=> 'Code für den mittleren eigenen Block',
 	'PORTAL_CUSTOM_CODE_CENTER_EXPLAIN'			=> 'Ändere den Code für die mittlere Box (HTML oder BBCode).',
 
 	// minicalendar
