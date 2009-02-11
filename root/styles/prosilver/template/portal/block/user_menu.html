@@ -2,7 +2,11 @@
 {$LR_BLOCK_H_L}<img src="{T_THEME_PATH}/images/portal/portal_menu.gif" width="18px" height="18px" alt=""/>&nbsp;{L_USER_MENU}{$LR_BLOCK_H_R}
 	<div style="text-align: center;">
 		<a href="{U_VIEW_PROFILE}"><!-- IF USER_COLOR --><span style="color: {USER_COLOR}; font-weight: bold;"><!-- ELSE --><span><!-- ENDIF -->{USERNAME}</span></a><br />
-		<a href="{U_PROFILE}"><!-- IF AVATAR_IMG -->{AVATAR_IMG}<!-- ELSE --><img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" /><!-- ENDIF --></a>
+		<!-- IF AVATAR_IMG -->
+			<a href="{U_PROFILE}">{AVATAR_IMG}</a>
+		<!-- ELSEIF $NO_AVATAR_IMG -->
+			<a href="{U_PROFILE}"><img src="{T_THEME_PATH}{$NO_AVATAR_IMG}" alt="" /></a>
+		<!-- ENDIF -->
 		<!-- IF RANK_TITLE --><br /><span class="gensmall">{RANK_TITLE}</span><!-- ENDIF -->
 		<!-- IF RANK_IMG --><br />{RANK_IMG}<!-- ENDIF -->
 	</div>

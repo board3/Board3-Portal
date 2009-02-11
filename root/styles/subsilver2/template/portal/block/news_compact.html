@@ -1,9 +1,9 @@
 <!--version $Id$ //-->
 <div id="pagecontent">
-<table class="tablebg" cellspacing="1" width="100%">
-		<tr>
-			<th colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_NEWS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->">{L_LATEST_NEWS} <a name="n"></a></th>
-		</tr>
+<!-- BEGIN news_row -->
+<!-- IF news_row.S_FIRST_ROW -->
+{$C_ANC_BLOCK_H_L} colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_NEWS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->">{L_LATEST_NEWS} <a name="n"></a>{$C_ANC_BLOCK_H_R}
+		<!-- IF not news_row.S_NO_TOPICS  -->
 		<tr class="nav">
 			<!-- IF S_TOPIC_ICONS -->
 				<td class="cat" align="center" colspan="3">&nbsp;{L_TOPICS}&nbsp;</td>
@@ -16,10 +16,11 @@
 			<!-- ENDIF -->
 			<td class="cat" align="center">&nbsp;{L_LAST_POST}&nbsp;</td>
 		</tr>
-	<!-- BEGIN news_row -->
+		<!-- ENDIF -->
+<!-- ENDIF -->
 	<!-- IF news_row.S_NO_TOPICS  -->
 	<tr class="row1">
-		<td>
+		<td align="center">
 			<span class="gensmall"><strong>{L_NO_NEWS}</strong></span>
 		</td>
 	</tr>
@@ -49,15 +50,15 @@
 				</td>		
 			</tr>
 	<!-- ENDIF -->
-	<!-- IF news_row.S_LAST_ROW -->
+<!-- IF news_row.S_LAST_ROW -->
 	<!-- IF NP_PAGINATION or TOTAL_NEWS -->
 	<tr class="row<!-- IF news_row.S_ROW_COUNT is even -->2<!-- ELSE -->1<!-- ENDIF -->">
 		<td class="gensmall" valign="middle" align="right" nowrap="nowrap" colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_NEWS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->">{TOTAL_NEWS}
 		<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; <span>{NP_PAGINATION}</span><!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
 	</tr>
 	<!-- ENDIF -->
-	<!-- ENDIF -->
-	<!-- END news_row -->
-</table>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
 <br />
+<!-- ENDIF -->
+<!-- END news_row -->
 </div>

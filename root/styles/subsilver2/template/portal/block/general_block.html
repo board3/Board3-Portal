@@ -1,20 +1,12 @@
 <!--version $Id$ //-->
-<table class="tablebg" cellspacing="1" width="100%">
-	<tr>
-	<!-- IF U_RESTORE_PERMISSIONS -->
-		<th>{L_INFORMATION}</th>
+<!-- IF U_RESTORE_PERMISSIONS -->
+{$C_BLOCK_H_L}{L_INFORMATION}{$C_BLOCK_H_R}
 	</tr>
 	<tr class="row1">
 		<td>
-			&bull; <a href="{U_RESTORE_PERMISSIONS}">{L_RESTORE_PERMISSIONS}</a>
-	<!-- ELSE -->
-		<th>{GEN_TITLE}</th>
-	</tr>
-	<tr class="row1">
-		<td>
-			{GEN_MESSAGE}
-	<!-- ENDIF -->
+			&raquo; <a href="{U_RESTORE_PERMISSIONS}">{L_RESTORE_PERMISSIONS}</a>
 		</td>
 	</tr>
-</table>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
 <br />
+<!-- ENDIF -->

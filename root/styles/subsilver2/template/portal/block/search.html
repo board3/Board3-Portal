@@ -46,10 +46,7 @@ function qsearch_onSubmit()
 //-->
 </script>
 
-<table class="tablebg" cellspacing="1" width="100%">
-	<tr>
-		<th><span style="float: left"><img src="{T_THEME_PATH}/images/portal/portal_search.png" width="16px" height="16px" alt="" />&nbsp;{L_SEARCH}</span></th>
-	</tr>
+{$LR_BLOCK_H_L}<img src="{T_THEME_PATH}/images/portal/portal_search.png" width="16px" height="16px" alt="" />&nbsp;{L_SEARCH}{$LR_BLOCK_H_R}
 	<tr class="row1">
 		<td>
 			<form id="qsearch_form" method="post" action="{U_SEARCH}" onsubmit="return qsearch_onSubmit();">
@@ -82,5 +79,5 @@ function qsearch_onSubmit()
 			<a href="{U_SEARCH}">{L_SH_ADV}</a>
 		</td>
 	</tr>
-</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
 <br />

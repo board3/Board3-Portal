@@ -1,13 +1,12 @@
 <!--version $Id$ //-->
-<table class="tablebg" width="100%" cellspacing="1">
+<!-- IF $WHOS_IMAGES -->{$WHOS_COLSPAN}<!-- ELSE -->{$C_BLOCK_H_L}<!-- ENDIF --><!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a><!-- ELSE -->{L_WHO_IS_ONLINE}<!-- ENDIF -->{$C_BLOCK_H_R}
 <tr>
-	<th colspan="2"><!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a><!-- ELSE -->{L_WHO_IS_ONLINE}<!-- ENDIF --></th>
-</tr>
-<tr>
-<!-- IF LEGEND -->
-	<td class="row1" rowspan="2" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
-<!-- ELSE -->
-	<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
+<!-- IF $WHOS_IMAGES -->
+	<!-- IF LEGEND -->
+		<td class="row1" rowspan="2" align="center" valign="middle"><img src="{T_THEME_PATH}{$WHOS_IMAGES}" alt="{L_WHO_IS_ONLINE}" /></td>
+	<!-- ELSE -->
+		<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}{$WHOS_IMAGES}" alt="{L_WHO_IS_ONLINE}" /></td>
+	<!-- ENDIF -->
 <!-- ENDIF -->
 	<td class="row1" width="100%"><span class="genmed">{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /><br />{LOGGED_IN_USER_LIST}</span></td>
 </tr>

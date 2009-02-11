@@ -1,9 +1,6 @@
 <!--version $Id$ //-->
 <form action="{S_LOGIN_ACTION}" method="post">
-<table class="tablebg" cellspacing="1" width="100%">
-	<tr>
-		<th><span style="float: left"><img src="{T_THEME_PATH}/images/portal/portal_login.png" width="16px" height="16px" alt="" />&nbsp;<a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></span></th>
-	</tr>
+{$LR_BLOCK_H_L}<img src="{T_THEME_PATH}/images/portal/portal_login.png" width="16px" height="16px" alt="" />&nbsp;<a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a>{$LR_BLOCK_H_R}
 	<tr class="row1">
 		<td>
 			<span class="genmed">{L_USERNAME}:</span><br />
@@ -21,6 +18,6 @@
 			<input type="submit" name="login" tabindex="5" value="{L_LOGIN}" class="button1" />	
 		</td>
 	</tr>
-</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
 </form>
 <br />

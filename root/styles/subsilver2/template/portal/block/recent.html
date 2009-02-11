@@ -1,9 +1,6 @@
 <!--version $Id$ //-->
 <!-- IF .latest_announcements or .latest_hot_topics or .latest_topics -->
-<table class="tablebg" cellspacing="1" width="100%">
-	<tr>
-		<th colspan="<!-- IF .latest_hot_topics and .latest_announcements -->3<!-- ELSEIF .latest_announcements or .latest_hot_topics -->2<!-- ELSE -->1<!-- ENDIF -->">{L_RECENT_TOPIC}</th>
-	</tr>
+{$C_ANC_BLOCK_H_L} colspan="<!-- IF .latest_hot_topics and .latest_announcements -->3<!-- ELSEIF .latest_announcements or .latest_hot_topics -->2<!-- ELSE -->1<!-- ENDIF -->">{L_RECENT_TOPIC}{$C_ANC_BLOCK_H_R}
 	<tr>
 		<!-- IF .latest_announcements --><td class="row1"><strong>{L_RECENT_ANN}</strong></td><!-- ENDIF -->
 		<!-- IF .latest_hot_topics --><td class="row1"><strong>{L_RECENT_HOT_TOPIC}</strong></td><!-- ENDIF -->
@@ -32,6 +29,6 @@
 		</td>
 		<!-- ENDIF -->
 	</tr>
-</table>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
 <br />
 <!-- ENDIF -->
