@@ -1,27 +1,15 @@
 <!--version $Id$ //-->
-<div class="forabg">
-	<div class="inner">
-		<span class="corners-top"><span></span></span>
-		<ul class="topiclist">
-	<!-- IF U_RESTORE_PERMISSIONS -->
-			<li class="header"><dl><dt>{L_INFORMATION}</dt></dl></li>
-		</ul>
-		<ul class="topiclist forums">
-			<li><dl>
-				<dd class="posts_portal"  style="border-left:0px">
-			 		&bull; <a href="{U_RESTORE_PERMISSIONS}">{L_RESTORE_PERMISSIONS}</a>
-	<!-- ELSE -->
-			<li class="header"><dl><dt>{GEN_TITLE}</dt></dl></li>
-		</ul>
-		<ul class="topiclist forums">
-			<li><dl>
-				<dd class="posts_portal"  style="border-left:0px">
-			{GEN_MESSAGE}
-	<!-- ENDIF -->
-				</dd>
-			</dl></li>
-		</ul>
-		<span class="corners-bottom"><span></span></span>
-	</div>
-</div>
+<!-- IF U_RESTORE_PERMISSIONS -->
+{$C_BLOCK_H_L}{L_INFORMATION}{$C_BLOCK_H_R}
+	<ul class="topiclist forums">
+		<li><dl>
+			<dd style="border-left: 0px">
+				<div style="margin: 0 0 0 5px">
+					&raquo; <a href="{U_RESTORE_PERMISSIONS}">{L_RESTORE_PERMISSIONS}</a>
+				</div>
+			</dd>
+		</dl></li>
+	</ul>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
 <br style="clear:both" />
+<!-- ENDIF -->

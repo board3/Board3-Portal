@@ -1,41 +1,30 @@
 <!--version $Id$ //-->
-<div class="panel">
-	<div class="inner">
-		<span class="corners-top"><span></span></span>
-			<h3><img src="{T_THEME_PATH}/images/portal/portal_menu.gif" width="18px" height="18px" alt=""/>&nbsp;{L_M_MENU}</h3>
-			<div class="portal-navigation">
-				<div class="menutitle">{L_M_CONTENT}</div>
-				<ul>
-					<li><a href="{U_INDEX}">{L_INDEX}</a></li>
-					<!-- IF S_DISPLAY_SEARCH -->
-						<li><a href="{U_SEARCH}">{L_SEARCH}</a></li>
-					<!-- ENDIF -->
-					<!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED -->
-						<li><a href="{U_REGISTER}">{L_REGISTER}</a></li>
-					<!-- ENDIF -->
-					<!-- IF not S_IS_BOT and S_DISPLAY_MEMBERLIST -->
-						<li><a href="{U_MEMBERLIST}">{L_MEMBERLIST}</a></li>
-					<!-- ENDIF -->
-					<!-- IF U_TEAM -->
-						<li><a href="{U_TEAM}">{L_THE_TEAM}</a></li>
-					<!-- ENDIF -->
-					<!-- IF U_MCP -->
-						<li><a href="{U_MCP}">{L_MCP}</a></li>
-					<!-- ENDIF -->
-					<!-- IF U_ACP -->
-						<li><a href="{U_ACP}">{L_M_ACP}</a></li>
-					<!-- ENDIF -->
-				</ul>
-				<hr class="dashed" />
-				<div class="menutitle">{L_M_HELP}</div>
-				<ul>
-					<li><a href="{U_FAQ}">{L_FAQ}</a></li>
-					<li><a href="{U_M_BBCODE}">{L_M_BBCODE}</a></li>
-					<li><a href="{U_M_TERMS}">{L_M_TERMS}</a></li>
-					<li><a href="{U_M_PRV}">{L_M_PRV}</a></li>
-				</ul>
-			</div>
-		<span class="corners-bottom"><span></span></span>
+{$LR_BLOCK_H_L}<img src="{T_THEME_PATH}/images/portal/portal_menu.gif" width="18px" height="18px" alt=""/>&nbsp;{L_M_MENU}{$LR_BLOCK_H_R}
+	<div class="portal-navigation">
+		<div class="menutitle">{L_M_CONTENT}</div>
+			<ul>
+				<li><a href="{U_INDEX}">{L_INDEX}</a></li>
+				<!-- IF S_DISPLAY_SEARCH -->
+					<li><a href="{U_SEARCH}">{L_SEARCH}</a></li>
+				<!-- ENDIF -->
+				<!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED -->
+					<li><a href="{U_REGISTER}">{L_REGISTER}</a></li>
+				<!-- ENDIF -->
+				<!-- IF not S_IS_BOT and S_DISPLAY_MEMBERLIST -->
+					<li><a href="{U_MEMBERLIST}">{L_MEMBERLIST}</a></li>
+				<!-- ENDIF -->
+				<!-- IF U_TEAM -->
+					<li><a href="{U_TEAM}">{L_THE_TEAM}</a></li>
+				<!-- ENDIF -->
+			</ul>
+		<hr class="dashed" />
+		<div class="menutitle">{L_M_HELP}</div>
+			<ul>
+				<li><a href="{U_FAQ}">{L_FAQ}</a></li>
+				<li><a href="{U_M_BBCODE}">{L_M_BBCODE}</a></li>
+				<li><a href="{U_M_TERMS}">{L_M_TERMS}</a></li>
+				<li><a href="{U_M_PRV}">{L_M_PRV}</a></li>
+			</ul>
 	</div>
-</div>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
 <br style="clear:both" />

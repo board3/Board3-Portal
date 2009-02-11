@@ -1,22 +1,15 @@
 <!--version $Id$ //-->
-<div class="panel">
-	<div class="inner">
-		<span class="corners-top"><span></span></span>
-			<h3><img src="{T_THEME_PATH}/images/portal/portal_linklist.gif" width="18px" height="18px" alt=""/>&nbsp;{L_LINKS}</h3>
-			<div class="portal-panel" style="margin-bottom: 0px;">
-			<div class="arrowlistmenu">
-				<ul>
-				<!-- IF .link -->
-					<!-- BEGIN link -->
-					<li><a href="{link.URL}" title="{link.TEXT}">{link.TEXT}</a></li>
-					<!-- END link -->
-				<!-- ELSE -->
-						<span style="float:left;" class="gensmall"><strong>{L_NO_LINKS}</strong></span><br />
-				<!-- ENDIF -->
-				</ul>
-				</div>
-			</div>
-		<span class="corners-bottom"><span></span></span>
+{$LR_BLOCK_H_L}<img src="{T_THEME_PATH}/images/portal/portal_linklist.gif" width="18px" height="18px" alt=""/>&nbsp;{L_LINKS}{$LR_BLOCK_H_R}
+	<div class="portal-navigation">
+		<ul>
+		<!-- IF .link -->
+			<!-- BEGIN link -->
+				<li><a href="{link.URL}" title="{link.TEXT}">{link.TEXT}</a></li>
+			<!-- END link -->
+		<!-- ELSE -->
+			<span style="float:left;" class="gensmall"><strong>{L_NO_LINKS}</strong></span><br />
+		<!-- ENDIF -->
+		</ul>
 	</div>
-</div>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
 <br style="clear:both" />

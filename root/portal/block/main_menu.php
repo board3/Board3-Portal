@@ -22,10 +22,9 @@ if (!defined('IN_PORTAL'))
 
 $template->assign_vars(array(
 	'S_DISPLAY_MAINMENU' 	=> true,
-	'U_M_BBCODE'   => append_sid("{$phpbb_root_path}faq.$phpEx", 'mode=bbcode'),
-	'U_M_TERMS'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=terms'),
-	'U_M_PRV'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=privacy'),
-	'U_MCP'                => ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=front', true, $user->session_id) : '', 
+	'U_M_BBCODE'   			=> append_sid("{$phpbb_root_path}faq.$phpEx", 'mode=bbcode'),
+	'U_M_TERMS'      		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=terms'),
+	'U_M_PRV'      			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=privacy'),
 ));
 
 ?>
