@@ -271,7 +271,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	{
 
 		$attachments = array();
-		if( $config['allow_attachments'] )
+		if( $config['allow_attachments'] && $row['post_id'] )
 		{
 			// Pull attachment data
 			$sql2 = 'SELECT *
