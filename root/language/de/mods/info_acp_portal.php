@@ -41,7 +41,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_FRIENDS_INFO'					=> 'Freunde',
 	
 	// Logs
-	'LOG_PORTAL_CONFIG'			=> '<strong>Portal-Einstellungen geändert</strong><br />» %s',
+	'LOG_PORTAL_CONFIG'			=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; %s',
 	
 	// Adding the permissions
 	'acl_a_portal_manage'		=> array('lang' => 'Kann Portal-Einstellungen ändern', 'cat' => 'misc'),
