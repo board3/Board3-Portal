@@ -226,13 +226,37 @@ class install_update extends module
 				set_portal_config('portal_phpbb_menu', '0');
 				set_portal_config('portal_minicalendar_today_color', '#FF0000');
 				set_portal_config('portal_minicalendar_day_link_color', '#006F00');
+				set_portal_config('portal_poll_hide', '0');
 
+				// Add permissions
 				$auth_admin = new auth_admin();
 				$auth_admin->acl_add_option(array(
 					'local'			=> array(),
 					'global'		=> array('a_portal_manage')
 				));
 				$cache->destroy('acl_options');
+
+				$sql = 'SELECT auth_option_id FROM ' . ACL_OPTIONS_TABLE . "
+					WHERE auth_option = 'a_portal_manage'";
+				$result = $db->sql_query($sql);
+				$auth_option_id = $db->sql_fetchfield('auth_option_id');
+				$db->sql_freeresult($result);
+
+				$sql = 'SELECT role_id FROM ' . ACL_ROLES_TABLE . "
+					WHERE role_name = 'ROLE_ADMIN_FULL'";
+				$result = $db->sql_query($sql);
+				$role_id = (int) $db->sql_fetchfield('role_id');
+				$db->sql_freeresult($result);
+
+				// Give the wanted role its option
+				$roles_data = array(
+					'role_id'			=> $role_id,
+					'auth_option_id'	=> $auth_option_id,
+					'auth_setting'		=> 1,
+				);
+
+				$sql = 'INSERT INTO ' . ACL_ROLES_DATA_TABLE . ' ' . $db->sql_build_array('INSERT', $roles_data);
+				$db->sql_query($sql);
 
 				// Update the ACP-Modules permissions
 				$sql = 'UPDATE ' . MODULES_TABLE . " SET

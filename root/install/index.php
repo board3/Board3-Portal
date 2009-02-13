@@ -80,6 +80,7 @@ class module
 	var $mode;
 	var $sub;
 	var $installed_version = false;
+	var $installed_p3p_version = false;
 	var $acp_parent_module = false;
 
 	/**
@@ -150,7 +151,7 @@ class module
 			$sql = 'SELECT *
 				FROM ' . PORTAL_CONFIG_TABLE;
 			$result = $db->sql_query($sql);
-
+			
 			while ($row = $db->sql_fetchrow($result))
 			{
 				if ($row['config_name'] == 'portal_version')
@@ -163,6 +164,21 @@ class module
 				}
 			}
 			$db->sql_freeresult($result);
+		}
+		if (in_array(CONFIG_TABLE, $tables))
+		{
+			$p3p_sql = 'SELECT *
+				FROM ' . CONFIG_TABLE;
+			$p3p_result = $db->sql_query($p3p_sql);
+
+			while ($p3p_row = $db->sql_fetchrow($p3p_result))
+			{
+				if ($p3p_row['config_name'] == 'portal_version')
+				{
+					$this->installed_p3p_version = $p3p_row['config_value'];
+				}
+			}
+			$db->sql_freeresult($p3p_result);
 		}
 		unset($tables);	
 

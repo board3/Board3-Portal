@@ -173,7 +173,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_POLL_LIMIT_EXPLAIN'					=> 'Die Anzahl der Umfragen, die auf dem Portal angezeigt werden sollen.',
 	'PORTAL_POLL_ALLOW_VOTE'					=> 'Abstimmen erlauben',
 	'PORTAL_POLL_ALLOW_VOTE_EXPLAIN'			=> 'Verfügt der Benutzer über entsprechende Berechtigungen, kann er direkt auf der Portal-Seite abstimmen.',
-
+	'PORTAL_POLL_HIDE'							=> 'Abgelaufene Umfragen verbergen?',
+	
 	// most poster
 	'ACP_PORTAL_MOST_POSTER_SETTINGS'			=> 'Einstellungen für die Vielschreiber',
 	'ACP_PORTAL_MOST_POSTER_SETTINGS_EXPLAIN'	=> 'Hier kannst du die Einstellungen für die Vielschreiber ändern.',

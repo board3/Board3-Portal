@@ -154,7 +154,7 @@ Deny from All
 			<edit>
 				<find><![CDATA[// The following assigns all _common_ variables that may be used at any point in a template.]]></find>
 				<action type="before-add"><![CDATA[	$user->add_lang('mods/lang_portal');
-			include_once($phpbb_root_path . 'portal/includes/functions.'.$phpEx);
+	include_once($phpbb_root_path . 'portal/includes/functions.'.$phpEx);
 	$portal_config = obtain_portal_config();]]></action>
 			</edit>
 			<edit>

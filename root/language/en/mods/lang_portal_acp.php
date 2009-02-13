@@ -174,6 +174,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_POLL_LIMIT_EXPLAIN'			=> 'The number of polls you would like to display on the portal page.',
 	'PORTAL_POLL_ALLOW_VOTE'			=> 'Allow voting',
 	'PORTAL_POLL_ALLOW_VOTE_EXPLAIN'	=> 'Allow users with the required permissions to vote from the portal page.',
+	'PORTAL_POLL_HIDE'					=> 'Expired Polls hide?',
 
 	// most poster
 	'ACP_PORTAL_MOST_POSTER_SETTINGS'			=> 'Most poster settings',
