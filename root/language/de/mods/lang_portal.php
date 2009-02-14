@@ -32,8 +32,10 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	// General
-	'PORTAL'							=> 'Portal',
-	'WELCOME'						=> 'Willkommen',
+	'PORTAL'					=> 'Portal',
+	'WELCOME'					=> 'Willkommen',
+	'PORTAL_INSTALL'			=> 'Installations Verzeichnis erkannt',
+	'PORTAL_INSTALL_TEXT'		=> 'Eine Installationsdatei wurde erkannt. Wenn Du dein Portal aktualisieren möchtest (oder einen anderen Mod), dann führe den Installer bitte aus. Wenn Du das bereits getan hast, entferne bitte aus Sicherheitsgründen das Verzeichnis oder benenne es um.',
 
 	// news & global announcements
 	'LATEST_ANNOUNCEMENTS'		=> 'Letzte Bekanntmachung',
@@ -187,7 +189,7 @@ $lang = array_merge($lang, array(
 	'POLL'		=> 'Umfrage',
 	'LATEST_POLLS'					=> 'Neueste Umfragen',
 	'NO_OPTIONS'						=> 'Diese Umfrage verfügt über keine Optionen.',
-	'NO_POLL'							=> 'Zur Zeit keine Umfragen vorhanden',
+	'NO_POLL'							=> 'Derzeit gibt es keine aktuellen Umfragen',
 	'RETURN_PORTAL'					=> '%sZurück zum Portal%s',
 
 	// other

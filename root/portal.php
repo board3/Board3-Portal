@@ -63,6 +63,18 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('mods/lang_portal');
 
+$load_center = true;
+
+if ( is_file( $phpbb_root_path . 'install/index.'.$phpEx ) === TRUE && ($user->data['user_type'] == USER_FOUNDER) )
+{
+		$template->assign_vars(array(
+			'S_DISPLAY_GENERAL'	=> true,
+			'GEN_TITLE'				=> $user->lang['PORTAL_INSTALL'],
+			'GEN_MESSAGE'			=> $user->lang['PORTAL_INSTALL_TEXT']
+		));
+	$load_center = false;
+}
+
 if ($portal_config['portal_phpbb_menu'])
 {
 	$template->assign_vars(array(
@@ -70,75 +82,79 @@ if ($portal_config['portal_phpbb_menu'])
 	));
 }
 
-if ($portal_config['portal_forum_index']) 
-{ 
-	display_forums('');
+if ( $load_center === TRUE )
+{
 
-	$template->assign_vars(array(
-		'FORUM_IMG'				=> $user->img('forum_read', 'NO_NEW_POSTS'),
-		'FORUM_NEW_IMG'			=> $user->img('forum_unread', 'NEW_POSTS'),
-		'FORUM_LOCKED_IMG'		=> $user->img('forum_read_locked', 'NO_NEW_POSTS_LOCKED'),
-		'FORUM_NEW_LOCKED_IMG'	=> $user->img('forum_unread_locked', 'NO_NEW_POSTS_LOCKED'),
-		'S_DISPLAY_PORTAL_FORUM_INDEX' => true,
+	if ($portal_config['portal_forum_index']) 
+	{ 
+		display_forums('');
 
-		'U_MARK_FORUMS'		=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx", 'mark=forums') : '',
-		'U_MCP'				=> ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=front', true, $user->session_id) : '')
-	);
-}
+		$template->assign_vars(array(
+			'FORUM_IMG'				=> $user->img('forum_read', 'NO_NEW_POSTS'),
+			'FORUM_NEW_IMG'			=> $user->img('forum_unread', 'NEW_POSTS'),
+			'FORUM_LOCKED_IMG'		=> $user->img('forum_read_locked', 'NO_NEW_POSTS_LOCKED'),
+			'FORUM_NEW_LOCKED_IMG'	=> $user->img('forum_unread_locked', 'NO_NEW_POSTS_LOCKED'),
+			'S_DISPLAY_PORTAL_FORUM_INDEX' => true,
 
-if ($portal_config['portal_recent']) 
-{ 
-	include($phpbb_root_path . 'portal/block/recent.'.$phpEx);
-}
-	
-if ($portal_config['portal_wordgraph'])
-{
-	include($phpbb_root_path . 'portal/block/wordgraph.'.$phpEx);
-}
-	
-if ($portal_config['portal_poll_topic'])
-{
-	include($phpbb_root_path . 'portal/block/poll.'.$phpEx);
-}
-	
-if ($portal_config['portal_welcome'])
-{
-	include($phpbb_root_path . 'portal/block/welcome.'.$phpEx);
-}
-	
-if ($portal_config['portal_welcome_guest'])
-{
-	$template->assign_vars(array(
-		'S_DISPLAY_WELCOME_GUEST' => true,
-	));
-}
-	
-if ($portal_config['portal_announcements'])
-{
-	include($phpbb_root_path . 'portal/block/announcements.'.$phpEx);
-	$template->assign_vars(array(
-		'S_ANNOUNCE_COMPACT' => ($portal_config['portal_announcements_style']) ? true : false,
-	));
-}
-	
-if ($portal_config['portal_news'])
-{
-	include($phpbb_root_path . 'portal/block/news.'.$phpEx);
-	$template->assign_vars(array(
-		'S_NEWS_COMPACT' => ($portal_config['portal_news_style']) ? true : false,
-	));
-}
+			'U_MARK_FORUMS'		=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx", 'mark=forums') : '',
+			'U_MCP'				=> ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=front', true, $user->session_id) : '')
+		);
+	}
 
-if ($portal_config['portal_custom_center'] or $portal_config['portal_custom_small'])
-{
-	include($phpbb_root_path . 'portal/block/custom.'.$phpEx);
-}
+	if ($portal_config['portal_recent']) 
+	{ 
+		include($phpbb_root_path . 'portal/block/recent.'.$phpEx);
+	}
+		
+	if ($portal_config['portal_wordgraph'])
+	{
+		include($phpbb_root_path . 'portal/block/wordgraph.'.$phpEx);
+	}
+		
+	if ($portal_config['portal_poll_topic'])
+	{
+		include($phpbb_root_path . 'portal/block/poll.'.$phpEx);
+	}
+		
+	if ($portal_config['portal_welcome'])
+	{
+		include($phpbb_root_path . 'portal/block/welcome.'.$phpEx);
+	}
+		
+	if ($portal_config['portal_welcome_guest'])
+	{
+		$template->assign_vars(array(
+			'S_DISPLAY_WELCOME_GUEST' => true,
+		));
+	}
+		
+	if ($portal_config['portal_announcements'])
+	{
+		include($phpbb_root_path . 'portal/block/announcements.'.$phpEx);
+		$template->assign_vars(array(
+			'S_ANNOUNCE_COMPACT' => ($portal_config['portal_announcements_style']) ? true : false,
+		));
+	}
+		
+	if ($portal_config['portal_news'])
+	{
+		include($phpbb_root_path . 'portal/block/news.'.$phpEx);
+		$template->assign_vars(array(
+			'S_NEWS_COMPACT' => ($portal_config['portal_news_style']) ? true : false,
+		));
+	}
 
-if ($config['load_online'] && $config['load_online_time'] && $portal_config['portal_whois_online'])
-{
-	include($phpbb_root_path . 'portal/block/whois_online.'.$phpEx);
-}
+	if ($portal_config['portal_custom_center'] or $portal_config['portal_custom_small'])
+	{
+		include($phpbb_root_path . 'portal/block/custom.'.$phpEx);
+	}
 
+	if ($config['load_online'] && $config['load_online_time'] && $portal_config['portal_whois_online'])
+	{
+		include($phpbb_root_path . 'portal/block/whois_online.'.$phpEx);
+	}
+
+}
 // show login box and user menu
 // only registered user see user menu
 if ($user->data['is_registered'])

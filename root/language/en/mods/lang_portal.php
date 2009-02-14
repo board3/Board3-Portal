@@ -35,6 +35,9 @@ $lang = array_merge($lang, array(
 	// General
 	'PORTAL'				=> 'Portal',
 	'WELCOME'				=> 'Welcome',
+	
+	'PORTAL_INSTALL'			=> 'Installation directory detected',
+	'PORTAL_INSTALL_TEXT'		=> 'A installation file has been detected. If you want to update your portal (or any other mod), please execute the installer. If you have already done so, please remove or rename the directory for security reasons.',
 
 	// news & global announcements
 	'LATEST_ANNOUNCEMENTS'	=> 'Latest global announcements',
