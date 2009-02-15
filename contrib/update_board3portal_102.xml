@@ -134,7 +134,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</open>
 		<open src="styles/prosilver/template/overall_footer.html">
 			<edit>
-				<find><![CDATA[<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>]]></find>
+				<find><![CDATA[<li class="icon-home"><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>]]></find>
 				<inline-edit>
 					<inline-find><![CDATA[<a href="{U_PORTAL}">{L_PORTAL}</a> &#187; ]]></inline-find>
 					<inline-action type="replace-with"><![CDATA[<!-- IF U_PORTAL --><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <!-- ENDIF -->]]></inline-action>
