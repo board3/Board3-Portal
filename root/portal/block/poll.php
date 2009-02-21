@@ -194,15 +194,24 @@ else
 
 $where = ($where !== '') ? "AND ({$where})" : '';
 
+if ($portal_config['portal_poll_hide'])
+{
+	$portal_poll_hide = "AND (t.poll_start + t.poll_length > ". time() ." OR t.poll_length = 0)";
+} 
+else
+{
+	$portal_poll_hide = '';
+}
+
 if( $poll_forums === TRUE )
 {
-	
 	$sql = 'SELECT t.poll_title, t.poll_start, t.topic_id,  t.topic_first_post_id, t.forum_id, t.poll_length, t.poll_vote_change, t.poll_max_options, t.topic_status, f.forum_status, p.bbcode_bitfield, p.bbcode_uid
 			FROM ' . TOPICS_TABLE . ' t, ' . POSTS_TABLE . ' p, ' . FORUMS_TABLE . " f
 			WHERE t.forum_id = f.forum_id AND t.topic_approved = 1 AND t.poll_start > 0
 			{$where}
 			AND t.topic_moved_id = 0
 			AND p.post_id = t.topic_first_post_id
+			{$portal_poll_hide}
 			ORDER BY t.poll_start DESC";
 
 	$limit = ( isset($portal_config['portal_poll_limit']) ) ? $portal_config['portal_poll_limit'] : 3;
@@ -213,24 +222,13 @@ if( $poll_forums === TRUE )
 
 	if ($result)
 	{
-		
 		while( $data = $db->sql_fetchrow($result) )
 		{
 			if (!function_exists('poll_vote_block'))
 			{
 				include($phpbb_root_path . 'portal/includes/functions_poll.' . $phpEx);
 			}
-			if ($portal_config['portal_poll_hide'])
-			{
-				if (($data['poll_length'] != 0 && $data['poll_start'] + $data['poll_length'] > time()) || $data['poll_length'] == 0)
-				{
-					poll_vote_block('poll');
-				}
-			} 
-			else
-			{
-				poll_vote_block('poll');
-			}
+			poll_vote_block('poll');
 		}
 	}		
 
