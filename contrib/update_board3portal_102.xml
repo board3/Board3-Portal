@@ -6,8 +6,8 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en-gb">board3 Portal</title>
-		<title lang="de">board3 Portal</title>
+		<title lang="en-gb">board3 Portal - Update from version 1.0.2</title>
+		<title lang="de">board3 Portal - Update von version 1.0.2</title>
 
 		<description lang="en-gb">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
@@ -27,8 +27,18 @@ Enthaltenen Sprachdateien:
 Weitere Sprachen kannst in unseren International Forum finden: http://www.board3.de/viewforum.php?f=13
 </description>
 
-		<author-notes lang="en-gb">i hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de</author-notes>
-		<author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.</author-notes>
+		<author-notes lang="en-gb">i hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
+		
+		Devolpers in earlier versions:
+		nickvergessen: http://www.flying-bits.org/
+		Redbull254: http://www.digitalfotografie-foren.de
+		</author-notes>
+		<author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.
+		
+		Entwickler in früheren Versionen:
+		nickvergessen: http://www.flying-bits.org/
+		Redbull254: http://www.digitalfotografie-foren.de
+		</author-notes>
 	
 		<author-group>
 			<author>
@@ -43,23 +53,6 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<realname>Kevin</realname>
 				<username>saint_hh</username>
 				<homepage>http://www.board3.de</homepage>
-				<contributions-group>
-					<contributions status="current" position="Main-Developer"></contributions>
-				</contributions-group>	
-			</author>
-			<author>
-				<email>nickvergessen@gmx.de</email>
-				<username>nickvergessen</username>
-				<homepage>http://www.flying-bits.org/</homepage>
-				<contributions-group>
-					<contributions status="current" position="Developer"></contributions>
-				</contributions-group>	
-			</author>
-			<author>
-				<realname>Walter</realname>
-				<email>w.bobeth@digitalfotografie-foren.de</email>
-				<username>Redbull254</username>
-				<homepage>http://www.digitalfotografie-foren.de</homepage>
 				<contributions-group>
 					<contributions status="current" position="Developer"></contributions>
 				</contributions-group>	
@@ -83,19 +76,34 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</installation>
 
 		<link-group>
-			<link type="contrib" lang="de" href="contrib/history.xml">Entwicklung</link>
-			<link type="contrib" lang="en-gb" href="contrib/history.xml">History</link>	
+			<link type="contrib" lang="de" href="history.xml">Entwicklung</link>
+			<link type="contrib" lang="en-gb" href="history.xml">History</link>	
 			<link type="parent" lang="de" href="../install.xml">Installations-Anleitung</link>
 			<link type="parent" lang="en-gb" href="../install.xml">Manual</link>
 		</link-group>	
 	</header>
 	<action-group>
 		<copy>
+			<file from="root/adm/mods/board3_portal_check_version.php" to="adm/mods/board3_portal_check_version.php" />
+			<file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />
+			<file from="root/includes/acp/info/acp_portal.php" to="includes/acp/info/acp_portal.php" />
 			<file from="root/install/*.*" to="install/*.*" />
-			<file from="root/install/schemas/*.*" to="install/schemas/*.*" />	
+			<file from="root/language/*.*" to="language/*.*" />
+			<file from="root/portal.php" to="portal.php" />
+			<file from="root/portal/block/additional_blocks.php" to="portal/block/additional_blocks.php" />
 			<file from="root/portal/block/announcements.php" to="portal/block/announcements.php" />
+			<file from="root/portal/block/birthday_list.php" to="portal/block/birthday_list.php" />
+			<file from="root/portal/block/friends.php" to="portal/block/friends.php" />
+			<file from="root/portal/block/main_menu.php" to="portal/block/main_menu.php" />
+			<file from="root/portal/block/mini_cal.php" to="portal/block/mini_cal.php" />
 			<file from="root/portal/block/news.php" to="portal/block/news.php" />
-			<file from="root/styles/prosilver/template/portal/block/search.html" to="styles/prosilver/template/portal/block/search.html" />
+			<file from="root/portal/block/poll.php" to="portal/block/poll.php" />
+			<file from="root/portal/block/user_menu.php" to="portal/block/user_menu.php" />
+			<file from="root/portal/includes/lang_adm_additional_blocks.php" to="portal/includes/lang_adm_additional_blocks.php" />
+			<file from="root/portal/includes/functions.php" to="portal/includes/functions.php" />
+			<file from="root/portal/includes/functions_poll.php" to="portal/includes/functions_poll.php" />
+			<file from="root/styles/prosilver/template/*.*" to="styles/prosilver/template/*.*" />
+			<file from="root/styles/prosilver/theme/*.*" to="styles/prosilver/theme/*.*" />
 		</copy>
 		<open src="adm/index.php">
 			<edit>
