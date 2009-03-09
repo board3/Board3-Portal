@@ -335,7 +335,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			</edit>
 			<edit>
 				<find><![CDATA[require($phpbb_root_path . 'includes/functions_module.' . $phpEx);]]></find>
-				<action type="add-after"><![CDATA[require($phpbb_root_path . 'portal/includes/lang_adm_additional_blocks.' . $phpEx);]]></action>
+				<action type="after-add><![CDATA[require($phpbb_root_path . 'portal/includes/lang_adm_additional_blocks.' . $phpEx);]]></action>
 			</edit>
 		</open>
 		<open src="includes/functions.php">
