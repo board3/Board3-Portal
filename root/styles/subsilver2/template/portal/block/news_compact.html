@@ -2,8 +2,9 @@
 <div id="pagecontent">
 <!-- BEGIN news_row -->
 <!-- IF news_row.S_FIRST_ROW -->
-{$C_ANC_BLOCK_H_L} colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_NEWS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->">{L_LATEST_NEWS} <a name="n"></a>{$C_ANC_BLOCK_H_R}
+{$C_BLOCK_H_L}{L_LATEST_NEWS} <a name="n"></a>{$C_BLOCK_H_R}
 		<!-- IF not news_row.S_NO_TOPICS  -->
+		<table class="tablebg" cellspacing="1" width="100%">
 		<tr class="nav">
 			<!-- IF S_TOPIC_ICONS -->
 				<td class="cat" align="center" colspan="3">&nbsp;{L_TOPICS}&nbsp;</td>
@@ -57,6 +58,7 @@
 		<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; <span>{NP_PAGINATION}</span><!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
 	</tr>
 	<!-- ENDIF -->
+</table>
 {$C_BLOCK_F_L}{$C_BLOCK_F_R}
 <br />
 <!-- ENDIF -->

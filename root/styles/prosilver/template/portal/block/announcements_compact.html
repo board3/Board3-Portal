@@ -1,6 +1,7 @@
 <!--version $Id$ //-->
 <!-- BEGIN announcements_row -->
-<!-- IF  announcements_row.S_NO_TOPICS  -->
+<!-- IF announcements_row.S_NO_TOPICS -->
+{$C_BLOCK_H_L}<dl><dt>{L_LATEST_ANNOUNCEMENTS}</dt></dl>{$C_BLOCK_H_R}
 	<div class="post bg2" style="margin-bottom: 0px">
 		<div class="inner"><span class="portal-corners-top-inner"></span>
 			<span style="text-align: center;"><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
@@ -10,14 +11,16 @@
 <!-- ELSE -->
 <!-- IF announcements_row.S_FIRST_ROW -->
 <a name="a"></a>
-{$C_ANC_BLOCK_H_L}
+{$C_BLOCK_H_L}
+<dl class="icon">
 	<dt <!-- IF S_DISPLAY_ANNOUNCEMENTS_RVS -->style="width: 44%"<!-- ELSE -->style="width: 60%"<!-- ENDIF -->>{L_LATEST_ANNOUNCEMENTS}</dt>
 	<!-- IF S_DISPLAY_ANNOUNCEMENTS_RVS -->
 		<dd class="posts" style="width: 11%">{L_REPLIES}</dd>
 		<dd class="views" style="width: 11%">{L_VIEWS}</dd>
 	<!-- ENDIF -->
 	<dd class="lastpost" style="width: 25%"><span>{L_LAST_POST}</span></dd>
-{$C_ANC_BLOCK_H_R}
+</dl>
+{$C_BLOCK_H_R}
 <ul class="topiclist topics">
 <!-- ENDIF -->
 	<li class="row<!-- IF announcements_row.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">

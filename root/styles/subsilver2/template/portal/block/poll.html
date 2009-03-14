@@ -1,6 +1,7 @@
 <!--version $Id$ //-->
 <a name="viewpoll"></a>
 {$C_BLOCK_H_L}{L_LATEST_POLLS}{$C_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
 	<tr class="row1" align="center">
 		<td>
 		<!-- IF S_HAS_POLL -->
@@ -9,7 +10,7 @@
 
 			<table class="tablebg" cellspacing="1" cellpadding="4" border="0" align="center" width="100%">
 				<tr>
-					<td class="cat" style="text-align: left">
+					<td class="row2" style="text-align: left">
 						<span class="gen"><b>{poll.POLL_QUESTION}</b></span><br /><span class="gensmall">{poll.L_POLL_LENGTH}</span>
 					</td>
 				</tr>
@@ -79,5 +80,6 @@
 		<!-- ENDIF -->
 		</td>
 	</tr>
+</table>
 {$C_BLOCK_F_L}{$C_BLOCK_F_R}
 <br />

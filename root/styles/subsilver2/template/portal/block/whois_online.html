@@ -1,5 +1,6 @@
 <!--version $Id$ //-->
-<!-- IF $WHOS_IMAGES -->{$WHOS_COLSPAN}<!-- ELSE -->{$C_BLOCK_H_L}<!-- ENDIF --><!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a><!-- ELSE -->{L_WHO_IS_ONLINE}<!-- ENDIF -->{$C_BLOCK_H_R}
+{$C_BLOCK_H_L}<!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a><!-- ELSE -->{L_WHO_IS_ONLINE}<!-- ENDIF -->{$C_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
 <tr>
 <!-- IF $WHOS_IMAGES -->
 	<!-- IF LEGEND -->
@@ -16,4 +17,5 @@
 	</tr>
 <!-- ENDIF -->
 </table>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
 <br clear="all" />
