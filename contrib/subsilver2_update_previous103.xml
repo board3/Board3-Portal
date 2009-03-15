@@ -76,8 +76,6 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</installation>
 
 		<link-group>
-			<link type="contrib" lang="de" href="history.xml">Entwicklung</link>
-			<link type="contrib" lang="en-gb" href="history.xml">History</link>	
 			<link type="parent" lang="de" href="../install.xml">Installations-Anleitung</link>
 			<link type="parent" lang="en-gb" href="../install.xml">Manual</link>
 		</link-group>	
