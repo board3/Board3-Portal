@@ -12,6 +12,10 @@
 			<!-- INCLUDE portal/block/main_menu.html -->
 		<!-- ENDIF -->
 
+		<!-- IF S_STYLE_OPTIONS and S_DISPLAY_CHANGE_STYLE -->
+				<!-- INCLUDE portal/block/change_style.html -->
+		<!-- ENDIF -->	
+
 		<!-- INCLUDE portal/block/additional_blocks_left.html -->			
 
 		<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
@@ -36,10 +40,6 @@
 
 		<!-- IF S_CUSTOM_SMALL -->
 			<!-- INCLUDE portal/block/custom_small.html -->
-		<!-- ENDIF -->		
-
-		<!-- IF S_STYLE_OPTIONS and S_DISPLAY_CHANGE_STYLE -->
-			<!-- INCLUDE portal/block/change_style.html -->
 		<!-- ENDIF -->		
 
 		<!-- IF S_DISPLAY_TOP_POSTERS -->
