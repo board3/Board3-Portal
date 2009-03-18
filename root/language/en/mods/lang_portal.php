@@ -37,7 +37,7 @@ $lang = array_merge($lang, array(
 	'WELCOME'				=> 'Welcome',
 	
 	'PORTAL_INSTALL'			=> 'Installation directory detected',
-	'PORTAL_INSTALL_TEXT'		=> 'A installation file has been detected. If you want to update your portal (or any other mod), please execute the installer. If you have already done so, please remove or rename the directory for security reasons.',
+	'PORTAL_INSTALL_TEXT'		=> 'An installation file has been detected. If you want to update your portal (or any other mod), please execute the installer. If you have already done so, please remove or rename the directory for security reasons.',
 
 	// news & global announcements
 	'LATEST_ANNOUNCEMENTS'	=> 'Latest global announcements',
@@ -60,7 +60,7 @@ $lang = array_merge($lang, array(
 
 	// Birthday
 	'BIRTHDAYS_AHEAD'              => 'In the next %s days',
-	'NO_BIRTHDAYS_AHEAD'        => 'In this period, no members have a birthday.',
+	'NO_BIRTHDAYS_AHEAD'        => 'No members have a birthday within this period of time.',
 
 	// user menu
 	'USER_MENU'			=> 'User menu',
@@ -70,7 +70,7 @@ $lang = array_merge($lang, array(
 	'UM_BOOKMARKS'		=> 'Bookmarks',
 
 	// statistics
-	'ST_TOP'		=> 'Total',
+	'ST_TOP'		=> 'Totals',
 	'ST_TOP_ANNS'	=> 'Total Announcements:',
 	'ST_TOP_STICKYS'=> 'Total Stickies:',
 	'ST_TOT_ATTACH'	=> 'Total Attachments:',
@@ -85,9 +85,9 @@ $lang = array_merge($lang, array(
 	
 	// recent
 	'RECENT_NEWS'		=> 'Recent',
-	'RECENT_TOPIC'		=> 'Recent topic',
-	'RECENT_ANN'		=> 'Recent announcement',
-	'RECENT_HOT_TOPIC'	=> 'Recent popular topic',
+	'RECENT_TOPIC'		=> 'Recent topics',
+	'RECENT_ANN'		=> 'Recent announcements',
+	'RECENT_HOT_TOPIC'	=> 'Recent popular topics',
 
 	// random member
 	'RND_MEMBER'	=> 'Random member',
@@ -98,7 +98,7 @@ $lang = array_merge($lang, array(
 	'RND_WWW'		=> 'Web page',
 
 	// top poster
-	'TOP_POSTER'	=> 'Top poster',
+	'TOP_POSTER'	=> 'Peak posters',
 	
 	// attachments
 	'DOWNLOADS'			=> 'Downloads',
@@ -109,13 +109,13 @@ $lang = array_merge($lang, array(
 	'NO_LINKS'			=> 'No links', 
 	
 	// latest members
-	'LATEST_MEMBERS'	=> 'Latest members',
+	'LATEST_MEMBERS'	=> 'Newest members',
 
 	// make donation
-	'DONATION' 		=> 'PayPal donation',
-	'DONATION_TEXT'	=> 'is a group suplying services with no intention of any revenue. Anyone who wants to support this group can do so by donating so that the cost of server, the domain etc. can be covered.',
+	'DONATION' 		=> 'PayPal donations',
+	'DONATION_TEXT'	=> 'is a group supplying services with no intention of any monetary profit. Your donations are welcome so that the cost of our server, domain name, etc. can be covered.',
 	'PAY_MSG'       => 'Please use a decimal point (not a comma) as the separator, e.g. 3.50',
-	'PAY_ITEM'		=> 'Make a donation', // paypal item
+	'PAY_ITEM'		=> 'Donate!', // paypal item
 
 	'AUD'						=> 'Australian Dollars (AUD)',
 	'CAD'						=> 'Canadian Dollars (CAD)',
@@ -142,7 +142,7 @@ $lang = array_merge($lang, array(
 	'M_ACP'		=> 'ACP',
 	'M_HELP'	=> 'Help',
 	'M_BBCODE'	=> 'BBCode FAQ',
-	'M_TERMS'	=> 'Term of use',
+	'M_TERMS'	=> 'Terms of use',
 	'M_PRV'		=> 'Privacy policy',
 	'M_SEARCH'	=> 'Search',
 
@@ -209,7 +209,7 @@ $lang = array_merge($lang, array(
 // mini calendar
 $lang = array_merge($lang, array(
 	'Mini_Cal_calendar'		=> 'Calendar',
-	'View_next_month'		=> 'next month',
+	'View_next_month'		=> 'Next month',
 	'View_previous_month'	=> 'Previous month',
 
 // uses MySQL DATE_FORMAT - %c  long_month, numeric (1..12) - %e  Day of the long_month, numeric (0..31)
