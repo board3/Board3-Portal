@@ -581,4 +581,31 @@ function ap_validate($str) {
        return $page_string;
     }
 
+/**
+	* Format user date for the Birthday block
+	* Note: this function is used as we already added timezones, etc
+	*
+	* borrowed from Upcoming Birthday Mod
+	* @author: lefty
+	* changed to work outside session.php by B3P
+	* @function: format_dateucb
+*/ 
+
+function format_birthday($date, $format = false)
+{
+	global $user;
+		$time->time_now	= time();
+		$lang_dates		= $user->lang['datetime'];
+		$format			= (!$format) ? $time->date_format : $format;
+
+		// Short representation of month in format
+		if ((strpos($format, '\M') === false && strpos($format, 'M') !== false) || (strpos($format, '\r') === false && strpos($format, 'r') !== false))
+		{
+			$lang_dates['May'] = $lang_dates['May_short'];
+		}
+		unset($lang_dates['May_short']);
+
+	return strtr(@date(str_replace('|', '', $format), $date), $lang_dates);
+} 
+	
 ?>
