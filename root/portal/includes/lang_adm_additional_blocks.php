@@ -15,6 +15,11 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
+// Start session management
+$user->session_begin();
+$auth->acl($user->data);
+$user->setup();
+
 $user->add_lang('mods/info_acp_portal');
 $user->add_lang('mods/additional_blocks');
 

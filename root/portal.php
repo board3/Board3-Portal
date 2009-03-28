@@ -19,6 +19,7 @@ $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'portal/includes/functions.'.$phpEx);
+include($phpbb_root_path . 'portal/includes/lang_adm_additional_blocks.'.$phpEx);
 
 $portal_config = obtain_portal_config();
 
