@@ -1,9 +1,6 @@
 <!--version $Id$ //-->
 <a name="viewpoll"></a>
 {$C_BLOCK_H_L}{L_LATEST_POLLS}{$C_BLOCK_H_R}
-<table class="tablebg" cellspacing="1" width="100%">
-	<tr class="row1" align="center">
-		<td>
 		<!-- IF S_HAS_POLL -->
 		<!-- BEGIN poll -->
 			<!-- IF poll.S_CAN_VOTE --><form method="post" action="{poll.S_POLL_ACTION}"><!-- ENDIF -->
@@ -78,7 +75,4 @@
 				</tr>
 			</table>
 		<!-- ENDIF -->
-		</td>
-	</tr>
-</table>
 {$C_BLOCK_F_L}{$C_BLOCK_F_R}
