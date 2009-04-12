@@ -333,7 +333,8 @@ class install_update extends module
 				$db->sql_query($sql);
 				
 				$reparse_modules = true;
-			//case '1.0.3':
+			case '1.0.3':
+			//case '1.0.4RC1':
 			break;
 		}
 
@@ -405,7 +406,8 @@ class install_update extends module
 					add_module($acp_portal_friends);
 					$acp_portal_birthdays = array('module_basename' => 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $portal_config['acp_parent_module'],	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_BIRTHDAYS_INFO',	'module_mode' => 'birthdays',	'module_auth' => 'acl_a_portal_manage');
 					add_module($acp_portal_birthdays);
-				//case '1.0.3':
+				case '1.0.3':
+				//case '1.0.4RC1':
 				break;
 			}
 

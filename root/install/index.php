@@ -18,7 +18,7 @@
 define('IN_PHPBB', true);
 define('IN_INSTALL', true);
 
-define('NEWEST_B3P_VERSION', '1.0.3');
+define('NEWEST_B3P_VERSION', '1.0.4RC1');
 
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);

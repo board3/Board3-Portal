@@ -67,7 +67,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			</author>
 		</author-group>
 
-		<mod-version>1.0.3</mod-version>
+		<mod-version>1.0.4</mod-version>
 
 		<installation>
 			<level>easy</level>
@@ -78,6 +78,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		<link-group>
 			<link type="dependency" lang="en-gb" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
 			<link type="dependency" lang="de" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal unterstützt MOD Version Check. Um dieses Feature zu nutzen, muss dieser Mod installiert sein.</link>
+			<link type="contrib" lang="en-gb" href="contrib/update_board3portal_103.xml">Update instructions for Board3 Portal Version 1.0.3</link>
+			<link type="contrib" lang="de" href="contrib/update_board3portal_103.xml">Updateanleitung für Board3 Portal Version 1.0.3</link>
 			<link type="contrib" lang="en-gb" href="contrib/update_board3portal_102.xml">Update instructions for Board3 Portal Version 1.0.2</link>
 			<link type="contrib" lang="de" href="contrib/update_board3portal_102.xml">Updateanleitung für Board3 Portal Version 1.0.2</link>
 			<link type="contrib" lang="en-gb" href="contrib/update_board3portal_101.xml">Update instructions for Board3 Portal Version 1.0.1</link>
@@ -108,6 +110,16 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<link type="template" lang="de" href="contrib/subsilver2_update_previous103.xml">Update Anleitung für subsilver2 Installationen vor Board3 Portal V.1.0.3</link>
 		</link-group>
 		<history>
+			<entry>
+				<date>2009-03-29</date>
+				<rev-version>1.0.4</rev-version>
+				<changelog lang="en-GB">
+					<change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=12</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=12</change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2009-03-29</date>
 				<rev-version>1.0.3</rev-version>
@@ -344,12 +356,6 @@ Deny from All
 		break;]]></action>
 			</edit>
 		</open>
-		<open src="adm/index.php">
-			<edit>
-				<find><![CDATA[require($phpbb_root_path . 'includes/functions_module.' . $phpEx);]]></find>
-				<action type="after-add"><![CDATA[require($phpbb_root_path . 'portal/includes/lang_adm_additional_blocks.' . $phpEx);]]></action>
-			</edit>
-		</open>
 		<open src="includes/constants.php">
 			<edit>
 				<find><![CDATA[// Additional tables]]></find>
@@ -359,7 +365,7 @@ Deny from All
 		<open src="includes/functions.php">
 			<edit>
 				<find><![CDATA[// The following assigns all _common_ variables that may be used at any point in a template.]]></find>
-				<action type="before-add"><![CDATA[	$user->add_lang('mods/lang_portal');
+				<action type="before-add"><![CDATA[	$user->add_lang(array('mods/lang_portal', 'mods/additional_blocks'));
 	include_once($phpbb_root_path . 'portal/includes/functions.'.$phpEx);
 	$portal_config = obtain_portal_config();]]></action>
 			</edit>

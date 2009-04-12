@@ -43,6 +43,7 @@ $oudated_files = array(
     'portal/images/mini_cal_icon_right_arrow.png',
     'portal/images/paypal.gif',
 	'portal/images/board3clock.swf',
+	'portal/includes/lang_adm_additional_blocks.php',
     'styles/prosilver/template/portal/block/active.html',
     'styles/prosilver/template/portal/block/ads_center.html',
     'styles/prosilver/template/portal/block/ads_small.html',

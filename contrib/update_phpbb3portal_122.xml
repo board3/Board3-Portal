@@ -67,7 +67,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			</author>
 		</author-group>
 
-		<mod-version>1.0.3</mod-version>
+		<mod-version>1.0.4</mod-version>
 
 		<installation>
 			<level>easy</level>
@@ -110,6 +110,16 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<link type="parent" lang="en" href="../install.xml">Install instructions</link>
 		</link-group>
 		<history>
+			<entry>
+				<date>2009-MM-DD</date>
+				<rev-version>1.0.4</rev-version>
+				<changelog lang="en-GB">
+					<change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=12</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=12</change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2009-03-29</date>
 				<rev-version>1.0.3</rev-version>
@@ -341,12 +351,10 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
 		</open>
 		<open src="adm/index.php">
 			<edit>
+				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
+				<comment lang="en-gb"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
 				<find><![CDATA[$user->add_lang('acp/portal');]]></find>
 				<action type="replace-with"><![CDATA[]]></action>
-			</edit>
-			<edit>
-				<find><![CDATA[require($phpbb_root_path . 'includes/functions_module.' . $phpEx);]]></find>
-				<action type="after-add"><![CDATA[require($phpbb_root_path . 'portal/includes/lang_adm_additional_blocks.' . $phpEx);]]></action>
 			</edit>
 		</open>
 		<open src="includes/constants.php">
@@ -357,6 +365,8 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
 		</open>
 		<open src="includes/functions.php">
 			<edit>
+				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
+				<comment lang="en-gb"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
 				<find><![CDATA[//-- [+] MOD: phpBB3 Portal ---------------------------------------------
 //-- add
 //
@@ -372,6 +382,8 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
 	$portal_config = obtain_portal_config();]]></action>
 			</edit>
 			<edit>
+				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
+				<comment lang="en-gb"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
 				<find><![CDATA[		'U_PORTAL'				=> append_sid("{$phpbb_root_path}portal.$phpEx"),
 		'S_PORTAL_COPY'			=> $user->lang['PORTAL_COPY'],]]></find>
 				<action type="replace-with"><![CDATA[]]></action>
@@ -389,6 +401,8 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
 		</open>
 		<open src="language/en/acp/common.php">
 			<edit>
+				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
+				<comment lang="en-gb"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
 				<find><![CDATA[// phpBB3 Portal by phpbb3portal.com
 $lang = array_merge($lang, array(
    	'ACP_PORTAL_INFO'           			=> 'Portal',
@@ -433,6 +447,8 @@ $lang = array_merge($lang, array(
 				</inline-edit>
 			</edit>
 			<edit>
+				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
+				<comment lang="en-gb"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
 				<find><![CDATA[<!-- IF S_PORTAL_COPY --><br />{S_PORTAL_COPY}<!-- ENDIF -->]]></find>
 				<action type="replace-with"><![CDATA[]]></action>
 			</edit>
