@@ -10,6 +10,11 @@
 *
 */
 
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 class acp_pallet
 {
 	function main($id, $mode)

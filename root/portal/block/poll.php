@@ -10,7 +10,6 @@
 */
 if (!defined('IN_PHPBB') or !defined('IN_PORTAL'))
 {
-	die('Hacking attempt');
 	exit;
 }
 

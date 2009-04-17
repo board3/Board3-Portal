@@ -10,6 +10,11 @@
 *
 */
 
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
+{
+	exit;
+}
+
 if (!isset($template->filename['clock_block']))
 {
 	$template->set_filenames(array(
