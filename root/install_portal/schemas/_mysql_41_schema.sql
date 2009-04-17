@@ -1,5 +1,5 @@
 #
-# $Id: $
+# $Id$
 #
 
 # Table: 'phpbb_portal_config'

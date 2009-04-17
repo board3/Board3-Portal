@@ -3,7 +3,7 @@
 /**
 *
 * @package - Board3portal
-* @version $Id: lang_pallet_acp.php 368 2008-09-06 10:20:18Z kevin74 $
+* @version $Id$
 * @copyright (c) kevin / saint ( www.board3.de/ ), (c) Ice, (c) nickvergessen ( www.flying-bits.org/ ), (c) redbull254 ( www.digitalfotografie-foren.de ), (c) Christian_N ( www.phpbb-projekt.de )
 * @based on: phpBB3 Portal by Sevdin Filiz, www.phpbb3portal.com
 * @translator (c) ( You - http://www.yourdomain.com )
