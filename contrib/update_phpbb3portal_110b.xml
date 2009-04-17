@@ -290,7 +290,7 @@ Dieses Portal basiert auf dem phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3por
       <edit>
         <find><![CDATA[# 
 # @package phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3portal.com )
-# @version $Id: .htaccess,v 1.3 2007/08/19 17:51:00 angelside Exp $
+# @version $Id$
 # @copyright (c) Canver Software - www.canversoft.net
 # @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 # 
