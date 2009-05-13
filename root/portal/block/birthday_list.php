@@ -29,14 +29,20 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 		case 'mssql_odbc':
 			$sql = 'SELECT user_id, username, user_colour, user_birthday
 			FROM ' . USERS_TABLE . "
-			WHERE user_birthday <> ''
+			WHERE user_birthday NOT LIKE '%0-%'
+			AND user_birthday NOT LIKE '0-%'
+			AND	user_birthday NOT LIKE '0- 0-%'
+			AND	user_birthday NOT LIKE ''
 			AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ') ORDER BY user_birthday ASC';
 		break;
 	
 		default:
 			$sql = 'SELECT user_id, username, user_colour, user_birthday
 			FROM ' . USERS_TABLE . "
-			WHERE user_birthday <> ''
+			WHERE user_birthday NOT LIKE '%0-%'
+			AND user_birthday NOT LIKE '0-%'
+			AND	user_birthday NOT LIKE '0- 0-%'
+			AND	user_birthday NOT LIKE ''
 			AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ') ORDER BY SUBSTRING(user_birthday FROM 4 FOR 2) ASC, SUBSTRING(user_birthday FROM 1 FOR 2) ASC, username_clean ASC';
 		break;
 	}
