@@ -4,197 +4,189 @@
 
 <!--version $Id$ //-->
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
-<tr>
-<!-- [+] left block area -->
-	<td valign="top" style="width: {PORTAL_LEFT_COLUMN}px; padding-right:6px;">
+	<tr>
+	<!-- [+] left block area -->
+		<td valign="top" style="width: {PORTAL_LEFT_COLUMN}px; padding-right:{$BLOCK_DISTANCE};">
 		<br style="clear:both" />
 
 		<!-- IF S_DISPLAY_MAINMENU -->
 			<!-- INCLUDE portal/block/main_menu.html -->
 		<!-- ENDIF -->
 
-		<!-- IF S_STYLE_OPTIONS and S_DISPLAY_CHANGE_STYLE -->
-				<!-- INCLUDE portal/block/change_style.html -->
-		<!-- ENDIF -->	
+		  <!-- IF S_STYLE_OPTIONS and S_DISPLAY_CHANGE_STYLE -->
+			<!-- INCLUDE portal/block/change_style.html -->
+		  <!-- ENDIF -->
 
-		<!-- INCLUDE portal/block/additional_blocks_left.html -->		
+		<!-- INCLUDE portal/block/additional_blocks_left.html -->
 
-		<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+		  <!-- IF S_DISPLAY_BIRTHDAY_LIST -->
 			<!-- INCLUDE portal/block/birthday_list.html -->
-		<!-- ENDIF -->
-		
-		<!-- IF S_DISPLAY_CLOCK -->
+		  <!-- ENDIF -->
+
+		  <!-- IF S_DISPLAY_CLOCK -->
 			<!-- INCLUDE portal/block/clock.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_PORTALSEARCH and S_DISPLAY_SEARCH -->
+		  <!-- IF S_DISPLAY_PORTALSEARCH and S_DISPLAY_SEARCH -->
 			<!-- INCLUDE portal/block/search.html -->
-		<!-- ENDIF -->		
-		
-		<!-- IF S_DISPLAY_RANDOM_MEMBER -->
+		  <!-- ENDIF -->
+
+		  <!-- IF S_DISPLAY_RANDOM_MEMBER -->
 			<!-- INCLUDE portal/block/random_member.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_ATTACHMENTS -->
+		  <!-- IF S_DISPLAY_ATTACHMENTS -->
 			<!-- INCLUDE portal/block/attachments.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_CUSTOM_SMALL -->
+		  <!-- IF S_CUSTOM_SMALL -->
 			<!-- INCLUDE portal/block/custom_small.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_TOP_POSTERS -->
+		  <!-- IF S_DISPLAY_TOP_POSTERS -->
 			<!-- INCLUDE portal/block/top_poster.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_LATEST_MEMBERS -->
+		  <!-- IF S_DISPLAY_LATEST_MEMBERS -->
 			<!-- INCLUDE portal/block/latest_members.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_LINK_US -->
+		  <!-- IF S_DISPLAY_LINK_US -->
 			<!-- INCLUDE portal/block/link_us.html -->
-		<!-- ENDIF -->
-		
-	</td>
+		  <!-- ENDIF -->
+		</td>
 <!-- [-] left block area -->
-	<td style="width:4px;" valign="top"></td>
-
+   
 <!-- [+] center block area -->
-	<td valign="top">
-	<br style="clear:both" />
+	   <td valign="top">
+	   <br style="clear:both" />
 
-		<!-- IF S_DISPLAY_GENERAL -->
+		  <!-- IF S_DISPLAY_GENERAL -->
 			<!-- INCLUDE portal/block/general_block.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF U_RESTORE_PERMISSIONS and S_DISPLAY_MAINMENU -->
+		  <!-- IF U_RESTORE_PERMISSIONS and S_DISPLAY_MAINMENU -->
 			<!-- INCLUDE portal/block/general_block.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_WELCOME -->
+		  <!-- IF S_DISPLAY_WELCOME -->
 			<!-- IF S_DISPLAY_WELCOME_GUEST and S_USER_LOGGED_IN -->
 			<!-- ELSE -->
 				<!-- INCLUDE portal/block/welcome.html -->
 			<!-- ENDIF -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_CUSTOM_CENTER -->
+		  <!-- IF S_CUSTOM_CENTER -->
 			<!-- INCLUDE portal/block/custom_center.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_RECENT -->
+		  <!-- IF S_DISPLAY_RECENT -->
 			<!-- INCLUDE portal/block/recent.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_ANNOUNCEMENTS -->
+		  <!-- IF S_DISPLAY_ANNOUNCEMENTS -->
 			<!-- IF S_ANNOUNCE_COMPACT -->
 				<!-- INCLUDE portal/block/announcements_compact.html -->
 			<!-- ELSE -->
 				<!-- INCLUDE portal/block/announcements.html -->
 			<!-- ENDIF -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_NEWS -->
+		  <!-- IF S_DISPLAY_NEWS -->
 			<!-- IF S_NEWS_COMPACT -->
 				<!-- INCLUDE portal/block/news_compact.html -->
 			<!-- ELSE -->
 				<!-- INCLUDE portal/block/news.html -->
 			<!-- ENDIF -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- INCLUDE portal/block/additional_blocks_center.html -->		
+		  <!-- INCLUDE portal/block/additional_blocks_center.html -->
 
-		<!-- IF S_DISPLAY_POLL -->
+		  <!-- IF S_DISPLAY_POLL -->
 			<!-- INCLUDE portal/block/poll.html -->
-		<!-- ENDIF -->
-		
-		<!-- IF S_DISPLAY_PORTAL_FORUM_INDEX -->		
+		  <!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_PORTAL_FORUM_INDEX -->
 			<!-- IF S_DISPLAY_SEARCH or (S_USER_LOGGED_IN and not S_IS_BOT) -->
-					<ul class="linklist">
+				<ul class="linklist">
 				<!-- IF S_DISPLAY_SEARCH -->
 					<li><a href="{U_SEARCH_UNANSWERED}">{L_SEARCH_UNANSWERED}</a><!-- IF S_USER_LOGGED_IN --> &bull; <a href="{U_SEARCH_NEW}">{L_SEARCH_NEW}</a><!-- ENDIF --> &bull; <a href="{U_SEARCH_ACTIVE_TOPICS}">{L_SEARCH_ACTIVE_TOPICS}</a></li>
 				<!-- ENDIF -->
-			<!-- IF not S_IS_BOT and U_MARK_FORUMS --><li class="rightside"><a href="{U_MARK_FORUMS}" accesskey="m">{L_MARK_FORUMS_READ}</a></li><!-- ENDIF -->
-					</ul>
+				<!-- IF not S_IS_BOT and U_MARK_FORUMS --><li class="rightside"><a href="{U_MARK_FORUMS}" accesskey="m">{L_MARK_FORUMS_READ}</a></li><!-- ENDIF -->
+				</ul>
 			<!-- ENDIF -->
-
 			<!-- INCLUDE forumlist_body.html -->
 			<br />
 		<!-- ENDIF -->
 
-        <!-- IF S_DISPLAY_ONLINE_PORTAL_LIST and S_DISPLAY_ONLINE_LIST -->
+		<!-- IF S_DISPLAY_ONLINE_PORTAL_LIST and S_DISPLAY_ONLINE_LIST -->
 			<!-- INCLUDE portal/block/whois_online.html -->
 		<!-- ENDIF -->
 
 		<!-- IF S_DISPLAY_PAY_C -->
 			<!-- INCLUDE portal/block/donation.html -->
 		<!-- ENDIF -->
-		
-       	<!-- IF S_DISPLAY_WORDGRAPH -->
+
+		<!-- IF S_DISPLAY_WORDGRAPH -->
 			<!-- INCLUDE portal/block/wordgraph.html -->
 		<!-- ENDIF -->
 
 		<!-- IF S_DISPLAY_JUMPBOX -->
 			<!-- INCLUDE portal/block/jumpbox.html -->
 		<!-- ENDIF -->
-		
+
 		<!-- please keep this credits visible, thank you!  -->
 		<br /><div class="copyright">{L_PORTAL_COPY}</div>
-	</td>
-                         
+		</td>
 <!-- [-] center block area -->
-	<td style="width:4px;" valign="top"> </td>
 
 <!-- [+] right block area -->
-	<td valign="top" style="width: {PORTAL_RIGHT_COLUMN}px; padding-left:6px;">
+		<td valign="top" style="width: {PORTAL_RIGHT_COLUMN}px; padding-left:{$BLOCK_DISTANCE};">
 		<br style="clear:both" />
 
 		<!-- IF S_DISPLAY_USERMENU -->
 			<!-- IF not S_USER_LOGGED_IN -->
 				<!-- INCLUDE portal/block/login_box.html -->
 			<!-- ENDIF -->
-
 			<!-- IF not S_IS_BOT and S_USER_LOGGED_IN -->
 				<!-- INCLUDE portal/block/user_menu.html -->
 			<!-- ENDIF -->
 		<!-- ENDIF -->
 
-		<!-- INCLUDE portal/block/additional_blocks_right.html -->
+		  <!-- INCLUDE portal/block/additional_blocks_right.html -->
 
-		<!-- IF not S_IS_BOT and S_USER_LOGGED_IN and S_ZEBRA_ENABLED and S_DISPLAY_FRIENDS -->
+		  <!-- IF not S_IS_BOT and S_USER_LOGGED_IN and S_ZEBRA_ENABLED and S_DISPLAY_FRIENDS -->
 			<!-- INCLUDE portal/block/online_friends.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_ADVANCED_STAT -->
+		  <!-- IF S_DISPLAY_ADVANCED_STAT -->
 			<!-- INCLUDE portal/block/statistics.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_MINICAL -->
+		  <!-- IF S_DISPLAY_MINICAL -->
 			<!-- INCLUDE portal/block/mini_calendar.html -->
-		<!-- ENDIF -->
-		
-		<!-- IF S_DISPLAY_LEADERS_EXT -->
+		  <!-- ENDIF -->
+
+		  <!-- IF S_DISPLAY_LEADERS_EXT -->
 			<!-- INCLUDE portal/block/leaders_ext.html -->
-		<!-- ELSEIF S_DISPLAY_LEADERS -->
+		  <!-- ELSEIF S_DISPLAY_LEADERS -->
 			<!-- INCLUDE portal/block/leaders.html -->
-		<!-- ENDIF -->
-		
-        <!-- IF S_DISPLAY_LAST_BOTS and S_LAST_VISITED_BOTS -->
-			<!-- INCLUDE portal/block/latest_bots.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_LINKS -->
+			<!-- IF S_DISPLAY_LAST_BOTS and S_LAST_VISITED_BOTS -->
+				<!-- INCLUDE portal/block/latest_bots.html -->
+			<!-- ENDIF -->
+
+		  <!-- IF S_DISPLAY_LINKS -->
 			<!-- INCLUDE portal/block/links.html -->
-		<!-- ENDIF -->
+		  <!-- ENDIF -->
 
-		<!-- IF S_DISPLAY_PAY_S -->
+		  <!-- IF S_DISPLAY_PAY_S -->
 			<!-- INCLUDE portal/block/donation_small.html -->
-		<!-- ENDIF -->
-
-	</td>
+		  <!-- ENDIF -->
+		</td>
 <!-- [-] right block area -->
-</tr>
+	</tr>
 </table>
-
 <!--// board3 Portal by www.board3.de //-->
 <!-- INCLUDE overall_footer.html -->
