@@ -334,6 +334,17 @@ class install_update extends module
 				
 				$reparse_modules = true;
 			case '1.0.3':
+				//remove the columns
+				$old_portal_configs = array('portal_minicalendar_day_link_color');
+				$sql = 'DELETE FROM ' . PORTAL_CONFIG_TABLE . '
+					WHERE ' . $db->sql_in_set('config_name', $old_portal_configs);
+				$db->sql_query($sql);
+
+				// Set default config
+				set_portal_config('portal_minicalendar_today_color', '#000000');
+				set_portal_config('portal_minicalendar_sunday_color', '#FF0000');
+				set_portal_config('portal_sunday_first', '1');
+				set_portal_config('portal_long_month', '0');
 			//case '1.0.4RC1':
 			break;
 		}

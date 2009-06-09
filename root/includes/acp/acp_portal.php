@@ -253,7 +253,9 @@ class acp_portal
 						'legend1'							=> 'ACP_PORTAL_MINICALENDAR_SETTINGS',
 						'portal_minicalendar'				=> array('lang' => 'PORTAL_MINICALENDAR'					 ,	'validate' => 'bool',	 'type' => 'radio:yes_no',	'explain' => true),
 						'portal_minicalendar_today_color'	=> array('lang' => 'PORTAL_MINICALENDAR_TODAY_COLOR'	 ,	'validate' => 'string', 'type' => 'text:10:10',	 'explain' => true),
-						'portal_minicalendar_day_link_color'	=> array('lang' => 'PORTAL_MINICALENDAR_DAY_LINK_COLOR' ,	'validate' => 'string', 'type' => 'text:10:10',	 'explain' => true),
+						'portal_minicalendar_sunday_color'	=> array('lang' => 'PORTAL_MINICALENDAR_SUNDAY_COLOR' ,	'validate' => 'string', 'type' => 'text:10:10',	 'explain' => true),
+						'portal_long_month'	=> array('lang' => 'PORTAL_LONG_MONTH' ,	'validate' => 'bool',	'type' => 'radio:yes_no',	 'explain' => true),
+						'portal_sunday_first'	=> array('lang' => 'PORTAL_SUNDAY_FIRST' ,	'validate' => 'bool',	'type' => 'radio:yes_no',	 'explain' => true),
 					)
 				);
 			break;

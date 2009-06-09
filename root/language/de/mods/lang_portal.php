@@ -206,43 +206,34 @@ $lang = array_merge($lang, array(
 
 // mini calendar
 $lang = array_merge($lang, array(
-	'Mini_Cal_calendar'				=> 'Kalender',
-	'View_next_month'				=> 'nächster Monat',
-	'View_previous_month'			=> 'voriger Monat',
+	'MINI_CALENDAR'					=> 'Kalender',
+	'VIEW_NEXT_MONTH'				=> 'nächster Monat',
+	'VIEW_PREVIOUS_MONTH'			=> 'voriger Monat',
 
-// uses MySQL DATE_FORMAT - %c  long_month, numeric (1..12) - %e  Day of the long_month, numeric (0..31)
-// see http://www.mysql.com/doc/D/a/Date_and_time_functions.html for more details
-// currently supports: %a, %b, %c, %d, %e, %m, %y, %Y, %H, %k, %h, %l, %i, %s, %p
-	'Mini_Cal_date_format'			=> '%b %e',
-	'Mini_Cal_date_format_Time'		=> '%H:%i',
-
-// if you change the first day of the week in constants.php, you should change values for the short day names accordingly
-// e.g. FDOW = Sunday -> $lang['mini_cal']['day'][1] = 'Su'; ... $lang['mini_cal']['day'][7] = 'Sa'; 
-//		FDOW = Monday -> $lang['mini_cal']['day'][1] = 'Mo'; ... $lang['mini_cal']['day'][7] = 'Su'; 
 	'mini_cal'	=> array(
 		'day'	=> array(
-			'1'	=> 'Mo',
-			'2'	=> 'Di',
-			'3'	=> 'Mi',
-			'4'	=> 'Do',
-			'5'	=> 'Fr',
-			'6'	=> 'Sa',
-			'7'	=> 'So',
+			'1'	=> 'So',
+			'2'	=> 'Mo',
+			'3'	=> 'Di',
+			'4'	=> 'Mi',
+			'5'	=> 'Do',
+			'6'	=> 'Fr',
+			'7'	=> 'Sa',
 		),
 
 		'month'	=> array(
-			'1'	=> 'Jan',
-			'2'	=> 'Feb',
-			'3'	=> 'Mär',
-			'4'	=> 'Apr',
+			'1'	=> 'Jan.',
+			'2'	=> 'Feb.',
+			'3'	=> 'Mär.',
+			'4'	=> 'Apr.',
 			'5'	=> 'Mai',
-			'6'	=> 'Jun',
-			'7'	=> 'Jul',
-			'8'	=> 'Aug',
-			'9'	=> 'Sep',
-			'10'=> 'Okt',
-			'11'=> 'Nov',
-			'12'=> 'Dez',
+			'6'	=> 'Jun.',
+			'7'	=> 'Jul.',
+			'8'	=> 'Aug.',
+			'9'	=> 'Sep.',
+			'10'=> 'Okt.',
+			'11'=> 'Nov.',
+			'12'=> 'Dez.',
 		),
 
 		'long_month'=> array(

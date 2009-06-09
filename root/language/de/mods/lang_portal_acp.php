@@ -267,9 +267,12 @@ $lang = array_merge($lang, array(
 	'PORTAL_MINICALENDAR_EXPLAIN'					=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_MINICALENDAR_TODAY_COLOR'				=> 'Farbe für den aktuellen Tag',
 	'PORTAL_MINICALENDAR_TODAY_COLOR_EXPLAIN'		=> 'HEX oder Farbennamen sind erlaubt (Englisch!) wie z.B. #FFFFFF für Weiß oder (englische!) Farbennamen wie z.B. violet.',
-	'PORTAL_MINICALENDAR_DAY_LINK_COLOR'			=> 'Linkfarbe für die restlichen Tage',
-	'PORTAL_MINICALENDAR_DAY_LINK_COLOR_EXPLAIN'	=> 'HEX oder Farbennamen sind erlaubt (Englisch!) wie z.B. #FFFFFF für Weiß oder (englische!) Farbennamen wie z.B. violet.',
-
+	'PORTAL_MINICALENDAR_SUNDAY_COLOR'            	=> 'Farbe für Sonntage',
+	'PORTAL_MINICALENDAR_SUNDAY_COLOR_EXPLAIN'      => 'HEX oder Farbennamen sind erlaubt (Englisch!) wie z.B. #FFFFFF für Weiß oder (englische!) Farbennamen wie z.B. violet.',
+	'PORTAL_LONG_MONTH'                       		=> 'Langen Monatsname anzeigen',
+	'PORTAL_LONG_MONTH_EXPLAIN'                 	=> 'Wenn deaktiviert, wird der Monat gekürzt z.B. Aug. statt August.',
+	'PORTAL_SUNDAY_FIRST'                   	  	=> 'erster Tag der Woche',
+	'PORTAL_SUNDAY_FIRST_EXPLAIN'              		=> 'Wenn deaktiviert, wird von Mo. --> So. angezeigt, ansonsten So. --> Sa.',
 ));
 
 ?>
