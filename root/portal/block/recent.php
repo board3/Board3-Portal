@@ -44,9 +44,11 @@ $sql = 'SELECT forum_id
 FROM ' . FORUMS_TABLE . '
 WHERE forum_type = ' . FORUM_POST;
 
+$forum_sql = '';
 if (sizeof($forum_ary))
 {
 $sql .= ' AND ' . $db->sql_in_set('forum_id', $forum_ary, true);
+$forum_sql = ' AND ' . $db->sql_in_set('t.forum_id', $forum_ary, true);
 }
 
 $result = $db->sql_query_limit($sql, 1);
@@ -56,12 +58,12 @@ $g_forum_id = (int) $db->sql_fetchfield('forum_id');
 // Recent announcements
 //
 $sql = 'SELECT topic_title, forum_id, topic_id
-	FROM ' . TOPICS_TABLE . '
+	FROM ' . TOPICS_TABLE . ' t
 	WHERE topic_status <> ' . FORUM_LINK . '
 		AND topic_approved = 1 
 		AND ( topic_type = ' . POST_ANNOUNCE . ' OR topic_type = ' . POST_GLOBAL . ' )
 		AND topic_moved_id = 0
-		' . $sql_where . '
+		' . $sql_where . '' .  $forum_sql . '
 	ORDER BY topic_time DESC';
 
 $result = $db->sql_query_limit($sql, $portal_config['portal_max_topics']);
@@ -84,11 +86,11 @@ $db->sql_freeresult($result);
 // Recent hot topics
 //
 $sql = 'SELECT topic_title, forum_id, topic_id
-	FROM ' . TOPICS_TABLE . '
+	FROM ' . TOPICS_TABLE . ' t
 	WHERE topic_approved = 1 
 		AND topic_replies >=' . $config['hot_threshold'] . '
 		AND topic_moved_id = 0
-		' . $sql_where . '
+		' . $sql_where . '' .  $forum_sql . '
 	ORDER BY topic_time DESC';
 
 $result = $db->sql_query_limit($sql, $portal_config['portal_max_topics']);
@@ -111,12 +113,12 @@ $db->sql_freeresult($result);
 // Recent topic (only show normal topic)
 //
 $sql = 'SELECT topic_title, forum_id, topic_id
-	FROM ' . TOPICS_TABLE . '
+	FROM ' . TOPICS_TABLE . ' t
 	WHERE topic_status <> ' . ITEM_MOVED . '
 		AND topic_approved = 1 
 		AND topic_type = ' . POST_NORMAL . '
 		AND topic_moved_id = 0
-		' . $sql_where . '
+		' . $sql_where . '' .  $forum_sql . '
 	ORDER BY topic_time DESC';
 
 $result = $db->sql_query_limit($sql, $portal_config['portal_max_topics']);
