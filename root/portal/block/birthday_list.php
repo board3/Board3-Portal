@@ -46,7 +46,7 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 		LEFT JOIN ' . BANLIST_TABLE . " b ON (u.user_id = b.ban_userid)
 		WHERE (b.ban_id IS NULL
 				OR b.ban_exclude = 1)
-			AND (u.user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%' {$sql_days}
+			AND (u.user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%' {$sql_days})
 			AND u.user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')
 		ORDER BY ' . $order_by;
 	$result = $db->sql_query($sql);
