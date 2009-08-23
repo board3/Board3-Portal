@@ -72,7 +72,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		<installation>
 			<level>easy</level>
 			<time>600</time>
-			<target-version>3.0.4</target-version>
+			<target-version>3.0.5</target-version>
 		</installation>
 
 		<link-group>
@@ -111,7 +111,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</link-group>
 		<history>
 			<entry>
-				<date>2009-MM-DD</date>
+				<date>2009-09-00</date>
 				<rev-version>1.0.4</rev-version>
 				<changelog lang="en-GB">
 					<change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=12</change>
