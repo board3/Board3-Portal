@@ -24,56 +24,25 @@ include($phpbb_root_path . 'portal/includes/functions.'.$phpEx);
 
 $portal_config = obtain_portal_config();
 
-if (!$portal_config['portal_enable'])
-{
-	// Redirect the user to the installer
-	// We have to generate a full HTTP/1.1 header here since we can't guarantee to have any of the information
-	// available as used by the redirect function
-	$server_name = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
-	$server_port = (!empty($_SERVER['SERVER_PORT'])) ? (int) $_SERVER['SERVER_PORT'] : (int) getenv('SERVER_PORT');
-	$secure = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 1 : 0;
-
-	$script_name = (!empty($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF');
-	if (!$script_name)
-	{
-		$script_name = (!empty($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : getenv('REQUEST_URI');
-	}
-
-	// Replace any number of consecutive backslashes and/or slashes with a single slash
-	// (could happen on some proxy setups and/or Windows servers)
-	$script_path = trim(dirname($script_name)) . '/'.$phpbb_root_path.'index.' . $phpEx;
-	$script_path = preg_replace('#[\\\\/]{2,}#', '/', $script_path);
-
-	$url = (($secure) ? 'https://' : 'http://') . $server_name;
-
-	if ($server_port && (($secure && $server_port <> 443) || (!$secure && $server_port <> 80)))
-	{
-		// HTTP HOST can carry a port number...
-		if (strpos($server_name, ':') === false)
-		{
-			$url .= ':' . $server_port;
-		}
-	}
-
-	$url .= $script_path;
-	header('Location: ' . $url);
-	exit;
-}
-
 // Start session management
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup('mods/lang_portal');
 
+if (!$portal_config['portal_enable'])
+{
+	redirect($phpbb_root_path . 'index.' . $phpEx);
+}
+
 $load_center = true;
 
-if ( is_file( $phpbb_root_path . 'install/index.'.$phpEx ) === TRUE && ($user->data['user_type'] == USER_FOUNDER) )
+if (file_exists($phpbb_root_path . 'install/index.' . $phpEx) && ($user->data['user_type'] == USER_FOUNDER))
 {
-		$template->assign_vars(array(
-			'S_DISPLAY_GENERAL'	=> true,
-			'GEN_TITLE'				=> $user->lang['PORTAL_INSTALL'],
-			'GEN_MESSAGE'			=> $user->lang['PORTAL_INSTALL_TEXT']
-		));
+	$template->assign_vars(array(
+		'S_DISPLAY_GENERAL'      => true,
+		'GEN_TITLE'            => $user->lang['PORTAL_INSTALL'],
+		'GEN_MESSAGE'         => $user->lang['PORTAL_INSTALL_TEXT'],
+	));
 	$load_center = false;
 }
 
@@ -84,9 +53,8 @@ if ($portal_config['portal_phpbb_menu'])
 	));
 }
 
-if ( $load_center === TRUE )
+if ($load_center == true)
 {
-
 	if ($portal_config['portal_forum_index']) 
 	{ 
 		display_forums('');
@@ -262,7 +230,7 @@ if ($portal_config['portal_links'])
 }
 
 
-if ($portal_config['portal_pay_s_block'] or ($portal_config['portal_pay_c_block']))
+if ($portal_config['portal_pay_s_block'] || ($portal_config['portal_pay_c_block']))
 {
 	include($phpbb_root_path . 'portal/block/donate.'.$phpEx);
 }
