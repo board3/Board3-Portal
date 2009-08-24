@@ -19,6 +19,10 @@ $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
+if (!class_exists('bbcode'))
+{
+	include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+}
 include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
 
 $portal_config = obtain_portal_config();
