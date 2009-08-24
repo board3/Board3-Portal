@@ -19,10 +19,6 @@ $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
-if (!class_exists('bbcode'))
-{
-	include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
-}
 include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
 
 $portal_config = obtain_portal_config();
@@ -99,17 +95,13 @@ if ($load_center)
 	if ($portal_config['portal_announcements'])
 	{
 		include($phpbb_root_path . 'portal/block/announcements.' . $phpEx);
-		$template->assign_vars(array(
-			'S_ANNOUNCE_COMPACT' => ($portal_config['portal_announcements_style']) ? true : false,
-		));
+		$template->assign_var('S_ANNOUNCE_COMPACT', $portal_config['portal_announcements_style']);
 	}
 
 	if ($portal_config['portal_news'])
 	{
 		include($phpbb_root_path . 'portal/block/news.' . $phpEx);
-		$template->assign_vars(array(
-			'S_NEWS_COMPACT' => ($portal_config['portal_news_style']) ? true : false,
-		));
+		$template->assign_vars('S_NEWS_COMPACT', $portal_config['portal_news_style']);
 	}
 
 	if ($portal_config['portal_custom_center'] || $portal_config['portal_custom_small'])
