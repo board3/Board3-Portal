@@ -6,8 +6,8 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en-gb">board3 Portal</title>
-		<title lang="de">board3 Portal</title>
+		<title lang="en-gb">board3 Portal - subsilver2 style</title>
+		<title lang="de">board3 Portal - subsilver2 style</title>
 
 		<description lang="en-gb">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
@@ -76,15 +76,15 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</installation>
 
 		<link-group>
-			<link type="parent" lang="de" href="../install.xml">Installations-Anleitung</link>
-			<link type="parent" lang="en-gb" href="../install.xml">Manual</link>
-		</link-group>
+			<link type="parent" lang="de" href="../../../install.xml">Installations-Anleitung</link>
+			<link type="parent" lang="en-gb" href="../../../install.xml">Manual</link>
+		</link-group>	
 	</header>
 	<action-group>
 		<copy>
-			<file from="root/language/de/mods/*.*" to="language/de/mods/*.*" />
+			<file from="root/styles/subsilver2/template/portal/*.*" to="styles/subsilver2/template/portal/*.*" />
+			<file from="root/styles/subsilver2/theme/images/portal/*.*" to="styles/subsilver2/theme/images/portal/*.*" />
 		</copy>
-
 		<diy-instructions lang="en-gb">See general install.xml file</diy-instructions>
 		<diy-instructions lang="de">Siehe install.xml</diy-instructions>
 	</action-group>

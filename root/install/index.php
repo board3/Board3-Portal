@@ -23,7 +23,7 @@ define('NEWEST_B3P_VERSION', '1.0.4RC1');
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.'.$phpEx);
-include_once($phpbb_root_path . 'includes/functions.' . $phpEx);
+include($phpbb_root_path . 'includes/functions.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 include($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
 include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
