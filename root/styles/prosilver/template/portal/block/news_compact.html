@@ -1,7 +1,7 @@
 <!--version $Id$ //-->
 <!-- BEGIN news_row -->
 <!-- IF news_row.S_NO_TOPICS -->
-{$C_BLOCK_H_L}<dl><dt>{L_LATEST_NEWS}</dt></dl>{$C_BLOCK_H_R}
+{$C_BLOCK_H_L}<dt>{L_LATEST_NEWS}</dt>{$C_BLOCK_H_R}
 	<div class="post bg2" style="margin-bottom: 0px">
 		<div class="inner"><span class="portal-corners-top-inner"></span>
 			<span style="text-align: center;"><strong>{L_NO_NEWS}</strong></span>
@@ -12,14 +12,13 @@
 <!-- IF news_row.S_FIRST_ROW  -->
 <a name="n"></a>
 {$C_BLOCK_H_L}
-<dl class="icon">
 	<dt <!-- IF S_DISPLAY_NEWS_RVS -->style="width: 44%"<!-- ELSE -->style="width: 60%"<!-- ENDIF -->>{L_LATEST_NEWS}</dt>
 	<!-- IF S_DISPLAY_NEWS_RVS -->
 		<dd class="posts" style="width: 11%">{L_REPLIES}</dd>
 		<dd class="views" style="width: 11%">{L_VIEWS}</dd>
 	<!-- ENDIF -->
 	<dd class="lastpost" style="width: 25%"><span>{L_LAST_POST}</span></dd>
-</dl>
+
 {$C_BLOCK_H_R}
 <ul class="topiclist topics">
 <!-- ENDIF -->
