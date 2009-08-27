@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -36,8 +31,6 @@ while( ($row = $db->sql_fetchrow($result)) && ($row['username']) )
 }
 $db->sql_freeresult($result);
 
-$template->assign_vars(array(
-	'S_DISPLAY_LATEST_MEMBERS' => true,
-));
+$template->assign_var('S_DISPLAY_LATEST_MEMBERS', true);
 
 ?>

@@ -10,43 +10,38 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
 
-if (!defined('IN_PORTAL'))
+switch ($db->sql_layer)
 {
-   exit;
-}
+	case 'postgres':
+	$sql = 'SELECT *
+		FROM ' . USERS_TABLE . '
+		WHERE user_type <> ' . USER_IGNORE . '
+		AND user_type <> ' . USER_INACTIVE . '
+		ORDER BY RANDOM()';
+	break;
 
-	switch ($db->sql_layer)
-	{
-		case 'postgres':
-			$sql = 'SELECT *
-			FROM ' . USERS_TABLE . '
-			WHERE user_type <> ' . USER_IGNORE . '
-			AND user_type <> ' . USER_INACTIVE . '
-			ORDER BY RANDOM()';
-		break;
-	
-		case 'mssql':
-		case 'mssql_odbc':
-			$sql = 'SELECT *
-			FROM ' . USERS_TABLE . '
-			WHERE user_type <> ' . USER_IGNORE . '
-			AND user_type <> ' . USER_INACTIVE . '
-			ORDER BY NEWID()';
-		break;
-	
-		default:
-			$sql = 'SELECT *
-			FROM ' . USERS_TABLE . '
-			WHERE user_type <> ' . USER_IGNORE . '
-			AND user_type <> ' . USER_INACTIVE . '
-			ORDER BY RAND()';
-		break;
-	}
+	case 'mssql':
+	case 'mssql_odbc':
+	$sql = 'SELECT *
+		FROM ' . USERS_TABLE . '
+		WHERE user_type <> ' . USER_IGNORE . '
+		AND user_type <> ' . USER_INACTIVE . '
+		ORDER BY NEWID()';
+	break;
+
+	default:
+	$sql = 'SELECT *
+		FROM ' . USERS_TABLE . '
+		WHERE user_type <> ' . USER_IGNORE . '
+		AND user_type <> ' . USER_INACTIVE . '
+		ORDER BY RAND()';
+	break;
+}
 
 $result = $db->sql_query_limit($sql, 1);
 $row = $db->sql_fetchrow($result);
@@ -79,8 +74,6 @@ $template->assign_block_vars('random_member', array(
 ));
 $db->sql_freeresult($result);
 
-$template->assign_vars(array(
-	'S_DISPLAY_RANDOM_MEMBER' => true,
-));
+$template->assign_var('S_DISPLAY_RANDOM_MEMBER', true);
 
 ?>

@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }

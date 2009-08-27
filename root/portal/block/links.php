@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -33,8 +28,6 @@ foreach( $links as $link_id => $link_data )
 	));
 }
 
-$template->assign_vars(array(
-	'S_DISPLAY_LINKS' => true,
-));
+$template->assign_var('S_DISPLAY_LINKS', true);
 
 ?>

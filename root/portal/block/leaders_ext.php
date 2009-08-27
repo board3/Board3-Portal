@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -70,9 +65,8 @@ if( sizeof($legends) )
 			WHERE
 				'. $db->sql_in_set('u.group_id', $legends) . '
 			ORDER BY u.username ASC';
-			
 	$result = $db->sql_query($sql);
-		
+
 	while ($row = $db->sql_fetchrow($result))
 	{
 		$groups[$row['group_id']]['group_users'][] = array(
@@ -81,7 +75,6 @@ if( sizeof($legends) )
 			'user_colour'	=> $row['user_colour'],
 		);
 	}
-		
 	$db->sql_freeresult($result);
 }
 
@@ -93,13 +86,13 @@ if( sizeof($groups) )
 		{
 			$group_name = ($group['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $group['group_name']] : $group['group_name'];
 			$u_group = append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $group_id);
-			
+
 			$template->assign_block_vars('group', array(
 				'GROUP_NAME'	=> $group_name,
 				'GROUP_COLOUR'	=> $group['group_colour'],
 				'U_GROUP'		=> $u_group,
 			));
-			
+
 			foreach($group['group_users'] as $group_user)
 			{
 				$template->assign_block_vars('group.member', array(
@@ -110,8 +103,7 @@ if( sizeof($groups) )
 		}
 	}
 }
-$template->assign_vars(array(
-	'S_DISPLAY_LEADERS_EXT' => true,
-));
+
+$template->assign_var('S_DISPLAY_LEADERS_EXT', true);
 
 ?>

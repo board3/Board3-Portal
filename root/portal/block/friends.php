@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -52,7 +47,7 @@ while ($row = $db->sql_fetchrow($result))
 {
 	$which = (time() - $update_time < $row['online_time'] && ($row['viewonline'] || $auth->acl_get('u_viewonline'))) ? 'online' : 'offline';
 	$s_display_friends = ($row['user_id']) ? true : false;
-	
+
 	$template->assign_block_vars("friends_{$which}", array(
 		'USER_ID'		=> $row['user_id'],
 		'U_PROFILE'		=> get_username_string('profile', $row['user_id'], $row['username'], $row['user_colour']),

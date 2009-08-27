@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -23,7 +18,6 @@ if (!defined('IN_PORTAL'))
 $template->assign_vars(array(
 	'S_DISPLAY_PORTALSEARCH' => true,
 	'S_SEARCH_ACTION'	=> append_sid("{$phpbb_root_path}search.$phpEx"),
-	
 ));
 
 ?>

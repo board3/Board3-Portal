@@ -9,12 +9,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -32,16 +27,14 @@ $result = $db->sql_query_limit($sql, $portal_config['portal_max_most_poster']);
 while( ($row = $db->sql_fetchrow($result)) && ($row['username']) )
 {
 	$template->assign_block_vars('top_poster', array(
-		'S_SEARCH_ACTION'=> append_sid("{$phpbb_root_path}search.$phpEx", 'author_id=' . $row['user_id'] . '&amp;sr=posts'),
-		'USERNAME_FULL'=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
-		'POSTER_POSTS'	=> $row['user_posts'],
+		'S_SEARCH_ACTION'	=> append_sid("{$phpbb_root_path}search.$phpEx", 'author_id=' . $row['user_id'] . '&amp;sr=posts'),
+		'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
+		'POSTER_POSTS'		=> $row['user_posts'],
 		)
 	);
 }
 $db->sql_freeresult($result);
 
-$template->assign_vars(array(
-	'S_DISPLAY_TOP_POSTERS' => true
-));
+$template->assign_var('S_DISPLAY_TOP_POSTERS', true);
 
 ?>

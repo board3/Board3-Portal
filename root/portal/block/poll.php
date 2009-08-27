@@ -8,9 +8,10 @@
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
+
 if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
-	exit;
+   exit;
 }
 
 /**
@@ -214,16 +215,12 @@ if ($poll_forums === true)
 			AND p.post_id = t.topic_first_post_id
 			{$portal_poll_hide}
 			ORDER BY t.poll_start DESC";
-
 	$limit = ( isset($portal_config['portal_poll_limit']) ) ? $portal_config['portal_poll_limit'] : 3;
-
 	$result = $db->sql_query_limit($sql, $limit);
-
 	$has_poll = false;
 
 	if ($result)
 	{
-
 		while( $data = $db->sql_fetchrow($result) )
 		{
 			$has_poll = true;

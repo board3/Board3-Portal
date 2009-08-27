@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -44,7 +39,7 @@ function get_db_stat($mode)
 					FROM ' . ATTACHMENTS_TABLE;
 		break;
 	}
-	
+
 	if ( !($result = $db->sql_query($sql)) )
 	{
 		return false;
@@ -125,15 +120,15 @@ $l_posts_per_topic_s = ($total_posts == 0) ? 'POSTS_PER_TOPIC_ZERO' : 'POSTS_PER
 
 // Assign specific vars
 $template->assign_vars(array(
-	'S_DISPLAY_ADVANCED_STAT' => true,
-	'TOTAL_POSTS'	=> sprintf($user->lang[$l_total_post_s], $total_posts),
-	'TOTAL_TOPICS'	=> sprintf($user->lang[$l_total_topic_s], $total_topics),
-	'TOTAL_USERS'	=> sprintf($user->lang[$l_total_user_s], $total_users),
-	'NEWEST_USER'	=> sprintf($user->lang['NEWEST_USER'], get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
-	'S_ANN'			=> get_db_stat('announcementtotal'),
-	'S_SCT'			=> get_db_stat('stickytotal'),
-	'S_TOT_ATTACH'	=> ($config['allow_attachments']) ? get_db_stat('attachmentstotal') : 0,
-	
+	'S_DISPLAY_ADVANCED_STAT'	=> true,
+	'TOTAL_POSTS'				=> sprintf($user->lang[$l_total_post_s], $total_posts),
+	'TOTAL_TOPICS'				=> sprintf($user->lang[$l_total_topic_s], $total_topics),
+	'TOTAL_USERS'				=> sprintf($user->lang[$l_total_user_s], $total_users),
+	'NEWEST_USER'				=> sprintf($user->lang['NEWEST_USER'], get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
+	'S_ANN'						=> get_db_stat('announcementtotal'),
+	'S_SCT'						=> get_db_stat('stickytotal'),
+	'S_TOT_ATTACH'				=> ($config['allow_attachments']) ? get_db_stat('attachmentstotal') : 0,
+
 	// avarage stat
 	'TOPICS_PER_DAY'	=> sprintf($user->lang[$l_topics_per_day_s], $topics_per_day),
 	'POSTS_PER_DAY'		=> sprintf($user->lang[$l_posts_per_day_s], $posts_per_day),

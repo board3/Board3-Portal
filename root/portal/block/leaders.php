@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -126,9 +121,9 @@ while ($row = $db->sql_fetchrow($result))
 	}
 
 	$template->assign_block_vars($which_row, array(
-		'USER_ID'		=> $row['user_id'],
-		'GROUP_NAME'	=> $group_name,
-		'GROUP_COLOR'	=> $row['group_colour'],
+		'USER_ID'			=> $row['user_id'],
+		'GROUP_NAME'		=> $group_name,
+		'GROUP_COLOR'		=> $row['group_colour'],
 
 		'U_GROUP'			=> $u_group,
 
@@ -141,8 +136,6 @@ while ($row = $db->sql_fetchrow($result))
 $db->sql_freeresult($result);
 
 
-$template->assign_vars(array(
-	'S_DISPLAY_LEADERS' => true,
-));
+$template->assign_var('S_DISPLAY_LEADERS', true);
 
 ?>

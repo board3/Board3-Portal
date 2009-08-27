@@ -230,7 +230,7 @@ $lang = array_merge($lang, array(
 	
 	// links
 	'ACP_PORTAL_LINKS_SETTINGS' 		=> 'Link Settings',
-	'ACP_PORTAL_LINKS_SETTINGS_EXPLAIN' => 'Customize the links listed in the links block.',
+	'ACP_PORTAL_LINKS_SETTINGS_EXPLAIN'	=> 'Customize the links listed in the links block.',
 	'PORTAL_LINKS'						=> 'Links block',
 	'PORTAL_LINKS_EXPLAIN'				=> 'Display this block on the portal.',
 	'PORTAL_LINK_TEXT'					=> 'Text/URL',
@@ -268,12 +268,12 @@ $lang = array_merge($lang, array(
 	'PORTAL_MINICALENDAR_EXPLAIN'				=> 'Display this block on the portal.',
 	'PORTAL_MINICALENDAR_TODAY_COLOR'			=> 'Active day color',
 	'PORTAL_MINICALENDAR_TODAY_COLOR_EXPLAIN'	=> 'HEX or named colors are allowed such as #FFFFFF for white, or color names like violet.',
-	'PORTAL_MINICALENDAR_SUNDAY_COLOR'          => 'Color for sunday',
-	'PORTAL_MINICALENDAR_SUNDAY_COLOR_EXPLAIN'  => 'HEX or named colors are allowed such as #FFFFFF for white, or color names like violet.',
-	'PORTAL_LONG_MONTH'                       	=> 'Langen Monatsname anzeigen',
-	'PORTAL_LONG_MONTH_EXPLAIN'                 => 'Wenn deaktiviert, wird der Monat gekürzt z.B. Aug. statt August.',
-	'PORTAL_SUNDAY_FIRST'                   	=> 'erster Tag der Woche',
-	'PORTAL_SUNDAY_FIRST_EXPLAIN'              	=> 'Wenn deaktiviert, wird von Mo. --> So. angezeigt, ansonsten So. --> Sa.',
+	'PORTAL_MINICALENDAR_SUNDAY_COLOR'			=> 'Color for sunday',
+	'PORTAL_MINICALENDAR_SUNDAY_COLOR_EXPLAIN'	=> 'HEX or named colors are allowed such as #FFFFFF for white, or color names like violet.',
+	'PORTAL_LONG_MONTH'							=> 'Show full month names',
+	'PORTAL_LONG_MONTH_EXPLAIN'					=> 'If disabled the months will be shortened e.g. Aug. instead of August.',
+	'PORTAL_SUNDAY_FIRST'						=> 'First day of the week',
+	'PORTAL_SUNDAY_FIRST_EXPLAIN'				=> 'If disabled the calendar will show Mo. --> Su., else Su. --> Sa.',
 ));
 
 ?>

@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -38,8 +33,8 @@ $text = bbcode_nl2br($text);
 $text = smiley_text($text);
 
 		$template->assign_vars(array(
-			'S_DISPLAY_WELCOME' 	=> true,
-			'PORTAL_WELCOME_INTRO'   => $text,
+			'S_DISPLAY_WELCOME'		=> true,
+			'PORTAL_WELCOME_INTRO'	=> $text,
 		));
 
 ?>

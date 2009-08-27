@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -25,7 +20,7 @@ $where = '';
 
 if( $portal_config['portal_attachments_forum_ids'] !== '' )
 {
-	$attach_forums_config = ( strpos($portal_config['portal_attachments_forum_ids'], ',') !== FALSE ) ? explode(',', $portal_config['portal_attachments_forum_ids']) : array($portal_config['portal_attachments_forum_ids']);
+	$attach_forums_config = ( strpos($portal_config['portal_attachments_forum_ids'], ',') !== false ) ? explode(',', $portal_config['portal_attachments_forum_ids']) : array($portal_config['portal_attachments_forum_ids']);
 	$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
 	
 	$forum_list =  array_unique( array_intersect($attach_forums_config, $forum_list) );
@@ -50,7 +45,7 @@ if( $where != '' )
 	$where = 'AND (' . substr($where, 0, -4) . ')';
 }
 
-if( $attach_forums === TRUE )
+if( $attach_forums === true )
 {
 	// Just grab all attachment info from database
 	$sql = 'SELECT
@@ -89,15 +84,11 @@ if( $attach_forums === TRUE )
 	}
 	$db->sql_freeresult($result);
 
-	// Assign specific vars
-	$template->assign_vars(array(
-		'S_DISPLAY_ATTACHMENTS'	=> true,
-	));
-} else {
-	// Assign specific vars
-	$template->assign_vars(array(
-		'S_DISPLAY_ATTACHMENTS'	=> false,
-	));
+	$template->assign_var('S_DISPLAY_ATTACHMENTS', true);
+} 
+else 
+{
+	$template->assign_var('S_DISPLAY_ATTACHMENTS', false);
 }
 
 

@@ -10,13 +10,9 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
-	exit;
-}
-if (!defined('IN_PORTAL'))
-{
-	exit;
+   exit;
 }
 
 //doing the easy way ;)
@@ -24,7 +20,7 @@ $u_link = $config['server_protocol'] . $config['server_name'] . $config['script_
 
 // Assign specific vars
 $template->assign_vars(array(
-	'S_DISPLAY_LINK_US' => true,
+	'S_DISPLAY_LINK_US'	=> true,
 	'LINK_US_TXT'		=> sprintf($user->lang['LINK_US_TXT'], $config['sitename']),
 	'U_LINK_US'			=> '&lt;a&nbsp;href=&quot;' . $u_link . '&quot;&nbsp;' . (($config['site_desc']) ? 'title=&quot;' . $config['site_desc'] . '&quot;' : '' ) . '&gt;' . (($config['sitename']) ? $config['sitename'] : $u_link ) . '&lt;/a&gt;',
 ));

@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -41,14 +36,14 @@ $forum_ary = array_unique(array_keys($auth->acl_getf('!f_read', true)));
 
 // Determine first forum the user is able to read (must not be a category)
 $sql = 'SELECT forum_id
-FROM ' . FORUMS_TABLE . '
-WHERE forum_type = ' . FORUM_POST;
+	FROM ' . FORUMS_TABLE . '
+	WHERE forum_type = ' . FORUM_POST;
 
 $forum_sql = '';
 if (sizeof($forum_ary))
 {
-$sql .= ' AND ' . $db->sql_in_set('forum_id', $forum_ary, true);
-$forum_sql = ' AND ' . $db->sql_in_set('t.forum_id', $forum_ary, true);
+	$sql .= ' AND ' . $db->sql_in_set('forum_id', $forum_ary, true);
+	$forum_sql = ' AND ' . $db->sql_in_set('t.forum_id', $forum_ary, true);
 }
 
 $result = $db->sql_query_limit($sql, 1);
@@ -65,7 +60,6 @@ $sql = 'SELECT topic_title, forum_id, topic_id
 		AND topic_moved_id = 0
 		' . $sql_where . '' .  $forum_sql . '
 	ORDER BY topic_time DESC';
-
 $result = $db->sql_query_limit($sql, $portal_config['portal_max_topics']);
 
 while( ($row = $db->sql_fetchrow($result)) && ($row['topic_title']) )
@@ -74,7 +68,7 @@ while( ($row = $db->sql_fetchrow($result)) && ($row['topic_title']) )
 	if ( ($auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0') )
 	{
 		$template->assign_block_vars('latest_announcements', array(
-			'TITLE'	 		=> character_limit($row['topic_title'], $portal_config['portal_recent_title_limit']),
+			'TITLE'			=> character_limit($row['topic_title'], $portal_config['portal_recent_title_limit']),
 			'FULL_TITLE'	=> censor_text($row['topic_title']),
 			'U_VIEW_TOPIC'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . ( ($row['forum_id'] == 0) ? $g_forum_id : $row['forum_id'] ) . '&amp;t=' . $row['topic_id'])
 		));
@@ -92,7 +86,6 @@ $sql = 'SELECT topic_title, forum_id, topic_id
 		AND topic_moved_id = 0
 		' . $sql_where . '' .  $forum_sql . '
 	ORDER BY topic_time DESC';
-
 $result = $db->sql_query_limit($sql, $portal_config['portal_max_topics']);
 
 while( ($row = $db->sql_fetchrow($result)) && ($row['topic_title']) )
@@ -101,7 +94,7 @@ while( ($row = $db->sql_fetchrow($result)) && ($row['topic_title']) )
 	if ( ($auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0') )
 	{
 		$template->assign_block_vars('latest_hot_topics', array(
-			'TITLE'	 		=> character_limit($row['topic_title'], $portal_config['portal_recent_title_limit']),
+			'TITLE'			=> character_limit($row['topic_title'], $portal_config['portal_recent_title_limit']),
 			'FULL_TITLE'	=> censor_text($row['topic_title']),
 			'U_VIEW_TOPIC'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . ( ($row['forum_id'] == 0) ? $g_forum_id : $row['forum_id'] ) . '&amp;t=' . $row['topic_id'])
 		));
@@ -120,7 +113,6 @@ $sql = 'SELECT topic_title, forum_id, topic_id
 		AND topic_moved_id = 0
 		' . $sql_where . '' .  $forum_sql . '
 	ORDER BY topic_time DESC';
-
 $result = $db->sql_query_limit($sql, $portal_config['portal_max_topics']);
 
 while( ($row = $db->sql_fetchrow($result)) && ($row['topic_title']) )
@@ -129,7 +121,7 @@ while( ($row = $db->sql_fetchrow($result)) && ($row['topic_title']) )
 	if ( ($auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0') )
 	{
 		$template->assign_block_vars('latest_topics', array(
-			'TITLE'	 		=> character_limit($row['topic_title'], $portal_config['portal_recent_title_limit']),
+			'TITLE'			=> character_limit($row['topic_title'], $portal_config['portal_recent_title_limit']),
 			'FULL_TITLE'	=> censor_text($row['topic_title']),
 			'U_VIEW_TOPIC'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $row['forum_id'] . '&amp;t=' . $row['topic_id'])
 		));
@@ -137,8 +129,6 @@ while( ($row = $db->sql_fetchrow($result)) && ($row['topic_title']) )
 }
 $db->sql_freeresult($result);
 
-$template->assign_vars(array(
-	'S_DISPLAY_RECENT'			=> true,
-));
+$template->assign_var('S_DISPLAY_RECENT', true);
 
 ?>

@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -46,7 +41,7 @@ foreach ( array_keys($words_array) as $word )
 	{
 		$maximum = $words_array[$word];
 	}
-	
+
 	if ( $words_array[$word] < $minimum )
 	{
 		$minimum = $words_array[$word];

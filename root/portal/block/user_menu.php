@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -42,7 +37,7 @@ if ($user->data['is_registered'])
 		$m_approve_fid_ary = array();
 		$m_approve_fid_sql = ' AND p.post_approved = 1';
 	}
-	
+
 	$sql = 'SELECT COUNT(distinct t.topic_id) as total
 				FROM ' . TOPICS_TABLE . ' t
 				WHERE t.topic_last_post_time > ' . $user->data['user_lastvisit'] . '
@@ -51,7 +46,7 @@ if ($user->data['is_registered'])
 					' . ((sizeof($ex_fid_ary)) ? 'AND ' . $db->sql_in_set('t.forum_id', $ex_fid_ary, true) : '');
 	$result = $db->sql_query($sql);
 	$new_posts_count = (int) $db->sql_fetchfield('total');
-	
+
 	// your post number
 	$sql = "SELECT user_posts
 		FROM " . USERS_TABLE . "
@@ -87,7 +82,6 @@ $template->assign_vars(array(
 	'L_SELF_POSTS'	=> $user->lang['SEARCH_SELF'] . '&nbsp;(' . $you_posts_count . ')',
 
 	'AVATAR_IMG'	=> $avatar_img,
-	
 	'RANK_TITLE'	=> $rank_title,
 	'RANK_IMG'		=> $rank_img,
 	'RANK_IMG_SRC'	=> $rank_img_src,
@@ -97,10 +91,10 @@ $template->assign_vars(array(
 	'USER_COLOR'		=> get_username_string('colour', $user_id, $username, $colour),
 	'U_VIEW_PROFILE'	=> get_username_string('profile', $user_id, $username, $colour),
 
-	'U_NEW_POSTS'			=> append_sid($phpbb_root_path . 'search.' . $phpEx . '?search_id=newposts'),
-	'U_SELF_POSTS'			=> append_sid($phpbb_root_path . 'search.' . $phpEx . '?search_id=egosearch'),
-	'U_UM_BOOKMARKS'		=> ($config['allow_bookmarks']) ? append_sid("{$phpbb_root_path}ucp.$phpEx", "i=main&amp;mode=bookmarks") : '',
-	'U_UM_MAIN_SUBSCRIBED'	=> append_sid($phpbb_root_path . 'ucp.' . $phpEx . '?i=main&amp;mode=subscribed'),
+	'U_NEW_POSTS'			=> append_sid("{$phpbb_root_path}search.$phpEx", 'search_id=newposts'),
+	'U_SELF_POSTS'			=> append_sid("{$phpbb_root_path}search.$phpEx", 'search_id=egosearch'),
+	'U_UM_BOOKMARKS'		=> ($config['allow_bookmarks']) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&amp;mode=bookmarks') : '',
+	'U_UM_MAIN_SUBSCRIBED'	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&amp;mode=subscribed'),
 	'U_MCP'					=> ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=front', true, $user->session_id) : '', 
 ));
 

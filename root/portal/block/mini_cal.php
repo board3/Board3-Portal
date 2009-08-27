@@ -11,12 +11,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -25,7 +20,9 @@ if (!defined('IN_PORTAL'))
 if ($portal_config['portal_sunday_first'])
 {
 	define('MINI_CAL_FDOW', 0);
-} else {
+}
+else
+{
 	define('MINI_CAL_FDOW', 1);
 }
 
@@ -49,7 +46,6 @@ $mini_cal_this_month = $mini_cal->dateMM;
 $mini_cal_this_day = $mini_cal->dateDD;
 $mini_cal_month_days = $mini_cal->daysMonth;
 
-
 // output the days for the current month 
 for($i=0; $i < $mini_cal_month_days;) 
 {
@@ -58,12 +54,12 @@ for($i=0; $i < $mini_cal_month_days;)
 	{
 		$template->assign_block_vars('mini_cal_row', array());
 	}
-	
+
 	// is this a valid weekday?
 	if($mini_cal_count == ($mini_cal->day[$i][3])) 
 	{
 		$mini_cal_this_day = $mini_cal->day[$i][0];
-	
+
 		$d_mini_cal_today = $mini_cal_this_year . ( ($mini_cal_this_month <= 9) ? '0' . $mini_cal_this_month : $mini_cal_this_month ) . ( ($mini_cal_this_day <= 9) ? '0' . $mini_cal_this_day : $mini_cal_this_day );
 		$mini_cal_day = ( $mini_cal_today == $d_mini_cal_today ) ? '<span style="font-weight: bold; color: ' . $portal_config['portal_minicalendar_today_color'] . ';">' . $mini_cal_this_day . '</span>' : $mini_cal_this_day;
 
@@ -100,18 +96,18 @@ $prev_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m=$do
 $next_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m=$up#minical") . '"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/mini_cal_icon_right_arrow.png' . '" title="' . $user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
 
 $template->assign_vars(array(
-	'S_DISPLAY_MINICAL' => true,
-	'S_SUNDAY_FIRST' => ($portal_config['portal_sunday_first']) ? true : false,
-	'L_MINI_CAL_MONTH' => (($portal_config['portal_long_month']) ? $user->lang['mini_cal']['long_month'][$mini_cal->day[0][1]] : $user->lang['mini_cal']['month'][$mini_cal->day[0][1]]) . " " . $mini_cal->day[0][2],
-	'L_MINI_CAL_SUN' => '<span style="color: ' . $portal_config['portal_minicalendar_sunday_color'] . ';">' . $user->lang['mini_cal']['day'][1] . '</span>', 
-	'L_MINI_CAL_MON' => $user->lang['mini_cal']['day'][2], 
-	'L_MINI_CAL_TUE' => $user->lang['mini_cal']['day'][3], 
-	'L_MINI_CAL_WED' => $user->lang['mini_cal']['day'][4], 
-	'L_MINI_CAL_THU' => $user->lang['mini_cal']['day'][5], 
-	'L_MINI_CAL_FRI' => $user->lang['mini_cal']['day'][6], 
-	'L_MINI_CAL_SAT' => $user->lang['mini_cal']['day'][7], 
-	'U_PREV_MONTH' => $prev_month,
-	'U_NEXT_MONTH' => $next_month)
+	'S_DISPLAY_MINICAL'	=> true,
+	'S_SUNDAY_FIRST'	=> ($portal_config['portal_sunday_first']) ? true : false,
+	'L_MINI_CAL_MONTH'	=> (($portal_config['portal_long_month']) ? $user->lang['mini_cal']['long_month'][$mini_cal->day[0][1]] : $user->lang['mini_cal']['month'][$mini_cal->day[0][1]]) . " " . $mini_cal->day[0][2],
+	'L_MINI_CAL_SUN'	=> '<span style="color: ' . $portal_config['portal_minicalendar_sunday_color'] . ';">' . $user->lang['mini_cal']['day'][1] . '</span>', 
+	'L_MINI_CAL_MON'	=> $user->lang['mini_cal']['day'][2], 
+	'L_MINI_CAL_TUE'	=> $user->lang['mini_cal']['day'][3], 
+	'L_MINI_CAL_WED'	=> $user->lang['mini_cal']['day'][4], 
+	'L_MINI_CAL_THU'	=> $user->lang['mini_cal']['day'][5], 
+	'L_MINI_CAL_FRI'	=> $user->lang['mini_cal']['day'][6], 
+	'L_MINI_CAL_SAT'	=> $user->lang['mini_cal']['day'][7], 
+	'U_PREV_MONTH'		=> $prev_month,
+	'U_NEXT_MONTH'		=> $next_month)
 );
 
 if (!isset($template->filename['mini_cal_block']))

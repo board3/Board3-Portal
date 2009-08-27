@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -24,22 +19,16 @@ if ($portal_config['portal_pay_acc'])
 {
 	if ($portal_config['portal_pay_c_block'])
 	{
-		$template->assign_vars(array(
-			'S_DISPLAY_PAY_C' => true,
-		));
+		$template->assign_var('S_DISPLAY_PAY_C', true);
 	}
 
 	if ($portal_config['portal_pay_s_block'])
 	{
-		$template->assign_vars(array(
-			'S_DISPLAY_PAY_S' => true,
-		));
+		$template->assign_var('S_DISPLAY_PAY_S', true);
 	}
 
 	// Assign specific vars
-	$template->assign_vars(array(
-		'PAY_ACC' => $portal_config['portal_pay_acc'],
-	));
+	$template->assign_var('PAY_ACC', $portal_config['portal_pay_acc']);
 }
 
 ?>

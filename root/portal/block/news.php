@@ -10,12 +10,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-   exit;
-}
-
-if (!defined('IN_PORTAL'))
+if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 {
    exit;
 }
@@ -47,25 +42,25 @@ else
 		$permissions = $portal_config['portal_news_permissions'];
 		$forum_from = $portal_config['portal_news_forum'];
 
-		$forum_from = ( strpos($forum_from, ',') !== FALSE ) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
+		$forum_from = ( strpos($forum_from, ',') !== false ) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 
 		$str_where = '';
 
-		if( $permissions == TRUE )
+		if( $permissions == true )
 		{
 			$disallow_access = array_unique(array_keys($auth->acl_getf('!f_read', true)));
 		} else {
 			$disallow_access = array();
 		}
-		
+
 		if( sizeof($forum_from) )
 		{
-			$disallow_access = array_diff($forum_from, $disallow_access);		
+			$disallow_access = array_diff($forum_from, $disallow_access);
 			if( !sizeof($disallow_access) )
 			{
 				return array();
 			}
-			
+
 			foreach( $disallow_access as $acc_id)
 			{
 				$acc_id = (int) $acc_id;
@@ -126,61 +121,61 @@ else
 			{
 				$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_news, $portal_config['portal_number_of_news'], $start, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news');
 			}
-			
-				$replies = ($auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
-				$folder_img = $folder_alt = $topic_type = $folder = $folder_new = '';
-				switch ($fetch_news[$i]['topic_type'])
-				{
-					case POST_STICKY:
-						$folder = 'sticky_read';
-						$folder_new = 'sticky_unread';
-					break;
-					case POST_ANNOUNCE:
-						$folder = 'announce_read';
-						$folder_new = 'announce_unread';
-					break;
-					default:
-						$folder = 'topic_read';
-						$folder_new = 'topic_unread';
-					if ($config['hot_threshold'] && $replies >= $config['hot_threshold'] && $fetch_news[$i]['topic_status'] != ITEM_LOCKED)
-						{
-							$folder .= '_hot';
-							$folder_new .= '_hot';
-						}
-					break;
-				}
-	
-				if ($fetch_news[$i]['topic_status'] == ITEM_LOCKED)
-				{
-					$folder .= '_locked';
-					$folder_new .= '_locked';
-				}
-				if ($fetch_news[$i]['topic_posted'])
-				{
-					$folder .= '_mine';
-					$folder_new .= '_mine';
-				}
 
-				$folder_img = ($unread_topic) ? $folder_new : $folder;
-				$folder_alt = ($unread_topic) ? 'NEW_POSTS' : (($fetch_news[$i]['topic_status'] == ITEM_LOCKED) ? 'TOPIC_LOCKED' : 'NO_NEW_POSTS');
-				
-				// Grab icons
-				$icons = $cache->obtain_icons();
-			
+			$replies = ($auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
+			$folder_img = $folder_alt = $topic_type = $folder = $folder_new = '';
+			switch ($fetch_news[$i]['topic_type'])
+			{
+				case POST_STICKY:
+					$folder = 'sticky_read';
+					$folder_new = 'sticky_unread';
+				break;
+				case POST_ANNOUNCE:
+					$folder = 'announce_read';
+					$folder_new = 'announce_unread';
+				break;
+				default:
+					$folder = 'topic_read';
+					$folder_new = 'topic_unread';
+					if ($config['hot_threshold'] && $replies >= $config['hot_threshold'] && $fetch_news[$i]['topic_status'] != ITEM_LOCKED)
+					{
+						$folder .= '_hot';
+						$folder_new .= '_hot';
+					}
+				break;
+			}
+
+			if ($fetch_news[$i]['topic_status'] == ITEM_LOCKED)
+			{
+				$folder .= '_locked';
+				$folder_new .= '_locked';
+			}
+			if ($fetch_news[$i]['topic_posted'])
+			{
+				$folder .= '_mine';
+				$folder_new .= '_mine';
+			}
+
+			$folder_img = ($unread_topic) ? $folder_new : $folder;
+			$folder_alt = ($unread_topic) ? 'NEW_POSTS' : (($fetch_news[$i]['topic_status'] == ITEM_LOCKED) ? 'TOPIC_LOCKED' : 'NO_NEW_POSTS');
+
+			// Grab icons
+			$icons = $cache->obtain_icons();
+
 			$template->assign_block_vars('news_row', array(
-				'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
-				'FORUM_NAME'		=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '',
-				'TITLE'				=> $fetch_news[$i]['topic_title'],
-				'POSTER'			=> $fetch_news[$i]['username'],
-				'POSTER_FULL'		=> $fetch_news[$i]['username_full'],
+				'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
+				'FORUM_NAME'			=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '',
+				'TITLE'					=> $fetch_news[$i]['topic_title'],
+				'POSTER'				=> $fetch_news[$i]['username'],
+				'POSTER_FULL'			=> $fetch_news[$i]['username_full'],
 				'USERNAME_FULL_LAST'	=> $fetch_news[$i]['username_full_last'],	
-				'U_USER_PROFILE'	=> (($fetch_news[$i]['user_type'] == USER_NORMAL || $fetch_news[$i]['user_type'] == USER_FOUNDER) && $fetch_news[$i]['user_id'] != ANONYMOUS) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $fetch_news[$i]['user_id']) : '',
-				'TIME'				=> $fetch_news[$i]['topic_time'],
+				'U_USER_PROFILE'		=> (($fetch_news[$i]['user_type'] == USER_NORMAL || $fetch_news[$i]['user_type'] == USER_FOUNDER) && $fetch_news[$i]['user_id'] != ANONYMOUS) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $fetch_news[$i]['user_id']) : '',
+				'TIME'					=> $fetch_news[$i]['topic_time'],
 				'LAST_POST_TIME'		=> $user->format_date($fetch_news[$i]['topic_last_post_time']),
-				'TEXT'				=> $fetch_news[$i]['post_text'],
-				'REPLIES'			=> $fetch_news[$i]['topic_replies'],
-				'TOPIC_VIEWS'		=> $fetch_news[$i]['topic_views'],
-				'N_ID'				=> $i,
+				'TEXT'					=> $fetch_news[$i]['post_text'],
+				'REPLIES'				=> $fetch_news[$i]['topic_replies'],
+				'TOPIC_VIEWS'			=> $fetch_news[$i]['topic_views'],
+				'N_ID'					=> $i,
 				'TOPIC_FOLDER_IMG'		=> $user->img($folder_img, $folder_alt),
 				'TOPIC_FOLDER_IMG_SRC'  => $user->img($folder_img, $folder_alt, false, '', 'src'),
 				'TOPIC_FOLDER_IMG_ALT'  => $user->lang[$folder_alt],
@@ -188,22 +183,22 @@ else
 				'TOPIC_ICON_IMG_WIDTH'	=> (!empty($icons[$fetch_news[$i]['icon_id']])) ? $icons[$fetch_news[$i]['icon_id']]['width'] : '',
 				'TOPIC_ICON_IMG_HEIGHT'	=> (!empty($icons[$fetch_news[$i]['icon_id']])) ? $icons[$fetch_news[$i]['icon_id']]['height'] : '',
 				'FOLDER_IMG'			=> $user->img('topic_read', 'NO_NEW_POSTS'),
-				'U_VIEWFORUM'		=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $fetch_news[$i]['forum_id']),
-				'U_LAST_COMMENTS'   => append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id'] . '&amp;p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
-				'U_VIEW_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id']),
-				'U_VIEW_UNREAD'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id'] . '&amp;view=unread#unread'),
-				'U_POST_COMMENT'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id']),
-				'U_READ_FULL'		=> append_sid("{$phpbb_root_path}portal.$phpEx", $read_full_url),
-				'L_READ_FULL'		=> $read_full,
-				'OPEN'				=> $open_bracket,
-				'CLOSE'				=> $close_bracket,
-				'S_NOT_LAST'		=> ($i < sizeof($fetch_news) - 1) ? true : false,
-				'S_POLL'			=> $fetch_news[$i]['poll'],
-				'S_UNREAD_INFO'		=> $unread_topic,
-				'PAGINATION'		=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),
+				'U_VIEWFORUM'			=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $fetch_news[$i]['forum_id']),
+				'U_LAST_COMMENTS'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id'] . '&amp;p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
+				'U_VIEW_COMMENTS'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id']),
+				'U_VIEW_UNREAD'			=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id'] . '&amp;view=unread#unread'),
+				'U_POST_COMMENT'		=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id']),
+				'U_READ_FULL'			=> append_sid("{$phpbb_root_path}portal.$phpEx", $read_full_url),
+				'L_READ_FULL'			=> $read_full,
+				'OPEN'					=> $open_bracket,
+				'CLOSE'					=> $close_bracket,
+				'S_NOT_LAST'			=> ($i < sizeof($fetch_news) - 1) ? true : false,
+				'S_POLL'				=> $fetch_news[$i]['poll'],
+				'S_UNREAD_INFO'			=> $unread_topic,
+				'PAGINATION'			=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),
 				'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 			));
-			
+
 			if( !empty($fetch_news[$i]['attachments']) )
 			{
 				foreach ($fetch_news[$i]['attachments'] as $attachment)
@@ -213,7 +208,7 @@ else
 					);
 				}
 			}
-			
+
 			if ($portal_config['portal_number_of_news'] <> 0 && $portal_config['portal_news_archive'])
 			{
 				$template->assign_vars(array(
@@ -255,19 +250,19 @@ else
 			'TOPIC_VIEWS'		=> $fetch_news[$i]['topic_views'],
 			'N_ID'				=> $i,
 			'U_VIEWFORUM'		=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $fetch_news[$i]['forum_id']),
-			'U_LAST_COMMENTS'   => append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
+			'U_LAST_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
 			'U_VIEW_COMMENTS'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id']),
 			'U_POST_COMMENT'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id']),
 			'S_POLL'			=> $fetch_news[$i]['poll'],
 			'S_UNREAD_INFO'		=> $unread_topic,
-			'U_READ_FULL'      	=> $read_full_url,
-			'L_READ_FULL'      	=> $read_full,      
-			'OPEN'            	=> $open_bracket,
-			'CLOSE'            	=> $close_bracket,
+			'U_READ_FULL'		=> $read_full_url,
+			'L_READ_FULL'		=> $read_full,      
+			'OPEN'				=> $open_bracket,
+			'CLOSE'				=> $close_bracket,
 			'PAGINATION'		=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),
-			'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
+			'S_HAS_ATTACHMENTS'	=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 		));
-		
+
 		if( !empty($fetch_news[$i]['attachments']) )
 		{
 			foreach ($fetch_news[$i]['attachments'] as $attachment)
@@ -277,7 +272,7 @@ else
 				);
 			}
 		}
-		
+
 		if ($portal_config['portal_number_of_news'] <> 0 && $portal_config['portal_news_archive'])
 		{
 			$template->assign_vars(array(
