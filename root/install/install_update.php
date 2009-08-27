@@ -345,6 +345,7 @@ class install_update extends module
 				set_portal_config('portal_minicalendar_sunday_color', '#FF0000');
 				set_portal_config('portal_sunday_first', '1');
 				set_portal_config('portal_long_month', '0');
+				set_portal_config('portal_attach_max_length', '15');
 			//case '1.0.4RC1':
 			break;
 		}

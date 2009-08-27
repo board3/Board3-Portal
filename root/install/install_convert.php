@@ -307,8 +307,7 @@ class install_convert extends module
 		set_portal_config('portal_wordgraph', '0');
 		set_portal_config('portal_wordgraph_ratio', '18');
 		set_portal_config('portal_minicalendar', '1');
-		set_portal_config('portal_minicalendar_today_color', '#FF0000');
-		set_portal_config('portal_minicalendar_day_link_color', '#006F00');
+		set_portal_config('portal_minicalendar_today_color', '#000000');
 		set_portal_config('portal_attachments', '1');
 		set_portal_config('portal_attachments_number', '8');
 
@@ -378,6 +377,12 @@ class install_convert extends module
 
 		$sql = 'INSERT INTO ' . ACL_ROLES_DATA_TABLE . ' ' . $db->sql_build_array('INSERT', $roles_data);
 		$db->sql_query($sql);
+
+		// Added 1.0.4RC1
+		set_portal_config('portal_minicalendar_sunday_color', '#FF0000');
+		set_portal_config('portal_sunday_first', '1');
+		set_portal_config('portal_long_month', '0');
+		set_portal_config('portal_attach_max_length', '15');
 
 		$submit = $user->lang['NEXT_STEP'];
 

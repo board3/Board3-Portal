@@ -67,13 +67,14 @@ if( $attach_forums === true )
 		$size_lang = ($row['filesize'] >= 1048576) ? $user->lang['MIB'] : (($row['filesize'] >= 1024) ? $user->lang['KIB'] : $user->lang['BYTES']);
 		$row['filesize'] = ($row['filesize'] >= 1048576) ? round((round($row['filesize'] / 1048576 * 100) / 100), 2) : (($row['filesize'] >= 1024) ? round((round($row['filesize'] / 1024 * 100) / 100), 2) : $row['filesize']);
 
-		$replace = str_replace(array('_','.zip','.jpg','.gif','.png','.ZIP','.JPG','.GIF','.PNG','.','-'), ' ', $row['real_filename']);
+		$replace = str_replace(array('_','.zip','.jpg','.jpeg','.exe','.gif','.png','.ZIP','.JPG','.JPEG','.EXE','.GIF','.PNG','.','-'), ' ', character_limit($row['real_filename'], $portal_config['portal_attach_max_length']));
 
 		$template->assign_block_vars('attach', array(
 			'FILESIZE'			=> $row['filesize'] . ' ' . $size_lang,
 			'FILETIME'			=> $user->format_date($row['filetime']),
 			'DOWNLOAD_COUNT'	=> (int) $row['download_count'], // grab downloads count
-			'REAL_FILENAME'		=> $replace,
+			'FILENAME'			=> $replace,
+			'REAL_FILENAME'		=> $row['real_filename'],
 			'PHYSICAL_FILENAME'	=> basename($row['physical_filename']),
 			'ATTACH_ID'			=> $row['attach_id'],
 			'POST_IDS'			=> (!empty($post_ids[$row['attach_id']])) ? $post_ids[$row['attach_id']] : '',

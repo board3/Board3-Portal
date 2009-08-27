@@ -167,11 +167,9 @@ class install_install extends module
 		set_portal_config('portal_wordgraph_ratio', '18');
 		set_portal_config('portal_minicalendar', '1');
 		set_portal_config('portal_minicalendar_today_color', '#000000');
-		set_portal_config('portal_minicalendar_sunday_color', '#FF0000');
-		set_portal_config('portal_sunday_first', '1');
-		set_portal_config('portal_long_month', '0');
 		set_portal_config('portal_attachments', '1');
 		set_portal_config('portal_attachments_number', '8');
+		set_portal_config('portal_attach_max_length', '15');
 
 		// Added 0.2.1
 		set_portal_config('portal_poll_limit', '3');

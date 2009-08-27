@@ -200,7 +200,9 @@ $lang = array_merge($lang, array(
 	'PORTAL_ATTACHMENTS_NUMBER_EXPLAIN'					=> '0 means infinite',
 	'PORTAL_ATTACHMENTS_FORUM_IDS'						=> 'Attachments forum id(s)',
 	'PORTAL_ATTACHMENTS_FORUM_IDS_EXPLAIN'				=> 'The ID(s) of the forum(s) from which the attachments should be displayed. Use a comma to separate multiple forums, or leave blank to use all available forums.',
-	
+	'PORTAL_ATTACHMENTS_MAX_LENGTH'						=> 'Character limit for each attachments',
+	'PORTAL_ATTACHMENTS_MAX_LENGTH_EXPLAIN'				=> '0 means infinite',
+
 	// friends
 	'ACP_PORTAL_FRIENDS_SETTINGS'			=> 'Friends Settings',
 	'ACP_PORTAL_FRIENDS_SETTINGS_EXPLAIN'	=> 'This is where you customize the friends block.',
