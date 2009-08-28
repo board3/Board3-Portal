@@ -47,7 +47,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<homepage>http://www.board3.de</homepage>
 				<contributions-group>
 					<contributions status="current" position="Main-Developer"></contributions>
-				</contributions-group>	
+				</contributions-group>
 			</author>
 			<author>
 				<realname>Kevin</realname>
@@ -55,7 +55,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<homepage>http://www.board3.de</homepage>
 				<contributions-group>
 					<contributions status="current" position="Developer"></contributions>
-				</contributions-group>	
+				</contributions-group>
 			</author>
 			<author>
 				<realname>Christian</realname>
@@ -63,7 +63,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<homepage>http://www.phpbb-projekt.de</homepage>
 				<contributions-group>
 					<contributions status="current" position="Developer"></contributions>
-				</contributions-group>	
+				</contributions-group>
 			</author>
 		</author-group>
 
@@ -78,8 +78,10 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		<link-group>
 			<link type="dependency" lang="en-gb" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
 			<link type="dependency" lang="de" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal unterstützt MOD Version Check. Um dieses Feature zu nutzen, muss dieser Mod installiert sein.</link>
-			<link type="contrib" lang="en-gb" href="contrib/update_103_to_104/update.xml">Update instructions for Board3 Portal Version 1.0.3</link>
-			<link type="contrib" lang="de" href="contrib/update_103_to_104/update.xml">Updateanleitung für Board3 Portal Version 1.0.3</link>
+			<link type="contrib" lang="en-gb" href="contrib/update_103_to_104/update.xml">Update from v1.0.3 to v1.0.4</link>
+			<link type="contrib" lang="de" href="contrib/update_103_to_104/update.xml">Update von v1.0.3 to v1.0.4</link>
+			<link type="contrib" lang="en-gb" href="contrib/update_phpbb3portal_122_to_board3portal_104.xml">Update instructions for phpBB3 Portal v1.2.2 to board3 Portal v1.0.4</link>
+			<link type="contrib" lang="de" href="contrib/update_phpbb3portal_122_to_board3portal_104.xml">Update-Anleitung für phpBB3 Portal v1.2.2 to board3 Portal v1.0.4</link>
 			<link type="language" lang="en-gb" href="contrib/de.xml">Manual for German Language-set</link>
 			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
 			<link type="template" lang="en-gb" href="contrib/subsilver2.xml">Manual for subsilver2 Style</link>

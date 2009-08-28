@@ -47,7 +47,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<homepage>http://www.board3.de</homepage>
 				<contributions-group>
 					<contributions status="current" position="Main-Developer"></contributions>
-				</contributions-group>	
+				</contributions-group>
 			</author>
 			<author>
 				<realname>Kevin</realname>
@@ -55,7 +55,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<homepage>http://www.board3.de</homepage>
 				<contributions-group>
 					<contributions status="current" position="Developer"></contributions>
-				</contributions-group>	
+				</contributions-group>
 			</author>
 			<author>
 				<realname>Christian</realname>
@@ -63,7 +63,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<homepage>http://www.phpbb-projekt.de</homepage>
 				<contributions-group>
 					<contributions status="current" position="Developer"></contributions>
-				</contributions-group>	
+				</contributions-group>
 			</author>
 		</author-group>
 
@@ -78,9 +78,9 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		<link-group>
 			<link type="parent" lang="de" href="../../install.xml">Installations-Anleitung</link>
 			<link type="parent" lang="en-gb" href="../../install.xml">Manual</link>
-			<link type="language" lang="en-gb" href="contrib/de.xml">Update manual for German Language-set</link>
+			<link type="language" lang="en-gb" href="contrib/de.xml">Update instructions for German Language-set</link>
 			<link type="language" lang="de" href="contrib/de.xml">Update-Anleitung für das deutsche Sprachpaket</link>
-			<link type="template" lang="en-gb" href="contrib/subsilver2.xml">Update manual for subsilver2 Style</link>
+			<link type="template" lang="en-gb" href="contrib/subsilver2.xml">Update instructions for subsilver2 Style</link>
 			<link type="template" lang="de" href="contrib/subsilver2.xml">Update-Anleitung für das Style subsilver2</link>
 		</link-group>
 	</header>
