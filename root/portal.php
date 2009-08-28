@@ -50,6 +50,26 @@ if ($portal_config['portal_phpbb_menu'])
 	$template->assign_var('S_DISPLAY_PHPBB_MENU', true);
 }
 
+if ($portal_config['version_check_time'] + 86400 < time())
+{
+	// Scare the user of outdated versions
+	if (!function_exists('mod_version_check'))
+	{
+		$phpbb_admin_path = $phpbb_root_path . 'adm/';
+		include($phpbb_root_path . 'portal/includes/functions_version_check.' . $phpEx);
+	}
+	set_portal_config('version_check_time', time());
+	set_portal_config('version_check_version', mod_version_check(true));
+}
+
+if ($auth->acl_get('a_') && version_compare($portal_config['portal_version'], $portal_config['version_check_version'], '<') && $portal_config['portal_version_check'])
+{
+	$user->add_lang('mods/lang_portal_acp');
+	$template->assign_vars(array(
+		'PORTAL_VERSION_CHECK'			=> sprintf($user->lang['NOT_UP_TO_DATE'], $user->lang['PORTAL']),
+	));
+}
+
 if ($load_center)
 {
 	if ($portal_config['portal_forum_index'])

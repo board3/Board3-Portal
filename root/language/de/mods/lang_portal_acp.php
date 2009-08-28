@@ -35,10 +35,10 @@ $lang = array_merge($lang, array(
 	// general
 	'ACP_PORTAL_GENERAL_TITLE'				=> 'Portal Administration',
 	'ACP_PORTAL_GENERAL_TITLE_EXPLAIN'		=> 'Danke, dass du dich für board3 Portal entschieden hast. Auf dieser Seite kannst du dein Portal verwalten. Diese Anzeige gibt dir einen schnellen Überblick über die verschiedenen Portal-Einstellungen. Die Links auf der linken Seite dieser Anzeige ermöglichen dir alle Einstellungen vorzunehmen, welche das Portal betreffen.',
-	'ACP_PORTAL_VERSION'					=> '<strong>Board3 Portal Version v%s</strong>',
 	'ACP_PORTAL_GENERAL_SETTINGS'			=> 'Allgemeine Einstellungen',
 	'PORTAL_ENABLE'							=> 'Portal aktivieren',
-    'PORTAL_ENABLE_EXPLAIN'					=> 'Wenn deaktiviert, wird das komplette Portal abgeschaltet.',
+	'PORTAL_ENABLE_EXPLAIN'					=> 'Wenn deaktiviert, wird das komplette Portal abgeschaltet.',
+	'PORTAL_VERSION_CHECK'					=> 'Versioncheck auf Portal',
 	'PORTAL_ADVANCED_STAT'					=> 'Erweiterte Statistik',
 	'PORTAL_ADVANCED_STAT_EXPLAIN'			=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_LEADERS'						=> 'Team',
@@ -275,6 +275,21 @@ $lang = array_merge($lang, array(
 	'PORTAL_LONG_MONTH_EXPLAIN'                 	=> 'Wenn deaktiviert, wird der Monat gekürzt z.B. Aug. statt August.',
 	'PORTAL_SUNDAY_FIRST'                   	  	=> 'erster Tag der Woche',
 	'PORTAL_SUNDAY_FIRST_EXPLAIN'              		=> 'Wenn deaktiviert, wird von Mo. --> So. angezeigt, ansonsten So. --> Sa.',
+));
+
+/**
+* A copy of Handyman` s MOD version check, to view it on the portal general settings
+*/
+$lang = array_merge($lang, array(
+	'ANNOUNCEMENT_TOPIC'	=> 'Release Ankündigung',
+	'CURRENT_VERSION'		=> 'Derzeitige Version',
+	'DOWNLOAD_LATEST'		=> 'Neueste Version herunterladen',
+	'LATEST_VERSION'		=> 'Neueste Version',
+	'NO_INFO'				=> 'Der Server konnte nicht erreicht werden',
+	'NOT_UP_TO_DATE'		=> '%s ist nicht aktuell',
+	'RELEASE_ANNOUNCEMENT'	=> 'Ankündigungsthema',
+	'UP_TO_DATE'			=> '%s ist aktuell',
+	'VERSION_CHECK'			=> 'MOD Version Check',
 ));
 
 ?>

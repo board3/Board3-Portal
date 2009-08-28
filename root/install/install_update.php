@@ -346,6 +346,10 @@ class install_update extends module
 				set_portal_config('portal_sunday_first', '1');
 				set_portal_config('portal_long_month', '0');
 				set_portal_config('portal_attach_max_length', '15');
+				set_portal_config('portal_version_check', '1');
+				set_portal_config('version_check_time', '0');
+				set_portal_config('version_check_version', '0.0.0');
+
 			//case '1.0.4RC1':
 			break;
 		}

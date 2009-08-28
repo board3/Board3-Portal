@@ -36,10 +36,10 @@ $lang = array_merge($lang, array(
 	// general
 	'ACP_PORTAL_GENERAL_TITLE'				=> 'Portal administration',
 	'ACP_PORTAL_GENERAL_TITLE_EXPLAIN'		=> 'Thank you for choosing Board3 Portal! This is where you can manage your portal page. The options below let you customize the various general settings. The links on the left-hand side allow you to customize in detail every aspect of your portal experience.',
-	'ACP_PORTAL_VERSION'					=> '<strong>Board3 Portal Version v%s</strong>',
 	'ACP_PORTAL_GENERAL_SETTINGS'			=> 'General settings',
 	'PORTAL_ENABLE'							=> 'Enable Portal',
 	'PORTAL_ENABLE_EXPLAIN'					=> 'Turns the whole portal on or off.',
+	'PORTAL_VERSION_CHECK'					=> 'Versioncheck on Portal',
 	'PORTAL_ADVANCED_STAT'					=> 'Advanced statistics block',
 	'PORTAL_ADVANCED_STAT_EXPLAIN'			=> 'Display this block on the portal.',
 	'PORTAL_LEADERS'						=> 'Leaders / Team block',
@@ -276,6 +276,21 @@ $lang = array_merge($lang, array(
 	'PORTAL_LONG_MONTH_EXPLAIN'					=> 'If disabled the months will be shortened e.g. Aug. instead of August.',
 	'PORTAL_SUNDAY_FIRST'						=> 'First day of the week',
 	'PORTAL_SUNDAY_FIRST_EXPLAIN'				=> 'If disabled the calendar will show Mo. --> Su., else Su. --> Sa.',
+));
+
+/**
+* A copy of Handyman` s MOD version check, to view it on the portal general settings
+*/
+$lang = array_merge($lang, array(
+	'ANNOUNCEMENT_TOPIC'	=> 'Release Announcement',
+	'CURRENT_VERSION'		=> 'Current Version',
+	'DOWNLOAD_LATEST'		=> 'Download Latest Version',
+	'LATEST_VERSION'		=> 'Latest Version',
+	'NO_INFO'				=> 'Version server could not be contacted',
+	'NOT_UP_TO_DATE'		=> '%s is not up to date',
+	'RELEASE_ANNOUNCEMENT'	=> 'Annoucement Topic',
+	'UP_TO_DATE'			=> '%s is up to date',
+	'VERSION_CHECK'			=> 'MOD Version Check',
 ));
 
 ?>

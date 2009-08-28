@@ -31,6 +31,12 @@ class acp_portal
 
 		$user->add_lang('mods/lang_portal_acp');
 
+		if (!function_exists('mod_version_check'))
+		{
+			include($phpbb_root_path . 'portal/includes/functions_version_check.' . $phpEx);
+		}
+		mod_version_check();
+
 		$action = request_var('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;
 		
@@ -50,6 +56,7 @@ class acp_portal
 					'vars'	=> array(
 						'legend1'					=> 'ACP_PORTAL_GENERAL_SETTINGS',
 						'portal_enable'				=> array('lang' => 'PORTAL_ENABLE',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_version_check'		=> array('lang' => 'PORTAL_VERSION_CHECK',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_advanced_stat'		=> array('lang' => 'PORTAL_ADVANCED_STAT',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_search'				=> array('lang' => 'PORTAL_SEARCH',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_leaders'			=> array('lang' => 'PORTAL_LEADERS',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
@@ -414,12 +421,10 @@ class acp_portal
 			trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link($this->u_action));
 		}
 
-		$this->tpl_name = 'acp_board';
+		$this->tpl_name = 'acp_portal';
 		$this->page_title = $display_vars['title'];
 
 		$title_explain = $user->lang[$display_vars['title'] . '_EXPLAIN'];
-
-		$title_explain .= ( $display_vars['title'] == 'ACP_PORTAL_GENERAL_TITLE' ) ? '<br /><br />' . sprintf($user->lang['ACP_PORTAL_VERSION'], $portal_config['portal_version']) : '';
 
 		$template->assign_vars(array(
 			'L_TITLE'			=> $user->lang[$display_vars['title']],
@@ -427,6 +432,8 @@ class acp_portal
 
 			'S_ERROR'			=> (sizeof($error)) ? true : false,
 			'ERROR_MSG'			=> implode('<br />', $error),
+
+			'S_VERSIONCHECK'	=> ($display_vars['title'] == 'ACP_PORTAL_GENERAL_TITLE') ? true : false,
 
 			'U_ACTION'			=> $this->u_action)
 		);

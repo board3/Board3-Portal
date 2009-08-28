@@ -169,7 +169,6 @@ class install_install extends module
 		set_portal_config('portal_minicalendar_today_color', '#000000');
 		set_portal_config('portal_attachments', '1');
 		set_portal_config('portal_attachments_number', '8');
-		set_portal_config('portal_attach_max_length', '15');
 
 		// Added 0.2.1
 		set_portal_config('portal_poll_limit', '3');
@@ -237,6 +236,15 @@ class install_install extends module
 
 		$sql = 'INSERT INTO ' . ACL_ROLES_DATA_TABLE . ' ' . $db->sql_build_array('INSERT', $roles_data);
 		$db->sql_query($sql);
+		
+		// Added 1.0.4RC1
+		set_portal_config('portal_minicalendar_sunday_color', '#FF0000');
+		set_portal_config('portal_sunday_first', '1');
+		set_portal_config('portal_long_month', '0');
+		set_portal_config('portal_attach_max_length', '15');
+		set_portal_config('portal_version_check', '1');
+		set_portal_config('version_check_time', '0');
+		set_portal_config('version_check_version', '0.0.0');
 
 		$submit = $user->lang['NEXT_STEP'];
 
