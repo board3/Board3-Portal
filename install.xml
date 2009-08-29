@@ -317,6 +317,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		<copy>
 			<file from="root/portal.php" to="portal.php" />
 			<file from="root/adm/mods/board3_portal_check_version.php" to="adm/mods/board3_portal_check_version.php" />
+			<file from="root/adm/style/acp_portal.html" to="adm/style/acp_portal.html" />
 			<file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />
 			<file from="root/includes/acp/info/acp_portal.php" to="includes/acp/info/acp_portal.php" />
 			<file from="root/install/*.*" to="install/*.*" />
