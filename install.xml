@@ -91,17 +91,37 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2009-09-00</date>
 				<rev-version>1.0.4</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en-gb">
 					<change>Bugfixes, view: http://www.board3.de/tracker.php?st=15&amp;vid=10&amp;p=13&amp;u=0&amp;at=0</change>
+					<change>MPV Check: Better request_var(); instead of $_COOKIE</change>
+					<change>MPV Check: Better function_exists(); instead of include_once();</change>
+					<change>Missing {$phpbb_root_path} in portal/block/poll.php</change>
+					<change>class="icon" in the dl-tag added and moved to _block_config.html</change>
+					<change>Use the bg1 class by all middle blocks</change>
+					<change>Fixed SQL ERROR [ postgres ], missing u.username_clean in the SELECT</change>
+					<change>Added Versioncheck on Portal (only Admins) and ACP --> Portal --> General settings.</change>
+					<change>Fixed bug in recent.php: users without access to all forums did not see the maximum number of topics</change>
+					<change>Missing IN_PHPBB check</change>
+					<change>CleanUp all Files</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Bugfixes, siehe: http://www.board3.de/tracker.php?st=15&amp;vid=10&amp;p=13&amp;u=0&amp;at=0</change>
+					<change>MPV Check: Besser request_var(); statt $_COOKIE</change>
+					<change>MPV Check: Besser function_exists(); statt include_once();</change>
+					<change>Vermisse {$phpbb_root_path} in portal/block/poll.php</change>
+					<change>class="icon" in dl-tag hinzugefügt und verschoben zu _block_config.html</change>
+					<change>Benutze bg1 class bei alle mittlere Blöcke</change>
+					<change>Fixed SQL ERROR [ postgres ], vermisse u.username_clean in SELECT</change>
+					<change>Versioncheck auf Portal (nur Admins) und ACP --> Portal --> Allgemeine Einstellungen hinzugefügt.</change>
+					<change>Fixed bug in recent.php: Benutzer ohne Zugriff auf alle Foren sah nicht die maximale Anzahl von Themen</change>
+					<change>Vermisse IN_PHPBB check</change>
+					<change>Alle Dateien aufgeräumt</change>
 				</changelog>
 			</entry>
 			<entry>
 				<date>2009-03-29</date>
 				<rev-version>1.0.3</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en-gb">
 					<change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=11</change>
 					<change>New option to disable the whole portal via ACP (links will be hidden).</change>
 					<change>Easier cutomizable template system with variables for block header and footer (_block_config.html) - change all headers and footers in one file</change>
@@ -125,7 +145,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-09-27</date>
 				<rev-version>1.0.2</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en-gb">
 					<change>Release of version 1.0.2. (Cleanup)</change>
 					<change>ModX 1.2.1</change>
 					<change>Some tiny fixes</change>
@@ -139,7 +159,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-09-09</date>
 				<rev-version>1.0.1</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en-gb">
 					<change>Release of version 1.0.1.</change>
 				</changelog>
 				<changelog lang="de">
@@ -149,7 +169,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-09-08</date>
 				<rev-version>1.0.0</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en-gb">
 					<change>Release of version 1.</change>
 				</changelog>
 				<changelog lang="de">
@@ -159,7 +179,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-08-31</date>
 				<rev-version>1.0.0RC3</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en-gb">
 					<change>Added switch to choose if "views" and "replies" should be diplayed in extra colums. To solve problems of distroyed layouts in compact view of news and announcements. e.g. with thin styles.</change>
 					<change>subsilver2 style rework</change>
 					<change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=9</change>
@@ -173,7 +193,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-08-20</date>
 				<rev-version>1.0.0RC2</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en-gb">
 					<change>Added new style / own CSS for easier style adaption - provided by Graphic Corner / Pfoti: www.graphic-corner.ch</change>
 					<change>Normal and inline attachments are displayed properly now in news / announcements text view. (Thanks to connect for the inline attachments solution)</change>
 					<change>Rework of the compact view of news / announcements. Topic folders and icons are now displayed. Complete style rework.</change>
@@ -201,7 +221,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>		
 				<date>2008-05-03</date>
 				<rev-version>1.0.0RC1</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en-gb">
 					<change>Many bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
 					<change>Adaptions to phpBB 3.0.1</change>
 					<change>The link block can be edited in the ACP: add, delete links and order position</change>
@@ -233,7 +253,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-02-03</date>
 				<rev-version>0.2.1</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en-gb">
 					<change>Fixed a news/announcements permissions bug</change>
 					<change>Fixed a bug when no news posts were viewable due to account permissions</change>
 					<change>Fixed a bug in announcements/news/polls due to shadow topics left after a topic is moved</change>
@@ -248,7 +268,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
  			<entry>
 				<date>2008-02-03</date>
 				<rev-version>0.2.0</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en-gb">
 					<change>added subsilver2 templates (valid XHTML 1.0 Strict)</change>
 					<change>added upcoming birthdays, configurable in ACP / thanks to Kendoo</change>
 					<change>complete rewrite of the poll system - checking user permissions, multible polls and more</change>
@@ -270,7 +290,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-01-15</date>
 				<rev-version>0.1.0</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en-gb">
 					<change>Changes from "phpBB3 Portal 1.1.0Beta" to "board3 Portal - based on phpBB3 Portal Version 1.0.0":</change>
 					<change>completet all missing ACP Control for several boxes</change>
 					<change>valid XHTML 1.0 Strict template</change>
