@@ -121,7 +121,7 @@ if ($load_center)
 	if ($portal_config['portal_news'])
 	{
 		include($phpbb_root_path . 'portal/block/news.' . $phpEx);
-		$template->assign_vars('S_NEWS_COMPACT', $portal_config['portal_news_style']);
+		$template->assign_var('S_NEWS_COMPACT', $portal_config['portal_news_style']);
 	}
 
 	if ($portal_config['portal_custom_center'] || $portal_config['portal_custom_small'])
