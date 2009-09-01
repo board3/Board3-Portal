@@ -185,7 +185,7 @@ class install_update extends module
 
 			// 0.3.0 was the internal release of 1.0.0RC1
 			case '0.3.0':
-			case '1.0.0RC1':	
+			case '1.0.0RC1':
 				set_portal_config('portal_announcements_permissions', '1');
 				set_portal_config('portal_news_permissions', '1');
 				set_portal_config('portal_custom_center', '0');
@@ -350,7 +350,8 @@ class install_update extends module
 				set_portal_config('version_check_time', '0');
 				set_portal_config('version_check_version', '0.0.0');
 
-			//case '1.0.4RC1':
+			case '1.0.4RC1':
+			//case '1.0.4RC2':
 			break;
 		}
 
@@ -423,7 +424,8 @@ class install_update extends module
 					$acp_portal_birthdays = array('module_basename' => 'portal',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $portal_config['acp_parent_module'],	'module_class' => 'acp',	'module_langname' => 'ACP_PORTAL_BIRTHDAYS_INFO',	'module_mode' => 'birthdays',	'module_auth' => 'acl_a_portal_manage');
 					add_module($acp_portal_birthdays);
 				case '1.0.3':
-				//case '1.0.4RC1':
+				case '1.0.4RC1':
+				//case '1.0.4RC2':
 				break;
 			}
 

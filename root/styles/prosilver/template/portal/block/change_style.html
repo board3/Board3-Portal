@@ -1,21 +1,7 @@
 <!--version $Id$ //-->
 {$LR_BLOCK_H_L}<img src="{T_THEME_PATH}/images/portal/portal_style.png" width="16" height="16" alt="" />&nbsp;{L_BOARD_STYLE}{$LR_BLOCK_H_R}
-		<script type="text/javascript">
-		<!--
-		// borrowed from forumimages.com !!
-		function jumpMenu(targ, selObj, restore)
-		{
-			eval(targ + ".location='" + selObj.options[selObj.selectedIndex].value + "'");
-			if (restore) selObj.selectedIndex = 0;
-		}
-		//-->
-		</script>
-		<form method="get" action="{S_STYLE_ACTION}" onsubmit="if(document.jumpbox.f.value == -1){return false;}">
-		<fieldset class="style_change">
-			<select style="width: 150px;" name="demo" id="demo" onchange="jumpMenu('parent',this,0)">
-				{STYLE_SELECT}
-			</select>
-			</fieldset>
-		</form>
-		<br />
+	<select style="width: 150px;" name="demo" id="demo" onchange="document.location.href = this.options[this.selectedIndex].value;">
+		{STYLE_SELECT}
+	</select>
+<br />
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
