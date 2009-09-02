@@ -37,11 +37,7 @@ $load_center = true;
 
 if (file_exists($phpbb_root_path . 'install/index.' . $phpEx) && ($user->data['user_type'] == USER_FOUNDER))
 {
-	$template->assign_vars(array(
-		'S_DISPLAY_GENERAL'		=> true,
-		'GEN_TITLE'				=> $user->lang['PORTAL_INSTALL'],
-		'GEN_MESSAGE'			=> $user->lang['PORTAL_INSTALL_TEXT'],
-	));
+	$template->assign_var('S_DISPLAY_GENERAL', true);
 	$load_center = false;
 }
 
@@ -127,6 +123,11 @@ if ($load_center)
 	if ($portal_config['portal_custom_center'] || $portal_config['portal_custom_small'])
 	{
 		include($phpbb_root_path . 'portal/block/custom.' . $phpEx);
+	}
+
+	if ($portal_config['portal_pay_s_block'] || ($portal_config['portal_pay_c_block']))
+	{
+		include($phpbb_root_path . 'portal/block/donate.' . $phpEx);
 	}
 
 	if ($config['load_online'] && $config['load_online_time'] && $portal_config['portal_whois_online'])
@@ -233,11 +234,6 @@ if ($portal_config['portal_clock'])
 if ($portal_config['portal_links'])
 {
 	include($phpbb_root_path . 'portal/block/links.' . $phpEx);
-}
-
-if ($portal_config['portal_pay_s_block'] || ($portal_config['portal_pay_c_block']))
-{
-	include($phpbb_root_path . 'portal/block/donate.' . $phpEx);
 }
 
 include($phpbb_root_path . 'portal/block/additional_blocks.' . $phpEx);
