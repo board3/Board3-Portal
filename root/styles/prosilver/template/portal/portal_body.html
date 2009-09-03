@@ -1,0 +1,48 @@
+<!-- DEFINE $S_IN_PORTAL = 1 -->
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE portal/_block_config.html -->
+
+<!--version $Id$ //-->
+<!-- IF PORTAL_VERSION_CHECK and U_ACP --> 
+	<div id="portal_version_check" class="rules">
+		<div class="inner"><span class="corners-top"><span></span></span>
+		<strong>{L_INFORMATION}:</strong> {PORTAL_VERSION_CHECK}
+		<span class="corners-bottom"><span></span></span></div>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE portal/blocks_top.html -->
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr>
+	<!-- [+] left block area -->
+		<td valign="top" style="width: {S_PORTAL_LEFT_COLUMN}px; padding-right:{$BLOCK_DISTANCE};">
+		<br style="clear:both" />
+			<!-- INCLUDE portal/blocks_left.html -->
+		</td>
+<!-- [-] left block area -->
+   
+<!-- [+] center block area -->
+	   <td valign="top">
+	   <br style="clear:both" />
+			<!-- INCLUDE portal/blocks_middle_top.html -->
+			<!-- INCLUDE portal/blocks_middle_bottom.html -->
+			<!-- IF S_DISPLAY_JUMPBOX -->
+				<!-- INCLUDE portal/block/jumpbox.html -->
+			<!-- ENDIF -->
+		</td>
+<!-- [-] center block area -->
+
+<!-- [+] right block area -->
+		<td valign="top" style="width: {S_PORTAL_RIGHT_COLUMN}px; padding-left:{$BLOCK_DISTANCE};">
+		<br style="clear:both" />
+			<!-- INCLUDE portal/blocks_right.html -->
+		</td>
+<!-- [-] right block area -->
+	</tr>
+</table>
+<!-- INCLUDE portal/blocks_bottom.html -->
+<!--// board3 Portal by www.board3.de //-->
+<div class="copyright">Powered by <a href="http://www.board3.de/">Board3 Portal</a> &copy; 2009 Board3 Group</div>
+
+<!-- INCLUDE overall_footer.html -->

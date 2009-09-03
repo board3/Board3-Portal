@@ -1,0 +1,52 @@
+/* inner corners */
+
+span.portal-corners-top-inner {
+	margin: 0 -5px;
+}
+
+span.portal-corners-bottom-inner {
+	margin: 0 -5px;
+	clear: both;
+}
+
+span.portal-corners-top-inner, span.portal-corners-bottom-inner{
+	font-size: 1px;
+	line-height: 1px;
+	display: block;
+	height: 5px;
+	background-repeat: no-repeat;
+}
+
+/* main menu, user menu and the links */
+
+.portal-navigation{
+width: auto;
+}
+
+.portal-navigation ul{
+list-style-type: none;
+margin: 0;
+padding: 0;
+margin-bottom: 8px; /*bottom spacing between each UL and rest of content*/
+}
+
+.portal-navigation ul li{
+padding-bottom: 2px; /*bottom spacing between menu items*/
+}
+
+.portal-navigation ul li a{
+background-image: url("{T_THEME_PATH}/images/portal/arrowbullet.gif");
+background-repeat: no-repeat;
+background-position: center left; /*custom bullet list image*/
+display: block;
+padding: 2px 0;
+padding-left: 19px; /*link text is indented 19px*/
+font-weight: bold;
+font-size: 90%;
+}
+
+.portal-navigation div.menutitle{
+padding: 1px 0;
+font: bold 90% 'Trebuchet MS', 'Lucida Grande', Arial, sans-serif;
+font-size: 12px;
+}

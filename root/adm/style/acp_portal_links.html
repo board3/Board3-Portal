@@ -1,0 +1,83 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<!-- IF S_EDIT -->
+
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<h1>{L_ACP_PORTAL_LINKS}</h1>
+	<p>{L_ACP_PORTAL_LINKS_EXPLAIN}</p>
+
+	<form id="acp_portal_links" method="post" action="{U_ACTION}">
+
+	<fieldset>
+		<legend>{L_ACP_PORTAL_LINKS}</legend>
+	<dl>
+		<dt><label for="link_title">{L_LINK_TITLE}:</label></dt>
+		<dd><input name="link_title" type="text" id="link_title" value="{LINK_TITLE}" maxlength="255" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="link_is_cat">{L_LINK_IS_CAT}:</label></dt>
+		<dd><label><input onchange="dE('url', -1)" type="radio" class="radio" name="link_is_cat" value="1" id="link_is_cat"<!-- IF S_LINK_IS_CAT --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
+			<label><input onchange="dE('url', 1)" type="radio" class="radio" name="link_is_cat" value="0"<!-- IF not S_LINK_IS_CAT --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+	</dl>
+	<!-- IF S_LINK_IS_CAT --><div id="url" style="display: none;"><!-- ELSE --><div id="url"><!-- ENDIF -->
+	<dl>
+		<dt><label for="link_url">{L_LINK_URL}:</label></dt>
+		<dd><input name="link_url" type="text" id="link_url" value="{LINK_URL}" maxlength="255" /></dd>
+	</dl>
+	</div>
+
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save" />
+
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		{S_FORM_TOKEN}
+	</p>
+	</fieldset>
+	</form>
+
+<!-- ELSE -->
+
+	<h1>{L_ACP_PORTAL_LINKS}</h1>
+	<p>{L_ACP_PORTAL_LINKS_EXPLAIN}</p>
+
+	<form id="acp_portal_links" method="post" action="{U_ACTION}">
+	<fieldset class="tabulated">
+	<legend>{L_ACP_PORTAL_LINKS}</legend>
+
+	<p class="quick">
+		<input class="button2" name="add" type="submit" value="{L_ADD_LINK}" />
+	</p>
+
+	<table cellspacing="1">
+	<thead>
+	<tr>
+		<th>{L_LINK_TITLE}</th>
+		<th>{L_LINK_URL}</th>
+		<th>{L_ACTION}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN links -->
+		<!-- IF links.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+		<td style="text-align: center;">{links.LINK_TITLE}</td>
+		<td style="text-align: center;"><!-- IF links.S_LINK_IS_CAT -->{L_LINK_CAT}<!-- ELSE -->{links.LINK_URL}<!-- ENDIF --></td>
+		<td style="text-align: center;">
+			<!-- IF links.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{links.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+			<!-- IF links.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{links.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->&nbsp;
+			<a href="{links.U_EDIT}">{ICON_EDIT}</a> <a href="{links.U_DELETE}">{ICON_DELETE}</a>
+		</td>
+	</tr>
+	<!-- END links -->
+	</tbody>
+	</table>
+
+	{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->
