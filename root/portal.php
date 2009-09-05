@@ -167,9 +167,9 @@ $result = $db->sql_query($sql);
 $db->sql_freeresult($result);
 
 // Grab navigation links
-//if ($portal_config['num_links'] > 0)
-//{
-/*	$links = $cache->obtain_links();
+if ($portal_config['num_links'] > 0)
+{
+	$links = $cache->obtain_links();
 	
 	if (sizeof($links))
 	{
@@ -183,8 +183,8 @@ $db->sql_freeresult($result);
 			));
 		}
 	}
-//}
-*/
+}
+
 // Assign specific vars
 $template->assign_vars(array(
 	'WELCOME_USERNAME'		=> get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),

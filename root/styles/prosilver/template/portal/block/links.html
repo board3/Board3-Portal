@@ -1,14 +1,12 @@
 <!--version $Id$ //-->
-{$LR_BLOCK_H_L}<img src="{T_THEME_PATH}/images/portal/portal_links.png" width="16" height="16" alt="" />&nbsp;{L_LINKS}{$LR_BLOCK_H_R}
+<!-- IF .links -->
 	<div class="portal-navigation">
 		<ul>
-		<!-- IF .link -->
-			<!-- BEGIN link -->
-				<li><a href="{link.URL}" title="{link.TEXT}">{link.TEXT}</a></li>
-			<!-- END link -->
-		<!-- ELSE -->
-			<span style="float:left;" class="gensmall"><strong>{L_NO_LINKS}</strong></span><br />
-		<!-- ENDIF -->
+			<!-- BEGIN links -->
+				<!-- IF links.S_IS_CAT --><div class="menutitle">{links.TITLE}</div><!-- ELSE --><li><a href="{links.URL}">{links.TITLE}</a></li><!-- ENDIF -->
+			<!-- END links -->
 		</ul>
 	</div>
-{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ELSE -->
+	<span style="float:left;" class="gensmall"><strong>{L_NO_LINKS}</strong></span><br />
+<!-- ENDIF -->
