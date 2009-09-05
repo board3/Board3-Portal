@@ -65,7 +65,7 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 		}
 		else
 		{
-			$birthday_ahead_list .= '<span title="' . format_birthday($user_birthday, 'd M') . '">' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</span>';
+			$birthday_ahead_list .= '<span title="' . format_birthday($row['user_birthday'], 'd M') . '">' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</span>';
 			if ($age = (int) substr($row['user_birthday'], -4))
 			{
 				$birthday_ahead_list .= ' (' . ($now['year'] - $age) . ')';

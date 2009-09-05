@@ -123,7 +123,13 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 	$portal_config = obtain_portal_config();]]></action>
 			</edit>
 		</open>
-
+		<open src="includes/session.php">
+			<edit>
+				<find><![CDATA[			$style = request_var('style', 0);
+			$SID .= '&amp;style=' . $style;]]></find>
+				<action type="after-add"><![CDATA[			define('SID_STYLE', $style);]]></action>
+			</edit>
+		</open>
 		<diy-instructions lang="de"><![CDATA[Rufe install/ auf und führe den Installer aus
 
 Aktualisiere deine Styles:
