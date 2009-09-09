@@ -15,7 +15,7 @@ if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
    exit;
 }
 
-$styles = '';
+$style_select = '';
 $sql = 'SELECT style_id, style_name
 	FROM ' . STYLES_TABLE . '
 	WHERE style_active = 1
@@ -23,20 +23,21 @@ $sql = 'SELECT style_id, style_name
 $result = $db->sql_query($sql);
 while ($row = $db->sql_fetchrow($result))
 {
-	if(defined('SID_STYLE'))
+	$style = request_var('style', 0);
+	if($style)
 	{
-		$url = str_replace('style=' . SID_STYLE, 'style=' . $row['style_id'], append_sid("{$phpbb_root_path}portal.$phpEx"));
+		$url = str_replace('style=' . $style, 'style=' . $row['style_id'], append_sid("{$phpbb_root_path}portal.$phpEx"));
 	}
 	else
 	{
 		$url = append_sid("{$phpbb_root_path}portal.$phpEx", 'style=' . $row['style_id']);
 	}
-	$styles .= '<option value="' . $url . '"' . ($row['style_id'] == $user->theme['style_id'] ? ' selected="selected"' : '') . '>' . htmlspecialchars($row['style_name']) . '</option>';
+	$style_select .= '<option value="' . $url . '"' . ($row['style_id'] == $user->theme['style_id'] ? ' selected="selected"' : '') . '>' . htmlspecialchars($row['style_name']) . '</option>';
 }
 $db->sql_freeresult($result);
-if(strlen($styles))
+if(strlen($style_select))
 {
-	$template->assign_var('STYLE_SELECT', $styles);
+	$template->assign_var('STYLE_SELECT', $style_select);
 }
 
 

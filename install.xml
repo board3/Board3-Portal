@@ -377,23 +377,8 @@ Deny from All
 		</open>
 		<open src="includes/session.php">
 			<edit>
-				<find><![CDATA[		if (!empty($_GET['style']) && $auth->acl_get('a_styles'))
-		{
-			global $SID, $_EXTRA_URL;
-
-			$style = request_var('style', 0);
-			$SID .= '&amp;style=' . $style;
-			$_EXTRA_URL = array('style=' . $style);
-		}]]></find>
-				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']))
-		{
-			global $SID, $_EXTRA_URL;
-
-			$style = request_var('style', 0);
-			$SID .= '&amp;style=' . $style;
-			define('SID_STYLE', $style);
-			$_EXTRA_URL = array('style=' . $style);
-		}]]></action>
+				<find><![CDATA[		if (!empty($_GET['style']) && $auth->acl_get('a_styles'))]]></find>
+				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']))]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/overall_header.html">
