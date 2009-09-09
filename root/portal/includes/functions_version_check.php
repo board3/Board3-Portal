@@ -96,7 +96,7 @@ function mod_version_check($return_version = false)
 	$version = str_replace(' ', '', $var['version']);
 	if ($return_version)
 	{
-		return $version;
+		return $mod_version;
 	}
 
 	$version_compare = (version_compare($version, $mod_version, '<')) ? false : true;
