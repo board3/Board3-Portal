@@ -19,7 +19,7 @@
 <table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
     <tr>
     <!-- [+] left block area -->
-       <td width="{PORTAL_LEFT_COLUMN}px" valign="top" style="padding-right:{$BLOCK_DISTANCE};">
+       <td width="<!-- IF $S_COLUMNS_WIDTH_OVERRIDE -->{$PORTAL_LEFT_COLUMN_OVERRIDE}<!-- ELSE -->{PORTAL_LEFT_COLUMN}<!-- ENDIF -->px" valign="top" style="padding-right:{$BLOCK_DISTANCE};">
 
           <!-- IF S_DISPLAY_MAINMENU -->
              <!-- INCLUDE portal/block/main_menu.html -->
@@ -159,7 +159,7 @@
        
 
     <!-- [+] right block area -->
-       <td width="{PORTAL_RIGHT_COLUMN}px" valign="top" style="padding-left:{$BLOCK_DISTANCE};">
+       <td width="<!-- IF $S_COLUMNS_WIDTH_OVERRIDE -->{$PORTAL_RIGHT_COLUMN_OVERRIDE}<!-- ELSE -->{PORTAL_RIGHT_COLUMN}<!-- ENDIF -->px" valign="top" style="padding-left:{$BLOCK_DISTANCE};">
           <!-- IF S_DISPLAY_USERMENU -->
              <!-- IF not S_USER_LOGGED_IN -->
                 <!-- INCLUDE portal/block/login_box.html -->

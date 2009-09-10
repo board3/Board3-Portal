@@ -50,6 +50,7 @@ $oudated_files = array(
 	'portal/includes/mini_cal/mini_cal_common.php',
 	'portal/includes/mini_cal/mini_cal_config.php',
 	'portal/includes/mini_cal/mini_cal_topic.php',
+	'styles/prosilver/template/portal/block/_sample_block_design.html',
 	'styles/prosilver/template/portal/block/active.html',
 	'styles/prosilver/template/portal/block/ads_center.html',
 	'styles/prosilver/template/portal/block/ads_small.html',
