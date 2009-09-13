@@ -33,7 +33,10 @@ function mod_version_check($return_version = false)
 
 	// load version files
 	$class_functions = array();
-	include($phpbb_admin_path . 'mods/board3_portal_check_version.' . $phpEx);
+	if (!class_exists('board3_portal_check_version'))
+	{
+		include($phpbb_admin_path . 'mods/board3_portal_check_version.' . $phpEx);
+	}
 	$class_name = 'board3_portal_check_version';
 
 	$var = call_user_func(array($class_name, 'version'));
@@ -42,6 +45,7 @@ function mod_version_check($return_version = false)
 	$errstr = '';
 	$errno = 0;
 
+	$mod_version = '0.0.0';
 	if (!$return_version)
 	{
 		$mod_version = $user->lang['NO_INFO'];
