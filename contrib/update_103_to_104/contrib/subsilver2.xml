@@ -71,7 +71,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 
 		<installation>
 			<level>easy</level>
-			<time>600</time>
+			<time>1200</time>
 			<target-version>3.0.5</target-version>
 		</installation>
 
@@ -82,9 +82,95 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 	</header>
 	<action-group>
 		<copy>
-			<file from="root/styles/subsilver2/template/portal/*.*" to="styles/subsilver2/template/portal/*.*" />
-			<file from="root/styles/subsilver2/theme/images/portal/*.*" to="styles/subsilver2/theme/images/portal/*.*" />
+			<file from="root/styles/subsilver2/template/portal/portal_body.html" to="styles/subsilver2/template/portal/portal_body.html" />
+			<file from="root/styles/subsilver2/template/portal/announcements.html" to="styles/subsilver2/template/portal/announcements.html" />
+			<file from="root/styles/subsilver2/template/portal/announcements_compact.html" to="styles/subsilver2/template/portal/announcements_compact.html" />
+			<file from="root/styles/subsilver2/template/portal/attachments.html" to="styles/subsilver2/template/portal/attachments.html" />
+			<file from="root/styles/subsilver2/template/portal/birthday_list.html" to="styles/subsilver2/template/portal/birthday_list.html" />
+			<file from="root/styles/subsilver2/template/portal/change_style.html" to="styles/subsilver2/template/portal/change_style.html" />
+			<file from="root/styles/subsilver2/template/portal/clock.html" to="styles/subsilver2/template/portal/clock.html" />
+			<file from="root/styles/subsilver2/template/portal/custom_center.html" to="styles/subsilver2/template/portal/custom_center.html" />
+			<file from="root/styles/subsilver2/template/portal/custom_small.html" to="styles/subsilver2/template/portal/custom_small.html" />
+			<file from="root/styles/subsilver2/template/portal/donation.html" to="styles/subsilver2/template/portal/donation.html" />
+			<file from="root/styles/subsilver2/template/portal/donation_small.html" to="styles/subsilver2/template/portal/donation_small.html" />
+			<file from="root/styles/subsilver2/template/portal/general_block.html" to="styles/subsilver2/template/portal/general_block.html" />
+			<file from="root/styles/subsilver2/template/portal/latest_bots.html" to="styles/subsilver2/template/portal/latest_bots.html" />
+			<file from="root/styles/subsilver2/template/portal/latest_members.html" to="styles/subsilver2/template/portal/latest_members.html" />
+			<file from="root/styles/subsilver2/template/portal/leaders.html" to="styles/subsilver2/template/portal/leaders.html" />
+			<file from="root/styles/subsilver2/template/portal/leaders_ext.html" to="styles/subsilver2/template/portal/leaders_ext.html" />
+			<file from="root/styles/subsilver2/template/portal/link_us.html" to="styles/subsilver2/template/portal/link_us.html" />
+			<file from="root/styles/subsilver2/template/portal/links.html" to="styles/subsilver2/template/portal/links.html" />
+			<file from="root/styles/subsilver2/template/portal/login_box.html" to="styles/subsilver2/template/portal/login_box.html" />
+			<file from="root/styles/subsilver2/template/portal/main_menu.html" to="styles/subsilver2/template/portal/main_menu.html" />
+			<file from="root/styles/subsilver2/template/portal/mini_calendar.html" to="styles/subsilver2/template/portal/mini_calendar.html" />
+			<file from="root/styles/subsilver2/template/portal/news.html" to="styles/subsilver2/template/portal/news.html" />
+			<file from="root/styles/subsilver2/template/portal/news_compact.html" to="styles/subsilver2/template/portal/news_compact.html" />
+			<file from="root/styles/subsilver2/template/portal/online_friends.html" to="styles/subsilver2/template/portal/online_friends.html" />
+			<file from="root/styles/subsilver2/template/portal/poll.html" to="styles/subsilver2/template/portal/poll.html" />
+			<file from="root/styles/subsilver2/template/portal/random_member.html" to="styles/subsilver2/template/portal/random_member.html" />
+			<file from="root/styles/subsilver2/template/portal/recent.html" to="styles/subsilver2/template/portal/recent.html" />
+			<file from="root/styles/subsilver2/template/portal/search.html" to="styles/subsilver2/template/portal/search.html" />
+			<file from="root/styles/subsilver2/template/portal/statistics.html" to="styles/subsilver2/template/portal/statistics.html" />
+			<file from="root/styles/subsilver2/template/portal/top_poster.html" to="styles/subsilver2/template/portal/top_poster.html" />
+			<file from="root/styles/subsilver2/template/portal/user_menu.html" to="styles/subsilver2/template/portal/user_menu.html" />
+			<file from="root/styles/subsilver2/template/portal/welcome.html" to="styles/subsilver2/template/portal/welcome.html" />
+			<file from="root/styles/subsilver2/template/portal/whois_online.html" to="styles/subsilver2/template/portal/whois_online.html" />
+			<file from="root/styles/subsilver2/template/portal/wordgraph.html" to="styles/subsilver2/template/portal/wordgraph.html" />
+			<file from="root/styles/subsilver2/theme/images/portal/mini_cal_icon_left_arrow.png" to="styles/subsilver2/theme/images/portal/mini_cal_icon_left_arrow.png" />
+			<file from="root/styles/subsilver2/theme/images/portal/mini_cal_icon_right_arrow.png" to="styles/subsilver2/theme/images/portal/mini_cal_icon_right_arrow.png" />
 		</copy>
+		<open src="styles/prosilver/template/portal/_block_config.html">
+			<edit>
+				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
+				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<find><![CDATA[<!-- DEFINE $LR_BLOCK_H_R = '</span></th></tr><tr class="row1"><td style="padding: 0px;">' -->]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[<tr class="row1"><td style="padding: 0px;">]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[</table>]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
+				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<find><![CDATA[<!-- DEFINE $LR_BLOCK_F_R = '</td></tr></table><br />' -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- DEFINE $LR_BLOCK_F_R = '<br />' -->]]></action>
+			</edit>
+			<edit>
+				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
+				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<find><![CDATA[<!-- DEFINE $C_BLOCK_H_R = '</span></th></tr><tr class="row1"><td style="padding: 0px;">' -->]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[<tr class="row1"><td style="padding: 0px;">]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[</table>]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
+				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<find><![CDATA[<!-- DEFINE $C_BLOCK_F_R = '</td></tr></table><br />' -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- DEFINE $C_BLOCK_F_R = '<br />' -->]]></action>
+			</edit>
+			<edit>
+				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
+				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<find><![CDATA[<!-- Images-URL //-->
+<!-- DEFINE $WHOS_IMAGES = '/images/whosonline.gif' -->
+<!-- DEFINE $NO_AVATAR_IMG = '/images/no_avatar.gif' -->]]></find>
+				<action type="after-add"><![CDATA[
+<!-- Vertical distance between left/right and center Blocks -->
+<!-- DEFINE $BLOCK_DISTANCE = '10px' -->
+
+<!-- show Icons in left/right Blocks? 0=no 1=yes -->
+<!-- DEFINE $S_BLOCK_ICON = 1 -->
+
+<!-- override the column width settings of the ACP for this style? 0=no 1=yes -->
+<!-- DEFINE $S_COLUMNS_WIDTH_OVERRIDE = 0 -->
+
+<!-- override the column width settings of the ACP - set the width if enabled -->
+<!-- DEFINE $PORTAL_LEFT_COLUMN_OVERRIDE = '200' -->
+<!-- DEFINE $PORTAL_RIGHT_COLUMN_OVERRIDE = '200' -->]]></action>
+			</edit>
+		</open>
 		<diy-instructions lang="en-gb">See general install.xml file</diy-instructions>
 		<diy-instructions lang="de">Siehe install.xml</diy-instructions>
 	</action-group>

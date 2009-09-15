@@ -351,7 +351,8 @@ class install_update extends module
 				set_portal_config('version_check_version', '0.0.0');
 
 			case '1.0.4RC1':
-			//case '1.0.4RC2':
+			case '1.0.4RC2':
+			//case '1.0.4RC3':
 			break;
 		}
 
@@ -425,7 +426,8 @@ class install_update extends module
 					add_module($acp_portal_birthdays);
 				case '1.0.3':
 				case '1.0.4RC1':
-				//case '1.0.4RC2':
+				case '1.0.4RC2':
+				//case '1.0.4RC3':
 				break;
 			}
 

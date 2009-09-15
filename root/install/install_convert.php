@@ -378,7 +378,7 @@ class install_convert extends module
 		$sql = 'INSERT INTO ' . ACL_ROLES_DATA_TABLE . ' ' . $db->sql_build_array('INSERT', $roles_data);
 		$db->sql_query($sql);
 
-		// Added 1.0.4RC1
+		// Added 1.0.4RC1 A.K.A 1.0.4
 		set_portal_config('portal_minicalendar_sunday_color', '#FF0000');
 		set_portal_config('portal_sunday_first', '1');
 		set_portal_config('portal_long_month', '0');
@@ -386,7 +386,7 @@ class install_convert extends module
 		set_portal_config('portal_version_check', '1');
 		set_portal_config('version_check_time', '0');
 		set_portal_config('version_check_version', '0.0.0');
-		
+
 		$submit = $user->lang['NEXT_STEP'];
 
 		$url = $this->p_master->module_url . "?mode=$mode&amp;sub=advanced";

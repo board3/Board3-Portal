@@ -71,7 +71,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 
 		<installation>
 			<level>easy</level>
-			<time>600</time>
+			<time>1200</time>
 			<target-version>3.0.5</target-version>
 		</installation>
 
@@ -89,7 +89,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</link-group>
 		<history>
 			<entry>
-				<date>2009-09-00</date>
+				<date>2009-09-30</date>
 				<rev-version>1.0.4</rev-version>
 				<changelog lang="en-gb">
 					<change>Bugfixes, view: http://www.board3.de/tracker.php?st=15&amp;vid=10&amp;p=13&amp;u=0&amp;at=0</change>
@@ -419,7 +419,7 @@ Deny from All
 			</edit>
 		</open>
 		
-		<diy-instructions lang="de"><![CDATA[Rufe install/ auf und führe den Installer aus
+		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus
 
 Aktualisiere deine Styles:
     "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
@@ -428,14 +428,14 @@ Aktualisiere deine Styles:
 
 Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
 ]]></diy-instructions>
-		<diy-instructions lang="en-gb"><![CDATA[Browse to install/ and run the installer
+		<diy-instructions lang="en-gb"><![CDATA[Browse to install/index.php and run the installer
 
 Refresh your Styles:
     "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
     "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
     "Administration Control Panel" (ACP) > "Styles" > "Imagesets" > each > "refresh"
 
-Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"	
+Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
 ]]></diy-instructions>
 	</action-group>
 </mod>

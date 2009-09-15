@@ -71,7 +71,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 
 		<installation>
 			<level>easy</level>
-			<time>600</time>
+			<time>1200</time>
 			<target-version>3.0.5</target-version>
 		</installation>
 
@@ -93,14 +93,74 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<file from="root/includes/acp/info/acp_portal.php" to="includes/acp/info/acp_portal.php" />
 			<file from="root/install/*.*" to="install/*.*" />
 			<file from="root/install/schemas/*.*" to="install/schemas/*.*" />
-			<file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
-			<file from="root/portal/index.html" to="portal/index.html" />
-			<file from="root/portal/block/*.*" to="portal/block/*.*" />
-			<file from="root/portal/includes/*.*" to="portal/includes/*.*" />
-			<file from="root/styles/prosilver/template/portal/*.*" to="styles/prosilver/template/portal/*.*" />
-			<file from="root/styles/prosilver/template/portal/block/*.*" to="styles/prosilver/template/portal/block/*.*" />
+			<file from="root/language/en/mods/lang_portal.php" to="language/en/mods/lang_portal.php" />
+			<file from="root/language/en/mods/lang_portal_acp.php" to="language/en/mods/lang_portal_acp.php" />
+			<file from="root/portal/block/announcements.php" to="portal/block/announcements.php" />
+			<file from="root/portal/block/attachments.php" to="portal/block/attachments.php" />
+			<file from="root/portal/block/birthday_list.php" to="portal/block/birthday_list.php" />
+			<file from="root/portal/block/change_style.php" to="portal/block/change_style.php" />
+			<file from="root/portal/block/custom.php" to="portal/block/custom.php" />
+			<file from="root/portal/block/donate.php" to="portal/block/donate.php" />
+			<file from="root/portal/block/friends.php" to="portal/block/friends.php" />
+			<file from="root/portal/block/latest_bots.php" to="portal/block/latest_bots.php" />
+			<file from="root/portal/block/latest_members.php" to="portal/block/latest_members.php" />
+			<file from="root/portal/block/leaders.php" to="portal/block/leaders.php" />
+			<file from="root/portal/block/leaders_ext.php" to="portal/block/leaders_ext.php" />
+			<file from="root/portal/block/link_us.php" to="portal/block/link_us.php" />
+			<file from="root/portal/block/links.php" to="portal/block/links.php" />
+			<file from="root/portal/block/login_box.php" to="portal/block/login_box.php" />
+			<file from="root/portal/block/main_menu.php" to="portal/block/main_menu.php" />
+			<file from="root/portal/block/mini_cal.php" to="portal/block/mini_cal.php" />
+			<file from="root/portal/block/news.php" to="portal/block/news.php" />
+			<file from="root/portal/block/poll.php" to="portal/block/poll.php" />
+			<file from="root/portal/block/random_member.php" to="portal/block/random_member.php" />
+			<file from="root/portal/block/recent.php" to="portal/block/recent.php" />
+			<file from="root/portal/block/search.php" to="portal/block/search.php" />
+			<file from="root/portal/block/statistics.php" to="portal/block/statistics.php" />
+			<file from="root/portal/block/top_posters.php" to="portal/block/top_posters.php" />
+			<file from="root/portal/block/user_menu.php" to="portal/block/user_menu.php" />
+			<file from="root/portal/block/welcome.php" to="portal/block/welcome.php" />
+			<file from="root/portal/block/whois_online.php" to="portal/block/whois_online.php" />
+			<file from="root/portal/block/wordgraph.php" to="portal/block/wordgraph.php" />
+			<file from="root/portal/includes/functions.php" to="portal/includes/functions.php" />
+			<file from="root/portal/includes/functions_version_check.php" to="portal/includes/functions_version_check.php" />
+			<file from="root/styles/prosilver/template/portal/portal_body.html" to="styles/prosilver/template/portal/portal_body.html" />
+			<file from="root/styles/prosilver/template/portal/announcements.html" to="styles/prosilver/template/portal/announcements.html" />
+			<file from="root/styles/prosilver/template/portal/announcements_compact.html" to="styles/prosilver/template/portal/announcements_compact.html" />
+			<file from="root/styles/prosilver/template/portal/attachments.html" to="styles/prosilver/template/portal/attachments.html" />
+			<file from="root/styles/prosilver/template/portal/birthday_list.html" to="styles/prosilver/template/portal/birthday_list.html" />
+			<file from="root/styles/prosilver/template/portal/change_style.html" to="styles/prosilver/template/portal/change_style.html" />
+			<file from="root/styles/prosilver/template/portal/clock.html" to="styles/prosilver/template/portal/clock.html" />
+			<file from="root/styles/prosilver/template/portal/custom_center.html" to="styles/prosilver/template/portal/custom_center.html" />
+			<file from="root/styles/prosilver/template/portal/custom_small.html" to="styles/prosilver/template/portal/custom_small.html" />
+			<file from="root/styles/prosilver/template/portal/donation.html" to="styles/prosilver/template/portal/donation.html" />
+			<file from="root/styles/prosilver/template/portal/donation_small.html" to="styles/prosilver/template/portal/donation_small.html" />
+			<file from="root/styles/prosilver/template/portal/general_block.html" to="styles/prosilver/template/portal/general_block.html" />
+			<file from="root/styles/prosilver/template/portal/latest_bots.html" to="styles/prosilver/template/portal/latest_bots.html" />
+			<file from="root/styles/prosilver/template/portal/latest_members.html" to="styles/prosilver/template/portal/latest_members.html" />
+			<file from="root/styles/prosilver/template/portal/leaders.html" to="styles/prosilver/template/portal/leaders.html" />
+			<file from="root/styles/prosilver/template/portal/leaders_ext.html" to="styles/prosilver/template/portal/leaders_ext.html" />
+			<file from="root/styles/prosilver/template/portal/link_us.html" to="styles/prosilver/template/portal/link_us.html" />
+			<file from="root/styles/prosilver/template/portal/links.html" to="styles/prosilver/template/portal/links.html" />
+			<file from="root/styles/prosilver/template/portal/login_box.html" to="styles/prosilver/template/portal/login_box.html" />
+			<file from="root/styles/prosilver/template/portal/main_menu.html" to="styles/prosilver/template/portal/main_menu.html" />
+			<file from="root/styles/prosilver/template/portal/mini_calendar.html" to="styles/prosilver/template/portal/mini_calendar.html" />
+			<file from="root/styles/prosilver/template/portal/news.html" to="styles/prosilver/template/portal/news.html" />
+			<file from="root/styles/prosilver/template/portal/news_compact.html" to="styles/prosilver/template/portal/news_compact.html" />
+			<file from="root/styles/prosilver/template/portal/online_friends.html" to="styles/prosilver/template/portal/online_friends.html" />
+			<file from="root/styles/prosilver/template/portal/poll.html" to="styles/prosilver/template/portal/poll.html" />
+			<file from="root/styles/prosilver/template/portal/random_member.html" to="styles/prosilver/template/portal/random_member.html" />
+			<file from="root/styles/prosilver/template/portal/recent.html" to="styles/prosilver/template/portal/recent.html" />
+			<file from="root/styles/prosilver/template/portal/search.html" to="styles/prosilver/template/portal/search.html" />
+			<file from="root/styles/prosilver/template/portal/statistics.html" to="styles/prosilver/template/portal/statistics.html" />
+			<file from="root/styles/prosilver/template/portal/top_poster.html" to="styles/prosilver/template/portal/top_poster.html" />
+			<file from="root/styles/prosilver/template/portal/user_menu.html" to="styles/prosilver/template/portal/user_menu.html" />
+			<file from="root/styles/prosilver/template/portal/welcome.html" to="styles/prosilver/template/portal/welcome.html" />
+			<file from="root/styles/prosilver/template/portal/whois_online.html" to="styles/prosilver/template/portal/whois_online.html" />
+			<file from="root/styles/prosilver/template/portal/wordgraph.html" to="styles/prosilver/template/portal/wordgraph.html" />
 			<file from="root/styles/prosilver/theme/portal.css" to="styles/prosilver/theme/portal.css" />
-			<file from="root/styles/prosilver/theme/images/portal/*.*" to="styles/prosilver/theme/images/portal/*.*" />
+			<file from="root/styles/prosilver/theme/images/portal/mini_cal_icon_left_arrow.png" to="styles/prosilver/theme/images/portal/mini_cal_icon_left_arrow.png" />
+			<file from="root/styles/prosilver/theme/images/portal/mini_cal_icon_right_arrow.png" to="styles/prosilver/theme/images/portal/mini_cal_icon_right_arrow.png" />
 		</copy>
 		<open src="adm/index.php">
 			<edit>
@@ -123,7 +183,64 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 	$portal_config = obtain_portal_config();]]></action>
 			</edit>
 		</open>
-		<diy-instructions lang="de"><![CDATA[Rufe install/ auf und führe den Installer aus
+		<open src="portal/block/additional_blocks.php">
+			<edit>
+				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
+				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<find><![CDATA[if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
+if (!defined('IN_PORTAL'))
+{
+	exit;
+}]]></find>
+				<action type="replace-with"><![CDATA[if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
+{
+   exit;
+}]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/portal/_block_config.html">
+			<edit>
+				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
+				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<find><![CDATA[<!-- DEFINE $C_BLOCK_H_L = '<div class="forabg"><div class="inner"><span class="corners-top"><span></span></span><ul class="topiclist"><li class="header">' -->]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[<ul class="topiclist"><li class="header">]]></inline-find>
+					<inline-action type="after-add"><![CDATA[<dl class="icon">]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
+				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<find><![CDATA[<!-- DEFINE $C_BLOCK_H_R = '</li></ul>' -->]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[</li></ul>]]></inline-find>
+					<inline-action type="before-add"><![CDATA[</dl>]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
+				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<find><![CDATA[<!-- Images-URL //-->
+<!-- DEFINE $NO_AVATAR_IMG = '/images/no_avatar.gif' -->]]></find>
+				<action type="after-add"><![CDATA[<!-- Vertical distance between left/right and center Blocks -->
+<!-- DEFINE $BLOCK_DISTANCE = '10px' -->
+
+<!-- show Icons in left/right Blocks? 0=no 1=yes -->
+<!-- DEFINE $S_BLOCK_ICON = 1 -->
+
+<!-- override the column width settings of the ACP for this style? 0=no 1=yes -->
+<!-- DEFINE $S_COLUMNS_WIDTH_OVERRIDE = 0 -->
+
+<!-- override the column width settings of the ACP - set the width if enabled -->
+<!-- DEFINE $PORTAL_LEFT_COLUMN_OVERRIDE = '200' -->
+<!-- DEFINE $PORTAL_RIGHT_COLUMN_OVERRIDE = '200' -->]]></action>
+			</edit>
+		</open>
+		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus
 
 Aktualisiere deine Styles:
     "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
@@ -133,14 +250,14 @@ Aktualisiere deine Styles:
 Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
 
 Subsilver2 User: bitte das komplette Verzeichnis subsilver2 mit den neuen Dateien überschreiben.]]></diy-instructions>
-		<diy-instructions lang="en-gb"><![CDATA[Browse to install/ and run the installer
+		<diy-instructions lang="en-gb"><![CDATA[Browse to install/index.php and run the installer
 
 Refresh your Styles:
     "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
     "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
     "Administration Control Panel" (ACP) > "Styles" > "Imagesets" > each > "refresh"
 
-Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"	
+Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
 
 Subsilver2 user: please upload the complete subsilver2 directory.]]></diy-instructions>
 	</action-group>

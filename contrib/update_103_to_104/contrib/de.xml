@@ -71,7 +71,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 
 		<installation>
 			<level>easy</level>
-			<time>600</time>
+			<time>1200</time>
 			<target-version>3.0.5</target-version>
 		</installation>
 
@@ -82,7 +82,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 	</header>
 	<action-group>
 		<copy>
-			<file from="root/language/de/mods/*.*" to="language/de/mods/*.*" />
+			<file from="root/language/de/mods/lang_portal.php" to="language/de/mods/lang_portal.php" />
+			<file from="root/language/de/mods/lang_portal_acp.php" to="language/de/mods/lang_portal_acp.php" />
 		</copy>
 
 		<diy-instructions lang="en-gb">See general install.xml file</diy-instructions>
