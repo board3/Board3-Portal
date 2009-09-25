@@ -3,7 +3,6 @@
 <!-- IF announcements_row.S_FIRST_ROW -->
 {$C_BLOCK_H_L}<dt>{L_LATEST_ANNOUNCEMENTS}</dt>{$C_BLOCK_H_R}
 <!-- ENDIF -->
-<div class="postbody" style="width: 100%">
 	<!-- IF announcements_row.S_NO_TOPICS  -->
 	<div class="post bg2" style="margin-bottom: 0px">
 		<div class="inner"><span class="portal-corners-top-inner"></span>
@@ -25,8 +24,10 @@
 				<!-- ENDIF -->
 				</li>
 			</ul>
-			<div class="content">
-				<br />{announcements_row.TEXT}
+			<div class="postbody" style="width: 100%">
+				<div class="content">
+					<br />{announcements_row.TEXT}
+				</div>
 			</div>
 			<!-- IF announcements_row.S_HAS_ATTACHMENTS -->
 			<dl class="attachbox">
@@ -51,7 +52,6 @@
 		<!-- ENDIF -->
 		<span class="portal-corners-bottom-inner"></span></div>
 	</div>
-</div>
 <!-- IF announcements_row.S_LAST_ROW -->			
 {$C_BLOCK_F_L}{$C_BLOCK_F_R}
 <!-- ENDIF -->

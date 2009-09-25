@@ -1,8 +1,7 @@
 <!--version $Id$ //-->
 {$C_BLOCK_H_L}<dt>{L_LATEST_NEWS}</dt>{$C_BLOCK_H_R}
-	<div class="postbody" style="width: 100%">
 		<!-- BEGIN news_row -->
-		<!-- IF news_row.S_NO_TOPICS  -->				
+		<!-- IF news_row.S_NO_TOPICS  -->
 			<div class="post bg2" style="margin-bottom: 0px">
 				<div class="inner"><span class="portal-corners-top-inner"></span>
 					<span style="text-align: center;"><strong>{L_NO_NEWS}</strong></span>
@@ -19,8 +18,10 @@
 						<ul class="linklist">
 							<li>{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong></li>
 						</ul>
-						<div class="content">
-							<br />{news_row.TEXT}
+						<div class="postbody" style="width: 100%">
+							<div class="content">
+								<br />{news_row.TEXT}
+							</div>
 						</div>
 					<!-- IF news_row.S_HAS_ATTACHMENTS -->
 					<dl class="attachbox">
@@ -50,5 +51,4 @@
 			</div>
 		<!-- ENDIF -->
 		<!-- END news_row -->
-	</div>
 {$C_BLOCK_F_L}{$C_BLOCK_F_R}
