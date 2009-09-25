@@ -19,7 +19,7 @@ $style_select = '';
 $sql = 'SELECT style_id, style_name
 	FROM ' . STYLES_TABLE . '
 	WHERE style_active = 1
-	ORDER BY style_name ASC';
+	ORDER BY LOWER(style_name) ASC';
 $result = $db->sql_query($sql);
 while ($row = $db->sql_fetchrow($result))
 {
