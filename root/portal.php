@@ -250,7 +250,7 @@ $template->set_filenames(array(
 	'body' => '/portal/portal_body.html'
 ));
 
-make_jumpbox(append_sid("{$phpbb_root_path}viewforum . $phpEx"));
+make_jumpbox(append_sid("{$phpbb_root_path}viewforum.$phpEx"));
 
 page_footer();
 
