@@ -116,6 +116,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<file from="root/styles/subsilver2/template/portal/welcome.html" to="styles/subsilver2/template/portal/welcome.html" />
 			<file from="root/styles/subsilver2/template/portal/whois_online.html" to="styles/subsilver2/template/portal/whois_online.html" />
 			<file from="root/styles/subsilver2/template/portal/wordgraph.html" to="styles/subsilver2/template/portal/wordgraph.html" />
+			<file from="root/styles/subsilver2/theme/images/portal/arrowbullet.gif" to="styles/subsilver2/theme/images/portal/arrowbullet.gif" />
 			<file from="root/styles/subsilver2/theme/images/portal/mini_cal_icon_left_arrow.png" to="styles/subsilver2/theme/images/portal/mini_cal_icon_left_arrow.png" />
 			<file from="root/styles/subsilver2/theme/images/portal/mini_cal_icon_right_arrow.png" to="styles/subsilver2/theme/images/portal/mini_cal_icon_right_arrow.png" />
 		</copy>
