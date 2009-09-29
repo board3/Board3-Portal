@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 
 
 $announcement = request_var('announcement', -1);
-$announcement = ($announcement > $portal_config['portal_number_of_announcements'] -1) ? -1 : $announcement;
+$announcement = ($announcement > $portal_config['portal_announcements_length'] -1) ? -1 : $announcement;
 $start = request_var('ap', 0);
 $start = ($start < 0) ? 0 : $start;
 
