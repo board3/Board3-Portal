@@ -352,7 +352,8 @@ class install_update extends module
 
 			case '1.0.4RC1':
 			case '1.0.4RC2':
-			//case '1.0.4RC3':
+			case '1.0.4RC3':
+			//case '1.0.4':
 			break;
 		}
 
@@ -427,7 +428,8 @@ class install_update extends module
 				case '1.0.3':
 				case '1.0.4RC1':
 				case '1.0.4RC2':
-				//case '1.0.4RC3':
+				case '1.0.4RC3':
+				//case '1.0.4':
 				break;
 			}
 
