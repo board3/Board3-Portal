@@ -15,10 +15,12 @@
 				</tr>
 				<tr class="row<!-- IF news_row.S_ROW_COUNT is odd -->1<!-- ELSE -->2<!-- ENDIF -->">
 					<td style="padding:5px 5px 5px 5px;">
-						<span class="gensmall" style="float: left;">{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL}
-						<!-- IF news_row.FORUM_NAME --> &nbsp;&bull;&nbsp; {L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong><!-- ENDIF -->
+						<span class="gensmall" style="float: left;">{L_POSTED} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL} &raquo; {news_row.TIME}</span>
+						<span class="gensmall" style="float: right;">
+						<!-- IF news_row.FORUM_NAME -->
+							{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong>
+						<!-- ENDIF -->
 						</span>
-						<span class="gensmall" style="float: right;">{news_row.TIME}</span>
 						<br /><br />
 						<div class="postbody">
 						{news_row.TEXT}

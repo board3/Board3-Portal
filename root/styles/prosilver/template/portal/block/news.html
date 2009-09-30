@@ -1,6 +1,7 @@
 <!--version $Id$ //-->
 {$C_BLOCK_H_L}<dt>{L_LATEST_NEWS}</dt>{$C_BLOCK_H_R}
-		<!-- BEGIN news_row -->
+<!-- IF $S_POSTBODY_TOP --><div class="postbody" style="width: 100%"><!-- ENDIF -->
+	<!-- BEGIN news_row -->
 		<!-- IF news_row.S_NO_TOPICS  -->
 			<div class="post bg2" style="margin-bottom: 0px">
 				<div class="inner"><span class="portal-corners-top-inner"></span>
@@ -14,15 +15,12 @@
 					<!-- IF news_row.PAGINATION --><strong class="pagination"><span>{news_row.PAGINATION}</span></strong><!-- ENDIF -->
 						<ul class="linklist">
 							<li>{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL} &raquo; {news_row.TIME}</li>
+							<li class="rightside">{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong></li>
 						</ul>
-						<ul class="linklist">
-							<li>{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong></li>
-						</ul>
-						<div class="postbody" style="width: 100%">
+						<!-- IF not $S_POSTBODY_TOP --><div class="postbody" style="width: 100%"><!-- ENDIF -->
 							<div class="content">
 								<br />{news_row.TEXT}
 							</div>
-						</div>
 					<!-- IF news_row.S_HAS_ATTACHMENTS -->
 					<dl class="attachbox">
 					<dt>{L_ATTACHMENTS}</dt>
@@ -47,8 +45,10 @@
 					<!-- ENDIF -->
 					<!-- ENDIF -->
 					<!-- ENDIF -->
+					<!-- IF not $S_POSTBODY_TOP --></div><!-- ENDIF -->
 				<span class="portal-corners-bottom-inner"></span></div>
 			</div>
 		<!-- ENDIF -->
-		<!-- END news_row -->
+	<!-- END news_row -->
+<!-- IF $S_POSTBODY_TOP --></div><!-- ENDIF -->
 {$C_BLOCK_F_L}{$C_BLOCK_F_R}

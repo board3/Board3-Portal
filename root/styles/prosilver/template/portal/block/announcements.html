@@ -3,6 +3,7 @@
 <!-- IF announcements_row.S_FIRST_ROW -->
 {$C_BLOCK_H_L}<dt>{L_LATEST_ANNOUNCEMENTS}</dt>{$C_BLOCK_H_R}
 <!-- ENDIF -->
+<!-- IF $S_POSTBODY_TOP --><div class="postbody" style="width: 100%"><!-- ENDIF -->
 	<!-- IF announcements_row.S_NO_TOPICS  -->
 	<div class="post bg2" style="margin-bottom: 0px">
 		<div class="inner"><span class="portal-corners-top-inner"></span>
@@ -14,21 +15,12 @@
 			<!-- IF announcements_row.PAGINATION --><strong class="pagination"><span>{announcements_row.PAGINATION}</span></strong><!-- ENDIF -->
 			<ul class="linklist">
 				<li>{L_POSTED} {L_POST_BY_AUTHOR}: {announcements_row.POSTER_FULL} &raquo; {announcements_row.TIME}</li>
+				<li class="rightside"><!-- IF announcements_row.FORUM_NAME -->{L_FORUM}: <strong><a href="{announcements_row.U_VIEWFORUM}">{announcements_row.FORUM_NAME}</a></strong><!-- ELSE -->{L_GLOBAL_ANNOUNCEMENT}<!-- ENDIF --></li>
 			</ul>
-			<ul class="linklist">
-				<li>
-				<!-- IF announcements_row.FORUM_NAME -->
-					{L_FORUM}: <strong><a href="{announcements_row.U_VIEWFORUM}">{announcements_row.FORUM_NAME}</a></strong>
-				<!-- ELSE -->
-					 {L_GLOBAL_ANNOUNCEMENT}
-				<!-- ENDIF -->
-				</li>
-			</ul>
-			<div class="postbody" style="width: 100%">
+			<!-- IF not $S_POSTBODY_TOP --><div class="postbody" style="width: 100%"><!-- ENDIF -->
 				<div class="content">
 					<br />{announcements_row.TEXT}
 				</div>
-			</div>
 			<!-- IF announcements_row.S_HAS_ATTACHMENTS -->
 			<dl class="attachbox">
 				<dt>{L_ATTACHMENTS}</dt>
@@ -49,10 +41,12 @@
 				<!-- IF AP_PAGE_NUMBER --><!-- IF AP_PAGINATION --> &bull; {AP_PAGE_NUMBER} &bull; <span>{AP_PAGINATION}</span><!-- ELSE --> &bull; {AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
 				</div>
 			<!-- ENDIF -->
+		<!-- IF not $S_POSTBODY_TOP --></div><!-- ENDIF -->
 		<!-- ENDIF -->
 		<span class="portal-corners-bottom-inner"></span></div>
 	</div>
-<!-- IF announcements_row.S_LAST_ROW -->			
+<!-- IF $S_POSTBODY_TOP --></div><!-- ENDIF -->
+<!-- IF announcements_row.S_LAST_ROW -->
 {$C_BLOCK_F_L}{$C_BLOCK_F_R}
 <!-- ENDIF -->
 <!-- END announcements_row -->

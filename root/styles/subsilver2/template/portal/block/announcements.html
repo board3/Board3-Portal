@@ -19,13 +19,14 @@
 				<tr class="row<!-- IF announcements_row.S_ROW_COUNT is odd -->1<!-- ELSE -->2<!-- ENDIF -->">
 					<td style="padding:5px 5px 5px 5px;">
 						
-						<span class="gensmall" style="float: left;">{L_POSTED} {L_POST_BY_AUTHOR}: {announcements_row.POSTER_FULL}
-							<!-- IF announcements_row.FORUM_NAME --> &nbsp;&bull;&nbsp; {L_FORUM}: <strong><a href="{announcements_row.U_VIEWFORUM}">{announcements_row.FORUM_NAME}</a></strong>
+						<span class="gensmall" style="float: left;">{L_POSTED} {L_POST_BY_AUTHOR}: {announcements_row.POSTER_FULL} &raquo; {announcements_row.TIME}</span>
+						<span class="gensmall" style="float: right;">
+							<!-- IF announcements_row.FORUM_NAME -->
+								{L_FORUM}: <strong><a href="{announcements_row.U_VIEWFORUM}">{announcements_row.FORUM_NAME}</a></strong>
 							<!-- ELSE -->
-								 &nbsp;&bull;&nbsp; {L_GLOBAL_ANNOUNCEMENT}
+								 {L_GLOBAL_ANNOUNCEMENT}
 							<!-- ENDIF -->
 						</span>
-						<span class="gensmall" style="float: right;">{announcements_row.TIME}</span>
 						<br /><br />
 						<div class="postbody">
 						{announcements_row.TEXT}
