@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
 <!-- $Id$ -->
-<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.2.xsd">
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.3.xsd">
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
@@ -103,6 +103,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Fixed bug in recent.php: users without access to all forums did not see the maximum number of topics</change>
 					<change>Missing IN_PHPBB check</change>
 					<change>CleanUp all Files</change>
+					<change>ModX 1.2.3 update</change>
+					<change>And much more... forgot to note it all down ;-)</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Bugfixes, siehe: http://www.board3.de/tracker.php?st=15&amp;vid=10&amp;p=13&amp;u=0&amp;at=0</change>
@@ -115,7 +117,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Versioncheck auf Portal (nur Admins) und ACP --> Portal --> Allgemeine Einstellungen hinzugefügt.</change>
 					<change>Fixed bug in recent.php: Benutzer ohne Zugriff auf alle Foren sah nicht die maximale Anzahl von Themen</change>
 					<change>Vermisse IN_PHPBB check</change>
-					<change>Alle Dateien aufgeräumt</change>
+					<change>ModX 1.2.3 Update</change>
+					<change>Und vieles mehr... vergessen es zu notieren ;-)</change>
 				</changelog>
 			</entry>
 			<entry>

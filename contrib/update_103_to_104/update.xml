@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
 <!-- $Id$ -->
-<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.2.xsd">
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.3.xsd">
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
@@ -231,6 +231,9 @@ if (!defined('IN_PORTAL'))
 
 <!-- show Icons in left/right Blocks? 0=no 1=yes -->
 <!-- DEFINE $S_BLOCK_ICON = 1 -->
+
+<!-- postbody top (default 1 by prosilver) 0=no 1=yes -->
+<!-- DEFINE $S_POSTBODY_TOP = 1 -->
 
 <!-- override the column width settings of the ACP for this style? 0=no 1=yes -->
 <!-- DEFINE $S_COLUMNS_WIDTH_OVERRIDE = 0 -->
