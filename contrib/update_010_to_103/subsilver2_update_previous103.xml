@@ -76,8 +76,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</installation>
 
 		<link-group>
-			<link type="parent" lang="de" href="../install.xml">Installations-Anleitung</link>
-			<link type="parent" lang="en-gb" href="../install.xml">Manual</link>
+			<link type="parent" lang="de" href="../../install.xml">Installations-Anleitung</link>
+			<link type="parent" lang="en-gb" href="../../install.xml">Manual</link>
 		</link-group>	
 	</header>
 	<action-group>
