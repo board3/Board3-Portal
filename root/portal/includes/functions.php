@@ -598,8 +598,14 @@ function format_birthday($date, $format = false)
 			$lang_dates['May'] = $lang_dates['May_short'];
 		}
 		unset($lang_dates['May_short']);
+		
+	// We need to create a UNIX timestamp for date()
+	$day = substr($date, 0, strpos($date, '-'));
+	$month = substr($date, (strpos($date, '-')+1), 2);
+	$year = substr($date, -4);
+	$birthday_time = mktime(0, 0, 0, $month, $day, $year);
 
-	return strtr(@date(str_replace('|', '', $format), $date), $lang_dates);
+	return strtr(@date(str_replace('|', '', $format), $birthday_time), $lang_dates);
 }
 
 // Mini Cal.
