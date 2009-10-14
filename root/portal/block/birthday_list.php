@@ -61,7 +61,7 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 			{
 				$birthday_list .= ' (' . ($now['year'] - $age) . ')';
 			}
-			$birthday_list .= '<br /><br />';
+			$birthday_list .= '<br />';
 		}
 		else
 		{
@@ -70,7 +70,7 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 			{
 				$birthday_ahead_list .= ' (' . ($now['year'] - $age) . ')';
 			}
-			$birthday_ahead_list .= '<br /><br />';
+			$birthday_ahead_list .= '<br />';
 		}
 	}
 	$db->sql_freeresult($result);
