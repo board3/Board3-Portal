@@ -56,21 +56,21 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 	{
 		if (substr($row['user_birthday'], 0, 6) == $today)
 		{
-			$birthday_list .= get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']);
+			$birthday_list .= '<span style="float:left;"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;">' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</span><span style="float: right;">';
 			if ($age = (int) substr($row['user_birthday'], -4))
 			{
 				$birthday_list .= ' (' . ($now['year'] - $age) . ')';
 			}
-			$birthday_list .= '<br />';
+			$birthday_list .= '</span><br style="clear: both" />';
 		}
 		else
 		{
-			$birthday_ahead_list .= '<span title="' . format_birthday($row['user_birthday'], 'd M') . '">' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</span>';
+			$birthday_ahead_list .= '<span style="float:left;"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><span title="' . format_birthday($row['user_birthday'], 'd M') . '">' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</span></span><span style="float: right;">';
 			if ($age = (int) substr($row['user_birthday'], -4))
 			{
 				$birthday_ahead_list .= ' (' . ($now['year'] - $age) . ')';
 			}
-			$birthday_ahead_list .= '<br />';
+			$birthday_ahead_list .= '</span><br style="clear: both" />';
 		}
 	}
 	$db->sql_freeresult($result);
