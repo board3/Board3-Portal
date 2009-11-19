@@ -27,7 +27,7 @@ Enthaltenen Sprachdateien:
 Weitere Sprachen kannst in unseren International Forum finden: http://www.board3.de/viewforum.php?f=13
 </description>
 
-		<author-notes lang="en-gb">i hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
+		<author-notes lang="en-gb">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
 		
 		Devolpers in earlier versions:
 		nickvergessen: http://www.flying-bits.org/
@@ -71,8 +71,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 
 		<installation>
 			<level>easy</level>
-			<time>1200</time>
-			<target-version>3.0.5</target-version>
+			<time>600</time>
+			<target-version>3.0.6</target-version>
 		</installation>
 
 		<link-group>
@@ -179,8 +179,8 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
 		</open>
 		<open src="includes/session.php">
 			<edit>
-				<find><![CDATA[		if (!empty($_GET['style']) && $auth->acl_get('a_styles'))]]></find>
-				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']))]]></action>
+				<find><![CDATA[		if (!empty($_GET['style']) && $auth->acl_get('a_styles') && !defined('ADMIN_START'))]]></find>
+				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START'))]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/overall_header.html">
