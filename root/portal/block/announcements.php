@@ -37,7 +37,7 @@ if (sizeof($fetch_news) == 0)
 else
 {
 	// Count number of posts for announcements archive, considering if permission check is dis- or enabled.
-	if ( $portal_config['portal_announcements_archive'] )
+	if ($portal_config['portal_announcements_archive'])
 	{
 		$permissions = $portal_config['portal_announcements_permissions'];
 		$forum_from = $portal_config['portal_global_announcements_forum'];
@@ -222,7 +222,7 @@ else
 					);
 				}
 			}
-			if ($portal_config['portal_number_of_announcements'] <> 0 && $portal_config['portal_announcements_archive'])
+			if ($portal_config['portal_number_of_announcements'] != 0 && $portal_config['portal_announcements_archive'])
 			{
 				$template->assign_vars(array(
 					'AP_PAGINATION'			=> $pagination,

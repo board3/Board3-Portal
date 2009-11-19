@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 $attach_forums = false;
 $where = '';
 
-if( $portal_config['portal_attachments_forum_ids'] !== '' )
+if($portal_config['portal_attachments_forum_ids'] !== '')
 {
 	$attach_forums_config = ( strpos($portal_config['portal_attachments_forum_ids'], ',') !== false ) ? explode(',', $portal_config['portal_attachments_forum_ids']) : array($portal_config['portal_attachments_forum_ids']);
 	$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
@@ -30,22 +30,22 @@ else
 	$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
 }
 
-if( sizeof($forum_list) )
+if(sizeof($forum_list))
 {
 	foreach($forum_list as $af )
 	{
-		$af = (int) trim($af);
+		$af = (int) $af;
 		$attach_forums = true;
-		$where .= 't.forum_id = \''.$af.'\' OR ';
+		$where .= 't.forum_id = ' . $af . ' OR ';
 	}
 }
 
-if( $where != '' )
+if($where != '')
 {
 	$where = 'AND (' . substr($where, 0, -4) . ')';
 }
 
-if( $attach_forums === true )
+if($attach_forums === true)
 {
 	// Just grab all attachment info from database
 	$sql = 'SELECT
