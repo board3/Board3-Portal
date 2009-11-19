@@ -24,7 +24,7 @@ $view = request_var('view', '');
 $update = request_var('update', false);
 $poll_view = request_var('polls', '');
 
-$poll_view_ar = ( strpos(urldecode($poll_view), ',') !== FALSE ) ? explode(',', urldecode($poll_view)) : (($poll_view != '') ? array($poll_view) : array());
+$poll_view_ar = ( strpos($poll_view, ',') !== FALSE ) ? explode(',', $poll_view) : (($poll_view != '') ? array($poll_view) : array());
 
 if ($update && $portal_config['portal_poll_allow_vote'])
 {

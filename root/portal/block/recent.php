@@ -26,7 +26,7 @@ if ($portal_config['portal_exclude_forums'])
 	{
 		if ($id > 0)
 		{
-			$sql_where .= ' AND forum_id <> ' . trim($id);
+			$sql_where .= ' AND forum_id <> ' . (int) $id;
 		}
 	}
 }
