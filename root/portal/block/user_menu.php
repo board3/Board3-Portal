@@ -59,22 +59,14 @@ if ($user->data['is_registered'])
 //
 
 
-// Get user...
+// Get user avatar and rank
 $user_id = $user->data['user_id'];
 $username = $user->data['username'];
-
-$sql = 'SELECT *
-	FROM ' . USERS_TABLE . '
-	WHERE ' . (($username) ? "username_clean = '" . $db->sql_escape(utf8_clean_string($username)) . "'" : "user_id = $user_id");
-$result = $db->sql_query($sql);
-$member = $db->sql_fetchrow($result);
-$db->sql_freeresult($result);
-$avatar_img = get_user_avatar($member['user_avatar'], $member['user_avatar_type'], $member['user_avatar_width'], $member['user_avatar_height']);
+$colour = $user->data['user_colour'];
+$avatar_img = get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']);
 $rank_title = $rank_img = '';
-get_user_rank($member['user_rank'], $member['user_posts'], $rank_title, $rank_img, $rank_img_src);
-$username = $member['username'];
-$user_id = (int) $member['user_id'];
-$colour = $member['user_colour'];
+get_user_rank($user->data['user_rank'], $user->data['user_posts'], $rank_title, $rank_img, $rank_img_src);
+
 
 // Assign specific vars
 $template->assign_vars(array(
