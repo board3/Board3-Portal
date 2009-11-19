@@ -226,19 +226,13 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	$sql_array['SELECT'] .= ', tp.topic_posted';
 	$sql = $db->sql_build_query('SELECT', $sql_array);
 
-	if ($number_of_posts <> 0)
+	if ($number_of_posts != 0)
 	{
 		$result = $db->sql_query_limit($sql, $number_of_posts, $start);
 	}
 	else
 	{
 		$result = $db->sql_query($sql);
-	}
-
-	// Instantiate BBCode if need be
-	if ($bbcode_bitfield !== '')
-	{
-		$bbcode = new bbcode(base64_encode($bbcode_bitfield));
 	}
 
 	$i = 0;
@@ -269,24 +263,21 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 
 		if (($text_length != 0) && (strlen($len_check) > $text_length))
 		{
-			$message = censor_text(get_sub_taged_string(str_replace("\n", '<br/> ', $row['post_text']), $row['bbcode_uid'], $maxlen));
+			$message = get_sub_taged_string(str_replace("\n", '<br/> ', $row['post_text']), $row['bbcode_uid'], $maxlen);
 			$posts[$i]['striped'] = true;
 		}
 		else 
 		{
-			$message = censor_text( str_replace("\n", '<br/> ', $row['post_text']) );
+			$message = str_replace("\n", '<br/> ', $row['post_text']);
 		}
-
-		// Second parse bbcode here
-		if ($row['bbcode_bitfield'])
-		{
-			$bbcode->bbcode_second_pass($message, $row['bbcode_uid'], $row['bbcode_bitfield']);
-		}
+		
+		$row['bbcode_options'] = (($row['enable_bbcode']) ? OPTION_FLAG_BBCODE : 0) + (($row['enable_smilies']) ? OPTION_FLAG_SMILIES : 0) + (($row['enable_magic_url']) ? OPTION_FLAG_LINKS : 0);
+		$message = generate_text_for_display($message, $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
+		
 		if (!empty($attachments))
 		{
 			parse_attachments($row['forum_id'], $message, $attachments, $update_count);
 		}
-		$message = smiley_text($message); // Always process smilies after parsing bbcodes
 
 		if( $global_f < 1 )
 		{
