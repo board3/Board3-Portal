@@ -77,7 +77,7 @@ function get_dbms_infos()
 		break;
 
 		default:
-			trigger_error('Sorry, unsupportet Databases found.');
+			trigger_error('Sorry, unsupported Databases found.');
 		break;
 	}
 

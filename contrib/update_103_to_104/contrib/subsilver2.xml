@@ -6,10 +6,10 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en-gb">board3 Portal - subsilver2 style</title>
+		<title lang="en">board3 Portal - subsilver2 style</title>
 		<title lang="de">board3 Portal - subsilver2 style</title>
 
-		<description lang="en-gb">Adds a portal to your forum.
+		<description lang="en">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
 
 Included language files:
@@ -27,7 +27,7 @@ Enthaltenen Sprachdateien:
 Weitere Sprachen kannst in unseren International Forum finden: http://www.board3.de/viewforum.php?f=13
 </description>
 
-		<author-notes lang="en-gb">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
+		<author-notes lang="en">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
 		
 		Devolpers in earlier versions:
 		nickvergessen: http://www.flying-bits.org/
@@ -77,7 +77,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 
 		<link-group>
 			<link type="parent" lang="de" href="../../../install.xml">Installations-Anleitung</link>
-			<link type="parent" lang="en-gb" href="../../../install.xml">Manual</link>
+			<link type="parent" lang="en" href="../../../install.xml">Manual</link>
 		</link-group>	
 	</header>
 	<action-group>
@@ -123,7 +123,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		<open src="styles/prosilver/template/portal/_block_config.html">
 			<edit>
 				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
-				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<comment lang="en"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
 				<find><![CDATA[<!-- DEFINE $LR_BLOCK_H_R = '</span></th></tr><tr class="row1"><td style="padding: 0px;">' -->]]></find>
 				<inline-edit>
 					<inline-find><![CDATA[<tr class="row1"><td style="padding: 0px;">]]></inline-find>
@@ -132,13 +132,13 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			</edit>
 			<edit>
 				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
-				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<comment lang="en"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
 				<find><![CDATA[<!-- DEFINE $LR_BLOCK_F_R = '</td></tr></table><br />' -->]]></find>
 				<action type="replace-with"><![CDATA[<!-- DEFINE $LR_BLOCK_F_R = '<br />' -->]]></action>
 			</edit>
 			<edit>
 				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
-				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<comment lang="en"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
 				<find><![CDATA[<!-- DEFINE $C_BLOCK_H_R = '</span></th></tr><tr class="row1"><td style="padding: 0px;">' -->]]></find>
 				<inline-edit>
 					<inline-find><![CDATA[<tr class="row1"><td style="padding: 0px;">]]></inline-find>
@@ -147,13 +147,13 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			</edit>
 			<edit>
 				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
-				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<comment lang="en"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
 				<find><![CDATA[<!-- DEFINE $C_BLOCK_F_R = '</td></tr></table><br />' -->]]></find>
 				<action type="replace-with"><![CDATA[<!-- DEFINE $C_BLOCK_F_R = '<br />' -->]]></action>
 			</edit>
 			<edit>
 				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
-				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<comment lang="en"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
 				<find><![CDATA[<!-- Images-URL //-->
 <!-- DEFINE $WHOS_IMAGES = '/images/whosonline.gif' -->
 <!-- DEFINE $NO_AVATAR_IMG = '/images/no_avatar.gif' -->]]></find>
@@ -172,7 +172,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 <!-- DEFINE $PORTAL_RIGHT_COLUMN_OVERRIDE = '200' -->]]></action>
 			</edit>
 		</open>
-		<diy-instructions lang="en-gb">See general install.xml file</diy-instructions>
+		<diy-instructions lang="en">See general install.xml file</diy-instructions>
 		<diy-instructions lang="de">Siehe install.xml</diy-instructions>
 	</action-group>
 </mod>

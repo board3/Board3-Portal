@@ -6,10 +6,10 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en-gb">board3 Portal</title>
+		<title lang="en">board3 Portal</title>
 		<title lang="de">board3 Portal</title>
 
-		<description lang="en-gb">Adds a portal to your forum.
+		<description lang="en">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
 
 Included language files:
@@ -27,7 +27,7 @@ Enthaltenen Sprachdateien:
 Weitere Sprachen kannst in unseren International Forum finden: http://www.board3.de/viewforum.php?f=13
 </description>
 
-		<author-notes lang="en-gb">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
+		<author-notes lang="en">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
 		
 		Devolpers in earlier versions:
 		nickvergessen: http://www.flying-bits.org/
@@ -77,10 +77,10 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 
 		<link-group>
 			<link type="parent" lang="de" href="../../install.xml">Installations-Anleitung</link>
-			<link type="parent" lang="en-gb" href="../../install.xml">Manual</link>
-			<link type="language" lang="en-gb" href="contrib/de.xml">Update instructions for German Language-set</link>
+			<link type="parent" lang="en" href="../../install.xml">Manual</link>
+			<link type="language" lang="en" href="contrib/de.xml">Update instructions for German Language-set</link>
 			<link type="language" lang="de" href="contrib/de.xml">Update-Anleitung für das deutsche Sprachpaket</link>
-			<link type="template" lang="en-gb" href="contrib/subsilver2.xml">Update instructions for subsilver2 Style</link>
+			<link type="template" lang="en" href="contrib/subsilver2.xml">Update instructions for subsilver2 Style</link>
 			<link type="template" lang="de" href="contrib/subsilver2.xml">Update-Anleitung für das Style subsilver2</link>
 		</link-group>
 	</header>
@@ -165,7 +165,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		<open src="adm/index.php">
 			<edit>
 				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
-				<comment lang="en-gb"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
+				<comment lang="en"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
 				<find><![CDATA[require($phpbb_root_path . 'portal/includes/lang_adm_additional_blocks.' . $phpEx);]]></find>
 				<action type="replace-with"><![CDATA[]]></action>
 			</edit>
@@ -186,7 +186,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		<open src="portal/block/additional_blocks.php">
 			<edit>
 				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
-				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<comment lang="en"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
 				<find><![CDATA[if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -205,7 +205,7 @@ if (!defined('IN_PORTAL'))
 		<open src="styles/prosilver/template/portal/_block_config.html">
 			<edit>
 				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
-				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<comment lang="en"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
 				<find><![CDATA[<!-- DEFINE $C_BLOCK_H_L = '<div class="forabg"><div class="inner"><span class="corners-top"><span></span></span><ul class="topiclist"><li class="header">' -->]]></find>
 				<inline-edit>
 					<inline-find><![CDATA[<ul class="topiclist"><li class="header">]]></inline-find>
@@ -214,7 +214,7 @@ if (!defined('IN_PORTAL'))
 			</edit>
 			<edit>
 				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
-				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<comment lang="en"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
 				<find><![CDATA[<!-- DEFINE $C_BLOCK_H_R = '</li></ul>' -->]]></find>
 				<inline-edit>
 					<inline-find><![CDATA[</li></ul>]]></inline-find>
@@ -223,7 +223,7 @@ if (!defined('IN_PORTAL'))
 			</edit>
 			<edit>
 				<comment lang="de"><![CDATA[Wer die Datei komplett hochladen (überschreiben) möchte, kann diese Änderungen ignorieren. Bereits gemachte Änderungen in der Datei auf dem Webspace gehen dabei allerdings verloren.]]></comment>
-				<comment lang="en-gb"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
+				<comment lang="en"><![CDATA[If you want to upload (overwrite) this file on your webspace, you can ignore this changes. In this case, your changes you've already done in this file, will get lost.]]></comment>
 				<find><![CDATA[<!-- Images-URL //-->
 <!-- DEFINE $NO_AVATAR_IMG = '/images/no_avatar.gif' -->]]></find>
 				<action type="after-add"><![CDATA[<!-- Vertical distance between left/right and center Blocks -->
@@ -253,7 +253,7 @@ Aktualisiere deine Styles:
 Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
 
 Subsilver2 User: bitte das komplette Verzeichnis subsilver2 mit den neuen Dateien überschreiben.]]></diy-instructions>
-		<diy-instructions lang="en-gb"><![CDATA[Browse to install/index.php and run the installer
+		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer
 
 Refresh your Styles:
     "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"

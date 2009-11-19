@@ -6,10 +6,10 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en-gb">board3 Portal - Update from version 0.1.0</title>
+		<title lang="en">board3 Portal - Update from version 0.1.0</title>
 		<title lang="de">board3 Portal - Update von Version 0.1.0</title>
 
-		<description lang="en-gb">Adds a portal to your forum.
+		<description lang="en">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
 
 Included language files:
@@ -27,7 +27,7 @@ Enthaltenen Sprachdateien:
 Weitere Sprachen kannst in unseren International Forum finden: http://www.board3.de/viewforum.php?f=13
 </description>
 
-		<author-notes lang="en-gb">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
+		<author-notes lang="en">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
 		
 		Devolpers in earlier versions:
 		nickvergessen: http://www.flying-bits.org/
@@ -76,35 +76,35 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</installation>
 
 		<link-group>
-			<link type="dependency" lang="en-gb" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
+			<link type="dependency" lang="en" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
 			<link type="dependency" lang="de" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal unterstützt MOD Version Check. Um dieses Feature zu nutzen, muss dieser Mod installiert sein.</link>
-			<link type="contrib" lang="en-gb" href="update_board3portal_102.xml">Update instructions for Board3 Portal Version 1.0.2</link>
+			<link type="contrib" lang="en" href="update_board3portal_102.xml">Update instructions for Board3 Portal Version 1.0.2</link>
 			<link type="contrib" lang="de" href="update_board3portal_102.xml">Updateanleitung für Board3 Portal Version 1.0.2</link>
-			<link type="contrib" lang="en-gb" href="update_board3portal_101.xml">Update instructions for Board3 Portal Version 1.0.1</link>
+			<link type="contrib" lang="en" href="update_board3portal_101.xml">Update instructions for Board3 Portal Version 1.0.1</link>
 			<link type="contrib" lang="de" href="update_board3portal_101.xml">Updateanleitung für Board3 Portal Version 1.0.1</link>
-			<link type="contrib" lang="en-gb" href="update_board3portal_100.xml">Update instructions for Board3 Portal Version 1.0.0</link>
+			<link type="contrib" lang="en" href="update_board3portal_100.xml">Update instructions for Board3 Portal Version 1.0.0</link>
 			<link type="contrib" lang="de" href="update_board3portal_100.xml">Updateanleitung für Board3 Portal Version 1.0.0</link>
-			<link type="contrib" lang="en-gb" href="update_board3portal_100rc3.xml">Update instructions for Board3 Portal Version 1.0.0RC3</link>
+			<link type="contrib" lang="en" href="update_board3portal_100rc3.xml">Update instructions for Board3 Portal Version 1.0.0RC3</link>
 			<link type="contrib" lang="de" href="update_board3portal_100rc3.xml">Updateanleitung für Board3 Portal Version 1.0.0RC3</link>
-			<link type="contrib" lang="en-gb" href="update_board3portal_100rc2.xml">Update instructions for Board3 Portal Version 1.0.0RC2</link>
+			<link type="contrib" lang="en" href="update_board3portal_100rc2.xml">Update instructions for Board3 Portal Version 1.0.0RC2</link>
 			<link type="contrib" lang="de" href="update_board3portal_100rc2.xml">Updateanleitung für Board3 Portal Version 1.0.0RC2</link>
-			<link type="contrib" lang="en-gb" href="update_board3portal_100rc1.xml">Update instructions for Board3 Portal Version 1.0.0RC1</link>
+			<link type="contrib" lang="en" href="update_board3portal_100rc1.xml">Update instructions for Board3 Portal Version 1.0.0RC1</link>
 			<link type="contrib" lang="de" href="update_board3portal_100rc1.xml">Updateanleitung für Board3 Portal Version 1.0.0RC1</link>
-			<link type="contrib" lang="en-gb" href="update_board3portal_021.xml">Update instructions for Board3 Portal Version 0.2.1</link>
+			<link type="contrib" lang="en" href="update_board3portal_021.xml">Update instructions for Board3 Portal Version 0.2.1</link>
 			<link type="contrib" lang="de" href="update_board3portal_021.xml">Updateanleitung für Board3 Portal Version 0.2.1</link>
-			<link type="contrib" lang="en-gb" href="update_board3portal_020.xml">Update instructions for Board3 Portal Version 0.2.0</link>
+			<link type="contrib" lang="en" href="update_board3portal_020.xml">Update instructions for Board3 Portal Version 0.2.0</link>
 			<link type="contrib" lang="de" href="update_board3portal_020.xml">Updateanleitung für Board3 Portal Version 0.2.0</link> 
-			<link type="contrib" lang="en-gb" href="update_board3portal_010.xml">Update instructions for Board3 Portal Version 0.1.0</link>
+			<link type="contrib" lang="en" href="update_board3portal_010.xml">Update instructions for Board3 Portal Version 0.1.0</link>
 			<link type="contrib" lang="de" href="update_board3portal_010.xml">Updateanleitung für Board3 Portal Version 0.1.0</link>
-			<link type="contrib" lang="en-gb" href="../update_phpbb3portal_122_to_board3portal_104.xml">Update instructions for phpBB3 Portal Version 1.2.2</link>
+			<link type="contrib" lang="en" href="../update_phpbb3portal_122_to_board3portal_104.xml">Update instructions for phpBB3 Portal Version 1.2.2</link>
 			<link type="contrib" lang="de" href="../update_phpbb3portal_122_to_board3portal_104.xml">Updateanleitung für phpBB3 Portal Version 1.2.2</link>
-			<link type="contrib" lang="en-gb" href="update_phpbb3portal_110b.xml">Update instructions for phpBB3 Portal Version 1.1.0b</link>
+			<link type="contrib" lang="en" href="update_phpbb3portal_110b.xml">Update instructions for phpBB3 Portal Version 1.1.0b</link>
 			<link type="contrib" lang="de" href="update_phpbb3portal_110b.xml">Updateanleitung für phpBB3 Portal Version 1.1.0b</link>
-			<link type="language" lang="en-gb" href="../de.xml">Manual for German Language-set</link>
+			<link type="language" lang="en" href="../de.xml">Manual for German Language-set</link>
 			<link type="language" lang="de" href="../de.xml">Anleitung für das deutsche Sprachpaket</link>
-			<link type="template" lang="en-gb" href="../subsilver2.xml">Manual for subsilver2 Style</link>
+			<link type="template" lang="en" href="../subsilver2.xml">Manual for subsilver2 Style</link>
 			<link type="template" lang="de" href="../subsilver2.xml">Anleitung für das Style subsilver2</link>
-			<link type="template" lang="en-gb" href="subsilver2_update_previous103.xml">Update instructions for subsilver2 Style installations previous Board3 Portal V.1.0.3</link>
+			<link type="template" lang="en" href="subsilver2_update_previous103.xml">Update instructions for subsilver2 Style installations previous Board3 Portal V.1.0.3</link>
 			<link type="template" lang="de" href="subsilver2_update_previous103.xml">Update Anleitung für subsilver2 Installationen vor Board3 Portal V.1.0.3</link>			
 			<link type="parent" lang="de" href="../../install.xml">Installations-Anleitung</link>
 			<link type="parent" lang="en" href="../../install.xml">Install instructions</link>
@@ -113,7 +113,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2009-03-29</date>
 				<rev-version>1.0.3</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en">
 					<change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=11</change>
 					<change>New option to disable the whole portal via ACP (links will be hidden).</change>
 					<change>Easier cutomizable template system with variables for block header and footer (_block_config.html) - change all headers and footers in one file</change>
@@ -137,7 +137,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-09-27</date>
 				<rev-version>1.0.2</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en">
 					<change>Release of version 1.0.2. (Cleanup)</change>
 					<change>ModX 1.2.1</change>
 					<change>Some tiny fixes</change>
@@ -151,7 +151,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-09-09</date>
 				<rev-version>1.0.1</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en">
 					<change>Release of version 1.0.1.</change>
 				</changelog>
 				<changelog lang="de">
@@ -161,7 +161,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-09-08</date>
 				<rev-version>1.0.0</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en">
 					<change>Release of version 1.</change>
 				</changelog>
 				<changelog lang="de">
@@ -171,7 +171,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-08-31</date>
 				<rev-version>1.0.0RC3</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en">
 					<change>Added switch to choose if "views" and "replies" should be diplayed in extra colums. To solve problems of distroyed layouts in compact view of news and announcements. e.g. with thin styles.</change>
 					<change>subsilver2 style rework</change>
 					<change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=9</change>
@@ -185,7 +185,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-08-20</date>
 				<rev-version>1.0.0RC2</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en">
 					<change>Added new style / own CSS for easier style adaption - provided by Graphic Corner / Pfoti: www.graphic-corner.ch</change>
 					<change>Normal and inline attachments are displayed properly now in news / announcements text view. (Thanks to connect for the inline attachments solution)</change>
 					<change>Rework of the compact view of news / announcements. Topic folders and icons are now displayed. Complete style rework.</change>
@@ -213,7 +213,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>		
 				<date>2008-05-03</date>
 				<rev-version>1.0.0RC1</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en">
 					<change>Many bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
 					<change>Adaptions to phpBB 3.0.1</change>
 					<change>The link block can be edited in the ACP: add, delete links and order position</change>
@@ -245,7 +245,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-02-03</date>
 				<rev-version>0.2.1</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en">
 					<change>Fixed a news/announcements permissions bug</change>
 					<change>Fixed a bug when no news posts were viewable due to account permissions</change>
 					<change>Fixed a bug in announcements/news/polls due to shadow topics left after a topic is moved</change>
@@ -260,7 +260,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
  			<entry>
 				<date>2008-02-03</date>
 				<rev-version>0.2.0</rev-version>
-				<changelog lang="en-GB">
+				<changelog lang="en">
 					<change>added subsilver2 templates (valid XHTML 1.0 Strict)</change>
 					<change>added upcoming birthdays, configurable in ACP / thanks to Kendoo</change>
 					<change>complete rewrite of the poll system - checking user permissions, multible polls and more</change>
@@ -282,7 +282,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<entry>
 				<date>2008-01-15</date>
 				<rev-version>0.1.0</rev-version>	
-				<changelog lang="en-GB">
+				<changelog lang="en">
 					<change>Changes from "phpBB3 Portal 1.1.0Beta" to "board3 Portal - based on phpBB3 Portal Version 1.0.0":</change>
 					<change>completet all missing ACP Control for several boxes</change>
 					<change>valid XHTML 1.0 Strict template</change>
@@ -391,7 +391,7 @@ Aktualisiere deine Styles:
 Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
 
 Subsilver2 User: bitte das komplette Verzeichnis subsilver2 mit den neuen Dateien überschreiben.]]></diy-instructions>
-		<diy-instructions lang="en-gb"><![CDATA[Browse to install/ and run the installer
+		<diy-instructions lang="en"><![CDATA[Browse to install/ and run the installer
 
 Refresh your Styles:
     "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"

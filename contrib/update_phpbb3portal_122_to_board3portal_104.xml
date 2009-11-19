@@ -6,10 +6,10 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en-gb">board3 Portal - Update from phpbb3portal 1.2.2</title>
+		<title lang="en">board3 Portal - Update from phpbb3portal 1.2.2</title>
 		<title lang="de">board3 Portal - Update von phpbb3portal 1.2.2</title>
 
-		<description lang="en-gb">Adds a portal to your forum.
+		<description lang="en">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
 
 Included language files:
@@ -27,7 +27,7 @@ Enthaltenen Sprachdateien:
 Weitere Sprachen kannst in unseren International Forum finden: http://www.board3.de/viewforum.php?f=13
 </description>
 
-		<author-notes lang="en-gb">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
+		<author-notes lang="en">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
 		
 		Devolpers in earlier versions:
 		nickvergessen: http://www.flying-bits.org/
@@ -78,9 +78,9 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		<link-group>
 			<link type="parent" lang="de" href="../install.xml">Installations-Anleitung</link>
 			<link type="parent" lang="en" href="../install.xml">Install instructions</link>
-			<link type="language" lang="en-gb" href="de.xml">Manual for German Language-set</link>
+			<link type="language" lang="en" href="de.xml">Manual for German Language-set</link>
 			<link type="language" lang="de" href="de.xml">Anleitung für das deutsche Sprachpaket</link>
-			<link type="template" lang="en-gb" href="subsilver2.xml">Manual for subsilver2 Style</link>
+			<link type="template" lang="en" href="subsilver2.xml">Manual for subsilver2 Style</link>
 			<link type="template" lang="de" href="subsilver2.xml">Anleitung für das Style subsilver2</link>
 		</link-group>
 	</header>
@@ -128,7 +128,7 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
 		<open src="adm/index.php">
 			<edit>
 				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
-				<comment lang="en-gb"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
+				<comment lang="en"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
 				<find><![CDATA[$user->add_lang('acp/portal');]]></find>
 				<action type="replace-with"><![CDATA[]]></action>
 			</edit>
@@ -142,7 +142,7 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
 		<open src="includes/functions.php">
 			<edit>
 				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
-				<comment lang="en-gb"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
+				<comment lang="en"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
 				<find><![CDATA[	//-- [+] MOD: phpBB3 Portal ---------------------------------------------
 	//-- add
 	//
@@ -162,7 +162,7 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
 			</edit>
 			<edit>
 				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
-				<comment lang="en-gb"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
+				<comment lang="en"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
 				<find><![CDATA[		//-- [+] MOD: phpBB3 Portal ---------------------------------------------
 		//-- add
 		//
@@ -206,7 +206,7 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
 			</edit>
 			<edit>
 				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
-				<comment lang="en-gb"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
+				<comment lang="en"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
 				<find><![CDATA[<!-- IF S_PORTAL_COPY --><br />{S_PORTAL_COPY}<!-- ENDIF -->]]></find>
 				<action type="replace-with"><![CDATA[]]></action>
 			</edit>
@@ -240,7 +240,7 @@ Aktualisiere deine Styles:
 Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
 
 Subsilver2 User: bitte das komplette Verzeichnis subsilver2 mit den neuen Dateien überschreiben.]]></diy-instructions>
-		<diy-instructions lang="en-gb"><![CDATA[Browse to install/index.php and run the installer
+		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer
 
 Refresh your Styles:
     "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
