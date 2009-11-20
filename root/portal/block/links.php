@@ -15,12 +15,12 @@ if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
    exit;
 }
 
-$links = ( strlen($portal_config['portal_links_array']) > 0 ) ? unserialize($portal_config['portal_links_array']) : array();
+$links = (strlen($portal_config['portal_links_array']) > 0) ? unserialize($portal_config['portal_links_array']) : array();
 
-ksort( $links );
-reset( $links );
+ksort($links);
+reset($links);
 
-foreach( $links as $link_id => $link_data )
+foreach($links as $link_id => $link_data)
 {
 	$template->assign_block_vars('link', array(
 		'URL' => $link_data['url'],

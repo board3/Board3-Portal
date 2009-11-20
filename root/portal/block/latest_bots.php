@@ -35,7 +35,7 @@ while ($row = $db->sql_fetchrow($result))
 	{
 		$template->assign_var('S_DISPLAY_LAST_BOTS', true);
 
-		if( $row['user_lastvisit'] > 0 )
+		if($row['user_lastvisit'] > 0)
 		{
 			$template->assign_block_vars('last_visited_bots', array(
 				'BOT_NAME'			=> get_username_string('full', '', $row['username'], $row['user_colour']),

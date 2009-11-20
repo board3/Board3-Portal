@@ -24,7 +24,7 @@ $sql = 'SELECT user_id, username, user_posts, user_colour
 	ORDER BY user_posts DESC';
 $result = $db->sql_query_limit($sql, $portal_config['portal_max_most_poster']);
 
-while( ($row = $db->sql_fetchrow($result)) && ($row['username']) )
+while(($row = $db->sql_fetchrow($result)) && ($row['username']))
 {
 	$template->assign_block_vars('top_poster', array(
 		'S_SEARCH_ACTION'	=> append_sid("{$phpbb_root_path}search.$phpEx", 'author_id=' . $row['user_id'] . '&amp;sr=posts'),

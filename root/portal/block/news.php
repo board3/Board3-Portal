@@ -37,31 +37,33 @@ if (sizeof($fetch_news) == 0)
 else
 {
 	// Count number of posts for news archive, considering if permission check is dis- or enabled.
-	if ( $portal_config['portal_news_archive'] )
+	if ($portal_config['portal_news_archive'])
 	{
 		$permissions = $portal_config['portal_news_permissions'];
 		$forum_from = $portal_config['portal_news_forum'];
 
-		$forum_from = ( strpos($forum_from, ',') !== false ) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
+		$forum_from = (strpos($forum_from, ',') !== false) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 
 		$str_where = '';
 
-		if( $permissions == true )
+		if($permissions == true)
 		{
 			$disallow_access = array_unique(array_keys($auth->acl_getf('!f_read', true)));
-		} else {
+		}
+		else
+		{
 			$disallow_access = array();
 		}
 
-		if( sizeof($forum_from) )
+		if(sizeof($forum_from))
 		{
 			$disallow_access = array_diff($forum_from, $disallow_access);
-			if( !sizeof($disallow_access) )
+			if(!sizeof($disallow_access))
 			{
 				return array();
 			}
 
-			foreach( $disallow_access as $acc_id)
+			foreach($disallow_access as $acc_id)
 			{
 				$acc_id = (int) $acc_id;
 				$str_where .= "forum_id = $acc_id OR ";
@@ -69,16 +71,16 @@ else
 		}
 		else
 		{
-			foreach( $disallow_access as $acc_id )
+			foreach($disallow_access as $acc_id)
 			{
 				$acc_id = (int) $acc_id;
 				$str_where .= "forum_id <> $acc_id AND ";
 			}
 		}
 
-		$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
+		$str_where = (strlen($str_where) > 0) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
 
-		$topic_type = ($portal_config['portal_show_all_news']) ? '( topic_type <> ' . POST_ANNOUNCE . ' ) AND ( topic_type <> ' . POST_GLOBAL . ')' : 'topic_type = ' . POST_NORMAL;
+		$topic_type = ($portal_config['portal_show_all_news']) ? '(topic_type <> ' . POST_ANNOUNCE . ') AND (topic_type <> ' . POST_GLOBAL . ')' : 'topic_type = ' . POST_NORMAL;
 
 		$sql = 'SELECT COUNT(topic_id) AS num_topics
 			FROM ' . TOPICS_TABLE . '
@@ -97,7 +99,7 @@ else
 		$count = $fetch_news['topic_count'];
 		for ($i = 0; $i < $count; $i++)
 		{
-			if( isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true )
+			if(isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true)
 			{
 				$open_bracket = '[ ';
 				$close_bracket = ' ]';
@@ -117,7 +119,7 @@ else
 			
 			$read_full_url = (isset($_GET['np'])) ? 'np='. $start . '&amp;news=' . $i . '#n' . $i : 'news=' . $i . '#n' . $i;
 			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-			if ( $portal_config['portal_news_archive'] )
+			if ($portal_config['portal_news_archive'])
 			{
 				$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_news, $portal_config['portal_number_of_news'], $start, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news');
 			}
@@ -164,7 +166,7 @@ else
 
 			$template->assign_block_vars('news_row', array(
 				'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
-				'FORUM_NAME'			=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '',
+				'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 				'TITLE'					=> $fetch_news[$i]['topic_title'],
 				'POSTER'				=> $fetch_news[$i]['username'],
 				'POSTER_FULL'			=> $fetch_news[$i]['username_full'],
@@ -199,7 +201,7 @@ else
 				'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 			));
 
-			if( !empty($fetch_news[$i]['attachments']) )
+			if(!empty($fetch_news[$i]['attachments']))
 			{
 				foreach ($fetch_news[$i]['attachments'] as $attachment)
 				{
@@ -233,14 +235,14 @@ else
 				
 		$read_full_url = (isset($_GET['np'])) ? append_sid("{$phpbb_root_path}portal.$phpEx", "np=$start#n$i") : append_sid("{$phpbb_root_path}portal.$phpEx#n$i");
 		$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-		if ( $portal_config['portal_news_archive'] )
+		if ($portal_config['portal_news_archive'])
 		{
 			$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_news, $portal_config['portal_number_of_news'], $start, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news');
 		}
 
 		$template->assign_block_vars('news_row', array(
 			'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
-			'FORUM_NAME'		=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '',
+			'FORUM_NAME'		=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 			'TITLE'				=> $fetch_news[$i]['topic_title'],
 			'POSTER'			=> $fetch_news[$i]['username'],
 			'POSTER_FULL'		=> $fetch_news[$i]['username_full'],
@@ -263,7 +265,7 @@ else
 			'S_HAS_ATTACHMENTS'	=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 		));
 
-		if( !empty($fetch_news[$i]['attachments']) )
+		if(!empty($fetch_news[$i]['attachments']))
 		{
 			foreach ($fetch_news[$i]['attachments'] as $attachment)
 			{
@@ -285,7 +287,7 @@ else
 }
 
 $topic_icons = false;
-if( !empty($fetch_news['topic_icons']) )
+if(!empty($fetch_news['topic_icons']))
 {
 	$topic_icons = true;
 }
@@ -294,10 +296,10 @@ $template->assign_vars(array(
 	'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 	'READ_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
 	'GOTO_PAGE_IMG'				=> $user->img('icon_post_target', 'GOTO_PAGE'),
-	'S_NEWEST_OR_FIRST'			=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
-	'POSTED_BY_TEXT'			=> ( $portal_config['portal_news_show_last'] ) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
+	'S_NEWEST_OR_FIRST'			=> ($portal_config['portal_news_show_last']) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
+	'POSTED_BY_TEXT'			=> ($portal_config['portal_news_show_last']) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
 	'S_DISPLAY_NEWS'			=> true,
-	'S_DISPLAY_NEWS_RVS'		=> ( $portal_config['portal_show_news_replies_views'] ) ? true : false,
+	'S_DISPLAY_NEWS_RVS'		=> ($portal_config['portal_show_news_replies_views']) ? true : false,
 	'S_TOPIC_ICONS'				=> $topic_icons,
 ));
 

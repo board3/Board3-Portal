@@ -71,12 +71,12 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 
 	$posts = array();
 	$post_time = ($time == 0) ? '' : 'AND t.topic_time > ' . (time() - $time * 86400);
-	$forum_from = ( strpos($forum_from, ',') !== FALSE ) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
+	$forum_from = (strpos($forum_from, ',') !== FALSE) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 	$str_where = '';
 	$topic_icons = array(0);
 	$have_icons = 0;
 
-	if( $permissions == TRUE )
+	if($permissions == TRUE)
 	{
 		$disallow_access = array_unique(array_keys($auth->acl_getf('!f_read', true)));
 	} 
@@ -87,19 +87,19 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 
 	$global_f = 0;
 
-	if( sizeof($forum_from) )
+	if(sizeof($forum_from))
 	{
 		$disallow_access = array_diff($forum_from, $disallow_access);
-		if( !sizeof($disallow_access) )
+		if(!sizeof($disallow_access))
 		{
 			return array();
 		}
 
-		foreach( $disallow_access as $acc_id)
+		foreach($disallow_access as $acc_id)
 		{
 			$acc_id = (int) $acc_id;
 			$str_where .= "t.forum_id = $acc_id OR ";
-			if( $type == 'announcements' && $global_f < 1 && $acc_id > 0 )
+			if($type == 'announcements' && $global_f < 1 && $acc_id > 0)
 			{
 				$global_f = $acc_id;
 			}
@@ -107,39 +107,39 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	}
 	else
 	{
-		foreach( $disallow_access as $acc_id )
+		foreach($disallow_access as $acc_id)
 		{
 			$acc_id = (int) $acc_id;
 			$str_where .= "t.forum_id <> $acc_id AND ";
 		}
 	}
 
-	switch( $type )
+	switch($type)
 	{
 		case "announcements":
-			$topic_type = '(( t.topic_type = ' . POST_ANNOUNCE . ') OR ( t.topic_type = ' . POST_GLOBAL . '))';
-			$str_where = ( strlen($str_where) > 0 ) ? 'AND (t.forum_id = 0 OR (' . trim(substr($str_where, 0, -4)) . '))' : '';
+			$topic_type = '((t.topic_type = ' . POST_ANNOUNCE . ') OR (t.topic_type = ' . POST_GLOBAL . '))';
+			$str_where = (strlen($str_where) > 0) ? 'AND (t.forum_id = 0 OR (' . trim(substr($str_where, 0, -4)) . '))' : '';
 			$user_link = 't.topic_poster = u.user_id';
 			$post_link = 't.topic_first_post_id = p.post_id';
 			$topic_order = 't.topic_time DESC';
 		break;
 		case "news":
 			$topic_type = 't.topic_type = ' . POST_NORMAL;
-			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
-			$user_link = ( $portal_config['portal_news_style'] ) ? 't.topic_poster = u.user_id' : (( $portal_config['portal_news_show_last'] ) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
-			$post_link = ( $portal_config['portal_news_style'] ) ? 't.topic_first_post_id = p.post_id' : (( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
-			$topic_order = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+			$str_where = (strlen($str_where) > 0) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
+			$user_link = ($portal_config['portal_news_style']) ? 't.topic_poster = u.user_id' : (($portal_config['portal_news_show_last']) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
+			$post_link = ($portal_config['portal_news_style']) ? 't.topic_first_post_id = p.post_id' : (($portal_config['portal_news_show_last']) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
+			$topic_order = ($portal_config['portal_news_show_last']) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
 		break;
 		case "news_all":
-			$topic_type = '( t.topic_type <> ' . POST_ANNOUNCE . ' ) AND ( t.topic_type <> ' . POST_GLOBAL . ')';
-			$str_where = ( strlen($str_where) > 0 ) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
-			$user_link = ( $portal_config['portal_news_style'] ) ? 't.topic_poster = u.user_id' : (( $portal_config['portal_news_show_last'] ) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
-			$post_link = ( $portal_config['portal_news_style'] ) ? 't.topic_first_post_id = p.post_id' : (( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
-			$topic_order = ( $portal_config['portal_news_show_last'] ) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+			$topic_type = '(t.topic_type <> ' . POST_ANNOUNCE . ') AND (t.topic_type <> ' . POST_GLOBAL . ')';
+			$str_where = (strlen($str_where) > 0) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
+			$user_link = ($portal_config['portal_news_style']) ? 't.topic_poster = u.user_id' : (($portal_config['portal_news_show_last']) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
+			$post_link = ($portal_config['portal_news_style']) ? 't.topic_first_post_id = p.post_id' : (($portal_config['portal_news_show_last']) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
+			$topic_order = ($portal_config['portal_news_show_last']) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
 		break;
 	}
 
-	if( $type == 'announcements' && $global_f < 1 )
+	if($type == 'announcements' && $global_f < 1)
 	{
 		$sql = 'SELECT
 					forum_id
@@ -153,7 +153,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		$result = $db->sql_query_limit($sql, 1);
 		$row = $db->sql_fetchrow($result);
 
-		if( !sizeof( $row ) )
+		if(!sizeof($row))
 		{
 			return array();
 		}
@@ -237,10 +237,10 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 
 	$i = 0;
 
-	while ( $row = $db->sql_fetchrow($result) )
+	while ($row = $db->sql_fetchrow($result))
 	{
 		$attachments = array();
-		if( $config['allow_attachments'] && $row['post_id'] )
+		if($config['allow_attachments'] && $row['post_id'])
 		{
 			// Pull attachment data
 			$sql2 = 'SELECT *
@@ -279,13 +279,13 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 			parse_attachments($row['forum_id'], $message, $attachments, $update_count);
 		}
 
-		if( $global_f < 1 )
+		if($global_f < 1)
 		{
 			$global_f = $row['forum_id'];
 		}
 
 		$topic_icons[] = $row['enable_icons'];
-		$have_icons = ( $row['icon_id'] > 0 ) ? 1 : $have_icons;
+		$have_icons = ($row['icon_id'] > 0) ? 1 : $have_icons;
 
 		$posts[$i] = array_merge($posts[$i], array(
 			'post_text'				=> ap_validate($message),
@@ -317,10 +317,10 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		$i++;
 	}
 
-	$posts['topic_icons'] = ( (max($topic_icons) > 0 ) && $have_icons ) ? true : false;
+	$posts['topic_icons'] = ((max($topic_icons) > 0) && $have_icons) ? true : false;
 	$posts['topic_count'] = $i;
 
-	if( $global_f < 1 )
+	if($global_f < 1)
 	{
 		return array();
 	}
@@ -479,7 +479,7 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 {
 	global $template, $user;
 
-	switch( $type )
+	switch($type)
 	{
 		case "announcements":
 			$pagination_type = 'ap';

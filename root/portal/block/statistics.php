@@ -20,7 +20,7 @@ function get_db_stat($mode)
 {
 	global $db, $user;
 
-	switch( $mode )
+	switch($mode)
 	{
 		case 'announcementtotal':
 			$sql = 'SELECT COUNT(distinct t.topic_id) AS announcement_total
@@ -40,14 +40,14 @@ function get_db_stat($mode)
 		break;
 	}
 
-	if ( !($result = $db->sql_query($sql)) )
+	if (!($result = $db->sql_query($sql)))
 	{
 		return false;
 	}
 
 	$row = $db->sql_fetchrow($result);
  
-	switch ( $mode )
+	switch ($mode)
 	{
 		case 'announcementtotal':
 			return $row['announcement_total'];
@@ -72,7 +72,7 @@ $l_total_post_s 	= ($total_posts == 0) ? 'TOTAL_POSTS_ZERO' : 'TOTAL_POSTS_OTHER
 $l_total_topic_s	= ($total_topics == 0) ? 'TOTAL_TOPICS_ZERO' : 'TOTAL_TOPICS_OTHER';
 
 // avarage stat
-$board_days = ( time() - $config['board_startdate'] ) / 86400;
+$board_days = (time() - $config['board_startdate']) / 86400;
 
 $topics_per_day		= ($total_topics) ? round($total_topics / $board_days, 0) : 0;
 $posts_per_day		= ($total_posts) ? round($total_posts / $board_days, 0) : 0;

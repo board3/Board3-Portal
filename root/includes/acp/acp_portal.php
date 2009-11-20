@@ -277,12 +277,12 @@ class acp_portal
 				);
 				// Links require preprocessing
 				
-				$links = ( strlen($portal_config['portal_links_array']) ) ? utf_unserialize($portal_config['portal_links_array']) : array() ;
-				$this->link_num = sizeof( $links );
+				$links = (strlen($portal_config['portal_links_array'])) ? utf_unserialize($portal_config['portal_links_array']) : array() ;
+				$this->link_num = sizeof($links);
 				
 				$lid = request_var('link', 0);
 
-				switch( $action )
+				switch($action)
 				{
 					case 'delete':
 						if($lid > 0)
@@ -300,7 +300,7 @@ class acp_portal
 					break;
 					case 'add':
 						$this->link_num = $this->link_num + 1;
-						$links[$this->link_num] = array( 'url' => '', 'text' => '' );
+						$links[$this->link_num] = array('url' => '', 'text' => '');
 						set_portal_config('portal_links_array', serialize($links));
 					break;
 					case 'moveup':
@@ -325,8 +325,8 @@ class acp_portal
 					break;
 				}
 				
-				ksort( $links );
-				reset( $links );
+				ksort($links);
+				reset($links);
 				
 				foreach($links as $link_id => $link_data)
 				{
@@ -361,7 +361,7 @@ class acp_portal
 		}
 		if ($submit)
 		{
-			switch( $mode )
+			switch($mode)
 			{
 				case 'links':
 					$links = array();
@@ -393,7 +393,7 @@ class acp_portal
 			{
 				if (confirm_box(true))
 				{
-					switch( $mode )
+					switch($mode)
 					{
 						case 'news':
 							set_portal_config('portal_news_permissions', 0);
@@ -402,14 +402,18 @@ class acp_portal
 							set_portal_config('portal_announcements_permissions', 0);
 						break;
 					}
-				} elseif( ($config_name == 'portal_news_permissions' && $config_value == '0' && $portal_config['portal_news_permissions'] == '1') || ($config_name == 'portal_announcements_permissions' && $config_value == '0' && $portal_config['portal_announcements_permissions'] == '1') ) {
+				}
+				elseif(($config_name == 'portal_news_permissions' && $config_value == '0' && $portal_config['portal_news_permissions'] == '1') || ($config_name == 'portal_announcements_permissions' && $config_value == '0' && $portal_config['portal_announcements_permissions'] == '1'))
+				{
 					$s_hidden_fields = build_hidden_fields(array(
 					'i'			=> $id,
 					'mode'		=> $mode,
 					'submit'	=> $submit,
 					));
 					confirm_box(false, $user->lang['CONFIRM_OPERATION'], $s_hidden_fields);
-				} else {
+				}
+				else
+				{
 					set_portal_config($config_name, $config_value);
 				}
 			}
@@ -489,7 +493,7 @@ class acp_portal
 		$icon_down_d	=	'<img src="' . $phpbb_admin_path . 'images/icon_down_disabled.gif" alt="' . $user->lang['MOVE_DOWN'] . '" title="' . $user->lang['MOVE_DOWN'] . '" />';
 		$icon_del		=	'<a href="'.append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=links&amp;action=delete&amp;link='.$value['key']).'"><img src="' . $phpbb_admin_path . 'images/icon_delete.gif" alt="' . $user->lang['DELETE'] . '" title="' . $user->lang['DELETE'] . '" /></a>';
 
-		return '<input id="' . $key . '_text" type="text" size="40" maxlength="255" name="config[' . $key . '_text]" value="' . $value['text'] . '" /> <input id="' . $key . '_url" type="text" size="40" maxlength="255" name="config[' . $key . '_url]" value="' . $value['url'] . '" /> ' . $icon_del . ' ' . ( ($value['key'] < $this->link_num) ? $icon_down : $icon_down_d ) . ' ' . ( ($value['key'] > 1) ? $icon_up : $icon_up_d );
+		return '<input id="' . $key . '_text" type="text" size="40" maxlength="255" name="config[' . $key . '_text]" value="' . $value['text'] . '" /> <input id="' . $key . '_url" type="text" size="40" maxlength="255" name="config[' . $key . '_url]" value="' . $value['url'] . '" /> ' . $icon_del . ' ' . (($value['key'] < $this->link_num) ? $icon_down : $icon_down_d) . ' ' . (($value['key'] > 1) ? $icon_up : $icon_up_d);
 	}
 	
 	function addLink($value, $key)

@@ -28,9 +28,9 @@ else
 
 // get the calendar month
 $mini_cal_month = 0;
-if( isset($_GET['m']) || isset($_POST['m']) )
+if(isset($_GET['m']) || isset($_POST['m']))
 {
-	$mini_cal_month = ( isset($_POST['m']) ) ? intval($_POST['m']) : intval($_GET['m']);
+	$mini_cal_month = (isset($_POST['m'])) ? intval($_POST['m']) : intval($_GET['m']);
 }
 
 // initialise our calendarsuite class
@@ -60,8 +60,8 @@ for($i=0; $i < $mini_cal_month_days;)
 	{
 		$mini_cal_this_day = $mini_cal->day[$i][0];
 
-		$d_mini_cal_today = $mini_cal_this_year . ( ($mini_cal_this_month <= 9) ? '0' . $mini_cal_this_month : $mini_cal_this_month ) . ( ($mini_cal_this_day <= 9) ? '0' . $mini_cal_this_day : $mini_cal_this_day );
-		$mini_cal_day = ( $mini_cal_today == $d_mini_cal_today ) ? '<span style="font-weight: bold; color: ' . $portal_config['portal_minicalendar_today_color'] . ';">' . $mini_cal_this_day . '</span>' : $mini_cal_this_day;
+		$d_mini_cal_today = $mini_cal_this_year . (($mini_cal_this_month <= 9) ? '0' . $mini_cal_this_month : $mini_cal_this_month) . (($mini_cal_this_day <= 9) ? '0' . $mini_cal_this_day : $mini_cal_this_day);
+		$mini_cal_day = ($mini_cal_today == $d_mini_cal_today) ? '<span style="font-weight: bold; color: ' . $portal_config['portal_minicalendar_today_color'] . ';">' . $mini_cal_this_day . '</span>' : $mini_cal_this_day;
 
 		$template->assign_block_vars('mini_cal_row.mini_cal_days', array(
 			'MINI_CAL_DAY'		=> ($mini_cal_count == 0) ? '<span style="color: ' . $portal_config['portal_minicalendar_sunday_color'] . ';">' . $mini_cal_day . '</span>' : $mini_cal_day)

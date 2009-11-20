@@ -291,7 +291,7 @@ function load_portal_config()
 
 	$sql = 'SELECT * FROM ' . PORTAL_CONFIG_TABLE;
 	$result = $db->sql_query($sql);
-	while( $row = $db->sql_fetchrow($result) )
+	while($row = $db->sql_fetchrow($result))
 	{
 		$portal_config[$row['config_name']] = $row['config_value'];
 	}

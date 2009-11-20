@@ -41,14 +41,14 @@ else
 	{
 		$permissions = $portal_config['portal_announcements_permissions'];
 		$forum_from = $portal_config['portal_global_announcements_forum'];
-		$forum_from = ( strpos($forum_from, ',') !== false ) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
+		$forum_from = (strpos($forum_from, ',') !== false) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 
-		$time = ( $portal_config['portal_announcements_day'] == 0 ) ? 0 : $portal_config['portal_announcements_day'];
+		$time = ($portal_config['portal_announcements_day'] == 0) ? 0 : $portal_config['portal_announcements_day'];
 		$post_time = ($time == 0) ? '' : 'AND topic_time > ' . (time() - $time * 86400);
 		
 		$str_where = '';
 
-		if( $permissions == true )
+		if($permissions == true)
 		{
 			$disallow_access = array_unique(array_keys($auth->acl_getf('!f_read', true)));
 		} 
@@ -59,19 +59,19 @@ else
 
 		$global_f = 0;
 
-		if( sizeof($forum_from) )
+		if(sizeof($forum_from))
 		{
 			$disallow_access = array_diff($forum_from, $disallow_access);		
-			if( !sizeof($disallow_access) )
+			if(!sizeof($disallow_access))
 			{
 				return array();
 			}
 
-			foreach( $disallow_access as $acc_id)
+			foreach($disallow_access as $acc_id)
 			{
 				$acc_id = (int) $acc_id;
 				$str_where .= "forum_id = $acc_id OR ";
-				if( $global_f < 1 && $acc_id > 0 )
+				if($global_f < 1 && $acc_id > 0)
 				{
 					$global_f = $acc_id;
 				}
@@ -79,14 +79,14 @@ else
 		}
 		else
 		{
-			foreach( $disallow_access as $acc_id )
+			foreach($disallow_access as $acc_id)
 			{
 				$acc_id = (int) $acc_id;
 				$str_where .= "forum_id <> $acc_id AND ";
 			}
 		}
 
-		$str_where = ( strlen($str_where) > 0 ) ? 'AND (forum_id = 0 OR (' . trim(substr($str_where, 0, -4)) . '))' : '';
+		$str_where = (strlen($str_where) > 0) ? 'AND (forum_id = 0 OR (' . trim(substr($str_where, 0, -4)) . '))' : '';
 
 		$sql = 'SELECT COUNT(topic_id) AS num_topics
 			FROM ' . TOPICS_TABLE . '
@@ -107,7 +107,7 @@ else
 		$count = $fetch_news['topic_count'];
 		for ($i = 0; $i < $count; $i++)
 		{
-			if( isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true )
+			if(isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true)
 			{
 				$open_bracket = '[ ';
 				$close_bracket = ' ]';
@@ -124,11 +124,11 @@ else
 			$topic_id = $fetch_news[$i]['topic_id'];
 			$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
 			$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
-			$real_forum_id = ( $forum_id == 0 ) ? $fetch_news['global_id']: $forum_id;
+			$real_forum_id = ($forum_id == 0) ? $fetch_news['global_id']: $forum_id;
 			$read_full_url = (isset($_GET['ap'])) ? 'ap='. $start . '&amp;announcement=' . $i . '#a' . $i : 'announcement=' . $i . '#a' . $i;
 			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 
-			if ( $portal_config['portal_announcements_archive'] )
+			if ($portal_config['portal_announcements_archive'])
 			{
 				$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $portal_config['portal_number_of_announcements'], $start, 'announcements');
 			}
@@ -178,7 +178,7 @@ else
 
 		$template->assign_block_vars('announcements_row', array(
 			'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
-			'FORUM_NAME'			=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '',
+			'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 			'TITLE'					=> $fetch_news[$i]['topic_title'],
 			'POSTER'				=> $fetch_news[$i]['username'],
 			'POSTER_FULL'			=> $fetch_news[$i]['username_full'],
@@ -213,7 +213,7 @@ else
 			'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 		));
 
-			if( !empty($fetch_news[$i]['attachments']) )
+			if(!empty($fetch_news[$i]['attachments']))
 			{
 				foreach ($fetch_news[$i]['attachments'] as $attachment)
 				{
@@ -243,18 +243,18 @@ else
 		$open_bracket = '[ ';
 		$close_bracket = ' ]';
 		$read_full = $user->lang['BACK'];
-		$real_forum_id = ( $forum_id == 0 ) ? $fetch_news['global_id']: $forum_id;
+		$real_forum_id = ($forum_id == 0) ? $fetch_news['global_id']: $forum_id;
 
 		$read_full_url = (isset($_GET['ap'])) ? append_sid("{$phpbb_root_path}portal.$phpEx", "ap=$start#a$i") : append_sid("{$phpbb_root_path}portal.$phpEx#a$i");
 		$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-		if ( $portal_config['portal_announcements_archive'] )
+		if ($portal_config['portal_announcements_archive'])
 		{
 			$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $portal_config['portal_number_of_announcements'], $start, 'announcements');
 		}	
 		
-		$template->assign_block_vars('announcements_row', array( 
+		$template->assign_block_vars('announcements_row', array(
 			'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
-			'FORUM_NAME'			=> ( $forum_id ) ? $fetch_news[$i]['forum_name'] : '',
+			'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 			'TITLE'					=> $fetch_news[$i]['topic_title'],
 			'POSTER'				=> $fetch_news[$i]['username'],
 			'POSTER_FULL'			=> $fetch_news[$i]['username_full'],
@@ -277,7 +277,7 @@ else
 			'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 		));
 
-		if( !empty($fetch_news[$i]['attachments']) )
+		if(!empty($fetch_news[$i]['attachments']))
 		{
 			foreach ($fetch_news[$i]['attachments'] as $attachment)
 			{
@@ -299,7 +299,7 @@ else
 }
 
 $topic_icons = false;
-if( !empty($fetch_news['topic_icons']) )
+if(!empty($fetch_news['topic_icons']))
 {
 	$topic_icons = true;
 }
@@ -309,7 +309,7 @@ $template->assign_vars(array(
 	'READ_POST_IMG'					=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
 	'GOTO_PAGE_IMG'					=> $user->img('icon_post_target', 'GOTO_PAGE'),
 	'S_DISPLAY_ANNOUNCEMENTS'		=> true,
-	'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ( $portal_config['portal_show_announcements_replies_views'] ) ? true : false,
+	'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ($portal_config['portal_show_announcements_replies_views']) ? true : false,
 	'S_TOPIC_ICONS'					=> $topic_icons,
 ));
 

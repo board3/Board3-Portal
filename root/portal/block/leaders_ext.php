@@ -56,7 +56,7 @@ while ($row = $db->sql_fetchrow($result))
 }
 $db->sql_freeresult($result);
 
-if( sizeof($legends) )
+if(sizeof($legends))
 {
 	$sql = 'SELECT
 				u.user_id, u.username, u.user_colour, u.group_id
@@ -78,11 +78,11 @@ if( sizeof($legends) )
 	$db->sql_freeresult($result);
 }
 
-if( sizeof($groups) )
+if(sizeof($groups))
 {
 	foreach($groups as $group_id => $group)
 	{
-		if( sizeof($group['group_users']) )
+		if(sizeof($group['group_users']))
 		{
 			$group_name = ($group['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $group['group_name']] : $group['group_name'];
 			$u_group = append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $group_id);

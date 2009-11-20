@@ -24,7 +24,7 @@ $view = request_var('view', '');
 $update = request_var('update', false);
 $poll_view = request_var('polls', '');
 
-$poll_view_ar = ( strpos($poll_view, ',') !== FALSE ) ? explode(',', $poll_view) : (($poll_view != '') ? array($poll_view) : array());
+$poll_view_ar = (strpos($poll_view, ',') !== FALSE) ? explode(',', $poll_view) : (($poll_view != '') ? array($poll_view) : array());
 
 if ($update && $portal_config['portal_poll_allow_vote'])
 {
@@ -72,7 +72,7 @@ if ($update && $portal_config['portal_poll_allow_vote'])
 		$topic_data['topic_status'] != ITEM_LOCKED &&
 		$topic_data['forum_status'] != ITEM_LOCKED) ? true : false;
 
-	if( $s_can_up_vote )
+	if($s_can_up_vote)
 	{
 		if (!sizeof($voted_id) || sizeof($voted_id) > $topic_data['poll_max_options'] || in_array(VOTE_CONVERTED, $cur_voted_id))
 		{
@@ -165,15 +165,15 @@ if ($update && $portal_config['portal_poll_allow_vote'])
 $where = '';
 $poll_forums = false;
 
-if( $portal_config['portal_poll_topic_id'] !== '' )
+if($portal_config['portal_poll_topic_id'] !== '')
 {
 	$poll_forums_config  = explode(',' ,$portal_config['portal_poll_topic_id']);
 	foreach($poll_forums_config as $poll_forum )
 	{
-		if ( is_numeric(trim($poll_forum)) === TRUE )
+		if (is_numeric(trim($poll_forum)) === TRUE)
 		{
 			$poll_forum = (int) trim($poll_forum);
-			if( $auth->acl_get('f_read', $poll_forum) )
+			if($auth->acl_get('f_read', $poll_forum))
 			{
 				$poll_forums = true;
 				$where .= ($where == "") ? "t.forum_id = '{$poll_forum}'" : " OR t.forum_id = '{$poll_forum}'";
@@ -215,13 +215,13 @@ if ($poll_forums === true)
 			AND p.post_id = t.topic_first_post_id
 			{$portal_poll_hide}
 			ORDER BY t.poll_start DESC";
-	$limit = ( isset($portal_config['portal_poll_limit']) ) ? $portal_config['portal_poll_limit'] : 3;
+	$limit = (isset($portal_config['portal_poll_limit'])) ? $portal_config['portal_poll_limit'] : 3;
 	$result = $db->sql_query_limit($sql, $limit);
 	$has_poll = false;
 
 	if ($result)
 	{
-		while( $data = $db->sql_fetchrow($result) )
+		while($data = $db->sql_fetchrow($result))
 		{
 			$has_poll = true;
 			$poll_has_options = false;
@@ -230,7 +230,7 @@ if ($poll_forums === true)
 			$forum_id = (int) $data['forum_id'];
 
 			$cur_voted_id = array();
-			if( $portal_config['portal_poll_allow_vote'] )
+			if($portal_config['portal_poll_allow_vote'])
 			{
 				if ($user->data['is_registered'])
 				{
@@ -263,11 +263,13 @@ if ($poll_forums === true)
 					(($data['poll_length'] != 0 && $data['poll_start'] + $data['poll_length'] > time()) || $data['poll_length'] == 0) &&
 					$data['topic_status'] != ITEM_LOCKED &&
 					$data['forum_status'] != ITEM_LOCKED) ? true : false;
-			} else {
+			}
+			else
+			{
 				$s_can_vote = false;
 			}
 
-			$s_display_results = ( !$s_can_vote || ( $s_can_vote && sizeof($cur_voted_id) ) || ( $view == 'viewpoll' && in_array($topic_id, $poll_view_ar) ) ) ? true : false;
+			$s_display_results = (!$s_can_vote || ($s_can_vote && sizeof($cur_voted_id)) || ($view == 'viewpoll' && in_array($topic_id, $poll_view_ar))) ? true : false;
 
 			$poll_sql = 'SELECT po.poll_option_id, po.poll_option_text, po.poll_option_total
 				FROM ' . POLL_OPTIONS_TABLE . " po
@@ -280,7 +282,7 @@ if ($poll_forums === true)
 
 			if ($poll_result)
 			{
-				while( $polls_data = $db->sql_fetchrow($poll_result) )
+				while($polls_data = $db->sql_fetchrow($poll_result))
 				{
 					$poll_has_options = true;
 					$poll_data[] = $polls_data;
@@ -291,13 +293,13 @@ if ($poll_forums === true)
 
 			$make_poll_view = array();
 
-			if( in_array($topic_id, $poll_view_ar) === FALSE )
+			if(in_array($topic_id, $poll_view_ar) === FALSE)
 			{
 				$make_poll_view[] = $topic_id;
 				$make_poll_view = array_merge($poll_view_ar, $make_poll_view);
 			}
 
-			$poll_view_str = urlencode( implode(',', $make_poll_view) );
+			$poll_view_str = urlencode(implode(',', $make_poll_view));
 			$portalpoll_url= append_sid("{$phpbb_root_path}portal.$phpEx", "polls=$poll_view_str");
 			$portalvote_url= append_sid("{$phpbb_root_path}portal.$phpEx", "f=$forum_id&amp;t=$topic_id");
 			$viewtopic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");

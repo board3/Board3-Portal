@@ -22,7 +22,7 @@ $sql = 'SELECT user_id, username, user_regdate, user_colour
 	ORDER BY user_regdate DESC';
 $result = $db->sql_query_limit($sql, $portal_config['portal_max_last_member']);
 
-while( ($row = $db->sql_fetchrow($result)) && ($row['username']) )
+while(($row = $db->sql_fetchrow($result)) && ($row['username']))
 {
 	$template->assign_block_vars('latest_members', array(
 		'USERNAME_FULL'	=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),

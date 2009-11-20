@@ -20,10 +20,10 @@ $where = '';
 
 if($portal_config['portal_attachments_forum_ids'] !== '')
 {
-	$attach_forums_config = ( strpos($portal_config['portal_attachments_forum_ids'], ',') !== false ) ? explode(',', $portal_config['portal_attachments_forum_ids']) : array($portal_config['portal_attachments_forum_ids']);
+	$attach_forums_config = (strpos($portal_config['portal_attachments_forum_ids'], ',') !== false) ? explode(',', $portal_config['portal_attachments_forum_ids']) : array($portal_config['portal_attachments_forum_ids']);
 	$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
 	
-	$forum_list =  array_unique( array_intersect($attach_forums_config, $forum_list) );
+	$forum_list =  array_unique(array_intersect($attach_forums_config, $forum_list));
 }
 else
 {
