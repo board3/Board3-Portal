@@ -73,14 +73,14 @@ $template->assign_vars(array(
 	'L_NEW_POSTS'	=> $user->lang['SEARCH_NEW'] . '&nbsp;(' . $new_posts_count . ')',
 	'L_SELF_POSTS'	=> $user->lang['SEARCH_SELF'] . '&nbsp;(' . $you_posts_count . ')',
 
-	'AVATAR_IMG'	=> $avatar_img,
-	'RANK_TITLE'	=> $rank_title,
-	'RANK_IMG'		=> $rank_img,
-	'RANK_IMG_SRC'	=> $rank_img_src,
+	'B3P_AVATAR_IMG'    => $avatar_img,
+	'B3P_RANK_TITLE'    => $rank_title,
+	'B3P_RANK_IMG'        => $rank_img,
+	'RANK_IMG_SRC'    => $rank_img_src,
 
-	'USERNAME_FULL'		=> get_username_string('full', $user_id, $username, $colour),
-	'USERNAME'			=> get_username_string('username', $user_id, $username, $colour),
-	'USER_COLOR'		=> get_username_string('colour', $user_id, $username, $colour),
+	'USERNAME_FULL'        => get_username_string('full', $user_id, $username, $colour),
+	'B3P_USERNAME'            => get_username_string('username', $user_id, $username, $colour),
+	'B3P_USER_COLOR'        => get_username_string('colour', $user_id, $username, $colour),
 	'U_VIEW_PROFILE'	=> get_username_string('profile', $user_id, $username, $colour),
 
 	'U_NEW_POSTS'			=> append_sid("{$phpbb_root_path}search.$phpEx", 'search_id=newposts'),

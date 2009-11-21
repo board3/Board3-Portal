@@ -4,15 +4,15 @@
 	<tr class="row1">
 		<td>
 			<div align="center">
-				<a href="{U_VIEW_PROFILE}"><!-- IF USER_COLOR --><span style="color: {USER_COLOR}; font-weight: bold;"><!-- ELSE --><span><!-- ENDIF -->{USERNAME}</span></a><br />
-				<!-- IF AVATAR_IMG -->
-					<a href="{U_PROFILE}">{AVATAR_IMG}</a>
-				<!-- ELSEIF $NO_AVATAR_IMG -->
-					<a href="{U_PROFILE}"><img src="{T_THEME_PATH}{$NO_AVATAR_IMG}" alt="" /></a>
-				<!-- ENDIF -->
-				<!-- IF RANK_TITLE --><br /><span class="gensmall">{RANK_TITLE}</span><!-- ENDIF -->
-				<!-- IF RANK_IMG --><br />{RANK_IMG}<!-- ENDIF -->
-			</div>
+                <a href="{U_VIEW_PROFILE}"><!-- IF B3P_USER_COLOR --><span style="color: {B3P_USER_COLOR}; font-weight: bold;"><!-- ELSE --><span><!-- ENDIF -->{B3P_USERNAME}</span></a><br />
+                <!-- IF B3P_AVATAR_IMG -->
+                    <a href="{U_PROFILE}">{B3P_AVATAR_IMG}</a>
+                <!-- ELSEIF $NO_AVATAR_IMG -->
+                    <a href="{U_PROFILE}"><img src="{T_THEME_PATH}{$NO_AVATAR_IMG}" alt="" /></a>
+                <!-- ENDIF -->
+                <!-- IF B3P_RANK_TITLE --><br /><span class="gensmall">{B3P_RANK_TITLE}</span><!-- ENDIF -->
+                <!-- IF B3P_RANK_IMG --><br />{B3P_RANK_IMG}<!-- ENDIF -->
+            </div>
 		</td>
 	</tr>
 	<!-- IF S_DISPLAY_SEARCH -->

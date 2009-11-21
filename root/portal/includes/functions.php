@@ -152,6 +152,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 					forum_id';
 		$result = $db->sql_query_limit($sql, 1);
 		$row = $db->sql_fetchrow($result);
+		$db->sql_freeresult($result);
 
 		if(!sizeof($row))
 		{
@@ -316,7 +317,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		$posts['global_id'] = $global_f;
 		$i++;
 	}
-
+	$db->sql_freeresult($result);
+	
 	$posts['topic_icons'] = ((max($topic_icons) > 0) && $have_icons) ? true : false;
 	$posts['topic_count'] = $i;
 
