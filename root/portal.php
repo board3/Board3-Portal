@@ -30,7 +30,7 @@ $user->setup('mods/lang_portal');
 
 if (!$portal_config['portal_enable'])
 {
-	redirect($phpbb_root_path . 'index.' . $phpEx);
+	redirect(reapply_sid($phpbb_root_path . 'index.' . $phpEx));
 }
 
 $load_center = true;
