@@ -67,7 +67,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			</author>
 		</author-group>
 
-		<mod-version>1.0.4</mod-version>
+		<mod-version>1.0.5</mod-version>
 
 		<installation>
 			<level>easy</level>
@@ -88,6 +88,50 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<link type="template" lang="de" href="contrib/subsilver2.xml">Anleitung für das Style subsilver2</link>
 		</link-group>
 		<history>
+			<entry>
+				<date>2009-12-01</date>
+				<rev-version>1.0.5</rev-version>
+				<changelog lang="en">
+					<change>Fixed mouseover showing "01 Jan" in birthday block, no matter when the birthday is</change>
+					<change>Removed unnecessary second line break from birthday list</change>
+					<change>Added user icon in front of every user in birthday list and made it look like top poster block</change>
+					<change>Fixed a typo in install files and update for 3.0.6</change>
+					<change>Changed "en-gb" to "en" in the install files</change>
+					<change>Changed apostrophe to its HTML Entity in install_portal.php</change>
+					<change>Fixed typo in install/install_functions.php</change>
+					<change>Fixed wrong edit in update from phpbb3portal</change>
+					<change>Fixed a few parts that didn't follow the coding guidelines</change>
+					<change>poll.php: removed urldecode() as this might cause errors</change>
+					<change>recent.php: casting $id to int now and trim() has been removed</change>
+					<change>Removed unnecessary queries in user_menu.php</change>
+					<change>Now using generate_text_for_display in block/welcome.php, block/custom.php and for function phpbb_fetch_posts</change>
+					<change>Removed unnecessary license.txt</change>
+					<change>Fixed broken link when block icons are turned off: http://www.board3.de/tracker.php?p=13&amp;t=160</change>
+					<change>Added reapply_sid() in portal.php</change>
+					<change>Added sql_freeresult to functions.php</change>
+					<change>Added fixes for better compatibility with Portalview MOD</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Fixed Bug in Geburtstags-Block: Mousever-Effekt zeigte "01 Jan" als Geburtstag, egal wann der Benutzer Geburtstag hat</change>
+					<change>Unnötigen zweiten Zeilenumbruch in Geburtstagsliste</change>
+					<change>Benutzericon vor jedem Benutzer in Geburtstagsliste hinzugefügt, und Aussehen an Vielschreiber-Block angepasst</change>
+					<change>Schreibfehler in Installationsanleitungen entfernt und für phpBB 3.0.6 aktualisiert</change>
+					<change>"en-gb" zu "en" in den Installationsanleitungen geändert</change>
+					<change>Apostroph mit HTML Datensatz ersetzt in install_portal.php</change>
+					<change>Schreibfehler in install/install_functions.php beseitigt</change>
+					<change>Falschen Edit im Update von phpbb3portal beseitigt</change>
+					<change>Einige Bestandteile, die nicht die Coding Guidelines einhielten, geändert</change>
+					<change>poll.php: urldecode() entfernt, da es zu Fehlern führen könnte</change>
+					<change>recent.php: $id wird jetzt zu Integer konvertiert und trim() wurde entfernt</change>
+					<change>Unnütze Abfragen in user_menu.php entfernt</change>
+					<change>generate_text_for_display wird jetzt in block/welcome.php, block/custom.php und für die Funktion phpbb_fetch_posts genutzt</change>
+					<change>Unnötige license.txt entfernt</change>
+					<change>Defekten Link repariert wenn Block Icons ausgeschaltet sind: http://www.board3.de/tracker.php?p=13&amp;t=160</change>
+					<change>reapply_sid() in portal.php hinzugefügt</change>
+					<change>sql_freeresult zu functions.php hinzugefügt</change>
+					<change>Änderungen für eine bessere Kompatibilität mit dem Portalview MOD hinzugefügt</change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2009-09-30</date>
 				<rev-version>1.0.4</rev-version>
@@ -381,7 +425,7 @@ Deny from All
 		<open src="includes/session.php">
 			<edit>
 				<find><![CDATA[		if (!empty($_GET['style']) && $auth->acl_get('a_styles') && !defined('ADMIN_START'))]]></find>
-				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START'))]]></action>
+				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']))]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/overall_header.html">

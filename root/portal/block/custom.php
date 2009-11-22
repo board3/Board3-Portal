@@ -15,9 +15,7 @@ if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
    exit;
 }
 
-$allow_bbcode = 1;
-$allow_urls = 1;
-$allow_smilies = 1;
+$allow_bbcode = $allow_urls = $allow_smilies = true;
 
 // Center Box
 if ($portal_config['portal_custom_center'])
@@ -30,12 +28,10 @@ if ($portal_config['portal_custom_center'])
 		$text_center = $message_parser->message;
 		$bbcode_uid = $message_parser->bbcode_uid;
 		$bbcode_bitfield = $message_parser->bbcode_bitfield; 
-
-		$bbcode = new bbcode(base64_encode($bbcode_bitfield));
-		$text_center = censor_text($text_center);
-		$bbcode->bbcode_second_pass($text_center, $bbcode_uid, $bbcode_bitfield);
-		$text_center = bbcode_nl2br($text_center);
-		$text_center = smiley_text($text_center);
+		
+		// Generate text for display and assign template vars
+		$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
+		$text_center = generate_text_for_display($text_center, $bbcode_uid, $bbcode_bitfield, $bbcode_options);
 
 		$template->assign_vars(array(
 			'PORTAL_CUSTOM_CENTER_CODE'	=> $text_center,
@@ -65,11 +61,9 @@ if ($portal_config['portal_custom_small'])
 		$bbcode_uid = $message_parser->bbcode_uid;
 		$bbcode_bitfield = $message_parser->bbcode_bitfield; 
 
-		$bbcode = new bbcode(base64_encode($bbcode_bitfield));
-		$text_small = censor_text($text_small);
-		$bbcode->bbcode_second_pass($text_small, $bbcode_uid, $bbcode_bitfield);
-		$text_small = bbcode_nl2br($text_small);
-		$text_small = smiley_text($text_small);
+		// Generate text for display and assign template vars
+		$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
+		$text_small = generate_text_for_display($text_small, $bbcode_uid, $bbcode_bitfield, $bbcode_options);
 
 		$template->assign_vars(array(
 			'PORTAL_CUSTOM_SMALL_CODE'	=> $text_small,
