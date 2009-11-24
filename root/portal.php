@@ -70,7 +70,7 @@ if ($load_center)
 {
 	if ($portal_config['portal_forum_index'])
 	{
-		display_forums('');
+		display_forums('', $config['load_moderators'], false);
 
 		$template->assign_vars(array(
 			'FORUM_IMG'						=> $user->img('forum_read', 'NO_NEW_POSTS'),
