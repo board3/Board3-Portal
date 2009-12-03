@@ -202,6 +202,10 @@ $lang = array_merge($lang, array(
 	'PORTAL_ATTACHMENTS_FORUM_IDS_EXPLAIN'				=> 'The ID(s) of the forum(s) from which the attachments should be displayed. Use a comma to separate multiple forums, or leave blank to use all available forums.',
 	'PORTAL_ATTACHMENTS_MAX_LENGTH'						=> 'Character limit for each attachments',
 	'PORTAL_ATTACHMENTS_MAX_LENGTH_EXPLAIN'				=> '0 means infinite',
+	'PORTAL_ATTACHMENTS_FILETYPE' 						=> 'Filetypes',
+	'PORTAL_ATTACHMENTS_FILETYPE_EXPLAIN' 				=> 'If &#39;Exclude filetypes&#39; is set to &#39;Yes&#39;, select the filetypes you want to exclude.<br />If &#39;Exclude filetypes&#39; is set to &#39;No&#39; select the filetypes you want to see.<br />Select/Deselect multiple forums by holding <samp>CTRL</samp> and clicking.',
+	'PORTAL_ATTACHMENTS_EXCLUDE'						=> 'Exclude filetypes',
+	'PORTAL_ATTACHMENTS_EXCLUDE_EXPLAIN'				=> 'Select &#39;Yes&#39; if you want to exlude the selected filetypes from the attachments block, and &#39;No&#39; if you want to see only the selected filetypes in the attachments block.',
 
 	// friends
 	'ACP_PORTAL_FRIENDS_SETTINGS'			=> 'Friends Settings',

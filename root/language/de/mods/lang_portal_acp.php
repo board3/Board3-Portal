@@ -201,6 +201,10 @@ $lang = array_merge($lang, array(
 	'PORTAL_ATTACHMENTS_FORUM_IDS_EXPLAIN'				=> 'Die ID des Forums, aus welchem die Dateianhänge angezeigt werden sollen. Frei lassen, um aus allen Foren anzeigen zu lassen. Mit Komma trennen, wenn aus mehreren ausgewählten Foren angezeigt werden soll, z.B. 1,2,5',
 	'PORTAL_ATTACHMENTS_MAX_LENGTH'						=> 'Maximal angezeigte Länge der Dateianhänge',
 	'PORTAL_ATTACHMENTS_MAX_LENGTH_EXPLAIN'				=> '0 bedeutet unbegrenzt',
+	'PORTAL_ATTACHMENTS_FILETYPE' 						=> 'Dateitypen',
+	'PORTAL_ATTACHMENTS_FILETYPE_EXPLAIN' 				=> 'Falls &#39;Dateitypen ausschließen&#39; auf &#39;Ja&#39; steht, wähle die Dateitypen die du ausschließen willst.<br />Falls &#39;Dateitypen ausschließen&#39; auf &#39;Nein&#39; steht, wähle die Dateitypen die du sehen willst.<br />Wähle mehrere Foren aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
+	'PORTAL_ATTACHMENTS_EXCLUDE'						=> 'Dateitypen aussschließen',
+	'PORTAL_ATTACHMENTS_EXCLUDE_EXPLAIN'				=> 'Wähle &#39;Ja&#39; wenn du die ausgewählten Dateitypen vom Dateianhänge-Block ausschließen willst, und &#39;Nein&#39; wenn du nur die ausgewählten Dateitypen im Dateianhänge-Block sehen willst.',
 
 	// friends
 	'ACP_PORTAL_FRIENDS_SETTINGS'				=> 'Einstellungen für den Freunde-Block',

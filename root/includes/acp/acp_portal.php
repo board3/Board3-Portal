@@ -156,6 +156,8 @@ class acp_portal
 						'portal_attachments_number'	=> array('lang' => 'PORTAL_ATTACHMENTS_NUMBER'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_attach_max_length'	=> array('lang' => 'PORTAL_ATTACHMENTS_MAX_LENGTH'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_attachments_forum_ids'	=> array('lang' => 'PORTAL_ATTACHMENTS_FORUM_IDS',	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
+						'portal_attachments_filetype'	=> array('lang' => 'PORTAL_ATTACHMENTS_FILETYPE',	'validate' => 'string', 	'type' => 'custom',	'explain' => true,	'method' => 'select_filetype'),
+						'portal_attachments_exclude'	=> array('lang' => 'PORTAL_ATTACHMENTS_EXCLUDE', 	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 					)
 				);
 			break;
@@ -386,6 +388,11 @@ class acp_portal
 			{
 				continue;
 			}
+			
+			if ($config_name == 'portal_attachments_filetype')
+			{
+				continue;
+			}
 
 			$this->new_config[$config_name] = $config_value = $cfg_array[$config_name];
 
@@ -419,6 +426,11 @@ class acp_portal
 			}
 		}
 
+		if($mode == 'attachments' && $submit)
+		{
+			$this->store_filetypes('portal_attachments_filetype');
+		}
+		
 		if ($submit)
 		{
 			add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']);
@@ -504,11 +516,57 @@ class acp_portal
 		
 		return '<a href="'.$link.'">'.$user->lang['PORTAL_LINK_ADD'].'</a>';
 	}
+	
+	// Create select box for attachment filetype
+	function select_filetype($value, $key)
+	{
+		global $db, $user, $config, $portal_config;
+		
+		// Get extensions
+		$sql = 'SELECT *
+			FROM ' . EXTENSIONS_TABLE . '
+			ORDER BY extension ASC';
+		$result = $db->sql_query($sql);
+		
+		while ($row = $db->sql_fetchrow($result))
+		{
+			$extensions[] = $row;
+		}
+		
+		$selected = array();
+		if(isset($portal_config['portal_attachments_filetype']) && strlen($portal_config['portal_attachments_filetype']) > 0)
+		{
+			$selected = explode(',', $portal_config['portal_attachments_filetype']);
+		}
+		
+		// Build options
+		$ext_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
+		foreach ($extensions as $id => $ext)
+		{
+			$ext_options .= '<option value="' . $ext['extension'] . '"' . ((in_array($ext['extension'], $selected)) ? ' selected="selected"' : '') . '>' . $ext['extension'] . '</option>';
+		}
+		$ext_options .= '</select>';
+		
+		return $ext_options;
+	}
+
+	// Store selected filetypes
+	function store_filetypes($key)
+	{
+		global $db, $cache;
+		
+		// Get selected extensions
+		$values = request_var($key, array(0 => ''));
+		
+		$filetypes = implode(',', $values);
+		
+		set_portal_config('portal_attachments_filetype', $filetypes);
+
+	}
 }
 
 function utf_unserialize($serial_str) {
     $out = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str );
     return unserialize($out);   
 }
-
 ?>

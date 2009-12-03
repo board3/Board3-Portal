@@ -18,6 +18,12 @@ if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 $attach_forums = false;
 $where = '';
 
+// Get filetypes and put them into an array
+if(isset($portal_config['portal_attachments_filetype']) && strlen($portal_config['portal_attachments_filetype']) > 0)
+{
+	$filetypes = explode(',', $portal_config['portal_attachments_filetype']);
+}
+
 if($portal_config['portal_attachments_forum_ids'] !== '')
 {
 	$attach_forums_config = (strpos($portal_config['portal_attachments_forum_ids'], ',') !== false) ? explode(',', $portal_config['portal_attachments_forum_ids']) : array($portal_config['portal_attachments_forum_ids']);
@@ -32,17 +38,20 @@ else
 
 if(sizeof($forum_list))
 {
-	foreach($forum_list as $af )
-	{
-		$af = (int) $af;
-		$attach_forums = true;
-		$where .= 't.forum_id = ' . $af . ' OR ';
-	}
+	$attach_forums = true;
+	$where = 'AND ' . $db->sql_in_set('t.forum_id', $forum_list);
 }
 
-if($where != '')
+if(sizeof($filetypes))
 {
-	$where = 'AND (' . substr($where, 0, -4) . ')';
+	if($portal_config['portal_attachments_exclude'])
+	{
+		$where .= ' AND ' . $db->sql_in_set('a.extension', $filetypes, true);
+	}
+	else
+	{
+		$where .= ' AND ' . $db->sql_in_set('a.extension', $filetypes);
+	}
 }
 
 if($attach_forums === true)
