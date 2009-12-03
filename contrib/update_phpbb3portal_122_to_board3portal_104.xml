@@ -65,6 +65,14 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<contributions status="current" position="Developer"></contributions>
 				</contributions-group>	
 			</author>
+			<author>
+				<realname>Marc Alexander</realname>
+				 <username>marc1706</username>
+				<homepage>http://www.m-a-styles.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			 </author>
 		</author-group>
 
 		<mod-version>1.0.5</mod-version>
