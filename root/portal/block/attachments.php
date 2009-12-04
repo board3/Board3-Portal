@@ -17,6 +17,7 @@ if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 
 $attach_forums = false;
 $where = '';
+$filetypes = array();
 
 // Get filetypes and put them into an array
 if(isset($portal_config['portal_attachments_filetype']) && strlen($portal_config['portal_attachments_filetype']) > 0)

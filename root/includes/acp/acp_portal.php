@@ -87,7 +87,8 @@ class acp_portal
 						'portal_show_all_news'				=> array('lang' => 'PORTAL_SHOW_ALL_NEWS',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_number_of_news'				=> array('lang' => 'PORTAL_NUMBER_OF_NEWS',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_news_length'				=> array('lang' => 'PORTAL_NEWS_LENGTH',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-						'portal_news_forum'					=> array('lang' => 'PORTAL_NEWS_FORUM',	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
+						'portal_news_forum'					=> array('lang' => 'PORTAL_NEWS_FORUM',	'validate' => 'string',		'type' => 'custom',	'method' => 'select_forums',	 'explain' => true),
+						'portal_news_exclude'				=> array('lang' => 'PORTAL_NEWS_EXCLUDE',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_news_show_last'             => array('lang' => 'PORTAL_NEWS_SHOW_LAST',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_news_archive'               => array('lang' => 'PORTAL_NEWS_ARCHIVE',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_news_permissions'			=> array('lang' => 'PORTAL_NEWS_PERMISSIONS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
@@ -389,7 +390,7 @@ class acp_portal
 				continue;
 			}
 			
-			if ($config_name == 'portal_attachments_filetype')
+			if ($config_name == 'portal_attachments_filetype' && $config_name == 'portal_news_forum')
 			{
 				continue;
 			}
@@ -425,10 +426,15 @@ class acp_portal
 				}
 			}
 		}
-
+		
+		// Get data from select boxes and store in DB
 		if($mode == 'attachments' && $submit)
 		{
 			$this->store_filetypes('portal_attachments_filetype');
+		}
+		elseif($mode == 'news' && $submit)
+		{
+			$this->store_selected_forums('portal_news_forum');
 		}
 		
 		if ($submit)
@@ -549,7 +555,7 @@ class acp_portal
 		
 		return $ext_options;
 	}
-
+	
 	// Store selected filetypes
 	function store_filetypes($key)
 	{
@@ -562,6 +568,44 @@ class acp_portal
 		
 		set_portal_config('portal_attachments_filetype', $filetypes);
 
+	}
+	
+	// Create forum select box
+	function select_forums($value, $key)
+	{
+		global $user, $config, $portal_config;
+
+		$forum_list = make_forum_select(false, false, true, true, true, false, true);
+		
+		$selected = array();
+		if(isset($portal_config[$key]) && strlen($portal_config[$key]) > 0)
+		{
+			$selected = explode(',', $portal_config[$key]);
+		}
+		// Build forum options
+		$s_forum_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
+		foreach ($forum_list as $f_id => $f_row)
+		{
+			$s_forum_options .= '<option value="' . $f_id . '"' . ((in_array($f_id, $selected)) ? ' selected="selected"' : '') . (($f_row['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $f_row['padding'] . $f_row['forum_name'] . '</option>';
+		}
+		$s_forum_options .= '</select>';
+
+		return $s_forum_options;
+
+	}
+	
+	// Store selected forums
+	function store_selected_forums($key)
+	{
+		global $db, $cache;
+		
+		// Get selected extensions
+		$values = request_var($key, array(0 => ''));
+		
+		$news = implode(',', $values);
+		
+		set_portal_config($key, $news);
+	
 	}
 }
 

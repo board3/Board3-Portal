@@ -207,6 +207,11 @@ class install_install extends module
 		set_portal_config('portal_phpbb_menu', '0');
 		set_portal_config('portal_poll_hide', '0');
 		
+		// Added 1.0.4
+		set_portal_config('portal_news_exclude', '0');
+		set_portal_config('portal_attachments_filetype', '');
+		set_portal_config('portal_attachments_exclude', '0');
+		
 		// Add permissions
 		$auth_admin = new auth_admin();
 		$auth_admin->acl_add_option(array(

@@ -37,7 +37,7 @@ $sql = $db->sql_build_query('SELECT_DISTINCT', array(
 	'WHERE'		=> 'z.user_id = ' . $user->data['user_id'] . '
 		AND z.friend = 1
 		AND u.user_id = z.zebra_id',
-	'GROUP_BY'	=> 'z.zebra_id, u.user_id, u.username, u.user_allow_viewonline, u.user_colour',
+	'GROUP_BY'	=> 'z.zebra_id, u.user_id, u.username, u.username_clean, u.user_allow_viewonline, u.user_colour',
 	'ORDER_BY'   => 'u.username_clean ASC',
 ));
 

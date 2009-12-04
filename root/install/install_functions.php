@@ -154,7 +154,7 @@ function b3p_drop_table($table)
 
 	$table_name = substr($table . '#', 6, -1);
 
-	if ($db->sql_layer != 'mssql')
+	if ($db->sql_layer != 'mssql' && $db->sql_layer != 'mssql_odbc')
 	{
 		$sql = 'DROP TABLE IF EXISTS ' . $table_prefix . $table_name;
 		$result = $db->sql_query($sql);
