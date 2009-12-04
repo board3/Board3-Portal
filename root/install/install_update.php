@@ -355,6 +355,7 @@ class install_update extends module
 			case '1.0.4RC3':
 			case '1.0.4':
 				set_portal_config('portal_news_exclude', '0');
+				set_portal_config('portal_announcements_forum_exclude', '0');
 				set_portal_config('portal_attachments_filetype', '');
 				set_portal_config('portal_attachments_exclude', '0');
 			break;

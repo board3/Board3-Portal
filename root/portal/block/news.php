@@ -23,7 +23,7 @@ $start = ($start < 0) ? 0 : $start;
 
 // Fetch news from portal/includes/functions.php with check if "read full" is requested.
 $portal_news_length = ($news < 0) ? $portal_config['portal_news_length'] : 0;
-$fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_config['portal_news_permissions'], $portal_config['portal_number_of_news'], $portal_news_length, 0, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news', $start);
+$fetch_news = phpbb_fetch_posts($portal_config['portal_news_forum'], $portal_config['portal_news_permissions'], $portal_config['portal_number_of_news'], $portal_news_length, 0, ($portal_config['portal_show_all_news']) ? 'news_all' : 'news', $start, $portal_config['portal_news_exclude']);
 
 
 // Any news present? If not terminate it here.
@@ -53,6 +53,12 @@ else
 		else
 		{
 			$disallow_access = array();
+		}
+		
+		if($portal_config['portal_news_exclude'] == true)
+		{
+			$disallow_access = array_merge($disallow_access, $forum_from);
+			$forum_from = array();
 		}
 
 		if(sizeof($forum_from))

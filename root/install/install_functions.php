@@ -162,8 +162,6 @@ function b3p_drop_table($table)
 	}
 	else
 	{
-		$sql = 'if exists (select * from sysobjects where name = ' . $table_prefix . $table_name . ')
-			drop table ' . $table_prefix . $table_name;
 		$sql = "IF EXISTS(SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '{$table_prefix}{$table_name}')
 			DROP TABLE {$table_prefix}{$table_name}";
 		$result = $db->sql_query($sql);

@@ -22,7 +22,7 @@ $start = ($start < 0) ? 0 : $start;
 
 // Fetch announcements from portal/includes/functions.php with check if "read full" is requested.
 $portal_announcement_length = ($announcement < 0) ? $portal_config['portal_announcements_length'] : 0;
-$fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_forum'], $portal_config['portal_announcements_permissions'], $portal_config['portal_number_of_announcements'], $portal_announcement_length, $portal_config['portal_announcements_day'], 'announcements', $start);
+$fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_forum'], $portal_config['portal_announcements_permissions'], $portal_config['portal_number_of_announcements'], $portal_announcement_length, $portal_config['portal_announcements_day'], 'announcements', $start, $portal_config['portal_announcements_forum_exclude']);
 
 // Any announcements present? If not terminate it here.
 if (sizeof($fetch_news) == 0)
@@ -55,6 +55,12 @@ else
 		else
 		{
 			$disallow_access = array();
+		}
+		
+		if($portal_config['portal_announcements_forum_exclude'] == true)
+		{
+			$disallow_access = array_merge($disallow_access, $forum_from);
+			$forum_from = array();
 		}
 
 		$global_f = 0;

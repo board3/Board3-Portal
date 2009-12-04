@@ -87,7 +87,7 @@ class acp_portal
 						'portal_show_all_news'				=> array('lang' => 'PORTAL_SHOW_ALL_NEWS',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_number_of_news'				=> array('lang' => 'PORTAL_NUMBER_OF_NEWS',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_news_length'				=> array('lang' => 'PORTAL_NEWS_LENGTH',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-						'portal_news_forum'					=> array('lang' => 'PORTAL_NEWS_FORUM',	'validate' => 'string',		'type' => 'custom',	'method' => 'select_forums',	 'explain' => true),
+						'portal_news_forum'					=> array('lang' => 'PORTAL_NEWS_FORUM',		'validate' => 'string',		'type' => 'custom',	 		'explain' => true,	'method' => 'select_forums'),
 						'portal_news_exclude'				=> array('lang' => 'PORTAL_NEWS_EXCLUDE',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_news_show_last'             => array('lang' => 'PORTAL_NEWS_SHOW_LAST',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_news_archive'               => array('lang' => 'PORTAL_NEWS_ARCHIVE',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
@@ -106,7 +106,8 @@ class acp_portal
 						'portal_number_of_announcements'			=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 						'portal_announcements_day'					=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 						'portal_announcements_length'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-						'portal_global_announcements_forum'			=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'text:10:200',	'explain' => true),						
+						'portal_global_announcements_forum'			=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'custom',			'explain' => true, 'method' => 'select_forums'),
+						'portal_announcements_forum_exclude'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_FORUM_EXCLUDE',	'validate' => 'string', 'type' => 'radio:yes_no',	'explain' => true),
 						'portal_announcements_archive'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_announcements_permissions'			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_show_announcements_replies_views'	=> array('lang' => 'PORTAL_SHOW_REPLIES_VIEWS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
@@ -390,7 +391,7 @@ class acp_portal
 				continue;
 			}
 			
-			if ($config_name == 'portal_attachments_filetype' && $config_name == 'portal_news_forum')
+			if ($config_name == 'portal_attachments_filetype' || $config_name == 'portal_news_forum' || $config_name == 'portal_global_announcements_forum')
 			{
 				continue;
 			}
@@ -427,18 +428,25 @@ class acp_portal
 			}
 		}
 		
-		// Get data from select boxes and store in DB
-		if($mode == 'attachments' && $submit)
-		{
-			$this->store_filetypes('portal_attachments_filetype');
-		}
-		elseif($mode == 'news' && $submit)
-		{
-			$this->store_selected_forums('portal_news_forum');
-		}
-		
 		if ($submit)
 		{
+			// Get data from select boxes and store in DB
+			switch($mode)
+			{
+				case 'attachments':
+					$this->store_filetypes('portal_attachments_filetype');
+				break;
+				
+				case 'news':
+					$this->store_selected_forums('portal_news_forum');
+				break;
+				
+				case 'announcements':
+					$this->store_selected_forums('portal_global_announcements_forum');
+				break;
+			
+			}
+		
 			add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']);
 			trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link($this->u_action));
 		}

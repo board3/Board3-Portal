@@ -65,7 +65,7 @@ function set_portal_config($config_name, $config_value)
 }
 
 // fetch post for news & announce
-function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0)
+function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0, $invert = false)
 {
 	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode, $portal_config, $config;
 
@@ -83,6 +83,12 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	else
 	{
 		$disallow_access = array();
+	}
+	
+	if($invert == true)
+	{
+		$disallow_access = array_merge($disallow_access, $forum_from);
+		$forum_from = array();
 	}
 
 	$global_f = 0;
