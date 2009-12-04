@@ -19,16 +19,11 @@ if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 // Exclude forums
 //
 $sql_where = '';
-if ($portal_config['portal_exclude_forums'])
+if ($portal_config['portal_recent_forum'] > 0)
 {
-	$exclude_forums = explode(',', $portal_config['portal_exclude_forums']);
-	foreach ($exclude_forums as $i => $id)
-	{
-		if ($id > 0)
-		{
-			$sql_where .= ' AND forum_id <> ' . (int) $id;
-		}
-	}
+	$exclude_forums = explode(',', $portal_config['portal_recent_forum']);
+	
+	$sql_where = ' AND ' . $db->sql_in_set('forum_id', $exclude_forums, ($portal_config['portal_exclude_forums']) ? true : false);
 }
 
 // Get a list of forums the user cannot read

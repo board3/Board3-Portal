@@ -119,10 +119,11 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_RECENT_SETTINGS',
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_RECENT_SETTINGS',
-						'portal_recent'			 			=> array('lang' => 'PORTAL_RECENT'				 	 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_max_topics'					=> array('lang' => 'PORTAL_MAX_TOPIC'					 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-						'portal_recent_title_limit'			=> array('lang' => 'PORTAL_RECENT_TITLE_LIMIT'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-						'portal_exclude_forums'				=> array('lang' => 'PORTAL_EXCLUDE_FORUM'				,	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
+						'portal_recent'			 			=> array('lang' => 'PORTAL_RECENT',				'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+						'portal_max_topics'					=> array('lang' => 'PORTAL_MAX_TOPIC',			'validate' => 'int',		'type' => 'text:3:3',		'explain' => true),
+						'portal_recent_title_limit'			=> array('lang' => 'PORTAL_RECENT_TITLE_LIMIT',	'validate' => 'int',		'type' => 'text:3:3',		'explain' => true),
+						'portal_recent_forum'				=> array('lang' => 'PORTAL_RECENT_FORUM',		'validate' => 'string',		'type' => 'custom',			'explain' => true, 'method' => 'select_forums'),
+						'portal_exclude_forums'				=> array('lang' => 'PORTAL_EXCLUDE_FORUM',		'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 					)
 				);
 			break;
@@ -391,7 +392,7 @@ class acp_portal
 				continue;
 			}
 			
-			if ($config_name == 'portal_attachments_filetype' || $config_name == 'portal_news_forum' || $config_name == 'portal_global_announcements_forum')
+			if ($config_name == 'portal_attachments_filetype' || $config_name == 'portal_news_forum' || $config_name == 'portal_global_announcements_forum' || $config_name == 'portal_recent_forum')
 			{
 				continue;
 			}
@@ -443,6 +444,10 @@ class acp_portal
 				
 				case 'announcements':
 					$this->store_selected_forums('portal_global_announcements_forum');
+				break;
+				
+				case 'recent':
+					$this->store_selected_forums('portal_recent_forum');
 				break;
 			
 			}

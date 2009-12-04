@@ -148,7 +148,6 @@ class install_install extends module
 		set_portal_config('portal_recent', '1');
 		set_portal_config('portal_recent_title_limit', '100');
 		set_portal_config('portal_max_topics', '10');
-		set_portal_config('portal_exclude_forums', '');
 		set_portal_config('portal_news_forum', '');
 		set_portal_config('portal_news_length', '250');
 		set_portal_config('portal_number_of_news', '5');
@@ -219,6 +218,8 @@ class install_install extends module
 		// Added 1.0.5
 		set_portal_config('portal_news_exclude', '0');
 		set_portal_config('portal_announcements_forum_exclude', '0');
+		set_portal_config('portal_exclude_forums', '1');
+		set_portal_config('portal_recent_forum', '');
 		set_portal_config('portal_attachments_filetype', '');
 		set_portal_config('portal_attachments_exclude', '0');
 		
