@@ -158,7 +158,8 @@ class acp_portal
 						'portal_attachments'				=> array('lang' => 'PORTAL_ATTACHMENTS'				 ,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_attachments_number'	=> array('lang' => 'PORTAL_ATTACHMENTS_NUMBER'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 						'portal_attach_max_length'	=> array('lang' => 'PORTAL_ATTACHMENTS_MAX_LENGTH'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-						'portal_attachments_forum_ids'	=> array('lang' => 'PORTAL_ATTACHMENTS_FORUM_IDS',	'validate' => 'string',		'type' => 'text:10:200',	 'explain' => true),
+						'portal_attachments_forum_ids'	=> array('lang' => 'PORTAL_ATTACHMENTS_FORUM_IDS',	'validate' => 'string',		'type' => 'custom',	'explain' => true,	'method' => 'select_forums'),
+						'portal_attachments_forum_exclude' => array('lang' => 'PORTAL_ATTACHMENTS_FORUM_EXCLUDE', 'validate' => 'bool', 'type' => 'radio:yes_no',	 'explain' => true),
 						'portal_attachments_filetype'	=> array('lang' => 'PORTAL_ATTACHMENTS_FILETYPE',	'validate' => 'string', 	'type' => 'custom',	'explain' => true,	'method' => 'select_filetype'),
 						'portal_attachments_exclude'	=> array('lang' => 'PORTAL_ATTACHMENTS_EXCLUDE', 	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 					)
@@ -392,7 +393,7 @@ class acp_portal
 				continue;
 			}
 			
-			if ($config_name == 'portal_attachments_filetype' || $config_name == 'portal_news_forum' || $config_name == 'portal_global_announcements_forum' || $config_name == 'portal_recent_forum')
+			if ($config_name == 'portal_attachments_filetype' || $config_name == 'portal_news_forum' || $config_name == 'portal_global_announcements_forum' || $config_name == 'portal_recent_forum' || $config_name == 'portal_attachments_forum_ids')
 			{
 				continue;
 			}
@@ -436,6 +437,7 @@ class acp_portal
 			{
 				case 'attachments':
 					$this->store_filetypes('portal_attachments_filetype');
+					$this->store_selected_forums('portal_attachments_forum_ids');
 				break;
 				
 				case 'news':
@@ -449,7 +451,8 @@ class acp_portal
 				case 'recent':
 					$this->store_selected_forums('portal_recent_forum');
 				break;
-			
+				
+				default:
 			}
 		
 			add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']);
