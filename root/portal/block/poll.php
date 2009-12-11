@@ -165,35 +165,32 @@ if ($update && $portal_config['portal_poll_allow_vote'])
 $where = '';
 $poll_forums = false;
 
+// Get readable forums
+$forum_list = array();
+
+$forum_list = array_unique(array_keys($auth->acl_getf('f_read', true)));
+
 if($portal_config['portal_poll_topic_id'] !== '')
 {
 	$poll_forums_config  = explode(',' ,$portal_config['portal_poll_topic_id']);
-	foreach($poll_forums_config as $poll_forum )
+	
+	if($portal_config['portal_poll_exclude_id'])
 	{
-		if (is_numeric(trim($poll_forum)) === TRUE)
-		{
-			$poll_forum = (int) trim($poll_forum);
-			if($auth->acl_get('f_read', $poll_forum))
-			{
-				$poll_forums = true;
-				$where .= ($where == "") ? "t.forum_id = '{$poll_forum}'" : " OR t.forum_id = '{$poll_forum}'";
-			}
-		}
+		$forum_list = array_unique(array_diff($forum_list, $poll_forums_config));
+	}
+	else
+	{
+		$forum_list = array_unique(array_intersect($poll_forums_config, $forum_list));
 	}
 }
-else
+
+$where = '';
+
+if(sizeof($forum_list))
 {
-	$forum_list = $auth->acl_getf('f_read', true);
-
-	foreach($forum_list as $pf => $pf_data )
-	{
-		$pf = (int) trim($pf);
-		$poll_forums = true;
-		$where .= ($where == "") ? "t.forum_id = '{$pf}'" : " OR t.forum_id = '{$pf}'";
-	}
+	$poll_forums = true;
+	$where = 'AND ' . $db->sql_in_set('t.forum_id', $forum_list);
 }
-
-$where = ($where !== '') ? "AND ({$where})" : '';
 
 if ($portal_config['portal_poll_hide'])
 {

@@ -1,0 +1,76 @@
+<!--version $Id: portal_center.html 544 2009-09-10 12:35:25Z christian_n $ //-->
+
+<!-- IF S_DISPLAY_GENERAL or (U_RESTORE_PERMISSIONS and S_DISPLAY_MAINMENU) -->
+	<!-- INCLUDE portal/block/general_block.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_WELCOME -->
+	<!-- IF S_DISPLAY_WELCOME_GUEST and S_USER_LOGGED_IN -->
+	<!-- ELSE -->
+		<!-- INCLUDE portal/block/welcome.html -->
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- IF S_CUSTOM_CENTER -->
+	<!-- INCLUDE portal/block/custom_center.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_RECENT -->
+	<!-- INCLUDE portal/block/recent.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_ANNOUNCEMENTS -->
+	<!-- IF S_ANNOUNCE_COMPACT -->
+		<!-- INCLUDE portal/block/announcements_compact.html -->
+	<!-- ELSE -->
+		<!-- INCLUDE portal/block/announcements.html -->
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_NEWS -->
+	<!-- IF S_NEWS_COMPACT -->
+		<!-- INCLUDE portal/block/news_compact.html -->
+	<!-- ELSE -->
+		<!-- INCLUDE portal/block/news.html -->
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- INCLUDE portal/block/additional_blocks_center.html -->
+
+<!-- IF S_DISPLAY_POLL -->
+	<!-- INCLUDE portal/block/poll.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_PORTAL_FORUM_INDEX -->
+	<!-- INCLUDE forumlist_body.html -->
+	<br clear="all" />
+	<table class="legend">
+		<tr>
+			<td width="20" align="center">{FORUM_NEW_IMG}</td>
+			<td><span class="gensmall">{L_NEW_POSTS}</span></td>
+			<td>&nbsp;&nbsp;</td>
+			<td width="20" align="center">{FORUM_IMG}</td>
+			<td><span class="gensmall">{L_NO_NEW_POSTS}</span></td>
+			<td>&nbsp;&nbsp;</td>
+			<td width="20" align="center">{FORUM_LOCKED_IMG}</td>
+			<td><span class="gensmall">{L_FORUM_LOCKED}</span></td>
+		</tr>
+	</table>
+	<br clear="all" />
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_ONLINE_PORTAL_LIST and S_DISPLAY_ONLINE_LIST -->
+	<!-- INCLUDE portal/block/whois_online.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_PAY_C -->
+	<!-- INCLUDE portal/block/donation.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_WORDGRAPH -->
+	<!-- INCLUDE portal/block/wordgraph.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_JUMPBOX -->
+	<!-- INCLUDE portal/block/jumpbox.html -->
+<!-- ENDIF -->

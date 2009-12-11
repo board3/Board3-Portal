@@ -56,6 +56,8 @@ class acp_portal
 					'vars'	=> array(
 						'legend1'					=> 'ACP_PORTAL_GENERAL_SETTINGS',
 						'portal_enable'				=> array('lang' => 'PORTAL_ENABLE',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_left_column'		=> array('lang' => 'PORTAL_LEFT_COLUMN',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'portal_right_column'		=> array('lang' => 'PORTAL_RIGHT_COLUMN',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_version_check'		=> array('lang' => 'PORTAL_VERSION_CHECK',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_advanced_stat'		=> array('lang' => 'PORTAL_ADVANCED_STAT',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'portal_search'				=> array('lang' => 'PORTAL_SEARCH',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
@@ -181,7 +183,8 @@ class acp_portal
 					'vars'	=> array(
 						'legend1'							=> 'ACP_PORTAL_POLLS_SETTINGS',
 						'portal_poll_topic'					=> array('lang' => 'PORTAL_POLL_TOPIC'					,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-						'portal_poll_topic_id'				=> array('lang' => 'PORTAL_POLL_TOPIC_ID'				,	'validate' => 'string',		'type' => 'text:10:200',	'explain' => true),
+						'portal_poll_topic_id'				=> array('lang' => 'PORTAL_POLL_TOPIC_ID'				,	'validate' => 'string',		'type' => 'custom',			'explain' => true, 'method' => 'select_forums'),
+						'portal_poll_exclude_id'			=> array('lang' => 'PORTAL_POLL_EXCLUDE_ID'				,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 						'portal_poll_limit'					=> array('lang' => 'PORTAL_POLL_LIMIT'					,	'validate' => 'int',		'type' => 'text:3:3',	 	'explain' => true),
 						'portal_poll_allow_vote'			=> array('lang' => 'PORTAL_POLL_ALLOW_VOTE'				,	'validate' => 'ibool',		'type' => 'radio:yes_no',	 'explain' => true),
 						'portal_poll_hide'					=> array('lang' => 'PORTAL_POLL_HIDE'					,	'validate' => 'bool',		'type' => 'radio:yes_no',	 'explain' => true),
@@ -393,7 +396,7 @@ class acp_portal
 				continue;
 			}
 			
-			if ($config_name == 'portal_attachments_filetype' || $config_name == 'portal_news_forum' || $config_name == 'portal_global_announcements_forum' || $config_name == 'portal_recent_forum' || $config_name == 'portal_attachments_forum_ids')
+			if ($config_name == 'portal_attachments_filetype' || $config_name == 'portal_news_forum' || $config_name == 'portal_global_announcements_forum' || $config_name == 'portal_recent_forum' || $config_name == 'portal_attachments_forum_ids' || $config_name == 'portal_poll_topic_id')
 			{
 				continue;
 			}
@@ -450,6 +453,10 @@ class acp_portal
 				
 				case 'recent':
 					$this->store_selected_forums('portal_recent_forum');
+				break;
+				
+				case 'polls':
+					$this->store_selected_forums('portal_poll_topic_id');
 				break;
 				
 				default:

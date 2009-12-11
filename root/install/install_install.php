@@ -216,6 +216,8 @@ class install_install extends module
 		set_portal_config('version_check_version', '0.0.0');
 		
 		// Added 1.0.5
+		set_portal_config('portal_left_column', '1');
+		set_portal_config('portal_right_column', '1');
 		set_portal_config('portal_news_exclude', '0');
 		set_portal_config('portal_announcements_forum_exclude', '0');
 		set_portal_config('portal_exclude_forums', '1');
@@ -223,6 +225,7 @@ class install_install extends module
 		set_portal_config('portal_attachments_forum_exclude', '0');
 		set_portal_config('portal_attachments_filetype', '');
 		set_portal_config('portal_attachments_exclude', '0');
+		set_portal_config('portal_poll_exclude_id', '0');
 		
 		// Add permissions
 		$auth_admin = new auth_admin();

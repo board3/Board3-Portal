@@ -35,6 +35,9 @@ if (!$portal_config['portal_enable'])
 
 $load_center = true;
 
+// Always load center column html-file in portal
+$template->assign_var('S_CENTER_COLUMN', true);
+
 if (file_exists($phpbb_root_path . 'install/index.' . $phpEx) && ($user->data['user_type'] == USER_FOUNDER))
 {
 	$template->assign_var('S_DISPLAY_GENERAL', true);
@@ -136,104 +139,116 @@ if ($load_center)
 	}
 }
 
-// show login box and user menu
-// only registered user see user menu
-if ($user->data['is_registered'])
+// load blocks in the left column
+if($portal_config['portal_left_column'])
 {
-	include($phpbb_root_path . 'portal/block/user_menu.' . $phpEx);
-}
-else
-{
-	include($phpbb_root_path . 'portal/block/login_box.' . $phpEx);
+	$template->assign_var('S_LEFT_COLUMN', true);
+	
+	if ($portal_config['portal_main_menu'])
+	{
+		include($phpbb_root_path . 'portal/block/main_menu.' . $phpEx);
+	}
+	
+	if ($portal_config['portal_search'])
+	{
+		include($phpbb_root_path . 'portal/block/search.' . $phpEx);
+	}
+	
+	if ($portal_config['portal_birthdays'])
+	{
+		include($phpbb_root_path . 'portal/block/birthday_list.' . $phpEx);
+	}
+
+	if ($portal_config['portal_attachments'] && $config['allow_attachments'])
+	{
+		include($phpbb_root_path . 'portal/block/attachments.' . $phpEx);
+	}
+	
+	if ($portal_config['portal_top_posters'])
+	{
+		include($phpbb_root_path . 'portal/block/top_posters.' . $phpEx);
+	}
+
+	if ($portal_config['portal_latest_members'])
+	{
+		include($phpbb_root_path . 'portal/block/latest_members.' . $phpEx);
+	}
+
+	if ($portal_config['portal_random_member'])
+	{
+		include($phpbb_root_path . 'portal/block/random_member.' . $phpEx);
+	}
+	
+	if ($portal_config['portal_link_us'])
+	{
+		include($phpbb_root_path . 'portal/block/link_us.' . $phpEx);
+	}
+	
+	if ($portal_config['portal_change_style'])
+	{
+		include($phpbb_root_path . 'portal/block/change_style.' . $phpEx);
+	}
+
+	if ($portal_config['portal_clock'])
+	{
+		$template->assign_var('S_DISPLAY_CLOCK', true);
+	}
 }
 
-if ($portal_config['portal_main_menu'])
+// load blocks in the right column
+if($portal_config['portal_right_column'])
 {
-	include($phpbb_root_path . 'portal/block/main_menu.' . $phpEx);
-}
+	$template->assign_var('S_RIGHT_COLUMN', true);
 
-if ($portal_config['portal_user_menu'])
-{
-	$template->assign_var('S_DISPLAY_USERMENU', true);
-}
+	// show login box and user menu
+	// only registered user see user menu
+	if ($user->data['is_registered'])
+	{
+		include($phpbb_root_path . 'portal/block/user_menu.' . $phpEx);
+	}
+	else
+	{
+		include($phpbb_root_path . 'portal/block/login_box.' . $phpEx);
+	}
+	
+	if ($portal_config['portal_user_menu'])
+	{
+		$template->assign_var('S_DISPLAY_USERMENU', true);
+	}
+	
+	if ($portal_config['portal_advanced_stat'])
+	{
+		include($phpbb_root_path . 'portal/block/statistics.' . $phpEx);
+	}
 
-if ($portal_config['portal_birthdays'])
-{
-	include($phpbb_root_path . 'portal/block/birthday_list.' . $phpEx);
-}
+	if ($portal_config['portal_minicalendar'])
+	{
+		include($phpbb_root_path . 'portal/block/mini_cal.' . $phpEx);
+	}
 
-if ($portal_config['portal_search'])
-{
-	include($phpbb_root_path . 'portal/block/search.' . $phpEx);
-}
-
-if ($portal_config['portal_attachments'] && $config['allow_attachments'])
-{
-	include($phpbb_root_path . 'portal/block/attachments.' . $phpEx);
-}
-
-if ($portal_config['portal_advanced_stat'])
-{
-	include($phpbb_root_path . 'portal/block/statistics.' . $phpEx);
-}
-
-if ($portal_config['portal_minicalendar'])
-{
-	include($phpbb_root_path . 'portal/block/mini_cal.' . $phpEx);
-}
-
-if ($portal_config['portal_link_us'])
-{
-	include($phpbb_root_path . 'portal/block/link_us.' . $phpEx);
-}
-
-if ($portal_config['portal_leaders'] && $portal_config['portal_leaders_ext'])
-{
-	include($phpbb_root_path . 'portal/block/leaders_ext.' . $phpEx);
-}
-elseif ($portal_config['portal_leaders'])
-{
-	include($phpbb_root_path . 'portal/block/leaders.' . $phpEx);
-}
-
-if ($portal_config['portal_load_last_visited_bots'])
-{
-	include($phpbb_root_path . 'portal/block/latest_bots.' . $phpEx);
-}
-
-if ($portal_config['portal_top_posters'])
-{
-	include($phpbb_root_path . 'portal/block/top_posters.' . $phpEx);
-}
-
-if ($portal_config['portal_latest_members'])
-{
-	include($phpbb_root_path . 'portal/block/latest_members.' . $phpEx);
-}
-
-if ($portal_config['portal_random_member'])
-{
-	include($phpbb_root_path . 'portal/block/random_member.' . $phpEx);
-}
-
-if ($portal_config['portal_friends'])
-{
-	include($phpbb_root_path . 'portal/block/friends.' . $phpEx);
-}
-
-if ($portal_config['portal_change_style'])
-{
-	include($phpbb_root_path . 'portal/block/change_style.' . $phpEx);
-}
-
-if ($portal_config['portal_clock'])
-{
-	$template->assign_var('S_DISPLAY_CLOCK', true);
-}
-
-if ($portal_config['portal_links'])
-{
-	include($phpbb_root_path . 'portal/block/links.' . $phpEx);
+	if ($portal_config['portal_leaders'] && $portal_config['portal_leaders_ext'])
+	{
+		include($phpbb_root_path . 'portal/block/leaders_ext.' . $phpEx);
+	}
+	elseif ($portal_config['portal_leaders'])
+	{
+		include($phpbb_root_path . 'portal/block/leaders.' . $phpEx);
+	}
+	
+	if ($portal_config['portal_load_last_visited_bots'])
+	{
+		include($phpbb_root_path . 'portal/block/latest_bots.' . $phpEx);
+	}
+	
+	if ($portal_config['portal_friends'])
+	{
+		include($phpbb_root_path . 'portal/block/friends.' . $phpEx);
+	}
+	
+	if ($portal_config['portal_links'])
+	{
+		include($phpbb_root_path . 'portal/block/links.' . $phpEx);
+	}
 }
 
 include($phpbb_root_path . 'portal/block/additional_blocks.' . $phpEx);
