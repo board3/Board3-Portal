@@ -97,7 +97,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</link-group>
 		<history>
 			<entry>
-				<date>2009-12-01</date>
+				<date>2009-12-24</date>
 				<rev-version>1.0.5</rev-version>
 				<changelog lang="en">
 					<change>Fixed mouseover showing "01 Jan" in birthday block, no matter when the birthday is</change>
@@ -118,6 +118,14 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Added reapply_sid() in portal.php</change>
 					<change>Added sql_freeresult to functions.php</change>
 					<change>Added fixes for better compatibility with Portalview MOD</change>
+					<change>Fixed SQL Bug with PostgreSQL</change>
+					<change>Fixed Bug where moderators were displayed in forumlist, although display of moderators was disabled in ACP</change>
+					<change>filetypes can now be selected to show up in attachment block and they can also be hidden from attachment block</change>
+					<change>Fixed small bugs for better compatibility with MSSQL</change>
+					<change>Added forum select box to news block, announcements block, recent topics block, attachments block, and polls block</change>
+					<change>Left and right column can be turned off via ACP now</change>
+					<change>Added rtl-fix for portal_body.html</change>
+					<change>Seperated portal_body.html into 3 seperate files</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fixed Bug in Geburtstags-Block: Mousever-Effekt zeigte "01 Jan" als Geburtstag, egal wann der Benutzer Geburtstag hat</change>
@@ -138,6 +146,14 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>reapply_sid() in portal.php hinzugefügt</change>
 					<change>sql_freeresult zu functions.php hinzugefügt</change>
 					<change>Änderungen für eine bessere Kompatibilität mit dem Portalview MOD hinzugefügt</change>
+					<change>SQL Bug mit PostgreSQL beseitigt</change>
+					<change>Bug beseitigt, durch den Moderatoren in der Forenlist angezeigt wurden, obwohl diese Option im ACP ausgeschaltet war</change>
+					<change>Dateitypen können für den Dateianhänge-Block ausgewählt und auch versteckt werden</change>
+					<change>Kleine SQL Fehler für eine bessere Kompatibilität mit MSSQL beseitigt</change>
+					<change>Foren-Auswahl-Box zu folgenden Blocks hinzugefügt: Aktuelle Beiträge-Block, Bekanntmachungs-Block, Aktuelle Themen-Block, Dateianhänge-Block und Umfragen-Block</change>
+					<change>Linke und rechte Spalte können über das ACP ausgeschaltet werden</change>
+					<change>RTL-fix für portal_body.html hinzugefügt</change>
+					<change>portal_body.html in 3 verschiedene Dateien aufgeteilt</change>
 				</changelog>
 			</entry>
 			<entry>
@@ -433,7 +449,7 @@ Deny from All
 		<open src="includes/session.php">
 			<edit>
 				<find><![CDATA[		if (!empty($_GET['style']) && $auth->acl_get('a_styles') && !defined('ADMIN_START'))]]></find>
-				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']))]]></action>
+				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START'))]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/overall_header.html">
@@ -449,7 +465,7 @@ Deny from All
 				</inline-edit>
 			</edit>
 			<edit>
-				<find><![CDATA[<li class="icon-logout"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="l">{L_LOGIN_LOGOUT}</a></li>
+				<find><![CDATA[					<li class="icon-logout"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="x">{L_LOGIN_LOGOUT}</a></li>
 				<!-- ENDIF -->
 			</ul>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- MODX by the phpBB MOD Team XSL file v1.2.3 copyright 2005-2009 the phpBB MOD Team.
 	This file is released under the GNU GPL version 2.  See license.txt.
-	$Id$ -->
+	$Id: modx.prosilver.en.xsl 554 2009-09-30 12:31:21Z christian_n $ -->
 <!DOCTYPE xsl:stylesheet[
 	<!ENTITY nbsp "&#160;">
 ]>

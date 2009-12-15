@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
-<!-- $Id$ -->
+<!-- $Id: subsilver2.xml 586 2009-12-03 00:16:49Z marc1706 $ -->
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.3.xsd">
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
@@ -75,55 +75,61 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			 </author>
 		</author-group>
 
-		<mod-version>1.0.4</mod-version>
+		<mod-version>1.0.5</mod-version>
 
 		<installation>
 			<level>easy</level>
-			<time>1200</time>
-			<target-version>3.0.5</target-version>
+			<time>600</time>
+			<target-version>3.0.6</target-version>
 		</installation>
 
 		<link-group>
 			<link type="parent" lang="de" href="../../../install.xml">Installations-Anleitung</link>
 			<link type="parent" lang="en" href="../../../install.xml">Manual</link>
+			<link type="parent" lang="de" href="../update.xml">Update-Anleitung von Version 1.0.3</link>
+			<link type="parent" lang="en" href="../update.xml">Update Instructions for 1.0.3</link>
 		</link-group>	
 	</header>
 	<action-group>
 		<copy>
 			<file from="root/styles/subsilver2/template/portal/portal_body.html" to="styles/subsilver2/template/portal/portal_body.html" />
-			<file from="root/styles/subsilver2/template/portal/announcements.html" to="styles/subsilver2/template/portal/announcements.html" />
-			<file from="root/styles/subsilver2/template/portal/announcements_compact.html" to="styles/subsilver2/template/portal/announcements_compact.html" />
-			<file from="root/styles/subsilver2/template/portal/attachments.html" to="styles/subsilver2/template/portal/attachments.html" />
-			<file from="root/styles/subsilver2/template/portal/birthday_list.html" to="styles/subsilver2/template/portal/birthday_list.html" />
-			<file from="root/styles/subsilver2/template/portal/change_style.html" to="styles/subsilver2/template/portal/change_style.html" />
-			<file from="root/styles/subsilver2/template/portal/clock.html" to="styles/subsilver2/template/portal/clock.html" />
-			<file from="root/styles/subsilver2/template/portal/custom_center.html" to="styles/subsilver2/template/portal/custom_center.html" />
-			<file from="root/styles/subsilver2/template/portal/custom_small.html" to="styles/subsilver2/template/portal/custom_small.html" />
-			<file from="root/styles/subsilver2/template/portal/donation.html" to="styles/subsilver2/template/portal/donation.html" />
-			<file from="root/styles/subsilver2/template/portal/donation_small.html" to="styles/subsilver2/template/portal/donation_small.html" />
-			<file from="root/styles/subsilver2/template/portal/general_block.html" to="styles/subsilver2/template/portal/general_block.html" />
-			<file from="root/styles/subsilver2/template/portal/latest_bots.html" to="styles/subsilver2/template/portal/latest_bots.html" />
-			<file from="root/styles/subsilver2/template/portal/latest_members.html" to="styles/subsilver2/template/portal/latest_members.html" />
-			<file from="root/styles/subsilver2/template/portal/leaders.html" to="styles/subsilver2/template/portal/leaders.html" />
-			<file from="root/styles/subsilver2/template/portal/leaders_ext.html" to="styles/subsilver2/template/portal/leaders_ext.html" />
-			<file from="root/styles/subsilver2/template/portal/link_us.html" to="styles/subsilver2/template/portal/link_us.html" />
-			<file from="root/styles/subsilver2/template/portal/links.html" to="styles/subsilver2/template/portal/links.html" />
-			<file from="root/styles/subsilver2/template/portal/login_box.html" to="styles/subsilver2/template/portal/login_box.html" />
-			<file from="root/styles/subsilver2/template/portal/main_menu.html" to="styles/subsilver2/template/portal/main_menu.html" />
-			<file from="root/styles/subsilver2/template/portal/mini_calendar.html" to="styles/subsilver2/template/portal/mini_calendar.html" />
-			<file from="root/styles/subsilver2/template/portal/news.html" to="styles/subsilver2/template/portal/news.html" />
-			<file from="root/styles/subsilver2/template/portal/news_compact.html" to="styles/subsilver2/template/portal/news_compact.html" />
-			<file from="root/styles/subsilver2/template/portal/online_friends.html" to="styles/subsilver2/template/portal/online_friends.html" />
-			<file from="root/styles/subsilver2/template/portal/poll.html" to="styles/subsilver2/template/portal/poll.html" />
-			<file from="root/styles/subsilver2/template/portal/random_member.html" to="styles/subsilver2/template/portal/random_member.html" />
-			<file from="root/styles/subsilver2/template/portal/recent.html" to="styles/subsilver2/template/portal/recent.html" />
-			<file from="root/styles/subsilver2/template/portal/search.html" to="styles/subsilver2/template/portal/search.html" />
-			<file from="root/styles/subsilver2/template/portal/statistics.html" to="styles/subsilver2/template/portal/statistics.html" />
-			<file from="root/styles/subsilver2/template/portal/top_poster.html" to="styles/subsilver2/template/portal/top_poster.html" />
-			<file from="root/styles/subsilver2/template/portal/user_menu.html" to="styles/subsilver2/template/portal/user_menu.html" />
-			<file from="root/styles/subsilver2/template/portal/welcome.html" to="styles/subsilver2/template/portal/welcome.html" />
-			<file from="root/styles/subsilver2/template/portal/whois_online.html" to="styles/subsilver2/template/portal/whois_online.html" />
-			<file from="root/styles/subsilver2/template/portal/wordgraph.html" to="styles/subsilver2/template/portal/wordgraph.html" />
+			<file from="root/styles/subsilver2/template/portal/portal_left.html" to="styles/subsilver2/template/portal/portal_left.html" />
+			<file from="root/styles/subsilver2/template/portal/portal_center.html" to="styles/subsilver2/template/portal/portal_center.html" />
+			<file from="root/styles/subsilver2/template/portal/portal_right.html" to="styles/subsilver2/template/portal/portal_right.html" />
+			<file from="root/styles/subsilver2/template/portal/block/announcements.html" to="styles/subsilver2/template/portal/block/announcements.html" />
+			<file from="root/styles/subsilver2/template/portal/block/announcements_compact.html" to="styles/subsilver2/template/portal/block/announcements_compact.html" />
+			<file from="root/styles/subsilver2/template/portal/block/attachments.html" to="styles/subsilver2/template/portal/block/attachments.html" />
+			<file from="root/styles/subsilver2/template/portal/block/birthday_list.html" to="styles/subsilver2/template/portal/block/birthday_list.html" />
+			<file from="root/styles/subsilver2/template/portal/block/change_style.html" to="styles/subsilver2/template/portal/block/change_style.html" />
+			<file from="root/styles/subsilver2/template/portal/block/clock.html" to="styles/subsilver2/template/portal/block/clock.html" />
+			<file from="root/styles/subsilver2/template/portal/block/custom_center.html" to="styles/subsilver2/template/portal/block/custom_center.html" />
+			<file from="root/styles/subsilver2/template/portal/block/custom_small.html" to="styles/subsilver2/template/portal/block/custom_small.html" />
+			<file from="root/styles/subsilver2/template/portal/block/donation.html" to="styles/subsilver2/template/portal/block/donation.html" />
+			<file from="root/styles/subsilver2/template/portal/block/donation_small.html" to="styles/subsilver2/template/portal/block/donation_small.html" />
+			<file from="root/styles/subsilver2/template/portal/block/forumlist_search.html" to="styles/subsilver2/template/portal/block/forumlist_search.html" />
+			<file from="root/styles/subsilver2/template/portal/block/general_block.html" to="styles/subsilver2/template/portal/block/general_block.html" />
+			<file from="root/styles/subsilver2/template/portal/block/latest_bots.html" to="styles/subsilver2/template/portal/block/latest_bots.html" />
+			<file from="root/styles/subsilver2/template/portal/block/latest_members.html" to="styles/subsilver2/template/portal/block/latest_members.html" />
+			<file from="root/styles/subsilver2/template/portal/block/leaders.html" to="styles/subsilver2/template/portal/block/leaders.html" />
+			<file from="root/styles/subsilver2/template/portal/block/leaders_ext.html" to="styles/subsilver2/template/portal/block/leaders_ext.html" />
+			<file from="root/styles/subsilver2/template/portal/block/link_us.html" to="styles/subsilver2/template/portal/block/link_us.html" />
+			<file from="root/styles/subsilver2/template/portal/block/links.html" to="styles/subsilver2/template/portal/block/links.html" />
+			<file from="root/styles/subsilver2/template/portal/block/login_box.html" to="styles/subsilver2/template/portal/block/login_box.html" />
+			<file from="root/styles/subsilver2/template/portal/block/main_menu.html" to="styles/subsilver2/template/portal/block/main_menu.html" />
+			<file from="root/styles/subsilver2/template/portal/block/mini_calendar.html" to="styles/subsilver2/template/portal/block/mini_calendar.html" />
+			<file from="root/styles/subsilver2/template/portal/block/news.html" to="styles/subsilver2/template/portal/block/news.html" />
+			<file from="root/styles/subsilver2/template/portal/block/news_compact.html" to="styles/subsilver2/template/portal/block/news_compact.html" />
+			<file from="root/styles/subsilver2/template/portal/block/online_friends.html" to="styles/subsilver2/template/portal/block/online_friends.html" />
+			<file from="root/styles/subsilver2/template/portal/block/poll.html" to="styles/subsilver2/template/portal/block/poll.html" />
+			<file from="root/styles/subsilver2/template/portal/block/random_member.html" to="styles/subsilver2/template/portal/block/random_member.html" />
+			<file from="root/styles/subsilver2/template/portal/block/recent.html" to="styles/subsilver2/template/portal/block/recent.html" />
+			<file from="root/styles/subsilver2/template/portal/block/search.html" to="styles/subsilver2/template/portal/block/search.html" />
+			<file from="root/styles/subsilver2/template/portal/block/statistics.html" to="styles/subsilver2/template/portal/block/statistics.html" />
+			<file from="root/styles/subsilver2/template/portal/block/top_poster.html" to="styles/subsilver2/template/portal/block/top_poster.html" />
+			<file from="root/styles/subsilver2/template/portal/block/user_menu.html" to="styles/subsilver2/template/portal/block/user_menu.html" />
+			<file from="root/styles/subsilver2/template/portal/block/welcome.html" to="styles/subsilver2/template/portal/block/welcome.html" />
+			<file from="root/styles/subsilver2/template/portal/block/whois_online.html" to="styles/subsilver2/template/portal/block/whois_online.html" />
+			<file from="root/styles/subsilver2/template/portal/block/wordgraph.html" to="styles/subsilver2/template/portal/block/wordgraph.html" />
 			<file from="root/styles/subsilver2/theme/images/portal/arrowbullet.gif" to="styles/subsilver2/theme/images/portal/arrowbullet.gif" />
 			<file from="root/styles/subsilver2/theme/images/portal/mini_cal_icon_left_arrow.png" to="styles/subsilver2/theme/images/portal/mini_cal_icon_left_arrow.png" />
 			<file from="root/styles/subsilver2/theme/images/portal/mini_cal_icon_right_arrow.png" to="styles/subsilver2/theme/images/portal/mini_cal_icon_right_arrow.png" />
