@@ -275,9 +275,7 @@ Aktualisiere deine Styles:
     "Administrations-Bereich" (ACP) > "Styles" > "Themes" > jedes > "Aktualisieren"
     "Administrations-Bereich" (ACP) > "Styles" > "Grafiksammlungen" > jedes > "Aktualisieren"
 
-Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
-
-Subsilver2 User: bitte das komplette Verzeichnis subsilver2 mit den neuen Dateien überschreiben.]]></diy-instructions>
+Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"]]></diy-instructions>
 		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer
 
 Refresh your Styles:
@@ -285,8 +283,6 @@ Refresh your Styles:
     "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
     "Administration Control Panel" (ACP) > "Styles" > "Imagesets" > each > "refresh"
 
-Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
-
-Subsilver2 user: please upload the complete subsilver2 directory.]]></diy-instructions>
+Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"]]></diy-instructions>
 	</action-group>
 </mod>
