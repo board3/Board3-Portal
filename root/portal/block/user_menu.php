@@ -53,6 +53,26 @@ if ($user->data['is_registered'])
 		WHERE user_id = " . $user->data['user_id'];
 	$result = $db->sql_query($sql);
 	$you_posts_count = (int) $db->sql_fetchfield('user_posts');
+	
+	// unread posts
+	$sql_where = 'AND t.topic_moved_id = 0
+					' . str_replace(array('p.', 'post_'), array('t.', 'topic_'), $m_approve_fid_sql) . '
+					' . ((sizeof($ex_fid_ary)) ? 'AND ' . $db->sql_in_set('t.forum_id', $ex_fid_ary, true) : '');
+	$unread_list = array();
+	$unread_list = get_unread_topics($user->data['user_id'], $sql_where, 'ORDER BY t.topic_id DESC');
+	
+	if (!empty($unread_list))
+	{
+		$sql = 'SELECT COUNT(distinct t.topic_id) as total
+			FROM ' . TOPICS_TABLE . ' t
+			WHERE ' . $db->sql_in_set('t.topic_id', array_keys($unread_list));
+		$result = $db->sql_query($sql);
+		$unread_posts_count = (int) $db->sql_fetchfield('total');
+	}
+	else
+	{
+		$unread_posts_count = 0;
+	}
 }
 //
 // - new posts since last visit & you post number
@@ -72,6 +92,7 @@ get_user_rank($user->data['user_rank'], $user->data['user_posts'], $rank_title, 
 $template->assign_vars(array(
 	'L_NEW_POSTS'	=> $user->lang['SEARCH_NEW'] . '&nbsp;(' . $new_posts_count . ')',
 	'L_SELF_POSTS'	=> $user->lang['SEARCH_SELF'] . '&nbsp;(' . $you_posts_count . ')',
+	'L_UNREAD_POSTS'=> $user->lang['SEARCH_UNREAD'] . '&nbsp;(' . $unread_posts_count . ')',
 
 	'B3P_AVATAR_IMG'    => $avatar_img,
 	'B3P_RANK_TITLE'    => $rank_title,
@@ -85,6 +106,7 @@ $template->assign_vars(array(
 
 	'U_NEW_POSTS'			=> append_sid("{$phpbb_root_path}search.$phpEx", 'search_id=newposts'),
 	'U_SELF_POSTS'			=> append_sid("{$phpbb_root_path}search.$phpEx", 'search_id=egosearch'),
+	'U_UNREAD_POSTS'		=> append_sid("{$phpbb_root_path}search.$phpEx", 'search_id=unreadposts'),
 	'U_UM_BOOKMARKS'		=> ($config['allow_bookmarks']) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&amp;mode=bookmarks') : '',
 	'U_UM_MAIN_SUBSCRIBED'	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&amp;mode=subscribed'),
 	'U_MCP'					=> ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=front', true, $user->session_id) : '', 
