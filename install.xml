@@ -128,6 +128,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Left and right column can be turned off via ACP now</change>
 					<change>Added rtl-fix for portal_body.html</change>
 					<change>Seperated portal_body.html into 3 seperate files</change>
+					<change>Added unread posts to user menu</change>
+					<change>Board Index is now available, even if the installer hasn't been ran yet</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fixed Bug in Geburtstags-Block: Mousever-Effekt zeigte "01 Jan" als Geburtstag, egal wann der Benutzer Geburtstag hat</change>
@@ -156,6 +158,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Linke und rechte Spalte können über das ACP ausgeschaltet werden</change>
 					<change>RTL-fix für portal_body.html hinzugefügt</change>
 					<change>portal_body.html in 3 verschiedene Dateien aufgeteilt</change>
+					<change>Ungelesene Beiträge zum Benutzer-Menü hinzugefügt</change>
+					<change>Der Foren-Index funktioniert jetzt, auch wenn der Installer noch nicht ausgeführt wurde</change>
 				</changelog>
 			</entry>
 			<entry>
@@ -441,11 +445,14 @@ Deny from All
 	{
 		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
 	}
-	$portal_config = obtain_portal_config();]]></action>
+	if(sql_table_exists(PORTAL_CONFIG_TABLE) == true)
+	{
+		$portal_config = obtain_portal_config();
+	}]]></action>
 			</edit>
 			<edit>
 				<find><![CDATA['U_PRIVATEMSGS'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),]]></find>
-				<action type="before-add"><![CDATA[		'U_PORTAL'				=> ($portal_config['portal_enable']) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></action>
+				<action type="before-add"><![CDATA[		'U_PORTAL'				=> (isset($portal_config['portal_enable']) && $portal_config['portal_enable'] == true) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></action>
 			</edit>
 		</open>
 		<open src="includes/session.php">

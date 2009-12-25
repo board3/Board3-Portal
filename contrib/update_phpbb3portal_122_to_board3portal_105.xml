@@ -166,7 +166,10 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
 	{
 		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
 	}
-	$portal_config = obtain_portal_config();]]></action>
+	if(sql_table_exists(PORTAL_CONFIG_TABLE) == true)
+	{
+		$portal_config = obtain_portal_config();
+	}]]></action>
 			</edit>
 			<edit>
 				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
@@ -182,7 +185,7 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
 			</edit>
 			<edit>
 				<find><![CDATA['U_PRIVATEMSGS'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),]]></find>
-				<action type="before-add"><![CDATA[		'U_PORTAL'				=> ($portal_config['portal_enable']) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></action>
+				<action type="before-add"><![CDATA[		'U_PORTAL'				=> (isset($portal_config['portal_enable']) && $portal_config['portal_enable'] == true) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></action>
 			</edit>
 		</open>
 		<open src="includes/session.php">

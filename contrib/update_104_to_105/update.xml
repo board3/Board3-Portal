@@ -134,6 +134,29 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START'))]]></action>
 			</edit>
 		</open>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[	$user->add_lang(array('mods/lang_portal', 'mods/additional_blocks'));
+	if (!function_exists('obtain_portal_config'))
+	{
+		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
+	}
+	$portal_config = obtain_portal_config();]]></find>
+				<action type="replace-with"><![CDATA[	$user->add_lang(array('mods/lang_portal', 'mods/additional_blocks'));
+	if (!function_exists('obtain_portal_config'))
+	{
+		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
+	}
+	if(sql_table_exists(PORTAL_CONFIG_TABLE) == true)
+	{
+		$portal_config = obtain_portal_config();
+	}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		'U_PORTAL'				=> ($portal_config['portal_enable']) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></find>
+				<action type="replace-with"><![CDATA[		'U_PORTAL'				=> (isset($portal_config['portal_enable']) && $portal_config['portal_enable'] == true) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></action>
+			</edit>
+		</open>
 		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus
 
 Aktualisiere deine Styles:
