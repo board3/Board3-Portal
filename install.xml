@@ -130,6 +130,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Seperated portal_body.html into 3 seperate files</change>
 					<change>Added unread posts to user menu</change>
 					<change>Board Index is now available, even if the installer hasn't been ran yet</change>
+					<change>Made subsilver2 poll block XHTML 1.0 Transitional valid</change>
+					<change>Updated forumlist_search.html for phpBB 3.0.6</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fixed Bug in Geburtstags-Block: Mousever-Effekt zeigte "01 Jan" als Geburtstag, egal wann der Benutzer Geburtstag hat</change>
@@ -160,6 +162,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>portal_body.html in 3 verschiedene Dateien aufgeteilt</change>
 					<change>Ungelesene Beiträge zum Benutzer-Menü hinzugefügt</change>
 					<change>Der Foren-Index funktioniert jetzt, auch wenn der Installer noch nicht ausgeführt wurde</change>
+					<change>Subsilver2 Umfrage-Block ist jetzt XHTML 1.0 Transitional valide</change>
+					<change>forumlist_search.html für phpBB 3.0.6 aktualisiert</change>
 				</changelog>
 			</entry>
 			<entry>
