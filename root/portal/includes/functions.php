@@ -270,7 +270,8 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 
 		if (($text_length != 0) && (strlen($len_check) > $text_length))
 		{
-			$message = get_sub_taged_string(str_replace("\n", '<br/> ', $row['post_text']), $row['bbcode_uid'], $maxlen);
+			$message = str_replace(array("\n", "\r"), array('<br />', "\n"), $row['post_text']);
+			$message = get_sub_taged_string($message, $row['bbcode_uid'], $maxlen);
 			$posts[$i]['striped'] = true;
 		}
 		else 
@@ -369,15 +370,34 @@ function get_end_bbtag($tag, $bbuid)
 	$etag = '';
 	for($i=0;$i<strlen($tag);$i++)
 	{
-		if ($tag[$i] == '[') $etag .= $tag[$i] . '/';
+		if ($tag[$i] == '[') 
+		{
+			$etag .= $tag[$i] . '/';
+		}
 		else if (($tag[$i] == '=') || ($tag[$i] == ':'))
 		{
-			if ($tag[1] == '*') $etag .= ':m:'.$bbuid.']';
-			else if (strpos($tag, 'list')) $etag .= ':u:'.$bbuid.']';
-			else $etag .= ':'.$bbuid.']';
-		break;
+			if ($tag[1] == '*')
+			{
+				$etag .= ':m:'.$bbuid.']';
+			}
+			else if (strpos($tag, '[list='))
+			{
+				$etag .= ':o:'.$bbuid.']';
+			}
+			else if (strpos($tag, '[list'))
+			{
+				$etag .= ':u:'.$bbuid.']';
+			}
+			else 
+			{
+				$etag .= ':'.$bbuid.']';
+			}
+			break;
 		} 
-		else $etag .= $tag[$i];
+		else 
+		{
+			$etag .= $tag[$i];
+		}
 	}
 	return $etag;
 }
@@ -469,6 +489,7 @@ function get_sub_taged_string($str, $bbuid, $maxlen)
 	{
 		$ap = $elem[1] . $ap;
 	}
+
 	$ret .= $ap;
 
 	return $ret;
