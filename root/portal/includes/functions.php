@@ -380,11 +380,11 @@ function get_end_bbtag($tag, $bbuid)
 			{
 				$etag .= ':m:'.$bbuid.']';
 			}
-			else if (strpos($tag, '[list='))
+			else if (substr($tag, 0, 6) == '[list=')
 			{
 				$etag .= ':o:'.$bbuid.']';
 			}
-			else if (strpos($tag, '[list'))
+			else if (substr($tag, 0, 5) == '[list')
 			{
 				$etag .= ':u:'.$bbuid.']';
 			}
