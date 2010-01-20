@@ -98,6 +98,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<file from="root/styles/subsilver2/template/portal/portal_right.html" to="styles/subsilver2/template/portal/portal_right.html" />
 			<file from="root/styles/subsilver2/template/portal/block/birthday_list.html" to="styles/subsilver2/template/portal/block/birthday_list.html" />
 			<file from="root/styles/subsilver2/template/portal/block/forumlist_search.html" to="styles/subsilver2/template/portal/block/forumlist_search.html" />
+			<file from="root/styles/subsilver2/template/portal/block/leaders_ext.html" to="styles/subsilver2/template/portal/block/leaders_ext.html" />
 			<file from="root/styles/subsilver2/template/portal/block/online_friends.html" to="styles/subsilver2/template/portal/block/online_friends.html" />
 			<file from="root/styles/subsilver2/template/portal/block/user_menu.html" to="styles/subsilver2/template/portal/block/user_menu.html" />
 		</copy>

@@ -90,8 +90,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<link type="contrib" lang="de" href="contrib/update_103_to_105/update.xml">Update von v1.0.3 to v1.0.5</link>
 			<link type="contrib" lang="en" href="contrib/update_104_to_105/update.xml">Update from v1.0.4 to v1.0.5</link>
 			<link type="contrib" lang="de" href="contrib/update_104_to_105/update.xml">Update von v1.0.4 to v1.0.5</link>
-			<link type="contrib" lang="en" href="contrib/update_phpbb3portal_122_to_board3portal_104.xml">Update instructions for phpBB3 Portal v1.2.2 to board3 Portal v1.0.4</link>
-			<link type="contrib" lang="de" href="contrib/update_phpbb3portal_122_to_board3portal_104.xml">Update-Anleitung für phpBB3 Portal v1.2.2 to board3 Portal v1.0.4</link>
+			<link type="contrib" lang="en" href="contrib/update_phpbb3portal_122_to_board3portal_105.xml">Update instructions for phpBB3 Portal v1.2.2 to board3 Portal v1.0.5</link>
+			<link type="contrib" lang="de" href="contrib/update_phpbb3portal_122_to_board3portal_105.xml">Update-Anleitung für phpBB3 Portal v1.2.2 to board3 Portal v1.0.5</link>
 			<link type="language" lang="en" href="contrib/de.xml">Manual for German Language-set</link>
 			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
 			<link type="template" lang="en" href="contrib/subsilver2.xml">Manual for subsilver2 Style</link>
@@ -99,7 +99,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</link-group>
 		<history>
 			<entry>
-				<date>2009-12-24</date>
+				<date>2010-01-20</date>
 				<rev-version>1.0.5</rev-version>
 				<changelog lang="en">
 					<change>Fixed mouseover showing "01 Jan" in birthday block, no matter when the birthday is</change>
@@ -132,6 +132,10 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Board Index is now available, even if the installer hasn't been ran yet</change>
 					<change>Made subsilver2 poll block XHTML 1.0 Transitional valid</change>
 					<change>Updated forumlist_search.html for phpBB 3.0.6</change>
+					<change>Made prosilver login box XHTML 1.0 strict valid</change>
+					<change>Fixed bug where endtags would get a :u: in front of the bbcode uid if the word "list" is inside the bbcode tag</change>
+					<change>Fixed error with wordgraph, where only the words with low counts would display</change>
+					<change>Fixed typo in leaders_ext.html</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fixed Bug in Geburtstags-Block: Mousever-Effekt zeigte "01 Jan" als Geburtstag, egal wann der Benutzer Geburtstag hat</change>
@@ -164,6 +168,10 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Der Foren-Index funktioniert jetzt, auch wenn der Installer noch nicht ausgeführt wurde</change>
 					<change>Subsilver2 Umfrage-Block ist jetzt XHTML 1.0 Transitional valide</change>
 					<change>forumlist_search.html für phpBB 3.0.6 aktualisiert</change>
+					<change>prosilver login box ist jetzt XHTML 1.0 strict valide</change>
+					<change>Bug beseitigt, durch den der Endtag eines BBCodes ein :u: vor die bbcode_uid bekam sobald das Wort "list" im BBCode enthalten war</change>
+					<change>Bug im Wordgraph beseitigt, durch den nur Wörter mit niedriger Anzahl angezeigt wurden</change>
+					<change>Schreibfehler in leaders_ext.html korrigiert</change>
 				</changelog>
 			</entry>
 			<entry>
