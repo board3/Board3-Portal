@@ -80,6 +80,10 @@ function mod_version_check($return_version = false)
 		{
 			// let's not stop the page from loading if a mod author messed up their mod check file
 			// also take care of one of the easiest ways to mess up an xml file: "&"
+			if (!function_exists('simplexml_load_string'))
+			{
+				return $mod_version;
+			}
 			$mod = @simplexml_load_string(str_replace('&', '&amp;', $file));
 			if (isset($mod->$var['tag']))
 			{
