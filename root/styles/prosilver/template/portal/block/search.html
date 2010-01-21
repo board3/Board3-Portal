@@ -22,8 +22,8 @@ function qsearch_onSubmit()
 	case 'yahoo':
 		window.open('http://search.yahoo.com/search?p=' + qs_keywords, '_yahoo', '');
 		return false;	
-	case 'msnlive':
-		window.open('http://search.live.com/results.aspx?q=' + qs_keywords, '_msnlive', '');
+	case 'bing':
+		window.open('http://www.bing.com/search?q=' + qs_keywords, '_bing', '');
 		return false;
 	case 'altavista':
 		window.open('http://www.altavista.com/web/results?itag=ody&q=' + qs_keywords + '&kgs=0&kls=0', '_altavista', '');
@@ -62,7 +62,7 @@ function qsearch_onSubmit()
 			<option value="wikipedia">Wikipedia</option>
 			<option value="google">Google</option>
 			<option value="yahoo">Yahoo</option>
-			<option value="msnlive">Msnlive</option>
+			<option value="bing">Bing</option>
 			<option value="altavista">Altavista</option>
 			<option value="lycos">Lycos</option>
 			<option value="odp">Open directory</option>
