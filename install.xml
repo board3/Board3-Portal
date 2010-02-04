@@ -136,6 +136,9 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Fixed bug where endtags would get a :u: in front of the bbcode uid if the word "list" is inside the bbcode tag</change>
 					<change>Fixed error with wordgraph, where only the words with low counts would display</change>
 					<change>Fixed typo in leaders_ext.html</change>
+					<change>Changed MSN Livesearch to BING</change>
+					<change>Fixed bug with missing simplexml extension in PHP</change>
+					<change>Fixed typo in subsilver2 online_friends.html</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fixed Bug in Geburtstags-Block: Mousever-Effekt zeigte "01 Jan" als Geburtstag, egal wann der Benutzer Geburtstag hat</change>
@@ -172,6 +175,9 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Bug beseitigt, durch den der Endtag eines BBCodes ein :u: vor die bbcode_uid bekam sobald das Wort "list" im BBCode enthalten war</change>
 					<change>Bug im Wordgraph beseitigt, durch den nur Wörter mit niedriger Anzahl angezeigt wurden</change>
 					<change>Schreibfehler in leaders_ext.html korrigiert</change>
+					<change>MSN Livesuche in BING umgeändert</change>
+					<change>Problem bei fehlender simplexml Erweiterung in PHP beseitigt</change>
+					<change>Schreibfehler in subsilver2 online_friends.html korrigiert</change>
 				</changelog>
 			</entry>
 			<entry>
