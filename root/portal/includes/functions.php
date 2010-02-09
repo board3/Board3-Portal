@@ -481,8 +481,7 @@ function get_sub_taged_string($str, $bbuid, $maxlen)
 		}
 		$sl = substr($sl, strlen($sr), strlen($sl)-strlen($sr));
 	}
-
-	$ret = trim($ret) . '...';
+	
 	$ap = '';
 
 	foreach ($arr as $elem)
@@ -491,6 +490,7 @@ function get_sub_taged_string($str, $bbuid, $maxlen)
 	}
 
 	$ret .= $ap;
+	$ret = trim($ret) . '...';
 
 	return $ret;
 }
