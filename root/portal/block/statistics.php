@@ -66,6 +66,7 @@ function get_db_stat($mode)
 $total_posts		= $config['num_posts'];
 $total_topics		= $config['num_topics'];
 $total_users		= $config['num_users'];
+$total_files 		= $config['num_files'];
 
 $l_total_user_s 	= ($total_users == 0) ? 'TOTAL_USERS_ZERO' : 'TOTAL_USERS_OTHER';
 $l_total_post_s 	= ($total_posts == 0) ? 'TOTAL_POSTS_ZERO' : 'TOTAL_POSTS_OTHER';
@@ -127,7 +128,7 @@ $template->assign_vars(array(
 	'NEWEST_USER'				=> sprintf($user->lang['NEWEST_USER'], get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
 	'S_ANN'						=> get_db_stat('announcementtotal'),
 	'S_SCT'						=> get_db_stat('stickytotal'),
-	'S_TOT_ATTACH'				=> ($config['allow_attachments']) ? get_db_stat('attachmentstotal') : 0,
+	'S_TOT_ATTACH'				=> ($config['allow_attachments']) ? $total_files : 0,
 
 	// avarage stat
 	'TOPICS_PER_DAY'	=> sprintf($user->lang[$l_topics_per_day_s], $topics_per_day),
