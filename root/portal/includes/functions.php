@@ -490,8 +490,13 @@ function get_sub_taged_string($str, $bbuid, $maxlen)
 	}
 
 	$ret .= $ap;
-	$ret = trim($ret) . '...';
-
+	$ret = trim($ret);
+	if(substr($ret, -4) == '<!--')
+	{
+		$ret .= ' -->';
+	}
+	$ret = $ret . '...';
+	
 	return $ret;
 }
 
