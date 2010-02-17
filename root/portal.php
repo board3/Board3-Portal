@@ -6,8 +6,6 @@
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 
-// DO NOT TOUCH YET!
-
 /**
 * @ignore
 */
@@ -17,7 +15,7 @@ define('IN_PORTAL', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
-require($phpbb_root_path . 'common.' . $phpEx);
+include($phpbb_root_path . 'common.' . $phpEx);
 $portal_root_path = PORTAL_ROOT_PATH;
 $portal_icons_path = PORTAL_ICONS_PATH;
 include($phpbb_root_path . $portal_root_path . 'includes/functions_modules.' . $phpEx);
@@ -27,6 +25,7 @@ include($phpbb_root_path . $portal_root_path . 'includes/functions_modules.' . $
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup('mods/portal');
+
 
 $sql = 'SELECT *
 	FROM ' . PORTAL_MODULES_TABLE;

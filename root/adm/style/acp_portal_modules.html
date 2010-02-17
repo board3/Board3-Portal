@@ -1,0 +1,149 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<!-- IF S_EDIT -->
+<h1>{L_ACP_PORTAL_MODULES}</h1>
+<p>{L_ACP_PORTAL_MODULES_EXPLAIN}</p>
+
+<form id="acp_portal_modules" method="post" action="{U_ACTION}">
+	<fieldset>
+		<legend>{L_GENERAL_OPTIONS}</legend>
+		<dl>
+			<dt><label for="module_classname">{L_CHOOSE_MODULE}:</label><br /><span>{L_CHOOSE_MODULE_EXPLAIN}</span></dt>
+			<dd><select name="module_classname" id="module_classname">{S_MODULE_NAMES}</select></dd>
+		</dl>
+
+		<p class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+			{S_FORM_TOKEN}{S_HIDDEN_FIELDS}
+		</p>
+	</fieldset>
+</form>
+
+<!-- ELSE -->
+
+<h1>{L_ACP_PORTAL_MODULES}</h1>
+<p>{L_ACP_PORTAL_MODULES_EXPLAIN}</p>
+
+<form id="acp_portal_modules" method="post" action="{U_ACTION}">
+	<fieldset class="tabulated">
+	<legend>{L_ACP_PORTAL_MODULES}</legend>
+
+	<table cellspacing="1">
+		<tr>
+			<th style="text-align: center;" colspan="3">{L_MODULE_POS_TOP}</th>
+		</tr>
+		<!-- BEGIN modules_top -->
+			<!-- IF modules_top.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+				<td colspan="3">
+					{modules_top.MODULE_IMAGE} {modules_top.MODULE_NAME}<br />
+					<br />
+					<!-- IF modules_top.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_top.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+					<!-- IF modules_top.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{modules_top.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->&nbsp;
+					<a href="{modules_top.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_top.U_DELETE}">{ICON_DELETE}</a>
+				</td>
+			</tr>
+		<!-- END modules_top -->
+	</table>
+	<p class="quick">
+		<input class="button2" name="add[top]" type="submit" value="{L_ADD_MODULE}" />
+	</p>
+
+	<table style="background-color: transparent; border: none; padding: 0px; margin: 0px;">
+		<tr style="vertical-align: top;">
+				<td style="width: 20%; font-size: 100%; line-height: 100%; padding: 0px; margin: 0px;">
+	<table cellspacing="1">
+		<tr>
+				<th>{L_MODULE_POS_LEFT}</th>
+		</tr>
+		<!-- BEGIN modules_left -->
+			<!-- IF modules_left.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+				<td>
+					{modules_left.MODULE_IMAGE} {modules_left.MODULE_NAME}<br />
+					<br />
+					<!-- IF modules_left.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_left.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+					<!-- IF modules_left.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{modules_left.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->&nbsp;
+					<a href="{modules_left.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_left.U_DELETE}">{ICON_DELETE}</a>
+				</td>
+			</tr>
+		<!-- END modules_left -->
+	</table>
+	<p class="quick">
+		<input class="button2" name="add[left]" type="submit" value="{L_ADD_MODULE}" />
+	</p>
+				</td>
+				<td style="font-size: 100%; line-height: 100%; padding: 0 12px;">
+	<table cellspacing="1">
+		<tr>
+				<th style="text-align: center;">{L_MODULE_POS_CENTER}</th>
+		</tr>
+		<!-- BEGIN modules_center -->
+			<!-- IF modules_center.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+				<td>
+					{modules_center.MODULE_IMAGE} {modules_center.MODULE_NAME}<br />
+					<br />
+					<!-- IF modules_center.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_center.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+					<!-- IF modules_center.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{modules_center.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->&nbsp;
+					<a href="{modules_center.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_center.U_DELETE}">{ICON_DELETE}</a>
+				</td>
+			</tr>
+		<!-- END modules_center -->
+	</table>
+	<p class="quick">
+		<input class="button2" name="add[center]" type="submit" value="{L_ADD_MODULE}" />
+	</p>
+				</td>
+				<td style="width: 20%; font-size: 100%; line-height: 100%; padding: 0px;">
+	<table cellspacing="1">
+		<tr>
+				<th>{L_MODULE_POS_RIGHT}</th>
+		</tr>
+		<!-- BEGIN modules_right -->
+			<!-- IF modules_right.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+				<td>
+					{modules_right.MODULE_IMAGE} {modules_right.MODULE_NAME}<br />
+					<br />
+					<!-- IF modules_right.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_right.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+					<!-- IF modules_right.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{modules_right.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->&nbsp;
+					<a href="{modules_right.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_right.U_DELETE}">{ICON_DELETE}</a>
+				</td>
+			</tr>
+		<!-- END modules_right -->
+	</table>
+	<p class="quick">
+		<input class="button2" name="add[right]" type="submit" value="{L_ADD_MODULE}" />
+	</p>
+				</td>
+		</tr>
+	</table>
+	<br />
+
+	<table cellspacing="1">
+		<tr>
+			<th style="text-align: center;" colspan="3">{L_MODULE_POS_BOTTOM}</th>
+		</tr>
+		<!-- BEGIN modules_bottom -->
+			<!-- IF modules_bottom.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+				<td colspan="3">
+					{modules_bottom.MODULE_IMAGE} {modules_bottom.MODULE_NAME}<br />
+					<br />
+					<!-- IF modules_bottom.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_bottom.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+					<!-- IF modules_bottom.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{modules_bottom.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->&nbsp;
+					<a href="{modules_bottom.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_bottom.U_DELETE}">{ICON_DELETE}</a>
+				</td>
+			</tr>
+		<!-- END modules_bottom -->
+	</table>
+	<p class="quick">
+		<input class="button2" name="add[bottom]" type="submit" value="{L_ADD_MODULE}" />
+	</p>
+
+	{S_FORM_TOKEN}
+	</fieldset>
+</form>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->
