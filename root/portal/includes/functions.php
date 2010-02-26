@@ -240,7 +240,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	while ($row = $db->sql_fetchrow($result))
 	{
 		$attachments = array();
-		if($config['allow_attachments'] && $row['post_id'])
+		if(($auth->acl_get('u_download') && $auth->acl_get('f_download', $post_data['forum_id'])) && $config['allow_attachments'] && $row['post_id'])
 		{
 			// Pull attachment data
 			$sql2 = 'SELECT *
