@@ -19,8 +19,10 @@ if (!defined('IN_PHPBB'))
 function obtain_portal_config()
 {
 	global $db, $cache;
+	
+	$portal_config = $cache->get('portal_config');
 
-	if (($portal_config = $cache->get('portal_config')) !== true)
+	if ($portal_config == false)
 	{
 		$portal_config = $cached_portal_config = array();
 
