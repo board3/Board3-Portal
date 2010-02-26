@@ -18,27 +18,18 @@ if (!defined('IN_PHPBB'))
 // Get portal config
 function obtain_portal_config()
 {
-	global $db, $cache;
-	
-	$portal_config = $cache->get('portal_config');
+	global $db;
 
-	if ($portal_config == false)
+	$sql = 'SELECT config_name, config_value
+		FROM ' . PORTAL_CONFIG_TABLE;
+	$result = $db->sql_query($sql);
+
+	while ($row = $db->sql_fetchrow($result))
 	{
-		$portal_config = $cached_portal_config = array();
-
-		$sql = 'SELECT config_name, config_value
-			FROM ' . PORTAL_CONFIG_TABLE;
-		$result = $db->sql_query($sql);
-
-		while ($row = $db->sql_fetchrow($result))
-		{
-			$cached_portal_config[$row['config_name']] = $row['config_value'];
-			$portal_config[$row['config_name']] = $row['config_value'];
-		}
-		$db->sql_freeresult($result);
-
-		$cache->put('portal_config', $cached_portal_config);
+		$cached_portal_config[$row['config_name']] = $row['config_value'];
+		$portal_config[$row['config_name']] = $row['config_value'];
 	}
+	$db->sql_freeresult($result);
 
 	return $portal_config;
 }
