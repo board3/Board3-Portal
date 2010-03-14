@@ -69,7 +69,7 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 	$topic_icons = array(0);
 	$have_icons = 0;
 
-	if($permissions == TRUE)
+	if($permissions == true)
 	{
 		$disallow_access = array_unique(array_keys($auth->acl_getf('!f_read', true)));
 	} 
@@ -637,7 +637,7 @@ function sql_table_exists($table_name)
 {
 	global $db;
 	$db->sql_return_on_error(true);
-	$result = $db->sql_query_limit('SELECT * FROM ' . $table_name, 1);
+	$result = $db->sql_query_limit('SELECT * FROM ' . $db->sql_escape($table_name), 1);
 	$db->sql_return_on_error(false);
 
 	if ($result)

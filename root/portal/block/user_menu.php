@@ -46,13 +46,6 @@ if ($user->data['is_registered'])
 					' . ((sizeof($ex_fid_ary)) ? 'AND ' . $db->sql_in_set('t.forum_id', $ex_fid_ary, true) : '');
 	$result = $db->sql_query($sql);
 	$new_posts_count = (int) $db->sql_fetchfield('total');
-
-	// your post number
-	$sql = "SELECT user_posts
-		FROM " . USERS_TABLE . "
-		WHERE user_id = " . $user->data['user_id'];
-	$result = $db->sql_query($sql);
-	$you_posts_count = (int) $db->sql_fetchfield('user_posts');
 	
 	// unread posts
 	$sql_where = 'AND t.topic_moved_id = 0
@@ -91,7 +84,7 @@ get_user_rank($user->data['user_rank'], $user->data['user_posts'], $rank_title, 
 // Assign specific vars
 $template->assign_vars(array(
 	'L_NEW_POSTS'	=> $user->lang['SEARCH_NEW'] . '&nbsp;(' . $new_posts_count . ')',
-	'L_SELF_POSTS'	=> $user->lang['SEARCH_SELF'] . '&nbsp;(' . $you_posts_count . ')',
+	'L_SELF_POSTS'	=> $user->lang['SEARCH_SELF'] . '&nbsp;(' . $user->data['user_posts'] . ')',
 	'L_UNREAD_POSTS'=> $user->lang['SEARCH_UNREAD'] . '&nbsp;(' . $unread_posts_count . ')',
 
 	'B3P_AVATAR_IMG'    => $avatar_img,

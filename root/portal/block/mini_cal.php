@@ -30,7 +30,7 @@ else
 $mini_cal_month = 0;
 if(isset($_GET['m']) || isset($_POST['m']))
 {
-	$mini_cal_month = (isset($_POST['m'])) ? intval($_POST['m']) : intval($_GET['m']);
+	$mini_cal_month = request_var('m', 0);
 }
 
 // initialise our calendarsuite class
