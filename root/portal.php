@@ -200,20 +200,24 @@ if($portal_config['portal_right_column'])
 {
 	$template->assign_var('S_RIGHT_COLUMN', true);
 
-	// show login box and user menu
-	// only registered user see user menu
-	if ($user->data['is_registered'])
-	{
-		include($phpbb_root_path . 'portal/block/user_menu.' . $phpEx);
-	}
-	else
-	{
-		include($phpbb_root_path . 'portal/block/login_box.' . $phpEx);
-	}
-	
 	if ($portal_config['portal_user_menu'])
 	{
+		// show login box and user menu
+		// only registered user see user menu
+		if ($user->data['is_registered'])
+		{
+			include($phpbb_root_path . 'portal/block/user_menu.' . $phpEx);
+		}
+		else
+		{
+			include($phpbb_root_path . 'portal/block/login_box.' . $phpEx);
+		}
 		$template->assign_var('S_DISPLAY_USERMENU', true);
+		
+		if($config['allow_topic_notify'] || $config['allow_forum_notify'])
+		{
+			$template->assign_var('S_DISPLAY_SUBSCRIPTIONS', true);
+		}
 	}
 	
 	if ($portal_config['portal_advanced_stat'])

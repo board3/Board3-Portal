@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB') || !defined('IN_PORTAL'))
 }
 
 //doing the easy way ;)
-$u_link = $config['server_protocol'] . $config['server_name'] . $config['script_path'];
+$u_link = generate_board_url();
 
 // Assign specific vars
 $template->assign_vars(array(
