@@ -28,16 +28,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 </description>
 
 		<author-notes lang="en">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
-		
-		Devolpers in earlier versions:
-		nickvergessen: http://www.flying-bits.org/
-		Redbull254: http://www.digitalfotografie-foren.de
 		</author-notes>
 		<author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.
-		
-		Entwickler in früheren Versionen:
-		nickvergessen: http://www.flying-bits.org/
-		Redbull254: http://www.digitalfotografie-foren.de
 		</author-notes>
 	
 		<author-group>
@@ -46,7 +38,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<username>avaren</username>
 				<homepage>http://www.board3.de</homepage>
 				<contributions-group>
-					<contributions status="current" position="Main-Developer"></contributions>
+					<contributions status="current" position="Developer"></contributions>
 				</contributions-group>
 			</author>
 			<author>
@@ -70,7 +62,25 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				 <username>marc1706</username>
 				<homepage>http://www.m-a-styles.de</homepage>
 				<contributions-group>
-					<contributions status="current" position="Developer"></contributions>
+					<contributions status="current" position="Main-Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>(N/A)</realname>
+				<email>nickvergessen@gmx.de</email>
+				<username>nickvergessen</username>
+				<homepage>http://mods.flying-bits.org/</homepage>
+				<contributions-group>
+					<contributions status="past" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Walter</realname>
+				<email>w.bobeth@digitalfotografie-foren.de</email>
+				<username>Redbull254</username>
+				<homepage>http://www.digitalfotografie-foren.de</homepage>
+				<contributions-group>
+					<contributions status="past" position="Developer"></contributions>
 				</contributions-group>
 			 </author>
 		</author-group>
@@ -176,10 +186,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</copy>
 		<open src="adm/index.php">
 			<edit>
-				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
-				<comment lang="en"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
-				<find><![CDATA[require($phpbb_root_path . 'portal/includes/lang_adm_additional_blocks.' . $phpEx);]]></find>
-				<action type="replace-with"><![CDATA[]]></action>
+				<remove><![CDATA[require($phpbb_root_path . 'portal/includes/lang_adm_additional_blocks.' . $phpEx);]]></remove>
 			</edit>
 		</open>
 		<open src="includes/functions.php">

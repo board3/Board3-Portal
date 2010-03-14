@@ -27,17 +27,9 @@ Enthaltenen Sprachdateien:
 Weitere Sprachen kannst in unseren International Forum finden: http://www.board3.de/viewforum.php?f=13
 </description>
 
-		<author-notes lang="en-gb">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
-		
-		Devolpers in earlier versions:
-		nickvergessen: http://www.flying-bits.org/
-		Redbull254: http://www.digitalfotografie-foren.de
+		<author-notes lang="en">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
 		</author-notes>
 		<author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.
-		
-		Entwickler in früheren Versionen:
-		nickvergessen: http://www.flying-bits.org/
-		Redbull254: http://www.digitalfotografie-foren.de
 		</author-notes>
 	
 		<author-group>
@@ -46,8 +38,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<username>avaren</username>
 				<homepage>http://www.board3.de</homepage>
 				<contributions-group>
-					<contributions status="current" position="Main-Developer"></contributions>
-				</contributions-group>	
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
 			</author>
 			<author>
 				<realname>Kevin</realname>
@@ -55,7 +47,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<homepage>http://www.board3.de</homepage>
 				<contributions-group>
 					<contributions status="current" position="Developer"></contributions>
-				</contributions-group>	
+				</contributions-group>
 			</author>
 			<author>
 				<realname>Christian</realname>
@@ -63,14 +55,32 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<homepage>http://www.phpbb-projekt.de</homepage>
 				<contributions-group>
 					<contributions status="current" position="Developer"></contributions>
-				</contributions-group>	
+				</contributions-group>
 			</author>
 			<author>
 				<realname>Marc Alexander</realname>
 				 <username>marc1706</username>
 				<homepage>http://www.m-a-styles.de</homepage>
 				<contributions-group>
-					<contributions status="current" position="Developer"></contributions>
+					<contributions status="current" position="Main-Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>(N/A)</realname>
+				<email>nickvergessen@gmx.de</email>
+				<username>nickvergessen</username>
+				<homepage>http://mods.flying-bits.org/</homepage>
+				<contributions-group>
+					<contributions status="past" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Walter</realname>
+				<email>w.bobeth@digitalfotografie-foren.de</email>
+				<username>Redbull254</username>
+				<homepage>http://www.digitalfotografie-foren.de</homepage>
+				<contributions-group>
+					<contributions status="past" position="Developer"></contributions>
 				</contributions-group>
 			 </author>
 		</author-group>
