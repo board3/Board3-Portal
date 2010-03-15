@@ -433,7 +433,10 @@ function get_sub_taged_string($str, $bbuid, $maxlen)
 	while((strlen($ntext) < $cnt) && (strlen($sl) > 0))
 	{
 		$sr = '';
-		if (substr($sl, 0, 1) == '[') $sr = substr($sl,0,strpos($sl,']')+1);
+		if (substr($sl, 0, 1) == '[')
+		{
+			$sr = substr($sl,0,strpos($sl,']')+1);
+		}
 		/* GESCHLOSSENE HTML-TAGS BEACHTEN */
 		if (substr($sl, 0, 2) == '<!')
 		{
@@ -454,7 +457,10 @@ function get_sub_taged_string($str, $bbuid, $maxlen)
 				$j = 0;
 				foreach ($arr as $elem)
 				{
-					if (strcmp($elem[1],$sr) != 0) $tarr[$j++] = $elem;
+					if (strcmp($elem[1],$sr) != 0) 
+					{
+						$tarr[$j++] = $elem;
+					}
 				}
 				$arr = $tarr;
 			}
@@ -488,8 +494,8 @@ function get_sub_taged_string($str, $bbuid, $maxlen)
 	{
 		$ret .= ' -->';
 	}
+	$ret = add_endtag($ret);
 	$ret = $ret . '...';
-	
 	return $ret;
 }
 
@@ -647,6 +653,22 @@ function sql_table_exists($table_name)
 	}
 
 	return false;
+}
+
+/**
+* check for invalid link tag at the end of a cut string
+*/
+function add_endtag ($message = '')
+{
+	$check = (int) strripos($message, '<!-- m --><a ');
+	$check_2 = (int) strripos($message, '</a><!--');
+	
+	if(((isset($check) && $check > 0) && ($check_2 <= $check)) || ((isset($check) && $check > 0) && !isset($check_2)))
+	{
+		$message .= '</a><!-- m -->';
+	}
+	
+	return $message;
 }
 
 // Mini Cal.
