@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_BIRTHDAYS'						=> 'Geburtstage',
 	'PORTAL_BIRTHDAYS_EXPLAIN'				=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Anstehende Geburtstage',
-	'PORTAL_BIRTHDAYS_AHEAD_EXPLAIN'		=> 'Zeitraum für die Geburtstagsvorschau (Tage)',	
+	'PORTAL_BIRTHDAYS_AHEAD_EXPLAIN'		=> 'Zeitraum für die Geburtstagsvorschau (Tage).<br />"0" deaktiviert die Anzeige der bevorstehenden Geburtstage.',	
 	
 	// announcements
 	'ACP_PORTAL_ANNOUNCE_SETTINGS'				=> 'Einstellungen für Bekanntmachungen',

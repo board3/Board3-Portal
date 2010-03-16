@@ -63,7 +63,7 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 			}
 			$birthday_list .= '</span><br style="clear: both" />';
 		}
-		else
+		elseif ($portal_config['portal_birthdays_ahead'] > 0)
 		{
 			$birthday_ahead_list .= '<span style="float:left;"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><span title="' . format_birthday($row['user_birthday'], 'd M') . '">' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</span></span><span style="float: right;">';
 			if ($age = (int) substr($row['user_birthday'], -4))
@@ -78,10 +78,11 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 
 // Assign index specific vars
 $template->assign_vars(array(
-	'BIRTHDAY_LIST'				=> $birthday_list,
-	'BIRTHDAYS_AHEAD_LIST'		=> ($portal_config['portal_birthdays_ahead']) ? $birthday_ahead_list : '',
-	'L_BIRTHDAYS_AHEAD'			=> sprintf($user->lang['BIRTHDAYS_AHEAD'], $portal_config['portal_birthdays_ahead']),
-	'S_DISPLAY_BIRTHDAY_LIST'	=> ($config['load_birthdays']) ? true : false,
+	'BIRTHDAY_LIST'					=> $birthday_list,
+	'BIRTHDAYS_AHEAD_LIST'			=> ($portal_config['portal_birthdays_ahead']) ? $birthday_ahead_list : '',
+	'L_BIRTHDAYS_AHEAD'				=> sprintf($user->lang['BIRTHDAYS_AHEAD'], $portal_config['portal_birthdays_ahead']),
+	'S_DISPLAY_BIRTHDAY_LIST'		=> ($config['load_birthdays']) ? true : false,
+	'S_DISPLAY_BIRTHDAY_AHEAD_LIST'	=> ($portal_config['portal_birthdays_ahead'] > 0) ? true : false,
 ));
 
 ?>

@@ -85,7 +85,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_BIRTHDAYS'						=> 'Birthday block',
 	'PORTAL_BIRTHDAYS_EXPLAIN'				=> 'Display this block on the portal.',
 	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Birthdays ahead days',
-	'PORTAL_BIRTHDAYS_AHEAD_EXPLAIN'		=> 'How many days to look ahead for future birthdays.',
+	'PORTAL_BIRTHDAYS_AHEAD_EXPLAIN'		=> 'How many days to look ahead for future birthdays.<br />"0" will disable the ahead birthdays list.',
 	
 	// global announcements
 	'ACP_PORTAL_ANNOUNCE_SETTINGS'				=> 'Global announcements settings',
