@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<!-- $Id: update_phpbb3portal_122_to_board3portal_104.xml 572 2009-11-19 16:13:18Z marc1706 $ -->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.3.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+
+		<title lang="en">board3 Portal - Update from phpbb3portal 1.2.2</title>
+		<title lang="de">board3 Portal - Update von phpbb3portal 1.2.2</title>
+
+		<description lang="en">Adds a portal to your forum.
+It has several boxes wich can be turned on an off in the ACP and certain settings.
+
+Included language files:
+» English (en)
+» German (de)
+
+More languages can be found in our International forum: http://www.board3.de/viewforum.php?f=13</description>
+		<description lang="de">Fügt ein Portal deinem Forum hinzu.
+Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werden können.
+
+Enthaltenen Sprachdateien:
+» Englisch (en)
+» Deutsch (de)
+
+Weitere Sprachen kannst in unseren International Forum finden: http://www.board3.de/viewforum.php?f=13
+</description>
+
+		<author-notes lang="en">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
+		
+		Devolpers in earlier versions:
+		nickvergessen: http://www.flying-bits.org/
+		Redbull254: http://www.digitalfotografie-foren.de
+		</author-notes>
+		<author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.
+		
+		Entwickler in früheren Versionen:
+		nickvergessen: http://www.flying-bits.org/
+		Redbull254: http://www.digitalfotografie-foren.de
+		</author-notes>
+	
+		<author-group>
+			<author>
+				<realname>Ice</realname>
+				<username>avaren</username>
+				<homepage>http://www.board3.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Main-Developer"></contributions>
+				</contributions-group>	
+			</author>
+			<author>
+				<realname>Kevin</realname>
+				<username>saint_hh</username>
+				<homepage>http://www.board3.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>	
+			</author>
+			<author>
+				<realname>Christian</realname>
+				<username>Christian_N</username>
+				<homepage>http://www.phpbb-projekt.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>	
+			</author>
+			<author>
+				<realname>Marc Alexander</realname>
+				 <username>marc1706</username>
+				<homepage>http://www.m-a-styles.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			 </author>
+		</author-group>
+
+		<mod-version>1.0.5</mod-version>
+
+		<installation>
+			<level>easy</level>
+			<time>600</time>
+			<target-version>3.0.6</target-version>
+		</installation>
+
+		<link-group>
+			<link type="parent" lang="de" href="../install.xml">Installations-Anleitung</link>
+			<link type="parent" lang="en" href="../install.xml">Install instructions</link>
+			<link type="language" lang="en" href="de.xml">Manual for German Language-set</link>
+			<link type="language" lang="de" href="de.xml">Anleitung für das deutsche Sprachpaket</link>
+			<link type="template" lang="en" href="subsilver2.xml">Manual for subsilver2 Style</link>
+			<link type="template" lang="de" href="subsilver2.xml">Anleitung für das Style subsilver2</link>
+		</link-group>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/portal.php" to="portal.php" />
+			<file from="root/adm/mods/board3_portal_check_version.php" to="adm/mods/board3_portal_check_version.php" />
+			<file from="root/adm/style/acp_portal.html" to="adm/style/acp_portal.html" />
+			<file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />
+			<file from="root/includes/acp/info/acp_portal.php" to="includes/acp/info/acp_portal.php" />
+			<file from="root/install/*.*" to="install/*.*" />
+			<file from="root/install/schemas/*.*" to="install/schemas/*.*" />
+			<file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
+			<file from="root/portal/index.html" to="portal/index.html" />
+			<file from="root/portal/block/*.*" to="portal/block/*.*" />
+			<file from="root/portal/includes/*.*" to="portal/includes/*.*" />
+			<file from="root/styles/prosilver/template/portal/*.*" to="styles/prosilver/template/portal/*.*" />
+			<file from="root/styles/prosilver/template/portal/block/*.*" to="styles/prosilver/template/portal/block/*.*" />
+			<file from="root/styles/prosilver/theme/portal.css" to="styles/prosilver/theme/portal.css" />
+			<file from="root/styles/prosilver/theme/images/portal/*.*" to="styles/prosilver/theme/images/portal/*.*" />
+		</copy>
+		<open src=".htaccess">
+			<edit>
+				<find><![CDATA[# 
+# @package phpBB3 Portal  a.k.a canverPortal  ( www.phpbb3portal.com )
+# @version $Id: .htaccess,v 1.7 2008/02/09 08:18:13 angelside Exp $
+# @copyright (c) Canver Software - www.canversoft.net
+# @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+# 
+
+DirectoryIndex portal.php index.php index.html index.htm]]></find>
+				<action type="replace-with"><![CDATA[<Files "config.php">
+Order Allow,Deny
+Deny from All
+</Files>
+
+<Files "common.php">
+Order Allow,Deny
+Deny from All
+</Files>
+
+DirectoryIndex portal.php index.php index.html index.htm]]></action>
+			</edit>
+		</open>
+		<open src="adm/index.php">
+			<edit>
+				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
+				<comment lang="en"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
+				<find><![CDATA[$user->add_lang('acp/portal');]]></find>
+				<action type="replace-with"><![CDATA[]]></action>
+			</edit>
+		</open>
+		<open src="includes/constants.php">
+			<edit>
+				<find><![CDATA[// Additional tables]]></find>
+				<action type="after-add"><![CDATA[define('PORTAL_CONFIG_TABLE',		$table_prefix . 'portal_config');]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions.php">
+			<edit>
+				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
+				<comment lang="en"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
+				<find><![CDATA[	//-- [+] MOD: phpBB3 Portal ---------------------------------------------
+	//-- add
+	//
+	$user->add_lang('portal');
+	//
+	//-- [-] MOD: phpBB3 Portal ---------------------------------------------]]></find>
+				<action type="replace-with"><![CDATA[]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[// The following assigns all _common_ variables that may be used at any point in a template.]]></find>
+				<action type="before-add"><![CDATA[	$user->add_lang(array('mods/lang_portal', 'mods/additional_blocks'));
+	if (!function_exists('obtain_portal_config'))
+	{
+		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
+	}
+	if(sql_table_exists(PORTAL_CONFIG_TABLE) == true)
+	{
+		$portal_config = obtain_portal_config();
+	}]]></action>
+			</edit>
+			<edit>
+				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
+				<comment lang="en"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
+				<find><![CDATA[		//-- [+] MOD: phpBB3 Portal ---------------------------------------------
+		//-- add
+		//
+		'U_PORTAL' 				=> append_sid("{$phpbb_root_path}portal.$phpEx"),
+		'S_PORTAL_COPY' 		=> $user->lang['PORTAL_COPY'],
+		//
+		//-- [-] MOD: phpBB3 Portal ---------------------------------------------]]></find>
+				<action type="replace-with"><![CDATA[]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['U_PRIVATEMSGS'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),]]></find>
+				<action type="before-add"><![CDATA[		'U_PORTAL'				=> (isset($portal_config['portal_enable']) && $portal_config['portal_enable'] == true) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></action>
+			</edit>
+		</open>
+		<open src="includes/session.php">
+			<edit>
+				<find><![CDATA[		if (!empty($_GET['style']) && $auth->acl_get('a_styles') && !defined('ADMIN_START'))]]></find>
+				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START'))]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/overall_header.html">
+			<edit>
+				<find><![CDATA[<!-- IF not $S_IN_PORTAL -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- IF not $S_IN_PORTAL or S_DISPLAY_PHPBB_MENU -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<li class="icon-home"><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <a href="{U_INDEX}" accesskey="h">{L_INDEX}</a> <!-- BEGIN navlinks --> <strong>&#8249;</strong>]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[<a href="{U_PORTAL}">{L_PORTAL}</a> &#187; ]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[<!-- IF U_PORTAL --><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <!-- ENDIF -->]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/overall_footer.html">
+			<edit>
+				<find><![CDATA[<li class="icon-home"><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[<a href="{U_PORTAL}">{L_PORTAL}</a> &#187; ]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[<!-- IF U_PORTAL --><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <!-- ENDIF -->]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<comment lang="de"><![CDATA[Es gibt keinen "Ersetze mit"-Code, da der Code gelöscht werden soll.]]></comment>
+				<comment lang="en"><![CDATA[There is no "replace-with"-code as you need to delete the code.]]></comment>
+				<find><![CDATA[<!-- IF S_PORTAL_COPY --><br />{S_PORTAL_COPY}<!-- ENDIF -->]]></find>
+				<action type="replace-with"><![CDATA[]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/stylesheet.css">
+			<edit>
+				<find><![CDATA[@import url("colours.css");]]></find>
+				<action type="after-add"><![CDATA[@import url("portal.css");]]></action>
+			</edit>
+		</open>
+		<open src="viewonline.php">
+			<edit>
+				<find><![CDATA[		case 'report':
+			$location = $user->lang['REPORTING_POST'];
+			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
+		break;]]></find>
+				<action type="after-add"><![CDATA[		case 'portal':
+			$user->add_lang('mods/lang_portal');
+			$location = $user->lang['VIEWING_PORTAL'];
+			$location_url = append_sid("{$phpbb_root_path}portal.$phpEx");
+		break;]]></action>
+			</edit>
+		</open>
+		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus
+
+Aktualisiere deine Styles:
+    "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
+    "Administrations-Bereich" (ACP) > "Styles" > "Themes" > jedes > "Aktualisieren"
+    "Administrations-Bereich" (ACP) > "Styles" > "Grafiksammlungen" > jedes > "Aktualisieren"
+
+Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
+
+Subsilver2 User: bitte das komplette Verzeichnis subsilver2 mit den neuen Dateien überschreiben.]]></diy-instructions>
+		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer
+
+Refresh your Styles:
+    "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
+    "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
+    "Administration Control Panel" (ACP) > "Styles" > "Imagesets" > each > "refresh"
+
+Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
+
+Subsilver2 user: please upload the complete subsilver2 directory.]]></diy-instructions>
+	</action-group>
+</mod>

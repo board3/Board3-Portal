@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<!-- $Id$ -->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.3.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+
+		<title lang="en">board3 Portal</title>
+		<title lang="de">board3 Portal</title>
+
+		<description lang="en">Adds a portal to your forum.
+It has several boxes wich can be turned on an off in the ACP and certain settings.
+
+Included language files:
+» English (en)
+» German (de)
+
+More languages can be found in our International forum: http://www.board3.de/viewforum.php?f=13</description>
+		<description lang="de">Fügt ein Portal deinem Forum hinzu.
+Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werden können.
+
+Enthaltenen Sprachdateien:
+» Englisch (en)
+» Deutsch (de)
+
+Weitere Sprachen kannst in unseren International Forum finden: http://www.board3.de/viewforum.php?f=13
+</description>
+
+		<author-notes lang="en">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
+		
+		Devolpers in earlier versions:
+		nickvergessen: http://www.flying-bits.org/
+		Redbull254: http://www.digitalfotografie-foren.de
+		</author-notes>
+		<author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.
+		
+		Entwickler in früheren Versionen:
+		nickvergessen: http://www.flying-bits.org/
+		Redbull254: http://www.digitalfotografie-foren.de
+		</author-notes>
+	
+		<author-group>
+			<author>
+				<realname>Ice</realname>
+				<username>avaren</username>
+				<homepage>http://www.board3.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Main-Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Kevin</realname>
+				<username>saint_hh</username>
+				<homepage>http://www.board3.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Christian</realname>
+				<username>Christian_N</username>
+				<homepage>http://www.phpbb-projekt.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Marc Alexander</realname>
+				 <username>marc1706</username>
+				<homepage>http://www.m-a-styles.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			 </author>
+		</author-group>
+
+		<mod-version>1.0.5</mod-version>
+
+		<installation>
+			<level>easy</level>
+			<time>600</time>
+			<target-version>3.0.6</target-version>
+		</installation>
+
+		<link-group>
+			<link type="parent" lang="de" href="../../install.xml">Installations-Anleitung</link>
+			<link type="parent" lang="en" href="../../install.xml">Manual</link>
+			<link type="language" lang="en" href="contrib/de.xml">Update instructions for German Language-set</link>
+			<link type="language" lang="de" href="contrib/de.xml">Update-Anleitung für das deutsche Sprachpaket</link>
+			<link type="template" lang="en" href="contrib/subsilver2.xml">Update instructions for subsilver2 Style</link>
+			<link type="template" lang="de" href="contrib/subsilver2.xml">Update-Anleitung für das Style subsilver2</link>
+		</link-group>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/portal.php" to="portal.php" />
+			<file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />
+			<file from="root/install/*.*" to="install/*.*" />
+			<file from="root/install/schemas/*.*" to="install/schemas/*.*" />
+			<file from="root/language/en/mods/lang_portal_acp.php" to="language/en/mods/lang_portal_acp.php" />
+			<file from="root/portal/block/announcements.php" to="portal/block/announcements.php" />
+			<file from="root/portal/block/attachments.php" to="portal/block/attachments.php" />
+			<file from="root/portal/block/birthday_list.php" to="portal/block/birthday_list.php" />
+			<file from="root/portal/block/custom.php" to="portal/block/custom.php" />
+			<file from="root/portal/block/friends.php" to="portal/block/friends.php" />
+			<file from="root/portal/block/latest_bots.php" to="portal/block/latest_bots.php" />
+			<file from="root/portal/block/latest_members.php" to="portal/block/latest_members.php" />
+			<file from="root/portal/block/leaders_ext.php" to="portal/block/leaders_ext.php" />
+			<file from="root/portal/block/links.php" to="portal/block/links.php" />
+			<file from="root/portal/block/mini_cal.php" to="portal/block/mini_cal.php" />
+			<file from="root/portal/block/news.php" to="portal/block/news.php" />
+			<file from="root/portal/block/poll.php" to="portal/block/poll.php" />
+			<file from="root/portal/block/recent.php" to="portal/block/recent.php" />
+			<file from="root/portal/block/statistics.php" to="portal/block/statistics.php" />
+			<file from="root/portal/block/top_posters.php" to="portal/block/top_posters.php" />
+			<file from="root/portal/block/user_menu.php" to="portal/block/user_menu.php" />
+			<file from="root/portal/block/welcome.php" to="portal/block/welcome.php" />
+			<file from="root/portal/block/wordgraph.php" to="portal/block/wordgraph.php" />
+			<file from="root/portal/includes/functions.php" to="portal/includes/functions.php" />
+			<file from="root/styles/prosilver/template/portal/portal_body.html" to="styles/prosilver/template/portal/portal_body.html" />
+			<file from="root/styles/prosilver/template/portal/portal_left.html" to="styles/prosilver/template/portal/portal_left.html" />
+			<file from="root/styles/prosilver/template/portal/portal_center.html" to="styles/prosilver/template/portal/portal_center.html" />
+			<file from="root/styles/prosilver/template/portal/portal_right.html" to="styles/prosilver/template/portal/portal_right.html" />
+			<file from="root/styles/prosilver/template/portal/block/birthday_list.html" to="styles/prosilver/template/portal/block/birthday_list.html" />
+			<file from="root/styles/prosilver/template/portal/block/forumlist_search.html" to="styles/prosilver/template/portal/block/forumlist_search.html" />
+			<file from="root/styles/prosilver/template/portal/block/leaders_ext.html" to="styles/prosilver/template/portal/block/leaders_ext.html" />
+			<file from="root/styles/prosilver/template/portal/block/login_box.html" to="styles/prosilver/template/portal/block/login_box.html" />
+			<file from="root/styles/prosilver/template/portal/block/online_friends.html" to="styles/prosilver/template/portal/block/online_friends.html" />
+			<file from="root/styles/prosilver/template/portal/block/user_menu.html" to="styles/prosilver/template/portal/block/user_menu.html" />
+		</copy>
+		<open src="includes/session.php">
+			<edit>
+				<find><![CDATA[		if (!empty($_GET['style']))]]></find>
+				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START'))]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[	$user->add_lang(array('mods/lang_portal', 'mods/additional_blocks'));
+	if (!function_exists('obtain_portal_config'))
+	{
+		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
+	}
+	$portal_config = obtain_portal_config();]]></find>
+				<action type="replace-with"><![CDATA[	$user->add_lang(array('mods/lang_portal', 'mods/additional_blocks'));
+	if (!function_exists('obtain_portal_config'))
+	{
+		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
+	}
+	if(sql_table_exists(PORTAL_CONFIG_TABLE) == true)
+	{
+		$portal_config = obtain_portal_config();
+	}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		'U_PORTAL'				=> ($portal_config['portal_enable']) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></find>
+				<action type="replace-with"><![CDATA[		'U_PORTAL'				=> (isset($portal_config['portal_enable']) && $portal_config['portal_enable'] == true) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></action>
+			</edit>
+		</open>
+		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus
+
+Aktualisiere deine Styles:
+    "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
+    "Administrations-Bereich" (ACP) > "Styles" > "Themes" > jedes > "Aktualisieren"
+    "Administrations-Bereich" (ACP) > "Styles" > "Grafiksammlungen" > jedes > "Aktualisieren"
+
+Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"]]></diy-instructions>
+		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer
+
+Refresh your Styles:
+    "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
+    "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
+    "Administration Control Panel" (ACP) > "Styles" > "Imagesets" > each > "refresh"
+
+Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"]]></diy-instructions>
+	</action-group>
+</mod>

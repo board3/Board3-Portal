@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<!-- $Id$ -->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.3.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+
+		<title lang="en">board3 Portal</title>
+		<title lang="de">board3 Portal</title>
+
+		<description lang="en">Adds a portal to your forum.
+It has several boxes wich can be turned on an off in the ACP and certain settings.
+
+Included language files:
+» English (en)
+» German (de)
+
+More languages can be found in our International forum: http://www.board3.de/viewforum.php?f=13</description>
+		<description lang="de">Fügt ein Portal deinem Forum hinzu.
+Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werden können.
+
+Enthaltenen Sprachdateien:
+» Englisch (en)
+» Deutsch (de)
+
+Weitere Sprachen kannst in unseren International Forum finden: http://www.board3.de/viewforum.php?f=13
+</description>
+
+		<author-notes lang="en">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
+		
+		Devolpers in earlier versions:
+		nickvergessen: http://www.flying-bits.org/
+		Redbull254: http://www.digitalfotografie-foren.de
+		</author-notes>
+		<author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.
+		
+		Entwickler in früheren Versionen:
+		nickvergessen: http://www.flying-bits.org/
+		Redbull254: http://www.digitalfotografie-foren.de
+		</author-notes>
+	
+		<author-group>
+			<author>
+				<realname>Ice</realname>
+				<username>avaren</username>
+				<homepage>http://www.board3.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Main-Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Kevin</realname>
+				<username>saint_hh</username>
+				<homepage>http://www.board3.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Christian</realname>
+				<username>Christian_N</username>
+				<homepage>http://www.phpbb-projekt.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Marc Alexander</realname>
+				 <username>marc1706</username>
+				<homepage>http://www.m-a-styles.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			 </author>
+		</author-group>
+
+		<mod-version>1.0.5</mod-version>
+
+		<installation>
+			<level>easy</level>
+			<time>600</time>
+			<target-version>3.0.6</target-version>
+		</installation>
+
+		<link-group>
+			<link type="dependency" lang="en" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
+			<link type="dependency" lang="de" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal unterstützt MOD Version Check. Um dieses Feature zu nutzen, muss dieser Mod installiert sein.</link>
+			<link type="contrib" lang="en" href="contrib/update_103_to_105/update.xml">Update from v1.0.3 to v1.0.5</link>
+			<link type="contrib" lang="de" href="contrib/update_103_to_105/update.xml">Update von v1.0.3 to v1.0.5</link>
+			<link type="contrib" lang="en" href="contrib/update_104_to_105/update.xml">Update from v1.0.4 to v1.0.5</link>
+			<link type="contrib" lang="de" href="contrib/update_104_to_105/update.xml">Update von v1.0.4 to v1.0.5</link>
+			<link type="contrib" lang="en" href="contrib/update_phpbb3portal_122_to_board3portal_105.xml">Update instructions for phpBB3 Portal v1.2.2 to board3 Portal v1.0.5</link>
+			<link type="contrib" lang="de" href="contrib/update_phpbb3portal_122_to_board3portal_105.xml">Update-Anleitung für phpBB3 Portal v1.2.2 to board3 Portal v1.0.5</link>
+			<link type="language" lang="en" href="contrib/de.xml">Manual for German Language-set</link>
+			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
+			<link type="template" lang="en" href="contrib/subsilver2.xml">Manual for subsilver2 Style</link>
+			<link type="template" lang="de" href="contrib/subsilver2.xml">Anleitung für das Style subsilver2</link>
+		</link-group>
+		<history>
+			<entry>
+				<date>2010-01-20</date>
+				<rev-version>1.0.5</rev-version>
+				<changelog lang="en">
+					<change>Fixed mouseover showing "01 Jan" in birthday block, no matter when the birthday is</change>
+					<change>Removed unnecessary second line break from birthday list</change>
+					<change>Added user icon in front of every user in birthday list and made it look like top poster block</change>
+					<change>Fixed a typo in install files and update for 3.0.6</change>
+					<change>Changed "en-gb" to "en" in the install files</change>
+					<change>Changed apostrophe to its HTML Entity in install_portal.php</change>
+					<change>Fixed typo in install/install_functions.php</change>
+					<change>Fixed wrong edit in update from phpbb3portal</change>
+					<change>Fixed a few parts that didn't follow the coding guidelines</change>
+					<change>poll.php: removed urldecode() as this might cause errors</change>
+					<change>recent.php: casting $id to int now and trim() has been removed</change>
+					<change>Removed unnecessary queries in user_menu.php</change>
+					<change>Now using generate_text_for_display in block/welcome.php, block/custom.php and for function phpbb_fetch_posts</change>
+					<change>Removed unnecessary license.txt</change>
+					<change>Fixed broken link when block icons are turned off: http://www.board3.de/tracker.php?p=13&amp;t=160</change>
+					<change>Added reapply_sid() in portal.php</change>
+					<change>Added sql_freeresult to functions.php</change>
+					<change>Added fixes for better compatibility with Portalview MOD</change>
+					<change>Fixed SQL Bug with PostgreSQL</change>
+					<change>Fixed Bug where moderators were displayed in forumlist, although display of moderators was disabled in ACP</change>
+					<change>filetypes can now be selected to show up in attachment block and they can also be hidden from attachment block</change>
+					<change>Fixed small bugs for better compatibility with MSSQL</change>
+					<change>Added forum select box to news block, announcements block, recent topics block, attachments block, and polls block</change>
+					<change>Left and right column can be turned off via ACP now</change>
+					<change>Added rtl-fix for portal_body.html</change>
+					<change>Seperated portal_body.html into 3 seperate files</change>
+					<change>Added unread posts to user menu</change>
+					<change>Board Index is now available, even if the installer hasn't been ran yet</change>
+					<change>Made subsilver2 poll block XHTML 1.0 Transitional valid</change>
+					<change>Updated forumlist_search.html for phpBB 3.0.6</change>
+					<change>Made prosilver login box XHTML 1.0 strict valid</change>
+					<change>Fixed bug where endtags would get a :u: in front of the bbcode uid if the word "list" is inside the bbcode tag</change>
+					<change>Fixed error with wordgraph, where only the words with low counts would display</change>
+					<change>Fixed typo in leaders_ext.html</change>
+					<change>Changed MSN Livesearch to BING</change>
+					<change>Fixed bug with missing simplexml extension in PHP</change>
+					<change>Fixed typo in subsilver2 online_friends.html</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Fixed Bug in Geburtstags-Block: Mousever-Effekt zeigte "01 Jan" als Geburtstag, egal wann der Benutzer Geburtstag hat</change>
+					<change>Unnötigen zweiten Zeilenumbruch in Geburtstagsliste</change>
+					<change>Benutzericon vor jedem Benutzer in Geburtstagsliste hinzugefügt, und Aussehen an Vielschreiber-Block angepasst</change>
+					<change>Schreibfehler in Installationsanleitungen entfernt und für phpBB 3.0.6 aktualisiert</change>
+					<change>"en-gb" zu "en" in den Installationsanleitungen geändert</change>
+					<change>Apostroph mit HTML Datensatz ersetzt in install_portal.php</change>
+					<change>Schreibfehler in install/install_functions.php beseitigt</change>
+					<change>Falschen Edit im Update von phpbb3portal beseitigt</change>
+					<change>Einige Bestandteile, die nicht die Coding Guidelines einhielten, geändert</change>
+					<change>poll.php: urldecode() entfernt, da es zu Fehlern führen könnte</change>
+					<change>recent.php: $id wird jetzt zu Integer konvertiert und trim() wurde entfernt</change>
+					<change>Unnütze Abfragen in user_menu.php entfernt</change>
+					<change>generate_text_for_display wird jetzt in block/welcome.php, block/custom.php und für die Funktion phpbb_fetch_posts genutzt</change>
+					<change>Unnötige license.txt entfernt</change>
+					<change>Defekten Link repariert wenn Block Icons ausgeschaltet sind: http://www.board3.de/tracker.php?p=13&amp;t=160</change>
+					<change>reapply_sid() in portal.php hinzugefügt</change>
+					<change>sql_freeresult zu functions.php hinzugefügt</change>
+					<change>Änderungen für eine bessere Kompatibilität mit dem Portalview MOD hinzugefügt</change>
+					<change>SQL Bug mit PostgreSQL beseitigt</change>
+					<change>Bug beseitigt, durch den Moderatoren in der Forenlist angezeigt wurden, obwohl diese Option im ACP ausgeschaltet war</change>
+					<change>Dateitypen können für den Dateianhänge-Block ausgewählt und auch versteckt werden</change>
+					<change>Kleine SQL Fehler für eine bessere Kompatibilität mit MSSQL beseitigt</change>
+					<change>Foren-Auswahl-Box zu folgenden Blocks hinzugefügt: Aktuelle Beiträge-Block, Bekanntmachungs-Block, Aktuelle Themen-Block, Dateianhänge-Block und Umfragen-Block</change>
+					<change>Linke und rechte Spalte können über das ACP ausgeschaltet werden</change>
+					<change>RTL-fix für portal_body.html hinzugefügt</change>
+					<change>portal_body.html in 3 verschiedene Dateien aufgeteilt</change>
+					<change>Ungelesene Beiträge zum Benutzer-Menü hinzugefügt</change>
+					<change>Der Foren-Index funktioniert jetzt, auch wenn der Installer noch nicht ausgeführt wurde</change>
+					<change>Subsilver2 Umfrage-Block ist jetzt XHTML 1.0 Transitional valide</change>
+					<change>forumlist_search.html für phpBB 3.0.6 aktualisiert</change>
+					<change>prosilver login box ist jetzt XHTML 1.0 strict valide</change>
+					<change>Bug beseitigt, durch den der Endtag eines BBCodes ein :u: vor die bbcode_uid bekam sobald das Wort "list" im BBCode enthalten war</change>
+					<change>Bug im Wordgraph beseitigt, durch den nur Wörter mit niedriger Anzahl angezeigt wurden</change>
+					<change>Schreibfehler in leaders_ext.html korrigiert</change>
+					<change>MSN Livesuche in BING umgeändert</change>
+					<change>Problem bei fehlender simplexml Erweiterung in PHP beseitigt</change>
+					<change>Schreibfehler in subsilver2 online_friends.html korrigiert</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-09-30</date>
+				<rev-version>1.0.4</rev-version>
+				<changelog lang="en">
+					<change>Bugfixes, view: http://www.board3.de/tracker.php?st=15&amp;vid=10&amp;p=13&amp;u=0&amp;at=0</change>
+					<change>MPV Check: Better request_var(); instead of $_COOKIE</change>
+					<change>MPV Check: Better function_exists(); instead of include_once();</change>
+					<change>Missing {$phpbb_root_path} in portal/block/poll.php</change>
+					<change>class="icon" in the dl-tag added and moved to _block_config.html</change>
+					<change>Use the bg1 class by all middle blocks</change>
+					<change>Fixed SQL ERROR [ postgres ], missing u.username_clean in the SELECT</change>
+					<change>Added Versioncheck on Portal (only Admins) and ACP --> Portal --> General settings.</change>
+					<change>Fixed bug in recent.php: users without access to all forums did not see the maximum number of topics</change>
+					<change>Missing IN_PHPBB check</change>
+					<change>CleanUp all Files</change>
+					<change>ModX 1.2.3 update</change>
+					<change>And much more... forgot to note it all down ;-)</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Bugfixes, siehe: http://www.board3.de/tracker.php?st=15&amp;vid=10&amp;p=13&amp;u=0&amp;at=0</change>
+					<change>MPV Check: Besser request_var(); statt $_COOKIE</change>
+					<change>MPV Check: Besser function_exists(); statt include_once();</change>
+					<change>Vermisse {$phpbb_root_path} in portal/block/poll.php</change>
+					<change>class="icon" in dl-tag hinzugefügt und verschoben zu _block_config.html</change>
+					<change>Benutze bg1 class bei alle mittlere Blöcke</change>
+					<change>Fixed SQL ERROR [ postgres ], vermisse u.username_clean in SELECT</change>
+					<change>Versioncheck auf Portal (nur Admins) und ACP --> Portal --> Allgemeine Einstellungen hinzugefügt.</change>
+					<change>Fixed bug in recent.php: Benutzer ohne Zugriff auf alle Foren sah nicht die maximale Anzahl von Themen</change>
+					<change>Vermisse IN_PHPBB check</change>
+					<change>ModX 1.2.3 Update</change>
+					<change>Und vieles mehr... vergessen es zu notieren ;-)</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-03-29</date>
+				<rev-version>1.0.3</rev-version>
+				<changelog lang="en">
+					<change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=11</change>
+					<change>New option to disable the whole portal via ACP (links will be hidden).</change>
+					<change>Easier cutomizable template system with variables for block header and footer (_block_config.html) - change all headers and footers in one file</change>
+					<change>New installer, based on phpBB Gallery by nickvergessen</change>
+					<change>Added interface files for additional blocks, for easier updating in future (additional_blocks.php, lang_adm_additional_blocks.php, additional_blocks_center.html / left, right)</change>
+					<change>Permissions for portal ACP modules</change>
+					<change>New option to hide expired polls on portal</change>
+					<change>ModX 1.2.2 update</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=11</change>
+					<change>Neue Option um das komplette Portal im ACP zu deaktivieren (Links werden dann ausgeblendet).</change>
+					<change>Einfacher anzupassendes Template System mit Variablen für die Block Header und Footer (_block_config.html) - Ändere alle Header und Footer in einer einzigen Datei.</change>
+					<change>Neuer Installer, basierend auf dem phpBB Gallery Installer von nickvergessen</change>
+					<change>Schnittstelle für zusätzliche Blöcke hinzu gefügt, für einfachere Portal Updates in Zukunft (additional_blocks.php, lang_adm_additional_blocks.php, additional_blocks_center.html / left, right)</change>
+					<change>Berechtigungen für die Portal ACP Module.</change>
+					<change>Neue Option um abgelaufene Umfragen auf dem Portal auszublenden.</change>
+					<change>ModX 1.2.2 Update</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2008-09-27</date>
+				<rev-version>1.0.2</rev-version>
+				<changelog lang="en">
+					<change>Release of version 1.0.2. (Cleanup)</change>
+					<change>ModX 1.2.1</change>
+					<change>Some tiny fixes</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Release der Version 1.0.2. (aufräumen)</change>
+					<change>ModX 1.2.1</change>
+					<change>Ein paar kleine Fixe</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2008-09-09</date>
+				<rev-version>1.0.1</rev-version>
+				<changelog lang="en">
+					<change>Release of version 1.0.1.</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Release der Version 1.0.1.</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2008-09-08</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change>Release of version 1.</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Release der Version 1.</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2008-08-31</date>
+				<rev-version>1.0.0RC3</rev-version>
+				<changelog lang="en">
+					<change>Added switch to choose if "views" and "replies" should be diplayed in extra colums. To solve problems of distroyed layouts in compact view of news and announcements. e.g. with thin styles.</change>
+					<change>subsilver2 style rework</change>
+					<change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=9</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Spalten "Antworten" und "Zugriffe" können nun bei der kompakten Ansicht der aktuellen Beiträge / Bekanntmachungen ausgeblendet werden, um Probleme mit dem Layout bei z.B. schmalen Styles zu beheben.</change>
+					<change>subsilver2 wurde überarbeitet</change>
+					<change>Bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=9</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2008-08-20</date>
+				<rev-version>1.0.0RC2</rev-version>
+				<changelog lang="en">
+					<change>Added new style / own CSS for easier style adaption - provided by Graphic Corner / Pfoti: www.graphic-corner.ch</change>
+					<change>Normal and inline attachments are displayed properly now in news / announcements text view. (Thanks to connect for the inline attachments solution)</change>
+					<change>Rework of the compact view of news / announcements. Topic folders and icons are now displayed. Complete style rework.</change>
+					<change>#unread link for news / announcements. (Thanks to Mike, for pushing us in the right direction)</change>
+					<change>Team bloc: possibillity to let non-system groups display</change>
+					<change>Support for handymans MOD Version Check. To use this feature, this mod has to be installed.</change>
+					<change>Update to ModX 1.2.0 - package structure adapted</change>
+					<change>Language files rework</change>
+					<change>PayPal block rework. All supported currencies can be chosen with a drop-down button. The amount to donate can be typed in.</change>
+					<change>Bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=8</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Neuer Style mit eigener CSS, zur einfacheren Anpassbarkeit an andere Styles - erstellt von Graphic Corner / Pfoti: www.graphic-corner.ch</change>
+					<change>Normale und inline Dateianhänge werden nun in der aktuellen Beiträge / Bekanntmachungen Text-Ansicht richtig angezeigt. (Danke an connect für die inline attachments Lösung)</change>
+					<change>Die kompakte Ansicht der aktuellen Beiträge / Bekanntmachungen wurde komplett überarbeitet. "Topic Folders" und Themen Symbole werden nun angezeigt. Der Style wurde komplett überarbeitet.</change>
+					<change>#unread Links für aktuelle Beiträge / Bekanntmachungen. (Danke an Mike, der uns in die richtige Richtung geschubst hat ;)</change>
+					<change>Team block: auch nicht-system Gruppen können nun angezeigt werden</change>
+					<change>Handymans MOD Version Check wird nun unterstützt. Um den Update Check zu nutzen, muss dieser Mod installiert sein.</change>
+					<change>Update auf ModX 1.2.0 - Packet Struktur angepasst.</change>
+					<change>Sprachdateien wurden überarbeitet. (Danke an Thomas.d)</change>
+					<change>PayPal überarbeitet. Alle von PayPal unterstützen Währungen können nun über einen Drop-Down-Button ausgewählt werden. Die zu spendende Summe kann man nun selbst eintippen.</change>
+					<change>Bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=8</change>
+				</changelog>
+			</entry>	
+			<entry>		
+				<date>2008-05-03</date>
+				<rev-version>1.0.0RC1</rev-version>
+				<changelog lang="en">
+					<change>Many bugfixes, view: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
+					<change>Adaptions to phpBB 3.0.1</change>
+					<change>The link block can be edited in the ACP: add, delete links and order position</change>
+					<change>BBCode is now allowed in welcome message</change>
+					<change>Two custom blocks added, which can be filled with BBCode or HTML in the ACP. To use with ads, videos, images, whatever.</change>
+					<change>Complete rework of the News / Announcements. Implemented a achive system and pagnition. You can choose if you want to have the first or the newest post displayed in news.</change>
+					<change>Full MSSQL support</change>
+					<change>Forum list on the portal added</change>
+					<change>Show "Portal page" in "who is online"</change>
+					<change>Option to disable user permission check for News / Announcements</change>
+					<change>Style changer added</change>
+					<change>Attachment block: display attachments from one or more specific forums + attachments permission check added</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Viele bugfixes, siehe: http://www.board3.de/bugtracker/viewcat.php?c=6</change>
+					<change>An phpBB 3.0.1 angepasst</change>
+					<change>Der Link Block kann nun über das ACP verwaltet werden: erstellen, löschen und positionieren von Links</change>
+					<change>Es kann nun BBCode in der Willkommens Nachricht benutzt werden</change>
+					<change>Zwei anpassbare Blöcke hinzu gefügt, die im ACP mit BBCode oder HTML gefüllt werden könen. Für Werbung, Videos, Bilder, was auch immer.</change>
+					<change>Aktuelle Beiträge und Bekanntmachungen wurden komplett überarbeitet. Es wurde ein Archivsystem und die Anzeige von Seitenzahlen hinzu gefügt. Zusätzlich kann man nun wählen ob man der Ersten oder Neuesten Beitrag bei den aktuellen Beiträgen angezeigt bekommen möchte.</change>
+					<change>MSSQL Unterstützung</change>
+					<change>Forum Liste auf dem Portal hinzugefügt</change>
+					<change>Anzeige "Betrachtet das Portal" in "Wer ist online?"</change>
+					<change>Option die Berechtigungsprüfung für aktuelle Beiträge / Bekanntmachungen ab zu stellen</change>
+					<change>"Mein Board-Style" hinzugefügt</change>
+					<change>Dateianhänge: Anhänge aus einem oder mehreren bestimmten Foren anzeigen lassen + Berechtigungsprüfung hinzugefügt.</change>
+				</changelog>
+ 			</entry>	
+			<entry>
+				<date>2008-02-03</date>
+				<rev-version>0.2.1</rev-version>
+				<changelog lang="en">
+					<change>Fixed a news/announcements permissions bug</change>
+					<change>Fixed a bug when no news posts were viewable due to account permissions</change>
+					<change>Fixed a bug in announcements/news/polls due to shadow topics left after a topic is moved</change>
+					<change>No longer required to be a founder to update/install, just an admin with "board" permissions</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Fehler in der Berechtigungserkennung bei den aktuellen Beiträgen / Bekanntmachungen gefixt</change>
+					<change>Fehler bei den aktuellen Beiträgen / Bekanntmachungen / Abstimmungen gefixt</change>
+					<change>Man braucht nun nicht mehr als Gründer angemeldet zu sein</change>
+				</changelog>
+			</entry>
+ 			<entry>
+				<date>2008-02-03</date>
+				<rev-version>0.2.0</rev-version>
+				<changelog lang="en">
+					<change>added subsilver2 templates (valid XHTML 1.0 Strict)</change>
+					<change>added upcoming birthdays, configurable in ACP / thanks to Kendoo</change>
+					<change>complete rewrite of the poll system - checking user permissions, multible polls and more</change>
+					<change>added forum names with link in news and announcements boxes</change>
+					<change>added portal log messages in the ACP</change>
+					<change>fixed several bugs: http://www.board3.de/bugtracker/viewcat.php?c=1</change>
+					<change>updated the MySQL installer</change>
+				</changelog>
+				<changelog lang="de">
+					<change>subsilver2 Templates hinzugefügt (valid XHTML 1.0 Strict)</change>
+					<change>Kommende Geburtstage, konfigurierbar im ACP / vielen Dank an Kendoo</change>
+					<change>Die Umfragen wurden komplett überarbeitet - Benutzer Berechtigungen werden geprüft, mehrere Abstimmungen sind möglich und mehr</change>
+ 					<change>Foren Namen mit Link in die aktuellen Beiträge und Bekanntmachungen hinzugefügt</change>
+					<change>Portal Log Meldungen im ACP hinzugefügt</change>
+					<change>Diverse Bugs gefixt: http://www.board3.de/bugtracker/viewcat.php?c=1</change>
+					<change>Der MySQL Installer wurde überarbeitet</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2008-01-15</date>
+				<rev-version>0.1.0</rev-version>
+				<changelog lang="en">
+					<change>Changes from "phpBB3 Portal 1.1.0Beta" to "board3 Portal - based on phpBB3 Portal Version 1.0.0":</change>
+					<change>completet all missing ACP Control for several boxes</change>
+					<change>valid XHTML 1.0 Strict template</change>
+					<change>fixed several bugs</change>
+					<change>added several language variables</change>
+					<change>changed the language file path to /en/mods/</change>
+					<change>updated the install instructions</change>
+					<change>updated the MySQL installer</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Änderungen von "phpBB3 Portal 1.1.0Beta" zu "board3 Portal - based on phpBB3 Portal Version 1.0.0":</change>
+					<change>Die ACP Verwaltung für diverse Boxen komplettiert</change>
+					<change>valid XHTML 1.0 Strict Template</change>
+					<change>Diverse Bugs gefixt</change>
+					<change>Diverse Sprachvariablen hinzugefügt</change>
+					<change>Pfad für die Sprachdateien ins Mod System integriert</change>
+					<change>Die Installationanweisungen komplett überarbeitet</change>
+					<change>Den MySQL Installer komplett überarbeitet</change>
+				</changelog>
+			</entry>
+		</history>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/portal.php" to="portal.php" />
+			<file from="root/adm/mods/board3_portal_check_version.php" to="adm/mods/board3_portal_check_version.php" />
+			<file from="root/adm/style/acp_portal.html" to="adm/style/acp_portal.html" />
+			<file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />
+			<file from="root/includes/acp/info/acp_portal.php" to="includes/acp/info/acp_portal.php" />
+			<file from="root/install/*.*" to="install/*.*" />
+			<file from="root/install/schemas/*.*" to="install/schemas/*.*" />
+			<file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
+			<file from="root/portal/index.html" to="portal/index.html" />
+			<file from="root/portal/block/*.*" to="portal/block/*.*" />
+			<file from="root/portal/includes/*.*" to="portal/includes/*.*" />
+			<file from="root/styles/prosilver/template/portal/*.*" to="styles/prosilver/template/portal/*.*" />
+			<file from="root/styles/prosilver/template/portal/block/*.*" to="styles/prosilver/template/portal/block/*.*" />
+			<file from="root/styles/prosilver/theme/portal.css" to="styles/prosilver/theme/portal.css" />
+			<file from="root/styles/prosilver/theme/images/portal/*.*" to="styles/prosilver/theme/images/portal/*.*" />
+		</copy>
+
+		<open src=".htaccess">
+			<edit>
+				<find><![CDATA[<Files "common.php">
+Order Allow,Deny
+Deny from All
+</Files>]]></find>
+				<action type="after-add"><![CDATA[DirectoryIndex portal.php index.php index.html index.htm]]></action>
+			</edit>
+		</open>
+		<open src="viewonline.php">
+			<edit>
+				<find><![CDATA[		case 'report':
+			$location = $user->lang['REPORTING_POST'];
+			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
+		break;]]></find>
+				<action type="after-add"><![CDATA[		case 'portal':
+			$user->add_lang('mods/lang_portal');
+			$location = $user->lang['VIEWING_PORTAL'];
+			$location_url = append_sid("{$phpbb_root_path}portal.$phpEx");
+		break;]]></action>
+			</edit>
+		</open>
+		<open src="includes/constants.php">
+			<edit>
+				<find><![CDATA[// Additional tables]]></find>
+				<action type="after-add"><![CDATA[define('PORTAL_CONFIG_TABLE',		$table_prefix . 'portal_config');]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[// The following assigns all _common_ variables that may be used at any point in a template.]]></find>
+				<action type="before-add"><![CDATA[	$user->add_lang(array('mods/lang_portal', 'mods/additional_blocks'));
+	if (!function_exists('obtain_portal_config'))
+	{
+		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
+	}
+	if(sql_table_exists(PORTAL_CONFIG_TABLE) == true)
+	{
+		$portal_config = obtain_portal_config();
+	}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['U_PRIVATEMSGS'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),]]></find>
+				<action type="before-add"><![CDATA[		'U_PORTAL'				=> (isset($portal_config['portal_enable']) && $portal_config['portal_enable'] == true) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></action>
+			</edit>
+		</open>
+		<open src="includes/session.php">
+			<edit>
+				<find><![CDATA[		if (!empty($_GET['style']) && $auth->acl_get('a_styles') && !defined('ADMIN_START'))]]></find>
+				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START'))]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/overall_header.html">
+			<edit>
+				<find><![CDATA[<div class="navbar">]]></find>
+				<action type="before-add"><![CDATA[<!-- IF not $S_IN_PORTAL or S_DISPLAY_PHPBB_MENU -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a> <!-- BEGIN navlinks --> <strong>&#8249;</strong>]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[<li class="icon-home">]]></inline-find>
+					<inline-action type="after-add"><![CDATA[<!-- IF U_PORTAL --><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <!-- ENDIF -->]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[					<li class="icon-logout"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="x">{L_LOGIN_LOGOUT}</a></li>
+				<!-- ENDIF -->
+			</ul>
+
+			<span class="corners-bottom"><span></span></span></div>
+		</div>]]></find>
+				<action type="after-add"><![CDATA[<!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/overall_footer.html">
+			<edit>
+				<find><![CDATA[<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[<li class="icon-home">]]></inline-find>
+					<inline-action type="after-add"><![CDATA[<!-- IF U_PORTAL --><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <!-- ENDIF -->]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/stylesheet.css">
+			<edit>
+				<find><![CDATA[@import url("colours.css");]]></find>
+				<action type="after-add"><![CDATA[@import url("portal.css");]]></action>
+			</edit>
+		</open>
+		
+		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus
+
+Aktualisiere deine Styles:
+    "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
+    "Administrations-Bereich" (ACP) > "Styles" > "Themes" > jedes > "Aktualisieren"
+    "Administrations-Bereich" (ACP) > "Styles" > "Grafiksammlungen" > jedes > "Aktualisieren"
+
+Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
+]]></diy-instructions>
+		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer
+
+Refresh your Styles:
+    "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
+    "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
+    "Administration Control Panel" (ACP) > "Styles" > "Imagesets" > each > "refresh"
+
+Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
+]]></diy-instructions>
+	</action-group>
+</mod>
