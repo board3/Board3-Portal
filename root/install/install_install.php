@@ -253,9 +253,21 @@ class install_install extends module
 			'auth_option_id'	=> $auth_option_id,
 			'auth_setting'		=> 1,
 		);
-
-		$sql = 'INSERT INTO ' . ACL_ROLES_DATA_TABLE . ' ' . $db->sql_build_array('INSERT', $roles_data);
-		$db->sql_query($sql);
+		
+		// First check if the values are already set
+		$sql = 'SELECT *
+				FROM ' . ACL_ROLES_DATA_TABLE . '
+				WHERE auth_option_id = ' . $db->sql_escape($auth_option_id) . '
+					AND role_id = ' . $db->sql_escape($role_id);
+		$result = $db->sql_query($sql);
+		$check_ary = $db->sql_fetchrow($result);
+		$db->sql_freeresult();
+		
+		if(sizeof($check_ary) < 1)
+		{
+			$sql = 'INSERT INTO ' . ACL_ROLES_DATA_TABLE . ' ' . $db->sql_build_array('INSERT', $roles_data);
+			$db->sql_query($sql);
+		}
 
 		$submit = $user->lang['NEXT_STEP'];
 
