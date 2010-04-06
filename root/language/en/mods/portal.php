@@ -41,8 +41,30 @@ $lang = array_merge($lang, array(
 
 // Common
 $lang = array_merge($lang, array(
+	// ACP - General Settings
+	'ACP_PORTAL_GENERAL_TITLE'			=> 'Portal administration',
+	'ACP_PORTAL_GENERAL_TITLE_EXP'		=> 'Thank you for choosing Board3 Portal! This is where you can manage your portal page. The options below let you customize the various general settings. The links on the left-hand side allow you to customize in detail every aspect of your portal experience.',
+	'ACP_PORTAL_GENERAL_SETTINGS'		=> 'General settings',
+	'PORTAL_ENABLE'						=> 'Enable Portal',
+	'PORTAL_ENABLE_EXP'					=> 'Turns the whole portal on or off.',
+	'PORTAL_LEFT_COLUMN'				=> 'Enable left column',
+	'PORTAL_LEFT_COLUMN_EXP'			=> 'Switch to no if you wish to turn off the left column',
+	'PORTAL_RIGHT_COLUMN'				=> 'Enable right column',
+	'PORTAL_RIGHT_COLUMN_EXP'			=> 'Switch to no if you wish to turn off the right column',
+	'PORTAL_VERSION_CHECK'				=> 'Versioncheck on Portal',
+	'PORTAL_FORUM_INDEX'				=> 'Forum Index (Forum list)',
+	'PORTAL_FORUM_INDEX_EXP'			=> 'Display this block on the portal.',
+	
+	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'	=> 'Left and right column width settings',
+	'PORTAL_LEFT_COLUMN_WIDTH'			=> 'Width of the left column',
+	'PORTAL_LEFT_COLUMN_WIDTH_EXP'		=> 'Change the width of the left column in pixels; recommended value is 180',
+	'PORTAL_RIGHT_COLUMN_WIDTH'			=> 'Width of the right column',
+	'PORTAL_RIGHT_COLUMN_WIDTH_EXP'		=> 'Change the width of the right column in pixels; recommended value is 180',
+	
+
 	'POSTERS'		=> 'Posters',
 
+	// Search engine names
 	'SEARCH_A9'					=> 'A9.com',
 	'SEARCH_ACRONYM_FINDER'		=> 'AcronymFinder',
 	'SEARCH_ALEXA'				=> 'Alexa',
@@ -55,7 +77,7 @@ $lang = array_merge($lang, array(
 	'SEARCH_CREATIVE_COMMONS'	=> 'Crative Commons',
 	'SEARCH_EBAY'				=> 'Ebay',
 	'SEARCH_GOOGLE'				=> 'Google',
-	'SEARCH_LIVE'				=> 'Windows Live',
+	'SEARCH_LIVE'				=> 'Bing',
 	'SEARCH_LYCOS'				=> 'Lycos',
 	'SEARCH_MININOVA'			=> 'Mininova',
 	'SEARCH_REFERENCE'			=> 'Reference.com',
@@ -71,7 +93,7 @@ $lang = array_merge($lang, array(
 
 	// paypal
 	'PORTAL_PAY_ACC'							=> 'Paypal Account',
-	'PORTAL_PAY_ACC_EXPLAIN'					=> 'Gib deine e-mail-Adresse an, die du bei Paypal benutzt, z.B. xxx@xxx.com',
+	'PORTAL_PAY_ACC_EXP'					=> 'Gib deine e-mail-Adresse an, die du bei Paypal benutzt, z.B. xxx@xxx.com',
 
 // User menu
 	'UM_LOG_ME_IN'					=> 'Mich bei jedem Besuch automatisch anmelden',
@@ -177,7 +199,7 @@ $lang = array_merge($lang, array(
 //
 // Example:
 // 'PAGE_ABOUT'			=> 'About us',					/* Main page title */
-// 'PAGE_ABOUT_EXPLAIN'	=> 'Contact information here.',	/* Explanation, page sub-title */
+// 'PAGE_ABOUT_EXP'	=> 'Contact information here.',	/* Explanation, page sub-title */
 //
 $lang = array_merge($lang, array(
 ));
