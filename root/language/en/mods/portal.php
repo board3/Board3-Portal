@@ -166,42 +166,4 @@ $lang = array_merge($lang, array(
 	'MXN'						=> 'Mexikanische Pesos (MXN)',
 	'ILS'						=> 'Neue Israelische Schekel (ILS)',
 ));
-
-// BLOCK TITLES
-// Set additional block titles here...
-//
-// Example:
-// 'BLOCK_TOP_POSTERS'		=> 'Top posters',	/* Main block title */
-// 'BLOCK_TOP_POSTERS_SUB'	=> 'Posted',		/* Legend, block sub-title */
-//
-$lang = array_merge($lang, array(
-	'BLOCK_BIRTHDAY'				=> 'Geburtstage',	
-	'BLOCK_EXPRESS_LINKS'			=> 'Navigation',
-	'BLOCK_SEARCH'					=> 'Suche',
-	'BLOCK_CLOCK'					=> 'Uhr',
-	'BLOCK_USER_MENU'				=> 'Benutzer-Menü',
-	'BLOCK_CHANGE_STYLE'			=> 'Mein Board-Style',
-	'BLOCK_ONLINE'					=> 'Wer ist Online?',
-	'BLOCK_DONATION'				=> 'Paypal-Spenden',
-	'BLOCK_LINKS'					=> 'Links',
-	'BLOCK_LATEST_BOTS'				=> 'Bots',
-	'BLOCK_LATEST_MEMBERS'			=> 'Neueste Mitglieder',
-	'BLOCK_MINI_CALENDAR'			=> 'Kalender',
-	'BLOCK_ONLINE_FRIENDS'					=> 'Freunde',
-	'BLOCK_STATISTICS'				=> 'Statistik',
-	'BLOCK_TOP_POSTER'				=> 'Top Poster',
-	'BLOCK_CUSTOM'					=> 'Custom',
-	'BLOCK_BOTS'					=> 'Letzten Bots-Besuche',
-));
-
-// CUSTOM PAGE TITLES
-// Set custom page titles here...
-//
-// Example:
-// 'PAGE_ABOUT'			=> 'About us',					/* Main page title */
-// 'PAGE_ABOUT_EXP'	=> 'Contact information here.',	/* Explanation, page sub-title */
-//
-$lang = array_merge($lang, array(
-));
-
 ?>

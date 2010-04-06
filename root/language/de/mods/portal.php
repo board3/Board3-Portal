@@ -41,6 +41,28 @@ $lang = array_merge($lang, array(
 
 // Common
 $lang = array_merge($lang, array(
+	// ACP
+	'ACP_PORTAL_GENERAL_TITLE'				=> 'Portal Administration',
+	'ACP_PORTAL_GENERAL_TITLE_EXP'		=> 'Danke, dass du dich für board3 Portal entschieden hast. Auf dieser Seite kannst du dein Portal verwalten. Diese Anzeige gibt dir einen schnellen Überblick über die verschiedenen Portal-Einstellungen. Die Links auf der linken Seite dieser Anzeige ermöglichen dir alle Einstellungen vorzunehmen, welche das Portal betreffen.',
+	'ACP_PORTAL_GENERAL_SETTINGS'			=> 'Allgemeine Einstellungen',
+	'PORTAL_ENABLE'							=> 'Portal aktivieren',
+	'PORTAL_ENABLE_EXP'					=> 'Wenn deaktiviert, wird das komplette Portal abgeschaltet.',
+	'PORTAL_LEFT_COLUMN'					=> 'Linke Spalte aktivieren',
+	'PORTAL_LEFT_COLUMN_EXP'			=> 'Die Linke Spalte auf dem Portal anzeigen',
+	'PORTAL_RIGHT_COLUMN'					=> 'Rechte Spalte aktivieren',
+	'PORTAL_RIGHT_COLUMN_EXP'			=> 'Die Rechte Spalte auf dem Portal anzeigen',
+	'PORTAL_VERSION_CHECK'					=> 'Versioncheck auf Portal',
+	'PORTAL_FORUM_INDEX'					=> 'Foren Index (Foren Liste)',
+	'PORTAL_FORUM_INDEX_EXP'			=> 'Diesen Block auf dem Portal anzeigen.',
+	
+	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'			=> 'Breiteneinstellung der rechten und linken Spalte',
+	'PORTAL_LEFT_COLUMN_WIDTH'					=> 'Breite der linken Spalte',
+	'PORTAL_LEFT_COLUMN_WIDTH_EXP'			=> 'Ändere hier die Breite der linken Spalte in Pixel, empfohlener Wert 180',
+	'PORTAL_RIGHT_COLUMN_WIDTH'					=> 'Breite der rechten Spalte',
+	'PORTAL_RIGHT_COLUMN_WIDTH_EXP'			=> 'Ändere hier die Breite der rechten Spalte in Pixel, empfohlener Wert 180',
+	
+	
+
 	'POSTERS'		=> 'Posters',
 
 	'SEARCH_A9'					=> 'A9.com',
@@ -71,7 +93,7 @@ $lang = array_merge($lang, array(
 
 	// paypal
 	'PORTAL_PAY_ACC'							=> 'Paypal Account',
-	'PORTAL_PAY_ACC_EXPLAIN'					=> 'Gib deine e-mail-Adresse an, die du bei Paypal benutzt, z.B. xxx@xxx.com',
+	'PORTAL_PAY_ACC_EXP'					=> 'Gib deine e-mail-Adresse an, die du bei Paypal benutzt, z.B. xxx@xxx.com',
 
 // User menu
 	'UM_LOG_ME_IN'					=> 'Mich bei jedem Besuch automatisch anmelden',
@@ -144,42 +166,4 @@ $lang = array_merge($lang, array(
 	'MXN'						=> 'Mexikanische Pesos (MXN)',
 	'ILS'						=> 'Neue Israelische Schekel (ILS)',
 ));
-
-// BLOCK TITLES
-// Set additional block titles here...
-//
-// Example:
-// 'BLOCK_TOP_POSTERS'		=> 'Top posters',	/* Main block title */
-// 'BLOCK_TOP_POSTERS_SUB'	=> 'Posted',		/* Legend, block sub-title */
-//
-$lang = array_merge($lang, array(
-	'BLOCK_BIRTHDAY'				=> 'Geburtstage',	
-	'BLOCK_EXPRESS_LINKS'			=> 'Navigation',
-	'BLOCK_SEARCH'					=> 'Suche',
-	'BLOCK_CLOCK'					=> 'Uhr',
-	'BLOCK_USER_MENU'				=> 'Benutzer-Menü',
-	'BLOCK_CHANGE_STYLE'			=> 'Mein Board-Style',
-	'BLOCK_ONLINE'					=> 'Wer ist Online?',
-	'BLOCK_DONATION'				=> 'Paypal-Spenden',
-	'BLOCK_LINKS'					=> 'Links',
-	'BLOCK_LATEST_BOTS'				=> 'Bots',
-	'BLOCK_LATEST_MEMBERS'			=> 'Neueste Mitglieder',
-	'BLOCK_MINI_CALENDAR'			=> 'Kalender',
-	'BLOCK_ONLINE_FRIENDS'					=> 'Freunde',
-	'BLOCK_STATISTICS'				=> 'Statistik',
-	'BLOCK_TOP_POSTER'				=> 'Top Poster',
-	'BLOCK_CUSTOM'					=> 'Custom',
-	'BLOCK_BOTS'					=> 'Letzten Bots-Besuche',
-));
-
-// CUSTOM PAGE TITLES
-// Set custom page titles here...
-//
-// Example:
-// 'PAGE_ABOUT'			=> 'About us',					/* Main page title */
-// 'PAGE_ABOUT_EXPLAIN'	=> 'Contact information here.',	/* Explanation, page sub-title */
-//
-$lang = array_merge($lang, array(
-));
-
 ?>
