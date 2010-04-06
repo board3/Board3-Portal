@@ -48,7 +48,7 @@ class portal_announcements_module
 
 	function get_template_center($module_id)
 	{
-		global $config, $template, $db, $portal_config;
+		global $config, $template, $db;
 
 		$announcement = request_var('announcement', -1);
 		$announcement = ($announcement > $portal_config['portal_announcements_length'] -1) ? -1 : $announcement;
@@ -371,11 +371,18 @@ class portal_announcements_module
 	function get_template_acp($module_id)
 	{
 		return array(
-			'title'	=> 'ACP_CONFIG_MODULENAME',
+			'title'	=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
 			'vars'	=> array(
-				'legend1'				=> 'ACP_MODULENAME_CONFIGLEGEND',
-				'portal_configname'		=> array('lang' => 'MODULENAME_CONFIGNAME',		'validate' => 'string',	'type' => 'text:10:200',	'explain' => false),
-				'portal_configname2'	=> array('lang' => 'MODULENAME_CONFIGNAME2',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'legend1'									=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
+				'portal_announcements_style'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_STYLE'		 	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'portal_number_of_announcements'			=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'portal_announcements_day'					=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'portal_announcements_length'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'portal_global_announcements_forum'			=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'custom',			'explain' => true, 'method' => 'select_forums', 'submit' => 'store_selected_forums'),
+				'portal_announcements_forum_exclude'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_FORUM_EXCLUDE',	'validate' => 'string', 'type' => 'radio:yes_no',	'explain' => true),
+				'portal_announcements_archive'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'portal_announcements_permissions'			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'portal_show_announcements_replies_views'	=> array('lang' => 'PORTAL_SHOW_REPLIES_VIEWS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 			),
 		);
 	}
@@ -385,8 +392,16 @@ class portal_announcements_module
 	*/
 	function install($module_id)
 	{
-		set_portal_config('portal_configname', 'Hello World!');
-		set_portal_config('portal_configname2', 1337);
+		set_config('portal_announcements_style', 0);
+		set_config('portal_number_of_announcements', 1);
+		set_config('portal_announcements_day', 0);
+		set_config('portal_announcements_length', 200);
+		set_config('portal_global_announcements_forum', '');
+		set_config('portal_announcements_forum_exclude', 0);
+		set_config('portal_announcements_archive', 1);
+		set_config('portal_announcements_permissions', 1);
+		set_config('portal_show_announcements_replies_views', 1);
+		
 		return true;
 	}
 
@@ -395,12 +410,57 @@ class portal_announcements_module
 		global $db;
 
 		$del_config = array(
-			'portal_configname',
-			'portal_configname2',
+			'portal_announcements_style',
+			'portal_number_of_announcements',
+			'portal_announcements_day',
+			'portal_announcements_length',
+			'portal_global_announcements_forum',
+			'portal_announcements_forum_exclude',
+			'portal_announcements_archive',
+			'portal_announcements_permissions',
+			'portal_show_announcements_replies_views',
 		);
-		$sql = 'DELETE FROM ' . PORTAL_CONFIG_TABLE . '
+		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
+	}
+	
+	// Create forum select box
+	function select_forums($value, $key)
+	{
+		global $user, $config;
+
+		$forum_list = make_forum_select(false, false, true, true, true, false, true);
+		
+		$selected = array();
+		if(isset($config[$key]) && strlen($config[$key]) > 0)
+		{
+			$selected = explode(',', $[$key]);
+		}
+		// Build forum options
+		$s_forum_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
+		foreach ($forum_list as $f_id => $f_row)
+		{
+			$s_forum_options .= '<option value="' . $f_id . '"' . ((in_array($f_id, $selected)) ? ' selected="selected"' : '') . (($f_row['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $f_row['padding'] . $f_row['forum_name'] . '</option>';
+		}
+		$s_forum_options .= '</select>';
+
+		return $s_forum_options;
+
+	}
+	
+	// Store selected forums
+	function store_selected_forums($key)
+	{
+		global $db, $cache;
+		
+		// Get selected extensions
+		$values = request_var($key, array(0 => ''));
+		
+		$news = implode(',', $values);
+		
+		set_config($key, $news);
+	
 	}
 }
 

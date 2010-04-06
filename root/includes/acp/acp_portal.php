@@ -22,19 +22,19 @@ class acp_portal
 	function main($id, $mode)
 	{
 		global $db, $user, $cache, $template, $display_vars;
-		global $config, $portal_config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx;
+		global $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx;
 		$portal_root_path = PORTAL_ROOT_PATH;
 		if (!function_exists('column_string_const'))
 		{
 			include($phpbb_root_path . $portal_root_path . 'includes/functions_modules.' . $phpEx);
 		}
-
+		/*
 		if (!function_exists('obtain_portal_config'))
 		{
 			include($phpbb_root_path . $portal_root_path . 'includes/functions.' . $phpEx);
 		}
 		$portal_config = obtain_portal_config();
-		/*
+		
 		if (!function_exists('mod_version_check'))
 		{
 			include($phpbb_root_path . $portal_root_path . 'includes/functions_version_check.' . $phpEx);
@@ -110,7 +110,7 @@ class acp_portal
 					}
 				}
 
-				$this->new_config = $portal_config;
+				$this->new_config = $config;
 				$cfg_array = (isset($_REQUEST['config'])) ? utf8_normalize_nfc(request_var('config', array('' => ''), true)) : $this->new_config;
 				$error = array();
 
@@ -139,7 +139,7 @@ class acp_portal
 
 					if ($submit)
 					{
-						set_portal_config($config_name, $config_value);
+						set_config($config_name, $config_value);
 					}
 				}
 
@@ -190,7 +190,7 @@ class acp_portal
 
 						continue;
 					}
-					//$this->new_config[$config_key] = $config[$config_key];
+					$this->new_config[$config_key] = $config[$config_key];
 					$type = explode(':', $vars['type']);
 
 					$l_explain = '';
