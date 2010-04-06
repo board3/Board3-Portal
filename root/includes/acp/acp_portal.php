@@ -57,13 +57,13 @@ class acp_portal
 		{
 			case 'config':
 				$display_vars = array(
-/*					'title'	=> 'ACP_PORTAL_GENERAL_TITLE',
+					'title'	=> 'ACP_PORTAL_GENERAL_TITLE',
 					'vars'	=> array(
 						'legend1'					=> 'ACP_PORTAL_GENERAL_INFO',
-						'portal_enable'				=> array('lang' => 'PORTAL_ENABLE',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_left_column_width'	=> array('lang' => 'PORTAL_LEFT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-						'portal_right_column_width'	=> array('lang' => 'PORTAL_RIGHT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-					)*/
+					#	'portal_enable'				=> array('lang' => 'PORTAL_ENABLE',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+					#	'portal_left_column_width'	=> array('lang' => 'PORTAL_LEFT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+					#	'portal_right_column_width'	=> array('lang' => 'PORTAL_RIGHT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+					)
 				);
 
 				$module_id = request_var('module_id', 0);
@@ -99,6 +99,8 @@ class acp_portal
 							'MODULE_IMAGE'			=> $module_data['module_image_src'],
 							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $module_data['module_image_src'] : '',
 						));
+						
+						$template->assign_var('SHOW_MODULE_OPTIONS', true);
 					}
 				}
 

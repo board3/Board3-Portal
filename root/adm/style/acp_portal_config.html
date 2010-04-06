@@ -38,7 +38,7 @@
 		<!-- ENDIF -->
 	</fieldset>
 <!-- END mods -->
-
+<!-- IF SHOW_MODULE_OPTIONS -->
 <form id="acp_portal_config" method="post" action="{U_ACTION}">
 		<fieldset>
 			<legend>{L_MODULE_OPTIONS}</legend>
@@ -52,7 +52,7 @@
 				<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
 			</dl>
 		</fieldset>
-
+<!-- ENDIF -->
 <!-- BEGIN options -->
 	<!-- IF options.S_LEGEND -->
 		<!-- IF not options.S_FIRST_ROW -->
