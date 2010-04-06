@@ -16,16 +16,24 @@ $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
+include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
+include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
 $portal_root_path = PORTAL_ROOT_PATH;
 $portal_icons_path = PORTAL_ICONS_PATH;
+include($phpbb_root_path . $portal_root_path . 'includes/functions.' . $phpEx);
 include($phpbb_root_path . $portal_root_path . 'includes/functions_modules.' . $phpEx);
-//include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
+
+$portal_config = obtain_portal_config();
 
 // Start session management
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup('mods/portal');
 
+if (!$portal_config['portal_enable'])
+{
+	redirect(reapply_sid($phpbb_root_path . 'index.' . $phpEx));
+}
 
 $sql = 'SELECT *
 	FROM ' . PORTAL_MODULES_TABLE;

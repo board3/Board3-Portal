@@ -29,12 +29,12 @@ class acp_portal
 			include($phpbb_root_path . $portal_root_path . 'includes/functions_modules.' . $phpEx);
 		}
 
-		/*if (!function_exists('obtain_portal_config'))
+		if (!function_exists('obtain_portal_config'))
 		{
 			include($phpbb_root_path . $portal_root_path . 'includes/functions.' . $phpEx);
 		}
 		$portal_config = obtain_portal_config();
-
+		/*
 		if (!function_exists('mod_version_check'))
 		{
 			include($phpbb_root_path . $portal_root_path . 'includes/functions_version_check.' . $phpEx);
@@ -110,7 +110,7 @@ class acp_portal
 					}
 				}
 
-				$this->new_config = $config;
+				$this->new_config = $portal_config;
 				$cfg_array = (isset($_REQUEST['config'])) ? utf8_normalize_nfc(request_var('config', array('' => ''), true)) : $this->new_config;
 				$error = array();
 
@@ -139,7 +139,7 @@ class acp_portal
 
 					if ($submit)
 					{
-						set_config($config_name, $config_value);
+						set_portal_config($config_name, $config_value);
 					}
 				}
 
@@ -190,7 +190,7 @@ class acp_portal
 
 						continue;
 					}
-					$this->new_config[$config_key] = $config[$config_key];
+					//$this->new_config[$config_key] = $config[$config_key];
 					$type = explode(':', $vars['type']);
 
 					$l_explain = '';
