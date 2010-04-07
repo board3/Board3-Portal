@@ -46,6 +46,7 @@ if ($user->data['is_registered'])
 					' . ((sizeof($ex_fid_ary)) ? 'AND ' . $db->sql_in_set('t.forum_id', $ex_fid_ary, true) : '');
 	$result = $db->sql_query($sql);
 	$new_posts_count = (int) $db->sql_fetchfield('total');
+	$db->sql_freeresult($result);
 	
 	// unread posts
 	$sql_where = 'AND t.topic_moved_id = 0
@@ -53,19 +54,7 @@ if ($user->data['is_registered'])
 					' . ((sizeof($ex_fid_ary)) ? 'AND ' . $db->sql_in_set('t.forum_id', $ex_fid_ary, true) : '');
 	$unread_list = array();
 	$unread_list = get_unread_topics($user->data['user_id'], $sql_where, 'ORDER BY t.topic_id DESC');
-	
-	if (!empty($unread_list))
-	{
-		$sql = 'SELECT COUNT(distinct t.topic_id) as total
-			FROM ' . TOPICS_TABLE . ' t
-			WHERE ' . $db->sql_in_set('t.topic_id', array_keys($unread_list));
-		$result = $db->sql_query($sql);
-		$unread_posts_count = (int) $db->sql_fetchfield('total');
-	}
-	else
-	{
-		$unread_posts_count = 0;
-	}
+	$unread_posts_count = sizeof($unread_list);
 }
 //
 // - new posts since last visit & you post number
