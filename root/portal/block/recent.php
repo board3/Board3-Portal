@@ -43,6 +43,7 @@ if (sizeof($forum_ary))
 
 $result = $db->sql_query_limit($sql, 1);
 $g_forum_id = (int) $db->sql_fetchfield('forum_id');
+$db->sql_freeresult($result);
 
 //
 // Recent announcements
