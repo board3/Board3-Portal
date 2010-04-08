@@ -1,6 +1,6 @@
 <?php
 /**
-* @package Portal - Topposters
+* @package Portal - User Menu
 * @version $Id$
 * @copyright (c) 2009, 2010 Board3 Portal Team
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -31,21 +31,11 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'LATEST_ANNOUNCEMENTS'		=> 'Letzte Bekanntmachung',
-	'GLOBAL_ANNOUNCEMENT'		=> 'Globale Bekanntmachung',
-	'VIEW_LATEST_ANNOUNCEMENT'   => '1 Bekanntmachung',
-	'VIEW_LATEST_ANNOUNCEMENTS'   => '%d Bekanntmachungen',
-	'READ_FULL'						=> 'alles lesen',
-	'NO_ANNOUNCEMENTS'			=> 'Keine Bekanntmachung',
-	'POSTED_BY'						=> 'Autor',
-	'COMMENTS'						=> 'Antworten',
-	'VIEW_COMMENTS'				=> 'Antworten anzeigen',
-	'POST_REPLY'						=> 'Antwort schreiben',
-	'TOPIC_VIEWS'					=> 'Zugriffe',
-	'JUMP_NEWEST'					=> 'Zum letzten Beitrag springen',
-	'JUMP_FIRST'						=> 'Zum ersten Beitrag springen',
-	'JUMP_TO_POST'					=> 'Rufe den Beitrag auf',
-	'BACK'								=> 'Zurück',
+	'USER_MENU'					=> 'Benutzer-Menü',
+	'UM_LOG_ME_IN'				=> 'Mich bei jedem Besuch automatisch anmelden',
+	'UM_HIDE_ME'				=> 'Meinen Online-Status während dieser Sitzung verbergen',
+	'UM_MAIN_SUBSCRIBED'		=> 'Benachrichtigungen verwalten',
+	'UM_BOOKMARKS'				=> 'Lesezeichen verwalten',
 ));
 
 ?>
