@@ -33,7 +33,8 @@ if (!$config['portal_enable'])
 }
 
 $sql = 'SELECT *
-	FROM ' . PORTAL_MODULES_TABLE;
+	FROM ' . PORTAL_MODULES_TABLE . '
+	ORDER BY module_order ASC';
 $result = $db->sql_query($sql);
 while ($row = $db->sql_fetchrow($result))
 {

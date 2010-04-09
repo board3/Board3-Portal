@@ -435,7 +435,7 @@ class portal_announcements_module
 		$selected = array();
 		if(isset($config[$key]) && strlen($config[$key]) > 0)
 		{
-			$selected = explode(',', $[$key]);
+			$selected = explode(',', $config[$key]);
 		}
 		// Build forum options
 		$s_forum_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';

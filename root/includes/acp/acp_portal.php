@@ -280,6 +280,8 @@ class acp_portal
 					$result = $db->sql_query_limit($sql, 1);
 					$module_data = $db->sql_fetchrow($result);
 					$db->sql_freeresult($result);
+					
+					$directory = $phpbb_root_path . 'portal/modules/';
 
 					if ($module_data !== false)
 					{
@@ -438,7 +440,7 @@ class acp_portal
 							'MODULE_NAME'		=> (isset($user->lang[$row['module_name']])) ? $user->lang[$row['module_name']] : $row['module_name'],
 							'MODULE_IMAGE'		=> ($row['module_image_src']) ? '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $row['module_image_src'] . '" alt="' . $row['module_name'] . '" />' : '',
 
-							'U_DELETE'			=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=delete',
+							'U_DELETE'			=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;module_classname=' . $row['module_classname'] . '&amp;action=delete',
 							'U_EDIT'			=> append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $row['module_id']),
 							'U_MOVE_UP'			=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_up',
 							'U_MOVE_DOWN'		=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_down',

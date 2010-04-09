@@ -59,7 +59,9 @@ class portal_leaders_module
 
 	function get_template_side($module_id)
 	{
-		global $config, $template, $user, $auth, $db;
+		global $config, $template, $user, $auth, $db, $phpEx;
+		
+		$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 
 		// Display a listing of board admins, moderators
 		$user->add_lang('groups');
