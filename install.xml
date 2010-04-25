@@ -85,12 +85,12 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			 </author>
 		</author-group>
 
-		<mod-version>1.0.5</mod-version>
+		<mod-version>1.0.6</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>600</time>
-			<target-version>3.0.6</target-version>
+			<target-version>3.0.7-PL1</target-version>
 		</installation>
 
 		<link-group>
@@ -108,6 +108,70 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<link type="template" lang="de" href="contrib/subsilver2.xml">Anleitung für das Style subsilver2</link>
 		</link-group>
 		<history>
+			<entry>
+				<date>2010-05-01</date>
+				<rev-version>1.0.6</rev-version>
+				<changelog lang="en">
+					<change>Fixed typos in subsilver2 online_friends.html</change>
+					<change>Removed incorrect link at the end of an announcement</change>
+					<change>Removed unnecessary database query in portal/block/statistics.php</change>
+					<change>Fixed error unclosed comment tag at the end of sub-taged-string</change>
+					<change>Removed caching from function obtain_portal_config, as this prevents people from changing the acp settings</change>
+					<change>Added missing permission check in function phpbb_fetch_posts</change>
+					<change>Fixed error with global announcement permission check</change>
+					<change>Updated XML-files to MODX 1.2.5</change>
+					<change>Added nickvergessen and Redbull back to the authors</change>
+					<change>Added remove-tag to update instructions</change>
+					<change>Replaced HTML-replacements of ' with the correct characters</change>
+					<change>Using lowercase true in portal/includes/functions.php</change>
+					<change>Now using sql_escape in function sql_table_exists</change>
+					<change>Removed $_POST and $_GET from portal/block/mini_cal.php</change>
+					<change>Removed unnecessary query for user's post count in portal/block/user_menu.php</change>
+					<change>Wordgraph is disabled if any search type other than fulltext native is chosen in the ACP in order to prevent errors</change>
+					<change>Don't query database if user menu is disabled</change>
+					<change>Don't show styleswitcher if only one style is activated</change>
+					<change>Now using generate_board_url() for the link us block</change>
+					<change>Fixed missing end-tag if the post is cut at a link-tag</change>
+					<change>Added ability to hide birthday ahead list by setting the number of days to 0</change>
+					<change>Added line break in prosilver birthday block between birthday list and birthday ahead list</change>
+					<change>Added intval for exclude_forums in recent topics block</change>
+					<change>Added feature that will prevent database error if last install was not successful</change>
+					<change>Extended leaders block now shows users in every "legend" group they are in</change>
+					<change>Removed unnecessary query from portal/block/user_menu.php</change>
+					<change>Added missing $db->sql_freeresult to several blocks</change>
+					<change>Replaced an old function with one that only uses one query in portal/block/statistics.php</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Schreibfehler in subsilver2 online_friends.html beseitigt</change>
+					<change>Fehlerhafte Links am Ende von Bekanntmachungen beseitigt</change>
+					<change>Unnötigen Datenbank Query in portal/block/statistics.php entfernt</change>
+					<change>Nicht geschlossenen Kommentar Tag am Ende von gekürzten Texten beseitigt</change>
+					<change>Unnötiges und fehlerhaftes Cachen in Funktion obtain_portal_config entfernt</change>
+					<change>Fehlende Überprüfung von Berechtigungen in Funktion phpbb_fetch_posts hinzugefügt</change>
+					<change>Fehler in der Überprüfung der Berechtigungen für Globale Bekanntmachungen entfernt</change>
+					<change>XML-Dateienn auf MODX 1.2.5 aktualisiert</change>
+					<change>Nickvergessen und Redbull wurden als Autoren wieder zu den Installationsdateien hinzugefügt</change>
+					<change>remove-tag zu den Update Anleitungen hinzugefügt</change>
+					<change>HTML-Zeichen von ' mit den korrekten Zeichen ersetzt</change>
+					<change>Nutzung von kleingeschriebenem true in portal/includes/functions.php</change>
+					<change>Nutzung von sql_escape in Function sql_table_exists</change>
+					<change>$_POST and $_GET von portal/block/mini_cal.php entfernt</change>
+					<change>Unnötige Queries für die Anzahl der Beiträge eines Benutzers in portal/block/user_menu.php entfernt</change>
+					<change>Wordgraph wird deaktiviert falls ein anderer Suchtyp als fulltext native verwendet wird um Fehlern vorzubeugen</change>
+					<change>Keine Datenbankabfragen falls das Benutzermenü deaktiviert ist</change>
+					<change>Zeige den Styleswitcher nicht, falls nur ein Style aktiviert ist</change>
+					<change>generate_board_url() wird jetzt für den Link Us Block verwendet</change>
+					<change>Fehlenden End-Tag, falls ein Beitrag bei einem Link gekürzt wird, korrigiert</change>
+					<change>Möglichkeit die Liste der nächsten Geburtstage nicht zu zeigen, falls die Anzahl der Tage auf 0 gesetzt wird</change>
+					<change>Zeilenumbruch in prosilver Geburtstagsblock zwischen Geburtstagsliste und Liste der nächsten Geburtstage hinzugefügt</change>
+					<change>intval für exclude_forums im Aktuelle Beiträge Block hinzugefügt</change>
+					<change>Feature hinzugefügt, das Fehler verhindert falls die lezte Installation nicht erfolgreich war</change>
+					<change>Erweiterter Team Block zeigt Benutzer jetzt in allen Gruppen, in denen sie Mitglied sind, an</change>
+					<change>Unnötigen Query von portal/block/user_menu.php entfernt</change>
+					<change>Fehlendes $db->sql_freeresult bei mehreren Blöcken hinzugefügt</change>
+					<change>Alte Funktion mit einer neuen Funktion die nur einen Query braucht in portal/block/statistics.php ersetzt</change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2010-01-20</date>
 				<rev-version>1.0.5</rev-version>
@@ -148,7 +212,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Fixed typo in leaders_ext.html</change>
 					<change>Changed MSN Livesearch to BING</change>
 					<change>Fixed bug with missing simplexml extension in PHP</change>
-					<change>Fixed typo in subsilver2 online_friends.html</change>
+					<change>Fixed typos in subsilver2 online_friends.html</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fixed Bug in Geburtstags-Block: Mousever-Effekt zeigte "01 Jan" als Geburtstag, egal wann der Benutzer Geburtstag hat</change>
