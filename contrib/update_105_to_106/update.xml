@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
-<!-- $Id: update.xml 586 2009-12-03 00:16:49Z marc1706 $ -->
+<!-- $Id$ -->
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
@@ -85,12 +85,12 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			 </author>
 		</author-group>
 
-		<mod-version>1.0.5</mod-version>
+		<mod-version>1.0.6</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>600</time>
-			<target-version>3.0.6</target-version>
+			<target-version>3.0.7-PL1</target-version>
 		</installation>
 
 		<link-group>
@@ -104,68 +104,60 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 	</header>
 	<action-group>
 		<copy>
-			<file from="root/portal.php" to="portal.php" />
-			<file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />
 			<file from="root/install/*.*" to="install/*.*" />
 			<file from="root/install/schemas/*.*" to="install/schemas/*.*" />
 			<file from="root/language/en/mods/lang_portal_acp.php" to="language/en/mods/lang_portal_acp.php" />
-			<file from="root/portal/block/announcements.php" to="portal/block/announcements.php" />
-			<file from="root/portal/block/attachments.php" to="portal/block/attachments.php" />
 			<file from="root/portal/block/birthday_list.php" to="portal/block/birthday_list.php" />
-			<file from="root/portal/block/custom.php" to="portal/block/custom.php" />
-			<file from="root/portal/block/friends.php" to="portal/block/friends.php" />
-			<file from="root/portal/block/latest_bots.php" to="portal/block/latest_bots.php" />
-			<file from="root/portal/block/latest_members.php" to="portal/block/latest_members.php" />
+			<file from="root/portal/block/change_style.php" to="portal/block/change_style.php" />
 			<file from="root/portal/block/leaders_ext.php" to="portal/block/leaders_ext.php" />
-			<file from="root/portal/block/links.php" to="portal/block/links.php" />
+			<file from="root/portal/block/link_us.php" to="portal/block/link_us.php" />
 			<file from="root/portal/block/mini_cal.php" to="portal/block/mini_cal.php" />
-			<file from="root/portal/block/news.php" to="portal/block/news.php" />
-			<file from="root/portal/block/poll.php" to="portal/block/poll.php" />
 			<file from="root/portal/block/recent.php" to="portal/block/recent.php" />
 			<file from="root/portal/block/statistics.php" to="portal/block/statistics.php" />
-			<file from="root/portal/block/top_posters.php" to="portal/block/top_posters.php" />
 			<file from="root/portal/block/user_menu.php" to="portal/block/user_menu.php" />
-			<file from="root/portal/block/welcome.php" to="portal/block/welcome.php" />
 			<file from="root/portal/block/wordgraph.php" to="portal/block/wordgraph.php" />
 			<file from="root/portal/includes/functions.php" to="portal/includes/functions.php" />
-			<file from="root/styles/prosilver/template/portal/portal_body.html" to="styles/prosilver/template/portal/portal_body.html" />
-			<file from="root/styles/prosilver/template/portal/portal_left.html" to="styles/prosilver/template/portal/portal_left.html" />
-			<file from="root/styles/prosilver/template/portal/portal_center.html" to="styles/prosilver/template/portal/portal_center.html" />
-			<file from="root/styles/prosilver/template/portal/portal_right.html" to="styles/prosilver/template/portal/portal_right.html" />
+			<file from="root/portal/includes/functions_version_check.php" to="portal/includes/functions_version_check.php" />
 			<file from="root/styles/prosilver/template/portal/block/birthday_list.html" to="styles/prosilver/template/portal/block/birthday_list.html" />
-			<file from="root/styles/prosilver/template/portal/block/forumlist_search.html" to="styles/prosilver/template/portal/block/forumlist_search.html" />
-			<file from="root/styles/prosilver/template/portal/block/leaders_ext.html" to="styles/prosilver/template/portal/block/leaders_ext.html" />
-			<file from="root/styles/prosilver/template/portal/block/login_box.html" to="styles/prosilver/template/portal/block/login_box.html" />
-			<file from="root/styles/prosilver/template/portal/block/online_friends.html" to="styles/prosilver/template/portal/block/online_friends.html" />
+			<file from="root/styles/prosilver/template/portal/block/search.html" to="styles/prosilver/template/portal/block/search.html" />
 			<file from="root/styles/prosilver/template/portal/block/user_menu.html" to="styles/prosilver/template/portal/block/user_menu.html" />
 		</copy>
-		<open src="includes/session.php">
+		<open src="portal.php">
 			<edit>
-				<find><![CDATA[		if (!empty($_GET['style']))]]></find>
-				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START'))]]></action>
-			</edit>
-		</open>
-		<open src="includes/functions.php">
-			<edit>
-				<find><![CDATA[	$user->add_lang(array('mods/lang_portal', 'mods/additional_blocks'));
-	if (!function_exists('obtain_portal_config'))
+				<find><![CDATA[	// show login box and user menu
+	// only registered user see user menu
+	if ($user->data['is_registered'])
 	{
-		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
+		include($phpbb_root_path . 'portal/block/user_menu.' . $phpEx);
 	}
-	$portal_config = obtain_portal_config();]]></find>
-				<action type="replace-with"><![CDATA[	$user->add_lang(array('mods/lang_portal', 'mods/additional_blocks'));
-	if (!function_exists('obtain_portal_config'))
+	else
 	{
-		include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
+		include($phpbb_root_path . 'portal/block/login_box.' . $phpEx);
 	}
-	if(sql_table_exists(PORTAL_CONFIG_TABLE) == true)
+	
+	if ($portal_config['portal_user_menu'])
 	{
-		$portal_config = obtain_portal_config();
+		$template->assign_var('S_DISPLAY_USERMENU', true);
+	}]]></find>
+				<action type="replace-with"><![CDATA[	if ($portal_config['portal_user_menu'])
+	{
+		// show login box and user menu
+		// only registered user see user menu
+		if ($user->data['is_registered'])
+		{
+			include($phpbb_root_path . 'portal/block/user_menu.' . $phpEx);
+		}
+		else
+		{
+			include($phpbb_root_path . 'portal/block/login_box.' . $phpEx);
+		}
+		$template->assign_var('S_DISPLAY_USERMENU', true);
+		
+		if($config['allow_topic_notify'] || $config['allow_forum_notify'])
+		{
+			$template->assign_var('S_DISPLAY_SUBSCRIPTIONS', true);
+		}
 	}]]></action>
-			</edit>
-			<edit>
-				<find><![CDATA[		'U_PORTAL'				=> ($portal_config['portal_enable']) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></find>
-				<action type="replace-with"><![CDATA[		'U_PORTAL'				=> (isset($portal_config['portal_enable']) && $portal_config['portal_enable'] == true) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></action>
 			</edit>
 		</open>
 		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus

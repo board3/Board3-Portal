@@ -85,23 +85,25 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			 </author>
 		</author-group>
 
-		<mod-version>1.0.5</mod-version>
+		<mod-version>1.0.6</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>600</time>
-			<target-version>3.0.6</target-version>
+			<target-version>3.0.7-PL1</target-version>
 		</installation>
 
 		<link-group>
 			<link type="parent" lang="de" href="../../../install.xml">Installations-Anleitung</link>
 			<link type="parent" lang="en" href="../../../install.xml">Manual</link>
-			<link type="parent" lang="de" href="../update.xml">Update-Anleitung von Version 1.0.4</link>
-			<link type="parent" lang="en" href="../update.xml">Update Instructions for 1.0.4</link>
+			<link type="parent" lang="de" href="../update.xml">Update-Anleitung von Version 1.0.3</link>
+			<link type="parent" lang="en" href="../update.xml">Update Instructions for 1.0.3</link>
 		</link-group>
 	</header>
 	<action-group>
 		<copy>
+			<file from="root/language/de/mods/install_portal.php" to="language/de/mods/install_portal.php" />
+			<file from="root/language/de/mods/lang_portal.php" to="language/de/mods/lang_portal.php" />
 			<file from="root/language/de/mods/lang_portal_acp.php" to="language/de/mods/lang_portal_acp.php" />
 		</copy>
 

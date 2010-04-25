@@ -6,10 +6,10 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en-gb">board3 Portal</title>
-		<title lang="de">board3 Portal</title>
+		<title lang="en">board3 Portal - subsilver2 style</title>
+		<title lang="de">board3 Portal - subsilver2 style</title>
 
-		<description lang="en-gb">Adds a portal to your forum.
+		<description lang="en">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
 
 Included language files:
@@ -89,21 +89,25 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 
 		<installation>
 			<level>easy</level>
-			<time>120</time>
+			<time>600</time>
 			<target-version>3.0.7-PL1</target-version>
 		</installation>
 
 		<link-group>
-			<link type="parent" lang="de" href="../install.xml">Installations-Anleitung</link>
-			<link type="parent" lang="en-gb" href="../install.xml">Manual</link>
-		</link-group>
+			<link type="parent" lang="de" href="../../../install.xml">Installations-Anleitung</link>
+			<link type="parent" lang="en" href="../../../install.xml">Manual</link>
+			<link type="parent" lang="de" href="../update.xml">Update-Anleitung von Version 1.0.5</link>
+			<link type="parent" lang="en" href="../update.xml">Update Instructions for 1.0.5</link>
+		</link-group>	
 	</header>
 	<action-group>
 		<copy>
-			<file from="root/language/de/mods/*.*" to="language/de/mods/*.*" />
+			<file from="root/styles/subsilver2/template/portal/block/birthday_list.html" to="styles/subsilver2/template/portal/block/birthday_list.html" />
+			<file from="root/styles/subsilver2/template/portal/block/online_friends.html" to="styles/subsilver2/template/portal/block/online_friends.html" />
+			<file from="root/styles/subsilver2/template/portal/block/search.html" to="styles/subsilver2/template/portal/block/search.html" />
+			<file from="root/styles/subsilver2/template/portal/block/user_menu.html" to="styles/subsilver2/template/portal/block/user_menu.html" />
 		</copy>
-
-		<diy-instructions lang="en-gb">See general install.xml file</diy-instructions>
-		<diy-instructions lang="de">Siehe install.xml</diy-instructions>
+		<diy-instructions lang="en">See general update.xml file</diy-instructions>
+		<diy-instructions lang="de">Siehe update.xml</diy-instructions>
 	</action-group>
 </mod>

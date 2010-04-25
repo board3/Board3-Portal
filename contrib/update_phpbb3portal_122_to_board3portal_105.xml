@@ -85,12 +85,12 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			 </author>
 		</author-group>
 
-		<mod-version>1.0.5</mod-version>
+		<mod-version>1.0.6</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>600</time>
-			<target-version>3.0.6</target-version>
+			<target-version>3.0.7-PL1</target-version>
 		</installation>
 
 		<link-group>
