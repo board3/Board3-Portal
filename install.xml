@@ -151,7 +151,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Unnötiges und fehlerhaftes Cachen in Funktion obtain_portal_config entfernt</change>
 					<change>Fehlende Überprüfung von Berechtigungen in Funktion phpbb_fetch_posts hinzugefügt</change>
 					<change>Fehler in der Überprüfung der Berechtigungen für Globale Bekanntmachungen entfernt</change>
-					<change>XML-Dateienn auf MODX 1.2.5 aktualisiert</change>
+					<change>XML-Dateien auf MODX 1.2.5 aktualisiert</change>
 					<change>Nickvergessen und Redbull wurden als Autoren wieder zu den Installationsdateien hinzugefügt</change>
 					<change>remove-tag zu den Update Anleitungen hinzugefügt</change>
 					<change>HTML-Zeichen von ' mit den korrekten Zeichen ersetzt</change>
@@ -592,9 +592,8 @@ Deny from All
 				<action type="after-add"><![CDATA[@import url("portal.css");]]></action>
 			</edit>
 		</open>
-		
-		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus
-
+		<php-installer>install/index.php</php-installer>
+		<diy-instructions lang="de"><![CDATA[
 Aktualisiere deine Styles:
     "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
     "Administrations-Bereich" (ACP) > "Styles" > "Themes" > jedes > "Aktualisieren"
@@ -602,8 +601,7 @@ Aktualisiere deine Styles:
 
 Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
 ]]></diy-instructions>
-		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer
-
+		<diy-instructions lang="en"><![CDATA[
 Refresh your Styles:
     "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
     "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
