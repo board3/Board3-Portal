@@ -411,7 +411,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>An phpBB 3.0.1 angepasst</change>
 					<change>Der Link Block kann nun über das ACP verwaltet werden: erstellen, löschen und positionieren von Links</change>
 					<change>Es kann nun BBCode in der Willkommens Nachricht benutzt werden</change>
-					<change>Zwei anpassbare Blöcke hinzu gefügt, die im ACP mit BBCode oder HTML gefüllt werden könen. Für Werbung, Videos, Bilder, was auch immer.</change>
+					<change>Zwei anpassbare Blöcke hinzu gefügt, die im ACP mit BBCode oder HTML gefüllt werden können. Für Werbung, Videos, Bilder, was auch immer.</change>
 					<change>Aktuelle Beiträge und Bekanntmachungen wurden komplett überarbeitet. Es wurde ein Archivsystem und die Anzeige von Seitenzahlen hinzu gefügt. Zusätzlich kann man nun wählen ob man der Ersten oder Neuesten Beitrag bei den aktuellen Beiträgen angezeigt bekommen möchte.</change>
 					<change>MSSQL Unterstützung</change>
 					<change>Forum Liste auf dem Portal hinzugefügt</change>
