@@ -239,8 +239,8 @@ DirectoryIndex portal.php index.php index.html index.htm]]></action>
 		break;]]></action>
 			</edit>
 		</open>
-		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus
-
+		<php-installer>install/index.php</php-installer>
+		<diy-instructions lang="de"><![CDATA[
 Aktualisiere deine Styles:
     "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
     "Administrations-Bereich" (ACP) > "Styles" > "Themes" > jedes > "Aktualisieren"
@@ -249,8 +249,7 @@ Aktualisiere deine Styles:
 Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
 
 Subsilver2 User: bitte das komplette Verzeichnis subsilver2 mit den neuen Dateien überschreiben.]]></diy-instructions>
-		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer
-
+		<diy-instructions lang="en"><![CDATA[
 Refresh your Styles:
     "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
     "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"

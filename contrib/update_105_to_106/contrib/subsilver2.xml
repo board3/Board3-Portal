@@ -107,7 +107,21 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<file from="root/styles/subsilver2/template/portal/block/search.html" to="styles/subsilver2/template/portal/block/search.html" />
 			<file from="root/styles/subsilver2/template/portal/block/user_menu.html" to="styles/subsilver2/template/portal/block/user_menu.html" />
 		</copy>
-		<diy-instructions lang="en">See general update.xml file</diy-instructions>
-		<diy-instructions lang="de">Siehe update.xml</diy-instructions>
+		<diy-instructions lang="de"><![CDATA[
+Aktualisiere deine Styles:
+    "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
+    "Administrations-Bereich" (ACP) > "Styles" > "Themes" > jedes > "Aktualisieren"
+    "Administrations-Bereich" (ACP) > "Styles" > "Grafiksammlungen" > jedes > "Aktualisieren"
+
+Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
+]]></diy-instructions>
+		<diy-instructions lang="en"><![CDATA[
+Refresh your Styles:
+    "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
+    "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
+    "Administration Control Panel" (ACP) > "Styles" > "Imagesets" > each > "refresh"
+
+Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
+]]></diy-instructions>
 	</action-group>
 </mod>
