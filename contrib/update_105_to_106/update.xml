@@ -159,6 +159,10 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		}
 	}]]></action>
 			</edit>
+			<edit>
+				<find><![CDATA[			'U_MARK_FORUMS'               => ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx", 'mark=forums') : '',]]></find>
+				<action type="replace-with"><![CDATA[			'U_MARK_FORUMS'					=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx", 'hash=' . generate_link_hash('global') . '&amp;mark=forums') : '',]]></action>
+			</edit>
 		</open>
 		<php-installer>install/index.php</php-installer>
 		<diy-instructions lang="de"><![CDATA[

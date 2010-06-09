@@ -327,6 +327,12 @@ class module
 		global $db, $template;
 
 		$template->display('body');
+		
+		// Unload cache, must be done before the DB connection if closed
+		if (!empty($cache) && is_object($cache))
+		{
+			$cache->unload();
+		}
 
 		// Close our DB connection.
 		if (!empty($db) && is_object($db))
