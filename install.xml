@@ -142,6 +142,11 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Removed unnecessary query from portal/block/user_menu.php</change>
 					<change>Added missing $db->sql_freeresult to several blocks</change>
 					<change>Replaced an old function with one that only uses one query in portal/block/statistics.php</change>
+					<change>Cleaner birthday list look for prosilver -- Suggestion by Wuerzi</change>
+					<change>Fixed double colon in whois_online.html</change>
+					<change>Fixed a bug that caused "Mark forums read" not to work on the portal</change>
+					<change>Fixed missing $cache->unload() in install/index.php</change>
+					<change>Fixed bug that causes the content of the small custom block to overlap its outline</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Schreibfehler in subsilver2 online_friends.html beseitigt</change>
@@ -172,6 +177,11 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Unnötigen Query von portal/block/user_menu.php entfernt</change>
 					<change>Fehlendes $db->sql_freeresult bei mehreren Blöcken hinzugefügt</change>
 					<change>Alte Funktion mit einer neuen Funktion die nur einen Query braucht in portal/block/statistics.php ersetzt</change>
+					<change>Geburtstags Block in prosilver Überarbeitet -- Vorschlang von Würzi</change>
+					<change>Doppelte Doppelpunkt in subsilver2 whois_online.html entfernt</change>
+					<change>Bug beseitigt, durch den "Alle Foren als gelesen markieren" nicht mehr funktioniert hat</change>
+					<change>Fehlendes $cache->unload() in install/index.php hinzugefügt</change>
+					<change>Bug beseitigt, der dazu führt, dass der Inhalt des kleinen Eigenen Blocks über den Rand des Blocks herraussragt</change>
 				</changelog>
 			</entry>
 			<entry>
