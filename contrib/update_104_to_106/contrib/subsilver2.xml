@@ -113,6 +113,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<file from="root/styles/subsilver2/template/portal/block/poll.html" to="styles/subsilver2/template/portal/block/poll.html" />
 			<file from="root/styles/subsilver2/template/portal/block/search.html" to="styles/subsilver2/template/portal/block/search.html" />
 			<file from="root/styles/subsilver2/template/portal/block/user_menu.html" to="styles/subsilver2/template/portal/block/user_menu.html" />
+			<file from="root/styles/subsilver2/template/portal/block/whois_online.html" to="styles/subsilver2/template/portal/block/whois_online.html" />
 		</copy>
 		<diy-instructions lang="de"><![CDATA[
 Aktualisiere deine Styles:

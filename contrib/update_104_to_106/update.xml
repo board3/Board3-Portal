@@ -136,6 +136,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<file from="root/styles/prosilver/template/portal/portal_center.html" to="styles/prosilver/template/portal/portal_center.html" />
 			<file from="root/styles/prosilver/template/portal/portal_right.html" to="styles/prosilver/template/portal/portal_right.html" />
 			<file from="root/styles/prosilver/template/portal/block/birthday_list.html" to="styles/prosilver/template/portal/block/birthday_list.html" />
+			<file from="root/styles/prosilver/template/portal/block/custom_small.html" to="styles/prosilver/template/portal/block/custom_small.html" />
 			<file from="root/styles/prosilver/template/portal/block/forumlist_search.html" to="styles/prosilver/template/portal/block/forumlist_search.html" />
 			<file from="root/styles/prosilver/template/portal/block/leaders_ext.html" to="styles/prosilver/template/portal/block/leaders_ext.html" />
 			<file from="root/styles/prosilver/template/portal/block/login_box.html" to="styles/prosilver/template/portal/block/login_box.html" />

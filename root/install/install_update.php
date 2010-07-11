@@ -365,6 +365,9 @@ class install_update extends module
 				set_portal_config('portal_attachments_exclude', '0');
 				set_portal_config('portal_poll_exclude_id', '0');
 			break;
+			
+			case '1.0.5':
+				// Nothing to update in the database
 		}
 
 		if (!$this->acp_parent_module)
@@ -439,7 +442,9 @@ class install_update extends module
 				case '1.0.4RC1':
 				case '1.0.4RC2':
 				case '1.0.4RC3':
-				//case '1.0.4':
+				case '1.0.4':
+				case '1.0.5':
+					// Nothing to update
 				break;
 			}
 
