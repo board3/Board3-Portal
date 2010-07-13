@@ -90,7 +90,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		<installation>
 			<level>easy</level>
 			<time>600</time>
-			<target-version>3.0.5</target-version>
+			<target-version>3.0.7-PL1</target-version>
 		</installation>
 
 		<link-group>
@@ -114,8 +114,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<link type="contrib" lang="de" href="update_board3portal_020.xml">Updateanleitung für Board3 Portal Version 0.2.0</link> 
 			<link type="contrib" lang="en" href="update_board3portal_010.xml">Update instructions for Board3 Portal Version 0.1.0</link>
 			<link type="contrib" lang="de" href="update_board3portal_010.xml">Updateanleitung für Board3 Portal Version 0.1.0</link>
-			<link type="contrib" lang="en" href="../update_phpbb3portal_122_to_board3portal_105.xml">Update instructions for phpBB3 Portal Version 1.2.2</link>
-			<link type="contrib" lang="de" href="../update_phpbb3portal_122_to_board3portal_105.xml">Updateanleitung für phpBB3 Portal Version 1.2.2</link>
+			<link type="contrib" lang="en" href="contrib/update_phpbb3portal_122_to_board3portal_106.xml">Update instructions for phpBB3 Portal v1.2.2 to board3 Portal v1.0.6</link>
+			<link type="contrib" lang="de" href="contrib/update_phpbb3portal_122_to_board3portal_106.xml">Update-Anleitung für phpBB3 Portal v1.2.2 to board3 Portal v1.0.6</link>
 			<link type="contrib" lang="en" href="update_phpbb3portal_110b.xml">Update instructions for phpBB3 Portal Version 1.1.0b</link>
 			<link type="contrib" lang="de" href="update_phpbb3portal_110b.xml">Updateanleitung für phpBB3 Portal Version 1.1.0b</link>
 			<link type="language" lang="en" href="../de.xml">Manual for German Language-set</link>
