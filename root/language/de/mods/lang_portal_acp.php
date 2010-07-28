@@ -69,6 +69,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_USER_MENU_EXPLAIN'				=> 'Diesen Block auf dem Portal anzeigen.',
 	'PORTAL_FORUM_INDEX'					=> 'Foren Index (Foren Liste)',
 	'PORTAL_FORUM_INDEX_EXPLAIN'			=> 'Diesen Block auf dem Portal anzeigen.',
+	'BLOCK_CHANGE_WARN'						=> 'Das Deaktivieren aller Blöcke führt zu einem leeren Portal.<br />Wenn du alle Blöcke in einer der Seitenspalten deaktivierst, dann deaktiviere diese Spalte bitte, da du ansonsten eine freie Fläche auf deinem Portal haben wirst.',
 	
 	// random member
 	'PORTAL_RANDOM_MEMBER'					=> 'Zufälliges Profil',

@@ -70,6 +70,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_USER_MENU_EXPLAIN'				=> 'Display this block on the portal.',
 	'PORTAL_FORUM_INDEX'					=> 'Forum Index (Forum list)',
 	'PORTAL_FORUM_INDEX_EXPLAIN'			=> 'Display this block on the portal.',
+	'BLOCK_CHANGE_WARN'						=> 'Please be aware that turning all blocks off will leave your portal page empty.<br />Also, if you are disabling all blocks in one side column please just turn off that column. Else you will have an empty space on your portal.',
 	
 	// random member
 	'PORTAL_RANDOM_MEMBER'					=> 'Random member block',

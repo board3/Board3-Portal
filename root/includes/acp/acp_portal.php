@@ -480,8 +480,9 @@ class acp_portal
 
 			'S_VERSIONCHECK'	=> ($display_vars['title'] == 'ACP_PORTAL_GENERAL_TITLE') ? true : false,
 
-			'U_ACTION'			=> $this->u_action)
-		);
+			'U_ACTION'			=> $this->u_action,
+			'BLOCK_CHANGE_WARN' => $user->lang['BLOCK_CHANGE_WARN'],
+		));
 
 		// Output relevant page
 		foreach ($display_vars['vars'] as $config_key => $vars)
