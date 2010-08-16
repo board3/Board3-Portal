@@ -343,7 +343,7 @@ if ($poll_forums === true)
 			foreach($poll_data as $pd)
 			{
 				$option_pct = ($poll_total_votes > 0) ? $pd['poll_option_total'] / $poll_total_votes : 0;
-				$option_pct_txt = sprintf("%.1d%%", ($option_pct * 100));
+				$option_pct_txt = sprintf("%.1d%%", round($option_pct * 100));
 
 				// Parse BBCode option text
 				if ($data['bbcode_bitfield'])

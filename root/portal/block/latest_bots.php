@@ -25,7 +25,7 @@ $result = $db->sql_query_limit($sql, $portal_config['portal_last_visited_bots_nu
 $first = true;
 while ($row = $db->sql_fetchrow($result))
 {
-	if (!$row['user_lastvisit'] && $first == TRUE)
+	if (!$row['user_lastvisit'] && $first == true)
 	{
 		$template->assign_vars(array(
 			'S_DISPLAY_LAST_BOTS'	=> false,
