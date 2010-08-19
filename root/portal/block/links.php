@@ -23,7 +23,7 @@ reset($links);
 foreach($links as $link_id => $link_data)
 {
 	$template->assign_block_vars('link', array(
-		'URL' => $link_data['url'],
+		'URL' => portal_validate_url($link_data['url']),
 		'TEXT' => $link_data['text'],
 	));
 }

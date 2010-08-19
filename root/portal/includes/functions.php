@@ -671,6 +671,33 @@ function add_endtag ($message = '')
 	return $message;
 }
 
+/**
+* validate URLs and execute apppend_sid if necessary
+*/
+function portal_validate_url($url)
+{
+	global $config;
+
+	$url = str_replace("\r\n", "\n", str_replace('\"', '"', trim($url)));
+	$url = str_replace(' ', '%20', $url);
+	
+	// if there is no scheme, then add http schema
+	if (!preg_match('#^[a-z][a-z\d+\-.]*:/{2}#i', $url))
+	{
+		$url = 'http://' . $url;
+	}
+	
+	// Is this a link to somewhere inside this board? If so then remove the session id from the url
+	if (strpos($url, generate_board_url()) !== false && strpos($url, 'sid=') !== false)
+	{
+		$url = preg_replace('/(&amp;|\?)sid=[0-9a-f]{32}&amp;/', '\1', $url);
+		$url = preg_replace('/(&amp;|\?)sid=[0-9a-f]{32}$/', '', $url);
+		$url = append_sid($url);
+	}
+	
+	return $url;
+}
+
 // Mini Cal.
 class calendar 
 {
