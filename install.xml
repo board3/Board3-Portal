@@ -147,6 +147,11 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Fixed a bug that caused "Mark forums read" not to work on the portal</change>
 					<change>Fixed missing $cache->unload() in install/index.php</change>
 					<change>Fixed bug that causes the content of the small custom block to overlap its outline</change>
+					<change>Display warning in ACP that turning off all the blocks results in an empty portal and that turning off all side blocks will leave an empty space</change>
+					<change>Fixed a small grammar error in lang_portal_acp.php</change>
+					<change>Replaced TRUE with the lowercase true in latest bots block file</change>
+					<change>Fixed the way the poll percentage gets rounded</change>
+					<change>Added append_sid to links block</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Schreibfehler in subsilver2 online_friends.html beseitigt</change>
@@ -182,6 +187,11 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 					<change>Bug beseitigt, durch den "Alle Foren als gelesen markieren" nicht mehr funktioniert hat</change>
 					<change>Fehlendes $cache->unload() in install/index.php hinzugefügt</change>
 					<change>Bug beseitigt, der dazu führt, dass der Inhalt des kleinen Eigenen Blocks über den Rand des Blocks herraussragt</change>
+					<change>Eine Warnung wird im Admin-Bereich angezeigt, die darauf hinweißt, dass das abstellen aller Blöcke in einem leeren Portal resultiert und dass das Abstellen aller Seitenblöcke einen leeren Bereich erzeugt, der nur durch das abstellen der Seitenspalte verhindert werden kann.</change>
+					<change>Kleinen Grammatik-Fehler in lang_portal_acp.php beseitigt</change>
+					<change>TRUE mit dem kleingeschriebenem true in der Datei des "Letzte Bots" Blocks ersetzt</change>
+					<change>Art und Weise wie die Umfrage-Werte gerundet werden korrigiert</change>
+					<change>append_sid zum Links-Block hinzugefügt</change>
 				</changelog>
 			</entry>
 			<entry>
