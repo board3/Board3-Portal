@@ -53,6 +53,11 @@ $versions = array(
 				'PRIMARY_KEY'		=> 'module_id',
 			)),
 		),
+		'config_add' => array(array(
+			array('board3_enable', true),
+			//array('test_mod_bool', true),
+			//array('test_mod_bool', true),
+		)),
 	),
 );
 

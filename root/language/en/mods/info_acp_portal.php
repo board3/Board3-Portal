@@ -33,6 +33,8 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
+// @todo: check for unneeded language variables
+// @todo: change language variables to English ones
 
 $lang = array_merge($lang, array(
 	// Manage blocks
@@ -81,6 +83,10 @@ $lang = array_merge($lang, array(
 	'SELECT_BLOCK_CLOCK'		=> 'Select an clock…',
 	'SELECT_BLOCK_POSITION'	=> 'Select a position…',
 	'SELECT_BLOCK_TYPE'		=> 'Select a type…',
+	
+	// Portal Modules
+	'ACP_PORTAL_MODULES'			=> 'Portal Modules',
+	'ACP_PORTAL_MODULES_EXPLAIN'	=> 'You can manage your portal modules here',
 
 	// Manage links
 	'ACP_EXPRESS_LINKS_EXPLAIN'	=> 'Using this form you can add, edit, view and delete navigation links on the index page. You can also create special navigation links as categories which aren’t clickable links.',
@@ -111,7 +117,7 @@ $lang = array_merge($lang, array(
 
 // BLOCK TITLES
 // Set additional block titles here...
-//
+// @todo: I think we need to remove this as it has become obsolete
 // Example:
 // 'BLOCK_TOP_POSTERS'		=> 'Top posters',	/* Main block title */
 // 'BLOCK_TOP_POSTERS_SUB'	=> 'Posted',		/* Legend, block sub-title */
@@ -140,6 +146,7 @@ $lang = array_merge($lang, array(
 // CUSTOM PAGE TITLES
 // Set custom page titles here...
 //
+// @todo: I think we need to remove this as it has become obsolete
 // Example:
 // 'PAGE_ABOUT'			=> 'About us',					/* Main page title */
 // 'PAGE_ABOUT_EXPLAIN'	=> 'Contact information here.',	/* Explanation, page sub-title */
