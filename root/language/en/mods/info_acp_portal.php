@@ -87,6 +87,16 @@ $lang = array_merge($lang, array(
 	// Portal Modules
 	'ACP_PORTAL_MODULES'			=> 'Portal Modules',
 	'ACP_PORTAL_MODULES_EXPLAIN'	=> 'You can manage your portal modules here',
+	
+	'MODULE_POS_TOP'				=> 'Top',
+	'MODULE_POS_LEFT'				=> 'Left column',
+	'MODULE_POS_RIGHT'				=> 'Right column',
+	'MODULE_POS_CENTER'				=> 'Center column',
+	'MODULE_POS_BOTTOM'				=> 'Bottom',
+	'ADD_MODULE'					=> 'Add module',
+	'CHOOSE_MODULE'					=> 'Choose module',
+	'CHOOSE_MODULE_EXPLAIN'			=> 'Choose a module from the drop-down list',
+	'SUCCESS'						=> 'The module was added successfully',
 
 	// Manage links
 	'ACP_EXPRESS_LINKS_EXPLAIN'	=> 'Using this form you can add, edit, view and delete navigation links on the index page. You can also create special navigation links as categories which aren’t clickable links.',
