@@ -95,8 +95,8 @@ $db->sql_freeresult($result);
 // Assign specific vars
 $template->assign_vars(array(
 	'S_SMALL_BLOCK'			=> true,
-	'S_PORTAL_LEFT_COLUMN'	=> 250,
-	'S_PORTAL_RIGHT_COLUMN'	=> 250,
+	'S_PORTAL_LEFT_COLUMN'	=> $config['board3_left_column_width'],
+	'S_PORTAL_RIGHT_COLUMN'	=> $config['board3_right_column_width'],
 ));
 
 // Output page

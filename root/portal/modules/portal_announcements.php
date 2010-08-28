@@ -48,7 +48,7 @@ class portal_announcements_module
 
 	function get_template_center($module_id)
 	{
-		global $config, $template, $db, $user, $auth, $cache;
+		global $config, $template, $db, $user, $auth, $cache, $phpEx;
 
 		$announcement = request_var('announcement', -1);
 		$announcement = ($announcement > $portal_config['portal_announcements_length'] -1) ? -1 : $announcement;
@@ -362,17 +362,6 @@ class portal_announcements_module
 		{
 			return 'announcements.html';
 		}
-	}
-
-	function get_template_side($module_id)
-	{
-		global $config, $template;
-
-		$template->assign_vars(array(
-			'EXAMPLE'			=> $config['portal_configname2'],
-		));
-
-		return 'modulename_side.html';
 	}
 
 	function get_template_acp($module_id)
