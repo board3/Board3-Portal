@@ -189,7 +189,7 @@ class portal_leaders_module
 	function get_template_acp($module_id)
 	{
 		return array(
-			'title'	=> 'ACP_CONFIG_MODULENAME',
+			'title'	=> 'ACP_PORTAL_LEADERS',
 			'vars'	=> array(
 				/*'legend1'				=> 'ACP_MODULENAME_CONFIGLEGEND',
 				'portal_configname'		=> array('lang' => 'MODULENAME_CONFIGNAME',		'validate' => 'string',	'type' => 'text:10:200',	'explain' => false),

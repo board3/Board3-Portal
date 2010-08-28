@@ -47,7 +47,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL'							=> 'Portal',
 	'ACP_PORTAL_GENERAL_INFO'				=> 'Allgemeine Einstellungen',
 	'ACP_PORTAL_GENERAL_TITLE'				=> 'Portal Administration',
-	'ACP_PORTAL_GENERAL_TITLE_EXPLAIN'		=> 'Hier kannst du allgemeine Einstellungen vornehmen.',
+	'ACP_PORTAL_GENERAL_TITLE_EXP'			=> 'Thank you for choosing Board3 Portal! This is where you can manage your portal page. The options below let you customize the various general settings.',
 	
 	'BLOCK_ADDED'					=> 'The block was successfully added.',
 	'BLOCK_FILENAME'				=> 'Block template file',
@@ -86,7 +86,7 @@ $lang = array_merge($lang, array(
 	
 	// Portal Modules
 	'ACP_PORTAL_MODULES'			=> 'Portal Modules',
-	'ACP_PORTAL_MODULES_EXPLAIN'	=> 'You can manage your portal modules here',
+	'ACP_PORTAL_MODULES_EXP'	=> 'You can manage your portal modules here',
 	
 	'MODULE_POS_TOP'				=> 'Top',
 	'MODULE_POS_LEFT'				=> 'Left column',
@@ -95,8 +95,15 @@ $lang = array_merge($lang, array(
 	'MODULE_POS_BOTTOM'				=> 'Bottom',
 	'ADD_MODULE'					=> 'Add module',
 	'CHOOSE_MODULE'					=> 'Choose module',
-	'CHOOSE_MODULE_EXPLAIN'			=> 'Choose a module from the drop-down list',
-	'SUCCESS'						=> 'The module was added successfully',
+	'CHOOSE_MODULE_EXP'			=> 'Choose a module from the drop-down list',
+	'SUCCESS_ADD'					=> 'The module was added successfully.',
+	'SUCCESS_DELETE'				=> 'The module was removed successfully.',
+	
+	'MODULE_OPTIONS'		=> 'Module options',
+	'MODULE_NAME'			=> 'Module name',
+	'MODULE_NAME_EXP'	=> 'Enter the name of the Module that should be displayed in the Module configuration.',
+	'MODULE_IMAGE'			=> 'Module image',
+	'MODULE_IMAGE_EXP'	=> 'Enter the filename of the module image. Images need to be in styles/*yourstyle*/theme/images/portal/',
 
 	// Manage links
 	'ACP_EXPRESS_LINKS_EXPLAIN'	=> 'Using this form you can add, edit, view and delete navigation links on the index page. You can also create special navigation links as categories which aren’t clickable links.',
@@ -123,51 +130,10 @@ $lang = array_merge($lang, array(
 	// paypal
 	'PORTAL_PAY_ACC'							=> 'Paypal Account',
 	'PORTAL_PAY_ACC_EXPLAIN'					=> 'Gib deine e-mail-Adresse an, die du bei Paypal benutzt, z.B. xxx@xxx.com',
-));
-
-// BLOCK TITLES
-// Set additional block titles here...
-// @todo: I think we need to remove this as it has become obsolete
-// Example:
-// 'BLOCK_TOP_POSTERS'		=> 'Top posters',	/* Main block title */
-// 'BLOCK_TOP_POSTERS_SUB'	=> 'Posted',		/* Legend, block sub-title */
-//
-$lang = array_merge($lang, array(
-	'BLOCK_BIRTHDAY'				=> 'Geburtstage',	
-	'BLOCK_EXPRESS_LINKS'			=> 'Navigation',
-	'BLOCK_SEARCH'					=> 'Suche',
-	'BLOCK_CLOCK'					=> 'Uhr',
-	'BLOCK_USER_MENU'				=> 'Benutzer-Menü',
-	'BLOCK_MAIN_MENU'				=> '',
-	'BLOCK_CHANGE_STYLE'			=> 'Mein Board-Style',
-	'BLOCK_ONLINE'					=> 'Wer ist Online?',
-	'BLOCK_DONATION'				=> 'Paypal-Spenden',
-	'BLOCK_LINKS'					=> 'Links',
-	'BLOCK_LATEST_BOTS'				=> 'Bots',
-	'BLOCK_LATEST_MEMBERS'			=> 'Neueste Mitglieder',
-	'BLOCK_MINI_CALENDAR'			=> 'Kalender',
-	'BLOCK_ONLINE_FRIENDS'			=> 'Freunde',
-	'BLOCK_STATISTICS'				=> 'Statistik',
-	'BLOCK_TOP_POSTER'				=> 'Top Poster',
-	'BLOCK_CUSTOM'					=> 'Custom',
-	'BLOCK_BOTS'					=> 'Letzten Bots',
-));
-
-// CUSTOM PAGE TITLES
-// Set custom page titles here...
-//
-// @todo: I think we need to remove this as it has become obsolete
-// Example:
-// 'PAGE_ABOUT'			=> 'About us',					/* Main page title */
-// 'PAGE_ABOUT_EXPLAIN'	=> 'Contact information here.',	/* Explanation, page sub-title */
-//
-$lang = array_merge($lang, array(
-));
-
-/**
-* A copy of Handyman` s MOD version check, to view it on the gallery overview
-*/
-$lang = array_merge($lang, array(
+	
+	/**
+	* A copy of Handyman` s MOD version check, to view it on the portal overview
+	*/
 	'ANNOUNCEMENT_TOPIC'	=> 'Release Ankündigung',
 	'CURRENT_VERSION'		=> 'Derzeitige Version',
 	'DOWNLOAD_LATEST'		=> 'Neueste Version herunterladen',
@@ -178,5 +144,4 @@ $lang = array_merge($lang, array(
 	'UP_TO_DATE'			=> '%s ist aktuell',
 	'VERSION_CHECK'			=> 'MOD Version Check',
 ));
-
 ?>

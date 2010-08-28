@@ -28,18 +28,11 @@ class acp_portal
 		{
 			include($phpbb_root_path . $portal_root_path . 'includes/functions_modules.' . $phpEx);
 		}
-		/*
-		if (!function_exists('obtain_portal_config'))
-		{
-			include($phpbb_root_path . $portal_root_path . 'includes/functions.' . $phpEx);
-		}
-		$portal_config = obtain_portal_config();
-		
+
 		if (!function_exists('mod_version_check'))
 		{
 			include($phpbb_root_path . $portal_root_path . 'includes/functions_version_check.' . $phpEx);
 		}
-		mod_version_check();*/
 
 		$user->add_lang('mods/portal');
 		$submit = (isset($_POST['submit'])) ? true : false;
@@ -60,15 +53,15 @@ class acp_portal
 					'title'	=> 'ACP_PORTAL_GENERAL_TITLE',
 					'vars'	=> array(
 						'legend1'					=> 'ACP_PORTAL_GENERAL_INFO',
-						'portal_enable'				=> array('lang' => 'PORTAL_ENABLE',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_left_column'		=> array('lang' => 'PORTAL_LEFT_COLUMN',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_right_column'		=> array('lang' => 'PORTAL_RIGHT_COLUMN',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_version_check'		=> array('lang' => 'PORTAL_VERSION_CHECK',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'portal_forum_index'		=> array('lang' => 'PORTAL_FORUM_INDEX',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'board3_enable'				=> array('lang' => 'PORTAL_ENABLE',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'board3_left_column'		=> array('lang' => 'PORTAL_LEFT_COLUMN',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'board3_right_column'		=> array('lang' => 'PORTAL_RIGHT_COLUMN',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'board3_version_check'		=> array('lang' => 'PORTAL_VERSION_CHECK',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'board3_forum_index'		=> array('lang' => 'PORTAL_FORUM_INDEX',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 
 						'legend2'					=> 'ACP_PORTAL_COLUMN_WIDTH_SETTINGS',
-						'portal_left_column_width'	=> array('lang' => 'PORTAL_LEFT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-						'portal_right_column_width'	=> array('lang' => 'PORTAL_RIGHT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+						'board3_left_column_width'	=> array('lang' => 'PORTAL_LEFT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+						'board3_right_column_width'	=> array('lang' => 'PORTAL_RIGHT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 					)
 				);
 
@@ -108,6 +101,11 @@ class acp_portal
 						
 						$template->assign_var('SHOW_MODULE_OPTIONS', true);
 					}
+				}
+				else
+				{
+					// only show the mod version check if we are on the General Settings page
+					mod_version_check();
 				}
 
 				$this->new_config = $config;
@@ -165,7 +163,7 @@ class acp_portal
 
 				$template->assign_vars(array(
 					'L_TITLE'			=> $user->lang[$display_vars['title']],
-					'L_TITLE_EXPLAIN'	=> (isset($user->lang[$display_vars['title'] . '_EXPLAIN'])) ? $user->lang[$display_vars['title'] . '_EXPLAIN'] : '',
+					'L_TITLE_EXPLAIN'	=> (isset($user->lang[$display_vars['title'] . '_EXP'])) ? $user->lang[$display_vars['title'] . '_EXP'] : '',
 
 					'S_ERROR'			=> (sizeof($error)) ? true : false,
 					'ERROR_MSG'			=> implode('<br />', $error),
@@ -309,7 +307,7 @@ class acp_portal
 								AND module_order > ' . $module_data['module_order'];
 						$db->sql_query($sql);
 
-						trigger_error('SUCCESS');
+						trigger_error($user->lang['SUCCESS_DELETE'] . adm_back_link($this->u_action));
 					}
 				}
 
@@ -356,7 +354,7 @@ class acp_portal
 
 						$c_class->install($db->sql_nextid());
 
-						trigger_error('SUCCESS');
+						trigger_error($user->lang['SUCCESS_ADD'] . adm_back_link($this->u_action));
 					}
 
 					$template->assign_var('S_EDIT', true);

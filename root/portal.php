@@ -27,7 +27,7 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('mods/portal');
 
-if (!$config['portal_enable'])
+if (!$config['board3_enable'])
 {
 	redirect(reapply_sid($phpbb_root_path . 'index.' . $phpEx));
 }
