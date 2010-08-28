@@ -354,7 +354,14 @@ class portal_announcements_module
 			'S_TOPIC_ICONS'					=> $topic_icons,
 		));
 
-		return 'announcements_center.html';
+		if ($config['board3_announcements_style'])
+		{
+			return 'announcements_compact.html';
+		}
+		else
+		{
+			return 'announcements.html';
+		}
 	}
 
 	function get_template_side($module_id)
