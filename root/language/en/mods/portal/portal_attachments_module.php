@@ -34,6 +34,23 @@ $lang = array_merge($lang, array(
 	'DOWNLOADS'				=> 'Downloads',
 	'NO_ATTACHMENTS'		=> 'No attachments',
 	'PORTAL_ATTACHMENTS'	=> 'Attachments Block',
+	
+	// ACP
+	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS'			=> 'Attachments settings',
+	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS_EXP'	=> 'This is where you customize the attachments block.',
+	'PORTAL_ATTACHMENTS_EXP'						=> 'Display this block on the portal.',
+	'PORTAL_ATTACHMENTS_NUMBER'							=> 'Limit of displayed attachments',
+	'PORTAL_ATTACHMENTS_NUMBER_EXP'					=> '0 means infinite',
+	'PORTAL_ATTACHMENTS_FORUM_IDS'						=> 'Attachments forums',
+	'PORTAL_ATTACHMENTS_FORUM_IDS_EXP'				=> 'The forum(s) from which the attachments should be displayed. If "Exclude forums" is set to "Yes", select the forums you want to exclude.<br />If "Exclude forums" is set to "No" select the forums you want to see.<br />Select/Deselect multiple forums by holding <samp>CTRL</samp> and clicking.',
+	'PORTAL_ATTACHMENTS_FORUM_EXCLUDE'					=> 'Exclude forums',
+	'PORTAL_ATTACHMENTS_FORUM_EXCLUDE_EXP'			=> 'Select "Yes" if you want to exlude the selected forums from the attachments block, and "No" if you want to see only the attachments of the selected forums in the attachments block.',
+	'PORTAL_ATTACHMENTS_MAX_LENGTH'						=> 'Character limit for each attachments',
+	'PORTAL_ATTACHMENTS_MAX_LENGTH_EXP'				=> '0 means infinite',
+	'PORTAL_ATTACHMENTS_FILETYPE' 						=> 'Filetypes',
+	'PORTAL_ATTACHMENTS_FILETYPE_EXP' 				=> 'If "Exclude filetypes" is set to "Yes", select the filetypes you want to exclude.<br />If "Exclude filetypes" is set to "No" select the filetypes you want to see.<br />Select/Deselect multiple filetypes by holding <samp>CTRL</samp> and clicking.',
+	'PORTAL_ATTACHMENTS_EXCLUDE'						=> 'Exclude filetypes',
+	'PORTAL_ATTACHMENTS_EXCLUDE_EXP'				=> 'Select "Yes" if you want to exlude the selected filetypes from the attachments block, and "No" if you want to see only the selected filetypes in the attachments block.',
 ));
 
 ?>
