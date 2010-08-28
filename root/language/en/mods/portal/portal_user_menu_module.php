@@ -36,6 +36,8 @@ $lang = array_merge($lang, array(
 	'UM_HIDE_ME'		=> 'Hide me',
 	'UM_MAIN_SUBSCRIBED'=> 'Subscribed',
 	'UM_BOOKMARKS'		=> 'Bookmarks',
+	'M_MENU' 			=> 'Menu',
+	'M_ACP'				=> 'ACP',
 ));
 
 ?>
