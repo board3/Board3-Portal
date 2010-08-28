@@ -48,7 +48,7 @@ class portal_announcements_module
 
 	function get_template_center($module_id)
 	{
-		global $config, $template, $db;
+		global $config, $template, $db, $user, $auth, $cache;
 
 		$announcement = request_var('announcement', -1);
 		$announcement = ($announcement > $portal_config['portal_announcements_length'] -1) ? -1 : $announcement;
@@ -354,7 +354,7 @@ class portal_announcements_module
 			'S_TOPIC_ICONS'					=> $topic_icons,
 		));
 
-		return 'modulename_center.html';
+		return 'announcements_center.html';
 	}
 
 	function get_template_side($module_id)
@@ -374,15 +374,15 @@ class portal_announcements_module
 			'title'	=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
 			'vars'	=> array(
 				'legend1'									=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
-				'portal_announcements_style'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_STYLE'		 	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-				'portal_number_of_announcements'			=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-				'portal_announcements_day'					=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-				'portal_announcements_length'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-				'portal_global_announcements_forum'			=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'custom',			'explain' => true, 'method' => 'select_forums', 'submit' => 'store_selected_forums'),
-				'portal_announcements_forum_exclude'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_FORUM_EXCLUDE',	'validate' => 'string', 'type' => 'radio:yes_no',	'explain' => true),
-				'portal_announcements_archive'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-				'portal_announcements_permissions'			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-				'portal_show_announcements_replies_views'	=> array('lang' => 'PORTAL_SHOW_REPLIES_VIEWS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_announcements_style'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_STYLE'		 	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_number_of_announcements'			=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'board3_announcements_day'					=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'board3_announcements_length'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'board3_global_announcements_forum'			=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'custom',			'explain' => true, 'method' => 'select_forums', 'submit' => 'store_selected_forums'),
+				'board3_announcements_forum_exclude'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_FORUM_EXCLUDE',	'validate' => 'string', 'type' => 'radio:yes_no',	'explain' => true),
+				'board3_announcements_archive'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_announcements_permissions'			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_show_announcements_replies_views'	=> array('lang' => 'PORTAL_SHOW_REPLIES_VIEWS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 			),
 		);
 	}
@@ -392,15 +392,15 @@ class portal_announcements_module
 	*/
 	function install($module_id)
 	{
-		set_config('portal_announcements_style', 0);
-		set_config('portal_number_of_announcements', 1);
-		set_config('portal_announcements_day', 0);
-		set_config('portal_announcements_length', 200);
-		set_config('portal_global_announcements_forum', '');
-		set_config('portal_announcements_forum_exclude', 0);
-		set_config('portal_announcements_archive', 1);
-		set_config('portal_announcements_permissions', 1);
-		set_config('portal_show_announcements_replies_views', 1);
+		set_config('board3_announcements_style', 0);
+		set_config('board3_number_of_announcements', 1);
+		set_config('board3_announcements_day', 0);
+		set_config('board3_announcements_length', 200);
+		set_config('board3_global_announcements_forum', '');
+		set_config('board3_announcements_forum_exclude', 0);
+		set_config('board3_announcements_archive', 1);
+		set_config('board3_announcements_permissions', 1);
+		set_config('board3_show_announcements_replies_views', 1);
 		
 		return true;
 	}
@@ -410,15 +410,15 @@ class portal_announcements_module
 		global $db;
 
 		$del_config = array(
-			'portal_announcements_style',
-			'portal_number_of_announcements',
-			'portal_announcements_day',
-			'portal_announcements_length',
-			'portal_global_announcements_forum',
-			'portal_announcements_forum_exclude',
-			'portal_announcements_archive',
-			'portal_announcements_permissions',
-			'portal_show_announcements_replies_views',
+			'board3_announcements_style',
+			'board3_number_of_announcements',
+			'board3_announcements_day',
+			'board3_announcements_length',
+			'board3_global_announcements_forum',
+			'board3_announcements_forum_exclude',
+			'board3_announcements_archive',
+			'board3_announcements_permissions',
+			'board3_show_announcements_replies_views',
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);

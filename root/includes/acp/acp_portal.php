@@ -56,7 +56,7 @@ class acp_portal
 						'board3_enable'				=> array('lang' => 'PORTAL_ENABLE',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'board3_left_column'		=> array('lang' => 'PORTAL_LEFT_COLUMN',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'board3_right_column'		=> array('lang' => 'PORTAL_RIGHT_COLUMN',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'board3_version_check'		=> array('lang' => 'PORTAL_VERSION_CHECK',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'board3_version_check'		=> array('lang' => 'PORTAL_VERSION_CHECK',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => false),
 						'board3_forum_index'		=> array('lang' => 'PORTAL_FORUM_INDEX',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 
 						'legend2'					=> 'ACP_PORTAL_COLUMN_WIDTH_SETTINGS',
@@ -128,7 +128,19 @@ class acp_portal
 				// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
 				foreach ($display_vars['vars'] as $config_name => $null)
 				{
+					if ($submit && $null['type'] == 'custom')
+					{
+						$func = array($c_class, $null['submit']);
+						call_user_func_array($func, $config_name);
+					}
+					
+					
 					if (!isset($cfg_array[$config_name]) || strpos($config_name, 'legend') !== false)
+					{
+						continue;
+					}
+					
+					if($null['type'] == 'custom')
 					{
 						continue;
 					}
@@ -136,7 +148,7 @@ class acp_portal
 					$this->new_config[$config_name] = $config_value = $cfg_array[$config_name];
 
 					if ($submit)
-					{
+					{	
 						set_config($config_name, $config_value);
 					}
 				}
@@ -197,7 +209,16 @@ class acp_portal
 						$l_explain = (isset($user->lang[$vars['lang'] . '_EXP'])) ? $user->lang[$vars['lang'] . '_EXP'] : '';
 					}
 
-					$content = build_cfg_template($type, $config_key, $this->new_config, $config_key, $vars);
+					if($vars['type'] != 'custom')
+					{
+						$content = build_cfg_template($type, $config_key, $this->new_config, $config_key, $vars);
+					}
+					else
+					{
+						$args = array($this->new_config[$config_key], $config_key);
+						$func = array($c_class, $vars['method']);
+						$content = call_user_func_array($func, $args);
+					}
 
 					if (empty($content))
 					{

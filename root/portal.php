@@ -19,6 +19,8 @@ include($phpbb_root_path . 'common.' . $phpEx);
 $portal_root_path = PORTAL_ROOT_PATH;
 $portal_icons_path = PORTAL_ICONS_PATH;
 include($phpbb_root_path . $portal_root_path . 'includes/functions_modules.' . $phpEx);
+include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
+include($phpbb_root_path . $portal_root_path . 'includes/functions.' . $phpEx);
 //include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
 
 
@@ -69,6 +71,14 @@ while ($row = $db->sql_fetchrow($result))
 		$template_module = $module->get_template_side($row['module_id']);
 		$template_column = 'right';
 	}
+	if ($row['module_column'] == 4)
+	{
+		$template_module = $module->get_template_center($row['module_id']);
+	}
+	if ($row['module_column'] == 5)
+	{
+		$template_module = $module->get_template_center($row['module_id']);
+	}
 	if (!$template_module)
 	{
 		continue;
@@ -78,6 +88,7 @@ while ($row = $db->sql_fetchrow($result))
 		'TEMPLATE_FILE'		=> 'portal/modules/' . $template_module,
 		'IMAGE_SRC'			=> $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $row['module_image_src'],
 	));
+	unset($template_module);
 }
 $db->sql_freeresult($result);
 
@@ -89,7 +100,7 @@ $template->assign_vars(array(
 ));
 
 // Output page
-page_header($user->lang['INDEX']);
+page_header($user->lang['PORTAL']);
 
 $template->set_filenames(array(
 	'body' => 'portal/portal_body.html')
