@@ -1,6 +1,6 @@
 <?php
 /**
-* @package Portal - Topposters
+* @package Portal - Announcements
 * @version $Id$
 * @copyright (c) 2009, 2010 Board3 Portal Team
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -47,6 +47,8 @@ $lang = array_merge($lang, array(
 	'JUMP_FIRST'			=> 'Jump to first post',
 	'JUMP_TO_POST'			=> 'Jump to post',
 	'BACK'							=> 'Back',
+	
+	// ACP
 	'ACP_PORTAL_ANNOUNCE_SETTINGS'				=> 'Global announcements settings',
 	'ACP_PORTAL_ANNOUNCE_SETTINGS_EXPLAIN'		=> 'This is where you customize the global announcements block.',
 	'PORTAL_ANNOUNCEMENTS'						=> 'Display global announcements',

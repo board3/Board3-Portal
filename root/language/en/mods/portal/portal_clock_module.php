@@ -1,7 +1,7 @@
 <?php
 /**
 * @package Portal - Clock
-* @version $Id: portal_birthday_list_module.php 678 2010-08-29 12:49:25Z marc1706 $
+* @version $Id$
 * @copyright (c) 2009, 2010 Board3 Portal Team
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */

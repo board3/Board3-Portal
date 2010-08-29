@@ -1,6 +1,6 @@
 <?php
 /**
-* @package Portal - Attachments
+* @package Portal - Stylechanger
 * @version $Id$
 * @copyright (c) 2009, 2010 Board3 Portal Team
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
