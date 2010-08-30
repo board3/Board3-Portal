@@ -46,6 +46,7 @@ $lang = array_merge($lang, array(
 	// general
 	'ACP_PORTAL'							=> 'Portal',
 	'ACP_PORTAL_GENERAL_INFO'				=> 'Allgemeine Einstellungen',
+	'ACP_PORTAL_CONFIG_INFO'				=> 'Allgemeine Einstellungen',
 	'ACP_PORTAL_GENERAL_TITLE'				=> 'Portal Administration',
 	'ACP_PORTAL_GENERAL_TITLE_EXP'			=> 'Thank you for choosing Board3 Portal! This is where you can manage your portal page. The options below let you customize the various general settings.',
 	'PORTAL_ENABLE'							=> 'Enable Portal',
@@ -107,9 +108,8 @@ $lang = array_merge($lang, array(
 
 	'SELECT_LINK_ICON'	=> 'Select an icon…',
 
-	// paypal
-	'PORTAL_PAY_ACC'							=> 'Paypal Account',
-	'PORTAL_PAY_ACC_EXPLAIN'					=> 'Gib deine e-mail-Adresse an, die du bei Paypal benutzt, z.B. xxx@xxx.com',
+	// Logs
+	'LOG_PORTAL_CONFIG'			=> '<strong>Altered Portal settings</strong><br />&raquo; %s',
 	
 	/**
 	* A copy of Handyman` s MOD version check, to view it on the portal overview

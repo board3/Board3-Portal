@@ -52,7 +52,7 @@ class acp_portal
 				$display_vars = array(
 					'title'	=> 'ACP_PORTAL_GENERAL_TITLE',
 					'vars'	=> array(
-						'legend1'					=> 'ACP_PORTAL_GENERAL_INFO',
+						'legend1'					=> 'ACP_PORTAL_CONFIG_INFO',
 						'board3_enable'				=> array('lang' => 'PORTAL_ENABLE',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'board3_left_column'		=> array('lang' => 'PORTAL_LEFT_COLUMN',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'board3_right_column'		=> array('lang' => 'PORTAL_RIGHT_COLUMN',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
@@ -404,14 +404,15 @@ class acp_portal
 								$c_class = new $class();
 								if ($c_class->columns & column_string_const($add_module))
 								{
-									$fileinfo[] = substr($class, 7, -7);
+									$user->add_lang('mods/portal/' . $c_class->language);
+									$fileinfo[] = $user->lang[$c_class->name];
 								}
 							}
 						}
 					}
 					closedir($dh);
 
-					ksort($fileinfo);
+					sort($fileinfo);
 					$options = '';
 
 					foreach ($fileinfo as $module)
