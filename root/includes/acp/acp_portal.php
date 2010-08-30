@@ -167,7 +167,7 @@ class acp_portal
 
 					$cache->destroy('sql', CONFIG_TABLE);
 					add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']);
-					trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link($this->u_action));
+					trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_root_path}/adm/index.$phpEx", 'i=portal&mode=modules') : $this->u_action));
 				}
 
 				$this->tpl_name = 'acp_portal_config';
