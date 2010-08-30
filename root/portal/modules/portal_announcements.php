@@ -48,16 +48,16 @@ class portal_announcements_module
 
 	function get_template_center($module_id)
 	{
-		global $config, $template, $db, $user, $auth, $cache, $phpEx;
+		global $config, $template, $db, $user, $auth, $cache, $phpEx, $phpbb_root_path;
 
 		$announcement = request_var('announcement', -1);
-		$announcement = ($announcement > $portal_config['portal_announcements_length'] -1) ? -1 : $announcement;
+		$announcement = ($announcement > $config['board3_announcements_length'] -1) ? -1 : $announcement;
 		$start = request_var('ap', 0);
 		$start = ($start < 0) ? 0 : $start;
 
 		// Fetch announcements from portal/includes/functions.php with check if "read full" is requested.
-		$portal_announcement_length = ($announcement < 0) ? $portal_config['portal_announcements_length'] : 0;
-		$fetch_news = phpbb_fetch_posts($portal_config['portal_global_announcements_forum'], $portal_config['portal_announcements_permissions'], $portal_config['portal_number_of_announcements'], $portal_announcement_length, $portal_config['portal_announcements_day'], 'announcements', $start, $portal_config['portal_announcements_forum_exclude']);
+		$portal_announcement_length = ($announcement < 0) ? $config['board3_announcements_length'] : 0;
+		$fetch_news = phpbb_fetch_posts($config['board3_global_announcements_forum'], $config['board3_announcements_permissions'], $config['board3_number_of_announcements'], $portal_announcement_length, $config['board3_announcements_day'], 'announcements', $start, $config['board3_announcements_forum_exclude']);
 
 		// Any announcements present? If not terminate it here.
 		if (sizeof($fetch_news) == 0)
@@ -72,13 +72,13 @@ class portal_announcements_module
 		else
 		{
 			// Count number of posts for announcements archive, considering if permission check is dis- or enabled.
-			if ($portal_config['portal_announcements_archive'])
+			if ($config['board3_announcements_archive'])
 			{
-				$permissions = $portal_config['portal_announcements_permissions'];
-				$forum_from = $portal_config['portal_global_announcements_forum'];
+				$permissions = $config['board3_announcements_permissions'];
+				$forum_from = $config['board3_global_announcements_forum'];
 				$forum_from = (strpos($forum_from, ',') !== false) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 
-				$time = ($portal_config['portal_announcements_day'] == 0) ? 0 : $portal_config['portal_announcements_day'];
+				$time = ($config['board3_announcements_day'] == 0) ? 0 : $config['board3_announcements_day'];
 				$post_time = ($time == 0) ? '' : 'AND topic_time > ' . (time() - $time * 86400);
 				
 				$str_where = '';
@@ -92,7 +92,7 @@ class portal_announcements_module
 					$disallow_access = array();
 				}
 				
-				if($portal_config['portal_announcements_forum_exclude'] == true)
+				if($config['board3_announcements_forum_exclude'] == true)
 				{
 					$disallow_access = array_merge($disallow_access, $forum_from);
 					$forum_from = array();
@@ -169,9 +169,9 @@ class portal_announcements_module
 					$read_full_url = (isset($_GET['ap'])) ? 'ap='. $start . '&amp;announcement=' . $i . '#a' . $i : 'announcement=' . $i . '#a' . $i;
 					$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 
-					if ($portal_config['portal_announcements_archive'])
+					if ($config['board3_announcements_archive'])
 					{
-						$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $portal_config['portal_number_of_announcements'], $start, 'announcements');
+						$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $config['board3_number_of_announcements'], $start, 'announcements');
 					}
 
 					$replies = ($auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
@@ -263,12 +263,12 @@ class portal_announcements_module
 							);
 						}
 					}
-					if ($portal_config['portal_number_of_announcements'] != 0 && $portal_config['portal_announcements_archive'])
+					if ($config['board3_number_of_announcements'] != 0 && $config['board3_announcements_archive'])
 					{
 						$template->assign_vars(array(
 							'AP_PAGINATION'			=> $pagination,
 							'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
-							'AP_PAGE_NUMBER'		=> on_page($total_announcements, $portal_config['portal_number_of_announcements'], $start))
+							'AP_PAGE_NUMBER'		=> on_page($total_announcements, $config['board3_number_of_announcements'], $start))
 						);
 					}
 				}
@@ -288,9 +288,9 @@ class portal_announcements_module
 
 				$read_full_url = (isset($_GET['ap'])) ? append_sid("{$phpbb_root_path}portal.$phpEx", "ap=$start#a$i") : append_sid("{$phpbb_root_path}portal.$phpEx#a$i");
 				$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-				if ($portal_config['portal_announcements_archive'])
+				if ($config['board3_announcements_archive'])
 				{
-					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $portal_config['portal_number_of_announcements'], $start, 'announcements');
+					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $config['board3_number_of_announcements'], $start, 'announcements');
 				}	
 				
 				$template->assign_block_vars('announcements_row', array(
@@ -328,12 +328,12 @@ class portal_announcements_module
 					}
 				}
 
-				if ($portal_config['portal_number_of_announcements'] <> 0 && $portal_config['portal_announcements_archive'])
+				if ($config['board3_number_of_announcements'] <> 0 && $config['board3_announcements_archive'])
 				{
 					$template->assign_vars(array(
 						'AP_PAGINATION'			=> $pagination,
 						'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
-						'AP_PAGE_NUMBER'		=> on_page($total_announcements, $portal_config['portal_number_of_announcements'], $start))
+						'AP_PAGE_NUMBER'		=> on_page($total_announcements, $config['board3_number_of_announcements'], $start))
 					);
 				}
 			}
@@ -350,7 +350,7 @@ class portal_announcements_module
 			'READ_POST_IMG'					=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
 			'GOTO_PAGE_IMG'					=> $user->img('icon_post_target', 'GOTO_PAGE'),
 			'S_DISPLAY_ANNOUNCEMENTS'		=> true,
-			'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ($portal_config['portal_show_announcements_replies_views']) ? true : false,
+			'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ($config['board3_show_announcements_replies_views']) ? true : false,
 			'S_TOPIC_ICONS'					=> $topic_icons,
 		));
 

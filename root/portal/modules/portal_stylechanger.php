@@ -48,7 +48,7 @@ class portal_stylechanger_module
 
 	function get_template_side($module_id)
 	{
-		global $config, $template, $db, $phpEx;
+		global $config, $template, $db, $phpEx, $phpbb_root_path, $user;
 
 		$style_count = 0;
 		$style_select = '';

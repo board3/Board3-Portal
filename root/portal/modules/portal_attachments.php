@@ -48,7 +48,7 @@ class portal_attachments_module
 
 	function get_template_center($module_id)
 	{
-		global $config, $template, $db, $user, $auth, $phpEx;
+		global $config, $template, $db, $user, $auth, $phpEx, $phpbb_root_path;
 
 		$attach_forums = false;
 		$where = '';
@@ -149,7 +149,7 @@ class portal_attachments_module
 
 	function get_template_side($module_id)
 	{
-		global $config, $template, $db, $user, $auth, $phpEx;
+		global $config, $template, $db, $user, $auth, $phpEx, $phpbb_root_path;
 
 		$attach_forums = false;
 		$where = '';
