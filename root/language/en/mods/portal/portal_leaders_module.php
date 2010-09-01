@@ -35,6 +35,12 @@ $lang = array_merge($lang, array(
 	'NO_MODERATORS_P'		=> 'No Moderators',
 	'NO_GROUPS_P'			=> 'No Groups',
 	'ACP_PORTAL_LEADERS'	=> 'The Team',
+	
+	// ACP
+	'ACP_PORTAL_LEADERS'		=> 'Team Settings',
+	'ACP_PORTAL_LEADERS_EXP'	=> 'This is where you customize the team block',
+	'PORTAL_LEADERS_EXT'		=> 'Extended Leaders / Team',
+	'PORTAL_LEADERS_EXT_EXP'	=> 'The standard block lists all admins/mods, while the extended block includes all non-hidden groups with a legend.',
 ));
 
 ?>
