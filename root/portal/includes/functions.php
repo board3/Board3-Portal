@@ -670,6 +670,139 @@ function add_endtag ($message = '')
 	return $message;
 }
 
+/**
+* get topic tracking info for news
+* based on get_complete_tracking_info of phpBB3
+* this should reduce the queries for the news and announcements block
+*/
+function get_portal_tracking_info($fetch_news)
+{
+	global $config, $user;
+	
+	$time1 = microtime();
+	
+	$last_read = $topic_ids = $forum_ids = $tracking_info = array();
+	
+	/**
+	* group everything by the forum IDs
+	*/
+	$count = $fetch_news['topic_count'];
+	for ($i = 0; $i < $count; $i++)
+	{
+		$tracking_info[$fetch_news[$i]['forum_id']][] = $fetch_news[$i]['topic_id'];
+	}
+	
+	foreach ($tracking_info as $forum_id => $current_forum)
+	{
+		if ($config['load_db_lastread'] && $user->data['is_registered'])
+		{
+			global $db;
+			
+			$mark_time = array();
+			
+			$sql = 'SELECT topic_id, mark_time
+				FROM ' . TOPICS_TRACK_TABLE . "
+				WHERE user_id = {$user->data['user_id']}
+					AND " . $db->sql_in_set('topic_id', $current_forum);
+			$result = $db->sql_query($sql);
+
+			while ($row = $db->sql_fetchrow($result))
+			{
+				$last_read[$row['topic_id']] = $row['mark_time'];
+			}
+			$db->sql_freeresult($result);
+
+			$current_forum = array_diff($current_forum, array_keys($last_read));
+
+			if (sizeof($topic_ids))
+			{
+				$sql = 'SELECT forum_id, mark_time
+					FROM ' . FORUMS_TRACK_TABLE . "
+					WHERE user_id = {$user->data['user_id']}
+						AND " . $db->sql_in_set('forum_id', $forum_ids);
+				$result = $db->sql_query($sql);
+
+				while ($row = $db->sql_fetchrow($result))
+				{
+					$mark_time[$row['forum_id']] = $row['mark_time'];
+				}
+				$db->sql_freeresult($result);
+
+				$user_lastmark = (isset($mark_time[$forum_id])) ? $mark_time[$forum_id] : $user->data['user_lastmark'];
+
+				foreach ($topic_ids as $topic_id)
+				{
+					$last_read[$topic_id] = $user_lastmark;
+				}
+			}
+		}
+		else if ($config['load_anon_lastread'] || $user->data['is_registered'])
+		{
+			global $tracking_topics;
+
+			if (!isset($tracking_topics) || !sizeof($tracking_topics))
+			{
+				$tracking_topics = (isset($_COOKIE[$config['cookie_name'] . '_track'])) ? ((STRIP) ? stripslashes($_COOKIE[$config['cookie_name'] . '_track']) : $_COOKIE[$config['cookie_name'] . '_track']) : '';
+				$tracking_topics = ($tracking_topics) ? tracking_unserialize($tracking_topics) : array();
+			}
+
+			if (!$user->data['is_registered'])
+			{
+				$user_lastmark = (isset($tracking_topics['l'])) ? base_convert($tracking_topics['l'], 36, 10) + $config['board_startdate'] : 0;
+			}
+			else
+			{
+				$user_lastmark = $user->data['user_lastmark'];
+			}
+
+			foreach ($topic_ids as $topic_id)
+			{
+				$topic_id36 = base_convert($topic_id, 10, 36);
+
+				if (isset($tracking_topics['t'][$topic_id36]))
+				{
+					$last_read[$topic_id] = base_convert($tracking_topics['t'][$topic_id36], 36, 10) + $config['board_startdate'];
+				}
+			}
+
+			$topic_ids = array_diff($topic_ids, array_keys($last_read));
+
+			if (sizeof($topic_ids))
+			{
+				$mark_time = array();
+				if ($global_announce_list && sizeof($global_announce_list))
+				{
+					if (isset($tracking_topics['f'][0]))
+					{
+						$mark_time[0] = base_convert($tracking_topics['f'][0], 36, 10) + $config['board_startdate'];
+					}
+				}
+
+				if (isset($tracking_topics['f'][$forum_id]))
+				{
+					$mark_time[$forum_id] = base_convert($tracking_topics['f'][$forum_id], 36, 10) + $config['board_startdate'];
+				}
+
+				$user_lastmark = (isset($mark_time[$forum_id])) ? $mark_time[$forum_id] : $user_lastmark;
+
+				foreach ($topic_ids as $topic_id)
+				{
+					if ($global_announce_list && isset($global_announce_list[$topic_id]))
+					{
+						$last_read[$topic_id] = (isset($mark_time[0])) ? $mark_time[0] : $user_lastmark;
+					}
+					else
+					{
+						$last_read[$topic_id] = $user_lastmark;
+					}
+				}
+			}
+		}
+	}
+	
+	return $last_read;
+}
+
 // Mini Cal.
 class calendar 
 {

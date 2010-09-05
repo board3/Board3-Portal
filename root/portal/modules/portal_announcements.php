@@ -141,6 +141,8 @@ class portal_announcements_module
 					$total_announcements = (int) $db->sql_fetchfield('num_topics');
 					$db->sql_freeresult($result);
 			}
+			
+			$topic_tracking_info = (get_portal_tracking_info($fetch_news));
 
 			if($announcement < 0)
 			// Show the announcements overview 
@@ -163,7 +165,7 @@ class portal_announcements_module
 					// unread?
 					$forum_id = $fetch_news[$i]['forum_id'];
 					$topic_id = $fetch_news[$i]['topic_id'];
-					$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
+					//$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
 					$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 					$real_forum_id = ($forum_id == 0) ? $fetch_news['global_id']: $forum_id;
 					$read_full_url = (isset($_GET['ap'])) ? 'ap='. $start . '&amp;announcement=' . $i . '#a' . $i : 'announcement=' . $i . '#a' . $i;

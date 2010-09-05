@@ -190,7 +190,7 @@ class portal_user_menu_module
 
 		// nothing
 		
-		return $db->sql_query($sql);
+		return true;
 	}
 }
 

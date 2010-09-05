@@ -404,8 +404,7 @@ class acp_portal
 								$c_class = new $class();
 								if ($c_class->columns & column_string_const($add_module))
 								{
-									$user->add_lang('mods/portal/' . $c_class->language);
-									$fileinfo[] = $user->lang[$c_class->name];
+									$fileinfo[] = substr($class, 7, -7);
 								}
 							}
 						}
