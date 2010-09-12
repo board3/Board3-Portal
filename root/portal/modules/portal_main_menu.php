@@ -50,6 +50,7 @@ class portal_main_menu_module
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
+	var $custom_acp_tpl = 'acp_portal_links';
 
 	function get_template_side($module_id)
 	{
@@ -80,8 +81,9 @@ class portal_main_menu_module
 	*/
 	function install($module_id)
 	{
-		set_config('board3_links_manage', '');
+		set_config('board3_links_urls', '');
 		set_config('board3_links_options', '');
+		set_config('board3_links_titles', '');
 		return true;
 	}
 
@@ -90,12 +92,244 @@ class portal_main_menu_module
 		global $db;
 
 		$del_config = array(
-			'board3_links_manage',
+			'board3_links_urls',
 			'board3_links_options',
+			'board3_links_titles',
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
+	}
+	
+	function manage_links($key)
+	{
+		global $config, $phpbb_admin_path, $user, $phpEx, $db, $template;
+		
+		// @todo: merge into constants file, maybe even portal contants file
+		define('B3_LINKS_CAT', 0);
+		define('B3_LINKS_INT', 1);
+		define('B3_LINKS_EXT', 2);
+		
+		$action = request_var('action', '');
+		$action = (isset($_POST['add'])) ? 'add' : $action;
+		$action = (isset($_POST['save'])) ? 'save' : $action;
+		$link_id = request_var('id', 0);
+		
+		$sql = 'SELECT module_id FROM ' . PORTAL_MODULES_TABLE . " WHERE module_classname = 'main_menu'";
+		$result = $db->sql_query($sql);
+		$module_id = $db->sql_fetchfield('module_id');
+		$db->sql_freeresult($result);
+		
+		$links_urls = $links_options = $links_titles = array();
+		
+		$links_urls = explode(';', $config['board3_links_urls']);
+		$links_options = explode(';', $config['board3_links_options']);
+		$links_titles = explode(';', $config['board3_links_titles']);
+		
+		$u_action = append_sid($phpbb_admin_path . 'index.' . $phpEx, 'i=portal&amp;mode=config&amp;module_id=' . $module_id);
+
+		switch ($action)
+		{
+			// Save changes
+			case 'save':
+				$form_name = 'acp_portal';
+				if (!check_form_key($form_name))
+				{
+					trigger_error($user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
+				}
+
+				$link_title = utf8_normalize_nfc(request_var('link_title', '', true));
+				$link_is_cat = request_var('link_is_cat', 0);
+				$link_url = ($link_is_cat) ? ' ' : request_var('link_url', '');
+
+				if (!$link_title)
+				{
+					trigger_error($user->lang['NO_LINK_TITLE'] . adm_back_link($u_action), E_USER_WARNING);
+				}
+
+				if (!$link_is_cat && !$link_url)
+				{
+					trigger_error($user->lang['NO_LINK_URL'] . adm_back_link($u_action), E_USER_WARNING);
+				}
+
+				if ($link_id)
+				{
+					$message = $user->lang['LINK_UPDATED'];
+					
+					// always check if the links already exist
+					if(isset($link_titles[$link_id]) && isset($link_options[$link_id]) && isset($link_urls[$link_id]))
+					{
+						$links_titles[$link_id] = $link_title;
+						$links_urls[$link_id] = htmlspecialchars_decode($link_url);
+						$links_options[$link_id] = ($link_is_cat) ? B3_LINKS_CAT : B3_LINKS_EXT; // Add internal link later on
+					}
+					else
+					{
+						$links_titles[] = $link_title;
+						$links_urls[] = $link_url;
+						$links_options[] = ($link_is_cat) ? B3_LINKS_CAT : B3_LINKS_EXT; // Add internal link later on
+					}
+
+					add_log('admin', 'LOG_PORTAL_LINK_UPDATED', $link_title);
+				}
+				else
+				{
+					$message = $user->lang['LINK_ADDED'];
+
+					if($links_titles[0] == '')
+					{
+						$links_titles[0] = $link_title;
+						$links_urls[0] = $link_url;
+						$links_options[0] = ($link_is_cat) ? B3_LINKS_CAT : B3_LINKS_EXT; // Add internal link later on
+					}
+					else
+					{
+						$links_titles[] = $link_title;
+						$links_urls[] = $link_url;
+						$links_options[] = ($link_is_cat) ? B3_LINKS_CAT : B3_LINKS_EXT; // Add internal link later on
+					}
+
+					//$config['board3_menu_count']++; // @todo: check if we need this
+					add_log('admin', 'LOG_PORTAL_LINK_ADDED', $link_title);
+				}
+
+				// $cache->destroy('_links'); // @todo: check if we need this
+				
+				set_config('board3_links_urls', implode(';', $links_urls));
+				set_config('board3_links_options', implode(';', $links_options));
+				set_config('board3_links_titles', implode(';', $links_titles));
+				
+
+				trigger_error($message . adm_back_link($u_action));
+
+			break;
+
+			// Delete link
+			case 'delete':
+
+				if (!$link_id)
+				{
+					trigger_error($user->lang['MUST_SELECT_LINK'] . adm_back_link($u_action), E_USER_WARNING);
+				}
+
+				if (confirm_box(true))
+				{
+					$sql = 'SELECT link_title, link_order
+						FROM ' . PORTAL_LINKS_TABLE . "
+						WHERE link_id = $link_id";
+					$result = $db->sql_query($sql);
+					$row = $db->sql_fetchrow($result);
+					$db->sql_freeresult($result);
+
+					if ($row)
+					{
+						$row['link_title'] = (string) $row['link_title'];
+						$row['link_order'] = (int) $row['link_order'];
+					}
+
+					$sql = 'DELETE FROM ' . PORTAL_LINKS_TABLE . " WHERE link_id = $link_id";
+					$db->sql_query($sql);
+
+					// Reset link order...
+					$sql = 'UPDATE ' . PORTAL_LINKS_TABLE . ' SET link_order = link_order - 1 WHERE link_order > ' . $row['link_order'];
+					$db->sql_query($sql);
+
+					$cache->destroy('_links');
+
+					set_portal_config('num_links', $config['board3_menu_count'] - 1, true);
+					add_log('admin', 'LOG_PORTAL_LINK_REMOVED', $row['link_title']);
+				}
+				else
+				{
+					confirm_box(false, $user->lang['CONFIRM_OPERATION'], build_hidden_fields(array(
+						'i'			=> $id,
+						'mode'		=> $mode,
+						'link_id'	=> $link_id,
+						'action'	=> 'delete',
+					)));
+				}
+
+			break;
+
+			// Move items up or down
+			case 'move_up':
+			case 'move_down':
+
+				if (!$link_id)
+				{
+					trigger_error($user->lang['MUST_SELECT_LINK'] . adm_back_link($u_action), E_USER_WARNING);
+				}
+
+				// Get current order id...
+				$sql = 'SELECT link_order AS current_order
+					FROM ' . PORTAL_LINKS_TABLE . "
+					WHERE link_id = $link_id";
+				$result = $db->sql_query($sql);
+				$current_order = (int) $db->sql_fetchfield('current_order');
+				$db->sql_freeresult($result);
+
+				if ($current_order == 0 && $action == 'move_up')
+				{
+					break;
+				}
+
+				// on move_down, switch position with next order_id...
+				// on move_up, switch position with previous order_id...
+				$switch_order_id = ($action == 'move_down') ? $current_order + 1 : $current_order - 1;
+
+				// Update order values
+				$sql = 'UPDATE ' . PORTAL_LINKS_TABLE . "
+					SET link_order = $current_order
+					WHERE link_order = $switch_order_id
+						AND link_id <> $link_id";
+				$db->sql_query($sql);
+
+				// Only update the other entry too if the previous entry got updated
+				if ($db->sql_affectedrows())
+				{
+					$sql = 'UPDATE ' . PORTAL_LINKS_TABLE . "
+						SET link_order = $switch_order_id
+						WHERE link_order = $current_order
+							AND link_id = $link_id";
+					$db->sql_query($sql);
+				}
+
+			break;
+
+			// Edit or add menu item
+			case 'edit':
+			case 'add':
+				$template->assign_vars(array(
+					'LINK_TITLE'	=> (isset($links_titles[$link_id])) ? $links_titles[$link_id] : '',
+					'LINK_URL'		=> (isset($links_urls[$link_id]) && $links_options[$link_id] != B3_LINKS_CAT) ? $links_urls[$link_id] : '',
+
+					'U_BACK'	=> $u_action,
+					'U_ACTION'	=> $u_action . '&amp;id=' . $link_id,
+
+					'S_EDIT'				=> true,
+					'S_LINK_IS_CAT'			=> (!isset($links_options[$link_id]) || $links_options[$link_id] == B3_LINKS_CAT) ? true : false,
+				));
+
+				return;
+
+			break;
+		}
+
+		for ($i = 0; $i < sizeof($links_urls); $i++)
+		{
+			$template->assign_block_vars('links', array(
+				'LINK_TITLE'	=> $links_titles[$i],
+				'LINK_URL'		=> $links_urls[$i],
+
+				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
+				'U_DELETE'		=> $u_action . '&amp;action=delete&amp;id=' . $i,
+				'U_MOVE_UP'		=> $u_action . '&amp;action=move_up&amp;id=' . $i,
+				'U_MOVE_DOWN'	=> $u_action . '&amp;action=move_down&amp;id=' . $i,
+
+				'S_LINK_IS_CAT'	=> ($links_options[$i] == B3_LINKS_CAT) ? true : false,
+			));	
+		}
+		$db->sql_freeresult($result);
 	}
 	
 	/*
@@ -107,7 +341,7 @@ class portal_main_menu_module
 	*	2 = external link
 	* links_urls: contains the URLs or titles (for categories)
 	*/
-	function manage_links($key)
+	function manage_links_old($key)
 	{
 		global $config, $phpbb_admin_path, $user, $phpEx, $db;
 		
@@ -167,11 +401,7 @@ class portal_main_menu_module
 	
 	function update_links($key)
 	{
-		global $db, $cache;
-		
-		$values = 
-		
-		print_r($values);
+		$this->manage_links($key);
 	}
 }
 

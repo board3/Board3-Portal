@@ -2,12 +2,18 @@
 
 <a name="maincontent"></a>
 
+<h1>{L_TITLE}</h1>
+
+<p>{L_TITLE_EXPLAIN}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
 <!-- IF S_EDIT -->
-
-	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
-	<h1>{L_ACP_PORTAL_LINKS}</h1>
-	<p>{L_ACP_PORTAL_LINKS_EXPLAIN}</p>
-
 	<form id="acp_portal_links" method="post" action="{U_ACTION}">
 
 	<fieldset>
@@ -39,11 +45,22 @@
 	</form>
 
 <!-- ELSE -->
-
-	<h1>{L_ACP_PORTAL_LINKS}</h1>
-	<p>{L_ACP_PORTAL_LINKS_EXPLAIN}</p>
-
 	<form id="acp_portal_links" method="post" action="{U_ACTION}">
+	<!-- IF SHOW_MODULE_OPTIONS -->
+	<fieldset>
+		<legend>{L_MODULE_OPTIONS}</legend>
+		<dl>
+			<dt><label for="module_name">{L_MODULE_NAME}:</label><br /><span>{L_MODULE_NAME_EXP}</span></dt>
+			<dd><input id="module_name" type="text" value="{MODULE_NAME}" name="module_name" maxlength="255" size="64" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="module_image">{L_MODULE_IMAGE}:</label><br /><span>{L_MODULE_IMAGE_EXP}</span></dt>
+			<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
+			<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
+		</dl>
+	</fieldset>
+	<!-- ENDIF -->	
+
 	<fieldset class="tabulated">
 	<legend>{L_ACP_PORTAL_LINKS}</legend>
 
@@ -62,8 +79,8 @@
 	<tbody>
 	<!-- BEGIN links -->
 		<!-- IF links.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
-		<td style="text-align: center;">{links.LINK_TITLE}</td>
-		<td style="text-align: center;"><!-- IF links.S_LINK_IS_CAT -->{L_LINK_CAT}<!-- ELSE -->{links.LINK_URL}<!-- ENDIF --></td>
+		<td style="text-align: center;"<!-- IF links.S_LINK_IS_CAT --> class="row3" colspan="2"<!-- ENDIF -->>{links.LINK_TITLE}</td>
+		<!-- IF not links.S_LINK_IS_CAT --><td style="text-align: center;">{links.LINK_URL}</td><!-- ENDIF -->
 		<td style="text-align: center;">
 			<!-- IF links.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{links.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
 			<!-- IF links.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{links.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->&nbsp;
