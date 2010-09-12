@@ -45,6 +45,11 @@ class portal_main_menu_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	var $language = 'portal_main_menu_module';
+	
+	/**
+	* custom acp template
+	* file must be in "adm/style/portal/"
+	*/
 
 	function get_template_side($module_id)
 	{

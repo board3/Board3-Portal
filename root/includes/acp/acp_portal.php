@@ -39,8 +39,6 @@ class acp_portal
 
 		$form_key = 'acp_portal';
 		add_form_key($form_key);
-		
-		// @todo: add a way to show custom HTML files, instead of the standard board3 portal one, on the settings page of the modules
 
 		/**
 		*	Validation types are:
@@ -172,7 +170,15 @@ class acp_portal
 					trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_root_path}/adm/index.$phpEx", 'i=portal&mode=modules') : $this->u_action));
 				}
 
-				$this->tpl_name = 'acp_portal_config';
+				// show custom HTML files on the settings page of the modules instead of the standard board3 portal one, if chosen by module
+				if(!isset($c_class->custom_acp_tpl))
+				{
+					$this->tpl_name = 'portal/acp_portal_config';
+				}
+				else
+				{
+					$this->tpl_name = 'portal/' . $c_class->custom_acp_tpl;
+				}
 				$this->page_title = $display_vars['title'];
 
 				$template->assign_vars(array(
@@ -470,7 +476,7 @@ class acp_portal
 					$db->sql_freeresult($result);
 				}
 
-				$this->tpl_name = 'acp_portal_modules';
+				$this->tpl_name = 'portal/acp_portal_modules';
 				$this->page_title = 'ACP_PORTAL_MODULES';
 			break;
 			default:
