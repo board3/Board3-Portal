@@ -39,6 +39,8 @@ class acp_portal
 
 		$form_key = 'acp_portal';
 		add_form_key($form_key);
+		
+		// @todo: add a way to show custom HTML files, instead of the standard board3 portal one, on the settings page of the modules
 
 		/**
 		*	Validation types are:
