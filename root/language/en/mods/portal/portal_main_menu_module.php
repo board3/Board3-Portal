@@ -50,7 +50,9 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_MENU_EXT'			=> 'External link',
 	'ACP_PORTAL_MENU_TITLE'			=> 'Title',
 	'ACP_PORTAL_MENU_URL'			=> 'URL',
-	'ACP_PORTAL_MENU_TYPE'			=> 'Type',
+	'ACP_PORTAL_MENU_TYPE'			=> 'Link type',
+	'ACP_PORTAL_MENU_TYPE_EXP'		=> 'If you have a link to a page of your board, choose "Internal link" in order to prevent unwanted logouts.',
+	'ACP_PORTAL_MENU_CREATE_CAT'	=> 'You need to create a category first.',
 ));
 
 ?>

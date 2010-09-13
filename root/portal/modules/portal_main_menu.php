@@ -113,7 +113,7 @@ class portal_main_menu_module
 		$action = request_var('action', '');
 		$action = (isset($_POST['add'])) ? 'add' : $action;
 		$action = (isset($_POST['save'])) ? 'save' : $action;
-		$link_id = request_var('id', 0);
+		$link_id = request_var('id', 99999999); // 0 will trigger unwanted behavior, therefore we set a number we should never reach
 		
 		$sql = 'SELECT module_id FROM ' . PORTAL_MODULES_TABLE . " WHERE module_classname = 'main_menu'";
 		$result = $db->sql_query($sql);
@@ -125,22 +125,22 @@ class portal_main_menu_module
 		$links_urls = explode(';', $config['board3_links_urls']);
 		$links_options = explode(';', $config['board3_links_options']);
 		$links_titles = explode(';', $config['board3_links_titles']);
-		
+
 		$u_action = append_sid($phpbb_admin_path . 'index.' . $phpEx, 'i=portal&amp;mode=config&amp;module_id=' . $module_id);
 
 		switch ($action)
 		{
 			// Save changes
 			case 'save':
-				$form_name = 'acp_portal';
-				if (!check_form_key($form_name))
+				if (!check_form_key('acp_portal'))
 				{
 					trigger_error($user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				$link_title = utf8_normalize_nfc(request_var('link_title', '', true));
+				$link_title = utf8_normalize_nfc(request_var('link_title', ' ', true));
 				$link_is_cat = request_var('link_is_cat', 0);
-				$link_url = ($link_is_cat) ? ' ' : request_var('link_url', '');
+				$link_type = (!$link_is_cat) ? request_var('link_type', 0) : B3_LINKS_CAT;
+				$link_url = ($link_is_cat) ? ' ' : request_var('link_url', ' ');
 
 				if (!$link_title)
 				{
@@ -152,22 +152,22 @@ class portal_main_menu_module
 					trigger_error($user->lang['NO_LINK_URL'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				if ($link_id)
+				if (isset($link_id) && $link_id < sizeof($links_urls))
 				{
 					$message = $user->lang['LINK_UPDATED'];
 					
 					// always check if the links already exist
-					if(isset($link_titles[$link_id]) && isset($link_options[$link_id]) && isset($link_urls[$link_id]))
+					if(isset($links_titles[$link_id]) && isset($links_options[$link_id]) && ($link_is_cat || isset($links_urls[$link_id])))
 					{
 						$links_titles[$link_id] = $link_title;
 						$links_urls[$link_id] = htmlspecialchars_decode($link_url);
-						$links_options[$link_id] = ($link_is_cat) ? B3_LINKS_CAT : B3_LINKS_EXT; // Add internal link later on
+						$links_options[$link_id] = $link_type;
 					}
 					else
 					{
 						$links_titles[] = $link_title;
 						$links_urls[] = $link_url;
-						$links_options[] = ($link_is_cat) ? B3_LINKS_CAT : B3_LINKS_EXT; // Add internal link later on
+						$links_options[] = $link_type;
 					}
 
 					add_log('admin', 'LOG_PORTAL_LINK_UPDATED', $link_title);
@@ -178,15 +178,23 @@ class portal_main_menu_module
 
 					if($links_titles[0] == '')
 					{
+						if($link_type != B3_LINKS_CAT && sizeof($links_titles) < 1)
+						{
+							trigger_error($user->lang['ACP_PORTAL_MENU_CREATE_CAT'] . adm_back_link($u_action), E_USER_WARNING);
+						}
 						$links_titles[0] = $link_title;
 						$links_urls[0] = $link_url;
-						$links_options[0] = ($link_is_cat) ? B3_LINKS_CAT : B3_LINKS_EXT; // Add internal link later on
+						$links_options[0] = $link_type; // Add internal link later on
 					}
 					else
 					{
+						if($link_type != B3_LINKS_CAT && sizeof($links_titles) < 1)
+						{
+							trigger_error($user->lang['ACP_PORTAL_MENU_CREATE_CAT'] . adm_back_link($u_action), E_USER_WARNING);
+						}
 						$links_titles[] = $link_title;
 						$links_urls[] = $link_url;
-						$links_options[] = ($link_is_cat) ? B3_LINKS_CAT : B3_LINKS_EXT; // Add internal link later on
+						$links_options[] = $link_type; // Add internal link later on
 					}
 
 					//$config['board3_menu_count']++; // @todo: check if we need this
@@ -207,43 +215,38 @@ class portal_main_menu_module
 			// Delete link
 			case 'delete':
 
-				if (!$link_id)
+				if (!isset($link_id) && $link_id >= sizeof($links_urls))
 				{
 					trigger_error($user->lang['MUST_SELECT_LINK'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				if (confirm_box(true))
 				{
-					$sql = 'SELECT link_title, link_order
-						FROM ' . PORTAL_LINKS_TABLE . "
-						WHERE link_id = $link_id";
-					$result = $db->sql_query($sql);
-					$row = $db->sql_fetchrow($result);
-					$db->sql_freeresult($result);
+					$cur_link_title = $links_titles[$link_id];
+					// make sure we don't delete links that weren't supposed to be deleted
+					$title_ary = array('{remove_link}');
+					$links_titles[$link_id] = '{remove_link}';
+					$option_ary = array('{remove_link}');
+					$links_options[$link_id] = '{remove_link}';
+					$url_ary = array('{remove_link}');
+					$links_urls[$link_id] = '{remove_link}';
+					
+					$links_titles = array_diff($links_titles, $title_ary);
+					$links_urls = array_diff($links_urls, $url_ary);
+					$links_options = array_diff($links_options, $url_ary);
+					
+					set_config('board3_links_urls', implode(';', $links_urls));
+					set_config('board3_links_options', implode(';', $links_options));
+					set_config('board3_links_titles', implode(';', $links_titles));
+					
+					
+					//$cache->destroy('_links'); // @todo: check if we can remove this
 
-					if ($row)
-					{
-						$row['link_title'] = (string) $row['link_title'];
-						$row['link_order'] = (int) $row['link_order'];
-					}
-
-					$sql = 'DELETE FROM ' . PORTAL_LINKS_TABLE . " WHERE link_id = $link_id";
-					$db->sql_query($sql);
-
-					// Reset link order...
-					$sql = 'UPDATE ' . PORTAL_LINKS_TABLE . ' SET link_order = link_order - 1 WHERE link_order > ' . $row['link_order'];
-					$db->sql_query($sql);
-
-					$cache->destroy('_links');
-
-					set_portal_config('num_links', $config['board3_menu_count'] - 1, true);
-					add_log('admin', 'LOG_PORTAL_LINK_REMOVED', $row['link_title']);
+					add_log('admin', 'LOG_PORTAL_LINK_REMOVED', $cur_link_title);
 				}
 				else
 				{
 					confirm_box(false, $user->lang['CONFIRM_OPERATION'], build_hidden_fields(array(
-						'i'			=> $id,
-						'mode'		=> $mode,
 						'link_id'	=> $link_id,
 						'action'	=> 'delete',
 					)));
@@ -255,44 +258,42 @@ class portal_main_menu_module
 			case 'move_up':
 			case 'move_down':
 
-				if (!$link_id)
+				if (!isset($link_id) && $link_id >= sizeof($links_urls))
 				{
 					trigger_error($user->lang['MUST_SELECT_LINK'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				// Get current order id...
-				$sql = 'SELECT link_order AS current_order
-					FROM ' . PORTAL_LINKS_TABLE . "
-					WHERE link_id = $link_id";
-				$result = $db->sql_query($sql);
-				$current_order = (int) $db->sql_fetchfield('current_order');
-				$db->sql_freeresult($result);
-
-				if ($current_order == 0 && $action == 'move_up')
+				// make sure we don't try to move a link where it can't be moved
+				if (($link_id == 0 && $action == 'move_up') || ($link_id == (sizeof($links_urls) - 1) && $action == 'move_down'))
 				{
 					break;
 				}
 
-				// on move_down, switch position with next order_id...
-				// on move_up, switch position with previous order_id...
-				$switch_order_id = ($action == 'move_down') ? $current_order + 1 : $current_order - 1;
+				/* 
+				* on move_down, switch position with next order_id...
+				* on move_up, switch position with previous order_id...
+				* move up means a lower ID, move down means a higher ID
+				*/
+				$switch_order_id = ($action == 'move_down') ? $link_id + 1 : $link_id - 1;
 
-				// Update order values
-				$sql = 'UPDATE ' . PORTAL_LINKS_TABLE . "
-					SET link_order = $current_order
-					WHERE link_order = $switch_order_id
-						AND link_id <> $link_id";
-				$db->sql_query($sql);
+				// back up the info of the link we want to move
+				$cur_url = $links_urls[$link_id];
+				$cur_title = $links_titles[$link_id];
+				$cur_option = $links_options[$link_id];
+				
+				// move the info of the links we replace in the order
+				$links_urls[$link_id] = $links_urls[$switch_order_id];
+				$links_titles[$link_id] = $links_titles[$switch_order_id];
+				$links_options[$link_id] = $links_options[$switch_order_id];
+				
+				// insert the info of the moved link
+				$links_urls[$switch_order_id] = $cur_url;
+				$links_titles[$switch_order_id] = $cur_title;
+				$links_options[$switch_order_id] = $cur_option;
 
-				// Only update the other entry too if the previous entry got updated
-				if ($db->sql_affectedrows())
-				{
-					$sql = 'UPDATE ' . PORTAL_LINKS_TABLE . "
-						SET link_order = $switch_order_id
-						WHERE link_order = $current_order
-							AND link_id = $link_id";
-					$db->sql_query($sql);
-				}
+				set_config('board3_links_urls', implode(';', $links_urls));
+				set_config('board3_links_options', implode(';', $links_options));
+				set_config('board3_links_titles', implode(';', $links_titles));
 
 			break;
 
@@ -300,14 +301,15 @@ class portal_main_menu_module
 			case 'edit':
 			case 'add':
 				$template->assign_vars(array(
-					'LINK_TITLE'	=> (isset($links_titles[$link_id])) ? $links_titles[$link_id] : '',
-					'LINK_URL'		=> (isset($links_urls[$link_id]) && $links_options[$link_id] != B3_LINKS_CAT) ? $links_urls[$link_id] : '',
+					'LINK_TITLE'	=> (isset($links_titles[$link_id]) && $action != 'add') ? $links_titles[$link_id] : '',
+					'LINK_URL'		=> (isset($links_urls[$link_id]) && $links_options[$link_id] != B3_LINKS_CAT && $action != 'add') ? $links_urls[$link_id] : '',
 
-					'U_BACK'	=> $u_action,
+					//'U_BACK'	=> $u_action,
 					'U_ACTION'	=> $u_action . '&amp;id=' . $link_id,
 
 					'S_EDIT'				=> true,
 					'S_LINK_IS_CAT'			=> (!isset($links_options[$link_id]) || $links_options[$link_id] == B3_LINKS_CAT) ? true : false,
+					'S_LINK_IS_INT'			=> (isset($links_options[$link_id]) && $links_options[$link_id] == B3_LINKS_INT) ? true : false,
 				));
 
 				return;
@@ -318,8 +320,8 @@ class portal_main_menu_module
 		for ($i = 0; $i < sizeof($links_urls); $i++)
 		{
 			$template->assign_block_vars('links', array(
-				'LINK_TITLE'	=> $links_titles[$i],
-				'LINK_URL'		=> $links_urls[$i],
+				'LINK_TITLE'	=> ($action != 'add') ? $links_titles[$i] : '',
+				'LINK_URL'		=> ($action != 'add') ? $links_urls[$i] : '',
 
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
 				'U_DELETE'		=> $u_action . '&amp;action=delete&amp;id=' . $i,
@@ -327,7 +329,7 @@ class portal_main_menu_module
 				'U_MOVE_DOWN'	=> $u_action . '&amp;action=move_down&amp;id=' . $i,
 
 				'S_LINK_IS_CAT'	=> ($links_options[$i] == B3_LINKS_CAT) ? true : false,
-			));	
+			));
 		}
 		$db->sql_freeresult($result);
 	}

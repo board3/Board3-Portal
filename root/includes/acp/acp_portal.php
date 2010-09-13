@@ -335,6 +335,8 @@ class acp_portal
 							WHERE module_column = ' . $module_data['module_column'] . '
 								AND module_order > ' . $module_data['module_order'];
 						$db->sql_query($sql);
+						
+						$cache->purge(); // make sure we don't get errors after re-adding a module
 
 						trigger_error($user->lang['SUCCESS_DELETE'] . adm_back_link($this->u_action));
 					}
