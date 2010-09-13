@@ -384,6 +384,8 @@ class acp_portal
 						$db->sql_query($sql);
 
 						$c_class->install($db->sql_nextid());
+						
+						$cache->purge(); // make sure we don't get errors after re-adding a module
 
 						trigger_error($user->lang['SUCCESS_ADD'] . adm_back_link($this->u_action));
 					}
