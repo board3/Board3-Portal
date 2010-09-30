@@ -79,7 +79,8 @@ class portal_main_menu_module
 			{
 				if($links_options[$i] == B3_LINKS_INT)
 				{
-					$cur_url = append_sid($phpbb_root_path . $links_urls[$i]);
+					$links_urls[$i] = str_replace('&', '&amp;', $links_urls[$i]); // we need to do this in order to prevent XHTML validation errors
+					$cur_url = append_sid($phpbb_root_path . $links_urls[$i]); // the user should know what kind of file it is
 				}
 				else
 				{
@@ -178,6 +179,41 @@ class portal_main_menu_module
 				$link_is_cat = request_var('link_is_cat', 0);
 				$link_type = (!$link_is_cat) ? request_var('link_type', 0) : B3_LINKS_CAT;
 				$link_url = ($link_is_cat) ? ' ' : request_var('link_url', ' ');
+				
+				if($link_type == B3_LINKS_INT)
+				{
+					$link_query1 = utf8_normalize_nfc(request_var('link_query1', ''));
+					$link_query2 = utf8_normalize_nfc(request_var('link_query2', ''));
+					$link_query3 = utf8_normalize_nfc(request_var('link_query3', ''));
+					$link_query_string = '';
+					
+					if($link_query1 != '')
+					{
+						$link_query_string .= '?' . $link_query1;
+						if($link_query2 != '')
+						{
+							$link_query_string .= '&' . $link_query2;
+						}
+						if($link_query3)
+						{
+							$link_query_string .= '&' . $link_query3;
+						}
+					}
+					elseif($link_query2 != '')
+					{
+						$link_query_string .= '?' . $link_query2;
+						if($link_query3)
+						{
+							$link_query_string .= '&' . $link_query3;
+						}
+					}
+					elseif($link_query3)
+					{
+						$link_query_string .= '&' . $link_query3;
+					}
+					
+					$link_url .= $link_query_string;
+				}
 
 				if (!$link_title)
 				{
@@ -189,6 +225,7 @@ class portal_main_menu_module
 					trigger_error($user->lang['NO_LINK_URL'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
+				// overwrite already existing links and make sure we don't try to save a link outside of the normal array size of $links_urls
 				if (isset($link_id) && $link_id < sizeof($links_urls))
 				{
 					$message = $user->lang['LINK_UPDATED'];

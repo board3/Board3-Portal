@@ -49,10 +49,19 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_MENU_INT'			=> 'Internal link',
 	'ACP_PORTAL_MENU_EXT'			=> 'External link',
 	'ACP_PORTAL_MENU_TITLE'			=> 'Title',
-	'ACP_PORTAL_MENU_URL'			=> 'URL',
+	'ACP_PORTAL_MENU_URL'			=> 'Link URL',
 	'ACP_PORTAL_MENU_TYPE'			=> 'Link type',
 	'ACP_PORTAL_MENU_TYPE_EXP'		=> 'If you have a link to a page of your board, choose "Internal link" in order to prevent unwanted logouts.',
 	'ACP_PORTAL_MENU_CREATE_CAT'	=> 'You need to create a category first.',
+	'ACP_PORTAL_MENU_URL_EXP'		=> 'External links:<br />All links should be entered with a http://<br /><br />Internal links:<br />Only enter the php file as link url, i.e. index.php.<br />If you would like to add a query string, then define the values below.<br />If your link is index.php?style=4, then enter index.php as link url and style=4 in the textfield for the first post variable.',
+	'ACP_PORTAL_MENU_QUERY1'		=> 'First post variable',
+	'ACP_PORTAL_MENU_QUERY1_EXP'	=> 'Enter the first post variable. Example: style=4',
+	'ACP_PORTAL_MENU_QUERY2'		=> 'Second post variable',
+	'ACP_PORTAL_MENU_QUERY2_EXP'	=> 'Enter the second post variable. Example: style=4',
+	'ACP_PORTAL_MENU_QUERY3'		=> 'Third post variable',
+	'ACP_PORTAL_MENU_QUERY3_EXP'	=> 'Enter the third post variable. Example: style=4',
+	'ACP_PORTAL_MENU_LINK'			=> 'Link settings',
+	'ACP_PORTAL_MENU_INT_OPTIONS'	=> 'Internal links options',
 ));
 
 ?>

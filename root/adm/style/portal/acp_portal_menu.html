@@ -17,7 +17,7 @@
 	<form id="acp_portal_links" method="post" action="{U_ACTION}">
 
 	<fieldset>
-		<legend>{L_ACP_PORTAL_LINKS}</legend>
+		<legend>{L_ACP_PORTAL_MENU_LINK}</legend>
 	<dl>
 		<dt><label for="link_title">{L_LINK_TITLE}:</label></dt>
 		<dd><input name="link_title" type="text" id="link_title" value="{LINK_TITLE}" maxlength="255" /></dd>
@@ -30,7 +30,7 @@
 	<!-- IF S_LINK_IS_CAT --><div id="url" style="display: none;"><!-- ELSE --><div id="url"><!-- ENDIF -->
 	<dl>
 		<dt>
-			<label for="link_tpye">{L_ACP_PORTAL_MENU_TYPE}:</label><br />
+			<label for="link_type">{L_ACP_PORTAL_MENU_TYPE}:</label><br />
 			<span>{L_ACP_PORTAL_MENU_TYPE_EXP}</span>
 		</dt>
 		<dd>
@@ -39,11 +39,36 @@
 		</dd>
 	</dl>
 	<dl>
-		<dt><label for="link_url">{L_LINK_URL}:</label></dt>
+		<dt>
+			<label for="link_url">{L_ACP_PORTAL_MENU_URL}:</label><br />
+			<span>{L_ACP_PORTAL_MENU_URL_EXP}</span>
+		</dt>
 		<dd><input name="link_url" type="text" id="link_url" value="{LINK_URL}" maxlength="255" /></dd>
 	</dl>
 	</div>
-
+	</fieldset>
+	<fieldset>
+		<legend>{L_ACP_PORTAL_MENU_INT_OPTIONS}</legend>
+	<dl>
+		<dt>
+			<label for="link_query1">{L_ACP_PORTAL_MENU_QUERY1}:</label><br />
+			<span>{L_ACP_PORTAL_MENU_QUERY1_EXP}</span>
+		</dt>
+		<dd><input name="link_query1" type="text" id="link_query1" value="{LINK_QUERY1}" maxlength="255" /></dd><br />
+		<dt>
+			<label for="link_query2">{L_ACP_PORTAL_MENU_QUERY2}:</label><br />
+			<span>{L_ACP_PORTAL_MENU_QUERY2_EXP}</span>
+		</dt>
+		<dd><input name="link_query2" type="text" id="link_query2" value="{LINK_QUERY2}" maxlength="255" /></dd><br />
+		<dt>
+			<label for="link_query3">{L_ACP_PORTAL_MENU_QUERY3}:</label><br />
+			<span>{L_ACP_PORTAL_MENU_QUERY3_EXP}</span>
+		</dt>
+		<dd><input name="link_query3" type="text" id="link_query3" value="{LINK_QUERY3}" maxlength="255" /></dd>
+	</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{L_ACP_SUBMIT_CHANGES}</legend>
 	<p class="submit-buttons">
 		<input type="hidden" name="action" value="save" />
 
