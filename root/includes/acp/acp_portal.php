@@ -23,6 +23,8 @@ class acp_portal
 	{
 		global $db, $user, $cache, $template, $display_vars;
 		global $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx;
+		
+		include($phpbb_root_path . 'portal/includes/constants.' . $phpEx);
 		$portal_root_path = PORTAL_ROOT_PATH;
 		if (!function_exists('column_string_const'))
 		{

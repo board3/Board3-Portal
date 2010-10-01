@@ -54,12 +54,7 @@ class portal_main_menu_module
 
 	function get_template_side($module_id)
 	{
-		global $config, $template, $phpEx, $phpbb_root_path;
-		
-		// @todo: merge into constants file, maybe even portal contants file
-		define('B3_LINKS_CAT', 0);
-		define('B3_LINKS_INT', 1);
-		define('B3_LINKS_EXT', 2);
+		global $config, $template, $phpEx, $phpbb_root_path, $user;
 
 		$links_urls = $links_options = $links_titles = array();
 		
@@ -67,12 +62,14 @@ class portal_main_menu_module
 		$links_options = explode(';', $config['board3_links_options']);
 		$links_titles = explode(';', $config['board3_links_titles']);
 		
+		// @todo: add posibility to set permissions for links
+		
 		for ($i = 0; $i < sizeof($links_urls); $i++)
 		{
 			if($links_options[$i] == B3_LINKS_CAT)
 			{
 				$template->assign_block_vars('portalmenu', array(
-					'CAT_TITLE'		=> $links_titles[$i],
+					'CAT_TITLE'		=> (isset($user->lang[$links_titles[$i]])) ? $user->lang[$links_titles[$i]] : $links_titles[$i],
 				));
 			}
 			else
@@ -88,7 +85,7 @@ class portal_main_menu_module
 				}
 				
 				$template->assign_block_vars('portalmenu.links', array(
-					'LINK_TITLE'		=> $links_titles[$i],
+					'LINK_TITLE'		=> (isset($user->lang[$links_titles[$i]])) ? $user->lang[$links_titles[$i]] : $links_titles[$i],
 					'LINK_URL'			=> $cur_url,
 				));
 			}
@@ -105,7 +102,8 @@ class portal_main_menu_module
 
 	function get_template_acp($module_id)
 	{
-		return array(
+		// do not remove this as it is needed in order to run manage_links
+                return array(
 			'title'	=> 'ACP_PORTAL_MENU',
 			'vars'	=> array(
 				'legend1'				=> 'ACP_PORTAL_MENU',
@@ -119,9 +117,53 @@ class portal_main_menu_module
 	*/
 	function install($module_id)
 	{
-		set_config('board3_links_urls', '');
-		set_config('board3_links_options', '');
-		set_config('board3_links_titles', '');
+		global $phpbb_root_path, $phpEx;
+		
+		$links_titles = array(
+			'M_CONTENT',
+			'INDEX',
+			'SEARCH',
+			'REGISTER',
+			'MEMBERLIST',
+			'THE_TEAM',
+			'M_HELP',
+			'FAQ',
+			'M_BBCODE',
+			'M_TERMS',
+			'M_PRV',
+		);
+		
+		$links_options = array(
+			B3_LINKS_CAT,
+			B3_LINKS_INT,
+			B3_LINKS_INT,
+			B3_LINKS_INT,
+			B3_LINKS_INT,
+			B3_LINKS_INT,
+			B3_LINKS_CAT,
+			B3_LINKS_INT,
+			B3_LINKS_INT,
+			B3_LINKS_INT,
+			B3_LINKS_INT,
+		);
+		
+		$links_urls = array(
+			'',
+			'index.' . $phpEx,
+			'search.' . $phpEx,
+			'ucp.' . $phpEx . '?mode=register',
+			'memberlist.' . $phpEx,
+			'memberlist.' . $phpEx . '?mode=leaders',
+			'',
+			'faq.' . $phpEx,
+			'faq.' . $phpEx . '?mode=bbcode',
+			'ucp.' . $phpEx . '?mode=terms',
+			'ucp.' . $phpEx . '?mode=privacy',
+		);
+		
+		set_config('board3_links_urls', implode(';', $links_urls));
+		set_config('board3_links_options', implode(';', $links_options));
+		set_config('board3_links_titles', implode(';', $links_titles));
 		return true;
 	}
 
@@ -142,11 +184,6 @@ class portal_main_menu_module
 	function manage_links($key)
 	{
 		global $config, $phpbb_admin_path, $user, $phpEx, $db, $template;
-		
-		// @todo: merge into constants file, maybe even portal contants file
-		define('B3_LINKS_CAT', 0);
-		define('B3_LINKS_INT', 1);
-		define('B3_LINKS_EXT', 2);
 		
 		$action = request_var('action', '');
 		$action = (isset($_POST['add'])) ? 'add' : $action;

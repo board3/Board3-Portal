@@ -538,18 +538,6 @@ Deny from All
 	}]]></action>
 			</edit>
 		</open>
-		<open src="includes/constants.php">
-			<edit>
-				<find><![CDATA[// Additional tables]]></find>
-				<action type="after-add"><![CDATA[define('PORTAL_ROOT_PATH', 'portal/');
-define('PORTAL_ICONS_PATH', 'images/portal/icons');
-
-define('PORTAL_BLOCKS_TABLE',		$table_prefix . 'portal_blocks');
-define('PORTAL_CONFIG_TABLE',		$table_prefix . 'portal_config');
-//define('PORTAL_PAGES_TABLE',		$table_prefix . 'portal_pages');
-define('PORTAL_LINKS_TABLE',		$table_prefix . 'portal_links');]]></action>
-			</edit>
-		</open>
 		<open src="includes/functions.php">
 			<edit>
 				<find><![CDATA[// The following assigns all _common_ variables that may be used at any point in a template.]]></find>
