@@ -76,7 +76,7 @@ class portal_friends_module
 			'ORDER_BY'   => 'u.username_clean ASC',
 		));
 
-		$result = $db->sql_query_limit($sql, $config['board3_max_online_friends']);
+		$result = $db->sql_query_limit($sql, $config['board3_max_online_friends_' . $module_id]);
 
 		while ($row = $db->sql_fetchrow($result))
 		{
@@ -108,7 +108,7 @@ class portal_friends_module
 			'title'	=> 'ACP_PORTAL_FRIENDS_SETTINGS',
 			'vars'	=> array(
 				'legend1'					=> 'ACP_PORTAL_FRIENDS_SETTINGS',
-				'board3_max_online_friends'	=> array('lang' => 'PORTAL_MAX_ONLINE_FRIENDS',	'validate' => 'int',	'type' => 'text:3:3', 'explain' => true),
+				'board3_max_online_friends_' . $module_id	=> array('lang' => 'PORTAL_MAX_ONLINE_FRIENDS',	'validate' => 'int',	'type' => 'text:3:3', 'explain' => true),
 			)
 		);
 	}
@@ -118,7 +118,7 @@ class portal_friends_module
 	*/
 	function install($module_id)
 	{
-		set_config('board3_max_online_friends', 8);
+		set_config('board3_max_online_friends_' . $module_id, 8);
 		return true;
 	}
 
@@ -127,7 +127,7 @@ class portal_friends_module
 		global $db;
 
 		$del_config = array(
-			'board3_max_online_friends',
+			'board3_max_online_friends_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);

@@ -55,17 +55,17 @@ class portal_attachments_module
 		$filetypes = array();
 
 		// Get filetypes and put them into an array
-		if(isset($config['board3_attachments_filetype']) && strlen($config['board3_attachments_filetype']) > 0)
+		if(isset($config['board3_attachments_filetype_' . $module_id]) && strlen($config['board3_attachments_filetype_' . $module_id]) > 0)
 		{
-			$filetypes = explode(',', $config['board3_attachments_filetype']);
+			$filetypes = explode(',', $config['board3_attachments_filetype_' . $module_id]);
 		}
 
-		if($config['board3_attachments_forum_ids'] !== '')
+		if($config['board3_attachments_forum_ids_' . $module_id] !== '')
 		{
-			$attach_forums_config = (strpos($config['board3_attachments_forum_ids'], ',') !== false) ? explode(',', $config['board3_attachments_forum_ids']) : array($config['board3_attachments_forum_ids']);
+			$attach_forums_config = (strpos($config['board3_attachments_forum_ids_' . $module_id], ',') !== false) ? explode(',', $config['board3_attachments_forum_ids_' . $module_id]) : array($config['board3_attachments_forum_ids_' . $module_id]);
 			$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
 			
-			if($config['board3_attachments_forum_exclude'])
+			if($config['board3_attachments_forum_exclude_' . $module_id])
 			{
 				$forum_list = array_unique(array_diff($forum_list, $attach_forums_config));
 			}
@@ -87,7 +87,7 @@ class portal_attachments_module
 
 		if(sizeof($filetypes))
 		{
-			if($config['board3_attachments_exclude'])
+			if($config['board3_attachments_exclude_' . $module_id])
 			{
 				$where .= ' AND ' . $db->sql_in_set('a.extension', $filetypes, true);
 			}
@@ -112,14 +112,14 @@ class portal_attachments_module
 						' . $where . '
 					ORDER BY
 						filetime ' . ((!$config['display_order']) ? 'DESC' : 'ASC') . ', post_msg_id ASC';
-			$result = $db->sql_query_limit($sql, $config['board3_attachments_number']);
+			$result = $db->sql_query_limit($sql, $config['board3_attachments_number_' . $module_id]);
 
 			while ($row = $db->sql_fetchrow($result))
 			{
 				$size_lang = ($row['filesize'] >= 1048576) ? $user->lang['MIB'] : (($row['filesize'] >= 1024) ? $user->lang['KIB'] : $user->lang['BYTES']);
 				$row['filesize'] = ($row['filesize'] >= 1048576) ? round((round($row['filesize'] / 1048576 * 100) / 100), 2) : (($row['filesize'] >= 1024) ? round((round($row['filesize'] / 1024 * 100) / 100), 2) : $row['filesize']);
 
-				$replace = character_limit(utf8_substr($row['real_filename'], 0, strrpos($row['real_filename'], '.')), $config['board3_attach_max_length']);
+				$replace = character_limit(utf8_substr($row['real_filename'], 0, strrpos($row['real_filename'], '.')), $config['board3_attach_max_length_' . $module_id]);
 
 				$template->assign_block_vars('attach', array(
 					'FILESIZE'			=> $row['filesize'] . ' ' . $size_lang,
@@ -156,17 +156,17 @@ class portal_attachments_module
 		$filetypes = array();
 
 		// Get filetypes and put them into an array
-		if(isset($config['board3_attachments_filetype']) && strlen($config['board3_attachments_filetype']) > 0)
+		if(isset($config['board3_attachments_filetype_' . $module_id]) && strlen($config['board3_attachments_filetype_' . $module_id]) > 0)
 		{
-			$filetypes = explode(',', $config['board3_attachments_filetype']);
+			$filetypes = explode(',', $config['board3_attachments_filetype_' . $module_id]);
 		}
 
-		if($config['board3_attachments_forum_ids'] !== '')
+		if($config['board3_attachments_forum_ids_' . $module_id] !== '')
 		{
-			$attach_forums_config = (strpos($config['board3_attachments_forum_ids'], ',') !== false) ? explode(',', $config['board3_attachments_forum_ids']) : array($config['board3_attachments_forum_ids']);
+			$attach_forums_config = (strpos($config['board3_attachments_forum_ids_' . $module_id], ',') !== false) ? explode(',', $config['board3_attachments_forum_ids_' . $module_id]) : array($config['board3_attachments_forum_ids_' . $module_id]);
 			$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
 			
-			if($config['board3_attachments_forum_exclude'])
+			if($config['board3_attachments_forum_exclude_' . $module_id])
 			{
 				$forum_list = array_unique(array_diff($forum_list, $attach_forums_config));
 			}
@@ -188,7 +188,7 @@ class portal_attachments_module
 
 		if(sizeof($filetypes))
 		{
-			if($config['board3_attachments_exclude'])
+			if($config['board3_attachments_exclude_' . $module_id])
 			{
 				$where .= ' AND ' . $db->sql_in_set('a.extension', $filetypes, true);
 			}
@@ -213,14 +213,14 @@ class portal_attachments_module
 						' . $where . '
 					ORDER BY
 						filetime ' . ((!$config['display_order']) ? 'DESC' : 'ASC') . ', post_msg_id ASC';
-			$result = $db->sql_query_limit($sql, $config['board3_attachments_number']);
+			$result = $db->sql_query_limit($sql, $config['board3_attachments_number_' . $module_id]);
 
 			while ($row = $db->sql_fetchrow($result))
 			{
 				$size_lang = ($row['filesize'] >= 1048576) ? $user->lang['MIB'] : (($row['filesize'] >= 1024) ? $user->lang['KIB'] : $user->lang['BYTES']);
 				$row['filesize'] = ($row['filesize'] >= 1048576) ? round((round($row['filesize'] / 1048576 * 100) / 100), 2) : (($row['filesize'] >= 1024) ? round((round($row['filesize'] / 1024 * 100) / 100), 2) : $row['filesize']);
 
-				$replace = character_limit(utf8_substr($row['real_filename'], 0, strrpos($row['real_filename'], '.')), $config['board3_attach_max_length']);
+				$replace = character_limit(utf8_substr($row['real_filename'], 0, strrpos($row['real_filename'], '.')), $config['board3_attach_max_length_' . $module_id]);
 
 				$template->assign_block_vars('attach', array(
 					'FILESIZE'			=> $row['filesize'] . ' ' . $size_lang,
@@ -254,12 +254,12 @@ class portal_attachments_module
 			'title'	=> 'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS',
 			'vars'	=> array(
 				'legend1'							=> 'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS',
-				'board3_attachments_number'	=> array('lang' => 'PORTAL_ATTACHMENTS_NUMBER'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-				'board3_attach_max_length'	=> array('lang' => 'PORTAL_ATTACHMENTS_MAX_LENGTH'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-				'board3_attachments_forum_ids'	=> array('lang' => 'PORTAL_ATTACHMENTS_FORUM_IDS',	'validate' => 'string',		'type' => 'custom',	'explain' => true,	'method' => 'select_forums', 'submit' => 'store_selected_forums'),
-				'board3_attachments_forum_exclude' => array('lang' => 'PORTAL_ATTACHMENTS_FORUM_EXCLUDE', 'validate' => 'bool', 'type' => 'radio:yes_no',	 'explain' => true),
-				'board3_attachments_filetype'	=> array('lang' => 'PORTAL_ATTACHMENTS_FILETYPE',	'validate' => 'string', 	'type' => 'custom',	'explain' => true,	'method' => 'select_filetype', 'submit' => 'store_filetypes'),
-				'board3_attachments_exclude'	=> array('lang' => 'PORTAL_ATTACHMENTS_EXCLUDE', 	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_attachments_number_' . $module_id			=> array('lang' => 'PORTAL_ATTACHMENTS_NUMBER'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+				'board3_attach_max_length_' . $module_id			=> array('lang' => 'PORTAL_ATTACHMENTS_MAX_LENGTH'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+				'board3_attachments_forum_ids_' . $module_id		=> array('lang' => 'PORTAL_ATTACHMENTS_FORUM_IDS',	'validate' => 'string',		'type' => 'custom',	'explain' => true,	'method' => 'select_forums', 'submit' => 'store_selected_forums'),
+				'board3_attachments_forum_exclude_' . $module_id	=> array('lang' => 'PORTAL_ATTACHMENTS_FORUM_EXCLUDE', 'validate' => 'bool', 'type' => 'radio:yes_no',	 'explain' => true),
+				'board3_attachments_filetype_' . $module_id			=> array('lang' => 'PORTAL_ATTACHMENTS_FILETYPE',	'validate' => 'string', 	'type' => 'custom',	'explain' => true,	'method' => 'select_filetype', 'submit' => 'store_filetypes'),
+				'board3_attachments_exclude_' . $module_id			=> array('lang' => 'PORTAL_ATTACHMENTS_EXCLUDE', 	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 			),
 		);
 	}
@@ -269,12 +269,12 @@ class portal_attachments_module
 	*/
 	function install($module_id)
 	{
-		set_config('board3_attachments_number', 8);
-		set_config('board3_attach_max_length', 15);
-		set_config('board3_attachments_forum_ids', '');
-		set_config('board3_attachments_forum_exclude', 0);
-		set_config('board3_attachments_filetype', '');
-		set_config('board3_attachments_exclude', 0);
+		set_config('board3_attachments_number_' . $module_id, 8);
+		set_config('board3_attach_max_length_' . $module_id, 15);
+		set_config('board3_attachments_forum_ids_' . $module_id, '');
+		set_config('board3_attachments_forum_exclude_' . $module_id, 0);
+		set_config('board3_attachments_filetype_' . $module_id, '');
+		set_config('board3_attachments_exclude_' . $module_id, 0);
 		return true;
 	}
 
@@ -283,20 +283,20 @@ class portal_attachments_module
 		global $db;
 
 		$del_config = array(
-			'board3_attachments_number',
-			'board3_attach_max_length',
-			'board3_attachments_forum_ids',
-			'board3_attachments_forum_exclude',
-			'board3_attachments_filetype',
-			'board3_attachments_exclude',
+			'board3_attachments_number_' . $module_id,
+			'board3_attach_max_length_' . $module_id,
+			'board3_attachments_forum_ids_' . $module_id,
+			'board3_attachments_forum_exclude_' . $module_id,
+			'board3_attachments_filetype_' . $module_id,
+			'board3_attachments_exclude_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
 	}
 	
-		// Create select box for attachment filetype
-	function select_filetype($value, $key)
+	// Create select box for attachment filetype
+	function select_filetype($value, $key, $module_id)
 	{
 		global $db, $user, $config;
 		
@@ -312,9 +312,9 @@ class portal_attachments_module
 		}
 		
 		$selected = array();
-		if(isset($config['board3_attachments_filetype']) && strlen($config['board3_attachments_filetype']) > 0)
+		if(isset($config['board3_attachments_filetype_' . $module_id]) && strlen($config['board3_attachments_filetype_' . $module_id]) > 0)
 		{
-			$selected = explode(',', $config['board3_attachments_filetype']);
+			$selected = explode(',', $config['board3_attachments_filetype_' . $module_id]);
 		}
 		
 		// Build options
@@ -329,7 +329,7 @@ class portal_attachments_module
 	}
 	
 	// Store selected filetypes
-	function store_filetypes($key)
+	function store_filetypes($key, $module_id)
 	{
 		global $db, $cache;
 		
@@ -338,7 +338,7 @@ class portal_attachments_module
 		
 		$filetypes = implode(',', $values);
 		
-		set_config('board3_attachments_filetype', $filetypes);
+		set_config('board3_attachments_filetype_' . $module_id, $filetypes);
 
 	}
 	

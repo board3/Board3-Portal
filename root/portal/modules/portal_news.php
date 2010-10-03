@@ -51,14 +51,14 @@ class portal_news_module
 		global $config, $template, $db, $user, $auth, $cache, $phpEx, $phpbb_root_path;
 
 		$news = request_var('news', -1);
-		$news = ($news > $config['board3_news_length'] -1) ? -1 : $news;
+		$news = ($news > $config['board3_news_length_' . $module_id] -1) ? -1 : $news;
 		$user->add_lang('viewforum');
 		$start = request_var('np', 0);
 		$start = ($start < 0) ? 0 : $start;
 
 		// Fetch news from portal/includes/functions.php with check if "read full" is requested.
-		$portal_news_length = ($news < 0) ? $config['board3_news_length'] : 0;
-		$fetch_news = phpbb_fetch_posts($config['board3_news_forum'], $config['board3_news_permissions'], $config['board3_number_of_news'], $portal_news_length, 0, ($config['board3_show_all_news']) ? 'news_all' : 'news', $start, $config['board3_news_exclude']);
+		$portal_news_length = ($news < 0) ? $config['board3_news_length_' . $module_id] : 0;
+		$fetch_news = phpbb_fetch_posts($config['board3_news_forum_' . $module_id], $config['board3_news_permissions_' . $module_id], $config['board3_number_of_news_' . $module_id], $portal_news_length, 0, ($config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news', $start, $config['board3_news_exclude_' . $module_id]);
 
 
 		// Any news present? If not terminate it here.
@@ -72,10 +72,10 @@ class portal_news_module
 		else
 		{
 			// Count number of posts for news archive, considering if permission check is dis- or enabled.
-			if ($config['board3_news_archive'])
+			if ($config['board3_news_archive_' . $module_id])
 			{
-				$permissions = $config['board3_news_permissions'];
-				$forum_from = $config['board3_news_forum'];
+				$permissions = $config['board3_news_permissions_' . $module_id];
+				$forum_from = $config['board3_news_forum_' . $module_id];
 
 				$forum_from = (strpos($forum_from, ',') !== false) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 
@@ -90,7 +90,7 @@ class portal_news_module
 					$disallow_access = array();
 				}
 				
-				if($config['board3_news_exclude'] == true)
+				if($config['board3_news_exclude_' . $module_id] == true)
 				{
 					$disallow_access = array_merge($disallow_access, $forum_from);
 					$forum_from = array();
@@ -121,7 +121,7 @@ class portal_news_module
 
 				$str_where = (strlen($str_where) > 0) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
 
-				$topic_type = ($config['board3_show_all_news']) ? '(topic_type <> ' . POST_ANNOUNCE . ') AND (topic_type <> ' . POST_GLOBAL . ')' : 'topic_type = ' . POST_NORMAL;
+				$topic_type = ($config['board3_show_all_news_' . $module_id]) ? '(topic_type <> ' . POST_ANNOUNCE . ') AND (topic_type <> ' . POST_GLOBAL . ')' : 'topic_type = ' . POST_NORMAL;
 
 				$sql = 'SELECT COUNT(topic_id) AS num_topics
 					FROM ' . TOPICS_TABLE . '
@@ -161,9 +161,9 @@ class portal_news_module
 					
 					$read_full_url = (isset($_GET['np'])) ? 'np='. $start . '&amp;news=' . $i . '#n' . $i : 'news=' . $i . '#n' . $i;
 					$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-					if ($config['board3_news_archive'])
+					if ($config['board3_news_archive_' . $module_id])
 					{
-						$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_news, $config['board3_number_of_news'], $start, ($config['board3_show_all_news']) ? 'news_all' : 'news');
+						$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_news, $config['board3_number_of_news_' . $module_id], $start, ($config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news');
 					}
 
 					$replies = ($auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
@@ -253,12 +253,12 @@ class portal_news_module
 						}
 					}
 
-					if ($config['board3_number_of_news'] <> 0 && $config['board3_news_archive'])
+					if ($config['board3_number_of_news_' . $module_id] <> 0 && $config['board3_news_archive_' . $module_id])
 					{
 						$template->assign_vars(array(
 							'NP_PAGINATION'		=> $pagination,
 							'TOTAL_NEWS'		=> ($total_news == 1) ? $user->lang['VIEW_FORUM_TOPIC'] : sprintf($user->lang['VIEW_FORUM_TOPICS'], $total_news),
-							'NP_PAGE_NUMBER'	=> on_page($total_news, $config['board3_number_of_news'], $start))
+							'NP_PAGE_NUMBER'	=> on_page($total_news, $config['board3_number_of_news_' . $module_id], $start))
 						);
 					}
 				}
@@ -276,9 +276,9 @@ class portal_news_module
 						
 				$read_full_url = (isset($_GET['np'])) ? append_sid("{$phpbb_root_path}portal.$phpEx", "np=$start#n$i") : append_sid("{$phpbb_root_path}portal.$phpEx#n$i");
 				$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-				if ($config['board3_news_archive'])
+				if ($config['board3_news_archive_' . $module_id])
 				{
-					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_news, $config['board3_number_of_news'], $start, ($config['board3_show_all_news']) ? 'news_all' : 'news');
+					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_news, $config['board3_number_of_news_' . $module_id], $start, ($config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news');
 				}
 
 				$template->assign_block_vars('news_row', array(
@@ -316,12 +316,12 @@ class portal_news_module
 					}
 				}
 
-				if ($config['board3_number_of_news'] <> 0 && $config['board3_news_archive'])
+				if ($config['board3_number_of_news_' . $module_id] <> 0 && $config['board3_news_archive_' . $module_id])
 				{
 					$template->assign_vars(array(
 						'NP_PAGINATION'		=> $pagination,
 						'TOTAL_NEWS'		=> ($total_news == 1) ? $user->lang['VIEW_FORUM_TOPIC'] : sprintf($user->lang['VIEW_FORUM_TOPICS'], $total_news),
-						'NP_PAGE_NUMBER'	=> on_page($total_news, $config['board3_number_of_news'], $start))
+						'NP_PAGE_NUMBER'	=> on_page($total_news, $config['board3_number_of_news_' . $module_id], $start))
 					);
 				}
 			}
@@ -337,14 +337,14 @@ class portal_news_module
 			'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 			'READ_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
 			'GOTO_PAGE_IMG'				=> $user->img('icon_post_target', 'GOTO_PAGE'),
-			'S_NEWEST_OR_FIRST'			=> ($config['board3_news_show_last']) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
-			'POSTED_BY_TEXT'			=> ($config['board3_news_show_last']) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
+			'S_NEWEST_OR_FIRST'			=> ($config['board3_news_show_last_' . $module_id]) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
+			'POSTED_BY_TEXT'			=> ($config['board3_news_show_last_' . $module_id]) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
 			'S_DISPLAY_NEWS'			=> true,
-			'S_DISPLAY_NEWS_RVS'		=> ($config['board3_show_news_replies_views']) ? true : false,
+			'S_DISPLAY_NEWS_RVS'		=> ($config['board3_show_news_replies_views_' . $module_id]) ? true : false,
 			'S_TOPIC_ICONS'				=> $topic_icons,
 		));
 
-		if($config['board3_news_style'])
+		if($config['board3_news_style_' . $module_id])
 		{
 			return 'news_compact_center.html';
 		}
@@ -360,16 +360,16 @@ class portal_news_module
 			'title'	=> 'ACP_PORTAL_NEWS_SETTINGS',
 			'vars'	=> array(
 				'legend1'							=> 'ACP_PORTAL_NEWS_SETTINGS',
-				'board3_news_style'					=> array('lang' => 'PORTAL_NEWS_STYLE',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-				'board3_show_all_news'				=> array('lang' => 'PORTAL_SHOW_ALL_NEWS',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-				'board3_number_of_news'				=> array('lang' => 'PORTAL_NUMBER_OF_NEWS',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-				'board3_news_length'				=> array('lang' => 'PORTAL_NEWS_LENGTH',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-				'board3_news_forum'					=> array('lang' => 'PORTAL_NEWS_FORUM',		'validate' => 'string',		'type' => 'custom',	 		'explain' => true,	'method' => 'select_forums', 'submit' => 'store_selected_forums'),
-				'board3_news_exclude'				=> array('lang' => 'PORTAL_NEWS_EXCLUDE',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-				'board3_news_show_last'             => array('lang' => 'PORTAL_NEWS_SHOW_LAST',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-				'board3_news_archive'               => array('lang' => 'PORTAL_NEWS_ARCHIVE',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-				'board3_news_permissions'			=> array('lang' => 'PORTAL_NEWS_PERMISSIONS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-				'board3_show_news_replies_views'	=> array('lang' => 'PORTAL_SHOW_REPLIES_VIEWS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_news_style_' . $module_id					=> array('lang' => 'PORTAL_NEWS_STYLE',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+				'board3_show_all_news_' . $module_id				=> array('lang' => 'PORTAL_SHOW_ALL_NEWS',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+				'board3_number_of_news_' . $module_id				=> array('lang' => 'PORTAL_NUMBER_OF_NEWS',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+				'board3_news_length_' . $module_id				=> array('lang' => 'PORTAL_NEWS_LENGTH',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+				'board3_news_forum_' . $module_id					=> array('lang' => 'PORTAL_NEWS_FORUM',		'validate' => 'string',		'type' => 'custom',	 		'explain' => true,	'method' => 'select_forums', 'submit' => 'store_selected_forums'),
+				'board3_news_exclude_' . $module_id				=> array('lang' => 'PORTAL_NEWS_EXCLUDE',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
+				'board3_news_show_last_' . $module_id             => array('lang' => 'PORTAL_NEWS_SHOW_LAST',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_news_archive_' . $module_id               => array('lang' => 'PORTAL_NEWS_ARCHIVE',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_news_permissions_' . $module_id			=> array('lang' => 'PORTAL_NEWS_PERMISSIONS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_show_news_replies_views_' . $module_id	=> array('lang' => 'PORTAL_SHOW_REPLIES_VIEWS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 			)
 		);
 	}
@@ -379,16 +379,16 @@ class portal_news_module
 	*/
 	function install($module_id)
 	{
-		set_config('board3_news_length', 250);
-		set_config('board3_news_forum', '');
-		set_config('board3_news_permissions', 1);
-		set_config('board3_number_of_news', 5);
-		set_config('board3_show_all_news', 1);
-		set_config('board3_news_exclude', 0);
-		set_config('board3_news_archive', 1);
-		set_config('board3_news_show_last', 0);
-		set_config('board3_show_news_replies_views', 1);
-		set_config('board3_news_style', 1);
+		set_config('board3_news_length_' . $module_id, 250);
+		set_config('board3_news_forum_' . $module_id, '');
+		set_config('board3_news_permissions_' . $module_id, 1);
+		set_config('board3_number_of_news_' . $module_id, 5);
+		set_config('board3_show_all_news_' . $module_id, 1);
+		set_config('board3_news_exclude_' . $module_id, 0);
+		set_config('board3_news_archive_' . $module_id, 1);
+		set_config('board3_news_show_last_' . $module_id, 0);
+		set_config('board3_show_news_replies_views_' . $module_id, 1);
+		set_config('board3_news_style_' . $module_id, 1);
 		return true;
 	}
 
@@ -397,16 +397,16 @@ class portal_news_module
 		global $db;
 
 		$del_config = array(
-			'board3_news_length',
-			'board3_news_forum',
-			'board3_news_permissions',
-			'board3_number_of_news',
-			'board3_show_all_news',
-			'board3_news_exclude',
-			'board3_news_archive',
-			'board3_news_show_last',
-			'board3_show_news_replies_views',
-			'board3_news_style',
+			'board3_news_length_' . $module_id,
+			'board3_news_forum_' . $module_id,
+			'board3_news_permissions_' . $module_id,
+			'board3_number_of_news_' . $module_id,
+			'board3_show_all_news_' . $module_id,
+			'board3_news_exclude_' . $module_id,
+			'board3_news_archive_' . $module_id,
+			'board3_news_show_last_' . $module_id,
+			'board3_show_news_replies_views_' . $module_id,
+			'board3_news_style_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
@@ -414,7 +414,7 @@ class portal_news_module
 	}
 	
 	// Create forum select box
-	function select_forums($value, $key)
+	function select_forums($value, $key, $module_id)
 	{
 		global $user, $config;
 
@@ -438,7 +438,7 @@ class portal_news_module
 	}
 	
 	// Store selected forums
-	function store_selected_forums($key)
+	function store_selected_forums($key, $module_id)
 	{
 		global $db, $cache;
 		

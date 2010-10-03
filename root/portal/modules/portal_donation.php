@@ -50,7 +50,7 @@ class portal_donation_module
 	{
 		global $config, $template;
 		
-		$template->assign_var('PAY_ACC', $config['board3_pay_acc']);
+		$template->assign_var('PAY_ACC', $config['board3_pay_acc_' . $module_id]);
 
 		return 'donation_center.html';
 	}
@@ -59,7 +59,7 @@ class portal_donation_module
 	{
 		global $config, $template;
 
-		$template->assign_var('PAY_ACC', $config['board3_pay_acc']);
+		$template->assign_var('PAY_ACC', $config['board3_pay_acc_' . $module_id]);
 
 		return 'donation_side.html';
 	}
@@ -70,7 +70,7 @@ class portal_donation_module
 			'title'	=> 'ACP_PORTAL_PAYPAL_SETTINGS',
 			'vars'	=> array(
 				'legend1'							=> 'ACP_PORTAL_PAYPAL_SETTINGS',
-				'board3_pay_acc'					=> array('lang' => 'PORTAL_PAY_ACC'						,	'validate' => 'string',		'type' => 'text:25:100',	 'explain' => true),
+				'board3_pay_acc_' . $module_id					=> array('lang' => 'PORTAL_PAY_ACC'						,	'validate' => 'string',		'type' => 'text:25:100',	 'explain' => true),
 			)
 		);
 	}
@@ -80,7 +80,7 @@ class portal_donation_module
 	*/
 	function install($module_id)
 	{
-		set_config('board3_pay_acc', 'your@paypal.com');
+		set_config('board3_pay_acc_' . $module_id, 'your@paypal.com');
 		return true;
 	}
 
@@ -89,7 +89,7 @@ class portal_donation_module
 		global $db;
 
 		$del_config = array(
-			'board3_pay_acc',
+			'board3_pay_acc_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);

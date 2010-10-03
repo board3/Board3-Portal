@@ -51,7 +51,7 @@ class portal_clock_module
 		global $config, $template;
 
 		$template->assign_vars(array(
-			'CLOCK_SRC'			=> $config['board3_clock_src'],
+			'CLOCK_SRC'			=> $config['board3_clock_src_' . $module_id],
 		));
 
 		return 'clock_side.html';
@@ -63,7 +63,7 @@ class portal_clock_module
 			'title'	=> 'ACP_PORTAL_CLOCK_SETTINGS',
 			'vars'	=> array(
 				'legend1'			=> 'ACP_PORTAL_CLOCK_SETTINGS',
-				'board3_clock_src'	=> array('lang' => 'ACP_PORTAL_CLOCK_SRC',		'validate' => 'string',	'type' => 'text:50:200',	'explain' => false),
+				'board3_clock_src_' . $module_id	=> array('lang' => 'ACP_PORTAL_CLOCK_SRC',		'validate' => 'string',	'type' => 'text:50:200',	'explain' => false),
 			),
 		);
 	}
@@ -73,7 +73,7 @@ class portal_clock_module
 	*/
 	function install($module_id)
 	{
-		set_config('board3_clock_src', 'board3clock.swf');
+		set_config('board3_clock_src_' . $module_id, 'board3clock.swf');
 		return true;
 	}
 
@@ -82,7 +82,7 @@ class portal_clock_module
 		global $db;
 
 		$del_config = array(
-			'board3_clock_src',
+			'board3_clock_src_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);

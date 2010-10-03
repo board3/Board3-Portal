@@ -55,7 +55,7 @@ class portal_latest_members_module
 			WHERE user_type <> ' . USER_IGNORE . '
 				AND user_inactive_time = 0
 			ORDER BY user_regdate DESC';
-		$result = $db->sql_query_limit($sql, $config['board3_max_last_member']);
+		$result = $db->sql_query_limit($sql, $config['board3_max_last_member_' . $module_id]);
 
 		while(($row = $db->sql_fetchrow($result)) && ($row['username']))
 		{
@@ -75,7 +75,7 @@ class portal_latest_members_module
 			'title'	=> 'ACP_PORTAL_MEMBERS_SETTINGS',
 			'vars'	=> array(
 				'legend1'							=> 'ACP_PORTAL_MEMBERS_SETTINGS',
-				'board3_max_last_member'			=> array('lang' => 'PORTAL_MAX_LAST_MEMBER'			 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+				'board3_max_last_member_' . $module_id			=> array('lang' => 'PORTAL_MAX_LAST_MEMBER'			 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 			)
 		);
 	}
@@ -85,7 +85,7 @@ class portal_latest_members_module
 	*/
 	function install($module_id)
 	{
-		set_config('board3_max_last_member', 8);
+		set_config('board3_max_last_member_' . $module_id, 8);
 		return true;
 	}
 
@@ -94,7 +94,7 @@ class portal_latest_members_module
 		global $db;
 
 		$del_config = array(
-			'board3_max_last_member',
+			'board3_max_last_member_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);

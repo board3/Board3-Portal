@@ -53,7 +53,7 @@ class portal_leaders_module
 		// Display a listing of board admins, moderators
 		$user->add_lang('groups');
 
-		if($config['board3_leaders_ext'])
+		if($config['board3_leaders_ext_' . $module_id])
 		{
 			$legends = array();
 			$groups = array();
@@ -209,7 +209,7 @@ class portal_leaders_module
 			'title'	=> 'ACP_PORTAL_LEADERS',
 			'vars'	=> array(
 				'legend1'				=> 'ACP_PORTAL_LEADERS',
-				'board3_leaders_ext'	=> array('lang' => 'PORTAL_LEADERS_EXT',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_leaders_ext_' . $module_id	=> array('lang' => 'PORTAL_LEADERS_EXT',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 			),
 		);
 	}
@@ -220,7 +220,7 @@ class portal_leaders_module
 	function install($module_id)
 	{
 		// Show normal team block by default
-		set_config('board3_leaders_ext', 0);
+		set_config('board3_leaders_ext_' . $module_id, 0);
 		return true;
 	}
 
@@ -229,7 +229,7 @@ class portal_leaders_module
 		global $db;
 
 		$del_config = array(
-			'board3_leaders_ext',
+			'board3_leaders_ext_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);

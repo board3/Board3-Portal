@@ -157,14 +157,7 @@ class portal_user_menu_module
 
 	function get_template_acp($module_id)
 	{
-		return array(
-			'title'	=> 'ACP_CONFIG_MODULENAME',
-			'vars'	=> array(
-				/*'legend1'				=> 'ACP_MODULENAME_CONFIGLEGEND',
-				'portal_configname'		=> array('lang' => 'MODULENAME_CONFIGNAME',		'validate' => 'string',	'type' => 'text:10:200',	'explain' => false),
-				'portal_configname2'	=> array('lang' => 'MODULENAME_CONFIGNAME2',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),*/
-			),
-		);
+		return false
 	}
 
 	/**

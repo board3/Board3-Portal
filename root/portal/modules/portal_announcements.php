@@ -51,13 +51,13 @@ class portal_announcements_module
 		global $config, $template, $db, $user, $auth, $cache, $phpEx, $phpbb_root_path;
 
 		$announcement = request_var('announcement', -1);
-		$announcement = ($announcement > $config['board3_announcements_length'] -1) ? -1 : $announcement;
+		$announcement = ($announcement > $config['board3_announcements_length_' . $module_id] -1) ? -1 : $announcement;
 		$start = request_var('ap', 0);
 		$start = ($start < 0) ? 0 : $start;
 
 		// Fetch announcements from portal/includes/functions.php with check if "read full" is requested.
-		$portal_announcement_length = ($announcement < 0) ? $config['board3_announcements_length'] : 0;
-		$fetch_news = phpbb_fetch_posts($config['board3_global_announcements_forum'], $config['board3_announcements_permissions'], $config['board3_number_of_announcements'], $portal_announcement_length, $config['board3_announcements_day'], 'announcements', $start, $config['board3_announcements_forum_exclude']);
+		$portal_announcement_length = ($announcement < 0) ? $config['board3_announcements_length_' . $module_id] : 0;
+		$fetch_news = phpbb_fetch_posts($config['board3_global_announcements_forum_' . $module_id], $config['board3_announcements_permissions_' . $module_id], $config['board3_number_of_announcements_' . $module_id], $portal_announcement_length, $config['board3_announcements_day_' . $module_id], 'announcements', $start, $config['board3_announcements_forum_exclude_' . $module_id]);
 
 		// Any announcements present? If not terminate it here.
 		if (sizeof($fetch_news) == 0)
@@ -72,13 +72,13 @@ class portal_announcements_module
 		else
 		{
 			// Count number of posts for announcements archive, considering if permission check is dis- or enabled.
-			if ($config['board3_announcements_archive'])
+			if ($config['board3_announcements_archive_' . $module_id])
 			{
-				$permissions = $config['board3_announcements_permissions'];
-				$forum_from = $config['board3_global_announcements_forum'];
+				$permissions = $config['board3_announcements_permissions_' . $module_id];
+				$forum_from = $config['board3_global_announcements_forum_' . $module_id];
 				$forum_from = (strpos($forum_from, ',') !== false) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 
-				$time = ($config['board3_announcements_day'] == 0) ? 0 : $config['board3_announcements_day'];
+				$time = ($config['board3_announcements_day_' . $module_id] == 0) ? 0 : $config['board3_announcements_day_' . $module_id];
 				$post_time = ($time == 0) ? '' : 'AND topic_time > ' . (time() - $time * 86400);
 				
 				$str_where = '';
@@ -92,7 +92,7 @@ class portal_announcements_module
 					$disallow_access = array();
 				}
 				
-				if($config['board3_announcements_forum_exclude'] == true)
+				if($config['board3_announcements_forum_exclude_' . $module_id] == true)
 				{
 					$disallow_access = array_merge($disallow_access, $forum_from);
 					$forum_from = array();
@@ -171,9 +171,9 @@ class portal_announcements_module
 					$read_full_url = (isset($_GET['ap'])) ? 'ap='. $start . '&amp;announcement=' . $i . '#a' . $i : 'announcement=' . $i . '#a' . $i;
 					$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 
-					if ($config['board3_announcements_archive'])
+					if ($config['board3_announcements_archive_' . $module_id])
 					{
-						$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $config['board3_number_of_announcements'], $start, 'announcements');
+						$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $config['board3_number_of_announcements_' . $module_id], $start, 'announcements');
 					}
 
 					$replies = ($auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
@@ -265,12 +265,12 @@ class portal_announcements_module
 							);
 						}
 					}
-					if ($config['board3_number_of_announcements'] != 0 && $config['board3_announcements_archive'])
+					if ($config['board3_number_of_announcements_' . $module_id] != 0 && $config['board3_announcements_archive_' . $module_id])
 					{
 						$template->assign_vars(array(
 							'AP_PAGINATION'			=> $pagination,
 							'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
-							'AP_PAGE_NUMBER'		=> on_page($total_announcements, $config['board3_number_of_announcements'], $start))
+							'AP_PAGE_NUMBER'		=> on_page($total_announcements, $config['board3_number_of_announcements_' . $module_id], $start))
 						);
 					}
 				}
@@ -290,9 +290,9 @@ class portal_announcements_module
 
 				$read_full_url = (isset($_GET['ap'])) ? append_sid("{$phpbb_root_path}portal.$phpEx", "ap=$start#a$i") : append_sid("{$phpbb_root_path}portal.$phpEx#a$i");
 				$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-				if ($config['board3_announcements_archive'])
+				if ($config['board3_announcements_archive_' . $module_id])
 				{
-					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $config['board3_number_of_announcements'], $start, 'announcements');
+					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $config['board3_number_of_announcements_' . $module_id], $start, 'announcements');
 				}	
 				
 				$template->assign_block_vars('announcements_row', array(
@@ -330,12 +330,12 @@ class portal_announcements_module
 					}
 				}
 
-				if ($config['board3_number_of_announcements'] <> 0 && $config['board3_announcements_archive'])
+				if ($config['board3_number_of_announcements_' . $module_id] <> 0 && $config['board3_announcements_archive_' . $module_id])
 				{
 					$template->assign_vars(array(
 						'AP_PAGINATION'			=> $pagination,
 						'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
-						'AP_PAGE_NUMBER'		=> on_page($total_announcements, $config['board3_number_of_announcements'], $start))
+						'AP_PAGE_NUMBER'		=> on_page($total_announcements, $config['board3_number_of_announcements_' . $module_id], $start))
 					);
 				}
 			}
@@ -352,11 +352,11 @@ class portal_announcements_module
 			'READ_POST_IMG'					=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
 			'GOTO_PAGE_IMG'					=> $user->img('icon_post_target', 'GOTO_PAGE'),
 			'S_DISPLAY_ANNOUNCEMENTS'		=> true,
-			'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ($config['board3_show_announcements_replies_views']) ? true : false,
+			'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ($config['board3_show_announcements_replies_views_' . $module_id]) ? true : false,
 			'S_TOPIC_ICONS'					=> $topic_icons,
 		));
 
-		if ($config['board3_announcements_style'])
+		if ($config['board3_announcements_style_' . $module_id])
 		{
 			return 'announcements_compact.html';
 		}
@@ -372,15 +372,15 @@ class portal_announcements_module
 			'title'	=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
 			'vars'	=> array(
 				'legend1'									=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
-				'board3_announcements_style'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_STYLE'		 	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-				'board3_number_of_announcements'			=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-				'board3_announcements_day'					=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-				'board3_announcements_length'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-				'board3_global_announcements_forum'			=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'custom',			'explain' => true, 'method' => 'select_forums', 'submit' => 'store_selected_forums'),
-				'board3_announcements_forum_exclude'		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_FORUM_EXCLUDE',	'validate' => 'string', 'type' => 'radio:yes_no',	'explain' => true),
-				'board3_announcements_archive'				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-				'board3_announcements_permissions'			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-				'board3_show_announcements_replies_views'	=> array('lang' => 'PORTAL_SHOW_REPLIES_VIEWS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_announcements_style_' . $module_id				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_STYLE'		 	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_number_of_announcements_' . $module_id			=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'board3_announcements_day_' . $module_id				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'board3_announcements_length_' . $module_id				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'board3_global_announcements_forum_' . $module_id		=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'custom',			'explain' => true, 'method' => 'select_forums', 'submit' => 'store_selected_forums'),
+				'board3_announcements_forum_exclude_' . $module_id		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_FORUM_EXCLUDE',	'validate' => 'string', 'type' => 'radio:yes_no',	'explain' => true),
+				'board3_announcements_archive_' . $module_id			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_announcements_permissions_' . $module_id		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+				'board3_show_announcements_replies_views_' . $module_id	=> array('lang' => 'PORTAL_SHOW_REPLIES_VIEWS',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 			),
 		);
 	}
@@ -390,15 +390,15 @@ class portal_announcements_module
 	*/
 	function install($module_id)
 	{
-		set_config('board3_announcements_style', 0);
-		set_config('board3_number_of_announcements', 1);
-		set_config('board3_announcements_day', 0);
-		set_config('board3_announcements_length', 200);
-		set_config('board3_global_announcements_forum', '');
-		set_config('board3_announcements_forum_exclude', 0);
-		set_config('board3_announcements_archive', 1);
-		set_config('board3_announcements_permissions', 1);
-		set_config('board3_show_announcements_replies_views', 1);
+		set_config('board3_announcements_style_' . $module_id, 0);
+		set_config('board3_number_of_announcements_' . $module_id, 1);
+		set_config('board3_announcements_day_' . $module_id, 0);
+		set_config('board3_announcements_length_' . $module_id, 200);
+		set_config('board3_global_announcements_forum_' . $module_id, '');
+		set_config('board3_announcements_forum_exclude_' . $module_id, 0);
+		set_config('board3_announcements_archive_' . $module_id, 1);
+		set_config('board3_announcements_permissions_' . $module_id, 1);
+		set_config('board3_show_announcements_replies_views_' . $module_id, 1);
 		
 		return true;
 	}
@@ -408,15 +408,15 @@ class portal_announcements_module
 		global $db;
 
 		$del_config = array(
-			'board3_announcements_style',
-			'board3_number_of_announcements',
-			'board3_announcements_day',
-			'board3_announcements_length',
-			'board3_global_announcements_forum',
-			'board3_announcements_forum_exclude',
-			'board3_announcements_archive',
-			'board3_announcements_permissions',
-			'board3_show_announcements_replies_views',
+			'board3_announcements_style_' . $module_id,
+			'board3_number_of_announcements_' . $module_id,
+			'board3_announcements_day_' . $module_id,
+			'board3_announcements_length_' . $module_id,
+			'board3_global_announcements_forum_' . $module_id,
+			'board3_announcements_forum_exclude_' . $module_id,
+			'board3_announcements_archive_' . $module_id,
+			'board3_announcements_permissions_' . $module_id,
+			'board3_show_announcements_replies_views_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
@@ -424,7 +424,7 @@ class portal_announcements_module
 	}
 	
 	// Create forum select box
-	function select_forums($value, $key)
+	function select_forums($value, $key, $module_id)
 	{
 		global $user, $config;
 
@@ -448,11 +448,11 @@ class portal_announcements_module
 	}
 	
 	// Store selected forums
-	function store_selected_forums($key)
+	function store_selected_forums($key, $module_id)
 	{
 		global $db, $cache;
 		
-		// Get selected extensions
+		// Get selected forums
 		$values = request_var($key, array(0 => ''));
 		
 		$news = implode(',', $values);

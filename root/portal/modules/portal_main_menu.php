@@ -58,10 +58,10 @@ class portal_main_menu_module
 
 		$links_urls = $links_options = $links_titles = $groups_ary = array();
 		
-		$links_urls = explode(';', $config['board3_links_urls']);
-		$links_options = explode(';', $config['board3_links_options']);
-		$links_titles = explode(';', $config['board3_links_titles']);
-		$links_permissions = explode(';', $config['board3_links_permissions']);
+		$links_urls = explode(';', $config['board3_links_urls_' . $module_id]);
+		$links_options = explode(';', $config['board3_links_options_' . $module_id]);
+		$links_titles = explode(';', $config['board3_links_titles_' . $module_id]);
+		$links_permissions = explode(';', $config['board3_links_permissions_' . $module_id]);
 		
 		// get user's groups
 		$sql = 'SELECT group_id
@@ -119,7 +119,7 @@ class portal_main_menu_module
 			'title'	=> 'ACP_PORTAL_MENU',
 			'vars'	=> array(
 				'legend1'				=> 'ACP_PORTAL_MENU',
-				'board3_links_urls'		=> array('lang' => 'ACP_PORTAL_MENU_MANAGE', 'validate' => 'string',	'type' => 'custom',	'explain' => true, 'method' => 'manage_links', 'submit' => 'update_links'),
+				'board3_links_urls_' . $module_id		=> array('lang' => 'ACP_PORTAL_MENU_MANAGE', 'validate' => 'string',	'type' => 'custom',	'explain' => true, 'method' => 'manage_links', 'submit' => 'update_links'),
 			),
 		);
 	}
@@ -197,10 +197,10 @@ class portal_main_menu_module
 			'',
 		);
 		
-		set_config('board3_links_urls', implode(';', $links_urls));
-		set_config('board3_links_options', implode(';', $links_options));
-		set_config('board3_links_titles', implode(';', $links_titles));
-		set_config('board3_links_permissions', implode(';', $links_permissions));
+		set_config('board3_links_urls_' . $module_id, implode(';', $links_urls));
+		set_config('board3_links_options_' . $module_id, implode(';', $links_options));
+		set_config('board3_links_titles_' . $module_id, implode(';', $links_titles));
+		set_config('board3_links_permissions_' . $module_id, implode(';', $links_permissions));
 		return true;
 	}
 
@@ -209,17 +209,17 @@ class portal_main_menu_module
 		global $db;
 
 		$del_config = array(
-			'board3_links_urls',
-			'board3_links_options',
-			'board3_links_titles',
-			'board3_links_permissions',
+			'board3_links_urls_' . $module_id,
+			'board3_links_options_' . $module_id,
+			'board3_links_titles_' . $module_id,
+			'board3_links_permissions_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
 	}
 	
-	function manage_links($key)
+	function manage_links($value, $key, $module_id)
 	{
 		global $config, $phpbb_admin_path, $user, $phpEx, $db, $template;
 		
@@ -235,10 +235,10 @@ class portal_main_menu_module
 		
 		$links_urls = $links_options = $links_titles = array();
 		
-		$links_urls = explode(';', $config['board3_links_urls']);
-		$links_options = explode(';', $config['board3_links_options']);
-		$links_titles = explode(';', $config['board3_links_titles']);
-		$links_permissions = explode(';', $config['board3_links_permissions']);
+		$links_urls = explode(';', $config['board3_links_urls_' . $module_id]);
+		$links_options = explode(';', $config['board3_links_options_' . $module_id]);
+		$links_titles = explode(';', $config['board3_links_titles_' . $module_id]);
+		$links_permissions = explode(';', $config['board3_links_permissions_' . $module_id]);
 
 		$u_action = append_sid($phpbb_admin_path . 'index.' . $phpEx, 'i=portal&amp;mode=config&amp;module_id=' . $module_id);
 
@@ -335,10 +335,10 @@ class portal_main_menu_module
 					add_log('admin', 'LOG_PORTAL_LINK_ADDED', $link_title);
 				}
 				
-				set_config('board3_links_urls', implode(';', $links_urls));
-				set_config('board3_links_options', implode(';', $links_options));
-				set_config('board3_links_titles', implode(';', $links_titles));
-				set_config('board3_links_permissions', implode(';', $links_permissions));
+				set_config('board3_links_urls_' . $module_id, implode(';', $links_urls));
+				set_config('board3_links_options_' . $module_id, implode(';', $links_options));
+				set_config('board3_links_titles_' . $module_id, implode(';', $links_titles));
+				set_config('board3_links_permissions_' . $module_id, implode(';', $links_permissions));
 
 				trigger_error($message . adm_back_link($u_action));
 
@@ -370,10 +370,10 @@ class portal_main_menu_module
 					$links_options = array_diff($links_options, $url_ary);
 					$links_permissions = array_diff($links_permissions, $permission_ary);
 					
-					set_config('board3_links_urls', implode(';', $links_urls));
-					set_config('board3_links_options', implode(';', $links_options));
-					set_config('board3_links_titles', implode(';', $links_titles));
-					set_config('board3_links_permissions', implode(';', $links_permissions));
+					set_config('board3_links_urls_' . $module_id, implode(';', $links_urls));
+					set_config('board3_links_options_' . $module_id, implode(';', $links_options));
+					set_config('board3_links_titles_' . $module_id, implode(';', $links_titles));
+					set_config('board3_links_permissions_' . $module_id, implode(';', $links_permissions));
 
 					add_log('admin', 'LOG_PORTAL_LINK_REMOVED', $cur_link_title);
 				}
@@ -427,10 +427,10 @@ class portal_main_menu_module
 				$links_options[$switch_order_id] = $cur_option;
 				$links_permissions[$switch_order_id] = $cur_permission;
 
-				set_config('board3_links_urls', implode(';', $links_urls));
-				set_config('board3_links_options', implode(';', $links_options));
-				set_config('board3_links_titles', implode(';', $links_titles));
-				set_config('board3_links_permissions', implode(';', $links_permissions));
+				set_config('board3_links_urls_' . $module_id, implode(';', $links_urls));
+				set_config('board3_links_options_' . $module_id, implode(';', $links_options));
+				set_config('board3_links_titles_' . $module_id, implode(';', $links_titles));
+				set_config('board3_links_permissions_' . $module_id, implode(';', $links_permissions));
 
 			break;
 
@@ -487,9 +487,9 @@ class portal_main_menu_module
 		}
 	}
 	
-	function update_links($key)
+	function update_links($key, $module_id)
 	{
-		$this->manage_links($key);
+		$this->manage_links('', $key, $module_id);
 	}
 }
 

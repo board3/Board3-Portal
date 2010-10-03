@@ -133,7 +133,8 @@ class acp_portal
 					if ($submit && $null['type'] == 'custom')
 					{
 						$func = array($c_class, $null['submit']);
-						call_user_func_array($func, $config_name);
+						$args = ($module_id != 0) ? array($config_name, $module_id) : $config_name;
+						call_user_func_array($func, $args);
 					}
 					
 					
@@ -225,7 +226,7 @@ class acp_portal
 					}
 					else
 					{
-						$args = array($this->new_config[$config_key], $config_key);
+						$args = array($this->new_config[$config_key], $config_key, $module_id);
 						$func = array($c_class, $vars['method']);
 						$content = call_user_func_array($func, $args);
 					}

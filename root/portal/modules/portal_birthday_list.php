@@ -55,7 +55,7 @@ class portal_birthday_list_module
 		if ($config['load_birthdays'] && $config['allow_birthdays'])
 		{
 			$now = getdate(time() + $user->timezone + $user->dst - date('Z'));
-			$cache_days = $config['board3_birthdays_ahead'];
+			$cache_days = $config['board3_birthdays_ahead_' . $module_id];
 			$sql_days = '';
 			while ($cache_days > 0)
 			{
@@ -98,7 +98,7 @@ class portal_birthday_list_module
 					}
 					$birthday_list .= '</span><br style="clear: both" />';
 				}
-				elseif ($config['board3_birthdays_ahead'] > 0)
+				elseif ($config['board3_birthdays_ahead_' . $module_id] > 0)
 				{
 					$birthday_ahead_list .= '<span style="float:left;"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><span title="' . format_birthday($row['user_birthday'], 'd M') . '">' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</span></span><span style="float: right;">';
 					if ($age = (int) substr($row['user_birthday'], -4))
@@ -114,10 +114,10 @@ class portal_birthday_list_module
 		// Assign index specific vars
 		$template->assign_vars(array(
 			'BIRTHDAY_LIST'					=> $birthday_list,
-			'BIRTHDAYS_AHEAD_LIST'			=> ($config['board3_birthdays_ahead']) ? $birthday_ahead_list : '',
-			'L_BIRTHDAYS_AHEAD'				=> sprintf($user->lang['BIRTHDAYS_AHEAD'], $config['board3_birthdays_ahead']),
+			'BIRTHDAYS_AHEAD_LIST'			=> ($config['board3_birthdays_ahead_' . $module_id]) ? $birthday_ahead_list : '',
+			'L_BIRTHDAYS_AHEAD'				=> sprintf($user->lang['BIRTHDAYS_AHEAD'], $config['board3_birthdays_ahead_' . $module_id]),
 			'S_DISPLAY_BIRTHDAY_LIST'		=> ($config['load_birthdays']) ? true : false,
-			'S_DISPLAY_BIRTHDAY_AHEAD_LIST'	=> ($config['board3_birthdays_ahead'] > 0) ? true : false,
+			'S_DISPLAY_BIRTHDAY_AHEAD_LIST'	=> ($config['board3_birthdays_ahead_' . $module_id] > 0) ? true : false,
 		));
 
 		return 'birthdays_side.html';
@@ -129,7 +129,7 @@ class portal_birthday_list_module
 			'title'	=> 'ACP_PORTAL_BIRTHDAYS_SETTINGS',
 			'vars'	=> array(
 				'legend1'					=> 'ACP_PORTAL_BIRTHDAYS_SETTINGS',
-				'board3_birthdays_ahead'	=> array('lang' => 'PORTAL_BIRTHDAYS_AHEAD',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'board3_birthdays_ahead_' . $module_id	=> array('lang' => 'PORTAL_BIRTHDAYS_AHEAD',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 			),
 		);
 	}
@@ -139,7 +139,7 @@ class portal_birthday_list_module
 	*/
 	function install($module_id)
 	{
-		set_config('board3_birthdays_ahead', 30);
+		set_config('board3_birthdays_ahead_' . $module_id, 30);
 		return true;
 	}
 
@@ -148,7 +148,7 @@ class portal_birthday_list_module
 		global $db;
 
 		$del_config = array(
-			'board3_birthdays_ahead',
+			'board3_birthdays_ahead_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);

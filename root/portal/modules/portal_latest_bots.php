@@ -55,7 +55,7 @@ class portal_latest_bots_module
 			FROM ' . USERS_TABLE . '
 			WHERE user_type = ' . USER_IGNORE . '
 			ORDER BY user_lastvisit DESC';
-		$result = $db->sql_query_limit($sql, $config['board3_last_visited_bots_number']);
+		$result = $db->sql_query_limit($sql, $config['board3_last_visited_bots_number_' . $module_id]);
 		$first = true;
 		while ($row = $db->sql_fetchrow($result))
 		{
@@ -83,7 +83,7 @@ class portal_latest_bots_module
 
 		// Assign specific vars
 		$template->assign_vars(array(
-			'LAST_VISITED_BOTS'		=> sprintf($user->lang['LAST_VISITED_BOTS'], $config['board3_last_visited_bots_number']),
+			'LAST_VISITED_BOTS'		=> sprintf($user->lang['LAST_VISITED_BOTS'], $config['board3_last_visited_bots_number_' . $module_id]),
 		));
 
 		return 'latest_bots_side.html';
@@ -95,7 +95,7 @@ class portal_latest_bots_module
 			'title'	=> 'ACP_PORTAL_BOTS_SETTINGS',
 			'vars'	=> array(
 				'legend1'							=> 'ACP_PORTAL_BOTS_SETTINGS',
-				'board3_last_visited_bots_number'	=> array('lang' => 'PORTAL_LAST_VISITED_BOTS_NUMBER' ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+				'board3_last_visited_bots_number_' . $module_id	=> array('lang' => 'PORTAL_LAST_VISITED_BOTS_NUMBER' ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 			)
 		);
 	}
@@ -105,7 +105,7 @@ class portal_latest_bots_module
 	*/
 	function install($module_id)
 	{
-		set_config('board3_last_visited_bots_number', 1);
+		set_config('board3_last_visited_bots_number_' . $module_id, 1);
 		return true;
 	}
 
@@ -114,7 +114,7 @@ class portal_latest_bots_module
 		global $db;
 
 		$del_config = array(
-			'board3_last_visited_bots_number',
+			'board3_last_visited_bots_number_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
