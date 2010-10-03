@@ -54,15 +54,27 @@ class portal_main_menu_module
 
 	function get_template_side($module_id)
 	{
-		global $config, $template, $phpEx, $phpbb_root_path, $user;
+		global $config, $template, $phpEx, $phpbb_root_path, $user, $db;
 
-		$links_urls = $links_options = $links_titles = array();
+		$links_urls = $links_options = $links_titles = $groups_ary = array();
 		
 		$links_urls = explode(';', $config['board3_links_urls']);
 		$links_options = explode(';', $config['board3_links_options']);
 		$links_titles = explode(';', $config['board3_links_titles']);
+		$links_permissions = explode(';', $config['board3_links_permissions']);
 		
-		// @todo: add posibility to set permissions for links
+		// get user's groups
+		$sql = 'SELECT group_id
+				FROM ' . USER_GROUP_TABLE . '
+				WHERE user_id = ' . $user->data['user_id'] . '
+				ORDER BY group_id ASC';
+		$result = $db->sql_query($sql);
+		while($row = $db->sql_fetchrow($result))
+		{
+			$groups_ary[] = $row['group_id'];
+		}
+		$db->sql_freeresult($result);
+		
 		
 		for ($i = 0; $i < sizeof($links_urls); $i++)
 		{
@@ -84,18 +96,18 @@ class portal_main_menu_module
 					$cur_url = $links_urls[$i];
 				}
 				
-				$template->assign_block_vars('portalmenu.links', array(
-					'LINK_TITLE'		=> (isset($user->lang[$links_titles[$i]])) ? $user->lang[$links_titles[$i]] : $links_titles[$i],
-					'LINK_URL'			=> $cur_url,
-				));
+				$cur_permissions = explode(',', $links_permissions[$i]);
+				$permission_check = array_intersect($groups_ary, $cur_permissions);
+				
+				if(!empty($permission_check) || $links_permissions[$i] == '')
+				{
+					$template->assign_block_vars('portalmenu.links', array(
+						'LINK_TITLE'		=> (isset($user->lang[$links_titles[$i]])) ? $user->lang[$links_titles[$i]] : $links_titles[$i],
+						'LINK_URL'			=> $cur_url,
+					));
+				}
 			}
 		}
-		
-		$template->assign_vars(array(
-			'U_M_BBCODE'   			=> append_sid("{$phpbb_root_path}faq.$phpEx", 'mode=bbcode'),
-			'U_M_TERMS'      		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=terms'),
-			'U_M_PRV'      			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=privacy'),
-		));
 
 		return 'main_menu_new.html';
 	}
@@ -117,7 +129,17 @@ class portal_main_menu_module
 	*/
 	function install($module_id)
 	{
-		global $phpbb_root_path, $phpEx;
+		global $phpbb_root_path, $phpEx, $db;
+		
+		// get the correct group IDs from the database
+		$in_ary = array('GUESTS', 'REGISTERED', 'REGISTERED_COPPA');
+		
+		$sql = 'SELECT group_id, group_name FROM ' . GROUPS_TABLE . ' WHERE ' . $db->sql_in_set('group_name', $in_ary);
+		$result = $db->sql_query($sql);
+		while($row = $db->sql_fetchrow($result))
+		{
+			$groups_ary[$row['group_name']] = $row['group_id'];
+		}
 		
 		$links_titles = array(
 			'M_CONTENT',
@@ -161,9 +183,24 @@ class portal_main_menu_module
 			'ucp.' . $phpEx . '?mode=privacy',
 		);
 		
+		$links_permissions = array(
+			'',
+			'',
+			'',
+			$groups_ary['GUESTS'],
+			$groups_ary['REGISTERED'] . ',' . $groups_ary['REGISTERED_COPPA'],
+			$groups_ary['REGISTERED'] . ',' . $groups_ary['REGISTERED_COPPA'],
+			'',
+			'',
+			'',
+			'',
+			'',
+		);
+		
 		set_config('board3_links_urls', implode(';', $links_urls));
 		set_config('board3_links_options', implode(';', $links_options));
 		set_config('board3_links_titles', implode(';', $links_titles));
+		set_config('board3_links_permissions', implode(';', $links_permissions));
 		return true;
 	}
 
@@ -175,6 +212,7 @@ class portal_main_menu_module
 			'board3_links_urls',
 			'board3_links_options',
 			'board3_links_titles',
+			'board3_links_permissions',
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
@@ -200,6 +238,7 @@ class portal_main_menu_module
 		$links_urls = explode(';', $config['board3_links_urls']);
 		$links_options = explode(';', $config['board3_links_options']);
 		$links_titles = explode(';', $config['board3_links_titles']);
+		$links_permissions = explode(';', $config['board3_links_permissions']);
 
 		$u_action = append_sid($phpbb_admin_path . 'index.' . $phpEx, 'i=portal&amp;mode=config&amp;module_id=' . $module_id);
 
@@ -216,41 +255,23 @@ class portal_main_menu_module
 				$link_is_cat = request_var('link_is_cat', 0);
 				$link_type = (!$link_is_cat) ? request_var('link_type', 0) : B3_LINKS_CAT;
 				$link_url = ($link_is_cat) ? ' ' : request_var('link_url', ' ');
+				$link_url = str_replace('&amp;', '&', $link_url);
+				$link_permission = request_var('permission-setting', array(0 => ''));
+				$groups_ary = array();
 				
-				if($link_type == B3_LINKS_INT)
+				// get groups and check if the selected groups actually exist
+				$sql = 'SELECT group_id
+						FROM ' . GROUPS_TABLE . '
+						ORDER BY group_id ASC';
+				$result = $db->sql_query($sql);
+				while($row = $db->sql_fetchrow($result))
 				{
-					$link_query1 = utf8_normalize_nfc(request_var('link_query1', ''));
-					$link_query2 = utf8_normalize_nfc(request_var('link_query2', ''));
-					$link_query3 = utf8_normalize_nfc(request_var('link_query3', ''));
-					$link_query_string = '';
-					
-					if($link_query1 != '')
-					{
-						$link_query_string .= '?' . $link_query1;
-						if($link_query2 != '')
-						{
-							$link_query_string .= '&' . $link_query2;
-						}
-						if($link_query3)
-						{
-							$link_query_string .= '&' . $link_query3;
-						}
-					}
-					elseif($link_query2 != '')
-					{
-						$link_query_string .= '?' . $link_query2;
-						if($link_query3)
-						{
-							$link_query_string .= '&' . $link_query3;
-						}
-					}
-					elseif($link_query3)
-					{
-						$link_query_string .= '&' . $link_query3;
-					}
-					
-					$link_url .= $link_query_string;
+					$groups_ary[] = $row['group_id'];
 				}
+				$db->sql_freeresult($result);
+				
+				$link_permissions = array_intersect($link_permission, $groups_ary);
+				$link_permissions = implode(',', $link_permissions);
 
 				if (!$link_title)
 				{
@@ -273,12 +294,14 @@ class portal_main_menu_module
 						$links_titles[$link_id] = $link_title;
 						$links_urls[$link_id] = htmlspecialchars_decode($link_url);
 						$links_options[$link_id] = $link_type;
+						$links_permissions[$link_id] = $link_permissions;
 					}
 					else
 					{
 						$links_titles[] = $link_title;
 						$links_urls[] = $link_url;
 						$links_options[] = $link_type;
+						$links_permissions[$link_id] = $link_permissions;
 					}
 
 					add_log('admin', 'LOG_PORTAL_LINK_UPDATED', $link_title);
@@ -295,7 +318,8 @@ class portal_main_menu_module
 						}
 						$links_titles[0] = $link_title;
 						$links_urls[0] = $link_url;
-						$links_options[0] = $link_type; // Add internal link later on
+						$links_options[0] = $link_type;
+						$links_permissions[0] = $link_permissions;
 					}
 					else
 					{
@@ -305,19 +329,16 @@ class portal_main_menu_module
 						}
 						$links_titles[] = $link_title;
 						$links_urls[] = $link_url;
-						$links_options[] = $link_type; // Add internal link later on
+						$links_options[] = $link_type;
+						$links_permissions[] = $link_permissions;
 					}
-
-					//$config['board3_menu_count']++; // @todo: check if we need this
 					add_log('admin', 'LOG_PORTAL_LINK_ADDED', $link_title);
 				}
-
-				// $cache->destroy('_links'); // @todo: check if we need this
 				
 				set_config('board3_links_urls', implode(';', $links_urls));
 				set_config('board3_links_options', implode(';', $links_options));
 				set_config('board3_links_titles', implode(';', $links_titles));
-				
+				set_config('board3_links_permissions', implode(';', $links_permissions));
 
 				trigger_error($message . adm_back_link($u_action));
 
@@ -341,17 +362,18 @@ class portal_main_menu_module
 					$links_options[$link_id] = '{remove_link}';
 					$url_ary = array('{remove_link}');
 					$links_urls[$link_id] = '{remove_link}';
+					$permission_ary = array('{remove_link}');
+					$links_permissions[$link_id] = '{remove_link}';
 					
 					$links_titles = array_diff($links_titles, $title_ary);
 					$links_urls = array_diff($links_urls, $url_ary);
 					$links_options = array_diff($links_options, $url_ary);
+					$links_permissions = array_diff($links_permissions, $permission_ary);
 					
 					set_config('board3_links_urls', implode(';', $links_urls));
 					set_config('board3_links_options', implode(';', $links_options));
 					set_config('board3_links_titles', implode(';', $links_titles));
-					
-					
-					//$cache->destroy('_links'); // @todo: check if we can remove this
+					set_config('board3_links_permissions', implode(';', $links_permissions));
 
 					add_log('admin', 'LOG_PORTAL_LINK_REMOVED', $cur_link_title);
 				}
@@ -391,20 +413,24 @@ class portal_main_menu_module
 				$cur_url = $links_urls[$link_id];
 				$cur_title = $links_titles[$link_id];
 				$cur_option = $links_options[$link_id];
+				$cur_permission = $links_permissions[$link_id];
 				
 				// move the info of the links we replace in the order
 				$links_urls[$link_id] = $links_urls[$switch_order_id];
 				$links_titles[$link_id] = $links_titles[$switch_order_id];
 				$links_options[$link_id] = $links_options[$switch_order_id];
+				$links_permissions[$link_id] = $links_permissions[$switch_order_id];
 				
 				// insert the info of the moved link
 				$links_urls[$switch_order_id] = $cur_url;
 				$links_titles[$switch_order_id] = $cur_title;
 				$links_options[$switch_order_id] = $cur_option;
+				$links_permissions[$switch_order_id] = $cur_permission;
 
 				set_config('board3_links_urls', implode(';', $links_urls));
 				set_config('board3_links_options', implode(';', $links_options));
 				set_config('board3_links_titles', implode(';', $links_titles));
+				set_config('board3_links_permissions', implode(';', $links_permissions));
 
 			break;
 
@@ -413,7 +439,7 @@ class portal_main_menu_module
 			case 'add':
 				$template->assign_vars(array(
 					'LINK_TITLE'	=> (isset($links_titles[$link_id]) && $action != 'add') ? $links_titles[$link_id] : '',
-					'LINK_URL'		=> (isset($links_urls[$link_id]) && $links_options[$link_id] != B3_LINKS_CAT && $action != 'add') ? $links_urls[$link_id] : '',
+					'LINK_URL'		=> (isset($links_urls[$link_id]) && $links_options[$link_id] != B3_LINKS_CAT && $action != 'add') ? str_replace('&', '&amp;', $links_urls[$link_id]) : '',
 
 					//'U_BACK'	=> $u_action,
 					'U_ACTION'	=> $u_action . '&amp;id=' . $link_id,
@@ -422,6 +448,23 @@ class portal_main_menu_module
 					'S_LINK_IS_CAT'			=> (!isset($links_options[$link_id]) || $links_options[$link_id] == B3_LINKS_CAT) ? true : false,
 					'S_LINK_IS_INT'			=> (isset($links_options[$link_id]) && $links_options[$link_id] == B3_LINKS_INT) ? true : false,
 				));
+				
+				$groups_ary = explode(',', $links_permissions[$link_id]);
+				
+				// get group info from database and assign the block vars
+				$sql = 'SELECT group_id, group_name 
+						FROM ' . GROUPS_TABLE . '
+						ORDER BY group_id ASC';
+				$result = $db->sql_query($sql);
+				while($row = $db->sql_fetchrow($result))
+				{
+					$template->assign_block_vars('permission_setting', array(
+						'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
+						'GROUP_NAME'	=> (isset($user->lang['G_' . $row['group_name']])) ? $user->lang['G_' . $row['group_name']] : $row['group_name'],
+						'GROUP_ID'		=> $row['group_id'],
+					));
+				}
+				$db->sql_freeresult($result);
 
 				return;
 
@@ -432,7 +475,7 @@ class portal_main_menu_module
 		{
 			$template->assign_block_vars('links', array(
 				'LINK_TITLE'	=> ($action != 'add') ? $links_titles[$i] : '',
-				'LINK_URL'		=> ($action != 'add') ? $links_urls[$i] : '',
+				'LINK_URL'		=> ($action != 'add') ? str_replace('&', '&amp;', $links_urls[$i]) : '',
 
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
 				'U_DELETE'		=> $u_action . '&amp;action=delete&amp;id=' . $i,
