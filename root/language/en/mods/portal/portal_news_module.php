@@ -65,6 +65,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_NEWS_SHOW_LAST_EXP'		=> 'When activated, the newest will be sorted in order to the newest posts. When deactivated, the news will be sorted in order to the newest topic.',
 	'PORTAL_NEWS_ARCHIVE'				=> 'Enable the news archive system',
 	'PORTAL_NEWS_ARCHIVE_EXP'		=> 'If enabled the news archive system / page numbers will be displayed.',
+	'PORTAL_SHOW_REPLIES_VIEWS'				=> 'Display the number of replies and views',
+	'PORTAL_SHOW_REPLIES_VIEWS_EXP'		=> 'This setting pertains to the compact block.<br />When Yes, the number of replies and views are shown in 2 extra columns. When No, replies and views will be shown beside the forum name. Select No if you have problems with the display of the extra columns due to the extra width required.',
 ));
 
 ?>

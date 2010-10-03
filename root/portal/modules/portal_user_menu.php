@@ -157,7 +157,7 @@ class portal_user_menu_module
 
 	function get_template_acp($module_id)
 	{
-		return false
+		return false;
 	}
 
 	/**
