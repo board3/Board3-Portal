@@ -35,6 +35,11 @@ class acp_portal
 		{
 			include($phpbb_root_path . $portal_root_path . 'includes/functions_version_check.' . $phpEx);
 		}
+		
+		if(!function_exists('obtain_portal_config'))
+		{
+			include($phpbb_root_path . $portal_root_path . 'includes/functions.' . $phpEx);
+		}
 
 		$user->add_lang('mods/portal');
 		$submit = (isset($_POST['submit'])) ? true : false;

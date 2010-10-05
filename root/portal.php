@@ -34,6 +34,8 @@ if (!$config['board3_enable'])
 	redirect(reapply_sid($phpbb_root_path . 'index.' . $phpEx));
 }
 
+$portal_config = obtain_portal_config();
+
 $sql = 'SELECT *
 	FROM ' . PORTAL_MODULES_TABLE . '
 	ORDER BY module_order ASC';

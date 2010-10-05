@@ -76,6 +76,14 @@ $versions = array(
 
 				'PRIMARY_KEY'	=> 'module_id',
 			)),
+			array(phpbb_portal_config, array(
+				'COLUMNS' => array(
+					'config_name' => array('VCHAR:255', ''),
+					'config_value'=> array('MTEXT', ''),
+				),
+				
+				'PRIMARY_KEY'	=> 'config_name',
+			));
 
 		),
 

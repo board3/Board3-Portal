@@ -17,24 +17,27 @@ if (!defined('IN_PHPBB'))
 // Get portal config
 function obtain_portal_config()
 {
-	global $db;
+	global $db, $portal_config;
 
-	$sql = 'SELECT config_name, config_value
-		FROM ' . PORTAL_CONFIG_TABLE;
-	$result = $db->sql_query($sql);
-
-	while ($row = $db->sql_fetchrow($result))
+	if(sizeof($portal_config) < 1)
 	{
-		$cached_portal_config[$row['config_name']] = $row['config_value'];
-		$portal_config[$row['config_name']] = $row['config_value'];
+		$sql = 'SELECT config_name, config_value
+			FROM ' . PORTAL_CONFIG_TABLE;
+		$result = $db->sql_query($sql);
+
+		while ($row = $db->sql_fetchrow($result))
+		{
+			$portal_config[$row['config_name']] = $row['config_value'];
+		}
+		$db->sql_freeresult($result);
 	}
-	$db->sql_freeresult($result);
 
 	return $portal_config;
 }
 
 /**
 * Set config value. Creates missing config entry.
+* Only use this if your config value might exceed 255 characters, otherwise please use set_config
 */
 function set_portal_config($config_name, $config_value)
 {
@@ -124,16 +127,16 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		case "news":
 			$topic_type = 't.topic_type = ' . POST_NORMAL;
 			$str_where = (strlen($str_where) > 0) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
-			$user_link = ($portal_config['portal_news_style']) ? 't.topic_poster = u.user_id' : (($portal_config['portal_news_show_last']) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
-			$post_link = ($portal_config['portal_news_style']) ? 't.topic_first_post_id = p.post_id' : (($portal_config['portal_news_show_last']) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
-			$topic_order = ($portal_config['portal_news_show_last']) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+			$user_link = ($config['board3_news_style']) ? 't.topic_poster = u.user_id' : (($config['board3_news_show_last']) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
+			$post_link = ($config['board3_news_style']) ? 't.topic_first_post_id = p.post_id' : (($config['board3_news_show_last']) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
+			$topic_order = ($config['board3_news_show_last']) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
 		break;
 		case "news_all":
 			$topic_type = '(t.topic_type <> ' . POST_ANNOUNCE . ') AND (t.topic_type <> ' . POST_GLOBAL . ')';
 			$str_where = (strlen($str_where) > 0) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
-			$user_link = ($portal_config['portal_news_style']) ? 't.topic_poster = u.user_id' : (($portal_config['portal_news_show_last']) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
-			$post_link = ($portal_config['portal_news_style']) ? 't.topic_first_post_id = p.post_id' : (($portal_config['portal_news_show_last']) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
-			$topic_order = ($portal_config['portal_news_show_last']) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+			$user_link = ($config['board3_news_style']) ? 't.topic_poster = u.user_id' : (($config['board3_news_show_last']) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
+			$post_link = ($config['board3_news_style']) ? 't.topic_first_post_id = p.post_id' : (($config['board3_news_show_last']) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
+			$topic_order = ($config['board3_news_show_last']) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
 		break;
 	}
 
