@@ -17,20 +17,14 @@
 	<form id="acp_portal_links" method="post" action="{U_ACTION}">
 
 	<fieldset>
-		<legend>{L_ACP_PORTAL_LINKS}</legend>
+		<legend>{L_ACP_PORTAL_MENU_LINK}</legend>
 	<dl>
 		<dt><label for="link_title">{L_LINK_TITLE}:</label></dt>
 		<dd><input name="link_title" type="text" id="link_title" value="{LINK_TITLE}" maxlength="255" /></dd>
 	</dl>
 	<dl>
-		<dt><label for="link_is_cat">{L_LINK_IS_CAT}:</label></dt>
-		<dd><label><input onchange="dE('url', -1)" type="radio" class="radio" name="link_is_cat" value="1" id="link_is_cat"<!-- IF S_LINK_IS_CAT --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
-			<label><input onchange="dE('url', 1)" type="radio" class="radio" name="link_is_cat" value="0"<!-- IF not S_LINK_IS_CAT --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
-	</dl>
-	<!-- IF S_LINK_IS_CAT --><div id="url" style="display: none;"><!-- ELSE --><div id="url"><!-- ENDIF -->
-	<dl>
 		<dt>
-			<label for="link_tpye">{L_ACP_PORTAL_MENU_TYPE}:</label><br />
+			<label for="link_type">{L_ACP_PORTAL_MENU_TYPE}:</label><br />
 			<span>{L_ACP_PORTAL_MENU_TYPE_EXP}</span>
 		</dt>
 		<dd>
@@ -39,11 +33,25 @@
 		</dd>
 	</dl>
 	<dl>
-		<dt><label for="link_url">{L_LINK_URL}:</label></dt>
+		<dt>
+			<label for="link_url">{L_ACP_PORTAL_MENU_URL}:</label><br />
+			<span>{L_ACP_PORTAL_MENU_URL_EXP}</span>
+		</dt>
 		<dd><input name="link_url" type="text" id="link_url" value="{LINK_URL}" maxlength="255" /></dd>
 	</dl>
-	</div>
-
+	<dl>
+		<dt>
+			<label for="permission-setting">{L_ACP_PORTAL_MENU_PERMISSION}:</label><br />
+			<span>{L_ACP_PORTAL_MENU_PERMISSION_EXP}</span>
+		</dt>
+		<dd>
+			<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
+				<!-- BEGIN permission_setting -->
+				<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
+				<!-- END permission_setting -->
+			</select>
+		</dd>
+	</dl>
 	<p class="submit-buttons">
 		<input type="hidden" name="action" value="save" />
 
@@ -97,10 +105,17 @@
 			<a href="{links.U_EDIT}">{ICON_EDIT}</a> <a href="{links.U_DELETE}">{ICON_DELETE}</a>
 		</td>
 	</tr>
+	<!-- BEGINELSE -->
+	<tr class="row1">
+		<td style="text-align: center;" colspan="3">{L_LINKS_NO_LINKS}</td>
+	</tr>
 	<!-- END links -->
 	</tbody>
 	</table>
-
+	<p class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	</p>
 	{S_FORM_TOKEN}
 	</fieldset>
 	</form>

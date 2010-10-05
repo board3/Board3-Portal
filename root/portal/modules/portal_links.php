@@ -1,6 +1,6 @@
 <?php
 /**
-* @package Portal - Main Menu
+* @package Portal - Links
 * @version $Id$
 * @copyright (c) 2009, 2010 Board3 Portal Team
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -15,9 +15,9 @@ if (!defined('IN_PHPBB'))
 }
 
 /**
-* @package Main Menu
+* @package Links
 */
-class portal_main_menu_module
+class portal_links_module
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -32,25 +32,25 @@ class portal_main_menu_module
 	/**
 	* Default modulename
 	*/
-	var $name = 'M_MENU';
+	var $name = 'PORTAL_LINKS';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_menu.png';
+	var $image_src = 'portal_links.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_main_menu_module';
+	var $language = 'portal_links_module';
 	
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
-	var $custom_acp_tpl = 'acp_portal_menu';
+	var $custom_acp_tpl = 'acp_portal_links';
 
 	function get_template_side($module_id)
 	{
@@ -59,7 +59,7 @@ class portal_main_menu_module
 		$links = array();
 		$portal_config = obtain_portal_config();
 		
-		$links = $this->utf_unserialize($portal_config['board3_menu_array_' . $module_id]);
+		$links = $this->utf_unserialize($portal_config['board3_links_array_' . $module_id]);
 		
 		// get user's groups
 		$sql = 'SELECT group_id
@@ -76,48 +76,39 @@ class portal_main_menu_module
 		
 		for ($i = 0; $i < sizeof($links); $i++)
 		{
-			if($links[$i]['type'] == B3_LINKS_CAT)
+			if($links[$i]['type'] == B3_LINKS_INT)
 			{
-				$template->assign_block_vars('portalmenu', array(
-					'CAT_TITLE'		=> (isset($user->lang[$links[$i]['title']])) ? $user->lang[$links[$i]['title']] : $links[$i]['title'],
-				));
+				$links[$i]['url'] = str_replace('&', '&amp;', $links[$i]['url']); // we need to do this in order to prevent XHTML validation errors
+				$cur_url = append_sid($phpbb_root_path . $links[$i]['url']); // the user should know what kind of file it is
 			}
 			else
 			{
-				if($links[$i]['type'] == B3_LINKS_INT)
-				{
-					$links[$i]['url'] = str_replace('&', '&amp;', $links[$i]['url']); // we need to do this in order to prevent XHTML validation errors
-					$cur_url = append_sid($phpbb_root_path . $links[$i]['url']); // the user should know what kind of file it is
-				}
-				else
-				{
-					$cur_url = $links[$i]['url'];
-				}
-				
-				$cur_permissions = explode(',', $links[$i]['permission']);
-				$permission_check = array_intersect($groups_ary, $cur_permissions);
-				
-				if(!empty($permission_check) || $links[$i]['permission'] == '')
-				{
-					$template->assign_block_vars('portalmenu.links', array(
-						'LINK_TITLE'		=> (isset($user->lang[$links[$i]['title']])) ? $user->lang[$links[$i]['title']] : $links[$i]['title'],
-						'LINK_URL'			=> $cur_url,
-					));
-				}
+				$cur_url = $links[$i]['url'];
+			}
+			
+			$cur_permissions = explode(',', $links[$i]['permission']);
+			$permission_check = array_intersect($groups_ary, $cur_permissions);
+			
+			if(!empty($permission_check) || $links[$i]['permission'] == '')
+			{
+				$template->assign_block_vars('portallinks', array(
+					'LINK_TITLE'		=> (isset($user->lang[$links[$i]['title']])) ? $user->lang[$links[$i]['title']] : $links[$i]['title'],
+					'LINK_URL'			=> $cur_url,
+				));
 			}
 		}
 
-		return 'main_menu_side.html';
+		return 'links_side.html';
 	}
 
 	function get_template_acp($module_id)
 	{
 		// do not remove this as it is needed in order to run manage_links
         return array(
-			'title'	=> 'ACP_PORTAL_MENU',
+			'title'	=> 'ACP_PORTAL_LINKS',
 			'vars'	=> array(
 				'legend1'				=> 'ACP_PORTAL_MENU',
-				'board3_menu_' . $module_id	=> array('lang' => 'ACP_PORTAL_MENU_MANAGE', 'validate' => 'string',	'type' => 'custom',	'explain' => true, 'method' => 'manage_links', 'submit' => 'update_links'),
+				'board3_links_' . $module_id	=> array('lang' => 'ACP_PORTAL_MENU_MANAGE', 'validate' => 'string',	'type' => 'custom',	'explain' => true, 'method' => 'manage_links', 'submit' => 'update_links'),
 			),
 		);
 	}
@@ -127,72 +118,26 @@ class portal_main_menu_module
 	*/
 	function install($module_id)
 	{
-		global $phpbb_root_path, $phpEx, $db;
-		
-		// get the correct group IDs from the database
-		$in_ary = array('GUESTS', 'REGISTERED', 'REGISTERED_COPPA');
-		
-		$sql = 'SELECT group_id, group_name FROM ' . GROUPS_TABLE . ' WHERE ' . $db->sql_in_set('group_name', $in_ary);
-		$result = $db->sql_query($sql);
-		while($row = $db->sql_fetchrow($result))
-		{
-			$groups_ary[$row['group_name']] = $row['group_id'];
-		}
+		global $phpbb_root_path, $db;
 		
 		$links = array();
 		
 		$links_titles = array(
-			'M_CONTENT',
-			'INDEX',
-			'SEARCH',
-			'REGISTER',
-			'MEMBERLIST',
-			'THE_TEAM',
-			'M_HELP',
-			'FAQ',
-			'M_BBCODE',
-			'M_TERMS',
-			'M_PRV',
+			'Board3.de',
+			'phpBB.com',
 		);
 		
 		$links_types = array(
-			B3_LINKS_CAT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
-			B3_LINKS_CAT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
+			B3_LINKS_EXT,
+			B3_LINKS_EXT,
 		);
 		
 		$links_urls = array(
-			'',
-			'index.' . $phpEx,
-			'search.' . $phpEx,
-			'ucp.' . $phpEx . '?mode=register',
-			'memberlist.' . $phpEx,
-			'memberlist.' . $phpEx . '?mode=leaders',
-			'',
-			'faq.' . $phpEx,
-			'faq.' . $phpEx . '?mode=bbcode',
-			'ucp.' . $phpEx . '?mode=terms',
-			'ucp.' . $phpEx . '?mode=privacy',
+			'http://www.board3.de/',
+			'http://www.phpbb.com/',
 		);
 		
 		$links_permissions = array(
-			'',
-			'',
-			'',
-			$groups_ary['GUESTS'],
-			$groups_ary['REGISTERED'] . ',' . $groups_ary['REGISTERED_COPPA'],
-			$groups_ary['REGISTERED'] . ',' . $groups_ary['REGISTERED_COPPA'],
-			'',
-			'',
-			'',
 			'',
 			'',
 		);
@@ -208,8 +153,8 @@ class portal_main_menu_module
 		}
 		
 		$board3_menu_array = serialize($links);
-		set_portal_config('board3_menu_array_' . $module_id, $board3_menu_array);
-		set_config('board3_menu_' . $module_id, '');
+		set_portal_config('board3_links_array_' . $module_id, $board3_menu_array);
+		set_config('board3_links_' . $module_id, '');
 		
 		return true;
 	}
@@ -219,13 +164,13 @@ class portal_main_menu_module
 		global $db;
 
 		$del_config = array(
-			'board3_menu_array_' . $module_id,
+			'board3_links_array_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . PORTAL_CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 			
 		$del_config = array(
-			'board3_menu_' . $module_id,
+			'board3_links_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
@@ -245,7 +190,7 @@ class portal_main_menu_module
 		
 		$links = array();
 
-		$links = $this->utf_unserialize($portal_config['board3_menu_array_' . $module_id]);
+		$links = $this->utf_unserialize($portal_config['board3_links_array_' . $module_id]);
 
 		$u_action = append_sid($phpbb_admin_path . 'index.' . $phpEx, 'i=portal&amp;mode=config&amp;module_id=' . $module_id);
 
@@ -259,9 +204,8 @@ class portal_main_menu_module
 				}
 
 				$link_title = utf8_normalize_nfc(request_var('link_title', ' ', true));
-				$link_is_cat = request_var('link_is_cat', 0);
-				$link_type = (!$link_is_cat) ? request_var('link_type', 0) : B3_LINKS_CAT;
-				$link_url = ($link_is_cat) ? ' ' : request_var('link_url', ' ');
+				$link_type = request_var('link_type', 2); // default to B3_LINK_EXT, no categories in Links block
+				$link_url = request_var('link_url', ' ');
 				$link_url = str_replace('&amp;', '&', $link_url);
 				$link_permission = request_var('permission-setting', array(0 => ''));
 				$groups_ary = array();
@@ -286,7 +230,7 @@ class portal_main_menu_module
 					trigger_error($user->lang['NO_LINK_TITLE'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				if (!$link_is_cat && !$link_url)
+				if (!$link_url)
 				{
 					trigger_error($user->lang['NO_LINK_URL'] . adm_back_link($u_action), E_USER_WARNING);
 				}
@@ -309,10 +253,6 @@ class portal_main_menu_module
 				{
 					$message = $user->lang['LINK_ADDED'];
 
-					if($link_type != B3_LINKS_CAT && sizeof($links) < 1)
-					{
-						trigger_error($user->lang['ACP_PORTAL_MENU_CREATE_CAT'] . adm_back_link($u_action), E_USER_WARNING);
-					}
 					$links[] = array(
 						'title' 		=> $link_title,
 						'url'			=> htmlspecialchars_decode($link_url),
@@ -322,8 +262,8 @@ class portal_main_menu_module
 					add_log('admin', 'LOG_PORTAL_LINK_ADDED', $link_title);
 				}
 				
-				$board3_menu_array = serialize($links);
-				set_portal_config('board3_menu_array_' . $module_id, $board3_menu_array);
+				$board3_links_array = serialize($links);
+				set_portal_config('board3_links_array_' . $module_id, $board3_links_array);
 
 				trigger_error($message . adm_back_link($u_action));
 
@@ -344,8 +284,8 @@ class portal_main_menu_module
 					array_splice($links, $link_id, 1);
 					$links = array_merge($links);
 					
-					$board3_menu_array = serialize($links);
-					set_portal_config('board3_menu_array_' . $module_id, $board3_menu_array);
+					$board3_links_array = serialize($links);
+					set_portal_config('board3_links_array_' . $module_id, $board3_links_array);
 
 					add_log('admin', 'LOG_PORTAL_LINK_REMOVED', $cur_link_title);
 				}
@@ -400,8 +340,8 @@ class portal_main_menu_module
 				// insert the info of the moved link
 				$links[$switch_order_id] = $cur_link;
 
-				$board3_menu_array = serialize($links);
-				set_portal_config('board3_menu_array_' . $module_id, $board3_menu_array);
+				$board3_links_array = serialize($links);
+				set_portal_config('board3_links_array_' . $module_id, $board3_links_array);
 
 			break;
 
@@ -410,13 +350,12 @@ class portal_main_menu_module
 			case 'add':
 				$template->assign_vars(array(
 					'LINK_TITLE'	=> (isset($links[$link_id]['title']) && $action != 'add') ? $links[$link_id]['title'] : '',
-					'LINK_URL'		=> (isset($links[$link_id]['url']) && $links[$link_id]['type'] != B3_LINKS_CAT && $action != 'add') ? str_replace('&', '&amp;', $links[$link_id]['url']) : '',
+					'LINK_URL'		=> (isset($links[$link_id]['url']) && $action != 'add') ? str_replace('&', '&amp;', $links[$link_id]['url']) : '',
 
 					//'U_BACK'	=> $u_action,
 					'U_ACTION'	=> $u_action . '&amp;id=' . $link_id,
 
 					'S_EDIT'				=> true,
-					'S_LINK_IS_CAT'			=> (!isset($links[$link_id]['type']) || $links[$link_id]['type'] == B3_LINKS_CAT) ? true : false,
 					'S_LINK_IS_INT'			=> (isset($links[$link_id]['type']) && $links[$link_id]['type'] == B3_LINKS_INT) ? true : false,
 				));
 				
@@ -452,8 +391,6 @@ class portal_main_menu_module
 				'U_DELETE'		=> $u_action . '&amp;action=delete&amp;id=' . $i,
 				'U_MOVE_UP'		=> $u_action . '&amp;action=move_up&amp;id=' . $i,
 				'U_MOVE_DOWN'	=> $u_action . '&amp;action=move_down&amp;id=' . $i,
-
-				'S_LINK_IS_CAT'	=> ($links[$i]['type'] == B3_LINKS_CAT) ? true : false,
 			));
 		}
 	}
