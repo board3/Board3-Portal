@@ -344,23 +344,10 @@ class portal_main_menu_module
 
 				if (confirm_box(true))
 				{
-					$cur_link_title = $links_titles[$link_id];
-					// make sure we don't delete links that weren't supposed to be deleted, i.e. duplicate links
-					$del_ary = array(
-						'title' 		=> '{remove_link}',
-						'url'			=> '{remove_link}',
-						'type'			=> '{remove_link}',
-						'permission'	=> '{remove_link}',
-					);
-					
-					$links[$link_id] = array(
-						'title' 		=> '{remove_link}',
-						'url'			=> '{remove_link}',
-						'type'			=> '{remove_link}',
-						'permission'	=> '{remove_link}',
-					);
-
-					$links = array_diff($links, $del_ary);
+					$cur_link_title = $links[$link_id]['title'];
+					// delete the selected link and reset the array numbering afterwards
+					array_splice($links, $link_id, 1);
+					$links = array_merge($links);
 					
 					$board3_menu_array = serialize($links);
 					set_portal_config('board3_menu_array_' . $module_id, $board3_menu_array);
@@ -463,7 +450,7 @@ class portal_main_menu_module
 		for ($i = 0; $i < sizeof($links); $i++)
 		{
 			$template->assign_block_vars('links', array(
-				'LINK_TITLE'	=> ($action != 'add') ? $links[$i]['title'] : '',
+				'LINK_TITLE'	=> ($action != 'add') ? ((isset($user->lang[$links[$i]['title']])) ? $user->lang[$links[$i]['title']] : $links[$i]['title']) : '',
 				'LINK_URL'		=> ($action != 'add') ? str_replace('&', '&amp;', $links[$i]['url']) : '',
 
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
