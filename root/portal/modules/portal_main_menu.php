@@ -224,6 +224,8 @@ class portal_main_menu_module
 		$sql = 'DELETE FROM ' . PORTAL_CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 			
+		$db->sql_query($sql);
+			
 		$del_config = array(
 			'board3_menu_' . $module_id,
 		);
