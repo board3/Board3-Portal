@@ -50,7 +50,7 @@ class portal_calendar_module
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
-	//var $custom_acp_tpl = '';
+	var $custom_acp_tpl = 'acp_portal_calendar';
 
 	function get_template_center($module_id)
 	{
@@ -174,7 +174,7 @@ class portal_calendar_module
 			'desc'			=> '',
 			'start_time'	=> '',
 			'end_time'		=> '',
-			'url'			=> '',
+			'url'			=> '', // optional
 		);*/
 		if(!empty($events))
 		{
@@ -195,9 +195,10 @@ class portal_calendar_module
 						$template->assign_block_vars('cur_events', array(
 							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
 							'EVENT_TITLE'	=> $cur_event['title'],
-							'START_TIME'	=> $user->format_date($cur_event['start_time'], 'y-m-d'),
-							'END_TIME'		=> $user->format_date($cur_event['end_time'], 'y-m-d'),
+							'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
+							'END_TIME'		=> $user->format_date($cur_event['end_time'], 'j. M Y, H:i'),
 							'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
+							'ALL_DAY'	=> (($cur_event['start_time'] - $cur_event['end_time']) == 1) ? true : false,
 						));
 					}
 					else
@@ -206,46 +207,15 @@ class portal_calendar_module
 							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
 							'EVENT_TITLE'	=> $cur_event['title'],
 							'CUR_EVENT'		=> ($cur_event['start_time'] <= $today_timestamp && $cur_event['end_time'] >= $today_timestamp) ? true : false,
-							'START_TIME'	=> $user->format_date($cur_event['start_time'], 'y-m-d'),
-							'END_TIME'		=> $user->format_date($cur_event['end_time'], 'y-m-d'),
+							'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
+							'END_TIME'		=> $user->format_date($cur_event['end_time'], 'j. M Y, H:i'),
 							'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
+							'ALL_DAY'	=> (($cur_event['start_time'] - $cur_event['end_time']) == 1) ? true : false,
 						));
 					}
 				}
-				else
-				{
-					// mark the events that should be deleted
-					$delete_id_ary[] = $key;
-				}
-			}
-			
-			// now delete old events
-			if(isset($delete_id_ary) && !empty($delete_id_ary))
-			{
-				foreach($delete_id_ary as $cur_id)
-				{
-					array_splice($events, $cur_id, 1);
-				}
-				
-				// afterwards reset the array numbering and insert the data into the database
-				$events = array_merge($events);
-				
-				$events = serialize($events);
-				set_portal_config('board3_calendar_events_' . $module_id, $events);
 			}
 		}
-		
-		//print_r($events); // no output needed, seems to work correctly
-
-		/*
-		if (!isset($template->filename['mini_cal_block']))
-		{
-			$template->set_filenames(array(
-				'mini_cal_block'	=> 'portal/block/mini_calendar.html')
-			);
-		}
-		*/
-
 
 		return 'calendar_side.html';
 	}
@@ -253,14 +223,17 @@ class portal_calendar_module
 	function get_template_acp($module_id)
 	{
 		return array(
-			'title'	=> 'ACP_CONFIG_MODULENAME',
+			'title'	=> 'ACP_PORTAL_CALENDAR',
 			'vars'	=> array(
-				'legend1'								=> 'ACP_MODULENAME_CONFIGLEGEND',
-				'portal_' . $module_id . '_configname'	=> array('lang' => 'MODULENAME_CONFIGNAME',		'validate' => 'string',	'type' => 'text:10:200',	'explain' => false),
-				'portal_' . $module_id . '_configname2'	=> array('lang' => 'MODULENAME_CONFIGNAME2',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'legend1'								=> 'ACP_PORTAL_CALENDAR',
+				'board3_calendar_today_color_' . $module_id		=> array('lang' => 'PORTAL_CALENDAR_TODAY_COLOR'	 ,	'validate' => 'string', 'type' => 'text:10:10',	 'explain' => true),
+				'board3_calendar_sunday_color_' . $module_id	=> array('lang' => 'PORTAL_CALENDAR_SUNDAY_COLOR' ,	'validate' => 'string', 'type' => 'text:10:10',	 'explain' => true),
+				'board3_long_month_' . $module_id				=> array('lang' => 'PORTAL_LONG_MONTH' ,	'validate' => 'bool',	'type' => 'radio:yes_no',	 'explain' => true),
+				'board3_sunday_first_' . $module_id				=> array('lang' => 'PORTAL_SUNDAY_FIRST' ,	'validate' => 'bool',	'type' => 'radio:yes_no',	 'explain' => true),
+				'board3_display_events_' . $module_id			=> array('lang' => 'PORTAL_DISPLAY_EVENTS',	'validate' => 'bool',	'type' => 'radio:yes_no',	 'explain' => true),
+				'board3_events_' . $module_id					=> array('lang' => 'PORTAL_EVENTS_MANAGE', 'validate' => 'string',	'type' => 'custom',	'explain' => false, 'method' => 'manage_events', 'submit' => 'update_events'),
 			),
 		);
-		return array();
 	}
 
 	/**
@@ -272,6 +245,8 @@ class portal_calendar_module
 		set_config('board3_calendar_today_color_' . $module_id, '#000000');
 		set_config('board3_calendar_sunday_color_' . $module_id, '#FF0000');
 		set_config('board3_long_month_' . $module_id, 0);
+		set_config('board3_display_events_' . $module_id, 0);
+		set_config('board3_events_' . $module_id, '');
 		
 		set_portal_config('board3_calendar_events_' . $module_id, '');
 		return true;
@@ -294,10 +269,241 @@ class portal_calendar_module
 			'board3_calendar_today_color_' . $module_id,
 			'board3_calendar_sunday_color_' . $module_id,
 			'board3_long_month_' . $module_id,
+			'board3_display_events_' . $module_id,
+			'board3_events_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
+	}
+	
+	function manage_events($value, $key, $module_id)
+	{
+		global $db, $portal_config, $config, $template, $user, $phpEx, $phpbb_admin_path;
+		
+		$action = request_var('action', '');
+		$action = (isset($_POST['add'])) ? 'add' : $action;
+		$action = (isset($_POST['save'])) ? 'save' : $action;
+		$link_id = request_var('id', 99999999); // 0 will trigger unwanted behavior, therefore we set a number we should never reach
+		$portal_config = obtain_portal_config();
+
+		$events = (strlen($portal_config['board3_calendar_events_' . $module_id]) >= 1) ? $this->utf_unserialize($portal_config['board3_calendar_events_' . $module_id]) : array();
+
+		$u_action = append_sid($phpbb_admin_path . 'index.' . $phpEx, 'i=portal&amp;mode=config&amp;module_id=' . $module_id);
+		
+		switch($action)
+		{
+			// Save changes
+			case 'save':
+				if (!check_form_key('acp_portal'))
+				{
+					trigger_error($user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
+				}
+
+				$event_title = utf8_normalize_nfc(request_var('event_title', ' ', true));
+				$event_desc = utf8_normalize_nfc(request_var('event_desc', ' ', true));
+				$event_start_day = trim(request_var('event_start_day', ''));
+				$event_start_time = trim(request_var('event_start_time', ''));
+				$event_end_day = trim(request_var('event_end_day', ''));
+				$event_end_time = trim(request_var('event_end_time', ''));
+				$event_all_day = request_var('event_all_day', false); // default to false
+				$event_url = str_replace('&amp;', '&', request_var('event_url', ' ')); // @todo: check if we need the str_replace when using serialize
+				$event_permission = request_var('permission-setting', array(0 => ''));
+				$groups_ary = array();
+				
+				/* 
+				* parse the event time
+				* first check for obvious errors, we don't want to waste server resources
+				*/
+				if(strlen($event_start_day) < 9 || strlen($event_start_day) > 10 || strlen($event_start_time) < 4 || strlen($event_start_time) > 5)
+				{
+					echo 'what';
+					trigger_error($user->lang['ACP_PORTAL_CALENDAR_START_INCORRECT']. adm_back_link($u_action), E_USER_WARNING);
+				}
+				elseif((strlen($event_end_day) < 9 || strlen($event_end_day) > 10 || strlen($event_end_time) < 4 || strlen($event_end_time) > 5) && !$event_all_day)
+				{
+					trigger_error($user->lang['ACP_PORTAL_CALENDAR_END_INCORRECT']. adm_back_link($u_action), E_USER_WARNING);
+				}
+				$start_year = (int) substr($event_start_day, 0, 4);
+				$start_month = (int) substr($event_start_day, 5, 2);
+				$start_day = (int) substr($event_start_day, 8, 2);
+				$start_hour = (int) substr($event_start_time, 0, 2);
+				$start_minute = (int) substr($event_start_time, 3, 2);
+				$end_year = (int) substr($event_end_day, 0, 4);
+				$end_month = (int) substr($event_end_day, 5, 2);
+				$end_day = (int) substr($event_end_day, 8, 2);
+				$end_hour = (int) substr($event_end_time, 0, 2);
+				$end_minute = (int) substr($event_end_time, 3, 2);
+				
+				// UNIX timestamps
+				$start_time = mktime($start_hour, $start_minute, 0, $start_month, $start_day, $start_year);
+				$end_time = (!$event_all_day) ? mktime($end_hour, $end_minute, 0, $end_month, $end_day, $end_year) : ($start_time - 1);
+				if($start_time <= time())
+				{
+					trigger_error($user->lang['ACP_PORTAL_CALENDAR_EVENT_PAST']. adm_back_link($u_action), E_USER_WARNING);
+				}
+				elseif($end_time < $start_time && !$event_all_day)
+				{
+					trigger_error($user->lang['ACP_PORTAL_CALENDAR_EVENT_START_FIRST']. adm_back_link($u_action), E_USER_WARNING);
+				}
+				
+				// get groups and check if the selected groups actually exist
+				$sql = 'SELECT group_id
+						FROM ' . GROUPS_TABLE . '
+						ORDER BY group_id ASC';
+				$result = $db->sql_query($sql);
+				while($row = $db->sql_fetchrow($result))
+				{
+					$groups_ary[] = $row['group_id'];
+				}
+				$db->sql_freeresult($result);
+				
+				$event_permission = array_intersect($event_permission, $groups_ary);
+				$event_permission = implode(',', $event_permission);
+
+				// Check for errors
+				if (!$event_title)
+				{
+					trigger_error($user->lang['NO_EVENT_TITLE'] . adm_back_link($u_action), E_USER_WARNING);
+				}
+
+				if (!$start_time || $start_time == 0)
+				{
+					trigger_error($user->lang['NO_EVENT_START'] . adm_back_link($u_action), E_USER_WARNING);
+				}
+
+				// overwrite already existing events and make sure we don't try to save an event outside of the normal array size of $events
+				if (isset($link_id) && $link_id < sizeof($events))
+				{
+					$message = $user->lang['EVENT_UPDATED'];
+					
+					$events[$link_id] = array(
+						'title' 		=> $event_title,
+						'desc'			=> $event_desc,
+						'start_time'	=> $event_start,
+						'end_time'		=> $event_end,
+						'permission'	=> $event_permission,
+						'url'			=> htmlspecialchars_decode($event_url),
+					);
+					/*
+					* this is what the events array should look like
+					$events[0] = array(
+						'title'			=> '',
+						'desc'			=> '',
+						'start_time'	=> '',
+						'end_time'		=> '',
+						'permission'	=> '',
+						'url'			=> '', // optional
+					);*/
+
+					add_log('admin', 'LOG_PORTAL_EVENT_UPDATED', $link_title);
+				}
+				else
+				{
+					$message = $user->lang['EVENT_ADDED'];
+					
+					$events[] = array(
+						'title'			=> $event_title,
+						'desc'			=> $event_desc,
+						'start_time'	=> $start_time,
+						'end_time'		=> $end_time,
+						'permission'	=> $event_permission,
+						'url'			=> $event_url, // optional
+					);
+					add_log('admin', 'LOG_PORTAL_EVENT_ADDED', $event_title);
+				}
+				
+				$board3_events_array = serialize($events);
+				set_portal_config('board3_calendar_events_' . $module_id, $board3_events_array);
+
+				trigger_error($message . adm_back_link($u_action));
+
+			break;
+
+			// Delete link
+			case 'delete':
+
+				if (!isset($link_id) && $link_id >= sizeof($events))
+				{
+					trigger_error($user->lang['NO_EVENT'] . adm_back_link($u_action), E_USER_WARNING);
+				}
+
+				if (confirm_box(true))
+				{
+					$cur_event_title = $events[$link_id]['title'];
+					// delete the selected link and reset the array numbering afterwards
+					array_splice($events, $link_id, 1);
+					$events = array_merge($events);
+					
+					$board3_events_array = serialize($events);
+					set_portal_config('board3_calendar_events_' . $module_id, $board3_events_array);
+
+					add_log('admin', 'LOG_PORTAL_EVENT_REMOVED', $cur_event_title);
+				}
+				else
+				{
+					confirm_box(false, $user->lang['CONFIRM_OPERATION'], build_hidden_fields(array(
+						'link_id'	=> $link_id,
+						'action'	=> 'delete',
+					)));
+				}
+
+			break;
+
+			// Edit or add menu item
+			case 'edit':
+			case 'add':
+				$template->assign_vars(array(
+					'EVENT_TITLE'	=> (isset($events[$link_id]['title']) && $action != 'add') ? $events[$link_id]['title'] : '',
+					'LINK_URL'		=> (isset($events[$link_id]['url']) && $action != 'add') ? str_replace('&', '&amp;', $events[$link_id]['url']) : '',
+
+					//'U_BACK'	=> $u_action,
+					'U_ACTION'	=> $u_action . '&amp;id=' . $link_id,
+
+					'S_EDIT'				=> true,
+				));
+				
+				$groups_ary = (isset($events[$link_id]['permission'])) ? explode(',', $events[$link_id]['permission']) : array();
+				
+				// get group info from database and assign the block vars
+				$sql = 'SELECT group_id, group_name 
+						FROM ' . GROUPS_TABLE . '
+						ORDER BY group_id ASC';
+				$result = $db->sql_query($sql);
+				while($row = $db->sql_fetchrow($result))
+				{
+					$template->assign_block_vars('permission_setting', array(
+						'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
+						'GROUP_NAME'	=> (isset($user->lang['G_' . $row['group_name']])) ? $user->lang['G_' . $row['group_name']] : $row['group_name'],
+						'GROUP_ID'		=> $row['group_id'],
+					));
+				}
+				$db->sql_freeresult($result);
+
+				return;
+
+			break;		
+		}
+		
+		for ($i = 0; $i < sizeof($events); $i++)
+		{
+			$template->assign_block_vars('events', array(
+				'EVENT_TITLE'	=> ($action != 'add') ? ((isset($user->lang[$events[$i]['title']])) ? $user->lang[$events[$i]['title']] : $events[$i]['title']) : '',
+				'EVENT_DESC'	=> ($action != 'add') ? $events[$i]['desc'] : '',
+				'EVENT_URL'		=> ($action != 'add') ? str_replace('&', '&amp;', $events[$i]['url']) : '',
+				'EVENT_START'	=> ($action != 'add') ? $user->format_date($events[$i]['start_time'], 'j. M Y, H:i') : '',
+				'EVENT_END'		=> ($action != 'add' && ($events[$i]['end_time'] - $events[$i]['start_time']) != 1) ? $user->format_date($events[$i]['end_time'], 'j. M Y, H:i') : '',
+				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
+				'U_DELETE'		=> $u_action . '&amp;action=delete&amp;id=' . $i,
+				'EVENT_ALL_DAY'	=> ($events[$i]['end_time'] - $events[$i]['start_time']) ? true : false,
+			));
+		}
+		
+	}
+	
+	function update_events($key, $module_id)
+	{
+		$this->manage_events('', $key, $module_id);
 	}
 	
 	var $dateYYY;						// year in numeric format (YYYY)
