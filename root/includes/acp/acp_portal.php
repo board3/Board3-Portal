@@ -179,7 +179,7 @@ class acp_portal
 				}
 
 				// show custom HTML files on the settings page of the modules instead of the standard board3 portal one, if chosen by module
-				if(!isset($c_class->custom_acp_tpl))
+				if(!isset($c_class->custom_acp_tpl) || empty($c_class->custom_acp_tpl))
 				{
 					$this->tpl_name = 'portal/acp_portal_config';
 				}
