@@ -62,7 +62,7 @@
 					<span style="font-weight: bold;">{upcoming_events.EVENT_TITLE}:</span><br />
 					<!-- IF not upcoming_events.ALL_DAY and not upcoming_events.END_TIME -->{L_EVENT_TIME}:&nbsp;{upcoming_events.START_TIME}<br />
 					<!-- ELSEIF not upcoming_events.ALL_DAY and upcoming_events.END_TIME -->{L_EVENT_START}:&nbsp;{upcoming_events.START_TIME}<br />{L_EVENT_END}:&nbsp;{upcoming_events.END_TIME}<br />
-					<!-- ELSE -->{L_EVENT_ALL_DAY}<br />
+					<!-- ELSE -->{L_EVENT_TIME}:&nbsp;{upcoming_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
 					<!-- ENDIF -->
 					<!-- IF upcoming_events.EVENT_DESC --><span style="font-style: italic;">{upcoming_events.EVENT_DESC}</span><!-- ENDIF -->
 					<!-- IF upcoming_events.EVENT_URL --></a><!-- ENDIF -->

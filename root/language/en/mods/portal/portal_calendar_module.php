@@ -88,14 +88,15 @@ $lang = array_merge($lang, array(
 	// ACP
 	'ACP_PORTAL_CALENDAR'					=> 'Calendar settings',
 	'ACP_PORTAL_CALENDAR_EXP'				=> 'This is where you customize the calendar block.',
+	'ACP_PORTAL_EVENTS'						=> 'Calendar events',
 	'PORTAL_CALENDAR_TODAY_COLOR'			=> 'Active day color',
-	'PORTAL_CALENDAR_TODAY_COLOR_EXPLAIN'	=> 'HEX or named colors are allowed such as #FFFFFF for white, or color names like violet.',
+	'PORTAL_CALENDAR_TODAY_COLOR_EXP'	=> 'HEX or named colors are allowed such as #FFFFFF for white, or color names like violet.',
 	'PORTAL_CALENDAR_SUNDAY_COLOR'			=> 'Color for sunday',
-	'PORTAL_CALENDAR_SUNDAY_COLOR_EXPLAIN'	=> 'HEX or named colors are allowed such as #FFFFFF for white, or color names like violet.',
+	'PORTAL_CALENDAR_SUNDAY_COLOR_EXP'	=> 'HEX or named colors are allowed such as #FFFFFF for white, or color names like violet.',
 	'PORTAL_LONG_MONTH'						=> 'Show full month names',
-	'PORTAL_LONG_MONTH_EXPLAIN'				=> 'If disabled the months will be shortened e.g. Aug. instead of August.',
+	'PORTAL_LONG_MONTH_EXP'				=> 'If disabled the months will be shortened e.g. Aug. instead of August.',
 	'PORTAL_SUNDAY_FIRST'					=> 'First day of the week',
-	'PORTAL_SUNDAY_FIRST_EXPLAIN'			=> 'If disabled the calendar will show Mo. --> Su., else Su. --> Sa.',
+	'PORTAL_SUNDAY_FIRST_EXP'			=> 'If disabled the calendar will show Mo. --> Su., else Su. --> Sa.',
 	'PORTAL_DISPLAY_EVENTS'					=> 'Display events',
 	'PORTAL_DISPLAY_EVENTS_EXP'				=> 'Display events that have been created in the calendar block',
 	'PORTAL_EVENTS_MANAGE'					=> 'Manage events',
@@ -121,6 +122,8 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_EVENT_END_TIME'				=> 'Event end time',
 	'ACP_PORTAL_EVENT_END_TIME_EXP'			=> 'Enter the time when the event starts. The time has to be in a 24 hour format, i.e. 23:12',
 	'ACP_PORTAL_CALENDAR_EVENT_START_FIRST'	=> 'The end of the event has to be after the start of the event.',
+	'ACP_PORTAL_CALENDAR_PERMISSION'		=> 'Event permissions',
+	'ACP_PORTAL_CALENDAR_PERMISSION_EXP'	=> 'Select the groups that should be authorized to view the event. If you want all users to be able to view the event, don´t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
 	
 	
 	// Logs

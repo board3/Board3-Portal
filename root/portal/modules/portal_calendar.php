@@ -166,16 +166,7 @@ class portal_calendar_module
 		* make sure we only display events in the future
 		*/
 		$events = $this->utf_unserialize($portal_config['board3_calendar_events_' . $module_id]);
-		
-		/*
-		* this is what the events array should look like
-		$events[0] = array(
-			'title'			=> '',
-			'desc'			=> '',
-			'start_time'	=> '',
-			'end_time'		=> '',
-			'url'			=> '', // optional
-		);*/
+
 		if(!empty($events))
 		{
 			// we sort the $events array by the start time
@@ -307,7 +298,7 @@ class portal_calendar_module
 				$event_end_day = trim(request_var('event_end_day', ''));
 				$event_end_time = trim(request_var('event_end_time', ''));
 				$event_all_day = request_var('event_all_day', false); // default to false
-				$event_url = str_replace('&amp;', '&', request_var('event_url', ' ')); // @todo: check if we need the str_replace when using serialize
+				$event_url = request_var('event_url', ' '); // @todo: check if we need the str_replace when using serialize
 				$event_permission = request_var('permission-setting', array(0 => ''));
 				$groups_ary = array();
 				
@@ -317,23 +308,37 @@ class portal_calendar_module
 				*/
 				if(strlen($event_start_day) < 9 || strlen($event_start_day) > 10 || strlen($event_start_time) < 4 || strlen($event_start_time) > 5)
 				{
-					echo 'what';
 					trigger_error($user->lang['ACP_PORTAL_CALENDAR_START_INCORRECT']. adm_back_link($u_action), E_USER_WARNING);
 				}
 				elseif((strlen($event_end_day) < 9 || strlen($event_end_day) > 10 || strlen($event_end_time) < 4 || strlen($event_end_time) > 5) && !$event_all_day)
 				{
 					trigger_error($user->lang['ACP_PORTAL_CALENDAR_END_INCORRECT']. adm_back_link($u_action), E_USER_WARNING);
 				}
-				$start_year = (int) substr($event_start_day, 0, 4);
-				$start_month = (int) substr($event_start_day, 5, 2);
-				$start_day = (int) substr($event_start_day, 8, 2);
-				$start_hour = (int) substr($event_start_time, 0, 2);
-				$start_minute = (int) substr($event_start_time, 3, 2);
-				$end_year = (int) substr($event_end_day, 0, 4);
-				$end_month = (int) substr($event_end_day, 5, 2);
-				$end_day = (int) substr($event_end_day, 8, 2);
-				$end_hour = (int) substr($event_end_time, 0, 2);
-				$end_minute = (int) substr($event_end_time, 3, 2);
+				// Now get the needed numbers out of the entered information
+				$first_start_hyphen = strpos($event_start_day, '-', 0);
+				$second_start_hyphen = strpos($event_start_day, '-', $first_start_hyphen + 1);
+				$start_colon_pos = strpos($event_start_time, ':', 0);
+				$start_day_length = strlen($event_start_day);
+				$start_time_length = strlen($event_start_time);
+				$start_year = (int) substr($event_start_day, 0, $first_start_hyphen);
+				$start_month =  (int) substr($event_start_day, $first_start_hyphen + 1, ($second_start_hyphen - $first_start_hyphen - 1));
+				$start_day = (int) substr($event_start_day, $second_start_hyphen + 1, $start_day_length - $second_start_hyphen);
+				$start_hour = (int) substr($event_start_time, 0, $start_colon_pos);
+				$start_minute = (int) substr($event_start_time, $start_colon_pos + 1, ($start_time_length - $start_colon_pos) - 1);
+				
+				if(!$event_all_day)
+				{
+					$first_end_hyphen = strpos($event_end_day, '-', 0);
+					$second_end_hyphen = strpos($event_end_day, '-', $first_end_hyphen + 1);
+					$end_colon_pos = strpos($event_end_time, ':', 0);
+					$end_day_length = strlen($event_end_day);
+					$end_time_length = strlen($event_end_time);
+					$end_year = (int) substr($event_end_day, 0, 4);
+					$end_month = (int) substr($event_end_day, 5, 2);
+					$end_day = (int) substr($event_end_day, 8, 2);
+					$end_hour = (int) substr($event_end_time, 0, 2);
+					$end_minute = (int) substr($event_end_time, 3, 2);
+				}
 				
 				// UNIX timestamps
 				$start_time = mktime($start_hour, $start_minute, 0, $start_month, $start_day, $start_year);
@@ -380,23 +385,13 @@ class portal_calendar_module
 					$events[$link_id] = array(
 						'title' 		=> $event_title,
 						'desc'			=> $event_desc,
-						'start_time'	=> $event_start,
-						'end_time'		=> $event_end,
+						'start_time'	=> $start_time,
+						'end_time'		=> $end_time,
 						'permission'	=> $event_permission,
 						'url'			=> htmlspecialchars_decode($event_url),
 					);
-					/*
-					* this is what the events array should look like
-					$events[0] = array(
-						'title'			=> '',
-						'desc'			=> '',
-						'start_time'	=> '',
-						'end_time'		=> '',
-						'permission'	=> '',
-						'url'			=> '', // optional
-					);*/
 
-					add_log('admin', 'LOG_PORTAL_EVENT_UPDATED', $link_title);
+					add_log('admin', 'LOG_PORTAL_EVENT_UPDATED', $event_title);
 				}
 				else
 				{
@@ -413,6 +408,12 @@ class portal_calendar_module
 					add_log('admin', 'LOG_PORTAL_EVENT_ADDED', $event_title);
 				}
 				
+				// we sort the $events array by the start time
+				foreach($events as $key => $cur_event)
+				{
+					$time_ary[$key] = $cur_event['start_time'];
+				}
+				array_multisort($time_ary, SORT_NUMERIC, $events);
 				$board3_events_array = serialize($events);
 				set_portal_config('board3_calendar_events_' . $module_id, $board3_events_array);
 
@@ -454,8 +455,14 @@ class portal_calendar_module
 			case 'edit':
 			case 'add':
 				$template->assign_vars(array(
-					'EVENT_TITLE'	=> (isset($events[$link_id]['title']) && $action != 'add') ? $events[$link_id]['title'] : '',
-					'LINK_URL'		=> (isset($events[$link_id]['url']) && $action != 'add') ? str_replace('&', '&amp;', $events[$link_id]['url']) : '',
+					'EVENT_TITLE'		=> (isset($events[$link_id]['title']) && $action != 'add') ? $events[$link_id]['title'] : '',
+					'EVENT_DESC'		=> (isset($events[$link_id]['desc']) && $action != 'add') ? $events[$link_id]['desc'] : '',
+					'EVENT_START_DAY'	=> ($action != 'add') ? $user->format_date($events[$link_id]['start_time'], 'Y-m-d') : '',
+					'EVENT_START_TIME'	=> ($action != 'add') ? $user->format_date($events[$link_id]['start_time'], 'G:i') : '',
+					'EVENT_END_DAY'		=> ($action != 'add' && ($events[$link_id]['start_time'] - $events[$link_id]['end_time']) != true) ? $user->format_date($events[$link_id]['end_time'], 'Y-m-d') : '',
+					'EVENT_END_TIME'	=> ($action != 'add' && ($events[$link_id]['start_time'] - $events[$link_id]['end_time']) != true) ? $user->format_date($events[$link_id]['end_time'], 'G:i') : '',
+					'EVENT_ALL_DAY'		=> ($events[$link_id]['start_time'] - $events[$link_id]['end_time']) ? true : false,
+					'EVENT_URL'			=> (isset($events[$link_id]['url']) && $action != 'add') ? $events[$link_id]['url'] : '',
 
 					//'U_BACK'	=> $u_action,
 					'U_ACTION'	=> $u_action . '&amp;id=' . $link_id,
@@ -492,7 +499,7 @@ class portal_calendar_module
 				'EVENT_DESC'	=> ($action != 'add') ? $events[$i]['desc'] : '',
 				'EVENT_URL'		=> ($action != 'add') ? str_replace('&', '&amp;', $events[$i]['url']) : '',
 				'EVENT_START'	=> ($action != 'add') ? $user->format_date($events[$i]['start_time'], 'j. M Y, H:i') : '',
-				'EVENT_END'		=> ($action != 'add' && ($events[$i]['end_time'] - $events[$i]['start_time']) != 1) ? $user->format_date($events[$i]['end_time'], 'j. M Y, H:i') : '',
+				'EVENT_END'		=> ($action != 'add' && ($events[$i]['start_time'] - $events[$i]['end_time']) != 1) ? $user->format_date($events[$i]['end_time'], 'j. M Y, H:i') : '',
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
 				'U_DELETE'		=> $u_action . '&amp;action=delete&amp;id=' . $i,
 				'EVENT_ALL_DAY'	=> ($events[$i]['end_time'] - $events[$i]['start_time']) ? true : false,
