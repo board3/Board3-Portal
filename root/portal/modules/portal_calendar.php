@@ -184,7 +184,7 @@ class portal_calendar_module
 					if(($cur_event['start_time'] <= $today_timestamp && $cur_event['end_time'] <= $cur_event['start_time']) || ($cur_event['start_time'] <= $today_timestamp && $cur_event['end_time'] >= $today_timestamp))
 					{
 						$template->assign_block_vars('cur_events', array(
-							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
+							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url(str_replace('&', '&amp;', $cur_event['url'])) : '',
 							'EVENT_TITLE'	=> $cur_event['title'],
 							'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
 							'END_TIME'		=> $user->format_date($cur_event['end_time'], 'j. M Y, H:i'),
@@ -195,7 +195,7 @@ class portal_calendar_module
 					else
 					{
 						$template->assign_block_vars('upcoming_events', array(
-							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
+							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url(str_replace('&', '&amp;', $cur_event['url'])) : '',
 							'EVENT_TITLE'	=> $cur_event['title'],
 							'CUR_EVENT'		=> ($cur_event['start_time'] <= $today_timestamp && $cur_event['end_time'] >= $today_timestamp) ? true : false,
 							'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
@@ -500,6 +500,7 @@ class portal_calendar_module
 				'EVENT_URL'		=> ($action != 'add') ? str_replace('&', '&amp;', $events[$i]['url']) : '',
 				'EVENT_START'	=> ($action != 'add') ? $user->format_date($events[$i]['start_time'], 'j. M Y, H:i') : '',
 				'EVENT_END'		=> ($action != 'add' && ($events[$i]['start_time'] - $events[$i]['end_time']) != 1) ? $user->format_date($events[$i]['end_time'], 'j. M Y, H:i') : '',
+				'EVENT_URL'		=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? $events[$i]['url'] : '',
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
 				'U_DELETE'		=> $u_action . '&amp;action=delete&amp;id=' . $i,
 				'EVENT_ALL_DAY'	=> ($events[$i]['end_time'] - $events[$i]['start_time']) ? true : false,
