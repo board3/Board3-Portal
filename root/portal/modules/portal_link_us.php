@@ -64,7 +64,10 @@ class portal_link_us_module
 
 	function get_template_acp($module_id)
 	{
-		return false;
+		return array(
+			'title'	=> 'LINK_US',
+			'vars'	=> array(),
+		);
 	}
 
 	/**

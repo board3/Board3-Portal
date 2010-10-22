@@ -46,17 +46,6 @@ class portal_user_menu_module
 	*/
 	var $language = 'portal_user_menu_module';
 
-	function get_template_center($module_id)
-	{
-		global $config, $template;
-
-		$template->assign_vars(array(
-			'EXAMPLE'			=> $config['portal_configname'],
-		));
-
-		return 'modulename_center.html';
-	}
-
 	function get_template_side($module_id)
 	{
 		global $config, $template, $user, $auth, $db, $phpEx, $phpbb_root_path;
@@ -157,7 +146,10 @@ class portal_user_menu_module
 
 	function get_template_acp($module_id)
 	{
-		return false;
+		return array(
+			'title'	=> 'USER_MENU',
+			'vars'	=> array(),
+		);
 	}
 
 	/**

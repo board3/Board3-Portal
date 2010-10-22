@@ -89,7 +89,10 @@ class portal_stylechanger_module
 
 	function get_template_acp($module_id)
 	{
-		return array();
+		return array(
+			'title'	=> 'BOARD_STYLE',
+			'vars'	=> array(),
+		);
 	}
 
 	/**

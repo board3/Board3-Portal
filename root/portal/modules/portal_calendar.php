@@ -497,10 +497,9 @@ class portal_calendar_module
 			$template->assign_block_vars('events', array(
 				'EVENT_TITLE'	=> ($action != 'add') ? ((isset($user->lang[$events[$i]['title']])) ? $user->lang[$events[$i]['title']] : $events[$i]['title']) : '',
 				'EVENT_DESC'	=> ($action != 'add') ? $events[$i]['desc'] : '',
-				'EVENT_URL'		=> ($action != 'add') ? str_replace('&', '&amp;', $events[$i]['url']) : '',
 				'EVENT_START'	=> ($action != 'add') ? $user->format_date($events[$i]['start_time'], 'j. M Y, H:i') : '',
 				'EVENT_END'		=> ($action != 'add' && ($events[$i]['start_time'] - $events[$i]['end_time']) != 1) ? $user->format_date($events[$i]['end_time'], 'j. M Y, H:i') : '',
-				'EVENT_URL'		=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? $events[$i]['url'] : '',
+				'EVENT_URL'		=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? str_replace('&', '&amp;', $events[$i]['url']) : '',
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
 				'U_DELETE'		=> $u_action . '&amp;action=delete&amp;id=' . $i,
 				'EVENT_ALL_DAY'	=> ($events[$i]['end_time'] - $events[$i]['start_time']) ? true : false,
