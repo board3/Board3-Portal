@@ -298,7 +298,7 @@ class portal_calendar_module
 				$event_end_day = trim(request_var('event_end_day', ''));
 				$event_end_time = trim(request_var('event_end_time', ''));
 				$event_all_day = request_var('event_all_day', false); // default to false
-				$event_url = request_var('event_url', ' '); // @todo: check if we need the str_replace when using serialize
+				$event_url = request_var('event_url', ' ');
 				$event_permission = request_var('permission-setting', array(0 => ''));
 				$groups_ary = array();
 				
