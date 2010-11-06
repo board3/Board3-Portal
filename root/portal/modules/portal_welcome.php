@@ -60,33 +60,8 @@ class portal_welcome_module
 		$uid = $config['board3_welcome_message_uid_' . $module_id];
 		$bitfield = $config['board3_welcome_message_bitfield_' . $module_id];
 		$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
-		//$text = generate_text_for_display($portal_config['board3_welcome_message_' . $module_id], $config['board3_welcome_message_uid_' . $module_id], $config['board3_welcome_message_bitfield_' . $module_id], $bbcode_options);
+		$text = generate_text_for_display($portal_config['board3_welcome_message_' . $module_id], $uid, $bitfield, $bbcode_options);
 
-		$text = censor_text($portal_config['board3_welcome_message_' . $module_id]);
-
-		// Parse bbcode if bbcode uid stored and bbcode enabled
-		if ($uid)
-		{
-			if (!class_exists('bbcode'))
-			{
-				global $phpbb_root_path, $phpEx;
-				include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
-			}
-
-			if (empty($bbcode))
-			{
-				$bbcode = new bbcode($bitfield);
-			}
-			else
-			{
-				$bbcode->bbcode($bitfield);
-			}
-
-			$bbcode->bbcode_second_pass($text, $uid);
-		}
-
-		$text = bbcode_nl2br($text);
-		$text = smiley_text($text, false);
 		$template->assign_vars(array(
 			'PORTAL_WELCOME_MSG'	=> $text,
 		));
