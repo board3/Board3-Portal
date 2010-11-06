@@ -1,0 +1,629 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<h1>{L_TITLE}</h1>
+
+<p>{L_TITLE_EXPLAIN}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+<form id="acp_portal_config" method="post" action="{U_ACTION}">
+<!-- IF SHOW_MODULE_OPTIONS -->
+		<fieldset>
+			<legend>{L_MODULE_OPTIONS}</legend>
+			<dl>
+				<dt><label for="module_name">{L_MODULE_NAME}:</label><br /><span>{L_MODULE_NAME_EXP}</span></dt>
+				<dd><input id="module_name" type="text" value="{MODULE_NAME}" name="module_name" maxlength="255" size="64" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="module_image">{L_MODULE_IMAGE}:</label><br /><span>{L_MODULE_IMAGE_EXP}</span></dt>
+				<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
+				<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
+			</dl>
+		</fieldset>
+<!-- ENDIF -->
+		<!-- IF S_PREVIEW -->
+		<fieldset>
+			<legend>{L_ACP_PORTAL_WELCOME_PREVIEW}</legend>
+		<dl>
+			<dt style="border: none; width: 100%;">
+				{PREVIEW_TEXT}
+			</dt>
+		</dl>
+		</fieldset>
+		<!-- ENDIF -->
+		<fieldset>
+			<legend>{L_PORTAL_WELCOME}</legend>
+		<dl>
+			<dt></dt>
+			<dd>
+				<script type="text/javascript">
+				// <![CDATA[
+				/**
+				* bbCode control by subBlue design [ www.subBlue.com ]
+				* Includes unixsafe colour palette selector by SHS`
+				*/
+
+				// Startup variables
+				var imageTag = false;
+				var theSelection = false;
+
+				var bbcodeEnabled = true;
+				// Check for Browser & Platform for PC & IE specific bits
+				// More details from: http://www.mozilla.org/docs/web-developer/sniffer/browser_type.html
+				var clientPC = navigator.userAgent.toLowerCase(); // Get client info
+				var clientVer = parseInt(navigator.appVersion); // Get browser version
+
+				var is_ie = ((clientPC.indexOf('msie') != -1) && (clientPC.indexOf('opera') == -1));
+				var is_win = ((clientPC.indexOf('win') != -1) || (clientPC.indexOf('16bit') != -1));
+				var baseHeight;
+				
+				var form_name = 'acp_portal_welcome';
+				var text_name = 'welcome_message';
+				var load_draft = false;
+				var upload = false;
+
+				// Define the bbCode tags
+				var bbcode = new Array();
+				var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->);
+				var imageTag = false;
+
+				// Helpline messages
+				var help_line = {
+					b: '{LA_BBCODE_B_HELP}',
+					i: '{LA_BBCODE_I_HELP}',
+					u: '{LA_BBCODE_U_HELP}',
+					q: '{LA_BBCODE_Q_HELP}',
+					c: '{LA_BBCODE_C_HELP}',
+					l: '{LA_BBCODE_L_HELP}',
+					o: '{LA_BBCODE_O_HELP}',
+					p: '{LA_BBCODE_P_HELP}',
+					w: '{LA_BBCODE_W_HELP}',
+					a: '{LA_BBCODE_A_HELP}',
+					s: '{LA_BBCODE_S_HELP}',
+					f: '{LA_BBCODE_F_HELP}',
+					e: '{LA_BBCODE_E_HELP}',
+					d: '{LA_BBCODE_D_HELP}'
+					<!-- BEGIN custom_tags -->
+						,cb_{custom_tags.BBCODE_ID}: '{custom_tags.A_BBCODE_HELPLINE}'
+					<!-- END custom_tags -->
+				}
+
+				var panels = new Array('options-panel', 'attach-panel', 'poll-panel');
+				var show_panel = 'options-panel';
+
+				/**
+				* Shows the help messages in the helpline window
+				*/
+				function helpline(help)
+				{
+					return;
+				}
+
+				/**
+				* Fix a bug involving the TextRange object. From
+				* http://www.frostjedi.com/terra/scripts/demo/caretBug.html
+				*/ 
+				function initInsertions() 
+				{
+					var doc;
+
+					if (document.forms[form_name])
+					{
+						doc = document;
+					}
+					else 
+					{
+						doc = opener.document;
+					}
+
+					var textarea = doc.getElementById(text_name);
+
+					if (is_ie && typeof(baseHeight) != 'number')
+					{
+						textarea.focus();
+						baseHeight = doc.selection.createRange().duplicate().boundingHeight;
+					}
+				}
+
+				/**
+				* bbstyle
+				*/
+				function bbstyle(bbnumber)
+				{	
+					if (bbnumber != -1)
+					{
+						bbfontstyle(bbtags[bbnumber], bbtags[bbnumber+1]);
+					} 
+					else 
+					{
+						insert_text('[*]');
+						document.getElementById(text_name).focus();
+					}
+				}
+
+				/**
+				* Apply bbcodes
+				*/
+				function bbfontstyle(bbopen, bbclose)
+				{
+					theSelection = false;
+
+					var textarea = document.getElementById(text_name);
+
+					textarea.focus();
+
+					if ((clientVer >= 4) && is_ie && is_win)
+					{
+						// Get text selection
+						theSelection = document.selection.createRange().text;
+
+						if (theSelection)
+						{
+							// Add tags around selection
+							document.selection.createRange().text = bbopen + theSelection + bbclose;
+							document.getElementById(text_name).focus();
+							theSelection = '';
+							return;
+						}
+					}
+					else if (document.getElementById(text_name).selectionEnd && (document.getElementById(text_name).selectionEnd - document.getElementById(text_name).selectionStart > 0))
+					{
+						mozWrap(document.getElementById(text_name), bbopen, bbclose);
+						document.getElementById(text_name).focus();
+						theSelection = '';
+						return;
+					}
+					
+					//The new position for the cursor after adding the bbcode
+					var caret_pos = getCaretPosition(textarea).start;
+					var new_pos = caret_pos + bbopen.length;		
+
+					// Open tag
+					insert_text(bbopen + bbclose);
+
+					// Center the cursor when we don't have a selection
+					// Gecko and proper browsers
+					if (!isNaN(textarea.selectionStart))
+					{
+						textarea.selectionStart = new_pos;
+						textarea.selectionEnd = new_pos;
+					}	
+					// IE
+					else if (document.selection)
+					{
+						var range = textarea.createTextRange(); 
+						range.move("character", new_pos); 
+						range.select();
+						storeCaret(textarea);
+					}
+
+					textarea.focus();
+					return;
+				}
+
+				/**
+				* Insert text at position
+				*/
+				function insert_text(text, spaces, popup)
+				{
+					var textarea;
+					
+					if (!popup) 
+					{
+						textarea = document.getElementById(text_name);
+					} 
+					else 
+					{
+						textarea = opener.document.getElementById(text_name);
+					}
+					if (spaces) 
+					{
+						text = ' ' + text + ' ';
+					}
+					
+					if (!isNaN(textarea.selectionStart))
+					{
+						var sel_start = textarea.selectionStart;
+						var sel_end = textarea.selectionEnd;
+
+						mozWrap(textarea, text, '')
+						textarea.selectionStart = sel_start + text.length;
+						textarea.selectionEnd = sel_end + text.length;
+					}
+					else if (textarea.createTextRange && textarea.caretPos)
+					{
+						if (baseHeight != textarea.caretPos.boundingHeight) 
+						{
+							textarea.focus();
+							storeCaret(textarea);
+						}
+
+						var caret_pos = textarea.caretPos;
+						caret_pos.text = caret_pos.text.charAt(caret_pos.text.length - 1) == ' ' ? caret_pos.text + text + ' ' : caret_pos.text + text;
+					}
+					else
+					{
+						textarea.value = textarea.value + text;
+					}
+					if (!popup) 
+					{
+						textarea.focus();
+					}
+				}
+
+				/**
+				* Add inline attachment at position
+				*/
+				function attach_inline(index, filename)
+				{
+					insert_text('[attachment=' + index + ']' + filename + '[/attachment]');
+					document.getElementById(text_name).focus();
+				}
+
+				/**
+				* Add quote text to message
+				*/
+				function addquote(post_id, username)
+				{
+					var message_name = 'message_' + post_id;
+					var theSelection = '';
+					var divarea = false;
+
+					if (document.all)
+					{
+						divarea = document.all[message_name];
+					}
+					else
+					{
+						divarea = document.getElementById(message_name);
+					}
+
+					// Get text selection - not only the post content :(
+					if (window.getSelection)
+					{
+						theSelection = window.getSelection().toString();
+					}
+					else if (document.getSelection)
+					{
+						theSelection = document.getSelection();
+					}
+					else if (document.selection)
+					{
+						theSelection = document.selection.createRange().text;
+					}
+
+					if (theSelection == '' || typeof theSelection == 'undefined' || theSelection == null)
+					{
+						if (divarea.innerHTML)
+						{
+							theSelection = divarea.innerHTML.replace(/<br>/ig, '\n');
+							theSelection = theSelection.replace(/<br\/>/ig, '\n');
+							theSelection = theSelection.replace(/&lt\;/ig, '<');
+							theSelection = theSelection.replace(/&gt\;/ig, '>');
+							theSelection = theSelection.replace(/&amp\;/ig, '&');
+							theSelection = theSelection.replace(/&nbsp\;/ig, ' ');
+						}
+						else if (document.all)
+						{
+							theSelection = divarea.innerText;
+						}
+						else if (divarea.textContent)
+						{
+							theSelection = divarea.textContent;
+						}
+						else if (divarea.firstChild.nodeValue)
+						{
+							theSelection = divarea.firstChild.nodeValue;
+						}
+					}
+
+					if (theSelection)
+					{
+						if (bbcodeEnabled)
+						{
+							insert_text('[quote="' + username + '"]' + theSelection + '[/quote]');
+						}
+						else
+						{
+							var lines = split_lines(theSelection);
+							for (i = 0; i < lines.length; i++)
+							{
+								insert_text('> ' + lines[i] + '\n')
+							}
+						}
+					}
+
+					return;
+				}
+
+				function split_lines(text)
+				{
+					var lines = text.split('\n');
+					var splitLines = new Array();
+					var j = 0;
+					for(i = 0; i < lines.length; i++)
+					{
+						if (lines[i].length <= 80)
+						{
+							splitLines[j] = lines[i];
+							j++;
+						}
+						else
+						{
+							var line = lines[i];
+							do
+							{
+								var splitAt = line.indexOf(' ', 80);
+								
+								if (splitAt == -1)
+								{
+									splitLines[j] = line;
+									j++
+								}
+								else
+								{
+									splitLines[j] = line.substring(0, splitAt);
+									line = line.substring(splitAt);
+									j++;
+								}
+							}
+							while(splitAt != -1)
+						}
+					}
+					return splitLines;
+				}
+				/**
+				* From http://www.massless.org/mozedit/
+				*/
+				function mozWrap(txtarea, open, close)
+				{
+					var selLength = (typeof(txtarea.textLength) == 'undefined') ? txtarea.value.length : txtarea.textLength;
+					var selStart = txtarea.selectionStart;
+					var selEnd = txtarea.selectionEnd;
+					var scrollTop = txtarea.scrollTop;
+
+					if (selEnd == 1 || selEnd == 2) 
+					{
+						selEnd = selLength;
+					}
+
+					var s1 = (txtarea.value).substring(0,selStart);
+					var s2 = (txtarea.value).substring(selStart, selEnd)
+					var s3 = (txtarea.value).substring(selEnd, selLength);
+
+					txtarea.value = s1 + open + s2 + close + s3;
+					txtarea.selectionStart = selStart + open.length;
+					txtarea.selectionEnd = selEnd + open.length;
+					txtarea.focus();
+					txtarea.scrollTop = scrollTop;
+
+					return;
+				}
+
+				/**
+				* Insert at Caret position. Code from
+				* http://www.faqts.com/knowledge_base/view.phtml/aid/1052/fid/130
+				*/
+				function storeCaret(textEl)
+				{
+					if (textEl.createTextRange)
+					{
+						textEl.caretPos = document.selection.createRange().duplicate();
+					}
+				}
+
+				/**
+				* Color pallette
+				*/
+				function colorPalette(dir, width, height)
+				{
+					var r = 0, g = 0, b = 0;
+					var numberList = new Array(6);
+					var color = '';
+
+					numberList[0] = '00';
+					numberList[1] = '40';
+					numberList[2] = '80';
+					numberList[3] = 'BF';
+					numberList[4] = 'FF';
+
+					document.writeln('<table cellspacing="1" cellpadding="0" border="0">');
+
+					for (r = 0; r < 5; r++)
+					{
+						if (dir == 'h')
+						{
+							document.writeln('<tr>');
+						}
+
+						for (g = 0; g < 5; g++)
+						{
+							if (dir == 'v')
+							{
+								document.writeln('<tr>');
+							}
+							
+							for (b = 0; b < 5; b++)
+							{
+								color = String(numberList[r]) + String(numberList[g]) + String(numberList[b]);
+								document.write('<td bgcolor="#' + color + '" style="width: ' + width + 'px; height: ' + height + 'px;">');
+								document.write('<a href="#" onclick="bbfontstyle(\'[color=#' + color + ']\', \'[/color]\'); return false;"><img src="images/spacer.gif" width="' + width + '" height="' + height + '" alt="#' + color + '" title="#' + color + '" /></a>');
+								document.writeln('</td>');
+							}
+
+							if (dir == 'v')
+							{
+								document.writeln('</tr>');
+							}
+						}
+
+						if (dir == 'h')
+						{
+							document.writeln('</tr>');
+						}
+					}
+					document.writeln('</table>');
+				}
+
+
+				/**
+				* Caret Position object
+				*/
+				function caretPosition()
+				{
+					var start = null;
+					var end = null;
+				}
+
+
+				/**
+				* Get the caret position in an textarea
+				*/
+				function getCaretPosition(txtarea)
+				{
+					var caretPos = new caretPosition();
+					
+					// simple Gecko/Opera way
+					if(txtarea.selectionStart || txtarea.selectionStart == 0)
+					{
+						caretPos.start = txtarea.selectionStart;
+						caretPos.end = txtarea.selectionEnd;
+					}
+					// dirty and slow IE way
+					else if(document.selection)
+					{
+					
+						// get current selection
+						var range = document.selection.createRange();
+
+						// a new selection of the whole textarea
+						var range_all = document.body.createTextRange();
+						range_all.moveToElementText(txtarea);
+						
+						// calculate selection start point by moving beginning of range_all to beginning of range
+						var sel_start;
+						for (sel_start = 0; range_all.compareEndPoints('StartToStart', range) < 0; sel_start++)
+						{		
+							range_all.moveStart('character', 1);
+						}
+					
+						txtarea.sel_start = sel_start;
+					
+						// we ignore the end value for IE, this is already dirty enough and we don't need it
+						caretPos.start = txtarea.sel_start;
+						caretPos.end = txtarea.sel_start;			
+					}
+
+					return caretPos;
+				}
+				// ]]>
+				</script>
+				<div id="colour_palette" style="display: none;">
+					<dl style="clear: left;">
+						<dt style="border: none;"><label>{L_FONT_COLOR}:</label><br /></dt>
+					</dl>
+					<dl style="clear: left;">
+					<dt style="border: none;">
+						<script type="text/javascript">
+						// <![CDATA[
+							function change_palette()
+							{
+								dE('colour_palette');
+								e = document.getElementById('colour_palette');
+								
+								if (e.style.display == 'block')
+								{
+									document.getElementById('bbpalette').value = '{LA_FONT_COLOR_HIDE}';
+								}
+								else
+								{
+									document.getElementById('bbpalette').value = '{LA_FONT_COLOR}';
+								}
+							}
+
+							colorPalette('h', 5, 5);
+						// ]]>
+						</script>
+					</dt>
+					</dl>
+				</div>
+				<div id="format-buttons">
+					<input type="button" class="button2" accesskey="b" name="addbbcode0" value=" B " style="font-weight:bold; width: 30px" onclick="bbstyle(0)" title="{L_BBCODE_B_HELP}" />
+					<input type="button" class="button2" accesskey="i" name="addbbcode2" value=" i " style="font-style:italic; width: 30px" onclick="bbstyle(2)" title="{L_BBCODE_I_HELP}" />
+					<input type="button" class="button2" accesskey="u" name="addbbcode4" value=" u " style="text-decoration: underline; width: 30px" onclick="bbstyle(4)" title="{L_BBCODE_U_HELP}" />
+					<!-- IF S_BBCODE_QUOTE -->
+						<input type="button" class="button2" accesskey="q" name="addbbcode6" value="Quote" style="width: 50px" onclick="bbstyle(6)" title="{L_BBCODE_Q_HELP}" />
+					<!-- ENDIF -->
+					<input type="button" class="button2" accesskey="c" name="addbbcode8" value="Code" style="width: 40px" onclick="bbstyle(8)" title="{L_BBCODE_C_HELP}" />
+					<input type="button" class="button2" accesskey="l" name="addbbcode10" value="List" style="width: 40px" onclick="bbstyle(10)" title="{L_BBCODE_L_HELP}" />
+					<input type="button" class="button2" accesskey="o" name="addbbcode12" value="List=" style="width: 40px" onclick="bbstyle(12)" title="{L_BBCODE_O_HELP}" />
+					<input type="button" class="button2" accesskey="t" name="addlitsitem" value="[*]" style="width: 40px" onclick="bbstyle(-1)" title="{L_BBCODE_LISTITEM_HELP}" />
+					<!-- IF S_BBCODE_IMG -->
+						<input type="button" class="button2" accesskey="p" name="addbbcode14" value="Img" style="width: 40px" onclick="bbstyle(14)" title="{L_BBCODE_P_HELP}" />
+					<!-- ENDIF -->
+					<!-- IF S_LINKS_ALLOWED -->
+						<input type="button" class="button2" accesskey="w" name="addbbcode16" value="URL" style="text-decoration: underline; width: 40px" onclick="bbstyle(16)" title="{L_BBCODE_W_HELP}" />
+					<!-- ENDIF -->
+					<!-- IF S_BBCODE_FLASH -->
+						<input type="button" class="button2" accesskey="d" name="addbbcode18" value="Flash" onclick="bbstyle(18)" title="{L_BBCODE_D_HELP}" />
+					<!-- ENDIF -->
+					<select name="addbbcode20" onchange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]');this.form.addbbcode20.selectedIndex = 2;" title="{L_BBCODE_F_HELP}">
+						<option value="50">{L_FONT_TINY}</option>
+						<option value="85">{L_FONT_SMALL}</option>
+						<option value="100" selected="selected">{L_FONT_NORMAL}</option>
+						<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 150 -->
+							<option value="150">{L_FONT_LARGE}</option>
+							<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 200 -->
+								<option value="200">{L_FONT_HUGE}</option>
+							<!-- ENDIF -->
+						<!-- ENDIF -->
+					</select>
+					<input type="button" class="button2" name="bbpalette" id="bbpalette" value="{L_FONT_COLOR}" onclick="change_palette();" title="{L_BBCODE_S_HELP}" />
+					<!-- BEGIN custom_tags -->
+						<input type="button" class="button2" name="addbbcode{custom_tags.BBCODE_ID}" value="{custom_tags.BBCODE_TAG}" onclick="bbstyle({custom_tags.BBCODE_ID})" title="{custom_tags.BBCODE_HELPLINE}" />
+					<!-- END custom_tags -->
+				</div>
+			</dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="welcome_message">{L_ACP_PORTAL_WELCOME_MESSAGE}:</label><br />
+				<span>{L_ACP_PORTAL_WELCOME_MESSAGE_EXP}</span>
+			</dt>
+			<dd><textarea name="welcome_message" id="welcome_message" cols="6" rows="12">{WELCOME_MESSAGE}</textarea></dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="permission-setting">{L_ACP_PORTAL_WELCOME_PERMISSION}:</label><br />
+				<span>{L_ACP_PORTAL_WELCOME_PERMISSION_EXP}</span>
+			</dt>
+			<dd>
+				<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
+					<!-- BEGIN permission_setting -->
+					<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
+					<!-- END permission_setting -->
+				</select>
+			</dd>
+		</dl>
+<!-- IF S_AUTH -->
+	<!-- BEGIN auth_tpl -->
+		{auth_tpl.TPL}
+	<!-- END auth_tpl -->
+<!-- ENDIF -->
+
+	<p class="submit-buttons">
+		<input class="button2" type="submit" id="preview" name="preview" value="{L_PREVIEW}" />&nbsp;
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	</p>
+	{S_FORM_TOKEN}
+</fieldset>
+</form>
+
+<!-- INCLUDE overall_footer.html -->
