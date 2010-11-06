@@ -424,19 +424,31 @@ class acp_portal
 								$c_class = new $class();
 								if ($c_class->columns & column_string_const($add_module))
 								{
-									$fileinfo[] = substr($class, 7, -7);
+									if ($c_class->language)
+									{
+										$user->add_lang('mods/portal/' . $c_class->language);
+									}
+									$fileinfo[] = array(
+										'module'		=> substr($class, 7, -7),
+										'name'			=> $user->lang[$c_class->name],
+									);
 								}
 							}
 						}
 					}
 					closedir($dh);
 
-					sort($fileinfo);
+					// we sort the $fileinfo array by the name of the modules
+					foreach($fileinfo as $key => $cur_file)
+					{
+						$name_ary[$key] = $cur_file['name'];
+					}
+					array_multisort($name_ary, SORT_REGULAR, $fileinfo);
 					$options = '';
 
 					foreach ($fileinfo as $module)
 					{
-						$options .= '<option value="' . $module . '">' . $module . '</option>';
+						$options .= '<option value="' . $module['module'] . '">' . $module['name'] . '</option>';
 					}
 
 					$s_hidden_fields = build_hidden_fields(array(

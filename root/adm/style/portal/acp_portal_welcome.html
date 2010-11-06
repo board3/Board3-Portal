@@ -40,7 +40,6 @@
 		<fieldset>
 			<legend>{L_PORTAL_WELCOME}</legend>
 		<dl>
-			<dt></dt>
 			<dd>
 				<script type="text/javascript">
 				// <![CDATA[
@@ -453,7 +452,7 @@
 							{
 								color = String(numberList[r]) + String(numberList[g]) + String(numberList[b]);
 								document.write('<td bgcolor="#' + color + '" style="width: ' + width + 'px; height: ' + height + 'px;">');
-								document.write('<a href="#" onclick="bbfontstyle(\'[color=#' + color + ']\', \'[/color]\'); return false;"><img src="images/spacer.gif" width="' + width + '" height="' + height + '" alt="#' + color + '" title="#' + color + '" /></a>');
+								document.write('<a href="#" onclick="bbfontstyle(\'[color=#' + color + ']\', \'[/color]\'); return false;" style="margin: -4px 0px -4px 2px;"><img src="images/spacer.gif" width="' + width + '" height="' + (height+10) + '" alt="#' + color + '" title="#' + color + '" style="margin: -4px;" /></a>');
 								document.writeln('</td>');
 							}
 
@@ -534,8 +533,15 @@
 						// <![CDATA[
 							function change_palette()
 							{
-								dE('colour_palette');
 								e = document.getElementById('colour_palette');
+								if(e.style.display == 'block')
+								{
+									dE('colour_palette', -1);
+								}
+								else
+								{
+									dE('colour_palette', 1);
+								}
 								
 								if (e.style.display == 'block')
 								{
@@ -547,7 +553,7 @@
 								}
 							}
 
-							colorPalette('h', 5, 5);
+							colorPalette('h', 10, 5);
 						// ]]>
 						</script>
 					</dt>

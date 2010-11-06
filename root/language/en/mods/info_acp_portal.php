@@ -35,6 +35,7 @@ if (empty($lang) || !is_array($lang))
 
 // @todo: check for unneeded language variables
 // @todo: change language variables to English ones
+// @todo: merge into mods/portal/
 
 $lang = array_merge($lang, array(
 	// Manage blocks
