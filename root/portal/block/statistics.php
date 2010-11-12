@@ -114,22 +114,22 @@ $topics_count = get_topics_count();
 
 // Assign specific vars
 $template->assign_vars(array(
-	'S_DISPLAY_ADVANCED_STAT'	=> true,
-	'TOTAL_POSTS'				=> sprintf($user->lang[$l_total_post_s], $total_posts),
-	'TOTAL_TOPICS'				=> sprintf($user->lang[$l_total_topic_s], $total_topics),
-	'TOTAL_USERS'				=> sprintf($user->lang[$l_total_user_s], $total_users),
-	'NEWEST_USER'				=> sprintf($user->lang['NEWEST_USER'], get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
-	'S_ANN'						=> $topics_count[POST_ANNOUNCE],
-	'S_SCT'						=> $topics_count[POST_STICKY],
-	'S_TOT_ATTACH'				=> ($config['allow_attachments']) ? $total_files : 0,
+	'S_DISPLAY_ADVANCED_STAT'		=> true,
+	'B3_TOTAL_POSTS'				=> sprintf($user->lang[$l_total_post_s], $total_posts),
+	'B3_TOTAL_TOPICS'				=> sprintf($user->lang[$l_total_topic_s], $total_topics),
+	'B3_TOTAL_USERS'				=> sprintf($user->lang[$l_total_user_s], $total_users),
+	'B3_NEWEST_USER'				=> sprintf($user->lang['NEWEST_USER'], get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
+	'B3_ANNOUNCE_COUNT'				=> $topics_count[POST_ANNOUNCE],
+	'B3_STICKY_COUNT'				=> $topics_count[POST_STICKY],
+	'B3_TOTAL_ATTACH'				=> ($config['allow_attachments']) ? $total_files : 0,
 
-	// avarage stat
-	'TOPICS_PER_DAY'	=> sprintf($user->lang[$l_topics_per_day_s], $topics_per_day),
-	'POSTS_PER_DAY'		=> sprintf($user->lang[$l_posts_per_day_s], $posts_per_day),
-	'USERS_PER_DAY'		=> sprintf($user->lang[$l_users_per_day_s], $users_per_day),
-	'TOPICS_PER_USER'	=> sprintf($user->lang[$l_topics_per_user_s], $topics_per_user),
-	'POSTS_PER_USER'	=> sprintf($user->lang[$l_posts_per_user_s], $posts_per_user),
-	'POSTS_PER_TOPIC'	=> sprintf($user->lang[$l_posts_per_topic_s], $posts_per_topic),
+	// average stat
+	'B3_TOPICS_PER_DAY'		=> sprintf($user->lang[$l_topics_per_day_s], $topics_per_day),
+	'B3_POSTS_PER_DAY'		=> sprintf($user->lang[$l_posts_per_day_s], $posts_per_day),
+	'B3_USERS_PER_DAY'		=> sprintf($user->lang[$l_users_per_day_s], $users_per_day),
+	'B3_TOPICS_PER_USER'	=> sprintf($user->lang[$l_topics_per_user_s], $topics_per_user),
+	'B3_POSTS_PER_USER'		=> sprintf($user->lang[$l_posts_per_user_s], $posts_per_user),
+	'B3_POSTS_PER_TOPIC'	=> sprintf($user->lang[$l_posts_per_topic_s], $posts_per_topic),
 ));
 
 ?>
