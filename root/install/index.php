@@ -110,6 +110,7 @@ class module
 
 				case 'mssql':
 				case 'mssql_odbc':
+				case 'mssqlnative':
 					$sql = "SELECT name
 						FROM sysobjects
 						WHERE type='U'";
