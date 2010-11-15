@@ -86,10 +86,23 @@ while ($row = $db->sql_fetchrow($result))
 		continue;
 	}
 
-	$template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
-		'TEMPLATE_FILE'		=> 'portal/modules/' . $template_module,
-		'IMAGE_SRC'			=> $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $row['module_image_src'],
-	));
+	// Custom Blocks that have been defined in the ACP will return an array instead of just the name of the template file
+	if(is_array($template_module))
+	{
+		$template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
+			'TEMPLATE_FILE'		=> 'portal/modules/' . $template_module['template'],
+			'IMAGE_SRC'			=> $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $template_module['image_src'],
+			'TITLE'				=> $template_module['title'],
+			'CODE'				=> $template_module['code'],
+		));
+	}
+	else
+	{
+		$template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
+			'TEMPLATE_FILE'		=> 'portal/modules/' . $template_module,
+			'IMAGE_SRC'			=> $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $row['module_image_src'],
+		));
+	}
 	unset($template_module);
 }
 $db->sql_freeresult($result);
