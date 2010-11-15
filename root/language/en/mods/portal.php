@@ -36,6 +36,7 @@ if (empty($lang) || !is_array($lang))
 
 // Common
 $lang = array_merge($lang, array(
-	'PORTAL'	=> 'Portal',
+	'PORTAL'		=> 'Portal',
+	'NO_MODULES'	=> 'No modules have been detected.',
 ));
 ?>
