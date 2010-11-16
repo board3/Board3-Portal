@@ -43,6 +43,13 @@ class acp_portal
 
 		$user->add_lang('mods/portal');
 		$submit = (isset($_POST['submit'])) ? true : false;
+		
+		// install modules first if this is the first visit
+		if($config['board3_first_install'])
+		{
+			set_config('board3_first_install', 0);
+			board3_basic_install(true, $this->u_action);
+		}
 
 		$form_key = 'acp_portal';
 		add_form_key($form_key);

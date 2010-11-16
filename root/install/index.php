@@ -52,7 +52,7 @@ $language_file = 'mods/info_acp_portal';
 * The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 */
 $versions = array(
-	'2.0.0-dev1' => array(
+	'2.0.0-dev2' => array(
 
 		'permission_add' => array(
 			array('a_portal'),
@@ -88,13 +88,14 @@ $versions = array(
 		),
 
 		'config_add' => array(
-			array('board3_enable', '1', 0),
-			array('board3_left_column', '1', 0),
-			array('board3_right_column', '1', 0),
-			array('board3_version_check', '1', 0),
-			array('board3_forum_index', '1', 0),
-			array('board3_left_column_width', '180', 0),
-			array('board3_right_column_width', '180', 0),
+			array('board3_enable', 1, 0),
+			array('board3_left_column', 1, 0),
+			array('board3_right_column', 1, 0),
+			array('board3_version_check', 1, 0),
+			array('board3_forum_index', 1, 0),
+			array('board3_left_column_width', 180, 0),
+			array('board3_right_column_width', 180, 0),
+			array('board3_first_install', 1, 0), // this will tell board3 portal to install the basic modules
 		),
 
 		'module_add' => array(
