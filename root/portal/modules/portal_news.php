@@ -58,7 +58,7 @@ class portal_news_module
 
 		// Fetch news from portal/includes/functions.php with check if "read full" is requested.
 		$portal_news_length = ($news < 0) ? $config['board3_news_length_' . $module_id] : 0;
-		$fetch_news = phpbb_fetch_posts($config['board3_news_forum_' . $module_id], $config['board3_news_permissions_' . $module_id], $config['board3_number_of_news_' . $module_id], $portal_news_length, 0, ($config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news', $start, $config['board3_news_exclude_' . $module_id]);
+		$fetch_news = phpbb_fetch_posts($module_id, $config['board3_news_forum_' . $module_id], $config['board3_news_permissions_' . $module_id], $config['board3_number_of_news_' . $module_id], $portal_news_length, 0, ($config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news', $start, $config['board3_news_exclude_' . $module_id]);
 
 
 		// Any news present? If not terminate it here.

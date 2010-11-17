@@ -60,7 +60,7 @@ function set_portal_config($config_name, $config_value)
 }
 
 // fetch post for news & announce
-function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0, $invert = false)
+function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0, $invert = false)
 {
 	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode, $portal_config, $config;
 
@@ -127,16 +127,16 @@ function phpbb_fetch_posts($forum_from, $permissions, $number_of_posts, $text_le
 		case "news":
 			$topic_type = 't.topic_type = ' . POST_NORMAL;
 			$str_where = (strlen($str_where) > 0) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
-			$user_link = ($config['board3_news_style']) ? 't.topic_poster = u.user_id' : (($config['board3_news_show_last']) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
-			$post_link = ($config['board3_news_style']) ? 't.topic_first_post_id = p.post_id' : (($config['board3_news_show_last']) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
-			$topic_order = ($config['board3_news_show_last']) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+			$user_link = ($config['board3_news_style_' . $module_id]) ? 't.topic_poster = u.user_id' : (($config['board3_news_show_last_' . $module_id]) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
+			$post_link = ($config['board3_news_style_' . $module_id]) ? 't.topic_first_post_id = p.post_id' : (($config['board3_news_show_last_' . $module_id]) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
+			$topic_order = ($config['board3_news_show_last_' . $module_id]) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
 		break;
 		case "news_all":
 			$topic_type = '(t.topic_type <> ' . POST_ANNOUNCE . ') AND (t.topic_type <> ' . POST_GLOBAL . ')';
 			$str_where = (strlen($str_where) > 0) ? 'AND (' . trim(substr($str_where, 0, -4)) . ')' : '';
-			$user_link = ($config['board3_news_style']) ? 't.topic_poster = u.user_id' : (($config['board3_news_show_last']) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
-			$post_link = ($config['board3_news_style']) ? 't.topic_first_post_id = p.post_id' : (($config['board3_news_show_last']) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
-			$topic_order = ($config['board3_news_show_last']) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+			$user_link = ($config['board3_news_style_' . $module_id]) ? 't.topic_poster = u.user_id' : (($config['board3_news_show_last_' . $module_id]) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
+			$post_link = ($config['board3_news_style_' . $module_id]) ? 't.topic_first_post_id = p.post_id' : (($config['board3_news_show_last_' . $module_id]) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
+			$topic_order = ($config['board3_news_show_last_' . $module_id]) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
 		break;
 	}
 

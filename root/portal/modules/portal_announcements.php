@@ -57,7 +57,7 @@ class portal_announcements_module
 
 		// Fetch announcements from portal/includes/functions.php with check if "read full" is requested.
 		$portal_announcement_length = ($announcement < 0) ? $config['board3_announcements_length_' . $module_id] : 0;
-		$fetch_news = phpbb_fetch_posts($config['board3_global_announcements_forum_' . $module_id], $config['board3_announcements_permissions_' . $module_id], $config['board3_number_of_announcements_' . $module_id], $portal_announcement_length, $config['board3_announcements_day_' . $module_id], 'announcements', $start, $config['board3_announcements_forum_exclude_' . $module_id]);
+		$fetch_news = phpbb_fetch_posts($module_id, $config['board3_global_announcements_forum_' . $module_id], $config['board3_announcements_permissions_' . $module_id], $config['board3_number_of_announcements_' . $module_id], $portal_announcement_length, $config['board3_announcements_day_' . $module_id], 'announcements', $start, $config['board3_announcements_forum_exclude_' . $module_id]);
 
 		// Any announcements present? If not terminate it here.
 		if (sizeof($fetch_news) == 0)
