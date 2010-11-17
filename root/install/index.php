@@ -20,6 +20,10 @@ if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 {
 	trigger_error('Please download the latest UMIL (Unified MOD Install Library) from: <a href="http://www.phpbb.com/mods/umil/">phpBB.com/mods/umil</a>', E_USER_ERROR);
 }
+if(!function_exists('board3_basic_install'))
+{
+	include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
+}
 
 // The name of the mod to be displayed during installation.
 $mod_name = 'Board3 Portal';
@@ -83,7 +87,7 @@ $versions = array(
 				),
 				
 				'PRIMARY_KEY'	=> 'config_name',
-			));
+			)),
 
 		),
 
@@ -95,7 +99,6 @@ $versions = array(
 			array('board3_forum_index', 1, 0),
 			array('board3_left_column_width', 180, 0),
 			array('board3_right_column_width', 180, 0),
-			array('board3_first_install', 1, 0), // this will tell board3 portal to install the basic modules
 		),
 
 		'module_add' => array(
@@ -118,6 +121,7 @@ $versions = array(
 				),
 			),
 		),
+		'custom'	=> array('board3_basic_install'),
 
 	),
 );

@@ -64,6 +64,10 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEFT_COLUMN_WIDTH_EXP'		=> 'Change the width of the left column in pixels; recommended value is 180',
 	'PORTAL_RIGHT_COLUMN_WIDTH'			=> 'Width of the right column',
 	'PORTAL_RIGHT_COLUMN_WIDTH_EXP'		=> 'Change the width of the right column in pixels; recommended value is 180',
+	
+	// Install
+	'PORTAL_BASIC_INSTALL'			=> 'Adding basic set of modules',
+	'PORTAL_BASIC_UNINSTALL'		=> 'Removing modules from database',
 
 	
 	// Portal Modules

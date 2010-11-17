@@ -9,7 +9,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
+if (!defined('IN_PHPBB') && !defined('UMIL_AUTO') && !defined('IN_INSTALL'))
 {
    exit;
 }
@@ -815,85 +815,97 @@ function get_portal_tracking_info($fetch_news)
 * !! this function should usually only be executed once upon installing the portal !!
 * DO NOT set $purge_modules to false unless you want to auto-add all modules again after deleting them (i.e. if your database was corrupted)
 */
-function board3_basic_install($purge_modules = true, $u_action)
+function board3_basic_install($mode = 'install', $purge_modules = true, $u_action = '')
 {
-	global $db, $phpbb_root_path, $phpEx, $cache, $user;
+	global $db, $phpbb_root_path, $phpEx, $cache, $user, $table_prefix;
 	
-	$directory = $phpbb_root_path . 'portal/modules/';
-	
-	if($purge_modules)
+	if(!defined('PORTAL_MODULES_TABLE'))
 	{
-		$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE;
-		$result = $db->sql_query($sql);
-		$db->sql_freeresult($result);
+		include($phpbb_root_path . 'portal/includes/constants.' . $phpEx);
 	}
 	
-	/* 
-	* this is a list of the basic modules that will be installed
-	* module_name => array(module_column, module_order)
-	*/
-	$modules_ary = array(
-		// left column
-		'portal_main_menu' 		=> array(1, 1),
-		'portal_stylechanger'	=> array(1, 2),
-		'portal_birthday_list'	=> array(1, 3),
-		'portal_clock'			=> array(1, 4),
-		'portal_search'			=> array(1, 5),
-		'portal_random_member'	=> array(1, 6),
-		'portal_attachments'	=> array(1, 7),
-		'portal_topposters'		=> array(1, 8),
-		'portal_latest_members'	=> array(1, 9),
-		'portal_link_us'		=> array(1, 10),
-		
-		// center column
-		'portal_welcome'		=> array(2, 1),
-		'portal_recent'			=> array(2, 2),
-		'portal_announcements'	=> array(2, 3),
-		'portal_news'			=> array(2, 4),
-		'portal_poll'			=> array(2, 5),
-		'portal_whois_online'	=> array(2, 6),
-		// 'portal_jumpbox'		=> array(2, 7),
-		
-		// right column
-		'portal_user_menu'		=> array(3, 1),
-		'portal_statistics'		=> array(3, 2),
-		'portal_calendar'		=> array(3, 3),
-		'portal_leaders'		=> array(3, 4),
-		'portal_latest_bots'	=> array(3, 5),
-		'portal_links'			=> array(3, 6),
-	);
-	
-	foreach($modules_ary as $module_name => $module_data)
+	if($mode == 'install')
 	{
-		$class_name = $module_name . '_module';
-		if (!class_exists($class_name))
+		$directory = $phpbb_root_path . 'portal/modules/';
+		
+
+		
+		if($purge_modules)
 		{
-			include($directory . $module_name . '.' . $phpEx);
-		}
-		if (!class_exists($class_name))
-		{
-			trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
+			$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE;
+			$result = $db->sql_query($sql);
+			$db->sql_freeresult($result);
 		}
 		
-		$c_class = new $class_name();
-
-		$sql_ary = array(
-			'module_classname'	=> substr($module_name, 7),
-			'module_column'		=> $module_data[0],
-			'module_order'		=> $module_data[1],
-			'module_name'		=> $c_class->name,
-			'module_image_src'	=> $c_class->image_src,
-			'module_group_ids'	=> '',
+		/* 
+		* this is a list of the basic modules that will be installed
+		* module_name => array(module_column, module_order)
+		*/
+		$modules_ary = array(
+			// left column
+			'portal_main_menu' 		=> array(1, 1),
+			'portal_stylechanger'	=> array(1, 2),
+			'portal_birthday_list'	=> array(1, 3),
+			'portal_clock'			=> array(1, 4),
+			'portal_search'			=> array(1, 5),
+			'portal_random_member'	=> array(1, 6),
+			'portal_attachments'	=> array(1, 7),
+			'portal_topposters'		=> array(1, 8),
+			'portal_latest_members'	=> array(1, 9),
+			'portal_link_us'		=> array(1, 10),
+			
+			// center column
+			'portal_welcome'		=> array(2, 1),
+			'portal_recent'			=> array(2, 2),
+			'portal_announcements'	=> array(2, 3),
+			'portal_news'			=> array(2, 4),
+			'portal_poll'			=> array(2, 5),
+			'portal_whois_online'	=> array(2, 6),
+			// 'portal_jumpbox'		=> array(2, 7),
+			
+			// right column
+			'portal_user_menu'		=> array(3, 1),
+			'portal_statistics'		=> array(3, 2),
+			'portal_calendar'		=> array(3, 3),
+			'portal_leaders'		=> array(3, 4),
+			'portal_latest_bots'	=> array(3, 5),
+			'portal_links'			=> array(3, 6),
 		);
-		$sql = 'INSERT INTO ' . PORTAL_MODULES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
-		$db->sql_query($sql);
+		
+		foreach($modules_ary as $module_name => $module_data)
+		{			
+			$class_name = $module_name . '_module';
+			if (!class_exists($class_name))
+			{
+				include($directory . $module_name . '.' . $phpEx);
+			}
+			if (!class_exists($class_name))
+			{
+				trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
+			}
+			
+			$c_class = new $class_name();
 
-		$c_class->install($db->sql_nextid());
+			$sql_ary = array(
+				'module_classname'	=> substr($module_name, 7),
+				'module_column'		=> $module_data[0],
+				'module_order'		=> $module_data[1],
+				'module_name'		=> $c_class->name,
+				'module_image_src'	=> $c_class->image_src,
+				'module_group_ids'	=> '',
+			);
+			$sql = 'INSERT INTO ' . PORTAL_MODULES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
+			$db->sql_query($sql);
+
+			$c_class->install($db->sql_nextid());
+		}
+
+		return $user->lang['PORTAL_BASIC_INSTALL'];
 	}
-	
-	$cache->purge(); // make sure we don't get errors after re-adding a module
-
-	trigger_error($user->lang['SUCCESS_ADD'] . adm_back_link($u_action));
+	else
+	{
+		return $user->lang['PORTAL_BASIC_UNINSTALL'];
+	}
 } 
 
 ?>
