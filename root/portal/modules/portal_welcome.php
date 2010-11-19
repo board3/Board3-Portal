@@ -89,7 +89,6 @@ class portal_welcome_module
 		set_config('board3_welcome_message_' . $module_id, '');
 		set_config('board3_welcome_message_uid_' . $module_id, '');
 		set_config('board3_welcome_message_bitfield_' . $module_id, '');
-		set_config('board3_welcome_groups_' . $module_id, '');
 		return true;
 	}
 
@@ -107,7 +106,6 @@ class portal_welcome_module
 
 		$del_config = array(
 			'board3_welcome_intro_' . $module_id,
-			'board3_welcome_groups_' . $module_id,
 			'board3_welcome_message_uid_' . $module_id,
 			'board3_welcome_message_bitfield_' . $module_id,
 		);
@@ -138,8 +136,6 @@ class portal_welcome_module
 				}
 
 				$welcome_message = utf8_normalize_nfc(request_var('welcome_message', '', true));
-				$welcome_permission = request_var('permission-setting', array(0 => ''));
-				$groups_ary = array();
 				$uid = $bitfield = $flags = '';
 				$options = 7;
 				generate_text_for_storage($welcome_message, $uid, $bitfield, $flags, true, true, true);
@@ -151,20 +147,6 @@ class portal_welcome_module
 					trigger_error($user->lang['ACP_PORTAL_WELCOME_MESSAGE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
 				}
 				
-				// get groups and check if the selected groups actually exist
-				$sql = 'SELECT group_id
-						FROM ' . GROUPS_TABLE . '
-						ORDER BY group_id ASC';
-				$result = $db->sql_query($sql);
-				while($row = $db->sql_fetchrow($result))
-				{
-					$groups_ary[] = $row['group_id'];
-				}
-				$db->sql_freeresult($result);
-				
-				$welcome_permission = array_intersect($welcome_permission, $groups_ary);
-				$welcome_permission = implode(',', $welcome_permission);
-
 				add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['PORTAL_WELCOME']);
 				
 				// set_portal_config will take care of escaping the welcome message
@@ -178,8 +160,7 @@ class portal_welcome_module
 			
 			case 'preview':
 				$welcome_message = $text = utf8_normalize_nfc(request_var('welcome_message', '', true));
-				$welcome_permission = request_var('permission-setting', array(0 => ''));
-				$groups_ary = array();
+
 				if (!class_exists('parse_message'))
 				{
 					include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
@@ -197,19 +178,6 @@ class portal_welcome_module
 					'PREVIEW_TEXT'		=> $text,
 					'S_PREVIEW'			=> true,
 				));
-				
-				// get groups and check if the selected groups actually exist
-				$sql = 'SELECT group_id
-						FROM ' . GROUPS_TABLE . '
-						ORDER BY group_id ASC';
-				$result = $db->sql_query($sql);
-				while($row = $db->sql_fetchrow($result))
-				{
-					$groups_ary[] = $row['group_id'];
-				}
-				$db->sql_freeresult($result);
-				
-				$temp_permissions = array_intersect($welcome_permission, $groups_ary);
 
 			// Edit or add menu item
 			case 'reset':
@@ -231,23 +199,6 @@ class portal_welcome_module
 					'S_BBCODE_ALLOWED'		=> true,
 					'MAX_FONT_SIZE'			=> (int) $config['max_post_font_size'],
 				));
-				
-				$groups_ary = (isset($temp_permissions)) ? $temp_permissions : ((isset($config['board3_welcome_groups_' . $module_id])) ? explode(',', $config['board3_welcome_groups_' . $module_id]) : array());
-				
-				// get group info from database and assign the block vars
-				$sql = 'SELECT group_id, group_name 
-						FROM ' . GROUPS_TABLE . '
-						ORDER BY group_id ASC';
-				$result = $db->sql_query($sql);
-				while($row = $db->sql_fetchrow($result))
-				{
-					$template->assign_block_vars('permission_setting', array(
-						'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
-						'GROUP_NAME'	=> (isset($user->lang['G_' . $row['group_name']])) ? $user->lang['G_' . $row['group_name']] : $row['group_name'],
-						'GROUP_ID'		=> $row['group_id'],
-					));
-				}
-				$db->sql_freeresult($result);
 				
 				if(!function_exists('display_forums'))
 				{

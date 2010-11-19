@@ -39,9 +39,6 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_WELCOME_PREVIEW'			=> 'Welcome Message Preview',
 	'ACP_PORTAL_WELCOME_MESSAGE'			=> 'Welcome Message',
 	'ACP_PORTAL_WELCOME_MESSAGE_EXP'		=> 'You can change the welcome message in the textbox. BBCode, Images and URLs are allowed.',
-	'ACP_PORTAL_WELCOME_PERMISSION'			=> 'Welcome message permissions',
-	'ACP_PORTAL_WELCOME_PERMISSION_EXP'		=> 'Select the groups that should be able to view the welcome message. If you want all users to be able to view the welcome message, don´t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
-	
 ));
 
 ?>

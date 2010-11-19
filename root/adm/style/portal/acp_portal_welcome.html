@@ -604,19 +604,6 @@
 			</dt>
 			<dd><textarea name="welcome_message" id="welcome_message" cols="6" rows="12">{WELCOME_MESSAGE}</textarea></dd>
 		</dl>
-		<dl>
-			<dt>
-				<label for="permission-setting">{L_ACP_PORTAL_WELCOME_PERMISSION}:</label><br />
-				<span>{L_ACP_PORTAL_WELCOME_PERMISSION_EXP}</span>
-			</dt>
-			<dd>
-				<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
-					<!-- BEGIN permission_setting -->
-					<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
-					<!-- END permission_setting -->
-				</select>
-			</dd>
-		</dl>
 <!-- IF S_AUTH -->
 	<!-- BEGIN auth_tpl -->
 		{auth_tpl.TPL}
