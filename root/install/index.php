@@ -103,20 +103,20 @@ $versions = array(
 
 		'module_add' => array(
 			array('acp', 'ACP_CAT_DOT_MODS', 'ACP_PORTAL'),
-			
-			array('acp', 'ACP_PORTAL', array(
-					'module_basename'	=> 'portal',
-					'module_langname'	=> 'ACP_PORTAL_MODULES',
-					'module_mode'		=> 'modules',
-					'module_auth'		=> 'acl_a_portal',
-				),
-			),
-			
+
 			array('acp', 'ACP_PORTAL', array(
 				
 					'module_basename'	=> 'portal',
 					'module_langname'	=> 'ACP_PORTAL_GENERAL_INFO',
 					'module_mode' 		=> 'config',
+					'module_auth'		=> 'acl_a_portal',
+				),
+			),
+			
+			array('acp', 'ACP_PORTAL', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_MODULES',
+					'module_mode'		=> 'modules',
 					'module_auth'		=> 'acl_a_portal',
 				),
 			),
