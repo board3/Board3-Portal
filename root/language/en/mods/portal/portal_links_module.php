@@ -37,7 +37,15 @@ $lang = array_merge($lang, array(
 	// ACP
 	'ACP_PORTAL_LINKS'				=> 'Link Settings',
 	'ACP_PORTAL_LINKS_EXP'			=> 'Customize the links listed in the links block',
-	// @todo: Add necessary language variables
+	'ACP_PORTAL_LINK_TITLE'			=> 'Title',
+	'ACP_PORTAL_LINK_TYPE'			=> 'Link type',
+	'ACP_PORTAL_LINK_TYPE_EXP'		=> 'If you have a link to a page of your board, choose "Internal link" in order to prevent unwanted logouts.',
+	'ACP_PORTAL_LINK_INT'			=> 'Internal link',
+	'ACP_PORTAL_LINK_EXT'			=> 'External link',
+	'ACP_PORTAL_LINK_URL'			=> 'Link URL',
+	'ACP_PORTAL_LINK_URL_EXP'		=> 'External links:<br />All links should be entered with a http://<br /><br />Internal links:<br />Only enter the php file as link url, i.e. index.php?style=4.',
+	'ACP_PORTAL_LINK_PERMISSION'	=> 'Link permissions',
+	'ACP_PORTAL_LINK_PERMISSION_EXP'=> 'Select the groups that should be authorized to view the link. If you want all users to be able to view the link, don’t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
 ));
 
 ?>

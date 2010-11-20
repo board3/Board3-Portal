@@ -72,14 +72,14 @@
 	</dl>
 	<dl>
 		<dt>
-			<label for="permission-setting">{L_ACP_PORTAL_CALENDAR_PERMISSION}:</label><br />
+			<label for="permission-setting-calendar">{L_ACP_PORTAL_CALENDAR_PERMISSION}:</label><br />
 			<span>{L_ACP_PORTAL_CALENDAR_PERMISSION_EXP}</span>
 		</dt>
 		<dd>
-			<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
-				<!-- BEGIN permission_setting -->
-				<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
-				<!-- END permission_setting -->
+			<select id="permission-setting-calendar" size="10" multiple="multiple" name="permission-setting-calendar[]">
+				<!-- BEGIN permission_setting_calendar -->
+				<option value="{permission_setting_calendar.GROUP_ID}"<!-- IF permission_setting_calendar.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting_calendar.GROUP_NAME}</option>
+				<!-- END permission_setting_calendar -->
 			</select>
 		</dd>
 	</dl>
@@ -107,8 +107,18 @@
 			<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
 			<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
 		</dl>
+		<dl>
+			<dt><label for="permission-setting">{L_MODULE_PERMISSIONS}:</label><br /><span>{L_MODULE_PERMISSIONS_EXP}</span></dt>
+			<dd>
+				<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
+					<!-- BEGIN permission_setting -->
+					<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
+					<!-- END permission_setting -->
+				</select>
+			</dd>
+		</dl>
 	</fieldset>
-	<!-- ENDIF -->	
+	<!-- ENDIF -->
 <!-- BEGIN options -->
 	<!-- IF options.S_LEGEND -->
 		<!-- IF not options.S_FIRST_ROW -->
@@ -132,7 +142,7 @@
 	<fieldset class="tabulated">
 
 	<p class="quick">
-		<input class="button2" name="add" type="submit" value="{L_ADD_LINK}" />
+		<input class="button2" name="add" type="submit" value="{L_ADD_EVENT}" />
 	</p>
 
 	<table cellspacing="1">

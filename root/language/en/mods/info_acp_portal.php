@@ -85,11 +85,13 @@ $lang = array_merge($lang, array(
 	'SUCCESS_ADD'					=> 'The module was added successfully.',
 	'SUCCESS_DELETE'				=> 'The module was removed successfully.',
 	
-	'MODULE_OPTIONS'		=> 'Module options',
-	'MODULE_NAME'			=> 'Module name',
-	'MODULE_NAME_EXP'	=> 'Enter the name of the Module that should be displayed in the Module configuration.',
-	'MODULE_IMAGE'			=> 'Module image',
-	'MODULE_IMAGE_EXP'	=> 'Enter the filename of the module image. Images need to be in styles/*yourstyle*/theme/images/portal/',
+	'MODULE_OPTIONS'			=> 'Module options',
+	'MODULE_NAME'				=> 'Module name',
+	'MODULE_NAME_EXP'			=> 'Enter the name of the Module that should be displayed in the Module configuration.',
+	'MODULE_IMAGE'				=> 'Module image',
+	'MODULE_IMAGE_EXP'			=> 'Enter the filename of the module image. Images need to be in styles/*yourstyle*/theme/images/portal/',
+	'MODULE_PERMISSIONS'		=> 'Module permissions',
+	'MODULE_PERMISSIONS_EXP'	=> 'Select the groups that should be authorized to view the module. If you want all users to be able to view the module, don’t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
 
 	// Manage links
 	'ACP_EXPRESS_LINKS_EXPLAIN'	=> 'Using this form you can add, edit, view and delete navigation links on the index page. You can also create special navigation links as categories which aren’t clickable links.',

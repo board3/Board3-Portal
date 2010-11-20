@@ -51,6 +51,18 @@
 				<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
 				<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
 			</dl>
+			<!-- IF permission_setting -->
+			<dl>
+				<dt><label for="permission-setting">{L_MODULE_PERMISSIONS}:</label><br /><span>{L_MODULE_PERMISSIONS_EXP}</span></dt>
+				<dd>
+					<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
+						<!-- BEGIN permission_setting -->
+						<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
+						<!-- END permission_setting -->
+					</select>
+				</dd>
+			</dl>
+			<!-- ENDIF -->
 		</fieldset>
 <!-- ENDIF -->
 <!-- BEGIN options -->

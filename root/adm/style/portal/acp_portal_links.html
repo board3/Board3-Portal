@@ -17,38 +17,38 @@
 	<form id="acp_portal_links" method="post" action="{U_ACTION}">
 
 	<fieldset>
-		<legend>{L_ACP_PORTAL_MENU_LINK}</legend>
+		<legend>{L_ACP_PORTAL_LINKS}</legend>
 	<dl>
-		<dt><label for="link_title">{L_LINK_TITLE}:</label></dt>
+		<dt><label for="link_title">{L_ACP_PORTAL_LINK_TITLE}:</label></dt>
 		<dd><input name="link_title" type="text" id="link_title" value="{LINK_TITLE}" maxlength="255" /></dd>
 	</dl>
 	<dl>
 		<dt>
-			<label for="link_type">{L_ACP_PORTAL_MENU_TYPE}:</label><br />
-			<span>{L_ACP_PORTAL_MENU_TYPE_EXP}</span>
+			<label for="link_type">{L_ACP_PORTAL_LINK_TYPE}:</label><br />
+			<span>{L_ACP_PORTAL_LINK_TYPE_EXP}</span>
 		</dt>
 		<dd>
-			<label><input type="radio" class="radio" name="link_type" value="1" id="link_type"<!-- IF S_LINK_IS_INT --> checked="checked"<!-- ENDIF --> />{L_ACP_PORTAL_MENU_INT}</label>
-			<label><input type="radio" class="radio" name="link_type" value="2"<!-- IF not S_LINK_IS_INT --> checked="checked"<!-- ENDIF --> /> {L_ACP_PORTAL_MENU_EXT}</label>
+			<label><input type="radio" class="radio" name="link_type" value="1" id="link_type"<!-- IF S_LINK_IS_INT --> checked="checked"<!-- ENDIF --> />{L_ACP_PORTAL_LINK_INT}</label>
+			<label><input type="radio" class="radio" name="link_type" value="2"<!-- IF not S_LINK_IS_INT --> checked="checked"<!-- ENDIF --> /> {L_ACP_PORTAL_LINK_EXT}</label>
 		</dd>
 	</dl>
 	<dl>
 		<dt>
-			<label for="link_url">{L_ACP_PORTAL_MENU_URL}:</label><br />
-			<span>{L_ACP_PORTAL_MENU_URL_EXP}</span>
+			<label for="link_url">{L_ACP_PORTAL_LINK_URL}:</label><br />
+			<span>{L_ACP_PORTAL_LINK_URL_EXP}</span>
 		</dt>
 		<dd><input name="link_url" type="text" id="link_url" value="{LINK_URL}" maxlength="255" /></dd>
 	</dl>
 	<dl>
 		<dt>
-			<label for="permission-setting">{L_ACP_PORTAL_MENU_PERMISSION}:</label><br />
-			<span>{L_ACP_PORTAL_MENU_PERMISSION_EXP}</span>
+			<label for="permission-setting-link">{L_ACP_PORTAL_LINK_PERMISSION}:</label><br />
+			<span>{L_ACP_PORTAL_LINK_PERMISSION_EXP}</span>
 		</dt>
 		<dd>
-			<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
-				<!-- BEGIN permission_setting -->
-				<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
-				<!-- END permission_setting -->
+			<select id="permission-setting-link" size="10" multiple="multiple" name="permission-setting-link[]">
+				<!-- BEGIN permission_setting_link -->
+				<option value="{permission_setting_link.GROUP_ID}"<!-- IF permission_setting_link.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting_link.GROUP_NAME}</option>
+				<!-- END permission_setting_link -->
 			</select>
 		</dd>
 	</dl>
@@ -76,6 +76,18 @@
 			<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
 			<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
 		</dl>
+		<!-- IF permission_setting -->
+		<dl>
+			<dt><label for="permission-setting">{L_MODULE_PERMISSIONS}:</label><br /><span>{L_MODULE_PERMISSIONS_EXP}</span></dt>
+			<dd>
+				<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
+					<!-- BEGIN permission_setting -->
+					<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
+					<!-- END permission_setting -->
+				</select>
+			</dd>
+		</dl>
+		<!-- ENDIF -->
 	</fieldset>
 	<!-- ENDIF -->	
 

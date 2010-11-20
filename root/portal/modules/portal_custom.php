@@ -76,12 +76,15 @@ class portal_custom_module
 		
 		$title = (!empty($config['board3_custom_' . $module_id . '_title'])) ? ((isset($user->lang[$config['board3_custom_' . $module_id . '_title']])) ? $user->lang[$config['board3_custom_' . $module_id . '_title']] : $config['board3_custom_' . $module_id . '_title']) : $user->lang[$this->name];
 
-		return array(
-			'template'	=> 'custom_center.html',
-			'title'		=> $title,
-			'code'		=> $assign_code,
-			'image_src'	=> '', // no image for center blocks
-		);
+		if(!empty($assign_code))
+		{
+			return array(
+				'template'	=> 'custom_center.html',
+				'title'		=> $title,
+				'code'		=> $assign_code,
+				'image_src'	=> '', // no image for center blocks
+			);
+		}
 	}
 
 	function get_template_side($module_id)
@@ -109,12 +112,15 @@ class portal_custom_module
 		
 		$title = (!empty($config['board3_custom_' . $module_id . '_title'])) ? ((isset($user->lang[$config['board3_custom_' . $module_id . '_title']])) ? $user->lang[$config['board3_custom_' . $module_id . '_title']] : $config['board3_custom_' . $module_id . '_title']) : $user->lang[$this->name];
 
-		return array(
-			'template'	=> 'custom_side.html',
-			'title'		=> $title,
-			'code'		=> $assign_code,
-			'image_src'	=> (!empty($config['board3_custom_' . $module_id . '_image_src'])) ? $config['board3_custom_' . $module_id . '_image_src'] : $this->image_src,
-		);
+		if(!empty($assign_code))
+		{
+			return array(
+				'template'	=> 'custom_side.html',
+				'title'		=> $title,
+				'code'		=> $assign_code,
+				'image_src'	=> (!empty($config['board3_custom_' . $module_id . '_image_src'])) ? $config['board3_custom_' . $module_id . '_image_src'] : $this->image_src,
+			);
+		}
 	}
 
 	function get_template_acp($module_id)

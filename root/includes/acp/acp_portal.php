@@ -113,6 +113,26 @@ class acp_portal
 							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $module_data['module_image_src'] : '',
 						));
 						
+						if($module_data['module_classname'] != 'custom')
+						{
+							$groups_ary = explode(',', $module_data['module_group_ids']);
+					
+							// get group info from database and assign the block vars
+							$sql = 'SELECT group_id, group_name 
+									FROM ' . GROUPS_TABLE . '
+									ORDER BY group_id ASC';
+							$result = $db->sql_query($sql);
+							while($row = $db->sql_fetchrow($result))
+							{
+								$template->assign_block_vars('permission_setting', array(
+									'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
+									'GROUP_NAME'	=> (isset($user->lang['G_' . $row['group_name']])) ? $user->lang['G_' . $row['group_name']] : $row['group_name'],
+									'GROUP_ID'		=> $row['group_id'],
+								));
+							}
+							$db->sql_freeresult($result);
+						}
+						
 						$template->assign_var('SHOW_MODULE_OPTIONS', true);
 					}
 				}
@@ -170,9 +190,28 @@ class acp_portal
 
 				if ($submit)
 				{
+					$module_permission = request_var('permission-setting', array(0 => ''));
+					$groups_ary = array();
+					
+					// get groups and check if the selected groups actually exist
+					$sql = 'SELECT group_id
+							FROM ' . GROUPS_TABLE . '
+							ORDER BY group_id ASC';
+					$result = $db->sql_query($sql);
+					while($row = $db->sql_fetchrow($result))
+					{
+						$groups_ary[] = $row['group_id'];
+					}
+					$db->sql_freeresult($result);
+					
+					$module_permission = array_intersect($module_permission, $groups_ary);
+					$module_permission = implode(',', $module_permission);
+					
+					
 					$sql_ary = array(
 						'module_image_src'	=> request_var('module_image', ''),
 						'module_name'		=> request_var('module_name', '', true),
+						'module_group_ids'	=> $module_permission,
 					);
 
 					$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
@@ -182,7 +221,7 @@ class acp_portal
 
 					$cache->destroy('sql', CONFIG_TABLE);
 					add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']);
-					trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_root_path}/adm/index.$phpEx", 'i=portal&mode=modules') : $this->u_action));
+					trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_root_path}adm/index.$phpEx", 'i=portal&mode=modules') : $this->u_action));
 				}
 
 				// show custom HTML files on the settings page of the modules instead of the standard board3 portal one, if chosen by module

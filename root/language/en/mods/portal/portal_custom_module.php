@@ -41,7 +41,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_CUSTOM_CODE'				=> 'Custom Block Code',
 	'ACP_PORTAL_CUSTOM_CODE_EXP'			=> 'Change the code for the small custom block (HTML or BBCode) here.',
 	'ACP_PORTAL_CUSTOM_PERMISSION'			=> 'Custom Block permissions',
-	'ACP_PORTAL_CUSTOM_PERMISSION_EXP'		=> 'Select the groups that should be able to view the custom block. If you want all users to be able to view the custom block, don´t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
+	'ACP_PORTAL_CUSTOM_PERMISSION_EXP'		=> 'Select the groups that should be able to view the custom block. If you want all users to be able to view the custom block, don’t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
 	'ACP_PORTAL_CUSTOM_BBCODE'				=> 'Activate BBCode for the custom block',
 	'ACP_PORTAL_CUSTOM_BBCODE_EXP'			=> 'BBCode could be used in this box. If BBCode is not activated, HTML will be parsed.',
 ));

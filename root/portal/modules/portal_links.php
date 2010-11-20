@@ -209,7 +209,7 @@ class portal_links_module
 				$link_type = request_var('link_type', 2); // default to B3_LINK_EXT, no categories in Links block
 				$link_url = request_var('link_url', ' ');
 				$link_url = str_replace('&amp;', '&', $link_url);
-				$link_permission = request_var('permission-setting', array(0 => ''));
+				$link_permission = request_var('permission-setting-link', array(0 => ''));
 				$groups_ary = array();
 				
 				// get groups and check if the selected groups actually exist
@@ -370,7 +370,7 @@ class portal_links_module
 				$result = $db->sql_query($sql);
 				while($row = $db->sql_fetchrow($result))
 				{
-					$template->assign_block_vars('permission_setting', array(
+					$template->assign_block_vars('permission_setting_link', array(
 						'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
 						'GROUP_NAME'	=> (isset($user->lang['G_' . $row['group_name']])) ? $user->lang['G_' . $row['group_name']] : $row['group_name'],
 						'GROUP_ID'		=> $row['group_id'],

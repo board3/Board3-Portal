@@ -102,6 +102,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_EVENTS_MANAGE'					=> 'Manage events',
 	'NO_EVENT_TITLE'						=> 'You haven’t specified a title for the event.',
 	'NO_EVENT_START'						=> 'You haven’t specified a start time for the event.',
+	'ADD_EVENT'								=> 'Add new event',
 	'EVENT_UPDATED'							=> 'Event updated successfully.',
 	'EVENT_ADDED'							=> 'Event added successfully.',
 	'NO_EVENT'								=> 'No event specified.',
@@ -123,7 +124,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_EVENT_END_TIME_EXP'			=> 'Enter the time when the event starts. The time has to be in a 24 hour format, i.e. 23:12',
 	'ACP_PORTAL_CALENDAR_EVENT_START_FIRST'	=> 'The end of the event has to be after the start of the event.',
 	'ACP_PORTAL_CALENDAR_PERMISSION'		=> 'Event permissions',
-	'ACP_PORTAL_CALENDAR_PERMISSION_EXP'	=> 'Select the groups that should be authorized to view the event. If you want all users to be able to view the event, don´t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
+	'ACP_PORTAL_CALENDAR_PERMISSION_EXP'	=> 'Select the groups that should be authorized to view the event. If you want all users to be able to view the event, don’t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
 	
 	
 	// Logs

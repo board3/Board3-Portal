@@ -25,6 +25,16 @@
 				<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
 				<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
 			</dl>
+			<dl>
+				<dt><label for="permission-setting">{L_ACP_PORTAL_CUSTOM_PERMISSION}:</label><br /><span>{L_ACP_PORTAL_CUSTOM_PERMISSION_EXP}</span></dt>
+				<dd>
+					<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
+						<!-- BEGIN permission_setting -->
+						<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
+						<!-- END permission_setting -->
+					</select>
+				</dd>
+			</dl>
 		</fieldset>
 <!-- ENDIF -->
 		<!-- IF S_PREVIEW -->
@@ -612,19 +622,6 @@
 			<dd>
 				<label><input onchange="dE('bbcode-buttons', 1)" class="radio" type="radio" value="1" name="custom_use_bbcode" id="custom_use_bbcode"<!-- IF CUSTOM_USE_BBCODE --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
 				<label><input onchange="dE('bbcode-buttons', -1)" class="radio" type="radio" value="0" name="custom_use_bbcode"<!-- IF not CUSTOM_USE_BBCODE --> checked="checked"<!-- ENDIF --> />{L_NO}</label>
-			</dd>
-		</dl>
-		<dl>
-			<dt>
-				<label for="permission-setting">{L_ACP_PORTAL_CUSTOM_PERMISSION}:</label><br />
-				<span>{L_ACP_PORTAL_CUSTOM_PERMISSION_EXP}</span>
-			</dt>
-			<dd>
-				<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
-					<!-- BEGIN permission_setting -->
-					<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
-					<!-- END permission_setting -->
-				</select>
 			</dd>
 		</dl>
 <!-- IF S_AUTH -->

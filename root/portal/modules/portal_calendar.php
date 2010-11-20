@@ -299,7 +299,7 @@ class portal_calendar_module
 				$event_end_time = trim(request_var('event_end_time', ''));
 				$event_all_day = request_var('event_all_day', false); // default to false
 				$event_url = request_var('event_url', ' ');
-				$event_permission = request_var('permission-setting', array(0 => ''));
+				$event_permission = request_var('permission-setting-calendar', array(0 => ''));
 				$groups_ary = array();
 				
 				/* 
@@ -461,7 +461,7 @@ class portal_calendar_module
 					'EVENT_START_TIME'	=> ($action != 'add') ? $user->format_date($events[$link_id]['start_time'], 'G:i') : '',
 					'EVENT_END_DAY'		=> ($action != 'add' && ($events[$link_id]['start_time'] - $events[$link_id]['end_time']) != true) ? $user->format_date($events[$link_id]['end_time'], 'Y-m-d') : '',
 					'EVENT_END_TIME'	=> ($action != 'add' && ($events[$link_id]['start_time'] - $events[$link_id]['end_time']) != true) ? $user->format_date($events[$link_id]['end_time'], 'G:i') : '',
-					'EVENT_ALL_DAY'		=> ($events[$link_id]['start_time'] - $events[$link_id]['end_time']) ? true : false,
+					'EVENT_ALL_DAY'		=> (isset($events[$link_id]['start_time']) && ($events[$link_id]['start_time'] - $events[$link_id]['end_time'])) ? true : false,
 					'EVENT_URL'			=> (isset($events[$link_id]['url']) && $action != 'add') ? $events[$link_id]['url'] : '',
 
 					//'U_BACK'	=> $u_action,
@@ -479,7 +479,7 @@ class portal_calendar_module
 				$result = $db->sql_query($sql);
 				while($row = $db->sql_fetchrow($result))
 				{
-					$template->assign_block_vars('permission_setting', array(
+					$template->assign_block_vars('permission_setting_calendar', array(
 						'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
 						'GROUP_NAME'	=> (isset($user->lang['G_' . $row['group_name']])) ? $user->lang['G_' . $row['group_name']] : $row['group_name'],
 						'GROUP_ID'		=> $row['group_id'],
