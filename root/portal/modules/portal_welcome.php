@@ -153,9 +153,6 @@ class portal_welcome_module
 				set_portal_config('board3_welcome_message_' . $module_id, $welcome_message);
 				set_config('board3_welcome_message_uid_' . $module_id, $uid);
 				set_config('board3_welcome_message_bitfield_' . $module_id, $bitfield);
-
-				trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&mode=modules') : $u_action));
-
 			break;
 			
 			case 'preview':

@@ -17,13 +17,13 @@
 	<form id="acp_portal_links" method="post" action="{U_ACTION}">
 
 	<fieldset>
-		<legend>{L_ACP_PORTAL_MENU_LINK}</legend>
+		<legend>{L_ACP_PORTAL_MENU_LINK_SETTINGS}</legend>
 	<dl>
-		<dt><label for="link_title">{L_LINK_TITLE}:</label></dt>
+		<dt><label for="link_title">{L_ACP_PORTAL_MENU_TITLE}:</label></dt>
 		<dd><input name="link_title" type="text" id="link_title" value="{LINK_TITLE}" maxlength="255" /></dd>
 	</dl>
 	<dl>
-		<dt><label for="link_is_cat">{L_LINK_IS_CAT}:</label></dt>
+		<dt><label for="link_is_cat">{L_ACP_PORTAL_MENU_IS_CAT}:</label></dt>
 		<dd><label><input onchange="dE('url', -1)" type="radio" class="radio" name="link_is_cat" value="1" id="link_is_cat"<!-- IF S_LINK_IS_CAT --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
 			<label><input onchange="dE('url', 1)" type="radio" class="radio" name="link_is_cat" value="0"<!-- IF not S_LINK_IS_CAT --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
 	</dl>
@@ -51,10 +51,10 @@
 			<span>{L_ACP_PORTAL_MENU_PERMISSION_EXP}</span>
 		</dt>
 		<dd>
-			<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
-				<!-- BEGIN permission_setting -->
-				<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
-				<!-- END permission_setting -->
+			<select id="permission-setting-menu" size="10" multiple="multiple" name="permission-setting-menu[]">
+				<!-- BEGIN permission_setting_menu -->
+				<option value="{permission_setting_menu.GROUP_ID}"<!-- IF permission_setting_menu.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting_menu.GROUP_NAME}</option>
+				<!-- END permission_setting_menu -->
 			</select>
 		</dd>
 	</dl>
@@ -83,6 +83,18 @@
 			<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
 			<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
 		</dl>
+		<!-- IF permission_setting -->
+		<dl>
+			<dt><label for="permission-setting">{L_MODULE_PERMISSIONS}:</label><br /><span>{L_MODULE_PERMISSIONS_EXP}</span></dt>
+			<dd>
+				<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
+					<!-- BEGIN permission_setting -->
+					<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
+					<!-- END permission_setting -->
+				</select>
+			</dd>
+		</dl>
+		<!-- ENDIF -->
 	</fieldset>
 	<!-- ENDIF -->	
 
@@ -90,14 +102,14 @@
 	<legend>{L_ACP_PORTAL_LINKS}</legend>
 
 	<p class="quick">
-		<input class="button2" name="add" type="submit" value="{L_ADD_LINK}" />
+		<input class="button2" name="add" type="submit" value="{L_ACP_PORTAL_MENU_ADD}" />
 	</p>
 
 	<table cellspacing="1">
 	<thead>
 	<tr>
-		<th>{L_LINK_TITLE}</th>
-		<th>{L_LINK_URL}</th>
+		<th>{L_ACP_PORTAL_MENU_TITLE}</th>
+		<th>{L_ACP_PORTAL_MENU_URL}</th>
 		<th>{L_ACTION}</th>
 	</tr>
 	</thead>

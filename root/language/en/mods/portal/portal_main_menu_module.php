@@ -43,14 +43,17 @@ $lang = array_merge($lang, array(
 	
 	// ACP
 	'ACP_PORTAL_MENU'				=> 'Menu settings',
+	'ACP_PORTAL_MENU_LINK_SETTINGS'	=> 'Link Settings',
 	'ACP_PORTAL_MENU_EXP'			=> 'Manage your main menu',
 	'ACP_PORTAL_MENU_MANAGE'		=> 'Manage menu',
 	'ACP_PORTAL_MENU_MANAGE_EXP'	=> 'You can manage the links of your main menu here.<br />Change the type of link by changing the selected option in the drop-down list next to the link.',
 	'ACP_PORTAL_MENU_CAT'			=> 'Category',
+	'ACP_PORTAL_MENU_IS_CAT'		=> 'Set as special link category',
 	'ACP_PORTAL_MENU_INT'			=> 'Internal link',
 	'ACP_PORTAL_MENU_EXT'			=> 'External link',
 	'ACP_PORTAL_MENU_TITLE'			=> 'Title',
 	'ACP_PORTAL_MENU_URL'			=> 'Link URL',
+	'ACP_PORTAL_MENU_ADD'			=> 'Add new navigation link',
 	'ACP_PORTAL_MENU_TYPE'			=> 'Link type',
 	'ACP_PORTAL_MENU_TYPE_EXP'		=> 'If you have a link to a page of your board, choose "Internal link" in order to prevent unwanted logouts.',
 	'ACP_PORTAL_MENU_CREATE_CAT'	=> 'You need to create a category first.',

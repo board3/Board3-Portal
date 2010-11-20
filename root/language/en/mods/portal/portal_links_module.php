@@ -42,6 +42,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_LINK_TYPE_EXP'		=> 'If you have a link to a page of your board, choose "Internal link" in order to prevent unwanted logouts.',
 	'ACP_PORTAL_LINK_INT'			=> 'Internal link',
 	'ACP_PORTAL_LINK_EXT'			=> 'External link',
+	'ACP_PORTAL_LINK_ADD'			=> 'Add new navigation link',
 	'ACP_PORTAL_LINK_URL'			=> 'Link URL',
 	'ACP_PORTAL_LINK_URL_EXP'		=> 'External links:<br />All links should be entered with a http://<br /><br />Internal links:<br />Only enter the php file as link url, i.e. index.php?style=4.',
 	'ACP_PORTAL_LINK_PERMISSION'	=> 'Link permissions',

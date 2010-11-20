@@ -94,6 +94,7 @@ $lang = array_merge($lang, array(
 	'MODULE_PERMISSIONS_EXP'	=> 'Select the groups that should be authorized to view the module. If you want all users to be able to view the module, don’t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
 
 	// Manage links
+	/*
 	'ACP_EXPRESS_LINKS_EXPLAIN'	=> 'Using this form you can add, edit, view and delete navigation links on the index page. You can also create special navigation links as categories which aren’t clickable links.',
 	'ADD_LINK'					=> 'Add new navigation link',
 	'ACP_PORTAL_MANAGE_LINKS'	=> 'Links verwalten',
@@ -114,7 +115,7 @@ $lang = array_merge($lang, array(
 	'NO_LINK_URL'	=> 'You have created clickable navigation link but haven’t entered the URL for this navigation link.',
 
 	'SELECT_LINK_ICON'	=> 'Select an icon…',
-
+	*/
 	// Logs
 	'LOG_PORTAL_CONFIG'			=> '<strong>Altered Portal settings</strong><br />&raquo; %s',
 	

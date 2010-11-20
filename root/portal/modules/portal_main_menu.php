@@ -265,7 +265,7 @@ class portal_main_menu_module
 				$link_type = (!$link_is_cat) ? request_var('link_type', 0) : B3_LINKS_CAT;
 				$link_url = ($link_is_cat) ? ' ' : request_var('link_url', ' ');
 				$link_url = str_replace('&amp;', '&', $link_url);
-				$link_permission = request_var('permission-setting', array(0 => ''));
+				$link_permission = request_var('permission-setting-menu', array(0 => ''));
 				$groups_ary = array();
 				
 				// get groups and check if the selected groups actually exist
@@ -431,7 +431,7 @@ class portal_main_menu_module
 				$result = $db->sql_query($sql);
 				while($row = $db->sql_fetchrow($result))
 				{
-					$template->assign_block_vars('permission_setting', array(
+					$template->assign_block_vars('permission_setting_menu', array(
 						'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
 						'GROUP_NAME'	=> (isset($user->lang['G_' . $row['group_name']])) ? $user->lang['G_' . $row['group_name']] : $row['group_name'],
 						'GROUP_ID'		=> $row['group_id'],
