@@ -106,6 +106,7 @@ class acp_portal
 						{
 							$user->add_lang('mods/portal/' . $c_class->language);
 						}
+						$module_name = $user->lang[$c_class->name];
 						$display_vars = $c_class->get_template_acp($module_id);
 						$template->assign_vars(array(
 							'MODULE_NAME'			=> $module_data['module_name'],
@@ -220,7 +221,14 @@ class acp_portal
 					$db->sql_query($sql);
 
 					$cache->destroy('sql', CONFIG_TABLE);
-					add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']);
+					if(isset($module_name))
+					{
+						add_log('admin', 'LOG_PORTAL_CONFIG',$module_name);
+					}
+					else
+					{
+						add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']);
+					}
 					trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_root_path}adm/index.$phpEx", 'i=portal&mode=modules') : $this->u_action));
 				}
 
