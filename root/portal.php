@@ -113,7 +113,14 @@ while ($row = $db->sql_fetchrow($result))
 	}
 	unset($template_module);
 }
+$module_count = $db->sql_affectedrows();
 $db->sql_freeresult($result);
+
+// Redirect to index if there are currently no active modules
+if($module_count < 1)
+{
+	redirect(reapply_sid($phpbb_root_path . 'index.' . $phpEx));
+}
 
 // Assign specific vars
 $template->assign_vars(array(

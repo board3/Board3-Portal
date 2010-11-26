@@ -40,7 +40,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	// Portal Modules
 	'ACP_PORTAL_MODULES'			=> 'Portal Modules',
-	'ACP_PORTAL_MODULES_EXP'	=> 'You can manage your portal modules here',
+	'ACP_PORTAL_MODULES_EXP'	=> 'You can manage your portal modules here. If you turn off all modules, please also disable the Portal.',
 	
 	'MODULE_POS_TOP'				=> 'Top',
 	'MODULE_POS_LEFT'				=> 'Left column',
