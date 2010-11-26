@@ -54,6 +54,14 @@ while ($row = $db->sql_fetchrow($result))
 
 
 	$module = new $class_name();
+	
+	// Check for permissions before loading anything
+	$group_ary = (!empty($row['module_group_ids'])) ? explode(',', $row['module_group_ids']) : '';
+	if((is_array($group_ary) && !in_array($user->data['group_id'], $group_ary)))
+	{
+		continue;
+	}
+	
 	if ($module->language)
 	{
 		$user->add_lang('mods/portal/' . $module->language);
