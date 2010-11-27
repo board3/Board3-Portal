@@ -904,6 +904,20 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 	}
 	else
 	{
+		$skip_entries = array(
+			'board3_right_column_width',
+			'board3_left_column_width',
+			'board3_forum_index',
+			'board3_version_check',
+			'board3_right_column',
+			'board3_left_column',
+			'board3_enable',
+			'board3_portal_version',
+		);
+		$sql = 'DELETE FROM ' . CONFIG_TABLE . ' WHERE config_name ' . str_replace('\\', '', $db->sql_like_expression('board3_%')) . '
+					AND ' . $db->sql_in_set('config_name', $skip_entries, true);
+		$db->sql_query($sql);
+		
 		return $user->lang['PORTAL_BASIC_UNINSTALL'];
 	}
 } 
