@@ -31,16 +31,16 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'BIRTHDAYS_AHEAD'              => 'In the next %s days',
-	'NO_BIRTHDAYS_AHEAD'        => 'No members have a birthday within this period of time.',
+	'BIRTHDAYS_AHEAD'				=> 'In den nächsten %s Tagen',
+	'NO_BIRTHDAYS_AHEAD'			=> 'In diesem Zeitraum hat kein Mitglied Geburtstag',
 	
 	// ACP
-	'ACP_PORTAL_BIRTHDAYS_SETTINGS'			=> 'Birthdays Settings',
-	'ACP_PORTAL_BIRTHDAYS_SETTINGS_EXP'	=> 'This is where you customize the birthday block.',
-	'PORTAL_BIRTHDAYS'						=> 'Birthday block',
-	'PORTAL_BIRTHDAYS_EXP'				=> 'Display this block on the portal.',
-	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Birthdays ahead days',
-	'PORTAL_BIRTHDAYS_AHEAD_EXP'		=> 'How many days to look ahead for future birthdays.<br />"0" will disable the ahead birthdays list.',
+	'ACP_PORTAL_BIRTHDAYS_SETTINGS'			=> 'Einstellungen für den Geburtstage-Block',
+	'ACP_PORTAL_BIRTHDAYS_SETTINGS_EXP'		=> 'Hier kannst du die Einstellungen für den Geburtstage-Block ändern.',
+	'PORTAL_BIRTHDAYS'						=> 'Geburtstage',
+	'PORTAL_BIRTHDAYS_EXPLAIN'				=> 'Diesen Block auf dem Portal anzeigen.',
+	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Anstehende Geburtstage',
+	'PORTAL_BIRTHDAYS_AHEAD_EXP'			=> 'Zeitraum für die Geburtstagsvorschau (Tage).<br />"0" deaktiviert die Anzeige der bevorstehenden Geburtstage.',	
 ));
 
 ?>

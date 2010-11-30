@@ -32,25 +32,24 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	'DOWNLOADS'				=> 'Downloads',
-	'NO_ATTACHMENTS'		=> 'No attachments',
-	'PORTAL_ATTACHMENTS'	=> 'Attachments Block',
+	'NO_ATTACHMENTS'		=> 'Keine Dateianhänge',
+	'PORTAL_ATTACHMENTS'	=> 'Dateianhänge-Block',
 	
 	// ACP
-	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS'			=> 'Attachments settings',
-	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS_EXP'	=> 'This is where you customize the attachments block.',
-	'PORTAL_ATTACHMENTS_EXP'						=> 'Display this block on the portal.',
-	'PORTAL_ATTACHMENTS_NUMBER'							=> 'Limit of displayed attachments',
-	'PORTAL_ATTACHMENTS_NUMBER_EXP'					=> '0 means infinite',
-	'PORTAL_ATTACHMENTS_FORUM_IDS'						=> 'Attachments forums',
-	'PORTAL_ATTACHMENTS_FORUM_IDS_EXP'				=> 'The forum(s) from which the attachments should be displayed. If "Exclude forums" is set to "Yes", select the forums you want to exclude.<br />If "Exclude forums" is set to "No" select the forums you want to see.<br />Select/Deselect multiple forums by holding <samp>CTRL</samp> and clicking.',
-	'PORTAL_ATTACHMENTS_FORUM_EXCLUDE'					=> 'Exclude forums',
-	'PORTAL_ATTACHMENTS_FORUM_EXCLUDE_EXP'			=> 'Select "Yes" if you want to exlude the selected forums from the attachments block, and "No" if you want to see only the attachments of the selected forums in the attachments block.',
-	'PORTAL_ATTACHMENTS_MAX_LENGTH'						=> 'Character limit for each attachments',
-	'PORTAL_ATTACHMENTS_MAX_LENGTH_EXP'				=> '0 means infinite',
-	'PORTAL_ATTACHMENTS_FILETYPE' 						=> 'Filetypes',
-	'PORTAL_ATTACHMENTS_FILETYPE_EXP' 				=> 'If "Exclude filetypes" is set to "Yes", select the filetypes you want to exclude.<br />If "Exclude filetypes" is set to "No" select the filetypes you want to see.<br />Select/Deselect multiple filetypes by holding <samp>CTRL</samp> and clicking.',
-	'PORTAL_ATTACHMENTS_EXCLUDE'						=> 'Exclude filetypes',
-	'PORTAL_ATTACHMENTS_EXCLUDE_EXP'				=> 'Select "Yes" if you want to exlude the selected filetypes from the attachments block, and "No" if you want to see only the selected filetypes in the attachments block.',
+	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS'			=> 'Einstellungen für Dateianhänge',
+	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS_EXP'	=> 'Hier kannst du die Einstellungen für Dateianhänge ändern.',
+	'PORTAL_ATTACHMENTS_NUMBER'							=> 'Anzahl der anzuzeigenden Dateianhänge',
+	'PORTAL_ATTACHMENTS_NUMBER_EXP'					=> '0 bedeutet unbegrenzt',
+	'PORTAL_ATTACHMENTS_FORUM_IDS'						=> 'Dateianhänge Foren',
+	'PORTAL_ATTACHMENTS_FORUM_IDS_EXP'				=> 'Die Foren, aus welchen die Dateianhänge angezeigt werden sollen. Frei lassen, um aus allen Foren anzeigen zu lassen. Falls "Foren aussschließen" auf "Ja" steht, wähle die Foren die du ausschließen willst.<br />Falls "Foren aussschließen" auf "Nein" steht, wähle die Foren aus, aus denen du die Dateianhänge sehen willst.<br />Wähle mehrere Foren aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
+	'PORTAL_ATTACHMENTS_FORUM_EXCLUDE'					=> 'Foren aussschließen',
+	'PORTAL_ATTACHMENTS_FORUM_EXCLUDE_EXP'			=> 'Wähle "Ja" wenn du die ausgewählten Foren vom Dateianhänge-Block ausschließen willst, und "Nein" wenn du nur die Dateianhänge der ausgewählten Foren im Dateianhänge-Block sehen willst.',
+	'PORTAL_ATTACHMENTS_MAX_LENGTH'						=> 'Maximal angezeigte Länge der Dateianhänge',
+	'PORTAL_ATTACHMENTS_MAX_LENGTH_EXP'				=> '0 bedeutet unbegrenzt',
+	'PORTAL_ATTACHMENTS_FILETYPE' 						=> 'Dateitypen',
+	'PORTAL_ATTACHMENTS_FILETYPE_EXP' 				=> 'Falls "Dateitypen ausschließen" auf "Ja" steht, wähle die Dateitypen die du ausschließen willst.<br />Falls "Dateitypen ausschließen" auf "Nein" steht, wähle die Dateitypen die du sehen willst.<br />Wähle mehrere Foren aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
+	'PORTAL_ATTACHMENTS_EXCLUDE'						=> 'Dateitypen aussschließen',
+	'PORTAL_ATTACHMENTS_EXCLUDE_EXP'				=> 'Wähle "Ja" wenn du die ausgewählten Dateitypen vom Dateianhänge-Block ausschließen willst, und "Nein" wenn du nur die ausgewählten Dateitypen im Dateianhänge-Block sehen willst.',	
 ));
 
 ?>
