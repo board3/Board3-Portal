@@ -57,8 +57,8 @@ $lang = array_merge($lang, array(
 	'BACK'								=> 'Zurück',
 
 	// Birthdays
-	 'BIRTHDAYS_AHEAD'				=> 'In den nächsten %s Tagen',
-	 'NO_BIRTHDAYS_AHEAD'			=> 'In diesem Zeitraum hat kein Mitglied Geburtstag',
+	'BIRTHDAYS_AHEAD'				=> 'In den nächsten %s Tagen',
+	'NO_BIRTHDAYS_AHEAD'			=> 'In diesem Zeitraum hat kein Mitglied Geburtstag',
 
 	// user menu
 	'USER_MENU'					=> 'Benutzer-Menü',
