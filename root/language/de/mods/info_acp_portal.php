@@ -49,6 +49,7 @@ $lang = array_merge($lang, array(
 	'CHOOSE_MODULE_EXP'				=> 'Wähle ein Modul von der Dropdown-Liste',
 	'SUCCESS_ADD'					=> 'Das Modul wurde erfolgreich hinzugefügt.',
 	'SUCCESS_DELETE'				=> 'Das Modul wurde erfolgreich entfernt.',
+	'NO_MODULES'					=> 'Es wurden keine Module gefunden.',
 	
 	'MODULE_OPTIONS'			=> 'Modul Optionen',
 	'MODULE_NAME'				=> 'Modul Name',

@@ -1,11 +1,9 @@
 <?php
 /**
-*
-* @package Board3 Portal v2
+* @package Portal - Random Member
 * @version $Id$
-* @copyright (c) Board3 Group ( www.board3.de )
+* @copyright (c) 2009, 2010 Board3 Portal Team
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
 */
 
 /**
@@ -32,9 +30,13 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
-
-// Common
 $lang = array_merge($lang, array(
-	'PORTAL'		=> 'Portal',
+	'PORTAL_RANDOM_MEMBER'	=> 'Random member',
+	'RND_JOIN'				=> 'Join',
+	'RND_POSTS'				=> 'Posts',
+	'RND_OCC'				=> 'Occupation',
+	'RND_FROM'				=> 'Location',
+	'RND_WWW'				=> 'Web page',
 ));
+
 ?>

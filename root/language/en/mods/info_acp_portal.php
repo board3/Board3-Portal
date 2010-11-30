@@ -33,14 +33,10 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
-// @todo: check for unneeded language variables
-// @todo: change language variables to English ones
-// not possible: merge into mods/portal/
-
 $lang = array_merge($lang, array(
 	// Portal Modules
 	'ACP_PORTAL_MODULES'			=> 'Portal Modules',
-	'ACP_PORTAL_MODULES_EXP'	=> 'You can manage your portal modules here. If you turn off all modules, please also disable the Portal.',
+	'ACP_PORTAL_MODULES_EXP'		=> 'You can manage your portal modules here. If you turn off all modules, please also disable the Portal.',
 	
 	'MODULE_POS_TOP'				=> 'Top',
 	'MODULE_POS_LEFT'				=> 'Left column',
@@ -49,9 +45,10 @@ $lang = array_merge($lang, array(
 	'MODULE_POS_BOTTOM'				=> 'Bottom',
 	'ADD_MODULE'					=> 'Add module',
 	'CHOOSE_MODULE'					=> 'Choose module',
-	'CHOOSE_MODULE_EXP'			=> 'Choose a module from the drop-down list',
+	'CHOOSE_MODULE_EXP'				=> 'Choose a module from the drop-down list',
 	'SUCCESS_ADD'					=> 'The module was added successfully.',
 	'SUCCESS_DELETE'				=> 'The module was removed successfully.',
+	'NO_MODULES'					=> 'No modules have been detected.',
 	
 	'MODULE_OPTIONS'			=> 'Module options',
 	'MODULE_NAME'				=> 'Module name',

@@ -29,7 +29,11 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('mods/portal');
 
-if (!$config['board3_enable'])
+/* 
+* Make sure we do an isset first, 
+* else we will get errors if someone uninstalls the portal and forgets to remove portal.php
+*/
+if (!isset($config['board3_enable']) || !$config['board3_enable'])
 {
 	redirect(reapply_sid($phpbb_root_path . 'index.' . $phpEx));
 }

@@ -1,11 +1,9 @@
 <?php
 /**
-*
-* @package Board3 Portal v2
+* @package Portal - Friends
 * @version $Id$
-* @copyright (c) Board3 Group ( www.board3.de )
+* @copyright (c) 2009, 2010 Board3 Portal Team
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
 */
 
 /**
@@ -32,9 +30,19 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
-
-// Common
 $lang = array_merge($lang, array(
-	'PORTAL'		=> 'Portal',
+	'FRIENDS'				=> 'Friends',
+	'FRIENDS_OFFLINE'		=> 'Offline',
+	'FRIENDS_ONLINE'		=> 'Online',
+	'NO_FRIENDS'			=> 'No friends currently defined',
+	'NO_FRIENDS_OFFLINE'	=> 'No friends offline',
+	'NO_FRIENDS_ONLINE'		=> 'No friends online',
+	
+	// ACP
+	'ACP_PORTAL_FRIENDS_SETTINGS'			=> 'Friends Settings',
+	'ACP_PORTAL_FRIENDS_SETTINGS_EXP'	=> 'This is where you customize the friends block.',
+	'PORTAL_MAX_ONLINE_FRIENDS'				=> 'Limit of displayed friends',
+	'PORTAL_MAX_ONLINE_FRIENDS_EXP'		=> 'The maximum number of friends displayed.',
 ));
+
 ?>

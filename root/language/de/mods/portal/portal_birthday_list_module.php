@@ -1,11 +1,9 @@
 <?php
 /**
-*
-* @package Board3 Portal v2
+* @package Portal - Birthday List
 * @version $Id$
-* @copyright (c) Board3 Group ( www.board3.de )
+* @copyright (c) 2009, 2010 Board3 Portal Team
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
 */
 
 /**
@@ -32,9 +30,17 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
-
-// Common
 $lang = array_merge($lang, array(
-	'PORTAL'		=> 'Portal',
+	'BIRTHDAYS_AHEAD'              => 'In the next %s days',
+	'NO_BIRTHDAYS_AHEAD'        => 'No members have a birthday within this period of time.',
+	
+	// ACP
+	'ACP_PORTAL_BIRTHDAYS_SETTINGS'			=> 'Birthdays Settings',
+	'ACP_PORTAL_BIRTHDAYS_SETTINGS_EXP'	=> 'This is where you customize the birthday block.',
+	'PORTAL_BIRTHDAYS'						=> 'Birthday block',
+	'PORTAL_BIRTHDAYS_EXP'				=> 'Display this block on the portal.',
+	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Birthdays ahead days',
+	'PORTAL_BIRTHDAYS_AHEAD_EXP'		=> 'How many days to look ahead for future birthdays.<br />"0" will disable the ahead birthdays list.',
 ));
+
 ?>

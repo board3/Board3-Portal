@@ -1,11 +1,9 @@
 <?php
 /**
-*
-* @package Board3 Portal v2
+* @package Portal - Welcome
 * @version $Id$
-* @copyright (c) Board3 Group ( www.board3.de )
+* @copyright (c) 2009, 2010 Board3 Portal Team
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
 */
 
 /**
@@ -32,9 +30,15 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
-
-// Common
 $lang = array_merge($lang, array(
-	'PORTAL'		=> 'Portal',
+	'PORTAL_WELCOME'		=> 'Welcome Message',
+	
+	// ACP
+	'ACP_PORTAL_WELCOME_SETTINGS'			=> 'Welcome Message Settings',
+	'ACP_PORTAL_WELCOME_MESSAGE_SHORT'		=> 'The message you entered is not long enough.',
+	'ACP_PORTAL_WELCOME_PREVIEW'			=> 'Welcome Message Preview',
+	'ACP_PORTAL_WELCOME_MESSAGE'			=> 'Welcome Message',
+	'ACP_PORTAL_WELCOME_MESSAGE_EXP'		=> 'You can change the welcome message in the textbox. BBCode, Images and URLs are allowed.',
 ));
+
 ?>
