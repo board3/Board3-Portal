@@ -98,5 +98,9 @@ $lang = array_merge($lang, array(
 	'RELEASE_ANNOUNCEMENT'	=> 'Ankündigungsthema',
 	'UP_TO_DATE'			=> '%s ist aktuell',
 	'VERSION_CHECK'			=> 'MOD Version Check',
+	
+	// Adding the permissions
+	'acl_a_manage_portal'		=> array('lang' => 'Can alter Portal settings', 'cat' => 'misc'),
+	'acl_u_view_portal'			=> array('lang' => 'Can view the Portal', 'cat' => 'misc'),
 ));
 ?>

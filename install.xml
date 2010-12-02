@@ -463,6 +463,7 @@ Deny from All
 		break;]]></action>
 			</edit>
 		</open>
+		<!-- @todo: check if we need this -- I guess not -->
 		<open src="includes/cache.php">
 			<edit>
 				<find><![CDATA[}
@@ -545,7 +546,7 @@ Deny from All
 			</edit>
 			<edit>
 				<find><![CDATA['U_PRIVATEMSGS'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),]]></find>
-				<action type="before-add"><![CDATA[		'U_PORTAL'				=> (isset($config['board3_enable']) && $config['board3_enable'] == true) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></action>
+				<action type="before-add"><![CDATA[		'U_PORTAL'				=> (isset($config['board3_enable']) && $config['board3_enable'] && $auth->acl_get('u_view_portal')) ? append_sid("{$phpbb_root_path}portal.$phpEx") : '',]]></action>
 			</edit>
 		</open>
 		<open src="includes/session.php">

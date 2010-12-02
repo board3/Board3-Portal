@@ -59,11 +59,13 @@ $versions = array(
 	'2.0.0-dev2' => array(
 
 		'permission_add' => array(
-			array('a_portal'),
+			array('a_manage_portal', 1),
+			array('u_view_portal', 1),
 		),
 
 		'permission_set' => array(
-			array('ADMINISTRATORS', 'a_portal', 'group'),
+			array('ADMINISTRATORS', 'a_manage_portal', 'group'),
+			array('REGISTERED', 'u_view_portal', 'group'),
 		),
 
 		'table_add' => array(
