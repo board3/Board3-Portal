@@ -31,13 +31,13 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'CLOCK'		=> 'Clock',
+	'CLOCK'		=> 'Uhr',
 	
 	// ACP
-	'ACP_PORTAL_CLOCK_SETTINGS'		=> 'Clock Settings',
-	'ACP_PORTAL_CLOCK_SETTINGS_EXP'	=> 'This is where you customize your clock',
-	'ACP_PORTAL_CLOCK_SRC'			=> 'Clock',
-	'ACP_PORTAL_CLOCK_SRC_EXP'		=> 'Enter the filename of your clock. The clock needs to be located in styles/*yourstyle*/theme/images/portal/.',
+	'ACP_PORTAL_CLOCK_SETTINGS'		=> 'Uhr Einstellungen',
+	'ACP_PORTAL_CLOCK_SETTINGS_EXP'	=> 'Hier kannst du die Einstellungen für die Uhr ändern',
+	'ACP_PORTAL_CLOCK_SRC'			=> 'Uhr',
+	'ACP_PORTAL_CLOCK_SRC_EXP'		=> 'Gebe den Dateinamen der Uhr  ein. Die Uhr muss unter folgendem Pfad gespeichert sein: styles/*yourstyle*/theme/images/portal/.',
 ));
 
 ?>

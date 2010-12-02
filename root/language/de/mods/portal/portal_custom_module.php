@@ -31,19 +31,19 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'PORTAL_CUSTOM'		=> 'Custom Block',
+	'PORTAL_CUSTOM'		=> 'Eigener Block',
 	
 	// ACP
 	'ACP_PORTAL_CUSTOM_SETTINGS'			=> 'Custom Block Settings',
-	'ACP_PORTAL_CUSTOM_SETTINGS_EXP'		=> 'Here you can edit your custom block',
-	'ACP_PORTAL_CUSTOM_CODE_SHORT'			=> 'The code you entered is not long enough.',
-	'ACP_PORTAL_CUSTOM_PREVIEW'				=> 'Preview',
-	'ACP_PORTAL_CUSTOM_CODE'				=> 'Custom Block Code',
-	'ACP_PORTAL_CUSTOM_CODE_EXP'			=> 'Change the code for the small custom block (HTML or BBCode) here.',
-	'ACP_PORTAL_CUSTOM_PERMISSION'			=> 'Custom Block permissions',
-	'ACP_PORTAL_CUSTOM_PERMISSION_EXP'		=> 'Select the groups that should be able to view the custom block. If you want all users to be able to view the custom block, don’t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
-	'ACP_PORTAL_CUSTOM_BBCODE'				=> 'Activate BBCode for the custom block',
-	'ACP_PORTAL_CUSTOM_BBCODE_EXP'			=> 'BBCode could be used in this box. If BBCode is not activated, HTML will be parsed.',
+	'ACP_PORTAL_CUSTOM_SETTINGS_EXP'		=> 'Einstellungen für den eigenen Block',
+	'ACP_PORTAL_CUSTOM_CODE_SHORT'			=> 'Der eingegebene Code ist nicht lang genug.',
+	'ACP_PORTAL_CUSTOM_PREVIEW'				=> 'Vorschau',
+	'ACP_PORTAL_CUSTOM_CODE'				=> 'Code für den eigenen Block',
+	'ACP_PORTAL_CUSTOM_CODE_EXP'			=> 'Ändere den Code für deinen eigenen Block (HTML oder BBCode).',
+	'ACP_PORTAL_CUSTOM_PERMISSION'			=> 'Berechtigungen für den eigenen Block',
+	'ACP_PORTAL_CUSTOM_PERMISSION_EXP'		=> 'Wähle die Gruppen aus, die den eigenen Block sehen dürfen. <br />Wähle mehrere Gruppen aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
+	'ACP_PORTAL_CUSTOM_BBCODE'				=> 'BBCode für den eigenen Block aktivieren',
+	'ACP_PORTAL_CUSTOM_BBCODE_EXP'			=> 'BBCode kann dann in diesem Block benutzt werden. Ansonsten wird HTML direkt geparst.',
 ));
 
 ?>

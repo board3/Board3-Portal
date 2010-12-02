@@ -31,18 +31,18 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'FRIENDS'				=> 'Friends',
-	'FRIENDS_OFFLINE'		=> 'Offline',
-	'FRIENDS_ONLINE'		=> 'Online',
-	'NO_FRIENDS'			=> 'No friends currently defined',
-	'NO_FRIENDS_OFFLINE'	=> 'No friends offline',
-	'NO_FRIENDS_ONLINE'		=> 'No friends online',
+	'FRIENDS'							=> 'Freunde',
+	'FRIENDS_OFFLINE'				=> 'Offline',
+	'FRIENDS_ONLINE'					=> 'Online',
+	'NO_FRIENDS'						=> 'Derzeit sind keine Freunde definiert',
+	'NO_FRIENDS_OFFLINE'			=> 'Keine Freunde offline',
+	'NO_FRIENDS_ONLINE'			=> 'Keine Freunde online',
 	
 	// ACP
-	'ACP_PORTAL_FRIENDS_SETTINGS'			=> 'Friends Settings',
-	'ACP_PORTAL_FRIENDS_SETTINGS_EXP'	=> 'This is where you customize the friends block.',
-	'PORTAL_MAX_ONLINE_FRIENDS'				=> 'Limit of displayed friends',
-	'PORTAL_MAX_ONLINE_FRIENDS_EXP'		=> 'The maximum number of friends displayed.',
+	'ACP_PORTAL_FRIENDS_SETTINGS'				=> 'Einstellungen für den Freunde-Block',
+	'ACP_PORTAL_FRIENDS_SETTINGS_EXP'		=> 'Hier kannst du die Einstellungen für den Freunde-Block ändern.',
+	'PORTAL_MAX_ONLINE_FRIENDS'					=> 'Limitierung der Anzeige Freunde online',
+	'PORTAL_MAX_ONLINE_FRIENDS_EXP'			=> 'Limitiert die Anzeige Freunde online auf den angegebenen Wert.',
 ));
 
 ?>

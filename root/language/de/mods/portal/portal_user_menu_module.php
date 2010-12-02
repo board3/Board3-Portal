@@ -32,10 +32,10 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	'USER_MENU'					=> 'Benutzer-Menü',
-	'UM_LOG_ME_IN'				=> 'Mich bei jedem Besuch automatisch anmelden',
-	'UM_HIDE_ME'				=> 'Meinen Online-Status während dieser Sitzung verbergen',
-	'UM_MAIN_SUBSCRIBED'		=> 'Benachrichtigungen verwalten',
-	'UM_BOOKMARKS'				=> 'Lesezeichen verwalten',
+	'UM_LOG_ME_IN'					=> 'Mich bei jedem Besuch automatisch anmelden',
+	'UM_HIDE_ME'						=> 'Meinen Online-Status während dieser Sitzung verbergen',
+	'UM_MAIN_SUBSCRIBED'			=> 'Benachrichtigungen verwalten',
+	'UM_BOOKMARKS'					=> 'Lesezeichen verwalten',
 ));
 
 ?>

@@ -31,13 +31,13 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'LATEST_MEMBERS'	=> 'Newest members',
+	'LATEST_MEMBERS'				=> 'Neue Mitglieder',
 	
 	// ACP
-	'ACP_PORTAL_MEMBERS_SETTINGS'			=> 'Newest members settings',
-	'ACP_PORTAL_MEMBERS_SETTINGS_EXP'	=> 'This is where you customize the newest members block.',
-	'PORTAL_MAX_LAST_MEMBER'				=> 'Maximum number of newest members shown',
-	'PORTAL_MAX_LAST_MEMBER_EXP'		=> '0 means infinite',
+	'ACP_PORTAL_MEMBERS_SETTINGS'				=> 'Einstellungen für neue Mitglieder',
+	'ACP_PORTAL_MEMBERS_SETTINGS_EXP'		=> 'Hier kannst du die Einstellungen für neue Mitglieder ändern.',
+	'PORTAL_MAX_LAST_MEMBER'					=> 'Anzahl der anzuzeigenden Mitglieder',
+	'PORTAL_MAX_LAST_MEMBER_EXP'			=> '0 bedeutet unbegrenzt',
 ));
 
 ?>

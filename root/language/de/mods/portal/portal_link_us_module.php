@@ -31,8 +31,8 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'LINK_US'		=> 'Link to us',
-	'LINK_US_TXT'	=> 'Please feel free to link to <strong>%s</strong>. Use the following HTML:',
+	'LINK_US'							=> 'Link zu uns ',
+	'LINK_US_TXT'					=> 'Benutze bitte diesen Link um <strong>%s</strong> bei dir zu verlinken:',
 ));
 
 ?>

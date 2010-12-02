@@ -32,21 +32,21 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	'PORTAL_LINKS'		=> 'Links',
-	'LINKS_NO_LINKS'	=> 'No links', 
+	'LINKS_NO_LINKS'	=> 'Keine Links vorhanden', 
 	
 	// ACP
-	'ACP_PORTAL_LINKS'				=> 'Link Settings',
-	'ACP_PORTAL_LINKS_EXP'			=> 'Customize the links listed in the links block',
-	'ACP_PORTAL_LINK_TITLE'			=> 'Title',
-	'ACP_PORTAL_LINK_TYPE'			=> 'Link type',
-	'ACP_PORTAL_LINK_TYPE_EXP'		=> 'If you have a link to a page of your board, choose "Internal link" in order to prevent unwanted logouts.',
-	'ACP_PORTAL_LINK_INT'			=> 'Internal link',
-	'ACP_PORTAL_LINK_EXT'			=> 'External link',
-	'ACP_PORTAL_LINK_ADD'			=> 'Add new navigation link',
+	'ACP_PORTAL_LINKS'				=> 'Links-Einstellungen',
+	'ACP_PORTAL_LINKS_EXP'			=> 'Einstellungen für die Links ändern.',
+	'ACP_PORTAL_LINK_TITLE'			=> 'Titel',
+	'ACP_PORTAL_LINK_TYPE'			=> 'Link Typ',
+	'ACP_PORTAL_LINK_TYPE_EXP'		=> 'Falls dein Link auf dein Forum verweist, dann wähle bitte "Interner Link" um ungewollte Logouts zu verhindern.',
+	'ACP_PORTAL_LINK_INT'			=> 'Interner Link',
+	'ACP_PORTAL_LINK_EXT'			=> 'Externer Link',
+	'ACP_PORTAL_LINK_ADD'			=> 'Link erstellen',
 	'ACP_PORTAL_LINK_URL'			=> 'Link URL',
-	'ACP_PORTAL_LINK_URL_EXP'		=> 'External links:<br />All links should be entered with a http://<br /><br />Internal links:<br />Only enter the php file as link url, i.e. index.php?style=4.',
-	'ACP_PORTAL_LINK_PERMISSION'	=> 'Link permissions',
-	'ACP_PORTAL_LINK_PERMISSION_EXP'=> 'Select the groups that should be authorized to view the link. If you want all users to be able to view the link, don’t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
+	'ACP_PORTAL_LINK_URL_EXP'		=> 'Externe Links:<br />Alle Links sollten mit einem http:// eingegeben werden.<br /><br />Interne Links:<br />Gebe nur die PHP Datei als Link URL ein, z.B. index.php?style=4.',
+	'ACP_PORTAL_LINK_PERMISSION'	=> 'Link Berechtigungen',
+	'ACP_PORTAL_LINK_PERMISSION_EXP'=> 'Wähle die Gruppen aus die berechtigt sein sollen den Link zu sehen. Falls alle Benutzer den Link sehen sollen, dann wähle nichts aus.<br />Wähle mehrere Gruppen aus/ab indem du <samp>STRG</samp> gedrückt hältst und klickst.',
 ));
 
 ?>

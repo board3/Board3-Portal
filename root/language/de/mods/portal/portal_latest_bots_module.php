@@ -31,14 +31,14 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'LATEST_BOTS'			=> 'Latest Bots',
-	'LAST_VISITED_BOTS'		=> 'Last %s visited bots',
+	'LATEST_BOTS'			=> 'Lezte Bots',
+	'LAST_VISITED_BOTS'		=> 'Die letzten %s Bots',
 	
 	// ACP
-	'ACP_PORTAL_BOTS_SETTINGS'					=> 'Visiting bots settings',
-	'ACP_PORTAL_BOTS_SETTINGS_EXP'			=> 'This is where you customize the visiting bots block.',
-	'PORTAL_LAST_VISITED_BOTS_NUMBER'			=> 'How many bots to display',
-	'PORTAL_LAST_VISITED_BOTS_NUMBER_EXP'	=> '0 means infinite',
+	'ACP_PORTAL_BOTS_SETTINGS'					=> 'Einstellungen für Bot-Besuche',
+	'ACP_PORTAL_BOTS_SETTINGS_EXP'			=> 'Hier kannst du die Einstellungen für Bot-Besuche ändern.',
+	'PORTAL_LAST_VISITED_BOTS_NUMBER'			=> 'Anzahl der anzuzeigenden Bots',
+	'PORTAL_LAST_VISITED_BOTS_NUMBER_EXP'	=> '0 bedeutet unbegrenzt',
 ));
 
 ?>
