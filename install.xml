@@ -463,7 +463,7 @@ Deny from All
 		break;]]></action>
 			</edit>
 		</open>
-		<!-- @todo: check if we need this -- I guess not -->
+		<!-- @todo: check if we need this - I guess not -->
 		<open src="includes/cache.php">
 			<edit>
 				<find><![CDATA[}
