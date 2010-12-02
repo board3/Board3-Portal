@@ -31,13 +31,13 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'PORTAL_SEARCH'			=> 'Search',
-	'PORTAL_SEARCH_GO'		=> 'Go',
-	'PORTAL_SEARCH_SITE'	=> 'Forums',
-	'PORTAL_SEARCH_POSTS'	=> 'Posts',
-	'PORTAL_SEARCH_AUTHOR'	=> 'Author',
-	'PORTAL_SEARCH_ENGINE'	=> 'Search engines',
-	'PORTAL_SEARCH_ADV'		=> 'Advanced search',
+	'PORTAL_SEARCH'			=> 'Suche',
+	'PORTAL_SEARCH_GO'		=> 'Los',
+	'PORTAL_SEARCH_SITE'	=> 'Foren',
+	'PORTAL_SEARCH_POSTS'	=> 'Beiträge',
+	'PORTAL_SEARCH_AUTHOR'	=> 'Autor',
+	'PORTAL_SEARCH_ENGINE'	=> 'Suchmaschinen',
+	'PORTAL_SEARCH_ADV'		=> 'erweiterte Suche',
 ));
 
 ?>

@@ -31,26 +31,24 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'PORTAL_POLL'			=> 'Poll',
-	'LATEST_POLLS'			=> 'Latest Polls',
-	'NO_OPTIONS'			=> 'This poll has no available options.',
-	'NO_POLL'				=> 'No polls available',
-	'RETURN_PORTAL'			=> '%sReturn to the portal%s',
+	'PORTAL_POLL'			=> 'Umfrage',
+	'LATEST_POLLS'			=> 'Neueste Umfragen',
+	'NO_OPTIONS'			=> 'Diese Umfrage verfügt über keine Optionen.',
+	'NO_POLL'				=> 'Derzeit gibt es keine aktuellen Umfragen',
+	'RETURN_PORTAL'			=> '%sZurück zum Portal%s',
 	
 	// ACP
-	'ACP_PORTAL_POLLS_SETTINGS'			=> 'Poll settings',
-	'ACP_PORTAL_POLLS_SETTINGS_EXP'	=> 'This is where you customize the poll block.',
-	'PORTAL_POLL_TOPIC'					=> 'Display poll blocks',
-	'PORTAL_POLL_TOPIC_EXP'			=> 'Display this block on the portal.',
-	'PORTAL_POLL_TOPIC_ID'				=> 'Poll forum(s)',
-	'PORTAL_POLL_TOPIC_ID_EXP'		=> 'The forum(s) from which the polls should be displayed. If "Exclude forums" is set to "Yes", select the forums you want to exclude.<br />If "Exclude forums" is set to "No" select the forums you want to see.<br />Select/Deselect multiple forums by holding <samp>CTRL</samp> and clicking.',
-	'PORTAL_POLL_EXCLUDE_ID'			=> 'Exclude Forums',
-	'PORTAL_POLL_EXCLUDE_ID_EXP'	=> 'Select "Yes" if you want to exlude the selected forums from the polls block, and "No" if you only want to see the polls from the selected forums in the polls block.',
-	'PORTAL_POLL_LIMIT'					=> 'Poll display limit',
-	'PORTAL_POLL_LIMIT_EXP'			=> 'The number of polls you would like to display on the portal page.',
-	'PORTAL_POLL_ALLOW_VOTE'			=> 'Allow voting',
-	'PORTAL_POLL_ALLOW_VOTE_EXP'	=> 'Allow users with the required permissions to vote from the portal page.',
-	'PORTAL_POLL_HIDE'					=> 'Hide expired polls?',
+	'ACP_PORTAL_POLLS_SETTINGS'				=> 'Einstellungen für Umfragen',
+	'ACP_PORTAL_POLLS_SETTINGS_EXP'			=> 'Hier kannst du die Einstellungen für Umfragen ändern.',
+	'PORTAL_POLL_TOPIC_ID'					=> 'Umfragen Foren',
+	'PORTAL_POLL_TOPIC_ID_EXP'				=> 'Die Foren, aus welchen die Umfragen angezeigt werden sollen. Frei lassen, um aus allen Foren anzeigen zu lassen. Falls "Foren aussschließen" auf "Ja" steht, wähle die Foren die du ausschließen willst.<br />Falls "Foren aussschließen" auf "Nein" steht, wähle die Foren die du sehen willst.<br />Wähle mehrere Foren aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
+	'PORTAL_POLL_EXCLUDE_ID'				=> 'Foren ausschließen',
+	'PORTAL_POLL_EXCLUDE_ID_EXP'			=> 'Wähle "Ja" wenn du die ausgewählten Foren vom Umfragen-Block ausschließen willst, und "Nein" wenn du nur die Themen aus den ausgewählten Foren im Umfragen-Block sehen willst.',
+	'PORTAL_POLL_LIMIT'						=> 'Maximale Anzahl der Umfragen',
+	'PORTAL_POLL_LIMIT_EXP'					=> 'Die Anzahl der Umfragen, die auf dem Portal angezeigt werden sollen.',
+	'PORTAL_POLL_ALLOW_VOTE'				=> 'Abstimmen erlauben',
+	'PORTAL_POLL_ALLOW_VOTE_EXP'			=> 'Verfügt der Benutzer über entsprechende Berechtigungen, kann er direkt auf der Portal-Seite abstimmen.',
+	'PORTAL_POLL_HIDE'						=> 'Abgelaufene Umfragen verbergen?',
 ));
 
 ?>

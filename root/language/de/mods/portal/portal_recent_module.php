@@ -31,22 +31,22 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'PORTAL_RECENT'				=> 'Recent',
-	'PORTAL_RECENT_TOPIC'		=> 'Recent topics',
-	'PORTAL_RECENT_ANN'			=> 'Recent announcements',
-	'PORTAL_RECENT_HOT_TOPIC'	=> 'Recent popular topics',
+	'PORTAL_RECENT_NEWS'		=> 'Aktuelles',
+	'PORTAL_RECENT_TOPIC'		=> 'Aktuelle Themen',
+	'PORTAL_RECENT_ANN'			=> 'Aktuelle Bekanntmachungen',
+	'PORTAL_RECENT_HOT_TOPIC'	=> 'Beliebte Themen',
 	
 	// ACP
-	'ACP_PORTAL_RECENT_SETTINGS'			=> 'Recent topics settings',
-	'ACP_PORTAL_RECENT_SETTINGS_EXP'	=> 'This is where you customize the recent topics block.',
-	'PORTAL_MAX_TOPIC'						=> 'Limit of recent announcements/hot topics',
-	'PORTAL_MAX_TOPIC_EXP'				=> '0 means infinite',
-	'PORTAL_RECENT_TITLE_LIMIT'				=> 'Character limit for each recent topic',
-	'PORTAL_RECENT_TITLE_LIMIT_EXP'		=> '0 means infinite',
-	'PORTAL_RECENT_FORUM'					=> 'Recent topics forums',
-	'PORTAL_RECENT_FORUM_EXP'			=> 'Forum(s) we pull the topics from, leave blank to pull from all forums. If "Exclude forums" is set to "Yes", select the forums you want to exclude.<br />If "Exclude forums" is set to "No" select the forums you want to see.<br />Select/Deselect multiple forums by holding <samp>CTRL</samp> and clicking.',
-	'PORTAL_EXCLUDE_FORUM'					=> 'Exclude Forums',
-	'PORTAL_EXCLUDE_FORUM_EXP'			=> 'Select "Yes" if you want to exlude the selected forums from the recent topics block, and "No" if you want to see only the selected forums in the recent topics block.',
+	'ACP_PORTAL_RECENT_SETTINGS'				=> 'Einstellungen für neueste Themen',
+	'ACP_PORTAL_RECENT_SETTINGS_EXPLAIN'		=> 'Hier kannst du die Einstellungen für die neuesten Themen ändern.',
+	'PORTAL_MAX_TOPIC'							=> 'Anzahl der neuesten Themen auf dem Portal',
+	'PORTAL_MAX_TOPIC_EXPLAIN'					=> '0 bedeutet unbegrenzt',
+	'PORTAL_RECENT_TITLE_LIMIT'					=> 'Maximal angezeigte Länge der neuesten Themen',
+	'PORTAL_RECENT_TITLE_LIMIT_EXPLAIN'			=> '0 bedeutet unbegrenzt',
+	'PORTAL_RECENT_FORUM'						=> 'Themen Foren',
+	'PORTAL_RECENT_FORUM_EXPLAIN'				=> 'Die Foren, aus welchen die Themen angezeigt werden sollen. Frei lassen, um aus allen Foren anzeigen zu lassen. Falls "Foren aussschließen" auf "Ja" steht, wähle die Foren die du ausschließen willst.<br />Falls "Foren aussschließen" auf "Nein" steht, wähle die Foren die du sehen willst.<br />Wähle mehrere Foren aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
+	'PORTAL_EXCLUDE_FORUM'						=> 'Foren aussschließen',
+	'PORTAL_EXCLUDE_FORUM_EXPLAIN'				=> 'Wähle "Ja" wenn du die ausgewählten Foren vom Aktuelle Themen-Block ausschließen willst, und "Nein" wenn du nur die Themen aus den ausgewählten Foren im Aktuelle Themen-Block sehen willst.',
 ));
 
 ?>
