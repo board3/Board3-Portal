@@ -90,7 +90,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 		<installation>
 			<level>easy</level>
 			<time>600</time>
-			<target-version>3.0.7-PL1</target-version>
+			<target-version>3.0.8</target-version>
 		</installation>
 
 		<link-group>
@@ -457,86 +457,10 @@ Deny from All
 			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
 		break;]]></find>
 				<action type="after-add"><![CDATA[		case 'portal':
-			$user->add_lang('mods/lang_portal');
+			$user->add_lang('mods/portal');
 			$location = $user->lang['VIEWING_PORTAL'];
 			$location_url = append_sid("{$phpbb_root_path}portal.$phpEx");
 		break;]]></action>
-			</edit>
-		</open>
-		<!-- @todo: check if we need this - I guess not -->
-		<open src="includes/cache.php">
-			<edit>
-				<find><![CDATA[}
-
-?>]]></find>
-				<action type="before-add"><![CDATA[	/**
-	* Obtain currently listed blocks
-	*/
-	function obtain_blocks()
-	{
-		if (($blocks = $this->get('_blocks')) === false)
-		{
-			global $db;
-
-			// Get blocks
-			$sql = 'SELECT *
-				FROM ' . PORTAL_BLOCKS_TABLE . '
-				ORDER BY block_order';
-			$result = $db->sql_query($sql);
-
-			$blocks = array();
-			while ($row = $db->sql_fetchrow($result))
-			{
-				$blocks[$row['block_id']]['id'] = (int )$row['block_id'];
-				$blocks[$row['block_id']]['title'] = (string) $row['block_title'];
-				$blocks[$row['block_id']]['type'] = (string) $row['block_type'];
-				$blocks[$row['block_id']]['position'] = (string) $row['block_position'];
-				$blocks[$row['block_id']]['group'] = (string) $row['block_groups'];
-				$blocks[$row['block_id']]['order'] = (int) $row['block_order'];
-				$blocks[$row['block_id']]['icon'] = (string) $row['block_icon'];
-				$blocks[$row['block_id']]['text'] = (string) $row['block_text'];
-				$blocks[$row['block_id']]['text_bitfield'] = (string) $row['block_text_bitfield'];
-				$blocks[$row['block_id']]['text_options'] = (int) $row['block_text_options'];
-				$blocks[$row['block_id']]['text_uid'] = (string) $row['block_text_uid'];
-			}
-			$db->sql_freeresult($result);
-
-			$this->put('_blocks', $blocks);
-		}
-
-		return $blocks;
-	}
-
-	/**
-	* Obtain currently listed navigation links
-	*/
-	function obtain_links()
-	{
-		if (($links = $this->get('_links')) === false)
-		{
-			global $db;
-
-			// Get navigation links
-			$sql = 'SELECT *
-				FROM ' . PORTAL_LINKS_TABLE . '
-				ORDER BY link_order';
-			$result = $db->sql_query($sql);
-
-			$links = array();
-			while ($row = $db->sql_fetchrow($result))
-			{
-				$links[$row['link_id']]['id'] = (int )$row['link_id'];
-				$links[$row['link_id']]['title'] = (string) $row['link_title'];
-				$links[$row['link_id']]['url'] = (string) $row['link_url'];
-				$links[$row['link_id']]['is_cat'] = ($row['link_is_cat']) ? true : false;
-			}
-			$db->sql_freeresult($result);
-
-			$this->put('_links', $links);
-		}
-
-		return $links;
-	}]]></action>
 			</edit>
 		</open>
 		<open src="includes/functions.php">
@@ -592,7 +516,7 @@ Deny from All
 				<action type="after-add"><![CDATA[@import url("portal.css");]]></action>
 			</edit>
 		</open>
-		
+		<php-installer>install/index.php</php-installer>
 		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus
 
 Aktualisiere deine Styles:
