@@ -828,8 +828,6 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 	{
 		$directory = $phpbb_root_path . 'portal/modules/';
 		
-
-		
 		if($purge_modules)
 		{
 			$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE;

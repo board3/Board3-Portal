@@ -5,7 +5,7 @@
  * @author David Lewis (Highway of Life) highwayoflife@gmail.com
  * @author chiron
  * @package umil
- * @version $Id: umil.php 207 2010-03-14 16:27:00Z exreaction $
+ * @version $Id$
  * @copyright (c) 2008 phpBB Group
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  *
@@ -123,7 +123,7 @@ $lang = array_merge($lang, array(
 	'UNKNOWN'						=> '未知の',
 	'UPDATE_MOD'					=> '%s のアップデート',
 	'UPDATE_MOD_CONFIRM'			=> '%s をアップデートしますか？',
-	'UPDATE_UMIL'					=> '現在の UMIL のバージョンが古くなっています。<br /><br /><a href="%1$s">%1$s</a> から最新の UMIL ( Unified MOD Install Library ) をダウンロードしてください。',
+	'UPDATE_UMIL'					=> '現在の UMIL のバージョンが古くなっています。<br /><br /><a href="%1$s" target="_blank">%1$s</a> から最新の UMIL ( Unified MOD Install Library ) をダウンロードしてください。',
 
 	'VERSIONS'						=> 'MOD のバージョン: <strong>%1$s</strong><br />現在のインストール状況: <strong>%2$s</strong>',
 	'VERSION_SELECT'				=> 'バージョンの選択',
