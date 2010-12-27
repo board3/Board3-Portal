@@ -52,6 +52,7 @@ function get_dbms_infos()
 
 		case 'mssql':
 		case 'mssql_odbc':
+		case 'mssqlnative':
 			$return['db_schema'] = 'mssql';
 			$return['delimiter'] = 'GO';
 		break;
