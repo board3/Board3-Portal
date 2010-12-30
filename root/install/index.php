@@ -74,7 +74,7 @@ $versions = array(
 		),
 
 		'table_add' => array(
-			array(phpbb_portal_modules, array(
+			array('phpbb_portal_modules', array(
 				'COLUMNS' => array(
 					'module_id' => array('UINT:3', NULL, 'auto_increment'),
 					'module_classname' => array('VCHAR:64', ''),
@@ -87,7 +87,7 @@ $versions = array(
 
 				'PRIMARY_KEY'	=> 'module_id',
 			)),
-			array(phpbb_portal_config, array(
+			array('phpbb_portal_config', array(
 				'COLUMNS' => array(
 					'config_name' => array('VCHAR:255', ''),
 					'config_value'=> array('MTEXT', ''),
