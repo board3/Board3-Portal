@@ -1,0 +1,66 @@
+<!--version $Id: main_menu.html 544 2009-09-10 12:35:25Z christian_n $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_menu.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_M_MENU}{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr class="row3">
+		<td>
+			<strong>{L_M_CONTENT}</strong>
+		</td>
+	</tr>
+	<tr class="row1">
+		<td>
+			<a href="{U_INDEX}">{L_INDEX}</a>
+		</td>
+	</tr>
+	<!-- IF S_DISPLAY_SEARCH -->
+	<tr class="row1">
+		<td>
+			<a href="{U_SEARCH}">{L_SEARCH}</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED -->
+	<tr class="row1">
+		<td>
+			<a href="{U_REGISTER}">{L_REGISTER}</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF not S_IS_BOT and S_DISPLAY_MEMBERLIST -->
+	<tr class="row1">
+		<td>
+			<a href="{U_MEMBERLIST}">{L_MEMBERLIST}</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<tr class="row1">
+		<td>
+			<a href="{U_TEAM}">{L_THE_TEAM}</a>
+		</td>
+	</tr>
+	<tr class="row3">
+		<td>
+			<strong>{L_M_HELP}</strong>
+		</td>
+	</tr>
+	<tr class="row1">
+		<td>
+			<a href="{U_FAQ}">{L_FAQ}</a>
+		</td>
+	</tr>
+	 <tr class="row1">
+		<td>
+			<a href="{U_M_BBCODE}">{L_M_BBCODE}</a>
+		</td>
+	</tr>
+	<tr class="row1">
+		<td>
+			<a href="{U_M_TERMS}">{L_M_TERMS}</a>
+		</td>
+	</tr>
+	<tr class="row1">
+		<td>
+			<a href="{U_M_PRV}">{L_M_PRV}</a>
+		</td>
+	</tr>
+</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

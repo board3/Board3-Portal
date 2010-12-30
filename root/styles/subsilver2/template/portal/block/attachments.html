@@ -1,0 +1,20 @@
+<!--version $Id: attachments.html 544 2009-09-10 12:35:25Z christian_n $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_attach.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_ATTACHMENTS}{$LR_BLOCK_H_R}
+	<table class="tablebg" cellspacing="1" width="100%">
+		<tr class="row1">
+			<td>
+				<!-- IF .attach -->
+					<span style="float:left;"><strong>{L_FILENAME}</strong></span><br style="clear:both" />
+					<!-- BEGIN attach -->
+						<span style="float:left;" class="gensmall"><img src="{T_THEME_PATH}/images/portal/icon_topic_attach.gif" alt="" />&nbsp;<a href="{attach.U_TOPIC}" title="{attach.REAL_FILENAME}"><strong>{attach.FILENAME}</strong></a></span><br style="clear:both" />
+						<span style="float:left;">{L_FILESIZE}:</span><span style="float:right;" class="gensmall"><strong>{attach.FILESIZE}</strong></span><br style="clear:both" />
+						<span style="float:left;">{L_DOWNLOADS}:</span><span style="float:right;" class="gensmall"><strong>{attach.DOWNLOAD_COUNT}</strong></span><br style="clear:both" />
+						<!-- IF not attach.S_LAST_ROW --><hr /><!-- ENDIF -->
+					<!-- END attach -->
+				<!-- ELSE -->
+					<span style="float:left;" class="gensmall"><strong>{L_NO_ATTACHMENTS}</strong></span>
+				<!-- ENDIF -->
+			</td>
+		</tr>
+	</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

@@ -1,0 +1,81 @@
+<!--version $Id: user_menu.html 632 2010-03-14 16:42:33Z marc1706 $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_USER_MENU}{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr class="row1">
+		<td>
+			<div align="center">
+                <a href="{U_VIEW_PROFILE}"><!-- IF B3P_USER_COLOR --><span style="color: {B3P_USER_COLOR}; font-weight: bold;"><!-- ELSE --><span><!-- ENDIF -->{B3P_USERNAME}</span></a><br />
+                <!-- IF B3P_AVATAR_IMG -->
+                    <a href="{U_PROFILE}">{B3P_AVATAR_IMG}</a>
+                <!-- ELSEIF $NO_AVATAR_IMG -->
+                    <a href="{U_PROFILE}"><img src="{T_THEME_PATH}{$NO_AVATAR_IMG}" alt="" /></a>
+                <!-- ENDIF -->
+                <!-- IF B3P_RANK_TITLE --><br /><span class="gensmall">{B3P_RANK_TITLE}</span><!-- ENDIF -->
+                <!-- IF B3P_RANK_IMG --><br />{B3P_RANK_IMG}<!-- ENDIF -->
+            </div>
+		</td>
+	</tr>
+	<!-- IF S_DISPLAY_SEARCH -->
+	<tr class="row1">
+		<td>
+			<a href="{U_NEW_POSTS}">{L_NEW_POSTS}</a>
+		</td>
+	</tr>
+	<tr class="row1">
+		<td>
+			<a href="{U_UNREAD_POSTS}">{L_UNREAD_POSTS}</a>
+		</td>
+	</tr>
+	<tr class="row1">
+		<td>
+			<a href="{U_SELF_POSTS}">{L_SELF_POSTS}</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF U_UM_BOOKMARKS -->
+	<tr class="row1">
+		<td>
+			<a href="{U_UM_BOOKMARKS}">{L_UM_BOOKMARKS}</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF S_DISPLAY_SUBSCRIPTIONS -->
+	<tr class="row1">
+		<td>
+			<a href="{U_UM_MAIN_SUBSCRIBED}">{L_UM_MAIN_SUBSCRIBED}</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF S_DISPLAY_PM -->
+	<tr class="row1">
+		<td>
+			<a href="{U_PRIVATEMSGS}">{PRIVATE_MESSAGE_INFO}</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<tr class="row1">
+		<td>
+			<a href="{U_PROFILE}">{L_PROFILE}</a>
+		</td>
+	</tr>
+	<!-- IF U_MCP -->
+	<tr class="row1">
+		<td>
+			<a href="{U_MCP}">{L_MCP}</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF U_ACP -->
+	<tr class="row1">
+		<td>
+			<a href="{U_ACP}">{L_M_ACP}</a><br />
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<tr class="row1">
+		<td>
+			<a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a>
+		</td>
+	</tr>
+</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

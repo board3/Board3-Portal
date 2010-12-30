@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<!-- $Id: subsilver2_update_previous103.xml 662 2010-07-13 09:59:43Z marc1706 $ -->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+
+		<title lang="en">board3 Portal - subsilver2 style update previous B3P V1.0.3</title>
+		<title lang="de">board3 Portal - subsilver2 style update von Versionen vor B3P V1.0.3</title>
+
+		<description lang="en">Adds a portal to your forum.
+It has several boxes wich can be turned on an off in the ACP and certain settings.
+
+Included language files:
+» English (en)
+» German (de)
+
+More languages can be found in our International forum: http://www.board3.de/viewforum.php?f=13</description>
+		<description lang="de">Fügt ein Portal deinem Forum hinzu.
+Es hat diverse Boxen, die über das ACP an- / abgeschaltet und eingestellt werden können.
+
+Enthaltenen Sprachdateien:
+» Englisch (en)
+» Deutsch (de)
+
+Weitere Sprachen kannst in unseren International Forum finden: http://www.board3.de/viewforum.php?f=13
+</description>
+
+		<author-notes lang="en">I hope you get everything working. Further developement, new boxes for the portal or questions are welcome at www.board3.de
+		</author-notes>
+		<author-notes lang="de">Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.
+		</author-notes>
+	
+		<author-group>
+			<author>
+				<realname>Ice</realname>
+				<username>avaren</username>
+				<homepage>http://www.board3.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Kevin</realname>
+				<username>saint_hh</username>
+				<homepage>http://www.board3.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Christian</realname>
+				<username>Christian_N</username>
+				<homepage>http://www.phpbb-projekt.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Marc Alexander</realname>
+				 <username>marc1706</username>
+				<homepage>http://www.m-a-styles.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Main-Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>(N/A)</realname>
+				<email>nickvergessen@gmx.de</email>
+				<username>nickvergessen</username>
+				<homepage>http://mods.flying-bits.org/</homepage>
+				<contributions-group>
+					<contributions status="past" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Walter</realname>
+				<email>w.bobeth@digitalfotografie-foren.de</email>
+				<username>Redbull254</username>
+				<homepage>http://www.digitalfotografie-foren.de</homepage>
+				<contributions-group>
+					<contributions status="past" position="Developer"></contributions>
+				</contributions-group>
+			 </author>
+		</author-group>
+
+		<mod-version>1.0.3</mod-version>
+
+		<installation>
+			<level>easy</level>
+			<time>600</time>
+			<target-version>3.0.7-PL1</target-version>
+		</installation>
+
+		<link-group>
+			<link type="parent" lang="de" href="../../install.xml">Installations-Anleitung</link>
+			<link type="parent" lang="en" href="../../install.xml">Manual</link>
+		</link-group>	
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/styles/subsilver2/template/portal/*.*" to="styles/subsilver2/template/portal/*.*" />
+			<file from="root/styles/subsilver2/theme/images/portal/*.*" to="styles/subsilver2/theme/images/portal/*.*" />
+		</copy>
+		<open src="styles/subsilver2/template/breadcrumbs.html">
+			<edit>
+				<find><![CDATA[<p class="breadcrumbs"><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <a href="{U_INDEX}">{L_INDEX}</a><!-- BEGIN navlinks --> &#187; ]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[<a href="{U_PORTAL}">{L_PORTAL}</a> &#187; ]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[<!-- IF U_PORTAL --><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <!-- ENDIF -->]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="styles/subsilver2/template/overall_header.html">
+			<edit>
+				<find><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- IF not $S_IN_PORTAL or S_DISPLAY_PHPBB_MENU -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- IF not $S_IN_PORTAL or S_DISPLAY_PHPBB_MENU -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<!-- IF not $S_IN_PORTAL or not S_DISPLAY_MAINMENU -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- IF not $S_IN_PORTAL or S_DISPLAY_PHPBB_MENU -->]]></action>
+			</edit>
+		</open>
+		
+				<diy-instructions lang="de"><![CDATA[Rufe install/ auf und führe den Installer aus
+
+Aktualisiere deine Styles:
+    "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
+    "Administrations-Bereich" (ACP) > "Styles" > "Themes" > jedes > "Aktualisieren"
+    "Administrations-Bereich" (ACP) > "Styles" > "Grafiksammlungen" > jedes > "Aktualisieren"
+
+Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
+
+Subsilver2 User: bitte das komplette Verzeichnis subsilver2 mit den neuen Dateien überschreiben.]]></diy-instructions>
+		<diy-instructions lang="en"><![CDATA[Browse to install/ and run the installer
+
+Refresh your Styles:
+    "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
+    "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
+    "Administration Control Panel" (ACP) > "Styles" > "Imagesets" > each > "refresh"
+
+Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
+
+Subsilver2 user: please upload the complete subsilver2 directory.]]></diy-instructions>
+	</action-group>
+</mod>

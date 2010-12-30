@@ -1,0 +1,66 @@
+<!--version $Id: portal_center.html 592 2009-12-15 12:10:32Z marc1706 $ //-->
+
+<!-- IF S_DISPLAY_GENERAL or (U_RESTORE_PERMISSIONS and S_DISPLAY_MAINMENU) -->
+	<!-- INCLUDE portal/block/general_block.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_WELCOME -->
+	<!-- IF S_DISPLAY_WELCOME_GUEST and S_USER_LOGGED_IN -->
+	<!-- ELSE -->
+		<!-- INCLUDE portal/block/welcome.html -->
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- IF S_CUSTOM_CENTER -->
+	<!-- INCLUDE portal/block/custom_center.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_RECENT -->
+	<!-- INCLUDE portal/block/recent.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_ANNOUNCEMENTS -->
+	<!-- IF S_ANNOUNCE_COMPACT -->
+		<!-- INCLUDE portal/block/announcements_compact.html -->
+	<!-- ELSE -->
+		<!-- INCLUDE portal/block/announcements.html -->
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_NEWS -->
+	<!-- IF S_NEWS_COMPACT -->
+		<!-- INCLUDE portal/block/news_compact.html -->
+	<!-- ELSE -->
+		<!-- INCLUDE portal/block/news.html -->
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- INCLUDE portal/block/additional_blocks_center.html -->
+
+<!-- IF S_DISPLAY_POLL -->
+	<!-- INCLUDE portal/block/poll.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_PORTAL_FORUM_INDEX -->
+	<!-- IF S_DISPLAY_SEARCH or (S_USER_LOGGED_IN and not S_IS_BOT) -->
+		<!-- INCLUDE portal/block/forumlist_search.html -->
+	<!-- ENDIF -->
+	<!-- INCLUDE forumlist_body.html -->
+	<br />
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_ONLINE_PORTAL_LIST and S_DISPLAY_ONLINE_LIST -->
+	<!-- INCLUDE portal/block/whois_online.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_PAY_C -->
+	<!-- INCLUDE portal/block/donation.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_WORDGRAPH -->
+	<!-- INCLUDE portal/block/wordgraph.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_JUMPBOX -->
+	<!-- INCLUDE portal/block/jumpbox.html -->
+<!-- ENDIF -->

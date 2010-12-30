@@ -1,0 +1,48 @@
+<!-- DEFINE $S_IN_PORTAL = 1 -->
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE portal/_block_config.html -->
+
+<!--version $Id: portal_body.html 591 2009-12-11 23:48:49Z marc1706 $ //-->
+<!-- IF PORTAL_VERSION_CHECK and U_ACP --> 
+	<div id="portal_version_check" class="rules">
+		<div class="inner"><span class="corners-top"><span></span></span>
+		<strong>{L_INFORMATION}:</strong> {PORTAL_VERSION_CHECK}
+		<span class="corners-bottom"><span></span></span></div>
+	</div>
+<!-- ENDIF -->
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr>
+<!-- [+] left block area -->
+	<!-- IF S_LEFT_COLUMN -->
+		<td valign="top" style="width: <!-- IF $S_COLUMNS_WIDTH_OVERRIDE -->{$PORTAL_LEFT_COLUMN_OVERRIDE}<!-- ELSE -->{PORTAL_LEFT_COLUMN}<!-- ENDIF -->px; padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->:{$BLOCK_DISTANCE};">
+		<br style="clear:both" />
+		<!-- INCLUDE portal/portal_left.html -->
+		</td>
+	<!-- ENDIF -->
+<!-- [-] left block area -->
+
+<!-- [+] center block area -->
+	<!-- IF S_CENTER_COLUMN -->
+		<td valign="top">
+		<br style="clear:both" />
+		<!-- INCLUDE portal/portal_center.html -->
+		
+		<!-- please keep this credits visible, thank you!  -->
+		<br /><div class="copyright">{L_PORTAL_COPY}</div>
+		</td>
+	<!-- ENDIF -->
+<!-- [-] center block area -->
+
+<!-- [+] right block area -->
+	<!-- IF S_RIGHT_COLUMN -->
+		<td valign="top" style="width: <!-- IF $S_COLUMNS_WIDTH_OVERRIDE -->{$PORTAL_RIGHT_COLUMN_OVERRIDE}<!-- ELSE -->{PORTAL_RIGHT_COLUMN}<!-- ENDIF -->px; padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->:{$BLOCK_DISTANCE};">
+		<br style="clear:both" />
+		<!-- INCLUDE portal/portal_right.html -->
+		</td>
+	<!-- ENDIF -->
+<!-- [-] right block area -->
+	</tr>
+</table>
+<!--// board3 Portal by www.board3.de //-->
+<!-- INCLUDE overall_footer.html -->

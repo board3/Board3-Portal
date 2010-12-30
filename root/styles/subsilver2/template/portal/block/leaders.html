@@ -1,0 +1,41 @@
+<!--version $Id: leaders.html 544 2009-09-10 12:35:25Z christian_n $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_team.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_THE_TEAM}{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr class="row3">
+		<td>
+			<strong>{L_ADMINISTRATORS}</strong>
+		</td>
+	</tr>
+	<!-- BEGIN admin -->
+	<tr  class="row1">
+		<td>
+			<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{admin.USERNAME_FULL}</strong></span><br style="clear:both" />
+		</td>
+	</tr>
+	<!-- BEGINELSE -->
+	<tr  class="row1">
+		<td>
+			{L_NO_ADMINISTRATORS_P}
+		</td>
+	</tr>
+	<!-- END admin -->
+	<tr  class="row3">
+		<td>
+			<strong>{L_MODERATORS}</strong>
+		</td>
+	</tr>
+	<!-- BEGIN mod -->
+	<tr  class="row1">
+		<td>
+			<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{mod.USERNAME_FULL}</strong></span><br style="clear:both" />
+		</td>
+	</tr>
+	<!-- BEGINELSE -->
+	<tr  class="row1">
+		<td>
+			{L_NO_MODERATORS_P}
+		</td>
+	</tr>
+	<!-- END mod -->
+</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

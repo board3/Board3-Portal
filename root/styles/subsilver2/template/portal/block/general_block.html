@@ -1,0 +1,11 @@
+<!--version $Id: general_block.html 535 2009-09-02 12:14:44Z christian_n $ //-->
+{$C_BLOCK_H_L}<!-- IF S_DISPLAY_GENERAL -->{L_PORTAL_INSTALL}<!-- ELSE -->{L_INFORMATION}<!-- ENDIF -->{$C_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	</tr>
+	<tr class="row1">
+		<td>
+			<!-- IF S_DISPLAY_GENERAL -->{L_PORTAL_INSTALL_TEXT}<!-- ELSE -->&raquo; <a href="{U_RESTORE_PERMISSIONS}">{L_RESTORE_PERMISSIONS}</a><!-- ENDIF -->
+		</td>
+	</tr>
+</table>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}

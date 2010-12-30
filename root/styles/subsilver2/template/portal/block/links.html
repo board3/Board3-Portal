@@ -1,0 +1,20 @@
+<!--version $Id: links.html 549 2009-09-25 19:04:37Z christian_n $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_links.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_LINKS}{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<!-- IF .link -->
+		<!-- BEGIN link -->
+		<tr class="row1">
+			<td>
+				<img src="{T_THEME_PATH}/images/portal/arrowbullet.gif" width="12" height="11" alt="" />&nbsp;<a href="{link.URL}" title="{link.TEXT}">{link.TEXT}</a>
+			</td>
+		</tr>
+		<!-- END link -->
+	<!-- ELSE -->
+	<tr class="row1">
+		<td>
+			<span style="float: left" class="gensmall"><strong>{L_NO_LINKS}</strong></span><br />
+		</td>
+	</tr>
+	<!-- ENDIF -->
+</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

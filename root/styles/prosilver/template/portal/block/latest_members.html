@@ -1,0 +1,9 @@
+<!--version $Id: latest_members.html 544 2009-09-10 12:35:25Z christian_n $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_members.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_LATEST_MEMBERS}{$LR_BLOCK_H_R}
+	<span style="float:left;"><strong>{L_USERNAME}</strong></span>
+	<span style="float:right;padding-right:10px;"><strong>{L_JOINED}</strong></span><br style="clear:both" />
+	<!-- BEGIN latest_members -->
+		<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;">{latest_members.USERNAME_FULL}</span>
+		<span style="float:right;padding-right:10px; padding-top:2px;">{latest_members.JOINED}</span><br style="clear:both" />
+	<!-- END latest_members -->
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

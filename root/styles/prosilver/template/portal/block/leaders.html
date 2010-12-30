@@ -1,0 +1,16 @@
+<!--version $Id: leaders.html 544 2009-09-10 12:35:25Z christian_n $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_team.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_THE_TEAM}{$LR_BLOCK_H_R}
+	<strong>{L_ADMINISTRATORS}</strong><br />
+	<!-- BEGIN admin -->
+		<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{admin.USERNAME_FULL}</strong></span><br style="clear:both" />
+	<!-- BEGINELSE -->
+		{L_NO_ADMINISTRATORS_P}<br /><br />
+	<!-- END admin -->
+	<br style="clear:both" />
+	<strong>{L_MODERATORS}</strong><br />
+	<!-- BEGIN mod -->
+		<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{mod.USERNAME_FULL}</strong></span><br style="clear:both" />
+	<!-- BEGINELSE -->
+		{L_NO_MODERATORS_P}
+	<!-- END mod -->
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

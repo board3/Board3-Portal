@@ -1,0 +1,42 @@
+<!--version $Id: portal_right.html 591 2009-12-11 23:48:49Z marc1706 $ //-->
+
+<!-- IF S_DISPLAY_USERMENU -->
+	<!-- IF not S_USER_LOGGED_IN -->
+		<!-- INCLUDE portal/block/login_box.html -->
+	<!-- ENDIF -->
+	<!-- IF not S_IS_BOT and S_USER_LOGGED_IN -->
+		<!-- INCLUDE portal/block/user_menu.html -->
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- INCLUDE portal/block/additional_blocks_right.html -->
+
+<!-- IF not S_IS_BOT and S_USER_LOGGED_IN and S_ZEBRA_ENABLED and S_DISPLAY_FRIENDS -->
+	<!-- INCLUDE portal/block/online_friends.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_ADVANCED_STAT -->
+	<!-- INCLUDE portal/block/statistics.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_MINICAL -->
+	<!-- INCLUDE portal/block/mini_calendar.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_LEADERS_EXT -->
+	<!-- INCLUDE portal/block/leaders_ext.html -->
+<!-- ELSEIF S_DISPLAY_LEADERS -->
+	<!-- INCLUDE portal/block/leaders.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_LAST_BOTS and S_LAST_VISITED_BOTS -->
+	<!-- INCLUDE portal/block/latest_bots.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_LINKS -->
+	<!-- INCLUDE portal/block/links.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_PAY_S -->
+	<!-- INCLUDE portal/block/donation_small.html -->
+<!-- ENDIF -->

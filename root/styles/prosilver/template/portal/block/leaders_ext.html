@@ -1,0 +1,12 @@
+<!--version $Id: leaders_ext.html 606 2010-01-19 22:46:35Z marc1706 $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_team.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_THE_TEAM}{$LR_BLOCK_H_R}
+	<!-- BEGIN group -->
+		<strong><a href="{group.U_GROUP}" style="color: #{group.GROUP_COLOUR};" class="username-coloured">{group.GROUP_NAME}</a></strong><br />
+	<!-- BEGIN member -->
+		<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{group.member.USERNAME_FULL}</strong></span><br style="clear:both" />
+	<!-- END member -->
+	<br style="clear:both" />
+	<!-- BEGINELSE -->
+		{L_NO_GROUPS_P}
+	<!-- END group -->
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

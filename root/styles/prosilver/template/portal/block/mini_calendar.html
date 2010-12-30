@@ -1,0 +1,32 @@
+<!--version $Id: mini_calendar.html 544 2009-09-10 12:35:25Z christian_n $ //-->
+<a name="minical"></a>
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_minical.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_MINI_CALENDAR}{$LR_BLOCK_H_R}	
+	<table width="100%" cellspacing="1">
+		<tr>
+			<td align="left" colspan="2">{U_PREV_MONTH}</td>
+			<td colspan="3" align="center"><span class="genmed">{L_MINI_CAL_MONTH}</span></td>
+			<td align="right" colspan="2">{U_NEXT_MONTH}</td>
+		</tr>
+		<tr>
+			<!-- IF S_SUNDAY_FIRST -->
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_SUN}</span></td>
+			<!-- ENDIF -->
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_MON}</span></td>
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_TUE}</span></td>
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_WED}</span></td>
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_THU}</span></td>
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_FRI}</span></td>
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_SAT}</span></td>
+			<!-- IF not S_SUNDAY_FIRST -->
+				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{L_MINI_CAL_SUN}</span></td>
+			<!-- ENDIF -->
+		</tr>
+		<!-- BEGIN mini_cal_row -->
+		<tr>
+			<!-- BEGIN mini_cal_days -->
+				<td class="row1" align="center"><span class="gensmall">{mini_cal_row.mini_cal_days.MINI_CAL_DAY}</span></td>
+			<!-- END mini_cal_days -->
+		</tr>
+		<!-- END mini_cal_row -->
+	</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

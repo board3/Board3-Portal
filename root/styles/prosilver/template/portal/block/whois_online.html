@@ -1,0 +1,11 @@
+<!--version $Id: whois_online.html 521 2009-08-26 20:59:19Z christian_n $ //-->
+{$C_BLOCK_H_L}<dt><!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a><!-- ELSE -->{L_WHO_IS_ONLINE}<!-- ENDIF --></dt>{$C_BLOCK_H_R}
+	<ul class="topiclist bg1">
+		<li><dl>
+			<dd style="border-left:0px">
+				<p style="margin: 0 5px 0 5px;">{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
+				<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>
+			</dd>
+		</dl></li>
+	</ul>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}

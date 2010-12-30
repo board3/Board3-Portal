@@ -1,0 +1,54 @@
+<!--version $Id: news.html 553 2009-09-30 12:10:19Z christian_n $ //-->
+{$C_BLOCK_H_L}<dt>{L_LATEST_NEWS}</dt>{$C_BLOCK_H_R}
+<!-- IF $S_POSTBODY_TOP --><div class="postbody" style="width: 100%"><!-- ENDIF -->
+	<!-- BEGIN news_row -->
+		<!-- IF news_row.S_NO_TOPICS  -->
+			<div class="post bg2" style="margin-bottom: 0px">
+				<div class="inner"><span class="portal-corners-top-inner"></span>
+					<span style="text-align: center;"><strong>{L_NO_NEWS}</strong></span>
+				<span class="portal-corners-bottom-inner"></span></div>
+			</div>
+		<!-- ELSE -->
+			<div style="margin-bottom: <!-- IF announcements_row.S_LAST_ROW -->0px<!-- ELSE -->1px<!-- ENDIF -->" class="post <!-- IF news_row.S_ROW_COUNT is odd -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
+				<div class="inner"><span class="portal-corners-top-inner"></span>
+					<h4 class="first"><a name="n"></a><a name="n{news_row.N_ID}"></a><!-- IF news_row.S_UNREAD_INFO --><a href="{news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><!-- IF news_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{news_row.TOPIC_ICON_IMG}" width="{news_row.TOPIC_ICON_IMG_WIDTH}" height="{news_row.TOPIC_ICON_IMG_HEIGHT}" alt="" /> <!-- ENDIF --><a href="{news_row.U_VIEW_COMMENTS}"><strong>{news_row.TITLE}</strong></a></h4>
+					<!-- IF news_row.PAGINATION --><strong class="pagination"><span>{news_row.PAGINATION}</span></strong><!-- ENDIF -->
+						<ul class="linklist">
+							<li>{POSTED_BY_TEXT} {L_POST_BY_AUTHOR}: {news_row.POSTER_FULL} &raquo; {news_row.TIME}</li>
+							<li class="rightside">{L_FORUM}: <strong><a href="{news_row.U_VIEWFORUM}">{news_row.FORUM_NAME}</a></strong></li>
+						</ul>
+						<!-- IF not $S_POSTBODY_TOP --><div class="postbody" style="width: 100%"><!-- ENDIF -->
+							<div class="content">
+								<br />{news_row.TEXT}
+							</div>
+					<!-- IF news_row.S_HAS_ATTACHMENTS -->
+					<dl class="attachbox">
+					<dt>{L_ATTACHMENTS}</dt>
+					<!-- BEGIN attachment -->
+						<dd>{news_row.attachment.DISPLAY_ATTACHMENT}</dd>
+					<!-- END attachment -->
+					</dl>
+					<!-- ENDIF -->
+					<br style="clear:both" />
+					<span style="float: left;">{L_TOPIC_VIEWS}: {news_row.TOPIC_VIEWS} &nbsp;&bull;&nbsp; <a href="{news_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}: {news_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{news_row.U_POST_COMMENT}">{L_POST_REPLY}</a></span>			
+					<span style="float: right; margin: 0 0 5px 0">{news_row.OPEN}<a href="{news_row.U_READ_FULL}">{news_row.L_READ_FULL}</a>{news_row.CLOSE}</span>
+					<div class="back2top"><a href="#wrap" class="top" title="{L_BACK_TO_TOP}">{L_BACK_TO_TOP}</a></div>
+					<!-- IF news_row.S_NOT_LAST --><br style="clear:both" /><!-- ENDIF -->
+					<!-- IF news_row.S_LAST_ROW -->
+					<!-- IF not news_row.S_NO_TOPICS  -->	
+					<!-- IF NP_PAGINATION or TOTAL_NEWS -->
+						<hr class="dashed" />
+						<div class="pagination">
+							{TOTAL_NEWS}
+							<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; <span>{NP_PAGINATION}</span><!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+						</div>
+					<!-- ENDIF -->
+					<!-- ENDIF -->
+					<!-- ENDIF -->
+					<!-- IF not $S_POSTBODY_TOP --></div><!-- ENDIF -->
+				<span class="portal-corners-bottom-inner"></span></div>
+			</div>
+		<!-- ENDIF -->
+	<!-- END news_row -->
+<!-- IF $S_POSTBODY_TOP --></div><!-- ENDIF -->
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}

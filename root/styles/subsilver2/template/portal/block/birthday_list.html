@@ -1,0 +1,27 @@
+<!--version $Id: birthday_list.html 634 2010-03-16 18:05:16Z marc1706 $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_birthday.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_BIRTHDAYS}{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr class="row1">
+		<td>
+			<!-- IF BIRTHDAY_LIST -->
+			<strong>{L_CONGRATULATIONS}:</strong><br />{BIRTHDAY_LIST}
+			<!-- ELSE -->
+			{L_NO_BIRTHDAYS}
+			<!-- ENDIF -->
+		</td>
+	</tr>
+	<!-- IF S_DISPLAY_BIRTHDAY_AHEAD_LIST -->
+	<tr class="row1">
+		<td>
+			<strong>{L_BIRTHDAYS_AHEAD}:</strong>
+			<br />
+			<!-- IF BIRTHDAYS_AHEAD_LIST -->
+			{BIRTHDAYS_AHEAD_LIST}
+			<!-- ELSE -->
+			{L_NO_BIRTHDAYS_AHEAD}
+			<!-- ENDIF -->
+		</td>
+	</tr>
+	<!-- ENDIF -->
+</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

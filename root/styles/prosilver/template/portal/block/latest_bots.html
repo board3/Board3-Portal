@@ -1,0 +1,7 @@
+<!--version $Id: latest_bots.html 544 2009-09-10 12:35:25Z christian_n $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_bots.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{LAST_VISITED_BOTS}{$LR_BLOCK_H_R}
+	<!-- BEGIN last_visited_bots -->
+		<span class="genmed">{last_visited_bots.BOT_NAME}</span> <br /> <span class="gensmall">{last_visited_bots.LAST_VISIT_DATE}</span>
+		<!-- IF not last_visited_bots.S_LAST_ROW --><hr /><!-- ENDIF -->
+	<!-- END last_visited_bots -->
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

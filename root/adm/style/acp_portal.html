@@ -1,0 +1,78 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<h1>{L_TITLE}</h1>
+
+<p>{L_TITLE_EXPLAIN}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- IF S_VERSIONCHECK -->
+<!-- BEGIN mods -->
+
+	<fieldset>
+		<legend>{L_VERSION_CHECK}</legend>
+		<p style="font-weight: bold; color: <!-- IF mods.S_UP_TO_DATE -->#228822<!-- ELSE -->#BC2A4D<!-- ENDIF -->;">{mods.UP_TO_DATE}</p>
+		<dl>
+			<dt><label>{L_CURRENT_VERSION}</label></dt>
+			<dd><strong>{mods.CURRENT_VERSION}</strong></dd>
+		</dl>
+		<dl>
+			<dt><label>{L_LATEST_VERSION}</label></dt>
+			<dd><strong>{mods.LATEST_VERSION}</strong></dd>
+		</dl>
+		<!-- IF not mods.S_UP_TO_DATE -->
+			<dl>
+				<dt><label>{L_DOWNLOAD_LATEST}</label></dt>
+				<dd><strong><a href="{mods.DOWNLOAD}">{L_DOWNLOAD} {mods.TITLE} {mods.LATEST_VERSION}</a></strong></dd>
+			</dl>
+			<dl>
+				<dt><label>{L_ANNOUNCEMENT_TOPIC}</label></dt>
+				<dd><strong><a href="{mods.ANNOUNCEMENT}">{L_RELEASE_ANNOUNCEMENT}</a></strong></dd>
+			</dl>
+		<!-- ENDIF -->
+	</fieldset>
+<!-- END mods -->
+<!-- ENDIF -->
+<form id="acp_portal" method="post" action="{U_ACTION}">
+	<div class="errorbox notice">
+		<p>{BLOCK_CHANGE_WARN}</p>
+	</div>
+<!-- BEGIN options -->
+	<!-- IF options.S_LEGEND -->
+		<!-- IF not options.S_FIRST_ROW -->
+			</fieldset>
+		<!-- ENDIF -->
+		<fieldset>
+			<legend>{options.LEGEND}</legend>
+	<!-- ELSE -->
+
+		<dl>
+			<dt><label for="{options.KEY}">{options.TITLE}:</label><!-- IF options.S_EXPLAIN --><br /><span>{options.TITLE_EXPLAIN}</span><!-- ENDIF --></dt>
+			<dd>{options.CONTENT}</dd>
+		</dl>
+
+	<!-- ENDIF -->
+<!-- END options -->
+
+<!-- IF S_AUTH -->
+	<!-- BEGIN auth_tpl -->
+		{auth_tpl.TPL}
+	<!-- END auth_tpl -->
+<!-- ENDIF -->
+
+	<p class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	</p>
+	{S_FORM_TOKEN}
+</fieldset>
+</form>
+
+<!-- INCLUDE overall_footer.html -->

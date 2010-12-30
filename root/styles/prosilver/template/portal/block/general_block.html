@@ -1,0 +1,12 @@
+<!--version $Id: general_block.html 535 2009-09-02 12:14:44Z christian_n $ //-->
+{$C_BLOCK_H_L}<dt><!-- IF S_DISPLAY_GENERAL -->{L_PORTAL_INSTALL}<!-- ELSE -->{L_INFORMATION}<!-- ENDIF --></dt>{$C_BLOCK_H_R}
+	<ul class="topiclist bg1">
+		<li><dl>
+			<dd style="border-left: 0px">
+				<div style="margin: 0 0 0 5px">
+					<!-- IF S_DISPLAY_GENERAL -->{L_PORTAL_INSTALL_TEXT}<!-- ELSE -->&raquo; <a href="{U_RESTORE_PERMISSIONS}">{L_RESTORE_PERMISSIONS}</a><!-- ENDIF -->
+				</div>
+			</dd>
+		</dl></li>
+	</ul>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}

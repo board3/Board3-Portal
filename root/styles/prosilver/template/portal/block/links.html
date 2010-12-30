@@ -1,0 +1,14 @@
+<!--version $Id: links.html 544 2009-09-10 12:35:25Z christian_n $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_links.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_LINKS}{$LR_BLOCK_H_R}
+	<div class="portal-navigation">
+		<ul>
+		<!-- IF .link -->
+			<!-- BEGIN link -->
+				<li><a href="{link.URL}" title="{link.TEXT}">{link.TEXT}</a></li>
+			<!-- END link -->
+		<!-- ELSE -->
+			<span style="float:left;" class="gensmall"><strong>{L_NO_LINKS}</strong></span><br />
+		<!-- ENDIF -->
+		</ul>
+	</div>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

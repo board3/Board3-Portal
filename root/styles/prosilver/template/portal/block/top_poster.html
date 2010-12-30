@@ -1,0 +1,11 @@
+<!--version $Id: top_poster.html 544 2009-09-10 12:35:25Z christian_n $ //-->
+<!-- IF .top_poster -->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_top_poster.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_TOP_POSTER}{$LR_BLOCK_H_R}
+	<span style="float:left;"><strong>{L_USERNAME}</strong></span>
+	<span style="float:right;padding-right:10px;"><strong>{L_POSTS}</strong></span><br style="clear:both" />
+	<!-- BEGIN top_poster -->
+		<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;">{top_poster.USERNAME_FULL}</span>
+		<span style="float:right;padding-right:10px; padding-top:2px;"><a href="{top_poster.S_SEARCH_ACTION}">{top_poster.POSTER_POSTS}</a></span><br style="clear:both" />
+	<!-- END top_poster -->
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ENDIF -->

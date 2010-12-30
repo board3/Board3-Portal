@@ -1,0 +1,59 @@
+<!--version $Id: news_compact.html 521 2009-08-26 20:59:19Z christian_n $ //-->
+<!-- BEGIN news_row -->
+<!-- IF news_row.S_NO_TOPICS -->
+{$C_BLOCK_H_L}<dt>{L_LATEST_NEWS}</dt>{$C_BLOCK_H_R}
+	<div class="post bg2" style="margin-bottom: 0px">
+		<div class="inner"><span class="portal-corners-top-inner"></span>
+			<span style="text-align: center;"><strong>{L_NO_NEWS}</strong></span>
+		<span class="portal-corners-bottom-inner"></span></div>
+	</div>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+<!-- ELSE  -->
+<!-- IF news_row.S_FIRST_ROW  -->
+<a name="n"></a>
+{$C_BLOCK_H_L}
+	<dt <!-- IF S_DISPLAY_NEWS_RVS -->style="width: 44%"<!-- ELSE -->style="width: 60%"<!-- ENDIF -->>{L_LATEST_NEWS}</dt>
+	<!-- IF S_DISPLAY_NEWS_RVS -->
+		<dd class="posts" style="width: 11%">{L_REPLIES}</dd>
+		<dd class="views" style="width: 11%">{L_VIEWS}</dd>
+	<!-- ENDIF -->
+	<dd class="lastpost" style="width: 25%"><span>{L_LAST_POST}</span></dd>
+
+{$C_BLOCK_H_R}
+<ul class="topiclist topics">
+<!-- ENDIF -->
+	<li class="row<!-- IF news_row.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
+		<dl class="icon" style="background-image: url({news_row.TOPIC_FOLDER_IMG_SRC}); background-repeat: no-repeat;">
+			<dt style="<!-- IF S_DISPLAY_NEWS_RVS -->width: 44%;<!-- ELSE -->width: 60%;<!-- ENDIF --> <!-- IF news_row.TOPIC_ICON_IMG -->background-image: url({T_ICONS_PATH}{news_row.TOPIC_ICON_IMG}); background-repeat: no-repeat;<!-- ENDIF -->" title="{news_row.TOPIC_FOLDER_IMG_ALT}"><!-- IF news_row.S_UNREAD_TOPIC --><a href="{news_row.U_NEWEST_POST}">{NEWEST_POST_IMG}</a> <!-- ENDIF --><!-- IF news_row.ATTACH_ICON_IMG -->{news_row.ATTACH_ICON_IMG} <!-- ENDIF --><!-- IF news_row.S_POLL --><strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_VIEW_COMMENTS}" title="{news_row.TITLE}" class="topictitle">{news_row.TITLE}</a><!-- IF U_VIEW_UNREAD_POST and not S_IS_BOT --> &bull; <a href="{U_VIEW_UNREAD_POST}">{L_VIEW_UNREAD_POST}</a> &bull; <!-- ENDIF -->
+				<!-- IF news_row.PAGINATION --><strong class="pagination"><span>{news_row.PAGINATION}</span></strong><!-- ENDIF -->
+					<br />{L_POSTED} {L_POST_BY_AUTHOR} {news_row.POSTER_FULL} &raquo; {news_row.TIME}
+				<!-- IF news_row.FORUM_NAME -->
+					<br />{L_FORUM}: <a href="{news_row.U_VIEWFORUM}" style="font-weight: bold;">{news_row.FORUM_NAME}</a>
+				<!-- ENDIF -->
+				<!-- IF not S_DISPLAY_NEWS_RVS --><!-- IF news_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}: <strong>{news_row.REPLIES}</strong>  &bull; {L_VIEWS}: <strong>{news_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
+			</dt>
+			<!-- IF S_DISPLAY_NEWS_RVS -->
+				<dd class="posts" style="width: 11%">{news_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
+				<dd class="views" style="width: 11%">{news_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
+			<!-- ENDIF -->
+			<dd class="lastpost" style="width: 25%"><span><dfn>{L_LAST_POST}</dfn>{L_POST_BY_AUTHOR} {news_row.USERNAME_FULL_LAST} <!-- IF news_row.S_UNREAD_INFO --><a href="{news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --><br />
+				{news_row.LAST_POST_TIME}</span>
+			</dd>
+		</dl>
+	</li>
+<!-- IF news_row.S_LAST_ROW -->
+    <!-- IF NP_PAGINATION or TOTAL_NEWS -->
+		<li class="row<!-- IF news_row.S_ROW_COUNT is even --> bg2<!-- ELSE --> bg1<!-- ENDIF -->">
+			<div class="topic-actions">
+				<div class="pagination">
+					{TOTAL_NEWS}
+					<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; <span>{NP_PAGINATION}</span><!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --> &nbsp;
+				</div>
+			</div>
+		</li>
+    <!-- ENDIF -->
+	</ul>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- ENDIF -->
+<!-- END news_row -->

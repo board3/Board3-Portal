@@ -1,0 +1,41 @@
+<!--version $Id: user_menu.html 632 2010-03-14 16:42:33Z marc1706 $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_USER_MENU}{$LR_BLOCK_H_R}
+	<div style="text-align: center;">
+        <a href="{U_VIEW_PROFILE}"><!-- IF B3P_USER_COLOR --><span style="color: {B3P_USER_COLOR}; font-weight: bold;"><!-- ELSE --><span><!-- ENDIF -->{B3P_USERNAME}</span></a><br />
+        <!-- IF B3P_AVATAR_IMG -->
+            <a href="{U_PROFILE}">{B3P_AVATAR_IMG}</a>
+        <!-- ELSEIF $NO_AVATAR_IMG -->
+            <a href="{U_PROFILE}"><img src="{T_THEME_PATH}{$NO_AVATAR_IMG}" alt="" /></a>
+        <!-- ENDIF -->
+        <!-- IF B3P_RANK_TITLE --><br /><span class="gensmall">{B3P_RANK_TITLE}</span><!-- ENDIF -->
+        <!-- IF B3P_RANK_IMG --><br />{B3P_RANK_IMG}<!-- ENDIF -->
+    </div> 
+	<hr class="dashed" />
+	<div class="portal-navigation">
+		<div class="menutitle">{L_M_MENU}</div>
+			<ul>
+				<!-- IF S_DISPLAY_SEARCH -->
+					<li><a href="{U_NEW_POSTS}">{L_NEW_POSTS}</a></li>
+					<li><a href="{U_UNREAD_POSTS}">{L_UNREAD_POSTS}</a></li>
+					<li><a href="{U_SELF_POSTS}">{L_SELF_POSTS}</a></li>
+				<!-- ENDIF -->
+				<!-- IF U_UM_BOOKMARKS -->
+					<li><a href="{U_UM_BOOKMARKS}">{L_UM_BOOKMARKS}</a></li>
+				<!-- ENDIF -->
+				<!-- IF S_DISPLAY_SUBSCRIPTIONS -->
+					<li><a href="{U_UM_MAIN_SUBSCRIBED}">{L_UM_MAIN_SUBSCRIBED}</a></li>
+				<!-- ENDIF -->
+				<!-- IF S_DISPLAY_PM -->
+					<li><a href="{U_PRIVATEMSGS}">{PRIVATE_MESSAGE_INFO}</a></li>
+				<!-- ENDIF -->
+				<li><a href="{U_PROFILE}">{L_PROFILE}</a></li>
+				<!-- IF U_MCP -->
+					<li><a href="{U_MCP}">{L_MCP}</a></li>
+				<!-- ENDIF -->
+				<!-- IF U_ACP -->
+					<li><a href="{U_ACP}">{L_M_ACP}</a></li>
+				<!-- ENDIF -->
+				<li><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></li>
+			</ul>
+	</div>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

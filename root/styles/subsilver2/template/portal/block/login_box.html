@@ -1,0 +1,24 @@
+<!--version $Id: login_box.html 544 2009-09-10 12:35:25Z christian_n $ //-->
+<form action="{S_LOGIN_ACTION}" method="post">
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{T_THEME_PATH}/images/portal/portal_login.png" width="16" height="16" alt="" />&nbsp;<!-- ENDIF --><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a>{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr class="row1">
+		<td>
+			<span class="genmed">{L_USERNAME}:</span><br />
+			<input type="text" tabindex="1" name="username" id="username" size="25" value="" class="inputbox autowidth" /><br /><br /> 
+			<span class="genmed">{L_PASSWORD}:</span><br />
+			<input type="password" tabindex="2" id="password" name="password" size="25" class="inputbox autowidth" /> 
+			<!-- IF S_DISPLAY_FULL_LOGIN -->
+			<br /><br />
+			<!-- IF S_AUTOLOGIN_ENABLED -->
+			<input type="checkbox" class="radio" name="autologin" tabindex="3" /> <span class="gensmall">{L_UM_LOG_ME_IN}</span><br />
+			<!-- ENDIF -->
+			<!-- ENDIF -->
+			<br />
+			<input type="hidden" name="redirect" value="{U_PORTAL}" />
+			<input type="submit" name="login" tabindex="5" value="{L_LOGIN}" class="button1" />	
+		</td>
+	</tr>
+</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+</form>
