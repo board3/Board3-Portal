@@ -1,8 +1,8 @@
 <?php
 /**
-* @package Portal - Clock
+* @package Portal - Recent
 * @version $Id$
-* @copyright (c) 2009, 2010 Board3 Portal Team
+* @copyright (c) 2009, 2011 Board3 Portal Team
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 
@@ -31,22 +31,22 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'PORTAL_RECENT_NEWS'		=> 'Aktuelles',
+	'PORTAL_RECENT'				=> 'Aktuelles',
 	'PORTAL_RECENT_TOPIC'		=> 'Aktuelle Themen',
 	'PORTAL_RECENT_ANN'			=> 'Aktuelle Bekanntmachungen',
 	'PORTAL_RECENT_HOT_TOPIC'	=> 'Beliebte Themen',
 	
 	// ACP
 	'ACP_PORTAL_RECENT_SETTINGS'				=> 'Einstellungen für neueste Themen',
-	'ACP_PORTAL_RECENT_SETTINGS_EXPLAIN'		=> 'Hier kannst du die Einstellungen für die neuesten Themen ändern.',
+	'ACP_PORTAL_RECENT_SETTINGS_EXP'			=> 'Hier kannst du die Einstellungen für die neuesten Themen ändern.',
 	'PORTAL_MAX_TOPIC'							=> 'Anzahl der neuesten Themen auf dem Portal',
-	'PORTAL_MAX_TOPIC_EXPLAIN'					=> '0 bedeutet unbegrenzt',
+	'PORTAL_MAX_TOPIC_EXP'						=> '0 bedeutet unbegrenzt',
 	'PORTAL_RECENT_TITLE_LIMIT'					=> 'Maximal angezeigte Länge der neuesten Themen',
-	'PORTAL_RECENT_TITLE_LIMIT_EXPLAIN'			=> '0 bedeutet unbegrenzt',
+	'PORTAL_RECENT_TITLE_LIMIT_EXP'				=> '0 bedeutet unbegrenzt',
 	'PORTAL_RECENT_FORUM'						=> 'Themen Foren',
-	'PORTAL_RECENT_FORUM_EXPLAIN'				=> 'Die Foren, aus welchen die Themen angezeigt werden sollen. Frei lassen, um aus allen Foren anzeigen zu lassen. Falls "Foren aussschließen" auf "Ja" steht, wähle die Foren die du ausschließen willst.<br />Falls "Foren aussschließen" auf "Nein" steht, wähle die Foren die du sehen willst.<br />Wähle mehrere Foren aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
+	'PORTAL_RECENT_FORUM_EXP'					=> 'Die Foren, aus welchen die Themen angezeigt werden sollen. Frei lassen, um aus allen Foren anzeigen zu lassen. Falls "Foren aussschließen" auf "Ja" steht, wähle die Foren die du ausschließen willst.<br />Falls "Foren aussschließen" auf "Nein" steht, wähle die Foren die du sehen willst.<br />Wähle mehrere Foren aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
 	'PORTAL_EXCLUDE_FORUM'						=> 'Foren aussschließen',
-	'PORTAL_EXCLUDE_FORUM_EXPLAIN'				=> 'Wähle "Ja" wenn du die ausgewählten Foren vom Aktuelle Themen-Block ausschließen willst, und "Nein" wenn du nur die Themen aus den ausgewählten Foren im Aktuelle Themen-Block sehen willst.',
+	'PORTAL_EXCLUDE_FORUM_EXP'					=> 'Wähle "Ja" wenn du die ausgewählten Foren vom Aktuelle Themen-Block ausschließen willst, und "Nein" wenn du nur die Themen aus den ausgewählten Foren im Aktuelle Themen-Block sehen willst.',
 ));
 
 ?>

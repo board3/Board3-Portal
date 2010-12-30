@@ -57,7 +57,7 @@ $lang = array_merge($lang, array(
 	'MODULE_IMAGE'				=> 'Modul Bild',
 	'MODULE_IMAGE_EXP'			=> 'Gebe den Dateinamen des Modul Bildes ein. Bilder müssen sich in styles/*yourstyle*/theme/images/portal/ befinden.',
 	'MODULE_PERMISSIONS'		=> 'Modul Berechtigungen',
-	'MODULE_PERMISSIONS_EXP'	=> 'Select the groups that should be authorized to view the module. If you want all users to be able to view the module, don’t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
+	'MODULE_PERMISSIONS_EXP'	=> 'Wähle die Gruppen aus, die berechtigt sein sollen, das Modul zu sehen. Sollen alle Benutzer das Modul sehen können, wähle nichts aus.<br />An- / abwählen mehrerer Gruppen indem man <samp>Strg</samp> gedrückt hält und klickt.',
 
 	// general
 	'ACP_PORTAL'							=> 'Portal',

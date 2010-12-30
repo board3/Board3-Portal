@@ -1,8 +1,8 @@
 <?php
 /**
-* @package Portal - Clock
+* @package Portal - Recent
 * @version $Id$
-* @copyright (c) 2009, 2010 Board3 Portal Team
+* @copyright (c) 2009, 2011 Board3 Portal Team
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 
