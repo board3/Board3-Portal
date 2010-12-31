@@ -37,5 +37,6 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'PORTAL'			=> 'Portal',
 	'VIEWING_PORTAL'	=> 'Betrachtet das Portal',
+	'BACK'				=> 'Zurück',
 ));
 ?>
