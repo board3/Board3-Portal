@@ -48,7 +48,7 @@ class portal_birthday_list_module
 
 	function get_template_side($module_id)
 	{
-		global $config, $template, $db, $user;
+		global $config, $template, $db, $user, $phpbb_root_path;
 
 		// Generate birthday list if required ... / borrowed from index.php 3.0.6
 		$birthday_list = $birthday_ahead_list = '';
