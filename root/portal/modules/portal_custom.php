@@ -98,7 +98,6 @@ class portal_custom_module
 		*/
 		if ($config['board3_custom_' . $module_id . '_bbcode'])
 		{	
-			echo 'shouldn´t be in here';
 			// Generate text for display and assign template vars
 			$uid = $config['board3_custom_' . $module_id . '_uid'];
 			$bitfield = $config['board3_custom_' . $module_id . '_bitfield'];
