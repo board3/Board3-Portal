@@ -3,7 +3,7 @@
 	<div class="portal-navigation">
 			<ul>
 			<!-- BEGIN portallinks -->
-				<li><a href="{portallinks.LINK_URL}" title="{portallinks.LINK_TITLE}">{portallinks.LINK_TITLE}</a></li>
+				<!-- IF $MODULE_ID eq portallinks.MODULE_ID --><li><a href="{portallinks.LINK_URL}" title="{portallinks.LINK_TITLE}">{portallinks.LINK_TITLE}</a></li><!-- ENDIF -->
 			<!-- BEGINELSE -->
 				<span style="float:left;" class="gensmall"><strong>{L_LINKS_NO_LINKS}</strong></span><br />
 			<!-- END portallinks -->

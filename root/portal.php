@@ -106,6 +106,7 @@ while ($row = $db->sql_fetchrow($result))
 			'IMAGE_SRC'			=> $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $template_module['image_src'],
 			'TITLE'				=> $template_module['title'],
 			'CODE'				=> $template_module['code'],
+			'MODULE_ID'			=> $row['module_id'],
 		));
 	}
 	else
@@ -113,6 +114,7 @@ while ($row = $db->sql_fetchrow($result))
 		$template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
 			'TEMPLATE_FILE'		=> 'portal/modules/' . $template_module,
 			'IMAGE_SRC'			=> $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $row['module_image_src'],
+			'MODULE_ID'			=> $row['module_id'],
 		));
 	}
 	unset($template_module);

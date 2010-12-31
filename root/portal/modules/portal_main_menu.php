@@ -80,6 +80,7 @@ class portal_main_menu_module
 			{
 				$template->assign_block_vars('portalmenu', array(
 					'CAT_TITLE'		=> (isset($user->lang[$links[$i]['title']])) ? $user->lang[$links[$i]['title']] : $links[$i]['title'],
+					'MODULE_ID'		=> $module_id,
 				));
 			}
 			else

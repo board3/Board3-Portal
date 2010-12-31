@@ -94,6 +94,7 @@ class portal_links_module
 				$template->assign_block_vars('portallinks', array(
 					'LINK_TITLE'		=> (isset($user->lang[$links[$i]['title']])) ? $user->lang[$links[$i]['title']] : $links[$i]['title'],
 					'LINK_URL'			=> $cur_url,
+					'MODULE_ID'			=> $module_id,
 				));
 			}
 		}
