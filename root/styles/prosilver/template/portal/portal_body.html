@@ -11,6 +11,7 @@
 <!-- ENDIF -->
 
 <table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<!-- IF S_TOP_COLUMN -->	
 	<tr>
 	<!-- [+] top module area -->
 		<td colspan="3">
@@ -25,8 +26,10 @@
 		</td>
 	<!-- [-] top module area -->
 	</tr>
+	<!-- ENDIF -->
 	<tr>
 	<!-- [+] left module area -->
+		<!-- IF S_LEFT_COLUMN -->
 		<td valign="top" style="width: {S_PORTAL_LEFT_COLUMN}px; padding-right: {$BLOCK_DISTANCE};">
 			<!-- BEGIN modules_left -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_left.TEMPLATE_FILE}' -->
@@ -37,9 +40,11 @@
 				<!-- INCLUDE {$TEMPLATE_FILE} -->
 			<!-- END modules_left -->
 		</td>
+		<!-- ENDIF -->
 	<!-- [-] left module area -->
 
 	<!-- [+] center module area -->
+		<!-- IF S_CENTER_COLUMN -->
 		<td valign="top">
 			<!-- BEGIN modules_center -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_center.TEMPLATE_FILE}' -->
@@ -54,9 +59,11 @@
 				<!-- INCLUDE portal/modules/jumpbox.html -->
 			<!-- ENDIF -->
 		</td>
+		<!-- ENDIF -->
 	<!-- [-] center module area -->
 
 	<!-- [+] right module area -->
+		<!-- IF S_RIGHT_COLUMN -->
 		<td valign="top" style="width: {S_PORTAL_RIGHT_COLUMN}px; padding-left: {$BLOCK_DISTANCE};">
 			<!-- BEGIN modules_right -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_right.TEMPLATE_FILE}' -->
@@ -67,8 +74,10 @@
 				<!-- INCLUDE {$TEMPLATE_FILE} -->
 			<!-- END modules_right -->
 		</td>
+		<!-- ENDIF -->
 	<!-- [-] right module area -->
 	</tr>
+	<!-- IF S_BOTTOM_COLUMN -->
 	<tr>
 	<!-- [+] bottom module area -->
 			<td colspan="3">
@@ -83,6 +92,7 @@
 		</td>
 	<!-- [-] bottom module area -->
 	</tr>
+	<!-- ENDIF -->
 </table>
 
 <!--// board3 Portal by www.board3.de //-->

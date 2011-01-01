@@ -40,6 +40,19 @@ if (!isset($config['board3_enable']) || !$config['board3_enable'] || !$auth->acl
 
 $portal_config = obtain_portal_config();
 
+/*
+* set up column_count array
+*/
+$module_count = array(
+	'total' 	=> 0,
+	'top'		=> 0,
+	'left'		=> 0,
+	'center'	=> 0,
+	'right'		=> 0,
+	'bottom'	=> 0,
+);
+
+
 $sql = 'SELECT *
 	FROM ' . PORTAL_MODULES_TABLE . '
 	ORDER BY module_order ASC';
@@ -70,30 +83,35 @@ while ($row = $db->sql_fetchrow($result))
 	{
 		$user->add_lang('mods/portal/' . $module->language);
 	}
-	if ($row['module_column'] == 1)
+	if ($row['module_column'] == 1 && $config['board3_left_column'])
 	{
 		$template_module = $module->get_template_side($row['module_id']);
 		$template_column = 'left';
+		++$module_count['left'];
 	}
 	if ($row['module_column'] == 2)
 	{
 		$template_module = $module->get_template_center($row['module_id']);
 		$template_column = 'center';
+		++$module_count['center'];
 	}
-	if ($row['module_column'] == 3)
+	if ($row['module_column'] == 3 && $config['board3_right_column'])
 	{
 		$template_module = $module->get_template_side($row['module_id']);
 		$template_column = 'right';
+		++$module_count['right'];
 	}
 	if ($row['module_column'] == 4)
 	{
 		$template_module = $module->get_template_center($row['module_id']);
+		++$module_count['top'];
 	}
 	if ($row['module_column'] == 5)
 	{
 		$template_module = $module->get_template_center($row['module_id']);
+		++$module_count['bottom'];
 	}
-	if (!$template_module)
+	if (!isset($template_module))
 	{
 		continue;
 	}
@@ -119,11 +137,11 @@ while ($row = $db->sql_fetchrow($result))
 	}
 	unset($template_module);
 }
-$module_count = $db->sql_affectedrows();
+$module_count['total'] = $db->sql_affectedrows();
 $db->sql_freeresult($result);
 
 // Redirect to index if there are currently no active modules
-if($module_count < 1)
+if($module_count['total'] < 1)
 {
 	redirect(reapply_sid($phpbb_root_path . 'index.' . $phpEx));
 }
@@ -133,6 +151,11 @@ $template->assign_vars(array(
 	'S_SMALL_BLOCK'			=> true,
 	'S_PORTAL_LEFT_COLUMN'	=> $config['board3_left_column_width'],
 	'S_PORTAL_RIGHT_COLUMN'	=> $config['board3_right_column_width'],
+	'S_LEFT_COLUMN'		=> ($module_count['left'] > 0) ? true : false,
+	'S_CENTER_COLUMN'	=> ($module_count['center'] > 0) ? true : false,
+	'S_RIGHT_COLUMN'	=> ($module_count['right'] > 0) ? true : false,
+	'S_TOP_COLUMN'		=> ($module_count['top'] > 0) ? true : false,
+	'S_BOTTOM_COLUMN'	=> ($module_count['bottom'] > 0) ? true : false,
 ));
 
 // Output page
