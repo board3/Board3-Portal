@@ -75,7 +75,7 @@ $versions = array(
 			array('GLOBAL_MODERATORS', 'u_view_portal', 'group'),
 			array('ADMINISTRATORS', 'u_view_portal', 'group'),
 			array('BOTS', 'u_view_portal', 'group'),
-			array('NEWLY_REGISTERED 	', 'u_view_portal', 'group'),
+			array('NEWLY_REGISTERED', 'u_view_portal', 'group'),
 		),
 
 		'table_add' => array(
