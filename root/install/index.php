@@ -70,7 +70,12 @@ $versions = array(
 
 		'permission_set' => array(
 			array('ADMINISTRATORS', 'a_manage_portal', 'group'),
-			array('REGISTERED', 'u_view_portal', 'group'),
+			array('GUESTS', 'u_view_portal', 'group'),
+			array('REGISTERED_COPPA', 'u_view_portal', 'group'),
+			array('GLOBAL_MODERATORS', 'u_view_portal', 'group'),
+			array('ADMINISTRATORS', 'u_view_portal', 'group'),
+			array('BOTS', 'u_view_portal', 'group'),
+			array('NEWLY_REGISTERED 	', 'u_view_portal', 'group'),
 		),
 
 		'table_add' => array(
