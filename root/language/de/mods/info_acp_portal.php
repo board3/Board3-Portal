@@ -87,6 +87,7 @@ $lang = array_merge($lang, array(
 	'LOG_PORTAL_LINK_ADDED'					=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Link hinzu gefügt: %s ',
 	'LOG_PORTAL_LINK_UPDATED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Link geändert: %s ',
 	'LOG_PORTAL_EVENT_ADDED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin eingetragen: %s ',
+	'LOG_PORTAL_EVENT_UPDATED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin geändert: %s ',
 	
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Füge Basismodule hinzu',
