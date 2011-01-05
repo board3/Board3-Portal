@@ -1,0 +1,24 @@
+<!-- BEGIN blocks -->
+	<!-- IF blocks.S_BLOCK_RIGHT and blocks.S_GROUP -->
+		{$LR_BLOCK_H_L}<dt <!-- IF blocks.S_ICON --> style="background: url('{blocks.ICON}') no-repeat; padding-left: 20px; white-space: nowrap;"<!-- ENDIF -->>{blocks.TITLE}</dt>{$LR_BLOCK_H_R}
+			<!-- IF blocks.TYPE == 'custom' -->
+				{blocks.TEXT}
+			<!-- ELSEIF blocks.TYPE == 'birthday' --><!-- INCLUDE portal/block/birthday.html -->
+			<!-- ELSEIF blocks.TYPE == 'online' --><!-- INCLUDE portal/block/online.html -->
+			<!-- ELSEIF blocks.TYPE == 'search' --><!-- INCLUDE portal/block/search.html -->
+			<!-- ELSEIF blocks.TYPE == 'clock' --><!-- INCLUDE portal/block/clock.html -->
+			<!-- ELSEIF blocks.TYPE == 'user_menu' --><!-- INCLUDE portal/block/user_menu.html -->
+			<!-- ELSEIF blocks.TYPE == 'change_style' --><!-- INCLUDE portal/block/change_style.html -->
+			<!-- ELSEIF blocks.TYPE == 'donation' --><!-- INCLUDE portal/block/donation.html -->
+			<!-- ELSEIF blocks.TYPE == 'links' --><!-- INCLUDE portal/block/links.html -->
+			<!-- ELSEIF blocks.TYPE == 'latest_bots' --><!-- INCLUDE portal/block/latest_bots.html -->
+			<!-- ELSEIF blocks.TYPE == 'latest_members' --><!-- INCLUDE portal/block/latest_members.html -->
+			<!-- ELSEIF blocks.TYPE == 'mini_calendar' --><!-- INCLUDE portal/block/mini_calendar.html -->
+			<!-- ELSEIF blocks.TYPE == 'online_friends' --><!-- INCLUDE portal/block/online_friends.html -->
+			<!-- ELSEIF blocks.TYPE == 'random_member' --><!-- INCLUDE portal/block/random_member.html -->
+			<!-- ELSEIF blocks.TYPE == 'statistics' --><!-- INCLUDE portal/block/statistics.html -->
+			<!-- ELSEIF blocks.TYPE == 'top_poster' --><!-- INCLUDE portal/block/top_poster.html -->
+			<!-- ENDIF -->
+		{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+	<!-- ENDIF -->
+<!-- END blocks -->

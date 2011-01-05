@@ -1,0 +1,27 @@
+<!--version $Id: main_menu_side 544 2009-09-10 12:35:25Z christian_n $ //-->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="16" height="16" alt="" />&nbsp;<!-- ENDIF -->{L_M_MENU}{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<!-- BEGIN portalmenu -->
+		<!-- IF $MODULE_ID eq portalmenu.MODULE_ID -->
+			<tr class="row3">
+				<td>
+					<strong>{portalmenu.CAT_TITLE}</strong>
+				</td>
+			</tr>
+			<!-- BEGIN links -->
+			<tr class="row1">
+				<td>
+						<a href="{portalmenu.links.LINK_URL}">{portalmenu.links.LINK_TITLE}</a>
+				</td>
+			</tr>
+			<!-- END links -->
+		<!-- ENDIF -->
+	<!-- BEGINELSE -->
+			<tr class="row1">
+				<td>
+					<span style="float:left;" class="gensmall"><strong>{L_MENU_NO_LINKS}</strong></span><br />
+				</td>
+			</tr>
+	<!-- END portal_menu -->
+</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
