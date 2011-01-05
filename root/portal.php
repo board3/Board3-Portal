@@ -156,6 +156,7 @@ $template->assign_vars(array(
 	'S_RIGHT_COLUMN'	=> ($module_count['right'] > 0) ? true : false,
 	'S_TOP_COLUMN'		=> ($module_count['top'] > 0) ? true : false,
 	'S_BOTTOM_COLUMN'	=> ($module_count['bottom'] > 0) ? true : false,
+	'S_DISPLAY_PHPBB_MENU'	=> $config['board3_phpbb_menu'],
 ));
 
 // Output page

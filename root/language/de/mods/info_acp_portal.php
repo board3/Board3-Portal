@@ -79,6 +79,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEFT_COLUMN_WIDTH_EXP'			=> 'Ändere hier die Breite der linken Spalte in Pixel, empfohlener Wert 180',
 	'PORTAL_RIGHT_COLUMN_WIDTH'				=> 'Breite der rechten Spalte',
 	'PORTAL_RIGHT_COLUMN_WIDTH_EXP'			=> 'Ändere hier die Breite der rechten Spalte in Pixel, empfohlener Wert 180',
+	'PORTAL_PHPBB_MENU'						=> 'phpBB-Menü',
+	'PORTAL_PHPBB_MENU_EXP'				=> 'Den phpBB Header auf dem Portal anzeigen.',
 	
 	'LINK_ADDED'							=> 'Der Link wurde erfolgreich eingetragen',
 	'LOG_PORTAL_LINK_ADDED'					=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Link hinzu gefügt: %s ',
