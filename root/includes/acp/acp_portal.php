@@ -438,9 +438,16 @@ class acp_portal
 						$sql = 'INSERT INTO ' . PORTAL_MODULES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
 						$db->sql_query($sql);
 
-						$c_class->install($db->sql_nextid());
+						$module_id = $db->sql_nextid();
+
+						$c_class->install($module_id);
 						
 						$cache->purge(); // make sure we don't get errors after re-adding a module
+
+						if($module_classname == 'custom')
+						{
+							meta_refresh(3, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $module_id));
+						}
 
 						trigger_error($user->lang['SUCCESS_ADD'] . adm_back_link($this->u_action));
 					}
