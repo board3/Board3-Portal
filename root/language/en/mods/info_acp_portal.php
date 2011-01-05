@@ -80,7 +80,9 @@ $lang = array_merge($lang, array(
 	'PORTAL_RIGHT_COLUMN_WIDTH_EXP'			=> 'Change the width of the right column in pixels; recommended value is 180',
 	
 	'LINK_ADDED'							=> 'The link has been successfully added',
+	'LINK_UPDATED'							=> 'The link has been successfully updated',
 	'LOG_PORTAL_LINK_ADDED'					=> '<strong>Altered Portal settings</strong><br />&raquo; Link added: %s ',
+	'LOG_PORTAL_LINK_UPDATED'				=> '<strong>Altered Portal settings</strong><br />&raquo; Link updated: %s ',
 	'LOG_PORTAL_EVENT_ADDED'				=> '<strong>Altered Portal settings</strong><br />&raquo; Event added: %s ',
 	
 	// Install
