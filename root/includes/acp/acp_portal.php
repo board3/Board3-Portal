@@ -156,7 +156,7 @@ class acp_portal
 				// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
 				foreach ($display_vars['vars'] as $config_name => $null)
 				{
-					if ($submit && $null['type'] == 'custom')
+					if ($submit && isset($null['submit']))
 					{
 						$func = array($c_class, $null['submit']);
 						$args = ($module_id != 0) ? array($config_name, $module_id) : $config_name;
