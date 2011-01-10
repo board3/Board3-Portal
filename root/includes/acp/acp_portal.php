@@ -156,10 +156,10 @@ class acp_portal
 				// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
 				foreach ($display_vars['vars'] as $config_name => $null)
 				{
-					if ($submit && isset($null['submit']))
+					if ($submit && ($null['type'] == 'custom' || $null['submit_type'] == 'custom'))
 					{
 						$func = array($c_class, $null['submit']);
-						$args = ($module_id != 0) ? array($config_name, $module_id) : $config_name;
+						$args = ($module_id != 0) ? array($cfg_array[$config_name], $config_name, $module_id) : $config_name;
 						call_user_func_array($func, $args);
 					}
 					
@@ -245,6 +245,7 @@ class acp_portal
 
 					'U_ACTION'			=> $this->u_action . (($module_id) ? '&amp;module_id=' . $module_id : ''),
 				));
+				
 
 				// Output relevant page
 				foreach ($display_vars['vars'] as $config_key => $vars)
@@ -549,9 +550,18 @@ class acp_portal
 							'U_EDIT'			=> append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $row['module_id']),
 							'U_MOVE_UP'			=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_up',
 							'U_MOVE_DOWN'		=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_down',
+							'U_MOVE_RIGHT'		=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_right',
+							'U_MOVE_LEFT'		=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_left',
 						));
 					}
 					$db->sql_freeresult($result);
+					
+					$template->assign_vars(array(
+						'ICON_MOVE_LEFT'				=> '<img src="' . $phpbb_admin_path . 'images/icon_left.gif" alt="' . $user->lang['MOVE_LEFT'] . '" title="' . $user->lang['MOVE_LEFT'] . '" />',
+						'ICON_MOVE_LEFT_DISABLED'		=> '<img src="' . $phpbb_admin_path . 'images/icon_left_disabled.gif" alt="' . $user->lang['MOVE_LEFT'] . '" title="' . $user->lang['MOVE_LEFT'] . '" />',
+						'ICON_MOVE_RIGHT'				=> '<img src="' . $phpbb_admin_path . 'images/icon_right.gif" alt="' . $user->lang['MOVE_RIGHT'] . '" title="' . $user->lang['MOVE_RIGHT'] . '" />',
+						'ICON_MOVE_RIGHT_DISABLED'		=> '<img src="' . $phpbb_admin_path . 'images/icon_right_disabled.gif" alt="' . $user->lang['MOVE_RIGHT'] . '" title="' . $user->lang['MOVE_RIGHT'] . '" />',
+					));
 				}
 
 				$this->tpl_name = 'portal/acp_portal_modules';

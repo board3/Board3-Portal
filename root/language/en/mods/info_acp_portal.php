@@ -49,6 +49,9 @@ $lang = array_merge($lang, array(
 	'SUCCESS_ADD'					=> 'The module was added successfully.',
 	'SUCCESS_DELETE'				=> 'The module was removed successfully.',
 	'NO_MODULES'					=> 'No modules have been detected.',
+	'MOVE_RIGHT'					=> 'Move right',
+	'MOVE_LEFT'						=> 'Move left',
+	'B3P_FILE_NOT_FOUND'			=> 'The requested file could not be found',
 	
 	'MODULE_OPTIONS'			=> 'Module options',
 	'MODULE_NAME'				=> 'Module name',
