@@ -355,6 +355,106 @@ class acp_portal
 						}
 					}
 				}
+				elseif($action == 'move_right')
+				{
+					$sql = 'SELECT module_order, module_column, module_classname
+						FROM ' . PORTAL_MODULES_TABLE . '
+						WHERE module_id = ' . $module_id;
+					$result = $db->sql_query_limit($sql, 1);
+					$module_data = $db->sql_fetchrow($result);
+					$db->sql_freeresult($result);
+					
+					$class = 'portal_' . $module_data['module_classname'] . '_module';
+					if (!class_exists($class))
+					{
+						include($phpbb_root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $phpEx);
+					}
+					if (!class_exists($class))
+					{
+						trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
+					}
+					$c_class = new $class();
+					
+					if($c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 1)))
+					{
+						if ($module_data !== false)
+						{
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_order = module_order + 1
+								WHERE module_order >= ' . $module_data['module_order'] . '
+									AND module_column = ' . ($module_data['module_column'] + 1);
+							$db->sql_query($sql);
+							$updated = $db->sql_affectedrows();
+							if ($updated)
+							{
+								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+									SET module_column = module_column + 1
+									WHERE module_id = ' . $module_id;
+								$db->sql_query($sql);
+								
+								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+									SET module_order = module_order - 1
+									WHERE module_order >= ' . $module_data['module_order'] . '
+									AND module_column = ' . $module_data['module_column'];
+								$db->sql_query($sql);
+							}
+						}
+					}
+					else
+					{
+						trigger_error($user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
+					}
+				}
+				elseif($action == 'move_left')
+				{
+					$sql = 'SELECT module_order, module_column, module_classname
+						FROM ' . PORTAL_MODULES_TABLE . '
+						WHERE module_id = ' . $module_id;
+					$result = $db->sql_query_limit($sql, 1);
+					$module_data = $db->sql_fetchrow($result);
+					$db->sql_freeresult($result);
+					
+					$class = 'portal_' . $module_data['module_classname'] . '_module';
+					if (!class_exists($class))
+					{
+						include($phpbb_root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $phpEx);
+					}
+					if (!class_exists($class))
+					{
+						trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
+					}
+					$c_class = new $class();
+					
+					if($c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 1)))
+					{
+						if ($module_data !== false)
+						{
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_order = module_order + 1
+								WHERE module_order >= ' . $module_data['module_order'] . '
+									AND module_column = ' . ($module_data['module_column'] - 1);
+							$db->sql_query($sql);
+							$updated = $db->sql_affectedrows();
+							if ($updated)
+							{
+								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+									SET module_column = module_column - 1
+									WHERE module_id = ' . $module_id;
+								$db->sql_query($sql);
+								
+								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+									SET module_order = module_order - 1
+									WHERE module_order >= ' . $module_data['module_order'] . '
+									AND module_column = ' . $module_data['module_column'];
+								$db->sql_query($sql);
+							}
+						}
+					}
+					else
+					{
+						trigger_error($user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
+					}
+				}
 				elseif ($action == 'delete')
 				{
 					$sql = 'SELECT *

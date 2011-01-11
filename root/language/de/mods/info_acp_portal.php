@@ -53,6 +53,7 @@ $lang = array_merge($lang, array(
 	'MOVE_RIGHT'					=> 'Nach rechts',
 	'MOVE_LEFT'						=> 'Nach links',
 	'B3P_FILE_NOT_FOUND'			=> 'Die angegebene Datei konnte nicht gefunden werden',
+	'UNABLE_TO_MOVE'				=> 'Es ist nicht möglich den Block in die gewählte Spalte zu verschieben.',
 	
 	'MODULE_OPTIONS'			=> 'Modul Optionen',
 	'MODULE_NAME'				=> 'Modul Name',
