@@ -159,14 +159,15 @@ class acp_portal
 					if ($submit && ($null['type'] == 'custom' || $null['submit_type'] == 'custom'))
 					{
 						$func = array($c_class, $null['submit']);
-						$args = ($module_id != 0) ? array($cfg_array[$config_name], $config_name, $module_id) : $config_name;
 						
 						if(method_exists($c_class, $null['submit']))
 						{
+							$args = ($module_id != 0) ? array($config_name, $module_id) : $config_name;
 							call_user_func_array($func, $args);
 						}
 						else
 						{
+							$args = ($module_id != 0) ? array($cfg_array[$config_name], $config_name, $module_id) : $config_name;
 							call_user_func_array($null['submit'], $args);
 						}
 					}
