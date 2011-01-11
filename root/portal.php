@@ -151,12 +151,13 @@ $template->assign_vars(array(
 	'S_SMALL_BLOCK'			=> true,
 	'S_PORTAL_LEFT_COLUMN'	=> $config['board3_left_column_width'],
 	'S_PORTAL_RIGHT_COLUMN'	=> $config['board3_right_column_width'],
-	'S_LEFT_COLUMN'		=> ($module_count['left'] > 0) ? true : false,
-	'S_CENTER_COLUMN'	=> ($module_count['center'] > 0) ? true : false,
-	'S_RIGHT_COLUMN'	=> ($module_count['right'] > 0) ? true : false,
-	'S_TOP_COLUMN'		=> ($module_count['top'] > 0) ? true : false,
-	'S_BOTTOM_COLUMN'	=> ($module_count['bottom'] > 0) ? true : false,
+	'S_LEFT_COLUMN'			=> ($module_count['left'] > 0) ? true : false,
+	'S_CENTER_COLUMN'		=> ($module_count['center'] > 0) ? true : false,
+	'S_RIGHT_COLUMN'		=> ($module_count['right'] > 0) ? true : false,
+	'S_TOP_COLUMN'			=> ($module_count['top'] > 0) ? true : false,
+	'S_BOTTOM_COLUMN'		=> ($module_count['bottom'] > 0) ? true : false,
 	'S_DISPLAY_PHPBB_MENU'	=> $config['board3_phpbb_menu'],
+	'S_DISPLAY_JUMPBOX'		=> $config['board3_display_jumpbox'],
 ));
 
 // Output page
@@ -166,7 +167,7 @@ $template->set_filenames(array(
 	'body' => 'portal/portal_body.html')
 );
 
-make_jumpbox(append_sid("{$phpbb_root_path}viewforum . $phpEx"));
+make_jumpbox(append_sid("{$phpbb_root_path}viewforum.$phpEx"));
 
 page_footer();
 

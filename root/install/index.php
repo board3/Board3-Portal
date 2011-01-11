@@ -112,6 +112,7 @@ $versions = array(
 			array('board3_left_column_width', 180, 0),
 			array('board3_right_column_width', 180, 0),
 			array('board3_phpbb_menu', 0, 0),
+			array('board3_display_jumpbox', 1, 0),
 		),
 
 		'module_add' => array(

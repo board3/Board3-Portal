@@ -85,6 +85,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_RIGHT_COLUMN_WIDTH_EXP'			=> 'Ändere hier die Breite der rechten Spalte in Pixel, empfohlener Wert 180',
 	'PORTAL_PHPBB_MENU'						=> 'phpBB-Menü',
 	'PORTAL_PHPBB_MENU_EXP'					=> 'Den phpBB Header auf dem Portal anzeigen.',
+	'PORTAL_DISPLAY_JUMPBOX'				=> 'Zeige Jumpbox',
+	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Die Jumpbox auf dem Portal anzeigen',
 	
 	'LINK_ADDED'							=> 'Der Link wurde erfolgreich eingetragen',
 	'LINK_UPDATED'							=> 'Der Link wurde erfolgreich geändert',
