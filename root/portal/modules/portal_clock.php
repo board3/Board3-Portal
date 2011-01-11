@@ -63,7 +63,7 @@ class portal_clock_module
 			'title'	=> 'ACP_PORTAL_CLOCK_SETTINGS',
 			'vars'	=> array(
 				'legend1'			=> 'ACP_PORTAL_CLOCK_SETTINGS',
-				'board3_clock_src_' . $module_id	=> array('lang' => 'ACP_PORTAL_CLOCK_SRC',		'validate' => 'string',	'type' => 'text:50:200',	'explain' => true, 'submit_type' => 'custom', 'submit' => 'check_clock_src'),
+				'board3_clock_src_' . $module_id	=> array('lang' => 'ACP_PORTAL_CLOCK_SRC',		'validate' => 'string',	'type' => 'text:50:200',	'explain' => true, 'submit_type' => 'custom', 'submit' => 'check_file_src'),
 			),
 		);
 	}
@@ -87,36 +87,6 @@ class portal_clock_module
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
-	}
-	
-	
-	/*
-	* check if the entered clock src file actually exists
-	*/
-	function check_clock_src($value, $key, $module_id)
-	{
-		global $db, $phpbb_root_path, $phpEx, $user;
-		
-		$sql = 'SELECT st.theme_path
-				FROM ' . STYLES_THEME_TABLE . ' st
-					LEFT JOIN ' . STYLES_TABLE . ' s
-						ON (st.theme_id = s.style_id)
-				WHERE s.style_active = 1';
-				
-		$result = $db->sql_query($sql);
-		while($row = $db->sql_fetchrow($result))
-		{
-			if(!file_exists($phpbb_root_path . 'styles/' . $row['theme_path'] . '/theme/images/portal/' . $value))
-			{
-				$error = $user->lang['B3P_FILE_NOT_FOUND'] . ': styles/' . $row['theme_path'] . '/theme/images/portal/' . $value . '<br />';
-			}
-		}
-		$db->sql_freeresult($result);
-		
-		if(isset($error))
-		{
-			trigger_error($error . adm_back_link(append_sid("{$phpbb_root_path}adm/index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $module_id)));
-		}
 	}
 }
 

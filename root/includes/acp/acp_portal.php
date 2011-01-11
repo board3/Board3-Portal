@@ -160,7 +160,15 @@ class acp_portal
 					{
 						$func = array($c_class, $null['submit']);
 						$args = ($module_id != 0) ? array($cfg_array[$config_name], $config_name, $module_id) : $config_name;
-						call_user_func_array($func, $args);
+						
+						if(method_exists($c_class, $null['submit']))
+						{
+							call_user_func_array($func, $args);
+						}
+						else
+						{
+							call_user_func_array($null['submit'], $args);
+						}
 					}
 					
 					
@@ -400,6 +408,31 @@ class acp_portal
 							}
 						}
 					}
+					elseif($c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 2)))
+					{
+						if ($module_data !== false)
+						{
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_order = module_order + 1
+								WHERE module_order >= ' . $module_data['module_order'] . '
+									AND module_column = ' . ($module_data['module_column'] + 2);
+							$db->sql_query($sql);
+							$updated = $db->sql_affectedrows();
+							if ($updated)
+							{
+								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+									SET module_column = module_column + 2
+									WHERE module_id = ' . $module_id;
+								$db->sql_query($sql);
+								
+								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+									SET module_order = module_order - 1
+									WHERE module_order >= ' . $module_data['module_order'] . '
+									AND module_column = ' . $module_data['module_column'];
+								$db->sql_query($sql);
+							}
+						}
+					}
 					else
 					{
 						trigger_error($user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
@@ -439,6 +472,31 @@ class acp_portal
 							{
 								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 									SET module_column = module_column - 1
+									WHERE module_id = ' . $module_id;
+								$db->sql_query($sql);
+								
+								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+									SET module_order = module_order - 1
+									WHERE module_order >= ' . $module_data['module_order'] . '
+									AND module_column = ' . $module_data['module_column'];
+								$db->sql_query($sql);
+							}
+						}
+					}
+					elseif($c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 2)))
+					{
+						if ($module_data !== false)
+						{
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_order = module_order + 1
+								WHERE module_order >= ' . $module_data['module_order'] . '
+									AND module_column = ' . ($module_data['module_column'] - 2);
+							$db->sql_query($sql);
+							$updated = $db->sql_affectedrows();
+							if ($updated)
+							{
+								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+									SET module_column = module_column - 2
 									WHERE module_id = ' . $module_id;
 								$db->sql_query($sql);
 								

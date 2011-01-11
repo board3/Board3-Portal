@@ -918,6 +918,38 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 		
 		return $user->lang['PORTAL_BASIC_UNINSTALL'];
 	}
-} 
+}
+
+	
+/*
+* check if the entered source file actually exists
+*/
+function check_file_src($value, $key, $module_id)
+{
+	global $db, $phpbb_root_path, $phpEx, $user;
+	
+	$error = '';
+	
+	$sql = 'SELECT st.theme_path
+			FROM ' . STYLES_THEME_TABLE . ' st
+				LEFT JOIN ' . STYLES_TABLE . ' s
+					ON (st.theme_id = s.style_id)
+			WHERE s.style_active = 1';
+			
+	$result = $db->sql_query($sql);
+	while($row = $db->sql_fetchrow($result))
+	{
+		if(!file_exists($phpbb_root_path . 'styles/' . $row['theme_path'] . '/theme/images/portal/' . $value))
+		{
+			$error .= $user->lang['B3P_FILE_NOT_FOUND'] . ': styles/' . $row['theme_path'] . '/theme/images/portal/' . $value . '<br />';
+		}
+	}
+	$db->sql_freeresult($result);
+	
+	if(!empty($error))
+	{
+		trigger_error($error . adm_back_link(append_sid("{$phpbb_root_path}adm/index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $module_id)));
+	}
+}
 
 ?>
