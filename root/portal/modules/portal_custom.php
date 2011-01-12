@@ -240,7 +240,7 @@ class portal_custom_module
 				set_config('board3_custom_' . $module_id . '_bitfield', $bitfield);
 				set_config('board3_custom_' . $module_id . '_permission', $custom_permission);
 
-				trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&mode=modules') : $u_action));
+				//trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&mode=modules') : $u_action));
 
 			break;
 			
