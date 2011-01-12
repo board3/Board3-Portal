@@ -132,6 +132,8 @@ while ($row = $db->sql_fetchrow($result))
 		$template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
 			'TEMPLATE_FILE'		=> 'portal/modules/' . $template_module,
 			'IMAGE_SRC'			=> $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $row['module_image_src'],
+			'IMAGE_WIDTH'		=> $row['module_image_width'],
+			'IMAGE_HEIGHT'		=> $row['module_image_height'],
 			'MODULE_ID'			=> $row['module_id'],
 			'TITLE'				=> (isset($user->lang[$row['module_name']])) ? $user->lang[$row['module_name']] : utf8_normalize_nfc($row['module_name']),
 		));

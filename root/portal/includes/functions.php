@@ -884,12 +884,14 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 			$c_class = new $class_name();
 
 			$sql_ary = array(
-				'module_classname'	=> substr($module_name, 7),
-				'module_column'		=> $module_data[0],
-				'module_order'		=> $module_data[1],
-				'module_name'		=> $c_class->name,
-				'module_image_src'	=> $c_class->image_src,
-				'module_group_ids'	=> '',
+				'module_classname'		=> substr($module_name, 7),
+				'module_column'			=> $module_data[0],
+				'module_order'			=> $module_data[1],
+				'module_name'			=> $c_class->name,
+				'module_image_src'		=> $c_class->image_src,
+				'module_group_ids'		=> '',
+				'module_image_width'	=> 16,
+				'module_image_height'	=> 16,
 			);
 			$sql = 'INSERT INTO ' . PORTAL_MODULES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
 			$db->sql_query($sql);

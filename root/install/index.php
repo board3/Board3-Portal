@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @author marc1706 (Marc Alexander) admin@m-a-styles.de
+ * @package Board3 Portal v2
  * @version $Id$
  * @copyright (c) 2010 Board3
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -87,6 +87,8 @@ $versions = array(
 					'module_order' => array('TINT:3', 0),
 					'module_name' => array('VCHAR', ''),
 					'module_image_src' => array('VCHAR', ''),
+					'module_image_width' => array('INT:3', 0),
+					'module_image_height' => array('INT:3', 0),
 					'module_group_ids' => array('VCHAR', ''),
 				),
 

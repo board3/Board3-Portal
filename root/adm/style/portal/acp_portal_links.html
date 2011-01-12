@@ -76,6 +76,16 @@
 			<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
 			<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
 		</dl>
+		<!-- IF MODULE_IMAGE_SRC -->
+		<dl>
+			<dt><label for="module_img_width">{L_MODULE_IMAGE_WIDTH}:</label><br /><span>{L_MODULE_IMAGE_WIDTH_EXP}</span></dt>
+			<dd><input id="module_img_width" type="text" value="{MODULE_IMAGE_WIDTH}" name="module_img_width" maxlength="3" size="3" />px</dd>
+		</dl>
+		<dl>
+			<dt><label for="module_img_height">{L_MODULE_IMAGE_HEIGHT}:</label><br /><span>{L_MODULE_IMAGE_HEIGHT_EXP}</span></dt>
+			<dd><input id="module_img_height" type="text" value="{MODULE_IMAGE_HEIGHT}" name="module_img_height" maxlength="3" size="3" />px</dd>
+		</dl>
+		<!-- ENDIF -->
 		<!-- IF permission_setting -->
 		<dl>
 			<dt><label for="permission-setting">{L_MODULE_PERMISSIONS}:</label><br /><span>{L_MODULE_PERMISSIONS_EXP}</span></dt>

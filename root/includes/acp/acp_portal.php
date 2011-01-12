@@ -105,6 +105,8 @@ class acp_portal
 						$template->assign_vars(array(
 							'MODULE_NAME'			=> $module_data['module_name'],
 							'MODULE_IMAGE'			=> $module_data['module_image_src'],
+							'MODULE_IMAGE_WIDTH'	=> $module_data['module_image_width'],
+							'MODULE_IMAGE_HEIGHT'	=> $module_data['module_image_height'],
 							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $module_data['module_image_src'] : '',
 						));
 						
@@ -213,9 +215,11 @@ class acp_portal
 					
 					
 					$sql_ary = array(
-						'module_image_src'	=> request_var('module_image', ''),
-						'module_name'		=> request_var('module_name', '', true),
-						'module_group_ids'	=> $module_permission,
+						'module_image_src'		=> request_var('module_image', ''),
+						'module_name'			=> request_var('module_name', '', true),
+						'module_image_width'	=> request_var('module_img_width', 0),
+						'module_image_height'	=> request_var('module_img_height', 0),
+						'module_group_ids'		=> $module_permission,
 					);
 
 					$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
@@ -648,6 +652,8 @@ class acp_portal
 							'module_name'		=> $c_class->name,
 							'module_image_src'	=> $c_class->image_src,
 							'module_group_ids'	=> '',
+							'module_image_height'	=> 16,
+							'module_image_width'	=> 16,
 						);
 						$sql = 'INSERT INTO ' . PORTAL_MODULES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
 						$db->sql_query($sql);

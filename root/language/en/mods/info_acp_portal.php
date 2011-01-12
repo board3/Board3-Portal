@@ -61,6 +61,10 @@ $lang = array_merge($lang, array(
 	'MODULE_IMAGE_EXP'			=> 'Enter the filename of the module image. Images need to be in styles/*yourstyle*/theme/images/portal/',
 	'MODULE_PERMISSIONS'		=> 'Module permissions',
 	'MODULE_PERMISSIONS_EXP'	=> 'Select the groups that should be authorized to view the module. If you want all users to be able to view the module, don’t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
+	'MODULE_IMAGE_WIDTH'		=> 'Module image width',
+	'MODULE_IMAGE_WIDTH_EXP'	=> 'Enter the width of the module image in pixels',
+	'MODULE_IMAGE_HEIGHT'		=> 'Module image height',
+	'MODULE_IMAGE_HEIGHT_EXP'	=> 'Enter the height of the module image in pixels',
 
 	// general
 	'ACP_PORTAL'							=> 'Portal',
