@@ -57,7 +57,7 @@ class portal_modulename_module
 		global $config, $template;
 
 		$template->assign_vars(array(
-			'EXAMPLE'			=> $config['portal_' . $module_id . '_configname'],
+			'EXAMPLE'			=> $config['board3_configname_' . $module_id],
 		));
 
 		return 'modulename_center.html';
@@ -68,7 +68,7 @@ class portal_modulename_module
 		global $config, $template;
 
 		$template->assign_vars(array(
-			'EXAMPLE'			=> $config['portal_' . $module_id . '_configname2'],
+			'EXAMPLE'			=> $config['board3_configname2_' . $module_id],
 		));
 
 		return 'modulename_side.html';
@@ -80,8 +80,8 @@ class portal_modulename_module
 			'title'	=> 'ACP_CONFIG_MODULENAME',
 			'vars'	=> array(
 				'legend1'								=> 'ACP_MODULENAME_CONFIGLEGEND',
-				'portal_' . $module_id . '_configname'	=> array('lang' => 'MODULENAME_CONFIGNAME',		'validate' => 'string',	'type' => 'text:10:200',	'explain' => false),
-				'portal_' . $module_id . '_configname2'	=> array('lang' => 'MODULENAME_CONFIGNAME2',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'board3_configname_' . $module_id	=> array('lang' => 'MODULENAME_CONFIGNAME',		'validate' => 'string',	'type' => 'text:10:200',	'explain' => false),
+				'board3_configname2_' . $module_id	=> array('lang' => 'MODULENAME_CONFIGNAME2',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 			),
 		);
 	}
@@ -91,8 +91,8 @@ class portal_modulename_module
 	*/
 	function install($module_id)
 	{
-		set_config('portal_' . $module_id . '_configname', 'Hello World!');
-		set_config('portal_' . $module_id . '_configname2', 1337);
+		set_config('board3_configname_' . $module_id, 'Hello World!');
+		set_config('board3_configname2_' . $module_id, 1337);
 		return true;
 	}
 
@@ -101,8 +101,8 @@ class portal_modulename_module
 		global $db;
 
 		$del_config = array(
-			'portal_' . $module_id . '_configname',
-			'portal_' . $module_id . '_configname2',
+			'board3_configname_' . $module_id,
+			'board3_configname2_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);

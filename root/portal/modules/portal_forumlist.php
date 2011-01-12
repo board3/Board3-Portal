@@ -84,22 +84,12 @@ class portal_forumlist_module
 	*/
 	function install($module_id)
 	{
-		set_config('portal_' . $module_id . '_configname', 'Hello World!');
-		set_config('portal_' . $module_id . '_configname2', 1337);
 		return true;
 	}
 
 	function uninstall($module_id)
 	{
-		global $db;
-
-		$del_config = array(
-			'portal_' . $module_id . '_configname',
-			'portal_' . $module_id . '_configname2',
-		);
-		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
-			WHERE ' . $db->sql_in_set('config_name', $del_config);
-		return $db->sql_query($sql);
+		return true;
 	}
 }
 

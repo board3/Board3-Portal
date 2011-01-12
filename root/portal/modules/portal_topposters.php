@@ -62,7 +62,7 @@ class portal_topposters_module
 				AND user_posts <> 0
 				AND username <> ''
 			ORDER BY user_posts DESC";
-		$result = $db->sql_query_limit($sql, $config['portal_topposters']);
+		$result = $db->sql_query_limit($sql, $config['board3_topposters_' . $module_id]);
 
 		while (($row = $db->sql_fetchrow($result)))
 		{
@@ -82,8 +82,8 @@ class portal_topposters_module
 		return array(
 			'title'	=> 'TOPPOSTERS_CONFIG',
 			'vars'	=> array(
-				'legend1'				=> 'TOPPOSTERS',
-				'portal_topposters'		=> array('lang' => 'NUM_TOPPOSTERS',		'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'legend1'							=> 'TOPPOSTERS',
+				'board3_topposters_' . $module_id	=> array('lang' => 'NUM_TOPPOSTERS',		'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 			),
 		);
 	}
@@ -93,7 +93,7 @@ class portal_topposters_module
 	*/
 	function install($module_id)
 	{
-		set_config('portal_topposters', 5);
+		set_config('board3_topposters_' . $module_id, 5);
 		return true;
 	}
 
@@ -102,7 +102,7 @@ class portal_topposters_module
 		global $db;
 
 		$del_config = array(
-			'portal_topposters',
+			'board3_topposters_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
