@@ -133,6 +133,7 @@ while ($row = $db->sql_fetchrow($result))
 			'TEMPLATE_FILE'		=> 'portal/modules/' . $template_module,
 			'IMAGE_SRC'			=> $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $row['module_image_src'],
 			'MODULE_ID'			=> $row['module_id'],
+			'TITLE'				=> (isset($user->lang[$row['module_name']])) ? $user->lang[$row['module_name']] : $row['module_name'],
 		));
 	}
 	unset($template_module);
