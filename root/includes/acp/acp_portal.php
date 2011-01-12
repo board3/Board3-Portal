@@ -395,17 +395,30 @@ class acp_portal
 									AND module_column = ' . ($module_data['module_column'] + 1);
 							$db->sql_query($sql);
 							$updated = $db->sql_affectedrows();
-							if ($updated)
+
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_column = module_column + 1
+								WHERE module_id = ' . $module_id;
+							$db->sql_query($sql);
+							
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_order = module_order - 1
+								WHERE module_order >= ' . $module_data['module_order'] . '
+								AND module_column = ' . $module_data['module_column'];
+							$db->sql_query($sql);
+							
+							// the module that needs to moved is in the last row
+							if(!$updated)
 							{
-								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_column = module_column + 1
-									WHERE module_id = ' . $module_id;
+								$sql = 'SELECT MAX(module_order) as new_order
+										FROM ' . PORTAL_MODULES_TABLE . '
+										WHERE module_order < ' . $module_data['module_order'];
 								$db->sql_query($sql);
+								$new_order = $db->sql_fetchfield('new_order') + 1;
 								
 								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_order = module_order - 1
-									WHERE module_order >= ' . $module_data['module_order'] . '
-									AND module_column = ' . $module_data['module_column'];
+									SET module_order = ' . $new_order . '
+									WHERE module_id = ' . $module_id;
 								$db->sql_query($sql);
 							}
 						}
@@ -420,19 +433,33 @@ class acp_portal
 									AND module_column = ' . ($module_data['module_column'] + 2);
 							$db->sql_query($sql);
 							$updated = $db->sql_affectedrows();
-							if ($updated)
+
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_column = module_column + 2
+								WHERE module_id = ' . $module_id;
+							$db->sql_query($sql);
+							
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_order = module_order - 1
+								WHERE module_order >= ' . $module_data['module_order'] . '
+								AND module_column = ' . $module_data['module_column'];
+							$db->sql_query($sql);
+							
+							// the module that needs to moved is in the last row
+							if(!$updated)
 							{
-								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_column = module_column + 2
-									WHERE module_id = ' . $module_id;
+								$sql = 'SELECT MAX(module_order) as new_order
+										FROM ' . PORTAL_MODULES_TABLE . '
+										WHERE module_order < ' . $module_data['module_order'];
 								$db->sql_query($sql);
+								$new_order = $db->sql_fetchfield('new_order') + 1;
 								
 								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_order = module_order - 1
-									WHERE module_order >= ' . $module_data['module_order'] . '
-									AND module_column = ' . $module_data['module_column'];
+									SET module_order = ' . $new_order . '
+									WHERE module_id = ' . $module_id;
 								$db->sql_query($sql);
 							}
+
 						}
 					}
 					else
@@ -470,17 +497,30 @@ class acp_portal
 									AND module_column = ' . ($module_data['module_column'] - 1);
 							$db->sql_query($sql);
 							$updated = $db->sql_affectedrows();
-							if ($updated)
+
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_column = module_column - 1
+								WHERE module_id = ' . $module_id;
+							$db->sql_query($sql);
+							
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_order = module_order - 1
+								WHERE module_order >= ' . $module_data['module_order'] . '
+								AND module_column = ' . $module_data['module_column'];
+							$db->sql_query($sql);
+							
+							// the module that needs to moved is in the last row
+							if(!$updated)
 							{
-								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_column = module_column - 1
-									WHERE module_id = ' . $module_id;
+								$sql = 'SELECT MAX(module_order) as new_order
+										FROM ' . PORTAL_MODULES_TABLE . '
+										WHERE module_order < ' . $module_data['module_order'];
 								$db->sql_query($sql);
+								$new_order = $db->sql_fetchfield('new_order') + 1;
 								
 								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_order = module_order - 1
-									WHERE module_order >= ' . $module_data['module_order'] . '
-									AND module_column = ' . $module_data['module_column'];
+									SET module_order = ' . $new_order . '
+									WHERE module_id = ' . $module_id;
 								$db->sql_query($sql);
 							}
 						}
@@ -495,17 +535,30 @@ class acp_portal
 									AND module_column = ' . ($module_data['module_column'] - 2);
 							$db->sql_query($sql);
 							$updated = $db->sql_affectedrows();
-							if ($updated)
+
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_column = module_column - 2
+								WHERE module_id = ' . $module_id;
+							$db->sql_query($sql);
+							
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_order = module_order - 1
+								WHERE module_order >= ' . $module_data['module_order'] . '
+								AND module_column = ' . $module_data['module_column'];
+							$db->sql_query($sql);
+							
+							// the module that needs to moved is in the last row
+							if(!$updated)
 							{
-								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_column = module_column - 2
-									WHERE module_id = ' . $module_id;
+								$sql = 'SELECT MAX(module_order) as new_order
+										FROM ' . PORTAL_MODULES_TABLE . '
+										WHERE module_order < ' . $module_data['module_order'];
 								$db->sql_query($sql);
+								$new_order = $db->sql_fetchfield('new_order') + 1;
 								
 								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_order = module_order - 1
-									WHERE module_order >= ' . $module_data['module_order'] . '
-									AND module_column = ' . $module_data['module_column'];
+									SET module_order = ' . $new_order . '
+									WHERE module_id = ' . $module_id;
 								$db->sql_query($sql);
 							}
 						}
