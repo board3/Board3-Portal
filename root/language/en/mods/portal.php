@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 // Common
 $lang = array_merge($lang, array(
 	'PORTAL'			=> 'Portal',
-	'VIEWING_PORTAL'	=> 'Portal page',
+	'VIEWING_PORTAL'                => 'Portal page',
 	'BACK'				=> 'Back',
 ));
 ?>

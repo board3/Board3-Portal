@@ -221,6 +221,8 @@ class acp_portal
 						'module_image_height'	=> request_var('module_img_height', 0),
 						'module_group_ids'		=> $module_permission,
 					);
+					
+					check_file_src($sql_ary['module_image_src'], '', $module_id);
 
 					$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 						SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
