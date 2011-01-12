@@ -410,7 +410,7 @@ class acp_portal
 							}
 						}
 					}
-					elseif($c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 2)))
+					elseif($c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 2)) && $module_data['module_column'] != 2)
 					{
 						if ($module_data !== false)
 						{
@@ -485,7 +485,7 @@ class acp_portal
 							}
 						}
 					}
-					elseif($c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 2)))
+					elseif($c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 2)) && $module_data['module_column'] != 2)
 					{
 						if ($module_data !== false)
 						{
@@ -701,6 +701,25 @@ class acp_portal
 							$user->add_lang('mods/portal/' . $c_class->language);
 						}
 						$template_column = column_num_string($row['module_column']);
+						
+						// find out of we can move modules to the left or right
+						if(($c_class->columns & column_string_const(column_num_string($row['module_column'] + 1))) || ($c_class->columns & column_string_const(column_num_string($row['module_column'] + 2)) && $row['module_column'] != 2))
+						{
+							$move_right = true;
+						}
+						else
+						{
+							$move_right = false;
+						}
+						
+						if(($c_class->columns & column_string_const(column_num_string($row['module_column'] - 1))) || ($c_class->columns & column_string_const(column_num_string($row['module_column'] - 2)) && $row['module_column'] != 2))
+						{
+							$move_left = true;
+						}
+						else
+						{
+							$move_left = false;
+						}
 
 						$template->assign_block_vars('modules_' . $template_column, array(
 							'MODULE_NAME'		=> (isset($user->lang[$row['module_name']])) ? $user->lang[$row['module_name']] : $row['module_name'],
@@ -710,8 +729,8 @@ class acp_portal
 							'U_EDIT'			=> append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $row['module_id']),
 							'U_MOVE_UP'			=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_up',
 							'U_MOVE_DOWN'		=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_down',
-							'U_MOVE_RIGHT'		=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_right',
-							'U_MOVE_LEFT'		=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_left',
+							'U_MOVE_RIGHT'		=> ($move_right) ? $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_right' : '',
+							'U_MOVE_LEFT'		=> ($move_left) ? $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_left' : '',
 						));
 					}
 					$db->sql_freeresult($result);
