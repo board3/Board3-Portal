@@ -859,7 +859,6 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 			'portal_news'			=> array(2, 4),
 			'portal_poll'			=> array(2, 5),
 			'portal_whois_online'	=> array(2, 6),
-			// 'portal_jumpbox'		=> array(2, 7),
 			
 			// right column
 			'portal_user_menu'		=> array(3, 1),
@@ -911,6 +910,8 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 			'board3_left_column',
 			'board3_enable',
 			'board3_portal_version',
+			'board3_phpbb_menu',
+			'board3_display_jumpbox',
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . ' WHERE config_name ' . str_replace('\\', '', $db->sql_like_expression('board3_%')) . '
 					AND ' . $db->sql_in_set('config_name', $skip_entries, true);
