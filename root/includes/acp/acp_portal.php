@@ -155,7 +155,7 @@ class acp_portal
 				{
 					$submit = false;
 				}
-
+				
 				// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
 				foreach ($display_vars['vars'] as $config_name => $null)
 				{
@@ -222,6 +222,7 @@ class acp_portal
 						'module_group_ids'		=> $module_permission,
 					);
 					
+					// check if module image file actually exists
 					check_file_src($sql_ary['module_image_src'], '', $module_id);
 
 					$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
