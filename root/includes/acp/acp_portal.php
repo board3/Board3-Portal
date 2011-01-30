@@ -103,7 +103,7 @@ class acp_portal
 						$module_name = $user->lang[$c_class->name];
 						$display_vars = $c_class->get_template_acp($module_id);
 						$template->assign_vars(array(
-							'MODULE_NAME'			=> $module_data['module_name'],
+							'MODULE_NAME'			=> ($module_data['module_classname'] != 'latest_bots')? $module_data['module_name'] : '',
 							'MODULE_IMAGE'			=> $module_data['module_image_src'],
 							'MODULE_IMAGE_WIDTH'	=> $module_data['module_image_width'],
 							'MODULE_IMAGE_HEIGHT'	=> $module_data['module_image_height'],
