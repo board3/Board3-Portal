@@ -230,6 +230,7 @@ class acp_portal
 						WHERE module_id = ' . $module_id;
 					$db->sql_query($sql);
 
+					$cache->destroy('portal_modules');
 					$cache->destroy('sql', CONFIG_TABLE);
 					if(isset($module_name))
 					{
@@ -345,6 +346,8 @@ class acp_portal
 							$db->sql_query($sql);
 						}
 					}
+					
+					$cache->destroy('portal_modules');
 				}
 				elseif ($action == 'move_down')
 				{
@@ -371,6 +374,8 @@ class acp_portal
 							$db->sql_query($sql);
 						}
 					}
+					
+					$cache->destroy('portal_modules');
 				}
 				elseif($action == 'move_right')
 				{
@@ -473,6 +478,8 @@ class acp_portal
 					{
 						trigger_error($user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 					}
+					
+					$cache->destroy('portal_modules');
 				}
 				elseif($action == 'move_left')
 				{
@@ -574,6 +581,8 @@ class acp_portal
 					{
 						trigger_error($user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 					}
+					
+					$cache->destroy('portal_modules');
 				}
 				elseif ($action == 'delete')
 				{
@@ -634,6 +643,8 @@ class acp_portal
 							)));
 						}
 					}
+					
+					$cache->destroy('portal_modules');
 				}
 
 				$add_module = key(request_var('add', array('' => '')));
@@ -755,12 +766,9 @@ class acp_portal
 				{
 					$directory = $phpbb_root_path . 'portal/modules/';
 
-					$sql = 'SELECT *
-						FROM ' . PORTAL_MODULES_TABLE . '
-						ORDER BY module_column, module_order ASC';
-					$result = $db->sql_query($sql);
-
-					while ($row = $db->sql_fetchrow($result))
+					$portal_modules = obtain_portal_modules();
+					
+					foreach($portal_modules as $row)
 					{
 						$class = 'portal_' . $row['module_classname'] . '_module';
 						if (!class_exists($class))
@@ -810,7 +818,6 @@ class acp_portal
 							'U_MOVE_LEFT'		=> ($move_left) ? $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_left' : '',
 						));
 					}
-					$db->sql_freeresult($result);
 					
 					$template->assign_vars(array(
 						'ICON_MOVE_LEFT'				=> '<img src="' . $phpbb_admin_path . 'images/icon_left.gif" alt="' . $user->lang['MOVE_LEFT'] . '" title="' . $user->lang['MOVE_LEFT'] . '" />',

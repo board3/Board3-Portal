@@ -17,19 +17,25 @@ if (!defined('IN_PHPBB') && !defined('UMIL_AUTO') && !defined('IN_INSTALL'))
 // Get portal config
 function obtain_portal_config()
 {
-	global $db, $portal_config;
+	global $db, $cache, $portal_config;
 
-	if(sizeof($portal_config) < 1)
+	if (($portal_config = $cache->get('portal_config')) === false)
 	{
+		$portal_config = $portal_cached_config = array();
+
 		$sql = 'SELECT config_name, config_value
 			FROM ' . PORTAL_CONFIG_TABLE;
 		$result = $db->sql_query($sql);
 
 		while ($row = $db->sql_fetchrow($result))
 		{
+			$portal_cached_config[$row['config_name']] = $row['config_value'];
+
 			$portal_config[$row['config_name']] = $row['config_value'];
 		}
 		$db->sql_freeresult($result);
+
+		$cache->put('portal_config', $portal_cached_config);
 	}
 
 	return $portal_config;
@@ -57,6 +63,38 @@ function set_portal_config($config_name, $config_value)
 	}
 
 	$portal_config[$config_name] = $config_value;
+	
+	$cache->destroy('portal_config');
+}
+
+/**
+* Get portal modules
+*/
+function obtain_portal_modules()
+{
+	global $db, $cache, $portal_modules;
+
+	if (($portal_modules = $cache->get('portal_modules')) === false)
+	{
+		$portal_modules = $portal_cached_modules = array();
+
+		$sql = 'SELECT *
+			FROM ' . PORTAL_MODULES_TABLE . '
+			ORDER BY module_order ASC';
+		$result = $db->sql_query($sql);
+
+		while ($row = $db->sql_fetchrow($result))
+		{
+			$portal_cached_modules[] = $row;
+
+			$portal_modules[] = $row;
+		}
+		$db->sql_freeresult($result);
+
+		$cache->put('portal_modules', $portal_cached_modules);
+	}
+
+	return $portal_modules;
 }
 
 // fetch post for news & announce
