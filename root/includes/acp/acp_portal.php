@@ -598,23 +598,41 @@ class acp_portal
 						{
 							trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 						}
-
-						$c_class = new $class();
-						$c_class->uninstall($module_data['module_id']);
-
-						$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE . '
-							WHERE module_id = ' . $module_id;
-						$db->sql_query($sql);
-
-						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-							SET module_order = module_order - 1
-							WHERE module_column = ' . $module_data['module_column'] . '
-								AND module_order > ' . $module_data['module_order'];
-						$db->sql_query($sql);
 						
-						$cache->purge(); // make sure we don't get errors after re-adding a module
+						if (confirm_box(true))
+						{
+							$c_class = new $class();
+							$c_class->uninstall($module_data['module_id']);
 
-						trigger_error($user->lang['SUCCESS_DELETE'] . adm_back_link($this->u_action));
+							$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE . '
+								WHERE module_id = ' . $module_id;
+							$db->sql_query($sql);
+
+							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+								SET module_order = module_order - 1
+								WHERE module_column = ' . $module_data['module_column'] . '
+									AND module_order > ' . $module_data['module_order'];
+							$db->sql_query($sql);
+							
+							$cache->purge(); // make sure we don't get errors after re-adding a module
+
+							trigger_error($user->lang['SUCCESS_DELETE'] . adm_back_link($this->u_action));
+						}
+						else
+						{
+							$c_class = new $class();
+							if ($c_class->language)
+							{
+								$user->add_lang('mods/portal/' . $c_class->language);
+							}
+							$confirm_text = (isset($user->lang[$module_data['module_name']])) ? sprintf($user->lang['DELETE_MODULE_CONFIRM'], $user->lang[$module_data['module_name']]) : sprintf($user->lang['DELETE_MODULE_CONFIRM'], utf8_normalize_nfc($module_data['module_name']));
+							confirm_box(false, $confirm_text, build_hidden_fields(array(
+								'i'			=> $id,
+								'mode'		=> $mode,
+								'action'	=> $action,
+								'module_id'	=> $module_id,
+							)));
+						}
 					}
 				}
 
