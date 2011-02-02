@@ -55,6 +55,8 @@ $lang = array_merge($lang, array(
 	'B3P_FILE_NOT_FOUND'			=> 'Die angegebene Datei konnte nicht gefunden werden',
 	'UNABLE_TO_MOVE'				=> 'Es ist nicht möglich den Block in die gewählte Spalte zu verschieben.',
 	'DELETE_MODULE_CONFIRM'			=> 'Bist du sicher, dass du das Module "%1$s" löschen möchtest?',
+	'MODULE_RESET_SUCCESS'			=> 'Modul Einstellungen erfolgreich zurückgesetzt.',
+	'MODULE_RESET_CONFIRM'			=> 'Bist du sicher, dass du die Einstellungen des Moduls "%1$s" zurücksetzen willst?',
 	
 	'MODULE_OPTIONS'			=> 'Modul Optionen',
 	'MODULE_NAME'				=> 'Modul Name',
@@ -63,7 +65,9 @@ $lang = array_merge($lang, array(
 	'MODULE_IMAGE_EXP'			=> 'Gebe den Dateinamen des Modul Bildes ein. Bilder müssen sich in styles/*yourstyle*/theme/images/portal/ befinden.',
 	'MODULE_PERMISSIONS'		=> 'Modul Berechtigungen',
 	'MODULE_PERMISSIONS_EXP'	=> 'Wähle die Gruppen aus, die berechtigt sein sollen, das Modul zu sehen. Sollen alle Benutzer das Modul sehen können, wähle nichts aus.<br />An- / abwählen mehrerer Gruppen indem man <samp>Strg</samp> gedrückt hält und klickt.',
-
+	'MODULE_RESET'				=> 'Modul Einstellungen zurücksetzen',
+	'MODULE_RESET_EXP'			=> 'Dies wird alle Einstellungen des Moduls auf die Standardeinstellungen zurücksetzen!',
+	
 	// general
 	'ACP_PORTAL'							=> 'Portal',
 	'ACP_PORTAL_GENERAL_INFO'				=> 'Allgemeine Einstellungen',

@@ -78,7 +78,7 @@ class acp_portal
 				{
 					$sql = 'SELECT *
 						FROM ' . PORTAL_MODULES_TABLE . '
-						WHERE module_id = ' . $module_id;
+						WHERE module_id = ' . (int) $module_id;
 					$result = $db->sql_query_limit($sql, 1);
 					$module_data = $db->sql_fetchrow($result);
 					$db->sql_freeresult($result);
@@ -156,10 +156,52 @@ class acp_portal
 					$submit = false;
 				}
 				
+				// Reset module
+				$reset_module = request_var('module_reset', 0);
+				
+				if($reset_module)
+				{
+					if (confirm_box(true))
+					{
+						$sql_ary = array(
+							'module_name'		=> $c_class->name,
+							'module_image_src'	=> $c_class->image_src,
+							'module_group_ids'	=> '',
+							'module_image_height'	=> 16,
+							'module_image_width'	=> 16,
+						);
+						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . ' 
+								SET ' . $db->sql_build_array('UPDATE', $sql_ary) . ' 
+								WHERE module_id = ' . (int) $module_id;
+						$db->sql_query($sql);
+						
+						$cache->destroy('config');
+						$cache->destroy('portal_config');
+						$portal_config = obtain_portal_config(); // we need to prevent duplicate entry errors
+						$c_class->install($module_id);
+						$cache->purge();
+						
+						// We need to return to the module config
+						meta_refresh(3, reapply_sid($this->u_action . "&amp;module_id=$module_id"));
+						
+						trigger_error($user->lang['MODULE_RESET_SUCCESS'] . adm_back_link($this->u_action . "&amp;module_id=$module_id"));
+					}
+					else
+					{
+						$confirm_text = (isset($user->lang[$module_data['module_name']])) ? sprintf($user->lang['MODULE_RESET_CONFIRM'], $user->lang[$module_data['module_name']]) : sprintf($user->lang['DELETE_MODULE_CONFIRM'], utf8_normalize_nfc($module_data['module_name']));
+						confirm_box(false, $confirm_text, build_hidden_fields(array(
+							'i'				=> $id,
+							'mode'			=> $mode,
+							'module_reset'	=> true,
+							'module_id'		=> $module_id,
+						)));
+					}
+				}
+				
 				// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
 				foreach ($display_vars['vars'] as $config_name => $null)
 				{
-					if ($submit && ($null['type'] == 'custom' || $null['submit_type'] == 'custom'))
+					if ($submit && ($null['type'] == 'custom' || (isset($null['submit_type']) && $null['submit_type'] == 'custom')))
 					{
 						$func = array($c_class, $null['submit']);
 						
@@ -227,7 +269,7 @@ class acp_portal
 
 					$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 						SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
-						WHERE module_id = ' . $module_id;
+						WHERE module_id = ' . (int) $module_id;
 					$db->sql_query($sql);
 
 					$cache->destroy('portal_modules');
@@ -325,7 +367,7 @@ class acp_portal
 				{
 					$sql = 'SELECT module_order, module_column
 						FROM ' . PORTAL_MODULES_TABLE . '
-						WHERE module_id = ' . $module_id;
+						WHERE module_id = ' . (int) $module_id;
 					$result = $db->sql_query_limit($sql, 1);
 					$module_data = $db->sql_fetchrow($result);
 					$db->sql_freeresult($result);
@@ -342,7 +384,7 @@ class acp_portal
 						{
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 								SET module_order = module_order - 1
-								WHERE module_id = ' . $module_id;
+								WHERE module_id = ' . (int) $module_id;
 							$db->sql_query($sql);
 						}
 					}
@@ -353,7 +395,7 @@ class acp_portal
 				{
 					$sql = 'SELECT module_order, module_column
 						FROM ' . PORTAL_MODULES_TABLE . '
-						WHERE module_id = ' . $module_id;
+						WHERE module_id = ' . (int) $module_id;
 					$result = $db->sql_query_limit($sql, 1);
 					$module_data = $db->sql_fetchrow($result);
 					$db->sql_freeresult($result);
@@ -370,7 +412,7 @@ class acp_portal
 						{
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 								SET module_order = module_order + 1
-								WHERE module_id = ' . $module_id;
+								WHERE module_id = ' . (int) $module_id;
 							$db->sql_query($sql);
 						}
 					}
@@ -381,7 +423,7 @@ class acp_portal
 				{
 					$sql = 'SELECT module_order, module_column, module_classname
 						FROM ' . PORTAL_MODULES_TABLE . '
-						WHERE module_id = ' . $module_id;
+						WHERE module_id = ' . (int) $module_id;
 					$result = $db->sql_query_limit($sql, 1);
 					$module_data = $db->sql_fetchrow($result);
 					$db->sql_freeresult($result);
@@ -410,7 +452,7 @@ class acp_portal
 
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 								SET module_column = module_column + 1
-								WHERE module_id = ' . $module_id;
+								WHERE module_id = ' . (int) $module_id;
 							$db->sql_query($sql);
 							
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
@@ -430,7 +472,7 @@ class acp_portal
 								
 								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 									SET module_order = ' . $new_order . '
-									WHERE module_id = ' . $module_id;
+									WHERE module_id = ' . (int) $module_id;
 								$db->sql_query($sql);
 							}
 						}
@@ -448,7 +490,7 @@ class acp_portal
 
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 								SET module_column = module_column + 2
-								WHERE module_id = ' . $module_id;
+								WHERE module_id = ' . (int) $module_id;
 							$db->sql_query($sql);
 							
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
@@ -468,7 +510,7 @@ class acp_portal
 								
 								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 									SET module_order = ' . $new_order . '
-									WHERE module_id = ' . $module_id;
+									WHERE module_id = ' . (int) $module_id;
 								$db->sql_query($sql);
 							}
 
@@ -485,7 +527,7 @@ class acp_portal
 				{
 					$sql = 'SELECT module_order, module_column, module_classname
 						FROM ' . PORTAL_MODULES_TABLE . '
-						WHERE module_id = ' . $module_id;
+						WHERE module_id = ' . (int) $module_id;
 					$result = $db->sql_query_limit($sql, 1);
 					$module_data = $db->sql_fetchrow($result);
 					$db->sql_freeresult($result);
@@ -514,7 +556,7 @@ class acp_portal
 
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 								SET module_column = module_column - 1
-								WHERE module_id = ' . $module_id;
+								WHERE module_id = ' . (int) $module_id;
 							$db->sql_query($sql);
 							
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
@@ -534,7 +576,7 @@ class acp_portal
 								
 								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 									SET module_order = ' . $new_order . '
-									WHERE module_id = ' . $module_id;
+									WHERE module_id = ' . (int) $module_id;
 								$db->sql_query($sql);
 							}
 						}
@@ -552,7 +594,7 @@ class acp_portal
 
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 								SET module_column = module_column - 2
-								WHERE module_id = ' . $module_id;
+								WHERE module_id = ' . (int) $module_id;
 							$db->sql_query($sql);
 							
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
@@ -572,7 +614,7 @@ class acp_portal
 								
 								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 									SET module_order = ' . $new_order . '
-									WHERE module_id = ' . $module_id;
+									WHERE module_id = ' . (int) $module_id;
 								$db->sql_query($sql);
 							}
 						}
@@ -588,7 +630,7 @@ class acp_portal
 				{
 					$sql = 'SELECT *
 						FROM ' . PORTAL_MODULES_TABLE . '
-						WHERE module_id = ' . $module_id;
+						WHERE module_id = ' . (int) $module_id;
 					$result = $db->sql_query_limit($sql, 1);
 					$module_data = $db->sql_fetchrow($result);
 					$db->sql_freeresult($result);
@@ -614,7 +656,7 @@ class acp_portal
 							$c_class->uninstall($module_data['module_id']);
 
 							$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE . '
-								WHERE module_id = ' . $module_id;
+								WHERE module_id = ' . (int) $module_id;
 							$db->sql_query($sql);
 
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '

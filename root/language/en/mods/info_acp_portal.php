@@ -54,6 +54,8 @@ $lang = array_merge($lang, array(
 	'B3P_FILE_NOT_FOUND'			=> 'The requested file could not be found',
 	'UNABLE_TO_MOVE'				=> 'It is not possible to move the block to the selected column.',
 	'DELETE_MODULE_CONFIRM'			=> 'Are you sure you wish to delete the module "%1$s"?',
+	'MODULE_RESET_SUCCESS'			=> 'Successfully reset the module settings.',
+	'MODULE_RESET_CONFIRM'			=> 'Are you sure you wish to reset the settings of the module "%1$s"?',
 	
 	'MODULE_OPTIONS'			=> 'Module options',
 	'MODULE_NAME'				=> 'Module name',
@@ -66,6 +68,8 @@ $lang = array_merge($lang, array(
 	'MODULE_IMAGE_WIDTH_EXP'	=> 'Enter the width of the module image in pixels',
 	'MODULE_IMAGE_HEIGHT'		=> 'Module image height',
 	'MODULE_IMAGE_HEIGHT_EXP'	=> 'Enter the height of the module image in pixels',
+	'MODULE_RESET'				=> 'Reset module configuration',
+	'MODULE_RESET_EXP'			=> 'This will reset all settings to the default!',
 
 	// general
 	'ACP_PORTAL'							=> 'Portal',
