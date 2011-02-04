@@ -959,12 +959,12 @@ class acp_portal
 											
 											foreach($langs as $cur_lang)
 											{
-												$lang_content = scandir($mod_dir . '/language/' . $cur_lang . '/mods/portal/');
+												$lang_content = scandir($mod_dir . '/language/' . $cur_lang . '/');
 												$lang_content = array_diff($lang_content, $cut_array);
 												
 												foreach($lang_content as $new_file)
 												{
-													$actions['NEW_FILES'][$mod_dir . '/language/' . $cur_lang . '/mods/portal/' . $new_file] = $phpbb_root_path . 'language/' . $cur_lang . '/mods/portal/' . $new_file;
+													$actions['NEW_FILES'][$mod_dir . '/language/' . $cur_lang . '/' . $new_file] = $phpbb_root_path . 'language/' . $cur_lang . '/mods/portal/' . $new_file;
 												}
 											}
 										break;
