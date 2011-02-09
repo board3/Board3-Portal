@@ -1,7 +1,7 @@
 <!--version $Id$ //-->
 <!-- BEGIN news_row -->
 <!-- IF news_row.S_NO_TOPICS -->
-{$C_BLOCK_H_L}<dt>{$TITLE}</dt>{$C_BLOCK_H_R}
+{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
 	<div class="post bg2" style="margin-bottom: 0px">
 		<div class="inner"><span class="portal-corners-top-inner"></span>
 			<span style="text-align: center;"><strong>{L_NO_NEWS}</strong></span>
@@ -11,15 +11,14 @@
 <!-- ELSE  -->
 <!-- IF news_row.S_FIRST_ROW  -->
 <a name="n"></a>
-{$C_BLOCK_H_L}
+{$CC_BLOCK_H_L}
 	<dt <!-- IF S_DISPLAY_NEWS_RVS -->style="width: 44%"<!-- ELSE -->style="width: 60%"<!-- ENDIF -->>{$TITLE}</dt>
 	<!-- IF S_DISPLAY_NEWS_RVS -->
 		<dd class="posts" style="width: 11%">{L_REPLIES}</dd>
 		<dd class="views" style="width: 11%">{L_VIEWS}</dd>
 	<!-- ENDIF -->
 	<dd class="lastpost" style="width: 25%"><span>{L_LAST_POST}</span></dd>
-
-{$C_BLOCK_H_R}
+{$CC_BLOCK_H_R}
 <ul class="topiclist topics">
 <!-- ENDIF -->
 	<li class="row<!-- IF news_row.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
