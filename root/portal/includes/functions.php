@@ -1,9 +1,7 @@
 <?php
-
 /**
 *
 * @package Board3 Portal v2
-* @version $Id$
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

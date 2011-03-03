@@ -6,8 +6,8 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en">board3 Portal 2.0.0 - Beta 1</title>
-		<title lang="de">board3 Portal 2.0.0 - Beta 1</title>
+		<title lang="en">board3 Portal 2.0.0 - Alpha 1</title>
+		<title lang="de">board3 Portal 2.0.0 - Alpha 1</title>
 
 		<description lang="en">Adds a portal with several blocks to your forum.
 You can change the settings, move the blocks, add new blocks and more in the ACP.
@@ -102,7 +102,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 		<history>
 			<entry>
 				<date>2011-05-01</date>
-				<rev-version>2.0.0b1</rev-version>
+				<rev-version>2.0.0a1</rev-version>
 				<changelog lang="en">
 					<change>First beta release</change>
 				</changelog>

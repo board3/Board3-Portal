@@ -1,9 +1,10 @@
 <?php
 /**
-* @package Portal - Recent
-* @version $Id: portal_default.php 706 2010-10-07 10:15:15Z marc1706 $
-* @copyright (c) 2009, 2010 Board3 Portal Team
+*
+* @package Board3 Portal v2 - Recent
+* @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
 */
 
 /**

@@ -1,9 +1,10 @@
 <?php
 /**
-* @package Portal
-* @version $Id$
-* @copyright (c) 2009, 2010 Board3 Portal Team
+*
+* @package Board3 Portal v2
+* @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
 */
 
 /**
@@ -138,98 +139,6 @@ foreach($portal_modules as $row)
 	unset($template_module);
 }
 $module_count['total'] = sizeof($portal_modules);
-
-/*
-$sql = 'SELECT *
-	FROM ' . PORTAL_MODULES_TABLE . '
-	ORDER BY module_order ASC';
-$result = $db->sql_query($sql);
-while ($row = $db->sql_fetchrow($result))
-{
-	$class_name = 'portal_' . $row['module_classname'] . '_module';
-	if (!class_exists($class_name))
-	{
-		include("{$phpbb_root_path}{$portal_root_path}modules/portal_{$row['module_classname']}.$phpEx");
-	}
-	if (!class_exists($class_name))
-	{
-		trigger_error(sprintf($user->lang['CLASS_NOT_FOUND'], $class_name, 'portal_' . $row['module_classname']), E_USER_ERROR);
-	}
-
-
-	$module = new $class_name();
-	
-	// Check for permissions before loading anything
-	$group_ary = (!empty($row['module_group_ids'])) ? explode(',', $row['module_group_ids']) : '';
-	if((is_array($group_ary) && !in_array($user->data['group_id'], $group_ary)))
-	{
-		continue;
-	}
-	
-	if ($module->language)
-	{
-		$user->add_lang('mods/portal/' . $module->language);
-	}
-	if ($row['module_column'] == 1 && $config['board3_left_column'])
-	{
-		$template_module = $module->get_template_side($row['module_id']);
-		$template_column = 'left';
-		++$module_count['left'];
-	}
-	if ($row['module_column'] == 2)
-	{
-		$template_module = $module->get_template_center($row['module_id']);
-		$template_column = 'center';
-		++$module_count['center'];
-	}
-	if ($row['module_column'] == 3 && $config['board3_right_column'])
-	{
-		$template_module = $module->get_template_side($row['module_id']);
-		$template_column = 'right';
-		++$module_count['right'];
-	}
-	if ($row['module_column'] == 4)
-	{
-		$template_module = $module->get_template_center($row['module_id']);
-		++$module_count['top'];
-	}
-	if ($row['module_column'] == 5)
-	{
-		$template_module = $module->get_template_center($row['module_id']);
-		++$module_count['bottom'];
-	}
-	if (!isset($template_module))
-	{
-		continue;
-	}
-
-	// Custom Blocks that have been defined in the ACP will return an array instead of just the name of the template file
-	if(is_array($template_module))
-	{
-		$template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
-			'TEMPLATE_FILE'		=> 'portal/modules/' . $template_module['template'],
-			'IMAGE_SRC'			=> $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $template_module['image_src'],
-			'TITLE'				=> $template_module['title'],
-			'CODE'				=> $template_module['code'],
-			'MODULE_ID'			=> $row['module_id'],
-		));
-	}
-	else
-	{
-		$template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
-			'TEMPLATE_FILE'		=> 'portal/modules/' . $template_module,
-			'IMAGE_SRC'			=> $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $row['module_image_src'],
-			'IMAGE_WIDTH'		=> $row['module_image_width'],
-			'IMAGE_HEIGHT'		=> $row['module_image_height'],
-			'MODULE_ID'			=> $row['module_id'],
-			'TITLE'				=> (isset($user->lang[$row['module_name']])) ? $user->lang[$row['module_name']] : utf8_normalize_nfc($row['module_name']),
-		));
-	}
-	unset($template_module);
-}
-$module_count['total'] = $db->sql_affectedrows();
-$db->sql_freeresult($result);
-*/
 
 // Redirect to index if there are currently no active modules
 if($module_count['total'] < 1)
