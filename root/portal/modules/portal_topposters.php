@@ -39,7 +39,7 @@ class portal_topposters_module
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'topposters.png';
+	var $image_src = 'portal_top_poster.png';
 
 	/**
 	* module-language file
