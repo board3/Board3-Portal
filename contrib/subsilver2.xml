@@ -126,7 +126,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or S_DISPLAY_PHPBB_MENU -->]]></action>
 			</edit>
 			<edit>
-				<find><![CDATA[<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN --> &nbsp;<span style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->]]></find>
+				<find><![CDATA[				<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN --> &nbsp;<span style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->]]></find>
 				<action type="before-add"><![CDATA[<!-- ENDIF -->]]></action>
 				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or S_DISPLAY_PHPBB_MENU -->]]></action>
 			</edit>
