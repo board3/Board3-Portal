@@ -115,6 +115,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 	<action-group>
 		<copy>
 			<file from="root/portal.php" to="portal.php" />
+			<file from="root/adm/images/*.*" to="adm/images/*.*" />
 			<file from="root/adm/mods/board3_portal_check_version.php" to="adm/mods/board3_portal_check_version.php" />
 			<file from="root/adm/style/*.*" to="adm/style/*.*" />
 			<file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />

@@ -35,7 +35,7 @@ padding-bottom: 2px; /*bottom spacing between menu items*/
 }
 
 .portal-navigation ul li a{
-background-image: url("images/portal/arrowbullet.gif");
+background-image: url("{T_THEME_PATH}/images/portal/arrowbullet.gif");
 background-repeat: no-repeat;
 background-position: center left; /*custom bullet list image*/
 display: block;

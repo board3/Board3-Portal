@@ -24,10 +24,34 @@ if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 {
 	trigger_error('Please download the latest UMIL (Unified MOD Install Library) from: <a href="http://www.phpbb.com/mods/umil/">phpBB.com/mods/umil</a>', E_USER_ERROR);
 }
-if(!function_exists('board3_basic_install'))
+if (!function_exists('board3_basic_install'))
 {
 	include($phpbb_root_path . 'portal/includes/functions.' . $phpEx);
 }
+
+/**
+* Check if we need to convert from Board3 Portal 1.0.6
+*/
+global $config;
+
+if (!defined('PORTAL_CONFIG_TABLE'))
+{
+	include($phpbb_root_path . 'portal/includes/constants.' . $phpEx);
+}
+
+if (sql_table_exists(PORTAL_CONFIG_TABLE) && !isset($config['board3_portal_version']))
+{
+	$portal_config = obtain_portal_config();
+	
+	/** 
+	* We only allow conversions from Board3 Portal 1.0.6
+	*/
+	if (isset($portal_config['portal_version']) && $portal_config['portal_version'] == '1.0.6')
+	{
+		set_config('board3_portal_version', '1.0.6');
+	}
+}
+
 
 // The name of the mod to be displayed during installation.
 $mod_name = 'Board3 Portal';
@@ -60,15 +84,180 @@ $language_file = 'mods/info_acp_portal';
 * The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 */
 $versions = array(
-	'2.0.0-dev2' => array(
-
+	'1.0.6' => array(
 		'permission_add' => array(
-			array('a_manage_portal', 1),
-			array('u_view_portal', 1),
+			array('a_portal_manage', 1),
 		),
 
 		'permission_set' => array(
 			array('ADMINISTRATORS', 'a_manage_portal', 'group'),
+		),
+
+		'table_add' => array(
+			array('phpbb_portal_config', array(
+				'COLUMNS' => array(
+					'config_name' => array('VCHAR:255', ''),
+					'config_value'=> array('MTEXT', ''),
+				),
+				
+				'PRIMARY_KEY'	=> 'config_name',
+			)),
+
+		),
+
+		'module_add' => array(
+			array('acp', 'ACP_CAT_DOT_MODS', 'ACP_PORTAL_INFO'),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+				
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_GENERAL_INFO',
+					'module_mode' 		=> 'config',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+			
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_NEWS_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_ANNOUNCEMENTS_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_WELCOME_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_RECENT_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_WORDGRAPH_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_PAYPAL_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_ATTACHMENTS_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_MEMBERS_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_POLLS_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_BOTS_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_POSTER_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_MINICALENDAR_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_CUSTOMBLOCK_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_LINKS_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_FRIENDS_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+
+			array('acp', 'ACP_PORTAL_INFO', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_BIRTHDAYS_INFO',
+					'module_mode'		=> 'modules',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
+		),
+	),
+
+	'2.0.0-a1' => array(
+		'permission_remove' => array(
+			'a_portal_manage',
+		),
+		
+		'permission_add' => array(
+			array('u_view_portal', 1),
+			array('a_manage_portal', 1),
+		),
+
+		'permission_set' => array(
 			array('GUESTS', 'u_view_portal', 'group'),
 			array('REGISTERED_COPPA', 'u_view_portal', 'group'),
 			array('GLOBAL_MODERATORS', 'u_view_portal', 'group'),
@@ -93,15 +282,6 @@ $versions = array(
 
 				'PRIMARY_KEY'	=> 'module_id',
 			)),
-			array('phpbb_portal_config', array(
-				'COLUMNS' => array(
-					'config_name' => array('VCHAR:255', ''),
-					'config_value'=> array('MTEXT', ''),
-				),
-				
-				'PRIMARY_KEY'	=> 'config_name',
-			)),
-
 		),
 
 		'config_add' => array(
@@ -114,6 +294,26 @@ $versions = array(
 			array('board3_right_column_width', 180, 0),
 			array('board3_phpbb_menu', 0, 0),
 			array('board3_display_jumpbox', 1, 0),
+		),
+
+		'module_remove' => array(
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_GENERAL_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_NEWS_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_ANNOUNCEMENTS_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_WELCOME_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_RECENT_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_WORDGRAPH_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_PAYPAL_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_ATTACHMENTS_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_MEMBERS_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_POLLS_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_BOTS_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_POSTER_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_MINICALENDAR_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_CUSTOMBLOCK_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_LINKS_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_FRIENDS_INFO'),
+			array('acp', 'ACP_PORTAL_INFO', 'ACP_PORTAL_BIRTHDAYS_INFO'),
 		),
 
 		'module_add' => array(
