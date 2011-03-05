@@ -335,6 +335,14 @@ $versions = array(
 					'module_auth'		=> 'acl_a_manage_portal',
 				),
 			),
+			
+			array('acp', 'ACP_PORTAL', array(
+					'module_basename'	=> 'portal',
+					'module_langname'	=> 'ACP_PORTAL_UPLOAD',
+					'module_mode'		=> 'upload_module',
+					'module_auth'		=> 'acl_a_manage_portal',
+				),
+			),
 		),
 		'custom'	=> array('board3_basic_install'),
 

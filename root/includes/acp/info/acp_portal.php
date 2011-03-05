@@ -22,11 +22,11 @@ class acp_portal_info
 		return array(
 			'filename'	=> 'acp_portal',
 			'title'		=> 'ACP_PORTAL',
-			'version'	=> '2.0.0',
+			'version'	=> '2.0.0-a1',
 			'modes'		=> array(
 				'config'		=> array('title' => 'ACP_PORTAL_GENERAL_INFO',	'auth' => 'acl_a_manage_portal', 'cat' => array('ACP_PORTAL')),
 				'modules'		=> array('title' => 'ACP_PORTAL_MODULES',	'auth' => 'acl_a_manage_portal', 'cat' => array('ACP_PORTAL')),
-				'upload_module'	=> array('title' => 'ACP_PORTAL_UPLOAD',	'auth' => 'acl_a_manage_portal', 'cat' => array('ACP_PORTAL')),
+				'upload_module'		=> array('title' => 'ACP_PORTAL_UPLOAD',	'auth' => 'acl_a_manage_portal', 'cat' => array('ACP_PORTAL')),
 			),
 		);
 	}
