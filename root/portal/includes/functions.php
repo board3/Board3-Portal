@@ -107,7 +107,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 	$topic_icons = array(0);
 	$have_icons = 0;
 
-	if($permissions == true)
+	if ($permissions == true)
 	{
 		$disallow_access = array_unique(array_keys($auth->acl_getf('!f_read', true)));
 	} 
@@ -116,7 +116,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 		$disallow_access = array();
 	}
 
-	if($invert == true)
+	if ($invert == true)
 	{
 		$disallow_access = array_merge($disallow_access, $forum_from);
 		$forum_from = array();
@@ -124,19 +124,19 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 
 	$global_f = 0;
 
-	if(sizeof($forum_from))
+	if (sizeof($forum_from))
 	{
 		$disallow_access = array_diff($forum_from, $disallow_access);
-		if(!sizeof($disallow_access))
+		if (!sizeof($disallow_access))
 		{
 			return array();
 		}
 
-		foreach($disallow_access as $acc_id)
+		foreach ($disallow_access as $acc_id)
 		{
 			$acc_id = (int) $acc_id;
 			$str_where .= "t.forum_id = $acc_id OR ";
-			if($type == 'announcements' && $global_f < 1 && $acc_id > 0)
+			if ($type == 'announcements' && $global_f < 1 && $acc_id > 0)
 			{
 				$global_f = $acc_id;
 			}
@@ -144,7 +144,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 	}
 	else
 	{
-		foreach($disallow_access as $acc_id)
+		foreach ($disallow_access as $acc_id)
 		{
 			$acc_id = (int) $acc_id;
 			$str_where .= "t.forum_id <> $acc_id AND ";
@@ -176,7 +176,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 		break;
 	}
 
-	if($type == 'announcements' && $global_f < 1)
+	if ($type == 'announcements' && $global_f < 1)
 	{
 		$sql = 'SELECT
 					forum_id
@@ -191,7 +191,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 		$row = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
 
-		if(!sizeof($row))
+		if (!sizeof($row))
 		{
 			return array();
 		}
@@ -278,7 +278,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 	while ($row = $db->sql_fetchrow($result))
 	{
 		$attachments = array();
-		if(($auth->acl_get('u_download') && ($auth->acl_get('f_download', $row['forum_id']) || $row['forum_id'] == 0)) && $config['allow_attachments'] && $row['post_id'] && $row['post_attachment'])
+		if (($auth->acl_get('u_download') && ($auth->acl_get('f_download', $row['forum_id']) || $row['forum_id'] == 0)) && $config['allow_attachments'] && $row['post_id'] && $row['post_attachment'])
 		{
 			// Pull attachment data
 			$sql2 = 'SELECT *
@@ -318,7 +318,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 			parse_attachments($row['forum_id'], $message, $attachments, $update_count);
 		}
 
-		if($global_f < 1)
+		if ($global_f < 1)
 		{
 			$global_f = $row['forum_id'];
 		}
@@ -353,14 +353,14 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 			'attachments'			=> (!empty($attachments)) ? $attachments : array(),
 		));
 		$posts['global_id'] = $global_f;
-		$i++;
+		++$i;
 	}
 	$db->sql_freeresult($result);
 
 	$posts['topic_icons'] = ((max($topic_icons) > 0) && $have_icons) ? true : false;
 	$posts['topic_count'] = $i;
 
-	if($global_f < 1)
+	if ($global_f < 1)
 	{
 		return array();
 	}
@@ -399,7 +399,7 @@ function is_valid_bbtag($str, $bbuid)
 function get_end_bbtag($tag, $bbuid)
 {
 	$etag = '';
-	for($i=0;$i<strlen($tag);$i++)
+	for ($i=0;$i<strlen($tag);++$i)
 	{
 		if ($tag[$i] == '[') 
 		{
@@ -436,7 +436,7 @@ function get_end_bbtag($tag, $bbuid)
 function get_next_word($str)
 {
 	$ret = '';
-	for($i=0;$i<strlen($str);$i++)
+	for ($i=0;$i<strlen($str);++$i)
 	{
 		switch ($str[$i])
 		{
@@ -468,7 +468,7 @@ function get_sub_taged_string($str, $bbuid, $maxlen)
 	$last = '';
 	$arr = array();
 
-	while((strlen($ntext) < $cnt) && (strlen($sl) > 0))
+	while ((strlen($ntext) < $cnt) && (strlen($sl) > 0))
 	{
 		$sr = '';
 		if (substr($sl, 0, 1) == '[')
@@ -497,7 +497,7 @@ function get_sub_taged_string($str, $bbuid, $maxlen)
 				{
 					if (strcmp($elem[1],$sr) != 0) 
 					{
-						$tarr[$j++] = $elem;
+						$tarr[++$j] = $elem;
 					}
 				}
 				$arr = $tarr;
@@ -505,7 +505,7 @@ function get_sub_taged_string($str, $bbuid, $maxlen)
 			else
 			{
 				$arr[$i][0] = $sr;
-				$arr[$i++][1] = get_end_bbtag($sr, $bbuid);
+				$arr[++$i][1] = get_end_bbtag($sr, $bbuid);
 			} 
 			$ret .= $sr;
 		}
@@ -528,7 +528,7 @@ function get_sub_taged_string($str, $bbuid, $maxlen)
 
 	$ret .= $ap;
 	$ret = trim($ret);
-	if(substr($ret, -4) == '<!--')
+	if (substr($ret, -4) == '<!--')
 	{
 		$ret .= ' -->';
 	}
@@ -586,7 +586,7 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 
 		$page_string .= ($start_cnt > 1) ? ' ... ' : $seperator;
 
-		for ($i = $start_cnt + 1; $i < $end_cnt; $i++)
+		for ($i = $start_cnt + 1; $i < $end_cnt; ++$i)
 		{
 			$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . $anker . '">' . $i . '</a>';
 			if ($i < $end_cnt - 1)
@@ -600,7 +600,7 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 	{
 		$page_string .= $seperator;
 
-		for ($i = 2; $i < $total_pages; $i++)
+		for ($i = 2; $i < $total_pages; ++$i)
 		{
 			$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . $anker . '">' . $i . '</a>';
 			if ($i < $total_pages)
@@ -701,7 +701,7 @@ function add_endtag ($message = '')
 	$check = (int) strripos($message, '<!-- m --><a ');
 	$check_2 = (int) strripos($message, '</a><!--');
 	
-	if(((isset($check) && $check > 0) && ($check_2 <= $check)) || ((isset($check) && $check > 0) && !isset($check_2)))
+	if (((isset($check) && $check > 0) && ($check_2 <= $check)) || ((isset($check) && $check > 0) && !isset($check_2)))
 	{
 		$message .= '</a><!-- m -->';
 	}
@@ -726,7 +726,7 @@ function get_portal_tracking_info($fetch_news)
 	* group everything by the forum IDs
 	*/
 	$count = $fetch_news['topic_count'];
-	for ($i = 0; $i < $count; $i++)
+	for ($i = 0; $i < $count; ++$i)
 	{
 		$tracking_info[$fetch_news[$i]['forum_id']][] = $fetch_news[$i]['topic_id'];
 	}
@@ -855,16 +855,16 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 {
 	global $db, $phpbb_root_path, $phpEx, $cache, $user, $table_prefix, $config;
 	
-	if(!defined('PORTAL_MODULES_TABLE'))
+	if (!defined('PORTAL_MODULES_TABLE'))
 	{
 		include($phpbb_root_path . 'portal/includes/constants.' . $phpEx);
 	}
 	
-	if($mode == 'install' || $mode == 'update')
+	if ($mode == 'install' || $mode == 'update')
 	{
 		$directory = $phpbb_root_path . 'portal/modules/';
 		
-		if($purge_modules)
+		if ($purge_modules)
 		{
 			$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE;
 			$result = $db->sql_query($sql);
@@ -905,7 +905,7 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 			'portal_links'			=> array(3, 6),
 		);
 		
-		foreach($modules_ary as $module_name => $module_data)
+		foreach ($modules_ary as $module_name => $module_data)
 		{			
 			$class_name = $module_name . '_module';
 			if (!class_exists($class_name))
@@ -935,7 +935,7 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 			$c_class->install($db->sql_nextid());
 		}
 
-		if($mode == 'update')
+		if ($mode == 'update')
 		{
 			/**
 			* Check if we need to convert from Board3 Portal 1.0.6
@@ -952,11 +952,11 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 				$convert = false;
 			}
 
-			if($convert)
+			if ($convert)
 			{
 				$portal_modules = obtain_portal_modules();
 
-				foreach($portal_modules as $row)
+				foreach ($portal_modules as $row)
 				{
 					switch($row['module_classname'])
 					{
@@ -1082,7 +1082,7 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 }
 
 	
-/*
+/**
 * check if the entered source file actually exists
 */
 function check_file_src($value, $key, $module_id)
@@ -1098,16 +1098,16 @@ function check_file_src($value, $key, $module_id)
 			WHERE s.style_active = 1';
 			
 	$result = $db->sql_query($sql);
-	while($row = $db->sql_fetchrow($result))
+	while ($row = $db->sql_fetchrow($result))
 	{
-		if(!file_exists($phpbb_root_path . 'styles/' . $row['theme_path'] . '/theme/images/portal/' . $value))
+		if (!file_exists($phpbb_root_path . 'styles/' . $row['theme_path'] . '/theme/images/portal/' . $value))
 		{
 			$error .= $user->lang['B3P_FILE_NOT_FOUND'] . ': styles/' . $row['theme_path'] . '/theme/images/portal/' . $value . '<br />';
 		}
 	}
 	$db->sql_freeresult($result);
 	
-	if(!empty($error))
+	if (!empty($error))
 	{
 		trigger_error($error . adm_back_link(append_sid("{$phpbb_root_path}adm/index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $module_id)));
 	}

@@ -87,7 +87,10 @@ class portal_latest_bots_module
 			'LAST_VISITED_BOTS'		=> sprintf($user->lang['LAST_VISITED_BOTS'], $config['board3_last_visited_bots_number_' . $module_id]),
 		));
 
-		return 'latest_bots_side.html';
+		if(!empty($row))
+		{
+			return 'latest_bots_side.html';
+		}
 	}
 
 	function get_template_acp($module_id)

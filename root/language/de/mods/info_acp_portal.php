@@ -102,7 +102,7 @@ $lang = array_merge($lang, array(
 	// Upload Module
 	'ACP_PORTAL_UPLOAD'		=> 'Modul hochladen',
 	'MODULE_UPLOAD'			=> 'Lade ein Modul hoch',
-	'MODULE_UPLOAD_EXP'		=> 'Wähle die ZIP-Datei des Moduls das du hochladen willst.',
+	'MODULE_UPLOAD_EXP'		=> 'Wähle die ZIP-Datei des Moduls das du hochladen willst:',
 	'MODULE_UPLOAD_GO'		=> 'Hochladen',
 	'NO_MODULE_UPLOAD'		=> 'Deine Server-Konfiguration erlaubt das Hochladen von Dateien nicht.',
 	'NO_AUTOMOD_INSTALLED'	=> 'Du hast AutoMOD nicht installiert, AutoMOD ist für dieses Feature aber zwingend erforderlich.',

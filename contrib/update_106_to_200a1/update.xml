@@ -86,7 +86,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			 </author>
 		</author-group>
 
-		<mod-version>2.0.0b1</mod-version>
+		<mod-version>2.0.0a1</mod-version>
 
 		<installation>
 			<level>easy</level>
@@ -97,10 +97,10 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		<link-group>
 			<link type="parent" lang="de" href="../../install.xml">Installations-Anleitung</link>
 			<link type="parent" lang="en" href="../../install.xml">Manual</link>
-			<link type="template" lang="en" href="contrib/subsilver2.xml">Update subsilver2 to Board3 Portal 2.0.0-a1</link>
-			<link type="template" lang="de" href="contrib/subsilver2.xml">Aktualisiere subsilver2 für Board3 Portal 2.0.0-a1</link>
-			<link type="language" lang="en" href="contrib/subsilver2.xml">Update German language to Board3 Portal 2.0.0-a1</link>
-			<link type="language" lang="de" href="contrib/subsilver2.xml">Aktualisiere deutsche Sprachdateien für Board3 Portal 2.0.0-a1</link>
+			<link type="template" lang="en" href="contrib/subsilver2.xml">Update subsilver2 to Board3 Portal 2.0.0a1</link>
+			<link type="template" lang="de" href="contrib/subsilver2.xml">Aktualisiere subsilver2 für Board3 Portal 2.0.0a1</link>
+			<link type="language" lang="en" href="contrib/subsilver2.xml">Update German language to Board3 Portal 2.0.0a1</link>
+			<link type="language" lang="de" href="contrib/subsilver2.xml">Aktualisiere deutsche Sprachdateien für Board3 Portal 2.0.0a1</link>
 		</link-group>	
 	</header>
 	<action-group>
