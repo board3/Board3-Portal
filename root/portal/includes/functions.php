@@ -698,8 +698,8 @@ function sql_table_exists($table_name)
 */
 function add_endtag ($message = '')
 {
-	$check = (int) strripos($message, '<!-- m --><a ');
-	$check_2 = (int) strripos($message, '</a><!--');
+	$check = (int) strrpos($message, '<!-- m --><a '); // @todo: add strripos back if we move to PHP5 !!
+	$check_2 = (int) strrpos($message, '</a><!--'); // @todo: add strripos back if we move to PHP5 !!
 	
 	if (((isset($check) && $check > 0) && ($check_2 <= $check)) || ((isset($check) && $check > 0) && !isset($check_2)))
 	{
@@ -842,11 +842,12 @@ function get_portal_tracking_info($fetch_news)
 	return $last_read;
 }
 
-/*
-* this function will install the basic set of blocks
+/**
+* This function will install the basic set of portal modules
+*
 * only set $purge_modules to false if you already know that the table is empty
 * set $u_action to where the user should be redirected after this
-* not that already existing data won't be deleted from the config and portal_config
+* note that already existing data won't be deleted from the config and portal_config
 * just to make sure we don't overwrite anything, the IDs won't be reset
 * !! this function should usually only be executed once upon installing the portal !!
 * DO NOT set $purge_modules to false unless you want to auto-add all modules again after deleting them (i.e. if your database was corrupted)
@@ -855,6 +856,7 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 {
 	global $db, $phpbb_root_path, $phpEx, $cache, $user, $table_prefix, $config;
 	
+	// Shouldn't happen but we should check this nonetheless
 	if (!defined('PORTAL_MODULES_TABLE'))
 	{
 		include($phpbb_root_path . 'portal/includes/constants.' . $phpEx);
@@ -1091,6 +1093,7 @@ function check_file_src($value, $key, $module_id)
 	
 	$error = '';
 	
+	// We check if the chosen file is present in all active styles
 	$sql = 'SELECT st.theme_path
 			FROM ' . STYLES_THEME_TABLE . ' st
 				LEFT JOIN ' . STYLES_TABLE . ' s
