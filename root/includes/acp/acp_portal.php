@@ -912,7 +912,7 @@ class acp_portal
 								$compress->extract($mod_dir . '_tmp/');
 								$compress->close();
 								$folder_contents = scandir($mod_dir . '_tmp/', 1);  // This ensures dir is at index 0
-								//print_r($folder_contents);
+
 								// We need to check if there's a main directory inside the temp MOD directory
 								if (sizeof($folder_contents) == 3)
 								{
