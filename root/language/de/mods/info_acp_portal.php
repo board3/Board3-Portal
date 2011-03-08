@@ -64,6 +64,10 @@ $lang = array_merge($lang, array(
 	'MODULE_IMAGE_EXP'			=> 'Gebe den Dateinamen des Modul Bildes ein. Bilder müssen sich in styles/*yourstyle*/theme/images/portal/ befinden.',
 	'MODULE_PERMISSIONS'		=> 'Modul Berechtigungen',
 	'MODULE_PERMISSIONS_EXP'	=> 'Wähle die Gruppen aus, die berechtigt sein sollen, das Modul zu sehen. Sollen alle Benutzer das Modul sehen können, wähle nichts aus.<br />An- / abwählen mehrerer Gruppen indem man <samp>Strg</samp> gedrückt hält und klickt.',
+	'MODULE_IMAGE_WIDTH'		=> 'Modul Bild Breite',
+	'MODULE_IMAGE_WIDTH_EXP'	=> 'Gebe die breite des Modul Bildes in Pixeln ein',
+	'MODULE_IMAGE_HEIGHT'		=> 'Modul Bild Höhe',
+	'MODULE_IMAGE_HEIGHT_EXP'	=> 'Gebe die Höhe des Modul Bildes in Pixeln ein',
 	'MODULE_RESET'				=> 'Modul Einstellungen zurücksetzen',
 	'MODULE_RESET_EXP'			=> 'Dies wird alle Einstellungen des Moduls auf die Standardeinstellungen zurücksetzen!',
 	
