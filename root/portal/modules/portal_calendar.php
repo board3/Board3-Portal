@@ -53,17 +53,6 @@ class portal_calendar_module
 	*/
 	var $custom_acp_tpl = 'acp_portal_calendar';
 
-	function get_template_center($module_id)
-	{
-		global $config, $template;
-
-		$template->assign_vars(array(
-			'EXAMPLE'			=> $config['portal_' . $module_id . '_configname'],
-		));
-
-		return 'modulename_center.html';
-	}
-
 	function get_template_side($module_id)
 	{
 		global $config, $template, $user, $phpbb_root_path, $phpEx;
