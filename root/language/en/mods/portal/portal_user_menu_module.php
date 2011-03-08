@@ -35,10 +35,13 @@ $lang = array_merge($lang, array(
 	'USER_MENU'			=> 'User menu',
 	'UM_LOG_ME_IN'		=> 'Remember me',
 	'UM_HIDE_ME'		=> 'Hide me',
+	'UM_REGISTER_NOW'	=> 'Register now!',
 	'UM_MAIN_SUBSCRIBED'=> 'Subscribed',
 	'UM_BOOKMARKS'		=> 'Bookmarks',
 	'M_MENU' 			=> 'Menu',
 	'M_ACP'				=> 'ACP',
+	'USER_MENU_SETTINGS'	=> 'User menu settings',
+	'USER_MENU_REGISTER'	=> 'Show registration link in user menu',
 ));
 
 ?>

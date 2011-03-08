@@ -139,8 +139,9 @@ class portal_user_menu_module
 				'S_DISPLAY_FULL_LOGIN'	=> true,
 				'S_AUTOLOGIN_ENABLED'	=> ($config['allow_autologin']) ? true : false,
 				'S_LOGIN_ACTION'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login'),
+				'S_SHOW_REGISTER'	=> ($config['board3_user_menu_register_' . $module_id]) ? true : false,
 			));
-			
+
 			return 'login_box_side.html';
 		}
 	}
@@ -149,7 +150,10 @@ class portal_user_menu_module
 	{
 		return array(
 			'title'	=> 'USER_MENU',
-			'vars'	=> array(),
+			'vars'	=> array(
+				'legend1'					=> 'USER_MENU_SETTINGS',
+				'board3_user_menu_register_' . $module_id	=> array('lang' => 'USER_MENU_REGISTER', 'validate' => 'bool', 'type' => 'radio:yes_no',	 'explain' => false),
+			),
 		);
 	}
 
@@ -158,7 +162,8 @@ class portal_user_menu_module
 	*/
 	function install($module_id)
 	{
-		// nothing
+		set_config('board3_user_menu_register_' . $module_id, 1);
+
 		return true;
 	}
 
@@ -166,9 +171,12 @@ class portal_user_menu_module
 	{
 		global $db;
 
-		// nothing
-		
-		return true;
+		$del_config = array(
+			'board3_user_menu_register_' . $module_id,
+		);
+		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
+			WHERE ' . $db->sql_in_set('config_name', $del_config);
+		return $db->sql_query($sql);
 	}
 }
 

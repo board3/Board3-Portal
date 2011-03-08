@@ -12,10 +12,13 @@
 			<!-- IF S_AUTOLOGIN_ENABLED -->
 			<input type="checkbox" class="radio" name="autologin" tabindex="3" /> <span class="gensmall">{L_UM_LOG_ME_IN}</span><br />
 			<!-- ENDIF -->
+			<!-- IF S_SHOW_REGISTER and S_REGISTER_ENABLED -->
+			 <br /><a href="{U_REGISTER}">{L_UM_REGISTER_NOW}</a><br />
+			<!-- ENDIF -->
 			<!-- ENDIF -->
 			<br />
 			<input type="hidden" name="redirect" value="{U_PORTAL}" />
-			<input type="submit" name="login" tabindex="5" value="{L_LOGIN}" class="button1" />	
+			<input type="submit" name="login" tabindex="5" value="{L_LOGIN}" class="button1" />
 		</td>
 	</tr>
 </table>

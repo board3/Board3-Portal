@@ -35,8 +35,13 @@ $lang = array_merge($lang, array(
 	'USER_MENU'					=> 'Benutzer-Menü',
 	'UM_LOG_ME_IN'					=> 'Mich bei jedem Besuch automatisch anmelden',
 	'UM_HIDE_ME'						=> 'Meinen Online-Status während dieser Sitzung verbergen',
+	'UM_REGISTER_NOW'				=> 'Registriere dich jetzt!',
 	'UM_MAIN_SUBSCRIBED'			=> 'Benachrichtigungen verwalten',
 	'UM_BOOKMARKS'					=> 'Lesezeichen verwalten',
+	'M_MENU' 				=> 'Menü',
+	'M_ACP'					=> 'Administrations-Bereich',
+	'USER_MENU_SETTINGS'			=> 'Benutzer-Menü Einstellungen',
+	'USER_MENU_REGISTER'			=> 'Zeige Registrierungs-Link in Benutzer-Menü',
 ));
 
 ?>
