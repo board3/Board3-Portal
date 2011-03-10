@@ -33,12 +33,12 @@
 			</table>
 		</td>
 	</tr>
-	
+<!-- IF S_DISPLAY_EVENTS -->
 <tr class="row2">
 		<td>   
 			<table width="100%" cellspacing="1">
 				<tr>
-					<td colspan="3" align="left"><span class="genmed">{L_CURRENT_EVENTS}:</span></td>
+					<td colspan="3" align="left"><span class="genmed" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_CURRENT_EVENTS}:</span></td>
 				</tr>	
 				
 				<tr>
@@ -61,7 +61,7 @@
 
 	<table width="100%" cellspacing="1">
 		<tr>
-			<td colspan="3" align="left"><span class="genmed">{L_UPCOMING_EVENTS}:</span></td>
+			<td colspan="3" align="left"><span class="genmed" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_UPCOMING_EVENTS}:</span></td>
 		</tr>
 		<tr>
 			<!-- BEGIN upcoming_events -->
@@ -83,6 +83,6 @@
 	</td>
 	
 </tr>
-	
+<!-- ENDIF -->
 </table>
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

@@ -137,7 +137,6 @@ class portal_calendar_module
 		$next_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m=$up#minical") . '"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
 
 		$template->assign_vars(array(
-			'S_DISPLAY_MINICAL'	=> true,
 			'S_SUNDAY_FIRST'	=> ($config['board3_sunday_first_' . $module_id]) ? true : false,
 			'L_MINI_CAL_MONTH'	=> (($config['board3_long_month_' . $module_id]) ? $user->lang['mini_cal']['long_month'][$this->day[0][1]] : $user->lang['mini_cal']['month'][$this->day[0][1]]) . " " . $this->day[0][2],
 			'L_MINI_CAL_SUN'	=> '<span style="color: ' . $config['board3_calendar_sunday_color_' . $module_id] . ';">' . $user->lang['mini_cal']['day'][1] . '</span>', 
@@ -148,8 +147,9 @@ class portal_calendar_module
 			'L_MINI_CAL_FRI'	=> $user->lang['mini_cal']['day'][6], 
 			'L_MINI_CAL_SAT'	=> $user->lang['mini_cal']['day'][7], 
 			'U_PREV_MONTH'		=> $prev_month,
-			'U_NEXT_MONTH'		=> $next_month)
-		);
+			'U_NEXT_MONTH'		=> $next_month,
+			'S_DISPLAY_EVENTS'	=> ($config['board3_display_events_' . $module_id]) ? true : false,
+		));
 		
 		/* 
 		* Let's start displaying the events
