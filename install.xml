@@ -110,9 +110,11 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 				<rev-version>2.0.0a2</rev-version>
 				<changelog lang="en">
 					<change>Added missing IF $S_BLOCK_ICON</change>
+					<change>Fixed select for displaying events </change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fehlendes IF $S_BLOCK_ICON hinzugefügt</change>
+					<change>Auswahl für das Anzeigen von Events repariert</change>
 				</changelog>
 			</entry>
 			<entry>
