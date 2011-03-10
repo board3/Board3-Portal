@@ -107,6 +107,16 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 		<history>
 			<entry>
 				<date>2011-05-01</date>
+				<rev-version>2.0.0a2</rev-version>
+				<changelog lang="en">
+					<change>Added missing IF $S_BLOCK_ICON</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Fehlendes IF $S_BLOCK_ICON hinzugefügt</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2011-03-08</date>
 				<rev-version>2.0.0a1</rev-version>
 				<changelog lang="en">
 					<change>First alpha release</change>
