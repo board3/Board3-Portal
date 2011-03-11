@@ -94,7 +94,7 @@ $versions = array(
 		),
 
 		'table_add' => array(
-			array('phpbb_portal_config', array(
+			array(PORTAL_CONFIG_TABLE, array(
 				'COLUMNS' => array(
 					'config_name' => array('VCHAR:255', ''),
 					'config_value'=> array('MTEXT', ''),
@@ -267,7 +267,7 @@ $versions = array(
 		),
 
 		'table_add' => array(
-			array('phpbb_portal_modules', array(
+			array(PORTAL_MODULES_TABLE, array(
 				'COLUMNS' => array(
 					'module_id' => array('UINT:3', NULL, 'auto_increment'),
 					'module_classname' => array('VCHAR:64', ''),
@@ -346,6 +346,12 @@ $versions = array(
 		),
 		'custom'	=> array('board3_basic_install'),
 
+	),
+	
+	'2.0.0a2' => array(
+		'table_column_add' => array(
+			array(PORTAL_MODULES_TABLE, 'module_status', array('TINT:1', 1)),
+		),
 	),
 );
 

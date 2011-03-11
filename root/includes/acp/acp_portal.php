@@ -109,6 +109,7 @@ class acp_portal
 							'MODULE_IMAGE_WIDTH'	=> $module_data['module_image_width'],
 							'MODULE_IMAGE_HEIGHT'	=> $module_data['module_image_height'],
 							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $module_data['module_image_src'] : '',
+							'MODULE_ENABLED'		=> ($module_data['module_status']) ? true : false,
 						));
 						
 						if($module_data['module_classname'] != 'custom')
@@ -170,6 +171,7 @@ class acp_portal
 							'module_group_ids'	=> '',
 							'module_image_height'	=> 16,
 							'module_image_width'	=> 16,
+							'module_status'		=> B3_MODULE_ENABLED,
 						);
 						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . ' 
 								SET ' . $db->sql_build_array('UPDATE', $sql_ary) . ' 
@@ -263,6 +265,7 @@ class acp_portal
 						'module_image_width'	=> request_var('module_img_width', 0),
 						'module_image_height'	=> request_var('module_img_height', 0),
 						'module_group_ids'		=> $module_permission,
+						'module_status'			=> request_var('module_status', B3_MODULE_ENABLED),
 					);
 					
 					// check if module image file actually exists
@@ -729,6 +732,7 @@ class acp_portal
 							'module_group_ids'	=> '',
 							'module_image_height'	=> 16,
 							'module_image_width'	=> 16,
+							'module_status'		=> B3_MODULE_ENABLED,
 						);
 						$sql = 'INSERT INTO ' . PORTAL_MODULES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
 						$db->sql_query($sql);
@@ -852,6 +856,7 @@ class acp_portal
 						$template->assign_block_vars('modules_' . $template_column, array(
 							'MODULE_NAME'		=> (isset($user->lang[$row['module_name']])) ? $user->lang[$row['module_name']] : $row['module_name'],
 							'MODULE_IMAGE'		=> ($row['module_image_src']) ? '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $row['module_image_src'] . '" alt="' . $row['module_name'] . '" />' : '',
+							'MODULE_ENABLED'	=> ($row['module_status']) ? true : false,
 
 							'U_DELETE'			=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;module_classname=' . $row['module_classname'] . '&amp;action=delete',
 							'U_EDIT'			=> append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $row['module_id']),

@@ -36,7 +36,7 @@
 			<th style="text-align: center;" colspan="3">{L_MODULE_POS_TOP}</th>
 		</tr>
 		<!-- BEGIN modules_top -->
-			<!-- IF modules_top.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<!-- IF not modules_top.MODULE_ENABLED --><tr class="row3"><!-- ELSEIF modules_top.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
 				<td colspan="3">
 					{modules_top.MODULE_IMAGE} {modules_top.MODULE_NAME}<br />
 					<br />
@@ -63,13 +63,13 @@
 				<th>{L_MODULE_POS_LEFT}</th>
 		</tr>
 		<!-- BEGIN modules_left -->
-			<!-- IF modules_left.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<!-- IF not modules_left.MODULE_ENABLED --><tr class="row3"><!-- ELSEIF modules_left.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
 				<td>
 					{modules_left.MODULE_IMAGE} {modules_left.MODULE_NAME}<br />
 					<br />
 					<!-- IF modules_left.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_left.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
 					<!-- IF modules_left.U_MOVE_RIGHT --><a href="{modules_left.U_MOVE_RIGHT}">{ICON_MOVE_RIGHT}</a><!-- ELSE -->{ICON_MOVE_RIGHT_DISABLED}<!-- ENDIF -->&nbsp;
-					<a href="{modules_left.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_left.U_DELETE}">{ICON_DELETE}</a><br/>
+					<a href="{modules_left.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_left.U_DELETE}">{ICON_DELETE}</a><br />
 					{ICON_MOVE_LEFT_DISABLED}&nbsp;
 					<!-- IF modules_left.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{modules_left.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->
 				</td>
@@ -90,7 +90,7 @@
 				<th style="text-align: center;">{L_MODULE_POS_CENTER}</th>
 		</tr>
 		<!-- BEGIN modules_center -->
-			<!-- IF modules_center.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<!-- IF not modules_center.MODULE_ENABLED --><tr class="row3"><!-- ELSEIF modules_center.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
 				<td>
 					{modules_center.MODULE_IMAGE} {modules_center.MODULE_NAME}<br />
 					<br />
@@ -117,7 +117,7 @@
 				<th>{L_MODULE_POS_RIGHT}</th>
 		</tr>
 		<!-- BEGIN modules_right -->
-			<!-- IF modules_right.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<!-- IF not modules_right.MODULE_ENABLED --><tr class="row3"><!-- ELSEIF modules_right.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
 				<td>
 					{modules_right.MODULE_IMAGE} {modules_right.MODULE_NAME}<br />
 					<br />
@@ -147,7 +147,7 @@
 			<th style="text-align: center;" colspan="3">{L_MODULE_POS_BOTTOM}</th>
 		</tr>
 		<!-- BEGIN modules_bottom -->
-			<!-- IF modules_bottom.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<!-- IF not modules_bottom.MODULE_ENABLED --><tr class="row3"><!-- ELSEIF modules_bottom.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
 				<td colspan="3">
 					{modules_bottom.MODULE_IMAGE} {modules_bottom.MODULE_NAME}<br />
 					<br />

@@ -19,6 +19,9 @@ define('B3_LINKS_CAT', 0);
 define('B3_LINKS_INT', 1);
 define('B3_LINKS_EXT', 2);
 
+define('B3_MODULE_DISABLED', 0);
+define('B3_MODULE_ENABLED', 1);
+
 // Tables and paths
 define('PORTAL_ROOT_PATH', 'portal/');
 define('PORTAL_MODULES_TABLE',		$table_prefix . 'portal_modules');

@@ -61,6 +61,11 @@ $module_count = array(
 */
 foreach ($portal_modules as $row)
 {
+	if($row['module_status'] == B3_MODULE_DISABLED)
+	{
+		continue;
+	}
+	
 	$class_name = 'portal_' . $row['module_classname'] . '_module';
 	if (!class_exists($class_name))
 	{

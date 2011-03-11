@@ -67,6 +67,13 @@
 				<dt><label for="module_reset">{L_MODULE_RESET}:</label><br /><span style="color: #BC2A4D;">{L_MODULE_RESET_EXP}</span></dt>
 				<dd><input id="module_reset" type="checkbox" value="1" name="module_reset" /></dd>
 			</dl>
+			<dl>
+				<dt><label for="module_status">{L_MODULE_STATUS}:</label></dt>
+				<dd>
+					<label><input type="radio" class="radio" name="module_status" value="1" id="module_status"<!-- IF MODULE_ENABLED --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
+					<label><input type="radio" class="radio" name="module_status" value="0"<!-- IF not MODULE_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
 			<!-- IF permission_setting -->
 			<dl>
 				<dt><label for="permission-setting">{L_MODULE_PERMISSIONS}:</label><br /><span>{L_MODULE_PERMISSIONS_EXP}</span></dt>

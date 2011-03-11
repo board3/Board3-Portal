@@ -69,6 +69,7 @@ $lang = array_merge($lang, array(
 	'MODULE_IMAGE_HEIGHT_EXP'	=> 'Enter the height of the module image in pixels',
 	'MODULE_RESET'				=> 'Reset module configuration',
 	'MODULE_RESET_EXP'			=> 'This will reset all settings to the default!',
+	'MODULE_STATUS'				=> 'Enable module',
 
 	// general
 	'ACP_PORTAL'							=> 'Portal',
