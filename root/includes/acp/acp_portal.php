@@ -917,9 +917,11 @@ class acp_portal
 								$compress->extract($mod_dir . '_tmp/');
 								$compress->close();
 								$folder_contents = scandir($mod_dir . '_tmp/', 1);  // This ensures dir is at index 0
+								$cut_array = array('.', '..');
+								$folder_contents = array_diff($folder_contents, $cut_array);
 
 								// We need to check if there's a main directory inside the temp MOD directory
-								if (sizeof($folder_contents) == 3)
+								if (sizeof($folder_contents) == 1)
 								{
 									// We need to move that directory then
 									$this->directory_move($mod_dir . '_tmp/' . $folder_contents[0], $upload_path . '/' . $folder_contents[0]);
@@ -939,7 +941,6 @@ class acp_portal
 								
 								// Now we need to get the files inside the folders
 								$folder_contents = scandir($mod_dir);
-								$cut_array = array('.', '..');
 								
 								$folder_contents = array_diff($folder_contents, $cut_array);
 
