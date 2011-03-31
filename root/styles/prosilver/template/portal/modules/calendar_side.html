@@ -38,7 +38,7 @@
 				<dt style="width: 100%; padding-left: 0px; padding-bottom: 5px;">
 					<!-- IF cur_events.EVENT_URL --><a href="{cur_events.EVENT_URL}" title="{cur_events.EVENT_TITLE}"><!-- ENDIF -->
 					<span style="font-weight: bold;">{cur_events.EVENT_TITLE}:</span><br />
-					<!-- IF not cur_events.ALL_DAY and not cur_events.END_TIME -->{L_EVENT_TIME}:&nbsp;{cur_events.START_TIME}<br />
+					<!-- IF cur_events.ALL_DAY -->{L_EVENT_START}:&nbsp;{cur_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
 					<!-- ELSEIF not cur_events.ALL_DAY and cur_events.END_TIME -->{L_EVENT_START}:&nbsp;{cur_events.START_TIME}<br />{L_EVENT_END}:&nbsp;{cur_events.END_TIME}<br />
 					<!-- ELSE -->{L_EVENT_ALL_DAY}<br />
 					<!-- ENDIF -->
@@ -48,7 +48,7 @@
 			</dl>
 		</li>
 		<!-- BEGINELSE -->
-		<li><span style="float:left;" class="gensmall"><strong>{L_NO_CUR_EVENTS}</strong></span><br /></li>
+		<li class="calendar-info"><span style="float:left;" class="gensmall"><strong>{L_NO_CUR_EVENTS}</strong></span><br /></li>
 		<!-- END cur_events -->
 	</ul>
 	<hr style="margin: 10px 0; border-top: 0;" />
@@ -70,7 +70,7 @@
 			</dl>
 		</li>
 		<!-- BEGINELSE -->
-		<li><span style="float:left;" class="gensmall"><strong>{L_NO_UPCOMING_EVENTS}</strong></span><br /></li>
+		<li class="calendar-info"><span style="float:left;" class="gensmall"><strong>{L_NO_UPCOMING_EVENTS}</strong></span><br /></li>
 		<!-- END upcoming_events -->
 	</ul>
 	<!-- ENDIF -->

@@ -86,7 +86,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 			 </author>
 		</author-group>
 
-		<mod-version>2.0.0a1</mod-version>
+		<mod-version>2.0.0a2</mod-version>
 
 		<installation>
 			<level>easy</level>
@@ -111,10 +111,20 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 				<changelog lang="en">
 					<change>Added missing IF $S_BLOCK_ICON</change>
 					<change>Fixed select for displaying events </change>
+					<change>Add feature to disable modules without having to remove them</change>
+					<change>Fixed typo in title of Latest Bots block</change>
+					<change>Applied patch for folders with special characters (upload module)</change>
+					<change>Reworked parts of calendar block</change>
+					<change>Fixed missing CSS for li-tags of calendar</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fehlendes IF $S_BLOCK_ICON hinzugefügt</change>
 					<change>Auswahl für das Anzeigen von Events repariert</change>
+					<change>Fähigkeit hinzugefügt um Module zu deaktivieren ohne sie zu entfernen</change>
+					<change>Schreibfehler in "Letzte Bots" Block beseitigt</change>
+					<change>Patch für Ordner mit Spezialcharaktern hinzugefügt (Upload Modul)</change>
+					<change>Teile des Kalender Blocks überarbeitet</change>
+					<change>Fehlendes CSS für li-tags des Kalenders hinzugefügt</change>
 				</changelog>
 			</entry>
 			<entry>
