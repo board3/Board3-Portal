@@ -739,9 +739,29 @@ class acp_portal
 
 						$module_id = $db->sql_nextid();
 
-						$c_class->install($module_id);
+						$error = $c_class->install($module_id);
 						
 						$cache->purge(); // make sure we don't get errors after re-adding a module
+						
+						// if something went wrong, handle the errors accordingly and undo the above query
+						if (sizeof($error))
+						{
+							if (is_array($error))
+							{
+								foreach($error as $cur_error)
+								{
+									$error_output = $cur_error . '<br />';
+								}
+							}
+							else if($error != false)
+							{
+								$error_output = $error;
+							}
+							
+							$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE . ' WHERE module_id = ' . (int) $module_id;
+							
+							trigger_error($error_output . adm_back_link($this->u_action));
+						}
 
 						meta_refresh(3, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $module_id));
 
