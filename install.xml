@@ -119,6 +119,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Added error handling to installation of modules</change>
 					<change>Fixed timezone handling of calendar</change>
 					<change>Fixed incorrect handling of links</change>
+					<change>Fixed mixup with td and tr in subsilver2 calendar block</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fehlendes IF $S_BLOCK_ICON hinzugefügt</change>
@@ -131,6 +132,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Fehlerbehandlung zu Installation von Modulen hinzugefügt</change>
 					<change>Zeitzonenbehandlung in Kalender korrigiert</change>
 					<change>Falsche Behandlung von Links korrigiert</change>
+					<change>Falsche Benutzung von td und tr im subsilver2 Kalender Block beseitigt</change>
 				</changelog>
 			</entry>
 			<entry>

@@ -41,8 +41,8 @@
 					<td colspan="3" align="left"><span class="genmed" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_CURRENT_EVENTS}:</span></td>
 				</tr>	
 				
+				<!-- BEGIN cur_events -->
 				<tr>
-					<!-- BEGIN cur_events -->
 					<td style="width: 100%; padding-left: 0px; padding-bottom: 5px;">
 								<!-- IF cur_events.EVENT_URL --><a href="{cur_events.EVENT_URL}" title="{cur_events.EVENT_TITLE}"><!-- ENDIF -->
 								<span style="font-weight: bold;">{cur_events.EVENT_TITLE}:</span><br />
@@ -53,10 +53,12 @@
 								<!-- IF cur_events.EVENT_DESC --><span style="font-style: italic;">{cur_events.EVENT_DESC}</span><!-- ENDIF -->
 								<!-- IF cur_events.EVENT_URL --></a><!-- ENDIF -->
 					</td>
-					<!-- BEGINELSE -->
-					<td><span style="float:left;" class="gensmall"><strong>{L_NO_CUR_EVENTS}</strong></span><br /></td>
-					<!-- END cur_events -->
 				</tr>
+				<!-- BEGINELSE -->
+				<tr>
+					<td><span style="float:left;" class="gensmall"><strong>{L_NO_CUR_EVENTS}</strong></span><br /></td>
+				</tr>
+				<!-- END cur_events -->
 			</table>
 
 	<table width="100%" cellspacing="1">
