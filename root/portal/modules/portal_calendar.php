@@ -174,7 +174,7 @@ class portal_calendar_module
 					if((($cur_event['start_time'] + 86400) >= $today_timestamp && $cur_event['all_day']) || ($cur_event['start_time'] <= $today_timestamp && $cur_event['end_time'] >= $today_timestamp))
 					{
 						$template->assign_block_vars('cur_events', array(
-							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url(str_replace('&', '&amp;', $cur_event['url'])) : '',
+							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
 							'EVENT_TITLE'	=> $cur_event['title'],
 							'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
 							'END_TIME'		=> (!empty($cur_event['end_time'])) ? $user->format_date($cur_event['end_time'], 'j. M Y, H:i') : false,
@@ -185,7 +185,7 @@ class portal_calendar_module
 					else
 					{
 						$template->assign_block_vars('upcoming_events', array(
-							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url(str_replace('&', '&amp;', $cur_event['url'])) : '',
+							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
 							'EVENT_TITLE'	=> $cur_event['title'],
 							'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
 							'END_TIME'		=> $user->format_date($cur_event['end_time'], 'j. M Y, H:i'),
@@ -497,7 +497,8 @@ class portal_calendar_module
 				'EVENT_DESC'	=> ($action != 'add') ? $events[$i]['desc'] : '',
 				'EVENT_START'	=> ($action != 'add') ? $user->format_date($events[$i]['start_time'], $start_time_format) : '',
 				'EVENT_END'		=> ($action != 'add' && !$event_all_day) ? $user->format_date($events[$i]['end_time'], $end_time_format) : '',
-				'EVENT_URL'		=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? str_replace('&', '&amp;', $events[$i]['url']) : '',
+				'EVENT_URL'		=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? $this->validate_url($events[$i]['url']) : '',
+				'EVENT_URL_RAW'	=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? $events[$i]['url'] : '',
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
 				'U_DELETE'		=> $u_action . '&amp;action=delete&amp;id=' . $i,
 				'EVENT_ALL_DAY'	=> $event_all_day,
@@ -576,8 +577,8 @@ class portal_calendar_module
 			$url = 'http://' . $url;
 		}
 		
-		// Is this a link to somewhere inside this board? If so then remove the session id from the url
-		if (strpos($url, generate_board_url()) !== false && strpos($url, 'sid=') !== false)
+		// Is this a link to somewhere inside this board? If so then run reapply_sid()
+		if (strpos($url, generate_board_url()) !== false)
 		{
 			$url = reapply_sid($url);
 		}

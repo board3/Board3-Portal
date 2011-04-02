@@ -118,6 +118,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Fixed missing CSS for li-tags of calendar</change>
 					<change>Added error handling to installation of modules</change>
 					<change>Fixed timezone handling of calendar</change>
+					<change>Fixed incorrect handling of links</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fehlendes IF $S_BLOCK_ICON hinzugefügt</change>
@@ -129,6 +130,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Fehlendes CSS für li-tags des Kalenders hinzugefügt</change>
 					<change>Fehlerbehandlung zu Installation von Modulen hinzugefügt</change>
 					<change>Zeitzonenbehandlung in Kalender korrigiert</change>
+					<change>Falsche Behandlung von Links korrigiert</change>
 				</changelog>
 			</entry>
 			<entry>
