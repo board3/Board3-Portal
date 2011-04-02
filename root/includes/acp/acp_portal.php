@@ -749,7 +749,7 @@ class acp_portal
 						$cache->purge(); // make sure we don't get errors after re-adding a module
 
 						// if something went wrong, handle the errors accordingly and undo the above query
-						if (sizeof($error))
+						if (sizeof($error) && $error != true)
 						{
 							if (is_array($error))
 							{
