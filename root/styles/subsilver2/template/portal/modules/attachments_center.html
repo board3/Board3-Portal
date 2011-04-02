@@ -1,0 +1,19 @@
+{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr class="row1">
+		<td style="padding:5px 5px 5px 5px;">
+				<!-- IF .attach -->
+					<span style="float:left;"><strong>{L_FILENAME}</strong></span><br style="clear:both" />
+					<!-- BEGIN attach -->
+						<span style="float:left;" class="gensmall"><img src="{T_THEME_PATH}/images/portal/icon_topic_attach.gif" alt="" />&nbsp;<a href="{attach.U_TOPIC}" title="{attach.REAL_FILENAME}"><strong>{attach.FILENAME}</strong></a></span><br style="clear:both" />
+						<span style="float:left;">{L_FILESIZE}:</span><span style="float:right;" class="gensmall"><strong>{attach.FILESIZE}</strong></span><br style="clear:both" />
+						<span style="float:left;">{L_DOWNLOADS}:</span><span style="float:right;" class="gensmall"><strong>{attach.DOWNLOAD_COUNT}</strong></span><br style="clear:both" />
+						<!-- IF not attach.S_LAST_ROW --><hr /><!-- ENDIF -->
+					<!-- END attach -->
+				<!-- ELSE -->
+					<span style="float:left;" class="gensmall"><strong>{L_NO_ATTACHMENTS}</strong></span>
+				<!-- ENDIF -->
+		</td>
+	</tr>
+</table>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}

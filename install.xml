@@ -120,6 +120,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Fixed timezone handling of calendar</change>
 					<change>Fixed incorrect handling of links</change>
 					<change>Fixed mixup with td and tr in subsilver2 calendar block</change>
+					<change>Added missing HTML file for center block of attachments module</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fehlendes IF $S_BLOCK_ICON hinzugefügt</change>
@@ -133,6 +134,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Zeitzonenbehandlung in Kalender korrigiert</change>
 					<change>Falsche Behandlung von Links korrigiert</change>
 					<change>Falsche Benutzung von td und tr im subsilver2 Kalender Block beseitigt</change>
+					<change>Fehlende HTML Datei des Dateianhänge Moduls für die mittlere Spalte hinzugefügt</change>
 				</changelog>
 			</entry>
 			<entry>

@@ -145,7 +145,7 @@ class portal_attachments_module
 			$template->assign_var('S_DISPLAY_ATTACHMENTS', false);
 		}
 
-		return 'attachments.html';
+		return 'attachments_center.html';
 	}
 
 	function get_template_side($module_id)
@@ -246,7 +246,7 @@ class portal_attachments_module
 			$template->assign_var('S_DISPLAY_ATTACHMENTS', false);
 		}
 
-		return 'attachments.html';
+		return 'attachments_side.html';
 	}
 
 	function get_template_acp($module_id)
