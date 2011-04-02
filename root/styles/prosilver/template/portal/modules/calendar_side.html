@@ -31,9 +31,9 @@
 	<!-- IF S_DISPLAY_EVENTS -->
 	<hr class="dashed" />
 	<div class="menutitle" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_CURRENT_EVENTS}:</div>
-	<ul>
+	<ul class="portal-events">
 		<!-- BEGIN cur_events -->
-		<li class="row" style="border-top: 0px;">
+		<li class="row">
 			<dl class="icon">
 				<dt style="width: 100%; padding-left: 0px; padding-bottom: 5px;">
 					<!-- IF cur_events.EVENT_URL --><a href="{cur_events.EVENT_URL}" title="{cur_events.EVENT_TITLE}"><!-- ENDIF -->
@@ -51,20 +51,20 @@
 		<li class="calendar-info"><span style="float:left;" class="gensmall"><strong>{L_NO_CUR_EVENTS}</strong></span><br /></li>
 		<!-- END cur_events -->
 	</ul>
-	<hr style="margin: 10px 0; border-top: 0;" />
+	<hr style="margin: 5px 0; border-top: 0;" />
 	<div class="menutitle" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_UPCOMING_EVENTS}:</div>
-	<ul>
+	<ul class="portal-events">
 		<!-- BEGIN upcoming_events -->
-		<li class="row" style="border-top: 0px;">
+		<li class="row">
 			<dl class="icon">
 				<dt style="width: 100%; padding-left: 0px; padding-bottom: 5px;">
 					<!-- IF upcoming_events.EVENT_URL --><a href="{upcoming_events.EVENT_URL}" title="{upcoming_events.EVENT_TITLE}"><!-- ENDIF -->
 					<span style="font-weight: bold;">{upcoming_events.EVENT_TITLE}:</span><br />
+					<!-- IF upcoming_events.EVENT_DESC --><span style="font-style: italic;">{upcoming_events.EVENT_DESC}</span><br /><!-- ENDIF -->
 					<!-- IF not upcoming_events.ALL_DAY and not upcoming_events.END_TIME -->{L_EVENT_TIME}:&nbsp;{upcoming_events.START_TIME}<br />
 					<!-- ELSEIF not upcoming_events.ALL_DAY and upcoming_events.END_TIME -->{L_EVENT_START}:&nbsp;{upcoming_events.START_TIME}<br />{L_EVENT_END}:&nbsp;{upcoming_events.END_TIME}<br />
 					<!-- ELSE -->{L_EVENT_TIME}:&nbsp;{upcoming_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
 					<!-- ENDIF -->
-					<!-- IF upcoming_events.EVENT_DESC --><span style="font-style: italic;">{upcoming_events.EVENT_DESC}</span><!-- ENDIF -->
 					<!-- IF upcoming_events.EVENT_URL --></a><!-- ENDIF -->
 				</dt>
 			</dl>
