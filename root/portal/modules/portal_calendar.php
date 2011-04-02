@@ -168,10 +168,10 @@ class portal_calendar_module
 			
 			foreach($events as $key => $cur_event)
 			{
-				if($cur_event['start_time'] >= time() || ($cur_event['end_time'] + $user->timezone + $user->dst) >= time() || (($cur_event['start_time'] + 86400) >= $today_timestamp && $cur_event['all_day']))
+				if($cur_event['start_time'] >= $today_timestamp || $cur_event['end_time'] >= $today_timestamp || (($cur_event['start_time'] + 86400) >= $today_timestamp && $cur_event['all_day']))
 				{
 					// current events
-					if((($cur_event['start_time'] + 86400) >= time() && $cur_event['all_day']) || ($cur_event['start_time'] <= time() && ($cur_event['end_time'] + $user->timezone + $user->dst) >= time()))
+					if((($cur_event['start_time'] + 86400) >= $today_timestamp && $cur_event['all_day']) || ($cur_event['start_time'] <= $today_timestamp && $cur_event['end_time'] >= $today_timestamp))
 					{
 						$template->assign_block_vars('cur_events', array(
 							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url(str_replace('&', '&amp;', $cur_event['url'])) : '',
@@ -330,10 +330,10 @@ class portal_calendar_module
 				}
 				
 				// UNIX timestamps
-				$start_time = mktime($start_hour, $start_minute, 0, $start_month, $start_day, $start_year) - $user->timezone - $user->dst;
-				$end_time = (!$event_all_day) ? mktime($end_hour, $end_minute, 0, $end_month, $end_day, $end_year) - $user->timezone - $user->dst : '';
+				$start_time = gmmktime($start_hour, $start_minute, 0, $start_month, $start_day, $start_year) - $user->timezone - $user->dst;
+				$end_time = (!$event_all_day) ? gmmktime($end_hour, $end_minute, 0, $end_month, $end_day, $end_year) - $user->timezone - $user->dst : '';
 
-				if(($end_time + $user->timezone + $user->dst) <= time() && !(($start_time + 86400) >= time() && $event_all_day))
+				if(($end_time) <= time() && !(($start_time + 86400) >= time() && $event_all_day))
 				{
 					trigger_error($user->lang['ACP_PORTAL_CALENDAR_EVENT_PAST']. adm_back_link($u_action), E_USER_WARNING);
 				}
@@ -451,10 +451,10 @@ class portal_calendar_module
 				$template->assign_vars(array(
 					'EVENT_TITLE'		=> (isset($events[$link_id]['title']) && $action != 'add') ? $events[$link_id]['title'] : '',
 					'EVENT_DESC'		=> (isset($events[$link_id]['desc']) && $action != 'add') ? $events[$link_id]['desc'] : '',
-					'EVENT_START_DAY'	=> ($action != 'add') ? $user->format_date($events[$link_id]['start_time'] + $user->timezone + $user->dst, 'd-m-Y') : '',
-					'EVENT_START_TIME'	=> ($action != 'add') ? $user->format_date($events[$link_id]['start_time'] + $user->timezone + $user->dst, 'G:i') : '',
-					'EVENT_END_DAY'		=> ($action != 'add' && !$event_all_day) ? $user->format_date($events[$link_id]['end_time'] + $user->timezone + $user->dst, 'd-m-Y') : '',
-					'EVENT_END_TIME'	=> ($action != 'add' && !$event_all_day) ? $user->format_date($events[$link_id]['end_time'] + $user->timezone + $user->dst, 'G:i') : '',
+					'EVENT_START_DAY'	=> ($action != 'add') ? $user->format_date($events[$link_id]['start_time'], 'd-m-Y') : '',
+					'EVENT_START_TIME'	=> ($action != 'add') ? $user->format_date($events[$link_id]['start_time'], 'G:i') : '',
+					'EVENT_END_DAY'		=> ($action != 'add' && !$event_all_day) ? $user->format_date($events[$link_id]['end_time'], 'd-m-Y') : '',
+					'EVENT_END_TIME'	=> ($action != 'add' && !$event_all_day) ? $user->format_date($events[$link_id]['end_time'], 'G:i') : '',
 					'EVENT_ALL_DAY'		=> (isset($events[$link_id]['all_day']) && $events[$link_id]['all_day'] == true) ? true : false,
 					'EVENT_URL'			=> (isset($events[$link_id]['url']) && $action != 'add') ? $events[$link_id]['url'] : '',
 
@@ -489,14 +489,14 @@ class portal_calendar_module
 		for ($i = 0; $i < sizeof($events); $i++)
 		{
 			$event_all_day = ($events[$i]['all_day'] == true) ? true : false;
-			$start_time_format = (!intval($user->format_date($events[$i]['start_time'] + $user->timezone + $user->dst, 'H')) && !intval($user->format_date($events[$i]['start_time'] + $user->timezone + $user->dst, 'i'))) ? 'j. M Y' : 'j. M Y, H:i';
-			$end_time_format = (!intval($user->format_date($events[$i]['end_time'] + $user->timezone + $user->dst, 'H')) && !intval($user->format_date($events[$i]['end_time'] + $user->timezone + $user->dst, 'i'))) ? 'j. M Y' : 'j. M Y, H:i';
+			$start_time_format = (!intval($user->format_date($events[$i]['start_time'], 'H')) && !intval($user->format_date($events[$i]['start_time'], 'i'))) ? 'j. M Y' : 'j. M Y, H:i';
+			$end_time_format = (!intval($user->format_date($events[$i]['end_time'], 'H')) && !intval($user->format_date($events[$i]['end_time'], 'i'))) ? 'j. M Y' : 'j. M Y, H:i';
 			
 			$template->assign_block_vars('events', array(
 				'EVENT_TITLE'	=> ($action != 'add') ? ((isset($user->lang[$events[$i]['title']])) ? $user->lang[$events[$i]['title']] : $events[$i]['title']) : '',
 				'EVENT_DESC'	=> ($action != 'add') ? $events[$i]['desc'] : '',
-				'EVENT_START'	=> ($action != 'add') ? $user->format_date($events[$i]['start_time'] + $user->timezone + $user->dst, $start_time_format) : '',
-				'EVENT_END'		=> ($action != 'add' && !$event_all_day) ? $user->format_date($events[$i]['end_time'] + $user->timezone + $user->dst, $end_time_format) : '',
+				'EVENT_START'	=> ($action != 'add') ? $user->format_date($events[$i]['start_time'], $start_time_format) : '',
+				'EVENT_END'		=> ($action != 'add' && !$event_all_day) ? $user->format_date($events[$i]['end_time'], $end_time_format) : '',
 				'EVENT_URL'		=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? str_replace('&', '&amp;', $events[$i]['url']) : '',
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
 				'U_DELETE'		=> $u_action . '&amp;action=delete&amp;id=' . $i,
