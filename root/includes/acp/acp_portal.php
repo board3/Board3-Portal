@@ -380,8 +380,9 @@ class acp_portal
 					{
 						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 							SET module_order = module_order + 1
-							WHERE module_order = ' . ($module_data['module_order'] - 1) . '
-								AND module_column = ' . $module_data['module_column'];
+							WHERE module_order = ' . (int) ($module_data['module_order'] - 1) . '
+								AND module_column = ' . (int) $module_data['module_column'];
+
 						$db->sql_query($sql);
 						$updated = $db->sql_affectedrows();
 						if ($updated)
@@ -408,8 +409,8 @@ class acp_portal
 					{
 						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 							SET module_order = module_order - 1
-							WHERE module_order = ' . ($module_data['module_order'] + 1) . '
-								AND module_column = ' . $module_data['module_column'];
+							WHERE module_order = ' . (int) ($module_data['module_order'] + 1) . '
+								AND module_column = ' . (int) $module_data['module_column'];
 						$db->sql_query($sql);
 						$updated = $db->sql_affectedrows();
 						if ($updated)
@@ -449,8 +450,8 @@ class acp_portal
 						{
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 								SET module_order = module_order + 1
-								WHERE module_order >= ' . $module_data['module_order'] . '
-									AND module_column = ' . ($module_data['module_column'] + 1);
+								WHERE module_order >= ' . (int) $module_data['module_order'] . '
+									AND module_column = ' . (int) ($module_data['module_column'] + 1);
 							$db->sql_query($sql);
 							$updated = $db->sql_affectedrows();
 
@@ -461,8 +462,8 @@ class acp_portal
 							
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 								SET module_order = module_order - 1
-								WHERE module_order >= ' . $module_data['module_order'] . '
-								AND module_column = ' . $module_data['module_column'];
+								WHERE module_order >= ' . (int) $module_data['module_order'] . '
+								AND module_column = ' . (int) $module_data['module_column'];
 							$db->sql_query($sql);
 							
 							// the module that needs to moved is in the last row
@@ -470,12 +471,13 @@ class acp_portal
 							{
 								$sql = 'SELECT MAX(module_order) as new_order
 										FROM ' . PORTAL_MODULES_TABLE . '
-										WHERE module_order < ' . $module_data['module_order'];
+										WHERE module_order < ' . (int) $module_data['module_order'] . '
+										AND module_column = ' . (int) ($module_data['module_column'] + 1);
 								$db->sql_query($sql);
 								$new_order = $db->sql_fetchfield('new_order') + 1;
 								
 								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_order = ' . $new_order . '
+									SET module_order = ' . (int) $new_order . '
 									WHERE module_id = ' . (int) $module_id;
 								$db->sql_query($sql);
 							}
@@ -487,8 +489,8 @@ class acp_portal
 						{
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 								SET module_order = module_order + 1
-								WHERE module_order >= ' . $module_data['module_order'] . '
-									AND module_column = ' . ($module_data['module_column'] + 2);
+								WHERE module_order >= ' . (int) $module_data['module_order'] . '
+									AND module_column = ' . (int) ($module_data['module_column'] + 2);
 							$db->sql_query($sql);
 							$updated = $db->sql_affectedrows();
 
@@ -499,8 +501,8 @@ class acp_portal
 							
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 								SET module_order = module_order - 1
-								WHERE module_order >= ' . $module_data['module_order'] . '
-								AND module_column = ' . $module_data['module_column'];
+								WHERE module_order >= ' . (int) $module_data['module_order'] . '
+								AND module_column = ' . (int) $module_data['module_column'];
 							$db->sql_query($sql);
 							
 							// the module that needs to moved is in the last row
@@ -508,12 +510,13 @@ class acp_portal
 							{
 								$sql = 'SELECT MAX(module_order) as new_order
 										FROM ' . PORTAL_MODULES_TABLE . '
-										WHERE module_order < ' . $module_data['module_order'];
+										WHERE module_order < ' . (int) $module_data['module_order'] . '
+										AND module_column = ' . (int) ($module_data['module_column'] + 2);
 								$db->sql_query($sql);
 								$new_order = $db->sql_fetchfield('new_order') + 1;
 								
 								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_order = ' . $new_order . '
+									SET module_order = ' . (int) $new_order . '
 									WHERE module_id = ' . (int) $module_id;
 								$db->sql_query($sql);
 							}
@@ -574,7 +577,8 @@ class acp_portal
 							{
 								$sql = 'SELECT MAX(module_order) as new_order
 										FROM ' . PORTAL_MODULES_TABLE . '
-										WHERE module_order < ' . $module_data['module_order'];
+										WHERE module_order < ' . $module_data['module_order'] . '
+										AND module_column = ' . (int) ($module_data['module_column'] - 1);
 								$db->sql_query($sql);
 								$new_order = $db->sql_fetchfield('new_order') + 1;
 								
@@ -612,7 +616,8 @@ class acp_portal
 							{
 								$sql = 'SELECT MAX(module_order) as new_order
 										FROM ' . PORTAL_MODULES_TABLE . '
-										WHERE module_order < ' . $module_data['module_order'];
+										WHERE module_order < ' . $module_data['module_order'] . '
+										AND module_column = ' . (int) ($module_data['module_column'] - 2);
 								$db->sql_query($sql);
 								$new_order = $db->sql_fetchfield('new_order') + 1;
 								
@@ -739,29 +744,9 @@ class acp_portal
 
 						$module_id = $db->sql_nextid();
 
-						$error = $c_class->install($module_id);
+						$c_class->install($module_id);
 						
 						$cache->purge(); // make sure we don't get errors after re-adding a module
-						
-						// if something went wrong, handle the errors accordingly and undo the above query
-						if (sizeof($error))
-						{
-							if (is_array($error))
-							{
-								foreach($error as $cur_error)
-								{
-									$error_output = $cur_error . '<br />';
-								}
-							}
-							else if($error != false)
-							{
-								$error_output = $error;
-							}
-							
-							$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE . ' WHERE module_id = ' . (int) $module_id;
-							
-							trigger_error($error_output . adm_back_link($this->u_action));
-						}
 
 						meta_refresh(3, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $module_id));
 

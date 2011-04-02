@@ -121,6 +121,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Fixed incorrect handling of links</change>
 					<change>Fixed mixup with td and tr in subsilver2 calendar block</change>
 					<change>Added missing HTML file for center block of attachments module</change>
+					<change>Fixed missing check for correct column when moving a module left or right</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fehlendes IF $S_BLOCK_ICON hinzugefügt</change>
@@ -135,6 +136,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Falsche Behandlung von Links korrigiert</change>
 					<change>Falsche Benutzung von td und tr im subsilver2 Kalender Block beseitigt</change>
 					<change>Fehlende HTML Datei des Dateianhänge Moduls für die mittlere Spalte hinzugefügt</change>
+					<change>Fehlende Überprüfung auf richtige Spalte beim Verschieben der Module</change>
 				</changelog>
 			</entry>
 			<entry>
