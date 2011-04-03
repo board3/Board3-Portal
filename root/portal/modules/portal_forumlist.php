@@ -28,7 +28,7 @@ class portal_forumlist_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 4;
+	var $columns = 21;
 
 	/**
 	* Default modulename
