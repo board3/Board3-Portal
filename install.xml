@@ -101,12 +101,12 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
 			<link type="template" lang="en" href="contrib/subsilver2.xml">Manual for subsilver2</link>
 			<link type="template" lang="de" href="contrib/subsilver2.xml">Anleitung für subsilver2</link>
-			<link type="contrib" lang="en" href="contrib/update_106_to_200a1/update.xml">Manual for Updating B3P 1.0.6 to 2.0.0a1</link>
-			<link type="contrib" lang="de" href="contrib/update_106_to_200a1/update.xml">Anleitung für das Aktualisieren von B3P 1.0.6 zu 2.0.0a1</link>
+			<link type="contrib" lang="en" href="contrib/update_106_to_200a2/update.xml">Manual for Updating B3P 1.0.6 to 2.0.0a2</link>
+			<link type="contrib" lang="de" href="contrib/update_106_to_200a2/update.xml">Anleitung für das Aktualisieren von B3P 1.0.6 zu 2.0.0a2</link>
 		</link-group>
 		<history>
 			<entry>
-				<date>2011-05-01</date>
+				<date>2011-04-04</date>
 				<rev-version>2.0.0a2</rev-version>
 				<changelog lang="en">
 					<change>Added missing IF $S_BLOCK_ICON</change>
