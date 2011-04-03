@@ -1112,7 +1112,7 @@ function check_file_src($value, $key, $module_id)
 	
 	if (!empty($error))
 	{
-		trigger_error($error . adm_back_link(append_sid("{$phpbb_root_path}adm/index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $module_id)));
+		trigger_error($error . adm_back_link(append_sid("{$phpbb_root_path}adm/index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $module_id)), E_USER_WARNING );
 	}
 }
 
