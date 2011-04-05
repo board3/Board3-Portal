@@ -109,5 +109,3 @@ class portal_stylechanger_module
 		return true;
 	}
 }
-
-?>

@@ -126,5 +126,3 @@ class portal_whois_online_module
 		return true;
 	}
 }
-
-?>

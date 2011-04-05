@@ -381,5 +381,3 @@ class portal_attachments_module
 	
 	}
 }
-
-?>

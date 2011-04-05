@@ -41,5 +41,3 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_WELCOME_MESSAGE'			=> 'Willkommens-Nachricht',
 	'ACP_PORTAL_WELCOME_MESSAGE_EXP'		=> 'Du kannst die Willkommens-Nachricht in der Textbox verändern. BBCode, Bilder und Links sind erlaubt.',
 ));
-
-?>

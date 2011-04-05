@@ -41,5 +41,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_LAST_VISITED_BOTS_NUMBER'			=> 'Anzahl der anzuzeigenden Bots',
 	'PORTAL_LAST_VISITED_BOTS_NUMBER_EXP'	=> '0 bedeutet unbegrenzt',
 ));
-
-?>

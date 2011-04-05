@@ -249,5 +249,3 @@ class portal_recent_module
 	
 	}
 }
-
-?>

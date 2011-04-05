@@ -237,5 +237,3 @@ class portal_leaders_module
 		return $db->sql_query($sql);
 	}
 }
-
-?>

@@ -49,5 +49,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_EXCLUDE_FORUM'					=> 'Exclude Forums',
 	'PORTAL_EXCLUDE_FORUM_EXP'			=> 'Select "Yes" if you want to exlude the selected forums from the recent topics block, and "No" if you want to see only the selected forums in the recent topics block.',
 ));
-
-?>

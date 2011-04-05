@@ -45,5 +45,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAX_ONLINE_FRIENDS'				=> 'Limit of displayed friends',
 	'PORTAL_MAX_ONLINE_FRIENDS_EXP'		=> 'The maximum number of friends displayed.',
 ));
-
-?>

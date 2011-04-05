@@ -62,5 +62,3 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_MENU_PERMISSION'	=> 'Link Berechtigungen',
 	'ACP_PORTAL_MENU_PERMISSION_EXP'=> 'Wähle die Gruppen aus die berechtigt sein sollen den Link zu sehen. Falls alle Benutzer den Link sehen sollen, dann wähle nichts aus.<br />Wähle mehrere Gruppen aus/ab indem du <samp>STRG</samp> gedrückt hältst und klickst.',
 ));
-
-?>

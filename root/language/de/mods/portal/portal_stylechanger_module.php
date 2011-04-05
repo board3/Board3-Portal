@@ -35,5 +35,3 @@ $lang = array_merge($lang, array(
 	'BOARD_STYLE'			=> 'Mein Board-Style',
 	'STYLE_CHOOSE'			=> 'Wähle einen Style',
 ));
-
-?>

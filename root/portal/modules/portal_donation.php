@@ -97,5 +97,3 @@ class portal_donation_module
 		return $db->sql_query($sql);
 	}
 }
-
-?>

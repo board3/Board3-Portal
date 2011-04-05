@@ -43,5 +43,3 @@ $lang = array_merge($lang, array(
 	'USER_MENU_SETTINGS'	=> 'User menu settings',
 	'USER_MENU_REGISTER'	=> 'Show registration link in user menu',
 ));
-
-?>

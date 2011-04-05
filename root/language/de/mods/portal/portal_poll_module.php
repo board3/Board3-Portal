@@ -51,5 +51,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_POLL_ALLOW_VOTE_EXP'			=> 'Verfügt der Benutzer über entsprechende Berechtigungen, kann er direkt auf der Portal-Seite abstimmen.',
 	'PORTAL_POLL_HIDE'						=> 'Abgelaufene Umfragen verbergen?',
 ));
-
-?>

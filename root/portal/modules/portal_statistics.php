@@ -197,5 +197,3 @@ class portal_statistics_module
 		return $return_ary;
 	}
 }
-
-?>

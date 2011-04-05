@@ -40,5 +40,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_MAX_LAST_MEMBER'					=> 'Anzahl der anzuzeigenden Mitglieder',
 	'PORTAL_MAX_LAST_MEMBER_EXP'			=> '0 bedeutet unbegrenzt',
 ));
-
-?>

@@ -39,5 +39,3 @@ $lang = array_merge($lang, array(
 	'RND_FROM'				=> 'Location',
 	'RND_WWW'				=> 'Web page',
 ));
-
-?>

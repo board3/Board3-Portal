@@ -417,5 +417,3 @@ class portal_links_module
 		return unserialize($out);   
 	}
 }
-
-?>

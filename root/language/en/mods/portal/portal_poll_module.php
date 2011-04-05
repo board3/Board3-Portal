@@ -53,5 +53,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_POLL_ALLOW_VOTE_EXP'	=> 'Allow users with the required permissions to vote from the portal page.',
 	'PORTAL_POLL_HIDE'					=> 'Hide expired polls?',
 ));
-
-?>

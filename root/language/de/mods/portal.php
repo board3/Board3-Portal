@@ -38,4 +38,3 @@ $lang = array_merge($lang, array(
 	'VIEWING_PORTAL'	=> 'Betrachtet das Portal',
 	'BACK'				=> 'Zurück',
 ));
-?>

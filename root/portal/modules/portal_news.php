@@ -452,5 +452,3 @@ class portal_news_module
 	
 	}
 }
-
-?>

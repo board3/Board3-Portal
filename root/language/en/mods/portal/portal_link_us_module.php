@@ -35,5 +35,3 @@ $lang = array_merge($lang, array(
 	'LINK_US'		=> 'Link to us',
 	'LINK_US_TXT'	=> 'Please feel free to link to <strong>%s</strong>. Use the following HTML:',
 ));
-
-?>

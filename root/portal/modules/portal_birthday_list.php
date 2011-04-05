@@ -156,5 +156,3 @@ class portal_birthday_list_module
 		return $db->sql_query($sql);
 	}
 }
-
-?>

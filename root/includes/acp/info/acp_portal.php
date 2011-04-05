@@ -31,5 +31,3 @@ class acp_portal_info
 		);
 	}
 }
-
-?>

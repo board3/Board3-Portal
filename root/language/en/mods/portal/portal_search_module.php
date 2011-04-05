@@ -40,5 +40,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_SEARCH_ENGINE'	=> 'Search engines',
 	'PORTAL_SEARCH_ADV'		=> 'Advanced search',
 ));
-
-?>

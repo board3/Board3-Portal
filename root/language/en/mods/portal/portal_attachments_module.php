@@ -53,5 +53,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_ATTACHMENTS_EXCLUDE'						=> 'Exclude filetypes',
 	'PORTAL_ATTACHMENTS_EXCLUDE_EXP'				=> 'Select "Yes" if you want to exlude the selected filetypes from the attachments block, and "No" if you want to see only the selected filetypes in the attachments block.',
 ));
-
-?>

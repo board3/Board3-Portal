@@ -22,5 +22,3 @@ define('B3_MODULE_ENABLED', 1);
 define('PORTAL_ROOT_PATH', 'portal/');
 define('PORTAL_MODULES_TABLE',		$table_prefix . 'portal_modules');
 define('PORTAL_CONFIG_TABLE',		$table_prefix . 'portal_config');
-
-?>

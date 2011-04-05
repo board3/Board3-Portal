@@ -43,5 +43,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Anstehende Geburtstage',
 	'PORTAL_BIRTHDAYS_AHEAD_EXP'			=> 'Zeitraum für die Geburtstagsvorschau (Tage).<br />"0" deaktiviert die Anzeige der bevorstehenden Geburtstage.',	
 ));
-
-?>

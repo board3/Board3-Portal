@@ -93,5 +93,3 @@ class portal_forumlist_module
 		return true;
 	}
 }
-
-?>

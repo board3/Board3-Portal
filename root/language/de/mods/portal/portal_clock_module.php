@@ -40,5 +40,3 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_CLOCK_SRC'			=> 'Uhr',
 	'ACP_PORTAL_CLOCK_SRC_EXP'		=> 'Gebe den Dateinamen der Uhr  ein. Die Uhr muss unter folgendem Pfad gespeichert sein: styles/*yourstyle*/theme/images/portal/.',
 ));
-
-?>

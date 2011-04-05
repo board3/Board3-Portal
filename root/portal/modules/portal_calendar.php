@@ -586,5 +586,3 @@ class portal_calendar_module
 		return $url;
 	}
 }
-
-?>

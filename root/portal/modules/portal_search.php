@@ -83,5 +83,3 @@ class portal_search_module
 		return true;
 	}
 }
-
-?>

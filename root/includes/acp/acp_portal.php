@@ -1210,4 +1210,3 @@ class acp_portal
 		return rmdir($dir);
 	}
 }
-?>

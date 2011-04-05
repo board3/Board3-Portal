@@ -186,5 +186,3 @@ function mvc_setup_array($xml)
 	}
 	return $ary;
 }
-
-?>

@@ -140,5 +140,3 @@ class portal_random_member_module
 		return true;
 	}
 }
-
-?>

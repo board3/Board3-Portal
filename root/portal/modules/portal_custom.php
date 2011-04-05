@@ -353,5 +353,3 @@ class portal_custom_module
 		$this->manage_custom('', $key, $module_id);
 	}
 }
-
-?>

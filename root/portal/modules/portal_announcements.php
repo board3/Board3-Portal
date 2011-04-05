@@ -462,5 +462,3 @@ class portal_announcements_module
 	
 	}
 }
-
-?>

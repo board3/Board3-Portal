@@ -135,5 +135,3 @@ class portal_friends_module
 		return $db->sql_query($sql);
 	}
 }
-
-?>

@@ -40,5 +40,3 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_CLOCK_SRC'			=> 'Clock',
 	'ACP_PORTAL_CLOCK_SRC_EXP'		=> 'Enter the filename of your clock. The clock needs to be located in styles/*yourstyle*/theme/images/portal/.',
 ));
-
-?>

@@ -46,5 +46,3 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_CUSTOM_BBCODE'				=> 'Activate BBCode for the custom block',
 	'ACP_PORTAL_CUSTOM_BBCODE_EXP'			=> 'BBCode could be used in this box. If BBCode is not activated, HTML will be parsed.',
 ));
-
-?>

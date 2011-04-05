@@ -481,5 +481,3 @@ class portal_main_menu_module
 		return unserialize($out);   
 	}
 }
-
-?>

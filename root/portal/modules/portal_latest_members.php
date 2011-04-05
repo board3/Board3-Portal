@@ -102,5 +102,3 @@ class portal_latest_members_module
 		return $db->sql_query($sql);
 	}
 }
-
-?>

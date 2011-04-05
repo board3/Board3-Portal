@@ -31,5 +31,3 @@ class board3_portal_check_version
 		);
 	}
 }
-
-?>

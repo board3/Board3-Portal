@@ -43,5 +43,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEADERS_EXT'		=> 'Extended Leaders / Team',
 	'PORTAL_LEADERS_EXT_EXP'	=> 'The standard block lists all admins/mods, while the extended block includes all non-hidden groups with a legend.',
 ));
-
-?>

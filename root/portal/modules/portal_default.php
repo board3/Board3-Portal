@@ -110,5 +110,3 @@ class portal_modulename_module
 		return $db->sql_query($sql);
 	}
 }
-
-?>

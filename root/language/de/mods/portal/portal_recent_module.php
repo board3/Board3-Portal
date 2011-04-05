@@ -49,5 +49,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_EXCLUDE_FORUM'						=> 'Foren aussschließen',
 	'PORTAL_EXCLUDE_FORUM_EXP'					=> 'Wähle "Ja" wenn du die ausgewählten Foren vom Aktuelle Themen-Block ausschließen willst, und "Nein" wenn du nur die Themen aus den ausgewählten Foren im Aktuelle Themen-Block sehen willst.',
 ));
-
-?>

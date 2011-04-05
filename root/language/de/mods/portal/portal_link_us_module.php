@@ -35,5 +35,3 @@ $lang = array_merge($lang, array(
 	'LINK_US'							=> 'Link zu uns ',
 	'LINK_US_TXT'					=> 'Benutze bitte diesen Link um <strong>%s</strong> bei dir zu verlinken:',
 ));
-
-?>

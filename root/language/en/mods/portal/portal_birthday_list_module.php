@@ -43,5 +43,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Birthdays ahead days',
 	'PORTAL_BIRTHDAYS_AHEAD_EXP'		=> 'How many days to look ahead for future birthdays.<br />"0" will disable the ahead birthdays list.',
 ));
-
-?>

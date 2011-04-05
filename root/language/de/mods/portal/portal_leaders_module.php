@@ -43,5 +43,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEADERS_EXT'		=> 'Erweiterter Team-Block',
 	'PORTAL_LEADERS_EXT_EXP'	=> 'Der standard Block listet alle Admins und Moderatoren auf, der erweiterte Team-Block listet zusätzlich alle nicht-versteckten Gruppen inklusive Legende auf.',
 ));
-
-?>

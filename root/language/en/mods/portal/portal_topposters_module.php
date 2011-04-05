@@ -39,5 +39,3 @@ $lang = array_merge($lang, array(
 	'NUM_TOPPOSTERS'				=> 'Number of Top Posters',
 	'NUM_TOPPOSTERS_EXP'			=> 'Enter how many users should be displayed in the top posters block.',
 ));
-
-?>

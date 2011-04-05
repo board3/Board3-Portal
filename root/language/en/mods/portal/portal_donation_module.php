@@ -66,5 +66,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_PAY_ACC'						=> 'Paypal account to use',
 	'PORTAL_PAY_ACC_EXPLAIN'				=> 'Enter your Paypal e-mail address eg. xxx@xxx.com',
 ));
-
-?>

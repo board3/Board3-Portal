@@ -46,5 +46,3 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_CUSTOM_BBCODE'				=> 'BBCode für den eigenen Block aktivieren',
 	'ACP_PORTAL_CUSTOM_BBCODE_EXP'			=> 'BBCode kann dann in diesem Block benutzt werden. Ansonsten wird HTML direkt geparst.',
 ));
-
-?>

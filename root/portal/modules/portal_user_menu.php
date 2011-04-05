@@ -179,5 +179,3 @@ class portal_user_menu_module
 		return $db->sql_query($sql);
 	}
 }
-
-?>

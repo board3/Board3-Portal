@@ -134,4 +134,3 @@ $lang = array_merge($lang, array(
 	'acl_a_manage_portal'		=> array('lang' => 'Can alter Portal settings', 'cat' => 'misc'),
 	'acl_u_view_portal'			=> array('lang' => 'Can view the Portal', 'cat' => 'misc'),
 ));
-?>

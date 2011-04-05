@@ -889,5 +889,3 @@ class portal_poll_module
 	
 	}
 }
-
-?>

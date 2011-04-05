@@ -133,5 +133,3 @@ $lang = array_merge($lang, array(
 	'LOG_PORTAL_EVENT_ADDED'				=> '<strong>Added Event</strong><br />&raquo; %s',
 	'LOG_PORTAL_EVENT_REMOVED'				=> '<strong>Removed Event</strong><br />&raquo; %s',
 ));
-
-?>

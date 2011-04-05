@@ -66,5 +66,3 @@ function column_string_const($column)
 			return 0;
 	}
 }
-
-?>

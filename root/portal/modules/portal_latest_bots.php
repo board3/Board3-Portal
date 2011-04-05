@@ -125,5 +125,3 @@ class portal_latest_bots_module
 		return $db->sql_query($sql);
 	}
 }
-
-?>

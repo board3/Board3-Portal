@@ -69,5 +69,3 @@ $lang = array_merge($lang, array(
 	'PORTAL_SHOW_REPLIES_VIEWS'				=> 'Display the number of replies and views',
 	'PORTAL_SHOW_REPLIES_VIEWS_EXP'		=> 'This setting pertains to the compact block.<br />When Yes, the number of replies and views are shown in 2 extra columns. When No, replies and views will be shown beside the forum name. Select No if you have problems with the display of the extra columns due to the extra width required.',
 ));
-
-?>

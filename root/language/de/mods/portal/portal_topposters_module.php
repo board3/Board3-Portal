@@ -36,5 +36,3 @@ $lang = array_merge($lang, array(
 	'TOPPOSTERS_CONFIG'				=> 'Einstellungen zu Top Poster',
 	'NUM_TOPPOSTERS'				=> 'Anzahl der Top Poster',
 ));
-
-?>

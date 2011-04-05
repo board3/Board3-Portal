@@ -216,5 +216,3 @@ class portal_welcome_module
 		$this->manage_welcome('', $key, $module_id);
 	}
 }
-
-?>

@@ -49,5 +49,3 @@ $lang = array_merge($lang, array(
 	'POSTS_PER_TOPIC_OTHER'		=> 'Beiträge pro Thema: <strong>%d</strong>',
 	'POSTS_PER_TOPIC_ZERO'		=> 'Beiträge pro Thema: <strong>0</strong>',
 ));
-
-?>

@@ -90,5 +90,3 @@ class portal_clock_module
 		return $db->sql_query($sql);
 	}
 }
-
-?>
