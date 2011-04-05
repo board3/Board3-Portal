@@ -52,6 +52,12 @@ class portal_links_module
 	* file must be in "adm/style/portal/"
 	*/
 	var $custom_acp_tpl = 'acp_portal_links';
+	
+	/**
+	* constants
+	*/
+	const LINK_INT = 1;
+	const LINK_EXT = 2;
 
 	function get_template_side($module_id)
 	{
@@ -77,7 +83,7 @@ class portal_links_module
 		
 		for ($i = 0; $i < sizeof($links); $i++)
 		{
-			if($links[$i]['type'] == B3_LINKS_INT)
+			if($links[$i]['type'] == self::LINK_INT)
 			{
 				$links[$i]['url'] = str_replace('&', '&amp;', $links[$i]['url']); // we need to do this in order to prevent XHTML validation errors
 				$cur_url = append_sid($phpbb_root_path . $links[$i]['url']); // the user should know what kind of file it is
@@ -130,8 +136,8 @@ class portal_links_module
 		);
 		
 		$links_types = array(
-			B3_LINKS_EXT,
-			B3_LINKS_EXT,
+			self::LINK_EXT,
+			self::LINK_EXT,
 		);
 		
 		$links_urls = array(
@@ -360,7 +366,7 @@ class portal_links_module
 					'U_ACTION'	=> $u_action . '&amp;id=' . $link_id,
 
 					'S_EDIT'				=> true,
-					'S_LINK_IS_INT'			=> (isset($links[$link_id]['type']) && $links[$link_id]['type'] == B3_LINKS_INT) ? true : false,
+					'S_LINK_IS_INT'			=> (isset($links[$link_id]['type']) && $links[$link_id]['type'] == self::LINK_INT) ? true : false,
 				));
 				
 				$groups_ary = (isset($links[$link_id]['permission'])) ? explode(',', $links[$link_id]['permission']) : array();

@@ -52,6 +52,13 @@ class portal_main_menu_module
 	* file must be in "adm/style/portal/"
 	*/
 	var $custom_acp_tpl = 'acp_portal_menu';
+	
+	/**
+	* constants
+	*/
+	const LINK_CAT = 0;
+	const LINK_INT = 1;
+	const LINK_EXT = 2;
 
 	function get_template_side($module_id)
 	{
@@ -77,7 +84,7 @@ class portal_main_menu_module
 		
 		for ($i = 0; $i < sizeof($links); $i++)
 		{
-			if($links[$i]['type'] == B3_LINKS_CAT)
+			if($links[$i]['type'] == self::LINK_CAT)
 			{
 				$template->assign_block_vars('portalmenu', array(
 					'CAT_TITLE'		=> (isset($user->lang[$links[$i]['title']])) ? $user->lang[$links[$i]['title']] : $links[$i]['title'],
@@ -86,7 +93,7 @@ class portal_main_menu_module
 			}
 			else
 			{
-				if($links[$i]['type'] == B3_LINKS_INT)
+				if($links[$i]['type'] == self::LINK_INT)
 				{
 					$links[$i]['url'] = str_replace('&', '&amp;', $links[$i]['url']); // we need to do this in order to prevent XHTML validation errors
 					$cur_url = append_sid($phpbb_root_path . $links[$i]['url']); // the user should know what kind of file it is
@@ -158,17 +165,17 @@ class portal_main_menu_module
 		);
 		
 		$links_types = array(
-			B3_LINKS_CAT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
-			B3_LINKS_CAT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
-			B3_LINKS_INT,
+			self::LINK_CAT,
+			self::LINK_INT,
+			self::LINK_INT,
+			self::LINK_INT,
+			self::LINK_INT,
+			self::LINK_INT,
+			self::LINK_CAT,
+			self::LINK_INT,
+			self::LINK_INT,
+			self::LINK_INT,
+			self::LINK_INT,
 		);
 		
 		$links_urls = array(
@@ -263,8 +270,8 @@ class portal_main_menu_module
 				}
 
 				$link_title = utf8_normalize_nfc(request_var('link_title', ' ', true));
-				$link_is_cat = request_var('link_is_cat', 0);
-				$link_type = (!$link_is_cat) ? request_var('link_type', 0) : B3_LINKS_CAT;
+				$link_is_cat = request_var('link_is_cat', false);
+				$link_type = (!$link_is_cat) ? request_var('link_type', self::LINK_INT) : self::LINK_CAT;
 				$link_url = ($link_is_cat) ? ' ' : request_var('link_url', ' ');
 				$link_url = str_replace('&amp;', '&', $link_url);
 				$link_permission = request_var('permission-setting-menu', array(0 => ''));
@@ -313,7 +320,7 @@ class portal_main_menu_module
 				{
 					$message = $user->lang['LINK_ADDED'];
 
-					if($link_type != B3_LINKS_CAT && sizeof($links) < 1)
+					if($link_type != self::LINK_CAT && sizeof($links) < 1)
 					{
 						trigger_error($user->lang['ACP_PORTAL_MENU_CREATE_CAT'] . adm_back_link($u_action), E_USER_WARNING);
 					}
@@ -414,14 +421,14 @@ class portal_main_menu_module
 			case 'add':
 				$template->assign_vars(array(
 					'LINK_TITLE'	=> (isset($links[$link_id]['title']) && $action != 'add') ? $links[$link_id]['title'] : '',
-					'LINK_URL'		=> (isset($links[$link_id]['url']) && $links[$link_id]['type'] != B3_LINKS_CAT && $action != 'add') ? str_replace('&', '&amp;', $links[$link_id]['url']) : '',
+					'LINK_URL'		=> (isset($links[$link_id]['url']) && $links[$link_id]['type'] != self::LINK_CAT && $action != 'add') ? str_replace('&', '&amp;', $links[$link_id]['url']) : '',
 
 					//'U_BACK'	=> $u_action,
 					'U_ACTION'	=> $u_action . '&amp;id=' . $link_id,
 
 					'S_EDIT'				=> true,
-					'S_LINK_IS_CAT'			=> (!isset($links[$link_id]['type']) || $links[$link_id]['type'] == B3_LINKS_CAT) ? true : false,
-					'S_LINK_IS_INT'			=> (isset($links[$link_id]['type']) && $links[$link_id]['type'] == B3_LINKS_INT) ? true : false,
+					'S_LINK_IS_CAT'			=> (!isset($links[$link_id]['type']) || $links[$link_id]['type'] == self::LINK_CAT) ? true : false,
+					'S_LINK_IS_INT'			=> (isset($links[$link_id]['type']) && $links[$link_id]['type'] == self::LINK_INT) ? true : false,
 				));
 				
 				$groups_ary = (isset($links[$link_id]['permission'])) ? explode(',', $links[$link_id]['permission']) : array();
@@ -457,7 +464,7 @@ class portal_main_menu_module
 				'U_MOVE_UP'		=> $u_action . '&amp;action=move_up&amp;id=' . $i,
 				'U_MOVE_DOWN'	=> $u_action . '&amp;action=move_down&amp;id=' . $i,
 
-				'S_LINK_IS_CAT'	=> ($links[$i]['type'] == B3_LINKS_CAT) ? true : false,
+				'S_LINK_IS_CAT'	=> ($links[$i]['type'] == self::LINK_CAT) ? true : false,
 			));
 		}
 	}

@@ -15,10 +15,6 @@ if (!defined('IN_PHPBB'))
 global $table_prefix;
 
 // Config constants
-define('B3_LINKS_CAT', 0);
-define('B3_LINKS_INT', 1);
-define('B3_LINKS_EXT', 2);
-
 define('B3_MODULE_DISABLED', 0);
 define('B3_MODULE_ENABLED', 1);
 
