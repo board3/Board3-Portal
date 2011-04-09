@@ -110,10 +110,16 @@ $lang = array_merge($lang, array(
 	'MODULE_UPLOAD_EXP'				=> 'Wähle die ZIP-Datei des Moduls das du hochladen willst:',
 	'MODULE_UPLOAD_GO'				=> 'Hochladen',
 	'NO_MODULE_UPLOAD'				=> 'Deine Server-Konfiguration erlaubt das Hochladen von Dateien nicht.',
-	'MODULE_UPLOADED'				=> 'Module erfolgreich hochgeladen.',
+	'MODULE_UPLOADED'				=> 'Modul erfolgreich hochgeladen.',
 	'MODULE_UPLOAD_MKDIR_FAILURE'	=> 'Es konnte kein Ordner erstellt werden.',
 	'MODULE_COPY_FAILURE'			=> 'Die folgende Datei konnte nicht kopiert werden: %1$s',
 	'MODULE_CORRUPTED'				=> 'Das Modul das du hochladen willst, scheint defekt zu sein.',
+	'PORTAL_NEW_FILES'				=> 'Neue Dateien',
+	'PORTAL_MODULE_SOURCE'			=> 'Quelle',
+	'PORTAL_MODULE_TARGET'			=> 'Ziel',
+	'PORTAL_MODULE_STATUS'			=> 'Status',
+	'PORTAL_MODULE_SUCCESS'			=> 'Erfolgreich kopiert.',
+	'PORTAL_MODULE_ERROR'			=> 'Datei exisitert schon oder konnte nicht kopiert werden.',
 	
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Füge Basismodule hinzu',

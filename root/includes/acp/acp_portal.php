@@ -907,38 +907,28 @@ class acp_portal
 				$error = array();
 				if($submit)
 				{
+					if(!check_form_key('acp_portal_module_upload'))
+					{
+						trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}
 					include($phpbb_root_path . 'portal/includes/functions_upload.' . $phpEx);
 					// Default upload path is portal/upload/
 					$upload_path = $phpbb_root_path . 'portal/upload/';
 					
 					$portal_upload = new portal_upload($upload_path);
+					
+					$this->tpl_name = 'portal/acp_portal_upload_module';
+					$this->page_title = $user->lang['ACP_PORTAL_UPLOAD'];
 				}
 				else
 				{
-					if(@ini_get('file_uploads') == '0' || strtolower(@ini_get('file_uploads')) == 'off' || !@extension_loaded('zlib'))
-					{
-						trigger_error($user->lang['NO_MODULE_UPLOAD'] . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=modules')), E_USER_WARNING);
-					}
-					
-					if(!isset($config['am_file_perms']))
-					{
-						trigger_error($user->lang['NO_AUTOMOD_INSTALLED'] . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=modules')), E_USER_WARNING);
-					}
-					
-					include("{$phpbb_root_path}includes/functions_transfer.$phpEx");
-					include("{$phpbb_root_path}includes/editor.$phpEx");
-					include("{$phpbb_root_path}includes/functions_mods.$phpEx");
-					include("{$phpbb_root_path}includes/mod_parser.$phpEx");
-
 					// start the page
-					$user->add_lang(array('install', 'acp/mods'));
-
 					$template->assign_vars(array(
 						'U_UPLOAD'			=> $this->u_action,
 						'S_FORM_ENCTYPE'	=> ' enctype="multipart/form-data"',
 					));
 					
-					add_form_key('acp_mods_upload');
+					add_form_key('acp_portal_module_upload');
 
 					$this->tpl_name = 'portal/acp_portal_upload_module';
 					$this->page_title = $user->lang['ACP_PORTAL_UPLOAD'];
@@ -958,65 +948,5 @@ class acp_portal
 				trigger_error('NO_MODE', E_USER_ERROR);
 			break;
 		}
-	}
-	
-	function directory_move($src, $dest)
-	{
-		global $config;
-		
-		$src_contents = scandir($src);
-		
-		if (!is_dir($dest) && is_dir($src))
-		{
-			mkdir($dest . '/', octdec($config['am_dir_perms']));
-		}
-		
-		foreach ($src_contents as $src_entry)
-		{
-			if ($src_entry != '.' && $src_entry != '..')
-			{
-				if (is_dir($src . '/' . $src_entry) && !is_dir($dest . '/' . $src_entry))
-				{
-					$this->directory_move($src . '/' . $src_entry, $dest . '/' . $src_entry);
-				}
-				else if (is_file($src . '/' . $src_entry) && !is_file($dest . '/' . $src_entry))
-				{
-					copy($src . '/' . $src_entry, $dest . '/' . $src_entry);
-					chmod($dest . '/' . $src_entry, octdec($config['am_file_perms']));
-				}
-			}
-		}
-	}
-	
-	function directory_delete($dir)
-	{
-		if (!file_exists($dir))
-		{
-			return true;
-		}
-		
-		if (!is_dir($dir) && is_file($dir))
-		{
-			phpbb_chmod($dir, CHMOD_ALL);
-			return unlink($dir);
-		}
-		
-        foreach (scandir($dir) as $item)
-		{ 
-            if ($item == '.' || $item == '..')
-			{
-				continue;
-			}
-            if (!$this->directory_delete($dir . "/" . $item))
-			{
-				phpbb_chmod($dir . "/" . $item, CHMOD_ALL);
-                if (!$this->directory_delete($dir . "/" . $item))
-				{
-					return false;
-				}
-            }
-        }
-		
-		return rmdir($dir);
 	}
 }
