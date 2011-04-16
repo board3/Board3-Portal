@@ -15,27 +15,33 @@ if (!defined('IN_PHPBB'))
 /**
 * @ignore
 */
-class portal_upload extends acp_portal
+class portal_upload
 {
 	/*
 	* pre-defined vars
 	*/
-	var $upload_path;
+	private $upload_path;
+	private $u_action;
 	
 	/*
-	* constructor function for PHP<5
+	* constructor function
 	*/
-	function portal_upload($path)
+	public function __construct($path, $u_action)
 	{
+		// This shouldn't happen, but we check for it anyways
 		if(is_dir($path))
 		{
 			$this->upload_path = $path;
-			
+			$this->u_action = $u_action;
+
 			$this->upload_file();
 		}
 	}
 	
-	function upload_file()
+	/**
+	* upload module zip
+	*/
+	private function upload_file()
 	{
 		global $user, $phpbb_root_path, $phpEx, $phpbb_admin_path, $template;
 		// Upload part
@@ -76,104 +82,45 @@ class portal_upload extends acp_portal
 					if (sizeof($folder_contents) == 1)
 					{
 						// We need to move that directory then
-						$this->directory_move($mod_dir . '_tmp/' . $folder_contents[0], $this->upload_path . '/' . $folder_contents[0]);
+						$this->directory_move($mod_dir . '_tmp/' . $folder_contents[0], $this->upload_path . $folder_contents[0]);
+						$new_mod_dir = $this->upload_path . $folder_contents[0];
 						
 					}
 					else if (!is_dir($mod_dir))
 					{
 						// Change the name of the directory by moving to directory without _tmp in it
 						$this->directory_move($mod_dir . '_tmp/', $mod_dir);
-						
+						$new_mod_dir = $mod_dir;
 					}
 					
 					$this->directory_delete($mod_dir . '_tmp/');
+					
+					// make sure we set $mod_dir to the correct folder after the above step
+					$mod_dir = (isset($new_mod_dir)) ? $new_mod_dir : $mod_dir;
 					
 					// if we got until here set $actions['NEW_FILES']
 					$actions['NEW_FILES'] = array();
 					
 					// Now we need to get the files inside the folders
-					$folder_contents = $this->cut_folder(scandir($mod_dir));
-
-					/* 
-					* This will tell us what files we need to copy incl. the path
-					* In loving memory of PHP 4.x ... NOT
-					*/
-					foreach($folder_contents as $cur_content)
+					//$folder_contents = $this->cut_folder(scandir($mod_dir));
+					$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($mod_dir)); // requires PHP >= 5.1.0
+					
+					foreach($iterator as $cur_file)
 					{
-						$cur_folder_content = array();
-						switch($cur_content)
+						$cur_path = $cur_file->getPathname();
+						$cur_path = str_replace('\\', '/', $cur_path); // we want unix-like paths
+						$cur_path = str_replace($mod_dir . '/', '', $cur_path);
+						$cut_pos = strpos($cur_path, '/');
+						
+						if(!in_array(substr($cur_path, 0, $cut_pos), array('portal', 'language', 'styles')))
 						{
-							case 'language':
-								// there are more foreach to come .....
-								$cur_folder_content = $this->cut_folder(scandir($mod_dir . '/language/'));
-								$langs = array();
-								
-								foreach($cur_folder_content as $copy_file)
-								{
-									$langs[] = $copy_file;
-								}
-								
-								foreach($langs as $cur_lang)
-								{
-									if(!file_exists($mod_dir . '/language/' . $cur_lang . '/mods/portal/'))
-									{
-										$file->remove();
-										$this->directory_delete($mod_dir);
-										trigger_error($user->lang['MODULE_CORRUPTED'] . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=modules')), E_USER_WARNING);
-									}
-									$lang_content = $this->cut_folder(scandir($mod_dir . '/language/' . $cur_lang . '/mods/portal/'));
-
-									foreach($lang_content as $new_file)
-									{
-										$actions['NEW_FILES'][$mod_dir . '/language/' . $cur_lang . '/' . $new_file] = $phpbb_root_path . 'language/' . $cur_lang . '/mods/portal/' . $new_file;
-									}
-								}
-							break;
-							case 'portal':
-								if(!file_exists($mod_dir . '/portal/modules/'))
-								{
-									$file->remove();
-									$this->directory_delete($mod_dir);
-									trigger_error($user->lang['MODULE_CORRUPTED'] . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=modules')), E_USER_WARNING);
-								}
-								$cur_folder_content = $this->cut_folder(scandir($mod_dir . '/portal/modules/'));
-								
-								foreach($cur_folder_content as $copy_file)
-								{
-									$actions['NEW_FILES'][$mod_dir . '/portal/modules/' . $copy_file] = $phpbb_root_path . 'portal/modules/' . $copy_file;
-								}
-							break;
-							case 'styles':
-								// there are more foreach to come .....
-								$cur_folder_content = $this->cut_folder(scandir($mod_dir . '/styles/'));
-								$styles = array();
-								
-								foreach($cur_folder_content as $copy_file)
-								{
-									$styles[] = $copy_file;
-								}
-								
-								foreach($styles as $cur_style)
-								{
-									if(!file_exists($mod_dir . '/styles/' . $cur_style . '/template/portal/modules/'))
-									{
-										$file->remove();
-										$this->directory_delete($mod_dir);
-										trigger_error($user->lang['MODULE_CORRUPTED'] . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=modules')), E_USER_WARNING);
-									}
-									$style_content = $this->cut_folder(scandir($mod_dir . '/styles/' . $cur_style . '/template/portal/modules/'));
-
-									foreach($style_content as $new_file)
-									{
-										$actions['NEW_FILES'][$mod_dir . '/styles/' . $cur_style . '/template/portal/modules/' . $new_file] = $phpbb_root_path . 'styles/' . $cur_style . '/template/portal/modules/' . $new_file;
-									}
-								}
-							break;
-							default:
-								// there shouldn't be other files or folders
-								$file->remove();
-								$this->directory_delete($mod_dir);
-								trigger_error($user->lang['MODULE_CORRUPTED'] . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=modules')), E_USER_WARNING);
+							$file->remove();
+							$this->directory_delete($mod_dir);
+							trigger_error($user->lang['MODULE_CORRUPTED'] . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&amp;mode=modules')), E_USER_WARNING);
+						}
+						else
+						{
+							$actions['NEW_FILES'][$mod_dir . '/' . $cur_path] = $phpbb_root_path . $cur_path;
 						}
 					}
 
@@ -233,7 +180,7 @@ class portal_upload extends acp_portal
 	*
 	* @return: cut array
 	*/
-	function cut_folder($folder_content)
+	private function cut_folder($folder_content)
 	{
 		$cut_array = array('.', '..');
 		$folder_content = array_diff($folder_content, $cut_array);
@@ -241,15 +188,13 @@ class portal_upload extends acp_portal
 		return $folder_content;
 	}
 
-	function directory_move($src, $dest)
-	{
-		global $config;
-		
+	private function directory_move($src, $dest)
+	{		
 		$src_contents = scandir($src);
 		
 		if (!is_dir($dest) && is_dir($src))
 		{
-			mkdir($dest . '/', octdec($config['am_dir_perms']));
+			mkdir($dest . '/', octdec(0755));
 		}
 		
 		foreach ($src_contents as $src_entry)
@@ -263,13 +208,19 @@ class portal_upload extends acp_portal
 				else if (is_file($src . '/' . $src_entry) && !is_file($dest . '/' . $src_entry))
 				{
 					copy($src . '/' . $src_entry, $dest . '/' . $src_entry);
-					chmod($dest . '/' . $src_entry, octdec($config['am_file_perms']));
+					chmod($dest . '/' . $src_entry, octdec(0644));
 				}
 			}
 		}
 	}
 	
-	function directory_delete($dir)
+	/**
+	* the following functions are from the AutoMOD package
+	* @copyright (c) 2008 phpBB Group
+	* @license http://opensource.org/licenses/gpl-2.0.php GNU Public License
+	*/
+	
+	private function directory_delete($dir)
 	{
 		if (!file_exists($dir))
 		{
@@ -298,7 +249,7 @@ class portal_upload extends acp_portal
             }
         }
 		
-		return rmdir($dir);
+		return @rmdir($dir);
 	}
 	
 	/**
@@ -312,7 +263,7 @@ class portal_upload extends acp_portal
 	* NOTE: function should preferably not return in case of failure on only one file.  
 	* 	The current method makes error handling difficult 
 	*/
-	function copy_content($from, $to = '', $strip = '')
+	private function copy_content($from, $to = '', $strip = '')
 	{
 		global $phpbb_root_path, $user, $config;
 
@@ -336,13 +287,11 @@ class portal_upload extends acp_portal
 			}
 		}
 
-		$dest = $to;
-
 		if (!@copy($from, $to))
 		{
-			return sprintf($user->lang['MODULE_COPY_FAILURE'], $dest);
+			return sprintf($user->lang['MODULE_COPY_FAILURE'], $to);
 		}
-		@chmod($dest, octdec(0666));
+		@chmod($to, octdec(0666));
 
 		return true;
 	}
@@ -354,11 +303,10 @@ class portal_upload extends acp_portal
 	* @param $mode - CHMOD the new dir to these permissions
 	* @return bool
 	*/
-	function recursive_mkdir($path, $mode = false)
+	private function recursive_mkdir($path, $mode = false)
 	{
 		if (!$mode)
 		{
-			global $config;
 			$mode = octdec(0777);
 		}
 

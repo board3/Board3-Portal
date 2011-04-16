@@ -915,7 +915,7 @@ class acp_portal
 					// Default upload path is portal/upload/
 					$upload_path = $phpbb_root_path . 'portal/upload/';
 					
-					$portal_upload = new portal_upload($upload_path);
+					$portal_upload = new portal_upload($upload_path, $this->u_action);
 					
 					$this->tpl_name = 'portal/acp_portal_upload_module';
 					$this->page_title = $user->lang['ACP_PORTAL_UPLOAD'];
