@@ -105,12 +105,21 @@ $lang = array_merge($lang, array(
 	'LOG_PORTAL_EVENT_UPDATED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin geändert: %s ',
 	
 	// Upload Module
-	'ACP_PORTAL_UPLOAD'		=> 'Modul hochladen',
-	'MODULE_UPLOAD'			=> 'Lade ein Modul hoch',
-	'MODULE_UPLOAD_EXP'		=> 'Wähle die ZIP-Datei des Moduls das du hochladen willst:',
-	'MODULE_UPLOAD_GO'		=> 'Hochladen',
-	'NO_MODULE_UPLOAD'		=> 'Deine Server-Konfiguration erlaubt das Hochladen von Dateien nicht.',
-	'NO_AUTOMOD_INSTALLED'	=> 'Du hast AutoMOD nicht installiert, AutoMOD ist für dieses Feature aber zwingend erforderlich.',
+	'ACP_PORTAL_UPLOAD'				=> 'Modul hochladen',
+	'MODULE_UPLOAD'					=> 'Lade ein Modul hoch',
+	'MODULE_UPLOAD_EXP'				=> 'Wähle die ZIP-Datei des Moduls das du hochladen willst:',
+	'MODULE_UPLOAD_GO'				=> 'Hochladen',
+	'NO_MODULE_UPLOAD'				=> 'Deine Server-Konfiguration erlaubt das Hochladen von Dateien nicht.',
+	'MODULE_UPLOADED'				=> 'Modul erfolgreich hochgeladen.',
+	'MODULE_UPLOAD_MKDIR_FAILURE'	=> 'Es konnte kein Ordner erstellt werden.',
+	'MODULE_COPY_FAILURE'			=> 'Die folgende Datei konnte nicht kopiert werden: %1$s',
+	'MODULE_CORRUPTED'				=> 'Das Modul das du hochladen willst, scheint defekt zu sein.',
+	'PORTAL_NEW_FILES'				=> 'Neue Dateien',
+	'PORTAL_MODULE_SOURCE'			=> 'Quelle',
+	'PORTAL_MODULE_TARGET'			=> 'Ziel',
+	'PORTAL_MODULE_STATUS'			=> 'Status',
+	'PORTAL_MODULE_SUCCESS'			=> 'Erfolgreich kopiert.',
+	'PORTAL_MODULE_ERROR'			=> 'Datei exisitert schon oder konnte nicht kopiert werden.',
 	
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Füge Basismodule hinzu',

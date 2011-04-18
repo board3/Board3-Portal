@@ -102,12 +102,15 @@ $lang = array_merge($lang, array(
 	'LOG_PORTAL_EVENT_UPDATED'				=> '<strong>Altered Portal settings</strong><br />&raquo; Event updated: %s ',
 	
 	// Upload Module
-	'ACP_PORTAL_UPLOAD'		=> 'Upload module',
-	'MODULE_UPLOAD'			=> 'Upload a module',
-	'MODULE_UPLOAD_EXP'		=> 'Choose the zip file of the module you want to upload:',
-	'MODULE_UPLOAD_GO'		=> 'Upload',
-	'NO_MODULE_UPLOAD'		=> 'Your server configuration does not allow file uploads.',
-	'NO_AUTOMOD_INSTALLED'	=> 'You don’t have AutoMOD installed, but AutoMOD is required for this module.',
+	'ACP_PORTAL_UPLOAD'				=> 'Upload module',
+	'MODULE_UPLOAD'					=> 'Upload a module',
+	'MODULE_UPLOAD_EXP'				=> 'Choose the zip file of the module you want to upload:',
+	'MODULE_UPLOAD_GO'				=> 'Upload',
+	'NO_MODULE_UPLOAD'				=> 'Your server configuration does not allow file uploads.',
+	'MODULE_UPLOADED'				=> 'Module uploaded successfully.',
+	'MODULE_UPLOAD_MKDIR_FAILURE'	=> 'Unable to create a folder.',
+	'MODULE_COPY_FAILURE'			=> 'Unable to copy the following file: %1$s',
+	'MODULE_CORRUPTED'				=> 'The module you are trying to upload seems to be corrupted.',
 	
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Adding basic set of modules',
