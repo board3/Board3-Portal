@@ -28,26 +28,26 @@ class portal_announcements_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 21;
+	public $columns = 21;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'GLOBAL_ANNOUNCEMENTS';
+	public $name = 'GLOBAL_ANNOUNCEMENTS';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = '';
+	public $image_src = '';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_announcements_module';
+	public $language = 'portal_announcements_module';
 
-	function get_template_center($module_id)
+	public function get_template_center($module_id)
 	{
 		global $config, $template, $db, $user, $auth, $cache, $phpEx, $phpbb_root_path;
 
@@ -367,7 +367,7 @@ class portal_announcements_module
 		}
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
@@ -389,7 +389,7 @@ class portal_announcements_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		set_config('board3_announcements_style_' . $module_id, 0);
 		set_config('board3_number_of_announcements_' . $module_id, 1);
@@ -404,7 +404,7 @@ class portal_announcements_module
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 
@@ -425,7 +425,7 @@ class portal_announcements_module
 	}
 	
 	// Create forum select box
-	function select_forums($value, $key, $module_id)
+	public function select_forums($value, $key, $module_id)
 	{
 		global $user, $config;
 
@@ -449,7 +449,7 @@ class portal_announcements_module
 	}
 	
 	// Store selected forums
-	function store_selected_forums($key, $module_id)
+	public function store_selected_forums($key, $module_id)
 	{
 		global $db, $cache;
 		

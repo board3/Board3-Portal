@@ -28,32 +28,32 @@ class portal_whois_online_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 21;
+	public $columns = 21;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'PORTAL_WHOIS_ONLINE';
+	public $name = 'PORTAL_WHOIS_ONLINE';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = '';
+	public $image_src = '';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_whois_online_module';
+	public $language = 'portal_whois_online_module';
 	
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
-	var $custom_acp_tpl = '';
+	public $custom_acp_tpl = '';
 
-	function get_template_center($module_id)
+	public function get_template_center($module_id)
 	{
 		global $config, $template, $user, $auth, $db, $phpbb_root_path, $phpEx;
 
@@ -105,7 +105,7 @@ class portal_whois_online_module
 		return 'whois_online_center.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'PORTAL_WHOIS_ONLINE',
@@ -116,12 +116,12 @@ class portal_whois_online_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		return true;
 	}

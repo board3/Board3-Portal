@@ -28,32 +28,32 @@ class portal_recent_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 21;
+	public $columns = 21;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'PORTAL_RECENT';
+	public $name = 'PORTAL_RECENT';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = '';
+	public $image_src = '';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_recent_module';
+	public $language = 'portal_recent_module';
 	
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
-	var $custom_acp_tpl = '';
+	public $custom_acp_tpl = '';
 
-	function get_template_center($module_id)
+	public function get_template_center($module_id)
 	{
 		global $config, $template, $db, $auth, $phpbb_root_path, $phpEx;
 
@@ -170,7 +170,7 @@ class portal_recent_module
 		return 'recent_center.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'ACP_PORTAL_RECENT_SETTINGS',
@@ -187,7 +187,7 @@ class portal_recent_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		set_config('board3_max_topics_' . $module_id, 10);
 		set_config('board3_recent_title_limit_' . $module_id, 100);
@@ -196,7 +196,7 @@ class portal_recent_module
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 
@@ -212,7 +212,7 @@ class portal_recent_module
 	}
 	
 	// Create forum select box
-	function select_forums($value, $key, $module_id)
+	public function select_forums($value, $key, $module_id)
 	{
 		global $user, $config;
 
@@ -236,7 +236,7 @@ class portal_recent_module
 	}
 	
 	// Store selected forums
-	function store_selected_forums($key, $module_id)
+	public function store_selected_forums($key, $module_id)
 	{
 		global $db, $cache;
 		

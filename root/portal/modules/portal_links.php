@@ -28,30 +28,30 @@ class portal_links_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 10;
+	public $columns = 10;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'PORTAL_LINKS';
+	public $name = 'PORTAL_LINKS';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_links.png';
+	public $image_src = 'portal_links.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_links_module';
+	public $language = 'portal_links_module';
 	
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
-	var $custom_acp_tpl = 'acp_portal_links';
+	public $custom_acp_tpl = 'acp_portal_links';
 	
 	/**
 	* constants
@@ -59,7 +59,7 @@ class portal_links_module
 	const LINK_INT = 1;
 	const LINK_EXT = 2;
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template, $phpEx, $phpbb_root_path, $user, $db;
 
@@ -109,7 +109,7 @@ class portal_links_module
 		return 'links_side.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		// do not remove this as it is needed in order to run manage_links
         return array(
@@ -124,7 +124,7 @@ class portal_links_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		global $phpbb_root_path, $db;
 		
@@ -167,7 +167,7 @@ class portal_links_module
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 
@@ -188,7 +188,7 @@ class portal_links_module
 	}
 	
 	// Manage the menu links
-	function manage_links($value, $key, $module_id)
+	public function manage_links($value, $key, $module_id)
 	{
 		global $config, $phpbb_admin_path, $user, $phpEx, $db, $template;
 		
@@ -405,13 +405,13 @@ class portal_links_module
 		}
 	}
 	
-	function update_links($key, $module_id)
+	public function update_links($key, $module_id)
 	{
 		$this->manage_links('', $key, $module_id);
 	}
 	
 	// Unserialize links array
-	function utf_unserialize($serial_str) 
+	private function utf_unserialize($serial_str) 
 	{
 		$out = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str );
 		return unserialize($out);   

@@ -28,37 +28,37 @@ class portal_calendar_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 10;
+	public $columns = 10;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'PORTAL_CALENDAR';
+	public $name = 'PORTAL_CALENDAR';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_calendar.png';
+	public $image_src = 'portal_calendar.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_calendar_module';
+	public $language = 'portal_calendar_module';
 	
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
-	var $custom_acp_tpl = 'acp_portal_calendar';
+	public $custom_acp_tpl = 'acp_portal_calendar';
 	
 	/**
 	* additional variables
 	*/
-	var $mini_cal_fdow;
+	private $mini_cal_fdow;
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template, $user, $phpbb_root_path, $phpEx;
 		
@@ -210,7 +210,7 @@ class portal_calendar_module
 		return 'calendar_side.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'ACP_PORTAL_CALENDAR',
@@ -229,7 +229,7 @@ class portal_calendar_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		set_config('board3_sunday_first_' . $module_id, 1);
 		set_config('board3_calendar_today_color_' . $module_id, '#000000');
@@ -242,7 +242,7 @@ class portal_calendar_module
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 		
@@ -267,7 +267,7 @@ class portal_calendar_module
 		return $db->sql_query($sql);
 	}
 	
-	function manage_events($value, $key, $module_id)
+	public function manage_events($value, $key, $module_id)
 	{
 		global $db, $portal_config, $config, $template, $user, $phpEx, $phpbb_admin_path;
 		
@@ -517,23 +517,23 @@ class portal_calendar_module
 		
 	}
 	
-	function update_events($key, $module_id)
+	public function update_events($key, $module_id)
 	{
 		$this->manage_events('', $key, $module_id);
 	}
 	
-	var $dateYYY;						// year in numeric format (YYYY)
-	var $dateMM;						// month in numeric format (MM)
-	var $dateDD;						// day in numeric format (DD)
-	var $ext_dateMM;					// extended month (e.g. February)
-	var $daysMonth;						// count of days in month
-	var $stamp;							// timestamp
-	var $day;							// return array s.a.
+	private $dateYYY;						// year in numeric format (YYYY)
+	private $dateMM;						// month in numeric format (MM)
+	private $dateDD;						// day in numeric format (DD)
+	private $ext_dateMM;					// extended month (e.g. February)
+	private $daysMonth;						// count of days in month
+	private $stamp;							// timestamp
+	private $day;							// return array s.a.
 
 	/**
 	* convert date->timestamp
 	**/
-	function makeTimestamp($date) 
+	private function makeTimestamp($date) 
 	{
 		$this->stamp = strtotime($date);
 		return ($this->stamp);
@@ -542,7 +542,7 @@ class portal_calendar_module
 	/**
 	* get date listed in array
 	**/
-	function getMonth($callDate) 
+	private function getMonth($callDate) 
 	{
 
 		$this->makeTimestamp($callDate);
@@ -565,7 +565,7 @@ class portal_calendar_module
 	}
 	
 	// Unserialize links array
-	function utf_unserialize($serial_str) 
+	private function utf_unserialize($serial_str) 
 	{
 		$out = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str );
 		return unserialize($out);   
@@ -574,7 +574,7 @@ class portal_calendar_module
 	/**
 	* validate URLs and execute apppend_sid if necessary
 	*/
-	function validate_url($url)
+	private function validate_url($url)
 	{
 		global $config;
 

@@ -28,26 +28,26 @@ class portal_donation_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 31;
+	public $columns = 31;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'DONATION';
+	public $name = 'DONATION';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_donation.png';
+	public $image_src = 'portal_donation.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_donation_module';
+	public $language = 'portal_donation_module';
 
-	function get_template_center($module_id)
+	public function get_template_center($module_id)
 	{
 		global $config, $template;
 		
@@ -56,7 +56,7 @@ class portal_donation_module
 		return 'donation_center.html';
 	}
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template;
 
@@ -65,7 +65,7 @@ class portal_donation_module
 		return 'donation_side.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'ACP_PORTAL_PAYPAL_SETTINGS',
@@ -79,13 +79,13 @@ class portal_donation_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		set_config('board3_pay_acc_' . $module_id, 'your@paypal.com');
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 
