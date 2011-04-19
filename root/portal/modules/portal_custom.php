@@ -28,32 +28,32 @@ class portal_custom_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 31;
+	public $columns = 31;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'PORTAL_CUSTOM';
+	public $name = 'PORTAL_CUSTOM';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_custom.png';
+	public $image_src = 'portal_custom.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_custom_module';
+	public $language = 'portal_custom_module';
 	
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
-	var $custom_acp_tpl = 'acp_portal_custom';
+	public $custom_acp_tpl = 'acp_portal_custom';
 
-	function get_template_center($module_id)
+	public function get_template_center($module_id)
 	{
 		global $config, $template, $portal_config, $user;
 
@@ -88,7 +88,7 @@ class portal_custom_module
 		}
 	}
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template, $portal_config, $user;
 
@@ -123,7 +123,7 @@ class portal_custom_module
 		}
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'PORTAL_CUSTOM',
@@ -137,7 +137,7 @@ class portal_custom_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		set_portal_config('board3_custom_' . $module_id . '_code', '');
 		set_config('board3_custom_' . $module_id . '_code', '');
@@ -150,7 +150,7 @@ class portal_custom_module
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 
@@ -175,7 +175,7 @@ class portal_custom_module
 		return ((!$check) ? $check : $db->sql_query($sql)); // if something went wrong, make sure we are aware of the first query
 	}
 	
-	function manage_custom($value, $key, $module_id)
+	public function manage_custom($value, $key, $module_id)
 	{
 		global $db, $portal_config, $config, $template, $user, $phpEx, $phpbb_admin_path, $phpbb_root_path;
 		
@@ -348,7 +348,7 @@ class portal_custom_module
 		}
 	}
 	
-	function update_custom($key, $module_id)
+	public function update_custom($key, $module_id)
 	{
 		$this->manage_custom('', $key, $module_id);
 	}

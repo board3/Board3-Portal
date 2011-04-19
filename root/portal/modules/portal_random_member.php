@@ -28,32 +28,32 @@ class portal_random_member_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 10;
+	public $columns = 10;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'PORTAL_RANDOM_MEMBER';
+	public $name = 'PORTAL_RANDOM_MEMBER';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_random_member.png';
+	public $image_src = 'portal_random_member.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_random_member_module';
+	public $language = 'portal_random_member_module';
 	
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
-	var $custom_acp_tpl = '';
+	public $custom_acp_tpl = '';
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template, $db, $user;
 
@@ -119,7 +119,7 @@ class portal_random_member_module
 		return 'random_member_side.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'PORTAL_RANDOM_MEMBER',
@@ -130,12 +130,12 @@ class portal_random_member_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		return true;
 	}

@@ -17,10 +17,10 @@ if (!defined('IN_PHPBB'))
 
 class acp_portal
 {
-	var $u_action;
-	var $new_config = array();
+	public $u_action;
+	public $new_config = array();
 
-	function main($id, $mode)
+	public function main($id, $mode)
 	{
 		global $db, $user, $cache, $template, $display_vars;
 		global $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx;

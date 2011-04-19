@@ -28,32 +28,32 @@ class portal_poll_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 31;
+	public $columns = 31;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'PORTAL_POLL';
+	public $name = 'PORTAL_POLL';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_poll.png';
+	public $image_src = 'portal_poll.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_poll_module';
+	public $language = 'portal_poll_module';
 	
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
-	var $custom_acp_tpl = '';
+	public $custom_acp_tpl = '';
 
-	function get_template_center($module_id)
+	public function get_template_center($module_id)
 	{
 		global $config, $template, $db, $user, $auth, $phpbb_root_path, $phpEx;
 
@@ -430,7 +430,7 @@ class portal_poll_module
 		return 'poll_center.html';
 	}
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template, $db, $user, $auth, $phpbb_root_path, $phpEx;
 
@@ -807,7 +807,7 @@ class portal_poll_module
 		return 'poll_side.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'ACP_PORTAL_POLLS_SETTINGS',
@@ -825,7 +825,7 @@ class portal_poll_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		set_config('board3_poll_allow_vote_' . $module_id, 1);
 		set_config('board3_poll_topic_id_' . $module_id, '');
@@ -835,7 +835,7 @@ class portal_poll_module
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 
@@ -852,7 +852,7 @@ class portal_poll_module
 	}
 	
 	// Create forum select box
-	function select_forums($value, $key, $module_id)
+	public function select_forums($value, $key, $module_id)
 	{
 		global $user, $config;
 
@@ -876,7 +876,7 @@ class portal_poll_module
 	}
 	
 	// Store selected forums
-	function store_selected_forums($key, $module_id)
+	public function store_selected_forums($key, $module_id)
 	{
 		global $db, $cache;
 		

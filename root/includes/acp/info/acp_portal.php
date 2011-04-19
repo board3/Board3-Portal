@@ -17,7 +17,7 @@ if (!defined('IN_PHPBB'))
 */
 class acp_portal_info
 {
-	function module()
+	public function module()
 	{
 		return array(
 			'filename'	=> 'acp_portal',
