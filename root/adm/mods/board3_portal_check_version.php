@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 
 class board3_portal_check_version
 {
-	function version()
+	public function version()
 	{
 		global $config, $phpbb_root_path, $phpEx;
 

@@ -28,26 +28,26 @@ class portal_leaders_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 10;
+	public $columns = 10;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'THE_TEAM';
+	public $name = 'THE_TEAM';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_team.png';
+	public $image_src = 'portal_team.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_leaders_module';
+	public $language = 'portal_leaders_module';
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template, $user, $auth, $db, $phpEx, $phpbb_root_path;
 		
@@ -204,7 +204,7 @@ class portal_leaders_module
 		}
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'ACP_PORTAL_LEADERS',
@@ -218,14 +218,14 @@ class portal_leaders_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		// Show normal team block by default
 		set_config('board3_leaders_ext_' . $module_id, 0);
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 

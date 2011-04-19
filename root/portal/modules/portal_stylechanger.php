@@ -28,26 +28,26 @@ class portal_stylechanger_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 10;
+	public $columns = 10;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'BOARD_STYLE';
+	public $name = 'BOARD_STYLE';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_style.png';
+	public $image_src = 'portal_style.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_stylechanger_module';
+	public $language = 'portal_stylechanger_module';
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template, $db, $phpEx, $phpbb_root_path, $user;
 
@@ -88,7 +88,7 @@ class portal_stylechanger_module
 		return 'stylechanger_side.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'BOARD_STYLE',
@@ -99,12 +99,12 @@ class portal_stylechanger_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		return true;
 	}

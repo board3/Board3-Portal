@@ -28,31 +28,31 @@ class portal_topposters_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 10;
+	public $columns = 10;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'TOPPOSTERS';
+	public $name = 'TOPPOSTERS';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_top_poster.png';
+	public $image_src = 'portal_top_poster.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_topposters_module';
+	public $language = 'portal_topposters_module';
 
-	function get_template_center($module_id)
+	public function get_template_center($module_id)
 	{
 		return false;
 	}
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $db, $template;
 		global $phpbb_root_path, $phpEx;
@@ -78,7 +78,7 @@ class portal_topposters_module
 		return 'topposters_side.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'TOPPOSTERS_CONFIG',
@@ -92,13 +92,13 @@ class portal_topposters_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		set_config('board3_topposters_' . $module_id, 5);
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 

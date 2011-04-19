@@ -28,26 +28,26 @@ class portal_latest_bots_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 10;
+	public $columns = 10;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'LATEST_BOTS';
+	public $name = 'LATEST_BOTS';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_bots.png';
+	public $image_src = 'portal_bots.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_latest_bots_module';
+	public $language = 'portal_latest_bots_module';
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template, $db, $user;
 
@@ -93,7 +93,7 @@ class portal_latest_bots_module
 		}
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'ACP_PORTAL_BOTS_SETTINGS',
@@ -107,13 +107,13 @@ class portal_latest_bots_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		set_config('board3_last_visited_bots_number_' . $module_id, 1);
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 

@@ -28,32 +28,32 @@ class portal_search_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 10;
+	public $columns = 10;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'PORTAL_SEARCH';
+	public $name = 'PORTAL_SEARCH';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_search.png';
+	public $image_src = 'portal_search.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_search_module';
+	public $language = 'portal_search_module';
 	
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
-	var $custom_acp_tpl = '';
+	public $custom_acp_tpl = '';
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $template, $phpbb_root_path, $phpEx;
 
@@ -62,7 +62,7 @@ class portal_search_module
 		return 'search_side.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'PORTAL_SEARCH',
@@ -73,12 +73,12 @@ class portal_search_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		return true;
 	}

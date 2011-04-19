@@ -28,26 +28,26 @@ class portal_latest_members_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 10;
+	public $columns = 10;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'LATEST_MEMBERS';
+	public $name = 'LATEST_MEMBERS';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_members.png';
+	public $image_src = 'portal_members.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_latest_members_module';
+	public $language = 'portal_latest_members_module';
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template, $db, $user;
 
@@ -70,7 +70,7 @@ class portal_latest_members_module
 		return 'latest_members_side.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'ACP_PORTAL_MEMBERS_SETTINGS',
@@ -84,13 +84,13 @@ class portal_latest_members_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		set_config('board3_max_last_member_' . $module_id, 8);
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 
