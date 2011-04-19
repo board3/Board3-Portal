@@ -28,32 +28,32 @@ class portal_modulename_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 0;
+	public $columns = 0;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'MODULENAME';
+	public $name = 'MODULENAME';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'modulename.png';
+	public $image_src = 'modulename.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = '';
+	public $language = '';
 	
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
-	var $custom_acp_tpl = '';
+	public $custom_acp_tpl = '';
 
-	function get_template_center($module_id)
+	public function get_template_center($module_id)
 	{
 		global $config, $template;
 
@@ -64,7 +64,7 @@ class portal_modulename_module
 		return 'modulename_center.html';
 	}
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template;
 
@@ -75,7 +75,7 @@ class portal_modulename_module
 		return 'modulename_side.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'ACP_CONFIG_MODULENAME',
@@ -90,14 +90,14 @@ class portal_modulename_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		set_config('board3_configname_' . $module_id, 'Hello World!');
 		set_config('board3_configname2_' . $module_id, 1337);
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 

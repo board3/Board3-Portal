@@ -28,26 +28,26 @@ class portal_friends_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 10;
+	public $columns = 10;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'FRIENDS';
+	public $name = 'FRIENDS';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_friends.png';
+	public $image_src = 'portal_friends.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_friends_module';
+	public $language = 'portal_friends_module';
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template, $db, $user;
 
@@ -103,7 +103,7 @@ class portal_friends_module
 		return 'friends_side.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'ACP_PORTAL_FRIENDS_SETTINGS',
@@ -117,13 +117,13 @@ class portal_friends_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		set_config('board3_max_online_friends_' . $module_id, 8);
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		global $db;
 

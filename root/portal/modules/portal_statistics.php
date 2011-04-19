@@ -28,32 +28,32 @@ class portal_statistics_module
 	* right		8
 	* bottom	16
 	*/
-	var $columns = 10;
+	public $columns = 10;
 
 	/**
 	* Default modulename
 	*/
-	var $name = 'STATISTICS';
+	public $name = 'STATISTICS';
 
 	/**
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	var $image_src = 'portal_statistics.png';
+	public $image_src = 'portal_statistics.png';
 
 	/**
 	* module-language file
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
-	var $language = 'portal_statistics_module';
+	public $language = 'portal_statistics_module';
 	
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
-	var $custom_acp_tpl = '';
+	public $custom_acp_tpl = '';
 
-	function get_template_side($module_id)
+	public function get_template_side($module_id)
 	{
 		global $config, $template, $user;
 
@@ -139,7 +139,7 @@ class portal_statistics_module
 		return 'statistics_side.html';
 	}
 
-	function get_template_acp($module_id)
+	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'STATISTICS',
@@ -150,18 +150,18 @@ class portal_statistics_module
 	/**
 	* API functions
 	*/
-	function install($module_id)
+	public function install($module_id)
 	{
 		return true;
 	}
 
-	function uninstall($module_id)
+	public function uninstall($module_id)
 	{
 		return true;
 	}
 	
 	// Better function with only one query
-	function get_topics_count()
+	public function get_topics_count()
 	{
 		global $db, $user;
 		
