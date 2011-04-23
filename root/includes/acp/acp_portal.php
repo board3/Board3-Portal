@@ -261,12 +261,16 @@ class acp_portal
 					
 					$sql_ary = array(
 						'module_image_src'		=> request_var('module_image', ''),
-						'module_name'			=> request_var('module_name', '', true),
 						'module_image_width'	=> request_var('module_img_width', 0),
 						'module_image_height'	=> request_var('module_img_height', 0),
 						'module_group_ids'		=> $module_permission,
 						'module_status'			=> request_var('module_status', B3_MODULE_ENABLED),
 					);
+					
+					if($module_data['module_classname'] != 'latest_bots')
+					{
+						$sql_ary['module_name'] = utf8_normalize_nfc(request_var('module_name', '', true));
+					}
 					
 					// check if module image file actually exists
 					check_file_src($sql_ary['module_image_src'], '', $module_id);
@@ -704,11 +708,26 @@ class acp_portal
 				{
 					$submit = (isset($_POST['submit'])) ? true : false;
 					$directory = $phpbb_root_path . 'portal/modules/';
+					
+					// Create an array of already installed modules
+					$portal_modules = obtain_portal_modules(); 
+					$installed_modules = array(); 
+
+					foreach($portal_modules as $cur_module) 
+					{ 
+						$installed_modules[] = $cur_module['module_classname'];
+					} 
 
 					if ($submit)
 					{
 						$module_classname = request_var('module_classname', '');
 						$class = 'portal_' . $module_classname . '_module';
+						
+						if(in_array($module_classname, $installed_modules) && $module_classname != 'custom')
+						{
+							trigger_error($user->lang['MODULE_ADD_ONCE'] . adm_back_link($this->u_action), E_USER_WARNING);
+						}
+						
 						if (!class_exists($class))
 						{
 							include($directory . 'portal_' . $module_classname . '.' . $phpEx);
@@ -788,6 +807,11 @@ class acp_portal
 						if (preg_match('/^portal_.+\.' . $phpEx . '$/', $file))
 						{
 							$class = str_replace(".$phpEx", '', $file) . '_module';
+							if(in_array(str_replace(array('portal_', '_module'), '', $class), $installed_modules))
+							{
+								continue;
+							}
+							
 							if (!class_exists($class))
 							{
 								include($directory . $file);

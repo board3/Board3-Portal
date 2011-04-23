@@ -119,7 +119,6 @@ class portal_statistics_module
 
 		// Assign specific vars
 		$template->assign_vars(array(
-			'S_DISPLAY_ADVANCED_STAT'		=> true,
 			'B3_TOTAL_POSTS'				=> sprintf($user->lang[$l_total_post_s], $total_posts),
 			'B3_TOTAL_TOPICS'				=> sprintf($user->lang[$l_total_topic_s], $total_topics),
 			'B3_TOTAL_USERS'				=> sprintf($user->lang[$l_total_user_s], $total_users),

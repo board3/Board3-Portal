@@ -97,7 +97,6 @@ class portal_friends_module
 		// Assign specific vars
 		$template->assign_vars(array(
 			'S_DISPLAY_FRIENDS'	=> $s_display_friends,
-			'S_ZEBRA_ENABLED'	=> true,
 		));
 
 		return 'friends_side.html';

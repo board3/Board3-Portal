@@ -70,6 +70,7 @@ $lang = array_merge($lang, array(
 	'MODULE_RESET'				=> 'Reset module configuration',
 	'MODULE_RESET_EXP'			=> 'This will reset all settings to the default!',
 	'MODULE_STATUS'				=> 'Enable module',
+	'MODULE_ADD_ONCE'			=> 'This module can only be added once.',
 
 	// general
 	'ACP_PORTAL'							=> 'Portal',
