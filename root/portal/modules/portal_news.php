@@ -340,7 +340,6 @@ class portal_news_module
 			'GOTO_PAGE_IMG'				=> $user->img('icon_post_target', 'GOTO_PAGE'),
 			'S_NEWEST_OR_FIRST'			=> ($config['board3_news_show_last_' . $module_id]) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
 			'POSTED_BY_TEXT'			=> ($config['board3_news_show_last_' . $module_id]) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
-			'S_DISPLAY_NEWS'			=> true,
 			'S_DISPLAY_NEWS_RVS'		=> ($config['board3_show_news_replies_views_' . $module_id]) ? true : false,
 			'S_TOPIC_ICONS'				=> $topic_icons,
 		));

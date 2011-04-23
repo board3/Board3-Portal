@@ -421,7 +421,6 @@ class portal_poll_module
 			$db->sql_freeresult($result);
 
 			$template->assign_vars(array(
-				'S_DISPLAY_POLL'		=> true,
 				'S_HAS_POLL'			=> $has_poll,
 				'POLL_LEFT_CAP_IMG'		=> $user->img('poll_left'),
 				'POLL_RIGHT_CAP_IMG'	=> $user->img('poll_right'),
@@ -789,7 +788,7 @@ class portal_poll_module
 							'POLL_OPTION_RESULT'	=> $pd['poll_option_total'],
 							'POLL_OPTION_PERCENT'	=> $option_pct_txt,
 							'POLL_OPTION_PCT'		=> round($option_pct * 100),
-							'POLL_OPTION_IMG'		=> $user->img('poll_center', $option_pct_txt, round($option_pct * 250)),
+							'POLL_OPTION_IMG'		=> $user->img('poll_center', $option_pct_txt, round($option_pct * 35) . 'px'),
 							'POLL_OPTION_VOTED'		=> (in_array($pd['poll_option_id'], $cur_voted_id)) ? true : false
 						));
 					}
@@ -798,7 +797,6 @@ class portal_poll_module
 			$db->sql_freeresult($result);
 
 			$template->assign_vars(array(
-				'S_DISPLAY_POLL'		=> true,
 				'S_HAS_POLL'			=> $has_poll,
 				'POLL_LEFT_CAP_IMG'		=> $user->img('poll_left'),
 				'POLL_RIGHT_CAP_IMG'	=> $user->img('poll_right'),

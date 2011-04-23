@@ -82,7 +82,6 @@ class portal_stylechanger_module
 		// Assign specific vars
 		$template->assign_vars(array(
 			'S_STYLE_OPTIONS'			=> ($config['override_user_style'] || $style_count < 2) ? '' : style_select($user->data['user_style']),
-			'S_DISPLAY_CHANGE_STYLE'	=> true,
 		));
 
 		return 'stylechanger_side.html';

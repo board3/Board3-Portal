@@ -33,7 +33,8 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	'LATEST_BOTS'			=> 'Latest Bots',
-	'LAST_VISITED_BOTS'		=> 'Last %s visited bots',
+	'LAST_VISITED_BOTS'		=> 'Last visited bots',
+	'LAST_VISITED_BOTS_CNT'	=> 'Last %s visited bots',
 	
 	// ACP
 	'ACP_PORTAL_BOTS_SETTINGS'					=> 'Visiting bots settings',
