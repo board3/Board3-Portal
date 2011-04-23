@@ -71,6 +71,7 @@ $lang = array_merge($lang, array(
 	'MODULE_RESET'				=> 'Modul Einstellungen zurücksetzen',
 	'MODULE_RESET_EXP'			=> 'Dies wird alle Einstellungen des Moduls auf die Standardeinstellungen zurücksetzen!',
 	'MODULE_STATUS'				=> 'Aktiviere Modul',
+	'FORUMLIST_ADD_ONCE'		=> 'Das Forenliste Module kann nur einmal hinzugefügt werden.',
 	
 	// general
 	'ACP_PORTAL'							=> 'Portal',

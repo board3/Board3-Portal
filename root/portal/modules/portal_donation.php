@@ -51,7 +51,10 @@ class portal_donation_module
 	{
 		global $config, $template;
 		
-		$template->assign_var('PAY_ACC', $config['board3_pay_acc_' . $module_id]);
+		$template->assign_block_vars('donation', array(
+			'PAY_ACC'		=> $config['board3_pay_acc_' . $module_id],
+			'MODULE_ID'		=> $module_id,
+		));
 
 		return 'donation_center.html';
 	}
@@ -60,7 +63,10 @@ class portal_donation_module
 	{
 		global $config, $template;
 
-		$template->assign_var('PAY_ACC', $config['board3_pay_acc_' . $module_id]);
+		$template->assign_block_vars('donation', array(
+			'PAY_ACC'		=> $config['board3_pay_acc_' . $module_id],
+			'MODULE_ID'		=> $module_id,
+		));
 
 		return 'donation_side.html';
 	}

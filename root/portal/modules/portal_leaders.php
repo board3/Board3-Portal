@@ -53,6 +53,10 @@ class portal_leaders_module
 		
 		// Display a listing of board admins, moderators
 		$user->add_lang('groups');
+		
+		$template->assign_block_vars('leaders', array(
+			'MODULE_ID'	=> $module_id,
+		));
 
 		if($config['board3_leaders_ext_' . $module_id])
 		{
@@ -127,7 +131,7 @@ class portal_leaders_module
 						$group_name = ($group['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $group['group_name']] : $group['group_name'];
 						$u_group = append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $group_id);
 
-						$template->assign_block_vars('group', array(
+						$template->assign_block_vars('leaders.group', array(
 							'GROUP_NAME'	=> $group_name,
 							'GROUP_COLOUR'	=> $group['group_colour'],
 							'U_GROUP'		=> $u_group,
@@ -135,7 +139,7 @@ class portal_leaders_module
 
 						foreach($group['group_users'] as $group_user)
 						{
-							$template->assign_block_vars('group.member', array(
+							$template->assign_block_vars('leaders.group.member', array(
 								'USER_ID'			=> $group_user['user_id'],
 								'USERNAME_FULL'		=> get_username_string('full', $group_user['user_id'], $group_user['username'], $group_user['user_colour']),
 							));
@@ -186,7 +190,7 @@ class portal_leaders_module
 					$u_group = append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $row['group_id']);
 				}
 
-				$template->assign_block_vars($which_row, array(
+				$template->assign_block_vars('leaders.' . $which_row, array(
 					'USER_ID'			=> $row['user_id'],
 					'GROUP_NAME'		=> $group_name,
 					'GROUP_COLOR'		=> $row['group_colour'],

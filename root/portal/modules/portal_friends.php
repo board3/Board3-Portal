@@ -50,8 +50,13 @@ class portal_friends_module
 	public function get_template_side($module_id)
 	{
 		global $config, $template, $db, $user;
-
-		$s_display_friends = false;
+		
+		// Assign specific vars
+		$template->assign_block_vars('b3p_friends', array(
+			'MODULE_ID'	=> $module_id,
+		));
+		
+		$display_friends = false;
 
 		// Output listing of friends online
 		$update_time = $config['load_online_time'] * 60;
@@ -82,9 +87,9 @@ class portal_friends_module
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$which = (time() - $update_time < $row['online_time'] && ($row['viewonline'] || $auth->acl_get('u_viewonline'))) ? 'online' : 'offline';
-			$s_display_friends = ($row['user_id']) ? true : false;
+			$display_friends = ($row['user_id']) ? true : false;
 
-			$template->assign_block_vars("b3p_friends_{$which}", array(
+			$template->assign_block_vars("b3p_friends.b3p_friends_{$which}", array(
 				'USER_ID'		=> $row['user_id'],
 				'U_PROFILE'		=> get_username_string('profile', $row['user_id'], $row['username'], $row['user_colour']),
 				'USER_COLOUR'	=> get_username_string('colour', $row['user_id'], $row['username'], $row['user_colour']),
@@ -94,13 +99,7 @@ class portal_friends_module
 		}
 		$db->sql_freeresult($result);
 
-		// Assign specific vars
-		$template->assign_vars(array(
-			'S_DISPLAY_FRIENDS'	=> $s_display_friends,
-			'S_ZEBRA_ENABLED'	=> true,
-		));
-
-		return 'friends_side.html';
+		return ($display_friends) ? 'friends_side.html' : false;
 	}
 
 	public function get_template_acp($module_id)

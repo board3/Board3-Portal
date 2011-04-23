@@ -1,37 +1,38 @@
+<!-- BEGIN poll -->
+<!-- IF poll.MODULE_ID eq $MODULE_ID -->
 <a name="viewpoll"></a>
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
-		<!-- IF S_HAS_POLL -->
 		<!-- BEGIN poll_side -->
-			<!-- IF poll_side.S_CAN_VOTE --><form method="post" action="{poll_side.S_POLL_ACTION}"><!-- ENDIF -->
+			<!-- IF poll.poll_side.S_CAN_VOTE --><form method="post" action="{poll.poll_side.S_POLL_ACTION}"><!-- ENDIF -->
 
 			<table class="tablebg" cellspacing="1" cellpadding="4" border="0" align="center" width="100%">
 				<tr>
 					<td class="row2" style="text-align: left">
-						<span class="gen"><b>{poll_side.POLL_QUESTION}</b></span><br /><span class="gensmall">{poll_side.L_POLL_LENGTH}</span>
+						<span class="gen"><b>{poll.poll_side.POLL_QUESTION}</b></span><br /><span class="gensmall">{poll.poll_side.L_POLL_LENGTH}</span>
 					</td>
 				</tr>
-				<!-- IF poll_side.S_POLL_HAS_OPTIONS -->
+				<!-- IF poll.poll_side.S_POLL_HAS_OPTIONS -->
 				<tr>	
 					<td class="row1" align="center">
 						<table cellspacing="0" cellpadding="2" border="0">
 						<!-- BEGIN poll_option -->
 							<tr>
-							<!-- IF poll_side.S_CAN_VOTE -->
+							<!-- IF poll.poll_side.S_CAN_VOTE -->
 								<td>
-									<!-- IF poll_side.S_IS_MULTI_CHOICE -->
-										<input type="checkbox" class="radio" name="vote_id[]" value="{poll_side.poll_option.POLL_OPTION_ID}"<!-- IF poll_side.poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF --> />
+									<!-- IF poll.poll_side.S_IS_MULTI_CHOICE -->
+										<input type="checkbox" class="radio" name="vote_id[]" value="{poll.poll_side.poll_option.POLL_OPTION_ID}"<!-- IF poll.poll_side.poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF --> />
 									<!-- ELSE -->
-										<input type="radio" class="radio" name="vote_id[]" value="{poll_side.poll_option.POLL_OPTION_ID}"<!-- IF poll_side.poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF --> />
+										<input type="radio" class="radio" name="vote_id[]" value="{poll.poll_side.poll_option.POLL_OPTION_ID}"<!-- IF poll.poll_side.poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF --> />
 									<!-- ENDIF -->
 								</td>
 							<!-- ENDIF -->
-								<td style="text-align: left"><span class="gen">{poll_side.poll_option.POLL_OPTION_CAPTION}</span></td>
-							<!-- IF poll_side.S_DISPLAY_RESULTS -->
-									<td dir="ltr" style="text-align: left; white-space: nowrap">{POLL_LEFT_CAP_IMG}{poll_side.poll_option.POLL_OPTION_IMG}{POLL_RIGHT_CAP_IMG}</td>
-									<td class="gen" align="{S_CONTENT_FLOW_END}"><b>&nbsp;{poll_side.poll_option.POLL_OPTION_PERCENT}&nbsp;</b></td>
-									<td class="gen" style="white-space: nowrap">[ {poll_side.poll_option.POLL_OPTION_RESULT} ]</td>
-								<!-- IF poll_side.poll_option.POLL_OPTION_VOTED -->
-									<td class="gensmall" valign="top"><b title="{L_POLL_VOTED_OPTION}">x</b></td>
+								<td style="text-align: left"><span class="gen">{poll.poll_side.poll_option.POLL_OPTION_CAPTION}</span></td>
+							<!-- IF poll.poll_side.S_DISPLAY_RESULTS -->
+									<td dir="ltr" style="text-align: left; white-space: nowrap">{poll.POLL_LEFT_CAP_IMG}{poll.poll_side.poll_option.POLL_OPTION_IMG}{poll.POLL_RIGHT_CAP_IMG}</td>
+									<td class="gen" align="{S_CONTENT_FLOW_END}"><b>&nbsp;{poll.poll_side.poll_option.POLL_OPTION_PERCENT}&nbsp;</b></td>
+									<td class="gen" style="white-space: nowrap">[ {poll.poll_side.poll_option.POLL_OPTION_RESULT} ]</td>
+								<!-- IF poll.poll_side.poll_option.POLL_OPTION_VOTED -->
+									<td class="gensmall" valign="middle"><b title="{L_POLL_VOTED_OPTION}">x</b></td>
 								<!-- ENDIF -->
 							<!-- ENDIF -->
 							</tr>
@@ -46,26 +47,25 @@
 					</td>
 				</tr>
 				<!-- ENDIF -->
-			<!-- IF poll_side.S_CAN_VOTE -->
+			<!-- IF poll.poll_side.S_CAN_VOTE -->
 				<tr>
-					<td class="row1" align="center"><span class="gensmall">{poll_side.L_MAX_VOTES}</span><br /><br /><input type="submit" name="update" value="{L_SUBMIT_VOTE}" class="btnlite" /></td>
+					<td class="row1" align="center"><span class="gensmall">{poll.poll_side.L_MAX_VOTES}</span><br /><br /><input type="submit" name="update" value="{L_SUBMIT_VOTE}" class="btnlite" /></td>
 				</tr>
 			<!-- ENDIF -->
-			<!-- IF poll_side.S_DISPLAY_RESULTS -->
+			<!-- IF poll.poll_side.S_DISPLAY_RESULTS -->
 				<tr>
-					<td class="row1" colspan="4" align="center"><span class="gensmall"><b>{L_TOTAL_VOTES} : {poll_side.TOTAL_VOTES}</b> <b><a href="{poll_side.U_VIEW_TOPIC}">{L_VIEW_TOPIC}</a></b></span></td>
+					<td class="row1" colspan="4" align="center"><span class="gensmall"><b>{L_TOTAL_VOTES} : {poll.poll_side.TOTAL_VOTES}</b> <b><a href="{poll.poll_side.U_VIEW_TOPIC}">{L_VIEW_TOPIC}</a></b></span></td>
 				</tr>
 			<!-- ELSE -->
 				<tr>
-					<td class="row1" align="center"><span class="gensmall"><b><a href="{poll_side.U_VIEW_RESULTS}">{L_VIEW_RESULTS}</a></b> <b><a href="{poll_side.U_VIEW_TOPIC}">{L_VIEW_TOPIC}</a></b></span></td>
+					<td class="row1" align="center"><span class="gensmall"><b><a href="{poll.poll_side.U_VIEW_RESULTS}">{L_VIEW_RESULTS}</a></b> <b><a href="{poll.poll_side.U_VIEW_TOPIC}">{L_VIEW_TOPIC}</a></b></span></td>
 				</tr>
 			<!-- ENDIF -->
 				</table>
-				<!-- IF poll_side.S_CAN_VOTE -->{S_HIDDEN_FIELDS}
+				<!-- IF poll.poll_side.S_CAN_VOTE -->{S_HIDDEN_FIELDS}
 				
 				</form><!-- ENDIF -->
-		<!-- END poll -->
-		<!-- ELSE -->
+		<!-- BEGINELSE -->
 			<table class="tablebg" cellspacing="1" width="100%">
 				<tr>
 					<td class="row1">
@@ -73,5 +73,7 @@
 					</td>
 				</tr>
 			</table>
-		<!-- ENDIF -->
+		<!-- END poll_side -->
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END poll -->

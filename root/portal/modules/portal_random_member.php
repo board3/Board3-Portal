@@ -113,6 +113,7 @@ class portal_random_member_module
 			'USER_OCC'		=> censor_text($row['user_occ']),
 			'USER_FROM'		=> censor_text($row['user_from']),
 			'U_WWW'			=> censor_text($row['user_website']),
+			'MODULE_ID'		=> $module_id,
 		));
 		$db->sql_freeresult($result);
 

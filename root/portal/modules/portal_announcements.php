@@ -46,6 +46,11 @@ class portal_announcements_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = 'portal_announcements_module';
+	
+	/**
+	* additional variables
+	*/
+	private $tpl_vars = array();
 
 	public function get_template_center($module_id)
 	{
@@ -63,12 +68,23 @@ class portal_announcements_module
 		// Any announcements present? If not terminate it here.
 		if (sizeof($fetch_news) == 0)
 		{
-			$template->assign_block_vars('announcements_row', array(
+			$this->tpl_vars = array_merge($this->tpl_vars, array(
+				'NEWEST_POST_IMG'				=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
+				'READ_POST_IMG'					=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
+				'GOTO_PAGE_IMG'					=> $user->img('icon_post_target', 'GOTO_PAGE'),
+				'S_DISPLAY_ANNOUNCEMENTS'		=> true,
+				'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ($config['board3_show_announcements_replies_views_' . $module_id]) ? true : false,
+				'S_TOPIC_ICONS'					=> $topic_icons,
+				'MODULE_ID'						=> $module_id,
+				'S_CAN_READ'					=> true,
+			));
+			
+			$template->assign_block_vars('announcements', $this->tpl_vars);
+			
+			$template->assign_block_vars('announcements.announcements_row', array(
 				'S_NO_TOPICS'	=> true,
 				'S_NOT_LAST'	=> false
 			));
-
-			$template->assign_var('S_CAN_READ', false);
 		}
 		else
 		{
@@ -144,10 +160,42 @@ class portal_announcements_module
 			}
 			
 			$topic_tracking_info = (get_portal_tracking_info($fetch_news));
+			
+			$topic_icons = false;
+			if(!empty($fetch_news['topic_icons']))
+			{
+				$topic_icons = true;
+			}
 
 			if($announcement < 0)
 			// Show the announcements overview 
 			{
+				if ($config['board3_announcements_archive_' . $module_id])
+				{
+					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $config['board3_number_of_announcements_' . $module_id], $start, 'announcements');
+				}
+				
+				// Assign block vars before we assign the block vars of the nested block
+				if ($config['board3_number_of_announcements_' . $module_id] != 0 && $config['board3_announcements_archive_' . $module_id])
+				{
+					$this->tpl_vars = array_merge($this->tpl_vars, array(
+						'AP_PAGINATION'			=> $pagination,
+						'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
+						'AP_PAGE_NUMBER'		=> on_page($total_announcements, $config['board3_number_of_announcements_' . $module_id], $start))
+					);
+				}
+				$this->tpl_vars = array_merge($this->tpl_vars, array(
+					'NEWEST_POST_IMG'				=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
+					'READ_POST_IMG'					=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
+					'GOTO_PAGE_IMG'					=> $user->img('icon_post_target', 'GOTO_PAGE'),
+					'S_DISPLAY_ANNOUNCEMENTS'		=> true,
+					'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ($config['board3_show_announcements_replies_views_' . $module_id]) ? true : false,
+					'S_TOPIC_ICONS'					=> $topic_icons,
+					'MODULE_ID'						=> $module_id,
+				));
+				
+				$template->assign_block_vars('announcements', $this->tpl_vars);
+
 				$count = $fetch_news['topic_count'];
 				for ($i = 0; $i < $count; $i++)
 				{
@@ -172,11 +220,6 @@ class portal_announcements_module
 					$read_full_url = (isset($_GET['ap'])) ? 'ap='. $start . '&amp;announcement=' . $i . '#a' . $i : 'announcement=' . $i . '#a' . $i;
 					$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 
-					if ($config['board3_announcements_archive_' . $module_id])
-					{
-						$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $config['board3_number_of_announcements_' . $module_id], $start, 'announcements');
-					}
-
 					$replies = ($auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
 					$folder_img = $folder_alt = $topic_type = $folder = $folder_new = '';
 					switch ($fetch_news[$i]['topic_type'])
@@ -200,79 +243,71 @@ class portal_announcements_module
 						break;
 					}
 
-				if ($fetch_news[$i]['topic_status'] == ITEM_LOCKED)
-				{
-					$folder .= '_locked';
-					$folder_new .= '_locked';
-				}
-				if ($fetch_news[$i]['topic_type'] == POST_GLOBAL)
-				{
-					$global_announce_list[$fetch_news[$i]['topic_id']] = true;
-				}
-				if ($fetch_news[$i]['topic_posted'])
-				{
-					$folder .= '_mine';
-					$folder_new .= '_mine';
-				}
-				$folder_img = ($unread_topic) ? $folder_new : $folder;
-				$folder_alt = ($unread_topic) ? 'NEW_POSTS' : (($fetch_news[$i]['topic_status'] == ITEM_LOCKED) ? 'TOPIC_LOCKED' : 'NO_NEW_POSTS');
+					if ($fetch_news[$i]['topic_status'] == ITEM_LOCKED)
+					{
+						$folder .= '_locked';
+						$folder_new .= '_locked';
+					}
+					if ($fetch_news[$i]['topic_type'] == POST_GLOBAL)
+					{
+						$global_announce_list[$fetch_news[$i]['topic_id']] = true;
+					}
+					if ($fetch_news[$i]['topic_posted'])
+					{
+						$folder .= '_mine';
+						$folder_new .= '_mine';
+					}
+					$folder_img = ($unread_topic) ? $folder_new : $folder;
+					$folder_alt = ($unread_topic) ? 'NEW_POSTS' : (($fetch_news[$i]['topic_status'] == ITEM_LOCKED) ? 'TOPIC_LOCKED' : 'NO_NEW_POSTS');
 
-				// Grab icons
-				$icons = $cache->obtain_icons();
+					// Grab icons
+					$icons = $cache->obtain_icons();
 
-				$template->assign_block_vars('announcements_row', array(
-					'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
-					'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
-					'TITLE'					=> $fetch_news[$i]['topic_title'],
-					'POSTER'				=> $fetch_news[$i]['username'],
-					'POSTER_FULL'			=> $fetch_news[$i]['username_full'],
-					'USERNAME_FULL_LAST'	=> $fetch_news[$i]['username_full_last'],
-					'U_USER_PROFILE'		=> (($fetch_news[$i]['user_type'] == USER_NORMAL || $fetch_news[$i]['user_type'] == USER_FOUNDER) && $fetch_news[$i]['user_id'] != ANONYMOUS) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $fetch_news[$i]['user_id']) : '',
-					'TIME'					=> $fetch_news[$i]['topic_time'],
-					'LAST_POST_TIME'		=> $user->format_date($fetch_news[$i]['topic_last_post_time']),
-					'TEXT'					=> $fetch_news[$i]['post_text'],
-					'REPLIES'				=> $fetch_news[$i]['topic_replies'],
-					'TOPIC_VIEWS'			=> $fetch_news[$i]['topic_views'],
-					'A_ID'					=> $i,
-					'TOPIC_FOLDER_IMG'		=> $user->img($folder_img, $folder_alt),
-					'TOPIC_FOLDER_IMG_SRC'	=> $user->img($folder_img, $folder_alt, false, '', 'src'),
-					'TOPIC_FOLDER_IMG_ALT'	=> $user->lang[$folder_alt],
-					'FOLDER_IMG'			=> $user->img('topic_read', 'NO_NEW_POSTS'),
-					'TOPIC_ICON_IMG'		=> (!empty($icons[$fetch_news[$i]['icon_id']])) ? $icons[$fetch_news[$i]['icon_id']]['img'] : '',
-					'TOPIC_ICON_IMG_WIDTH'	=> (!empty($icons[$fetch_news[$i]['icon_id']])) ? $icons[$fetch_news[$i]['icon_id']]['width'] : '',
-					'TOPIC_ICON_IMG_HEIGHT'	=> (!empty($icons[$fetch_news[$i]['icon_id']])) ? $icons[$fetch_news[$i]['icon_id']]['height'] : '',
-					'U_VIEWFORUM'			=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $fetch_news[$i]['forum_id']),
-					'U_LAST_COMMENTS'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id . '&amp;p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
-					'U_VIEW_COMMENTS'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id),
-					'U_VIEW_UNREAD'			=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id . '&amp;view=unread#unread'),
-					'U_POST_COMMENT'		=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;' . (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id),
-					'U_READ_FULL'			=> append_sid("{$phpbb_root_path}portal.$phpEx", $read_full_url),
-					'L_READ_FULL'			=> $read_full,
-					'OPEN'					=> $open_bracket,
-					'CLOSE'					=> $close_bracket,
-					'S_NOT_LAST'			=> ($i < sizeof($fetch_news) - 1) ? true : false,
-					'S_POLL'				=> $fetch_news[$i]['poll'],
-					'S_UNREAD_INFO'			=> $unread_topic,
-					'PAGINATION'			=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),
-					'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
-				));
+					$template->assign_block_vars('announcements.announcements_row', array(
+						'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
+						'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
+						'TITLE'					=> $fetch_news[$i]['topic_title'],
+						'POSTER'				=> $fetch_news[$i]['username'],
+						'POSTER_FULL'			=> $fetch_news[$i]['username_full'],
+						'USERNAME_FULL_LAST'	=> $fetch_news[$i]['username_full_last'],
+						'U_USER_PROFILE'		=> (($fetch_news[$i]['user_type'] == USER_NORMAL || $fetch_news[$i]['user_type'] == USER_FOUNDER) && $fetch_news[$i]['user_id'] != ANONYMOUS) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $fetch_news[$i]['user_id']) : '',
+						'TIME'					=> $fetch_news[$i]['topic_time'],
+						'LAST_POST_TIME'		=> $user->format_date($fetch_news[$i]['topic_last_post_time']),
+						'TEXT'					=> $fetch_news[$i]['post_text'],
+						'REPLIES'				=> $fetch_news[$i]['topic_replies'],
+						'TOPIC_VIEWS'			=> $fetch_news[$i]['topic_views'],
+						'A_ID'					=> $i,
+						'TOPIC_FOLDER_IMG'		=> $user->img($folder_img, $folder_alt),
+						'TOPIC_FOLDER_IMG_SRC'	=> $user->img($folder_img, $folder_alt, false, '', 'src'),
+						'TOPIC_FOLDER_IMG_ALT'	=> $user->lang[$folder_alt],
+						'FOLDER_IMG'			=> $user->img('topic_read', 'NO_NEW_POSTS'),
+						'TOPIC_ICON_IMG'		=> (!empty($icons[$fetch_news[$i]['icon_id']])) ? $icons[$fetch_news[$i]['icon_id']]['img'] : '',
+						'TOPIC_ICON_IMG_WIDTH'	=> (!empty($icons[$fetch_news[$i]['icon_id']])) ? $icons[$fetch_news[$i]['icon_id']]['width'] : '',
+						'TOPIC_ICON_IMG_HEIGHT'	=> (!empty($icons[$fetch_news[$i]['icon_id']])) ? $icons[$fetch_news[$i]['icon_id']]['height'] : '',
+						'U_VIEWFORUM'			=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $fetch_news[$i]['forum_id']),
+						'U_LAST_COMMENTS'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id . '&amp;p=' . $fetch_news[$i]['topic_last_post_id'] . '#p' . $fetch_news[$i]['topic_last_post_id']),
+						'U_VIEW_COMMENTS'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id),
+						'U_VIEW_UNREAD'			=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id . '&amp;view=unread#unread'),
+						'U_POST_COMMENT'		=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;' . (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id),
+						'U_READ_FULL'			=> append_sid("{$phpbb_root_path}portal.$phpEx", $read_full_url),
+						'L_READ_FULL'			=> $read_full,
+						'OPEN'					=> $open_bracket,
+						'CLOSE'					=> $close_bracket,
+						'S_NOT_LAST'			=> ($i < sizeof($fetch_news) - 1) ? true : false,
+						'S_POLL'				=> $fetch_news[$i]['poll'],
+						'S_UNREAD_INFO'			=> $unread_topic,
+						'PAGINATION'			=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),
+						'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
+					));
 
 					if(!empty($fetch_news[$i]['attachments']))
 					{
 						foreach ($fetch_news[$i]['attachments'] as $attachment)
 						{
-							$template->assign_block_vars('announcements_row.attachment', array(
+							$template->assign_block_vars('announcements.announcements_row.attachment', array(
 								'DISPLAY_ATTACHMENT'	=> $attachment)
 							);
 						}
-					}
-					if ($config['board3_number_of_announcements_' . $module_id] != 0 && $config['board3_announcements_archive_' . $module_id])
-					{
-						$template->assign_vars(array(
-							'AP_PAGINATION'			=> $pagination,
-							'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
-							'AP_PAGE_NUMBER'		=> on_page($total_announcements, $config['board3_number_of_announcements_' . $module_id], $start))
-						);
 					}
 				}
 			}
@@ -294,9 +329,31 @@ class portal_announcements_module
 				if ($config['board3_announcements_archive_' . $module_id])
 				{
 					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $config['board3_number_of_announcements_' . $module_id], $start, 'announcements');
-				}	
+				}
 				
-				$template->assign_block_vars('announcements_row', array(
+				// Assign block vars before we assign the block vars of the nested block
+				if ($config['board3_number_of_announcements_' . $module_id] != 0 && $config['board3_announcements_archive_' . $module_id])
+				{
+					$this->tpl_vars = array_merge($this->tpl_vars, array(
+						'AP_PAGINATION'			=> $pagination,
+						'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
+						'AP_PAGE_NUMBER'		=> on_page($total_announcements, $config['board3_number_of_announcements_' . $module_id], $start))
+					);
+				}
+				
+				$this->tpl_vars = array_merge($this->tpl_vars, array(
+					'NEWEST_POST_IMG'				=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
+					'READ_POST_IMG'					=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
+					'GOTO_PAGE_IMG'					=> $user->img('icon_post_target', 'GOTO_PAGE'),
+					'S_DISPLAY_ANNOUNCEMENTS'		=> true,
+					'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ($config['board3_show_announcements_replies_views_' . $module_id]) ? true : false,
+					'S_TOPIC_ICONS'					=> $topic_icons,
+					'MODULE_ID'						=> $module_id,
+				));
+				
+				$template->assign_block_vars('announcements', $this->tpl_vars);
+				
+				$template->assign_block_vars('announcements.announcements_row', array(
 					'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
 					'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 					'TITLE'					=> $fetch_news[$i]['topic_title'],
@@ -325,37 +382,13 @@ class portal_announcements_module
 				{
 					foreach ($fetch_news[$i]['attachments'] as $attachment)
 					{
-						$template->assign_block_vars('announcements_row.attachment', array(
+						$template->assign_block_vars('announcements.announcements_row.attachment', array(
 							'DISPLAY_ATTACHMENT'	=> $attachment)
 						);
 					}
 				}
-
-				if ($config['board3_number_of_announcements_' . $module_id] <> 0 && $config['board3_announcements_archive_' . $module_id])
-				{
-					$template->assign_vars(array(
-						'AP_PAGINATION'			=> $pagination,
-						'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
-						'AP_PAGE_NUMBER'		=> on_page($total_announcements, $config['board3_number_of_announcements_' . $module_id], $start))
-					);
-				}
 			}
 		}
-
-		$topic_icons = false;
-		if(!empty($fetch_news['topic_icons']))
-		{
-			$topic_icons = true;
-		}
-
-		$template->assign_vars(array(
-			'NEWEST_POST_IMG'				=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
-			'READ_POST_IMG'					=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
-			'GOTO_PAGE_IMG'					=> $user->img('icon_post_target', 'GOTO_PAGE'),
-			'S_DISPLAY_ANNOUNCEMENTS'		=> true,
-			'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ($config['board3_show_announcements_replies_views_' . $module_id]) ? true : false,
-			'S_TOPIC_ICONS'					=> $topic_icons,
-		));
 
 		if ($config['board3_announcements_style_' . $module_id])
 		{

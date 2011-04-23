@@ -2,7 +2,11 @@
 	<div class="panel bg1" style="margin-bottom: 0px">
 		<div class="inner"><span class="portal-corners-top-inner"></span>
 			<div class="postbody" style="width: 100%">
-				<div class="content">{PORTAL_WELCOME_MSG}</div>
+			<!-- BEGIN welcome -->
+			<!-- IF welcome.MODULE_ID eq $MODULE_ID -->
+				<div class="content">{welcome.PORTAL_WELCOME_MSG}</div>
+			<!-- ENDIF -->
+			<!-- END welcome -->
 			</div>
 		<span class="portal-corners-bottom-inner"></span></div>
 	</div>

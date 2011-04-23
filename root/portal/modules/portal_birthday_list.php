@@ -113,12 +113,13 @@ class portal_birthday_list_module
 		}
 
 		// Assign index specific vars
-		$template->assign_vars(array(
+		$template->assign_block_vars('birthday_list', array(
 			'BIRTHDAY_LIST'					=> $birthday_list,
 			'BIRTHDAYS_AHEAD_LIST'			=> ($config['board3_birthdays_ahead_' . $module_id]) ? $birthday_ahead_list : '',
 			'L_BIRTHDAYS_AHEAD'				=> sprintf($user->lang['BIRTHDAYS_AHEAD'], $config['board3_birthdays_ahead_' . $module_id]),
 			'S_DISPLAY_BIRTHDAY_LIST'		=> ($config['load_birthdays']) ? true : false,
 			'S_DISPLAY_BIRTHDAY_AHEAD_LIST'	=> ($config['board3_birthdays_ahead_' . $module_id] > 0) ? true : false,
+			'MODULE_ID'						=> $module_id,
 		));
 
 		return 'birthdays_side.html';

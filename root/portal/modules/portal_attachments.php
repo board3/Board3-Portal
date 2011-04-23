@@ -100,6 +100,8 @@ class portal_attachments_module
 
 		if($attach_forums === true)
 		{
+			$template->assign_block_vars('attachments', array('MODULE_ID'	=> $module_id));
+
 			// Just grab all attachment info from database
 			$sql = 'SELECT
 						a.*,
@@ -122,7 +124,7 @@ class portal_attachments_module
 
 				$replace = character_limit(utf8_substr($row['real_filename'], 0, strrpos($row['real_filename'], '.')), $config['board3_attach_max_length_' . $module_id]);
 
-				$template->assign_block_vars('attach', array(
+				$template->assign_block_vars('attachments.attach', array(
 					'FILESIZE'			=> $row['filesize'] . ' ' . $size_lang,
 					'FILETIME'			=> $user->format_date($row['filetime']),
 					'DOWNLOAD_COUNT'	=> (int) $row['download_count'], // grab downloads count
@@ -137,12 +139,6 @@ class portal_attachments_module
 				));
 			}
 			$db->sql_freeresult($result);
-
-			$template->assign_var('S_DISPLAY_ATTACHMENTS', true);
-		} 
-		else 
-		{
-			$template->assign_var('S_DISPLAY_ATTACHMENTS', false);
 		}
 
 		return 'attachments_center.html';
@@ -201,6 +197,8 @@ class portal_attachments_module
 
 		if($attach_forums === true)
 		{
+			$template->assign_block_vars('attachments', array('MODULE_ID'	=> $module_id));
+
 			// Just grab all attachment info from database
 			$sql = 'SELECT
 						a.*,
@@ -223,7 +221,7 @@ class portal_attachments_module
 
 				$replace = character_limit(utf8_substr($row['real_filename'], 0, strrpos($row['real_filename'], '.')), $config['board3_attach_max_length_' . $module_id]);
 
-				$template->assign_block_vars('attach', array(
+				$template->assign_block_vars('attachments.attach', array(
 					'FILESIZE'			=> $row['filesize'] . ' ' . $size_lang,
 					'FILETIME'			=> $user->format_date($row['filetime']),
 					'DOWNLOAD_COUNT'	=> (int) $row['download_count'], // grab downloads count
@@ -238,12 +236,6 @@ class portal_attachments_module
 				));
 			}
 			$db->sql_freeresult($result);
-
-			$template->assign_var('S_DISPLAY_ATTACHMENTS', true);
-		} 
-		else 
-		{
-			$template->assign_var('S_DISPLAY_ATTACHMENTS', false);
 		}
 
 		return 'attachments_side.html';

@@ -261,13 +261,16 @@ class acp_portal
 					
 					$sql_ary = array(
 						'module_image_src'		=> request_var('module_image', ''),
-						'module_name'			=> request_var('module_name', '', true),
 						'module_image_width'	=> request_var('module_img_width', 0),
 						'module_image_height'	=> request_var('module_img_height', 0),
 						'module_group_ids'		=> $module_permission,
 						'module_status'			=> request_var('module_status', B3_MODULE_ENABLED),
 					);
 					
+					if($module_data['module_classname'] != 'latest_bots')
+					{
+						$sql_ary['module_name'] = request_var('module_name', '', true);
+					}
 					// check if module image file actually exists
 					check_file_src($sql_ary['module_image_src'], '', $module_id);
 
@@ -704,11 +707,29 @@ class acp_portal
 				{
 					$submit = (isset($_POST['submit'])) ? true : false;
 					$directory = $phpbb_root_path . 'portal/modules/';
+					
+					// Make sure we only add the forumlist module once
+					$portal_modules = obtain_portal_modules();
+					$show_forumlist = true;
+					
+					foreach($portal_modules as $cur_module)
+					{
+						if($cur_module['module_classname'] == 'forumlist')
+						{
+							$show_forumlist = false;
+						}
+					}
 
 					if ($submit)
 					{
 						$module_classname = request_var('module_classname', '');
 						$class = 'portal_' . $module_classname . '_module';
+						
+						if($module_classname == 'forumlist' && !$show_forumlist)
+						{
+							trigger_error($user->lang['FORUMLIST_ADD_ONCE'] . adm_back_link($this->u_action), E_USER_WARNING);
+						}
+
 						if (!class_exists($class))
 						{
 							include($directory . 'portal_' . $module_classname . '.' . $phpEx);
@@ -791,6 +812,11 @@ class acp_portal
 							if (!class_exists($class))
 							{
 								include($directory . $file);
+							}
+							
+							if($class == 'portal_forumlist_module' && !$show_forumlist)
+							{
+								continue;
 							}
 
 							// Get module title tag

@@ -1,9 +1,11 @@
+<!-- BEGIN portal_links -->
+<!-- IF portal_links.MODULE_ID eq $MODULE_ID -->
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
 <table class="tablebg" cellspacing="1" width="100%">
 	<!-- BEGIN portallinks -->
 		<tr class="row1">
 			<td>
-				<!-- IF $MODULE_ID eq portallinks.MODULE_ID --><img src="{T_THEME_PATH}/images/portal/arrowbullet.gif" width="12" height="11" alt="" />&nbsp;<a href="{portallinks.LINK_URL}" title="{portallinks.LINK_TITLE}">{portallinks.LINK_TITLE}</a><!-- ENDIF -->
+				<img src="{T_THEME_PATH}/images/portal/arrowbullet.gif" width="12" height="11" alt="" />&nbsp;<a href="{portal_links.portallinks.LINK_URL}" title="{portal_links.portallinks.LINK_TITLE}">{portal_links.portallinks.LINK_TITLE}</a>
 			</td>
 		</tr>
 	<!-- BEGINELSE -->
@@ -15,3 +17,5 @@
 	<!-- END portallinks -->
 </table>
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END portal_links -->

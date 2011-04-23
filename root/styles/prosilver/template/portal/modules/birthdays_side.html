@@ -1,17 +1,21 @@
+<!-- BEGIN birthday_list -->
+<!-- IF birthday_list.MODULE_ID eq $MODULE_ID -->
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
-			<!-- IF BIRTHDAY_LIST -->
-			<strong>{L_CONGRATULATIONS}:</strong><br /> {BIRTHDAY_LIST}
+			<!-- IF birthday_list.BIRTHDAY_LIST -->
+			<strong>{L_CONGRATULATIONS}:</strong><br /> {birthday_list.BIRTHDAY_LIST}
 			<!-- ELSE -->
 			{L_NO_BIRTHDAYS}
 			<!-- ENDIF -->
-			<!-- IF S_DISPLAY_BIRTHDAY_AHEAD_LIST -->
+			<!-- IF birthday_list.S_DISPLAY_BIRTHDAY_AHEAD_LIST -->
 				<hr class="dashed" />
-				<strong>{L_BIRTHDAYS_AHEAD}</strong>
+				<strong>{birthday_list.L_BIRTHDAYS_AHEAD}</strong>
 				<br />
-				<!-- IF BIRTHDAYS_AHEAD_LIST -->
-				{BIRTHDAYS_AHEAD_LIST}
+				<!-- IF birthday_list.BIRTHDAYS_AHEAD_LIST -->
+				{birthday_list.BIRTHDAYS_AHEAD_LIST}
 				<!-- ELSE -->
 				{L_NO_BIRTHDAYS_AHEAD}
 				<!-- ENDIF -->
 			<!-- ENDIF -->
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END birthday_list -->

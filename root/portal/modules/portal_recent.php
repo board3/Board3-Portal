@@ -86,6 +86,10 @@ class portal_recent_module
 		$result = $db->sql_query_limit($sql, 1);
 		$g_forum_id = (int) $db->sql_fetchfield('forum_id');
 		$db->sql_freeresult($result);
+		
+		$template->assign_block_vars('recent', array(
+			'MODULE_ID'		=> $module_id,
+		));
 
 		//
 		// Recent announcements
@@ -105,7 +109,7 @@ class portal_recent_module
 			// auto auth
 			if (($auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0'))
 			{
-				$template->assign_block_vars('latest_announcements', array(
+				$template->assign_block_vars('recent.latest_announcements', array(
 					'TITLE'			=> character_limit($row['topic_title'], $config['board3_recent_title_limit_' . $module_id]),
 					'FULL_TITLE'	=> censor_text($row['topic_title']),
 					'U_VIEW_TOPIC'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id'] == 0) ? $g_forum_id : $row['forum_id']) . '&amp;t=' . $row['topic_id'])
@@ -131,7 +135,7 @@ class portal_recent_module
 			// auto auth
 			if (($auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0'))
 			{
-				$template->assign_block_vars('latest_hot_topics', array(
+				$template->assign_block_vars('recent.latest_hot_topics', array(
 					'TITLE'			=> character_limit($row['topic_title'], $config['board3_recent_title_limit_' . $module_id]),
 					'FULL_TITLE'	=> censor_text($row['topic_title']),
 					'U_VIEW_TOPIC'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id'] == 0) ? $g_forum_id : $row['forum_id']) . '&amp;t=' . $row['topic_id'])
@@ -158,7 +162,7 @@ class portal_recent_module
 			// auto auth
 			if (($auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0'))
 			{
-				$template->assign_block_vars('latest_topics', array(
+				$template->assign_block_vars('recent.latest_topics', array(
 					'TITLE'			=> character_limit($row['topic_title'], $config['board3_recent_title_limit_' . $module_id]),
 					'FULL_TITLE'	=> censor_text($row['topic_title']),
 					'U_VIEW_TOPIC'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $row['forum_id'] . '&amp;t=' . $row['topic_id'])

@@ -50,6 +50,10 @@ class portal_latest_members_module
 	public function get_template_side($module_id)
 	{
 		global $config, $template, $db, $user;
+		
+		$template->assign_block_vars('latest_members', array(
+			'MODULE_ID'	=> $module_id,
+		));
 
 		$sql = 'SELECT user_id, username, user_regdate, user_colour
 			FROM ' . USERS_TABLE . '
@@ -60,7 +64,7 @@ class portal_latest_members_module
 
 		while(($row = $db->sql_fetchrow($result)) && ($row['username']))
 		{
-			$template->assign_block_vars('latest_members', array(
+			$template->assign_block_vars('latest_members.members', array(
 				'USERNAME_FULL'	=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
 				'JOINED'		=> $user->format_date($row['user_regdate'], $format = 'd M'),
 			));

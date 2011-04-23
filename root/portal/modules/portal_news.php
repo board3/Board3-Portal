@@ -46,6 +46,11 @@ class portal_news_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = 'portal_news_module';
+	
+	/**
+	* additional variables
+	*/
+	private $tpl_vars = array();
 
 	public function get_template_center($module_id)
 	{
@@ -65,9 +70,28 @@ class portal_news_module
 		// Any news present? If not terminate it here.
 		if (sizeof($fetch_news) == 0)
 		{
-			$template->assign_block_vars('news_row', array(
+			$topic_icons = false;
+			if(!empty($fetch_news['topic_icons']))
+			{
+				$topic_icons = true;
+			}
+
+			$this->tpl_vars = array_merge($this->tpl_vars, array(
+				'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
+				'READ_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
+				'GOTO_PAGE_IMG'				=> $user->img('icon_post_target', 'GOTO_PAGE'),
+				'S_NEWEST_OR_FIRST'			=> ($config['board3_news_show_last_' . $module_id]) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
+				'POSTED_BY_TEXT'			=> ($config['board3_news_show_last_' . $module_id]) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
+				'S_DISPLAY_NEWS'			=> true,
+				'S_DISPLAY_NEWS_RVS'		=> ($config['board3_show_news_replies_views_' . $module_id]) ? true : false,
+				'S_TOPIC_ICONS'				=> $topic_icons,
+			));
+			
+			$template->assign_block_vars('news', $this->tpl_vars);
+			
+			$template->assign_block_vars('news.news_row', array(
 				'S_NO_TOPICS'	=> true,
-				'S_NOT_LAST'	=> false,
+				'S_NOT_LAST'	=> false
 			));
 		}
 		else
@@ -136,10 +160,44 @@ class portal_news_module
 			}
 			
 			$topic_tracking_info = get_portal_tracking_info($fetch_news);
+			
+			$topic_icons = false;
+			if(!empty($fetch_news['topic_icons']))
+			{
+				$topic_icons = true;
+			}
 
 			if($news < 0)
 			// Show the news overview
 			{
+				if ($config['board3_news_archive_' . $module_id])
+				{
+					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_news, $config['board3_number_of_news_' . $module_id], $start, ($config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news');
+				}
+				
+				// Assign block vars before we assign the block vars of the nested block
+				if ($config['board3_number_of_news_' . $module_id] <> 0 && $config['board3_news_archive_' . $module_id])
+				{
+					$this->tpl_vars = array_merge($this->tpl_vars, array(
+						'NP_PAGINATION'		=> $pagination,
+						'TOTAL_NEWS'		=> ($total_news == 1) ? $user->lang['VIEW_FORUM_TOPIC'] : sprintf($user->lang['VIEW_FORUM_TOPICS'], $total_news),
+						'NP_PAGE_NUMBER'	=> on_page($total_news, $config['board3_number_of_news_' . $module_id], $start))
+					);
+				}
+
+				$this->tpl_vars = array_merge($this->tpl_vars, array(
+					'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
+					'READ_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
+					'GOTO_PAGE_IMG'				=> $user->img('icon_post_target', 'GOTO_PAGE'),
+					'S_NEWEST_OR_FIRST'			=> ($config['board3_news_show_last_' . $module_id]) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
+					'POSTED_BY_TEXT'			=> ($config['board3_news_show_last_' . $module_id]) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
+					'S_DISPLAY_NEWS_RVS'		=> ($config['board3_show_news_replies_views_' . $module_id]) ? true : false,
+					'S_TOPIC_ICONS'				=> $topic_icons,
+					'MODULE_ID'					=> $module_id,
+				));
+				
+				$template->assign_block_vars('news', $this->tpl_vars);
+				
 				$count = $fetch_news['topic_count'];
 				for ($i = 0; $i < $count; $i++)
 				{
@@ -162,10 +220,6 @@ class portal_news_module
 					
 					$read_full_url = (isset($_GET['np'])) ? 'np='. $start . '&amp;news=' . $i . '#n' . $i : 'news=' . $i . '#n' . $i;
 					$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-					if ($config['board3_news_archive_' . $module_id])
-					{
-						$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_news, $config['board3_number_of_news_' . $module_id], $start, ($config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news');
-					}
 
 					$replies = ($auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
 					$folder_img = $folder_alt = $topic_type = $folder = $folder_new = '';
@@ -207,7 +261,7 @@ class portal_news_module
 					// Grab icons
 					$icons = $cache->obtain_icons();
 
-					$template->assign_block_vars('news_row', array(
+					$template->assign_block_vars('news.news_row', array(
 						'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
 						'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 						'TITLE'					=> $fetch_news[$i]['topic_title'],
@@ -248,19 +302,10 @@ class portal_news_module
 					{
 						foreach ($fetch_news[$i]['attachments'] as $attachment)
 						{
-							$template->assign_block_vars('news_row.attachment', array(
+							$template->assign_block_vars('news.news_row.attachment', array(
 								'DISPLAY_ATTACHMENT'	=> $attachment)
 							);
 						}
-					}
-
-					if ($config['board3_number_of_news_' . $module_id] <> 0 && $config['board3_news_archive_' . $module_id])
-					{
-						$template->assign_vars(array(
-							'NP_PAGINATION'		=> $pagination,
-							'TOTAL_NEWS'		=> ($total_news == 1) ? $user->lang['VIEW_FORUM_TOPIC'] : sprintf($user->lang['VIEW_FORUM_TOPICS'], $total_news),
-							'NP_PAGE_NUMBER'	=> on_page($total_news, $config['board3_number_of_news_' . $module_id], $start))
-						);
 					}
 				}
 			}
@@ -281,8 +326,31 @@ class portal_news_module
 				{
 					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_news, $config['board3_number_of_news_' . $module_id], $start, ($config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news');
 				}
+				
+				// Assign block vars before we assign the block vars of the nested block
+				if ($config['board3_number_of_news_' . $module_id] <> 0 && $config['board3_news_archive_' . $module_id])
+				{
+					$this->tpl_vars = array_merge($this->tpl_vars, array(
+						'NP_PAGINATION'		=> $pagination,
+						'TOTAL_NEWS'		=> ($total_news == 1) ? $user->lang['VIEW_FORUM_TOPIC'] : sprintf($user->lang['VIEW_FORUM_TOPICS'], $total_news),
+						'NP_PAGE_NUMBER'	=> on_page($total_news, $config['board3_number_of_news_' . $module_id], $start))
+					);
+				}
+				
+				$this->tpl_vars = array_merge($this->tpl_vars, array(
+					'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
+					'READ_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
+					'GOTO_PAGE_IMG'				=> $user->img('icon_post_target', 'GOTO_PAGE'),
+					'S_NEWEST_OR_FIRST'			=> ($config['board3_news_show_last_' . $module_id]) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
+					'POSTED_BY_TEXT'			=> ($config['board3_news_show_last_' . $module_id]) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
+					'S_DISPLAY_NEWS_RVS'		=> ($config['board3_show_news_replies_views_' . $module_id]) ? true : false,
+					'S_TOPIC_ICONS'				=> $topic_icons,
+					'MODULE_ID'					=> $module_id,
+				));
+				
+				$template->assign_block_vars('news', $this->tpl_vars);
 
-				$template->assign_block_vars('news_row', array(
+				$template->assign_block_vars('news.news_row', array(
 					'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
 					'FORUM_NAME'		=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 					'TITLE'				=> $fetch_news[$i]['topic_title'],
@@ -311,39 +379,13 @@ class portal_news_module
 				{
 					foreach ($fetch_news[$i]['attachments'] as $attachment)
 					{
-						$template->assign_block_vars('news_row.attachment', array(
+						$template->assign_block_vars('news.news_row.attachment', array(
 							'DISPLAY_ATTACHMENT'	=> $attachment)
 						);
 					}
 				}
-
-				if ($config['board3_number_of_news_' . $module_id] <> 0 && $config['board3_news_archive_' . $module_id])
-				{
-					$template->assign_vars(array(
-						'NP_PAGINATION'		=> $pagination,
-						'TOTAL_NEWS'		=> ($total_news == 1) ? $user->lang['VIEW_FORUM_TOPIC'] : sprintf($user->lang['VIEW_FORUM_TOPICS'], $total_news),
-						'NP_PAGE_NUMBER'	=> on_page($total_news, $config['board3_number_of_news_' . $module_id], $start))
-					);
-				}
 			}
 		}
-
-		$topic_icons = false;
-		if(!empty($fetch_news['topic_icons']))
-		{
-			$topic_icons = true;
-		}
-
-		$template->assign_vars(array(
-			'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
-			'READ_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
-			'GOTO_PAGE_IMG'				=> $user->img('icon_post_target', 'GOTO_PAGE'),
-			'S_NEWEST_OR_FIRST'			=> ($config['board3_news_show_last_' . $module_id]) ? $user->lang['JUMP_NEWEST'] : $user->lang['JUMP_FIRST'],
-			'POSTED_BY_TEXT'			=> ($config['board3_news_show_last_' . $module_id]) ? $user->lang['LAST_POST'] : $user->lang['POSTED'],
-			'S_DISPLAY_NEWS'			=> true,
-			'S_DISPLAY_NEWS_RVS'		=> ($config['board3_show_news_replies_views_' . $module_id]) ? true : false,
-			'S_TOPIC_ICONS'				=> $topic_icons,
-		));
 
 		if($config['board3_news_style_' . $module_id])
 		{

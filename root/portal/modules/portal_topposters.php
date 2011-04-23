@@ -71,6 +71,7 @@ class portal_topposters_module
 				'S_SEARCH_ACTION'	=> append_sid("{$phpbb_root_path}search.$phpEx", 'author_id=' . $row['user_id'] . '&amp;sr=posts'),
 				'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
 				'POSTER_POSTS'		=> $row['user_posts'],
+				'MODULE_ID'			=> $module_id,
 			));
 		}
 		$db->sql_freeresult($result);

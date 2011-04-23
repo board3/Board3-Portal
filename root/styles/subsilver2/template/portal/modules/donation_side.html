@@ -1,3 +1,5 @@
+<!-- BEGIN donation -->
+<!-- IF donation.MODULE_ID eq $MODULE_ID -->
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
 <table class="tablebg" cellspacing="1" width="100%">
 <tr>
@@ -5,7 +7,7 @@
 		<div style="text-align: center;">
 			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 				<input type="hidden" name="cmd" value="_xclick" />
-				<input type="hidden" name="business" value="{PAY_ACC}" />
+				<input type="hidden" name="business" value="{donation.PAY_ACC}" />
 				<input type="hidden" name="item_name" value="{L_PAY_ITEM}" />
 				<input type="hidden" name="no_note" value="1" />
 				<input type="hidden" name="no_shipping" value="2" />
@@ -37,3 +39,5 @@
 </tr>
 </table>
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END donation -->

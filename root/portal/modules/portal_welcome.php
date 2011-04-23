@@ -63,8 +63,9 @@ class portal_welcome_module
 		$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
 		$text = generate_text_for_display($portal_config['board3_welcome_message_' . $module_id], $uid, $bitfield, $bbcode_options);
 
-		$template->assign_vars(array(
+		$template->assign_block_vars('welcome', array(
 			'PORTAL_WELCOME_MSG'	=> $text,
+			'MODULE_ID'				=> $module_id,
 		));
 
 		return 'welcome_center.html';

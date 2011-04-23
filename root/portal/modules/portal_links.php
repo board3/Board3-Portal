@@ -80,6 +80,9 @@ class portal_links_module
 		}
 		$db->sql_freeresult($result);
 		
+		$template->assign_block_vars('portal_links', array(
+			'MODULE_ID'	=> $module_id,
+		));
 		
 		for ($i = 0; $i < sizeof($links); $i++)
 		{
@@ -98,7 +101,7 @@ class portal_links_module
 			
 			if(!empty($permission_check) || $links[$i]['permission'] == '')
 			{
-				$template->assign_block_vars('portallinks', array(
+				$template->assign_block_vars('portal_links.portallinks', array(
 					'LINK_TITLE'		=> (isset($user->lang[$links[$i]['title']])) ? $user->lang[$links[$i]['title']] : $links[$i]['title'],
 					'LINK_URL'			=> $cur_url,
 					'MODULE_ID'			=> $module_id,

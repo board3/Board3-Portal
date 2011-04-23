@@ -1,30 +1,32 @@
-<!-- IF .latest_announcements or .latest_hot_topics or .latest_topics -->
+<!-- BEGIN recent -->
+<!-- IF recent.MODULE_ID eq $MODULE_ID -->
+<!-- IF .recent.latest_announcements or .recent.latest_hot_topics or .recent.latest_topics -->
 {$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
 <table class="tablebg" cellspacing="1" width="100%">
 	<tr>
-		<!-- IF .latest_announcements --><td class="row1"><strong>{L_PORTAL_RECENT_ANN}</strong></td><!-- ENDIF -->
-		<!-- IF .latest_hot_topics --><td class="row1"><strong>{L_PORTAL_RECENT_HOT_TOPIC}</strong></td><!-- ENDIF -->
-		<!-- IF .latest_topics --><td class="row1"><strong>{L_PORTAL_RECENT_TOPIC}</strong></td><!-- ENDIF -->
+		<!-- IF .recent.latest_announcements --><td class="row1"><strong>{L_PORTAL_RECENT_ANN}</strong></td><!-- ENDIF -->
+		<!-- IF .recent.latest_hot_topics --><td class="row1"><strong>{L_PORTAL_RECENT_HOT_TOPIC}</strong></td><!-- ENDIF -->
+		<!-- IF .recent.latest_topics --><td class="row1"><strong>{L_PORTAL_RECENT_TOPIC}</strong></td><!-- ENDIF -->
 	</tr>
 	<tr>
-		<!-- IF .latest_announcements -->
+		<!-- IF .recent.latest_announcements -->
 		<td class="row1" width="33%" valign="top">
 			<!-- BEGIN latest_announcements -->
-						<a href="{latest_announcements.U_VIEW_TOPIC}" title="{latest_announcements.FULL_TITLE}">{latest_announcements.TITLE}</a><br />
+						<a href="{recent.latest_announcements.U_VIEW_TOPIC}" title="{recent.latest_announcements.FULL_TITLE}">{recent.latest_announcements.TITLE}</a><br />
 			<!-- END latest_announcements -->
 		</td>
 		<!-- ENDIF -->
-		<!-- IF .latest_hot_topics -->
+		<!-- IF .recent.latest_hot_topics -->
 		<td class="row1" width="33%" valign="top">
 			<!-- BEGIN latest_hot_topics -->
-				<a href="{latest_hot_topics.U_VIEW_TOPIC}" title="{latest_hot_topics.FULL_TITLE}">{latest_hot_topics.TITLE}</a><br />
+				<a href="{recent.latest_hot_topics.U_VIEW_TOPIC}" title="{recent.latest_hot_topics.FULL_TITLE}">{recent.latest_hot_topics.TITLE}</a><br />
 			<!-- END latest_hot_topics -->
 		</td>
 		<!-- ENDIF -->
-		<!-- IF .latest_topics -->
+		<!-- IF .recent.latest_topics -->
 		<td class="row1" width="33%" valign="top">
 			<!-- BEGIN latest_topics -->
-				<a href="{latest_topics.U_VIEW_TOPIC}" title="{latest_topics.FULL_TITLE}">{latest_topics.TITLE}</a><br />
+				<a href="{recent.latest_topics.U_VIEW_TOPIC}" title="{recent.latest_topics.FULL_TITLE}">{recent.latest_topics.TITLE}</a><br />
 			<!-- END latest_topics -->
 		</td>
 		<!-- ENDIF -->
@@ -32,3 +34,5 @@
 </table>
 {$C_BLOCK_F_L}{$C_BLOCK_F_R}
 <!-- ENDIF -->
+<!-- ENDIF -->
+<!-- END recent -->	

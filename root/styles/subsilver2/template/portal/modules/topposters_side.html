@@ -5,8 +5,10 @@
 			<span style="float:left;"><strong>{L_USERNAME}</strong></span>
 			<span style="float:right;padding-right:10px;"><strong>{L_POSTS}</strong></span><br style="clear:both" />
 			<!-- BEGIN topposters -->
+			<!-- IF topposters.MODULE_ID eq $MODULE_ID -->
 			<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;">{topposters.USERNAME_FULL}</span>
 			<span style="float:right;padding-right:10px; padding-top:2px;"><a href="{topposters.S_SEARCH_ACTION}">{topposters.POSTER_POSTS}</a></span><br style="clear:both" />
+			<!-- ENDIF -->
 			<!-- END topposters -->		
 		</td>
 	</tr>

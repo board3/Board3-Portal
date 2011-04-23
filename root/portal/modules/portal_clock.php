@@ -51,8 +51,9 @@ class portal_clock_module
 	{
 		global $config, $template;
 
-		$template->assign_vars(array(
+		$template->assign_block_vars('clock', array(
 			'CLOCK_SRC'			=> $config['board3_clock_src_' . $module_id],
+			'MODULE_ID'			=> $module_id,
 		));
 
 		return 'clock_side.html';

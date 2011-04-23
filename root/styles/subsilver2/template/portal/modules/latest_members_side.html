@@ -1,14 +1,18 @@
+<!-- BEGIN latest_members -->
+<!-- IF latest_members.MODULE_ID eq $MODULE_ID -->
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
 <table class="tablebg" cellspacing="1" width="100%">
 	<tr class="row1">
 		<td>
 			<span style="float:left;"><strong>{L_USERNAME}</strong></span>
 			<span style="float:right;padding-right:10px;"><strong>{L_JOINED}</strong></span><br style="clear:both" />
-			<!-- BEGIN latest_members -->
-			<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;">{latest_members.USERNAME_FULL}</span>
-			<span style="float:right;padding-right:10px; padding-top:2px;">{latest_members.JOINED}</span><br style="clear:both" />
-			<!-- END latest_members -->
+			<!-- BEGIN members -->
+			<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;">{latest_members.members.USERNAME_FULL}</span>
+			<span style="float:right;padding-right:10px; padding-top:2px;">{latest_members.members.JOINED}</span><br style="clear:both" />
+			<!-- END members -->
 		</td>
 	</tr>
 </table>
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END latest_members -->

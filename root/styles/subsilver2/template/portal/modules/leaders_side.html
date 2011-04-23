@@ -1,3 +1,5 @@
+<!-- BEGIN leaders -->
+<!-- IF leaders.MODULE_ID eq $MODULE_ID -->
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
 <table class="tablebg" cellspacing="1" width="100%">
 	<tr class="row3">
@@ -8,7 +10,7 @@
 	<!-- BEGIN admin -->
 	<tr  class="row1">
 		<td>
-			<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{admin.USERNAME_FULL}</strong></span><br style="clear:both" />
+			<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{leaders.admin.USERNAME_FULL}</strong></span><br style="clear:both" />
 		</td>
 	</tr>
 	<!-- BEGINELSE -->
@@ -26,7 +28,7 @@
 	<!-- BEGIN mod -->
 	<tr  class="row1">
 		<td>
-			<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{mod.USERNAME_FULL}</strong></span><br style="clear:both" />
+			<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{leaders.mod.USERNAME_FULL}</strong></span><br style="clear:both" />
 		</td>
 	</tr>
 	<!-- BEGINELSE -->
@@ -38,3 +40,5 @@
 	<!-- END mod -->
 </table>
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END leaders -->

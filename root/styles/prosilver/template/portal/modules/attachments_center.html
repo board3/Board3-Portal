@@ -1,17 +1,21 @@
+<!-- BEGIN attachments -->
+<!-- IF attachments.MODULE_ID eq $MODULE_ID -->
 {$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
 <div class="panel bg1" style="margin-bottom: 0px">
 	<div class="inner"><span class="portal-corners-top-inner"></span>
-	<!-- IF .attach -->
+	<!-- IF .attachments.attach -->
 		<span style="float:left;"><strong>{L_FILENAME}</strong></span><br />
 		<!-- BEGIN attach -->
-			<span style="float:left;" class="portal-gensmall"><img src="{T_THEME_PATH}/images/portal/icon_topic_attach.gif" alt="" />&nbsp;<a href="{attach.U_TOPIC}" title="{attach.REAL_FILENAME}"><strong>{attach.FILENAME}</strong></a></span><br style="clear:both" />
-			<span style="float:left;padding-right:10px;">{L_FILESIZE}:</span><span style="float:right;padding-right:10px;" class="portal-gensmall"><strong>{attach.FILESIZE}</strong></span><br style="clear:both" />
-			<span style="float:left;padding-right:10px;">{L_DOWNLOADS}:</span><span style="float:right;padding-right:10px;" class="portal-gensmall"><strong>{attach.DOWNLOAD_COUNT}</strong></span><br style="clear:both" />
-			<!-- IF not attach.S_LAST_ROW --><hr class="dashed" /><!-- ENDIF -->
-		<!-- END .attach --> 
+			<span style="float:left;" class="portal-gensmall"><img src="{T_THEME_PATH}/images/portal/icon_topic_attach.gif" alt="" />&nbsp;<a href="{attachments.attach.U_TOPIC}" title="{attachments.attach.REAL_FILENAME}"><strong>{attachments.attach.FILENAME}</strong></a></span><br style="clear:both" />
+			<span style="float:left;padding-right:10px;">{L_FILESIZE}:</span><span style="float:right;padding-right:10px;" class="portal-gensmall"><strong>{attachments.attach.FILESIZE}</strong></span><br style="clear:both" />
+			<span style="float:left;padding-right:10px;">{L_DOWNLOADS}:</span><span style="float:right;padding-right:10px;" class="portal-gensmall"><strong>{attachments.attach.DOWNLOAD_COUNT}</strong></span><br style="clear:both" />
+			<!-- IF not attachments.attach.S_LAST_ROW --><hr class="dashed" /><!-- ENDIF -->
+		<!-- END attach --> 
 	<!-- ELSE -->
 		<span style="float:left;" class="portal-gensmall"><strong>{L_NO_ATTACHMENTS}</strong></span><br />
 	<!-- ENDIF -->
 	<span class="portal-corners-bottom-inner"></span></div>
 </div>
 {$C_BLOCK_F_L}{$C_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END attachments -->

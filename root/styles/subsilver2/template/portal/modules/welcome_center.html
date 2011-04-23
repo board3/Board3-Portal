@@ -3,7 +3,11 @@
 	<tr class="row1">
 		<td style="padding:5px 5px 5px 5px;">
 			<div class="postbody">
-			{PORTAL_WELCOME_MSG}
+			<!-- BEGIN welcome -->
+			<!-- IF welcome.MODULE_ID eq $MODULE_ID -->
+				{welcome.PORTAL_WELCOME_MSG}
+			<!-- ENDIF -->
+			<!-- END welcome -->
 			</div>
 		</td>
 	</tr>
