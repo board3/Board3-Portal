@@ -112,7 +112,8 @@ class portal_upload
 						$cur_path = str_replace($mod_dir . '/', '', $cur_path);
 						$cut_pos = strpos($cur_path, '/');
 						
-						if(!in_array(substr($cur_path, 0, $cut_pos), array('portal', 'language', 'styles')))
+						// Only allow files in adm, language, portal and styles folder
+						if(!in_array(substr($cur_path, 0, $cut_pos), array('adm', 'language', 'portal', 'styles')))
 						{
 							$file->remove();
 							$this->directory_delete($mod_dir);
