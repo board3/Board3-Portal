@@ -46,6 +46,12 @@ class portal_latest_bots_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = 'portal_latest_bots_module';
+	
+	/**
+	* hide module name in ACP configuration page
+	*/
+	public $hide_name = true;
+
 
 	public function get_template_side($module_id)
 	{
