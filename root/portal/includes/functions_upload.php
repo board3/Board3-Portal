@@ -287,12 +287,26 @@ class portal_upload
 				return sprintf($user->lang['MODULE_UPLOAD_MKDIR_FAILURE'], $dirname_check);
 			}
 		}
+		
+		// leave a backup file if it already exists
+		if(file_exists($to))
+		{
+			// remove old backup file first
+			if(file_exists($to . '.bak'))
+			{
+				phpbb_chmod($to . '.bak', CHMOD_ALL);
+				unlink($to . '.bak');
+			}
+			rename($to, $to . '.bak');
+			phpbb_chmod($to, CHMOD_ALL);
+			unlink($to);
+		}
 
 		if (!@copy($from, $to))
 		{
 			return sprintf($user->lang['MODULE_COPY_FAILURE'], $to);
 		}
-		@chmod($to, octdec(0666));
+		@chmod($to, octdec(0644));
 
 		return true;
 	}
