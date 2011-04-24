@@ -52,6 +52,11 @@ class portal_modulename_module
 	* file must be in "adm/style/portal/"
 	*/
 	public $custom_acp_tpl = '';
+	
+	/**
+	* hide module name in ACP configuration page
+	*/
+	public $hide_name = false;
 
 	public function get_template_center($module_id)
 	{
