@@ -46,7 +46,7 @@
 				<!-- BEGIN cur_events -->
 				<tr>
 					<td style="width: 100%; padding-left: 0px; padding-bottom: 5px;">
-								<!-- IF minical.cur_events.EVENT_URL --><a href="{minical.cur_events.EVENT_URL}" title="{minical.cur_events.EVENT_TITLE}"><!-- ENDIF -->
+								<!-- IF minical.cur_events.EVENT_URL --><a href="{minical.cur_events.EVENT_URL}" title="{minical.cur_events.EVENT_TITLE}" <!-- IF minical.cur_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.cur_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
 								<span style="font-weight: bold;">{minical.cur_events.EVENT_TITLE}:</span><br />
 								<!-- IF not minical.cur_events.ALL_DAY and not minical.cur_events.END_TIME -->{L_EVENT_TIME}:&nbsp;{minical.cur_events.START_TIME}<br />
 								<!-- ELSEIF not minical.cur_events.ALL_DAY and cur_events.END_TIME -->{L_EVENT_START}:&nbsp;{minical.cur_events.START_TIME}<br />{L_EVENT_END}:&nbsp;{minical.cur_events.END_TIME}<br />
@@ -70,7 +70,7 @@
 			<!-- BEGIN upcoming_events -->
 			<tr>
 				<td style="width: 100%; padding-left: 0px; padding-bottom: 5px;">
-							<!-- IF minical.upcoming_events.EVENT_URL --><a href="{minical.upcoming_events.EVENT_URL}" title="{minical.upcoming_events.EVENT_TITLE}"><!-- ENDIF -->
+							<!-- IF minical.upcoming_events.EVENT_URL --><a href="{minical.upcoming_events.EVENT_URL}" title="{minical.upcoming_events.EVENT_TITLE}" <!-- IF minical.upcoming_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.upcoming_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
 							<span style="font-weight: bold;">{minical.upcoming_events.EVENT_TITLE}:</span><br />
 							<!-- IF not minical.upcoming_events.ALL_DAY and not minical.upcoming_events.END_TIME -->{L_EVENT_TIME}:&nbsp;{minical.upcoming_events.START_TIME}<br />
 							<!-- ELSEIF not minical.upcoming_events.ALL_DAY and minical.upcoming_events.END_TIME -->{L_EVENT_START}:&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_END}:&nbsp;{minical.upcoming_events.END_TIME}<br />

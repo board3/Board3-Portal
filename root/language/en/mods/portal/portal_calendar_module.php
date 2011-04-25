@@ -126,6 +126,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_CALENDAR_EVENT_START_FIRST'	=> 'The end of the event has to be after the start of the event.',
 	'ACP_PORTAL_CALENDAR_PERMISSION'		=> 'Event permissions',
 	'ACP_PORTAL_CALENDAR_PERMISSION_EXP'	=> 'Select the groups that should be authorized to view the event. If you want all users to be able to view the event, don’t select anything.<br />Select/Deselect multiple groups by holding <samp>CTRL</samp> and clicking.',
+	'PORTAL_EVENTS_URL_NEW_WINDOW'			=> 'Open external event links in a new window',
 	
 	
 	// Logs

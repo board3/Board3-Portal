@@ -64,22 +64,41 @@ class portal_latest_bots_module
 			AND user_lastvisit > 0
 			ORDER BY user_lastvisit DESC';
 		$result = $db->sql_query_limit($sql, $config['board3_last_visited_bots_number_' . $module_id]);
+		
+		$show_module = false;
 
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$template->assign_block_vars('last_visited_bots', array(
-					'BOT_NAME'			=> get_username_string('full', '', $row['username'], $row['user_colour']),
-					'LAST_VISIT_DATE'	=> $user->format_date($row['user_lastvisit']),
-				));
+				'BOT_NAME'			=> get_username_string('full', '', $row['username'], $row['user_colour']),
+				'LAST_VISIT_DATE'	=> $user->format_date($row['user_lastvisit']),
+			));
+			$show_module = true;
 		}
 		$db->sql_freeresult($result);
+		
+		if($config['board3_last_visited_bots_number_' . $module_id] != 0)
+		{
+			if($config['board3_last_visited_bots_number_' . $module_id] == 1)
+			{
+				$last_visited_bots = $user->lang['LAST_VISITED_BOT'];
+			}
+			else
+			{
+				$last_visited_bots = sprintf($user->lang['LAST_VISITED_BOTS_CNT'], $config['board3_last_visited_bots_number_' . $module_id]);
+			}
+		}
+		else
+		{
+			$last_visited_bots = $user->lang['LAST_VISITED_BOTS'];
+		}	
 
 		// Assign specific vars
 		$template->assign_vars(array(
-			'LAST_VISITED_BOTS'		=> ($config['board3_last_visited_bots_number_' . $module_id] != 0) ? sprintf($user->lang['LAST_VISITED_BOTS_CNT'], $config['board3_last_visited_bots_number_' . $module_id]) : $user->lang['LAST_VISITED_BOTS'],
+			'LAST_VISITED_BOTS'		=> $last_visited_bots,
 		));
 
-		if(!empty($row))
+		if($show_module)
 		{
 			return 'latest_bots_side.html';
 		}
