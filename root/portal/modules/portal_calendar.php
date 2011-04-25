@@ -178,6 +178,15 @@ class portal_calendar_module
 			{
 				if($cur_event['start_time'] >= $today_timestamp || $cur_event['end_time'] >= $today_timestamp || (($cur_event['start_time'] + 86400) >= $today_timestamp && $cur_event['all_day']))
 				{
+					// check if this is an external link
+					if (isset($cur_event['url']) && strpos($cur_event['url'], generate_board_url()) === false)
+					{
+						$is_external = true;
+					}
+					else
+					{
+						$is_external = false;
+					}
 					// current events
 					if((($cur_event['start_time'] + 86400) >= $today_timestamp && $cur_event['all_day']) || ($cur_event['start_time'] <= $today_timestamp && $cur_event['end_time'] >= $today_timestamp))
 					{
@@ -189,6 +198,7 @@ class portal_calendar_module
 							'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
 							'ALL_DAY'	=> ($cur_event['all_day']) ? true : false,
 							'MODULE_ID'		=> $module_id,
+							'EVENT_URL_NEW_WINDOW'	=> ($is_external && $config['board3_events_url_new_window_' . $module_id]) ? true : false,
 						));
 					}
 					else
@@ -201,6 +211,7 @@ class portal_calendar_module
 							'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
 							'ALL_DAY'	=> (($cur_event['start_time'] - $cur_event['end_time']) == 1) ? true : false,
 							'MODULE_ID'		=> $module_id,
+							'EVENT_URL_NEW_WINDOW'	=> ($is_external && $config['board3_events_url_new_window_' . $module_id]) ? true : false,
 						));
 					}
 				}
@@ -221,6 +232,7 @@ class portal_calendar_module
 				'board3_long_month_' . $module_id				=> array('lang' => 'PORTAL_LONG_MONTH' ,	'validate' => 'bool',	'type' => 'radio:yes_no',	 'explain' => true),
 				'board3_sunday_first_' . $module_id				=> array('lang' => 'PORTAL_SUNDAY_FIRST' ,	'validate' => 'bool',	'type' => 'radio:yes_no',	 'explain' => true),
 				'board3_display_events_' . $module_id			=> array('lang' => 'PORTAL_DISPLAY_EVENTS',	'validate' => 'bool',	'type' => 'radio:yes_no',	 'explain' => true),
+				'board3_events_url_new_window_' . $module_id	=> array('lang' => 'PORTAL_EVENTS_URL_NEW_WINDOW', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => false),
 				'board3_events_' . $module_id					=> array('lang' => 'PORTAL_EVENTS_MANAGE', 'validate' => 'string',	'type' => 'custom',	'explain' => false, 'method' => 'manage_events', 'submit' => 'update_events'),
 			),
 		);
@@ -237,6 +249,7 @@ class portal_calendar_module
 		set_config('board3_long_month_' . $module_id, 0);
 		set_config('board3_display_events_' . $module_id, 0);
 		set_config('board3_events_' . $module_id, '');
+		set_config('board3_events_url_new_window_' . $module_id, 0);
 		
 		set_portal_config('board3_calendar_events_' . $module_id, '');
 		return true;
@@ -261,6 +274,7 @@ class portal_calendar_module
 			'board3_long_month_' . $module_id,
 			'board3_display_events_' . $module_id,
 			'board3_events_' . $module_id,
+			'board3_events_url_new_window_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);

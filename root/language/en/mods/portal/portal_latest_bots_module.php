@@ -35,6 +35,7 @@ $lang = array_merge($lang, array(
 	'LATEST_BOTS'			=> 'Latest Bots',
 	'LAST_VISITED_BOTS'		=> 'Last visited bots',
 	'LAST_VISITED_BOTS_CNT'	=> 'Last %s visited bots',
+	'LAST_VISITED_BOT'		=> 'Last visited bot',
 	
 	// ACP
 	'ACP_PORTAL_BOTS_SETTINGS'					=> 'Visiting bots settings',

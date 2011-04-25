@@ -807,7 +807,7 @@ class acp_portal
 						if (preg_match('/^portal_.+\.' . $phpEx . '$/', $file))
 						{
 							$class = str_replace(".$phpEx", '', $file) . '_module';
-							if(in_array(str_replace(array('portal_', '_module'), '', $class), $installed_modules))
+							if(in_array(str_replace(array('portal_', '_module'), '', $class), $installed_modules) && $class != 'portal_custom_module')
 							{
 								continue;
 							}

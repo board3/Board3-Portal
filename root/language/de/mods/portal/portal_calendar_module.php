@@ -126,7 +126,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_CALENDAR_EVENT_START_FIRST'	=> 'Das Ende der Veranstaltung muss nach dem Beginn der Veranstaltung liegen.',
 	'ACP_PORTAL_CALENDAR_PERMISSION'		=> 'Berechtigungen für die Veranstaltung',
 	'ACP_PORTAL_CALENDAR_PERMISSION_EXP'	=> 'Wähle die Gruppen aus, denen es erlaubt sein soll die Veranstaltung zu sehen. Falls alle Benutzer die Veranstaltung sehen sollen, dann wähle nichts aus.<br />Wähle mehrere Gruppen aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
-	
+	'PORTAL_EVENTS_URL_NEW_WINDOW'			=> 'Öffne externe Veranstaltungsverknüpfungen in einem neuen Fenster',
 	
 	// Logs
 	'LOG_PORTAL_EVENT_UPDATED'				=> '<strong>Veranstaltung aktualisiert</strong><br />&raquo; %s',
