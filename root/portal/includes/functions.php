@@ -1039,6 +1039,7 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 							set_config('board3_max_topics_' . $row['module_id'], $portal_config['portal_max_topics']);
 							set_config('board3_recent_title_limit_' . $row['module_id'], $portal_config['portal_recent_title_limit']);
 							set_config('board3_recent_forum_' . $row['module_id'], $portal_config['portal_recent_forum']);
+							set_config('board3_recent_exclude_forums_' . $row['module_id'], $portal_config['portal_exclude_forums']);
 						break;
 						
 						case 'topposters':
@@ -1053,6 +1054,11 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 							// do nothing
 					}
 				}
+				
+				// Now that we are done, delete all data that seems useless to us
+				$sql = 'DELETE FROM ' . PORTAL_CONFIG_TABLE . '
+						WHERE config_name ' . $db->sql_like_expression(utf8_clean_string('portal_') . $db->any_char);
+				$db->sql_query($sql);
 			}
 			return $user->lang['PORTAL_CONVERT_SUCCESS'];
 		}
@@ -1075,7 +1081,7 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 			'board3_phpbb_menu',
 			'board3_display_jumpbox',
 		);
-		$sql = 'DELETE FROM ' . CONFIG_TABLE . ' WHERE config_name ' . str_replace('\\', '', $db->sql_like_expression('board3_%')) . '
+		$sql = 'DELETE FROM ' . CONFIG_TABLE . ' WHERE config_name ' . $db->sql_like_expression(utf8_clean_string('board3_') . $db->any_char) . '
 					AND ' . $db->sql_in_set('config_name', $skip_entries, true);
 		$db->sql_query($sql);
 		

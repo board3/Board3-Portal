@@ -51,7 +51,7 @@
 					<td><strong>{new_files.SOURCE}<!-- IF new_files.S_MISSING_FILE -->&nbsp;&nbsp;&nbsp;<strong><font color="red">({L_FILE_MISSING})</font><!-- ENDIF --></strong></td>
 					<td>{new_files.TARGET}</td>
 					<!-- IF S_INSTALL -->
-						<td><!-- IF new_files.S_SUCCESS --><font color="green">{L_PORTAL_MODULE_SUCCESS}</font><!-- ELSE --><font color="red">{L_PORTAL_MODULE_ERROR}</font><!-- ENDIF --></td>
+						<td style="<!-- IF new_files.S_SUCCESS -->color: green;">{L_PORTAL_MODULE_SUCCESS}<!-- ELSE -->color: red;">{L_PORTAL_MODULE_ERROR}<!-- ENDIF --></td>
 					<!-- ENDIF -->
 				</tr>
 			<!-- END new_files -->
