@@ -73,6 +73,7 @@ class portal_upload
 					{
 						$this->directory_delete($mod_dir);
 					}
+
 					$compress = new compress_zip('r', $file->destination_file);
 					$compress->extract($mod_dir . '_tmp/');
 					$compress->close();
@@ -92,7 +93,7 @@ class portal_upload
 						$this->directory_move($mod_dir . '_tmp/', $mod_dir);
 						$new_mod_dir = $mod_dir;
 					}
-					
+
 					$this->directory_delete($mod_dir . '_tmp/');
 					
 					// make sure we set $mod_dir to the correct folder after the above step
@@ -190,12 +191,12 @@ class portal_upload
 	}
 
 	private function directory_move($src, $dest)
-	{		
+	{
 		$src_contents = scandir($src);
 		
 		if (!is_dir($dest) && is_dir($src))
 		{
-			mkdir($dest . '/', octdec(0755));
+			mkdir($dest . '/', 0755);
 		}
 		
 		foreach ($src_contents as $src_entry)
@@ -209,7 +210,7 @@ class portal_upload
 				else if (is_file($src . '/' . $src_entry) && !is_file($dest . '/' . $src_entry))
 				{
 					copy($src . '/' . $src_entry, $dest . '/' . $src_entry);
-					chmod($dest . '/' . $src_entry, octdec(0644));
+					chmod($dest . '/' . $src_entry, 0644);
 				}
 			}
 		}
