@@ -112,6 +112,12 @@ $lang = array_merge($lang, array(
 	'MODULE_UPLOAD_MKDIR_FAILURE'	=> 'Unable to create a folder.',
 	'MODULE_COPY_FAILURE'			=> 'Unable to copy the following file: %1$s',
 	'MODULE_CORRUPTED'				=> 'The module you are trying to upload seems to be corrupted.',
+	'PORTAL_NEW_FILES'				=> 'New files',
+	'PORTAL_MODULE_SOURCE'			=> 'Source',
+	'PORTAL_MODULE_TARGET'			=> 'Target',
+	'PORTAL_MODULE_STATUS'			=> 'Status',
+	'PORTAL_MODULE_SUCCESS'			=> 'Success',
+	'PORTAL_MODULE_ERROR'			=> 'Error',
 	
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Adding basic set of modules',
