@@ -300,7 +300,6 @@ class portal_upload
 			}
 			rename($to, $to . '.bak');
 			phpbb_chmod($to, CHMOD_ALL);
-			unlink($to);
 		}
 
 		if (!@copy($from, $to))
