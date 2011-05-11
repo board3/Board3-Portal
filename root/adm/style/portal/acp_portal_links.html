@@ -111,7 +111,24 @@
 		<!-- ENDIF -->
 	</fieldset>
 	<!-- ENDIF -->	
+<!-- BEGIN options -->
+	<!-- IF options.S_LEGEND -->
+		<!-- IF not options.S_FIRST_ROW -->
+			</fieldset>
+		<!-- ENDIF -->
+		<fieldset>
+			<legend>{options.LEGEND}</legend>
+	<!-- ELSE -->
 
+		<dl>
+			<dt><label for="{options.KEY}">{options.TITLE}:</label><!-- IF options.S_EXPLAIN --><br /><span>{options.TITLE_EXPLAIN}</span><!-- ENDIF --></dt>
+			<dd>{options.CONTENT}</dd>
+		</dl>
+
+	<!-- ENDIF -->
+<!-- BEGINELSE -->
+	<fieldset>
+<!-- END options -->
 	<fieldset class="tabulated">
 	<legend>{L_ACP_PORTAL_LINKS}</legend>
 
@@ -150,6 +167,7 @@
 		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
 	</p>
 	{S_FORM_TOKEN}
+	</fieldset>
 	</fieldset>
 	</form>
 

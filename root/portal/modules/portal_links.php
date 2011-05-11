@@ -102,6 +102,7 @@ class portal_links_module
 					'LINK_TITLE'		=> (isset($user->lang[$links[$i]['title']])) ? $user->lang[$links[$i]['title']] : $links[$i]['title'],
 					'LINK_URL'			=> $cur_url,
 					'MODULE_ID'			=> $module_id,
+					'NEW_WINDOW'		=> ($links[$i]['type'] != self::LINK_INT && $config['board3_links_url_new_window_' . $module_id]) ? true : false,
 				));
 			}
 		}
@@ -115,8 +116,9 @@ class portal_links_module
         return array(
 			'title'	=> 'ACP_PORTAL_LINKS',
 			'vars'	=> array(
-				'legend1'				=> 'ACP_PORTAL_MENU',
+				'legend1'				=> 'ACP_PORTAL_LINKS',
 				'board3_links_' . $module_id	=> array('lang' => 'ACP_PORTAL_MENU_MANAGE', 'validate' => 'string',	'type' => 'custom',	'explain' => true, 'method' => 'manage_links', 'submit' => 'update_links'),
+				'board3_links_url_new_window_' . $module_id => array('lang' => 'ACP_PORTAL_LINKS_NEW_WINDOW', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => false),
 			),
 		);
 	}
@@ -163,6 +165,7 @@ class portal_links_module
 		$board3_menu_array = serialize($links);
 		set_portal_config('board3_links_array_' . $module_id, $board3_menu_array);
 		set_config('board3_links_' . $module_id, '');
+		set_config('board3_links_url_new_window_' . $module_id, 0);
 		
 		return true;
 	}
@@ -181,6 +184,7 @@ class portal_links_module
 			
 		$del_config = array(
 			'board3_links_' . $module_id,
+			'board3_links_url_new_window_' . $module_id
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);

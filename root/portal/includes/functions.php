@@ -936,6 +936,9 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 
 			$c_class->install($db->sql_nextid());
 		}
+		
+		// Make sure we get rid of old data
+		$cache->destroy('portal_modules');
 
 		if ($mode == 'update')
 		{

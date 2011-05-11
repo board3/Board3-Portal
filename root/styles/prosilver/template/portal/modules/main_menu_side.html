@@ -5,7 +5,7 @@
 		<div class="menutitle">{portalmenu.CAT_TITLE}</div>
 			<ul>
 			<!-- BEGIN links -->
-				<li><a href="{portalmenu.links.LINK_URL}">{portalmenu.links.LINK_TITLE}</a></li>
+				<li><a href="{portalmenu.links.LINK_URL}" <!-- IF portalmenu.links.NEW_WINDOW -->onclick="window.open('{portalmenu.links.LINK_URL}'); return false;"<!-- ENDIF -->>{portalmenu.links.LINK_TITLE}</a></li>
 			<!-- END links -->
 			</ul>
 		<hr class="dashed" />
