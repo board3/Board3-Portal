@@ -390,151 +390,30 @@ function character_limit(&$title, $limit = 0)
 	}
 }
 
-// Don't let them mess up the complete portal layout in cut messages and do some real AP magic
-function is_valid_bbtag($str, $bbuid)
+/**
+* Cut post text to given length
+*
+* @param $message string post text
+* @param $bbcode_uid string bbcode uid
+* @param $length int The desired length
+*/
+function get_sub_taged_string($message, $bbcode_uid, $length)
 {
-	return (substr($str,0,1) == '[') && (strpos($str, ':'.$bbuid.']') > 0);
-}
+	global $phpbb_root_path, $phpEx;
 
-function get_end_bbtag($tag, $bbuid)
-{
-	$etag = '';
-	for ($i=0;$i<strlen($tag);++$i)
+	if(!class_exists('phpbb_trim_message'))
 	{
-		if ($tag[$i] == '[') 
-		{
-			$etag .= $tag[$i] . '/';
-		}
-		else if (($tag[$i] == '=') || ($tag[$i] == ':'))
-		{
-			if ($tag[1] == '*')
-			{
-				$etag .= ':m:'.$bbuid.']';
-			}
-			else if (substr($tag, 0, 6) == '[list=')
-			{
-				$etag .= ':o:'.$bbuid.']';
-			}
-			else if (substr($tag, 0, 5) == '[list')
-			{
-				$etag .= ':u:'.$bbuid.']';
-			}
-			else 
-			{
-				$etag .= ':'.$bbuid.']';
-			}
-			break;
-		} 
-		else 
-		{
-			$etag .= $tag[$i];
-		}
+		include(PORTAL_ROOT_PATH . 'includes/trim_message/trim_message.' . $phpEx);
 	}
-	return $etag;
-}
-
-function get_next_word($str)
-{
-	$ret = '';
-	for ($i=0;$i<strlen($str);++$i)
+	
+	if(!class_exists('phpbb_trim_message_bbcodes'))
 	{
-		switch ($str[$i])
-		{
-			case ' ': //$ret .= ' '; break; break;
-				return $ret . ' ';
-			case '\\': 
-				if ($str[$i+1] == 'n') return $ret . '\n';
-			case '[': if ($i != 0) return $ret;
-			default: $ret .= $str[$i];
-		}    
-	}
-	return $ret;
-}
-
-function get_next_bbhtml_part($str)
-{
-	$lim =  substr($str,0,strpos($str,'>')+1);
-	return substr($str,0,strpos($str, $lim, strlen($lim))+strlen($lim));
-}
-
-function get_sub_taged_string($str, $bbuid, $maxlen)
-{
-	$sl = $str;
-	$ret = '';
-	$ntext = '';
-	$lret = '';
-	$i = 0;
-	$cnt = $maxlen;
-	$last = '';
-	$arr = array();
-
-	while ((strlen($ntext) < $cnt) && (strlen($sl) > 0))
-	{
-		$sr = '';
-		if (substr($sl, 0, 1) == '[')
-		{
-			$sr = substr($sl,0,strpos($sl,']')+1);
-		}
-		/* GESCHLOSSENE HTML-TAGS BEACHTEN */
-		if (substr($sl, 0, 2) == '<!')
-		{
-			$sr = get_next_bbhtml_part($sl);
-			$ret .= $sr;
-		} 
-		else if (substr($sl, 0, 1) == '<')
-		{
-			$sr = substr($sl,0,strpos($sl,'>')+1);
-			$ret .= $sr;
-		}
-		else if (is_valid_bbtag($sr, $bbuid))
-		{
-			if ($sr[1] == '/')
-			{
-				/* entfernt das endtag aus dem tag array */
-				$tarr = array();
-				$j = 0;
-				foreach ($arr as $elem)
-				{
-					if (strcmp($elem[1],$sr) != 0) 
-					{
-						$tarr[++$j] = $elem;
-					}
-				}
-				$arr = $tarr;
-			}
-			else
-			{
-				$arr[$i][0] = $sr;
-				$arr[++$i][1] = get_end_bbtag($sr, $bbuid);
-			} 
-			$ret .= $sr;
-		}
-		else
-		{
-			$sr = get_next_word($sl);
-			$ret .= $sr;
-			$ntext .= $sr;
-			$last = $sr;
-		}
-		$sl = substr($sl, strlen($sr), strlen($sl)-strlen($sr));
+		include(PORTAL_ROOT_PATH . 'includes/trim_message/bbcodes.' . $phpEx);
 	}
 
-	$ap = '';
-
-	foreach ($arr as $elem)
-	{
-		$ap = $elem[1] . $ap;
-	}
-
-	$ret .= $ap;
-	$ret = trim($ret);
-	if (substr($ret, -4) == '<!--')
-	{
-		$ret .= ' -->';
-	}
-	$ret = add_endtag($ret);
-	$ret = $ret . '...';
-	return $ret;
+	$object = new phpbb_trim_message($message, $bbcode_uid, $length);
+	// Ready to get parsed:
+	return $object->message();
 }
 
 function ap_validate($str)
@@ -691,22 +570,6 @@ function sql_table_exists($table_name)
 	}
 
 	return false;
-}
-
-/**
-* check for invalid link tag at the end of a cut string
-*/
-function add_endtag ($message = '')
-{
-	$check = (int) strrpos($message, '<!-- m --><a '); // @todo: add strripos back if we move to PHP5 !!
-	$check_2 = (int) strrpos($message, '</a><!--'); // @todo: add strripos back if we move to PHP5 !!
-	
-	if (((isset($check) && $check > 0) && ($check_2 <= $check)) || ((isset($check) && $check > 0) && !isset($check_2)))
-	{
-		$message .= '</a><!-- m -->';
-	}
-	
-	return $message;
 }
 
 /**
