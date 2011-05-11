@@ -48,4 +48,5 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_LINK_URL_EXP'		=> 'Externe Links:<br />Alle Links sollten mit einem http:// eingegeben werden.<br /><br />Interne Links:<br />Gebe nur die PHP Datei als Link URL ein, z.B. index.php?style=4.',
 	'ACP_PORTAL_LINK_PERMISSION'	=> 'Link Berechtigungen',
 	'ACP_PORTAL_LINK_PERMISSION_EXP'=> 'Wähle die Gruppen aus die berechtigt sein sollen den Link zu sehen. Falls alle Benutzer den Link sehen sollen, dann wähle nichts aus.<br />Wähle mehrere Gruppen aus/ab indem du <samp>STRG</samp> gedrückt hältst und klickst.',
+	'ACP_PORTAL_LINKS_NEW_WINDOW'	=> 'Öffne externe Verknüpfungen in einem neuen Fenster',
 ));
