@@ -104,7 +104,7 @@ class portal_upload
 					
 					// Now we need to get the files inside the folders
 					//$folder_contents = $this->cut_folder(scandir($mod_dir));
-					$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($mod_dir)); // requires PHP >= 5.1.0
+					$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($mod_dir)); // requires PHP 5
 					
 					foreach($iterator as $cur_file)
 					{
@@ -114,7 +114,7 @@ class portal_upload
 						$cut_pos = strpos($cur_path, '/');
 						
 						// Only allow files in adm, language, portal and styles folder
-						if(!in_array(substr($cur_path, 0, $cut_pos), array('adm', 'language', 'portal', 'styles')))
+						if(!in_array(substr($cur_path, 0, $cut_pos), array('adm', 'language', 'portal', 'styles')) && $cur_file->getFilename() != 'license.txt')
 						{
 							$file->remove();
 							$this->directory_delete($mod_dir);

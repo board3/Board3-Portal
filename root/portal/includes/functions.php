@@ -581,8 +581,6 @@ function get_portal_tracking_info($fetch_news)
 {
 	global $config, $user;
 	
-	$time1 = microtime();
-	
 	$last_read = $topic_ids = $forum_ids = $tracking_info = array();
 	
 	/**
