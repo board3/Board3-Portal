@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
-<!-- $Id: subsilver2.xml 658 2010-06-01 12:26:23Z marc1706 $ -->
+<!-- $Id$ -->
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en">board3 Portal - Update subsilver2 style for 2.0.0a2</title>
-		<title lang="de">board3 Portal - Aktualisiere das subsilver2 style für 2.0.0a2</title>
+		<title lang="en">board3 Portal - German Language Update for 2.0.0b1</title>
+		<title lang="de">board3 Portal - Deutsche Sprache Aktualisiering für 2.0.0b1</title>
 
 		<description lang="en">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
@@ -38,7 +38,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<username>avaren</username>
 				<homepage>http://www.board3.de</homepage>
 				<contributions-group>
-					<contributions status="current" position="Developer"></contributions>
+					<contributions status="past" position="Developer"></contributions>
 				</contributions-group>
 			</author>
 			<author>
@@ -54,7 +54,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<username>Christian_N</username>
 				<homepage>http://www.phpbb-projekt.de</homepage>
 				<contributions-group>
-					<contributions status="current" position="Developer"></contributions>
+					<contributions status="past" position="Developer"></contributions>
 				</contributions-group>
 			</author>
 			<author>
@@ -72,7 +72,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<username>nickvergessen</username>
 				<homepage>http://mods.flying-bits.org/</homepage>
 				<contributions-group>
-					<contributions status="past" position="Developer"></contributions>
+					<contributions status="current" position="Developer"></contributions>
 				</contributions-group>
 			</author>
 			<author>
@@ -86,7 +86,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			 </author>
 		</author-group>
 
-		<mod-version>2.0.0a2</mod-version>
+		<mod-version>2.0.0b1</mod-version>
 
 		<installation>
 			<level>easy</level>
@@ -97,40 +97,21 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		<link-group>
 			<link type="parent" lang="de" href="../update.xml">Update-Anleitung</link>
 			<link type="parent" lang="en" href="../update.xml">Update instructions</link>
-		</link-group>	
+		</link-group>
 	</header>
 	<action-group>
 		<copy>
-			<file from="root/styles/subsilver2/template/portal/*.*" to="styles/subsilver2/template/portal/*.*" />
-			<file from="root/styles/subsilver2/theme/images/portal/*.*" to="styles/subsilver2/theme/images/portal/*.*" />
+			<file from="root/language/de/mods/*.*" to="language/de/mods/*.*" />
 		</copy>
 		<delete>
-			<file name="styles/subsilver2/template/portal/portal_center.html" />
-			<file name="styles/subsilver2/template/portal/portal_left.html" />
-			<file name="styles/subsilver2/template/portal/portal_right.html" />
-			<file name="styles/subsilver2/template/portal/block/*.*" />
-			<file name="styles/subsilver2/theme/images/portal/mini_cal_icon_left_arrow.png" />
-			<file name="styles/subsilver2/theme/images/portal/mini_cal_icon_right_arrow.png" />
-			<file name="styles/subsilver2/theme/images/portal/portal_login.png" />
-			<file name="styles/subsilver2/theme/images/portal/portal_minical.png" />
-			<file name="styles/subsilver2/theme/images/portal/portal_random.png" />
-			<file name="styles/subsilver2/theme/images/portal/portal_stats.png" />
+			<file name="language/de/mods/additional_blocks.php" />
+			<file name="language/de/mods/info_acp_additional_blocks.php" />
+			<file name="language/de/mods/install_portal.php" />
+			<file name="language/de/mods/lang_portal.php" />
+			<file name="language/de/mods/lang_portal_acp.php" />
 		</delete>
-		<diy-instructions lang="de"><![CDATA[
-Aktualisiere deine Styles:
-    "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
-    "Administrations-Bereich" (ACP) > "Styles" > "Themes" > jedes > "Aktualisieren"
-    "Administrations-Bereich" (ACP) > "Styles" > "Grafiksammlungen" > jedes > "Aktualisieren"
 
-Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
-]]></diy-instructions>
-		<diy-instructions lang="en"><![CDATA[
-Refresh your Styles:
-    "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
-    "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
-    "Administration Control Panel" (ACP) > "Styles" > "Imagesets" > each > "refresh"
-
-Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
-]]></diy-instructions>
+		<diy-instructions lang="en">See general install.xml file</diy-instructions>
+		<diy-instructions lang="de">Siehe install.xml</diy-instructions>
 	</action-group>
 </mod>

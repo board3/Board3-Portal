@@ -6,8 +6,8 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en">board3 Portal 2.0.0 - Alpha 1</title>
-		<title lang="de">board3 Portal 2.0.0 - Alpha 1</title>
+		<title lang="en">board3 Portal 2.0.0 - Beta 1</title>
+		<title lang="de">board3 Portal 2.0.0 - Beta 1</title>
 
 		<description lang="en">Adds a portal with several blocks to your forum.
 You can change the settings, move the blocks, add new blocks and more in the ACP.
@@ -38,7 +38,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 				<username>avaren</username>
 				<homepage>http://www.board3.de</homepage>
 				<contributions-group>
-					<contributions status="current" position="Developer"></contributions>
+					<contributions status="past" position="Developer"></contributions>
 				</contributions-group>
 			</author>
 			<author>
@@ -54,7 +54,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 				<username>Christian_N</username>
 				<homepage>http://www.phpbb-projekt.de</homepage>
 				<contributions-group>
-					<contributions status="current" position="Developer"></contributions>
+					<contributions status="past" position="Developer"></contributions>
 				</contributions-group>
 			</author>
 			<author>
@@ -72,7 +72,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 				<username>nickvergessen</username>
 				<homepage>http://mods.flying-bits.org/</homepage>
 				<contributions-group>
-					<contributions status="past" position="Developer"></contributions>
+					<contributions status="current" position="Developer"></contributions>
 				</contributions-group>
 			</author>
 			<author>
@@ -86,7 +86,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 			 </author>
 		</author-group>
 
-		<mod-version>2.0.0a2</mod-version>
+		<mod-version>2.0.0b1</mod-version>
 
 		<installation>
 			<level>easy</level>
@@ -101,13 +101,13 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
 			<link type="template" lang="en" href="contrib/subsilver2.xml">Manual for subsilver2</link>
 			<link type="template" lang="de" href="contrib/subsilver2.xml">Anleitung für subsilver2</link>
-			<link type="contrib" lang="en" href="contrib/update_106_to_200a2/update.xml">Manual for Updating B3P 1.0.6 to 2.0.0a2</link>
-			<link type="contrib" lang="de" href="contrib/update_106_to_200a2/update.xml">Anleitung für das Aktualisieren von B3P 1.0.6 zu 2.0.0a2</link>
+			<link type="contrib" lang="en" href="contrib/update_106_to_200a2/update.xml">Manual for Updating B3P 1.0.6 to 2.0.0b1</link>
+			<link type="contrib" lang="de" href="contrib/update_106_to_200a2/update.xml">Anleitung für das Aktualisieren von B3P 1.0.6 zu 2.0.0b1</link>
 		</link-group>
 		<history>
 			<entry>
-				<date>2011-04-04</date>
-				<rev-version>2.0.0a2</rev-version>
+				<date>2011-05-17</date>
+				<rev-version>2.0.0b1</rev-version>
 				<changelog lang="en">
 					<change>Added missing IF $S_BLOCK_ICON</change>
 					<change>Fixed select for displaying events </change>
@@ -123,6 +123,17 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Added missing HTML file for center block of attachments module</change>
 					<change>Fixed missing check for correct column when moving a module left or right</change>
 					<change>Added possibility to add forumlist to top and bottom column</change>
+					<change>Corrected language var for module image as suggested by archivar</change>
+					<change>Moved link constants into module files</change>
+					<change>Remove php closing tag</change>
+					<change>Rewrote basic uploader for module zips</change>
+					<change>Modified class files for PHP5 -- PHP5 is now a requirement</change>
+					<change>Added check to prevent adding a module more than once</change>
+					<change>Added feature to hide portal name on acp configuration page for all modules (was only for latest bots module)</change>
+					<change>Added adm folder to allowed upload folders</change>
+					<change>Replace chmod with phpbb_chmod in uploader where needed</change>
+					<change>Added feature to open external links in a new window</change>
+					<change>Merged nickvergessen's phpbb3-tools-trim-message replacing old get_sub_taged_string function</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fehlendes IF $S_BLOCK_ICON hinzugefügt</change>
@@ -139,6 +150,17 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Fehlende HTML Datei des Dateianhänge Moduls für die mittlere Spalte hinzugefügt</change>
 					<change>Fehlende Überprüfung auf richtige Spalte beim Verschieben der Module</change>
 					<change>Möglichkeit hinzugefügt die Forenliste in die obere und untere Modulezeile hinzuzufügen</change>
+					<change>Sprachvariable für Modulbild, wie von archivar vorgeschlagen, abgeändert</change>
+					<change>Link Konstanten in Module verschoben</change>
+					<change>Schließenden Tag von PHP Dateien entfernt</change>
+					<change>Hochlade-Module für Modul Zips komplett neu geschrieben</change>
+					<change>Klassen Dateien für PHP5 modifiziert -- PHP5 ist jetzt eine Vorraussetzung</change>
+					<change>Überprüfung hinzugefügt, damit ein Modul nicht mehrmals hinzugefügt werden kann</change>
+					<change>Möglichkeits hinzugefügt den Modultitel auf der Konfigurationsseite im ACP zu verstecken</change>
+					<change>adm Ordner zu erlaubten upload Ordnern hinzugefügt</change>
+					<change>chmod mit phpbb_chmod ersetzt in Upload Modul</change>
+					<change>Möglichkeit externe Links in einem neuen Fenster zu öffnen hinzugefügt</change>
+					<change>nickvergessen's phpbb3-tools-trim-message hinzugefügt - ersetzt die alte Funktion get_sub_taged_string()</change>
 				</changelog>
 			</entry>
 			<entry>

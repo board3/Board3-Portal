@@ -353,6 +353,7 @@ $versions = array(
 			array(PORTAL_MODULES_TABLE, 'module_status', array('TINT:1', 1)),
 		),
 	),
+	'2.0.0b1' => array(),
 );
 
 // Include the UMIL Auto file, it handles the rest
