@@ -38,7 +38,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<username>avaren</username>
 				<homepage>http://www.board3.de</homepage>
 				<contributions-group>
-					<contributions status="current" position="Developer"></contributions>
+					<contributions status="past" position="Developer"></contributions>
 				</contributions-group>
 			</author>
 			<author>
@@ -54,7 +54,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<username>Christian_N</username>
 				<homepage>http://www.phpbb-projekt.de</homepage>
 				<contributions-group>
-					<contributions status="current" position="Developer"></contributions>
+					<contributions status="past" position="Developer"></contributions>
 				</contributions-group>
 			</author>
 			<author>
@@ -72,7 +72,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<username>nickvergessen</username>
 				<homepage>http://mods.flying-bits.org/</homepage>
 				<contributions-group>
-					<contributions status="past" position="Developer"></contributions>
+					<contributions status="current" position="Developer"></contributions>
 				</contributions-group>
 			</author>
 			<author>
@@ -86,7 +86,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			 </author>
 		</author-group>
 
-		<mod-version>2.0.0a2</mod-version>
+		<mod-version>2.0.0b1</mod-version>
 
 		<installation>
 			<level>easy</level>
