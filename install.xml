@@ -134,6 +134,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Replace chmod with phpbb_chmod in uploader where needed</change>
 					<change>Added feature to open external links in a new window</change>
 					<change>Merged nickvergessen's phpbb3-tools-trim-message replacing old get_sub_taged_string function</change>
+					<change>Random members block will not be installed by default</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Fehlendes IF $S_BLOCK_ICON hinzugefügt</change>
@@ -161,6 +162,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>chmod mit phpbb_chmod ersetzt in Upload Modul</change>
 					<change>Möglichkeit externe Links in einem neuen Fenster zu öffnen hinzugefügt</change>
 					<change>nickvergessen's phpbb3-tools-trim-message hinzugefügt - ersetzt die alte Funktion get_sub_taged_string()</change>
+					<change>Zufällige Mitglieder Block wird standardmäßig nicht installiert</change>
 				</changelog>
 			</entry>
 			<entry>

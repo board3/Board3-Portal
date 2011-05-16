@@ -745,7 +745,6 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 			'portal_birthday_list'	=> array(1, 3),
 			'portal_clock'			=> array(1, 4),
 			'portal_search'			=> array(1, 5),
-			'portal_random_member'	=> array(1, 6),
 			'portal_attachments'	=> array(1, 7),
 			'portal_topposters'		=> array(1, 8),
 			'portal_latest_members'	=> array(1, 9),
