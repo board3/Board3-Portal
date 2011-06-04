@@ -6,8 +6,8 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en">board3 Portal - Convert from Board3 Portal 1.0.6</title>
-		<title lang="de">board3 Portal - Konvertiere von Board3 Portal 1.0.6</title>
+		<title lang="en">board3 Portal 2.0.0b1 - Convert from Board3 Portal 1.0.6</title>
+		<title lang="de">board3 Portal 2.0.0b1 - Konvertiere von Board3 Portal 1.0.6</title>
 
 		<description lang="en">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
@@ -34,30 +34,6 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 	
 		<author-group>
 			<author>
-				<realname>Ice</realname>
-				<username>avaren</username>
-				<homepage>http://www.board3.de</homepage>
-				<contributions-group>
-					<contributions status="past" position="Developer"></contributions>
-				</contributions-group>
-			</author>
-			<author>
-				<realname>Kevin</realname>
-				<username>saint_hh</username>
-				<homepage>http://www.board3.de</homepage>
-				<contributions-group>
-					<contributions status="current" position="Developer"></contributions>
-				</contributions-group>
-			</author>
-			<author>
-				<realname>Christian</realname>
-				<username>Christian_N</username>
-				<homepage>http://www.phpbb-projekt.de</homepage>
-				<contributions-group>
-					<contributions status="past" position="Developer"></contributions>
-				</contributions-group>
-			</author>
-			<author>
 				<realname>Marc Alexander</realname>
 				<username>marc1706</username>
 				<email>admin@m-a-styles.de</email>
@@ -73,6 +49,30 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 				<homepage>http://mods.flying-bits.org/</homepage>
 				<contributions-group>
 					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Kevin</realname>
+				<username>saint_hh</username>
+				<homepage>http://www.board3.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Ice</realname>
+				<username>avaren</username>
+				<homepage>http://www.board3.de</homepage>
+				<contributions-group>
+					<contributions status="past" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Christian</realname>
+				<username>Christian_N</username>
+				<homepage>http://www.phpbb-projekt.de</homepage>
+				<contributions-group>
+					<contributions status="past" position="Developer"></contributions>
 				</contributions-group>
 			</author>
 			<author>

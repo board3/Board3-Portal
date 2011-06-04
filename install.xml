@@ -34,30 +34,6 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 	
 		<author-group>
 			<author>
-				<realname>Ice</realname>
-				<username>avaren</username>
-				<homepage>http://www.board3.de</homepage>
-				<contributions-group>
-					<contributions status="past" position="Developer"></contributions>
-				</contributions-group>
-			</author>
-			<author>
-				<realname>Kevin</realname>
-				<username>saint_hh</username>
-				<homepage>http://www.board3.de</homepage>
-				<contributions-group>
-					<contributions status="current" position="Developer"></contributions>
-				</contributions-group>
-			</author>
-			<author>
-				<realname>Christian</realname>
-				<username>Christian_N</username>
-				<homepage>http://www.phpbb-projekt.de</homepage>
-				<contributions-group>
-					<contributions status="past" position="Developer"></contributions>
-				</contributions-group>
-			</author>
-			<author>
 				<realname>Marc Alexander</realname>
 				<username>marc1706</username>
 				<email>admin@m-a-styles.de</email>
@@ -73,6 +49,30 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 				<homepage>http://mods.flying-bits.org/</homepage>
 				<contributions-group>
 					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Kevin</realname>
+				<username>saint_hh</username>
+				<homepage>http://www.board3.de</homepage>
+				<contributions-group>
+					<contributions status="current" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Ice</realname>
+				<username>avaren</username>
+				<homepage>http://www.board3.de</homepage>
+				<contributions-group>
+					<contributions status="past" position="Developer"></contributions>
+				</contributions-group>
+			</author>
+			<author>
+				<realname>Christian</realname>
+				<username>Christian_N</username>
+				<homepage>http://www.phpbb-projekt.de</homepage>
+				<contributions-group>
+					<contributions status="past" position="Developer"></contributions>
 				</contributions-group>
 			</author>
 			<author>
@@ -106,7 +106,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 		</link-group>
 		<history>
 			<entry>
-				<date>2011-05-17</date>
+				<date>2011-06-06</date>
 				<rev-version>2.0.0b1</rev-version>
 				<changelog lang="en">
 					<change>Added missing IF $S_BLOCK_ICON</change>
