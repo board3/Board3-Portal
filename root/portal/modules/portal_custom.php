@@ -199,7 +199,7 @@ class portal_custom_module
 				$custom_code = utf8_normalize_nfc(request_var('custom_code', '', true));
 				$custom_bbcode = request_var('custom_use_bbcode', 1); // default to BBCode
 				$custom_permission = request_var('permission-setting', array(0 => ''));
-				$custom_title = utf8_normalize_nfc(request_var('module_name', ''));
+				$custom_title = utf8_normalize_nfc(request_var('module_name', '', true));
 				$custom_image_src = utf8_normalize_nfc(request_var('module_image', ''));
 				$groups_ary = array();
 				$uid = $bitfield = $flags = '';
