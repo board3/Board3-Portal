@@ -134,6 +134,8 @@ foreach ($portal_modules as $row)
 			'TITLE'				=> $template_module['title'],
 			'CODE'				=> $template_module['code'],
 			'MODULE_ID'			=> $row['module_id'],
+			'IMAGE_WIDTH'			=> $row['module_image_width'],
+			'IMAGE_HEIGHT'			=> $row['module_image_height'],
 		));
 	}
 	else
