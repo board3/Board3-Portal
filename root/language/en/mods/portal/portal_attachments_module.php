@@ -34,7 +34,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'DOWNLOADS'				=> 'Downloads',
 	'NO_ATTACHMENTS'		=> 'No attachments',
-	'PORTAL_ATTACHMENTS'	=> 'Attachments Block',
+	'PORTAL_ATTACHMENTS'	=> 'Attachments',
 	
 	// ACP
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS'			=> 'Attachments settings',
