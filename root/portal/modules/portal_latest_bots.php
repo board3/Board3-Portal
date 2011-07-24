@@ -50,7 +50,7 @@ class portal_latest_bots_module
 	/**
 	* hide module name in ACP configuration page
 	*/
-	public $hide_name = true;
+	public $hide_name = false;
 
 
 	public function get_template_side($module_id)
@@ -76,27 +76,6 @@ class portal_latest_bots_module
 			$show_module = true;
 		}
 		$db->sql_freeresult($result);
-		
-		if($config['board3_last_visited_bots_number_' . $module_id] != 0)
-		{
-			if($config['board3_last_visited_bots_number_' . $module_id] == 1)
-			{
-				$last_visited_bots = $user->lang['LAST_VISITED_BOT'];
-			}
-			else
-			{
-				$last_visited_bots = sprintf($user->lang['LAST_VISITED_BOTS_CNT'], $config['board3_last_visited_bots_number_' . $module_id]);
-			}
-		}
-		else
-		{
-			$last_visited_bots = $user->lang['LAST_VISITED_BOTS'];
-		}	
-
-		// Assign specific vars
-		$template->assign_vars(array(
-			'LAST_VISITED_BOTS'		=> $last_visited_bots,
-		));
 
 		if($show_module)
 		{
