@@ -176,7 +176,9 @@ class portal_calendar_module
 			
 			foreach($events as $key => $cur_event)
 			{
-				if($cur_event['start_time'] >= $today_timestamp || $cur_event['end_time'] >= $today_timestamp || (($cur_event['start_time'] + 86400) >= $today_timestamp && $cur_event['all_day']))
+				if(($cur_event['start_time'] + $user->timezone + $user->dst) >= $today_timestamp || 
+					($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp || 
+					(($cur_event['start_time'] + $user->timezone + $user->dst + 86400) >= $today_timestamp && $cur_event['all_day']))
 				{
 					// check if this is an external link
 					if (isset($cur_event['url']) && strpos($cur_event['url'], generate_board_url()) === false)
@@ -187,8 +189,10 @@ class portal_calendar_module
 					{
 						$is_external = false;
 					}
+
 					// current events
-					if((($cur_event['start_time'] + 86400) >= $today_timestamp && $cur_event['all_day']) || ($cur_event['start_time'] <= $today_timestamp && $cur_event['end_time'] >= $today_timestamp))
+					if((($cur_event['start_time'] + $user->timezone + $user->dst + 86400) >= $today_timestamp && $cur_event['all_day']) || 
+					(($cur_event['start_time'] + $user->timezone + $user->dst) <= $today_timestamp && ($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp))
 					{
 						$template->assign_block_vars('minical.cur_events', array(
 							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
