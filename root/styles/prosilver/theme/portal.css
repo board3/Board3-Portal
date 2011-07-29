@@ -60,3 +60,11 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 	border-top: 0px;
 	list-style-type: none;
 }
+
+/*
+* top spacing between portal body table and headerbar spacing is usually 10px
+* the headerbar's rounded corners already generate a padding of 5px so only 5px needed here
+*/
+#portal-body {
+	padding-top: 5px;
+}
