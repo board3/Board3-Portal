@@ -110,6 +110,7 @@ class acp_portal
 							'MODULE_IMAGE_HEIGHT'	=> $module_data['module_image_height'],
 							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $module_data['module_image_src'] : '',
 							'MODULE_ENABLED'		=> ($module_data['module_status']) ? true : false,
+							'MODULE_SHOW_IMAGE'		=> (in_array(column_num_string($module_data['module_column']), array('center', 'top', 'bottom'))) ? false : true,
 						));
 						
 						if($module_data['module_classname'] != 'custom')
