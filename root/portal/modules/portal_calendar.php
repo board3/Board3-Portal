@@ -60,7 +60,7 @@ class portal_calendar_module
 
 	public function get_template_side($module_id)
 	{
-		global $config, $template, $user, $phpbb_root_path, $phpEx;
+		global $config, $template, $user, $phpbb_root_path, $phpEx, $db;
 		
 		$portal_config = obtain_portal_config();
 
@@ -174,49 +174,67 @@ class portal_calendar_module
 			}
 			array_multisort($time_ary, SORT_NUMERIC, $events);
 			
+			// get user's groups
+			$sql = 'SELECT group_id
+					FROM ' . USER_GROUP_TABLE . '
+					WHERE user_id = ' . (int) $user->data['user_id'] . '
+					ORDER BY group_id ASC';
+			$result = $db->sql_query($sql);
+			while($row = $db->sql_fetchrow($result))
+			{
+				$groups_ary[] = $row['group_id'];
+			}
+			$db->sql_freeresult($result);
+			
 			foreach($events as $key => $cur_event)
 			{
 				if(($cur_event['start_time'] + $user->timezone + $user->dst) >= $today_timestamp || 
 					($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp || 
 					(($cur_event['start_time'] + $user->timezone + $user->dst + 86400) >= $today_timestamp && $cur_event['all_day']))
 				{
-					// check if this is an external link
-					if (isset($cur_event['url']) && strpos($cur_event['url'], generate_board_url()) === false)
+					$cur_permissions = explode(',', $cur_event['permission']);
+					$permission_check = array_intersect($groups_ary, $cur_permissions);
+					
+					if(!empty($permission_check) || $cur_event['permission'] == '')
 					{
-						$is_external = true;
-					}
-					else
-					{
-						$is_external = false;
-					}
+						// check if this is an external link
+						if (isset($cur_event['url']) && strpos($cur_event['url'], generate_board_url()) === false)
+						{
+							$is_external = true;
+						}
+						else
+						{
+							$is_external = false;
+						}
 
-					// current events
-					if((($cur_event['start_time'] + $user->timezone + $user->dst + 86400) >= $today_timestamp && $cur_event['all_day']) || 
-					(($cur_event['start_time'] + $user->timezone + $user->dst) <= $today_timestamp && ($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp))
-					{
-						$template->assign_block_vars('minical.cur_events', array(
-							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
-							'EVENT_TITLE'	=> $cur_event['title'],
-							'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
-							'END_TIME'		=> (!empty($cur_event['end_time'])) ? $user->format_date($cur_event['end_time'], 'j. M Y, H:i') : false,
-							'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
-							'ALL_DAY'	=> ($cur_event['all_day']) ? true : false,
-							'MODULE_ID'		=> $module_id,
-							'EVENT_URL_NEW_WINDOW'	=> ($is_external && $config['board3_events_url_new_window_' . $module_id]) ? true : false,
-						));
-					}
-					else
-					{
-						$template->assign_block_vars('minical.upcoming_events', array(
-							'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
-							'EVENT_TITLE'	=> $cur_event['title'],
-							'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
-							'END_TIME'		=> $user->format_date($cur_event['end_time'], 'j. M Y, H:i'),
-							'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
-							'ALL_DAY'	=> (($cur_event['start_time'] - $cur_event['end_time']) == 1) ? true : false,
-							'MODULE_ID'		=> $module_id,
-							'EVENT_URL_NEW_WINDOW'	=> ($is_external && $config['board3_events_url_new_window_' . $module_id]) ? true : false,
-						));
+						// current events
+						if((($cur_event['start_time'] + $user->timezone + $user->dst + 86400) >= $today_timestamp && $cur_event['all_day']) || 
+						(($cur_event['start_time'] + $user->timezone + $user->dst) <= $today_timestamp && ($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp))
+						{
+							$template->assign_block_vars('minical.cur_events', array(
+								'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
+								'EVENT_TITLE'	=> $cur_event['title'],
+								'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
+								'END_TIME'		=> (!empty($cur_event['end_time'])) ? $user->format_date($cur_event['end_time'], 'j. M Y, H:i') : false,
+								'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
+								'ALL_DAY'	=> ($cur_event['all_day']) ? true : false,
+								'MODULE_ID'		=> $module_id,
+								'EVENT_URL_NEW_WINDOW'	=> ($is_external && $config['board3_events_url_new_window_' . $module_id]) ? true : false,
+							));
+						}
+						else
+						{
+							$template->assign_block_vars('minical.upcoming_events', array(
+								'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
+								'EVENT_TITLE'	=> $cur_event['title'],
+								'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
+								'END_TIME'		=> $user->format_date($cur_event['end_time'], 'j. M Y, H:i'),
+								'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
+								'ALL_DAY'	=> (($cur_event['start_time'] - $cur_event['end_time']) == 1) ? true : false,
+								'MODULE_ID'		=> $module_id,
+								'EVENT_URL_NEW_WINDOW'	=> ($is_external && $config['board3_events_url_new_window_' . $module_id]) ? true : false,
+							));
+						}
 					}
 				}
 			}
