@@ -67,11 +67,11 @@
 				<dt style="width: 100%; padding-left: 0px; padding-bottom: 5px;">
 					<!-- IF minical.upcoming_events.EVENT_URL --><a href="{minical.upcoming_events.EVENT_URL}" title="{minical.upcoming_events.EVENT_TITLE}" <!-- IF minical.upcoming_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.upcoming_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
 					<span style="font-weight: bold;">{minical.upcoming_events.EVENT_TITLE}:</span><br />
-					<!-- IF minical.upcoming_events.EVENT_DESC --><span style="font-style: italic;">{minical.upcoming_events.EVENT_DESC}</span><br /><!-- ENDIF -->
 					<!-- IF not minical.upcoming_events.ALL_DAY and not minical.upcoming_events.END_TIME -->{L_EVENT_TIME}:&nbsp;{minical.upcoming_events.START_TIME}<br />
 					<!-- ELSEIF not minical.upcoming_events.ALL_DAY and minical.upcoming_events.END_TIME -->{L_EVENT_START}:&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_END}:&nbsp;{minical.upcoming_events.END_TIME}<br />
 					<!-- ELSE -->{L_EVENT_TIME}:&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
 					<!-- ENDIF -->
+					<!-- IF minical.upcoming_events.EVENT_DESC --><span style="font-style: italic;">{minical.upcoming_events.EVENT_DESC}</span><br /><!-- ENDIF -->
 					<!-- IF minical.upcoming_events.EVENT_URL --></a><!-- ENDIF -->
 				</dt>
 			</dl>
