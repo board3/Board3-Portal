@@ -63,8 +63,22 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 
 /*
 * top spacing between portal body table and headerbar spacing is usually 10px
-* the headerbar's rounded corners already generate a padding of 5px so only 5px needed here
 */
 #portal-body {
-	padding-top: 5px;
+	padding-top: 10px;
+}
+
+/*
+* This is needed in order to have the same spacing between blocks
+* as we have between the top blocks and the headerbar
+*/
+#portal-body .forabg {
+	margin-bottom: 0px;
+}
+
+/* RTL language fixes */
+.rtl .portal-navigation ul li a{
+	background-image: url("{T_THEME_PATH}/images/portal/arrowbullet_rtl.gif");
+	background-position: center right; /*custom bullet list image*/
+	padding-right: 19px; /*link text is indented 19px*/
 }

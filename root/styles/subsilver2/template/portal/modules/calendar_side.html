@@ -7,9 +7,9 @@
       <td>   
          <table width="100%" cellspacing="1">
             <tr>
-               <td align="left" colspan="2">{minical.U_PREV_MONTH}</td>
+               <td align="left" colspan="2"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{minical.U_NEXT_MONTH}<!-- ELSE -->{minical.U_PREV_MONTH}<!-- ENDIF --></td>
                <td colspan="3" align="center"><span class="genmed">{minical.L_MINI_CAL_MONTH}</span></td>
-               <td align="right" colspan="2">{minical.U_NEXT_MONTH}</td>
+               <td align="right" colspan="2"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{minical.U_PREV_MONTH}<!-- ELSE -->{minical.U_NEXT_MONTH}<!-- ENDIF --></td>
             </tr>
             <tr>
                <!-- IF minical.S_SUNDAY_FIRST -->
