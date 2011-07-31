@@ -96,7 +96,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_PHPBB_MENU'						=> 'phpBB-Menü',
 	'PORTAL_PHPBB_MENU_EXP'					=> 'Den phpBB Header auf dem Portal anzeigen.',
 	'PORTAL_DISPLAY_JUMPBOX'				=> 'Zeige Jumpbox',
-	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Die Jumpbox auf dem Portal anzeigen',
+	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Die Jumpbox auf dem Portal anzeigen. Die Jumpbox wird nur angezeigt, wenn sie gleichzeitig in den Board-Funktionalitäten aktiviert ist.',
 	
 	'LINK_ADDED'							=> 'Der Link wurde erfolgreich eingetragen',
 	'LINK_UPDATED'							=> 'Der Link wurde erfolgreich geändert',
