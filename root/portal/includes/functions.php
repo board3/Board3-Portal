@@ -581,7 +581,7 @@ function get_portal_tracking_info($fetch_news)
 {
 	global $config, $user;
 	
-	$last_read = $topic_ids = $forum_ids = $tracking_info = array();
+	$last_read = $topic_ids = $forum_ids = $tracking_info = $rev_forum_ids = array();
 	
 	/**
 	* group everything by the forum IDs
@@ -590,6 +590,9 @@ function get_portal_tracking_info($fetch_news)
 	for ($i = 0; $i < $count; ++$i)
 	{
 		$tracking_info[$fetch_news[$i]['forum_id']][] = $fetch_news[$i]['topic_id'];
+		$topic_ids[] = $fetch_news[$i]['topic_id'];
+		$forum_ids[] = $fetch_news[$i]['forum_id'];
+		$rev_forum_ids[$fetch_news[$i]['topic_id']] = $fetch_news[$i]['forum_id']; // the other way round also helps
 	}
 	
 	foreach ($tracking_info as $forum_id => $current_forum)
@@ -628,11 +631,14 @@ function get_portal_tracking_info($fetch_news)
 				}
 				$db->sql_freeresult($result);
 
-				$user_lastmark = (isset($mark_time[$forum_id])) ? $mark_time[$forum_id] : $user->data['user_lastmark'];
+				foreach($forum_ids as $current_forum)
+				{
+					$user_lastmark[$current_forum] = (isset($mark_time[$current_forum])) ? $mark_time[$current_forum] : $user->data['user_lastmark'];
+				}
 
 				foreach ($topic_ids as $topic_id)
 				{
-					$last_read[$topic_id] = $user_lastmark;
+					$last_read[$topic_id] = (!isset($last_read[$topic_id]) || $user_lastmark[$rev_forum_ids[$topic_id]] > $last_read[$topic_id]) ? $user_lastmark[$rev_forum_ids[$topic_id]] : $last_read[$topic_id];
 				}
 			}
 		}
