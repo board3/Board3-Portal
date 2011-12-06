@@ -1,8 +1,18 @@
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
+	<span style="float:right;padding-right:10px;"><strong>{L_USERNAME}</strong></span>
+	<span style="float:left;"><strong>{L_POSTS}</strong></span><br style="clear:both" />
+	<!-- ELSE -->
 	<span style="float:left;"><strong>{L_USERNAME}</strong></span>
 	<span style="float:right;padding-right:10px;"><strong>{L_POSTS}</strong></span><br style="clear:both" />
+	<!-- ENDIF -->
 	<!-- BEGIN topposters -->
+		<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
+		<span style="float:right; padding-right:10px; padding-top:2px;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:right; padding-right:5px; padding-top:2px;">{topposters.USERNAME_FULL}</span>
+		<span style="float:left;"><a href="{topposters.S_SEARCH_ACTION}">{topposters.POSTER_POSTS}</a></span><br style="clear:both" />
+		<!-- ELSE -->
 		<span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;">{topposters.USERNAME_FULL}</span>
 		<span style="float:right; padding-right:10px; padding-top:2px;"><a href="{topposters.S_SEARCH_ACTION}">{topposters.POSTER_POSTS}</a></span><br style="clear:both" />
+		<!-- ENDIF -->
 	<!-- END topposters -->
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

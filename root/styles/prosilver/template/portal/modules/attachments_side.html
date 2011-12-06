@@ -1,13 +1,13 @@
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
 	<!-- IF .attach -->
-		<span style="float:left;"><strong>{L_FILENAME}</strong></span><br />
+		<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"><strong>{L_FILENAME}</strong></span><br />
 		<!-- BEGIN attach -->
-			<span style="float:left;" class="portal-gensmall"><img src="{T_THEME_PATH}/images/portal/icon_topic_attach.gif" alt="" />&nbsp;<a href="{attach.U_TOPIC}" title="{attach.REAL_FILENAME}"><strong>{attach.FILENAME}</strong></a></span><br style="clear:both" />
-			<span style="float:left;padding-right:10px;">{L_FILESIZE}:</span><span style="float:right;padding-right:10px;" class="portal-gensmall"><strong>{attach.FILESIZE}</strong></span><br style="clear:both" />
-			<span style="float:left;padding-right:10px;">{L_DOWNLOADS}:</span><span style="float:right;padding-right:10px;" class="portal-gensmall"><strong>{attach.DOWNLOAD_COUNT}</strong></span><br style="clear:both" />
+			<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;" class="portal-gensmall"><img src="{T_THEME_PATH}/images/portal/icon_topic_attach.gif" alt="" />&nbsp;<a href="{attach.U_TOPIC}" title="{attach.REAL_FILENAME}"><strong>{attach.FILENAME}</strong></a></span><br style="clear:both" />
+			<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->:10px;">{L_FILESIZE}:</span><span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->;padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->:10px;" class="portal-gensmall"><strong>{attach.FILESIZE}</strong></span><br style="clear:both" />
+			<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->:10px;">{L_DOWNLOADS}:</span><span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->;padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->:10px;" class="portal-gensmall"><strong>{attach.DOWNLOAD_COUNT}</strong></span><br style="clear:both" />
 			<!-- IF not attach.S_LAST_ROW --><hr class="dashed" /><!-- ENDIF -->
 		<!-- END .attach --> 
 	<!-- ELSE -->
-		<span style="float:left;" class="portal-gensmall"><strong>{L_NO_ATTACHMENTS}</strong></span><br />
+		<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;" class="portal-gensmall"><strong>{L_NO_ATTACHMENTS}</strong></span><br />
 	<!-- ENDIF -->
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

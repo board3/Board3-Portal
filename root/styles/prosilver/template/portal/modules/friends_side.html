@@ -1,17 +1,17 @@
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
-	<strong style="color:green">{L_FRIENDS_ONLINE}</strong><br />
+	<strong style="color:green<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->; float: right;<!-- ENDIF -->">{L_FRIENDS_ONLINE}</strong><br />
 	<!-- BEGIN b3p_friends_online -->
-        <span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;">{b3p_friends_online.USERNAME_FULL}</span><br style="clear:both" />    
+        <span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->float:right; padding-right:5px;<!-- ELSE -->float:left; padding-left:5px;<!-- ENDIF --> padding-top:2px;">{b3p_friends_online.USERNAME_FULL}</span><br style="clear:both" />    
     <!-- BEGINELSE -->
-        <span style="float:left; padding-left:5px; padding-top:2px;">{L_NO_FRIENDS_ONLINE}</span>
+        <span style="<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->float:right; padding-right:5px;<!-- ELSE -->float:left; padding-left:5px;<!-- ENDIF --> padding-top:2px;">{L_NO_FRIENDS_ONLINE}</span>
         <br style="clear:both" />
     <!-- END b3p_friends_online -->
 		<br style="clear:both" />
-		<strong style="color:red">{L_FRIENDS_OFFLINE}</strong><br />
+		<strong style="color:red<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->; float: right;<!-- ENDIF -->">{L_FRIENDS_OFFLINE}</strong><br />
 	<!-- BEGIN b3p_friends_offline -->
-        <span style="float:left;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;">{b3p_friends_offline.USERNAME_FULL}</span><br style="clear:both" />
+        <span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"><img src="{T_THEME_PATH}/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->float:right; padding-right:5px;<!-- ELSE -->float:left; padding-left:5px;<!-- ENDIF --> padding-top:2px;">{b3p_friends_offline.USERNAME_FULL}</span><br style="clear:both" />
     <!-- BEGINELSE -->
-        <span style="float:left; padding-left:5px; padding-top:2px;">{L_NO_FRIENDS_OFFLINE}</span>
+        <span style="<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->float:right; padding-right:5px;<!-- ELSE -->float:left; padding-left:5px;<!-- ENDIF --> padding-top:2px;">{L_NO_FRIENDS_OFFLINE}</span>
     <!-- END b3p_friends_offline -->
 	<br />
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
