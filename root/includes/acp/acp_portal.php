@@ -349,7 +349,14 @@ class acp_portal
 					else
 					{
 						$args = array($this->new_config[$config_key], $config_key, $module_id);
-						$func = array($c_class, $vars['method']);
+						if (!is_array($vars['method']))
+						{
+							$func = array($c_class, $vars['method']);
+						}
+						else
+						{
+							$func = $vars['method'];
+						}
 						$content = call_user_func_array($func, $args);
 					}
 
