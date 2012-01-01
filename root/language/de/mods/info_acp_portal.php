@@ -104,6 +104,7 @@ $lang = array_merge($lang, array(
 	'LOG_PORTAL_LINK_UPDATED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Link geändert: %s ',
 	'LOG_PORTAL_EVENT_ADDED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin eingetragen: %s ',
 	'LOG_PORTAL_EVENT_UPDATED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin geändert: %s ',
+	'LOG_PORTAL_EVENT_REMOVED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin gelöscht: %s ',
 	
 	// Upload Module
 	'ACP_PORTAL_UPLOAD'				=> 'Modul hochladen',
