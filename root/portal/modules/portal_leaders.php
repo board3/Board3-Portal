@@ -97,14 +97,15 @@ class portal_leaders_module
 			if(sizeof($legends))
 			{
 				$sql = 'SELECT
-							u.user_id AS user_id, u.username AS username, u.user_colour AS user_colour, ug.group_id AS group_id
+							u.user_id AS user_id, u.username AS username, u.username_clean AS username_clean,
+							u.user_colour AS user_colour, ug.group_id AS group_id
 						FROM
 							' . USERS_TABLE . ' AS u,
 							' . USER_GROUP_TABLE . ' AS ug
 						WHERE
 							ug.user_id = u.user_id
 							AND '. $db->sql_in_set('ug.group_id', $legends) . '
-						ORDER BY u.username ASC';
+						ORDER BY u.username_clean ASC';
 				$result = $db->sql_query($sql);
 
 				while ($row = $db->sql_fetchrow($result))
