@@ -49,7 +49,7 @@ class phpbb_trim_message
 	*/
 	public function __construct($message, $bbcode_uid, $length, $append_str = ' [...]', $tolerance = 25)
 	{
-		$this->message			= $message;
+		$this->message			= htmlspecialchars_decode($message);
 		$this->bbcode_uid		= $bbcode_uid;
 		$this->append_str		= $append_str;
 		$this->length			= (int) $length;

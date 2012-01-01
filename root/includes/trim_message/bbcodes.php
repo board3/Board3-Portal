@@ -8,7 +8,7 @@
 * @package    trim_message
 * @copyright  2011
 * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
-* @version    1.0
+* @version    1.1
 */
 
 /**
@@ -24,6 +24,14 @@ if (!defined('IN_PHPBB'))
 */
 class phpbb_trim_message_bbcodes
 {
+	/**
+	* Some BBCodes, such as img and flash should not be split up in their middle.
+	* So I added a sensitive BBCode array which protects BBCodes from being split.
+	* You can also need to add your custom bbcodes in here.
+	*/
+	private $sensitive_bbcodes = array('url', 'flash', 'flash=', 'attachment', 'attachment=', 'img', 'email', 'email=');
+	private $is_sensitive = false;
+
 	/**
 	* Variables
 	*/
@@ -112,9 +120,23 @@ class phpbb_trim_message_bbcodes
 						}
 					}
 				}
+				// Or the user just used a normal [ in his post.
+				else
+				{
+					$this->cur_content_length++;
+					$content_length = $this->get_content_length($exploded_parts[0]);
+					$max_content_allowed = ($this->max_content_length - $this->cur_content_length);
+					if (($content_length >= $max_content_allowed) && !$this->trim_position)
+					{
+						$allowed_content_position = $this->get_content_position($exploded_parts[0], $max_content_allowed);
+						$this->trim_position = $this->cur_position + $allowed_content_position;
+					}
+					$this->cur_content_length += $content_length;
+					$this->cur_position += utf8_strlen($exploded_parts[0]);
+				}
 			}
 			/**
-			* Two element is hte normal case:
+			* Two element is the normal case:
 			* String: [bbcode:uid]foobar
 			* Keys:    ^^^^^^ = 0 ^^^^^^ = 1
 			* String: [/bbcode:uid]foobar
@@ -122,17 +144,43 @@ class phpbb_trim_message_bbcodes
 			*/
 			elseif ($num_parts == 2)
 			{
-				// We matched it something ;)
-				if ($exploded_parts[0][0] != '/')
+				/**
+				* We found an opening bracket in the quoted username which is not a bbcode
+				* String: [quote="odd[name":uid]quote-text
+				* Keys:               ^^^^^ = 0 ^^^^^^^^^^ = 1
+				*/
+				if ($allow_close_quote && (utf8_substr($exploded_parts[0], -6) == '&quot;'))
+				{
+					$this->cur_position += utf8_strlen($exploded_parts[0]) + $bbcode_end_length;
+
+					$content_length = $this->get_content_length($exploded_parts[1]);
+					$max_content_allowed = ($this->max_content_length - $this->cur_content_length);
+					if (($content_length >= $max_content_allowed) && !$this->trim_position)
+					{
+						$allowed_content_position = $this->get_content_position($exploded_parts[1], $max_content_allowed);
+						$this->trim_position = $this->cur_position + $allowed_content_position;
+					}
+					$this->cur_content_length += $content_length;
+					$this->cur_position += utf8_strlen($exploded_parts[1]);
+					$allow_close_quote = false;
+				}
+				// We matched something ;)
+				else if ($exploded_parts[0][0] != '/')
 				{
 					// Open BBCode-tag
 					$bbcode_tag = $this->filter_bbcode_tag($exploded_parts[0]);
+					$bbcode_tag_extended = $this->filter_bbcode_tag($exploded_parts[0], false, false);
+					if (in_array($bbcode_tag_extended, $this->sensitive_bbcodes))
+					{
+						$this->is_sensitive = true;
+					}
+
 
 					$this->open_bbcode($bbcode_tag, $this->cur_position);
 					$this->cur_position += utf8_strlen($exploded_parts[0]) + $bbcode_end_length;
 					$this->bbcode_action($bbcode_tag, 'open_end', $this->cur_position);
 
-					if (!$allow_close_quote)
+					if (!$allow_close_quote && !$this->is_sensitive)
 					{
 						// If we allow a closing quote, we are in the username.
 						// We do not count that as content-length.
@@ -156,6 +204,7 @@ class phpbb_trim_message_bbcodes
 					{
 						$bbcode_tag_extended = '';
 					}
+					$this->is_sensitive = false;
 
 					$this->bbcode_action($bbcode_tag, 'close_start', $this->cur_position);
 					$this->cur_position += utf8_strlen($exploded_parts[0]) + $bbcode_end_length;
@@ -313,7 +362,8 @@ class phpbb_trim_message_bbcodes
 	static public function get_content_length($content)
 	{
 		$content_length = utf8_strlen($content);
-		$last_html_opening = $last_html_closing = $last_smiley = false;
+		$last_smiley = false;
+		$last_html_opening = $last_html_closing = 0;
 		while (($last_html_opening = utf8_strpos($content, '<', $last_html_closing)) !== false)
 		{
 			$last_html_closing = utf8_strpos($content, '>', $last_html_opening);
@@ -395,7 +445,7 @@ class phpbb_trim_message_bbcodes
 	*
 	* @return	string		plain bbcode-tag
 	*/
-	static public function filter_bbcode_tag($bbcode_tag, $strip_information = true)
+	static public function filter_bbcode_tag($bbcode_tag, $strip_information = true, $strip_equal = true)
 	{
 		if ($bbcode_tag[0] == '/')
 		{
@@ -412,9 +462,9 @@ class phpbb_trim_message_bbcodes
 			return 'list';
 		}
 
-		if ($strip_information && (($equals = utf8_strpos($bbcode_tag, '=')) !== false))
+		if (($strip_information || !$strip_equal) && (($equals = utf8_strpos($bbcode_tag, '=')) !== false))
 		{
-			$bbcode_tag = utf8_substr($bbcode_tag, 0, $equals);
+			$bbcode_tag = utf8_substr($bbcode_tag, 0, (!$strip_equal) ? $equals + 1 : $equals);
 		}
 
 		return $bbcode_tag;

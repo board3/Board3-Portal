@@ -194,6 +194,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 			<file from="root/adm/mods/board3_portal_check_version.php" to="adm/mods/board3_portal_check_version.php" />
 			<file from="root/adm/style/*.*" to="adm/style/*.*" />
 			<file from="root/includes/acp/*.*" to="includes/acp/*.*" />
+			<file from="root/includes/trim_message/*.*" to="includes/trim_message/*.*" />
 			<file from="root/install/index.php" to="install/index.php" />
 			<file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
 			<file from="root/portal/*.*" to="portal/*.*" />
