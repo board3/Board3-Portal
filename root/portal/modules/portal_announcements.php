@@ -63,7 +63,7 @@ class portal_announcements_module
 		// Any announcements present? If not terminate it here.
 		if (sizeof($fetch_news) == 0)
 		{
-			$template->assign_block_vars('announcements_row', array(
+			$template->assign_block_vars('announcements_center_row', array(
 				'S_NO_TOPICS'	=> true,
 				'S_NOT_LAST'	=> false
 			));
@@ -220,7 +220,7 @@ class portal_announcements_module
 				// Grab icons
 				$icons = $cache->obtain_icons();
 
-				$template->assign_block_vars('announcements_row', array(
+				$template->assign_block_vars('announcements_center_row', array(
 					'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
 					'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 					'TITLE'					=> $fetch_news[$i]['topic_title'],
@@ -261,7 +261,7 @@ class portal_announcements_module
 					{
 						foreach ($fetch_news[$i]['attachments'] as $attachment)
 						{
-							$template->assign_block_vars('announcements_row.attachment', array(
+							$template->assign_block_vars('announcements_center_row.attachment', array(
 								'DISPLAY_ATTACHMENT'	=> $attachment)
 							);
 						}
@@ -296,7 +296,7 @@ class portal_announcements_module
 					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $config['board3_number_of_announcements_' . $module_id], $start, 'announcements');
 				}	
 				
-				$template->assign_block_vars('announcements_row', array(
+				$template->assign_block_vars('announcements_center_row', array(
 					'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
 					'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 					'TITLE'					=> $fetch_news[$i]['topic_title'],
@@ -325,7 +325,7 @@ class portal_announcements_module
 				{
 					foreach ($fetch_news[$i]['attachments'] as $attachment)
 					{
-						$template->assign_block_vars('announcements_row.attachment', array(
+						$template->assign_block_vars('announcements_center_row.attachment', array(
 							'DISPLAY_ATTACHMENT'	=> $attachment)
 						);
 					}
@@ -358,11 +358,11 @@ class portal_announcements_module
 
 		if ($config['board3_announcements_style_' . $module_id])
 		{
-			return 'announcements_compact.html';
+			return 'announcements_center_compact.html';
 		}
 		else
 		{
-			return 'announcements.html';
+			return 'announcements_center.html';
 		}
 	}
 

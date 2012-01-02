@@ -719,19 +719,46 @@ class acp_portal
 					
 					// Create an array of already installed modules
 					$portal_modules = obtain_portal_modules(); 
-					$installed_modules = array(); 
+					$installed_modules = $module_column = array(); 
 
 					foreach($portal_modules as $cur_module) 
 					{ 
 						$installed_modules[] = $cur_module['module_classname'];
-					} 
+						// Create an array with the columns the module is in
+						$module_column[$cur_module['module_classname']][] = column_num_string($cur_module['module_column']);
+					}
 
 					if ($submit)
 					{
 						$module_classname = request_var('module_classname', '');
 						$class = 'portal_' . $module_classname . '_module';
 						
-						if(in_array($module_classname, $installed_modules) && $module_classname != 'custom')
+						$column_string = column_num_string($add_column);
+						
+						// do we want to add the module to the side columns or to the center columns?
+						if (in_array($column_string, array('left', 'right')))
+						{
+							// does the module already exist in the side columns?
+							if (isset($module_column[$module_classname]) && 
+								(in_array('left', $module_column[$module_classname]) || in_array('right', $module_column[$module_classname])))
+							{
+								$submit = false;
+							}
+						}
+						elseif (in_array($column_string, array('center', 'top', 'bottom')))
+						{
+							// does the module already exist in the center columns?
+							if (isset($module_column[$module_classname]) && 
+								(in_array('center', $module_column[$module_classname]) || 
+								in_array('top', $module_column[$module_classname]) || 
+								in_array('bottom', $module_column[$module_classname])))
+							{
+								$submit = false;
+							}
+						}
+						
+						// do not install if module already exists in that column
+						if (!$submit && $module_classname != 'custom')
 						{
 							trigger_error($user->lang['MODULE_ADD_ONCE'] . adm_back_link($this->u_action), E_USER_WARNING);
 						}
@@ -815,10 +842,6 @@ class acp_portal
 						if (preg_match('/^portal_.+\.' . $phpEx . '$/', $file))
 						{
 							$class = str_replace(".$phpEx", '', $file) . '_module';
-							if(in_array(str_replace(array('portal_', '_module'), '', $class), $installed_modules) && $class != 'portal_custom_module')
-							{
-								continue;
-							}
 							
 							if (!class_exists($class))
 							{

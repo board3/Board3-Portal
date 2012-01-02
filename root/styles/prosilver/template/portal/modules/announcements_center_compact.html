@@ -1,0 +1,59 @@
+<!-- BEGIN announcements_center_row -->
+<!-- IF announcements_center_row.S_NO_TOPICS -->
+{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
+	<div class="post bg2" style="margin-bottom: 0px">
+		<div class="inner"><span class="portal-corners-top-inner"></span>
+			<span style="text-align: center;"><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
+		<span class="portal-corners-bottom-inner"></span></div>
+	</div>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+<!-- ELSE -->
+<!-- IF announcements_center_row.S_FIRST_ROW -->
+<a name="a"></a>
+{$CC_BLOCK_H_L}
+	<dt <!-- IF S_DISPLAY_ANNOUNCEMENTS_RVS -->style="width: 44%"<!-- ELSE -->style="width: 60%"<!-- ENDIF -->>{$TITLE}</dt>
+	<!-- IF S_DISPLAY_ANNOUNCEMENTS_RVS -->
+		<dd class="posts" style="width: 11%">{L_REPLIES}</dd>
+		<dd class="views" style="width: 11%">{L_VIEWS}</dd>
+	<!-- ENDIF -->
+	<dd class="lastpost" style="width: 25%"><span>{L_LAST_POST}</span></dd>
+{$CC_BLOCK_H_R}
+<ul class="topiclist topics">
+<!-- ENDIF -->
+	<li class="row<!-- IF announcements_center_row.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
+		<dl class="icon" style="background-image: url({announcements_center_row.TOPIC_FOLDER_IMG_SRC}); background-repeat: no-repeat;">
+			<dt style="<!-- IF S_DISPLAY_ANNOUNCEMENTS_RVS -->width: 44%;<!-- ELSE -->width: 60%;<!-- ENDIF --> <!-- IF announcements_center_row.TOPIC_ICON_IMG -->background-image: url({T_ICONS_PATH}{announcements_center_row.TOPIC_ICON_IMG}); background-repeat: no-repeat;<!-- ENDIF -->" title="{announcements_center_row.TOPIC_FOLDER_IMG_ALT}"><!-- IF announcements_center_row.S_UNREAD_TOPIC --><a href="{announcements_center_row.U_NEWEST_POST}">{NEWEST_POST_IMG}</a> <!-- ENDIF --><!-- IF announcements_center_row.ATTACH_ICON_IMG -->{announcements_center_row.ATTACH_ICON_IMG} <!-- ENDIF --><!-- IF announcements_center_row.S_POLL --><strong>{L_VIEW_TOPIC_POLL}</strong><!-- ENDIF --><a href="{announcements_center_row.U_VIEW_COMMENTS}" title="{announcements_center_row.TITLE}" class="topictitle">{announcements_center_row.TITLE}</a><!-- IF U_VIEW_UNREAD_POST and not S_IS_BOT --> &bull; <a href="{U_VIEW_UNREAD_POST}">{L_VIEW_UNREAD_POST}</a> &bull; <!-- ENDIF -->
+				<!-- IF announcements_center_row.PAGINATION --><strong class="pagination"><span>{announcements_center_row.PAGINATION}</span></strong><!-- ENDIF -->
+					<br />{L_POSTED} {L_POST_BY_AUTHOR} {announcements_center_row.POSTER_FULL} &raquo; {announcements_center_row.TIME}
+				<!-- IF announcements_center_row.FORUM_NAME -->
+					<br />{L_FORUM}: <a href="{announcements_center_row.U_VIEWFORUM}" style="font-weight: bold;">{announcements_center_row.FORUM_NAME}</a>
+				<!-- ELSE -->
+					<br />{L_GLOBAL_ANNOUNCEMENT}
+				<!-- ENDIF -->
+				<!-- IF not S_DISPLAY_ANNOUNCEMENTS_RVS --><!-- IF announcements_center_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}: <strong>{announcements_center_row.REPLIES}</strong>  &bull; {L_VIEWS}: <strong>{announcements_center_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
+			</dt>
+			<!-- IF S_DISPLAY_ANNOUNCEMENTS_RVS -->
+				<dd class="posts" style="width: 11%">{announcements_center_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
+				<dd class="views" style="width: 11%">{announcements_center_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
+			<!-- ENDIF -->
+			<dd class="lastpost" style="width: 25%"><span><dfn>{L_LAST_POST}</dfn>{L_POST_BY_AUTHOR} {announcements_center_row.USERNAME_FULL_LAST} <!-- IF announcements_center_row.S_UNREAD_INFO --><a href="{announcements_center_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_center_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --><br />
+				{announcements_center_row.LAST_POST_TIME}</span>
+			</dd>
+		</dl>
+	</li>
+<!-- IF announcements_center_row.S_LAST_ROW -->
+	<!-- IF AP_PAGINATION or TOTAL_ANNOUNCEMENTS -->
+	<li class="row<!-- IF announcements_center_row.S_ROW_COUNT is even --> bg2<!-- ELSE --> bg1<!-- ENDIF -->">
+		<div class="topic-actions">
+			<div class="pagination">
+				{TOTAL_ANNOUNCEMENTS}
+				<!-- IF AP_PAGE_NUMBER --><!-- IF AP_PAGINATION --> &bull; {AP_PAGE_NUMBER} &bull; <span>{AP_PAGINATION}</span><!-- ELSE --> &bull; {AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --> &nbsp;
+			</div>
+		</div>
+	</li>
+	<!-- ENDIF -->
+	</ul>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- ENDIF -->
+<!-- END announcements_center_row -->
