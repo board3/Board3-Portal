@@ -401,6 +401,8 @@ function get_sub_taged_string($message, $bbcode_uid, $length)
 {
 	global $phpbb_root_path, $phpEx;
 
+	$message = htmlspecialchars_decode($message);
+
 	if(!class_exists('phpbb_trim_message'))
 	{
 		include($phpbb_root_path . 'includes/trim_message/trim_message.' . $phpEx);
