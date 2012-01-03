@@ -76,6 +76,13 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 	margin-bottom: 0px;
 }
 
+/**
+* margin spacing as in default prosilver for the forumlist
+*/
+#portal-forumlist .forabg {
+	margin-bottom: 4px;
+}
+
 /* RTL language fixes */
 .rtl .portal-navigation ul li a{
 	background-image: url("{T_THEME_PATH}/images/portal/arrowbullet_rtl.gif");
