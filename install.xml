@@ -137,6 +137,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Allow duplicate inclusion of module if it's in a different column type</change>
 					<change>Fixed incorrect arrow directions when using rtl language (ACP)</change>
 					<change>Disabled poll module for the side columns</change>
+					<change>Merged small whois online block into whois online module</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Deutsche Sprachvariablen mit englischen ersetzt</change>
@@ -166,6 +167,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Doppelte Einbindung von Modulen erlaubt, falls sie in einem anderen Spaltentyp hinzugefügt werden</change>
 					<change>Falsche Pfeilrichtungen bei RTL Sprachen korrigiert (Admin-Bereich)</change>
 					<change>Umfrage Modul in den seitlichen Spalten deaktiviert</change>
+					<change>Kleinen "Wer ist online?" Block in das "Wer ist online?" Modul eingefügt</change>
 				</changelog>
 			</entry>
 			<entry>
