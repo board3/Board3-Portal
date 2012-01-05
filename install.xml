@@ -103,6 +103,8 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 			<link type="template" lang="de" href="contrib/subsilver2.xml">Anleitung für subsilver2</link>
 			<link type="contrib" lang="en" href="contrib/update_106_to_200/update.xml">Manual for Updating B3P 1.0.6 to 2.0.0</link>
 			<link type="contrib" lang="de" href="contrib/update_106_to_200/update.xml">Anleitung für das Aktualisieren von B3P 1.0.6 zu 2.0.0</link>
+			<link type="contrib" lang="en" href="contrib/update_200b1_to_200/update.xml">Manual for Updating B3P 2.0.0b1 to 2.0.0</link>
+			<link type="contrib" lang="de" href="contrib/update_200b1_to_200/update.xml">Anleitung für das Aktualisieren von B3P 2.0.0b1 zu 2.0.0</link>
 		</link-group>
 		<history>
 			<entry>
