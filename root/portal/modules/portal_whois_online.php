@@ -28,7 +28,7 @@ class portal_whois_online_module
 	* right		8
 	* bottom	16
 	*/
-	public $columns = 21;
+	public $columns = 31;
 
 	/**
 	* Default modulename
@@ -39,7 +39,7 @@ class portal_whois_online_module
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	public $image_src = '';
+	public $image_src = 'portal_friends.png';
 
 	/**
 	* module-language file
@@ -103,6 +103,15 @@ class portal_whois_online_module
 		$template->assign_var('PORTAL_LEGEND', $legend);
 
 		return 'whois_online_center.html';
+	}
+	
+	public function get_template_side($module_id)
+	{
+		global $config, $template, $user, $auth, $db, $phpbb_root_path, $phpEx;
+
+		// No legend on the side so just return the template file
+
+		return 'whois_online_side.html';
 	}
 
 	public function get_template_acp($module_id)

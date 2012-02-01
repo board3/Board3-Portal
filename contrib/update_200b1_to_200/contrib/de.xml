@@ -6,8 +6,8 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en">board3 Portal - German Language Update for 2.0.0b2</title>
-		<title lang="de">board3 Portal - Deutsche Sprache Aktualisiering für 2.0.0b2</title>
+		<title lang="en">board3 Portal - German Language Update for 2.0.0</title>
+		<title lang="de">board3 Portal - Deutsche Sprache Aktualisiering für 2.0.0</title>
 
 		<description lang="en">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
@@ -86,12 +86,12 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			 </author>
 		</author-group>
 
-		<mod-version>2.0.0b2</mod-version>
+		<mod-version>2.0.0</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>120</time>
-			<target-version>3.0.9</target-version>
+			<target-version>3.0.10</target-version>
 		</installation>
 
 		<link-group>
@@ -101,16 +101,10 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 	</header>
 	<action-group>
 		<copy>
-			<file from="root/language/de/mods/*.*" to="language/de/mods/*.*" />
+			<file from="root/language/de/mods/info_acp_portal.php" to="language/de/mods/info_acp_portal.php" />
+			<file from="root/language/de/mods/portal/portal_attachments_module.php" to="language/de/mods/portal/portal_attachments_module.php" />
+			<file from="root/language/de/mods/portal/portal_latest_bots_module.php" to="language/de/mods/portal/portal_latest_bots_module.php" />
 		</copy>
-		<delete>
-			<file name="language/de/mods/additional_blocks.php" />
-			<file name="language/de/mods/info_acp_additional_blocks.php" />
-			<file name="language/de/mods/install_portal.php" />
-			<file name="language/de/mods/lang_portal.php" />
-			<file name="language/de/mods/lang_portal_acp.php" />
-		</delete>
-
 		<diy-instructions lang="en">See general install.xml file</diy-instructions>
 		<diy-instructions lang="de">Siehe install.xml</diy-instructions>
 	</action-group>

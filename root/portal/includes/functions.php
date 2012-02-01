@@ -798,6 +798,7 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 				'module_group_ids'		=> '',
 				'module_image_width'	=> 16,
 				'module_image_height'	=> 16,
+				'module_status'			=> B3_MODULE_ENABLED,
 			);
 			$sql = 'INSERT INTO ' . PORTAL_MODULES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
 			$db->sql_query($sql);

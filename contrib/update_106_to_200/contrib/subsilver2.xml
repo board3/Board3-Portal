@@ -6,8 +6,8 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en">board3 Portal - subsilver2 style</title>
-		<title lang="de">board3 Portal - subsilver2 style</title>
+		<title lang="en">board3 Portal - Update subsilver2 style for 2.0.0</title>
+		<title lang="de">board3 Portal - Aktualisiere das subsilver2 style für 2.0.0</title>
 
 		<description lang="en">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
@@ -95,8 +95,8 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</installation>
 
 		<link-group>
-			<link type="parent" lang="de" href="../install.xml">Installations-Anleitung</link>
-			<link type="parent" lang="en" href="../install.xml">Manual</link>
+			<link type="parent" lang="de" href="../update.xml">Update-Anleitung</link>
+			<link type="parent" lang="en" href="../update.xml">Update instructions</link>
 		</link-group>	
 	</header>
 	<action-group>
@@ -104,55 +104,18 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<file from="root/styles/subsilver2/template/portal/*.*" to="styles/subsilver2/template/portal/*.*" />
 			<file from="root/styles/subsilver2/theme/images/portal/*.*" to="styles/subsilver2/theme/images/portal/*.*" />
 		</copy>
-		<open src="styles/subsilver2/template/breadcrumbs.html">
-			<edit>
-				<find><![CDATA[<p class="breadcrumbs"><a href="{U_INDEX}">{L_INDEX}</a><!-- BEGIN navlinks --> &#187; ]]></find>
-				<inline-edit>
-					<inline-find><![CDATA[<a href="{U_INDEX}">{L_INDEX}</a>]]></inline-find>
-					<inline-action type="before-add"><![CDATA[<!-- IF U_PORTAL --><a href="{U_PORTAL}">{L_PORTAL}</a> &#187; <!-- ENDIF -->]]></inline-action>
-				</inline-edit>
-			</edit>
-		</open>
-		<open src="styles/subsilver2/template/overall_header.html">
-			<edit>
-				<find><![CDATA[	<div id="logodesc">
-		<table width="100%" cellspacing="0">
-		<tr>
-			<td><a href="{U_INDEX}">{SITE_LOGO_IMG}</a></td>
-			<td width="100%" align="center"><h1>{SITENAME}</h1><span class="gen">{SITE_DESCRIPTION}</span></td>
-		</tr>
-		</table>
-	</div>]]></find>
-				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or S_DISPLAY_PHPBB_MENU -->]]></action>
-			</edit>
-			<edit>
-				<find><![CDATA[				<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN --> &nbsp;<span style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->]]></find>
-				<action type="before-add"><![CDATA[<!-- ENDIF -->]]></action>
-				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or S_DISPLAY_PHPBB_MENU -->]]></action>
-			</edit>
-			<edit>
-				<find><![CDATA[	<div id="datebar">
-		<table width="100%" cellspacing="0">
-		<tr>
-			<td class="gensmall"><!-- IF S_USER_LOGGED_IN -->{LAST_VISIT_DATE}<!-- ENDIF --></td>
-			<td class="gensmall" align="{S_CONTENT_FLOW_END}">{CURRENT_TIME}<br /></td>
-		</tr>
-		</table>
-	</div>]]></find>
-				<action type="after-add"><![CDATA[<!-- ENDIF -->]]></action>
-			</edit>
-			<edit>
-				<find><![CDATA[<div id="wrapcentre">]]></find>
-				<action type="after-add"><![CDATA[<!-- IF not $S_IN_PORTAL or S_DISPLAY_PHPBB_MENU -->]]></action>
-			</edit>
-			<edit>
-				<find><![CDATA[	<!-- INCLUDE breadcrumbs.html -->
-
-	<br />]]></find>
-				<action type="after-add"><![CDATA[<!-- ENDIF -->]]></action>
-			</edit>
-		</open>
-		
+		<delete>
+			<file name="styles/subsilver2/template/portal/portal_center.html" />
+			<file name="styles/subsilver2/template/portal/portal_left.html" />
+			<file name="styles/subsilver2/template/portal/portal_right.html" />
+			<file name="styles/subsilver2/template/portal/block/*.*" />
+			<file name="styles/subsilver2/theme/images/portal/mini_cal_icon_left_arrow.png" />
+			<file name="styles/subsilver2/theme/images/portal/mini_cal_icon_right_arrow.png" />
+			<file name="styles/subsilver2/theme/images/portal/portal_login.png" />
+			<file name="styles/subsilver2/theme/images/portal/portal_minical.png" />
+			<file name="styles/subsilver2/theme/images/portal/portal_random.png" />
+			<file name="styles/subsilver2/theme/images/portal/portal_stats.png" />
+		</delete>
 		<diy-instructions lang="de"><![CDATA[
 Aktualisiere deine Styles:
     "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
