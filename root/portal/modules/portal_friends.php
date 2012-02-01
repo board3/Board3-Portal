@@ -49,7 +49,7 @@ class portal_friends_module
 
 	public function get_template_side($module_id)
 	{
-		global $config, $template, $db, $user;
+		global $config, $template, $db, $user, $auth;
 
 		$s_display_friends = false;
 
