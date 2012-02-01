@@ -57,8 +57,13 @@ class portal_poll_module
 	{
 		global $config, $template, $db, $user, $auth, $phpbb_root_path, $phpEx;
 
-
 		$user->add_lang('viewtopic');
+		
+		// check if we need to include the bbcode class
+		if(!class_exists('bbcode'))
+		{
+			include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+		}
 
 		$view = request_var('view', '');
 		$update = request_var('update', false);
@@ -433,8 +438,13 @@ class portal_poll_module
 	{
 		global $config, $template, $db, $user, $auth, $phpbb_root_path, $phpEx;
 
-
 		$user->add_lang('viewtopic');
+		
+		// check if we need to include the bbcode class
+		if(!class_exists('bbcode'))
+		{
+			include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+		}
 
 		$view = request_var('view', '');
 		$update = request_var('update', false);
