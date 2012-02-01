@@ -6,8 +6,8 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en">board3 Portal 2.0.0b2 - Convert from Board3 Portal 1.0.6</title>
-		<title lang="de">board3 Portal 2.0.0b2 - Konvertiere von Board3 Portal 1.0.6</title>
+		<title lang="en">board3 Portal 2.0.0 - Convert from Board3 Portal 1.0.6</title>
+		<title lang="de">board3 Portal 2.0.0 - Konvertiere von Board3 Portal 1.0.6</title>
 
 		<description lang="en">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
@@ -86,21 +86,21 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			 </author>
 		</author-group>
 
-		<mod-version>2.0.0b2</mod-version>
+		<mod-version>2.0.0</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>120</time>
-			<target-version>3.0.9</target-version>
+			<target-version>3.0.10</target-version>
 		</installation>
 
 		<link-group>
 			<link type="parent" lang="de" href="../../install.xml">Installations-Anleitung</link>
 			<link type="parent" lang="en" href="../../install.xml">Manual</link>
-			<link type="template" lang="en" href="contrib/subsilver2.xml">Update subsilver2 to Board3 Portal 2.0.0a2</link>
-			<link type="template" lang="de" href="contrib/subsilver2.xml">Aktualisiere subsilver2 für Board3 Portal 2.0.0a2</link>
-			<link type="language" lang="en" href="contrib/de.xml">Update German language to Board3 Portal 2.0.0a2</link>
-			<link type="language" lang="de" href="contrib/de.xml">Aktualisiere deutsche Sprachdateien für Board3 Portal 2.0.0a2</link>
+			<link type="template" lang="en" href="contrib/subsilver2.xml">Update subsilver2 to Board3 Portal 2.0.0</link>
+			<link type="template" lang="de" href="contrib/subsilver2.xml">Aktualisiere subsilver2 für Board3 Portal 2.0.0</link>
+			<link type="language" lang="en" href="contrib/de.xml">Update German language to Board3 Portal 2.0.0</link>
+			<link type="language" lang="de" href="contrib/de.xml">Aktualisiere deutsche Sprachdateien für Board3 Portal 2.0.0</link>
 		</link-group>	
 	</header>
 	<action-group>
@@ -110,6 +110,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<file from="root/adm/mods/board3_portal_check_version.php" to="adm/mods/board3_portal_check_version.php" />
 			<file from="root/adm/style/*.*" to="adm/style/*.*" />
 			<file from="root/includes/acp/*.*" to="includes/acp/*.*" />
+			<file from="root/includes/trim_message/*.*" to="includes/trim_message/*.*" />
 			<file from="root/install/index.php" to="install/index.php" />
 			<file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
 			<file from="root/portal/*.*" to="portal/*.*" />

@@ -28,7 +28,7 @@ class portal_poll_module
 	* right		8
 	* bottom	16
 	*/
-	public $columns = 31;
+	public $columns = 21;
 
 	/**
 	* Default modulename
