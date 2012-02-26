@@ -278,6 +278,7 @@ $versions = array(
 					'module_image_width' => array('INT:3', 0),
 					'module_image_height' => array('INT:3', 0),
 					'module_group_ids' => array('VCHAR', ''),
+					'module_status' => array('TINT:1', 1),
 				),
 
 				'PRIMARY_KEY'	=> 'module_id',
@@ -346,12 +347,6 @@ $versions = array(
 		),
 		'custom'	=> array('board3_basic_install'),
 
-	),
-	
-	'2.0.0a2' => array(
-		'table_column_add' => array(
-			array(PORTAL_MODULES_TABLE, 'module_status', array('TINT:1', 1)),
-		),
 	),
 
 	'2.0.0b1' => array(
