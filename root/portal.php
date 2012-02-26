@@ -92,30 +92,30 @@ foreach ($portal_modules as $row)
 	{
 		$user->add_lang('mods/portal/' . $module->language);
 	}
-	if ($row['module_column'] == 1 && $config['board3_left_column'])
+	if ($row['module_column'] == column_string_num('left') && $config['board3_left_column'])
 	{
 		$template_module = $module->get_template_side($row['module_id']);
 		$template_column = 'left';
 		++$module_count['left'];
 	}
-	if ($row['module_column'] == 2)
+	if ($row['module_column'] == column_string_num('center'))
 	{
 		$template_module = $module->get_template_center($row['module_id']);
 		$template_column = 'center';
 		++$module_count['center'];
 	}
-	if ($row['module_column'] == 3 && $config['board3_right_column'])
+	if ($row['module_column'] == column_string_num('right') && $config['board3_right_column'])
 	{
 		$template_module = $module->get_template_side($row['module_id']);
 		$template_column = 'right';
 		++$module_count['right'];
 	}
-	if ($row['module_column'] == 4)
+	if ($row['module_column'] == column_string_num('top'))
 	{
 		$template_module = $module->get_template_center($row['module_id']);
 		++$module_count['top'];
 	}
-	if ($row['module_column'] == 5)
+	if ($row['module_column'] == column_string_num('bottom'))
 	{
 		$template_module = $module->get_template_center($row['module_id']);
 		++$module_count['bottom'];
