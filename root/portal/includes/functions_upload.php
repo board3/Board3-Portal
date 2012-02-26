@@ -131,6 +131,14 @@ class portal_upload
 						// Let's start moving our files where they belong						
 						foreach ($actions['NEW_FILES'] as $source => $target)
 						{
+							/*
+							* make sure we don't try to copy folders
+							* folders will be created if necessary in copy_content
+							*/
+							if(is_dir($source))
+							{
+								continue;
+							}
 							$status = $this->copy_content($source, $target);
 
 							if ($status !== true && !is_null($status))
