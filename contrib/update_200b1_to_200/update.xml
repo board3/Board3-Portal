@@ -132,6 +132,12 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<file name="styles/prosilver/template/portal/modules/announcements.html" />
 			<file name="styles/prosilver/template/portal/modules/announcements_compact.html" />
 		</delete>
+		<open src="includes/session.php">
+			<edit>
+				<find><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START'))]]></find>
+				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START') && $this->data['user_type'] != USER_IGNORE)]]></action>
+			</edit>
+		</open>
 		<php-installer>install/index.php</php-installer>
 		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus
 
