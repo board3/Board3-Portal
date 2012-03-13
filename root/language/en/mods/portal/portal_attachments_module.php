@@ -39,7 +39,6 @@ $lang = array_merge($lang, array(
 	// ACP
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS'			=> 'Attachments settings',
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS_EXP'	=> 'This is where you customize the attachments block.',
-	'PORTAL_ATTACHMENTS_EXP'						=> 'Display this block on the portal.',
 	'PORTAL_ATTACHMENTS_NUMBER'							=> 'Limit of displayed attachments',
 	'PORTAL_ATTACHMENTS_NUMBER_EXP'					=> '0 means infinite',
 	'PORTAL_ATTACHMENTS_FORUM_IDS'						=> 'Attachments forums',
