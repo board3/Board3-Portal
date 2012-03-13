@@ -39,7 +39,6 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_BIRTHDAYS_SETTINGS'			=> 'Birthdays Settings',
 	'ACP_PORTAL_BIRTHDAYS_SETTINGS_EXP'	=> 'This is where you customize the birthday block.',
 	'PORTAL_BIRTHDAYS'						=> 'Birthday block',
-	'PORTAL_BIRTHDAYS_EXP'				=> 'Display this block on the portal.',
 	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Birthdays ahead days',
 	'PORTAL_BIRTHDAYS_AHEAD_EXP'		=> 'How many days to look ahead for future birthdays.<br />"0" will disable the ahead birthdays list.',
 ));

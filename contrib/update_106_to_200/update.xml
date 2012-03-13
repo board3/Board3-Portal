@@ -174,23 +174,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			</edit>
 		</open>
 		<php-installer>install/index.php</php-installer>
-		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus
-
-Aktualisiere deine Styles:
-    "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
-    "Administrations-Bereich" (ACP) > "Styles" > "Themes" > jedes > "Aktualisieren"
-    "Administrations-Bereich" (ACP) > "Styles" > "Grafiksammlungen" > jedes > "Aktualisieren"
-
-Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
-]]></diy-instructions>
-		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer
-
-Refresh your Styles:
-    "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"
-    "Administration Control Panel" (ACP) > "Styles" > "Themes" > each > "refresh"
-    "Administration Control Panel" (ACP) > "Styles" > "Imagesets" > each > "refresh"
-
-Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
-]]></diy-instructions>
+		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus.]]></diy-instructions>
+		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer.]]></diy-instructions>
 	</action-group>
 </mod>

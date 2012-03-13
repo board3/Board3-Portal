@@ -41,8 +41,6 @@ $lang = array_merge($lang, array(
 	// ACP
 	'ACP_PORTAL_POLLS_SETTINGS'			=> 'Poll settings',
 	'ACP_PORTAL_POLLS_SETTINGS_EXP'	=> 'This is where you customize the poll block.',
-	'PORTAL_POLL_TOPIC'					=> 'Display poll blocks',
-	'PORTAL_POLL_TOPIC_EXP'			=> 'Display this block on the portal.',
 	'PORTAL_POLL_TOPIC_ID'				=> 'Poll forum(s)',
 	'PORTAL_POLL_TOPIC_ID_EXP'		=> 'The forum(s) from which the polls should be displayed. If "Exclude forums" is set to "Yes", select the forums you want to exclude.<br />If "Exclude forums" is set to "No" select the forums you want to see.<br />Select/Deselect multiple forums by holding <samp>CTRL</samp> and clicking.',
 	'PORTAL_POLL_EXCLUDE_ID'			=> 'Exclude Forums',
