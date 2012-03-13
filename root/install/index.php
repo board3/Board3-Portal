@@ -354,7 +354,13 @@ $versions = array(
 	),
 
 	'2.0.0' => array(
-		// no changes
+		// no changes ... purge caches anyways
+		'cache_purge' => array(
+			'imageset',
+			'template',
+			'theme',
+			'',
+		),
 	),
 );
 

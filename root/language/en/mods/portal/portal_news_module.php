@@ -43,7 +43,6 @@ $lang = array_merge($lang, array(
 	'JUMP_NEWEST'			=> 'Jump to newest post',
 	'JUMP_FIRST'			=> 'Jump to first post',
 	'JUMP_TO_POST'			=> 'Jump to post',
-	'BACK'					=> 'Back',
 	
 	// ACP
 	'ACP_PORTAL_NEWS_SETTINGS'			=> 'News settings',

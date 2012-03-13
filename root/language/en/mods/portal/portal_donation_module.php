@@ -58,11 +58,7 @@ $lang = array_merge($lang, array(
 	
 	// ACP
 	'ACP_PORTAL_PAYPAL_SETTINGS'			=> 'Paypal settings',
-	'ACP_PORTAL_PAYPAL_SETTINGS_EXPLAIN'	=> 'This is where you customize the Paypal block.',
-	'PORTAL_PAY_C_BLOCK'					=> 'Display paypal center block',
-	'PORTAL_PAY_C_BLOCK_EXPLAIN'			=> 'Display this block on the portal.',
-	'PORTAL_PAY_S_BLOCK'					=> 'Display paypal small block',
-	'PORTAL_PAY_S_BLOCK_EXPLAIN'			=> 'Display this block on the portal.',
+	'ACP_PORTAL_PAYPAL_SETTINGS_EXP'		=> 'This is where you customize the Paypal block.',
 	'PORTAL_PAY_ACC'						=> 'Paypal account to use',
-	'PORTAL_PAY_ACC_EXPLAIN'				=> 'Enter your Paypal e-mail address eg. xxx@xxx.com',
+	'PORTAL_PAY_ACC_EXP'					=> 'Enter your Paypal e-mail address eg. xxx@xxx.com',
 ));
