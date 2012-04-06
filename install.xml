@@ -108,7 +108,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 		</link-group>
 		<history>
 			<entry>
-				<date>2012-01-06</date>
+				<date>2012-04-06</date>
 				<rev-version>2.0.0</rev-version>
 				<changelog lang="en">
 					<change>Replaced German language vars with English ones</change>
@@ -140,6 +140,20 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Fixed incorrect arrow directions when using rtl language (ACP)</change>
 					<change>Disabled poll module for the side columns</change>
 					<change>Merged small whois online block into whois online module</change>
+					<change>Fixed missing module_status in board3_basic_install()</change>
+					<change>Add missing update instructions for 2.0.0b1</change>
+					<change>Fix size of input boxes</change>
+					<change>Add missing class references</change>
+					<change>Fixed "unknown column" issue when installing</change>
+					<change>Fixing incorrect size of module box for oneliners</change>
+					<change>Get rid of magic numbers in portal.php</change>
+					<change>Make sure we don't try to copy folders</change>
+					<change>[Fix] Don't let Bots use styleswitcher </change>
+					<change>Added missing language vars and removed useless ones</change>
+					<change>Purge caches via install file</change>
+					<change>Fixed exceeding of max execution time when using trim message tool</change>
+					<change>Moved duplicate javascript to acp_portal.js</change>
+					<change>Hide modules that can't be added</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Deutsche Sprachvariablen mit englischen ersetzt</change>
@@ -170,6 +184,20 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Falsche Pfeilrichtungen bei RTL Sprachen korrigiert (Admin-Bereich)</change>
 					<change>Umfrage Modul in den seitlichen Spalten deaktiviert</change>
 					<change>Kleinen "Wer ist online?" Block in das "Wer ist online?" Modul eingefügt</change>
+					<change>Fehlender module_stats in board3_basic_install() korrigiert</change>
+					<change>Fehlende Update-Anleitung für 2.0.0b1 hinzugefügt</change>
+					<change>Größe der Input-Boxen korrigiert</change>
+					<change>Fehlende Globalisierung von Klassen und includes hinzugefügt</change>
+					<change>"unknown column" Fehler beim Installieren korrigiert</change>
+					<change>Falsche Größe der Modul Box bei Einzeilern korrigiert</change>
+					<change>"Magic Numbers" in portal.php entfernt</change>
+					<change>Stelle sicher, dass wir nicht versuchen Ordner zu kopieren</change>
+					<change>Lasse Bots nicht den Styleswicher benutzen</change>
+					<change>Fehlende Sprachvariablen hinzugefügt und Unnötige entfernt</change>
+					<change>Leere Caches mit dem Install-Skript</change>
+					<change>Überschreiten der maximalen Ausführungszeit im trim message Tool korrigiert</change>
+					<change>Doppeltes Javascript in acp_portal.js verschoben</change>
+					<change>Verstecke Module die nicht hinzugefügt werden können</change>
 				</changelog>
 			</entry>
 			<entry>
@@ -337,7 +365,11 @@ Deny from All
 			</edit>
 		</open>
 		<php-installer>install/index.php</php-installer>
-		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus.]]></diy-instructions>
-		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer.]]></diy-instructions>
+		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus.
+
+Lösche anschließend das Installationsverzeichnis.]]></diy-instructions>
+		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer.
+
+Remove the install-folder afterwards.]]></diy-instructions>
 	</action-group>
 </mod>
