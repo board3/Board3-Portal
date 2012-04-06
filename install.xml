@@ -337,7 +337,11 @@ Deny from All
 			</edit>
 		</open>
 		<php-installer>install/index.php</php-installer>
-		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus.]]></diy-instructions>
-		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer.]]></diy-instructions>
+		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus.
+
+Lösche anschließend das Installationsverzeichnis.]]></diy-instructions>
+		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer.
+
+Remove the install-folder afterwards.]]></diy-instructions>
 	</action-group>
 </mod>
