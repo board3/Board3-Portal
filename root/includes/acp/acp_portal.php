@@ -842,6 +842,41 @@ class acp_portal
 						if (preg_match('/^portal_.+\.' . $phpEx . '$/', $file))
 						{
 							$class = str_replace(".$phpEx", '', $file) . '_module';
+							$module_class = str_replace(array('portal_', ".$phpEx"), '', $file);
+							$column_string = column_num_string($add_column);
+							
+							// Create an array of already installed modules
+							$portal_modules = obtain_portal_modules(); 
+							$installed_modules = $module_column = array();
+
+							foreach($portal_modules as $cur_module) 
+							{ 
+								$installed_modules[] = $cur_module['module_classname'];
+								// Create an array with the columns the module is in
+								$module_column[$cur_module['module_classname']][] = column_num_string($cur_module['module_column']);
+							}
+							
+							// do we want to add the module to the side columns or to the center columns?
+							if (in_array($column_string, array('left', 'right')))
+							{
+								// does the module already exist in the side columns?
+								if (isset($module_column[$module_class]) && 
+									(in_array('left', $module_column[$module_class]) || in_array('right', $module_column[$module_class])))
+								{
+									continue;
+								}
+							}
+							elseif (in_array($column_string, array('center', 'top', 'bottom')))
+							{
+								// does the module already exist in the center columns?
+								if (isset($module_column[$module_class]) && 
+									(in_array('center', $module_column[$module_class]) || 
+									in_array('top', $module_column[$module_class]) || 
+									in_array('bottom', $module_column[$module_class])))
+								{
+									continue;
+								}
+							}
 							
 							if (!class_exists($class))
 							{
