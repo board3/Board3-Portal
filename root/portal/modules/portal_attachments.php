@@ -122,7 +122,7 @@ class portal_attachments_module
 
 				$replace = character_limit(utf8_substr($row['real_filename'], 0, strrpos($row['real_filename'], '.')), $config['board3_attach_max_length_' . $module_id]);
 
-				$template->assign_block_vars('attach', array(
+				$template->assign_block_vars('attach_center', array(
 					'FILESIZE'			=> $row['filesize'] . ' ' . $size_lang,
 					'FILETIME'			=> $user->format_date($row['filetime']),
 					'DOWNLOAD_COUNT'	=> (int) $row['download_count'], // grab downloads count
@@ -223,7 +223,7 @@ class portal_attachments_module
 
 				$replace = character_limit(utf8_substr($row['real_filename'], 0, strrpos($row['real_filename'], '.')), $config['board3_attach_max_length_' . $module_id]);
 
-				$template->assign_block_vars('attach', array(
+				$template->assign_block_vars('attach_side', array(
 					'FILESIZE'			=> $row['filesize'] . ' ' . $size_lang,
 					'FILETIME'			=> $user->format_date($row['filetime']),
 					'DOWNLOAD_COUNT'	=> (int) $row['download_count'], // grab downloads count
