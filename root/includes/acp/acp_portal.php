@@ -857,24 +857,27 @@ class acp_portal
 							}
 							
 							// do we want to add the module to the side columns or to the center columns?
-							if (in_array($column_string, array('left', 'right')))
+							if ($module_class != 'custom')
 							{
-								// does the module already exist in the side columns?
-								if (isset($module_column[$module_class]) && 
-									(in_array('left', $module_column[$module_class]) || in_array('right', $module_column[$module_class])))
+								if (in_array($column_string, array('left', 'right')))
 								{
-									continue;
+									// does the module already exist in the side columns?
+									if (isset($module_column[$module_class]) && 
+										(in_array('left', $module_column[$module_class]) || in_array('right', $module_column[$module_class])))
+									{
+										continue;
+									}
 								}
-							}
-							elseif (in_array($column_string, array('center', 'top', 'bottom')))
-							{
-								// does the module already exist in the center columns?
-								if (isset($module_column[$module_class]) && 
-									(in_array('center', $module_column[$module_class]) || 
-									in_array('top', $module_column[$module_class]) || 
-									in_array('bottom', $module_column[$module_class])))
+								elseif (in_array($column_string, array('center', 'top', 'bottom')))
 								{
-									continue;
+									// does the module already exist in the center columns?
+									if (isset($module_column[$module_class]) && 
+										(in_array('center', $module_column[$module_class]) || 
+										in_array('top', $module_column[$module_class]) || 
+										in_array('bottom', $module_column[$module_class])))
+									{
+										continue;
+									}
 								}
 							}
 							
