@@ -379,6 +379,18 @@ class acp_portal
 			case 'modules':
 				$action = request_var('action', '');
 				$module_id = request_var('module_id', '');
+				
+				// Create an array of already installed modules
+				$portal_modules = obtain_portal_modules(); 
+				$installed_modules = $module_column = array(); 
+
+				foreach($portal_modules as $cur_module) 
+				{ 
+					$installed_modules[] = $cur_module['module_classname'];
+					// Create an array with the columns the module is in
+					$module_column[$cur_module['module_classname']][] = column_num_string($cur_module['module_column']);
+				}
+
 				if ($action == 'move_up')
 				{
 					$sql = 'SELECT module_order, module_column
@@ -456,83 +468,77 @@ class acp_portal
 					}
 					$c_class = new $class();
 					
-					if($c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 1)))
+					if ($module_data !== false)
 					{
-						if ($module_data !== false)
+						if($c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 1)))
 						{
-							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-								SET module_order = module_order + 1
-								WHERE module_order >= ' . (int) $module_data['module_order'] . '
-									AND module_column = ' . (int) ($module_data['module_column'] + 1);
-							$db->sql_query($sql);
-							$updated = $db->sql_affectedrows();
-
-							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-								SET module_column = module_column + 1
-								WHERE module_id = ' . (int) $module_id;
-							$db->sql_query($sql);
-							
-							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-								SET module_order = module_order - 1
-								WHERE module_order >= ' . (int) $module_data['module_order'] . '
-								AND module_column = ' . (int) $module_data['module_column'];
-							$db->sql_query($sql);
-							
-							// the module that needs to moved is in the last row
-							if(!$updated)
+							$move_action = 1; // we move 1 column to the right
+						}
+						elseif($c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 2)) && $module_data['module_column'] != 2)
+						{
+							$move_action = 2; // we move 2 columns to the right
+						}
+						
+						/**
+						* moving only 1 column to the right means we will either end up in the right column
+						* or in the center column. this is not possible when moving 2 columns to the right.
+						* therefore we only need to check if we won't end up with a duplicate module in the
+						* new column (side columns (left & right) or center columns (top, center, bottom)).
+						* of course this does not apply to custom modules.
+						*/
+						if ($module_data['module_classname'] != 'custom' && $move_action == 1)
+						{
+							$column_string = column_num_string($module_data['module_column'] + $move_action);
+							// we can only move right to the right & center column
+							if ($column_string == 'right' &&
+								isset($module_column[$module_data['module_classname']]) &&
+								in_array('right', $module_column[$module_data['module_classname']]))
 							{
-								$sql = 'SELECT MAX(module_order) as new_order
-										FROM ' . PORTAL_MODULES_TABLE . '
-										WHERE module_order < ' . (int) $module_data['module_order'] . '
-										AND module_column = ' . (int) ($module_data['module_column'] + 1);
-								$db->sql_query($sql);
-								$new_order = $db->sql_fetchfield('new_order') + 1;
-								
-								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_order = ' . (int) $new_order . '
-									WHERE module_id = ' . (int) $module_id;
-								$db->sql_query($sql);
+								trigger_error($user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
+							}
+							elseif ($column_string == 'center' &&
+								isset($module_column[$module_data['module_classname']]) &&
+								(in_array('center', $module_column[$module_data['module_classname']]) ||
+								in_array('top', $module_column[$module_data['module_classname']]) ||
+								in_array('bottom', $module_column[$module_data['module_classname']])))
+							{
+								// we are moving from the left to the center column so we should move to the right column instead
+								$move_action = 2;
 							}
 						}
-					}
-					elseif($c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 2)) && $module_data['module_column'] != 2)
-					{
-						if ($module_data !== false)
-						{
-							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-								SET module_order = module_order + 1
-								WHERE module_order >= ' . (int) $module_data['module_order'] . '
-									AND module_column = ' . (int) ($module_data['module_column'] + 2);
-							$db->sql_query($sql);
-							$updated = $db->sql_affectedrows();
+						
+						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+							SET module_order = module_order + 1
+							WHERE module_order >= ' . (int) $module_data['module_order'] . '
+								AND module_column = ' . (int) ($module_data['module_column'] + $move_action);
+						$db->sql_query($sql);
+						$updated = $db->sql_affectedrows();
 
+						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+							SET module_column = module_column + ' . $move_action . '
+							WHERE module_id = ' . (int) $module_id;
+						$db->sql_query($sql);
+						
+						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+							SET module_order = module_order - 1
+							WHERE module_order >= ' . (int) $module_data['module_order'] . '
+							AND module_column = ' . (int) $module_data['module_column'];
+						$db->sql_query($sql);
+						
+						// the module that needs to moved is in the last row
+						if(!$updated)
+						{
+							$sql = 'SELECT MAX(module_order) as new_order
+									FROM ' . PORTAL_MODULES_TABLE . '
+									WHERE module_order < ' . (int) $module_data['module_order'] . '
+									AND module_column = ' . (int) ($module_data['module_column'] + $move_action);
+							$db->sql_query($sql);
+							$new_order = $db->sql_fetchfield('new_order') + 1;
+							
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-								SET module_column = module_column + 2
+								SET module_order = ' . (int) $new_order . '
 								WHERE module_id = ' . (int) $module_id;
 							$db->sql_query($sql);
-							
-							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-								SET module_order = module_order - 1
-								WHERE module_order >= ' . (int) $module_data['module_order'] . '
-								AND module_column = ' . (int) $module_data['module_column'];
-							$db->sql_query($sql);
-							
-							// the module that needs to moved is in the last row
-							if(!$updated)
-							{
-								$sql = 'SELECT MAX(module_order) as new_order
-										FROM ' . PORTAL_MODULES_TABLE . '
-										WHERE module_order < ' . (int) $module_data['module_order'] . '
-										AND module_column = ' . (int) ($module_data['module_column'] + 2);
-								$db->sql_query($sql);
-								$new_order = $db->sql_fetchfield('new_order') + 1;
-								
-								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_order = ' . (int) $new_order . '
-									WHERE module_id = ' . (int) $module_id;
-								$db->sql_query($sql);
-							}
-
 						}
 					}
 					else
@@ -562,82 +568,77 @@ class acp_portal
 					}
 					$c_class = new $class();
 					
-					if($c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 1)))
+					if ($module_data !== false)
 					{
-						if ($module_data !== false)
+						if($c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 1)))
 						{
-							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-								SET module_order = module_order + 1
-								WHERE module_order >= ' . $module_data['module_order'] . '
-									AND module_column = ' . ($module_data['module_column'] - 1);
-							$db->sql_query($sql);
-							$updated = $db->sql_affectedrows();
-
-							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-								SET module_column = module_column - 1
-								WHERE module_id = ' . (int) $module_id;
-							$db->sql_query($sql);
-							
-							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-								SET module_order = module_order - 1
-								WHERE module_order >= ' . $module_data['module_order'] . '
-								AND module_column = ' . $module_data['module_column'];
-							$db->sql_query($sql);
-							
-							// the module that needs to moved is in the last row
-							if(!$updated)
+							$move_action = 1; // we move 1 column to the left
+						}
+						elseif($c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 2)) && $module_data['module_column'] != 2)
+						{
+							$move_action = 2; // we move 2 columns to the left
+						}
+						
+						/**
+						* moving only 1 column to the left means we will either end up in the left column
+						* or in the center column. this is not possible when moving 2 columns to the left.
+						* therefore we only need to check if we won't end up with a duplicate module in the
+						* new column (side columns (left & right) or center columns (top, center, bottom)).
+						* of course this does not apply to custom modules.
+						*/
+						if ($module_data['module_classname'] != 'custom' && $move_action == 1)
+						{
+							$column_string = column_num_string($module_data['module_column'] - $move_action);
+							// we can only move left to the left & center column
+							if ($column_string == 'left' &&
+								isset($module_column[$module_data['module_classname']]) &&
+								in_array('left', $module_column[$module_data['module_classname']]))
 							{
-								$sql = 'SELECT MAX(module_order) as new_order
-										FROM ' . PORTAL_MODULES_TABLE . '
-										WHERE module_order < ' . $module_data['module_order'] . '
-										AND module_column = ' . (int) ($module_data['module_column'] - 1);
-								$db->sql_query($sql);
-								$new_order = $db->sql_fetchfield('new_order') + 1;
-								
-								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_order = ' . $new_order . '
-									WHERE module_id = ' . (int) $module_id;
-								$db->sql_query($sql);
+								trigger_error($user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
+							}
+							elseif ($column_string == 'center' &&
+								isset($module_column[$module_data['module_classname']]) &&
+								(in_array('center', $module_column[$module_data['module_classname']]) ||
+								in_array('top', $module_column[$module_data['module_classname']]) ||
+								in_array('bottom', $module_column[$module_data['module_classname']])))
+							{
+								// we are moving from the right to the center column so we should move to the left column instead
+								$move_action = 2;
 							}
 						}
-					}
-					elseif($c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 2)) && $module_data['module_column'] != 2)
-					{
-						if ($module_data !== false)
-						{
-							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-								SET module_order = module_order + 1
-								WHERE module_order >= ' . $module_data['module_order'] . '
-									AND module_column = ' . ($module_data['module_column'] - 2);
-							$db->sql_query($sql);
-							$updated = $db->sql_affectedrows();
 
+						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+							SET module_order = module_order + 1
+							WHERE module_order >= ' . $module_data['module_order'] . '
+								AND module_column = ' . ($module_data['module_column'] - $move_action);
+						$db->sql_query($sql);
+						$updated = $db->sql_affectedrows();
+
+						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+							SET module_column = module_column - ' . $move_action . '
+							WHERE module_id = ' . (int) $module_id;
+						$db->sql_query($sql);
+						
+						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+							SET module_order = module_order - 1
+							WHERE module_order >= ' . $module_data['module_order'] . '
+							AND module_column = ' . $module_data['module_column'];
+						$db->sql_query($sql);
+						
+						// the module that needs to moved is in the last row
+						if(!$updated)
+						{
+							$sql = 'SELECT MAX(module_order) as new_order
+									FROM ' . PORTAL_MODULES_TABLE . '
+									WHERE module_order < ' . $module_data['module_order'] . '
+									AND module_column = ' . (int) ($module_data['module_column'] - $move_action);
+							$db->sql_query($sql);
+							$new_order = $db->sql_fetchfield('new_order') + 1;
+							
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-								SET module_column = module_column - 2
+								SET module_order = ' . $new_order . '
 								WHERE module_id = ' . (int) $module_id;
 							$db->sql_query($sql);
-							
-							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-								SET module_order = module_order - 1
-								WHERE module_order >= ' . $module_data['module_order'] . '
-								AND module_column = ' . $module_data['module_column'];
-							$db->sql_query($sql);
-							
-							// the module that needs to moved is in the last row
-							if(!$updated)
-							{
-								$sql = 'SELECT MAX(module_order) as new_order
-										FROM ' . PORTAL_MODULES_TABLE . '
-										WHERE module_order < ' . $module_data['module_order'] . '
-										AND module_column = ' . (int) ($module_data['module_column'] - 2);
-								$db->sql_query($sql);
-								$new_order = $db->sql_fetchfield('new_order') + 1;
-								
-								$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-									SET module_order = ' . $new_order . '
-									WHERE module_id = ' . (int) $module_id;
-								$db->sql_query($sql);
-							}
 						}
 					}
 					else
@@ -716,17 +717,6 @@ class acp_portal
 				{
 					$submit = (isset($_POST['submit'])) ? true : false;
 					$directory = $phpbb_root_path . 'portal/modules/';
-					
-					// Create an array of already installed modules
-					$portal_modules = obtain_portal_modules(); 
-					$installed_modules = $module_column = array(); 
-
-					foreach($portal_modules as $cur_module) 
-					{ 
-						$installed_modules[] = $cur_module['module_classname'];
-						// Create an array with the columns the module is in
-						$module_column[$cur_module['module_classname']][] = column_num_string($cur_module['module_column']);
-					}
 
 					if ($submit)
 					{
@@ -844,17 +834,6 @@ class acp_portal
 							$class = str_replace(".$phpEx", '', $file) . '_module';
 							$module_class = str_replace(array('portal_', ".$phpEx"), '', $file);
 							$column_string = column_num_string($add_column);
-							
-							// Create an array of already installed modules
-							$portal_modules = obtain_portal_modules(); 
-							$installed_modules = $module_column = array();
-
-							foreach($portal_modules as $cur_module) 
-							{ 
-								$installed_modules[] = $cur_module['module_classname'];
-								// Create an array with the columns the module is in
-								$module_column[$cur_module['module_classname']][] = column_num_string($cur_module['module_column']);
-							}
 							
 							// do we want to add the module to the side columns or to the center columns?
 							if ($module_class != 'custom')
