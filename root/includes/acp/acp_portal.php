@@ -502,7 +502,8 @@ class acp_portal
 							// we can only move right to the right & center column
 							if ($column_string == 'right' &&
 								isset($module_column[$module_data['module_classname']]) &&
-								in_array('right', $module_column[$module_data['module_classname']]))
+								(in_array('left', $module_column[$module_data['module_classname']]) ||
+								in_array('right', $module_column[$module_data['module_classname']])))
 							{
 								trigger_error($user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 							}
@@ -603,7 +604,8 @@ class acp_portal
 							// we can only move left to the left & center column
 							if ($column_string == 'left' &&
 								isset($module_column[$module_data['module_classname']]) &&
-								in_array('left', $module_column[$module_data['module_classname']]))
+								(in_array('left', $module_column[$module_data['module_classname']]) ||
+								in_array('right', $module_column[$module_data['module_classname']])))
 							{
 								trigger_error($user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 							}
@@ -946,7 +948,31 @@ class acp_portal
 						// find out of we can move modules to the left or right
 						if(($c_class->columns & column_string_const(column_num_string($row['module_column'] + 1))) || ($c_class->columns & column_string_const(column_num_string($row['module_column'] + 2)) && $row['module_column'] != 2))
 						{
-							$move_right = true;
+							/**
+							* check if we can actually move
+							* this only applies to modules in the center column as the side modules
+							* will automatically skip the center column when moving if they need to
+							*/
+							if ($row['module_classname'] != 'custom')
+							{
+								$column_string = column_num_string($row['module_column'] + 1); // move 1 right
+
+								if ($column_string == 'right' &&
+									isset($module_column[$row['module_classname']]) &&
+									(in_array('left', $module_column[$row['module_classname']]) ||
+									in_array('right', $module_column[$row['module_classname']])))
+								{
+									$move_right = false;
+								}
+								else
+								{
+									$move_right = true;
+								}
+							}
+							else
+							{
+								$move_right = true;
+							}
 						}
 						else
 						{
@@ -955,7 +981,31 @@ class acp_portal
 						
 						if(($c_class->columns & column_string_const(column_num_string($row['module_column'] - 1))) || ($c_class->columns & column_string_const(column_num_string($row['module_column'] - 2)) && $row['module_column'] != 2))
 						{
-							$move_left = true;
+							/**
+							* check if we can actually move
+							* this only applies to modules in the center column as the side modules
+							* will automatically skip the center column when moving if they need to
+							*/
+							if ($row['module_classname'] != 'custom')
+							{
+								$column_string = column_num_string($row['module_column'] - 1); // move 1 left
+
+								if ($column_string == 'left' &&
+									isset($module_column[$row['module_classname']]) &&
+									(in_array('left', $module_column[$row['module_classname']]) ||
+									in_array('right', $module_column[$row['module_classname']])))
+								{
+									$move_left = false;
+								}
+								else
+								{
+									$move_left = true;
+								}
+							}
+							else
+							{
+								$move_left = true;
+							}
 						}
 						else
 						{
