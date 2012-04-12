@@ -280,6 +280,16 @@ class portal_announcements_module
 			// Show "read full" page
 			{ 
 				$i = $announcement;
+				
+				/** 
+				* redirect to portal page if the specified announcement does not exist
+				* force #top anchor in order to get rid of the #a anchor
+				*/
+				if (!isset($fetch_news[$i]))
+				{
+					redirect(append_sid($phpbb_root_path . 'portal.' . $phpEx, '#top'));
+				}
+
 				$forum_id = $fetch_news[$i]['forum_id'];
 				$topic_id = $fetch_news[$i]['topic_id'];
 				$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
