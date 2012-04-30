@@ -584,16 +584,42 @@ class portal_calendar_module
 	{
 		global $user;
 
+		$this->makeTimestamp($callDate);
 		// last or first day of some months need to be treated in a special way
 		if (!empty($this->mini_cal_month))
 		{
 			$today_timestamp = time() + $user->timezone + $user->dst;
 			$cur_month = date("n", $today_timestamp);
 			$correct_month = $cur_month + $this->mini_cal_month;
+			
+			// move back or forth the correct number of years
+			while ($correct_month < 1 || $correct_month > 12)
+			{
+				if ($correct_month < 1)
+				{
+					$correct_month = $correct_month + 12;
+				}
+				else
+				{
+					$correct_month = $correct_month - 12;
+				}
+			}
+			
+			// fix incorrect months
+			while (date("n", $this->stamp) != $correct_month)
+			{
+				if (date("n", $this->stamp) > $correct_month)
+				{
+					$this->stamp = $this->stamp - 86400; // go back one day
+				}
+				else
+				{
+					$this->stamp = $this->stamp + 86400; // move forward one day
+				}
+			}
 		}
-		$this->makeTimestamp($callDate);
 		$this->dateYYYY = date("Y", $this->stamp);
-		$this->dateMM = (isset($correct_month)) ? $correct_month : date("n", $this->stamp);
+		$this->dateMM = date("n", $this->stamp);
 		$this->ext_dateMM = date("F", $this->stamp);
 		$this->dateDD = date("d", $this->stamp);
 		$this->daysMonth = date("t", $this->stamp);
