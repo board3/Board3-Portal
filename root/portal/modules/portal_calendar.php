@@ -75,16 +75,16 @@ class portal_calendar_module
 		}
 
 		// get the calendar month
-		$mini_cal_month = 0;
+		$this->mini_cal_month = 0;
 		if(isset($_GET['m' . $module_id]) || isset($_POST['m' . $module_id]))
 		{
-			$mini_cal_month = request_var('m' . $module_id, 0);
+			$this->mini_cal_month = request_var('m' . $module_id, 0);
 		}
 
 		// initialise some variables
 		$today_timestamp = time() + $user->timezone + $user->dst;
 		$mini_cal_today = date('Ymd', time() + $user->timezone + $user->dst - date('Z'));
-		$s_cal_month = ($mini_cal_month != 0) ? $mini_cal_month . ' month' : $mini_cal_today;
+		$s_cal_month = ($this->mini_cal_month != 0) ? $this->mini_cal_month . ' month' : $mini_cal_today;
 		$this->getMonth($s_cal_month);
 		$mini_cal_count = $this->mini_cal_fdow;
 		$mini_cal_this_year = $this->dateYYYY;
@@ -93,10 +93,10 @@ class portal_calendar_module
 		$mini_cal_month_days = $this->daysMonth;
 		
 		// output our general calendar bits
-		$down = $mini_cal_month - 1;
-		$up = $mini_cal_month + 1;
-		$prev_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m$module_id=$down#minical$module_id") . '" rel="nofollow"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/cal_icon_left_arrow.png' . '" title="' . $user->lang['VIEW_PREVIOUS_MONTH'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
-		$next_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m$module_id=$up#minical$module_id") . '" rel="nofollow"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
+		$down = $this->mini_cal_month - 1;
+		$up = $this->mini_cal_month + 1;
+		$prev_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m$module_id=$down#minical$module_id") . '"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/cal_icon_left_arrow.png' . '" title="' . $user->lang['VIEW_PREVIOUS_MONTH'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
+		$next_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m$module_id=$up#minical$module_id") . '"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
 
 		$template->assign_block_vars('minical', array(
 			'S_SUNDAY_FIRST'	=> ($config['board3_sunday_first_' . $module_id]) ? true : false,
@@ -571,7 +571,9 @@ class portal_calendar_module
 	**/
 	private function makeTimestamp($date) 
 	{
-		$this->stamp = strtotime($date);
+		global $user;
+
+		$this->stamp = strtotime($date) + $user->timezone + $user->dst;
 		return ($this->stamp);
 	}
 
@@ -580,10 +582,18 @@ class portal_calendar_module
 	**/
 	private function getMonth($callDate) 
 	{
+		global $user;
 
+		// last or first day of some months need to be treated in a special way
+		if (!empty($this->mini_cal_month))
+		{
+			$today_timestamp = time() + $user->timezone + $user->dst;
+			$cur_month = date("n", $today_timestamp);
+			$correct_month = $cur_month + $this->mini_cal_month;
+		}
 		$this->makeTimestamp($callDate);
 		$this->dateYYYY = date("Y", $this->stamp);
-		$this->dateMM = date("n", $this->stamp);
+		$this->dateMM = (isset($correct_month)) ? $correct_month : date("n", $this->stamp);
 		$this->ext_dateMM = date("F", $this->stamp);
 		$this->dateDD = date("d", $this->stamp);
 		$this->daysMonth = date("t", $this->stamp);
