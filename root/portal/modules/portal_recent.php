@@ -65,7 +65,7 @@ class portal_recent_module
 		{
 			$exclude_forums = explode(',', $config['board3_recent_forum_' . $module_id]);
 			
-			$sql_where = ' AND ' . $db->sql_in_set('forum_id', array_map('intval', $exclude_forums), ($config['board3_exclude_forums_' . $module_id]) ? true : false);
+			$sql_where = ' AND ' . $db->sql_in_set('forum_id', array_map('intval', $exclude_forums), ($config['board3_recent_exclude_forums_' . $module_id]) ? true : false);
 		}
 
 		// Get a list of forums the user cannot read
