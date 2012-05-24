@@ -676,13 +676,6 @@ function get_portal_tracking_info($fetch_news)
 			if (sizeof($topic_ids))
 			{
 				$mark_time = array();
-				if ($global_announce_list && sizeof($global_announce_list))
-				{
-					if (isset($tracking_topics['f'][0]))
-					{
-						$mark_time[0] = base_convert($tracking_topics['f'][0], 36, 10) + $config['board_startdate'];
-					}
-				}
 
 				if (isset($tracking_topics['f'][$forum_id]))
 				{
@@ -693,14 +686,7 @@ function get_portal_tracking_info($fetch_news)
 
 				foreach ($topic_ids as $topic_id)
 				{
-					if ($global_announce_list && isset($global_announce_list[$topic_id]))
-					{
-						$last_read[$topic_id] = (isset($mark_time[0])) ? $mark_time[0] : $user_lastmark;
-					}
-					else
-					{
-						$last_read[$topic_id] = $user_lastmark;
-					}
+					$last_read[$topic_id] = $user_lastmark;
 				}
 			}
 		}
