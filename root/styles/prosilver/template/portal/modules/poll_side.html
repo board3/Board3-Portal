@@ -1,8 +1,6 @@
-<a name="viewpoll"></a>
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
 	<!-- IF S_HAS_POLL -->
-
-		<div class="inner">
+		<div id="viewpoll" class="inner">
 		<!-- BEGIN poll_side -->
 			<!-- IF poll_side.S_CAN_VOTE --><form method="post" action="{poll_side.S_POLL_ACTION}"><!-- ENDIF -->
 				<div class="content">
