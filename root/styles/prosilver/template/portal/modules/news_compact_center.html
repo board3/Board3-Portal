@@ -9,9 +9,8 @@
 {$C_BLOCK_F_L}{$C_BLOCK_F_R}
 <!-- ELSE  -->
 <!-- IF news_row.S_FIRST_ROW  -->
-<a name="n"></a>
 {$CC_BLOCK_H_L}
-	<dt <!-- IF S_DISPLAY_NEWS_RVS -->style="width: 44%"<!-- ELSE -->style="width: 60%"<!-- ENDIF -->>{$TITLE}</dt>
+	<dt id="n" <!-- IF S_DISPLAY_NEWS_RVS -->style="width: 44%"<!-- ELSE -->style="width: 60%"<!-- ENDIF -->>{$TITLE}</dt>
 	<!-- IF S_DISPLAY_NEWS_RVS -->
 		<dd class="posts" style="width: 11%">{L_REPLIES}</dd>
 		<dd class="views" style="width: 11%">{L_VIEWS}</dd>
