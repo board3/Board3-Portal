@@ -208,7 +208,8 @@ class portal_calendar_module
 						}
 
 						// current events
-						if((($cur_event['start_time'] + $user->timezone + $user->dst + 86400) >= $today_timestamp && $cur_event['all_day']) || 
+						if((($cur_event['start_time'] + $user->timezone + $user->dst + 86400) >= $today_timestamp && $cur_event['all_day'] && 
+						($cur_event['start_time'] + $user->timezone + $user->dst) <= $today_timestamp) || 
 						(($cur_event['start_time'] + $user->timezone + $user->dst) <= $today_timestamp && ($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp))
 						{
 							$template->assign_block_vars('minical.cur_events', array(
@@ -228,7 +229,7 @@ class portal_calendar_module
 								'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
 								'EVENT_TITLE'	=> $cur_event['title'],
 								'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
-								'END_TIME'		=> $user->format_date($cur_event['end_time'], 'j. M Y, H:i'),
+								'END_TIME'		=> (!$cur_event['all_day']) ? $user->format_date($cur_event['end_time'], 'j. M Y, H:i') : '',
 								'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
 								'ALL_DAY'	=> (($cur_event['start_time'] - $cur_event['end_time']) == 1) ? true : false,
 								'MODULE_ID'		=> $module_id,
