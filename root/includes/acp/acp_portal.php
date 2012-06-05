@@ -205,7 +205,7 @@ class acp_portal
 				// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
 				foreach ($display_vars['vars'] as $config_name => $null)
 				{
-					if ($submit && ($null['type'] == 'custom' || (isset($null['submit_type']) && $null['submit_type'] == 'custom')))
+					if ($submit && ((isset($null['type']) && $null['type'] == 'custom') || (isset($null['submit_type']) && $null['submit_type'] == 'custom')))
 					{
 						$func = array($c_class, $null['submit']);
 						
@@ -227,7 +227,7 @@ class acp_portal
 						continue;
 					}
 					
-					if($null['type'] == 'custom')
+					if(isset($null['type']) && $null['type'] == 'custom')
 					{
 						continue;
 					}
