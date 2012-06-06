@@ -306,7 +306,7 @@ class portal_upload
 				phpbb_chmod($to . '.bak', CHMOD_ALL);
 				unlink($to . '.bak');
 			}
-			rename($to, $to . '.bak');
+			@rename($to, $to . '.bak');
 			phpbb_chmod($to, CHMOD_ALL);
 		}
 
@@ -314,7 +314,7 @@ class portal_upload
 		{
 			return sprintf($user->lang['MODULE_COPY_FAILURE'], $to);
 		}
-		@chmod($to, octdec(0644));
+		phpbb_chmod($to, CHMOD_ALL);
 
 		return true;
 	}
