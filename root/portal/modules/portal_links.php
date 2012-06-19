@@ -219,7 +219,7 @@ class portal_links_module
 
 				$link_title = utf8_normalize_nfc(request_var('link_title', ' ', true));
 				$link_type = request_var('link_type', 2); // default to B3_LINK_EXT, no categories in Links block
-				$link_url = request_var('link_url', ' ');
+				$link_url = utf8_normalize_nfc(request_var('link_url', ' ', true));
 				$link_url = str_replace('&amp;', '&', $link_url);
 				$link_permission = request_var('permission-setting-link', array(0 => ''));
 				$groups_ary = array();
