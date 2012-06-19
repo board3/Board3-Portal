@@ -276,7 +276,7 @@ class portal_main_menu_module
 				$link_title = utf8_normalize_nfc(request_var('link_title', ' ', true));
 				$link_is_cat = request_var('link_is_cat', false);
 				$link_type = (!$link_is_cat) ? request_var('link_type', self::LINK_INT) : self::LINK_CAT;
-				$link_url = ($link_is_cat) ? ' ' : request_var('link_url', ' ');
+				$link_url = ($link_is_cat) ? ' ' : utf8_normalize_nfc(request_var('link_url', ' ', true));
 				$link_url = str_replace('&amp;', '&', $link_url);
 				$link_permission = request_var('permission-setting-menu', array(0 => ''));
 				$groups_ary = array();
