@@ -6,8 +6,8 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en">board3 Portal 2.0.0</title>
-		<title lang="de">board3 Portal 2.0.0</title>
+		<title lang="en">board3 Portal 2.0.1</title>
+		<title lang="de">board3 Portal 2.0.1</title>
 
 		<description lang="en">Adds a portal with several blocks to your forum.
 You can change the settings, move the blocks, add new blocks and more in the ACP.
@@ -86,12 +86,12 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 			 </author>
 		</author-group>
 
-		<mod-version>2.0.0</mod-version>
+		<mod-version>2.0.1</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>600</time>
-			<target-version>3.0.10</target-version>
+			<target-version>3.0.11</target-version>
 		</installation>
 
 		<link-group>
@@ -101,10 +101,8 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
 			<link type="template" lang="en" href="contrib/subsilver2.xml">Manual for subsilver2</link>
 			<link type="template" lang="de" href="contrib/subsilver2.xml">Anleitung für subsilver2</link>
-			<link type="contrib" lang="en" href="contrib/update_106_to_200/update.xml">Manual for Updating B3P 1.0.6 to 2.0.0</link>
-			<link type="contrib" lang="de" href="contrib/update_106_to_200/update.xml">Anleitung für das Aktualisieren von B3P 1.0.6 zu 2.0.0</link>
-			<link type="contrib" lang="en" href="contrib/update_200b1_to_200/update.xml">Manual for Updating B3P 2.0.0b1 to 2.0.0</link>
-			<link type="contrib" lang="de" href="contrib/update_200b1_to_200/update.xml">Anleitung für das Aktualisieren von B3P 2.0.0b1 zu 2.0.0</link>
+			<link type="contrib" lang="en" href="contrib/update_200_to_201/update.xml">Manual for Updating B3P 2.0.0b1 to 2.0.0</link>
+			<link type="contrib" lang="de" href="contrib/update_200_to_201/update.xml">Anleitung für das Aktualisieren von B3P 2.0.0b1 zu 2.0.0</link>
 		</link-group>
 		<history>
 			<entry>
@@ -324,7 +322,7 @@ Deny from All
 		<open src="includes/session.php">
 			<edit>
 				<find><![CDATA[		if (!empty($_GET['style']) && $auth->acl_get('a_styles') && !defined('ADMIN_START'))]]></find>
-				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START') && $this->data['user_type'] != USER_IGNORE)]]></action>
+				<action type="replace-with"><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START') && !$this->data['is_bot'])]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/overall_header.html">
