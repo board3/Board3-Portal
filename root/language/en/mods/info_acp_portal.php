@@ -100,6 +100,7 @@ $lang = array_merge($lang, array(
 	'LINK_UPDATED'							=> 'The link has been successfully updated',
 	'LOG_PORTAL_LINK_ADDED'					=> '<strong>Altered Portal settings</strong><br />&raquo; Link added: %s ',
 	'LOG_PORTAL_LINK_UPDATED'				=> '<strong>Altered Portal settings</strong><br />&raquo; Link updated: %s ',
+	'LOG_PORTAL_LINK_REMOVED'				=> '<strong>Altered Portal settings</strong><br />&raquo; Link removed: %s ',
 	'LOG_PORTAL_EVENT_ADDED'				=> '<strong>Altered Portal settings</strong><br />&raquo; Event added: %s ',
 	'LOG_PORTAL_EVENT_UPDATED'				=> '<strong>Altered Portal settings</strong><br />&raquo; Event updated: %s ',
 	'LOG_PORTAL_EVENT_REMOVED'				=> '<strong>Altered Portal settings</strong><br />&raquo; Event removed: %s ',
