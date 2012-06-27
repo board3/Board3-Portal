@@ -126,7 +126,6 @@ $lang = array_merge($lang, array(
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Füge Basismodule hinzu',
 	'PORTAL_BASIC_UNINSTALL'		=> 'Entferne Module von Datenbank',
-	'PORTAL_CONVERT_SUCCESS'		=> 'Konvertiere von Board3 Portal 1.0.6 & füge Basismodule hinzu',
 	
 	// Logs
 	'LOG_PORTAL_CONFIG'			=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; %s',
