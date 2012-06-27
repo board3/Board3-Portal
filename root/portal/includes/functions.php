@@ -715,7 +715,7 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 		include($phpbb_root_path . 'portal/includes/constants.' . $phpEx);
 	}
 	
-	if ($mode == 'install' || $mode == 'update')
+	if ($mode == 'install')
 	{
 		$directory = $phpbb_root_path . 'portal/modules/';
 		
@@ -793,135 +793,7 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 		// Make sure we get rid of old data
 		$cache->destroy('portal_modules');
 
-		if ($mode == 'update')
-		{
-			/**
-			* Check if we need to convert from Board3 Portal 1.0.6
-			*/
-			global $config;
-
-			if ($config['board3_portal_version'] == '1.0.6')
-			{
-				$convert = true;
-				$portal_config = obtain_portal_config();
-			}
-			else
-			{
-				$convert = false;
-			}
-
-			if ($convert)
-			{
-				$portal_modules = obtain_portal_modules();
-
-				foreach ($portal_modules as $row)
-				{
-					switch($row['module_classname'])
-					{
-						case 'announcements':
-							set_config('board3_announcements_style_' . $row['module_id'], $portal_config['portal_announcements_style']);
-							set_config('board3_number_of_announcements_' . $row['module_id'], $portal_config['portal_number_of_announcements']);
-							set_config('board3_announcements_day_' . $row['module_id'], $portal_config['portal_announcements_day']);
-							set_config('board3_announcements_length_' . $row['module_id'], $portal_config['portal_announcements_length']);
-							set_config('board3_global_announcements_forum_' . $row['module_id'], $portal_config['portal_global_announcements_forum']);
-							set_config('board3_announcements_forum_exclude_' . $row['module_id'], $portal_config['portal_announcements_forum_exclude']);
-							set_config('board3_announcements_archive_' . $row['module_id'], $portal_config['portal_announcements_archive']);
-							set_config('board3_announcements_permissions_' . $row['module_id'], $portal_config['portal_announcements_permissions']);
-							set_config('board3_show_announcements_replies_views_' . $row['module_id'], $portal_config['portal_show_announcements_replies_views']);
-						break;
-						
-						case 'attachments':
-							set_config('board3_attachments_number_' . $row['module_id'], $portal_config['portal_attachments_number']);
-							set_config('board3_attach_max_length_' . $row['module_id'], $portal_config['portal_attach_max_length']);
-							set_config('board3_attachments_forum_ids_' . $row['module_id'], $portal_config['portal_attachments_forum_ids']);
-							set_config('board3_attachments_forum_exclude_' . $row['module_id'], $portal_config['portal_attachments_forum_exclude']);
-							set_config('board3_attachments_filetype_' . $row['module_id'], $portal_config['portal_attachments_filetype']);
-							set_config('board3_attachments_exclude_' . $row['module_id'], $portal_config['portal_attachments_exclude']);
-						break;
-						
-						case 'birthday_list':
-							set_config('board3_birthdays_ahead_' . $row['module_id'], 'portal_birthdays_ahead');
-						break;
-						
-						case 'calendar':
-							set_config('board3_sunday_first_' . $row['module_id'], $portal_config['portal_sunday_first']);
-							set_config('board3_calendar_today_color_' . $row['module_id'], $portal_config['portal_minicalendar_today_color']);
-							set_config('board3_calendar_sunday_color_' . $row['module_id'], $portal_config['portal_minicalendar_sunday_color']);
-							set_config('board3_long_month_' . $row['module_id'], $portal_config['portal_long_month']);
-						break;
-						
-						case 'donation':
-							set_config('board3_pay_acc_' . $row['module_id'], $portal_config['portal_pay_acc']);
-						break;
-						
-						case 'friends':
-							set_config('board3_max_online_friends_' . $row['module_id'], $portal_config['portal_max_online_friends']);
-						break;
-						
-						case 'latest_bots':
-							set_config('board3_last_visited_bots_number_' . $row['module_id'], $portal_config['portal_last_visited_bots_number']);
-						break;
-						
-						case 'latest_members':
-							set_config('board3_max_last_member_' . $row['module_id'], $portal_config['portal_max_last_member']);
-						break;
-						
-						case 'leaders':
-							set_config('board3_leaders_ext_' . $row['module_id'], $portal_config['portal_leaders_ext']);
-						break;
-						
-						case 'news':
-							set_config('board3_news_length_' . $row['module_id'], $portal_config['portal_news_length']);
-							set_config('board3_news_forum_' . $row['module_id'], $portal_config['portal_news_forum']);
-							set_config('board3_news_permissions_' . $row['module_id'], $portal_config['portal_news_permissions']);
-							set_config('board3_number_of_news_' . $row['module_id'], $portal_config['portal_number_of_news']);
-							set_config('board3_show_all_news_' . $row['module_id'], $portal_config['portal_show_all_news']);
-							set_config('board3_news_exclude_' . $row['module_id'], $portal_config['portal_news_exclude']);
-							set_config('board3_news_archive_' . $row['module_id'], $portal_config['portal_news_archive']);
-							set_config('board3_news_show_last_' . $row['module_id'], $portal_config['portal_news_show_last']);
-							set_config('board3_show_news_replies_views_' . $row['module_id'], $portal_config['portal_show_news_replies_views']);
-							set_config('board3_news_style_' . $row['module_id'], $portal_config['portal_news_style']);
-						break;
-						
-						case 'poll':
-							set_config('board3_poll_allow_vote_' . $row['module_id'], $portal_config['portal_poll_allow_vote']);
-							set_config('board3_poll_topic_id_' . $row['module_id'], $portal_config['portal_poll_topic_id']);
-							set_config('board3_poll_exclude_id_' . $row['module_id'], $portal_config['portal_poll_exclude_id']);
-							set_config('board3_poll_hide_' . $row['module_id'], $portal_config['portal_poll_hide']);
-							set_config('board3_poll_limit_' . $row['module_id'], $portal_config['portal_poll_limit']);
-						break;
-						
-						case 'recent':
-							set_config('board3_max_topics_' . $row['module_id'], $portal_config['portal_max_topics']);
-							set_config('board3_recent_title_limit_' . $row['module_id'], $portal_config['portal_recent_title_limit']);
-							set_config('board3_recent_forum_' . $row['module_id'], $portal_config['portal_recent_forum']);
-							set_config('board3_recent_exclude_forums_' . $row['module_id'], $portal_config['portal_exclude_forums']);
-						break;
-						
-						case 'topposters':
-							set_config('board3_topposters_' . $row['module_id'], $portal_config['portal_max_most_poster']);
-						break;
-						
-						case 'welcome':
-							set_portal_config('board3_welcome_message_' . $row['module_id'], $portal_config['portal_welcome_intro']);
-						break;
-						
-						default:
-							// do nothing
-					}
-				}
-				
-				// Now that we are done, delete all data that seems useless to us
-				$sql = 'DELETE FROM ' . PORTAL_CONFIG_TABLE . '
-						WHERE config_name ' . $db->sql_like_expression(utf8_clean_string('portal_') . $db->any_char);
-				$db->sql_query($sql);
-			}
-			return $user->lang['PORTAL_CONVERT_SUCCESS'];
-		}
-		else
-		{
-			return $user->lang['PORTAL_BASIC_INSTALL'];
-		}
+		return $user->lang['PORTAL_BASIC_INSTALL'];
 	}
 	else
 	{
