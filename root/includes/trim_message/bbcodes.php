@@ -364,7 +364,8 @@ class phpbb_trim_message_bbcodes
 		$content_length = utf8_strlen($content);
 		$last_smiley = false;
 		$last_html_opening = $last_html_closing = 0;
-		while (($last_html_opening = utf8_strpos($content, '<', $last_html_closing)) !== false)
+		while (($last_html_opening = utf8_strpos($content, '<', $last_html_closing)) !== false &&
+			utf8_strpos($content, '>', $last_html_opening) !== false)
 		{
 			$last_html_closing = utf8_strpos($content, '>', $last_html_opening);
 			if (($smiley_code = utf8_substr($content, $last_html_opening + 7, ($last_html_closing - $last_html_opening - 11))) != '--')
