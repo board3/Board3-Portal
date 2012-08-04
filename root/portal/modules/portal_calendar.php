@@ -57,6 +57,13 @@ class portal_calendar_module
 	* additional variables
 	*/
 	private $mini_cal_fdow;
+	
+	/**
+	* constants
+	*/
+	const TIME_DAY = 86400;
+	const DAYS_PER_WEEK = 6; // indexes start at 0
+	const MONTHS_PER_YEAR = 12;
 
 	public function get_template_side($module_id)
 	{
@@ -147,7 +154,7 @@ class portal_calendar_module
 			}
 
 			// is this the last day of the week?
-			if ($mini_cal_count == 6)
+			if ($mini_cal_count == self::DAYS_PER_WEEK)
 			{
 				// if so then reset the count
 				$mini_cal_count = 0;
@@ -190,7 +197,7 @@ class portal_calendar_module
 			{
 				if(($cur_event['start_time'] + $user->timezone + $user->dst) >= $today_timestamp || 
 					($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp || 
-					(($cur_event['start_time'] + $user->timezone + $user->dst + 86400) >= $today_timestamp && $cur_event['all_day']))
+					(($cur_event['start_time'] + $user->timezone + $user->dst + self::TIME_DAY) >= $today_timestamp && $cur_event['all_day']))
 				{
 					$cur_permissions = explode(',', $cur_event['permission']);
 					$permission_check = array_intersect($groups_ary, $cur_permissions);
@@ -207,10 +214,15 @@ class portal_calendar_module
 							$is_external = false;
 						}
 
-						// current events
-						if((($cur_event['start_time'] + $user->timezone + $user->dst + 86400) >= $today_timestamp && $cur_event['all_day'] && 
-						($cur_event['start_time'] + $user->timezone + $user->dst) <= $today_timestamp) || 
-						(($cur_event['start_time'] + $user->timezone + $user->dst) <= $today_timestamp && ($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp))
+						/** 
+						* Current events
+						*
+						* Events are treated as current if the following is met:
+						* - We have an all day event and the start of that event is less than 1 day (86400 seconds) away
+						* - We have a normal event with a start that is less then 1 day away and that hasn't ended yet
+						*/
+						if((($cur_event['start_time'] + $user->timezone + $user->dst - $today_timestamp) <= self::TIME_DAY && $cur_event['all_day']) || 
+						(($cur_event['start_time'] + $user->timezone + $user->dst - $today_timestamp) <= self::TIME_DAY && ($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp))
 						{
 							$template->assign_block_vars('minical.cur_events', array(
 								'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
@@ -380,7 +392,7 @@ class portal_calendar_module
 				$start_time = gmmktime($start_hour, $start_minute, 0, $start_month, $start_day, $start_year) - $user->timezone - $user->dst;
 				$end_time = (!$event_all_day) ? gmmktime($end_hour, $end_minute, 0, $end_month, $end_day, $end_year) - $user->timezone - $user->dst : '';
 
-				if(($end_time) <= time() && !(($start_time + 86400) >= time() && $event_all_day))
+				if(($end_time) <= time() && !(($start_time + self::TIME_DAY) >= time() && $event_all_day))
 				{
 					trigger_error($user->lang['ACP_PORTAL_CALENDAR_EVENT_PAST']. adm_back_link($u_action), E_USER_WARNING);
 				}
@@ -594,15 +606,15 @@ class portal_calendar_module
 			$correct_month = $cur_month + $this->mini_cal_month;
 			
 			// move back or forth the correct number of years
-			while ($correct_month < 1 || $correct_month > 12)
+			while ($correct_month < 1 || $correct_month > self::MONTHS_PER_YEAR)
 			{
 				if ($correct_month < 1)
 				{
-					$correct_month = $correct_month + 12;
+					$correct_month = $correct_month + self::MONTHS_PER_YEAR;
 				}
 				else
 				{
-					$correct_month = $correct_month - 12;
+					$correct_month = $correct_month - self::MONTHS_PER_YEAR;
 				}
 			}
 			
@@ -611,11 +623,11 @@ class portal_calendar_module
 			{
 				if (date("n", $this->stamp) > $correct_month)
 				{
-					$this->stamp = $this->stamp - 86400; // go back one day
+					$this->stamp = $this->stamp - self::TIME_DAY; // go back one day
 				}
 				else
 				{
-					$this->stamp = $this->stamp + 86400; // move forward one day
+					$this->stamp = $this->stamp + self::TIME_DAY; // move forward one day
 				}
 			}
 		}
@@ -625,7 +637,7 @@ class portal_calendar_module
 		$this->dateDD = date("d", $this->stamp);
 		$this->daysMonth = date("t", $this->stamp);
     
-		for($i=1; $i < $this->daysMonth+1; $i++) 
+		for ($i=1; $i < $this->daysMonth + 1; $i++) 
 		{
 			$this->makeTimestamp("$i $this->ext_dateMM $this->dateYYYY");
 			$this->day[] = array(
