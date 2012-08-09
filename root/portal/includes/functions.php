@@ -529,16 +529,16 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 function format_birthday($date, $format = false)
 {
 	global $user;
-		$time->time_now	= time();
-		$lang_dates		= $user->lang['datetime'];
-		$format			= (!$format) ? $time->date_format : $format;
 
-		// Short representation of month in format
-		if ((strpos($format, '\M') === false && strpos($format, 'M') !== false) || (strpos($format, '\r') === false && strpos($format, 'r') !== false))
-		{
-			$lang_dates['May'] = $lang_dates['May_short'];
-		}
-		unset($lang_dates['May_short']);
+	$lang_dates		= $user->lang['datetime'];
+	$format			= (!$format) ? $user->data['user_dateformat'] : $format;
+
+	// Short representation of month in format
+	if ((strpos($format, '\M') === false && strpos($format, 'M') !== false) || (strpos($format, '\r') === false && strpos($format, 'r') !== false))
+	{
+		$lang_dates['May'] = $lang_dates['May_short'];
+	}
+	unset($lang_dates['May_short']);
 
 	// We need to create a UNIX timestamp for date()
 	$day = substr($date, 0, strpos($date, '-'));
