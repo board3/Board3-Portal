@@ -72,6 +72,7 @@ $lang = array_merge($lang, array(
 	'MODULE_RESET_EXP'			=> 'This will reset all settings to the default!',
 	'MODULE_STATUS'				=> 'Enable module',
 	'MODULE_ADD_ONCE'			=> 'This module can only be added once.',
+	'MODULE_IMAGE_ERROR'		=> 'There was an error while checking for the module image:',
 
 	// general
 	'ACP_PORTAL'							=> 'Portal',
