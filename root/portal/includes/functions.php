@@ -100,7 +100,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 {
 	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode, $portal_config, $config;
 
-	$posts = array();
+	$posts = $update_count = array();
 	$post_time = ($time == 0) ? '' : 'AND t.topic_time > ' . (time() - $time * 86400);
 	$forum_from = (strpos($forum_from, ',') !== FALSE) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 	$str_where = '';
@@ -174,6 +174,11 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 			$post_link = ($config['board3_news_style_' . $module_id]) ? 't.topic_first_post_id = p.post_id' : (($config['board3_news_show_last_' . $module_id]) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
 			$topic_order = ($config['board3_news_show_last_' . $module_id]) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
 		break;
+
+        default:
+            $topic_type = $str_where = $user_link = $post_link = '';
+            $topic_order = 't.topic_time DESC';
+            // maybe use trigger_error here, as this shouldn't happen
 	}
 
 	if ($type == 'announcements' && $global_f < 1)
@@ -440,6 +445,11 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 			$pagination_type = 'np';
 			$anker = '#n';
 		break;
+
+        default:
+            // this shouldn't happend @todo: use trigger_error()
+            $pagination_type = 'ap';
+            $anker = '#a';
 	}
 
 	// Make sure $per_page is a valid value
@@ -631,11 +641,13 @@ function get_portal_tracking_info($fetch_news)
 				}
 				$db->sql_freeresult($result);
 
+                // @todo: do not use $current_forum here as this is already used by the outside foreach
 				foreach($forum_ids as $current_forum)
 				{
 					$user_lastmark[$current_forum] = (isset($mark_time[$current_forum])) ? $mark_time[$current_forum] : $user->data['user_lastmark'];
 				}
 
+                // @todo: also check if $user_lastmark has been defined for this specific forum_id
 				foreach ($topic_ids as $topic_id)
 				{
 					$last_read[$topic_id] = (!isset($last_read[$topic_id]) || $user_lastmark[$rev_forum_ids[$topic_id]] > $last_read[$topic_id]) ? $user_lastmark[$rev_forum_ids[$topic_id]] : $last_read[$topic_id];
@@ -821,7 +833,7 @@ function board3_basic_install($mode = 'install', $purge_modules = true, $u_actio
 /**
 * check if the entered source file actually exists
 */
-function check_file_src($value, $key, $module_id)
+function check_file_src($value, $key, $module_id, $force_error = true)
 {
 	global $db, $phpbb_root_path, $phpEx, $user;
 	
@@ -846,6 +858,17 @@ function check_file_src($value, $key, $module_id)
 	
 	if (!empty($error))
 	{
-		trigger_error($error . adm_back_link(append_sid("{$phpbb_root_path}adm/index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $module_id)), E_USER_WARNING );
+		if ($force_error)
+		{
+			trigger_error($error . adm_back_link(append_sid("{$phpbb_root_path}adm/index.$phpEx", 'i=portal&amp;mode=config&amp;module_id=' . $module_id)), E_USER_WARNING );
+		}
+		else
+		{
+			return $error;
+		}
+	}
+	else
+	{
+		return false;
 	}
 }

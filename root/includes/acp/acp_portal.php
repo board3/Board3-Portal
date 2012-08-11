@@ -166,6 +166,7 @@ class acp_portal
 				{
 					if (confirm_box(true))
 					{
+                        // @todo: handle possible error if selected module_id doesn't exist
 						$sql_ary = array(
 							'module_name'		=> $c_class->name,
 							'module_image_src'	=> $c_class->image_src,
@@ -244,6 +245,7 @@ class acp_portal
 				{
 					$module_permission = request_var('permission-setting', array(0 => ''));
 					$groups_ary = array();
+					$img_error = '';
 					
 					// get groups and check if the selected groups actually exist
 					$sql = 'SELECT group_id
@@ -274,7 +276,7 @@ class acp_portal
 					}
 					
 					// check if module image file actually exists
-					check_file_src($sql_ary['module_image_src'], '', $module_id);
+					$img_error = check_file_src($sql_ary['module_image_src'], '', $module_id, false);
 
 					$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 						SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
@@ -285,13 +287,13 @@ class acp_portal
 					$cache->destroy('sql', CONFIG_TABLE);
 					if(isset($module_name))
 					{
-						add_log('admin', 'LOG_PORTAL_CONFIG',$module_name);
+						add_log('admin', 'LOG_PORTAL_CONFIG', $module_name);
 					}
 					else
 					{
 						add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']);
 					}
-					trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_root_path}adm/index.$phpEx", 'i=portal&amp;mode=modules') : $this->u_action));
+					trigger_error($user->lang['CONFIG_UPDATED'] . ((!empty($img_error) ? '<br /><br />' . $user->lang['MODULE_IMAGE_ERROR'] . '<br />' . $img_error : '')) . adm_back_link(($module_id) ? append_sid("{$phpbb_root_path}adm/index.$phpEx", 'i=portal&amp;mode=modules') : $this->u_action));
 				}
 
 				// show custom HTML files on the settings page of the modules instead of the standard board3 portal one, if chosen by module
@@ -488,6 +490,10 @@ class acp_portal
 						{
 							$move_action = 2; // we move 2 columns to the right
 						}
+                        else
+                        {
+                            // @todo: need an error handle here
+                        }
 						
 						/**
 						* moving only 1 column to the right means we will either end up in the right column
@@ -590,6 +596,10 @@ class acp_portal
 						{
 							$move_action = 2; // we move 2 columns to the left
 						}
+                        else
+                        {
+                            // @todo: need an error handle here (i.e. trigger_error())
+                        }
 						
 						/**
 						* moving only 1 column to the left means we will either end up in the left column
@@ -816,7 +826,7 @@ class acp_portal
 									$error_output = $cur_error . '<br />';
 								}
 							}
-							else if($error != false)
+							else
 							{
 								$error_output = $error;
 							}
