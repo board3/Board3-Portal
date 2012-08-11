@@ -26,6 +26,8 @@ function column_num_string($column)
 			return 'top';
 		case 5:
 			return 'bottom';
+        default:
+            return 0;
 	}
 }
 
