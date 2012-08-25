@@ -49,4 +49,8 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_LINK_PERMISSION'	=> 'Link Berechtigungen',
 	'ACP_PORTAL_LINK_PERMISSION_EXP'=> 'Wähle die Gruppen aus die berechtigt sein sollen den Link zu sehen. Falls alle Benutzer den Link sehen sollen, dann wähle nichts aus.<br />Wähle mehrere Gruppen aus/ab indem du <samp>STRG</samp> gedrückt hältst und klickst.',
 	'ACP_PORTAL_LINKS_NEW_WINDOW'	=> 'Öffne externe Verknüpfungen in einem neuen Fenster',
+	
+	// Errors
+	'NO_LINK_TITLE'					=> 'Du musst einen Titel für diesen Link angeben.',
+	'NO_LINK_URL'					=> 'Du musst eine Link URL eingeben.',
 ));
