@@ -101,10 +101,66 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
 			<link type="template" lang="en" href="contrib/subsilver2.xml">Manual for subsilver2</link>
 			<link type="template" lang="de" href="contrib/subsilver2.xml">Anleitung für subsilver2</link>
-			<link type="contrib" lang="en" href="contrib/update_200_to_201/update.xml">Manual for Updating B3P 2.0.0b1 to 2.0.0</link>
-			<link type="contrib" lang="de" href="contrib/update_200_to_201/update.xml">Anleitung für das Aktualisieren von B3P 2.0.0b1 zu 2.0.0</link>
+			<link type="contrib" lang="en" href="contrib/update_200_to_201/update.xml">Manual for Updating B3P 2.0.0 to 2.0.1</link>
+			<link type="contrib" lang="de" href="contrib/update_200_to_201/update.xml">Anleitung für das Aktualisieren von B3P 2.0.0 zu 2.0.1</link>
 		</link-group>
 		<history>
+			<entry>
+				<date>2012-08-26</date>
+				<rev-version>2.0.1</rev-version>
+				<changelog lang="en">
+					<change>Redirect to portal.php when detecting incorrect announcement parameter</change>
+					<change>Add rel="nofollow" to calendar navigation</change>
+					<change>Fixed incorrect handling of months by strtotime</change>
+					<change>Fix previous commit for calendar</change>
+					<change>Fix incorrect config_name in portal_recent.php</change>
+					<change>Fix error if server-side topic marking is disabled</change>
+					<change>Fix incorrect space between blocks in IE9</change>
+					<change>[ticket/203] Future all day events are always displayed as current</change>
+					<change>[ticket/207] Debug warning in ACP when using PHP 5.4</change>
+					<change>[ticket/206] Missing link to MCP in subsilver2</change>
+					<change>Fix PHP notice when unable to rename</change>
+					<change>Fix incorrect space above calendar in IE9</change>
+					<change>Properly handle mutated vowels in links</change>
+					<change>Enable stylechanger for guests again</change>
+					<change>Add missing language var for logs after removing a link</change>
+					<change>Remove converter for Board3 Portal 1.0.6</change>
+					<change>Fix: Infinite loop caused by smiley code with "["</change>
+					<change>Fix: Only variables can be passed by ref in strict mode</change>
+					<change>Display events that start in the next 24 Hours as "Current"</change>
+					<change>Remove unnecessary variables from format_birthday() &amp; clean-up</change>
+					<change>Save module settings even if module image can't be found</change>
+					<change>Add missing error messages to links &amp; main menu modules</change>
+					<change>Remove update instructions for old releases</change>
+					<change>Remove update for beta version</change>
+				</changelog>
+				<changelog lang="de">
+					<change>Leite bei falschen Parametern für Ankündigungen an die portal.php weiter</change>
+					<change>Füge rel="nofollow" zur Kalender Navigation hinzu</change>
+					<change>Korrigiere fehlerhafte Behandlung von Monaten mit strtotime</change>
+					<change>Korrigiere vohergehende Änderung für den Kalender</change>
+					<change>Korrigiere falschen config_name in portal_recent.php</change>
+					<change>Korrigiere Fehler falls serverseitiges Markieren von Themen deaktiviert ist</change>
+					<change>Korrigiere falschen Abstand zwischen Blöcken in IE9</change>
+					<change>[ticket/203] Future all day events are always displayed as current</change>
+					<change>[ticket/207] PHP 5.4.0 Unterstützung / Support</change>
+					<change>[ticket/206] Kein Link zum Moderations-Bereich im user_menu_side.html bei subsilver2</change>
+					<change>Korrigiere PHP notice falls nicht umbenannt werden kann</change>
+					<change>Korrigiere falschen Abstand über dem Kalender in IE9</change>
+					<change>Gehe korrekt mit Umlauten in Links um</change>
+					<change>Aktiviere Stylechanger wieder für Gäste</change>
+					<change>Füge fehlende Sprachvariablen für Logs nach dem Entfernen von Links hinzu</change>
+					<change>Entferne Konverter für Board3 Portal 1.0.6</change>
+					<change>Korrigiere Endlosschleife durch Smiley Code mit "["</change>
+					<change>Korrigiere: Only variables can be passed by ref in strict mode</change>
+					<change>Zeige Veranstaltungen die in den nächsten 24 Stunden beginnen als aktuell an</change>
+					<change>Entferne unnötige Variablen von format_birthday() &amp; räume etwas auf</change>
+					<change>Sichere Modul Einstellungen auch wenn die Modul Bilder nicht gefunden werden können</change>
+					<change>Füge fehlende Fehlermeldungen zu Links &amp; Menü Modulen hinzu</change>
+					<change>Entferne Update Anleitungen für ältere Veröffentlichungen</change>
+					<change>Entferne Update Anleitung für Beta Version</change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2012-04-06</date>
 				<rev-version>2.0.0</rev-version>
