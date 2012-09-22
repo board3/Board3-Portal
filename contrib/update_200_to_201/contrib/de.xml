@@ -86,12 +86,12 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			 </author>
 		</author-group>
 
-		<mod-version>2.0.0</mod-version>
+		<mod-version>2.0.1</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>120</time>
-			<target-version>3.0.10</target-version>
+			<target-version>3.0.11</target-version>
 		</installation>
 
 		<link-group>
@@ -100,13 +100,11 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</link-group>
 	</header>
 	<action-group>
-	<!--
 		<copy>
 			<file from="root/language/de/mods/info_acp_portal.php" to="language/de/mods/info_acp_portal.php" />
-			<file from="root/language/de/mods/portal/portal_attachments_module.php" to="language/de/mods/portal/portal_attachments_module.php" />
-			<file from="root/language/de/mods/portal/portal_latest_bots_module.php" to="language/de/mods/portal/portal_latest_bots_module.php" />
+			<file from="root/language/de/mods/portal/portal_links_module.php" to="language/de/mods/portal/portal_links_module.php" />
+			<file from="root/language/de/mods/portal/portal_main_menu_module.php" to="language/de/mods/portal/portal_main_menu_module.php" />
 		</copy>
-		-->
 		<diy-instructions lang="en">See general install.xml file</diy-instructions>
 		<diy-instructions lang="de">Siehe install.xml</diy-instructions>
 	</action-group>
