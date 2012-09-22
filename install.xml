@@ -106,7 +106,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 		</link-group>
 		<history>
 			<entry>
-				<date>2012-08-26</date>
+				<date>2012-10-13</date>
 				<rev-version>2.0.1</rev-version>
 				<changelog lang="en">
 					<change>Redirect to portal.php when detecting incorrect announcement parameter</change>
@@ -133,6 +133,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Add missing error messages to links &amp; main menu modules</change>
 					<change>Remove update instructions for old releases</change>
 					<change>Remove update for beta version</change>
+					<change>Add missing language variable "NO_FILE_B3P"</change>
 				</changelog>
 				<changelog lang="de">
 					<change>Leite bei falschen Parametern für Ankündigungen an die portal.php weiter</change>
@@ -159,6 +160,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>Füge fehlende Fehlermeldungen zu Links &amp; Menü Modulen hinzu</change>
 					<change>Entferne Update Anleitungen für ältere Veröffentlichungen</change>
 					<change>Entferne Update Anleitung für Beta Version</change>
+					<change>Füge fehlende Sprachvariable "NO_FILE_B3P" hinzu</change>
 				</changelog>
 			</entry>
 			<entry>
