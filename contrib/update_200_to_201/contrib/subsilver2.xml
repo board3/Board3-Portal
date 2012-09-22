@@ -100,19 +100,9 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</link-group>	
 	</header>
 	<action-group>
-	<!--
 		<copy>
-			<file from="root/styles/subsilver2/template/portal/modules/*.*" to="styles/subsilver2/template/portal/modules/*.*" />
-			<file from="root/styles/subsilver2/template/portal/portal_body.html" to="styles/subsilver2/template/portal/portal_body.html" />
-			<file from="root/styles/subsilver2/theme/portal.css" to="styles/subsilver2/theme/portal.css" />
-			<file from="root/styles/subsilver2/theme/images/portal/arrowbullet.gif" to="styles/subsilver2/theme/images/portal/arrowbullet.gif" />
-			<file from="root/styles/subsilver2/theme/images/portal/arrowbullet_rtl.gif" to="styles/subsilver2/theme/images/portal/arrowbullet_rtl.gif" />
+			<file from="root/styles/subsilver2/template/portal/modules/user_menu_side.html" to="styles/subsilver2/template/portal/modules/user_menu_side.html" />
 		</copy>
-		<delete>
-			<file name="styles/subsilver2/template/portal/modules/announcements.html" />
-			<file name="styles/subsilver2/template/portal/modules/announcements_compact.html" />
-		</delete>
-	-->
 		<diy-instructions lang="de"><![CDATA[
 Aktualisiere deine Styles:
     "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"
