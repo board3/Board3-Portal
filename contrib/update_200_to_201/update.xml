@@ -5,8 +5,8 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en">board3 Portal 2.0.1 - Update from Board3 Portal 2.0.1</title>
-		<title lang="de">board3 Portal 2.0.1 - Update von Board3 Portal 2.0.1</title>
+		<title lang="en">board3 Portal 2.0.1 - Update from Board3 Portal 2.0.0</title>
+		<title lang="de">board3 Portal 2.0.1 - Update von Board3 Portal 2.0.0</title>
 
 		<description lang="en">Adds a portal to your forum.
 It has several boxes wich can be turned on an off in the ACP and certain settings.
@@ -103,37 +103,30 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 		</link-group>	
 	</header>
 	<action-group>
-	<!--
 		<copy>
-			<file from="root/portal.php" to="portal.php" />
-			<file from="root/adm/style/portal/*.*" to="adm/style/portal/*.*" />
-			<file from="root/includes/acp/*.*" to="includes/acp/*.*" />
-			<file from="root/includes/trim_message/*.*" to="includes/trim_message/*.*" />
+			<file from="root/includes/acp/acp_portal.php" to="includes/acp/acp_portal.php" />
+			<file from="root/includes/trim_message/bbcodes.php" to="includes/trim_message/bbcodes.php" />
 			<file from="root/install/index.php" to="install/index.php" />
 			<file from="root/language/en/mods/info_acp_portal.php" to="language/en/mods/info_acp_portal.php" />
-			<file from="root/language/en/mods/portal/portal_attachments_module.php" to="language/en/mods/portal/portal_attachments_module.php" />
-			<file from="root/language/en/mods/portal/portal_latest_bots_module.php" to="language/en/mods/portal/portal_latest_bots_module.php" />
+			<file from="root/language/en/mods/portal/portal_links_module.php" to="language/en/mods/portal/portal_links_module.php" />
+			<file from="root/language/en/mods/portal/portal_main_menu_module.php" to="language/en/mods/portal/portal_main_menu_module.php" />
 			<file from="root/portal/includes/functions.php" to="portal/includes/functions.php" />
+			<file from="root/portal/includes/functions_modules.php" to="portal/includes/functions_modules.php" />
+			<file from="root/portal/includes/functions_upload.php" to="portal/includes/functions_upload.php" />
 			<file from="root/portal/modules/portal_announcements.php" to="portal/modules/portal_announcements.php" />
+			<file from="root/portal/modules/portal_attachments.php" to="portal/modules/portal_attachments.php" />
 			<file from="root/portal/modules/portal_calendar.php" to="portal/modules/portal_calendar.php" />
-			<file from="root/portal/modules/portal_custom.php" to="portal/modules/portal_custom.php" />
-			<file from="root/portal/modules/portal_donation.php" to="portal/modules/portal_donation.php" />
-			<file from="root/portal/modules/portal_latest_bots.php" to="portal/modules/portal_latest_bots.php" />
-			<file from="root/portal/modules/portal_leaders.php" to="portal/modules/portal_leaders.php" />
-			<file from="root/portal/modules/portal_poll.php" to="portal/modules/portal_poll.php" />
-			<file from="root/portal/modules/portal_whois_online.php" to="portal/modules/portal_whois_online.php" />
-			<file from="root/styles/prosilver/template/portal/modules/*.*" to="styles/prosilver/template/portal/modules/*.*" />
-			<file from="root/styles/prosilver/template/portal/portal_body.html" to="styles/prosilver/template/portal/portal_body.html" />
-			<file from="root/styles/prosilver/theme/portal.css" to="styles/prosilver/theme/portal.css" />
-			<file from="root/styles/prosilver/theme/images/portal/arrowbullet.gif" to="styles/prosilver/theme/images/portal/arrowbullet.gif" />
-			<file from="root/styles/prosilver/theme/images/portal/arrowbullet_rtl.gif" to="styles/prosilver/theme/images/portal/arrowbullet_rtl.gif" />
+			<file from="root/portal/modules/portal_links.php" to="portal/modules/portal_links.php" />
+			<file from="root/portal/modules/portal_main_menu.php" to="portal/modules/portal_main_menu.php" />
+			<file from="root/portal/modules/portal_recent.php" to="portal/modules/portal_recent.php" />
+			<file from="root/styles/prosilver/template/portal/modules/announcements_center.html" to="styles/prosilver/template/portal/modules/announcements_center.html" />
+			<file from="root/styles/prosilver/template/portal/modules/announcements_center_compact.html" to="styles/prosilver/template/portal/modules/announcements_center_compact.html" />
+			<file from="root/styles/prosilver/template/portal/modules/calendar_side.html" to="styles/prosilver/template/portal/modules/calendar_side.html" />
+			<file from="root/styles/prosilver/template/portal/modules/news_center.html" to="styles/prosilver/template/portal/modules/news_center.html" />
+			<file from="root/styles/prosilver/template/portal/modules/news_compact_center.html" to="styles/prosilver/template/portal/modules/news_compact_center.html" />
+			<file from="root/styles/prosilver/template/portal/modules/poll_center.html" to="styles/prosilver/template/portal/modules/poll_center.html" />
+			<file from="root/styles/prosilver/template/portal/modules/poll_side.html" to="styles/prosilver/template/portal/modules/poll_side.html" />
 		</copy>
-		<delete>
-			<file name="portal/includes/trim_message/*.*" />
-			<file name="styles/prosilver/template/portal/modules/announcements.html" />
-			<file name="styles/prosilver/template/portal/modules/announcements_compact.html" />
-		</delete>
-		-->
 		<open src="includes/session.php">
 			<edit>
 				<find><![CDATA[		if (!empty($_GET['style']) && !defined('ADMIN_START') && $this->data['user_type'] != USER_IGNORE)]]></find>
