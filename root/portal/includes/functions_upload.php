@@ -52,10 +52,11 @@ class portal_upload
 		$upload->set_allowed_extensions(array('zip'));
 		
 		$file = $upload->form_upload('modupload');
-		
-		if (empty($file->filename))
+
+		// this is for module zips so don't allow anything else
+		if (empty($file->filename) || !preg_match('.zip.', $file->get('realname')))
 		{
-			trigger_error($user->lang['NO_UPLOAD_FILE'] . adm_back_link($this->u_action), E_USER_WARNING);
+			trigger_error($user->lang['NO_FILE_B3P'] . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 		else
 		{
@@ -113,7 +114,17 @@ class portal_upload
 						$cur_path = str_replace($mod_dir . '/', '', $cur_path);
 						$cut_pos = strpos($cur_path, '/');
 						
-						// Only allow files in adm, language, portal and styles folder
+						/* 
+						* We only copy files. The recursive iterator might grab paths depending on
+						* the PHP version. This will trigger our error handle with trigger_error()
+						* though. If we are trying to copy a directory just move on.
+						*/
+						if (is_dir($cur_path))
+						{
+							continue;
+						}
+						
+						// Only allow files in adm, language, portal and styles folder and a license.txt
 						if(!in_array(substr($cur_path, 0, $cut_pos), array('adm', 'language', 'portal', 'styles')) && $cur_file->getFilename() != 'license.txt')
 						{
 							$file->remove();
