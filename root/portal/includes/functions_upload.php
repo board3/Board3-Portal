@@ -105,7 +105,7 @@ class portal_upload
 					
 					// Now we need to get the files inside the folders
 					//$folder_contents = $this->cut_folder(scandir($mod_dir));
-					$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($mod_dir)); // requires PHP 5
+					$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($mod_dir, FilesystemIterator::SKIP_DOTS)); // requires PHP 5
 					
 					foreach($iterator as $cur_file)
 					{
@@ -113,16 +113,6 @@ class portal_upload
 						$cur_path = str_replace('\\', '/', $cur_path); // we want unix-like paths
 						$cur_path = str_replace($mod_dir . '/', '', $cur_path);
 						$cut_pos = strpos($cur_path, '/');
-						
-						/* 
-						* We only copy files. The recursive iterator might grab paths depending on
-						* the PHP version. This will trigger our error handle with trigger_error()
-						* though. If we are trying to copy a directory just move on.
-						*/
-						if (is_dir($cur_path))
-						{
-							continue;
-						}
 						
 						// Only allow files in adm, language, portal and styles folder and a license.txt
 						if(!in_array(substr($cur_path, 0, $cut_pos), array('adm', 'language', 'portal', 'styles')) && $cur_file->getFilename() != 'license.txt')
