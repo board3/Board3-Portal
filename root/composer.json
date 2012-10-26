@@ -1,0 +1,55 @@
+{
+	"name": "board3/portal",
+	"type": "phpbb3-extension",
+	"description": "Adds a portal with several blocks to your forum. You can change the settings, move the blocks, add new blocks and more in the ACP.",
+	"homepage": "http://www.board3.de",
+	"version": "2.1.0-dev",
+	"time": "2012-10-05 10:40:01",
+	"licence": "GPL-2.0",
+	"authors": [{
+			"name": "Marc Alexander",
+			"username": "marc1706",
+			"email": "admin@m-a-styles.de",
+			"homepage": "http://www.m-a-styles.de",
+			"role": "Lead Developer"
+		},  
+		{
+			"name": "Joas Schilling",
+			"username": "nickvergessen",
+			"email": "nickvergessen@gmx.de",
+			"homepage": "http://mods.flying-bits.org",
+			"role": "Developer"
+		},
+		{
+			"name": "Kevin",
+			"username": "saint_hh",
+			"homepage": "http://www.board3.de",
+			"role": "Developer"
+		},
+		{
+			"name": "Ice",
+			"username": "avaren",
+			"homepage": "http://www.board3.de",
+			"role": "Developer"
+		},
+		{
+			"name": "Christian",
+			"username": "Christian_N",
+			"homepage": "http://www.phpbb-projekt.de",
+			"role": "Developer"
+		},
+		{
+			"name": "Walter",
+			"username": "Redbull254",
+			"email": "w.bobeth@digitalfotografie-foren.de",
+			"homepage": "http://www.digitalfotografie-foren.de",
+			"role": "Developer"
+		}],
+	"require": {
+		"php": ">=5.2",
+		"phpbb": "3.1.0-dev"
+	},
+	"extra": {
+		"display-name": "Board3 Portal"
+	}
+}
