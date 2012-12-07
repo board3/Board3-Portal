@@ -872,3 +872,35 @@ function check_file_src($value, $key, $module_id, $force_error = true)
 		return false;
 	}
 }
+
+/**
+* Get the groups a user is in
+*
+* @return array Array containing the user's groups
+*/
+function get_user_groups()
+{
+	global $cache, $db, $user;
+
+	$groups_ary = $cache->get('_user_groups_' . $user->data['user_id']);
+
+	if ($groups_ary === false)
+	{
+		// get user's groups
+		$sql = 'SELECT group_id
+				FROM ' . USER_GROUP_TABLE . '
+				WHERE user_id = ' . (int) $user->data['user_id'] . '
+				ORDER BY group_id ASC';
+		$result = $db->sql_query($sql);
+		while($row = $db->sql_fetchrow($result))
+		{
+			$groups_ary[] = $row['group_id'];
+		}
+		$db->sql_freeresult($result);
+
+		// save data in cache for 60 seconds
+		$cache->put('_user_groups_' . $user->data['user_id'], $groups_ary, 60);
+	}
+
+	return $groups_ary;
+}
