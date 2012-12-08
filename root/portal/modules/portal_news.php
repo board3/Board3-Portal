@@ -52,7 +52,7 @@ class portal_news_module
 		global $config, $template, $db, $user, $auth, $cache, $phpEx, $phpbb_root_path;
 
 		$news = request_var('news', -1);
-		$news = ($news > $config['board3_news_length_' . $module_id] -1) ? -1 : $news;
+		$news = ($news > $config['board3_number_of_news_' . $module_id] -1) ? -1 : $news;
 		$user->add_lang('viewforum');
 		$start = request_var('np', 0);
 		$start = ($start < 0) ? 0 : $start;
