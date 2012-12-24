@@ -69,18 +69,8 @@ class portal_links_module
 		$links = $this->utf_unserialize($portal_config['board3_links_array_' . $module_id]);
 		
 		// get user's groups
-		$sql = 'SELECT group_id
-				FROM ' . USER_GROUP_TABLE . '
-				WHERE user_id = ' . (int) $user->data['user_id'] . '
-				ORDER BY group_id ASC';
-		$result = $db->sql_query($sql);
-		while($row = $db->sql_fetchrow($result))
-		{
-			$groups_ary[] = $row['group_id'];
-		}
-		$db->sql_freeresult($result);
-		
-		
+		$groups_ary = get_user_groups();
+
 		for ($i = 0; $i < sizeof($links); $i++)
 		{
 			if($links[$i]['type'] == self::LINK_INT)
