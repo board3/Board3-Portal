@@ -68,20 +68,10 @@ class portal_main_menu_module
 		$portal_config = obtain_portal_config();
 		
 		$links = $this->utf_unserialize($portal_config['board3_menu_array_' . $module_id]);
-		
+
 		// get user's groups
-		$sql = 'SELECT group_id
-				FROM ' . USER_GROUP_TABLE . '
-				WHERE user_id = ' . (int) $user->data['user_id'] . '
-				ORDER BY group_id ASC';
-		$result = $db->sql_query($sql);
-		while($row = $db->sql_fetchrow($result))
-		{
-			$groups_ary[] = $row['group_id'];
-		}
-		$db->sql_freeresult($result);
-		
-		
+		$groups_ary = get_user_groups();
+
 		for ($i = 0; $i < sizeof($links); $i++)
 		{
 			if($links[$i]['type'] == self::LINK_CAT)
