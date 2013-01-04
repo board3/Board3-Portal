@@ -56,6 +56,7 @@ $lang = array_merge($lang, array(
 	'DELETE_MODULE_CONFIRM'			=> 'Are you sure you wish to delete the module "%1$s"?',
 	'MODULE_RESET_SUCCESS'			=> 'Successfully reset the module settings.',
 	'MODULE_RESET_CONFIRM'			=> 'Are you sure you wish to reset the settings of the module "%1$s"?',
+	'MODULE_NOT_EXISTS'				=> 'The selected module does not exist.',
 
 	'MODULE_OPTIONS'			=> 'Module options',
 	'MODULE_NAME'				=> 'Module name',
