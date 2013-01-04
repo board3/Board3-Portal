@@ -46,13 +46,13 @@ class portal_links_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = 'portal_links_module';
-	
+
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
 	public $custom_acp_tpl = 'acp_portal_links';
-	
+
 	/**
 	* constants
 	*/
@@ -65,9 +65,9 @@ class portal_links_module
 
 		$links = array();
 		$portal_config = obtain_portal_config();
-		
+
 		$links = $this->utf_unserialize($portal_config['board3_links_array_' . $module_id]);
-		
+
 		// get user's groups
 		$groups_ary = get_user_groups();
 
@@ -82,10 +82,10 @@ class portal_links_module
 			{
 				$cur_url = $links[$i]['url'];
 			}
-			
+
 			$cur_permissions = explode(',', $links[$i]['permission']);
 			$permission_check = array_intersect($groups_ary, $cur_permissions);
-			
+
 			if(!empty($permission_check) || $links[$i]['permission'] == '')
 			{
 				$template->assign_block_vars('portallinks', array(
@@ -119,29 +119,29 @@ class portal_links_module
 	public function install($module_id)
 	{
 		global $phpbb_root_path, $db;
-		
+
 		$links = array();
-		
+
 		$links_titles = array(
 			'Board3.de',
 			'phpBB.com',
 		);
-		
+
 		$links_types = array(
 			self::LINK_EXT,
 			self::LINK_EXT,
 		);
-		
+
 		$links_urls = array(
 			'http://www.board3.de/',
 			'http://www.phpbb.com/',
 		);
-		
+
 		$links_permissions = array(
 			'',
 			'',
 		);
-		
+
 		foreach($links_urls as $i => $url)
 		{
 			$links[] = array(
@@ -151,12 +151,12 @@ class portal_links_module
 				'permission'	=> $links_permissions[$i],
 			);
 		}
-		
+
 		$board3_menu_array = serialize($links);
 		set_portal_config('board3_links_array_' . $module_id, $board3_menu_array);
 		set_config('board3_links_' . $module_id, '');
 		set_config('board3_links_url_new_window_' . $module_id, 0);
-		
+
 		return true;
 	}
 
@@ -169,9 +169,9 @@ class portal_links_module
 		);
 		$sql = 'DELETE FROM ' . PORTAL_CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
-			
+
 		$db->sql_query($sql);
-			
+
 		$del_config = array(
 			'board3_links_' . $module_id,
 			'board3_links_url_new_window_' . $module_id
@@ -180,18 +180,18 @@ class portal_links_module
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
 	}
-	
+
 	// Manage the menu links
 	public function manage_links($value, $key, $module_id)
 	{
 		global $config, $phpbb_admin_path, $user, $phpEx, $db, $template;
-		
+
 		$action = request_var('action', '');
 		$action = (isset($_POST['add'])) ? 'add' : $action;
 		$action = (isset($_POST['save'])) ? 'save' : $action;
 		$link_id = request_var('id', 99999999); // 0 will trigger unwanted behavior, therefore we set a number we should never reach
 		$portal_config = obtain_portal_config();
-		
+
 		$links = array();
 
 		$links = $this->utf_unserialize($portal_config['board3_links_array_' . $module_id]);
@@ -213,7 +213,7 @@ class portal_links_module
 				$link_url = str_replace('&amp;', '&', $link_url);
 				$link_permission = request_var('permission-setting-link', array(0 => ''));
 				$groups_ary = array();
-				
+
 				// get groups and check if the selected groups actually exist
 				$sql = 'SELECT group_id
 						FROM ' . GROUPS_TABLE . '
@@ -224,7 +224,7 @@ class portal_links_module
 					$groups_ary[] = $row['group_id'];
 				}
 				$db->sql_freeresult($result);
-				
+
 				$link_permissions = array_intersect($link_permission, $groups_ary);
 				$link_permissions = implode(',', $link_permissions);
 
@@ -243,7 +243,7 @@ class portal_links_module
 				if (isset($link_id) && $link_id < sizeof($links))
 				{
 					$message = $user->lang['LINK_UPDATED'];
-					
+
 					$links[$link_id] = array(
 						'title' 		=> $link_title,
 						'url'			=> htmlspecialchars_decode($link_url),
@@ -265,7 +265,7 @@ class portal_links_module
 					);
 					add_log('admin', 'LOG_PORTAL_LINK_ADDED', $link_title);
 				}
-				
+
 				$board3_links_array = serialize($links);
 				set_portal_config('board3_links_array_' . $module_id, $board3_links_array);
 
@@ -287,7 +287,7 @@ class portal_links_module
 					// delete the selected link and reset the array numbering afterwards
 					array_splice($links, $link_id, 1);
 					$links = array_merge($links);
-					
+
 					$board3_links_array = serialize($links);
 					set_portal_config('board3_links_array_' . $module_id, $board3_links_array);
 
@@ -332,7 +332,7 @@ class portal_links_module
 					'type'			=> $links[$link_id]['type'],
 					'permission'	=> $links[$link_id]['permission'],
 				);
-				
+
 				// move the info of the links we replace in the order
 				$links[$link_id] = array(
 					'title'			=> $links[$switch_order_id]['title'],
@@ -340,7 +340,7 @@ class portal_links_module
 					'type'			=> $links[$switch_order_id]['type'],
 					'permission'	=> $links[$switch_order_id]['permission'],
 				);
-				
+
 				// insert the info of the moved link
 				$links[$switch_order_id] = $cur_link;
 
@@ -362,9 +362,9 @@ class portal_links_module
 					'S_EDIT'				=> true,
 					'S_LINK_IS_INT'			=> (isset($links[$link_id]['type']) && $links[$link_id]['type'] == self::LINK_INT) ? true : false,
 				));
-				
+
 				$groups_ary = (isset($links[$link_id]['permission'])) ? explode(',', $links[$link_id]['permission']) : array();
-				
+
 				// get group info from database and assign the block vars
 				$sql = 'SELECT group_id, group_name 
 						FROM ' . GROUPS_TABLE . '
@@ -398,12 +398,12 @@ class portal_links_module
 			));
 		}
 	}
-	
+
 	public function update_links($key, $module_id)
 	{
 		$this->manage_links('', $key, $module_id);
 	}
-	
+
 	// Unserialize links array
 	private function utf_unserialize($serial_str) 
 	{

@@ -46,7 +46,7 @@ class portal_forumlist_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = 'portal_forumlist_module';
-	
+
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"

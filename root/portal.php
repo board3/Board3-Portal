@@ -65,7 +65,7 @@ foreach ($portal_modules as $row)
 	{
 		continue;
 	}
-	
+
 	$class_name = 'portal_' . $row['module_classname'] . '_module';
 	if (!class_exists($class_name))
 	{
@@ -77,7 +77,7 @@ foreach ($portal_modules as $row)
 	}
 
 	$module = new $class_name();
-	
+
 	/** 
 	* Check for permissions before loading anything
 	* the default group of a user always defines his/her permission (KISS)
@@ -87,7 +87,7 @@ foreach ($portal_modules as $row)
 	{
 		continue;
 	}
-	
+
 	if ($module->language)
 	{
 		$user->add_lang('mods/portal/' . $module->language);

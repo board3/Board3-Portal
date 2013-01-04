@@ -36,7 +36,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_RECENT_TOPIC'		=> 'Recent topics',
 	'PORTAL_RECENT_ANN'			=> 'Recent announcements',
 	'PORTAL_RECENT_HOT_TOPIC'	=> 'Recent popular topics',
-	
+
 	// ACP
 	'ACP_PORTAL_RECENT_SETTINGS'			=> 'Recent topics settings',
 	'ACP_PORTAL_RECENT_SETTINGS_EXP'	=> 'This is where you customize the recent topics block.',

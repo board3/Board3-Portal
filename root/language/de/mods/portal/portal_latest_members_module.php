@@ -33,7 +33,7 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	'LATEST_MEMBERS'				=> 'Neue Mitglieder',
-	
+
 	// ACP
 	'ACP_PORTAL_MEMBERS_SETTINGS'				=> 'Einstellungen für neue Mitglieder',
 	'ACP_PORTAL_MEMBERS_SETTINGS_EXP'		=> 'Hier kannst du die Einstellungen für neue Mitglieder ändern.',

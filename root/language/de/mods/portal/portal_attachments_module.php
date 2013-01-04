@@ -35,7 +35,7 @@ $lang = array_merge($lang, array(
 	'DOWNLOADS'				=> 'Downloads',
 	'NO_ATTACHMENTS'		=> 'Keine Dateianhänge',
 	'PORTAL_ATTACHMENTS'	=> 'Dateianhänge-Block',
-	
+
 	// ACP
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS'			=> 'Einstellungen für Dateianhänge',
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS_EXP'	=> 'Hier kannst du die Einstellungen für Dateianhänge ändern.',

@@ -85,7 +85,7 @@ $lang = array_merge($lang, array(
 			'12'=> 'Dezember',
 		),
 	),
-	
+
 	// ACP
 	'ACP_PORTAL_CALENDAR'					=> 'Kalender Einstellungen',
 	'ACP_PORTAL_CALENDAR_EXP'				=> 'Hier kannst du die Einstellungen für den Kalender ändern.',
@@ -127,7 +127,7 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_CALENDAR_PERMISSION'		=> 'Berechtigungen für die Veranstaltung',
 	'ACP_PORTAL_CALENDAR_PERMISSION_EXP'	=> 'Wähle die Gruppen aus, denen es erlaubt sein soll die Veranstaltung zu sehen. Falls alle Benutzer die Veranstaltung sehen sollen, dann wähle nichts aus.<br />Wähle mehrere Gruppen aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
 	'PORTAL_EVENTS_URL_NEW_WINDOW'			=> 'Öffne externe Veranstaltungsverknüpfungen in einem neuen Fenster',
-	
+
 	// Logs
 	'LOG_PORTAL_EVENT_UPDATED'				=> '<strong>Veranstaltung aktualisiert</strong><br />&raquo; %s',
 	'LOG_PORTAL_EVENT_ADDED'				=> '<strong>Veranstaltung hinzugefügt</strong><br />&raquo; %s',

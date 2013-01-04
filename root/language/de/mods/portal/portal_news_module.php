@@ -43,7 +43,7 @@ $lang = array_merge($lang, array(
 	'JUMP_NEWEST'			=> 'Zum letzten Beitrag springen',
 	'JUMP_FIRST'			=> 'Zum ersten Beitrag springen',
 	'JUMP_TO_POST'			=> 'Rufe den Beitrag auf',
-	
+
 	// ACP
 	'ACP_PORTAL_NEWS_SETTINGS'				=> 'Aktuelle Beiträge  Einstellungen',
 	'ACP_PORTAL_NEWS_SETTINGS_EXP'			=> 'Hier kannst du die Einstellungen für die aktuellen Beiträge ändern.',
