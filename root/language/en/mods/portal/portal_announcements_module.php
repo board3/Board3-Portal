@@ -47,7 +47,7 @@ $lang = array_merge($lang, array(
 	'JUMP_NEWEST'				=> 'Jump to newest post',
 	'JUMP_FIRST'				=> 'Jump to first post',
 	'JUMP_TO_POST'				=> 'Jump to post',
-	
+
 	// ACP
 	'ACP_PORTAL_ANNOUNCE_SETTINGS'				=> 'Global announcements settings',
 	'ACP_PORTAL_ANNOUNCE_SETTINGS_EXP'		=> 'This is where you customize the global announcements block.',

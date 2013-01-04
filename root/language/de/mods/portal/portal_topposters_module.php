@@ -34,7 +34,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'TOPPOSTERS'					=> 'Top Poster',
 	'TOPPOSTERS_CONFIG'				=> 'Einstellungen zu Top Poster',
-	
+
 	// ACP
 	'NUM_TOPPOSTERS'				=> 'Anzahl der Top Poster',
 	'NUM_TOPPOSTERS_EXP'			=> 'Gebe die Anzahl der Benutzer an, die im Top Poster Block angezeigt werden sollen.',

@@ -37,7 +37,7 @@ $lang = array_merge($lang, array(
 	'NO_OPTIONS'			=> 'This poll has no available options.',
 	'NO_POLL'				=> 'No polls available',
 	'RETURN_PORTAL'			=> '%sReturn to the portal%s',
-	
+
 	// ACP
 	'ACP_PORTAL_POLLS_SETTINGS'			=> 'Poll settings',
 	'ACP_PORTAL_POLLS_SETTINGS_EXP'	=> 'This is where you customize the poll block.',

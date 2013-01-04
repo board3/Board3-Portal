@@ -34,7 +34,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'LATEST_BOTS'			=> 'Letzte Bots',
 	'LAST_VISITED_BOTS'		=> 'Die letzten Bots',
-	
+
 	// ACP
 	'ACP_PORTAL_BOTS_SETTINGS'					=> 'Einstellungen für Bot-Besuche',
 	'ACP_PORTAL_BOTS_SETTINGS_EXP'			=> 'Hier kannst du die Einstellungen für Bot-Besuche ändern.',

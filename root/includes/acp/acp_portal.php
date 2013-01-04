@@ -24,7 +24,7 @@ class acp_portal
 	{
 		global $db, $user, $cache, $template, $display_vars;
 		global $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx;
-		
+
 		include($phpbb_root_path . 'portal/includes/constants.' . $phpEx);
 		$portal_root_path = PORTAL_ROOT_PATH;
 		if (!function_exists('column_string_const'))
@@ -36,7 +36,7 @@ class acp_portal
 		{
 			include($phpbb_root_path . $portal_root_path . 'includes/functions_version_check.' . $phpEx);
 		}
-		
+
 		if(!function_exists('obtain_portal_config'))
 		{
 			include($phpbb_root_path . $portal_root_path . 'includes/functions.' . $phpEx);
@@ -112,11 +112,11 @@ class acp_portal
 							'MODULE_ENABLED'		=> ($module_data['module_status']) ? true : false,
 							'MODULE_SHOW_IMAGE'		=> (in_array(column_num_string($module_data['module_column']), array('center', 'top', 'bottom'))) ? false : true,
 						));
-						
+
 						if($module_data['module_classname'] != 'custom')
 						{
 							$groups_ary = explode(',', $module_data['module_group_ids']);
-					
+
 							// get group info from database and assign the block vars
 							$sql = 'SELECT group_id, group_name 
 									FROM ' . GROUPS_TABLE . '
@@ -132,7 +132,7 @@ class acp_portal
 							}
 							$db->sql_freeresult($result);
 						}
-						
+
 						$template->assign_var('SHOW_MODULE_OPTIONS', true);
 					}
 				}
@@ -158,10 +158,10 @@ class acp_portal
 				{
 					$submit = false;
 				}
-				
+
 				// Reset module
 				$reset_module = request_var('module_reset', 0);
-				
+
 				if($reset_module)
 				{
 					if (confirm_box(true))
@@ -179,16 +179,16 @@ class acp_portal
 								SET ' . $db->sql_build_array('UPDATE', $sql_ary) . ' 
 								WHERE module_id = ' . (int) $module_id;
 						$db->sql_query($sql);
-						
+
 						$cache->destroy('config');
 						$cache->destroy('portal_config');
 						$portal_config = obtain_portal_config(); // we need to prevent duplicate entry errors
 						$c_class->install($module_id);
 						$cache->purge();
-						
+
 						// We need to return to the module config
 						meta_refresh(3, reapply_sid($this->u_action . "&amp;module_id=$module_id"));
-						
+
 						trigger_error($user->lang['MODULE_RESET_SUCCESS'] . adm_back_link($this->u_action . "&amp;module_id=$module_id"));
 					}
 					else
@@ -202,14 +202,14 @@ class acp_portal
 						)));
 					}
 				}
-				
+
 				// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
 				foreach ($display_vars['vars'] as $config_name => $null)
 				{
 					if ($submit && ((isset($null['type']) && $null['type'] == 'custom') || (isset($null['submit_type']) && $null['submit_type'] == 'custom')))
 					{
 						$func = array($c_class, $null['submit']);
-						
+
 						if(method_exists($c_class, $null['submit']))
 						{
 							$args = ($module_id != 0) ? array($config_name, $module_id) : $config_name;
@@ -221,13 +221,12 @@ class acp_portal
 							call_user_func_array($null['submit'], $args);
 						}
 					}
-					
-					
+
 					if (!isset($cfg_array[$config_name]) || strpos($config_name, 'legend') !== false)
 					{
 						continue;
 					}
-					
+
 					if(isset($null['type']) && $null['type'] == 'custom')
 					{
 						continue;
@@ -246,7 +245,7 @@ class acp_portal
 					$module_permission = request_var('permission-setting', array(0 => ''));
 					$groups_ary = array();
 					$img_error = '';
-					
+
 					// get groups and check if the selected groups actually exist
 					$sql = 'SELECT group_id
 							FROM ' . GROUPS_TABLE . '
@@ -257,11 +256,10 @@ class acp_portal
 						$groups_ary[] = $row['group_id'];
 					}
 					$db->sql_freeresult($result);
-					
+
 					$module_permission = array_intersect($module_permission, $groups_ary);
 					$module_permission = implode(',', $module_permission);
-					
-					
+
 					$sql_ary = array(
 						'module_image_src'		=> request_var('module_image', ''),
 						'module_image_width'	=> request_var('module_img_width', 0),
@@ -269,12 +267,12 @@ class acp_portal
 						'module_group_ids'		=> $module_permission,
 						'module_status'			=> request_var('module_status', B3_MODULE_ENABLED),
 					);
-					
+
 					if(!(isset($c_class->hide_name) && $c_class->hide_name == true))
 					{
 						$sql_ary['module_name'] = utf8_normalize_nfc(request_var('module_name', '', true));
 					}
-					
+
 					// check if module image file actually exists
 					$img_error = check_file_src($sql_ary['module_image_src'], '', $module_id, false);
 
@@ -316,7 +314,6 @@ class acp_portal
 
 					'U_ACTION'			=> $this->u_action . (($module_id) ? '&amp;module_id=' . $module_id : ''),
 				));
-				
 
 				// Output relevant page
 				foreach ($display_vars['vars'] as $config_key => $vars)
@@ -381,7 +378,7 @@ class acp_portal
 			case 'modules':
 				$action = request_var('action', '');
 				$module_id = request_var('module_id', '');
-				
+
 				// Create an array of already installed modules
 				$portal_modules = obtain_portal_modules(); 
 				$installed_modules = $module_column = array(); 
@@ -423,7 +420,7 @@ class acp_portal
 					{
 						trigger_error($user->lang['UNABLE_TO_MOVE_ROW'] . adm_back_link($this->u_action));
 					}
-					
+
 					$cache->destroy('portal_modules');
 					redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
 				}
@@ -456,7 +453,7 @@ class acp_portal
 					{
 						trigger_error($user->lang['UNABLE_TO_MOVE_ROW'] . adm_back_link($this->u_action));
 					}
-					
+
 					$cache->destroy('portal_modules');
 					redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
 				}
@@ -468,7 +465,7 @@ class acp_portal
 					$result = $db->sql_query_limit($sql, 1);
 					$module_data = $db->sql_fetchrow($result);
 					$db->sql_freeresult($result);
-					
+
 					$class = 'portal_' . $module_data['module_classname'] . '_module';
 					if (!class_exists($class))
 					{
@@ -479,7 +476,7 @@ class acp_portal
 						trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 					}
 					$c_class = new $class();
-					
+
 					if ($module_data !== false)
 					{
 						if($c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 1)))
@@ -494,7 +491,7 @@ class acp_portal
                         {
                             // @todo: need an error handle here
                         }
-						
+
 						/**
 						* moving only 1 column to the right means we will either end up in the right column
 						* or in the center column. this is not possible when moving 2 columns to the right.
@@ -523,7 +520,7 @@ class acp_portal
 								$move_action = 2;
 							}
 						}
-						
+
 						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 							SET module_order = module_order + 1
 							WHERE module_order >= ' . (int) $module_data['module_order'] . '
@@ -535,13 +532,13 @@ class acp_portal
 							SET module_column = module_column + ' . $move_action . '
 							WHERE module_id = ' . (int) $module_id;
 						$db->sql_query($sql);
-						
+
 						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 							SET module_order = module_order - 1
 							WHERE module_order >= ' . (int) $module_data['module_order'] . '
 							AND module_column = ' . (int) $module_data['module_column'];
 						$db->sql_query($sql);
-						
+
 						// the module that needs to moved is in the last row
 						if(!$updated)
 						{
@@ -551,7 +548,7 @@ class acp_portal
 									AND module_column = ' . (int) ($module_data['module_column'] + $move_action);
 							$db->sql_query($sql);
 							$new_order = $db->sql_fetchfield('new_order') + 1;
-							
+
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 								SET module_order = ' . (int) $new_order . '
 								WHERE module_id = ' . (int) $module_id;
@@ -562,7 +559,7 @@ class acp_portal
 					{
 						trigger_error($user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 					}
-					
+
 					$cache->destroy('portal_modules');
 					redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
 				}
@@ -574,7 +571,7 @@ class acp_portal
 					$result = $db->sql_query_limit($sql, 1);
 					$module_data = $db->sql_fetchrow($result);
 					$db->sql_freeresult($result);
-					
+
 					$class = 'portal_' . $module_data['module_classname'] . '_module';
 					if (!class_exists($class))
 					{
@@ -585,7 +582,7 @@ class acp_portal
 						trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 					}
 					$c_class = new $class();
-					
+
 					if ($module_data !== false)
 					{
 						if($c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 1)))
@@ -600,7 +597,7 @@ class acp_portal
                         {
                             // @todo: need an error handle here (i.e. trigger_error())
                         }
-						
+
 						/**
 						* moving only 1 column to the left means we will either end up in the left column
 						* or in the center column. this is not possible when moving 2 columns to the left.
@@ -641,13 +638,13 @@ class acp_portal
 							SET module_column = module_column - ' . $move_action . '
 							WHERE module_id = ' . (int) $module_id;
 						$db->sql_query($sql);
-						
+
 						$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 							SET module_order = module_order - 1
 							WHERE module_order >= ' . $module_data['module_order'] . '
 							AND module_column = ' . $module_data['module_column'];
 						$db->sql_query($sql);
-						
+
 						// the module that needs to moved is in the last row
 						if(!$updated)
 						{
@@ -657,7 +654,7 @@ class acp_portal
 									AND module_column = ' . (int) ($module_data['module_column'] - $move_action);
 							$db->sql_query($sql);
 							$new_order = $db->sql_fetchfield('new_order') + 1;
-							
+
 							$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 								SET module_order = ' . $new_order . '
 								WHERE module_id = ' . (int) $module_id;
@@ -668,7 +665,7 @@ class acp_portal
 					{
 						trigger_error($user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 					}
-					
+
 					$cache->destroy('portal_modules');
 					redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
 				}
@@ -680,7 +677,7 @@ class acp_portal
 					$result = $db->sql_query_limit($sql, 1);
 					$module_data = $db->sql_fetchrow($result);
 					$db->sql_freeresult($result);
-					
+
 					$directory = $phpbb_root_path . 'portal/modules/';
 
 					if ($module_data !== false)
@@ -695,7 +692,7 @@ class acp_portal
 						{
 							trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 						}
-						
+
 						if (confirm_box(true))
 						{
 							$c_class = new $class();
@@ -710,7 +707,7 @@ class acp_portal
 								WHERE module_column = ' . $module_data['module_column'] . '
 									AND module_order > ' . $module_data['module_order'];
 							$db->sql_query($sql);
-							
+
 							$cache->purge(); // make sure we don't get errors after re-adding a module
 
 							trigger_error($user->lang['SUCCESS_DELETE'] . adm_back_link($this->u_action));
@@ -731,7 +728,7 @@ class acp_portal
 							)));
 						}
 					}
-					
+
 					$cache->destroy('portal_modules');
 				}
 
@@ -746,9 +743,9 @@ class acp_portal
 					{
 						$module_classname = request_var('module_classname', '');
 						$class = 'portal_' . $module_classname . '_module';
-						
+
 						$column_string = column_num_string($add_column);
-						
+
 						// do we want to add the module to the side columns or to the center columns?
 						if (in_array($column_string, array('left', 'right')))
 						{
@@ -770,13 +767,13 @@ class acp_portal
 								$submit = false;
 							}
 						}
-						
+
 						// do not install if module already exists in that column
 						if (!$submit && $module_classname != 'custom')
 						{
 							trigger_error($user->lang['MODULE_ADD_ONCE'] . adm_back_link($this->u_action), E_USER_WARNING);
 						}
-						
+
 						if (!class_exists($class))
 						{
 							include($directory . 'portal_' . $module_classname . '.' . $phpEx);
@@ -813,7 +810,7 @@ class acp_portal
 						$module_id = $db->sql_nextid();
 
 						$error = $c_class->install($module_id);
-						
+
 						$cache->purge(); // make sure we don't get errors after re-adding a module
 
 						// if something went wrong, handle the errors accordingly and undo the above query
@@ -830,7 +827,7 @@ class acp_portal
 							{
 								$error_output = $error;
 							}
-							
+
 							$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE . ' WHERE module_id = ' . (int) $module_id;
 
 							trigger_error($error_output . adm_back_link($this->u_action));
@@ -858,7 +855,7 @@ class acp_portal
 							$class = str_replace(".$phpEx", '', $file) . '_module';
 							$module_class = str_replace(array('portal_', ".$phpEx"), '', $file);
 							$column_string = column_num_string($add_column);
-							
+
 							// do we want to add the module to the side columns or to the center columns?
 							if ($module_class != 'custom')
 							{
@@ -883,7 +880,7 @@ class acp_portal
 									}
 								}
 							}
-							
+
 							if (!class_exists($class))
 							{
 								include($directory . $file);
@@ -935,7 +932,7 @@ class acp_portal
 					$directory = $phpbb_root_path . 'portal/modules/';
 
 					$portal_modules = obtain_portal_modules();
-					
+
 					foreach($portal_modules as $row)
 					{
 						$class = 'portal_' . $row['module_classname'] . '_module';
@@ -954,7 +951,7 @@ class acp_portal
 							$user->add_lang('mods/portal/' . $c_class->language);
 						}
 						$template_column = column_num_string($row['module_column']);
-						
+
 						// find out of we can move modules to the left or right
 						if(($c_class->columns & column_string_const(column_num_string($row['module_column'] + 1))) || ($c_class->columns & column_string_const(column_num_string($row['module_column'] + 2)) && $row['module_column'] != 2))
 						{
@@ -988,7 +985,7 @@ class acp_portal
 						{
 							$move_right = false;
 						}
-						
+
 						if(($c_class->columns & column_string_const(column_num_string($row['module_column'] - 1))) || ($c_class->columns & column_string_const(column_num_string($row['module_column'] - 2)) && $row['module_column'] != 2))
 						{
 							/**
@@ -1035,7 +1032,7 @@ class acp_portal
 							'U_MOVE_LEFT'		=> ($move_left) ? $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_left' : '',
 						));
 					}
-					
+
 					$template->assign_vars(array(
 						'ICON_MOVE_LEFT'				=> '<img src="' . $phpbb_admin_path . 'images/icon_left.gif" alt="' . $user->lang['MOVE_LEFT'] . '" title="' . $user->lang['MOVE_LEFT'] . '" />',
 						'ICON_MOVE_LEFT_DISABLED'		=> '<img src="' . $phpbb_admin_path . 'images/icon_left_disabled.gif" alt="' . $user->lang['MOVE_LEFT'] . '" title="' . $user->lang['MOVE_LEFT'] . '" />',
@@ -1058,9 +1055,9 @@ class acp_portal
 					include($phpbb_root_path . 'portal/includes/functions_upload.' . $phpEx);
 					// Default upload path is portal/upload/
 					$upload_path = $phpbb_root_path . 'portal/upload/';
-					
+
 					$portal_upload = new portal_upload($upload_path, $this->u_action);
-					
+
 					$this->tpl_name = 'portal/acp_portal_upload_module';
 					$this->page_title = $user->lang['ACP_PORTAL_UPLOAD'];
 				}
@@ -1071,7 +1068,7 @@ class acp_portal
 						'U_UPLOAD'			=> $this->u_action,
 						'S_FORM_ENCTYPE'	=> ' enctype="multipart/form-data"',
 					));
-					
+
 					add_form_key('acp_portal_module_upload');
 
 					$this->tpl_name = 'portal/acp_portal_upload_module';

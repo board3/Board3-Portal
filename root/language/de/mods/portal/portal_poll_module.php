@@ -37,7 +37,7 @@ $lang = array_merge($lang, array(
 	'NO_OPTIONS'			=> 'Diese Umfrage verfügt über keine Optionen.',
 	'NO_POLL'				=> 'Derzeit gibt es keine aktuellen Umfragen',
 	'RETURN_PORTAL'			=> '%sZurück zum Portal%s',
-	
+
 	// ACP
 	'ACP_PORTAL_POLLS_SETTINGS'				=> 'Einstellungen für Umfragen',
 	'ACP_PORTAL_POLLS_SETTINGS_EXP'			=> 'Hier kannst du die Einstellungen für Umfragen ändern.',

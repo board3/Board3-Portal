@@ -33,7 +33,7 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	'CLOCK'		=> 'Uhr',
-	
+
 	// ACP
 	'ACP_PORTAL_CLOCK_SETTINGS'		=> 'Uhr Einstellungen',
 	'ACP_PORTAL_CLOCK_SETTINGS_EXP'	=> 'Hier kannst du die Einstellungen für die Uhr ändern',

@@ -46,7 +46,7 @@ class portal_search_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = 'portal_search_module';
-	
+
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"

@@ -46,7 +46,7 @@ class portal_latest_bots_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = 'portal_latest_bots_module';
-	
+
 	/**
 	* hide module name in ACP configuration page
 	*/
@@ -64,7 +64,7 @@ class portal_latest_bots_module
 			AND user_lastvisit > 0
 			ORDER BY user_lastvisit DESC';
 		$result = $db->sql_query_limit($sql, $config['board3_last_visited_bots_number_' . $module_id]);
-		
+
 		$show_module = false;
 
 		while ($row = $db->sql_fetchrow($result))

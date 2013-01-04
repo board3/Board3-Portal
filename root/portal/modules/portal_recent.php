@@ -46,7 +46,7 @@ class portal_recent_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = 'portal_recent_module';
-	
+
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
@@ -64,7 +64,7 @@ class portal_recent_module
 		if ($config['board3_recent_forum_' . $module_id] > 0)
 		{
 			$exclude_forums = explode(',', $config['board3_recent_forum_' . $module_id]);
-			
+
 			$sql_where = ' AND ' . $db->sql_in_set('forum_id', array_map('intval', $exclude_forums), ($config['board3_recent_exclude_forums_' . $module_id]) ? true : false);
 		}
 
@@ -210,14 +210,14 @@ class portal_recent_module
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
 	}
-	
+
 	// Create forum select box
 	public function select_forums($value, $key, $module_id)
 	{
 		global $user, $config;
 
 		$forum_list = make_forum_select(false, false, true, true, true, false, true);
-		
+
 		$selected = array();
 		if(isset($config[$key]) && strlen($config[$key]) > 0)
 		{
@@ -234,18 +234,18 @@ class portal_recent_module
 		return $s_forum_options;
 
 	}
-	
+
 	// Store selected forums
 	public function store_selected_forums($key, $module_id)
 	{
 		global $db, $cache;
-		
+
 		// Get selected extensions
 		$values = request_var($key, array(0 => ''));
-		
+
 		$news = implode(',', $values);
-		
+
 		set_config($key, $news);
-	
+
 	}
 }

@@ -43,7 +43,7 @@ $lang = array_merge($lang, array(
 	'JUMP_NEWEST'			=> 'Jump to newest post',
 	'JUMP_FIRST'			=> 'Jump to first post',
 	'JUMP_TO_POST'			=> 'Jump to post',
-	
+
 	// ACP
 	'ACP_PORTAL_NEWS_SETTINGS'			=> 'News settings',
 	'ACP_PORTAL_NEWS_SETTINGS_EXP'	=> 'This is where you customize the news block.',

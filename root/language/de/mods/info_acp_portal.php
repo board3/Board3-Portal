@@ -37,7 +37,7 @@ $lang = array_merge($lang, array(
 	// Portal Module
 	'ACP_PORTAL_MODULES'			=> 'Portal Module',
 	'ACP_PORTAL_MODULES_EXP'		=> 'Du kannst deine Portal Module hier verwalten. Falls du alle Module deaktivierst, dann deaktiviere bitte auch das Portal.',
-	
+
 	'MODULE_POS_TOP'				=> 'Oben',
 	'MODULE_POS_LEFT'				=> 'Linke Spalte',
 	'MODULE_POS_RIGHT'				=> 'Rechte Spalte',
@@ -57,7 +57,7 @@ $lang = array_merge($lang, array(
 	'DELETE_MODULE_CONFIRM'			=> 'Bist du sicher, dass du das Modul "%1$s" löschen möchtest?',
 	'MODULE_RESET_SUCCESS'			=> 'Modul Einstellungen erfolgreich zurückgesetzt.',
 	'MODULE_RESET_CONFIRM'			=> 'Bist du sicher, dass du die Einstellungen des Moduls "%1$s" zurücksetzen willst?',
-	
+
 	'MODULE_OPTIONS'			=> 'Modul Optionen',
 	'MODULE_NAME'				=> 'Modul Name',
 	'MODULE_NAME_EXP'			=> 'Gebe den Namen ein der für das Modul in der Modul Konfiguration angezeigt werden soll.',
@@ -74,7 +74,7 @@ $lang = array_merge($lang, array(
 	'MODULE_STATUS'				=> 'Aktiviere Modul',
 	'MODULE_ADD_ONCE'			=> 'Diese Modul kann nur ein Mal hinzugefügt werden.',
 	'MODULE_IMAGE_ERROR'		=> 'Während dem Prüfen des Modul Bildes sind ein oder mehrere Fehler aufgetreten:',
-	
+
 	// general
 	'ACP_PORTAL'							=> 'Portal',
 	'ACP_PORTAL_GENERAL_INFO'				=> 'Allgemeine Einstellungen',
@@ -97,7 +97,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_PHPBB_MENU_EXP'					=> 'Den phpBB Header auf dem Portal anzeigen.',
 	'PORTAL_DISPLAY_JUMPBOX'				=> 'Zeige Jumpbox',
 	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Die Jumpbox auf dem Portal anzeigen. Die Jumpbox wird nur angezeigt, wenn sie gleichzeitig in den Board-Funktionalitäten aktiviert ist.',
-	
+
 	'LINK_ADDED'							=> 'Der Link wurde erfolgreich eingetragen',
 	'LINK_UPDATED'							=> 'Der Link wurde erfolgreich geändert',
 	'LOG_PORTAL_LINK_ADDED'					=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Link hinzu gefügt: %s ',
@@ -106,7 +106,7 @@ $lang = array_merge($lang, array(
 	'LOG_PORTAL_EVENT_ADDED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin eingetragen: %s ',
 	'LOG_PORTAL_EVENT_UPDATED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin geändert: %s ',
 	'LOG_PORTAL_EVENT_REMOVED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin gelöscht: %s ',
-	
+
 	// Upload Module
 	'ACP_PORTAL_UPLOAD'				=> 'Modul hochladen',
 	'MODULE_UPLOAD'					=> 'Lade ein Modul hoch',
@@ -124,14 +124,14 @@ $lang = array_merge($lang, array(
 	'PORTAL_MODULE_STATUS'			=> 'Status',
 	'PORTAL_MODULE_SUCCESS'			=> 'Erfolgreich kopiert.',
 	'PORTAL_MODULE_ERROR'			=> 'Datei exisitert schon oder konnte nicht kopiert werden.',
-	
+
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Füge Basismodule hinzu',
 	'PORTAL_BASIC_UNINSTALL'		=> 'Entferne Module von Datenbank',
-	
+
 	// Logs
 	'LOG_PORTAL_CONFIG'			=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; %s',
-	
+
 	/**
 	* A copy of Handyman` s MOD version check, to view it on the gallery overview
 	*/
@@ -144,9 +144,9 @@ $lang = array_merge($lang, array(
 	'RELEASE_ANNOUNCEMENT'	=> 'Ankündigungsthema',
 	'UP_TO_DATE'			=> '%s ist aktuell',
 	'VERSION_CHECK'			=> 'MOD Version Check',
-	
+
 	// Adding the permissions
 	'acl_a_manage_portal'		=> array('lang' => 'Kann Portal-Einstellungen ändern', 'cat' => 'misc'),
 	'acl_u_view_portal'			=> array('lang' => 'Kann das Portal sehen', 'cat' => 'misc'),
-	
+
 ));
