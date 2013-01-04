@@ -103,7 +103,7 @@ $versions = array(
 					'config_name' => array('VCHAR:255', ''),
 					'config_value'=> array('MTEXT', ''),
 				),
-				
+
 				'PRIMARY_KEY'	=> 'config_name',
 			)),
 		),
@@ -124,14 +124,14 @@ $versions = array(
 			array('acp', 'ACP_CAT_DOT_MODS', 'ACP_PORTAL'),
 
 			array('acp', 'ACP_PORTAL', array(
-				
+
 					'module_basename'	=> 'portal',
 					'module_langname'	=> 'ACP_PORTAL_GENERAL_INFO',
 					'module_mode' 		=> 'config',
 					'module_auth'		=> 'acl_a_manage_portal',
 				),
 			),
-			
+
 			array('acp', 'ACP_PORTAL', array(
 					'module_basename'	=> 'portal',
 					'module_langname'	=> 'ACP_PORTAL_MODULES',
@@ -139,7 +139,7 @@ $versions = array(
 					'module_auth'		=> 'acl_a_manage_portal',
 				),
 			),
-			
+
 			array('acp', 'ACP_PORTAL', array(
 					'module_basename'	=> 'portal',
 					'module_langname'	=> 'ACP_PORTAL_UPLOAD',
@@ -159,7 +159,7 @@ $versions = array(
 	'2.0.0' => array(
 		// no changes
 	),
-	
+
 	'2.0.1' => array(
 		// no changes ... purge caches anyways
 		'cache_purge' => array(

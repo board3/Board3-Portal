@@ -50,7 +50,7 @@ class portal_donation_module
 	public function get_template_center($module_id)
 	{
 		global $config, $template;
-		
+
 		$template->assign_var('PAY_ACC_CENTER', $config['board3_pay_acc_' . $module_id]);
 
 		return 'donation_center.html';

@@ -33,7 +33,7 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	'PORTAL_WELCOME'		=> 'Willkommen',
-	
+
 	// ACP
 	'ACP_PORTAL_WELCOME_SETTINGS'			=> 'Einstellungen für die Willkommens-Nachricht',
 	'ACP_PORTAL_WELCOME_MESSAGE_SHORT'		=> 'Die eingegebene Nachricht ist nicht lang genug.',

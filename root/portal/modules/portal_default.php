@@ -46,13 +46,13 @@ class portal_modulename_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = '';
-	
+
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
 	*/
 	public $custom_acp_tpl = '';
-	
+
 	/**
 	* hide module name in ACP configuration page
 	*/

@@ -50,7 +50,7 @@ class portal_leaders_module
 	public function get_template_side($module_id)
 	{
 		global $config, $template, $user, $auth, $db, $phpEx, $phpbb_root_path;
-		
+
 		// Display a listing of board admins, moderators
 		$user->add_lang('groups');
 
@@ -164,7 +164,7 @@ class portal_leaders_module
 			));
 
 			$result = $db->sql_query($sql);
-			
+
 			while ($row = $db->sql_fetchrow($result))
 			{
 				if ($row['group_name'] == 'ADMINISTRATORS')

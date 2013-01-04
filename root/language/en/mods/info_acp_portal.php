@@ -36,7 +36,7 @@ $lang = array_merge($lang, array(
 	// Portal Modules
 	'ACP_PORTAL_MODULES'			=> 'Portal Modules',
 	'ACP_PORTAL_MODULES_EXP'		=> 'You can manage your portal modules here. If you turn off all modules, please also disable the Portal.',
-	
+
 	'MODULE_POS_TOP'				=> 'Top',
 	'MODULE_POS_LEFT'				=> 'Left column',
 	'MODULE_POS_RIGHT'				=> 'Right column',
@@ -57,7 +57,7 @@ $lang = array_merge($lang, array(
 	'MODULE_RESET_SUCCESS'			=> 'Successfully reset the module settings.',
 	'MODULE_RESET_CONFIRM'			=> 'Are you sure you wish to reset the settings of the module "%1$s"?',
 	'MODULE_NOT_EXISTS'				=> 'The selected module does not exist.',
-	
+
 	'MODULE_OPTIONS'			=> 'Module options',
 	'MODULE_NAME'				=> 'Module name',
 	'MODULE_NAME_EXP'			=> 'Enter the name of the Module that should be displayed in the Module configuration.',
@@ -97,7 +97,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEFT_COLUMN_WIDTH_EXP'			=> 'Change the width of the left column in pixels; recommended value is 180',
 	'PORTAL_RIGHT_COLUMN_WIDTH'				=> 'Width of the right column',
 	'PORTAL_RIGHT_COLUMN_WIDTH_EXP'			=> 'Change the width of the right column in pixels; recommended value is 180',
-	
+
 	'LINK_ADDED'							=> 'The link has been successfully added',
 	'LINK_UPDATED'							=> 'The link has been successfully updated',
 	'LOG_PORTAL_LINK_ADDED'					=> '<strong>Altered Portal settings</strong><br />&raquo; Link added: %s ',
@@ -124,14 +124,14 @@ $lang = array_merge($lang, array(
 	'PORTAL_MODULE_STATUS'			=> 'Status',
 	'PORTAL_MODULE_SUCCESS'			=> 'Success',
 	'PORTAL_MODULE_ERROR'			=> 'Error',
-	
+
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Adding basic set of modules',
 	'PORTAL_BASIC_UNINSTALL'		=> 'Removing modules from database',
-	
+
 	// Logs
 	'LOG_PORTAL_CONFIG'			=> '<strong>Altered Portal settings</strong><br />&raquo; %s',
-	
+
 	/**
 	* A copy of Handyman` s MOD version check, to view it on the portal overview
 	*/
@@ -144,7 +144,7 @@ $lang = array_merge($lang, array(
 	'RELEASE_ANNOUNCEMENT'	=> 'Annoucement Topic',
 	'UP_TO_DATE'			=> '%s is up to date',
 	'VERSION_CHECK'			=> 'MOD Version Check',
-	
+
 	// Adding the permissions
 	'acl_a_manage_portal'		=> array('lang' => 'Can alter Portal settings', 'cat' => 'misc'),
 	'acl_u_view_portal'			=> array('lang' => 'Can view the Portal', 'cat' => 'misc'),
