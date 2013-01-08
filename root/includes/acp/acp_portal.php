@@ -360,8 +360,8 @@ class acp_portal
 				$module_id = request_var('module_id', '');
 
 				// Create an array of already installed modules
-				$portal_modules = obtain_portal_modules(); 
-				$installed_modules = $module_column = array(); 
+				$portal_modules = obtain_portal_modules();
+				$installed_modules = $module_column = array();
 
 				foreach($portal_modules as $cur_module) 
 				{ 

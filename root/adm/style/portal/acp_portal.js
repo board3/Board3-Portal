@@ -107,8 +107,8 @@ function bbfontstyle(bbopen, bbclose)
 	// IE
 	else if (document.selection)
 	{
-		var range = textarea.createTextRange(); 
-		range.move("character", new_pos); 
+		var range = textarea.createTextRange();
+		range.move("character", new_pos);
 		range.select();
 		storeCaret(textarea);
 	}
