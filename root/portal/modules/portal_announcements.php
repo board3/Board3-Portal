@@ -293,7 +293,7 @@ class portal_announcements_module
 				$forum_id = $fetch_news[$i]['forum_id'];
 				$topic_id = $fetch_news[$i]['topic_id'];
 				$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
-				$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false; 
+				$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 				$open_bracket = '[ ';
 				$close_bracket = ' ]';
 				$read_full = $user->lang['BACK'];

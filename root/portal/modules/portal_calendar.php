@@ -142,7 +142,7 @@ class portal_calendar_module
 
 				$template->assign_block_vars('minical.mini_cal_row.mini_cal_days', array(
 					'MINI_CAL_DAY'		=> ($mini_cal_count == 0) ? '<span style="color: ' . $config['board3_calendar_sunday_color_' . $module_id] . ';">' . $mini_cal_day . '</span>' : $mini_cal_day)
-				); 
+				);
 				$i++;
 			} 
 			// no day
@@ -150,7 +150,7 @@ class portal_calendar_module
 			{
 				$template->assign_block_vars('minical.mini_cal_row.mini_cal_days', array(
 					'MINI_CAL_DAY'		=> ' ')
-				); 
+				);
 			}
 
 			// is this the last day of the week?
