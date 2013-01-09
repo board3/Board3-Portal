@@ -7,17 +7,17 @@
 *
 */
 
-class phpbb_ext_board3_portal_controller_main extends phpbb_extension_controller
+class phpbb_ext_board3_portal_controller_main
 {
 	/**
 	* Auth object
-	* @var phpbb_aut
+	* @var phpbb_auth
 	*/
 	private $auth;
 
 	/**
 	* phpBB Config object
-	* @var phpbb_config
+	* @var phpbb_config_db
 	*/
 	private $config;
 
@@ -56,7 +56,7 @@ class phpbb_ext_board3_portal_controller_main extends phpbb_extension_controller
 	* NOTE: The parameters of this method must match in order and type with
 	* the dependencies defined in the services.yml file for this service.
 	* @param phpbb_auth $auth Auth object
-	* @param phpbb_config $config phpBB Config object
+	* @param phpbb_config_db $config phpBB Config object
 	* @param phpbb_template $template Template object
 	* @param phpbb_user $user User object
 	* @param string $phpbb_root_path phpBB root path
@@ -111,7 +111,7 @@ class phpbb_ext_board3_portal_controller_main extends phpbb_extension_controller
 	{
 		if (!isset($this->config['board3_enable']) || !$this->config['board3_enable'] || !$this->auth->acl_get('u_view_portal'))
 		{
-			redirect(append_sid($this->phpbb_root_path . 'index.' . $this->php_ext));
+			redirect(append_sid($this->phpbb_root_path . 'index' . $this->php_ext));
 		}
 	}
 
