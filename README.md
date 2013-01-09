@@ -139,7 +139,8 @@ and finally:
 ```sql
 INSERT INTO `phpbb_acl_options` (`auth_option`, `is_global`, `is_local`, `founder_only`) VALUES
 ('u_view_portal', 1, 0, 0),
-('a_manage_portal', 1, 0, 0);```
+('a_manage_portal', 1, 0, 0);
+```
 
 ##Support
 
