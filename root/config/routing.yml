@@ -1,0 +1,8 @@
+board3_controller:
+    pattern: /portal
+    defaults: { _controller: board3.portal.main:handle }
+
+# This is currently not supported yet
+board3_pages_controller:
+    pattern: /portal/{page}
+    defaults: { _controller: board3.portal.main:handle_page, page: "portal" }
