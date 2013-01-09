@@ -81,7 +81,7 @@ class portal_announcements_module
 
 				$time = ($config['board3_announcements_day_' . $module_id] == 0) ? 0 : $config['board3_announcements_day_' . $module_id];
 				$post_time = ($time == 0) ? '' : 'AND topic_time > ' . (time() - $time * 86400);
-				
+
 				$str_where = '';
 
 				if($permissions == true)
@@ -92,7 +92,7 @@ class portal_announcements_module
 				{
 					$disallow_access = array();
 				}
-				
+
 				if($config['board3_announcements_forum_exclude_' . $module_id] == true)
 				{
 					$disallow_access = array_merge($disallow_access, $forum_from);
@@ -142,7 +142,7 @@ class portal_announcements_module
 					$total_announcements = (int) $db->sql_fetchfield('num_topics');
 					$db->sql_freeresult($result);
 			}
-			
+
 			$topic_tracking_info = (get_portal_tracking_info($fetch_news));
 
 			if($announcement < 0)
@@ -280,7 +280,7 @@ class portal_announcements_module
 			// Show "read full" page
 			{ 
 				$i = $announcement;
-				
+
 				/** 
 				* redirect to portal page if the specified announcement does not exist
 				* force #top anchor in order to get rid of the #a anchor
@@ -293,7 +293,7 @@ class portal_announcements_module
 				$forum_id = $fetch_news[$i]['forum_id'];
 				$topic_id = $fetch_news[$i]['topic_id'];
 				$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
-				$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false; 
+				$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 				$open_bracket = '[ ';
 				$close_bracket = ' ]';
 				$read_full = $user->lang['BACK'];
@@ -305,7 +305,7 @@ class portal_announcements_module
 				{
 					$pagination = generate_portal_pagination(append_sid("{$phpbb_root_path}portal.$phpEx"), $total_announcements, $config['board3_number_of_announcements_' . $module_id], $start, 'announcements');
 				}	
-				
+
 				$template->assign_block_vars('announcements_center_row', array(
 					'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
 					'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
@@ -409,7 +409,7 @@ class portal_announcements_module
 		set_config('board3_announcements_archive_' . $module_id, 1);
 		set_config('board3_announcements_permissions_' . $module_id, 1);
 		set_config('board3_show_announcements_replies_views_' . $module_id, 1);
-		
+
 		return true;
 	}
 
@@ -432,14 +432,14 @@ class portal_announcements_module
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
 	}
-	
+
 	// Create forum select box
 	public function select_forums($value, $key, $module_id)
 	{
 		global $user, $config;
 
 		$forum_list = make_forum_select(false, false, true, true, true, false, true);
-		
+
 		$selected = array();
 		if(isset($config[$key]) && strlen($config[$key]) > 0)
 		{
@@ -456,18 +456,15 @@ class portal_announcements_module
 		return $s_forum_options;
 
 	}
-	
+
 	// Store selected forums
 	public function store_selected_forums($key, $module_id)
 	{
 		global $db, $cache;
-		
+
 		// Get selected forums
 		$values = request_var($key, array(0 => ''));
-		
 		$news = implode(',', $values);
-		
 		set_config($key, $news);
-	
 	}
 }

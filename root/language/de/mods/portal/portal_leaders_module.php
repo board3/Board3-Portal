@@ -36,7 +36,7 @@ $lang = array_merge($lang, array(
 	'NO_MODERATORS_P'		=> 'Keine Moderatoren',
 	'NO_GROUPS_P'			=> 'Keine Gruppen',
 	'ACP_PORTAL_LEADERS'	=> 'Das Team',
-	
+
 	// ACP
 	'ACP_PORTAL_LEADERS'		=> 'Team Block Einstellungen',
 	'ACP_PORTAL_LEADERS_EXP'	=> 'Hier kannst Du den Team-Block anpassen',

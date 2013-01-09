@@ -36,7 +36,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_RECENT_TOPIC'		=> 'Aktuelle Themen',
 	'PORTAL_RECENT_ANN'			=> 'Aktuelle Bekanntmachungen',
 	'PORTAL_RECENT_HOT_TOPIC'	=> 'Beliebte Themen',
-	
+
 	// ACP
 	'ACP_PORTAL_RECENT_SETTINGS'				=> 'Einstellungen für neueste Themen',
 	'ACP_PORTAL_RECENT_SETTINGS_EXP'			=> 'Hier kannst du die Einstellungen für die neuesten Themen ändern.',

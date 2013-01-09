@@ -46,7 +46,7 @@ class portal_custom_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = 'portal_custom_module';
-	
+
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
@@ -74,7 +74,7 @@ class portal_custom_module
 		{
 			$assign_code = htmlspecialchars_decode($portal_config['board3_custom_' . $module_id . '_code'], ENT_QUOTES);
 		}
-		
+
 		$title = (!empty($config['board3_custom_' . $module_id . '_title'])) ? ((isset($user->lang[$config['board3_custom_' . $module_id . '_title']])) ? $user->lang[$config['board3_custom_' . $module_id . '_title']] : $config['board3_custom_' . $module_id . '_title']) : $user->lang[$this->name];
 
 		if(!empty($assign_code))
@@ -109,7 +109,7 @@ class portal_custom_module
 		{
 			$assign_code = htmlspecialchars_decode($portal_config['board3_custom_' . $module_id . '_code'], ENT_QUOTES);
 		}
-		
+
 		$title = (!empty($config['board3_custom_' . $module_id . '_title'])) ? ((isset($user->lang[$config['board3_custom_' . $module_id . '_title']])) ? $user->lang[$config['board3_custom_' . $module_id . '_title']] : $config['board3_custom_' . $module_id . '_title']) : $user->lang[$this->name];
 
 		if(!empty($assign_code))
@@ -159,7 +159,7 @@ class portal_custom_module
 		);
 		$sql = 'DELETE FROM ' . PORTAL_CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
-			
+
 		$check = $db->sql_query($sql);
 
 		$del_config = array(
@@ -174,19 +174,19 @@ class portal_custom_module
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return ((!$check) ? $check : $db->sql_query($sql)); // if something went wrong, make sure we are aware of the first query
 	}
-	
+
 	public function manage_custom($value, $key, $module_id)
 	{
 		global $db, $portal_config, $config, $template, $user, $phpEx, $phpbb_admin_path, $phpbb_root_path;
-		
+
 		$action = (isset($_POST['reset'])) ? 'reset' : '';
 		$action = (isset($_POST['submit'])) ? 'save' : $action;
 		$action = (isset($_POST['preview'])) ? 'preview' : $action;
-		
+
 		$portal_config = obtain_portal_config();
 
 		$u_action = append_sid($phpbb_admin_path . 'index.' . $phpEx, 'i=portal&amp;mode=config&amp;module_id=' . $module_id);
-		
+
 		switch($action)
 		{
 			// Save changes
@@ -208,14 +208,13 @@ class portal_custom_module
 				{
 					generate_text_for_storage($custom_code, $uid, $bitfield, $flags, true, true, true);
 				}
-				
-				
+
 				// first check for obvious errors, we don't want to waste server resources
 				if(empty($custom_code))
 				{
 					trigger_error($user->lang['ACP_PORTAL_CUSTOM_CODE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
 				}
-				
+
 				// get groups and check if the selected groups actually exist
 				$sql = 'SELECT group_id
 						FROM ' . GROUPS_TABLE . '
@@ -226,12 +225,12 @@ class portal_custom_module
 					$groups_ary[] = $row['group_id'];
 				}
 				$db->sql_freeresult($result);
-				
+
 				$custom_permission = array_intersect($custom_permission, $groups_ary);
 				$custom_permission = implode(',', $custom_permission);
 
 				add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['PORTAL_CUSTOM'] . '&nbsp;-&nbsp;' . $config['board3_custom_' . $module_id . '_title']);
-				
+
 				// set_portal_config will take care of escaping the welcome message
 				set_portal_config('board3_custom_' . $module_id . '_code', $custom_code);
 				set_config('board3_custom_' . $module_id . '_bbcode', $custom_bbcode);
@@ -244,7 +243,7 @@ class portal_custom_module
 				//trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&mode=modules') : $u_action));
 
 			break;
-			
+
 			case 'preview':
 				$custom_code = $text = utf8_normalize_nfc(request_var('custom_code', '', true));
 				$custom_bbcode = request_var('custom_use_bbcode', 1); // default to BBCode
@@ -252,13 +251,13 @@ class portal_custom_module
 				$custom_title = utf8_normalize_nfc(request_var('module_name', ''));
 				$custom_image_src = utf8_normalize_nfc(request_var('module_image', ''));
 				$groups_ary = array();
-				
+
 				// first check for obvious errors, we don't want to waste server resources
 				if(empty($custom_code))
 				{
 					trigger_error($user->lang['ACP_PORTAL_CUSTOM_CODE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
 				}
-				
+
 				if (!class_exists('parse_message'))
 				{
 					include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
@@ -270,19 +269,19 @@ class portal_custom_module
 					$bitfield = (isset($config['board3_custom_' . $module_id . '_bitfield'])) ? $config['board3_custom_' . $module_id . '_bitfield'] : '';
 					$options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
 					generate_text_for_storage($text, $uid, $bitfield, $options, true, true, true);
-					
+
 					$text = generate_text_for_display($text, $uid, $bitfield, $options);
 				}
 				else
 				{
 					$text = htmlspecialchars_decode($text, ENT_QUOTES);
 				}
-				
+
 				$template->assign_vars(array(
 					'PREVIEW_TEXT'		=> $text,
 					'S_PREVIEW'			=> true,
 				));
-				
+
 				// get groups and check if the selected groups actually exist
 				$sql = 'SELECT group_id
 						FROM ' . GROUPS_TABLE . '
@@ -293,7 +292,7 @@ class portal_custom_module
 					$groups_ary[] = $row['group_id'];
 				}
 				$db->sql_freeresult($result);
-				
+
 				$temp_permissions = array_intersect($custom_permission, $groups_ary);
 
 			// Edit or add menu item
@@ -317,9 +316,9 @@ class portal_custom_module
 					'S_BBCODE_ALLOWED'		=> true,
 					'MAX_FONT_SIZE'			=> (int) $config['max_post_font_size'],
 				));
-				
+
 				$groups_ary = (isset($temp_permissions)) ? $temp_permissions : ((isset($config['board3_custom_' . $module_id . '_permission'])) ? explode(',', $config['board3_custom_' . $module_id . '_permission']) : array());
-				
+
 				// get group info from database and assign the block vars
 				$sql = 'SELECT group_id, group_name 
 						FROM ' . GROUPS_TABLE . '
@@ -334,12 +333,12 @@ class portal_custom_module
 					));
 				}
 				$db->sql_freeresult($result);
-				
+
 				if(!function_exists('display_forums'))
 				{
 					include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 				}
-				
+
 				// Build custom bbcodes array
 				display_custom_bbcodes();
 				$user->add_lang('posting');
@@ -347,7 +346,7 @@ class portal_custom_module
 			break;		
 		}
 	}
-	
+
 	public function update_custom($key, $module_id)
 	{
 		$this->manage_custom('', $key, $module_id);

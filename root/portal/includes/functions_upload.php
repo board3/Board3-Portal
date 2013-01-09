@@ -22,7 +22,7 @@ class portal_upload
 	*/
 	private $upload_path;
 	private $u_action;
-	
+
 	/*
 	* constructor function
 	*/
@@ -37,7 +37,7 @@ class portal_upload
 			$this->upload_file();
 		}
 	}
-	
+
 	/**
 	* upload module zip
 	*/
@@ -50,7 +50,7 @@ class portal_upload
 		$upload = new fileupload();
 		// Only allow ZIP files
 		$upload->set_allowed_extensions(array('zip'));
-		
+
 		$file = $upload->form_upload('modupload');
 
 		// this is for module zips so don't allow anything else
@@ -64,7 +64,7 @@ class portal_upload
 			{
 				$file->clean_filename('real');
 				$file->move_file(str_replace($phpbb_root_path, '', $this->upload_path), true, true);
-				
+
 				if (!sizeof($file->error))
 				{
 					include($phpbb_root_path . 'includes/functions_compress.' . $phpEx);
@@ -86,7 +86,7 @@ class portal_upload
 						// We need to move that directory then
 						$this->directory_move($mod_dir . '_tmp/' . $folder_contents[0], $this->upload_path . $folder_contents[0]);
 						$new_mod_dir = $this->upload_path . $folder_contents[0];
-						
+
 					}
 					else if (!is_dir($mod_dir))
 					{
@@ -96,24 +96,24 @@ class portal_upload
 					}
 
 					$this->directory_delete($mod_dir . '_tmp/');
-					
+
 					// make sure we set $mod_dir to the correct folder after the above step
 					$mod_dir = (isset($new_mod_dir)) ? $new_mod_dir : $mod_dir;
-					
+
 					// if we got until here set $actions['NEW_FILES']
 					$actions['NEW_FILES'] = array();
-					
+
 					// Now we need to get the files inside the folders
 					//$folder_contents = $this->cut_folder(scandir($mod_dir));
 					$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($mod_dir, FilesystemIterator::SKIP_DOTS)); // requires PHP 5
-					
+
 					foreach($iterator as $cur_file)
 					{
 						$cur_path = $cur_file->getPathname();
 						$cur_path = str_replace('\\', '/', $cur_path); // we want unix-like paths
 						$cur_path = str_replace($mod_dir . '/', '', $cur_path);
 						$cut_pos = strpos($cur_path, '/');
-						
+
 						// Only allow files in adm, language, portal and styles folder and a license.txt
 						if(!in_array(substr($cur_path, 0, $cut_pos), array('adm', 'language', 'portal', 'styles')) && $cur_file->getFilename() != 'license.txt')
 						{
@@ -154,7 +154,7 @@ class portal_upload
 								'TARGET'			=> $target,
 							));
 						}
-						
+
 						$template->assign_vars(array(
 							'S_MOD_SUCCESSBOX'	=> true,
 							'MESSAGE'			=> $user->lang['MODULE_UPLOADED'],
@@ -170,10 +170,10 @@ class portal_upload
 			{
 				trigger_error((sizeof($file->error) ? implode('<br />', $file->error) : $user->lang['MOD_UPLOAD_INIT_FAIL']) . adm_back_link($this->u_action), E_USER_WARNING);
 			}
-			
+
 			$this->tpl_name = 'portal/acp_portal_upload_module';
 			$this->page_title = $user->lang['ACP_PORTAL_UPLOAD'];
-			
+
 			$template->assign_vars(array(
 			'L_TITLE'			=> $user->lang['ACP_PORTAL_UPLOAD'],
 			'L_TITLE_EXPLAIN'	=> '',
@@ -185,7 +185,7 @@ class portal_upload
 		));
 		}
 	}
-	
+
 	/**
 	* Cuts the unneeded '.' and '..' from the folder content info scandir returns
 	*
@@ -195,19 +195,19 @@ class portal_upload
 	{
 		$cut_array = array('.', '..');
 		$folder_content = array_diff($folder_content, $cut_array);
-		
+
 		return $folder_content;
 	}
 
 	private function directory_move($src, $dest)
 	{
 		$src_contents = scandir($src);
-		
+
 		if (!is_dir($dest) && is_dir($src))
 		{
 			mkdir($dest . '/', 0755);
 		}
-		
+
 		foreach ($src_contents as $src_entry)
 		{
 			if ($src_entry != '.' && $src_entry != '..')
@@ -224,26 +224,26 @@ class portal_upload
 			}
 		}
 	}
-	
+
 	/**
 	* the following functions are from the AutoMOD package
 	* @copyright (c) 2008 phpBB Group
 	* @license http://opensource.org/licenses/gpl-2.0.php GNU Public License
 	*/
-	
+
 	private function directory_delete($dir)
 	{
 		if (!file_exists($dir))
 		{
 			return true;
 		}
-		
+
 		if (!is_dir($dir) && is_file($dir))
 		{
 			phpbb_chmod($dir, CHMOD_ALL);
 			return unlink($dir);
 		}
-		
+
         foreach (scandir($dir) as $item)
 		{ 
             if ($item == '.' || $item == '..')
@@ -259,10 +259,10 @@ class portal_upload
 				}
             }
         }
-		
+
 		return @rmdir($dir);
 	}
-	
+
 	/**
 	* Moves files or complete directories
 	*
@@ -297,7 +297,7 @@ class portal_upload
 				return sprintf($user->lang['MODULE_UPLOAD_MKDIR_FAILURE'], $dirname_check);
 			}
 		}
-		
+
 		// leave a backup file if it already exists
 		if(file_exists($to))
 		{
@@ -319,7 +319,7 @@ class portal_upload
 
 		return true;
 	}
-	
+
 	/**
 	* @author Michal Nazarewicz (from the php manual)
 	* Creates all non-existant directories in a path

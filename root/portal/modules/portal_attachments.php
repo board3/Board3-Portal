@@ -65,7 +65,7 @@ class portal_attachments_module
 		{
 			$attach_forums_config = (strpos($config['board3_attachments_forum_ids_' . $module_id], ',') !== false) ? explode(',', $config['board3_attachments_forum_ids_' . $module_id]) : array($config['board3_attachments_forum_ids_' . $module_id]);
 			$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
-			
+
 			if($config['board3_attachments_forum_exclude_' . $module_id])
 			{
 				$forum_list = array_unique(array_diff($forum_list, $attach_forums_config));
@@ -167,7 +167,7 @@ class portal_attachments_module
 		{
 			$attach_forums_config = (strpos($config['board3_attachments_forum_ids_' . $module_id], ',') !== false) ? explode(',', $config['board3_attachments_forum_ids_' . $module_id]) : array($config['board3_attachments_forum_ids_' . $module_id]);
 			$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
-			
+
 			if($config['board3_attachments_forum_exclude_' . $module_id])
 			{
 				$forum_list = array_unique(array_diff($forum_list, $attach_forums_config));
@@ -297,29 +297,29 @@ class portal_attachments_module
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
 	}
-	
+
 	// Create select box for attachment filetype
 	public function select_filetype($value, $key, $module_id)
 	{
 		global $db, $user, $config;
-		
+
 		// Get extensions
 		$sql = 'SELECT *
 			FROM ' . EXTENSIONS_TABLE . '
 			ORDER BY extension ASC';
 		$result = $db->sql_query($sql);
-		
+
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$extensions[] = $row;
 		}
-		
+
 		$selected = array();
 		if(isset($config['board3_attachments_filetype_' . $module_id]) && strlen($config['board3_attachments_filetype_' . $module_id]) > 0)
 		{
 			$selected = explode(',', $config['board3_attachments_filetype_' . $module_id]);
 		}
-		
+
 		// Build options
 		$ext_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
 		foreach ($extensions as $id => $ext)
@@ -327,31 +327,31 @@ class portal_attachments_module
 			$ext_options .= '<option value="' . $ext['extension'] . '"' . ((in_array($ext['extension'], $selected)) ? ' selected="selected"' : '') . '>' . $ext['extension'] . '</option>';
 		}
 		$ext_options .= '</select>';
-		
+
 		return $ext_options;
 	}
-	
+
 	// Store selected filetypes
 	public function store_filetypes($key, $module_id)
 	{
 		global $db, $cache;
-		
+
 		// Get selected extensions
 		$values = request_var($key, array(0 => ''));
-		
+
 		$filetypes = implode(',', $values);
-		
+
 		set_config('board3_attachments_filetype_' . $module_id, $filetypes);
 
 	}
-	
+
 	// Create forum select box
 	public function select_forums($value, $key)
 	{
 		global $user, $config;
 
 		$forum_list = make_forum_select(false, false, true, true, true, false, true);
-		
+
 		$selected = array();
 		if(isset($config[$key]) && strlen($config[$key]) > 0)
 		{
@@ -368,18 +368,15 @@ class portal_attachments_module
 		return $s_forum_options;
 
 	}
-	
+
 	// Store selected forums
 	public function store_selected_forums($key)
 	{
 		global $db, $cache;
-		
+
 		// Get selected extensions
 		$values = request_var($key, array(0 => ''));
-		
 		$news = implode(',', $values);
-		
 		set_config($key, $news);
-	
 	}
 }

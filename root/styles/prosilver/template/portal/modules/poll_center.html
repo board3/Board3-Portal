@@ -7,7 +7,7 @@
 				<div class="content">
 					<h2>{poll.POLL_QUESTION}</h2>
 					<p class="author">{poll.L_POLL_LENGTH}<!-- IF poll.S_CAN_VOTE and poll.L_POLL_LENGTH --><br /><!-- ENDIF --><!-- IF poll.S_CAN_VOTE -->{poll.L_MAX_VOTES}<!-- ENDIF --></p>
-		
+
 					<fieldset class="polls">
 					<!-- IF poll.S_POLL_HAS_OPTIONS -->
 					<!-- BEGIN poll_option -->
@@ -21,28 +21,28 @@
 					<!-- ELSE -->
 						{L_NO_OPTIONS}
 					<!-- ENDIF -->
-		
+
 					<!-- IF poll.S_DISPLAY_RESULTS -->
 						<dl>
 							<dt>&nbsp;</dt>
 							<dd class="resultbar"><p style="font-size:1.0em;">{L_TOTAL_VOTES} : {poll.TOTAL_VOTES}</p></dd>
 						</dl>
 					<!-- ENDIF -->
-		
+
 					<!-- IF poll.S_CAN_VOTE -->
 						<dl style="border-top: none;">
 							<dt>&nbsp;</dt>
 							<dd class="resultbar"><input type="submit" name="update" value="{L_SUBMIT_VOTE}" class="button1" /></dd>
 						</dl>
 					<!-- ENDIF -->
-		
+
 					<!-- IF not poll.S_DISPLAY_RESULTS -->
 						<dl style="border-top: none;">
 							<dt>&nbsp;</dt>
 							<dd class="resultbar"><p style="font-size:1.0em;"><a href="{poll.U_VIEW_RESULTS}">{L_VIEW_RESULTS}</a></p></dd>
 						</dl>
 					<!-- ENDIF -->
-		
+
 						<dl style="border-top: none;">
 							<dt>&nbsp;</dt>
 							<dd class="resultbar"><p style="font-size:1.0em;"><a href="{poll.U_VIEW_TOPIC}">{L_VIEW_TOPIC}</a></p></dd>

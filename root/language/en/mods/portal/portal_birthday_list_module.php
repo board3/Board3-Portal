@@ -34,7 +34,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'BIRTHDAYS_AHEAD'              => 'In the next %s days',
 	'NO_BIRTHDAYS_AHEAD'        => 'No members have a birthday within this period of time.',
-	
+
 	// ACP
 	'ACP_PORTAL_BIRTHDAYS_SETTINGS'			=> 'Birthdays Settings',
 	'ACP_PORTAL_BIRTHDAYS_SETTINGS_EXP'	=> 'This is where you customize the birthday block.',

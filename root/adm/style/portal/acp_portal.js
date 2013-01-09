@@ -89,7 +89,7 @@ function bbfontstyle(bbopen, bbclose)
 		theSelection = '';
 		return;
 	}
-	
+
 	//The new position for the cursor after adding the bbcode
 	var caret_pos = getCaretPosition(textarea).start;
 	var new_pos = caret_pos + bbopen.length;		
@@ -107,8 +107,8 @@ function bbfontstyle(bbopen, bbclose)
 	// IE
 	else if (document.selection)
 	{
-		var range = textarea.createTextRange(); 
-		range.move("character", new_pos); 
+		var range = textarea.createTextRange();
+		range.move("character", new_pos);
 		range.select();
 		storeCaret(textarea);
 	}
@@ -123,7 +123,7 @@ function bbfontstyle(bbopen, bbclose)
 function insert_text(text, spaces, popup)
 {
 	var textarea;
-	
+
 	if (!popup) 
 	{
 		textarea = document.getElementById(text_name);
@@ -136,7 +136,7 @@ function insert_text(text, spaces, popup)
 	{
 		text = ' ' + text + ' ';
 	}
-	
+
 	if (!isNaN(textarea.selectionStart))
 	{
 		var sel_start = textarea.selectionStart;
@@ -270,7 +270,7 @@ function split_lines(text)
 			do
 			{
 				var splitAt = line.indexOf(' ', 80);
-				
+
 				if (splitAt == -1)
 				{
 					splitLines[j] = line;
@@ -358,7 +358,7 @@ function colorPalette(dir, width, height)
 			{
 				document.writeln('<tr>');
 			}
-			
+
 			for (b = 0; b < 5; b++)
 			{
 				color = String(numberList[r]) + String(numberList[g]) + String(numberList[b]);
@@ -398,7 +398,7 @@ function caretPosition()
 function getCaretPosition(txtarea)
 {
 	var caretPos = new caretPosition();
-	
+
 	// simple Gecko/Opera way
 	if(txtarea.selectionStart || txtarea.selectionStart == 0)
 	{
@@ -408,23 +408,23 @@ function getCaretPosition(txtarea)
 	// dirty and slow IE way
 	else if(document.selection)
 	{
-	
+
 		// get current selection
 		var range = document.selection.createRange();
 
 		// a new selection of the whole textarea
 		var range_all = document.body.createTextRange();
 		range_all.moveToElementText(txtarea);
-		
+
 		// calculate selection start point by moving beginning of range_all to beginning of range
 		var sel_start;
 		for (sel_start = 0; range_all.compareEndPoints('StartToStart', range) < 0; sel_start++)
 		{		
 			range_all.moveStart('character', 1);
 		}
-	
+
 		txtarea.sel_start = sel_start;
-	
+
 		// we ignore the end value for IE, this is already dirty enough and we don't need it
 		caretPos.start = txtarea.sel_start;
 		caretPos.end = txtarea.sel_start;			

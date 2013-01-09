@@ -55,7 +55,7 @@ $lang = array_merge($lang, array(
 	'EUR'						=> 'Euros (EUR)',
 	'MXN'						=> 'Mexican Pesos (MXN)',
 	'ILS'						=> 'Israeli New Shekels (ILS)',
-	
+
 	// ACP
 	'ACP_PORTAL_PAYPAL_SETTINGS'			=> 'Paypal settings',
 	'ACP_PORTAL_PAYPAL_SETTINGS_EXP'		=> 'This is where you customize the Paypal block.',
