@@ -1,21 +1,85 @@
 <?php
+/**
+*
+* @package Board3 Portal 2.1
+* @copyright (c) Board3 Group ( www.board3.de )
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+*/
 
-class phpbb_ext_board3_portal_controller extends phpbb_extension_controller
+class phpbb_ext_board3_portal_controller_main extends phpbb_extension_controller
 {
-	// extension root path
-	private $root_path = '';
-	
+	/**
+	* Auth object
+	* @var phpbb_aut
+	*/
+	private $auth;
+
+	/**
+	* phpBB Config object
+	* @var phpbb_config
+	*/
+	private $config;
+
+	/**
+	* Template object
+	* @var phpbb_template
+	*/
+	private $template;
+
+	/**
+	* User object
+	* @var phpbb_user
+	*/
+	private $user;
+
+	/**
+	* phpBB root path
+	* @var string
+	*/
+	private $phpbb_root_path;
+
+	/**
+	* PHP file extension
+	* @var string
+	*/
+	private $php_ext;
+
+	/**
+	* Portal root path
+	* @var string
+	*/
+	private $root_path;
+
+	/**
+	* Constructor
+	* NOTE: The parameters of this method must match in order and type with
+	* the dependencies defined in the services.yml file for this service.
+	* @param phpbb_auth $auth Auth object
+	* @param phpbb_config $config phpBB Config object
+	* @param phpbb_template $template Template object
+	* @param phpbb_user $user User object
+	* @param string $phpbb_root_path phpBB root path
+	* @param string $php_ext PHP file extension
+	*/
+	public function __construct($auth, $config, $template, $user, $phpbb_root_path, $php_ext)
+	{
+		$this->auth = $auth;
+		$this->config = $config;
+		$this->template = $template;
+		$this->user = $user;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->php_ext = $php_ext;
+		$this->root_path = $phpbb_root_path . '/ext/board3/portal/portal/';
+	}
+
     /**
     * Extension front handler method. This is called automatically when your extension is accessed 
     * through index.php?ext=example/foobar
     * @return null
     */
     public function handle()
-    {
-		global $phpbb_root_path, $phpEx;
-
-		$this->root_path = $phpbb_root_path . '/ext/board3/portal/portal/';
-		
+    {	
 		$this->check_permission();
         // We defined the phpBB objects in __construct() and can use them in the rest of our class like this
         //echo 'Welcome, ' . $this->user->data['username'];
@@ -45,11 +109,9 @@ class phpbb_ext_board3_portal_controller extends phpbb_extension_controller
 	// check if user should be able to access this page
 	private function check_permission()
 	{
-		global $config, $auth, $phpbb_root_path, $phpEx;
-		
-		if (!isset($config['board3_enable']) || !$config['board3_enable'] || !$auth->acl_get('u_view_portal'))
+		if (!isset($this->config['board3_enable']) || !$this->config['board3_enable'] || !$this->auth->acl_get('u_view_portal'))
 		{
-			redirect(append_sid($phpbb_root_path . 'index.' . $phpEx));
+			redirect(append_sid($this->phpbb_root_path . 'index.' . $this->php_ext));
 		}
 	}
 
@@ -60,8 +122,6 @@ class phpbb_ext_board3_portal_controller extends phpbb_extension_controller
 	*/
 	private function display_modules()
 	{
-		global $template, $phpbb_root_path;
-
 		/**
 		* get initial data
 		*/
@@ -94,7 +154,7 @@ class phpbb_ext_board3_portal_controller extends phpbb_extension_controller
 			$class_name = 'portal_' . $row['module_classname'] . '_module';
 			if (!class_exists($class_name))
 			{
-				include("{$this->root_path}modules/portal_{$row['module_classname']}.$phpEx");
+				include("{$this->root_path}modules/portal_{$row['module_classname']}.{$this->php_ext}");
 			}
 			if (!class_exists($class_name))
 			{
@@ -117,7 +177,7 @@ class phpbb_ext_board3_portal_controller extends phpbb_extension_controller
 			{
 				$user->add_lang_ext('board3/portal', 'mods/portal/' . $module->language);
 			}
-			if ($row['module_column'] == column_string_num('left') && $config['board3_left_column'])
+			if ($row['module_column'] == column_string_num('left') && $this->config['board3_left_column'])
 			{
 				$template_module = $module->get_template_side($row['module_id']);
 				$template_column = 'left';
@@ -129,7 +189,7 @@ class phpbb_ext_board3_portal_controller extends phpbb_extension_controller
 				$template_column = 'center';
 				++$module_count['center'];
 			}
-			if ($row['module_column'] == column_string_num('right') && $config['board3_right_column'])
+			if ($row['module_column'] == column_string_num('right') && $this->config['board3_right_column'])
 			{
 				$template_module = $module->get_template_side($row['module_id']);
 				$template_column = 'right';
@@ -153,7 +213,7 @@ class phpbb_ext_board3_portal_controller extends phpbb_extension_controller
 			// Custom Blocks that have been defined in the ACP will return an array instead of just the name of the template file
 			if (is_array($template_module))
 			{
-				$template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
+				$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
 					'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module['template'],
 					'IMAGE_SRC'			=> $this->root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $template_module['image_src'],
 					'TITLE'				=> $template_module['title'],
@@ -165,7 +225,7 @@ class phpbb_ext_board3_portal_controller extends phpbb_extension_controller
 			}
 			else
 			{
-				$template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
+				$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
 					'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module,
 					'IMAGE_SRC'			=> $this->root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/' . $row['module_image_src'],
 					'IMAGE_WIDTH'			=> $row['module_image_width'],
