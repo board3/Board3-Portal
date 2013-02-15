@@ -122,7 +122,7 @@ class portal_calendar_module
 		));
 
 		// output the days for the current month 
-		for($i=0; $i < $mini_cal_month_days;) 
+		for($i = 0; $i < $mini_cal_month_days;)
 		{
 			// is this the first day of the week?
 			if($mini_cal_count == $this->mini_cal_fdow)
@@ -576,7 +576,7 @@ class portal_calendar_module
 	{
 		global $user;
 
-		$this->stamp = strtotime($date) + $user->timezone + $user->dst;
+		$this->stamp = strtotime($date);
 		return ($this->stamp);
 	}
 
@@ -627,14 +627,14 @@ class portal_calendar_module
 		$this->dateDD = date("d", $this->stamp);
 		$this->daysMonth = date("t", $this->stamp);
 
-		for ($i=1; $i < $this->daysMonth + 1; $i++) 
+		for ($i = 1; $i < $this->daysMonth + 1; $i++)
 		{
-			$this->makeTimestamp("$i $this->ext_dateMM $this->dateYYYY");
+			$this->makeTimestamp("$i {$this->ext_dateMM} {$this->dateYYYY}");
 			$this->day[] = array(
-				"0" => "$i",
-				"1" => $this->dateMM,
-				"2" => $this->dateYYYY,
-				"3" => (date('w', $this->stamp))
+				'0' => "$i",
+				'1' => $this->dateMM,
+				'2' => $this->dateYYYY,
+				'3' => date('w', $this->stamp)
 				);
 		}
 	}
