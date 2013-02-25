@@ -46,7 +46,7 @@ class portal_whois_online_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = 'portal_whois_online_module';
-	
+
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
@@ -99,12 +99,12 @@ class portal_whois_online_module
 		$db->sql_freeresult($result);
 
 		$legend = implode(', ', $legend);
-		
+
 		$template->assign_var('PORTAL_LEGEND', $legend);
 
 		return 'whois_online_center.html';
 	}
-	
+
 	public function get_template_side($module_id)
 	{
 		global $config, $template, $user, $auth, $db, $phpbb_root_path, $phpEx;

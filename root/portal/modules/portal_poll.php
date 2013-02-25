@@ -46,7 +46,7 @@ class portal_poll_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = 'portal_poll_module';
-	
+
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
@@ -58,7 +58,7 @@ class portal_poll_module
 		global $config, $template, $db, $user, $auth, $phpbb_root_path, $phpEx;
 
 		$user->add_lang('viewtopic');
-		
+
 		// check if we need to include the bbcode class
 		if(!class_exists('bbcode'))
 		{
@@ -218,7 +218,7 @@ class portal_poll_module
 		if($config['board3_poll_topic_id_' . $module_id] !== '')
 		{
 			$poll_forums_config  = explode(',' ,$config['board3_poll_topic_id_' . $module_id]);
-			
+
 			if($config['board3_poll_exclude_id_' . $module_id])
 			{
 				$forum_list = array_unique(array_diff($forum_list, $poll_forums_config));
@@ -439,7 +439,7 @@ class portal_poll_module
 		global $config, $template, $db, $user, $auth, $phpbb_root_path, $phpEx;
 
 		$user->add_lang('viewtopic');
-		
+
 		// check if we need to include the bbcode class
 		if(!class_exists('bbcode'))
 		{
@@ -599,7 +599,7 @@ class portal_poll_module
 		if($config['board3_poll_topic_id_' . $module_id] !== '')
 		{
 			$poll_forums_config  = explode(',' ,$config['board3_poll_topic_id_' . $module_id]);
-			
+
 			if($config['board3_poll_exclude_id_' . $module_id])
 			{
 				$forum_list = array_unique(array_diff($forum_list, $poll_forums_config));
@@ -858,14 +858,14 @@ class portal_poll_module
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
 	}
-	
+
 	// Create forum select box
 	public function select_forums($value, $key, $module_id)
 	{
 		global $user, $config;
 
 		$forum_list = make_forum_select(false, false, true, true, true, false, true);
-		
+
 		$selected = array();
 		if(isset($config[$key]) && strlen($config[$key]) > 0)
 		{
@@ -882,18 +882,18 @@ class portal_poll_module
 		return $s_forum_options;
 
 	}
-	
+
 	// Store selected forums
 	public function store_selected_forums($key, $module_id)
 	{
 		global $db, $cache;
-		
+
 		// Get selected forums
 		$values = request_var($key, array(0 => ''));
-		
+
 		$news = implode(',', $values);
-		
+
 		set_config($key, $news);
-	
+
 	}
 }

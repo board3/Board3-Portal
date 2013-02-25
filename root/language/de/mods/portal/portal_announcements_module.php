@@ -47,7 +47,7 @@ $lang = array_merge($lang, array(
 	'JUMP_NEWEST'					=> 'Zum letzten Beitrag springen',
 	'JUMP_FIRST'					=> 'Zum ersten Beitrag springen',
 	'JUMP_TO_POST'					=> 'Rufe den Beitrag auf',
-	
+
 	// ACP
 	'ACP_PORTAL_ANNOUNCE_SETTINGS'				=> 'Einstellungen für Bekanntmachungen',
 	'ACP_PORTAL_ANNOUNCE_SETTINGS_EXP'		=> 'Hier kannst du die Einstellungen für die Bekanntmachungen ändern.',

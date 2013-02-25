@@ -46,7 +46,7 @@ class portal_statistics_module
 	* file must be in "language/{$user->lang}/mods/portal/"
 	*/
 	public $language = 'portal_statistics_module';
-	
+
 	/**
 	* custom acp template
 	* file must be in "adm/style/portal/"
@@ -157,22 +157,22 @@ class portal_statistics_module
 	{
 		return true;
 	}
-	
+
 	// Better function with only one query
 	public function get_topics_count()
 	{
 		global $db, $user;
-		
+
 		$return_ary = array(
 			POST_ANNOUNCE => 0,
 			POST_STICKY => 0,
 		);
-		
+
 		$sql_in = array(
 			POST_ANNOUNCE,
 			POST_STICKY,
 		);
-		
+
 		$sql = 'SELECT DISTINCT(topic_id) AS topic_id, topic_type AS type
 					FROM ' . TOPICS_TABLE . '
 					WHERE ' . $db->sql_in_set('topic_type', $sql_in, false);
@@ -184,14 +184,14 @@ class portal_statistics_module
 				case POST_ANNOUNCE:
 					++$return_ary[POST_ANNOUNCE];
 				break;
-				
+
 				case POST_STICKY:
 					++$return_ary[POST_STICKY];
 				break;
 			}
 		}
 		$db->sql_freeresult($result);
-		
+
 		return $return_ary;
 	}
 }

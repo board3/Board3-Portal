@@ -90,7 +90,7 @@ class portal_news_module
 				{
 					$disallow_access = array();
 				}
-				
+
 				if($config['board3_news_exclude_' . $module_id] == true)
 				{
 					$disallow_access = array_merge($disallow_access, $forum_from);
@@ -134,7 +134,7 @@ class portal_news_module
 					$total_news = (int) $db->sql_fetchfield('num_topics');
 					$db->sql_freeresult($result);
 			}
-			
+
 			$topic_tracking_info = get_portal_tracking_info($fetch_news);
 
 			if($news < 0)
@@ -159,7 +159,7 @@ class portal_news_module
 					$forum_id = $fetch_news[$i]['forum_id'];
 					$topic_id = $fetch_news[$i]['topic_id'];
 					$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
-					
+
 					$read_full_url = (isset($_GET['np'])) ? 'np='. $start . '&amp;news=' . $i . '#n' . $i : 'news=' . $i . '#n' . $i;
 					$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 					if ($config['board3_news_archive_' . $module_id])
@@ -275,7 +275,7 @@ class portal_news_module
 				$open_bracket = '[ ';
 				$close_bracket = ' ]';
 				$read_full = $user->lang['BACK'];
-						
+
 				$read_full_url = (isset($_GET['np'])) ? append_sid("{$phpbb_root_path}portal.$phpEx", "np=$start#n$i") : append_sid("{$phpbb_root_path}portal.$phpEx#n$i");
 				$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 				if ($config['board3_news_archive_' . $module_id])
@@ -413,14 +413,14 @@ class portal_news_module
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
 	}
-	
+
 	// Create forum select box
 	public function select_forums($value, $key, $module_id)
 	{
 		global $user, $config;
 
 		$forum_list = make_forum_select(false, false, true, true, true, false, true);
-		
+
 		$selected = array();
 		if(isset($config[$key]) && strlen($config[$key]) > 0)
 		{
@@ -437,18 +437,18 @@ class portal_news_module
 		return $s_forum_options;
 
 	}
-	
+
 	// Store selected forums
 	public function store_selected_forums($key, $module_id)
 	{
 		global $db, $cache;
-		
+
 		// Get selected extensions
 		$values = request_var($key, array(0 => ''));
-		
+
 		$news = implode(',', $values);
-		
+
 		set_config($key, $news);
-	
+
 	}
 }

@@ -38,7 +38,7 @@ $lang = array_merge($lang, array(
 	'NO_FRIENDS'						=> 'Derzeit sind keine Freunde definiert',
 	'NO_FRIENDS_OFFLINE'			=> 'Keine Freunde offline',
 	'NO_FRIENDS_ONLINE'			=> 'Keine Freunde online',
-	
+
 	// ACP
 	'ACP_PORTAL_FRIENDS_SETTINGS'				=> 'Einstellungen für den Freunde-Block',
 	'ACP_PORTAL_FRIENDS_SETTINGS_EXP'		=> 'Hier kannst du die Einstellungen für den Freunde-Block ändern.',

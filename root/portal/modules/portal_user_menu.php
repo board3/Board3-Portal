@@ -50,7 +50,7 @@ class portal_user_menu_module
 	public function get_template_side($module_id)
 	{
 		global $config, $template, $user, $auth, $db, $phpEx, $phpbb_root_path;
-		
+
 		if (!function_exists('get_user_avatar'))
 		{
 			include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
@@ -62,7 +62,7 @@ class portal_user_menu_module
 			// + new posts since last visit & you post number
 			//
 			$ex_fid_ary = array_unique(array_merge(array_keys($auth->acl_getf('!f_read', true)), array_keys($auth->acl_getf('!f_search', true))));
-			
+
 			if ($auth->acl_get('m_approve'))
 			{
 				$m_approve_fid_ary = array(-1);
@@ -88,7 +88,7 @@ class portal_user_menu_module
 			$result = $db->sql_query($sql);
 			$new_posts_count = (int) $db->sql_fetchfield('total');
 			$db->sql_freeresult($result);
-			
+
 			// unread posts
 			$sql_where = 'AND t.topic_moved_id = 0
 							' . str_replace(array('p.', 'post_'), array('t.', 'topic_'), $m_approve_fid_sql) . '

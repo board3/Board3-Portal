@@ -35,7 +35,7 @@ $lang = array_merge($lang, array(
 	'DOWNLOADS'				=> 'Downloads',
 	'NO_ATTACHMENTS'		=> 'No attachments',
 	'PORTAL_ATTACHMENTS'	=> 'Attachments',
-	
+
 	// ACP
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS'			=> 'Attachments settings',
 	'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS_EXP'	=> 'This is where you customize the attachments block.',
