@@ -207,6 +207,8 @@ class portal_news_module
 					// Grab icons
 					$icons = $cache->obtain_icons();
 
+					phpbb_generate_template_pagination($template, $view_topic_url, 'pagination', 'np', $fetch_news[$i]['topic_replies'], $config['board3_number_of_news_' . $module_id], $start);
+
 					$template->assign_block_vars('news_row', array(
 						'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $config['allow_attachments']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
 						'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
@@ -240,7 +242,6 @@ class portal_news_module
 						'S_NOT_LAST'			=> ($i < sizeof($fetch_news) - 1) ? true : false,
 						'S_POLL'				=> $fetch_news[$i]['poll'],
 						'S_UNREAD_INFO'			=> $unread_topic,
-						'PAGINATION'			=> topic_generate_pagination($fetch_news[$i]['topic_replies'], $view_topic_url),
 						'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 					));
 
@@ -258,8 +259,8 @@ class portal_news_module
 					{
 						$template->assign_vars(array(
 							'NP_PAGINATION'		=> $pagination,
-							'TOTAL_NEWS'		=> ($total_news == 1) ? $user->lang['VIEW_FORUM_TOPIC'] : sprintf($user->lang['VIEW_FORUM_TOPICS'], $total_news),
-							'NP_PAGE_NUMBER'	=> on_page($total_news, $config['board3_number_of_news_' . $module_id], $start))
+							'TOTAL_NEWS'		=> ($total_news == 1) ? sprintf($user->lang['VIEW_FORUM_TOPICS'][1], $total_news) : sprintf($user->lang['VIEW_FORUM_TOPICS'][2], $total_news),
+							'NP_PAGE_NUMBER'	=> phpbb_on_page($template, $user, $view_topic_url, $total_news, $config['board3_number_of_news_' . $module_id], $start))
 						);
 					}
 				}

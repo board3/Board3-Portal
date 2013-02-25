@@ -404,16 +404,16 @@ function character_limit(&$title, $limit = 0)
 */
 function get_sub_taged_string($message, $bbcode_uid, $length)
 {
-	global $phpbb_root_path, $phpEx;
+	global $portal_root_path, $phpEx;
 
 	if(!class_exists('phpbb_trim_message'))
 	{
-		include($phpbb_root_path . 'includes/trim_message/trim_message.' . $phpEx);
+		include($portal_root_path . '../includes/trim_message/trim_message.' . $phpEx);
 	}
 
 	if(!class_exists('phpbb_trim_message_bbcodes'))
 	{
-		include($phpbb_root_path . 'includes/trim_message/bbcodes.' . $phpEx);
+		include($portal_root_path . '../includes/trim_message/bbcodes.' . $phpEx);
 	}
 
 	$object = new phpbb_trim_message($message, $bbcode_uid, $length);

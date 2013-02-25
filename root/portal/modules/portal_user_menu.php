@@ -51,7 +51,7 @@ class portal_user_menu_module
 	{
 		global $config, $template, $user, $auth, $db, $phpEx, $phpbb_root_path;
 
-		if (!function_exists('display_forums'))
+		if (!function_exists('get_user_avatar'))
 		{
 			include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 		}

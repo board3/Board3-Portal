@@ -53,14 +53,16 @@ class portal_birthday_list_module
 
 		// Generate birthday list if required ... / borrowed from index.php 3.0.6
 		$birthday_list = $birthday_ahead_list = '';
+
 		if ($config['load_birthdays'] && $config['allow_birthdays'])
 		{
-			$now = getdate(time() + $user->timezone + $user->dst - date('Z'));
+			$time = $user->create_datetime();
+			$now = phpbb_gmgetdate($time->getTimestamp() + $time->getOffset());
 			$cache_days = $config['board3_birthdays_ahead_' . $module_id];
 			$sql_days = '';
 			while ($cache_days > 0)
 			{
-				$day = getdate(time() + 86400 * $cache_days + $user->timezone + $user->dst - date('Z'));
+				$day = phpbb_gmgetdate($time->getTimestamp() + 86400 * $cache_days + $time->getOffset());
 				$sql_days .= " OR u.user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $day['mday'], $day['mon'])) . "%'";
 				$cache_days--;
 			}
@@ -76,7 +78,7 @@ class portal_birthday_list_module
 					$order_by = 'SUBSTRING(u.user_birthday FROM 4 FOR 2) ASC, SUBSTRING(u.user_birthday FROM 1 FOR 2) ASC, u.username_clean ASC';
 				break;
 			}
-			$now = getdate(time() + $user->timezone + $user->dst - date('Z'));
+
 			$sql = 'SELECT u.user_id, u.username, u.user_colour, u.user_birthday
 				FROM ' . USERS_TABLE . ' u
 				LEFT JOIN ' . BANLIST_TABLE . " b ON (u.user_id = b.ban_userid)
