@@ -70,7 +70,7 @@ class portal_stylechanger_module
 				$url = append_sid("{$phpbb_root_path}portal.$phpEx", 'style=' . $row['style_id']);
 			}
 			++$style_count;
-			$style_select .= '<option value="' . $url . '"' . ($row['style_id'] == $user->theme['style_id'] ? ' selected="selected"' : '') . '>' . htmlspecialchars($row['style_name']) . '</option>';
+			$style_select .= '<option value="' . $url . '"' . ($row['style_id'] == $user->style['style_id'] ? ' selected="selected"' : '') . '>' . htmlspecialchars($row['style_name']) . '</option>';
 		}
 		$db->sql_freeresult($result);
 		if(strlen($style_select))

@@ -63,9 +63,9 @@ class portal_statistics_module
 		$total_users		= $config['num_users'];
 		$total_files 		= $config['num_files'];
 
-		$l_total_user_s 	= ($total_users == 0) ? 'TOTAL_USERS_ZERO' : 'TOTAL_USERS_OTHER';
-		$l_total_post_s 	= ($total_posts == 0) ? 'TOTAL_POSTS_ZERO' : 'TOTAL_POSTS_OTHER';
-		$l_total_topic_s	= ($total_topics == 0) ? 'TOTAL_TOPICS_ZERO' : 'TOTAL_TOPICS_OTHER';
+		$l_total_user_s 	= ($total_users == 0) ? sprintf($user->lang['TOTAL_USERS_ZERO'], $total_users) : sprintf($user->lang['TOTAL_USERS'][2], $total_users);
+		$l_total_post_s 	= ($total_posts == 0) ? sprintf($user->lang['TOTAL_POSTS_ZERO'], $total_posts) : sprintf($user->lang['TOTAL_POSTS_COUNT'][2], $total_posts);
+		$l_total_topic_s	= ($total_topics == 0) ? sprintf($user->lang['TOTAL_TOPICS_ZERO'], $total_topics) : sprintf($user->lang['TOTAL_TOPICS'][2], $total_topics);
 
 		// avarage stat
 		$board_days = (time() - $config['board_startdate']) / 86400;
@@ -116,12 +116,11 @@ class portal_statistics_module
 
 		$topics_count = $this->get_topics_count();
 
-
 		// Assign specific vars
 		$template->assign_vars(array(
-			'B3_TOTAL_POSTS'				=> sprintf($user->lang[$l_total_post_s], $total_posts),
-			'B3_TOTAL_TOPICS'				=> sprintf($user->lang[$l_total_topic_s], $total_topics),
-			'B3_TOTAL_USERS'				=> sprintf($user->lang[$l_total_user_s], $total_users),
+			'B3_TOTAL_POSTS'				=> $l_total_post_s,
+			'B3_TOTAL_TOPICS'				=> $l_total_topic_s,
+			'B3_TOTAL_USERS'				=> $l_total_user_s,
 			'B3_NEWEST_USER'				=> sprintf($user->lang['NEWEST_USER'], get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
 			'B3_ANNOUNCE_COUNT'				=> $topics_count[POST_ANNOUNCE],
 			'B3_STICKY_COUNT'				=> $topics_count[POST_STICKY],

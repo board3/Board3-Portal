@@ -64,13 +64,16 @@ class phpbb_ext_board3_portal_controller_main
 	*/
 	public function __construct($auth, $config, $template, $user, $phpbb_root_path, $php_ext)
 	{
+		global $portal_root_path;
+
 		$this->auth = $auth;
 		$this->config = $config;
 		$this->template = $template;
 		$this->user = $user;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $php_ext;
-		$this->root_path = $phpbb_root_path . '/ext/board3/portal/portal/';
+		$this->root_path = $phpbb_root_path . 'ext/board3/portal/portal/';
+		$portal_root_path = $this->root_path;
 
 		if (!function_exists('obtain_portal_config'))
 		{
@@ -86,7 +89,7 @@ class phpbb_ext_board3_portal_controller_main
     * @return null
     */
     public function handle()
-    {	
+    {
 		$this->check_permission();
         // We defined the phpBB objects in __construct() and can use them in the rest of our class like this
         //echo 'Welcome, ' . $this->user->data['username'];
@@ -96,39 +99,6 @@ class phpbb_ext_board3_portal_controller_main
         // 2) what language file to use
         $this->user->add_lang_ext('board3/portal', 'mods/portal');
 		
-		//$this->template->set_ext_dir_prefix($phpbb_root_path . 'ext/board3/portal/');
-		
-		$this->display_modules();
-
-        // foobar_body.html is in ./ext/foobar/example/styles/prosilver/template/foobar_body.html
-        $this->template->set_filenames(array(
-                'body' => 'portal/portal_body.html'
-        ));
-
-        // And we assign template variables the same as before as well
-        $this->template->assign_var('MESSAGE', 'Yes, this is hard-coded language, which should still be avoided in virtually all cases.');
-
-        // And now to output the page.
-        page_header($this->user->lang('PORTAL'));
-        page_footer();
-    }
-
-	// check if user should be able to access this page
-	private function check_permission()
-	{
-		if (!isset($this->config['board3_enable']) || !$this->config['board3_enable'] || !$this->auth->acl_get('u_view_portal'))
-		{
-			redirect(append_sid($this->phpbb_root_path . 'index' . $this->php_ext));
-		}
-	}
-
-	/**
-	* Display the portal modules
-	*
-	* @return: true if page can be display, false if there are no modules to display
-	*/
-	private function display_modules()
-	{
 		/**
 		* get initial data
 		*/
@@ -222,7 +192,7 @@ class phpbb_ext_board3_portal_controller_main
 			{
 				$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
 					'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module['template'],
-					'IMAGE_SRC'			=> $this->root_path . 'styles/' . $this->user->theme['theme_path'] . '/theme/images/portal/' . $template_module['image_src'],
+					'IMAGE_SRC'			=> $this->root_path . '../styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $template_module['image_src'],
 					'TITLE'				=> $template_module['title'],
 					'CODE'				=> $template_module['code'],
 					'MODULE_ID'			=> $row['module_id'],
@@ -234,7 +204,7 @@ class phpbb_ext_board3_portal_controller_main
 			{
 				$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
 					'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module,
-					'IMAGE_SRC'			=> $this->root_path . 'styles/' . $this->user->theme['theme_path'] . '/theme/images/portal/' . $row['module_image_src'],
+					'IMAGE_SRC'			=> $this->root_path . '../styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'],
 					'IMAGE_WIDTH'			=> $row['module_image_width'],
 					'IMAGE_HEIGHT'			=> $row['module_image_height'],
 					'MODULE_ID'			=> $row['module_id'],
@@ -243,7 +213,45 @@ class phpbb_ext_board3_portal_controller_main
 			}
 			unset($template_module);
 		}
-		return sizeof($portal_modules);
+		$module_count['total'] = sizeof($portal_modules);
+
+		// Redirect to index if there are currently no active modules
+		if($module_count['total'] < 1)
+		{
+			redirect(append_sid($this->phpbb_root_path . 'index.' . $phpEx));
+		}
+
+		// Assign specific vars
+		$this->template->assign_vars(array(
+		// 	'S_SMALL_BLOCK'			=> true,
+			'S_PORTAL_LEFT_COLUMN'	=> $this->config['board3_left_column_width'],
+			'S_PORTAL_RIGHT_COLUMN'	=> $this->config['board3_right_column_width'],
+			'S_LEFT_COLUMN'			=> ($module_count['left'] > 0 && $this->config['board3_left_column']) ? true : false,
+			'S_CENTER_COLUMN'		=> ($module_count['center'] > 0) ? true : false,
+			'S_RIGHT_COLUMN'		=> ($module_count['right'] > 0 && $this->config['board3_right_column']) ? true : false,
+			'S_TOP_COLUMN'			=> ($module_count['top'] > 0) ? true : false,
+			'S_BOTTOM_COLUMN'		=> ($module_count['bottom'] > 0) ? true : false,
+			'S_DISPLAY_PHPBB_MENU'	=> $this->config['board3_phpbb_menu'],
+			'B3P_DISPLAY_JUMPBOX'	=> $this->config['board3_display_jumpbox'],
+		));
+
+        // And now to output the page.
+        page_header($this->user->lang('PORTAL'));
+
+        // foobar_body.html is in ./ext/foobar/example/styles/prosilver/template/foobar_body.html
+        $this->template->set_filenames(array(
+                'body' => 'portal/portal_body.html'
+        ));
+
+        page_footer();
+    }
+
+	// check if user should be able to access this page
+	private function check_permission()
+	{
+		if (!isset($this->config['board3_enable']) || !$this->config['board3_enable'] || !$this->auth->acl_get('u_view_portal'))
+		{
+			redirect(append_sid($this->phpbb_root_path . 'index' . $this->php_ext));
+		}
 	}
-	
 }
