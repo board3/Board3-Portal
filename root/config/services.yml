@@ -1,0 +1,11 @@
+services:
+
+    board3.portal.main:
+        class: phpbb_ext_board3_portal_controller_main
+        arguments:
+            - @auth
+            - @config
+            - @template
+            - @user
+            - %core.root_path%
+            - .%core.php_ext%
