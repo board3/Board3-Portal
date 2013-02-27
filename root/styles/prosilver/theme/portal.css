@@ -35,7 +35,7 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 }
 
 .portal-navigation ul li a{
-	background-image: url("{T_THEME_PATH}/images/portal/arrowbullet.gif");
+	background-image: url("./images/portal/arrowbullet.gif");
 	background-repeat: no-repeat;
 	background-position: center left; /*custom bullet list image*/
 	display: block;
@@ -76,6 +76,10 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 	margin-bottom: 0px;
 }
 
+#portal-body td {
+	vertical-align: top;
+}
+
 /**
 * margin spacing as in default prosilver for the forumlist
 */
@@ -85,7 +89,7 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 
 /* RTL language fixes */
 .rtl .portal-navigation ul li a{
-	background-image: url("{T_THEME_PATH}/images/portal/arrowbullet_rtl.gif");
+	background-image: url("./images/portal/arrowbullet_rtl.gif");
 	background-position: center right; /*custom bullet list image*/
 	padding-right: 19px; /*link text is indented 19px*/
 }

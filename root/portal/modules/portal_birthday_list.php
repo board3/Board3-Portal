@@ -94,7 +94,7 @@ class portal_birthday_list_module
 			{
 				if (substr($row['user_birthday'], 0, 6) == $today)
 				{
-					$birthday_list .= '<span style="float:left;"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;">' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</span><span style="float: right;">';
+					$birthday_list .= '<span style="float:left;"><img src="' . $portal_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;">' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</span><span style="float: right;">';
 					if ($age = (int) substr($row['user_birthday'], -4))
 					{
 						$birthday_list .= ' (' . ($now['year'] - $age) . ')';

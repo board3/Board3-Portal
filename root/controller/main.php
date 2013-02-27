@@ -73,7 +73,7 @@ class phpbb_ext_board3_portal_controller_main
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $php_ext;
 		$this->root_path = $phpbb_root_path . 'ext/board3/portal/portal/';
-		$portal_root_path = $this->root_path;
+		$portal_root_path = $phpbb_root_path . 'ext/board3/portal/';
 
 		if (!function_exists('obtain_portal_config'))
 		{
@@ -233,6 +233,7 @@ class phpbb_ext_board3_portal_controller_main
 			'S_BOTTOM_COLUMN'		=> ($module_count['bottom'] > 0) ? true : false,
 			'S_DISPLAY_PHPBB_MENU'	=> $this->config['board3_phpbb_menu'],
 			'B3P_DISPLAY_JUMPBOX'	=> $this->config['board3_display_jumpbox'],
+			'T_EXT_THEME_PATH'		=> $this->phpbb_root_path . 'ext/board3/portal/styles/' . $this->user->style['style_path'] . '/theme/',
 		));
 
         // And now to output the page.
