@@ -61,13 +61,13 @@ class portal_stylechanger_module
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$style = request_var('style', 0);
-			if($style)
+			if (!empty($style))
 			{
-				$url = str_replace('style=' . $style, 'style=' . $row['style_id'], append_sid("{$phpbb_root_path}portal.$phpEx"));
+				$url = str_replace('style=' . $style, 'style=' . $row['style_id'], append_sid("{$phpbb_root_path}app.$phpEx", 'controller=portal'));
 			}
 			else
 			{
-				$url = append_sid("{$phpbb_root_path}portal.$phpEx", 'style=' . $row['style_id']);
+				$url = append_sid("{$phpbb_root_path}app.$phpEx", 'controller=portal&amp;style=' . $row['style_id']);
 			}
 			++$style_count;
 			$style_select .= '<option value="' . $url . '"' . ($row['style_id'] == $user->style['style_id'] ? ' selected="selected"' : '') . '>' . htmlspecialchars($row['style_name']) . '</option>';
