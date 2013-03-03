@@ -59,6 +59,11 @@ class portal_calendar_module
 	private $mini_cal_fdow;
 
 	/**
+	* User datetime object
+	*/
+	private $time;
+
+	/**
 	* constants
 	*/
 	const TIME_DAY = 86400;
@@ -89,8 +94,8 @@ class portal_calendar_module
 		}
 
 		// initialise some variables
-		$time = $user->create_datetime();
-		$now = phpbb_gmgetdate($time->getTimestamp() + $time->getOffset());
+		$this->time = $user->create_datetime();
+		$now = phpbb_gmgetdate($this->time->getTimestamp() + $this->time->getOffset());
 		$today_timestamp = $now[0];
 		$mini_cal_today = date('Ymd', $today_timestamp - date('Z'));
 		$this->stamp = $today_timestamp;
@@ -105,26 +110,26 @@ class portal_calendar_module
 		// output our general calendar bits
 		$down = $this->mini_cal_month - 1;
 		$up = $this->mini_cal_month + 1;
-		$prev_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m$module_id=$down#minical$module_id") . '"><img src="' . $portal_root_path . 'styles/' . $user->style['style_path'] . '/theme/images/portal/cal_icon_left_arrow.png' . '" title="' . $user->lang['VIEW_PREVIOUS_MONTH'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
-		$next_month = '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "m$module_id=$up#minical$module_id") . '"><img src="' . $portal_root_path . 'styles/' . $user->style['style_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
+		$prev_month = '<a href="' . append_sid("{$phpbb_root_path}app.$phpEx", "controller=portal&amp;m$module_id=$down#minical$module_id") . '"><img src="' . $portal_root_path . 'styles/' . $user->style['style_path'] . '/theme/images/portal/cal_icon_left_arrow.png' . '" title="' . $user->lang['VIEW_PREVIOUS_MONTH'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
+		$next_month = '<a href="' . append_sid("{$phpbb_root_path}app.$phpEx", "controller=portal&amp;m$module_id=$up#minical$module_id") . '"><img src="' . $portal_root_path . 'styles/' . $user->style['style_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
 
 		$template->assign_block_vars('minical', array(
 			'S_SUNDAY_FIRST'	=> ($config['board3_sunday_first_' . $module_id]) ? true : false,
 			'L_MINI_CAL_MONTH'	=> (($config['board3_long_month_' . $module_id]) ? $user->lang['mini_cal']['long_month'][$this->day[0][1]] : $user->lang['mini_cal']['month'][$this->day[0][1]]) . " " . $this->day[0][2],
-			'L_MINI_CAL_SUN'	=> '<span style="color: ' . $config['board3_calendar_sunday_color_' . $module_id] . ';">' . $user->lang['mini_cal']['day'][1] . '</span>', 
-			'L_MINI_CAL_MON'	=> $user->lang['mini_cal']['day'][2], 
-			'L_MINI_CAL_TUE'	=> $user->lang['mini_cal']['day'][3], 
-			'L_MINI_CAL_WED'	=> $user->lang['mini_cal']['day'][4], 
-			'L_MINI_CAL_THU'	=> $user->lang['mini_cal']['day'][5], 
-			'L_MINI_CAL_FRI'	=> $user->lang['mini_cal']['day'][6], 
-			'L_MINI_CAL_SAT'	=> $user->lang['mini_cal']['day'][7], 
+			'L_MINI_CAL_SUN'	=> '<span style="color: ' . $config['board3_calendar_sunday_color_' . $module_id] . ';">' . $user->lang['mini_cal']['day'][1] . '</span>',
+			'L_MINI_CAL_MON'	=> $user->lang['mini_cal']['day'][2],
+			'L_MINI_CAL_TUE'	=> $user->lang['mini_cal']['day'][3],
+			'L_MINI_CAL_WED'	=> $user->lang['mini_cal']['day'][4],
+			'L_MINI_CAL_THU'	=> $user->lang['mini_cal']['day'][5],
+			'L_MINI_CAL_FRI'	=> $user->lang['mini_cal']['day'][6],
+			'L_MINI_CAL_SAT'	=> $user->lang['mini_cal']['day'][7],
 			'U_PREV_MONTH'		=> $prev_month,
 			'U_NEXT_MONTH'		=> $next_month,
 			'S_DISPLAY_EVENTS'	=> ($config['board3_display_events_' . $module_id]) ? true : false,
 			'MODULE_ID'			=> $module_id,
 		));
 
-		// output the days for the current month 
+		// output the days for the current month
 		for($i = 0; $i < $mini_cal_month_days;)
 		{
 			// is this the first day of the week?
@@ -136,7 +141,7 @@ class portal_calendar_module
 			}
 
 			// is this a valid weekday?
-			if($mini_cal_count == ($this->day[$i][3])) 
+			if($mini_cal_count == ($this->day[$i][3]))
 			{
 				$mini_cal_this_day = $this->day[$i][0];
 
@@ -147,9 +152,9 @@ class portal_calendar_module
 					'MINI_CAL_DAY'		=> ($mini_cal_count == 0) ? '<span style="color: ' . $config['board3_calendar_sunday_color_' . $module_id] . ';">' . $mini_cal_day . '</span>' : $mini_cal_day)
 				);
 				$i++;
-			} 
+			}
 			// no day
-			else 
+			else
 			{
 				$template->assign_block_vars('minical.mini_cal_row.mini_cal_days', array(
 					'MINI_CAL_DAY'		=> ' ')
@@ -169,7 +174,16 @@ class portal_calendar_module
 			}
 		}
 
-		/* 
+		// fill table with empty strings
+		while ($mini_cal_count <= self::DAYS_PER_WEEK)
+		{
+			$template->assign_block_vars('minical.mini_cal_row.mini_cal_days', array(
+				'MINI_CAL_DAY'		=> ' ')
+			);
+			$mini_cal_count++;
+		}
+
+		/*
 		* Let's start displaying the events
 		* make sure we only display events in the future
 		*/
@@ -188,8 +202,8 @@ class portal_calendar_module
 
 			foreach($events as $key => $cur_event)
 			{
-				if(($cur_event['start_time'] + $user->timezone + $user->dst) >= $today_timestamp || 
-					($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp || 
+				if(($cur_event['start_time'] + $user->timezone + $user->dst) >= $today_timestamp ||
+					($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp ||
 					(($cur_event['start_time'] + $user->timezone + $user->dst + self::TIME_DAY) >= $today_timestamp && $cur_event['all_day']))
 				{
 					$cur_permissions = explode(',', $cur_event['permission']);
@@ -207,14 +221,14 @@ class portal_calendar_module
 							$is_external = false;
 						}
 
-						/** 
+						/**
 						* Current events
 						*
 						* Events are treated as current if the following is met:
 						* - We have an all day event and the start of that event is less than 1 day (86400 seconds) away
 						* - We have a normal event with a start that is less then 1 day away and that hasn't ended yet
 						*/
-						if((($cur_event['start_time'] + $user->timezone + $user->dst - $today_timestamp) <= self::TIME_DAY && $cur_event['all_day']) || 
+						if((($cur_event['start_time'] + $user->timezone + $user->dst - $today_timestamp) <= self::TIME_DAY && $cur_event['all_day']) ||
 						(($cur_event['start_time'] + $user->timezone + $user->dst - $today_timestamp) <= self::TIME_DAY && ($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp))
 						{
 							$template->assign_block_vars('minical.cur_events', array(
@@ -343,7 +357,7 @@ class portal_calendar_module
 				$event_permission = request_var('permission-setting-calendar', array(0 => ''));
 				$groups_ary = array();
 
-				/* 
+				/*
 				* parse the event time
 				* first check for obvious errors, we don't want to waste server resources
 				*/
@@ -519,7 +533,7 @@ class portal_calendar_module
 				$groups_ary = (isset($events[$link_id]['permission'])) ? explode(',', $events[$link_id]['permission']) : array();
 
 				// get group info from database and assign the block vars
-				$sql = 'SELECT group_id, group_name 
+				$sql = 'SELECT group_id, group_name
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
 				$result = $db->sql_query($sql);
@@ -575,16 +589,16 @@ class portal_calendar_module
 	/**
 	* convert date->timestamp
 	**/
-	private function makeTimestamp($date) 
+	private function makeTimestamp($date)
 	{
-		$this->stamp = (empty($this->stamp)) ? strtotime($date) : $this->stamp;
+		$this->stamp = strtotime($date);
 		return ($this->stamp);
 	}
 
 	/**
 	* get date listed in array
 	**/
-	private function getMonth($callDate) 
+	private function getMonth($callDate)
 	{
 		global $user;
 
@@ -592,7 +606,9 @@ class portal_calendar_module
 		// last or first day of some months need to be treated in a special way
 		if (!empty($this->mini_cal_month))
 		{
-			$today_timestamp = time() + $user->timezone + $user->dst;
+			$time = $user->create_datetime();
+			$now = phpbb_gmgetdate($time->getTimestamp() + $time->getOffset());
+			$today_timestamp = $now[0];
 			$cur_month = date("n", $today_timestamp);
 			$correct_month = $cur_month + $this->mini_cal_month;
 
@@ -641,10 +657,10 @@ class portal_calendar_module
 	}
 
 	// Unserialize links array
-	private function utf_unserialize($serial_str) 
+	private function utf_unserialize($serial_str)
 	{
 		$out = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str );
-		return unserialize($out);   
+		return unserialize($out);
 	}
 
 	/**
