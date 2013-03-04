@@ -13,6 +13,7 @@ define('IN_PHPBB', true);
 define('B3_MODULE_ENABLED', 1);
 define('GROUPS_TABLE', '$this->table_prefix . \'groups');
 $php_ex = substr(strrchr(__FILE__, '.'), 1);
+$phpEx = $php_ex;
 
 $config_entry = $portal_config_entry = $db_data = array();
 $root_path = '../'; // one directory down
@@ -26,17 +27,22 @@ function set_config($name, $val)
 		trigger_error('Duplicate entry: ' . $name);
 	}
 
-	if (is_string($val))
-	{
-		$val = "'$val'";
-	}
-
-	if (empty($val))
-	{
-		$val = "''";
-	}
+	handle_string($val);
 
 	$config_entry[$name] = $val;
+}
+
+function handle_string(&$str)
+{
+	if (is_string($str))
+	{
+		$str = "'$str'";
+	}
+
+	if (empty($str))
+	{
+		$str = "''";
+	}
 }
 
 function set_portal_config($name, $val)
@@ -48,14 +54,38 @@ function set_portal_config($name, $val)
 		trigger_error('Duplicate entry: ' . $name);
 	}
 
-	if (is_string($val))
-	{
-		$val = "'$val'";
-	}
+	handle_string($val);
 
-	if (empty($val))
+	// we do not want serialized entries
+	if (strpos($val, 'a:') === 1)
 	{
-		$val = "''";
+		// cut preceding and appended quote
+		$val = substr($val, 1, -1);
+		// start unserializing and building
+		$val = unserialize($val);
+		$after_val = 'array(<br />';
+		foreach ($val as $key => $entry)
+		{
+			if (is_array($entry))
+			{
+				$after_val .= '&nbsp;&nbsp;array(<br />';
+				foreach ($entry as $one => $two)
+				{
+					handle_string($one);
+					handle_string($two);
+					$after_val .= '&nbsp;&nbsp;&nbsp;' . $one . '&nbsp;&nbsp;&nbsp;=> ' . $two . ',<br />';
+				}
+				$after_val .= '&nbsp;&nbsp;),<br />';
+			}
+			else
+			{
+				handle_string($key);
+				handle_string($entry);
+				$after_val .= '&nbsp;&nbsp;' . $key . '&nbsp;&nbsp;&nbsp;=> ' . $entry . ',<br />';
+			}
+		}
+		$after_val .= ')';
+		$val = $after_val;
 	}
 
 	$portal_config_entry[$name] = $val;
@@ -74,7 +104,7 @@ echo '</pre>';
 echo '<br /><br />set_portal_config entries for migrations:<br /><pre>';
 foreach ($portal_config_entry as $name => $val)
 {
-	echo 'set_portal_config(\'' . $name . '\', ' . $val . '));<br />';
+	echo 'set_portal_config(\'' . $name . '\', ' . $val . ');<br />';
 }
 echo '</pre>';
 
