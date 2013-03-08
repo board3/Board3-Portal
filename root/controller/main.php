@@ -218,7 +218,7 @@ class phpbb_ext_board3_portal_controller_main
 		// Redirect to index if there are currently no active modules
 		if($module_count['total'] < 1)
 		{
-			redirect(append_sid($this->phpbb_root_path . 'index.' . $phpEx));
+			redirect(append_sid($this->phpbb_root_path . 'index' . $this->php_ext));
 		}
 
 		// Assign specific vars
