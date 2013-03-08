@@ -56,35 +56,35 @@ function set_portal_config($name, $val)
 
 	handle_string($val);
 
-	// we do not want serialized entries
+	// we do not want serialized entries as they are hard to read
 	if (strpos($val, 'a:') === 1)
 	{
 		// cut preceding and appended quote
 		$val = substr($val, 1, -1);
 		// start unserializing and building
 		$val = unserialize($val);
-		$after_val = 'array(<br />';
+		$after_val = 'serialize(array(<br />';
 		foreach ($val as $key => $entry)
 		{
 			if (is_array($entry))
 			{
-				$after_val .= '&nbsp;&nbsp;array(<br />';
+				$after_val .= '			array(<br />';
 				foreach ($entry as $one => $two)
 				{
 					handle_string($one);
 					handle_string($two);
-					$after_val .= '&nbsp;&nbsp;&nbsp;' . $one . '&nbsp;&nbsp;&nbsp;=> ' . $two . ',<br />';
+					$after_val .= '				' . $one . '		=> ' . $two . ',<br />';
 				}
-				$after_val .= '&nbsp;&nbsp;),<br />';
+				$after_val .= '			),<br />';
 			}
 			else
 			{
 				handle_string($key);
 				handle_string($entry);
-				$after_val .= '&nbsp;&nbsp;' . $key . '&nbsp;&nbsp;&nbsp;=> ' . $entry . ',<br />';
+				$after_val .= '		' . $key . '		=> ' . $entry . ',<br />';
 			}
 		}
-		$after_val .= ')';
+		$after_val .= '		))';
 		$val = $after_val;
 	}
 
@@ -104,7 +104,7 @@ echo '</pre>';
 echo '<br /><br />set_portal_config entries for migrations:<br /><pre>';
 foreach ($portal_config_entry as $name => $val)
 {
-	echo 'set_portal_config(\'' . $name . '\', ' . $val . ');<br />';
+	echo '		set_portal_config(\'' . $name . '\', ' . $val . ');<br />';
 }
 echo '</pre>';
 
@@ -124,7 +124,7 @@ echo $db_data . '</pre><br />';
 function board3_get_install_data($db, $root_path, $php_ex, &$db_data)
 {
 	$directory = $root_path . 'portal/modules/';
-	$db_data = '$board3_sql_query = array(<br />';
+	$db_data = '		$board3_sql_query = array(<br />';
 
 	/*
 	* this is a list of the basic modules that will be installed
@@ -185,26 +185,28 @@ function board3_get_install_data($db, $root_path, $php_ex, &$db_data)
 			'module_status'			=> B3_MODULE_ENABLED,
 		);
 		$sql = 'INSERT INTO \' . $this->table_prefix . \'portal_modules ' . $db->sql_build_array('INSERT', $sql_ary);
-		$db->sql_query($sql);
+		$db->sql_query($sql, true);
 
 		$data1 = array();
 		$data2 = array();
-		$db_data .= 'array(<br />';
+		$db_data .= '			array(<br />';
 		foreach ($sql_ary as $key => $val)
 		{
 			$key = (is_string($key)) ? '\'' . $key . '\'' : $key;
 			$val = (is_string($val)) ? '\'' . $val . '\'' : $val;
-			$db_data .= '&nbsp;' . $key . '&nbsp;&nbsp;&nbsp;=> ' . $val . ',<br />';
+			$db_data .= '				' . $key . '		=> ' . $val . ',<br />';
 		}
-		$db_data .= '),<br />';
-
+		$db_data .= '			),<br />';
 		$c_class->install($db->sql_id());
 	}
+	$db_data .= '		);';
 }
 
 class db
 {
 	// start at 0
+	private $sql_id = 0;
+
 	private $id = 0;
 
 	private $int_pointer = 0;
@@ -221,14 +223,18 @@ class db
 	}
 	public function sql_id()
 	{
-		return $this->id;
+		return $this->sql_id;
 	}
 
-	public function sql_query($sql)
+	public function sql_query($sql, $increase = false)
 	{
 		if (strpos($sql, 'INSERT') !== false)
 		{
 			//$this->data[] = $sql;
+		}
+		if ($increase)
+		{
+			$this->sql_id++;
 		}
 		$this->id++;
 		$this->sql_ary[$this->id] = $sql;
