@@ -224,6 +224,7 @@ class portal_news_module
 						'TOPIC_VIEWS'			=> $fetch_news[$i]['topic_views'],
 						'N_ID'					=> $i,
 						'TOPIC_FOLDER_IMG'		=> $user->img($folder_img, $folder_alt),
+						'TOPIC_IMG_STYLE'		=> $folder_img,
 						'TOPIC_FOLDER_IMG_SRC'  => $user->img($folder_img, $folder_alt, false, '', 'src'),
 						'TOPIC_FOLDER_IMG_ALT'  => $user->lang[$folder_alt],
 						'TOPIC_ICON_IMG'		=> (!empty($icons[$fetch_news[$i]['icon_id']])) ? $icons[$fetch_news[$i]['icon_id']]['img'] : '',
