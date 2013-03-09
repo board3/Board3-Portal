@@ -52,6 +52,12 @@ class phpbb_ext_board3_portal_controller_main
 	private $root_path;
 
 	/**
+	* Portal includes path
+	* @var string
+	*/
+	private $includes_path;
+
+	/**
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
 	* the dependencies defined in the services.yml file for this service.
@@ -72,14 +78,15 @@ class phpbb_ext_board3_portal_controller_main
 		$this->user = $user;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $php_ext;
-		$this->root_path = $phpbb_root_path . 'ext/board3/portal/portal/';
-		$portal_root_path = $phpbb_root_path . 'ext/board3/portal/';
+		$this->includes_path = $phpbb_root_path . 'ext/board3/portal/portal/';
+		$this->root_path = $phpbb_root_path . 'ext/board3/portal/';
+		$portal_root_path = $this->root_path;
 
 		if (!function_exists('obtain_portal_config'))
 		{
-			include($this->root_path . 'includes/constants' . $this->php_ext);
-			include($this->root_path . 'includes/functions_modules' . $this->php_ext);
-			include($this->root_path . 'includes/functions' . $this->php_ext);
+			include($this->includes_path . 'includes/constants' . $this->php_ext);
+			include($this->includes_path . 'includes/functions_modules' . $this->php_ext);
+			include($this->includes_path . 'includes/functions' . $this->php_ext);
 		}
 	}
 
@@ -131,7 +138,7 @@ class phpbb_ext_board3_portal_controller_main
 			$class_name = 'portal_' . $row['module_classname'] . '_module';
 			if (!class_exists($class_name))
 			{
-				include("{$this->root_path}modules/portal_{$row['module_classname']}{$this->php_ext}");
+				include("{$this->includes_path}modules/portal_{$row['module_classname']}{$this->php_ext}");
 			}
 			if (!class_exists($class_name))
 			{
@@ -192,7 +199,7 @@ class phpbb_ext_board3_portal_controller_main
 			{
 				$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
 					'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module['template'],
-					'IMAGE_SRC'			=> $this->root_path . '../styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $template_module['image_src'],
+					'IMAGE_SRC'			=> $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $template_module['image_src'],
 					'TITLE'				=> $template_module['title'],
 					'CODE'				=> $template_module['code'],
 					'MODULE_ID'			=> $row['module_id'],
@@ -204,7 +211,7 @@ class phpbb_ext_board3_portal_controller_main
 			{
 				$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
 					'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module,
-					'IMAGE_SRC'			=> $this->root_path . '../styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'],
+					'IMAGE_SRC'			=> $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'],
 					'IMAGE_WIDTH'			=> $row['module_image_width'],
 					'IMAGE_HEIGHT'			=> $row['module_image_height'],
 					'MODULE_ID'			=> $row['module_id'],
