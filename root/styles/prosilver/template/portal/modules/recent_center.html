@@ -3,7 +3,7 @@
 	<ul class="topiclist bg1">
 		<li><dl>
 			<dd style="border-left:0px; width:100%">
-			<table width="100%">
+			<table style="width: 100%;">
 			<tr>
 				<!-- IF .latest_announcements --><td class="row1"><strong>{L_PORTAL_RECENT_ANN}</strong></td><!-- ENDIF -->
 				<!-- IF .latest_hot_topics --><td class="row1"><strong>{L_PORTAL_RECENT_HOT_TOPIC}</strong></td><!-- ENDIF -->
@@ -11,7 +11,7 @@
 			</tr>
 			<tr>
 				<!-- IF .latest_announcements -->
-				<td class="row1" style="width: 33%;" valign="top">
+				<td class="row1" style="width: 33%; vertical-align: top;">
 					<span class="gensmall">
 					<!-- BEGIN latest_announcements -->
 								<a href="{latest_announcements.U_VIEW_TOPIC}" title="{latest_announcements.FULL_TITLE}">{latest_announcements.TITLE}</a><br />
@@ -20,7 +20,7 @@
 				</td>
 				<!-- ENDIF -->
 				<!-- IF .latest_hot_topics -->
-				<td class="row1" style="width: 33%;" valign="top">
+				<td class="row1" style="width: 33%; vertical-align: top;">
 					<span class="gensmall">
 					<!-- BEGIN latest_hot_topics -->
 						<a href="{latest_hot_topics.U_VIEW_TOPIC}" title="{latest_hot_topics.FULL_TITLE}">{latest_hot_topics.TITLE}</a><br />
@@ -29,7 +29,7 @@
 				</td>
 				<!-- ENDIF -->
 				<!-- IF .latest_topics -->
-				<td class="row1" style="width: 33%;" valign="top">
+				<td class="row1" style="width: 33%; vertical-align: top;">
 					<span class="gensmall">
 					<!-- BEGIN latest_topics -->
 						<a href="{latest_topics.U_VIEW_TOPIC}" title="{latest_topics.FULL_TITLE}">{latest_topics.TITLE}</a><br />
