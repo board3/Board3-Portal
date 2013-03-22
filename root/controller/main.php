@@ -91,7 +91,7 @@ class phpbb_ext_board3_portal_controller_main
 	}
 
     /**
-    * Extension front handler method. This is called automatically when your extension is accessed 
+    * Extension front handler method. This is called automatically when your extension is accessed
     * through index.php?ext=example/foobar
     * @return null
     */
@@ -105,7 +105,7 @@ class phpbb_ext_board3_portal_controller_main
         // 1) which extension language folder we're using (it's not smart enough to use its own automatically)
         // 2) what language file to use
         $this->user->add_lang_ext('board3/portal', 'mods/portal');
-		
+
 		/**
 		* get initial data
 		*/
@@ -134,7 +134,7 @@ class phpbb_ext_board3_portal_controller_main
 			{
 				continue;
 			}
-			
+
 			$class_name = 'portal_' . $row['module_classname'] . '_module';
 			if (!class_exists($class_name))
 			{
@@ -146,8 +146,8 @@ class phpbb_ext_board3_portal_controller_main
 			}
 
 			$module = new $class_name();
-			
-			/** 
+
+			/**
 			* Check for permissions before loading anything
 			* the default group of a user always defines his/her permission (KISS)
 			*/
@@ -156,7 +156,7 @@ class phpbb_ext_board3_portal_controller_main
 			{
 				continue;
 			}
-			
+
 			if ($module->language)
 			{
 				$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $module->language);

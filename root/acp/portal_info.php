@@ -15,12 +15,12 @@ if (!defined('IN_PHPBB'))
 /**
 * @package module_install
 */
-class acp_portal_info
+class phpbb_ext_board3_portal_acp_portal_info
 {
 	public function module()
 	{
 		return array(
-			'filename'	=> 'acp_portal',
+			'filename'	=> 'phpbb_ext_board3_portal_acp_portal_module',
 			'title'		=> 'ACP_PORTAL',
 			'version'	=> '2.0.0b2',
 			'modes'		=> array(
