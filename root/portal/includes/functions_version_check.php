@@ -19,23 +19,24 @@ if (!defined('IN_PHPBB'))
 /**
 * A copy of Handyman` s MOD version check, to view it on the gallery overview
 */
-function mod_version_check($return_version = false)
+function mod_version_check($phpbb_root_path, $root_path, $return_version = false)
 {
 	global $user, $template;
-	global $phpbb_admin_path, $phpEx;
+	global $phpEx;
 
 	if (!function_exists('get_remote_file'))
 	{
-		global $phpbb_root_path;
 		include($phpbb_root_path . 'includes/functions_admin.' . $phpEx);
 	}
 
 	// load version files
 	$class_functions = array();
-	include($phpbb_admin_path . 'mods/board3_portal_check_version.' . $phpEx);
+	include($root_path . 'adm/mods/board3_portal_check_version.' . $phpEx);
 	$class_name = 'board3_portal_check_version';
 
-	$var = call_user_func(array($class_name, 'version'));
+	$version_check = new $class_name();
+
+	$var = call_user_func(array($version_check, 'version'));
 
 	// Get current and latest version
 	$errstr = '';
