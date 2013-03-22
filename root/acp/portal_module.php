@@ -15,21 +15,24 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-class acp_portal
+class phpbb_ext_board3_portal_acp_portal_module
 {
 	public $u_action;
 	public $new_config = array();
 	protected $c_class;
 	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx;
+	protected $root_path;
 
 	public function __construct()
 	{
 		global $db, $user, $cache, $template;
 		global $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx;
 
-		$user->add_lang('mods/portal');
+		$user->add_lang_ext('board3/portal', 'mods/portal');
 
-		include($phpbb_root_path . 'portal/includes/constants.' . $phpEx);
+		$this->root_path = $phpbb_root_path . 'ext/board3/portal/';
+
+		include($this->root_path . 'portal/includes/constants.' . $phpEx);
 		$portal_root_path = PORTAL_ROOT_PATH;
 
 		$this->db = $db;
@@ -39,21 +42,22 @@ class acp_portal
 		$this->config = $config;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->phpbb_admin_path = $phpbb_admin_path;
+		$this->portal_root_path = $this->root_path . 'portal/';
 		$this->php_ex = $phpEx;
 
 		if (!function_exists('column_string_const'))
 		{
-			include($phpbb_root_path . $portal_root_path . 'includes/functions_modules.' . $this->php_ex);
+			include($this->portal_root_path . 'includes/functions_modules.' . $this->php_ex);
 		}
 
 		if (!function_exists('mod_version_check'))
 		{
-			include($phpbb_root_path . $portal_root_path . 'includes/functions_version_check.' . $this->php_ex);
+			include($this->portal_root_path . 'includes/functions_version_check.' . $this->php_ex);
 		}
 
 		if(!function_exists('obtain_portal_config'))
 		{
-			include($phpbb_root_path . $portal_root_path . 'includes/functions.' . $this->php_ex);
+			include($this->portal_root_path . 'includes/functions.' . $this->php_ex);
 		}
 	}
 
@@ -105,7 +109,7 @@ class acp_portal
 						$class = 'portal_' . $module_data['module_classname'] . '_module';
 						if (!class_exists($class))
 						{
-							include($this->phpbb_root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ex);
+							include($this->root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ex);
 						}
 						if (!class_exists($class))
 						{
@@ -115,7 +119,7 @@ class acp_portal
 						$this->c_class = new $class();
 						if ($this->c_class->language)
 						{
-							$this->user->add_lang('mods/portal/' . $this->c_class->language);
+							$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->language);
 						}
 						$module_name = $this->user->lang[$this->c_class->name];
 						$display_vars = $this->c_class->get_template_acp($module_id);
@@ -124,7 +128,7 @@ class acp_portal
 							'MODULE_IMAGE'			=> $module_data['module_image_src'],
 							'MODULE_IMAGE_WIDTH'	=> $module_data['module_image_width'],
 							'MODULE_IMAGE_HEIGHT'	=> $module_data['module_image_height'],
-							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $this->phpbb_root_path . 'styles/' . $this->user->theme['theme_path'] . '/theme/images/portal/' . $module_data['module_image_src'] : '',
+							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $this->root_path . 'styles/' . $this->user->theme['theme_path'] . '/theme/images/portal/' . $module_data['module_image_src'] : '',
 							'MODULE_ENABLED'		=> ($module_data['module_status']) ? true : false,
 							'MODULE_SHOW_IMAGE'		=> (in_array(column_num_string($module_data['module_column']), array('center', 'top', 'bottom'))) ? false : true,
 						));
@@ -155,7 +159,7 @@ class acp_portal
 				else
 				{
 					// only show the mod version check if we are on the General Settings page
-					mod_version_check();
+					mod_version_check($this->phpbb_root_path, $this->root_path);
 				}
 
 				$this->new_config = $this->config;
@@ -396,7 +400,7 @@ class acp_portal
 				if ($add_column)
 				{
 					$submit = (isset($_POST['submit'])) ? true : false;
-					$directory = $this->phpbb_root_path . 'portal/modules/';
+					$directory = $this->root_path . 'portal/modules/';
 
 					if ($submit)
 					{
@@ -588,7 +592,7 @@ class acp_portal
 				}
 				else
 				{
-					$directory = $this->phpbb_root_path . 'portal/modules/';
+					$directory = $this->root_path . 'portal/modules/';
 
 					$portal_modules = obtain_portal_modules();
 
@@ -607,7 +611,7 @@ class acp_portal
 						$this->c_class = new $class();
 						if ($this->c_class->language)
 						{
-							$this->user->add_lang('mods/portal/' . $this->c_class->language);
+							$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->language);
 						}
 						$template_column = column_num_string($row['module_column']);
 
@@ -680,7 +684,7 @@ class acp_portal
 
 						$this->template->assign_block_vars('modules_' . $template_column, array(
 							'MODULE_NAME'		=> (isset($this->user->lang[$row['module_name']])) ? $this->user->lang[$row['module_name']] : $row['module_name'],
-							'MODULE_IMAGE'		=> ($row['module_image_src']) ? '<img src="' . $this->phpbb_root_path . 'styles/' . $this->user->theme['theme_path'] . '/theme/images/portal/' . $row['module_image_src'] . '" alt="' . $row['module_name'] . '" />' : '',
+							'MODULE_IMAGE'		=> ($row['module_image_src']) ? '<img src="' . $this->root_path . 'styles/' .  $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'] . '" alt="' . $row['module_name'] . '" />' : '',
 							'MODULE_ENABLED'	=> ($row['module_status']) ? true : false,
 
 							'U_DELETE'			=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;module_classname=' . $row['module_classname'] . '&amp;action=delete',
@@ -693,10 +697,10 @@ class acp_portal
 					}
 
 					$this->template->assign_vars(array(
-						'ICON_MOVE_LEFT'				=> '<img src="' . $this->phpbb_admin_path . 'images/icon_left.gif" alt="' . $this->user->lang['MOVE_LEFT'] . '" title="' . $this->user->lang['MOVE_LEFT'] . '" />',
-						'ICON_MOVE_LEFT_DISABLED'		=> '<img src="' . $this->phpbb_admin_path . 'images/icon_left_disabled.gif" alt="' . $this->user->lang['MOVE_LEFT'] . '" title="' . $this->user->lang['MOVE_LEFT'] . '" />',
-						'ICON_MOVE_RIGHT'				=> '<img src="' . $this->phpbb_admin_path . 'images/icon_right.gif" alt="' . $this->user->lang['MOVE_RIGHT'] . '" title="' . $this->user->lang['MOVE_RIGHT'] . '" />',
-						'ICON_MOVE_RIGHT_DISABLED'		=> '<img src="' . $this->phpbb_admin_path . 'images/icon_right_disabled.gif" alt="' . $this->user->lang['MOVE_RIGHT'] . '" title="' . $this->user->lang['MOVE_RIGHT'] . '" />',
+						'ICON_MOVE_LEFT'				=> '<img src="' . $this->root_path . 'adm/images/icon_left.gif" alt="' . $this->user->lang['MOVE_LEFT'] . '" title="' . $this->user->lang['MOVE_LEFT'] . '" />',
+						'ICON_MOVE_LEFT_DISABLED'		=> '<img src="' . $this->root_path . 'adm/images/icon_left_disabled.gif" alt="' . $this->user->lang['MOVE_LEFT'] . '" title="' . $this->user->lang['MOVE_LEFT'] . '" />',
+						'ICON_MOVE_RIGHT'				=> '<img src="' . $this->root_path . 'adm/images/icon_right.gif" alt="' . $this->user->lang['MOVE_RIGHT'] . '" title="' . $this->user->lang['MOVE_RIGHT'] . '" />',
+						'ICON_MOVE_RIGHT_DISABLED'		=> '<img src="' . $this->root_path . 'adm/images/icon_right_disabled.gif" alt="' . $this->user->lang['MOVE_RIGHT'] . '" title="' . $this->user->lang['MOVE_RIGHT'] . '" />',
 					));
 				}
 
@@ -711,9 +715,9 @@ class acp_portal
 					{
 						trigger_error($this->user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
 					}
-					include($this->phpbb_root_path . 'portal/includes/functions_upload.' . $this->php_ex);
+					include($this->root_path . 'portal/includes/functions_upload.' . $this->php_ex);
 					// Default upload path is portal/upload/
-					$upload_path = $this->phpbb_root_path . 'portal/upload/';
+					$upload_path = $this->root_path . 'portal/upload/';
 
 					$portal_upload = new portal_upload($upload_path, $this->u_action);
 
@@ -902,7 +906,7 @@ class acp_portal
 		$class = 'portal_' . $module_data['module_classname'] . '_module';
 		if (!class_exists($class))
 		{
-			include($this->phpbb_root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ex);
+			include($this->root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ex);
 		}
 		if (!class_exists($class))
 		{
@@ -1014,7 +1018,7 @@ class acp_portal
 		$class = 'portal_' . $module_data['module_classname'] . '_module';
 		if (!class_exists($class))
 		{
-			include($this->phpbb_root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ex);
+			include($this->root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ex);
 		}
 		if (!class_exists($class))
 		{
@@ -1126,7 +1130,7 @@ class acp_portal
 		$module_data = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
 		
-		$directory = $this->phpbb_root_path . 'portal/modules/';
+		$directory = $this->root_path . 'portal/modules/';
 
 		if ($module_data !== false)
 		{
