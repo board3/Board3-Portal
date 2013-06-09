@@ -61,7 +61,8 @@ class portal_birthday_list_module
 			while ($cache_days > 0)
 			{
 				$day = getdate(time() + 86400 * $cache_days + $user->timezone + $user->dst - date('Z'));
-				$sql_days .= " OR u.user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $day['mday'], $day['mon'])) . "%'";
+				$like_expression = $db->sql_like_expression($db->any_char . (sprintf('%2d-%2d-', $day['mday'], $day['mon'])) . $db->any_char);
+				$sql_days .= " OR u.user_birthday " . $like_expression . "";
 				$cache_days--;
 			}
 
@@ -92,21 +93,19 @@ class portal_birthday_list_module
 			{
 				if (substr($row['user_birthday'], 0, 6) == $today)
 				{
-					$birthday_list .= '<span style="float:left;"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;">' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</span><span style="float: right;">';
-					if ($age = (int) substr($row['user_birthday'], -4))
-					{
-						$birthday_list .= ' (' . ($now['year'] - $age) . ')';
-					}
-					$birthday_list .= '</span><br style="clear: both" />';
+					$birthday_list = true;
+					$template->assign_block_vars('board3_birthday_list', array(
+						'USER'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
+						'AGE'		=> ($age = (int) substr($row['user_birthday'], -4)) ? ' (' . ($now['year'] - $age) . ')' : '',
+					));
 				}
 				elseif ($config['board3_birthdays_ahead_' . $module_id] > 0)
 				{
-					$birthday_ahead_list .= '<span style="float:left;"><img src="' . $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/portal/portal_user.png" width="16" height="16" alt="" /></span><span style="float:left; padding-left:5px; padding-top:2px;"><span title="' . format_birthday($row['user_birthday'], 'd M') . '">' . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']) . '</span></span><span style="float: right;">';
-					if ($age = (int) substr($row['user_birthday'], -4))
-					{
-						$birthday_ahead_list .= ' (' . ($now['year'] - $age) . ')';
-					}
-					$birthday_ahead_list .= '</span><br style="clear: both" />';
+					$birthday_ahead_list = true;
+					$template->assign_block_vars('board3_birthday_ahead_list', array(
+						'USER'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
+						'AGE'		=> ($age = (int) substr($row['user_birthday'], -4)) ? ' (' . ($now['year'] - $age) . ')' : '',
+					));
 				}
 			}
 			$db->sql_freeresult($result);
