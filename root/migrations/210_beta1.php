@@ -70,7 +70,7 @@ class phpbb_ext_board3_portal_migrations_210_beta1 extends phpbb_db_migration
 	public function update_data()
 	{
 		return array(
-			array('config.add', array('board3_portal_version', '2.1.0b1'));
+			array('config.add', array('board3_portal_version', '2.1.0b1')),
 			array('config.add', array('board3_enable', 1)),
 			array('config.add', array('board3_left_column', 1)),
 			array('config.add', array('board3_right_column', 1)),
@@ -152,8 +152,8 @@ class phpbb_ext_board3_portal_migrations_210_beta1 extends phpbb_db_migration
 				'acp',
 				'ACP_PORTAL',
 				array(
-					'module_basename'	=> 'portal',
-					'modes'				=> array('config'),
+					'module_basename'	=> 'phpbb_ext_board3_portal_acp_portal_module',
+					'module_mode'		=> 'config',
 					'module_auth'		=> 'acl_a_manage_portal',
 					'module_langname'	=> 'ACP_PORTAL_GENERAL_INFO',
 				),
@@ -162,8 +162,8 @@ class phpbb_ext_board3_portal_migrations_210_beta1 extends phpbb_db_migration
 				'acp',
 				'ACP_PORTAL',
 				array(
-					'module_basename'	=> 'portal',
-					'modes'				=> array('modules'),
+					'module_basename'	=> 'phpbb_ext_board3_portal_acp_portal_module',
+					'module_mode'		=> 'modules',
 					'module_auth'		=> 'acl_a_manage_portal',
 					'module_langname'	=> 'ACP_PORTAL_MODULES',
 				),
@@ -172,8 +172,8 @@ class phpbb_ext_board3_portal_migrations_210_beta1 extends phpbb_db_migration
 				'acp',
 				'ACP_PORTAL',
 				array(
-					'module_basename'	=> 'portal',
-					'modes'				=> array('upload_module'),
+					'module_basename'	=> 'phpbb_ext_board3_portal_acp_portal_module',
+					'module_mode'		=> 'upload_module',
 					'module_auth'		=> 'acl_a_manage_portal',
 					'module_langname'	=> 'ACP_PORTAL_UPLOAD',
 				),
@@ -185,6 +185,21 @@ class phpbb_ext_board3_portal_migrations_210_beta1 extends phpbb_db_migration
 
 	public function add_portal_data()
 	{
+		if ($this->db_tools->sql_table_exists($this->table_prefix . 'portal_config'))
+		{
+			$sql = 'SELECT * FROM ' . $this->table_prefix . 'portal_config';
+			$result = $this->db->sql_query_limit($sql, 1);
+			$row = $this->db->sql_fetchrow($result);
+			if (!empty($row))
+			{
+				return;
+			}
+		}
+		else
+		{
+			return;
+		}
+
 		// get the correct group IDs from the database
 		$in_ary = array('GUESTS', 'REGISTERED', 'REGISTERED_COPPA');
 		$groups_ary = array();
