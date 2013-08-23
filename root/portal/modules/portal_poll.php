@@ -251,7 +251,7 @@ class portal_poll_module
 
 			$sql = 'SELECT t.poll_title, t.poll_start, t.topic_id,  t.topic_first_post_id, t.forum_id, t.poll_length, t.poll_vote_change, t.poll_max_options, t.topic_status, f.forum_status, p.bbcode_bitfield, p.bbcode_uid
 					FROM ' . TOPICS_TABLE . ' t, ' . POSTS_TABLE . ' p, ' . FORUMS_TABLE . " f
-					WHERE t.forum_id = f.forum_id AND t.topic_approved = 1 AND t.poll_start > 0
+					WHERE t.forum_id = f.forum_id AND t.topic_visibility = 1 AND t.poll_start > 0
 					{$where}
 					AND t.topic_moved_id = 0
 					AND p.post_id = t.topic_first_post_id

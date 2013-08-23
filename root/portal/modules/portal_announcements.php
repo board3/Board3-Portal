@@ -134,7 +134,7 @@ class portal_announcements_module
 					FROM ' . TOPICS_TABLE . '
 					WHERE ((topic_type = ' . POST_GLOBAL . ')
 						OR topic_type = ' . POST_ANNOUNCE . ')
-						AND topic_approved = 1
+						AND topic_visibility = 1
 						AND topic_moved_id = 0
 						' . $post_time . '
 						' . $str_where;

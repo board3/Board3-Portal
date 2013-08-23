@@ -213,8 +213,9 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 			t.topic_attachment,
 			t.topic_views,
 			t.poll_title,
-			t.topic_replies,
-			t.topic_replies_real,
+			t.topic_posts_approved,
+			t.topic_posts_unapproved,
+			t.topic_posts_softdeleted,
 			t.topic_poster,
 			t.topic_type,
 			t.topic_status,
@@ -259,7 +260,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 		'WHERE' => $topic_type . '
 				' . $post_time . '
 				AND t.topic_status <> ' . ITEM_MOVED . '
-				AND t.topic_approved = 1
+				AND t.topic_visibility = 1
 				AND t.topic_moved_id = 0
 				' . $str_where,
 		'ORDER_BY' => $topic_order,
@@ -340,8 +341,8 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 			'icon_id'				=> $row['icon_id'],
 			'topic_status'			=> $row['topic_status'],
 			'forum_id'				=> $row['forum_id'],
-			'topic_replies'			=> $row['topic_replies'],
-			'topic_replies_real'	=> $row['topic_replies_real'],
+			'topic_replies'			=> $row['topic_posts_approved'] + $row['topic_posts_unapproved'] + $row['topic_posts_softdeleted'],
+			'topic_replies_real'	=> $row['topic_posts_approved'],
 			'topic_time'			=> $user->format_date($row['post_time']),
 			'topic_last_post_time'	=> $row['topic_last_post_time'],
 			'topic_title'			=> $row['topic_title'],

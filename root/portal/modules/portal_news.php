@@ -127,7 +127,7 @@ class portal_news_module
 				$sql = 'SELECT COUNT(topic_id) AS num_topics
 					FROM ' . TOPICS_TABLE . '
 					WHERE ' . $topic_type . '
-						AND topic_approved = 1
+						AND topic_visibility = ' . ITEM_APPROVED . '
 						AND topic_moved_id = 0
 						' . $str_where;
 					$result = $db->sql_query($sql);
