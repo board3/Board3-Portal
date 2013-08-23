@@ -169,11 +169,11 @@ class portal_leaders_module
 			{
 				if ($row['group_name'] == 'ADMINISTRATORS')
 				{
-					$which_row = 'admin';
+					$which_row = 'b3p_admins';
 				}
 				elseif ($row['group_name'] == 'GLOBAL_MODERATORS')
 				{
-					$which_row = 'mod';
+					$which_row = 'b3p_moderators';
 				}
 
 				if ($row['group_type'] == GROUP_HIDDEN && !$auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel') && $row['ug_user_id'] != $user->data['user_id'])
