@@ -93,7 +93,7 @@ class portal_recent_module
 		$sql = 'SELECT topic_title, forum_id, topic_id
 			FROM ' . TOPICS_TABLE . ' t
 			WHERE topic_status <> ' . FORUM_LINK . '
-				AND topic_approved = 1 
+				AND topic_visibility = ' . ITEM_APPROVED . '
 				AND (topic_type = ' . POST_ANNOUNCE . ' OR topic_type = ' . POST_GLOBAL . ')
 				AND topic_moved_id = 0
 				' . $sql_where . '' .  $forum_sql . '
@@ -119,8 +119,8 @@ class portal_recent_module
 		//
 		$sql = 'SELECT topic_title, forum_id, topic_id
 			FROM ' . TOPICS_TABLE . ' t
-			WHERE topic_approved = 1 
-				AND topic_replies >=' . $config['hot_threshold'] . '
+			WHERE topic_visibility = ' . ITEM_APPROVED . '
+				AND topic_posts_approved >' . $config['hot_threshold'] . '
 				AND topic_moved_id = 0
 				' . $sql_where . '' .  $forum_sql . '
 			ORDER BY topic_time DESC';
@@ -146,7 +146,7 @@ class portal_recent_module
 		$sql = 'SELECT topic_title, forum_id, topic_id
 			FROM ' . TOPICS_TABLE . ' t
 			WHERE topic_status <> ' . ITEM_MOVED . '
-				AND topic_approved = 1 
+				AND topic_visibility = ' . ITEM_APPROVED . '
 				AND topic_type = ' . POST_NORMAL . '
 				AND topic_moved_id = 0
 				' . $sql_where . '' .  $forum_sql . '
