@@ -49,18 +49,24 @@ class portal_donation_module
 
 	public function get_template_center($module_id)
 	{
-		global $config, $template;
+		global $config, $template, $user;
 
-		$template->assign_var('PAY_ACC_CENTER', $config['board3_pay_acc_' . $module_id]);
+		$template->assign_vars(array(
+			'PAY_ACC_CENTER'	=> $config['board3_pay_acc_' . $module_id],
+			'PAY_CUSTOM_CENTER'	=> (!empty($config['board3_pay_custom_' . $module_id])) ? $user->data['username_clean'] : false,
+		));
 
 		return 'donation_center.html';
 	}
 
 	public function get_template_side($module_id)
 	{
-		global $config, $template;
+		global $config, $template, $user;
 
-		$template->assign_var('PAY_ACC_SIDE', $config['board3_pay_acc_' . $module_id]);
+		$template->assign_vars(array(
+			'PAY_ACC_SIDE'	=> $config['board3_pay_acc_' . $module_id],
+			'PAY_CUSTOM_SIDE'	=> (!empty($config['board3_pay_custom_' . $module_id])) ? $user->data['username_clean'] : false,
+		));
 
 		return 'donation_side.html';
 	}
@@ -71,7 +77,8 @@ class portal_donation_module
 			'title'	=> 'ACP_PORTAL_PAYPAL_SETTINGS',
 			'vars'	=> array(
 				'legend1'							=> 'ACP_PORTAL_PAYPAL_SETTINGS',
-				'board3_pay_acc_' . $module_id					=> array('lang' => 'PORTAL_PAY_ACC'						,	'validate' => 'string',		'type' => 'text:25:100',	 'explain' => true),
+				'board3_pay_acc_' . $module_id		=> array('lang' => 'PORTAL_PAY_ACC', 'validate' => 'string', 'type' => 'text:25:100', 'explain' => true),
+				'board3_pay_custom_' . $module_id	=> array('lang' => 'PORTAL_PAY_CUSTOM', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => false),
 			)
 		);
 	}
@@ -82,6 +89,7 @@ class portal_donation_module
 	public function install($module_id)
 	{
 		set_config('board3_pay_acc_' . $module_id, 'your@paypal.com');
+		set_config('board3_pay_custom_' . $module_id, true);
 		return true;
 	}
 
@@ -91,6 +99,7 @@ class portal_donation_module
 
 		$del_config = array(
 			'board3_pay_acc_' . $module_id,
+			'board3_pay_custom_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
