@@ -61,4 +61,5 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_PAYPAL_SETTINGS_EXP'		=> 'This is where you customize the Paypal block.',
 	'PORTAL_PAY_ACC'						=> 'Paypal account to use',
 	'PORTAL_PAY_ACC_EXP'					=> 'Enter your Paypal e-mail address eg. xxx@xxx.com',
+	'PORTAL_PAY_CUSTOM'				=> 'Append username to Paypal donation',
 ));
