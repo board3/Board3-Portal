@@ -218,8 +218,8 @@ class portal_upload
 				}
 				else if (is_file($src . '/' . $src_entry) && !is_file($dest . '/' . $src_entry))
 				{
-					copy($src . '/' . $src_entry, $dest . '/' . $src_entry);
-					chmod($dest . '/' . $src_entry, 0644);
+					@copy($src . '/' . $src_entry, $dest . '/' . $src_entry);
+					@chmod($dest . '/' . $src_entry, 0644);
 				}
 			}
 		}
@@ -240,25 +240,25 @@ class portal_upload
 
 		if (!is_dir($dir) && is_file($dir))
 		{
-			phpbb_chmod($dir, CHMOD_ALL);
-			return unlink($dir);
+			@chmod($dir, 0644);
+			return @unlink($dir);
 		}
 
-        foreach (scandir($dir) as $item)
+		foreach (scandir($dir) as $item)
 		{ 
-            if ($item == '.' || $item == '..')
+			if ($item == '.' || $item == '..')
 			{
 				continue;
 			}
-            if (!$this->directory_delete($dir . "/" . $item))
+			if (!$this->directory_delete($dir . "/" . $item))
 			{
-				phpbb_chmod($dir . "/" . $item, CHMOD_ALL);
-                if (!$this->directory_delete($dir . "/" . $item))
+				@chmod($dir . "/" . $item, 0644);
+				if (!$this->directory_delete($dir . "/" . $item))
 				{
 					return false;
 				}
-            }
-        }
+			}
+		}
 
 		return @rmdir($dir);
 	}
@@ -304,18 +304,18 @@ class portal_upload
 			// remove old backup file first
 			if(file_exists($to . '.bak'))
 			{
-				phpbb_chmod($to . '.bak', CHMOD_ALL);
+				@chmod($to . '.bak', 0644);
 				unlink($to . '.bak');
 			}
 			@rename($to, $to . '.bak');
-			phpbb_chmod($to, CHMOD_ALL);
+			@chmod($to, 0644);
 		}
 
 		if (!@copy($from, $to))
 		{
 			return sprintf($user->lang['MODULE_COPY_FAILURE'], $to);
 		}
-		phpbb_chmod($to, CHMOD_ALL);
+		@chmod($to, 0644);
 
 		return true;
 	}
