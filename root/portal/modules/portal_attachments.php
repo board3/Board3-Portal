@@ -49,206 +49,12 @@ class portal_attachments_module
 
 	public function get_template_center($module_id)
 	{
-		global $config, $template, $db, $user, $auth, $phpEx, $phpbb_root_path;
-
-		$attach_forums = false;
-		$where = '';
-		$filetypes = array();
-
-		// Get filetypes and put them into an array
-		if(isset($config['board3_attachments_filetype_' . $module_id]) && strlen($config['board3_attachments_filetype_' . $module_id]) > 0)
-		{
-			$filetypes = explode(',', $config['board3_attachments_filetype_' . $module_id]);
-		}
-
-		if($config['board3_attachments_forum_ids_' . $module_id] !== '')
-		{
-			$attach_forums_config = (strpos($config['board3_attachments_forum_ids_' . $module_id], ',') !== false) ? explode(',', $config['board3_attachments_forum_ids_' . $module_id]) : array($config['board3_attachments_forum_ids_' . $module_id]);
-			$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
-
-			if($config['board3_attachments_forum_exclude_' . $module_id])
-			{
-				$forum_list = array_unique(array_diff($forum_list, $attach_forums_config));
-			}
-			else
-			{
-				$forum_list =  array_unique(array_intersect($attach_forums_config, $forum_list));
-			}
-		}
-		else
-		{
-			$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
-		}
-
-		if(sizeof($forum_list))
-		{
-			$attach_forums = true;
-			$where = 'AND ' . $db->sql_in_set('t.forum_id', $forum_list);
-		}
-
-		if(sizeof($filetypes))
-		{
-			if($config['board3_attachments_exclude_' . $module_id])
-			{
-				$where .= ' AND ' . $db->sql_in_set('a.extension', $filetypes, true);
-			}
-			else
-			{
-				$where .= ' AND ' . $db->sql_in_set('a.extension', $filetypes);
-			}
-		}
-
-		if($attach_forums === true)
-		{
-			// Just grab all attachment info from database
-			$sql = 'SELECT
-						a.*,
-						t.forum_id
-					FROM
-						' . ATTACHMENTS_TABLE . ' a,
-						' . TOPICS_TABLE . ' t
-					WHERE
-						a.topic_id <> 0
-						AND a.topic_id = t.topic_id
-						' . $where . '
-					ORDER BY
-						filetime ' . ((!$config['display_order']) ? 'DESC' : 'ASC') . ', post_msg_id ASC';
-			$result = $db->sql_query_limit($sql, $config['board3_attachments_number_' . $module_id]);
-
-			while ($row = $db->sql_fetchrow($result))
-			{
-				$size_lang = ($row['filesize'] >= 1048576) ? $user->lang['MIB'] : (($row['filesize'] >= 1024) ? $user->lang['KIB'] : $user->lang['BYTES']);
-				$row['filesize'] = ($row['filesize'] >= 1048576) ? round((round($row['filesize'] / 1048576 * 100) / 100), 2) : (($row['filesize'] >= 1024) ? round((round($row['filesize'] / 1024 * 100) / 100), 2) : $row['filesize']);
-
-				$raw_filename = utf8_substr($row['real_filename'], 0, strrpos($row['real_filename'], '.'));
-				$replace = character_limit($raw_filename, $config['board3_attach_max_length_' . $module_id]);
-
-				$template->assign_block_vars('attach_center', array(
-					'FILESIZE'			=> $row['filesize'] . ' ' . $size_lang,
-					'FILETIME'			=> $user->format_date($row['filetime']),
-					'DOWNLOAD_COUNT'	=> (int) $row['download_count'], // grab downloads count
-					'FILENAME'			=> $replace,
-					'REAL_FILENAME'		=> $row['real_filename'],
-					'PHYSICAL_FILENAME'	=> basename($row['physical_filename']),
-					'ATTACH_ID'			=> $row['attach_id'],
-					'POST_IDS'			=> (!empty($post_ids[$row['attach_id']])) ? $post_ids[$row['attach_id']] : '',
-					'POST_MSG_ID'		=> $row['post_msg_id'], // grab post ID to redirect to post
-					'U_FILE'			=> append_sid($phpbb_root_path . 'download/file.' . $phpEx, 'id=' . $row['attach_id']),
-					'U_TOPIC'			=> append_sid($phpbb_root_path . 'viewtopic.'.$phpEx, 'p='.$row['post_msg_id'].'#p'.$row['post_msg_id']),
-				));
-			}
-			$db->sql_freeresult($result);
-
-			$template->assign_var('S_DISPLAY_ATTACHMENTS', true);
-		} 
-		else 
-		{
-			$template->assign_var('S_DISPLAY_ATTACHMENTS', false);
-		}
-
-		return 'attachments_center.html';
+		return $this->parse_template($module_id, 'center');
 	}
 
 	public function get_template_side($module_id)
 	{
-		global $config, $template, $db, $user, $auth, $phpEx, $phpbb_root_path;
-
-		$attach_forums = false;
-		$where = '';
-		$filetypes = array();
-
-		// Get filetypes and put them into an array
-		if(isset($config['board3_attachments_filetype_' . $module_id]) && strlen($config['board3_attachments_filetype_' . $module_id]) > 0)
-		{
-			$filetypes = explode(',', $config['board3_attachments_filetype_' . $module_id]);
-		}
-
-		if($config['board3_attachments_forum_ids_' . $module_id] !== '')
-		{
-			$attach_forums_config = (strpos($config['board3_attachments_forum_ids_' . $module_id], ',') !== false) ? explode(',', $config['board3_attachments_forum_ids_' . $module_id]) : array($config['board3_attachments_forum_ids_' . $module_id]);
-			$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
-
-			if($config['board3_attachments_forum_exclude_' . $module_id])
-			{
-				$forum_list = array_unique(array_diff($forum_list, $attach_forums_config));
-			}
-			else
-			{
-				$forum_list =  array_unique(array_intersect($attach_forums_config, $forum_list));
-			}
-		}
-		else
-		{
-			$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
-		}
-
-		if(sizeof($forum_list))
-		{
-			$attach_forums = true;
-			$where = 'AND ' . $db->sql_in_set('t.forum_id', $forum_list);
-		}
-
-		if(sizeof($filetypes))
-		{
-			if($config['board3_attachments_exclude_' . $module_id])
-			{
-				$where .= ' AND ' . $db->sql_in_set('a.extension', $filetypes, true);
-			}
-			else
-			{
-				$where .= ' AND ' . $db->sql_in_set('a.extension', $filetypes);
-			}
-		}
-
-		if($attach_forums === true)
-		{
-			// Just grab all attachment info from database
-			$sql = 'SELECT
-						a.*,
-						t.forum_id
-					FROM
-						' . ATTACHMENTS_TABLE . ' a,
-						' . TOPICS_TABLE . ' t
-					WHERE
-						a.topic_id <> 0
-						AND a.topic_id = t.topic_id
-						' . $where . '
-					ORDER BY
-						filetime ' . ((!$config['display_order']) ? 'DESC' : 'ASC') . ', post_msg_id ASC';
-			$result = $db->sql_query_limit($sql, $config['board3_attachments_number_' . $module_id]);
-
-			while ($row = $db->sql_fetchrow($result))
-			{
-				$size_lang = ($row['filesize'] >= 1048576) ? $user->lang['MIB'] : (($row['filesize'] >= 1024) ? $user->lang['KIB'] : $user->lang['BYTES']);
-				$row['filesize'] = ($row['filesize'] >= 1048576) ? round((round($row['filesize'] / 1048576 * 100) / 100), 2) : (($row['filesize'] >= 1024) ? round((round($row['filesize'] / 1024 * 100) / 100), 2) : $row['filesize']);
-
-				$raw_filename = utf8_substr($row['real_filename'], 0, strrpos($row['real_filename'], '.'));
-				$replace = character_limit($raw_filename, $config['board3_attach_max_length_' . $module_id]);
-
-				$template->assign_block_vars('attach_side', array(
-					'FILESIZE'			=> $row['filesize'] . ' ' . $size_lang,
-					'FILETIME'			=> $user->format_date($row['filetime']),
-					'DOWNLOAD_COUNT'	=> (int) $row['download_count'], // grab downloads count
-					'FILENAME'			=> $replace,
-					'REAL_FILENAME'		=> $row['real_filename'],
-					'PHYSICAL_FILENAME'	=> basename($row['physical_filename']),
-					'ATTACH_ID'			=> $row['attach_id'],
-					'POST_IDS'			=> (!empty($post_ids[$row['attach_id']])) ? $post_ids[$row['attach_id']] : '',
-					'POST_MSG_ID'		=> $row['post_msg_id'], // grab post ID to redirect to post
-					'U_FILE'			=> append_sid($phpbb_root_path . 'download/file.' . $phpEx, 'id=' . $row['attach_id']),
-					'U_TOPIC'			=> append_sid($phpbb_root_path . 'viewtopic.'.$phpEx, 'p='.$row['post_msg_id'].'#p'.$row['post_msg_id']),
-				));
-			}
-			$db->sql_freeresult($result);
-
-			$template->assign_var('S_DISPLAY_ATTACHMENTS', true);
-		} 
-		else 
-		{
-			$template->assign_var('S_DISPLAY_ATTACHMENTS', false);
-		}
-
-		return 'attachments_side.html';
+		return $this->parse_template($module_id, 'side');
 	}
 
 	public function get_template_acp($module_id)
@@ -378,5 +184,113 @@ class portal_attachments_module
 		$values = request_var($key, array(0 => ''));
 		$news = implode(',', $values);
 		set_config($key, $news);
+	}
+
+	/**
+	* Parse template variables for module
+	*
+	* @param int $module_id	Module ID
+	* @param string $type	Module type (center or side)
+	*/
+	protected function parse_template($module_id, $type)
+	{
+		global $config, $template, $db, $user, $auth, $phpEx, $phpbb_root_path;
+
+		$attach_forums = false;
+		$where = '';
+		$filetypes = array();
+
+		// Get filetypes and put them into an array
+		if(isset($config['board3_attachments_filetype_' . $module_id]) && strlen($config['board3_attachments_filetype_' . $module_id]) > 0)
+		{
+			$filetypes = explode(',', $config['board3_attachments_filetype_' . $module_id]);
+		}
+
+		if($config['board3_attachments_forum_ids_' . $module_id] !== '')
+		{
+			$attach_forums_config = (strpos($config['board3_attachments_forum_ids_' . $module_id], ',') !== false) ? explode(',', $config['board3_attachments_forum_ids_' . $module_id]) : array($config['board3_attachments_forum_ids_' . $module_id]);
+			$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
+
+			if($config['board3_attachments_forum_exclude_' . $module_id])
+			{
+				$forum_list = array_unique(array_diff($forum_list, $attach_forums_config));
+			}
+			else
+			{
+				$forum_list =  array_unique(array_intersect($attach_forums_config, $forum_list));
+			}
+		}
+		else
+		{
+			$forum_list =  array_unique(array_keys($auth->acl_getf('f_read', true)));
+		}
+
+		if(sizeof($forum_list))
+		{
+			$attach_forums = true;
+			$where = 'AND ' . $db->sql_in_set('t.forum_id', $forum_list);
+		}
+
+		if(sizeof($filetypes))
+		{
+			if($config['board3_attachments_exclude_' . $module_id])
+			{
+				$where .= ' AND ' . $db->sql_in_set('a.extension', $filetypes, true);
+			}
+			else
+			{
+				$where .= ' AND ' . $db->sql_in_set('a.extension', $filetypes);
+			}
+		}
+
+		if($attach_forums === true)
+		{
+			// Just grab all attachment info from database
+			$sql = 'SELECT
+						a.*,
+						t.forum_id
+					FROM
+						' . ATTACHMENTS_TABLE . ' a,
+						' . TOPICS_TABLE . ' t
+					WHERE
+						a.topic_id <> 0
+						AND a.topic_id = t.topic_id
+						' . $where . '
+					ORDER BY
+						filetime ' . ((!$config['display_order']) ? 'DESC' : 'ASC') . ', post_msg_id ASC';
+			$result = $db->sql_query_limit($sql, $config['board3_attachments_number_' . $module_id]);
+
+			while ($row = $db->sql_fetchrow($result))
+			{
+				$size_lang = ($row['filesize'] >= 1048576) ? $user->lang['MIB'] : (($row['filesize'] >= 1024) ? $user->lang['KIB'] : $user->lang['BYTES']);
+				$row['filesize'] = ($row['filesize'] >= 1048576) ? round((round($row['filesize'] / 1048576 * 100) / 100), 2) : (($row['filesize'] >= 1024) ? round((round($row['filesize'] / 1024 * 100) / 100), 2) : $row['filesize']);
+
+				$raw_filename = utf8_substr($row['real_filename'], 0, strrpos($row['real_filename'], '.'));
+				$replace = character_limit($raw_filename, $config['board3_attach_max_length_' . $module_id]);
+
+				$template->assign_block_vars('attach_' . $type, array(
+					'FILESIZE'			=> $row['filesize'] . ' ' . $size_lang,
+					'FILETIME'			=> $user->format_date($row['filetime']),
+					'DOWNLOAD_COUNT'	=> (int) $row['download_count'], // grab downloads count
+					'FILENAME'			=> $replace,
+					'REAL_FILENAME'		=> $row['real_filename'],
+					'PHYSICAL_FILENAME'	=> basename($row['physical_filename']),
+					'ATTACH_ID'			=> $row['attach_id'],
+					'POST_IDS'			=> (!empty($post_ids[$row['attach_id']])) ? $post_ids[$row['attach_id']] : '',
+					'POST_MSG_ID'		=> $row['post_msg_id'], // grab post ID to redirect to post
+					'U_FILE'			=> append_sid($phpbb_root_path . 'download/file.' . $phpEx, 'id=' . $row['attach_id']),
+					'U_TOPIC'			=> append_sid($phpbb_root_path . 'viewtopic.'.$phpEx, 'p='.$row['post_msg_id'].'#p'.$row['post_msg_id']),
+				));
+			}
+			$db->sql_freeresult($result);
+
+			$template->assign_var('S_DISPLAY_ATTACHMENTS', true);
+		}
+		else
+		{
+			$template->assign_var('S_DISPLAY_ATTACHMENTS', false);
+		}
+
+		return 'attachments_' . $type . '.html';
 	}
 }
