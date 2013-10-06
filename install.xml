@@ -94,8 +94,8 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 		</installation>
 
 		<link-group>
-			<link type="contrib" lang="en" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
-			<link type="contrib" lang="de" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal unterstützt MOD Version Check. Um dieses Feature zu nutzen, muss dieser Mod installiert sein.</link>
+			<link type="dependency" lang="en" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
+			<link type="dependency" lang="de" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal unterstützt MOD Version Check. Um dieses Feature zu nutzen, muss dieser Mod installiert sein.</link>
 			<link type="language" lang="en" href="contrib/de.xml">Manual for German Language-set</link>
 			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
 			<link type="template" lang="en" href="contrib/subsilver2.xml">Manual for subsilver2</link>
