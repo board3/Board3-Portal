@@ -4,10 +4,8 @@
  * @author Nathan Guse (EXreaction) http://lithiumstudios.org
  * @author David Lewis (Highway of Life) highwayoflife@gmail.com
  * @package umil
- * @phpBB source Id: umil.php 202 2010-03-11 02:19:30Z exreaction $
- * @version $Id$
  * @copyright (c) 2008 phpBB Group
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  * @translated by Olympus DK Team
  *
  */

@@ -4,10 +4,10 @@
  * @author Nathan Guse (EXreaction) http://lithiumstudios.org
  * @author David Lewis (Highway of Life) highwayoflife@gmail.com
  * @package umil
- * @version $Id$
  * @copyright (c) 2008 phpBB Group
  * @copyright (c) 2010 phpBB.it - upgrade translation on 2010/08/19
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @copyright (c) 2011 portalxl.eu - upgrade translation on 2011/04/06
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  *
  */
 
@@ -56,14 +56,14 @@ $lang = array_merge($lang, array(
 	'DISPLAY_RESULTS'				=> 'Mostra risultati completi',
 	'DISPLAY_RESULTS_EXPLAIN'		=> 'Seleziona Sì per visualizzare tutte le azioni e i risultati durante l’azione richiesta.',
 
-	'ERROR_NOTICE'					=> 'Uno o più errori si sono verificati durante l’azione richiesta.  Scarica <a href="%1$s">questo file</a> con gli errori contenuti e chiedi assistenza all’autore della mod.<br /><br />Se hai qualche problema nello scaricare il file puoi accedere direttamente con un browser FTP al seguente indirizzo: %2$s',
-	'ERROR_NOTICE_NO_FILE'			=> 'Uno o più errori si sono verificati durante l’azione richiesta. Fai una registrazione completa degli eventuali errori e chiedi assistenza all’autore della mod.',
+	'ERROR_NOTICE'					=> 'Uno o più errori si sono verificati durante l’azione richiesta. Scarica <a href="%1$s">questo file</a> con gli errori contenuti e chiedi assistenza all’autore della MOD.<br /><br />Se hai qualche problema nello scaricare il file puoi accedere direttamente con un browser FTP al seguente indirizzo: %2$s',
+	'ERROR_NOTICE_NO_FILE'			=> 'Uno o più errori si sono verificati durante l’azione richiesta. Fai una registrazione completa degli eventuali errori e chiedi assistenza all’autore della MOD.',
 
 	'FAIL'							=> 'Fallito',
 	'FILE_COULD_NOT_READ'			=> 'ERRORE: Impossibile aprire il file %s per la lettura.',
 	'FOUNDERS_ONLY'					=> 'Devi essere un fondatore del forum per poter accedere a questa pagina.',
 
-	'GROUP_NOT_EXIST'				=> 'Gruppo non esiste',
+	'GROUP_NOT_EXIST'				=> 'Gruppo non esistente',
 
 	'IGNORE'						=> 'Ignora',
 	'IMAGESET_CACHE_PURGE'			=> 'Aggiornamento %s set-immagini',
@@ -72,12 +72,12 @@ $lang = array_merge($lang, array(
 	'INSTALL_MOD_CONFIRM'			=> 'Sei pronto ad installare %s?',
 
 	'MODULE_ADD'					=> 'Aggiungi %1$s modulo: %2$s',
-	'MODULE_ALREADY_EXIST'			=> 'ERRORE: Modulo esiste già.',
-	'MODULE_NOT_EXIST'				=> 'ERRORE: Modulo non esiste.',
+	'MODULE_ALREADY_EXIST'			=> 'ERRORE: Il modulo già esiste.',
+	'MODULE_NOT_EXIST'				=> 'ERRORE: Il modulo non esiste.',
 	'MODULE_REMOVE'					=> 'Rimozione %1$s modulo: %2$s',
 
 	'NONE'							=> 'Nessuno',
-	'NO_TABLE_DATA'					=> 'ERRORE: Nessuna tabella dati è stata specificato',
+	'NO_TABLE_DATA'					=> 'ERRORE: Nessuna tabella dati è stata specificata.',
 
 	'PARENT_NOT_EXIST'				=> 'ERRORE: La categoria madre per il presente modulo non esiste.',
 	'PERMISSIONS_WARNING'			=> 'Nuove impostazioni nei permessi sono state aggiunte. Assicurati di controllare le impostazioni dei permessi e vedere se sono quelli che desideri.',
@@ -94,7 +94,7 @@ $lang = array_merge($lang, array(
 	'PERMISSION_UNSET_ROLE'			=> 'Annulla permessi per il ruolo %s.',
 
 	'ROLE_ALREADY_EXISTS'			=> 'Ruolo permessi già esistenti.',
-	'ROLE_NOT_EXIST'				=> 'Ruolo non esiste',
+	'ROLE_NOT_EXIST'				=> 'Ruolo non esistente.',
 
 	'SUCCESS'						=> 'Successo',
 
@@ -119,14 +119,14 @@ $lang = array_merge($lang, array(
 
 	'UNINSTALL'						=> 'Disinstalla',
 	'UNINSTALL_MOD'					=> 'Disinstalla %s',
-	'UNINSTALL_MOD_CONFIRM'			=> 'Sei pronto a disinstallare %s? Tutte le impostazioni e i dati salvati da questa mod verranno rimossi!',
+	'UNINSTALL_MOD_CONFIRM'			=> 'Sei pronto a disinstallare %s? Tutte le impostazioni e i dati salvati da questa MOD verranno rimossi!',
 	'UNKNOWN'						=> 'Sconosciuto',
 	'UPDATE_MOD'					=> 'Aggiorna %s',
 	'UPDATE_MOD_CONFIRM'			=> 'Sei pronto per l’aggiornamento %s?',
-	'UPDATE_UMIL'					=> 'Questa versione di UMIL è obsoleta.<br /><br />Scarica l’ultima versione di UMIL (Unified MOD Install Library) da: <a href="%1$s" target="_blank">%1$s</a>',
+	'UPDATE_UMIL'					=> 'Questa versione di UMIL è obsoleta.<br /><br />Scarica l’ultima versione di UMIL (Unified MOD Install Library) da: <a href="%1$s" onclick="window.open(this.href);return false;">%1$s</a>',
 
 
-	'VERSIONS'						=> 'Versione Mod: <strong>%1$s</strong><br />Attualmente installata: <strong>%2$s</strong>',
+	'VERSIONS'						=> 'Versione MOD: <strong>%1$s</strong><br />Attualmente installata: <strong>%2$s</strong>',
 	'VERSION_SELECT'				=> 'Seleziona versione',
 	'VERSION_SELECT_EXPLAIN'		=> 'Non cambiare l’impostazione “Ignora” a meno che tu non sappia cosa stai facendo o ti sia stato richiesto espressamente.',
 ));

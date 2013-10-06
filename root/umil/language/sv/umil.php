@@ -4,9 +4,8 @@
  * @author Nathan Guse (EXreaction) http://lithiumstudios.org
  * @author David Lewis (Highway of Life) highwayoflife@gmail.com
  * @package umil
- * @version $Id$
  * @copyright (c) 2008 phpBB Group
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  *
  * Swedish transalation by phpBB-se http://www.phpbb-se.com/forum/viewtopic.php?f=33&t=6841
  */
@@ -80,7 +79,7 @@ $lang = array_merge($lang, array(
 	'NO_TABLE_DATA'		=> 'FEL: Ingen tabelldata angavs',
 
 	'PARENT_NOT_EXIST'		=> 'FEL: Den ovanstående kategorin som anges för denna modul finns inte.',
-	'PERMISSIONS_WARNING'	=> 'Nya inställningar för behörigheter har lagts till.  Var noga med att kontrollera inställningarna och se till att de pasasr forumet.',
+	'PERMISSIONS_WARNING'	=> 'Nya inställningar för behörigheter har lagts till.  Var noga med att kontrollera inställningarna och se till att de passar forumet.',
 	'PERMISSION_ADD'	=> 'Lägger till nytt behörighetsalternativ: %s',
 	'PERMISSION_ALREADY_EXISTS'		=> 'FEL: Behörighetsalternativ %s finns redan.',
 	'PERMISSION_NOT_EXIST'	=> 'FEL: Behörighetsalternativ %s finns inte.',
