@@ -21,8 +21,7 @@
  * @author    EXreaction (Nathan Guse) http://lithiumstudios.org
  * @author    Highway of Life <highwayoflife@gmail.com> (David Lewis)
  * @copyright (c) 2008 phpBB Group
- * @license   http://opensource.org/licenses/gpl-2.0.php GNU General Public License
- * @version   $Id$
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  */
 
 /**
@@ -137,7 +136,7 @@ $lang = array_merge($lang, array(
 	'UNKNOWN'						=> 'Inconnu',
 	'UPDATE_MOD'					=> 'Mettre à jour %s',
 	'UPDATE_MOD_CONFIRM'			=> 'Êtes-vous prêt à mettre à jour %s ?',
-	'UPDATE_UMIL'					=> 'Cette version d’UMIL n’est pas à jour.<br /><br />Veuillez télécharger la dernière version d’UMIL sur : <a href="%1$s" target="_blank">%1$s</a>',
+	'UPDATE_UMIL'					=> 'Cette version d’UMIL n’est pas à jour.<br /><br />Veuillez télécharger la dernière version d’UMIL sur : <a href="%1$s" onclick="window.open(this.href);return false;">%1$s</a>',
 
 	'VERSIONS'						=> 'Version du MOD : <strong>%1$s</strong><br />Actuellement installée : <strong>%2$s</strong>',
 	'VERSION_SELECT'				=> 'Sélectionnez la version',

@@ -1,10 +1,10 @@
 <style type="text/css">
 #page-header {
-	background: url("<!-- IF LOGO_IMG -->{LOGO_IMG}<!-- ELSE -->{ROOT_PATH}adm/images/phpbb_logo.gif<!-- ENDIF -->") top left no-repeat;
+	background: url("<!-- IF LOGO_IMG -->{LOGO_IMG}<!-- ELSE -->{ROOT_PATH}adm/images/phpbb_logo.png<!-- ENDIF -->") top left no-repeat;
 }
 
 .rtl #page-header {
-	background: url("<!-- IF LOGO_IMG -->{LOGO_IMG}<!-- ELSE -->{ROOT_PATH}adm/images/phpbb_logo.gif<!-- ENDIF -->") top right no-repeat;
+	background: url("<!-- IF LOGO_IMG -->{LOGO_IMG}<!-- ELSE -->{ROOT_PATH}adm/images/phpbb_logo.png<!-- ENDIF -->") top right no-repeat;
 }
 
 #tabs a {
