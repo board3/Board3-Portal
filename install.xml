@@ -121,17 +121,17 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>[gh/113] Update UMIL to 1.0.5</change>
 				</changelog>
 				<changelog lang="de">
-					<change>[ticket/216] Add function for obtaining user's groups</change>
-					<change>[ticket/217] Handle incorrect values in the news URL</change>
-					<change>[cleanup/acp] Make acp_portal module more readable</change>
-					<change>[cleanup/tabs] Remove unnecessary tabbing in portal files</change>
-					<change>[cleanup/whitespace] Get rid of unnecessary whitespace</change>
-					<change>Display correct day of the week with negative UTC offset</change>
-					<change>[ticket/120] Move birthday block HTML to template files</change>
-					<change>[ticket/224] Add possibility to append username to donation</change>
-					<change>[ŧicket/223] Set correct permissions to uploaded files (644)</change>
-					<change>[feature/clean-up] Remove duplicated code from portal modules</change>
-					<change>[gh/113] Update UMIL to 1.0.5</change>
+					<change>[ticket/216] Füge Funktion zur Erlangung der Gruppen eines Benutzers hinzu</change>
+					<change>[ticket/217] Behandele falsche Parameter in der News URL</change>
+					<change>[cleanup/acp] Mache acp_portal lesbarer</change>
+					<change>[cleanup/tabs] Entferne sinnlose Tabs in Portal Dateien</change>
+					<change>[cleanup/whitespace] Entferne unnötige Leerzeichen</change>
+					<change>Zeige korrekten Tag der Woche bei negativem UTC Abstand an</change>
+					<change>[ticket/120] Verschiebe HTML des Geburtstags-Blocks in Template Dateien</change>
+					<change>[ticket/224] Füge Möglichkeit des Anhängens des Benutzernamens an Spende ein</change>
+					<change>[ŧicket/223] Setze richtige Berechtigungen für hochgeladene Dateien (644)</change>
+					<change>[feature/clean-up] Entferne doppelten Code von Portal Modulen</change>
+					<change>[gh/113] Aktualisiere UMIL zu 1.0.5</change>
 				</changelog>
 			</entry>
 			<entry>
