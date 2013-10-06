@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
-<!-- $Id$ -->
-<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="en">board3 Portal 2.0.1</title>
-		<title lang="de">board3 Portal 2.0.1</title>
+		<title lang="en">board3 Portal</title>
+		<title lang="de">board3 Portal</title>
 
 		<description lang="en">Adds a portal with several blocks to your forum.
 You can change the settings, move the blocks, add new blocks and more in the ACP.
@@ -31,11 +30,11 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 		</author-notes>
 		<author-notes lang="de">Dieser MOD benötigt PHP5. Ich hoffe ihr habt Spaß am Portal. Neuen Code, bzw neue Boxen und Fragen könnt ihr auf www.board3.de posten.
 		</author-notes>
-	
+		<github>https://github.com/board3/Board3-Portal</github>
 		<author-group>
 			<author>
 				<realname>Marc Alexander</realname>
-				<username>marc1706</username>
+				<username>Marc</username>
 				<email>admin@m-a-styles.de</email>
 				<homepage>http://www.m-a-styles.de</homepage>
 				<contributions-group>
@@ -86,25 +85,55 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 			 </author>
 		</author-group>
 
-		<mod-version>2.0.1</mod-version>
+		<mod-version>2.0.2</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>600</time>
-			<target-version>3.0.11</target-version>
+			<target-version>3.0.12</target-version>
 		</installation>
 
 		<link-group>
-			<link type="dependency" lang="en" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
-			<link type="dependency" lang="de" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal unterstützt MOD Version Check. Um dieses Feature zu nutzen, muss dieser Mod installiert sein.</link>
+			<link type="contrib" lang="en" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal supports MOD Version Check. To use this feature, this mod has to be installed.</link>
+			<link type="contrib" lang="de" href="http://www.phpbb.com/community/viewtopic.php?f=69&amp;t=691155">Board3 Portal unterstützt MOD Version Check. Um dieses Feature zu nutzen, muss dieser Mod installiert sein.</link>
 			<link type="language" lang="en" href="contrib/de.xml">Manual for German Language-set</link>
 			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
 			<link type="template" lang="en" href="contrib/subsilver2.xml">Manual for subsilver2</link>
 			<link type="template" lang="de" href="contrib/subsilver2.xml">Anleitung für subsilver2</link>
-			<link type="contrib" lang="en" href="contrib/update_200_to_201/update.xml">Manual for Updating B3P 2.0.0 to 2.0.1</link>
-			<link type="contrib" lang="de" href="contrib/update_200_to_201/update.xml">Anleitung für das Aktualisieren von B3P 2.0.0 zu 2.0.1</link>
+			<link type="contrib" lang="en" href="contrib/update_201_to_202/update.xml">Manual for Updating B3P 2.0.1 to 2.0.2</link>
+			<link type="contrib" lang="de" href="contrib/update_201_to_202/update.xml">Anleitung für das Aktualisieren von B3P 2.0.1 zu 2.0.2</link>
 		</link-group>
 		<history>
+			<entry>
+				<date>2013-10-13</date>
+				<rev-version>2.0.2</rev-version>
+				<changelog lang="en">
+					<change>[ticket/216] Add function for obtaining user's groups</change>
+					<change>[ticket/217] Handle incorrect values in the news URL</change>
+					<change>[cleanup/acp] Make acp_portal module more readable</change>
+					<change>[cleanup/tabs] Remove unnecessary tabbing in portal files</change>
+					<change>[cleanup/whitespace] Get rid of unnecessary whitespace</change>
+					<change>Display correct day of the week with negative UTC offset</change>
+					<change>[ticket/120] Move birthday block HTML to template files</change>
+					<change>[ticket/224] Add possibility to append username to donation</change>
+					<change>[ŧicket/223] Set correct permissions to uploaded files (644)</change>
+					<change>[feature/clean-up] Remove duplicated code from portal modules</change>
+					<change>[gh/113] Update UMIL to 1.0.5</change>
+				</changelog>
+				<changelog lang="de">
+					<change>[ticket/216] Add function for obtaining user's groups</change>
+					<change>[ticket/217] Handle incorrect values in the news URL</change>
+					<change>[cleanup/acp] Make acp_portal module more readable</change>
+					<change>[cleanup/tabs] Remove unnecessary tabbing in portal files</change>
+					<change>[cleanup/whitespace] Get rid of unnecessary whitespace</change>
+					<change>Display correct day of the week with negative UTC offset</change>
+					<change>[ticket/120] Move birthday block HTML to template files</change>
+					<change>[ticket/224] Add possibility to append username to donation</change>
+					<change>[ŧicket/223] Set correct permissions to uploaded files (644)</change>
+					<change>[feature/clean-up] Remove duplicated code from portal modules</change>
+					<change>[gh/113] Update UMIL to 1.0.5</change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2012-10-13</date>
 				<rev-version>2.0.1</rev-version>

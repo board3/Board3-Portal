@@ -161,7 +161,10 @@ $versions = array(
 	),
 
 	'2.0.1' => array(
-		// no changes ... purge caches anyways
+		// no changes
+	),
+	'2.0.2' => array(
+		'custom' => array('update_donation_modules'),
 		'cache_purge' => array(
 			'imageset',
 			'template',
@@ -173,3 +176,36 @@ $versions = array(
 
 // Include the UMIL Auto file, it handles the rest
 include($phpbb_root_path . 'umil/umil_auto.' . $phpEx);
+
+/**
+* Add missing config setting to existing donation modules
+*
+* @param string $mode UMIL mode
+* @param string	$version Version
+*/
+function update_donation_modules($mode = 'install', $version = '')
+{
+	global $user;
+
+	$new_configs = '';
+	if ($mode === 'update')
+	{
+		global $db;
+
+		$sql = 'SELECT *
+			FROM ' . PORTAL_MODULES_TABLE . "
+			WHERE module_classname = 'donation'";
+		$result = $db->sql_query($sql);
+		while ($row = $db->sql_fetchrow($result))
+		{
+			set_config('board3_pay_custom_' . $row['module_id'], true);
+			if (!empty($new_configs))
+			{
+				$new_configs .= ', ';
+			}
+			$new_configs .= 'board3_pay_custom_' . $row['module_id'];
+		}
+		$db->sql_freeresult($result);
+	}
+	return $user->lang('CONFIG_ADD', $new_configs);
+}
