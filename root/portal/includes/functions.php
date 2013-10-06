@@ -528,39 +528,6 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 }
 
 /**
-* Format user date for the Birthday block
-* Note: this function is used as we already added timezones, etc
-*
-* borrowed from Upcoming Birthday Mod
-* @author: lefty
-* changed to work outside session.php by B3P
-* @function: format_dateucb
-*/ 
-
-function format_birthday($date, $format = false)
-{
-	global $user;
-
-	$lang_dates		= $user->lang['datetime'];
-	$format			= (!$format) ? $user->data['user_dateformat'] : $format;
-
-	// Short representation of month in format
-	if ((strpos($format, '\M') === false && strpos($format, 'M') !== false) || (strpos($format, '\r') === false && strpos($format, 'r') !== false))
-	{
-		$lang_dates['May'] = $lang_dates['May_short'];
-	}
-	unset($lang_dates['May_short']);
-
-	// We need to create a UNIX timestamp for date()
-	$day = substr($date, 0, strpos($date, '-'));
-	$month = substr($date, (strpos($date, '-')+1), 2);
-	$year = substr($date, -4);
-	$birthday_time = mktime(0, 0, 0, $month, $day, $year);
-
-	return strtr(@date(str_replace('|', '', $format), $birthday_time), $lang_dates);
-}
-
-/**
 * Check if table exists
 * @copyright (c) 2007 phpBB Group
 *
