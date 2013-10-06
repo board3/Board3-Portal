@@ -55,72 +55,12 @@ class portal_custom_module
 
 	public function get_template_center($module_id)
 	{
-		global $config, $template, $portal_config, $user;
-
-		/* 
-		* Run generate_text_for_display if the user uses BBCode for designing his custom block
-		* HTML won't be parsed if the user chooses to use BBCodes in the ACP
-		* If BBCodes are turned off, the custom Block code will be directly assigned and HTML will be parsed
-		*/
-		if ($config['board3_custom_' . $module_id . '_bbcode'])
-		{	
-			// Generate text for display and assign template vars
-			$uid = $config['board3_custom_' . $module_id . '_uid'];
-			$bitfield = $config['board3_custom_' . $module_id . '_bitfield'];
-			$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
-			$assign_code = generate_text_for_display($portal_config['board3_custom_' . $module_id . '_code'], $uid, $bitfield, $bbcode_options);
-		}
-		else
-		{
-			$assign_code = htmlspecialchars_decode($portal_config['board3_custom_' . $module_id . '_code'], ENT_QUOTES);
-		}
-
-		$title = (!empty($config['board3_custom_' . $module_id . '_title'])) ? ((isset($user->lang[$config['board3_custom_' . $module_id . '_title']])) ? $user->lang[$config['board3_custom_' . $module_id . '_title']] : $config['board3_custom_' . $module_id . '_title']) : $user->lang[$this->name];
-
-		if(!empty($assign_code))
-		{
-			return array(
-				'template'	=> 'custom_center.html',
-				'title'		=> $title,
-				'code'		=> $assign_code,
-				'image_src'	=> '', // no image for center blocks
-			);
-		}
+		return $this->parse_template($module_id);
 	}
 
 	public function get_template_side($module_id)
 	{
-		global $config, $template, $portal_config, $user;
-
-		/* 
-		* Run generate_text_for_display if the user uses BBCode for designing his custom block
-		* HTML won't be parsed if the user chooses to use BBCodes in the ACP
-		* If BBCodes are turned off, the custom Block code will be directly assigned and HTML will be parsed
-		*/
-		if ($config['board3_custom_' . $module_id . '_bbcode'])
-		{	
-			// Generate text for display and assign template vars
-			$uid = $config['board3_custom_' . $module_id . '_uid'];
-			$bitfield = $config['board3_custom_' . $module_id . '_bitfield'];
-			$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
-			$assign_code = generate_text_for_display($portal_config['board3_custom_' . $module_id . '_code'], $uid, $bitfield, $bbcode_options);
-		}
-		else
-		{
-			$assign_code = htmlspecialchars_decode($portal_config['board3_custom_' . $module_id . '_code'], ENT_QUOTES);
-		}
-
-		$title = (!empty($config['board3_custom_' . $module_id . '_title'])) ? ((isset($user->lang[$config['board3_custom_' . $module_id . '_title']])) ? $user->lang[$config['board3_custom_' . $module_id . '_title']] : $config['board3_custom_' . $module_id . '_title']) : $user->lang[$this->name];
-
-		if(!empty($assign_code))
-		{
-			return array(
-				'template'	=> 'custom_side.html',
-				'title'		=> $title,
-				'code'		=> $assign_code,
-				'image_src'	=> (!empty($config['board3_custom_' . $module_id . '_image_src'])) ? $config['board3_custom_' . $module_id . '_image_src'] : $this->image_src,
-			);
-		}
+		return $this->parse_template($module_id, 'side');
 	}
 
 	public function get_template_acp($module_id)
@@ -350,5 +290,49 @@ class portal_custom_module
 	public function update_custom($key, $module_id)
 	{
 		$this->manage_custom('', $key, $module_id);
+	}
+
+	/**
+	* Parse template for custom blocks
+	*
+	* @param int $module_id	Module ID of current module
+	* @param string $type	Type of module (center or side), default to
+	*			center to not show module image unless wanted
+	* @return array		An array containing the custom module data
+	*/
+	protected function parse_template($module_id, $type = 'center')
+	{
+		global $config, $template, $portal_config, $user;
+
+		/*
+		* Run generate_text_for_display if the user uses BBCode for designing his custom block
+		* HTML won't be parsed if the user chooses to use BBCodes in the ACP
+		* If BBCodes are turned off, the custom Block code will be directly assigned and HTML will be parsed
+		*/
+		if ($config['board3_custom_' . $module_id . '_bbcode'])
+		{
+			// Generate text for display and assign template vars
+			$uid = $config['board3_custom_' . $module_id . '_uid'];
+			$bitfield = $config['board3_custom_' . $module_id . '_bitfield'];
+			$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
+			$assign_code = generate_text_for_display($portal_config['board3_custom_' . $module_id . '_code'], $uid, $bitfield, $bbcode_options);
+		}
+		else
+		{
+			$assign_code = htmlspecialchars_decode($portal_config['board3_custom_' . $module_id . '_code'], ENT_QUOTES);
+		}
+
+		$title = (!empty($config['board3_custom_' . $module_id . '_title'])) ? ((isset($user->lang[$config['board3_custom_' . $module_id . '_title']])) ? $user->lang[$config['board3_custom_' . $module_id . '_title']] : $config['board3_custom_' . $module_id . '_title']) : $user->lang[$this->name];
+
+		if(!empty($assign_code))
+		{
+			return array(
+				'template'	=> 'custom_' . $type . '.html',
+				'title'		=> $title,
+				'code'		=> $assign_code,
+				// no image for center blocks
+				'image_src'	=> ($type === 'center') ? '' : ((!empty($config['board3_custom_' . $module_id . '_image_src'])) ? $config['board3_custom_' . $module_id . '_image_src'] : $this->image_src),
+			);
+		}
 	}
 }
