@@ -100,7 +100,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 	</header>
 	<action-group>
 		<copy>
-			<file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
+			<file from="root/language/de/mods/*.*" to="language/de/mods/*.*" />
 		</copy>
 		<diy-instructions lang="en">See general install.xml file</diy-instructions>
 		<diy-instructions lang="de">Siehe install.xml</diy-instructions>
