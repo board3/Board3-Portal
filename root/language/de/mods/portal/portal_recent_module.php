@@ -45,7 +45,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_RECENT_TITLE_LIMIT'					=> 'Maximal angezeigte Länge der neuesten Themen',
 	'PORTAL_RECENT_TITLE_LIMIT_EXP'				=> '0 bedeutet unbegrenzt',
 	'PORTAL_RECENT_FORUM'						=> 'Themen Foren',
-	'PORTAL_RECENT_FORUM_EXP'					=> 'Die Foren, aus welchen die Themen angezeigt werden sollen. Frei lassen, um aus allen Foren anzeigen zu lassen. Falls "Foren aussschließen" auf "Ja" steht, wähle die Foren die du ausschließen willst.<br />Falls "Foren aussschließen" auf "Nein" steht, wähle die Foren die du sehen willst.<br />Wähle mehrere Foren aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
-	'PORTAL_EXCLUDE_FORUM'						=> 'Foren aussschließen',
+	'PORTAL_RECENT_FORUM_EXP'					=> 'Die Foren, aus welchen die Themen angezeigt werden sollen. Frei lassen, um aus allen Foren anzeigen zu lassen. Falls "Foren ausschließen" auf "Ja" steht, wähle die Foren die du ausschließen willst.<br />Falls "Foren ausschließen" auf "Nein" steht, wähle die Foren die du sehen willst.<br />Wähle mehrere Foren aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
+	'PORTAL_EXCLUDE_FORUM'						=> 'Foren ausschließen',
 	'PORTAL_EXCLUDE_FORUM_EXP'					=> 'Wähle "Ja" wenn du die ausgewählten Foren vom Aktuelle Themen-Block ausschließen willst, und "Nein" wenn du nur die Themen aus den ausgewählten Foren im Aktuelle Themen-Block sehen willst.',
 ));
