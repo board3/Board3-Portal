@@ -192,7 +192,7 @@ class phpbb_ext_board3_portal_acp_portal_module
 				{
 					if ($submit && ((isset($null['type']) && $null['type'] == 'custom') || (isset($null['submit_type']) && $null['submit_type'] == 'custom')))
 					{
-						$func = array($c_class, $null['submit']);
+						$func = array($this->c_class, $null['submit']);
 
 						if(method_exists($this->c_class, $null['submit']))
 						{

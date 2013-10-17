@@ -591,6 +591,11 @@ class portal_calendar_module
 	**/
 	private function makeTimestamp($date)
 	{
+<<<<<<< HEAD
+=======
+		global $user;
+
+>>>>>>> 36903cb... Display correct day of the week with negative UTC offset
 		$this->stamp = strtotime($date);
 		return ($this->stamp);
 	}
