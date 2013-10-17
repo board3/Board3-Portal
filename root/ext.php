@@ -4,6 +4,8 @@
 // however you can override the default methods and add custom
 // installation logic
 
-class phpbb_ext_board3_portal_ext extends phpbb_extension_base
+namespace board3\portal;
+
+class ext extends \phpbb\extension\base
 {
 }
