@@ -7,7 +7,9 @@
 *
 */
 
-class phpbb_ext_board3_portal_migrations_210_beta1 extends phpbb_db_migration
+namespace board3\portal\migrations;
+
+class v210_beta1 extends \phpbb\db\migration\migration
 {
 	/**
 	* Portal config table
@@ -22,7 +24,7 @@ class phpbb_ext_board3_portal_migrations_210_beta1 extends phpbb_db_migration
 
 	static public function depends_on()
 	{
-		return array('phpbb_db_migration_data_310_extensions');
+		return array('\phpbb\db\migration\data\v310\extensions');
 	}
 
 	public function update_schema()
