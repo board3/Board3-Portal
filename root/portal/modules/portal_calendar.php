@@ -110,8 +110,8 @@ class portal_calendar_module
 		// output our general calendar bits
 		$down = $this->mini_cal_month - 1;
 		$up = $this->mini_cal_month + 1;
-		$prev_month = '<a href="' . append_sid("{$phpbb_root_path}app.$phpEx", "controller=portal&amp;m$module_id=$down#minical$module_id") . '"><img src="' . $portal_root_path . 'styles/' . $user->style['style_path'] . '/theme/images/portal/cal_icon_left_arrow.png' . '" title="' . $user->lang['VIEW_PREVIOUS_MONTH'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
-		$next_month = '<a href="' . append_sid("{$phpbb_root_path}app.$phpEx", "controller=portal&amp;m$module_id=$up#minical$module_id") . '"><img src="' . $portal_root_path . 'styles/' . $user->style['style_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
+		$prev_month = '<a href="' . append_sid("{$phpbb_root_path}app.$phpEx", "controller=portal&amp;m$module_id=$down#minical$module_id") . '"><img src="./../' . $portal_root_path . 'styles/' . $user->style['style_path'] . '/theme/images/portal/cal_icon_left_arrow.png' . '" title="' . $user->lang['VIEW_PREVIOUS_MONTH'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
+		$next_month = '<a href="' . append_sid("{$phpbb_root_path}app.$phpEx", "controller=portal&amp;m$module_id=$up#minical$module_id") . '"><img src="./../' . $portal_root_path . 'styles/' . $user->style['style_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
 
 		$template->assign_block_vars('minical', array(
 			'S_SUNDAY_FIRST'	=> ($config['board3_sunday_first_' . $module_id]) ? true : false,
@@ -591,11 +591,6 @@ class portal_calendar_module
 	**/
 	private function makeTimestamp($date)
 	{
-<<<<<<< HEAD
-=======
-		global $user;
-
->>>>>>> 36903cb... Display correct day of the week with negative UTC offset
 		$this->stamp = strtotime($date);
 		return ($this->stamp);
 	}

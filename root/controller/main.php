@@ -7,7 +7,9 @@
 *
 */
 
-class phpbb_ext_board3_portal_controller_main
+namespace board3\portal\controller;
+
+class main
 {
 	/**
 	* Auth object
@@ -58,6 +60,12 @@ class phpbb_ext_board3_portal_controller_main
 	private $includes_path;
 
 	/**
+	* phpBB path helper
+	* @var \phpbb\path_helper
+	*/
+	protected $path_helper;
+
+	/**
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
 	* the dependencies defined in the services.yml file for this service.
@@ -65,10 +73,11 @@ class phpbb_ext_board3_portal_controller_main
 	* @param phpbb_config_db $config phpBB Config object
 	* @param phpbb_template $template Template object
 	* @param phpbb_user $user User object
+	* @param \phpbb\path_helper $path_helper phpBB path helper
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $php_ext PHP file extension
 	*/
-	public function __construct($auth, $config, $template, $user, $phpbb_root_path, $php_ext)
+	public function __construct($auth, $config, $template, $user, $path_helper, $phpbb_root_path, $php_ext)
 	{
 		global $portal_root_path;
 
@@ -76,6 +85,7 @@ class phpbb_ext_board3_portal_controller_main
 		$this->config = $config;
 		$this->template = $template;
 		$this->user = $user;
+		$this->path_helper = $path_helper;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $php_ext;
 		$this->includes_path = $phpbb_root_path . 'ext/board3/portal/portal/';
@@ -90,21 +100,21 @@ class phpbb_ext_board3_portal_controller_main
 		}
 	}
 
-    /**
-    * Extension front handler method. This is called automatically when your extension is accessed
-    * through index.php?ext=example/foobar
-    * @return null
-    */
-    public function handle()
-    {
+	/**
+	* Extension front handler method. This is called automatically when your extension is accessed
+	* through index.php?ext=example/foobar
+	* @return null
+	*/
+	public function handle()
+	{
 		$this->check_permission();
-        // We defined the phpBB objects in __construct() and can use them in the rest of our class like this
-        //echo 'Welcome, ' . $this->user->data['username'];
+		// We defined the phpBB objects in __construct() and can use them in the rest of our class like this
+		//echo 'Welcome, ' . $this->user->data['username'];
 
-        // The following takes two arguments:
-        // 1) which extension language folder we're using (it's not smart enough to use its own automatically)
-        // 2) what language file to use
-        $this->user->add_lang_ext('board3/portal', 'mods/portal');
+		// The following takes two arguments:
+		// 1) which extension language folder we're using (it's not smart enough to use its own automatically)
+		// 2) what language file to use
+		$this->user->add_lang_ext('board3/portal', 'mods/portal');
 
 		/**
 		* get initial data
@@ -199,7 +209,7 @@ class phpbb_ext_board3_portal_controller_main
 			{
 				$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
 					'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module['template'],
-					'IMAGE_SRC'			=> $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $template_module['image_src'],
+					'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $template_module['image_src'],
 					'TITLE'				=> $template_module['title'],
 					'CODE'				=> $template_module['code'],
 					'MODULE_ID'			=> $row['module_id'],
@@ -211,7 +221,7 @@ class phpbb_ext_board3_portal_controller_main
 			{
 				$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
 					'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module,
-					'IMAGE_SRC'			=> $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'],
+					'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'],
 					'IMAGE_WIDTH'			=> $row['module_image_width'],
 					'IMAGE_HEIGHT'			=> $row['module_image_height'],
 					'MODULE_ID'			=> $row['module_id'],
@@ -240,19 +250,19 @@ class phpbb_ext_board3_portal_controller_main
 			'S_BOTTOM_COLUMN'		=> ($module_count['bottom'] > 0) ? true : false,
 			'S_DISPLAY_PHPBB_MENU'	=> $this->config['board3_phpbb_menu'],
 			'B3P_DISPLAY_JUMPBOX'	=> $this->config['board3_display_jumpbox'],
-			'T_EXT_THEME_PATH'		=> $this->phpbb_root_path . 'ext/board3/portal/styles/' . $this->user->style['style_path'] . '/theme/',
+			'T_EXT_THEME_PATH'		=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/',
 		));
 
-        // And now to output the page.
-        page_header($this->user->lang('PORTAL'));
+		// And now to output the page.
+		page_header($this->user->lang('PORTAL'));
 
-        // foobar_body.html is in ./ext/foobar/example/styles/prosilver/template/foobar_body.html
-        $this->template->set_filenames(array(
-                'body' => 'portal/portal_body.html'
-        ));
+		// foobar_body.html is in ./ext/foobar/example/styles/prosilver/template/foobar_body.html
+		$this->template->set_filenames(array(
+			'body' => 'portal/portal_body.html'
+		));
 
-        page_footer();
-    }
+		page_footer();
+	}
 
 	// check if user should be able to access this page
 	private function check_permission()
