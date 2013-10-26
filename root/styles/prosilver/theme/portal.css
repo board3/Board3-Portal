@@ -49,6 +49,13 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 	padding: 1px 0;
 	font: bold 90% 'Trebuchet MS', 'Lucida Grande', Arial, sans-serif;
 	font-size: 12px;
+	text-decoration: underline;
+}
+
+.portal-navigation tr.menutitle{
+	font: bold 90% 'Trebuchet MS', 'Lucida Grande', Arial, sans-serif;
+	font-size: 12px;
+	text-decoration: underline;
 }
 
 .calendar-info {
