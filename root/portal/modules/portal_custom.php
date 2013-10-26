@@ -169,7 +169,16 @@ class portal_custom_module
 				$custom_permission = array_intersect($custom_permission, $groups_ary);
 				$custom_permission = implode(',', $custom_permission);
 
-				add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['PORTAL_CUSTOM'] . '&nbsp;-&nbsp;' . $config['board3_custom_' . $module_id . '_title']);
+				if (isset($user->lang[$custom_title]))
+				{
+					$log_title =  $user->lang[$custom_title];
+				}
+				else
+				{
+					$log_title = $custom_title;
+				}
+
+				add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['PORTAL_CUSTOM'] . ':&nbsp;' . $log_title);
 
 				// set_portal_config will take care of escaping the welcome message
 				set_portal_config('board3_custom_' . $module_id . '_code', $custom_code);
