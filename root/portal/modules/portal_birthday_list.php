@@ -107,6 +107,7 @@ class portal_birthday_list_module
 					$template->assign_block_vars('board3_birthday_ahead_list', array(
 						'USER'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
 						'AGE'		=> ($age = (int) substr($row['user_birthday'], -4)) ? ' (' . ($now['year'] - $age) . ')' : '',
+						'DATE'		=> $this->format_birthday($user, $row['user_birthday'], 'd M'),
 					));
 				}
 			}
@@ -155,5 +156,26 @@ class portal_birthday_list_module
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
+	}
+
+	/**
+	* Format birthday for span title
+	*
+	* @param object $user phpBB user object
+	* @param string $birthday User's birthday from database
+	* @param string $date_settings Settings for date() function
+	*/
+	protected function format_birthday($user, $birthday, $date_settings)
+	{
+		if (!preg_match('/(?:[0-9])+-+(?:[0-9]{2})+-+(?:[0-9]{4})/', $birthday, $match))
+		{
+			return '';
+		}
+
+		$date = explode('-', $birthday);
+		$time = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
+		$lang_dates = $user->lang['datetime'];
+
+		return strtr(date($date_settings, $time), $lang_dates);
 	}
 }
