@@ -114,6 +114,7 @@ Weitere Sprachen kannst in unseren International Forum finden: http://www.board3
 			<file from="root/portal/includes/functions_upload.php" to="portal/includes/functions_upload.php" />
 			<file from="root/portal/modules/*.*" to="portal/modules/*.*" />
 			<file from="root/styles/prosilver/template/portal/modules/*.*" to="styles/prosilver/template/portal/modules/*.*" />
+			<file from="root/styles/prosilver/theme/portal.css" to="styles/prosilver/theme/portal.css" />
 			<file from="root/umil/*.*" to="umil/*.*" />
 			<file from="root/portal.php" to="portal.php" />
 		</copy>
