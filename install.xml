@@ -105,7 +105,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 		</link-group>
 		<history>
 			<entry>
-				<date>2013-10-13</date>
+				<date>2013-10-27</date>
 				<rev-version>2.0.2</rev-version>
 				<changelog lang="en">
 					<change>[ticket/216] Add function for obtaining user's groups</change>
@@ -119,6 +119,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>[ŧicket/223] Set correct permissions to uploaded files (644)</change>
 					<change>[feature/clean-up] Remove duplicated code from portal modules</change>
 					<change>[gh/113] Update UMIL to 1.0.5</change>
+					<change>Slight changes to design of portal</change>
 				</changelog>
 				<changelog lang="de">
 					<change>[ticket/216] Füge Funktion zur Erlangung der Gruppen eines Benutzers hinzu</change>
@@ -132,6 +133,7 @@ Weitere Sprachen kannst in unserem Internationalen Forum finden: http://www.boar
 					<change>[ŧicket/223] Setze richtige Berechtigungen für hochgeladene Dateien (644)</change>
 					<change>[feature/clean-up] Entferne doppelten Code von Portal Modulen</change>
 					<change>[gh/113] Aktualisiere UMIL zu 1.0.5</change>
+					<change>Kleine Änderungen im Design des Portals</change>
 				</changelog>
 			</entry>
 			<entry>
