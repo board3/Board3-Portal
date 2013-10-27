@@ -267,9 +267,13 @@ class phpbb_ext_board3_portal_acp_portal_module
 
 					$this->cache->destroy('portal_modules');
 					$this->cache->destroy('sql', CONFIG_TABLE);
+
 					if(isset($module_name))
 					{
-						add_log('admin', 'LOG_PORTAL_CONFIG', $module_name);
+						if ($module_data['module_classname'] !== 'custom')
+						{
+							add_log('admin', 'LOG_PORTAL_CONFIG', $module_name);
+						}
 					}
 					else
 					{
