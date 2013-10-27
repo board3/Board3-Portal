@@ -172,23 +172,8 @@ class portal_birthday_list_module
 
 		$date = explode('-', $birthday);
 		$time = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
-		$lang_dates = array_filter($user->lang['datetime'], array($this, 'filter_lang_dates'));
+		$lang_dates = array_filter($user->lang['datetime'], 'is_string');
 
 		return strtr(date($date_settings, $time), $lang_dates);
-	}
-
-	/**
-	* Filter out lang dates that are not arrays.
-	* This is required in order to prevent PHP notices in PHP >= 5.4.12
-	* that happen if an array that is passed to strtr() has rows that are
-	* arrays.
-	*
-	* @param mixed $row Current row of array
-	*
-	* @return bool True if array row is not an array
-	*/
-	protected function filter_lang_dates($row)
-	{
-		return !is_array($row);
 	}
 }
