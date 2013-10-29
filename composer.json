@@ -1,0 +1,23 @@
+{
+	"name": "phpbbgallery/core",
+	"type": "phpbb-extension",
+	"description": "Experimental version of phpBB Gallery for phpBB 3.1",
+	"homepage": "https://github.com/nickvergessen/phpbb-ext-gallery",
+	"version": "0.1.0",
+	"time": "2013-03-27",
+	"licence": "GPL-2.0",
+	"authors": [{
+			"name": "Joas Schilling",
+			"username": "nickvergessen",
+			"email": "nickvergessen@gmx.de",
+			"homepage": "https://github.com/nickvergessen/",
+			"role": "Lead Developer"
+		}],
+	"require": {
+		"php": ">=5.3.3",
+		"phpbb/phpbb": "3.1.*@dev"
+	},
+	"extra": {
+		"display-name": "phpBB Gallery Core"
+	}
+}

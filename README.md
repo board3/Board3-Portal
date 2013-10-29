@@ -1,6 +1,6 @@
-#Board3 Portal 2.1.0
+#Board3 Portal 2.1.x
 
-Board Portal 2.1.0 is a second generation portal for phpBB 3.1.x. It adds a portal with several blocks to your forum.
+Board Portal 2.1.x is a second generation portal for phpBB 3.1.x. It adds a portal with several blocks to your forum.
 You can change the settings, move the blocks, add new blocks and more in the ACP.
 
 ##How to use
