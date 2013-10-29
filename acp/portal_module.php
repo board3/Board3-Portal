@@ -23,12 +23,12 @@ class portal_module
 	public $new_config = array();
 	protected $c_class;
 	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx;
-	protected $root_path;
+	protected $root_path, $mod_version_check;
 
 	public function __construct()
 	{
 		global $db, $user, $cache, $template;
-		global $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx;
+		global $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpbb_container, $phpEx;
 
 		$user->add_lang_ext('board3/portal', 'mods/portal');
 
@@ -46,15 +46,11 @@ class portal_module
 		$this->phpbb_admin_path = $phpbb_admin_path;
 		$this->portal_root_path = $this->root_path . 'portal/';
 		$this->php_ex = $phpEx;
+		$this->mod_version_check = $phpbb_container->get('board3.version.check');
 
 		if (!function_exists('column_string_const'))
 		{
 			include($this->portal_root_path . 'includes/functions_modules.' . $this->php_ex);
-		}
-
-		if (!function_exists('mod_version_check'))
-		{
-			include($this->portal_root_path . 'includes/functions_version_check.' . $this->php_ex);
 		}
 
 		if(!function_exists('obtain_portal_config'))
@@ -161,7 +157,7 @@ class portal_module
 				else
 				{
 					// only show the mod version check if we are on the General Settings page
-					mod_version_check($this->phpbb_root_path, $this->root_path);
+					$this->mod_version_check->version_check();
 				}
 
 				$this->new_config = $this->config;
