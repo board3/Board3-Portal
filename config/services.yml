@@ -1,3 +1,14 @@
+parameters:
+    board3.version_data:
+        author: Marc
+        title: Board3 Portal
+        tag: board3_portal_v2_dev
+        version: board3_portal_version
+        file:
+            - board3.de
+            - updatecheck
+            - board3_portal.xml
+
 services:
 
     board3.portal.main:
@@ -10,3 +21,13 @@ services:
             - @path_helper
             - %core.root_path%
             - .%core.php_ext%
+
+    board3.version.check:
+        class: \board3\portal\includes\mod_version_check
+        arguments:
+            - %board3.version_data%
+            - @config
+            - %core.root_path%
+            - %core.php_ext%
+            - @template
+            - @user
