@@ -7,6 +7,8 @@
 *
 */
 
+namespace board3\portal\acp;
+
 /**
 * @ignore
 */
@@ -15,7 +17,7 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-class phpbb_ext_board3_portal_acp_portal_module
+class portal_module
 {
 	public $u_action;
 	public $new_config = array();

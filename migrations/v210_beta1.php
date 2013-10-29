@@ -154,7 +154,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'acp',
 				'ACP_PORTAL',
 				array(
-					'module_basename'	=> 'phpbb_ext_board3_portal_acp_portal_module',
+					'module_basename'	=> '\board3\portal\acp\portal_module',
 					'module_mode'		=> 'config',
 					'module_auth'		=> 'acl_a_manage_portal',
 					'module_langname'	=> 'ACP_PORTAL_GENERAL_INFO',
@@ -164,7 +164,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'acp',
 				'ACP_PORTAL',
 				array(
-					'module_basename'	=> 'phpbb_ext_board3_portal_acp_portal_module',
+					'module_basename'	=> '\board3\portal\acp\portal_module',
 					'module_mode'		=> 'modules',
 					'module_auth'		=> 'acl_a_manage_portal',
 					'module_langname'	=> 'ACP_PORTAL_MODULES',
@@ -174,7 +174,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'acp',
 				'ACP_PORTAL',
 				array(
-					'module_basename'	=> 'phpbb_ext_board3_portal_acp_portal_module',
+					'module_basename'	=> '\board3\portal\acp\portal_module',
 					'module_mode'		=> 'upload_module',
 					'module_auth'		=> 'acl_a_manage_portal',
 					'module_langname'	=> 'ACP_PORTAL_UPLOAD',

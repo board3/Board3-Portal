@@ -7,6 +7,8 @@
 *
 */
 
+namespace board3\portal\acp;
+
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -15,12 +17,12 @@ if (!defined('IN_PHPBB'))
 /**
 * @package module_install
 */
-class phpbb_ext_board3_portal_acp_portal_info
+class portal_info
 {
 	public function module()
 	{
 		return array(
-			'filename'	=> 'phpbb_ext_board3_portal_acp_portal_module',
+			'filename'	=> '\board3\portal\acp\portal_module',
 			'title'		=> 'ACP_PORTAL',
 			'version'	=> '2.0.0b2',
 			'modes'		=> array(
