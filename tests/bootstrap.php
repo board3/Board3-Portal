@@ -8,7 +8,7 @@
 */
 
 define('IN_PHPBB', true);
-$phpbb_root_path = './../../';
+$phpbb_root_path = './../../../';
 $phpEx = 'php';
 require_once $phpbb_root_path . 'includes/startup.' . $phpEx;
 

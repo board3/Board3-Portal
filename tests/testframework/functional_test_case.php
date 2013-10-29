@@ -7,7 +7,7 @@
 *
 */
 
-namespace board3\tests\testframework;
+namespace board3\portal\tests\testframework;
 
 abstract class functional_test_case extends \phpbb_functional_test_case
 {

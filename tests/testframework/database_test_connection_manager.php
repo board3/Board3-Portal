@@ -7,7 +7,7 @@
 *
 */
 
-namespace board3\tests\testframework;
+namespace board3\portal\tests\testframework;
 
 class database_test_connection_manager extends \phpbb_database_test_connection_manager
 {
