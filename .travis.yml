@@ -15,7 +15,8 @@ before_script:
   - git clone "git://github.com/phpbb/phpbb3.git" "phpBB3"
   - mkdir phpBB3/phpBB/ext
   - mkdir phpBB3/phpBB/ext/board3
-  - mv board3/Board3-Portal phpBB3/phpBB/ext/board3
+  - find -type d -name "Board3-Portal" -print | xargs -i mv {} phpBB3/phpBB/ext/board3
+  # - mv board3/Board3-Portal phpBB3/phpBB/ext/board3
 
   # Setup the dependencies
   - cd phpBB3/phpBB
