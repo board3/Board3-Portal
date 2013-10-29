@@ -13,3 +13,8 @@ Board3 Portal 2.1.x can be installed via the phpBB 3.1 ACP.
 
 Support for Board3 Portal can be found at [www.board3.de](http://www.board3.de/ "Board3 • Portal") or on [www.phpbb.com](http://www.phpbb.com/community/viewtopic.php?f=70&t=2131824/ "phpBB • Board3 Portal").
 The extension is currently under heavy development and not supported until further notice.
+
+## AUTOMATED TESTING
+
+We are starting to have unit and functional tests in order to prevent regressions. You can check our travis build below.
+develop-2.1.x - [![Build Status](https://api.travis-ci.org/board3/Board3-Portal.png?branch=develop-2.1.x)](http://travis-ci.org/phpbb/phpbb)
