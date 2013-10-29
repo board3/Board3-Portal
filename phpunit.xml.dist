@@ -2,7 +2,7 @@
 
 <phpunit backupGlobals="true"
          backupStaticAttributes="true"
-         colors="false"
+         colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
