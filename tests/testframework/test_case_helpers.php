@@ -18,7 +18,7 @@ abstract class test_case_helpers extends \phpbb_test_case_helpers
 	{
 		$config = array();
 
-		if (extension_loaded('sqlite') && version_compare(PHPUnit_Runner_Version::id(), '3.4.15', '>='))
+		if (extension_loaded('sqlite') && version_compare(\PHPUnit_Runner_Version::id(), '3.4.15', '>='))
 		{
 			$config = array_merge($config, array(
 				'dbms'		=> 'phpbb_db_driver_sqlite',
