@@ -7,9 +7,9 @@
 *
 */
 
-namespace board3\tests\systemtests;
+namespace board3\portal\tests\systemtests;
 
-class base_test extends \board3\tests\testframework\test_case
+class base_test extends \board3\portal\tests\testframework\test_case
 {
 	public function test_check()
 	{

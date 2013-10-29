@@ -7,7 +7,7 @@
 *
 */
 
-namespace board3\tests\testframework;
+namespace board3\portal\tests\testframework;
 
 abstract class test_case_helpers extends \phpbb_test_case_helpers
 {
