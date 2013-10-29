@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+	<table name="phpbb_sessions">
+		<column>session_id</column>
+		<column>session_user_id</column>
+		<column>session_album_id</column>
+		<column>session_ip</column>
+		<column>session_browser</column>
+		<column>session_admin</column>
+		<row>
+			<value>bar_session000000000000000000000</value>
+			<value>4</value>
+			<value>42</value>
+			<value>127.0.0.1</value>
+			<value>user agent</value>
+			<value>1</value>
+		</row>
+	</table>
+	<table name="phpbb_gallery_albums">
+		<column>album_id</column>
+		<column>album_name</column>
+		<column>album_parents</column>
+		<column>album_desc</column>
+		<row>
+			<value>42</value>
+			<value>Testalbum</value>
+			<value></value>
+			<value></value>
+		</row>
+	</table>
+</dataset>

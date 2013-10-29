@@ -1,0 +1,41 @@
+language: php
+php:
+  - 5.3.3
+  - 5.3
+  - 5.4
+  - 5.5
+
+env:
+  - DB=mysql
+  - DB=postgres
+
+before_script:
+  # checkout phpBB and move your extension in place
+  - cd ../../
+  - git clone "git://github.com/phpbb/phpbb3.git" "phpBB3"
+  - mkdir phpBB3/phpBB/ext
+  - mkdir phpBB3/phpBB/ext/phpbbgallery
+  - mv nickvergessen/phpbb3-ext-gallery phpBB3/phpBB/ext/phpbbgallery/core
+
+  # Setup the dependencies
+  - cd phpBB3/phpBB
+  - php ../composer.phar install --dev --no-interaction --prefer-source
+
+  # Setup the tests/travis
+  - cd ext/phpbbgallery/core
+  - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'DROP DATABASE IF EXISTS phpbb_tests;' -U postgres; fi"
+  - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'create database phpbb_tests;' -U postgres; fi"
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database IF NOT EXISTS phpbb_tests;'; fi"
+  - travis/install-php-extensions.sh
+  - phpenv rehash
+  - sh -c "if [ `php -r "echo (int) version_compare(PHP_VERSION, '5.3.19', '>=');"` = "1" ]; then travis/setup-webserver.sh; fi"
+
+script:
+  - ../../../vendor/bin/phpunit --configuration travis/phpunit-$DB-travis.xml
+
+notifications:
+  email:
+    recipients:
+      - nickvergessen@gmx.de
+    on_success: change
+    on_failure: change
