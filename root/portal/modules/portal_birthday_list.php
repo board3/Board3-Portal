@@ -165,13 +165,13 @@ class portal_birthday_list_module
 	*/
 	protected function format_birthday($user, $birthday, $date_settings)
 	{
-		if (!preg_match('/(?:[0-9])+-+(?:[0-9]{2})+-+(?:[0-9]{4})/', $birthday, $match))
+		if (!preg_match('/(?:[0-9])+-+(?:[0-9]{2})+-+(?:[0-9]{4})?/', $birthday, $match))
 		{
 			return '';
 		}
 
 		$date = explode('-', $birthday);
-		$time = mktime(0, 0, 0, $date[1], $date[0], $date[2]);
+		$time = mktime(0, 0, 0, $date[1], $date[0], (isset($date[2])) ? $date[2] : 0);
 		$lang_dates = array_filter($user->lang['datetime'], 'is_string');
 
 		return strtr(date($date_settings, $time), $lang_dates);
