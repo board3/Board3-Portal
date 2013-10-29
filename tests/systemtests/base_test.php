@@ -7,9 +7,9 @@
 *
 */
 
-namespace phpbbgallery\core\tests\systemtests;
+namespace board3\tests\systemtests;
 
-class base_test extends \phpbbgallery\core\tests\testframework\test_case
+class base_test extends \board3\tests\testframework\test_case
 {
 	public function test_check()
 	{

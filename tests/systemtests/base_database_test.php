@@ -7,9 +7,9 @@
 *
 */
 
-namespace phpbbgallery\core\tests\systemtests;
+namespace board3\tests\systemtests;
 
-class base_database_test extends \phpbbgallery\core\tests\testframework\database_test_case
+class base_database_test extends \board3\tests\testframework\database_test_case
 {
 	public function getDataSet()
 	{

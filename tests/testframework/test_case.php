@@ -7,7 +7,7 @@
 *
 */
 
-namespace phpbbgallery\core\tests\testframework;
+namespace board3\tests\testframework;
 
 abstract class test_case extends \phpbb_test_case
 {
@@ -15,7 +15,7 @@ abstract class test_case extends \phpbb_test_case
 	{
 		if (!$this->test_case_helpers)
 		{
-			$this->test_case_helpers = new \phpbbgallery\core\tests\testframework\test_case_helpers($this);
+			$this->test_case_helpers = new \board3\tests\testframework\test_case_helpers($this);
 		}
 
 		return $this->test_case_helpers;
