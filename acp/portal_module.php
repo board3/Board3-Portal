@@ -126,7 +126,7 @@ class portal_module
 							'MODULE_IMAGE'			=> $module_data['module_image_src'],
 							'MODULE_IMAGE_WIDTH'	=> $module_data['module_image_width'],
 							'MODULE_IMAGE_HEIGHT'	=> $module_data['module_image_height'],
-							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $this->root_path . 'styles/' . $this->user->theme['theme_path'] . '/theme/images/portal/' . $module_data['module_image_src'] : '',
+							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $module_data['module_image_src'] : '',
 							'MODULE_ENABLED'		=> ($module_data['module_status']) ? true : false,
 							'MODULE_SHOW_IMAGE'		=> (in_array(column_num_string($module_data['module_column']), array('center', 'top', 'bottom'))) ? false : true,
 						));
@@ -299,6 +299,7 @@ class portal_module
 					'ERROR_MSG'			=> implode('<br />', $error),
 
 					'U_ACTION'			=> $this->u_action . (($module_id) ? '&amp;module_id=' . $module_id : ''),
+					'B3P_ACP_ROOT'		=> $this->root_path,
 				));
 
 				// Output relevant page
@@ -498,7 +499,7 @@ class portal_module
 							trigger_error($error_output . adm_back_link($this->u_action));
 						}
 
-						meta_refresh(3, append_sid("{$this->phpbb_admin_path}index.{$this->php_ex}", 'i=portal&amp;mode=config&amp;module_id=' . $module_id));
+						meta_refresh(3, $this->get_module_link('config', $module_id));
 
 						trigger_error($this->user->lang['SUCCESS_ADD'] . adm_back_link($this->u_action));
 					}
@@ -690,7 +691,7 @@ class portal_module
 							'MODULE_ENABLED'	=> ($row['module_status']) ? true : false,
 
 							'U_DELETE'			=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;module_classname=' . $row['module_classname'] . '&amp;action=delete',
-							'U_EDIT'			=> append_sid("{$this->phpbb_admin_path}index.{$this->php_ex}", 'i=portal&amp;mode=config&amp;module_id=' . $row['module_id']),
+							'U_EDIT'			=> $this->get_module_link('config', $row['module_id']),
 							'U_MOVE_UP'			=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_up',
 							'U_MOVE_DOWN'		=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_down',
 							'U_MOVE_RIGHT'		=> ($move_right) ? $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_right' : '',
@@ -1184,5 +1185,18 @@ class portal_module
 		}
 		
 		$this->cache->destroy('portal_modules');
+	}
+
+	/**
+	* Get link to module settings with specified ID and portal_module mode
+	*
+	* @param string $mode portal_module mode
+	* @param int $module_id Module ID
+	*
+	* @return string Link to module settings
+	*/
+	protected function get_module_link($mode, $module_id)
+	{
+		return preg_replace(array('/i=[0-9]+/', '/mode=[a-zA-Z0-9_]+/'), array('i=\\' . __CLASS__, 'mode=' . $mode), $this->u_action) . '&amp;module_id=' . $module_id;
 	}
 }
