@@ -45,10 +45,17 @@
 		</td>
 	</tr>
 	<!-- ENDIF -->
+	<!-- IF S_NOTIFICATIONS_DISPLAY and not S_IS_BOT and S_USER_LOGGED_IN -->
+	<tr class="row1">
+		<td>
+			<a href="{U_VIEW_ALL_NOTIFICATIONS}" id="notification_list_button"><img src="{T_THEME_PATH}/images/icon_mini_notification.gif" width="12" height="13" alt="*" /> {L_NOTIFICATIONS} [<strong>{NOTIFICATIONS_COUNT}</strong>]</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
 	<!-- IF S_DISPLAY_PM -->
 	<tr class="row1">
 		<td>
-			<a href="{U_PRIVATEMSGS}" title="{L_MESSAGE}"><img src="{T_EXT_THEME_PATH}/images/portal/arrowbullet<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->_rtl<!-- ENDIF -->.gif" width="12" height="11" alt="" />&nbsp;{PRIVATE_MESSAGE_INFO}</a>
+			<a href="{U_PRIVATEMSGS}" title="{L_MESSAGE}"><img src="{T_THEME_PATH}/images/icon_mini_message.gif" width="12" height="13" alt="*" /> {L_PRIVATE_MESSAGES} [<strong>{PRIVATE_MESSAGE_COUNT}</strong>]</a>
 		</td>
 	</tr>
 	<!-- ENDIF -->
