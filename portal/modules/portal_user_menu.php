@@ -135,7 +135,7 @@ class portal_user_menu_module
 		{
 			// Assign specific vars
 			$template->assign_vars(array(
-				'U_PORTAL'				=> append_sid("{$phpbb_root_path}portal.$phpEx"),
+				'U_PORTAL'				=> append_sid("{$phpbb_root_path}app.$phpEx/portal"),
 				'S_DISPLAY_FULL_LOGIN'	=> true,
 				'S_AUTOLOGIN_ENABLED'	=> ($config['allow_autologin']) ? true : false,
 				'S_LOGIN_ACTION'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login'),
