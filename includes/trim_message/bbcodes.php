@@ -342,7 +342,7 @@ class phpbb_trim_message_bbcodes
 		for ($i = 1; $i <= $this->array_size; $i++)
 		{
 			if (($this->bbcode_list[$this->array_size - $i]['open_start'] < $position) &&
-				 ($this->bbcode_list[$this->array_size - $i]['close_start'] >= $position))
+				($this->bbcode_list[$this->array_size - $i]['close_start'] >= $position))
 			{
 				$bbcodes[] = $this->bbcode_list[$this->array_size - $i]['bbcode_tag'];
 			}
