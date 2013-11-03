@@ -113,7 +113,7 @@ class portal_main_menu_module
 	public function get_template_acp($module_id)
 	{
 		// do not remove this as it is needed in order to run manage_links
-        return array(
+		return array(
 			'title'	=> 'ACP_PORTAL_MENU',
 			'vars'	=> array(
 				'legend1'				=> 'ACP_PORTAL_MENU',

@@ -284,7 +284,7 @@ class db
 							$ret[$key] = "{foobar.{$key}.{$this->sql_in_set[$id][1][$this->int_pointer]}}";
 						}
 					}
-					$this->int_pointer++;;
+					$this->int_pointer++;
 					return $ret;
 				}
 			}

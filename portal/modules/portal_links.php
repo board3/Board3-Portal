@@ -103,7 +103,7 @@ class portal_links_module
 	public function get_template_acp($module_id)
 	{
 		// do not remove this as it is needed in order to run manage_links
-        return array(
+		return array(
 			'title'	=> 'ACP_PORTAL_LINKS',
 			'vars'	=> array(
 				'legend1'				=> 'ACP_PORTAL_LINKS',
