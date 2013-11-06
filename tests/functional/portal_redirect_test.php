@@ -38,7 +38,20 @@ class phpbb_functional_portal_redirect_test extends \board3\portal\tests\testfra
 
 	public function test_redirect()
 	{
-		$crawler = self::request('GET', '');
-		$this->assertContains('Board3 Portal', $crawler->text());
+		if (function_exists('apache_get_modules'))
+		{
+			$modules = apache_get_modules();
+			$mod_rewrite = in_array('mod_rewrite', $modules);
+		}
+		else
+		{
+			$mod_rewrite =  (getenv('HTTP_MOD_REWRITE')=='On') ? true : false;
+		}
+
+		if ($mod_rewrite)
+		{
+			$crawler = self::request('GET', '');
+			$this->assertContains('Board3 Portal', $crawler->text());
+		}
 	}
 }
