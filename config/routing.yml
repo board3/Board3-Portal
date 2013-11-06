@@ -6,3 +6,8 @@ board3_controller:
 board3_pages_controller:
     pattern: /portal/{page}
     defaults: { _controller: board3.portal.main:handle_page, page: "portal" }
+
+# Redirect to portal by default
+board3_redirect_controller:
+    pattern: /
+    defaults: { _controller: board3.portal.main:handle }
