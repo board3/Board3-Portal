@@ -17,7 +17,6 @@ class phpbb_functional_portal_redirect_test extends \board3\portal\tests\testfra
 		parent::setUp();
 		$this->login();
 		$this->admin_login();
-		$this->add_lang(array('mods/portal'));
 		$this->enable_board3_portal_ext();
 	}
 
