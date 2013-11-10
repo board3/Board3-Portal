@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 /**
 * @package Donation
 */
-class portal_donation_module
+class portal_donation_module extends \board3\portal\modules\module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)

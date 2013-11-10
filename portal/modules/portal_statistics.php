@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 /**
 * @package Statistics
 */
-class portal_statistics_module
+class portal_statistics_module extends \board3\portal\modules\module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)

@@ -21,6 +21,7 @@ services:
             - @path_helper
             - %core.root_path%
             - .%core.php_ext%
+            - @board3.module_collection
 
     board3.version.check:
         class: \board3\portal\includes\mod_version_check
@@ -31,3 +32,22 @@ services:
             - %core.php_ext%
             - @template
             - @user
+
+    board3.module_collection:
+        class: phpbb\di\service_collection
+        arguments:
+            - @service_container
+        tags:
+            - { name: service_collection, tag: board3.module }
+
+    board3.module.stylechanger:
+        class: \board3\portal\modules\stylechanger
+        arguments:
+            - @config
+            - @template
+            - @dbal.conn
+            - %core.php_ext%
+            - %core.root_path%
+            - @user
+        tags:
+            - { name: board3.module }

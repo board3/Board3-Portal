@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 /**
 * @package Birthday List
 */
-class portal_birthday_list_module
+class portal_birthday_list_module extends \board3\portal\modules\module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)

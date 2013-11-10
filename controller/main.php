@@ -66,6 +66,12 @@ class main
 	protected $path_helper;
 
 	/**
+	* Board3 Modules service collection
+	* @var phpbb\di\service_collection
+	*/
+	protected $modules;
+
+	/**
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
 	* the dependencies defined in the services.yml file for this service.
@@ -76,8 +82,10 @@ class main
 	* @param \phpbb\path_helper $path_helper phpBB path helper
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $php_ext PHP file extension
+	* @param \phpbb\di\service_collection $modules Board3 Modules service
+	*						collection
 	*/
-	public function __construct($auth, $config, $template, $user, $path_helper, $phpbb_root_path, $php_ext)
+	public function __construct($auth, $config, $template, $user, $path_helper, $phpbb_root_path, $php_ext, $modules)
 	{
 		global $portal_root_path;
 
@@ -88,6 +96,8 @@ class main
 		$this->path_helper = $path_helper;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $php_ext;
+		$this->register_modules($modules);
+
 		$this->includes_path = $phpbb_root_path . 'ext/board3/portal/portal/';
 		$this->root_path = $phpbb_root_path . 'ext/board3/portal/';
 		$portal_root_path = $this->root_path;
@@ -97,6 +107,25 @@ class main
 			include($this->includes_path . 'includes/constants' . $this->php_ext);
 			include($this->includes_path . 'includes/functions_modules' . $this->php_ext);
 			include($this->includes_path . 'includes/functions' . $this->php_ext);
+		}
+	}
+
+	/**
+	* Register list of Board3 Portal modules
+	*
+	* @param \phpbb\di\service_collection $modules Board3 Modules service
+	*						collection
+	* @return void
+	*/
+	protected function register_modules($modules)
+	{
+		foreach ($modules as $current_module)
+		{
+			$class_name = '\\' . get_class($current_module);
+			if (!isset($this->modules[$class_name]))
+			{
+				$this->modules[$class_name] = $current_module;
+			}
 		}
 	}
 
@@ -145,17 +174,28 @@ class main
 				continue;
 			}
 
-			$class_name = 'portal_' . $row['module_classname'] . '_module';
-			if (!class_exists($class_name))
+			// Do not try to load non-existant modules
+			if (!isset($this->modules[$row['module_classname']]))
 			{
-				include("{$this->includes_path}modules/portal_{$row['module_classname']}{$this->php_ext}");
-			}
-			if (!class_exists($class_name))
-			{
-				trigger_error(sprintf($this->user->lang['CLASS_NOT_FOUND'], $class_name, 'portal_' . $row['module_classname']), E_USER_ERROR);
-			}
+				if (file_exists("{$this->includes_path}modules/portal_{$row['module_classname']}{$this->php_ext}"))
+				{
+					include("{$this->includes_path}modules/portal_{$row['module_classname']}{$this->php_ext}");
+				}
 
-			$module = new $class_name();
+				$class_name = 'portal_' . $row['module_classname'] . '_module';
+				if (class_exists($class_name))
+				{
+					$module = new $class_name();
+				}
+				else
+				{
+					continue;
+				}
+			}
+			else
+			{
+				$module = $this->modules[$row['module_classname']];
+			}
 
 			/**
 			* Check for permissions before loading anything
@@ -167,9 +207,9 @@ class main
 				continue;
 			}
 
-			if ($module->language)
+			if ($language_file = $module->get_language())
 			{
-				$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $module->language);
+				$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $language_file);
 			}
 			if ($row['module_column'] == column_string_num('left') && $this->config['board3_left_column'])
 			{

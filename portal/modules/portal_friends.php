@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 /**
 * @package Friends
 */
-class portal_friends_module
+class portal_friends_module extends \board3\portal\modules\module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
