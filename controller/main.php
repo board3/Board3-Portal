@@ -177,7 +177,20 @@ class main
 			// Do not try to load non-existant modules
 			if (!isset($this->modules[$row['module_classname']]))
 			{
-				continue;
+				if (file_exists("{$this->includes_path}modules/portal_{$row['module_classname']}{$this->php_ext}"))
+				{
+					include("{$this->includes_path}modules/portal_{$row['module_classname']}{$this->php_ext}");
+				}
+
+				$class_name = 'portal_' . $row['module_classname'] . '_module';
+				if (class_exists($class_name))
+				{
+					$module = new $class_name();
+				}
+				else
+				{
+					continue;
+				}
 			}
 			else
 			{

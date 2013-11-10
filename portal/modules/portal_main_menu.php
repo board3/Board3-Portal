@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 /**
 * @package Main Menu
 */
-class portal_main_menu_module
+class portal_main_menu_module extends \board3\portal\modules\module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)

@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 /**
 * @package Topposters
 */
-class portal_topposters_module
+class portal_topposters_module extends \board3\portal\modules\module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)

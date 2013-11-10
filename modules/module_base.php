@@ -20,7 +20,7 @@ if (!defined('IN_PHPBB'))
 /**
 * @package module_base
 */
-abstract class module_base implements module_interface
+class module_base implements module_interface
 {
 	/**
 	* @inheritdoc
