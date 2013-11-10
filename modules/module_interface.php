@@ -69,6 +69,15 @@ interface module_interface
 	public function get_template_side($module_id);
 
 	/**
+	* Get template file for center columns
+	*
+	* @param int $module_id Module's ID
+	*
+	* @return string Module template file
+	*/
+	public function get_template_center($module_id);
+
+	/**
 	* Get acp settings
 	*
 	* @param int $module_id Module's ID

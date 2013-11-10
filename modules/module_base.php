@@ -57,6 +57,30 @@ class module_base implements module_interface
 	/**
 	* @inheritdoc
 	*/
+	public function get_template_side($module_id)
+	{
+		return;
+	}
+
+	/**
+	* @inheritdoc
+	*/
+	public function get_template_center($module_id)
+	{
+		return;
+	}
+
+	/**
+	* @inheritdoc
+	*/
+	public function get_template_acp($module_id)
+	{
+		return false;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function install($module_id)
 	{
 		return true;
