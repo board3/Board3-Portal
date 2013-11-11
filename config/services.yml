@@ -51,3 +51,8 @@ services:
             - @user
         tags:
             - { name: board3.module }
+
+    board3.module.clock:
+        class: \board3\portal\modules\clock
+        tags:
+            - { name: board3.module }
