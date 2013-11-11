@@ -10,14 +10,6 @@
 namespace board3\portal\modules;
 
 /**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
-/**
 * @package Stylechanger
 */
 class stylechanger extends module_base
