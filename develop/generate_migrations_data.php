@@ -12,8 +12,20 @@ die('This script shouldn\'t be run unless you really know what you do. If this s
 define('IN_PHPBB', true);
 define('B3_MODULE_ENABLED', 1);
 define('GROUPS_TABLE', '$this->table_prefix . \'groups');
+$phpbb_root_path = '../../../../';
+include($phpbb_root_path . 'includes/startup.php');
 $php_ex = substr(strrchr(__FILE__, '.'), 1);
 $phpEx = $php_ex;
+$table_prefix = 'phpbb_';
+require_once $phpbb_root_path . 'includes/constants.php';
+require_once $phpbb_root_path . 'phpbb/class_loader.' . $phpEx;
+
+$phpbb_class_loader_mock = new \phpbb\class_loader('phpbb_mock_', $phpbb_root_path . '../tests/mock/', "php");
+$phpbb_class_loader_mock->register();
+$phpbb_class_loader_ext = new \phpbb\class_loader('\\', $phpbb_root_path . 'ext/', "php");
+$phpbb_class_loader_ext->register();
+$phpbb_class_loader = new \phpbb\class_loader('phpbb\\', $phpbb_root_path . 'phpbb/', "php");
+$phpbb_class_loader->register();
 
 $config_entry = $portal_config_entry = $db_data = array();
 $root_path = '../'; // one directory down
@@ -160,7 +172,7 @@ function board3_get_install_data($db, $root_path, $php_ex, &$db_data)
 	);
 
 	foreach ($modules_ary as $module_name => $module_data)
-	{			
+	{
 		$class_name = $module_name . '_module';
 		if (!class_exists($class_name))
 		{
@@ -177,8 +189,8 @@ function board3_get_install_data($db, $root_path, $php_ex, &$db_data)
 			'module_classname'		=> substr($module_name, 7),
 			'module_column'			=> $module_data[0],
 			'module_order'			=> $module_data[1],
-			'module_name'			=> $c_class->name,
-			'module_image_src'		=> $c_class->image_src,
+			'module_name'			=> $c_class->get_name,
+			'module_image_src'		=> $c_class->get_image,
 			'module_group_ids'		=> '',
 			'module_image_width'	=> 16,
 			'module_image_height'	=> 16,
