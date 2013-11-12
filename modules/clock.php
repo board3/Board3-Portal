@@ -44,38 +44,6 @@ class clock extends module_base
 	/**
 	* @inheritdoc
 	*/
-	public function get_allowed_columns()
-	{
-		return $this->columns;
-	}
-
-	/**
-	* @inheritdoc
-	*/
-	public function get_name()
-	{
-		return $this->name;
-	}
-
-	/**
-	* @inheritdoc
-	*/
-	public function get_image()
-	{
-		return $this->image_src;
-	}
-
-	/**
-	* @inheritdoc
-	*/
-	public function get_language()
-	{
-		return $this->language;
-	}
-
-	/**
-	* @inheritdoc
-	*/
 	public function get_template_side($module_id)
 	{
 		return 'clock_side.html';

@@ -41,6 +41,34 @@ class stylechanger extends module_base
 	*/
 	public $language = 'portal_stylechanger_module';
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var \phpbb\db\driver */
+	protected $db;
+
+	/** @var php file extension */
+	protected $php_ext;
+
+	/** @var phpbb root path */
+	protected $phpbb_root_path;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/**
+	* Construct a stylechanger object
+	*
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\db\driver $db Database driver
+	* @param string $phpEx php file extension
+	* @param string $phpbb_root_path phpBB root path
+	* @param \phpbb\user $user phpBB user object
+	*/
 	public function __construct($config, $template, $db, $phpEx, $phpbb_root_path, $user)
 	{
 		$this->config = $config;
@@ -49,38 +77,6 @@ class stylechanger extends module_base
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
-	}
-
-	/**
-	* @inheritdoc
-	*/
-	public function get_allowed_columns()
-	{
-		return $this->columns;
-	}
-
-	/**
-	* @inheritdoc
-	*/
-	public function get_name()
-	{
-		return $this->name;
-	}
-
-	/**
-	* @inheritdoc
-	*/
-	public function get_image()
-	{
-		return $this->image_src;
-	}
-
-	/**
-	* @inheritdoc
-	*/
-	public function get_language()
-	{
-		return $this->language;
 	}
 
 	/**
