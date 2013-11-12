@@ -214,10 +214,10 @@ class portal_poll_module extends \board3\portal\modules\module_base
 
 			if($s_can_up_vote)
 			{
+				$redirect_url = append_sid("{$phpbb_root_path}app.$phpEx/portal");
+
 				if (!sizeof($voted_id) || sizeof($voted_id) > $topic_data['poll_max_options'] || in_array(VOTE_CONVERTED, $cur_voted_id))
 				{
-					$redirect_url = append_sid("{$phpbb_root_path}portal.$phpEx");
-
 					meta_refresh(5, $redirect_url);
 					if (!sizeof($voted_id))
 					{
@@ -294,8 +294,6 @@ class portal_poll_module extends \board3\portal\modules\module_base
 					WHERE topic_id = $up_topic_id";
 				//, topic_last_post_time = ' . time() . " -- for bumping topics with new votes, ignore for now
 				$db->sql_query($sql);
-
-				$redirect_url = append_sid("{$phpbb_root_path}portal.$phpEx");
 
 				meta_refresh(5, $redirect_url);
 				trigger_error($user->lang['VOTE_SUBMITTED'] . '<br /><br />' . sprintf($user->lang['RETURN_PORTAL'], '<a href="' . $redirect_url . '">', '</a>'));
@@ -437,8 +435,8 @@ class portal_poll_module extends \board3\portal\modules\module_base
 					}
 
 					$poll_view_str = urlencode(implode(',', $make_poll_view));
-					$portalpoll_url= append_sid("{$phpbb_root_path}portal.$phpEx", "polls=$poll_view_str");
-					$portalvote_url= append_sid("{$phpbb_root_path}portal.$phpEx", "f=$forum_id&amp;t=$topic_id");
+					$portalpoll_url= append_sid("{$phpbb_root_path}app.$phpEx/portal", "polls=$poll_view_str");
+					$portalvote_url= append_sid("{$phpbb_root_path}app.$phpEx/portal", "f=$forum_id&amp;t=$topic_id");
 					$viewtopic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
 					$poll_end = $data['poll_length'] + $data['poll_start'];
 
