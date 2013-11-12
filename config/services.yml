@@ -56,3 +56,12 @@ services:
         class: \board3\portal\modules\clock
         tags:
             - { name: board3.module }
+
+    board3.module.donation:
+        class: \board3\portal\modules\donation
+        arguments:
+            - @config
+            - @template
+            - @user
+        tags:
+            - { name: board3.module }
