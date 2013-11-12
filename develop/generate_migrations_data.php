@@ -55,7 +55,9 @@ function handle_string(&$str)
 {
 	if (is_string($str) && strpos($str, '$') === 0)
 	{
+	      // @codingStandardsIgnoreStart
 	      $str = str_replace(',', ' . \',\' . ', $str);
+	      // @codingStandardsIgnoreEnd
 	}
 	else if (is_string($str))
 	{
