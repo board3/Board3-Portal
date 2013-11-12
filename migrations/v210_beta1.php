@@ -314,7 +314,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'stylechanger',
+				'module_classname'		=> '\board3\portal\modules\stylechanger',
 				'module_column'		=> 1,
 				'module_order'		=> 2,
 				'module_name'		=> 'BOARD_STYLE',
@@ -336,7 +336,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'clock',
+				'module_classname'		=> '\board3\portal\modules\clock',
 				'module_column'		=> 1,
 				'module_order'		=> 4,
 				'module_name'		=> 'CLOCK',
