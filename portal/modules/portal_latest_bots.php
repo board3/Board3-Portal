@@ -103,10 +103,8 @@ class portal_latest_bots_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_last_visited_bots_number_' . $module_id,
 		);

@@ -81,7 +81,7 @@ class module_base implements module_interface
 	/**
 	* @inheritdoc
 	*/
-	public function uninstall($module_id)
+	public function uninstall($module_id, $db)
 	{
 		return true;
 	}

@@ -167,10 +167,8 @@ class portal_user_menu_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_user_menu_register_' . $module_id,
 		);

@@ -87,10 +87,8 @@ class portal_attachments_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_attachments_number_' . $module_id,
 			'board3_attach_max_length_' . $module_id,

@@ -297,10 +297,8 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_calendar_events_' . $module_id,
 		);

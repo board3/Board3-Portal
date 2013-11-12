@@ -90,10 +90,8 @@ class portal_latest_members_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_max_last_member_' . $module_id,
 		);

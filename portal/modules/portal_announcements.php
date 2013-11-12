@@ -413,10 +413,8 @@ class portal_announcements_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_announcements_style_' . $module_id,
 			'board3_number_of_announcements_' . $module_id,

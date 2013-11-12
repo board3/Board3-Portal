@@ -118,10 +118,8 @@ class donation extends module_base
 	/**
 	* @inheritdoc
 	*/
-	public function uninstall($module_id)
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_pay_acc_' . $module_id,
 			'board3_pay_custom_' . $module_id,
