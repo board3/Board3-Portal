@@ -22,8 +22,11 @@ class portal_module
 	public $u_action;
 	public $new_config = array();
 	protected $c_class;
-	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx;
+	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
 	protected $root_path, $mod_version_check;
+
+	/** @var \phpbb\di\service_collection Portal modules */
+	protected $modules;
 
 	public function __construct()
 	{
@@ -46,7 +49,9 @@ class portal_module
 		$this->phpbb_admin_path = $phpbb_admin_path;
 		$this->portal_root_path = $this->root_path . 'portal/';
 		$this->php_ex = $phpEx;
-		$this->mod_version_check = $phpbb_container->get('board3.version.check');
+		$this->phpbb_container = $phpbb_container;
+		$this->mod_version_check = $this->phpbb_container->get('board3.version.check');
+		$this->register_modules($this->phpbb_container->get('board3.module_collection'));
 
 		if (!function_exists('column_string_const'))
 		{
@@ -104,22 +109,32 @@ class portal_module
 
 					if ($module_data !== false)
 					{
-						$class = 'portal_' . $module_data['module_classname'] . '_module';
-						if (!class_exists($class))
+						if (!isset($this->modules[$module_data['module_classname']]))
 						{
-							include($this->root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ex);
+							$class = 'portal_' . $module_data['module_classname'] . '_module';
+							if (!class_exists($class))
+							{
+								include($this->root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ex);
+							}
+							if (class_exists($class))
+							{
+								$this->c_class = new $class();
+							}
+							else
+							{
+								continue;
+							}
 						}
-						if (!class_exists($class))
+						else
 						{
-							trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
+							$this->c_class = $this->modules[$module_data['module_classname']];
 						}
 
-						$this->c_class = new $class();
-						if ($this->c_class->language)
+						if ($this->c_class->get_language())
 						{
 							$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->language);
 						}
-						$module_name = $this->user->lang[$this->c_class->name];
+						$module_name = $this->user->lang[$this->c_class->get_name()];
 						$display_vars = $this->c_class->get_template_acp($module_id);
 						$this->template->assign_vars(array(
 							'MODULE_NAME'			=> (isset($this->c_class->hide_name) && $this->c_class->hide_name == true)? '' : $module_data['module_name'],
@@ -601,25 +616,35 @@ class portal_module
 
 					foreach($portal_modules as $row)
 					{
-						$class = 'portal_' . $row['module_classname'] . '_module';
-						if (!class_exists($class))
+						if (!isset($this->modules[$row['module_classname']]))
 						{
-							include($directory . 'portal_' . $row['module_classname'] . '.' . $this->php_ex);
+							$class = 'portal_' . $row['module_classname'] . '_module';
+							if (!class_exists($class))
+							{
+								include($directory . 'portal_' . $row['module_classname'] . '.' . $this->php_ex);
+							}
+							if (class_exists($class))
+							{
+								$this->c_class = new $class();
+							}
+							else
+							{
+								continue;
+							}
 						}
-						if (!class_exists($class))
+						else
 						{
-							trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
+							$this->c_class = $this->modules[$row['module_classname']];
 						}
 
-						$this->c_class = new $class();
-						if ($this->c_class->language)
+						if ($this->c_class->get_language())
 						{
-							$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->language);
+							$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->get_language());
 						}
 						$template_column = column_num_string($row['module_column']);
 
 						// find out of we can move modules to the left or right
-						if(($this->c_class->columns & column_string_const(column_num_string($row['module_column'] + 1))) || ($this->c_class->columns & column_string_const(column_num_string($row['module_column'] + 2)) && $row['module_column'] != 2))
+						if(($this->c_class->get_allowed_columns() & column_string_const(column_num_string($row['module_column'] + 1))) || ($this->c_class->get_allowed_columns() & column_string_const(column_num_string($row['module_column'] + 2)) && $row['module_column'] != 2))
 						{
 							/**
 							* check if we can actually move
@@ -652,7 +677,7 @@ class portal_module
 							$move_right = false;
 						}
 
-						if(($this->c_class->columns & column_string_const(column_num_string($row['module_column'] - 1))) || ($this->c_class->columns & column_string_const(column_num_string($row['module_column'] - 2)) && $row['module_column'] != 2))
+						if(($this->c_class->get_allowed_columns() & column_string_const(column_num_string($row['module_column'] - 1))) || ($this->c_class->get_allowed_columns() & column_string_const(column_num_string($row['module_column'] - 2)) && $row['module_column'] != 2))
 						{
 							/**
 							* check if we can actually move
@@ -1198,5 +1223,24 @@ class portal_module
 	protected function get_module_link($mode, $module_id)
 	{
 		return preg_replace(array('/i=[0-9]+/', '/mode=[a-zA-Z0-9_]+/'), array('i=\\' . __CLASS__, 'mode=' . $mode), $this->u_action) . '&amp;module_id=' . $module_id;
+	}
+
+	/**
+	* Register list of Board3 Portal modules
+	*
+	* @param \phpbb\di\service_collection $modules Board3 Modules service
+	*						collection
+	* @return null
+	*/
+	protected function register_modules($modules)
+	{
+		foreach ($modules as $current_module)
+		{
+			$class_name = '\\' . get_class($current_module);
+			if (!isset($this->modules[$class_name]))
+			{
+				$this->modules[$class_name] = $current_module;
+			}
+		}
 	}
 }
