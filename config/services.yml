@@ -54,6 +54,19 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.attachments:
+        class: \board3\portal\modules\attachments
+        arguments:
+            - @auth
+            - @config
+            - @template
+            - @dbal.conn
+            - %core.php_ext%
+            - %core.root_path%
+            - @user
+        tags:
+            - { name: board3.module }
+
     board3.module.stylechanger:
         class: \board3\portal\modules\stylechanger
         arguments:
