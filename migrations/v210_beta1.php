@@ -358,7 +358,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'attachments',
+				'module_classname'		=> '\board3\portal\modules\attachments',
 				'module_column'		=> 1,
 				'module_order'		=> 6,
 				'module_name'		=> 'PORTAL_ATTACHMENTS',

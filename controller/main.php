@@ -115,7 +115,7 @@ class main
 	*
 	* @param \phpbb\di\service_collection $modules Board3 Modules service
 	*						collection
-	* @return void
+	* @return null
 	*/
 	protected function register_modules($modules)
 	{
