@@ -424,7 +424,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'announcements',
+				'module_classname'		=> '\board3\portal\modules\announcements',
 				'module_column'		=> 2,
 				'module_order'		=> 3,
 				'module_name'		=> 'GLOBAL_ANNOUNCEMENTS',

@@ -183,15 +183,11 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 
 	if ($type == 'announcements' && $global_f < 1)
 	{
-		$sql = 'SELECT
-					forum_id
-				FROM
-					' . FORUMS_TABLE . '
-				WHERE
-					forum_type = ' . FORUM_POST . '
-					' . str_replace('t.', '', $str_where) . '
-				ORDER BY
-					forum_id';
+		$sql = 'SELECT forum_id
+			FROM ' . FORUMS_TABLE . '
+			WHERE forum_type = ' . FORUM_POST . '
+			' . str_replace('t.', '', $str_where) . '
+			ORDER BY forum_id';
 		$result = $db->sql_query_limit($sql, 1);
 		$row = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
