@@ -72,7 +72,7 @@ function obtain_portal_modules()
 {
 	global $db, $cache, $portal_modules;
 
-	if (($portal_modules = $cache->get('portal_modules')) === false)
+	if (($portal_modules = $cache->get('portal_modules')) === false || defined('DEBUG'))
 	{
 		$portal_modules = $portal_cached_modules = array();
 
