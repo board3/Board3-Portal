@@ -468,7 +468,7 @@ class portal_poll_module extends \board3\portal\modules\module_base
 						'POLL_LENGTH'			=> $data['poll_length'],
 						'TOPIC_ID'				=> $topic_id,
 						'TOTAL_VOTES'			=> $poll_total_votes,
-						'L_MAX_VOTES'			=> ($data['poll_max_options'] == 1) ? $user->lang['MAX_OPTION_SELECT'] : sprintf($user->lang['MAX_OPTIONS_SELECT'], $data['poll_max_options']),
+						'L_MAX_VOTES'			=> $user->lang('MAX_OPTIONS_SELECT', $data['poll_max_options']),
 						'L_POLL_LENGTH'			=> ($data['poll_length']) ? sprintf($user->lang[($poll_end > time()) ? 'POLL_RUN_TILL' : 'POLL_ENDED_AT'], $user->format_date($poll_end)) : '',
 						'S_CAN_VOTE'			=> $s_can_vote,
 						'S_DISPLAY_RESULTS'		=> $s_display_results,
