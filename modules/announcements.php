@@ -66,7 +66,7 @@ class announcements extends module_base
 	protected $user;
 
 	/**
-	* Construct a stylechanger object
+	* Construct an announcements object
 	*
 	* @param \phpbb\auth\auth $auth phpBB auth service
 	* @param \phpbb\cache\driver $cache phpBB cache driver
