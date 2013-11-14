@@ -22,7 +22,7 @@ class phpbb_functional_portal_no_error_test extends \board3\portal\tests\testfra
 
 	public function test_vanilla_board()
 	{
-		$crawler = self::request('GET', 'app.php/portal');
+		$crawler = self::request('GET', 'app.php?portal');
 	}
 
 	public function test_with_poll()
@@ -35,7 +35,7 @@ class phpbb_functional_portal_no_error_test extends \board3\portal\tests\testfra
 
 		if (isset($data))
 		{
-			$crawler = self::request('GET', 'app.php/portal');
+			$crawler = self::request('GET', 'app.php?portal');
 		}
 	}
 }
