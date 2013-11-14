@@ -98,7 +98,7 @@ function obtain_portal_modules()
 // fetch post for news & announce
 function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0, $invert = false)
 {
-	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode, $portal_config, $config;
+	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode, $portal_config, $config, $cache;
 
 	$posts = $update_count = array();
 	$post_time = ($time == 0) ? '' : 'AND t.topic_time > ' . (time() - $time * 86400);
@@ -183,18 +183,23 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 
 	if ($type == 'announcements' && $global_f < 1)
 	{
-		$sql = 'SELECT
-					forum_id
-				FROM
-					' . FORUMS_TABLE . '
-				WHERE
-					forum_type = ' . FORUM_POST . '
-					' . str_replace('t.', '', $str_where) . '
-				ORDER BY
-					forum_id';
-		$result = $db->sql_query_limit($sql, 1);
-		$row = $db->sql_fetchrow($result);
-		$db->sql_freeresult($result);
+		if (!empty($str_where) || ($row = $cache->get('_forum_id_first_forum_post')) === false)
+		{
+			$sql = 'SELECT forum_id
+				FROM ' . FORUMS_TABLE . '
+				WHERE forum_type = ' . FORUM_POST . '
+				' . str_replace('t.', '', $str_where) . '
+				ORDER BY forum_id';
+			$result = $db->sql_query_limit($sql, 1);
+			$row = $db->sql_fetchrow($result);
+			$db->sql_freeresult($result);
+
+			if (empty($str_where))
+			{
+				// Cache first forum ID for one day = 86400 s
+				$cache->put('_forum_id_first_forum_post', $row, 86400);
+			}
+		}
 
 		if (!sizeof($row))
 		{
