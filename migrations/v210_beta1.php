@@ -325,7 +325,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'birthday_list',
+				'module_classname'		=> '\board3\portal\modules\birthday_list',
 				'module_column'		=> 1,
 				'module_order'		=> 3,
 				'module_name'		=> 'BIRTHDAYS',
