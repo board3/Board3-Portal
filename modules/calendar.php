@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Calendar
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
 * @package Calendar
 */
-class portal_calendar_module extends \board3\portal\modules\module_base
+class calendar extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -56,12 +50,12 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 	/**
 	* additional variables
 	*/
-	private $mini_cal_fdow;
+	protected $mini_cal_fdow;
 
 	/**
 	* User datetime object
 	*/
-	private $time;
+	protected $time;
 
 	/**
 	* constants
@@ -70,14 +64,83 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 	const DAYS_PER_WEEK = 6; // indexes start at 0
 	const MONTHS_PER_YEAR = 12;
 
+	/** @var year in numeric format (YYYY) */
+	protected $dateYYY;
+
+	/** @var month in numeric format (MM) */
+	protected $dateMM;
+
+	/** @var day in numeric format (DD) */
+	protected $dateDD;
+
+	/** @var extended month (e.g. February) */
+	protected $ext_dateMM;
+
+	/** @var count of days in month */
+	protected $daysMonth;
+
+	/** @var timestamp */
+	protected $stamp;
+
+	/** @var return array s.a. */
+	protected $day;
+
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var \phpbb\db\driver */
+	protected $db;
+
+	/** @var php file extension */
+	protected $php_ext;
+
+	/** @var phpbb root path */
+	protected $phpbb_root_path;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/** @var \phpbb\path_helper */
+	protected $path_helper;
+
+	/** @var Portal root path */
+	protected $portal_root_path;
+
+	/**
+	* Construct a birthday_list object
+	*
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\db\driver $db Database driver
+	* @param string $phpEx php file extension
+	* @param string $phpbb_root_path phpBB root path
+	* @param \phpbb\user $user phpBB user object
+	* @param \phpbb\path_helper $path_helper phpBB path helper
+	*/
+	public function __construct($config, $template, $db, $phpbb_root_path, $phpEx, $user, $path_helper)
+	{
+		$this->config = $config;
+		$this->template = $template;
+		$this->db = $db;
+		$this->php_ext = $phpEx;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->user = $user;
+		$this->path_helper = $path_helper;
+		$this->portal_root_path = $this->path_helper->get_web_root_path() . $this->phpbb_root_path . 'ext/board3/portal/';
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_side($module_id)
 	{
-		global $config, $template, $user, $phpbb_root_path, $phpEx, $db, $portal_root_path;
-
 		$portal_config = obtain_portal_config();
 
 		// 0 = Sunday first - 1 = Monday first. ;-)
-		if ($config['board3_sunday_first_' . $module_id])
+		if ($this->config['board3_sunday_first_' . $module_id])
 		{
 			$this->mini_cal_fdow = 0;
 		}
@@ -94,7 +157,7 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 		}
 
 		// initialise some variables
-		$this->time = $user->create_datetime();
+		$this->time = $this->user->create_datetime();
 		$now = phpbb_gmgetdate($this->time->getTimestamp() + $this->time->getOffset());
 		$today_timestamp = $now[0];
 		$mini_cal_today = date('Ymd', $today_timestamp - date('Z'));
@@ -110,22 +173,22 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 		// output our general calendar bits
 		$down = $this->mini_cal_month - 1;
 		$up = $this->mini_cal_month + 1;
-		$prev_month = '<a href="' . append_sid("{$phpbb_root_path}app.$phpEx", "controller=portal&amp;m$module_id=$down#minical$module_id") . '"><img src="./../' . $portal_root_path . 'styles/' . $user->style['style_path'] . '/theme/images/portal/cal_icon_left_arrow.png' . '" title="' . $user->lang['VIEW_PREVIOUS_MONTH'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
-		$next_month = '<a href="' . append_sid("{$phpbb_root_path}app.$phpEx", "controller=portal&amp;m$module_id=$up#minical$module_id") . '"><img src="./../' . $portal_root_path . 'styles/' . $user->style['style_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
+		$prev_month = '<a href="' . append_sid("{$this->phpbb_root_path}app.{$this->php_ext}", "controller=portal&amp;m$module_id=$down#minical$module_id") . '"><img src="' . $this->portal_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/cal_icon_left_arrow.png' . '" title="' . $this->user->lang['VIEW_PREVIOUS_MONTH'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
+		$next_month = '<a href="' . append_sid("{$this->phpbb_root_path}app.{$this->php_ext}", "controller=portal&amp;m$module_id=$up#minical$module_id") . '"><img src="' . $this->portal_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $this->user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
 
-		$template->assign_block_vars('minical', array(
-			'S_SUNDAY_FIRST'	=> ($config['board3_sunday_first_' . $module_id]) ? true : false,
-			'L_MINI_CAL_MONTH'	=> (($config['board3_long_month_' . $module_id]) ? $user->lang['mini_cal']['long_month'][$this->day[0][1]] : $user->lang['mini_cal']['month'][$this->day[0][1]]) . " " . $this->day[0][2],
-			'L_MINI_CAL_SUN'	=> '<span style="color: ' . $config['board3_calendar_sunday_color_' . $module_id] . ';">' . $user->lang['mini_cal']['day'][1] . '</span>',
-			'L_MINI_CAL_MON'	=> $user->lang['mini_cal']['day'][2],
-			'L_MINI_CAL_TUE'	=> $user->lang['mini_cal']['day'][3],
-			'L_MINI_CAL_WED'	=> $user->lang['mini_cal']['day'][4],
-			'L_MINI_CAL_THU'	=> $user->lang['mini_cal']['day'][5],
-			'L_MINI_CAL_FRI'	=> $user->lang['mini_cal']['day'][6],
-			'L_MINI_CAL_SAT'	=> $user->lang['mini_cal']['day'][7],
+		$this->template->assign_block_vars('minical', array(
+			'S_SUNDAY_FIRST'	=> ($this->config['board3_sunday_first_' . $module_id]) ? true : false,
+			'L_MINI_CAL_MONTH'	=> (($this->config['board3_long_month_' . $module_id]) ? $this->user->lang['mini_cal']['long_month'][$this->day[0][1]] : $this->user->lang['mini_cal']['month'][$this->day[0][1]]) . " " . $this->day[0][2],
+			'L_MINI_CAL_SUN'	=> '<span style="color: ' . $this->config['board3_calendar_sunday_color_' . $module_id] . ';">' . $this->user->lang['mini_cal']['day'][1] . '</span>',
+			'L_MINI_CAL_MON'	=> $this->user->lang['mini_cal']['day'][2],
+			'L_MINI_CAL_TUE'	=> $this->user->lang['mini_cal']['day'][3],
+			'L_MINI_CAL_WED'	=> $this->user->lang['mini_cal']['day'][4],
+			'L_MINI_CAL_THU'	=> $this->user->lang['mini_cal']['day'][5],
+			'L_MINI_CAL_FRI'	=> $this->user->lang['mini_cal']['day'][6],
+			'L_MINI_CAL_SAT'	=> $this->user->lang['mini_cal']['day'][7],
 			'U_PREV_MONTH'		=> $prev_month,
 			'U_NEXT_MONTH'		=> $next_month,
-			'S_DISPLAY_EVENTS'	=> ($config['board3_display_events_' . $module_id]) ? true : false,
+			'S_DISPLAY_EVENTS'	=> ($this->config['board3_display_events_' . $module_id]) ? true : false,
 			'MODULE_ID'			=> $module_id,
 		));
 
@@ -135,7 +198,7 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 			// is this the first day of the week?
 			if($mini_cal_count == $this->mini_cal_fdow)
 			{
-				$template->assign_block_vars('minical.mini_cal_row', array(
+				$this->template->assign_block_vars('minical.mini_cal_row', array(
 					'MODULE_ID'		=> $module_id,
 				));
 			}
@@ -146,17 +209,17 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 				$mini_cal_this_day = $this->day[$i][0];
 
 				$d_mini_cal_today = $mini_cal_this_year . (($mini_cal_this_month <= 9) ? '0' . $mini_cal_this_month : $mini_cal_this_month) . (($mini_cal_this_day <= 9) ? '0' . $mini_cal_this_day : $mini_cal_this_day);
-				$mini_cal_day = ($mini_cal_today == $d_mini_cal_today) ? '<span style="font-weight: bold; color: ' . $config['board3_calendar_today_color_' . $module_id] . ';">' . $mini_cal_this_day . '</span>' : $mini_cal_this_day;
+				$mini_cal_day = ($mini_cal_today == $d_mini_cal_today) ? '<span style="font-weight: bold; color: ' . $this->config['board3_calendar_today_color_' . $module_id] . ';">' . $mini_cal_this_day . '</span>' : $mini_cal_this_day;
 
-				$template->assign_block_vars('minical.mini_cal_row.mini_cal_days', array(
-					'MINI_CAL_DAY'		=> ($mini_cal_count == 0) ? '<span style="color: ' . $config['board3_calendar_sunday_color_' . $module_id] . ';">' . $mini_cal_day . '</span>' : $mini_cal_day)
+				$this->template->assign_block_vars('minical.mini_cal_row.mini_cal_days', array(
+					'MINI_CAL_DAY'		=> ($mini_cal_count == 0) ? '<span style="color: ' . $this->config['board3_calendar_sunday_color_' . $module_id] . ';">' . $mini_cal_day . '</span>' : $mini_cal_day)
 				);
 				$i++;
 			}
 			// no day
 			else
 			{
-				$template->assign_block_vars('minical.mini_cal_row.mini_cal_days', array(
+				$this->template->assign_block_vars('minical.mini_cal_row.mini_cal_days', array(
 					'MINI_CAL_DAY'		=> ' ')
 				);
 			}
@@ -177,7 +240,7 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 		// fill table with empty strings
 		while ($mini_cal_count <= self::DAYS_PER_WEEK)
 		{
-			$template->assign_block_vars('minical.mini_cal_row.mini_cal_days', array(
+			$this->template->assign_block_vars('minical.mini_cal_row.mini_cal_days', array(
 				'MINI_CAL_DAY'		=> ' ')
 			);
 			$mini_cal_count++;
@@ -189,7 +252,7 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 		*/
 		$events = $this->utf_unserialize($portal_config['board3_calendar_events_' . $module_id]);
 
-		if(!empty($events) && $config['board3_display_events_' . $module_id])
+		if(!empty($events) && $this->config['board3_display_events_' . $module_id])
 		{
 			// we sort the $events array by the start time
 			foreach($events as $key => $cur_event)
@@ -202,9 +265,9 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 
 			foreach($events as $key => $cur_event)
 			{
-				if(($cur_event['start_time'] + $user->timezone + $user->dst) >= $today_timestamp ||
-					($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp ||
-					(($cur_event['start_time'] + $user->timezone + $user->dst + self::TIME_DAY) >= $today_timestamp && $cur_event['all_day']))
+				if(($cur_event['start_time'] + $this->time->getOffset()) >= $today_timestamp ||
+					($cur_event['end_time'] + $this->time->getOffset()) >= $today_timestamp ||
+					(($cur_event['start_time'] + $this->time->getOffset() + self::TIME_DAY) >= $today_timestamp && $cur_event['all_day']))
 				{
 					$cur_permissions = explode(',', $cur_event['permission']);
 					$permission_check = array_intersect($groups_ary, $cur_permissions);
@@ -228,31 +291,31 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 						* - We have an all day event and the start of that event is less than 1 day (86400 seconds) away
 						* - We have a normal event with a start that is less then 1 day away and that hasn't ended yet
 						*/
-						if((($cur_event['start_time'] + $user->timezone + $user->dst - $today_timestamp) <= self::TIME_DAY && $cur_event['all_day']) ||
-						(($cur_event['start_time'] + $user->timezone + $user->dst - $today_timestamp) <= self::TIME_DAY && ($cur_event['end_time'] + $user->timezone + $user->dst) >= $today_timestamp))
+						if((($cur_event['start_time'] + $this->time->getOffset() - $today_timestamp) <= self::TIME_DAY && $cur_event['all_day']) ||
+						(($cur_event['start_time'] + $this->time->getOffset() - $today_timestamp) <= self::TIME_DAY && ($cur_event['end_time'] + $this->time->getOffset()) >= $today_timestamp))
 						{
-							$template->assign_block_vars('minical.cur_events', array(
+							$this->template->assign_block_vars('minical.cur_events', array(
 								'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
 								'EVENT_TITLE'	=> $cur_event['title'],
-								'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
-								'END_TIME'		=> (!empty($cur_event['end_time'])) ? $user->format_date($cur_event['end_time'], 'j. M Y, H:i') : false,
+								'START_TIME'	=> $this->user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
+								'END_TIME'		=> (!empty($cur_event['end_time'])) ? $this->user->format_date($cur_event['end_time'], 'j. M Y, H:i') : false,
 								'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
 								'ALL_DAY'	=> ($cur_event['all_day']) ? true : false,
 								'MODULE_ID'		=> $module_id,
-								'EVENT_URL_NEW_WINDOW'	=> ($is_external && $config['board3_events_url_new_window_' . $module_id]) ? true : false,
+								'EVENT_URL_NEW_WINDOW'	=> ($is_external && $this->config['board3_events_url_new_window_' . $module_id]) ? true : false,
 							));
 						}
 						else
 						{
-							$template->assign_block_vars('minical.upcoming_events', array(
+							$this->template->assign_block_vars('minical.upcoming_events', array(
 								'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
 								'EVENT_TITLE'	=> $cur_event['title'],
-								'START_TIME'	=> $user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
-								'END_TIME'		=> (!$cur_event['all_day']) ? $user->format_date($cur_event['end_time'], 'j. M Y, H:i') : '',
+								'START_TIME'	=> $this->user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
+								'END_TIME'		=> (!$cur_event['all_day']) ? $this->user->format_date($cur_event['end_time'], 'j. M Y, H:i') : '',
 								'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
 								'ALL_DAY'	=> (($cur_event['start_time'] - $cur_event['end_time']) == 1) ? true : false,
 								'MODULE_ID'		=> $module_id,
-								'EVENT_URL_NEW_WINDOW'	=> ($is_external && $config['board3_events_url_new_window_' . $module_id]) ? true : false,
+								'EVENT_URL_NEW_WINDOW'	=> ($is_external && $this->config['board3_events_url_new_window_' . $module_id]) ? true : false,
 							));
 						}
 					}
@@ -263,6 +326,9 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 		return 'calendar_side.html';
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
@@ -281,7 +347,7 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
@@ -297,6 +363,9 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function uninstall($module_id, $db)
 	{
 		$del_config = array(
@@ -321,10 +390,17 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 		return $db->sql_query($sql);
 	}
 
+	/**
+	* Manage events
+	*
+	* @param mixed $value Value of input
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	*/
 	public function manage_events($value, $key, $module_id)
 	{
-		global $db, $portal_config, $config, $template, $user, $phpEx, $phpbb_admin_path;
-
 		$action = request_var('action', '');
 		$action = (isset($_POST['add'])) ? 'add' : $action;
 		$action = (isset($_POST['save'])) ? 'save' : $action;
@@ -333,7 +409,8 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 
 		$events = (strlen($portal_config['board3_calendar_events_' . $module_id]) >= 1) ? $this->utf_unserialize($portal_config['board3_calendar_events_' . $module_id]) : array();
 
-		$u_action = append_sid($phpbb_admin_path . 'index.' . $phpEx, 'i=portal&amp;mode=config&amp;module_id=' . $module_id);
+		// append_sid() adds adm/ already, no need to add it here
+		$u_action = append_sid('index.' . $this->php_ext, 'i=\board3\portal\acp\portal_module&amp;mode=config&amp;module_id=' . $module_id);
 
 		switch($action)
 		{
@@ -341,7 +418,7 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 			case 'save':
 				if (!check_form_key('acp_portal'))
 				{
-					trigger_error($user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				$event_title = utf8_normalize_nfc(request_var('event_title', ' ', true));
@@ -361,11 +438,11 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 				*/
 				if(strlen($event_start_day) < 9 || strlen($event_start_day) > 10 || (strlen($event_start_time) < 4 && !$event_all_day) || strlen($event_start_time) > 5)
 				{
-					trigger_error($user->lang['ACP_PORTAL_CALENDAR_START_INCORRECT']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['ACP_PORTAL_CALENDAR_START_INCORRECT']. adm_back_link($u_action), E_USER_WARNING);
 				}
 				elseif((strlen($event_end_day) < 9 || strlen($event_end_day) > 10 || strlen($event_end_time) < 4 || strlen($event_end_time) > 5) && !$event_all_day)
 				{
-					trigger_error($user->lang['ACP_PORTAL_CALENDAR_END_INCORRECT']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['ACP_PORTAL_CALENDAR_END_INCORRECT']. adm_back_link($u_action), E_USER_WARNING);
 				}
 				// Now get the needed numbers out of the entered information
 				$first_start_hyphen = strpos($event_start_day, '-', 0);
@@ -394,28 +471,28 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 				}
 
 				// UNIX timestamps
-				$start_time = gmmktime($start_hour, $start_minute, 0, $start_month, $start_day, $start_year) - $user->timezone - $user->dst;
-				$end_time = (!$event_all_day) ? gmmktime($end_hour, $end_minute, 0, $end_month, $end_day, $end_year) - $user->timezone - $user->dst : '';
+				$start_time = gmmktime($start_hour, $start_minute, 0, $start_month, $start_day, $start_year);
+				$end_time = (!$event_all_day) ? gmmktime($end_hour, $end_minute, 0, $end_month, $end_day, $end_year) : '';
 
 				if(($end_time) <= time() && !(($start_time + self::TIME_DAY) >= time() && $event_all_day))
 				{
-					trigger_error($user->lang['ACP_PORTAL_CALENDAR_EVENT_PAST']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['ACP_PORTAL_CALENDAR_EVENT_PAST']. adm_back_link($u_action), E_USER_WARNING);
 				}
 				elseif($end_time < $start_time && !$event_all_day)
 				{
-					trigger_error($user->lang['ACP_PORTAL_CALENDAR_EVENT_START_FIRST']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['ACP_PORTAL_CALENDAR_EVENT_START_FIRST']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				// get groups and check if the selected groups actually exist
 				$sql = 'SELECT group_id
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
-				$result = $db->sql_query($sql);
-				while($row = $db->sql_fetchrow($result))
+				$result = $this->db->sql_query($sql);
+				while($row = $this->db->sql_fetchrow($result))
 				{
 					$groups_ary[] = $row['group_id'];
 				}
-				$db->sql_freeresult($result);
+				$this->db->sql_freeresult($result);
 
 				$event_permission = array_intersect($event_permission, $groups_ary);
 				$event_permission = implode(',', $event_permission);
@@ -423,18 +500,18 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 				// Check for errors
 				if (!$event_title)
 				{
-					trigger_error($user->lang['NO_EVENT_TITLE'] . adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['NO_EVENT_TITLE'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				if (!$start_time || $start_time == 0)
 				{
-					trigger_error($user->lang['NO_EVENT_START'] . adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['NO_EVENT_START'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				// overwrite already existing events and make sure we don't try to save an event outside of the normal array size of $events
 				if (isset($link_id) && $link_id < sizeof($events))
 				{
-					$message = $user->lang['EVENT_UPDATED'];
+					$message = $this->user->lang['EVENT_UPDATED'];
 
 					$events[$link_id] = array(
 						'title' 		=> $event_title,
@@ -450,7 +527,7 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 				}
 				else
 				{
-					$message = $user->lang['EVENT_ADDED'];
+					$message = $this->user->lang['EVENT_ADDED'];
 
 					$events[] = array(
 						'title'			=> $event_title,
@@ -482,7 +559,7 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 
 				if (!isset($link_id) && $link_id >= sizeof($events))
 				{
-					trigger_error($user->lang['NO_EVENT'] . adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['NO_EVENT'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				if (confirm_box(true))
@@ -499,7 +576,7 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 				}
 				else
 				{
-					confirm_box(false, $user->lang['CONFIRM_OPERATION'], build_hidden_fields(array(
+					confirm_box(false, $this->user->lang['CONFIRM_OPERATION'], build_hidden_fields(array(
 						'link_id'	=> $link_id,
 						'action'	=> 'delete',
 					)));
@@ -512,13 +589,13 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 			case 'add':
 				$event_all_day = (isset($events[$link_id]['all_day']) && $events[$link_id]['all_day'] == true) ? true : false;
 
-				$template->assign_vars(array(
+				$this->template->assign_vars(array(
 					'EVENT_TITLE'		=> (isset($events[$link_id]['title']) && $action != 'add') ? $events[$link_id]['title'] : '',
 					'EVENT_DESC'		=> (isset($events[$link_id]['desc']) && $action != 'add') ? $events[$link_id]['desc'] : '',
-					'EVENT_START_DAY'	=> ($action != 'add') ? $user->format_date($events[$link_id]['start_time'], 'd-m-Y') : '',
-					'EVENT_START_TIME'	=> ($action != 'add') ? $user->format_date($events[$link_id]['start_time'], 'G:i') : '',
-					'EVENT_END_DAY'		=> ($action != 'add' && !$event_all_day) ? $user->format_date($events[$link_id]['end_time'], 'd-m-Y') : '',
-					'EVENT_END_TIME'	=> ($action != 'add' && !$event_all_day) ? $user->format_date($events[$link_id]['end_time'], 'G:i') : '',
+					'EVENT_START_DAY'	=> ($action != 'add') ? $this->user->format_date($events[$link_id]['start_time'], 'd-m-Y') : '',
+					'EVENT_START_TIME'	=> ($action != 'add') ? $this->user->format_date($events[$link_id]['start_time'], 'G:i') : '',
+					'EVENT_END_DAY'		=> ($action != 'add' && !$event_all_day) ? $this->user->format_date($events[$link_id]['end_time'], 'd-m-Y') : '',
+					'EVENT_END_TIME'	=> ($action != 'add' && !$event_all_day) ? $this->user->format_date($events[$link_id]['end_time'], 'G:i') : '',
 					'EVENT_ALL_DAY'		=> (isset($events[$link_id]['all_day']) && $events[$link_id]['all_day'] == true) ? true : false,
 					'EVENT_URL'			=> (isset($events[$link_id]['url']) && $action != 'add') ? $events[$link_id]['url'] : '',
 
@@ -534,16 +611,16 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 				$sql = 'SELECT group_id, group_name
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
-				$result = $db->sql_query($sql);
-				while($row = $db->sql_fetchrow($result))
+				$result = $this->db->sql_query($sql);
+				while($row = $this->db->sql_fetchrow($result))
 				{
-					$template->assign_block_vars('permission_setting_calendar', array(
+					$this->template->assign_block_vars('permission_setting_calendar', array(
 						'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
-						'GROUP_NAME'	=> (isset($user->lang['G_' . $row['group_name']])) ? $user->lang['G_' . $row['group_name']] : $row['group_name'],
+						'GROUP_NAME'	=> (isset($this->user->lang['G_' . $row['group_name']])) ? $this->user->lang['G_' . $row['group_name']] : $row['group_name'],
 						'GROUP_ID'		=> $row['group_id'],
 					));
 				}
-				$db->sql_freeresult($result);
+				$this->db->sql_freeresult($result);
 
 				return;
 
@@ -553,14 +630,17 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 		for ($i = 0; $i < sizeof($events); $i++)
 		{
 			$event_all_day = ($events[$i]['all_day'] == true) ? true : false;
-			$start_time_format = (!intval($user->format_date($events[$i]['start_time'], 'H')) && !intval($user->format_date($events[$i]['start_time'], 'i'))) ? 'j. M Y' : 'j. M Y, H:i';
-			$end_time_format = (!intval($user->format_date($events[$i]['end_time'], 'H')) && !intval($user->format_date($events[$i]['end_time'], 'i'))) ? 'j. M Y' : 'j. M Y, H:i';
+			$start_time_format = (!intval($this->user->format_date($events[$i]['start_time'], 'H')) && !intval($this->user->format_date($events[$i]['start_time'], 'i'))) ? 'j. M Y' : 'j. M Y, H:i';
+			if (!empty($events[$i]['end_time']))
+			{
+				$end_time_format = (!intval($this->user->format_date($events[$i]['end_time'], 'H')) && !intval($this->user->format_date($events[$i]['end_time'], 'i'))) ? 'j. M Y' : 'j. M Y, H:i';
+			}
 
-			$template->assign_block_vars('events', array(
-				'EVENT_TITLE'	=> ($action != 'add') ? ((isset($user->lang[$events[$i]['title']])) ? $user->lang[$events[$i]['title']] : $events[$i]['title']) : '',
+			$this->template->assign_block_vars('events', array(
+				'EVENT_TITLE'	=> ($action != 'add') ? ((isset($this->user->lang[$events[$i]['title']])) ? $this->user->lang[$events[$i]['title']] : $events[$i]['title']) : '',
 				'EVENT_DESC'	=> ($action != 'add') ? $events[$i]['desc'] : '',
-				'EVENT_START'	=> ($action != 'add') ? $user->format_date($events[$i]['start_time'], $start_time_format) : '',
-				'EVENT_END'		=> ($action != 'add' && !$event_all_day) ? $user->format_date($events[$i]['end_time'], $end_time_format) : '',
+				'EVENT_START'	=> ($action != 'add') ? $this->user->format_date($events[$i]['start_time'], $start_time_format) : '',
+				'EVENT_END'		=> ($action != 'add' && !$event_all_day) ? $this->user->format_date($events[$i]['end_time'], $end_time_format) : '',
 				'EVENT_URL'		=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? $this->validate_url($events[$i]['url']) : '',
 				'EVENT_URL_RAW'	=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? $events[$i]['url'] : '',
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
@@ -571,40 +651,46 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 
 	}
 
+	/**
+	* Update events
+	*
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	*/
 	public function update_events($key, $module_id)
 	{
 		$this->manage_events('', $key, $module_id);
 	}
 
-	private $dateYYY;						// year in numeric format (YYYY)
-	private $dateMM;						// month in numeric format (MM)
-	private $dateDD;						// day in numeric format (DD)
-	private $ext_dateMM;					// extended month (e.g. February)
-	private $daysMonth;						// count of days in month
-	private $stamp;							// timestamp
-	private $day;							// return array s.a.
-
 	/**
-	* convert date->timestamp
-	**/
-	private function makeTimestamp($date)
+	* Convert date->timestamp to time
+	*
+	* @param string $date Date to convert
+	*
+	* @return string Converted time
+	*/
+	protected function makeTimestamp($date)
 	{
 		$this->stamp = strtotime($date);
 		return ($this->stamp);
 	}
 
 	/**
-	* get date listed in array
-	**/
-	private function getMonth($callDate)
+	* Get date listed in array
+	*
+	* @param string $callDate Date
+	*
+	* @return null
+	*/
+	protected function getMonth($callDate)
 	{
-		global $user;
-
 		$this->makeTimestamp($callDate);
 		// last or first day of some months need to be treated in a special way
 		if (!empty($this->mini_cal_month))
 		{
-			$time = $user->create_datetime();
+			$time = $this->user->create_datetime();
 			$now = phpbb_gmgetdate($time->getTimestamp() + $time->getOffset());
 			$today_timestamp = $now[0];
 			$cur_month = date("n", $today_timestamp);
@@ -654,20 +740,28 @@ class portal_calendar_module extends \board3\portal\modules\module_base
 		}
 	}
 
-	// Unserialize links array
-	private function utf_unserialize($serial_str)
+	/**
+	* Unserialize links array
+	*
+	* @param string $serial_str Serialized string
+	*
+	* @return array Unserialized array
+	*/
+	protected function utf_unserialize($serial_str)
 	{
 		$out = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str );
 		return unserialize($out);
 	}
 
 	/**
-	* validate URLs and execute apppend_sid if necessary
+	* Validate URLs and execute apppend_sid if necessary
+	*
+	* @param string $url URL to process
+	*
+	* @return string Processed URL
 	*/
-	private function validate_url($url)
+	protected function validate_url($url)
 	{
-		global $config;
-
 		$url = str_replace("\r\n", "\n", str_replace('\"', '"', trim($url)));
 		$url = str_replace(' ', '%20', $url);
 		$url = str_replace('&', '&amp;', $url);

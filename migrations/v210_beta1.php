@@ -490,7 +490,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'calendar',
+				'module_classname'		=> '\board3\portal\modules\calendar',
 				'module_column'		=> 3,
 				'module_order'		=> 3,
 				'module_name'		=> 'PORTAL_CALENDAR',

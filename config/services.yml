@@ -77,6 +77,19 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.calendar:
+        class: \board3\portal\modules\calendar
+        arguments:
+            - @config
+            - @template
+            - @dbal.conn
+            - %core.root_path%
+            - %core.php_ext%
+            - @user
+            - @path_helper
+        tags:
+            - { name: board3.module }
+
     board3.module.stylechanger:
         class: \board3\portal\modules\stylechanger
         arguments:
