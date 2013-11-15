@@ -110,7 +110,7 @@ class calendar extends module_base
 	protected $portal_root_path;
 
 	/**
-	* Construct a birthday_list object
+	* Construct a calendar object
 	*
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\template $template phpBB template
@@ -173,8 +173,8 @@ class calendar extends module_base
 		// output our general calendar bits
 		$down = $this->mini_cal_month - 1;
 		$up = $this->mini_cal_month + 1;
-		$prev_month = '<a href="' . append_sid("{$this->phpbb_root_path}app.{$this->php_ext}", "controller=portal&amp;m$module_id=$down#minical$module_id") . '"><img src="' . $this->portal_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/cal_icon_left_arrow.png' . '" title="' . $this->user->lang['VIEW_PREVIOUS_MONTH'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
-		$next_month = '<a href="' . append_sid("{$this->phpbb_root_path}app.{$this->php_ext}", "controller=portal&amp;m$module_id=$up#minical$module_id") . '"><img src="' . $this->portal_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $this->user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
+		$prev_month = '<a href="' . append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "m$module_id=$down#minical$module_id") . '"><img src="' . $this->portal_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/cal_icon_left_arrow.png' . '" title="' . $this->user->lang['VIEW_PREVIOUS_MONTH'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
+		$next_month = '<a href="' . append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "m$module_id=$up#minical$module_id") . '"><img src="' . $this->portal_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $this->user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
 
 		$this->template->assign_block_vars('minical', array(
 			'S_SUNDAY_FIRST'	=> ($this->config['board3_sunday_first_' . $module_id]) ? true : false,
