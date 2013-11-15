@@ -132,7 +132,7 @@ class portal_module
 
 						if ($this->c_class->get_language())
 						{
-							$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->language);
+							$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->get_language());
 						}
 						$module_name = $this->user->lang[$this->c_class->get_name()];
 						$display_vars = $this->c_class->get_template_acp($module_id);
@@ -292,7 +292,7 @@ class portal_module
 					{
 						add_log('admin', 'LOG_PORTAL_CONFIG', $this->user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']);
 					}
-					trigger_error($this->user->lang['CONFIG_UPDATED'] . ((!empty($img_error) ? '<br /><br />' . $this->user->lang['MODULE_IMAGE_ERROR'] . '<br />' . $img_error : '')) . adm_back_link(($module_id) ? append_sid("{$this->phpbb_root_path}adm/index.{$this->php_ex}", 'i=portal&amp;mode=modules') : $this->u_action));
+					trigger_error($this->user->lang['CONFIG_UPDATED'] . ((!empty($img_error) ? '<br /><br />' . $this->user->lang['MODULE_IMAGE_ERROR'] . '<br />' . $img_error : '')) . adm_back_link(($module_id) ? append_sid("{$this->phpbb_root_path}adm/index.{$this->php_ex}", 'i=\board3\portal\acp\portal_module&amp;mode=modules') : $this->u_action));
 				}
 
 				// show custom HTML files on the settings page of the modules instead of the standard board3 portal one, if chosen by module
