@@ -68,6 +68,7 @@ class birthday_list extends module_base
 		$this->db = $db;
 		$this->user = $user;
 	}
+
 	/**
 	* @inheritdoc
 	*/
