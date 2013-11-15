@@ -423,7 +423,6 @@ class portal_module
 					if ($submit)
 					{
 						$module_classname = request_var('module_classname', '');
-						$class = 'portal_' . $module_classname . '_module';
 
 						$column_string = column_num_string($add_column);
 
@@ -455,13 +454,24 @@ class portal_module
 							trigger_error($this->user->lang['MODULE_ADD_ONCE'] . adm_back_link($this->u_action), E_USER_WARNING);
 						}
 
-						if (!class_exists($class))
+						if (isset($this->modules[$module_classname]))
 						{
-							include($directory . 'portal_' . $module_classname . '.' . $this->php_ex);
+							$this->c_class = $this->modules[$module_classname];
 						}
-						if (!class_exists($class))
+						else
 						{
-							trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
+							$class = 'portal_' . $module_classname . '_module';
+
+							if (!class_exists($class))
+							{
+								include($directory . 'portal_' . $module_classname . '.' . $this->php_ex);
+							}
+							if (!class_exists($class))
+							{
+								trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
+							}
+
+							$this->c_class = new $class();
 						}
 
 						$sql = 'SELECT module_order
@@ -471,8 +481,6 @@ class portal_module
 						$result = $this->db->sql_query_limit($sql, 1);
 						$module_order = 1 + (int) $this->db->sql_fetchfield('module_order');
 						$this->db->sql_freeresult($result);
-
-						$this->c_class = new $class();
 
 						$sql_ary = array(
 							'module_classname'	=> $module_classname,
@@ -522,6 +530,7 @@ class portal_module
 					$this->template->assign_var('S_EDIT', true);
 					$fileinfo = array();
 
+					// @todo: remove old school way of getting modules
 					$dh = @opendir($directory);
 					if (!$dh)
 					{
@@ -573,19 +582,59 @@ class portal_module
 								$this->c_class = new $class();
 								if ($this->c_class->columns & column_string_const($add_module))
 								{
-									if ($this->c_class->language)
+									if ($this->c_class->get_language())
 									{
-										$this->user->add_lang('mods/portal/' . $this->c_class->language);
+										$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->get_language());
 									}
 									$fileinfo[] = array(
 										'module'		=> substr($class, 7, -7),
-										'name'			=> $this->user->lang[$this->c_class->name],
+										'name'			=> $this->user->lang[$this->c_class->get_name()],
 									);
 								}
 							}
 						}
 					}
 					closedir($dh);
+
+					// Find new modules
+					foreach ($this->modules as $module_class => $module)
+					{
+						if ($module_class !== '\board3\portal\modules\custom')
+						{
+							if (in_array($column_string, array('left', 'right')))
+							{
+								// does the module already exist in the side columns?
+								if (isset($module_column[$module_class]) &&
+									(in_array('left', $module_column[$module_class]) || in_array('right', $module_column[$module_class])))
+								{
+									continue;
+								}
+							}
+							elseif (in_array($column_string, array('center', 'top', 'bottom')))
+							{
+								// does the module already exist in the center columns?
+								if (isset($module_column[$module_class]) &&
+									(in_array('center', $module_column[$module_class]) ||
+									in_array('top', $module_column[$module_class]) ||
+									in_array('bottom', $module_column[$module_class])))
+								{
+									continue;
+								}
+							}
+						}
+
+						if ($module->get_allowed_columns() & column_string_const($add_module))
+						{
+							if ($module->get_language())
+							{
+								$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $module->get_language());
+							}
+							$fileinfo[] = array(
+								'module'		=> $module_class,
+								'name'			=> $this->user->lang[$module->get_name()],
+							);
+						}
+					}
 
 					// we sort the $fileinfo array by the name of the modules
 					foreach($fileinfo as $key => $cur_file)
