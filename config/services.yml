@@ -102,6 +102,18 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.forumlist:
+        class: \board3\portal\modules\forumlist
+        arguments:
+            - @auth
+            - @config
+            - @template
+            - %core.root_path%
+            - %core.php_ext%
+            - @user
+        tags:
+            - { name: board3.module }
+
     board3.module.stylechanger:
         class: \board3\portal\modules\stylechanger
         arguments:
