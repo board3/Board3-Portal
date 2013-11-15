@@ -331,11 +331,13 @@ function storeCaret(textEl)
 /**
 * Color pallette
 */
-function colorPalette(dir, width, height)
-{
-	var r = 0, g = 0, b = 0;
-	var numberList = new Array(6);
-	var color = '';
+function colorPalette(dir, width, height) {
+	var r = 0,
+		g = 0,
+		b = 0,
+		numberList = new Array(6),
+		color = '',
+		html = '';
 
 	numberList[0] = '00';
 	numberList[1] = '40';
@@ -343,43 +345,46 @@ function colorPalette(dir, width, height)
 	numberList[3] = 'BF';
 	numberList[4] = 'FF';
 
-	document.writeln('<table cellspacing="1" cellpadding="0" border="0">');
+	html += '<table>';
 
-	for (r = 0; r < 5; r++)
-	{
-		if (dir == 'h')
-		{
-			document.writeln('<tr>');
+	for (r = 0; r < 5; r++) {
+		if (dir == 'h') {
+			html += '<tr>';
 		}
 
-		for (g = 0; g < 5; g++)
-		{
-			if (dir == 'v')
-			{
-				document.writeln('<tr>');
+		for (g = 0; g < 5; g++) {
+			if (dir == 'v') {
+				html += '<tr>';
 			}
 
-			for (b = 0; b < 5; b++)
-			{
+			for (b = 0; b < 5; b++) {
 				color = String(numberList[r]) + String(numberList[g]) + String(numberList[b]);
-				document.write('<td bgcolor="#' + color + '" style="width: ' + width + 'px; height: ' + height + 'px;">');
-				document.write('<a href="#" onclick="bbfontstyle(\'[color=#' + color + ']\', \'[/color]\'); return false;" style="margin: -4px 0px -4px 2px;"><img src="images/spacer.gif" width="' + width + '" height="' + (height+10) + '" alt="#' + color + '" title="#' + color + '" style="margin: -4px;" /></a>');
-				document.writeln('</td>');
+				html += '<td style="background-color: #' + color + '; width: ' + width + 'px; height: ' + height + 'px;">';
+				html += '<a href="#" onclick="bbfontstyle(\'[color=#' + color + ']\', \'[/color]\'); return false;" style="display: block; width: ' + width + 'px; height: ' + height + 'px; " alt="#' + color + '" title="#' + color + '"></a>';
+				html += '</td>';
 			}
 
-			if (dir == 'v')
-			{
-				document.writeln('</tr>');
+			if (dir == 'v') {
+				html += '</tr>';
 			}
 		}
 
-		if (dir == 'h')
-		{
-			document.writeln('</tr>');
+		if (dir == 'h') {
+			html += '</tr>';
 		}
 	}
-	document.writeln('</table>');
+	html += '</table>';
+	return html;
 }
+
+(function($) {
+	$(document).ready(function() {
+		$('#color_palette_placeholder').each(function() {
+			$(this).html(colorPalette('h', 5, 10));
+		});
+	});
+})(jQuery);
+
 
 
 /**
