@@ -9,7 +9,7 @@
 
 namespace board3\portal\tests\testframework;
 
-abstract class test_case_helpers extends \phpbb_test_case_helpers
+class test_case_helpers extends \phpbb_test_case_helpers
 {
 	/**
 	* Copied from phpbb_test_case_helpers::get_test_config() to fix some paths
