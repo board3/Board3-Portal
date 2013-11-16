@@ -303,7 +303,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 		// Populate module table
 		$board3_sql_query = array(
 			array(
-				'module_classname'		=> 'main_menu',
+				'module_classname'		=> '\board3\portal\modules\main_menu',
 				'module_column'		=> 1,
 				'module_order'		=> 1,
 				'module_name'		=> 'M_MENU',

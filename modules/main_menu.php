@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Main Menu
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
 * @package Main Menu
 */
-class portal_main_menu_module extends \board3\portal\modules\module_base
+class main_menu extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -60,10 +54,49 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 	const LINK_INT = 1;
 	const LINK_EXT = 2;
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\db\driver */
+	protected $db;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var php file extension */
+	protected $php_ext;
+
+	/** @var phpbb root path */
+	protected $phpbb_root_path;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/**
+	* Construct a main menu object
+	*
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\template $template phpBB template
+	* @param string $phpbb_root_path phpBB root path
+	* @param string $phpEx php file extension
+	* @param \phpbb\user $user phpBB user object
+	*/
+	public function __construct($config, $db, $template, $phpbb_root_path, $phpEx, $user)
+	{
+		$this->config = $config;
+		$this->db = $db;
+		$this->template = $template;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->php_ext = $phpEx;
+		$this->user = $user;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_side($module_id)
 	{
-		global $config, $template, $phpEx, $phpbb_root_path, $user, $db;
-
 		$links = array();
 		$portal_config = obtain_portal_config();
 
@@ -76,8 +109,8 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 		{
 			if($links[$i]['type'] == self::LINK_CAT)
 			{
-				$template->assign_block_vars('portalmenu', array(
-					'CAT_TITLE'		=> (isset($user->lang[$links[$i]['title']])) ? $user->lang[$links[$i]['title']] : $links[$i]['title'],
+				$this->template->assign_block_vars('portalmenu', array(
+					'CAT_TITLE'		=> (isset($this->user->lang[$links[$i]['title']])) ? $this->user->lang[$links[$i]['title']] : $links[$i]['title'],
 					'MODULE_ID'		=> $module_id,
 				));
 			}
@@ -86,7 +119,7 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 				if($links[$i]['type'] == self::LINK_INT)
 				{
 					$links[$i]['url'] = str_replace('&', '&amp;', $links[$i]['url']); // we need to do this in order to prevent XHTML validation errors
-					$cur_url = append_sid($phpbb_root_path . $links[$i]['url']); // the user should know what kind of file it is
+					$cur_url = append_sid($this->phpbb_root_path . $links[$i]['url']); // the user should know what kind of file it is
 				}
 				else
 				{
@@ -98,10 +131,10 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 
 				if(!empty($permission_check) || $links[$i]['permission'] == '')
 				{
-					$template->assign_block_vars('portalmenu.links', array(
-						'LINK_TITLE'		=> (isset($user->lang[$links[$i]['title']])) ? $user->lang[$links[$i]['title']] : $links[$i]['title'],
+					$this->template->assign_block_vars('portalmenu.links', array(
+						'LINK_TITLE'		=> (isset($this->user->lang[$links[$i]['title']])) ? $this->user->lang[$links[$i]['title']] : $links[$i]['title'],
 						'LINK_URL'			=> $cur_url,
-						'NEW_WINDOW'		=> ($links[$i]['type'] != self::LINK_INT && $config['board3_menu_url_new_window_' . $module_id]) ? true : false,
+						'NEW_WINDOW'		=> ($links[$i]['type'] != self::LINK_INT && $this->config['board3_menu_url_new_window_' . $module_id]) ? true : false,
 					));
 				}
 			}
@@ -110,9 +143,11 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 		return 'main_menu_side.html';
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
-		// do not remove this as it is needed in order to run manage_links
 		return array(
 			'title'	=> 'ACP_PORTAL_MENU',
 			'vars'	=> array(
@@ -124,18 +159,16 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
-		global $phpbb_root_path, $phpEx, $db;
-
 		// get the correct group IDs from the database
 		$in_ary = array('GUESTS', 'REGISTERED', 'REGISTERED_COPPA');
 
-		$sql = 'SELECT group_id, group_name FROM ' . GROUPS_TABLE . ' WHERE ' . $db->sql_in_set('group_name', $in_ary);
-		$result = $db->sql_query($sql);
-		while($row = $db->sql_fetchrow($result))
+		$sql = 'SELECT group_id, group_name FROM ' . GROUPS_TABLE . ' WHERE ' . $this->db->sql_in_set('group_name', $in_ary);
+		$result = $this->db->sql_query($sql);
+		while($row = $this->db->sql_fetchrow($result))
 		{
 			$groups_ary[$row['group_name']] = $row['group_id'];
 		}
@@ -172,16 +205,16 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 
 		$links_urls = array(
 			'',
-			'index.' . $phpEx,
-			'search.' . $phpEx,
-			'ucp.' . $phpEx . '?mode=register',
-			'memberlist.' . $phpEx,
-			'memberlist.' . $phpEx . '?mode=leaders',
+			'index.' . $this->php_ext,
+			'search.' . $this->php_ext,
+			'ucp.' . $this->php_ext . '?mode=register',
+			'memberlist.' . $this->php_ext,
+			'memberlist.' . $this->php_ext . '?mode=leaders',
 			'',
-			'faq.' . $phpEx,
-			'faq.' . $phpEx . '?mode=bbcode',
-			'ucp.' . $phpEx . '?mode=terms',
-			'ucp.' . $phpEx . '?mode=privacy',
+			'faq.' . $this->php_ext,
+			'faq.' . $this->php_ext . '?mode=bbcode',
+			'ucp.' . $this->php_ext . '?mode=terms',
+			'ucp.' . $this->php_ext . '?mode=privacy',
 		);
 
 		$links_permissions = array(
@@ -216,6 +249,9 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function uninstall($module_id, $db)
 	{
 		$del_config = array(
@@ -235,11 +271,17 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 		return $db->sql_query($sql);
 	}
 
-	// Manage the menu links
+	/**
+	* Manage the menu links
+	*
+	* @param mixed $value Value of input
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	*/
 	public function manage_links($value, $key, $module_id)
 	{
-		global $config, $phpbb_admin_path, $user, $phpEx, $db, $template;
-
 		$action = request_var('action', '');
 		$action = (isset($_POST['add'])) ? 'add' : $action;
 		$action = (isset($_POST['save'])) ? 'save' : $action;
@@ -250,7 +292,7 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 
 		$links = $this->utf_unserialize($portal_config['board3_menu_array_' . $module_id]);
 
-		$u_action = append_sid($phpbb_admin_path . 'index.' . $phpEx, 'i=portal&amp;mode=config&amp;module_id=' . $module_id);
+		$u_action = append_sid('index.' . $this->php_ext, 'i=\board3\portal\modules\portal&amp;mode=config&amp;module_id=' . $module_id);
 
 		switch ($action)
 		{
@@ -258,7 +300,7 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 			case 'save':
 				if (!check_form_key('acp_portal'))
 				{
-					trigger_error($user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				$link_title = utf8_normalize_nfc(request_var('link_title', ' ', true));
@@ -273,12 +315,12 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 				$sql = 'SELECT group_id
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
-				$result = $db->sql_query($sql);
-				while($row = $db->sql_fetchrow($result))
+				$result = $this->db->sql_query($sql);
+				while($row = $this->db->sql_fetchrow($result))
 				{
 					$groups_ary[] = $row['group_id'];
 				}
-				$db->sql_freeresult($result);
+				$this->db->sql_freeresult($result);
 
 				$link_permissions = array_intersect($link_permission, $groups_ary);
 				$link_permissions = implode(',', $link_permissions);
@@ -286,18 +328,18 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 				// Check for errors
 				if (!$link_title)
 				{
-					trigger_error($user->lang['NO_LINK_TITLE'] . adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['NO_LINK_TITLE'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				if (!$link_is_cat && !$link_url)
 				{
-					trigger_error($user->lang['NO_LINK_URL'] . adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['NO_LINK_URL'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				// overwrite already existing links and make sure we don't try to save a link outside of the normal array size of $links
 				if (isset($link_id) && $link_id < sizeof($links))
 				{
-					$message = $user->lang['LINK_UPDATED'];
+					$message = $this->user->lang['LINK_UPDATED'];
 
 					$links[$link_id] = array(
 						'title' 		=> $link_title,
@@ -310,11 +352,11 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 				}
 				else
 				{
-					$message = $user->lang['LINK_ADDED'];
+					$message = $this->user->lang['LINK_ADDED'];
 
 					if($link_type != self::LINK_CAT && sizeof($links) < 1)
 					{
-						trigger_error($user->lang['ACP_PORTAL_MENU_CREATE_CAT'] . adm_back_link($u_action), E_USER_WARNING);
+						trigger_error($this->user->lang['ACP_PORTAL_MENU_CREATE_CAT'] . adm_back_link($u_action), E_USER_WARNING);
 					}
 					$links[] = array(
 						'title' 		=> $link_title,
@@ -337,7 +379,7 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 
 				if (!isset($link_id) && $link_id >= sizeof($links))
 				{
-					trigger_error($user->lang['MUST_SELECT_LINK'] . adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['MUST_SELECT_LINK'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				if (confirm_box(true))
@@ -354,7 +396,7 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 				}
 				else
 				{
-					confirm_box(false, $user->lang['CONFIRM_OPERATION'], build_hidden_fields(array(
+					confirm_box(false, $this->user->lang['CONFIRM_OPERATION'], build_hidden_fields(array(
 						'link_id'	=> $link_id,
 						'action'	=> 'delete',
 					)));
@@ -368,7 +410,7 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 
 				if (!isset($link_id) && $link_id >= sizeof($links))
 				{
-					trigger_error($user->lang['MUST_SELECT_LINK'] . adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['MUST_SELECT_LINK'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				// make sure we don't try to move a link where it can't be moved
@@ -411,7 +453,7 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 			// Edit or add menu item
 			case 'edit':
 			case 'add':
-				$template->assign_vars(array(
+				$this->template->assign_vars(array(
 					'LINK_TITLE'	=> (isset($links[$link_id]['title']) && $action != 'add') ? $links[$link_id]['title'] : '',
 					'LINK_URL'		=> (isset($links[$link_id]['url']) && $links[$link_id]['type'] != self::LINK_CAT && $action != 'add') ? str_replace('&', '&amp;', $links[$link_id]['url']) : '',
 
@@ -429,16 +471,16 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 				$sql = 'SELECT group_id, group_name 
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
-				$result = $db->sql_query($sql);
-				while($row = $db->sql_fetchrow($result))
+				$result = $this->db->sql_query($sql);
+				while($row = $this->db->sql_fetchrow($result))
 				{
-					$template->assign_block_vars('permission_setting_menu', array(
+					$this->template->assign_block_vars('permission_setting_menu', array(
 						'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
-						'GROUP_NAME'	=> (isset($user->lang['G_' . $row['group_name']])) ? $user->lang['G_' . $row['group_name']] : $row['group_name'],
+						'GROUP_NAME'	=> (isset($this->user->lang['G_' . $row['group_name']])) ? $this->user->lang['G_' . $row['group_name']] : $row['group_name'],
 						'GROUP_ID'		=> $row['group_id'],
 					));
 				}
-				$db->sql_freeresult($result);
+				$this->db->sql_freeresult($result);
 
 				return;
 
@@ -447,8 +489,8 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 
 		for ($i = 0; $i < sizeof($links); $i++)
 		{
-			$template->assign_block_vars('links', array(
-				'LINK_TITLE'	=> ($action != 'add') ? ((isset($user->lang[$links[$i]['title']])) ? $user->lang[$links[$i]['title']] : $links[$i]['title']) : '',
+			$this->template->assign_block_vars('links', array(
+				'LINK_TITLE'	=> ($action != 'add') ? ((isset($this->user->lang[$links[$i]['title']])) ? $this->user->lang[$links[$i]['title']] : $links[$i]['title']) : '',
 				'LINK_URL'		=> ($action != 'add') ? str_replace('&', '&amp;', $links[$i]['url']) : '',
 
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
@@ -461,12 +503,26 @@ class portal_main_menu_module extends \board3\portal\modules\module_base
 		}
 	}
 
+	/**
+	* Update links
+	*
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	*/
 	public function update_links($key, $module_id)
 	{
 		$this->manage_links('', $key, $module_id);
 	}
 
-	// Unserialize links array
+	/**
+	* Unserialize links array
+	*
+	* @param string $serial_str Serialized string
+	*
+	* @return string Unserialized string
+	*/
 	private function utf_unserialize($serial_str) 
 	{
 		$out = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str );
