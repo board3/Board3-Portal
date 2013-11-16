@@ -114,6 +114,17 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.friends:
+        class: \board3\portal\modules\friends
+        arguments:
+            - @auth
+            - @config
+            - @dbal.conn
+            - @template
+            - @user
+        tags:
+            - { name: board3.module }
+
     board3.module.stylechanger:
         class: \board3\portal\modules\stylechanger
         arguments:
