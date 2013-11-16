@@ -44,9 +44,6 @@ class link_us extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\db\driver */
-	protected $db;
-
 	/** @var \phpbb\template */
 	protected $template;
 
