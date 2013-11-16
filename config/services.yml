@@ -125,6 +125,16 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.latest_bots:
+        class: \board3\portal\modules\latest_bots
+        arguments:
+            - @config
+            - @dbal.conn
+            - @template
+            - @user
+        tags:
+            - { name: board3.module }
+
     board3.module.stylechanger:
         class: \board3\portal\modules\stylechanger
         arguments:

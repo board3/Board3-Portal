@@ -512,7 +512,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'latest_bots',
+				'module_classname'		=> '\board3\portal\modules\latest_bots',
 				'module_column'		=> 3,
 				'module_order'		=> 5,
 				'module_name'		=> 'LATEST_BOTS',

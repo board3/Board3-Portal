@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Latest Bots
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
 * @package Latest Bots
 */
-class portal_latest_bots_module extends \board3\portal\modules\module_base
+class latest_bots extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -52,37 +46,68 @@ class portal_latest_bots_module extends \board3\portal\modules\module_base
 	*/
 	public $hide_name = false;
 
+	/** @var \phpbb\config\config */
+	protected $config;
 
+	/** @var \phpbb\db\driver */
+	protected $db;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/**
+	* Construct a latest bots object
+	*
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\user $user phpBB user object
+	*/
+	public function __construct($config, $db, $template, $user)
+	{
+		$this->config = $config;
+		$this->db = $db;
+		$this->template = $template;
+		$this->user = $user;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_side($module_id)
 	{
-		global $config, $template, $db, $user;
-
 		// Last x visited bots
 		$sql = 'SELECT username, user_colour, user_lastvisit
 			FROM ' . USERS_TABLE . '
 			WHERE user_type = ' . USER_IGNORE . '
 			AND user_lastvisit > 0
 			ORDER BY user_lastvisit DESC';
-		$result = $db->sql_query_limit($sql, $config['board3_last_visited_bots_number_' . $module_id]);
+		$result = $this->db->sql_query_limit($sql, $this->config['board3_last_visited_bots_number_' . $module_id]);
 
 		$show_module = false;
 
-		while ($row = $db->sql_fetchrow($result))
+		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$template->assign_block_vars('last_visited_bots', array(
+			$this->template->assign_block_vars('last_visited_bots', array(
 				'BOT_NAME'			=> get_username_string('full', '', $row['username'], $row['user_colour']),
-				'LAST_VISIT_DATE'	=> $user->format_date($row['user_lastvisit']),
+				'LAST_VISIT_DATE'	=> $this->user->format_date($row['user_lastvisit']),
 			));
 			$show_module = true;
 		}
-		$db->sql_freeresult($result);
+		$this->db->sql_freeresult($result);
 
-		if($show_module)
+		if ($show_module)
 		{
 			return 'latest_bots_side.html';
 		}
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
@@ -95,7 +120,7 @@ class portal_latest_bots_module extends \board3\portal\modules\module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
@@ -103,6 +128,9 @@ class portal_latest_bots_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function uninstall($module_id, $db)
 	{
 		$del_config = array(
