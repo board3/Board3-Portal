@@ -227,6 +227,18 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.recent:
+        class: \board3\portal\modules\recent
+        arguments:
+            - @auth
+            - @config
+            - @dbal.conn
+            - @template
+            - %core.root_path%
+            - %core.php_ext%
+        tags:
+            - { name: board3.module }
+
     board3.module.search:
         class: \board3\portal\modules\search
         arguments:
