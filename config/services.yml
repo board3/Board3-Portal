@@ -218,6 +218,15 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.random_member:
+        class: \board3\portal\modules\random_member
+        arguments:
+            - @dbal.conn
+            - @template
+            - @user
+        tags:
+            - { name: board3.module }
+
     board3.module.search:
         class: \board3\portal\modules\search
         arguments:

@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Random Member
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
 * @package Random Member
 */
-class portal_random_member_module extends \board3\portal\modules\module_base
+class random_member extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -53,11 +47,35 @@ class portal_random_member_module extends \board3\portal\modules\module_base
 	*/
 	public $custom_acp_tpl = '';
 
+	/** @var \phpbb\db\driver */
+	protected $db;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/**
+	* Construct a random member object
+	*
+	* @param \phpbb\db\driver $db phpBB database system
+	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\user $user phpBB user object
+	*/
+	public function __construct($db, $template, $user)
+	{
+		$this->db = $db;
+		$this->template = $template;
+		$this->user = $user;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_side($module_id)
 	{
-		global $config, $template, $db, $user;
-
-		switch ($db->sql_layer)
+		switch ($this->db->sql_layer)
 		{
 			case 'postgres':
 			$sql = 'SELECT *
@@ -85,8 +103,8 @@ class portal_random_member_module extends \board3\portal\modules\module_base
 			break;
 		}
 
-		$result = $db->sql_query_limit($sql, 1);
-		$row = $db->sql_fetchrow($result);
+		$result = $this->db->sql_query_limit($sql, 1);
+		$row = $this->db->sql_fetchrow($result);
 
 		$avatar_img = get_user_avatar($row['user_avatar'], $row['user_avatar_type'], $row['user_avatar_width'], $row['user_avatar_height']);
 
@@ -97,7 +115,7 @@ class portal_random_member_module extends \board3\portal\modules\module_base
 		$user_id = (int) $row['user_id'];
 		$colour = $row['user_colour'];
 
-		$template->assign_block_vars('random_member', array(
+		$this->template->assign_block_vars('random_member', array(
 			'USERNAME_FULL'		=> get_username_string('full', $user_id, $username, $colour),
 			'USERNAME'			=> get_username_string('username', $user_id, $username, $colour),
 			'USER_COLOR'		=> get_username_string('colour', $user_id, $username, $colour),
@@ -109,34 +127,24 @@ class portal_random_member_module extends \board3\portal\modules\module_base
 
 			'USER_POSTS'	=> (int) $row['user_posts'],
 			'AVATAR_IMG'	=> $avatar_img,
-			'JOINED'		=> $user->format_date($row['user_regdate'], 'd.M.Y'),
+			'JOINED'		=> $this->user->format_date($row['user_regdate'], 'd.M.Y'),
 			'USER_OCC'		=> censor_text($row['user_occ']),
 			'USER_FROM'		=> censor_text($row['user_from']),
 			'U_WWW'			=> censor_text($row['user_website']),
 		));
-		$db->sql_freeresult($result);
+		$this->db->sql_freeresult($result);
 
 		return 'random_member_side.html';
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
 			'title'	=> 'PORTAL_RANDOM_MEMBER',
 			'vars'	=> array(),
 		);
-	}
-
-	/**
-	* API functions
-	*/
-	public function install($module_id)
-	{
-		return true;
-	}
-
-	public function uninstall($module_id, $db)
-	{
-		return true;
 	}
 }
