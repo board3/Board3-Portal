@@ -158,6 +158,18 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.links:
+        class: \board3\portal\modules\links
+        arguments:
+            - @config
+            - @dbal.conn
+            - @template
+            - %core.root_path%
+            - %core.php_ext%
+            - @user
+        tags:
+            - { name: board3.module }
+
     board3.module.stylechanger:
         class: \board3\portal\modules\stylechanger
         arguments:

@@ -523,7 +523,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'links',
+				'module_classname'		=> '\board3\portal\modules\links',
 				'module_column'		=> 3,
 				'module_order'		=> 6,
 				'module_name'		=> 'PORTAL_LINKS',
