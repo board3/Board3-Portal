@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Donation
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
 * @package Donation
 */
-class portal_donation_module extends \board3\portal\modules\module_base
+class donation extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -47,30 +41,58 @@ class portal_donation_module extends \board3\portal\modules\module_base
 	*/
 	public $language = 'portal_donation_module';
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/**
+	* Construct a stylechanger object
+	*
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\user $user phpBB user object
+	*/
+	public function __construct($config, $template, $user)
+	{
+		$this->config = $config;
+		$this->template = $template;
+		$this->user = $user;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_center($module_id)
 	{
-		global $config, $template, $user;
-
-		$template->assign_vars(array(
-			'PAY_ACC_CENTER'	=> $config['board3_pay_acc_' . $module_id],
-			'PAY_CUSTOM_CENTER'	=> (!empty($config['board3_pay_custom_' . $module_id])) ? $user->data['username_clean'] : false,
+		$this->template->assign_vars(array(
+			'PAY_ACC_CENTER'	=> $this->config['board3_pay_acc_' . $module_id],
+			'PAY_CUSTOM_CENTER'	=> (!empty($this->config['board3_pay_custom_' . $module_id])) ? $this->user->data['username_clean'] : false,
 		));
 
 		return 'donation_center.html';
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_side($module_id)
 	{
-		global $config, $template, $user;
-
-		$template->assign_vars(array(
-			'PAY_ACC_SIDE'	=> $config['board3_pay_acc_' . $module_id],
-			'PAY_CUSTOM_SIDE'	=> (!empty($config['board3_pay_custom_' . $module_id])) ? $user->data['username_clean'] : false,
+		$this->template->assign_vars(array(
+			'PAY_ACC_SIDE'	=> $this->config['board3_pay_acc_' . $module_id],
+			'PAY_CUSTOM_SIDE'	=> (!empty($this->config['board3_pay_custom_' . $module_id])) ? $this->user->data['username_clean'] : false,
 		));
 
 		return 'donation_side.html';
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
@@ -84,7 +106,7 @@ class portal_donation_module extends \board3\portal\modules\module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
@@ -93,10 +115,11 @@ class portal_donation_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	/**
+	* @inheritdoc
+	*/
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_pay_acc_' . $module_id,
 			'board3_pay_custom_' . $module_id,

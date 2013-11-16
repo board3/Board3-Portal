@@ -130,7 +130,7 @@ class portal_whois_online_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	public function uninstall($module_id, $db)
 	{
 		return true;
 	}

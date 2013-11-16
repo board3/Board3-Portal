@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Custom
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
 * @package Custom
 */
-class portal_custom_module extends \board3\portal\modules\module_base
+class custom extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -53,16 +47,63 @@ class portal_custom_module extends \board3\portal\modules\module_base
 	*/
 	public $custom_acp_tpl = 'acp_portal_custom';
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var \phpbb\db\driver */
+	protected $db;
+
+	/** @var php file extension */
+	protected $php_ext;
+
+	/** @var phpbb root path */
+	protected $phpbb_root_path;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/**
+	* Construct a custom module object
+	*
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\db\driver $db Database driver
+	* @param string $phpEx php file extension
+	* @param string $phpbb_root_path phpBB root path
+	* @param \phpbb\user $user phpBB user object
+	*/
+	public function __construct($config, $template, $db, $phpbb_root_path, $phpEx, $user)
+	{
+		$this->config = $config;
+		$this->template = $template;
+		$this->db = $db;
+		$this->php_ext = $phpEx;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->user = $user;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_center($module_id)
 	{
 		return $this->parse_template($module_id);
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_side($module_id)
 	{
 		return $this->parse_template($module_id, 'side');
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
@@ -75,7 +116,7 @@ class portal_custom_module extends \board3\portal\modules\module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
@@ -90,10 +131,11 @@ class portal_custom_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	/**
+	* @inheritdoc
+	*/
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_custom_' . $module_id . '_code',
 		);
@@ -115,17 +157,24 @@ class portal_custom_module extends \board3\portal\modules\module_base
 		return ((!$check) ? $check : $db->sql_query($sql)); // if something went wrong, make sure we are aware of the first query
 	}
 
+	/**
+	* Manage custom module
+	*
+	* @param mixed $value Value of input
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	*/
 	public function manage_custom($value, $key, $module_id)
 	{
-		global $db, $portal_config, $config, $template, $user, $phpEx, $phpbb_admin_path, $phpbb_root_path;
-
 		$action = (isset($_POST['reset'])) ? 'reset' : '';
 		$action = (isset($_POST['submit'])) ? 'save' : $action;
 		$action = (isset($_POST['preview'])) ? 'preview' : $action;
 
 		$portal_config = obtain_portal_config();
 
-		$u_action = append_sid($phpbb_admin_path . 'index.' . $phpEx, 'i=portal&amp;mode=config&amp;module_id=' . $module_id);
+		$u_action = append_sid('index.' . $this->php_ext, 'i=\board3\portal\acp\portal_module&amp;mode=config&amp;module_id=' . $module_id);
 
 		switch($action)
 		{
@@ -133,7 +182,7 @@ class portal_custom_module extends \board3\portal\modules\module_base
 			case 'save':
 				if (!check_form_key('acp_portal'))
 				{
-					trigger_error($user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				$custom_code = utf8_normalize_nfc(request_var('custom_code', '', true));
@@ -152,33 +201,33 @@ class portal_custom_module extends \board3\portal\modules\module_base
 				// first check for obvious errors, we don't want to waste server resources
 				if(empty($custom_code))
 				{
-					trigger_error($user->lang['ACP_PORTAL_CUSTOM_CODE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['ACP_PORTAL_CUSTOM_CODE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				// get groups and check if the selected groups actually exist
 				$sql = 'SELECT group_id
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
-				$result = $db->sql_query($sql);
-				while($row = $db->sql_fetchrow($result))
+				$result = $this->db->sql_query($sql);
+				while($row = $this->db->sql_fetchrow($result))
 				{
 					$groups_ary[] = $row['group_id'];
 				}
-				$db->sql_freeresult($result);
+				$this->db->sql_freeresult($result);
 
 				$custom_permission = array_intersect($custom_permission, $groups_ary);
 				$custom_permission = implode(',', $custom_permission);
 
-				if (isset($user->lang[$custom_title]))
+				if (isset($this->user->lang[$custom_title]))
 				{
-					$log_title =  $user->lang[$custom_title];
+					$log_title =  $this->user->lang[$custom_title];
 				}
 				else
 				{
 					$log_title = $custom_title;
 				}
 
-				add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['PORTAL_CUSTOM'] . ':&nbsp;' . $log_title);
+				add_log('admin', 'LOG_PORTAL_CONFIG', $this->user->lang['PORTAL_CUSTOM'] . ':&nbsp;' . $log_title);
 
 				// set_portal_config will take care of escaping the welcome message
 				set_portal_config('board3_custom_' . $module_id . '_code', $custom_code);
@@ -189,7 +238,7 @@ class portal_custom_module extends \board3\portal\modules\module_base
 				set_config('board3_custom_' . $module_id . '_bitfield', $bitfield);
 				set_config('board3_custom_' . $module_id . '_permission', $custom_permission);
 
-				//trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&mode=modules') : $u_action));
+				//trigger_error($this->user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&mode=modules') : $u_action));
 
 			break;
 
@@ -204,18 +253,14 @@ class portal_custom_module extends \board3\portal\modules\module_base
 				// first check for obvious errors, we don't want to waste server resources
 				if(empty($custom_code))
 				{
-					trigger_error($user->lang['ACP_PORTAL_CUSTOM_CODE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['ACP_PORTAL_CUSTOM_CODE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				if (!class_exists('parse_message'))
-				{
-					include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
-				}
 				if($custom_bbcode)
 				{
 					$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
-					$uid  =  (isset($config['board3_custom_' . $module_id . '_uid'])) ? $config['board3_custom_' . $module_id . '_uid'] : '';
-					$bitfield = (isset($config['board3_custom_' . $module_id . '_bitfield'])) ? $config['board3_custom_' . $module_id . '_bitfield'] : '';
+					$uid  =  (isset($this->config['board3_custom_' . $module_id . '_uid'])) ? $this->config['board3_custom_' . $module_id . '_uid'] : '';
+					$bitfield = (isset($this->config['board3_custom_' . $module_id . '_bitfield'])) ? $this->config['board3_custom_' . $module_id . '_bitfield'] : '';
 					$options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
 					generate_text_for_storage($text, $uid, $bitfield, $options, true, true, true);
 
@@ -226,7 +271,7 @@ class portal_custom_module extends \board3\portal\modules\module_base
 					$text = htmlspecialchars_decode($text, ENT_QUOTES);
 				}
 
-				$template->assign_vars(array(
+				$this->template->assign_vars(array(
 					'PREVIEW_TEXT'		=> $text,
 					'S_PREVIEW'			=> true,
 				));
@@ -235,12 +280,12 @@ class portal_custom_module extends \board3\portal\modules\module_base
 				$sql = 'SELECT group_id
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
-				$result = $db->sql_query($sql);
-				while($row = $db->sql_fetchrow($result))
+				$result = $this->db->sql_query($sql);
+				while($row = $this->db->sql_fetchrow($result))
 				{
 					$groups_ary[] = $row['group_id'];
 				}
-				$db->sql_freeresult($result);
+				$this->db->sql_freeresult($result);
 
 				$temp_permissions = array_intersect($custom_permission, $groups_ary);
 
@@ -249,12 +294,12 @@ class portal_custom_module extends \board3\portal\modules\module_base
 			default:
 				if(!isset($custom_code))
 				{
-					$custom_code = generate_text_for_edit($portal_config['board3_custom_' . $module_id . '_code'], $config['board3_custom_' . $module_id . '_uid'], '');
+					$custom_code = generate_text_for_edit($portal_config['board3_custom_' . $module_id . '_code'], $this->config['board3_custom_' . $module_id . '_uid'], '');
 				}
 
-				$template->assign_vars(array(
+				$this->template->assign_vars(array(
 					'CUSTOM_CODE'			=> (is_array($custom_code)) ? $custom_code['text'] : $custom_code,
-					'CUSTOM_USE_BBCODE'		=> (isset($custom_bbcode)) ? $custom_bbcode : (($config['board3_custom_' . $module_id . '_bbcode'] != '') ? $config['board3_custom_' . $module_id . '_bbcode'] : true), // BBCodes are selected by default
+					'CUSTOM_USE_BBCODE'		=> (isset($custom_bbcode)) ? $custom_bbcode : (($this->config['board3_custom_' . $module_id . '_bbcode'] != '') ? $this->config['board3_custom_' . $module_id . '_bbcode'] : true), // BBCodes are selected by default
 					//'U_BACK'				=> $u_action,
 					'U_ACTION'				=> $u_action,
 					'S_EDIT'				=> true,
@@ -263,39 +308,47 @@ class portal_custom_module extends \board3\portal\modules\module_base
 					'S_BBCODE_FLASH'		=> true,
 					'S_BBCODE_QUOTE'		=> true,
 					'S_BBCODE_ALLOWED'		=> true,
-					'MAX_FONT_SIZE'			=> (int) $config['max_post_font_size'],
+					'MAX_FONT_SIZE'			=> (int) $this->config['max_post_font_size'],
 				));
 
-				$groups_ary = (isset($temp_permissions)) ? $temp_permissions : ((isset($config['board3_custom_' . $module_id . '_permission'])) ? explode(',', $config['board3_custom_' . $module_id . '_permission']) : array());
+				$groups_ary = (isset($temp_permissions)) ? $temp_permissions : ((isset($this->config['board3_custom_' . $module_id . '_permission'])) ? explode(',', $this->config['board3_custom_' . $module_id . '_permission']) : array());
 
 				// get group info from database and assign the block vars
 				$sql = 'SELECT group_id, group_name 
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
-				$result = $db->sql_query($sql);
-				while($row = $db->sql_fetchrow($result))
+				$result = $this->db->sql_query($sql);
+				while($row = $this->db->sql_fetchrow($result))
 				{
-					$template->assign_block_vars('permission_setting', array(
+					$this->template->assign_block_vars('permission_setting', array(
 						'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
-						'GROUP_NAME'	=> (isset($user->lang['G_' . $row['group_name']])) ? $user->lang['G_' . $row['group_name']] : $row['group_name'],
+						'GROUP_NAME'	=> (isset($this->user->lang['G_' . $row['group_name']])) ? $this->user->lang['G_' . $row['group_name']] : $row['group_name'],
 						'GROUP_ID'		=> $row['group_id'],
 					));
 				}
-				$db->sql_freeresult($result);
+				$this->db->sql_freeresult($result);
 
 				if(!function_exists('display_forums'))
 				{
-					include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
+					include($this->phpbb_root_path . 'includes/functions_display.' . $this->php_ext);
 				}
 
 				// Build custom bbcodes array
 				display_custom_bbcodes();
-				$user->add_lang('posting');
+				$this->user->add_lang('posting');
 
 			break;		
 		}
 	}
 
+	/**
+	* Update custom module
+	*
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	*/
 	public function update_custom($key, $module_id)
 	{
 		$this->manage_custom('', $key, $module_id);
@@ -311,18 +364,18 @@ class portal_custom_module extends \board3\portal\modules\module_base
 	*/
 	protected function parse_template($module_id, $type = 'center')
 	{
-		global $config, $template, $portal_config, $user;
+		$portal_config = obtain_portal_config();
 
 		/*
 		* Run generate_text_for_display if the user uses BBCode for designing his custom block
 		* HTML won't be parsed if the user chooses to use BBCodes in the ACP
 		* If BBCodes are turned off, the custom Block code will be directly assigned and HTML will be parsed
 		*/
-		if ($config['board3_custom_' . $module_id . '_bbcode'])
+		if ($this->config['board3_custom_' . $module_id . '_bbcode'])
 		{
 			// Generate text for display and assign template vars
-			$uid = $config['board3_custom_' . $module_id . '_uid'];
-			$bitfield = $config['board3_custom_' . $module_id . '_bitfield'];
+			$uid = $this->config['board3_custom_' . $module_id . '_uid'];
+			$bitfield = $this->config['board3_custom_' . $module_id . '_bitfield'];
 			$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
 			$assign_code = generate_text_for_display($portal_config['board3_custom_' . $module_id . '_code'], $uid, $bitfield, $bbcode_options);
 		}
@@ -331,7 +384,7 @@ class portal_custom_module extends \board3\portal\modules\module_base
 			$assign_code = htmlspecialchars_decode($portal_config['board3_custom_' . $module_id . '_code'], ENT_QUOTES);
 		}
 
-		$title = (!empty($config['board3_custom_' . $module_id . '_title'])) ? ((isset($user->lang[$config['board3_custom_' . $module_id . '_title']])) ? $user->lang[$config['board3_custom_' . $module_id . '_title']] : $config['board3_custom_' . $module_id . '_title']) : $user->lang[$this->name];
+		$title = (!empty($this->config['board3_custom_' . $module_id . '_title'])) ? ((isset($this->user->lang[$this->config['board3_custom_' . $module_id . '_title']])) ? $this->user->lang[$this->config['board3_custom_' . $module_id . '_title']] : $this->config['board3_custom_' . $module_id . '_title']) : $this->user->lang[$this->name];
 
 		if(!empty($assign_code))
 		{
@@ -340,7 +393,7 @@ class portal_custom_module extends \board3\portal\modules\module_base
 				'title'		=> $title,
 				'code'		=> $assign_code,
 				// no image for center blocks
-				'image_src'	=> ($type === 'center') ? '' : ((!empty($config['board3_custom_' . $module_id . '_image_src'])) ? $config['board3_custom_' . $module_id . '_image_src'] : $this->image_src),
+				'image_src'	=> ($type === 'center') ? '' : ((!empty($this->config['board3_custom_' . $module_id . '_image_src'])) ? $this->config['board3_custom_' . $module_id . '_image_src'] : $this->image_src),
 			);
 		}
 	}

@@ -10,14 +10,6 @@
 namespace board3\portal\modules;
 
 /**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
-/**
 * @package module_base
 */
 class module_base implements module_interface
@@ -89,7 +81,7 @@ class module_base implements module_interface
 	/**
 	* @inheritdoc
 	*/
-	public function uninstall($module_id)
+	public function uninstall($module_id, $db)
 	{
 		return true;
 	}

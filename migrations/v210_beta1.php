@@ -314,7 +314,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'stylechanger',
+				'module_classname'		=> '\board3\portal\modules\stylechanger',
 				'module_column'		=> 1,
 				'module_order'		=> 2,
 				'module_name'		=> 'BOARD_STYLE',
@@ -325,7 +325,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'birthday_list',
+				'module_classname'		=> '\board3\portal\modules\birthday_list',
 				'module_column'		=> 1,
 				'module_order'		=> 3,
 				'module_name'		=> 'BIRTHDAYS',
@@ -336,7 +336,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'clock',
+				'module_classname'		=> '\board3\portal\modules\clock',
 				'module_column'		=> 1,
 				'module_order'		=> 4,
 				'module_name'		=> 'CLOCK',
@@ -358,7 +358,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'attachments',
+				'module_classname'		=> '\board3\portal\modules\attachments',
 				'module_column'		=> 1,
 				'module_order'		=> 6,
 				'module_name'		=> 'PORTAL_ATTACHMENTS',
@@ -380,7 +380,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'latest_members',
+				'module_classname'		=> '\board3\portal\modules\latest_members',
 				'module_column'		=> 1,
 				'module_order'		=> 8,
 				'module_name'		=> 'LATEST_MEMBERS',
@@ -391,7 +391,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'link_us',
+				'module_classname'		=> '\board3\portal\modules\link_us',
 				'module_column'		=> 1,
 				'module_order'		=> 9,
 				'module_name'		=> 'LINK_US',
@@ -424,7 +424,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'announcements',
+				'module_classname'		=> '\board3\portal\modules\announcements',
 				'module_column'		=> 2,
 				'module_order'		=> 3,
 				'module_name'		=> 'GLOBAL_ANNOUNCEMENTS',
@@ -490,7 +490,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'calendar',
+				'module_classname'		=> '\board3\portal\modules\calendar',
 				'module_column'		=> 3,
 				'module_order'		=> 3,
 				'module_name'		=> 'PORTAL_CALENDAR',
@@ -501,7 +501,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'leaders',
+				'module_classname'		=> '\board3\portal\modules\leaders',
 				'module_column'		=> 3,
 				'module_order'		=> 4,
 				'module_name'		=> 'THE_TEAM',
@@ -512,7 +512,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'latest_bots',
+				'module_classname'		=> '\board3\portal\modules\latest_bots',
 				'module_column'		=> 3,
 				'module_order'		=> 5,
 				'module_name'		=> 'LATEST_BOTS',
@@ -523,7 +523,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'links',
+				'module_classname'		=> '\board3\portal\modules\links',
 				'module_column'		=> 3,
 				'module_order'		=> 6,
 				'module_name'		=> 'PORTAL_LINKS',

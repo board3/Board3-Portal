@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Default
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
 * @package Modulname
 */
-class portal_modulename_module extends \board3\portal\modules\module_base
+class modulename extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -58,10 +52,29 @@ class portal_modulename_module extends \board3\portal\modules\module_base
 	*/
 	public $hide_name = false;
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/**
+	* Construct a default module object
+	*
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\template $template phpBB template
+	*/
+	public function __construct($config, $template)
+	{
+		$this->config = $config;
+		$this->template = $template;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_center($module_id)
 	{
-		global $config, $template;
-
 		$template->assign_vars(array(
 			'EXAMPLE'			=> $config['board3_configname_' . $module_id],
 		));
@@ -69,10 +82,11 @@ class portal_modulename_module extends \board3\portal\modules\module_base
 		return 'modulename_center.html';
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_side($module_id)
 	{
-		global $config, $template;
-
 		$template->assign_vars(array(
 			'EXAMPLE'			=> $config['board3_configname2_' . $module_id],
 		));
@@ -80,6 +94,9 @@ class portal_modulename_module extends \board3\portal\modules\module_base
 		return 'modulename_side.html';
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
@@ -93,7 +110,7 @@ class portal_modulename_module extends \board3\portal\modules\module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
@@ -102,10 +119,11 @@ class portal_modulename_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	/**
+	* @inheritdoc
+	*/
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_configname_' . $module_id,
 			'board3_configname2_' . $module_id,

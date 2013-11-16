@@ -10,14 +10,6 @@
 namespace board3\portal\modules;
 
 /**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
-/**
 * @package module_interface
 */
 interface module_interface
@@ -101,8 +93,9 @@ interface module_interface
 	* Executes any additional commands for uninstalling the module
 	*
 	* @param int $module_id Module's ID
+	* @param \phpbb\db\driver $db phpBB dbal driver
 	*
 	* @return bool True if uninstall was successful, false if not
 	*/
-	public function uninstall($module_id);
+	public function uninstall($module_id, $db);
 }

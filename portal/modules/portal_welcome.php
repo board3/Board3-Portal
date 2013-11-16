@@ -93,10 +93,8 @@ class portal_welcome_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_welcome_message_' . $module_id,
 		);

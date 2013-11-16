@@ -13,6 +13,7 @@ define('IN_PHPBB', true);
 define('B3_MODULE_ENABLED', 1);
 define('GROUPS_TABLE', '$this->table_prefix . \'groups');
 $phpbb_root_path = '../../../../';
+$root_path = '../'; // one directory down
 include($phpbb_root_path . 'includes/startup.php');
 $php_ex = substr(strrchr(__FILE__, '.'), 1);
 $phpEx = $php_ex;
@@ -27,8 +28,14 @@ $phpbb_class_loader_ext->register();
 $phpbb_class_loader = new \phpbb\class_loader('phpbb\\', $phpbb_root_path . 'phpbb/', "php");
 $phpbb_class_loader->register();
 
+require($phpbb_root_path . 'includes/functions_content.' . $phpEx);
+require($phpbb_root_path . 'includes/functions_container.' . $phpEx);
+include($phpbb_root_path . 'includes/functions_compatibility.' . $phpEx);
+require($root_path . 'develop/phpbb_functions.' . $phpEx);
+// Set up container
+$phpbb_container = phpbb_create_default_container($phpbb_root_path, $phpEx);
+
 $config_entry = $portal_config_entry = $db_data = array();
-$root_path = '../'; // one directory down
 
 function set_config($name, $val)
 {
@@ -46,7 +53,13 @@ function set_config($name, $val)
 
 function handle_string(&$str)
 {
-	if (is_string($str))
+	if (is_string($str) && strpos($str, '$') === 0)
+	{
+	      // @codingStandardsIgnoreStart
+	      $str = str_replace(',', ' . \',\' . ', $str);
+	      // @codingStandardsIgnoreEnd
+	}
+	else if (is_string($str))
 	{
 		$str = "'$str'";
 	}
@@ -109,14 +122,14 @@ board3_get_install_data($db, $root_path, $php_ex, $db_data);
 echo 'set_config entries for migrations:<br /><pre>';
 foreach ($config_entry as $name => $val)
 {
-	echo 'array(\'config.add\', array(\'' . $name . '\', ' . $val . ')),<br />';
+	echo '			array(\'config.add\', array(\'' . $name . '\', ' . $val . ')),<br />';
 }
 echo '</pre>';
 
 echo '<br /><br />set_portal_config entries for migrations:<br /><pre>';
 foreach ($portal_config_entry as $name => $val)
 {
-	echo '		set_portal_config(\'' . $name . '\', ' . $val . ');<br />';
+	echo '		$this->set_portal_config(\'' . $name . '\', ' . $val . ');<br />';
 }
 echo '</pre>';
 
@@ -135,6 +148,8 @@ echo $db_data . '</pre><br />';
 */
 function board3_get_install_data($db, $root_path, $php_ex, &$db_data)
 {
+	global $phpbb_container;
+
 	$directory = $root_path . 'portal/modules/';
 	$db_data = '		$board3_sql_query = array(<br />';
 
@@ -173,24 +188,34 @@ function board3_get_install_data($db, $root_path, $php_ex, &$db_data)
 
 	foreach ($modules_ary as $module_name => $module_data)
 	{
-		$class_name = $module_name . '_module';
-		if (!class_exists($class_name))
+		$new_module_name = '\\board3\\portal\\modules\\' . str_replace('portal_', '', $module_name);
+		if (class_exists($new_module_name))
 		{
-			include($directory . $module_name . '.' . $php_ex);
+			$c_class = $phpbb_container->get('board3.module.' . str_replace('portal_', '', $module_name));
+			$module_name = $new_module_name;
 		}
-		if (!class_exists($class_name))
+		else
 		{
-			trigger_error('Class not found', E_USER_ERROR);
-		}
+			$class_name = $module_name . '_module';
+			if (!class_exists($class_name))
+			{
+				include($directory . $module_name . '.' . $php_ex);
+			}
+			if (!class_exists($class_name))
+			{
+				trigger_error('Class not found: ' . $class_name, E_USER_ERROR);
+			}
 
-		$c_class = new $class_name();
+			$c_class = new $class_name();
+			$module_name = substr($module_name, 7);
+		}
 
 		$sql_ary = array(
-			'module_classname'		=> substr($module_name, 7),
+			'module_classname'		=> $module_name,
 			'module_column'			=> $module_data[0],
 			'module_order'			=> $module_data[1],
-			'module_name'			=> $c_class->get_name,
-			'module_image_src'		=> $c_class->get_image,
+			'module_name'			=> $c_class->get_name(),
+			'module_image_src'		=> $c_class->get_image(),
 			'module_group_ids'		=> '',
 			'module_image_width'	=> 16,
 			'module_image_height'	=> 16,
@@ -297,7 +322,7 @@ class db
 						}
 					}
 					$this->int_pointer++;
-					return $ret;
+					return $this->preg_replace_value($ret);
 				}
 			}
 		}
@@ -306,4 +331,55 @@ class db
 			return false;
 		}
 	}
+
+	protected function preg_replace_value($value)
+	{
+		return preg_replace("/\{foobar\.group_id\.\s*([A-Z_]+?)\s*+\}/", "\$groups_ary['$1']", $value);
+	}
+}
+
+/**
+* Convert either 3.0 dbms or 3.1 db driver class name to 3.1 db driver class name.
+*
+* If $dbms is a valid 3.1 db driver class name, returns it unchanged.
+* Otherwise prepends phpbb\db\driver\ to the dbms to convert a 3.0 dbms
+* to 3.1 db driver class name.
+*
+* @param string $dbms dbms parameter
+* @return db driver class
+*/
+function phpbb_convert_30_dbms_to_31($dbms)
+{
+	// Note: this check is done first because mysqli extension
+	// supplies a mysqli class, and class_exists($dbms) would return
+	// true for mysqli class.
+	// However, per the docblock any valid 3.1 driver name should be
+	// recognized by this function, and have priority over 3.0 dbms.
+	if (class_exists('phpbb\db\driver\\' . $dbms))
+	{
+		return 'phpbb\db\driver\\' . $dbms;
+	}
+
+	if (class_exists($dbms))
+	{
+		// Additionally we could check that $dbms extends phpbb\db\driver\driver.
+		// http://php.net/manual/en/class.reflectionclass.php
+		// Beware of possible performance issues:
+		// http://stackoverflow.com/questions/294582/php-5-reflection-api-performance
+		// We could check for interface implementation in all paths or
+		// only when we do not prepend phpbb\db\driver\.
+
+		/*
+		$reflection = new \ReflectionClass($dbms);
+
+		if ($reflection->isSubclassOf('phpbb\db\driver\driver'))
+		{
+			return $dbms;
+		}
+		*/
+
+		return $dbms;
+	}
+
+	throw new \RuntimeException("You have specified an invalid dbms driver: $dbms");
 }

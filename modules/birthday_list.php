@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Birthday List
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
 * @package Birthday List
 */
-class portal_birthday_list_module extends \board3\portal\modules\module_base
+class birthday_list extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -47,28 +41,57 @@ class portal_birthday_list_module extends \board3\portal\modules\module_base
 	*/
 	public $language = 'portal_birthday_list_module';
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var \phpbb\db\driver */
+	protected $db;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/**
+	* Construct a birthday_list object
+	*
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\db\driver $db Database driver
+	* @param \phpbb\user $user phpBB user object
+	*/
+	public function __construct($config, $template, $db, $user)
+	{
+		$this->config = $config;
+		$this->template = $template;
+		$this->db = $db;
+		$this->user = $user;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_side($module_id)
 	{
-		global $config, $template, $db, $user, $phpbb_root_path;
-
 		// Generate birthday list if required ... / borrowed from index.php 3.0.6
 		$birthday_list = $birthday_ahead_list = '';
 
-		if ($config['load_birthdays'] && $config['allow_birthdays'])
+		if ($this->config['load_birthdays'] && $this->config['allow_birthdays'])
 		{
-			$time = $user->create_datetime();
+			$time = $this->user->create_datetime();
 			$now = phpbb_gmgetdate($time->getTimestamp() + $time->getOffset());
-			$cache_days = $config['board3_birthdays_ahead_' . $module_id];
+			$cache_days = $this->config['board3_birthdays_ahead_' . $module_id];
 			$sql_days = '';
 			while ($cache_days > 0)
 			{
 				$day = phpbb_gmgetdate($time->getTimestamp() + 86400 * $cache_days + $time->getOffset());
-				$like_expression = $db->sql_like_expression($db->any_char . (sprintf('%2d-%2d-', $day['mday'], $day['mon'])) . $db->any_char);
+				$like_expression = $this->db->sql_like_expression($this->db->any_char . (sprintf('%2d-%2d-', $day['mday'], $day['mon'])) . $this->db->any_char);
 				$sql_days .= " OR u.user_birthday " . $like_expression . "";
 				$cache_days--;
 			}
 
-			switch ($db->sql_layer)
+			switch ($this->db->sql_layer)
 			{
 				case 'mssql':
 				case 'mssql_odbc':
@@ -85,47 +108,50 @@ class portal_birthday_list_module extends \board3\portal\modules\module_base
 				LEFT JOIN ' . BANLIST_TABLE . " b ON (u.user_id = b.ban_userid)
 				WHERE (b.ban_id IS NULL
 						OR b.ban_exclude = 1)
-					AND (u.user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%' {$sql_days})
+					AND (u.user_birthday LIKE '" . $this->db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%' {$sql_days})
 					AND u.user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')
 				ORDER BY ' . $order_by;
-			$result = $db->sql_query($sql);
+			$result = $this->db->sql_query($sql);
 			$today = sprintf('%2d-%2d-', $now['mday'], $now['mon']);
 
-			while ($row = $db->sql_fetchrow($result))
+			while ($row = $this->db->sql_fetchrow($result))
 			{
 				if (substr($row['user_birthday'], 0, 6) == $today)
 				{
 					$birthday_list = true;
-					$template->assign_block_vars('board3_birthday_list', array(
+					$this->template->assign_block_vars('board3_birthday_list', array(
 						'USER'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
 						'AGE'		=> ($age = (int) substr($row['user_birthday'], -4)) ? ' (' . ($now['year'] - $age) . ')' : '',
 					));
 				}
-				elseif ($config['board3_birthdays_ahead_' . $module_id] > 0)
+				elseif ($this->config['board3_birthdays_ahead_' . $module_id] > 0)
 				{
 					$birthday_ahead_list = true;
-					$template->assign_block_vars('board3_birthday_ahead_list', array(
+					$this->template->assign_block_vars('board3_birthday_ahead_list', array(
 						'USER'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
 						'AGE'		=> ($age = (int) substr($row['user_birthday'], -4)) ? ' (' . ($now['year'] - $age) . ')' : '',
-						'DATE'		=> $this->format_birthday($user, $row['user_birthday'], 'd M'),
+						'DATE'		=> $this->format_birthday($this->user, $row['user_birthday'], 'd M'),
 					));
 				}
 			}
-			$db->sql_freeresult($result);
+			$this->db->sql_freeresult($result);
 		}
 
 		// Assign index specific vars
-		$template->assign_vars(array(
+		$this->template->assign_vars(array(
 			'BIRTHDAY_LIST'					=> $birthday_list,
-			'BIRTHDAYS_AHEAD_LIST'			=> ($config['board3_birthdays_ahead_' . $module_id]) ? $birthday_ahead_list : '',
-			'L_BIRTHDAYS_AHEAD'				=> sprintf($user->lang['BIRTHDAYS_AHEAD'], $config['board3_birthdays_ahead_' . $module_id]),
-			'S_DISPLAY_BIRTHDAY_LIST'		=> ($config['load_birthdays']) ? true : false,
-			'S_DISPLAY_BIRTHDAY_AHEAD_LIST'	=> ($config['board3_birthdays_ahead_' . $module_id] > 0) ? true : false,
+			'BIRTHDAYS_AHEAD_LIST'			=> ($this->config['board3_birthdays_ahead_' . $module_id]) ? $birthday_ahead_list : '',
+			'L_BIRTHDAYS_AHEAD'				=> sprintf($this->user->lang['BIRTHDAYS_AHEAD'], $this->config['board3_birthdays_ahead_' . $module_id]),
+			'S_DISPLAY_BIRTHDAY_LIST'		=> ($this->config['load_birthdays']) ? true : false,
+			'S_DISPLAY_BIRTHDAY_AHEAD_LIST'	=> ($this->config['board3_birthdays_ahead_' . $module_id] > 0) ? true : false,
 		));
 
 		return 'birthdays_side.html';
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
@@ -138,7 +164,7 @@ class portal_birthday_list_module extends \board3\portal\modules\module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
@@ -146,10 +172,11 @@ class portal_birthday_list_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	/**
+	* @inheritdoc
+	*/
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_birthdays_ahead_' . $module_id,
 		);

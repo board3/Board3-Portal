@@ -10,14 +10,6 @@
 namespace board3\portal\modules;
 
 /**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
-/**
 * @package Stylechanger
 */
 class stylechanger extends module_base
@@ -49,6 +41,34 @@ class stylechanger extends module_base
 	*/
 	public $language = 'portal_stylechanger_module';
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var \phpbb\db\driver */
+	protected $db;
+
+	/** @var php file extension */
+	protected $php_ext;
+
+	/** @var phpbb root path */
+	protected $phpbb_root_path;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/**
+	* Construct a stylechanger object
+	*
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\db\driver $db Database driver
+	* @param string $phpEx php file extension
+	* @param string $phpbb_root_path phpBB root path
+	* @param \phpbb\user $user phpBB user object
+	*/
 	public function __construct($config, $template, $db, $phpEx, $phpbb_root_path, $user)
 	{
 		$this->config = $config;

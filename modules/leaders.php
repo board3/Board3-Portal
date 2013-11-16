@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Leaders
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
 * @package Leaders
 */
-class portal_leaders_module extends \board3\portal\modules\module_base
+class leaders extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -47,19 +41,63 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 	*/
 	public $language = 'portal_leaders_module';
 
+	/** @var \phpbb\auth\auth */
+	protected $auth;
+
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\db\driver */
+	protected $db;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var php file extension */
+	protected $php_ext;
+
+	/** @var phpbb root path */
+	protected $phpbb_root_path;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/**
+	* Construct a leaders object
+	*
+	* @param \phpbb\auth\auth $auth phpBB auth service
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\template $template phpBB template
+	* @param string $phpEx php file extension
+	* @param string $phpbb_root_path phpBB root path
+	* @param \phpbb\user $user phpBB user object
+	*/
+	public function __construct($auth, $config, $db, $template, $phpbb_root_path, $phpEx, $user)
+	{
+		$this->auth = $auth;
+		$this->config = $config;
+		$this->db = $db;
+		$this->template = $template;
+		$this->php_ext = $phpEx;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->user = $user;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_side($module_id)
 	{
-		global $config, $template, $user, $auth, $db, $phpEx, $phpbb_root_path;
-
 		// Display a listing of board admins, moderators
-		$user->add_lang('groups');
+		$this->user->add_lang('groups');
 
-		if($config['board3_leaders_ext_' . $module_id])
+		if($this->config['board3_leaders_ext_' . $module_id])
 		{
 			$legends = array();
 			$groups = array();
 
-			if ($auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel'))
+			if ($this->auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel'))
 			{
 				$sql = 'SELECT group_id, group_name, group_colour, group_type
 					FROM ' . GROUPS_TABLE . '
@@ -73,16 +111,16 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 					LEFT JOIN ' . USER_GROUP_TABLE . ' ug
 						ON (
 							g.group_id = ug.group_id
-							AND ug.user_id = ' . $user->data['user_id'] . '
+							AND ug.user_id = ' . $this->user->data['user_id'] . '
 							AND ug.user_pending = 0
 						)
 					WHERE g.group_legend = 1
-						AND (g.group_type <> ' . GROUP_HIDDEN . ' OR ug.user_id = ' . $user->data['user_id'] . ')
+						AND (g.group_type <> ' . GROUP_HIDDEN . ' OR ug.user_id = ' . $this->user->data['user_id'] . ')
 					ORDER BY g.group_name ASC';
 			}
-			$result = $db->sql_query($sql);
+			$result = $this->db->sql_query($sql);
 
-			while ($row = $db->sql_fetchrow($result))
+			while ($row = $this->db->sql_fetchrow($result))
 			{
 				$groups[$row['group_id']] = array(
 					'group_name'	=> $row['group_name'],
@@ -92,7 +130,7 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 				);
 				$legends[] = $row['group_id'];
 			}
-			$db->sql_freeresult($result);
+			$this->db->sql_freeresult($result);
 
 			if(sizeof($legends))
 			{
@@ -104,11 +142,11 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 							' . USER_GROUP_TABLE . ' AS ug
 						WHERE
 							ug.user_id = u.user_id
-							AND '. $db->sql_in_set('ug.group_id', $legends) . '
+							AND '. $this->db->sql_in_set('ug.group_id', $legends) . '
 						ORDER BY u.username_clean ASC';
-				$result = $db->sql_query($sql);
+				$result = $this->db->sql_query($sql);
 
-				while ($row = $db->sql_fetchrow($result))
+				while ($row = $this->db->sql_fetchrow($result))
 				{
 					$groups[$row['group_id']]['group_users'][] = array(
 						'user_id'		=> $row['user_id'],
@@ -116,7 +154,7 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 						'user_colour'	=> $row['user_colour'],
 					);
 				}
-				$db->sql_freeresult($result);
+				$this->db->sql_freeresult($result);
 			}
 
 			if(sizeof($groups))
@@ -125,10 +163,10 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 				{
 					if(sizeof($group['group_users']))
 					{
-						$group_name = ($group['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $group['group_name']] : $group['group_name'];
-						$u_group = append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $group_id);
+						$group_name = ($group['group_type'] == GROUP_SPECIAL) ? $this->user->lang['G_' . $group['group_name']] : $group['group_name'];
+						$u_group = append_sid("{$this->phpbb_root_path}memberlist.{$this->php_ext}", 'mode=group&amp;g=' . $group_id);
 
-						$template->assign_block_vars('group', array(
+						$this->template->assign_block_vars('group', array(
 							'GROUP_NAME'	=> $group_name,
 							'GROUP_COLOUR'	=> $group['group_colour'],
 							'U_GROUP'		=> $u_group,
@@ -136,7 +174,7 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 
 						foreach($group['group_users'] as $group_user)
 						{
-							$template->assign_block_vars('group.member', array(
+							$this->template->assign_block_vars('group.member', array(
 								'USER_ID'			=> $group_user['user_id'],
 								'USERNAME_FULL'		=> get_username_string('full', $group_user['user_id'], $group_user['username'], $group_user['user_colour']),
 							));
@@ -148,7 +186,7 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 		}
 		else
 		{
-			$sql = $db->sql_build_query('SELECT', array(
+			$sql = $this->db->sql_build_query('SELECT', array(
 				'SELECT'	=> 'u.user_id, u.group_id as default_group, u.username, u.user_colour, u.user_allow_pm, g.group_id, g.group_name, g.group_colour, g.group_type, ug.user_id as ug_user_id',
 				'FROM'		=> array(
 					USERS_TABLE		=> 'u',
@@ -157,15 +195,15 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 				'LEFT_JOIN'	=> array(
 					array(
 						'FROM'	=> array(USER_GROUP_TABLE => 'ug'),
-						'ON'	=> 'ug.group_id = g.group_id AND ug.user_pending = 0 AND ug.user_id = ' . $user->data['user_id']
+						'ON'	=> 'ug.group_id = g.group_id AND ug.user_pending = 0 AND ug.user_id = ' . $this->user->data['user_id']
 					)),
-				'WHERE'		=> 'u.group_id = g.group_id AND ' . $db->sql_in_set('g.group_name', array('ADMINISTRATORS', 'GLOBAL_MODERATORS')),
+				'WHERE'		=> 'u.group_id = g.group_id AND ' . $this->db->sql_in_set('g.group_name', array('ADMINISTRATORS', 'GLOBAL_MODERATORS')),
 				'ORDER_BY'	=> 'g.group_name ASC, u.username_clean ASC'
 			));
 
-			$result = $db->sql_query($sql);
+			$result = $this->db->sql_query($sql);
 
-			while ($row = $db->sql_fetchrow($result))
+			while ($row = $this->db->sql_fetchrow($result))
 			{
 				if ($row['group_name'] == 'ADMINISTRATORS')
 				{
@@ -176,18 +214,18 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 					$which_row = 'b3p_moderators';
 				}
 
-				if ($row['group_type'] == GROUP_HIDDEN && !$auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel') && $row['ug_user_id'] != $user->data['user_id'])
+				if ($row['group_type'] == GROUP_HIDDEN && !$this->auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel') && $row['ug_user_id'] != $this->user->data['user_id'])
 				{
-					$group_name = $user->lang['GROUP_UNDISCLOSED'];
+					$group_name = $this->user->lang['GROUP_UNDISCLOSED'];
 					$u_group = '';
 				}
 				else
 				{
-					$group_name = ($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name'];
-					$u_group = append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $row['group_id']);
+					$group_name = ($row['group_type'] == GROUP_SPECIAL) ? $this->user->lang['G_' . $row['group_name']] : $row['group_name'];
+					$u_group = append_sid("{$this->phpbb_root_path}memberlist.{$this->php_ext}", 'mode=group&amp;g=' . $row['group_id']);
 				}
 
-				$template->assign_block_vars($which_row, array(
+				$this->template->assign_block_vars($which_row, array(
 					'USER_ID'			=> $row['user_id'],
 					'GROUP_NAME'		=> $group_name,
 					'GROUP_COLOR'		=> $row['group_colour'],
@@ -200,11 +238,14 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 					'U_VIEW_PROFILE'	=> get_username_string('profile', $row['user_id'], $row['username'], $row['user_colour']),
 				));
 			}
-			$db->sql_freeresult($result);
+			$this->db->sql_freeresult($result);
 			return 'leaders_side.html';
 		}
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
@@ -217,7 +258,7 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
@@ -226,10 +267,11 @@ class portal_leaders_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
-	public function uninstall($module_id)
+	/**
+	* @inheritdoc
+	*/
+	public function uninstall($module_id, $db)
 	{
-		global $db;
-
 		$del_config = array(
 			'board3_leaders_ext_' . $module_id,
 		);

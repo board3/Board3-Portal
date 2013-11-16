@@ -40,6 +40,145 @@ services:
         tags:
             - { name: service_collection, tag: board3.module }
 
+    board3.module.announcements:
+        class: \board3\portal\modules\announcements
+        arguments:
+            - @auth
+            - @cache
+            - @config
+            - @template
+            - @dbal.conn
+            - %core.php_ext%
+            - %core.root_path%
+            - @user
+        tags:
+            - { name: board3.module }
+
+    board3.module.attachments:
+        class: \board3\portal\modules\attachments
+        arguments:
+            - @auth
+            - @config
+            - @template
+            - @dbal.conn
+            - %core.php_ext%
+            - %core.root_path%
+            - @user
+        tags:
+            - { name: board3.module }
+
+    board3.module.birthday_list:
+        class: \board3\portal\modules\birthday_list
+        arguments:
+            - @config
+            - @template
+            - @dbal.conn
+            - @user
+        tags:
+            - { name: board3.module }
+
+    board3.module.calendar:
+        class: \board3\portal\modules\calendar
+        arguments:
+            - @config
+            - @template
+            - @dbal.conn
+            - %core.root_path%
+            - %core.php_ext%
+            - @user
+            - @path_helper
+        tags:
+            - { name: board3.module }
+
+    board3.module.custom:
+        class: \board3\portal\modules\custom
+        arguments:
+            - @config
+            - @template
+            - @dbal.conn
+            - %core.root_path%
+            - %core.php_ext%
+            - @user
+        tags:
+            - { name: board3.module }
+
+    board3.module.forumlist:
+        class: \board3\portal\modules\forumlist
+        arguments:
+            - @auth
+            - @config
+            - @template
+            - %core.root_path%
+            - %core.php_ext%
+            - @user
+        tags:
+            - { name: board3.module }
+
+    board3.module.friends:
+        class: \board3\portal\modules\friends
+        arguments:
+            - @auth
+            - @config
+            - @dbal.conn
+            - @template
+            - @user
+        tags:
+            - { name: board3.module }
+
+    board3.module.latest_bots:
+        class: \board3\portal\modules\latest_bots
+        arguments:
+            - @config
+            - @dbal.conn
+            - @template
+            - @user
+        tags:
+            - { name: board3.module }
+
+    board3.module.latest_members:
+        class: \board3\portal\modules\latest_members
+        arguments:
+            - @config
+            - @dbal.conn
+            - @template
+            - @user
+        tags:
+            - { name: board3.module }
+
+    board3.module.leaders:
+        class: \board3\portal\modules\leaders
+        arguments:
+            - @auth
+            - @config
+            - @dbal.conn
+            - @template
+            - %core.root_path%
+            - %core.php_ext%
+            - @user
+        tags:
+            - { name: board3.module }
+
+    board3.module.link_us:
+        class: \board3\portal\modules\link_us
+        arguments:
+            - @config
+            - @template
+            - @user
+        tags:
+            - { name: board3.module }
+
+    board3.module.links:
+        class: \board3\portal\modules\links
+        arguments:
+            - @config
+            - @dbal.conn
+            - @template
+            - %core.root_path%
+            - %core.php_ext%
+            - @user
+        tags:
+            - { name: board3.module }
+
     board3.module.stylechanger:
         class: \board3\portal\modules\stylechanger
         arguments:
@@ -48,6 +187,20 @@ services:
             - @dbal.conn
             - %core.php_ext%
             - %core.root_path%
+            - @user
+        tags:
+            - { name: board3.module }
+
+    board3.module.clock:
+        class: \board3\portal\modules\clock
+        tags:
+            - { name: board3.module }
+
+    board3.module.donation:
+        class: \board3\portal\modules\donation
+        arguments:
+            - @config
+            - @template
             - @user
         tags:
             - { name: board3.module }

@@ -1,6 +1,6 @@
 <!-- INCLUDE overall_header.html -->
 
-<script type="text/javascript" src="{ROOT_PATH}style/portal/acp_portal.js"></script>
+<!-- INCLUDEJS portal/acp_portal.js -->
 <script type="text/javascript">
 // <![CDATA[
 /**
@@ -52,6 +52,21 @@ var help_line = {
 		,cb_{custom_tags.BBCODE_ID}: '{custom_tags.A_BBCODE_HELPLINE}'
 	<!-- END custom_tags -->
 }
+
+	function change_palette()
+	{
+		dE('colour_palette');
+		e = document.getElementById('colour_palette');
+
+		if (e.style.display == 'block')
+		{
+			document.getElementById('bbpalette').value = '{LA_FONT_COLOR_HIDE}';
+		}
+		else
+		{
+			document.getElementById('bbpalette').value = '{LA_FONT_COLOR}';
+		}
+	}
 
 // ]]>
 </script>
@@ -131,41 +146,16 @@ var help_line = {
 		<fieldset>
 			<legend>{L_PORTAL_CUSTOM}</legend>
 		<dl id="bbcode-buttons"<!-- IF not CUSTOM_USE_BBCODE --> style="display: none;"<!-- ENDIF -->>
+			<dt></dt>
 			<dd>
 				<div id="colour_palette" style="display: none;">
 					<dl style="clear: left;">
-						<dt style="border: none;"><label>{L_FONT_COLOR}:</label><br /></dt>
+						<dt style="border: none;"><label>{L_FONT_COLOR}{L_COLON}</label></dt>
+						<dd></dd>
 					</dl>
 					<dl style="clear: left;">
-					<dt style="border: none;">
-						<script type="text/javascript">
-						// <![CDATA[
-							function change_palette()
-							{
-								e = document.getElementById('colour_palette');
-								if(e.style.display == 'block')
-								{
-									dE('colour_palette', -1);
-								}
-								else
-								{
-									dE('colour_palette', 1);
-								}
-
-								if (e.style.display == 'block')
-								{
-									document.getElementById('bbpalette').value = '{LA_FONT_COLOR_HIDE}';
-								}
-								else
-								{
-									document.getElementById('bbpalette').value = '{LA_FONT_COLOR}';
-								}
-							}
-
-							colorPalette('h', 10, 5);
-						// ]]>
-						</script>
-					</dt>
+						<dt id="color_palette_placeholder" style="border: none;"></dt>
+						<dd></dd>
 					</dl>
 				</div>
 				<div id="format-buttons">
