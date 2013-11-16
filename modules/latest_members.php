@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Latest Members
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
-* @package Modulname
+* @package Latest members
 */
-class portal_latest_members_module extends \board3\portal\modules\module_base
+class latest_members extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -47,29 +41,61 @@ class portal_latest_members_module extends \board3\portal\modules\module_base
 	*/
 	public $language = 'portal_latest_members_module';
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\db\driver */
+	protected $db;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/**
+	* Construct a leaders object
+	*
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\user $user phpBB user object
+	*/
+	public function __construct($config, $db, $template, $user)
+	{
+		$this->config = $config;
+		$this->db = $db;
+		$this->template = $template;
+		$this->user = $user;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_side($module_id)
 	{
-		global $config, $template, $db, $user;
-
 		$sql = 'SELECT user_id, username, user_regdate, user_colour
 			FROM ' . USERS_TABLE . '
 			WHERE user_type <> ' . USER_IGNORE . '
 				AND user_inactive_time = 0
 			ORDER BY user_regdate DESC';
-		$result = $db->sql_query_limit($sql, $config['board3_max_last_member_' . $module_id]);
+		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_last_member_' . $module_id]);
 
-		while(($row = $db->sql_fetchrow($result)) && ($row['username']))
+		while(($row = $this->db->sql_fetchrow($result)) && ($row['username']))
 		{
-			$template->assign_block_vars('latest_members', array(
+			$this->template->assign_block_vars('latest_members', array(
 				'USERNAME_FULL'	=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
-				'JOINED'		=> $user->format_date($row['user_regdate'], $format = 'd M'),
+				'JOINED'		=> $this->user->format_date($row['user_regdate'], $format = 'd M'),
 			));
 		}
-		$db->sql_freeresult($result);
+		$this->db->sql_freeresult($result);
 
 		return 'latest_members_side.html';
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
@@ -82,7 +108,7 @@ class portal_latest_members_module extends \board3\portal\modules\module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
@@ -90,6 +116,9 @@ class portal_latest_members_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function uninstall($module_id, $db)
 	{
 		$del_config = array(

@@ -135,6 +135,16 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.latest_members:
+        class: \board3\portal\modules\latest_members
+        arguments:
+            - @config
+            - @dbal.conn
+            - @template
+            - @user
+        tags:
+            - { name: board3.module }
+
     board3.module.stylechanger:
         class: \board3\portal\modules\stylechanger
         arguments:

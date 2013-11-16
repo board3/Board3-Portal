@@ -380,7 +380,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'latest_members',
+				'module_classname'		=> '\board3\portal\modules\latest_members',
 				'module_column'		=> 1,
 				'module_order'		=> 8,
 				'module_name'		=> 'LATEST_MEMBERS',
