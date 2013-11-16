@@ -158,6 +158,15 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.link_us:
+        class: \board3\portal\modules\link_us
+        arguments:
+            - @config
+            - @template
+            - @user
+        tags:
+            - { name: board3.module }
+
     board3.module.links:
         class: \board3\portal\modules\links
         arguments:

@@ -391,7 +391,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'link_us',
+				'module_classname'		=> '\board3\portal\modules\link_us',
 				'module_column'		=> 1,
 				'module_order'		=> 9,
 				'module_name'		=> 'LINK_US',
