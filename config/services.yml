@@ -145,6 +145,19 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.leaders:
+        class: \board3\portal\modules\leaders
+        arguments:
+            - @auth
+            - @config
+            - @dbal.conn
+            - @template
+            - %core.root_path%
+            - %core.php_ext%
+            - @user
+        tags:
+            - { name: board3.module }
+
     board3.module.stylechanger:
         class: \board3\portal\modules\stylechanger
         arguments:

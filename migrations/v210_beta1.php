@@ -501,7 +501,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'leaders',
+				'module_classname'		=> '\board3\portal\modules\leaders',
 				'module_column'		=> 3,
 				'module_order'		=> 4,
 				'module_name'		=> 'THE_TEAM',
