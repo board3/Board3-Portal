@@ -54,7 +54,7 @@ class latest_members extends module_base
 	protected $user;
 
 	/**
-	* Construct a leaders object
+	* Construct a latest_members object
 	*
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\db\driver $db phpBB db driver
