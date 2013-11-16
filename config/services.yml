@@ -179,6 +179,15 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.search:
+        class: \board3\portal\modules\search
+        arguments:
+            - @template
+            - %core.php_ext%
+            - %core.root_path%
+        tags:
+            - { name: board3.module }
+
     board3.module.stylechanger:
         class: \board3\portal\modules\stylechanger
         arguments:
