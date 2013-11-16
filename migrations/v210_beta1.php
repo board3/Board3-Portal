@@ -446,7 +446,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'poll',
+				'module_classname'		=> '\board3\portal\modules\poll',
 				'module_column'		=> 2,
 				'module_order'		=> 5,
 				'module_name'		=> 'PORTAL_POLL',

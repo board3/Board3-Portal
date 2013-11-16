@@ -205,6 +205,19 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.poll:
+        class: \board3\portal\modules\poll
+        arguments:
+            - @auth
+            - @config
+            - @dbal.conn
+            - @template
+            - %core.root_path%
+            - %core.php_ext%
+            - @user
+        tags:
+            - { name: board3.module }
+
     board3.module.search:
         class: \board3\portal\modules\search
         arguments:
