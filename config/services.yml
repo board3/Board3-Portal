@@ -191,6 +191,20 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.news:
+        class: \board3\portal\modules\news
+        arguments:
+            - @auth
+            - @cache
+            - @config
+            - @dbal.conn
+            - @template
+            - %core.root_path%
+            - %core.php_ext%
+            - @user
+        tags:
+            - { name: board3.module }
+
     board3.module.search:
         class: \board3\portal\modules\search
         arguments:
