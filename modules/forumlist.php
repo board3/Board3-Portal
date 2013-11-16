@@ -66,7 +66,7 @@ class forumlist extends module_base
 	protected $user;
 
 	/**
-	* Construct a custom module object
+	* Construct a forumlist object
 	*
 	* @param \phpbb\auth\auth $auth phpBB auth service
 	* @param \phpbb\config\config $config phpBB config
