@@ -84,6 +84,9 @@ class leaders extends module_base
 		$this->user = $user;
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_side($module_id)
 	{
 		// Display a listing of board admins, moderators
@@ -240,6 +243,9 @@ class leaders extends module_base
 		}
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
@@ -252,7 +258,7 @@ class leaders extends module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
@@ -261,6 +267,9 @@ class leaders extends module_base
 		return true;
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function uninstall($module_id, $db)
 	{
 		$del_config = array(
