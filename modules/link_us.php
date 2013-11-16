@@ -60,7 +60,7 @@ class link_us extends module_base
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($config,  $template, $user)
+	public function __construct($config, $template, $user)
 	{
 		$this->config = $config;
 		$this->template = $template;
