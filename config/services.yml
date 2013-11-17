@@ -295,3 +295,16 @@ services:
             - %core.php_ext%
         tags:
             - { name: board3.module }
+
+    board3.module.user_menu:
+        class: \board3\portal\modules\user_menu
+        arguments:
+            - @auth
+            - @config
+            - @dbal.conn
+            - @template
+            - @user
+            - %core.root_path%
+            - %core.php_ext%
+        tags:
+            - { name: board3.module }

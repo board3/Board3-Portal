@@ -468,7 +468,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'user_menu',
+				'module_classname'		=> '\board3\portal\modules\user_menu',
 				'module_column'		=> 3,
 				'module_order'		=> 1,
 				'module_name'		=> 'USER_MENU',
