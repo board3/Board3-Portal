@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Welcome
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
 * @package Welcome
 */
-class portal_welcome_module extends \board3\portal\modules\module_base
+class welcome extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -53,23 +47,62 @@ class portal_welcome_module extends \board3\portal\modules\module_base
 	*/
 	public $custom_acp_tpl = 'acp_portal_welcome';
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/** @var php file extension */
+	protected $php_ext;
+
+	/** @var phpbb root path */
+	protected $phpbb_root_path;
+
+	/**
+	* Construct a welcome object
+	*
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\user $user phpBB user
+	* @param string $phpbb_root_path phpBB root path
+	* @param string $phpEx php file extension
+	*/
+	public function __construct($config, $template, $user, $phpbb_root_path, $phpEx)
+	{
+		$this->config = $config;
+		$this->template = $template;
+		$this->user = $user;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->php_ext = $phpEx;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_center($module_id)
 	{
-		global $config, $template, $portal_config, $phpEx;
+		$portal_config = obtain_portal_config();
 
 		// Generate text for display and assign template vars
-		$uid = $config['board3_welcome_message_uid_' . $module_id];
-		$bitfield = $config['board3_welcome_message_bitfield_' . $module_id];
+		$uid = $this->config['board3_welcome_message_uid_' . $module_id];
+		$bitfield = $this->config['board3_welcome_message_bitfield_' . $module_id];
 		$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
 		$text = generate_text_for_display($portal_config['board3_welcome_message_' . $module_id], $uid, $bitfield, $bbcode_options);
 
-		$template->assign_vars(array(
+		$this->template->assign_vars(array(
 			'PORTAL_WELCOME_MSG'	=> $text,
 		));
 
 		return 'welcome_center.html';
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
@@ -82,7 +115,7 @@ class portal_welcome_module extends \board3\portal\modules\module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
@@ -93,6 +126,9 @@ class portal_welcome_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function uninstall($module_id, $db)
 	{
 		$del_config = array(
@@ -113,17 +149,24 @@ class portal_welcome_module extends \board3\portal\modules\module_base
 		return ((!$check) ? $check : $db->sql_query($sql)); // if something went wrong, make sure we are aware of the first query
 	}
 
+	/**
+	* Manage welcome message
+	*
+	* @param mixed $value Value of input
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	*/
 	public function manage_welcome($value, $key, $module_id)
 	{
-		global $db, $portal_config, $config, $template, $user, $phpEx, $phpbb_admin_path, $phpbb_root_path;
-
 		$action = (isset($_POST['reset'])) ? 'reset' : '';
 		$action = (isset($_POST['submit'])) ? 'save' : $action;
 		$action = (isset($_POST['preview'])) ? 'preview' : $action;
 
 		$portal_config = obtain_portal_config();
 
-		$u_action = append_sid($phpbb_admin_path . 'index.' . $phpEx, 'i=portal&amp;mode=config&amp;module_id=' . $module_id);
+		$u_action = append_sid('index.' . $this->php_ext, 'i=\board3\portal\acp\portal_module&amp;mode=config&amp;module_id=' . $module_id);
 
 		switch($action)
 		{
@@ -131,7 +174,7 @@ class portal_welcome_module extends \board3\portal\modules\module_base
 			case 'save':
 				if (!check_form_key('acp_portal'))
 				{
-					trigger_error($user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				$welcome_message = utf8_normalize_nfc(request_var('welcome_message', '', true));
@@ -142,10 +185,10 @@ class portal_welcome_module extends \board3\portal\modules\module_base
 				// first check for obvious errors, we don't want to waste server resources
 				if(empty($welcome_message))
 				{
-					trigger_error($user->lang['ACP_PORTAL_WELCOME_MESSAGE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['ACP_PORTAL_WELCOME_MESSAGE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				add_log('admin', 'LOG_PORTAL_CONFIG', $user->lang['PORTAL_WELCOME']);
+				add_log('admin', 'LOG_PORTAL_CONFIG', $this->user->lang['PORTAL_WELCOME']);
 
 				// set_portal_config will take care of escaping the welcome message
 				set_portal_config('board3_welcome_message_' . $module_id, $welcome_message);
@@ -156,20 +199,15 @@ class portal_welcome_module extends \board3\portal\modules\module_base
 			case 'preview':
 				$welcome_message = $text = utf8_normalize_nfc(request_var('welcome_message', '', true));
 
-				if (!class_exists('parse_message'))
-				{
-					include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
-				}
-
 				$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
-				$uid  =  (isset($config['board3_welcome_message_uid_' . $module_id])) ? $config['board3_welcome_message_uid_' . $module_id] : '';
-				$bitfield = (isset($config['board3_welcome_message_bitfield_' . $module_id])) ? $config['board3_welcome_message_bitfield_' . $module_id] : '';
+				$uid  =  (isset($this->config['board3_welcome_message_uid_' . $module_id])) ? $this->config['board3_welcome_message_uid_' . $module_id] : '';
+				$bitfield = (isset($this->config['board3_welcome_message_bitfield_' . $module_id])) ? $this->config['board3_welcome_message_bitfield_' . $module_id] : '';
 				$options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
 				generate_text_for_storage($text, $uid, $bitfield, $options, true, true, true);
 
 				$text = generate_text_for_display($text, $uid, $bitfield, $options);
 
-				$template->assign_vars(array(
+				$this->template->assign_vars(array(
 					'PREVIEW_TEXT'		=> $text,
 					'S_PREVIEW'			=> true,
 				));
@@ -179,10 +217,10 @@ class portal_welcome_module extends \board3\portal\modules\module_base
 			default:
 				if(!isset($welcome_message))
 				{
-					$welcome_message = generate_text_for_edit($portal_config['board3_welcome_message_' . $module_id], $config['board3_welcome_message_uid_' . $module_id], '');
+					$welcome_message = generate_text_for_edit($portal_config['board3_welcome_message_' . $module_id], $this->config['board3_welcome_message_uid_' . $module_id], '');
 				}
 
-				$template->assign_vars(array(
+				$this->template->assign_vars(array(
 					'WELCOME_MESSAGE'		=> (is_array($welcome_message)) ? $welcome_message['text'] : $welcome_message,
 					//'U_BACK'				=> $u_action,
 					'U_ACTION'				=> $u_action,
@@ -192,22 +230,30 @@ class portal_welcome_module extends \board3\portal\modules\module_base
 					'S_BBCODE_FLASH'		=> true,
 					'S_BBCODE_QUOTE'		=> true,
 					'S_BBCODE_ALLOWED'		=> true,
-					'MAX_FONT_SIZE'			=> (int) $config['max_post_font_size'],
+					'MAX_FONT_SIZE'			=> (int) $this->config['max_post_font_size'],
 				));
 
 				if(!function_exists('display_forums'))
 				{
-					include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
+					include($this->phpbb_root_path . 'includes/functions_display.' . $this->php_ext);
 				}
 
 				// Build custom bbcodes array
 				display_custom_bbcodes();
-				$user->add_lang('posting');
+				$this->user->add_lang('posting');
 
 			break;		
 		}
 	}
 
+	/**
+	* Update welcome message
+	*
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	*/
 	public function update_welcome($key, $module_id)
 	{
 		$this->manage_welcome('', $key, $module_id);

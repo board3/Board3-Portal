@@ -303,7 +303,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 		// Populate module table
 		$board3_sql_query = array(
 			array(
-				'module_classname'		=> 'main_menu',
+				'module_classname'		=> '\board3\portal\modules\main_menu',
 				'module_column'		=> 1,
 				'module_order'		=> 1,
 				'module_name'		=> 'M_MENU',
@@ -369,7 +369,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'topposters',
+				'module_classname'		=> '\board3\portal\modules\topposters',
 				'module_column'		=> 1,
 				'module_order'		=> 7,
 				'module_name'		=> 'TOPPOSTERS',
@@ -402,7 +402,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'welcome',
+				'module_classname'		=> '\board3\portal\modules\welcome',
 				'module_column'		=> 2,
 				'module_order'		=> 1,
 				'module_name'		=> 'PORTAL_WELCOME',
@@ -413,7 +413,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'recent',
+				'module_classname'		=> '\board3\portal\modules\recent',
 				'module_column'		=> 2,
 				'module_order'		=> 2,
 				'module_name'		=> 'PORTAL_RECENT',
@@ -435,7 +435,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'news',
+				'module_classname'		=> '\board3\portal\modules\news',
 				'module_column'		=> 2,
 				'module_order'		=> 4,
 				'module_name'		=> 'LATEST_NEWS',
@@ -446,7 +446,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'poll',
+				'module_classname'		=> '\board3\portal\modules\poll',
 				'module_column'		=> 2,
 				'module_order'		=> 5,
 				'module_name'		=> 'PORTAL_POLL',
@@ -457,7 +457,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'whois_online',
+				'module_classname'		=> '\board3\portal\modules\whois_online',
 				'module_column'		=> 2,
 				'module_order'		=> 6,
 				'module_name'		=> 'PORTAL_WHOIS_ONLINE',
@@ -468,7 +468,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'user_menu',
+				'module_classname'		=> '\board3\portal\modules\user_menu',
 				'module_column'		=> 3,
 				'module_order'		=> 1,
 				'module_name'		=> 'USER_MENU',
@@ -479,7 +479,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'statistics',
+				'module_classname'		=> '\board3\portal\modules\statistics',
 				'module_column'		=> 3,
 				'module_order'		=> 2,
 				'module_name'		=> 'STATISTICS',

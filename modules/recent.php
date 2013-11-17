@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Recent
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
 * @package Recent
 */
-class portal_recent_module extends \board3\portal\modules\module_base
+class recent extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -53,23 +47,62 @@ class portal_recent_module extends \board3\portal\modules\module_base
 	*/
 	public $custom_acp_tpl = '';
 
+	/** @var \phpbb\auth\auth */
+	protected $auth;
+
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\db\driver */
+	protected $db;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var php file extension */
+	protected $php_ext;
+
+	/** @var phpbb root path */
+	protected $phpbb_root_path;
+
+	/**
+	* Construct a recent object
+	*
+	* @param \phpbb\auth\auth $auth phpBB auth
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\template $template phpBB template
+	* @param string $phpbb_root_path phpBB root path
+	* @param string $phpEx php file extension
+	*/
+	public function __construct($auth, $config, $db, $template, $phpbb_root_path, $phpEx)
+	{
+		$this->auth = $auth;
+		$this->config = $config;
+		$this->db = $db;
+		$this->template = $template;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->php_ext = $phpEx;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_center($module_id)
 	{
-		global $config, $template, $db, $auth, $phpbb_root_path, $phpEx;
-
 		//
 		// Exclude forums
 		//
 		$sql_where = '';
-		if ($config['board3_recent_forum_' . $module_id] > 0)
+		if ($this->config['board3_recent_forum_' . $module_id] > 0)
 		{
-			$exclude_forums = explode(',', $config['board3_recent_forum_' . $module_id]);
+			$exclude_forums = explode(',', $this->config['board3_recent_forum_' . $module_id]);
 
-			$sql_where = ' AND ' . $db->sql_in_set('forum_id', array_map('intval', $exclude_forums), ($config['board3_recent_exclude_forums_' . $module_id]) ? true : false);
+			$sql_where = ' AND ' . $this->db->sql_in_set('forum_id', array_map('intval', $exclude_forums), ($this->config['board3_recent_exclude_forums_' . $module_id]) ? true : false);
 		}
 
 		// Get a list of forums the user cannot read
-		$forum_ary = array_unique(array_keys($auth->acl_getf('!f_read', true)));
+		$forum_ary = array_unique(array_keys($this->auth->acl_getf('!f_read', true)));
 
 		// Determine first forum the user is able to read (must not be a category)
 		$sql = 'SELECT forum_id
@@ -79,13 +112,13 @@ class portal_recent_module extends \board3\portal\modules\module_base
 		$forum_sql = '';
 		if (sizeof($forum_ary))
 		{
-			$sql .= ' AND ' . $db->sql_in_set('forum_id', $forum_ary, true);
-			$forum_sql = ' AND ' . $db->sql_in_set('t.forum_id', $forum_ary, true);
+			$sql .= ' AND ' . $this->db->sql_in_set('forum_id', $forum_ary, true);
+			$forum_sql = ' AND ' . $this->db->sql_in_set('t.forum_id', $forum_ary, true);
 		}
 
-		$result = $db->sql_query_limit($sql, 1);
-		$g_forum_id = (int) $db->sql_fetchfield('forum_id');
-		$db->sql_freeresult($result);
+		$result = $this->db->sql_query_limit($sql, 1);
+		$g_forum_id = (int) $this->db->sql_fetchfield('forum_id');
+		$this->db->sql_freeresult($result);
 
 		//
 		// Recent announcements
@@ -98,21 +131,21 @@ class portal_recent_module extends \board3\portal\modules\module_base
 				AND topic_moved_id = 0
 				' . $sql_where . '' .  $forum_sql . '
 			ORDER BY topic_time DESC';
-		$result = $db->sql_query_limit($sql, $config['board3_max_topics_' . $module_id]);
+		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id]);
 
-		while(($row = $db->sql_fetchrow($result)) && ($row['topic_title']))
+		while(($row = $this->db->sql_fetchrow($result)) && ($row['topic_title']))
 		{
 			// auto auth
-			if (($auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0'))
+			if (($this->auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0'))
 			{
-				$template->assign_block_vars('latest_announcements', array(
-					'TITLE'			=> character_limit($row['topic_title'], $config['board3_recent_title_limit_' . $module_id]),
+				$this->template->assign_block_vars('latest_announcements', array(
+					'TITLE'			=> character_limit($row['topic_title'], $this->config['board3_recent_title_limit_' . $module_id]),
 					'FULL_TITLE'	=> censor_text($row['topic_title']),
-					'U_VIEW_TOPIC'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id'] == 0) ? $g_forum_id : $row['forum_id']) . '&amp;t=' . $row['topic_id'])
+					'U_VIEW_TOPIC'	=> append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($row['forum_id'] == 0) ? $g_forum_id : $row['forum_id']) . '&amp;t=' . $row['topic_id'])
 				));
 			}
 		}
-		$db->sql_freeresult($result);
+		$this->db->sql_freeresult($result);
 
 		//
 		// Recent hot topics
@@ -120,25 +153,25 @@ class portal_recent_module extends \board3\portal\modules\module_base
 		$sql = 'SELECT topic_title, forum_id, topic_id
 			FROM ' . TOPICS_TABLE . ' t
 			WHERE topic_visibility = ' . ITEM_APPROVED . '
-				AND topic_posts_approved >' . $config['hot_threshold'] . '
+				AND topic_posts_approved >' . $this->config['hot_threshold'] . '
 				AND topic_moved_id = 0
 				' . $sql_where . '' .  $forum_sql . '
 			ORDER BY topic_time DESC';
-		$result = $db->sql_query_limit($sql, $config['board3_max_topics_' . $module_id]);
+		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id]);
 
-		while(($row = $db->sql_fetchrow($result)) && ($row['topic_title']))
+		while(($row = $this->db->sql_fetchrow($result)) && ($row['topic_title']))
 		{
 			// auto auth
-			if (($auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0'))
+			if (($this->auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0'))
 			{
-				$template->assign_block_vars('latest_hot_topics', array(
-					'TITLE'			=> character_limit($row['topic_title'], $config['board3_recent_title_limit_' . $module_id]),
+				$this->template->assign_block_vars('latest_hot_topics', array(
+					'TITLE'			=> character_limit($row['topic_title'], $this->config['board3_recent_title_limit_' . $module_id]),
 					'FULL_TITLE'	=> censor_text($row['topic_title']),
-					'U_VIEW_TOPIC'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id'] == 0) ? $g_forum_id : $row['forum_id']) . '&amp;t=' . $row['topic_id'])
+					'U_VIEW_TOPIC'	=> append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($row['forum_id'] == 0) ? $g_forum_id : $row['forum_id']) . '&amp;t=' . $row['topic_id'])
 				));
 			}
 		}
-		$db->sql_freeresult($result);
+		$this->db->sql_freeresult($result);
 
 		//
 		// Recent topic (only show normal topic)
@@ -151,25 +184,28 @@ class portal_recent_module extends \board3\portal\modules\module_base
 				AND topic_moved_id = 0
 				' . $sql_where . '' .  $forum_sql . '
 			ORDER BY topic_time DESC';
-		$result = $db->sql_query_limit($sql, $config['board3_max_topics_' . $module_id]);
+		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id]);
 
-		while(($row = $db->sql_fetchrow($result)) && ($row['topic_title']))
+		while(($row = $this->db->sql_fetchrow($result)) && ($row['topic_title']))
 		{
 			// auto auth
-			if (($auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0'))
+			if (($this->auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0'))
 			{
-				$template->assign_block_vars('latest_topics', array(
-					'TITLE'			=> character_limit($row['topic_title'], $config['board3_recent_title_limit_' . $module_id]),
+				$this->template->assign_block_vars('latest_topics', array(
+					'TITLE'			=> character_limit($row['topic_title'], $this->config['board3_recent_title_limit_' . $module_id]),
 					'FULL_TITLE'	=> censor_text($row['topic_title']),
-					'U_VIEW_TOPIC'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $row['forum_id'] . '&amp;t=' . $row['topic_id'])
+					'U_VIEW_TOPIC'	=> append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . $row['forum_id'] . '&amp;t=' . $row['topic_id'])
 				));
 			}
 		}
-		$db->sql_freeresult($result);
+		$this->db->sql_freeresult($result);
 
 		return 'recent_center.html';
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
@@ -185,7 +221,7 @@ class portal_recent_module extends \board3\portal\modules\module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
@@ -196,6 +232,9 @@ class portal_recent_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function uninstall($module_id, $db)
 	{
 		$del_config = array(
@@ -209,17 +248,23 @@ class portal_recent_module extends \board3\portal\modules\module_base
 		return $db->sql_query($sql);
 	}
 
-	// Create forum select box
+	/**
+	* Create forum select box
+	*
+	* @param mixed $value Value of input
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	*/
 	public function select_forums($value, $key, $module_id)
 	{
-		global $user, $config;
-
 		$forum_list = make_forum_select(false, false, true, true, true, false, true);
 
 		$selected = array();
-		if(isset($config[$key]) && strlen($config[$key]) > 0)
+		if(isset($this->config[$key]) && strlen($this->config[$key]) > 0)
 		{
-			$selected = explode(',', $config[$key]);
+			$selected = explode(',', $this->config[$key]);
 		}
 		// Build forum options
 		$s_forum_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
@@ -233,11 +278,16 @@ class portal_recent_module extends \board3\portal\modules\module_base
 
 	}
 
-	// Store selected forums
+	/**
+	* Store selected forums
+	*
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	*/
 	public function store_selected_forums($key, $module_id)
 	{
-		global $db, $cache;
-
 		// Get selected extensions
 		$values = request_var($key, array(0 => ''));
 

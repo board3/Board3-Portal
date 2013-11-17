@@ -1,24 +1,18 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - Poll
+* @package Board3 Portal v2.1
 * @copyright (c) Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\modules;
 
 /**
 * @package Poll
 */
-class portal_poll_module extends \board3\portal\modules\module_base
+class poll extends module_base
 {
 	/**
 	* Allowed columns: Just sum up your options (Exp: left + right = 10)
@@ -53,16 +47,68 @@ class portal_poll_module extends \board3\portal\modules\module_base
 	*/
 	public $custom_acp_tpl = '';
 
+	/** @var \phpbb\auth\auth */
+	protected $auth;
+
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\template */
+	protected $template;
+
+	/** @var \phpbb\db\driver */
+	protected $db;
+
+	/** @var php file extension */
+	protected $php_ext;
+
+	/** @var phpbb root path */
+	protected $phpbb_root_path;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/**
+	* Construct a poll object
+	*
+	* @param \phpbb\auth\auth $auth phpBB auth service
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\db\driver $db Database driver
+	* @param string $phpEx php file extension
+	* @param string $phpbb_root_path phpBB root path
+	* @param \phpbb\user $user phpBB user object
+	*/
+	public function __construct($auth, $config, $db, $template, $phpbb_root_path, $phpEx, $user)
+	{
+		$this->auth = $auth;
+		$this->config = $config;
+		$this->db = $db;
+		$this->template = $template;
+		$this->php_ext = $phpEx;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->user = $user;
+	}
+
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_center($module_id)
 	{
 		return $this->parse_template($module_id);
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_side($module_id)
 	{
 		return $this->parse_template($module_id, 'side');
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function get_template_acp($module_id)
 	{
 		return array(
@@ -79,7 +125,7 @@ class portal_poll_module extends \board3\portal\modules\module_base
 	}
 
 	/**
-	* API functions
+	* @inheritdoc
 	*/
 	public function install($module_id)
 	{
@@ -91,6 +137,9 @@ class portal_poll_module extends \board3\portal\modules\module_base
 		return true;
 	}
 
+	/**
+	* @inheritdoc
+	*/
 	public function uninstall($module_id, $db)
 	{
 		$del_config = array(
@@ -105,17 +154,23 @@ class portal_poll_module extends \board3\portal\modules\module_base
 		return $db->sql_query($sql);
 	}
 
-	// Create forum select box
+	/**
+	* Create forum select box
+	*
+	* @param mixed $value Value of input
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	*/
 	public function select_forums($value, $key, $module_id)
 	{
-		global $user, $config;
-
 		$forum_list = make_forum_select(false, false, true, true, true, false, true);
 
 		$selected = array();
-		if(isset($config[$key]) && strlen($config[$key]) > 0)
+		if(isset($this->config[$key]) && strlen($this->config[$key]) > 0)
 		{
-			$selected = explode(',', $config[$key]);
+			$selected = explode(',', $this->config[$key]);
 		}
 		// Build forum options
 		$s_forum_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
@@ -128,11 +183,16 @@ class portal_poll_module extends \board3\portal\modules\module_base
 		return $s_forum_options;
 	}
 
-	// Store selected forums
+	/**
+	* Store selected forums
+	*
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	*/
 	public function store_selected_forums($key, $module_id)
 	{
-		global $db, $cache;
-
 		// Get selected forums
 		$values = request_var($key, array(0 => ''));
 
@@ -147,17 +207,17 @@ class portal_poll_module extends \board3\portal\modules\module_base
 	*
 	* @param int $module_id	Module ID
 	* @param string $type	Module type (center or side)
+	*
+	* @return string HTML filename
 	*/
 	protected function parse_template($module_id, $type = '')
 	{
-		global $config, $template, $db, $user, $auth, $phpbb_root_path, $phpEx;
-
-		$user->add_lang('viewtopic');
+		$this->user->add_lang('viewtopic');
 
 		// check if we need to include the bbcode class
 		if(!class_exists('bbcode'))
 		{
-			include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+			include($this->phpbb_root_path . 'includes/bbcode.' . $this->php_ext);
 		}
 
 		$view = request_var('view', '');
@@ -166,35 +226,35 @@ class portal_poll_module extends \board3\portal\modules\module_base
 
 		$poll_view_ar = (strpos($poll_view, ',') !== FALSE) ? explode(',', $poll_view) : (($poll_view != '') ? array($poll_view) : array());
 
-		if ($update && $config['board3_poll_allow_vote_' . $module_id])
+		if ($update && $this->config['board3_poll_allow_vote_' . $module_id])
 		{
 			$up_topic_id = request_var('t', 0);
 			$up_forum_id = request_var('f', 0);
 			$voted_id = request_var('vote_id', array('' => 0));
 
 			$cur_voted_id = array();
-			if ($user->data['is_registered'])
+			if ($this->user->data['is_registered'])
 			{
 				$sql = 'SELECT poll_option_id
 					FROM ' . POLL_VOTES_TABLE . '
 					WHERE topic_id = ' . $up_topic_id . '
-						AND vote_user_id = ' . $user->data['user_id'];
-				$result = $db->sql_query($sql);
+						AND vote_user_id = ' . $this->user->data['user_id'];
+				$result = $this->db->sql_query($sql);
 
-				while ($row = $db->sql_fetchrow($result))
+				while ($row = $this->db->sql_fetchrow($result))
 				{
 					$cur_voted_id[] = $row['poll_option_id'];
 				}
-				$db->sql_freeresult($result);
+				$this->db->sql_freeresult($result);
 			}
 			else
 			{
 				// Cookie based guest tracking ... I don't like this but hum ho
 				// it's oft requested. This relies on "nice" users who don't feel
 				// the need to delete cookies to mess with results.
-				if (isset($_COOKIE[$config['cookie_name'] . '_poll_' . $up_topic_id]))
+				if (isset($_COOKIE[$this->config['cookie_name'] . '_poll_' . $up_topic_id]))
 				{
-					$cur_voted_id = explode(',', request_var($config['cookie_name'] . '_poll_' . $up_topic_id, 0, false, true));
+					$cur_voted_id = explode(',', request_var($this->config['cookie_name'] . '_poll_' . $up_topic_id, 0, false, true));
 					$cur_voted_id = array_map('intval', $cur_voted_id);
 				}
 			}
@@ -202,19 +262,19 @@ class portal_poll_module extends \board3\portal\modules\module_base
 			$sql = 'SELECT t.poll_length, t.poll_start, t.poll_vote_change, t.topic_status, f.forum_status, t.poll_max_options
 					FROM ' . TOPICS_TABLE . ' t, ' . FORUMS_TABLE . " f
 					WHERE t.forum_id = f.forum_id AND t.topic_id = " . (int) $up_topic_id . " AND t.forum_id = " . (int) $up_forum_id;
-			$result = $db->sql_query_limit($sql, 1);
-			$topic_data = $db->sql_fetchrow($result);
-			$db->sql_freeresult($result);
+			$result = $this->db->sql_query_limit($sql, 1);
+			$topic_data = $this->db->sql_fetchrow($result);
+			$this->db->sql_freeresult($result);
 
-			$s_can_up_vote = (((!sizeof($cur_voted_id) && $auth->acl_get('f_vote', $up_forum_id)) ||
-				($auth->acl_get('f_votechg', $up_forum_id) && $topic_data['poll_vote_change'])) &&
+			$s_can_up_vote = (((!sizeof($cur_voted_id) && $this->auth->acl_get('f_vote', $up_forum_id)) ||
+				($this->auth->acl_get('f_votechg', $up_forum_id) && $topic_data['poll_vote_change'])) &&
 				(($topic_data['poll_length'] != 0 && $topic_data['poll_start'] + $topic_data['poll_length'] > time()) || $topic_data['poll_length'] == 0) &&
 				$topic_data['topic_status'] != ITEM_LOCKED &&
 				$topic_data['forum_status'] != ITEM_LOCKED) ? true : false;
 
 			if($s_can_up_vote)
 			{
-				$redirect_url = append_sid("{$phpbb_root_path}app.$phpEx/portal");
+				$redirect_url = append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal");
 
 				if (!sizeof($voted_id) || sizeof($voted_id) > $topic_data['poll_max_options'] || in_array(VOTE_CONVERTED, $cur_voted_id))
 				{
@@ -232,7 +292,7 @@ class portal_poll_module extends \board3\portal\modules\module_base
 						$message = 'VOTE_CONVERTED';
 					}
 
-					$message = $user->lang[$message] . '<br /><br />' . sprintf($user->lang['RETURN_PORTAL'], '<a href="' . $redirect_url . '">', '</a>');
+					$message = $this->user->lang[$message] . '<br /><br />' . sprintf($this->user->lang['RETURN_PORTAL'], '<a href="' . $redirect_url . '">', '</a>');
 					trigger_error($message);
 				}
 
@@ -247,19 +307,19 @@ class portal_poll_module extends \board3\portal\modules\module_base
 						SET poll_option_total = poll_option_total + 1
 						WHERE poll_option_id = ' . (int) $option . '
 							AND topic_id = ' . (int) $up_topic_id;
-					$db->sql_query($sql);
+					$this->db->sql_query($sql);
 
-					if ($user->data['is_registered'])
+					if ($this->user->data['is_registered'])
 					{
 						$sql_ary = array(
 							'topic_id'			=> (int) $up_topic_id,
 							'poll_option_id'	=> (int) $option,
-							'vote_user_id'		=> (int) $user->data['user_id'],
-							'vote_user_ip'		=> (string) $user->ip,
+							'vote_user_id'		=> (int) $this->user->data['user_id'],
+							'vote_user_ip'		=> (string) $this->user->ip,
 						);
 
-						$sql = 'INSERT INTO ' . POLL_VOTES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
-						$db->sql_query($sql);
+						$sql = 'INSERT INTO ' . POLL_VOTES_TABLE . ' ' . $this->db->sql_build_array('INSERT', $sql_ary);
+						$this->db->sql_query($sql);
 					}
 				}
 
@@ -271,32 +331,32 @@ class portal_poll_module extends \board3\portal\modules\module_base
 							SET poll_option_total = poll_option_total - 1
 							WHERE poll_option_id = ' . (int) $option . '
 								AND topic_id = ' . (int) $up_topic_id;
-						$db->sql_query($sql);
+						$this->db->sql_query($sql);
 
-						if ($user->data['is_registered'])
+						if ($this->user->data['is_registered'])
 						{
 							$sql = 'DELETE FROM ' . POLL_VOTES_TABLE . '
 								WHERE topic_id = ' . (int) $up_topic_id . '
 									AND poll_option_id = ' . (int) $option . '
-									AND vote_user_id = ' . (int) $user->data['user_id'];
-							$db->sql_query($sql);
+									AND vote_user_id = ' . (int) $this->user->data['user_id'];
+							$this->db->sql_query($sql);
 						}
 					}
 				}
 
-				if ($user->data['user_id'] == ANONYMOUS && !$user->data['is_bot'])
+				if ($this->user->data['user_id'] == ANONYMOUS && !$this->user->data['is_bot'])
 				{
-					$user->set_cookie('poll_' . $up_topic_id, implode(',', $voted_id), time() + 31536000);
+					$this->user->set_cookie('poll_' . $up_topic_id, implode(',', $voted_id), time() + 31536000);
 				}
 
 				$sql = 'UPDATE ' . TOPICS_TABLE . '
 					SET poll_last_vote = ' . time() . "
 					WHERE topic_id = $up_topic_id";
 				//, topic_last_post_time = ' . time() . " -- for bumping topics with new votes, ignore for now
-				$db->sql_query($sql);
+				$this->db->sql_query($sql);
 
 				meta_refresh(5, $redirect_url);
-				trigger_error($user->lang['VOTE_SUBMITTED'] . '<br /><br />' . sprintf($user->lang['RETURN_PORTAL'], '<a href="' . $redirect_url . '">', '</a>'));
+				trigger_error($this->user->lang['VOTE_SUBMITTED'] . '<br /><br />' . sprintf($this->user->lang['RETURN_PORTAL'], '<a href="' . $redirect_url . '">', '</a>'));
 			}
 		}
 
@@ -306,13 +366,13 @@ class portal_poll_module extends \board3\portal\modules\module_base
 		// Get readable forums
 		$forum_list = array();
 
-		$forum_list = array_unique(array_keys($auth->acl_getf('f_read', true)));
+		$forum_list = array_unique(array_keys($this->auth->acl_getf('f_read', true)));
 
-		if($config['board3_poll_topic_id_' . $module_id] !== '')
+		if($this->config['board3_poll_topic_id_' . $module_id] !== '')
 		{
-			$poll_forums_config  = explode(',' ,$config['board3_poll_topic_id_' . $module_id]);
+			$poll_forums_config  = explode(',' ,$this->config['board3_poll_topic_id_' . $module_id]);
 
-			if($config['board3_poll_exclude_id_' . $module_id])
+			if($this->config['board3_poll_exclude_id_' . $module_id])
 			{
 				$forum_list = array_unique(array_diff($forum_list, $poll_forums_config));
 			}
@@ -327,10 +387,10 @@ class portal_poll_module extends \board3\portal\modules\module_base
 		if(sizeof($forum_list))
 		{
 			$poll_forums = true;
-			$where = 'AND ' . $db->sql_in_set('t.forum_id', $forum_list);
+			$where = 'AND ' . $this->db->sql_in_set('t.forum_id', $forum_list);
 		}
 
-		if ($config['board3_poll_hide_' . $module_id])
+		if ($this->config['board3_poll_hide_' . $module_id])
 		{
 			$portal_poll_hide = "AND (t.poll_start + t.poll_length > ". time() ." OR t.poll_length = 0)";
 		}
@@ -350,13 +410,13 @@ class portal_poll_module extends \board3\portal\modules\module_base
 					AND p.post_id = t.topic_first_post_id
 					{$portal_poll_hide}
 					ORDER BY t.poll_start DESC";
-			$limit = (isset($config['board3_poll_limit_' . $module_id])) ? $config['board3_poll_limit_' . $module_id] : 3;
-			$result = $db->sql_query_limit($sql, $limit);
+			$limit = (isset($this->config['board3_poll_limit_' . $module_id])) ? $this->config['board3_poll_limit_' . $module_id] : 3;
+			$result = $this->db->sql_query_limit($sql, $limit);
 			$has_poll = false;
 
 			if ($result)
 			{
-				while($data = $db->sql_fetchrow($result))
+				while($data = $this->db->sql_fetchrow($result))
 				{
 					$has_poll = true;
 					$poll_has_options = false;
@@ -365,36 +425,36 @@ class portal_poll_module extends \board3\portal\modules\module_base
 					$forum_id = (int) $data['forum_id'];
 
 					$cur_voted_id = array();
-					if($config['board3_poll_allow_vote_' . $module_id])
+					if($this->config['board3_poll_allow_vote_' . $module_id])
 					{
-						if ($user->data['is_registered'])
+						if ($this->user->data['is_registered'])
 						{
 							$vote_sql = 'SELECT poll_option_id
 								FROM ' . POLL_VOTES_TABLE . '
 								WHERE topic_id = ' . $topic_id . '
-									AND vote_user_id = ' . $user->data['user_id'];
-							$vote_result = $db->sql_query($vote_sql);
+									AND vote_user_id = ' . $this->user->data['user_id'];
+							$vote_result = $this->db->sql_query($vote_sql);
 
-							while ($row = $db->sql_fetchrow($vote_result))
+							while ($row = $this->db->sql_fetchrow($vote_result))
 							{
 								$cur_voted_id[] = $row['poll_option_id'];
 							}
-							$db->sql_freeresult($vote_result);
+							$this->db->sql_freeresult($vote_result);
 						}
 						else
 						{
 							// Cookie based guest tracking ... I don't like this but hum ho
 							// it's oft requested. This relies on "nice" users who don't feel
 							// the need to delete cookies to mess with results.
-							if (isset($_COOKIE[$config['cookie_name'] . '_poll_' . $topic_id]))
+							if (isset($_COOKIE[$this->config['cookie_name'] . '_poll_' . $topic_id]))
 							{
-								$cur_voted_id = explode(',', request_var($config['cookie_name'] . '_poll_' . $topic_id, 0, false, true));
+								$cur_voted_id = explode(',', request_var($this->config['cookie_name'] . '_poll_' . $topic_id, 0, false, true));
 								$cur_voted_id = array_map('intval', $cur_voted_id);
 							}
 						}
 
-						$s_can_vote = (((!sizeof($cur_voted_id) && $auth->acl_get('f_vote', $forum_id)) ||
-							($auth->acl_get('f_votechg', $forum_id) && $data['poll_vote_change'])) &&
+						$s_can_vote = (((!sizeof($cur_voted_id) && $this->auth->acl_get('f_vote', $forum_id)) ||
+							($this->auth->acl_get('f_votechg', $forum_id) && $data['poll_vote_change'])) &&
 							(($data['poll_length'] != 0 && $data['poll_start'] + $data['poll_length'] > time()) || $data['poll_length'] == 0) &&
 							$data['topic_status'] != ITEM_LOCKED &&
 							$data['forum_status'] != ITEM_LOCKED) ? true : false;
@@ -411,20 +471,20 @@ class portal_poll_module extends \board3\portal\modules\module_base
 						WHERE po.topic_id = {$topic_id}
 						ORDER BY po.poll_option_id";
 
-					$poll_result = $db->sql_query($poll_sql);
+					$poll_result = $this->db->sql_query($poll_sql);
 					$poll_total_votes = 0;
 					$poll_data = array();
 
 					if ($poll_result)
 					{
-						while($polls_data = $db->sql_fetchrow($poll_result))
+						while($polls_data = $this->db->sql_fetchrow($poll_result))
 						{
 							$poll_has_options = true;
 							$poll_data[] = $polls_data;
 							$poll_total_votes += $polls_data['poll_option_total'];
 						}
 					}
-					$db->sql_freeresult($poll_result);
+					$this->db->sql_freeresult($poll_result);
 
 					$make_poll_view = array();
 
@@ -435,9 +495,9 @@ class portal_poll_module extends \board3\portal\modules\module_base
 					}
 
 					$poll_view_str = urlencode(implode(',', $make_poll_view));
-					$portalpoll_url= append_sid("{$phpbb_root_path}app.$phpEx/portal", "polls=$poll_view_str");
-					$portalvote_url= append_sid("{$phpbb_root_path}app.$phpEx/portal", "f=$forum_id&amp;t=$topic_id");
-					$viewtopic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
+					$portalpoll_url= append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "polls=$poll_view_str");
+					$portalvote_url= append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "f=$forum_id&amp;t=$topic_id");
+					$viewtopic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", "f=$forum_id&amp;t=$topic_id");
 					$poll_end = $data['poll_length'] + $data['poll_start'];
 
 					// Parse BBCode title
@@ -461,15 +521,15 @@ class portal_poll_module extends \board3\portal\modules\module_base
 					$data['poll_title'] = smiley_text($data['poll_title']);
 					unset($poll_bbcode);
 
-					$template->assign_block_vars(($type !== '') ? 'poll_' . $type : 'poll', array(
+					$this->template->assign_block_vars(($type !== '') ? 'poll_' . $type : 'poll', array(
 						'S_POLL_HAS_OPTIONS'	=> $poll_has_options,
 						'POLL_QUESTION'			=> $data['poll_title'],
-						'U_POLL_TOPIC'			=> append_sid($phpbb_root_path . 'viewtopic.' . $phpEx . '?t=' . $topic_id . '&amp;f=' . $forum_id),
+						'U_POLL_TOPIC'			=> append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext . '?t=' . $topic_id . '&amp;f=' . $forum_id),
 						'POLL_LENGTH'			=> $data['poll_length'],
 						'TOPIC_ID'				=> $topic_id,
 						'TOTAL_VOTES'			=> $poll_total_votes,
-						'L_MAX_VOTES'			=> $user->lang('MAX_OPTIONS_SELECT', $data['poll_max_options']),
-						'L_POLL_LENGTH'			=> ($data['poll_length']) ? sprintf($user->lang[($poll_end > time()) ? 'POLL_RUN_TILL' : 'POLL_ENDED_AT'], $user->format_date($poll_end)) : '',
+						'L_MAX_VOTES'			=> $this->user->lang('MAX_OPTIONS_SELECT', $data['poll_max_options']),
+						'L_POLL_LENGTH'			=> ($data['poll_length']) ? sprintf($this->user->lang[($poll_end > time()) ? 'POLL_RUN_TILL' : 'POLL_ENDED_AT'], $this->user->format_date($poll_end)) : '',
 						'S_CAN_VOTE'			=> $s_can_vote,
 						'S_DISPLAY_RESULTS'		=> $s_display_results,
 						'S_IS_MULTI_CHOICE'		=> ($data['poll_max_options'] > 1) ? true : false,
@@ -504,24 +564,24 @@ class portal_poll_module extends \board3\portal\modules\module_base
 						$pd['poll_option_text'] = smiley_text($pd['poll_option_text']);
 						unset($poll_bbcode);
 
-						$template->assign_block_vars((($type !== '') ? 'poll_' . $type : 'poll') . '.poll_option', array(
+						$this->template->assign_block_vars((($type !== '') ? 'poll_' . $type : 'poll') . '.poll_option', array(
 							'POLL_OPTION_ID'		=> $pd['poll_option_id'],
 							'POLL_OPTION_CAPTION'	=> $pd['poll_option_text'],
 							'POLL_OPTION_RESULT'	=> $pd['poll_option_total'],
 							'POLL_OPTION_PERCENT'	=> $option_pct_txt,
 							'POLL_OPTION_PCT'		=> round($option_pct * 100),
-							'POLL_OPTION_IMG'		=> $user->img('poll_center', $option_pct_txt, round($option_pct * 35) . 'px'),
+							'POLL_OPTION_IMG'		=> $this->user->img('poll_center', $option_pct_txt, round($option_pct * 35) . 'px'),
 							'POLL_OPTION_VOTED'		=> (in_array($pd['poll_option_id'], $cur_voted_id)) ? true : false
 						));
 					}
 				}
 			}
-			$db->sql_freeresult($result);
+			$this->db->sql_freeresult($result);
 
-			$template->assign_vars(array(
+			$this->template->assign_vars(array(
 				'S_HAS_POLL'			=> $has_poll,
-				'POLL_LEFT_CAP_IMG'		=> $user->img('poll_left'),
-				'POLL_RIGHT_CAP_IMG'	=> $user->img('poll_right'),
+				'POLL_LEFT_CAP_IMG'		=> $this->user->img('poll_left'),
+				'POLL_RIGHT_CAP_IMG'	=> $this->user->img('poll_right'),
 			));
 		}
 		return (($type !== '') ? 'poll_' . $type : 'poll_center') . '.html';
