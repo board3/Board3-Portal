@@ -402,7 +402,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'welcome',
+				'module_classname'		=> '\board3\portal\modules\welcome',
 				'module_column'		=> 2,
 				'module_order'		=> 1,
 				'module_name'		=> 'PORTAL_WELCOME',

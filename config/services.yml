@@ -308,3 +308,14 @@ services:
             - %core.php_ext%
         tags:
             - { name: board3.module }
+
+    board3.module.welcome:
+        class: \board3\portal\modules\welcome
+        arguments:
+            - @config
+            - @template
+            - @user
+            - %core.root_path%
+            - %core.php_ext%
+        tags:
+            - { name: board3.module }

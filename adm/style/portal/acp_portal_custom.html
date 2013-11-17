@@ -53,20 +53,20 @@ var help_line = {
 	<!-- END custom_tags -->
 }
 
-	function change_palette()
-	{
-		dE('colour_palette');
-		e = document.getElementById('colour_palette');
+function change_palette()
+{
+	dE('colour_palette');
+	e = document.getElementById('colour_palette');
 
-		if (e.style.display == 'block')
-		{
-			document.getElementById('bbpalette').value = '{LA_FONT_COLOR_HIDE}';
-		}
-		else
-		{
-			document.getElementById('bbpalette').value = '{LA_FONT_COLOR}';
-		}
+	if (e.style.display == 'block')
+	{
+		document.getElementById('bbpalette').value = '{LA_FONT_COLOR_HIDE}';
 	}
+	else
+	{
+		document.getElementById('bbpalette').value = '{LA_FONT_COLOR}';
+	}
+}
 
 // ]]>
 </script>
