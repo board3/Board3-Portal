@@ -457,7 +457,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'whois_online',
+				'module_classname'		=> '\board3\portal\modules\whois_online',
 				'module_column'		=> 2,
 				'module_order'		=> 6,
 				'module_name'		=> 'PORTAL_WHOIS_ONLINE',

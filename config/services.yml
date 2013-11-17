@@ -319,3 +319,15 @@ services:
             - %core.php_ext%
         tags:
             - { name: board3.module }
+
+    board3.module.whois_online:
+        class: \board3\portal\modules\whois_online
+        arguments:
+            - @auth
+            - @dbal.conn
+            - @template
+            - @user
+            - %core.root_path%
+            - %core.php_ext%
+        tags:
+            - { name: board3.module }
