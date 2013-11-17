@@ -90,6 +90,11 @@ services:
         tags:
             - { name: board3.module }
 
+    board3.module.clock:
+        class: \board3\portal\modules\clock
+        tags:
+            - { name: board3.module }
+
     board3.module.custom:
         class: \board3\portal\modules\custom
         arguments:
@@ -98,6 +103,15 @@ services:
             - @dbal.conn
             - %core.root_path%
             - %core.php_ext%
+            - @user
+        tags:
+            - { name: board3.module }
+
+    board3.module.donation:
+        class: \board3\portal\modules\donation
+        arguments:
+            - @config
+            - @template
             - @user
         tags:
             - { name: board3.module }
@@ -271,16 +285,13 @@ services:
         tags:
             - { name: board3.module }
 
-    board3.module.clock:
-        class: \board3\portal\modules\clock
-        tags:
-            - { name: board3.module }
-
-    board3.module.donation:
-        class: \board3\portal\modules\donation
+    board3.module.topposters:
+        class: \board3\portal\modules\topposters
         arguments:
             - @config
+            - @dbal.conn
             - @template
-            - @user
+            - %core.root_path%
+            - %core.php_ext%
         tags:
             - { name: board3.module }

@@ -369,7 +369,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 				'module_status'		=> 1,
 			),
 			array(
-				'module_classname'		=> 'topposters',
+				'module_classname'		=> '\board3\portal\modules\topposters',
 				'module_column'		=> 1,
 				'module_order'		=> 7,
 				'module_name'		=> 'TOPPOSTERS',
