@@ -418,8 +418,6 @@ class portal_module
 				if ($add_column)
 				{
 					$submit = (isset($_POST['submit'])) ? true : false;
-					$directory = $this->root_path . 'portal/modules/';
-
 					if ($submit)
 					{
 						$module_classname = request_var('module_classname', '');
@@ -460,18 +458,7 @@ class portal_module
 						}
 						else
 						{
-							$class = 'portal_' . $module_classname . '_module';
-
-							if (!class_exists($class))
-							{
-								include($directory . 'portal_' . $module_classname . '.' . $this->php_ex);
-							}
-							if (!class_exists($class))
-							{
-								trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
-							}
-
-							$this->c_class = new $class();
+							continue;
 						}
 
 						$sql = 'SELECT module_order
@@ -486,8 +473,8 @@ class portal_module
 							'module_classname'	=> $module_classname,
 							'module_column'		=> $add_column,
 							'module_order'		=> $module_order,
-							'module_name'		=> $this->c_class->name,
-							'module_image_src'	=> $this->c_class->image_src,
+							'module_name'		=> $this->c_class->get_name(),
+							'module_image_src'	=> $this->c_class->get_image(),
 							'module_group_ids'	=> '',
 							'module_image_height'	=> 16,
 							'module_image_width'	=> 16,
@@ -529,72 +516,7 @@ class portal_module
 
 					$this->template->assign_var('S_EDIT', true);
 					$fileinfo = array();
-
-					// @todo: remove old school way of getting modules
-					$dh = @opendir($directory);
-					if (!$dh)
-					{
-						return $fileinfo;
-					}
-
-					while (($file = readdir($dh)) !== false)
-					{
-						// Is module?
-						if (preg_match('/^portal_.+\.' . $this->php_ex . '$/', $file))
-						{
-							$class = str_replace(".{$this->php_ex}", '', $file) . '_module';
-							$module_class = str_replace(array('portal_', ".{$this->php_ex}"), '', $file);
-							$column_string = column_num_string($add_column);
-
-							// do we want to add the module to the side columns or to the center columns?
-							if ($module_class != 'custom')
-							{
-								if (in_array($column_string, array('left', 'right')))
-								{
-									// does the module already exist in the side columns?
-									if (isset($module_column[$module_class]) && 
-										(in_array('left', $module_column[$module_class]) || in_array('right', $module_column[$module_class])))
-									{
-										continue;
-									}
-								}
-								elseif (in_array($column_string, array('center', 'top', 'bottom')))
-								{
-									// does the module already exist in the center columns?
-									if (isset($module_column[$module_class]) && 
-										(in_array('center', $module_column[$module_class]) || 
-										in_array('top', $module_column[$module_class]) || 
-										in_array('bottom', $module_column[$module_class])))
-									{
-										continue;
-									}
-								}
-							}
-
-							if (!class_exists($class))
-							{
-								include($directory . $file);
-							}
-
-							// Get module title tag
-							if (class_exists($class))
-							{
-								$this->c_class = new $class();
-								if ($this->c_class->columns & column_string_const($add_module))
-								{
-									if ($this->c_class->get_language())
-									{
-										$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->get_language());
-									}
-									$fileinfo[] = array(
-										'module'		=> substr($class, 7, -7),
-										'name'			=> $this->user->lang[$this->c_class->get_name()],
-									);
-								}
-							}
-						}
-					}
-					closedir($dh);
+					$column_string = column_num_string($add_column);
 
 					// Find new modules
 					foreach ($this->modules as $module_class => $module)
@@ -659,27 +581,13 @@ class portal_module
 				}
 				else
 				{
-					$directory = $this->root_path . 'portal/modules/';
-
 					$portal_modules = obtain_portal_modules();
 
 					foreach($portal_modules as $row)
 					{
 						if (!isset($this->modules[$row['module_classname']]))
 						{
-							$class = 'portal_' . $row['module_classname'] . '_module';
-							if (!class_exists($class))
-							{
-								include($directory . 'portal_' . $row['module_classname'] . '.' . $this->php_ex);
-							}
-							if (class_exists($class))
-							{
-								$this->c_class = new $class();
-							}
-							else
-							{
-								continue;
-							}
+							continue;
 						}
 						else
 						{
@@ -1207,25 +1115,19 @@ class portal_module
 		$module_data = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
 		
-		$directory = $this->root_path . 'portal/modules/';
-
 		if ($module_data !== false)
 		{
 			$module_classname = request_var('module_classname', '');
-			$class = 'portal_' . $module_classname . '_module';
-			if (!class_exists($class))
-			{
-				include($directory . 'portal_' . $module_classname . '.' . $this->php_ex);
-			}
-			if (!class_exists($class))
+
+			if (!isset($this->modules[$module_classname]))
 			{
 				trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 			}
-			
+
 			if (confirm_box(true))
 			{
-				$this->c_class = new $class();
-				$this->c_class->uninstall($module_data['module_id']);
+				$this->c_class = $this->modules[$module_classname];
+				$this->c_class->uninstall($module_data['module_id'], $this->db);
 
 				$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE . '
 					WHERE module_id = ' . (int) $module_id;
@@ -1243,10 +1145,10 @@ class portal_module
 			}
 			else
 			{
-				$this->c_class = new $class();
-				if ($this->c_class->language)
+				$this->c_class = $this->modules[$module_classname];
+				if ($this->c_class->get_language())
 				{
-					$this->user->add_lang('mods/portal/' . $this->c_class->language);
+					$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->get_language());
 				}
 				$confirm_text = (isset($this->user->lang[$module_data['module_name']])) ? sprintf($this->user->lang['DELETE_MODULE_CONFIRM'], $this->user->lang[$module_data['module_name']]) : sprintf($this->user->lang['DELETE_MODULE_CONFIRM'], utf8_normalize_nfc($module_data['module_name']));
 				confirm_box(false, $confirm_text, build_hidden_fields(array(
