@@ -1,9 +1,9 @@
 <?php
 /**
 *
-* @package Board3 Portal v2 - User Menu
-* @copyright (c) Board3 Group ( www.board3.de )
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @package Board3 Portal v2.1 - User Menu
+* @copyright (c) 2013 Board3 Group ( www.board3.de )
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
