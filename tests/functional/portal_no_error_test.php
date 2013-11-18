@@ -24,18 +24,4 @@ class phpbb_functional_portal_no_error_test extends \board3\portal\tests\testfra
 	{
 		$crawler = self::request('GET', 'app.php?portal');
 	}
-
-	public function test_with_poll()
-	{
-		// Create topic with poll
-		$data = $this->create_topic(2, 'Portal-poll', 'This is a poll for the portal', array(
-			'poll_title'	=> 'Is this a poll?',
-			'poll_option_text'	=> "Yes\nNo\nMaybe",
-		));
-
-		if (isset($data))
-		{
-			$crawler = self::request('GET', 'app.php?portal');
-		}
-	}
 }
