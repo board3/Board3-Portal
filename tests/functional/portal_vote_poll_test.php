@@ -30,13 +30,13 @@ class phpbb_functional_portal_vote_poll_test extends \board3\portal\tests\testfr
 
 		if (isset($data))
 		{
-			$crawler = self::request('GET', 'app.php?portal');
+			$crawler = self::request('GET', 'app.php/portal');
 			$form = $crawler->selectButton('Submit vote')->form();
 			$form->setValues(array('vote_id' => array(1)));
 			$crawler = self::submit($form);
 
 			// no errors should appear on portal
-			$crawler = self::request('GET', 'app.php?portal');
+			$crawler = self::request('GET', 'app.php/portal');
 		}
 	}
 }
