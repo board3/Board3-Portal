@@ -22,6 +22,6 @@ class phpbb_functional_portal_no_error_test extends \board3\portal\tests\testfra
 
 	public function test_vanilla_board()
 	{
-		$crawler = self::request('GET', 'app.php?portal');
+		$crawler = self::request('GET', 'app.php/portal');
 	}
 }

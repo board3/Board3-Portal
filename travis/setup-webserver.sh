@@ -46,6 +46,10 @@ server {
 		fastcgi_pass	unix:$PHP_FPM_SOCK;
 		include			fastcgi_params;
 	}
+
+	location / {
+		try_files \$uri \$uri/ /app.php\$is_args\$args;
+	}
 }
 " | sudo tee $NGINX_CONF > /dev/null
 
