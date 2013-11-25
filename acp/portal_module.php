@@ -33,7 +33,7 @@ class portal_module
 		global $db, $user, $cache, $template;
 		global $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpbb_container, $phpEx;
 
-		$user->add_lang_ext('board3/portal', 'mods/portal');
+		$user->add_lang_ext('board3/portal', 'portal');
 
 		$this->root_path = $phpbb_root_path . 'ext/board3/portal/';
 
@@ -132,7 +132,7 @@ class portal_module
 
 						if ($this->c_class->get_language())
 						{
-							$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->get_language());
+							$this->user->add_lang_ext('board3/portal', 'modules/' . $this->c_class->get_language());
 						}
 						$module_name = $this->user->lang[$this->c_class->get_name()];
 						$display_vars = $this->c_class->get_template_acp($module_id);
@@ -549,7 +549,7 @@ class portal_module
 						{
 							if ($module->get_language())
 							{
-								$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $module->get_language());
+								$this->user->add_lang_ext('board3/portal', 'modules/' . $module->get_language());
 							}
 							$fileinfo[] = array(
 								'module'		=> $module_class,
@@ -596,7 +596,7 @@ class portal_module
 
 						if ($this->c_class->get_language())
 						{
-							$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->get_language());
+							$this->user->add_lang_ext('board3/portal', 'modules/' . $this->c_class->get_language());
 						}
 						$template_column = column_num_string($row['module_column']);
 
@@ -1148,7 +1148,7 @@ class portal_module
 				$this->c_class = $this->modules[$module_classname];
 				if ($this->c_class->get_language())
 				{
-					$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $this->c_class->get_language());
+					$this->user->add_lang_ext('board3/portal', 'modules/' . $this->c_class->get_language());
 				}
 				$confirm_text = (isset($this->user->lang[$module_data['module_name']])) ? sprintf($this->user->lang['DELETE_MODULE_CONFIRM'], $this->user->lang[$module_data['module_name']]) : sprintf($this->user->lang['DELETE_MODULE_CONFIRM'], utf8_normalize_nfc($module_data['module_name']));
 				confirm_box(false, $confirm_text, build_hidden_fields(array(

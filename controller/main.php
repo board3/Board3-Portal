@@ -143,7 +143,7 @@ class main
 		// The following takes two arguments:
 		// 1) which extension language folder we're using (it's not smart enough to use its own automatically)
 		// 2) what language file to use
-		$this->user->add_lang_ext('board3/portal', 'mods/portal');
+		$this->user->add_lang_ext('board3/portal', 'portal');
 
 		/**
 		* get initial data
@@ -209,7 +209,7 @@ class main
 
 			if ($language_file = $module->get_language())
 			{
-				$this->user->add_lang_ext('board3/portal', 'mods/portal/' . $language_file);
+				$this->user->add_lang_ext('board3/portal', 'modules/' . $language_file);
 			}
 			if ($row['module_column'] == column_string_num('left') && $this->config['board3_left_column'])
 			{
