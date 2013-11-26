@@ -94,6 +94,9 @@ class calendar extends module_base
 	/** @var \phpbb\db\driver */
 	protected $db;
 
+	/** @var \phpbb\request\request */
+	protected $request;
+
 	/** @var php file extension */
 	protected $php_ext;
 
@@ -115,16 +118,18 @@ class calendar extends module_base
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\db\driver $db Database driver
+	* @param \phpbb\request\request $request phpBB request
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	* @param \phpbb\path_helper $path_helper phpBB path helper
 	*/
-	public function __construct($config, $template, $db, $phpbb_root_path, $phpEx, $user, $path_helper)
+	public function __construct($config, $template, $db, $request, $phpbb_root_path, $phpEx, $user, $path_helper)
 	{
 		$this->config = $config;
 		$this->template = $template;
 		$this->db = $db;
+		$this->request = $request;
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
@@ -151,9 +156,9 @@ class calendar extends module_base
 
 		// get the calendar month
 		$this->mini_cal_month = 0;
-		if(isset($_GET['m' . $module_id]) || isset($_POST['m' . $module_id]))
+		if ($this->request->is_set('m' . $module_id))
 		{
-			$this->mini_cal_month = request_var('m' . $module_id, 0);
+			$this->mini_cal_month = $this->request->variable('m' . $module_id, 0);
 		}
 
 		// initialise some variables
@@ -401,10 +406,10 @@ class calendar extends module_base
 	*/
 	public function manage_events($value, $key, $module_id)
 	{
-		$action = request_var('action', '');
-		$action = (isset($_POST['add'])) ? 'add' : $action;
-		$action = (isset($_POST['save'])) ? 'save' : $action;
-		$link_id = request_var('id', 99999999); // 0 will trigger unwanted behavior, therefore we set a number we should never reach
+		$action = $this->request->variable('action', '');
+		$action = ($this->request->is_set_post('add')) ? 'add' : $action;
+		$action = ($this->request->is_set_post('save')) ? 'save' : $action;
+		$link_id = $this->request->variable('id', 99999999); // 0 will trigger unwanted behavior, therefore we set a number we should never reach
 		$portal_config = obtain_portal_config();
 
 		$events = (strlen($portal_config['board3_calendar_events_' . $module_id]) >= 1) ? $this->utf_unserialize($portal_config['board3_calendar_events_' . $module_id]) : array();
@@ -421,15 +426,15 @@ class calendar extends module_base
 					trigger_error($this->user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				$event_title = utf8_normalize_nfc(request_var('event_title', ' ', true));
-				$event_desc = utf8_normalize_nfc(request_var('event_desc', ' ', true));
-				$event_start_day = trim(request_var('event_start_day', ''));
-				$event_start_time = trim(request_var('event_start_time', ''));
-				$event_end_day = trim(request_var('event_end_day', ''));
-				$event_end_time = trim(request_var('event_end_time', ''));
-				$event_all_day = request_var('event_all_day', false); // default to false
-				$event_url = request_var('event_url', ' ');
-				$event_permission = request_var('permission-setting-calendar', array(0 => ''));
+				$event_title = $this->request->variable('event_title', ' ', true);
+				$event_desc = $this->request->variable('event_desc', ' ', true);
+				$event_start_day = trim($this->request->variable('event_start_day', ''));
+				$event_start_time = trim($this->request->variable('event_start_time', ''));
+				$event_end_day = trim($this->request->variable('event_end_day', ''));
+				$event_end_time = trim($this->request->variable('event_end_time', ''));
+				$event_all_day = $this->request->variable('event_all_day', false); // default to false
+				$event_url = $this->request->variable('event_url', ' ');
+				$event_permission = $this->request->variable('permission-setting-calendar', array(0 => ''));
 				$groups_ary = array();
 
 				/*

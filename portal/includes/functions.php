@@ -562,7 +562,7 @@ function sql_table_exists($table_name)
 */
 function get_portal_tracking_info($fetch_news)
 {
-	global $config, $user;
+	global $config, $request, $user;
 
 	$last_read = $topic_ids = $forum_ids = $tracking_info = $rev_forum_ids = array();
 
@@ -633,7 +633,21 @@ function get_portal_tracking_info($fetch_news)
 
 			if (!isset($tracking_topics) || !sizeof($tracking_topics))
 			{
-				$tracking_topics = (isset($_COOKIE[$config['cookie_name'] . '_track'])) ? ((STRIP) ? stripslashes($_COOKIE[$config['cookie_name'] . '_track']) : $_COOKIE[$config['cookie_name'] . '_track']) : '';
+				if ($request->is_set($config['cookie_name'] . '_track', \phpbb\request\request_interface::COOKIE))
+				{
+					if (STRIP)
+					{
+						$tracking_topics = stripslashes($this->request->variable($config['cookie_name'] . '_track', '', true, \phpbb\request\request_interface::COOKIE));
+					}
+					else
+					{
+						$tracking_topics = $this->request->variable($config['cookie_name'] . '_track', '', true, \phpbb\request\request_interface::COOKIE);
+					}
+				}
+				else
+				{
+					$tracking_topics = '';
+				}
 				$tracking_topics = ($tracking_topics) ? tracking_unserialize($tracking_topics) : array();
 			}
 

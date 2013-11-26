@@ -56,6 +56,9 @@ class announcements extends module_base
 	/** @var \phpbb\db\driver */
 	protected $db;
 
+	/** @var \phpbb\request\request */
+	protected $request;
+
 	/** @var php file extension */
 	protected $php_ext;
 
@@ -73,17 +76,19 @@ class announcements extends module_base
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\db\driver $db Database driver
+	* @param \phpbb\request\request $request phpBB request
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($auth, $cache, $config, $template, $db, $phpEx, $phpbb_root_path, $user)
+	public function __construct($auth, $cache, $config, $template, $db, $request, $phpEx, $phpbb_root_path, $user)
 	{
 		$this->auth = $auth;
 		$this->cache = $cache;
 		$this->config = $config;
 		$this->template = $template;
 		$this->db = $db;
+		$this->request = $request;
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
@@ -94,9 +99,9 @@ class announcements extends module_base
 	*/
 	public function get_template_center($module_id)
 	{
-		$announcement = request_var('announcement', -1);
+		$announcement = $this->request->variable('announcement', -1);
 		$announcement = ($announcement > $this->config['board3_announcements_length_' . $module_id] -1) ? -1 : $announcement;
-		$start = request_var('ap', 0);
+		$start = $this->request->variable('ap', 0);
 		$start = ($start < 0) ? 0 : $start;
 
 		// Fetch announcements from portal/includes/functions.php with check if "read full" is requested.
@@ -210,7 +215,7 @@ class announcements extends module_base
 					//$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
 					$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 					$real_forum_id = ($forum_id == 0) ? $fetch_news['global_id']: $forum_id;
-					$read_full_url = (isset($_GET['ap'])) ? 'ap='. $start . '&amp;announcement=' . $i . '#a' . $i : 'announcement=' . $i . '#a' . $i;
+					$read_full_url = ($this->request->is_set('ap')) ? 'ap='. $start . '&amp;announcement=' . $i . '#a' . $i : 'announcement=' . $i . '#a' . $i;
 					$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 
 					if ($this->config['board3_announcements_archive_' . $module_id])
@@ -342,7 +347,7 @@ class announcements extends module_base
 				$read_full = $this->user->lang['BACK'];
 				$real_forum_id = ($forum_id == 0) ? $fetch_news['global_id']: $forum_id;
 
-				$read_full_url = (isset($_GET['ap'])) ? append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "ap=$start#a$i") : append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal#a$i");
+				$read_full_url = ($this->request->is_set('ap')) ? append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "ap=$start#a$i") : append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal#a$i");
 				$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 				if ($this->config['board3_announcements_archive_' . $module_id])
 				{
@@ -522,7 +527,7 @@ class announcements extends module_base
 	public function store_selected_forums($key, $module_id)
 	{
 		// Get selected forums
-		$values = request_var($key, array(0 => ''));
+		$values = $this->request->variable($key, array(0 => ''));
 		$news = implode(',', $values);
 		set_config($key, $news);
 	}

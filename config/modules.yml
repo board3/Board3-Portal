@@ -7,6 +7,7 @@ services:
             - @config
             - @template
             - @dbal.conn
+            - @request
             - %core.php_ext%
             - %core.root_path%
             - @user
@@ -20,6 +21,7 @@ services:
             - @config
             - @template
             - @dbal.conn
+            - @request
             - %core.php_ext%
             - %core.root_path%
             - @user
@@ -42,6 +44,7 @@ services:
             - @config
             - @template
             - @dbal.conn
+            - @request
             - %core.root_path%
             - %core.php_ext%
             - @user
@@ -60,6 +63,7 @@ services:
             - @config
             - @template
             - @dbal.conn
+            - @request
             - %core.root_path%
             - %core.php_ext%
             - @user
@@ -145,6 +149,7 @@ services:
         arguments:
             - @config
             - @dbal.conn
+            - @request
             - @template
             - %core.root_path%
             - %core.php_ext%
@@ -157,6 +162,7 @@ services:
         arguments:
             - @config
             - @dbal.conn
+            - @request
             - @template
             - %core.root_path%
             - %core.php_ext%
@@ -171,6 +177,7 @@ services:
             - @cache
             - @config
             - @dbal.conn
+            - @request
             - @template
             - %core.root_path%
             - %core.php_ext%
@@ -184,6 +191,7 @@ services:
             - @auth
             - @config
             - @dbal.conn
+            - @request
             - @template
             - %core.root_path%
             - %core.php_ext%
@@ -206,6 +214,7 @@ services:
             - @auth
             - @config
             - @dbal.conn
+            - @request
             - @template
             - %core.root_path%
             - %core.php_ext%
@@ -238,6 +247,7 @@ services:
             - @config
             - @template
             - @dbal.conn
+            - @request
             - %core.php_ext%
             - %core.root_path%
             - @user
@@ -272,6 +282,7 @@ services:
         class: \board3\portal\modules\welcome
         arguments:
             - @config
+            - @request
             - @template
             - @user
             - %core.root_path%
