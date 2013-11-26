@@ -50,6 +50,9 @@ class welcome extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
+	/** @var \phpbb\request\request */
+	protected $request;
+
 	/** @var \phpbb\template */
 	protected $template;
 
@@ -66,14 +69,16 @@ class welcome extends module_base
 	* Construct a welcome object
 	*
 	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\request\request $request phpBB request
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\user $user phpBB user
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	*/
-	public function __construct($config, $template, $user, $phpbb_root_path, $phpEx)
+	public function __construct($config, $request, $template, $user, $phpbb_root_path, $phpEx)
 	{
 		$this->config = $config;
+		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
 		$this->phpbb_root_path = $phpbb_root_path;
@@ -160,9 +165,9 @@ class welcome extends module_base
 	*/
 	public function manage_welcome($value, $key, $module_id)
 	{
-		$action = (isset($_POST['reset'])) ? 'reset' : '';
-		$action = (isset($_POST['submit'])) ? 'save' : $action;
-		$action = (isset($_POST['preview'])) ? 'preview' : $action;
+		$action = ($this->request->is_set_post('reset')) ? 'reset' : '';
+		$action = ($this->request->is_set_post('submit')) ? 'save' : $action;
+		$action = ($this->request->is_set_post('preview')) ? 'preview' : $action;
 
 		$portal_config = obtain_portal_config();
 
@@ -177,7 +182,7 @@ class welcome extends module_base
 					trigger_error($this->user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				$welcome_message = utf8_normalize_nfc(request_var('welcome_message', '', true));
+				$welcome_message = $this->request->variable('welcome_message', '', true);
 				$uid = $bitfield = $flags = '';
 				$options = 7;
 				generate_text_for_storage($welcome_message, $uid, $bitfield, $flags, true, true, true);
@@ -197,7 +202,7 @@ class welcome extends module_base
 			break;
 
 			case 'preview':
-				$welcome_message = $text = utf8_normalize_nfc(request_var('welcome_message', '', true));
+				$welcome_message = $text = $this->request->variable('welcome_message', '', true);
 
 				$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
 				$uid  =  (isset($this->config['board3_welcome_message_uid_' . $module_id])) ? $this->config['board3_welcome_message_uid_' . $module_id] : '';

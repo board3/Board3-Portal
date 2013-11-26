@@ -281,6 +281,7 @@ services:
         class: \board3\portal\modules\welcome
         arguments:
             - @config
+            - @request
             - @template
             - @user
             - %core.root_path%
