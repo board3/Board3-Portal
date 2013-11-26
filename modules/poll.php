@@ -59,6 +59,9 @@ class poll extends module_base
 	/** @var \phpbb\db\driver */
 	protected $db;
 
+	/** @var \phpbb\request\request */
+	protected $request;
+
 	/** @var php file extension */
 	protected $php_ext;
 
@@ -73,17 +76,19 @@ class poll extends module_base
 	*
 	* @param \phpbb\auth\auth $auth phpBB auth service
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\db\driver $db Database driver
+	* @param \phpbb\request\request $request phpBB request
+	* @param \phpbb\template $template phpBB template
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($auth, $config, $db, $template, $phpbb_root_path, $phpEx, $user)
+	public function __construct($auth, $config, $db, $request, $template, $phpbb_root_path, $phpEx, $user)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
 		$this->db = $db;
+		$this->request = $request;
 		$this->template = $template;
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
@@ -194,7 +199,7 @@ class poll extends module_base
 	public function store_selected_forums($key, $module_id)
 	{
 		// Get selected forums
-		$values = request_var($key, array(0 => ''));
+		$values = $this->request->variable($key, array(0 => ''));
 
 		$news = implode(',', $values);
 
@@ -220,17 +225,17 @@ class poll extends module_base
 			include($this->phpbb_root_path . 'includes/bbcode.' . $this->php_ext);
 		}
 
-		$view = request_var('view', '');
-		$update = request_var('update', false);
-		$poll_view = request_var('polls', '');
+		$view = $this->request->variable('view', '');
+		$update = $this->request->variable('update', false);
+		$poll_view = $this->request->variable('polls', '');
 
 		$poll_view_ar = (strpos($poll_view, ',') !== FALSE) ? explode(',', $poll_view) : (($poll_view != '') ? array($poll_view) : array());
 
 		if ($update && $this->config['board3_poll_allow_vote_' . $module_id])
 		{
-			$up_topic_id = request_var('t', 0);
-			$up_forum_id = request_var('f', 0);
-			$voted_id = request_var('vote_id', array('' => 0));
+			$up_topic_id = $this->request->variable('t', 0);
+			$up_forum_id = $this->request->variable('f', 0);
+			$voted_id = $this->request->variable('vote_id', array('' => 0));
 
 			$cur_voted_id = array();
 			if ($this->user->data['is_registered'])
@@ -252,9 +257,9 @@ class poll extends module_base
 				// Cookie based guest tracking ... I don't like this but hum ho
 				// it's oft requested. This relies on "nice" users who don't feel
 				// the need to delete cookies to mess with results.
-				if (isset($_COOKIE[$this->config['cookie_name'] . '_poll_' . $up_topic_id]))
+				if ($request->is_set($config['cookie_name'] . '_poll_' . $up_topic_id, \phpbb\request\request_interface::COOKIE))
 				{
-					$cur_voted_id = explode(',', request_var($this->config['cookie_name'] . '_poll_' . $up_topic_id, 0, false, true));
+					$cur_voted_id = explode(',', $this->request->variable($config['cookie_name'] . '_poll_' . $up_topic_id, '', true, \phpbb\request\request_interface::COOKIE));
 					$cur_voted_id = array_map('intval', $cur_voted_id);
 				}
 			}
@@ -446,9 +451,9 @@ class poll extends module_base
 							// Cookie based guest tracking ... I don't like this but hum ho
 							// it's oft requested. This relies on "nice" users who don't feel
 							// the need to delete cookies to mess with results.
-							if (isset($_COOKIE[$this->config['cookie_name'] . '_poll_' . $topic_id]))
+							if ($this->request->is_set($config['cookie_name'] . '_poll_' . $topic_id, \phpbb\request\request_interface::COOKIE))
 							{
-								$cur_voted_id = explode(',', request_var($this->config['cookie_name'] . '_poll_' . $topic_id, 0, false, true));
+								$cur_voted_id = explode(',', $this->request->variable($this->config['cookie_name'] . '_poll_' . $topic_id, 0, false, true));
 								$cur_voted_id = array_map('intval', $cur_voted_id);
 							}
 						}
