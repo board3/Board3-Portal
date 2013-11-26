@@ -39,4 +39,13 @@ class phpbb_functional_portal_vote_poll_test extends \board3\portal\tests\testfr
 			$crawler = self::request('GET', 'app.php/portal');
 		}
 	}
+
+	/**
+	* @depends test_with_poll
+	*/
+	public function test_after_poll()
+	{
+		$this->logout();
+		$crawler = self::request('GET', 'app.php/portal');
+	}
 }
