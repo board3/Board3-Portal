@@ -20,6 +20,7 @@ services:
             - @config
             - @template
             - @dbal.conn
+            - @request
             - %core.php_ext%
             - %core.root_path%
             - @user

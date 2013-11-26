@@ -47,6 +47,9 @@ class attachments extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
+	/** @var \phpbb\request\request */
+	protected $request;
+
 	/** @var \phpbb\template */
 	protected $template;
 
@@ -69,16 +72,18 @@ class attachments extends module_base
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\db\driver $db Database driver
+	* @param \phpbb\request\request $request phpBB request
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($auth, $config, $template, $db, $phpEx, $phpbb_root_path, $user)
+	public function __construct($auth, $config, $template, $db, $request, $phpEx, $phpbb_root_path, $user)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
 		$this->template = $template;
 		$this->db = $db;
+		$this->request = $request;
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
@@ -201,7 +206,7 @@ class attachments extends module_base
 	public function store_filetypes($key, $module_id)
 	{
 		// Get selected extensions
-		$values = request_var($key, array(0 => ''));
+		$values = $this->request->variable($key, array(0 => ''));
 
 		$filetypes = implode(',', $values);
 
@@ -250,7 +255,7 @@ class attachments extends module_base
 	public function store_selected_forums($key)
 	{
 		// Get selected extensions
-		$values = request_var($key, array(0 => ''));
+		$values = $this->request->variable($key, array(0 => ''));
 		$news = implode(',', $values);
 		set_config($key, $news);
 	}
