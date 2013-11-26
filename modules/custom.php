@@ -56,6 +56,9 @@ class custom extends module_base
 	/** @var \phpbb\db\driver */
 	protected $db;
 
+	/** @var \phpbb\request\request */
+	protected $request;
+
 	/** @var php file extension */
 	protected $php_ext;
 
@@ -71,15 +74,17 @@ class custom extends module_base
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\db\driver $db Database driver
+	* @param \phpbb\request\request $request phpBB request
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($config, $template, $db, $phpbb_root_path, $phpEx, $user)
+	public function __construct($config, $template, $db, $request, $phpbb_root_path, $phpEx, $user)
 	{
 		$this->config = $config;
 		$this->template = $template;
 		$this->db = $db;
+		$this->request = $request;
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
@@ -168,9 +173,9 @@ class custom extends module_base
 	*/
 	public function manage_custom($value, $key, $module_id)
 	{
-		$action = (isset($_POST['reset'])) ? 'reset' : '';
-		$action = (isset($_POST['submit'])) ? 'save' : $action;
-		$action = (isset($_POST['preview'])) ? 'preview' : $action;
+		$action = ($this->request->is_set_post('reset')) ? 'reset' : '';
+		$action = ($this->request->is_set_post('submit')) ? 'save' : $action;
+		$action = ($this->request->is_set_post('preview')) ? 'preview' : $action;
 
 		$portal_config = obtain_portal_config();
 
@@ -185,11 +190,11 @@ class custom extends module_base
 					trigger_error($this->user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				$custom_code = utf8_normalize_nfc(request_var('custom_code', '', true));
-				$custom_bbcode = request_var('custom_use_bbcode', 1); // default to BBCode
-				$custom_permission = request_var('permission-setting', array(0 => ''));
-				$custom_title = utf8_normalize_nfc(request_var('module_name', '', true));
-				$custom_image_src = utf8_normalize_nfc(request_var('module_image', ''));
+				$custom_code = $this->request->variable('custom_code', '', true);
+				$custom_bbcode = $this->request->variable('custom_use_bbcode', 1); // default to BBCode
+				$custom_permission = $this->request->variable('permission-setting', array(0 => ''));
+				$custom_title = $this->request->variable('module_name', '', true);
+				$custom_image_src = $this->request->variable('module_image', '', true);
 				$groups_ary = array();
 				$uid = $bitfield = $flags = '';
 				$options = 7;
@@ -243,11 +248,11 @@ class custom extends module_base
 			break;
 
 			case 'preview':
-				$custom_code = $text = utf8_normalize_nfc(request_var('custom_code', '', true));
-				$custom_bbcode = request_var('custom_use_bbcode', 1); // default to BBCode
-				$custom_permission = request_var('permission-setting', array(0 => ''));
-				$custom_title = utf8_normalize_nfc(request_var('module_name', ''));
-				$custom_image_src = utf8_normalize_nfc(request_var('module_image', ''));
+				$custom_code = $text = $this->request->variable('custom_code', '', true);
+				$custom_bbcode = $this->request->variable('custom_use_bbcode', 1); // default to BBCode
+				$custom_permission = $this->request->variable('permission-setting', array(0 => ''));
+				$custom_title = $this->request->variable('module_name', '', true);
+				$custom_image_src = $this->request->variable('module_image', '', true);
 				$groups_ary = array();
 
 				// first check for obvious errors, we don't want to waste server resources
