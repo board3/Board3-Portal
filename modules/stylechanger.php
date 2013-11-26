@@ -50,6 +50,9 @@ class stylechanger extends module_base
 	/** @var \phpbb\db\driver */
 	protected $db;
 
+	/** @var \phpbb\request\request */
+	protected $request;
+
 	/** @var php file extension */
 	protected $php_ext;
 
@@ -65,15 +68,17 @@ class stylechanger extends module_base
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\db\driver $db Database driver
+	* @param \phpbb\request\request $request phpBB request
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($config, $template, $db, $phpEx, $phpbb_root_path, $user)
+	public function __construct($config, $template, $db, $request, $phpEx, $phpbb_root_path, $user)
 	{
 		$this->config = $config;
 		$this->template = $template;
 		$this->db = $db;
+		$this->request = $request;
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
@@ -93,7 +98,7 @@ class stylechanger extends module_base
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$style = request_var('style', 0);
+			$style = $this->request->variable('style', 0);
 			if (!empty($style))
 			{
 				$url = str_replace('style=' . $style, 'style=' . $row['style_id'], append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"));
