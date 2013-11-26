@@ -23,14 +23,14 @@ class portal_module
 	public $new_config = array();
 	protected $c_class;
 	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
-	protected $root_path, $mod_version_check;
+	protected $root_path, $mod_version_check, $request;
 
 	/** @var \phpbb\di\service_collection Portal modules */
 	protected $modules;
 
 	public function __construct()
 	{
-		global $db, $user, $cache, $template;
+		global $db, $user, $cache, $request, $template;
 		global $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpbb_container, $phpEx;
 
 		$user->add_lang_ext('board3/portal', 'portal');
@@ -45,6 +45,7 @@ class portal_module
 		$this->cache = $cache;
 		$this->template = $template;
 		$this->config = $config;
+		$this->request = $request;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->phpbb_admin_path = $phpbb_admin_path;
 		$this->portal_root_path = $this->root_path . 'portal/';
@@ -66,7 +67,7 @@ class portal_module
 
 	public function main($id, $mode)
 	{
-		$submit = (isset($_POST['submit'])) ? true : false;
+		$submit = ($this->request->is_set_post('submit')) ? true : false;
 
 		$form_key = 'acp_portal';
 		add_form_key($form_key);
@@ -97,7 +98,7 @@ class portal_module
 					)
 				);
 
-				$module_id = request_var('module_id', 0);
+				$module_id = $this->request->variable('module_id', 0);
 				if ($module_id)
 				{
 					$sql = 'SELECT *
@@ -176,7 +177,7 @@ class portal_module
 				}
 
 				$this->new_config = $this->config;
-				$cfg_array = (isset($_REQUEST['config'])) ? utf8_normalize_nfc(request_var('config', array('' => ''), true)) : $this->new_config;
+				$cfg_array = ($this->request->is_set('config')) ? $this->request->variable('config', array('' => ''), true) : $this->new_config;
 				$error = array();
 
 				// We validate the complete config if whished
@@ -193,7 +194,7 @@ class portal_module
 				}
 
 				// Reset module
-				$reset_module = request_var('module_reset', 0);
+				$reset_module = $this->request->variable('module_reset', 0);
 
 				if($reset_module)
 				{
@@ -239,7 +240,7 @@ class portal_module
 
 				if ($submit)
 				{
-					$module_permission = request_var('permission-setting', array(0 => ''));
+					$module_permission = $this->request->variable('permission-setting', array(0 => ''));
 					$groups_ary = array();
 					$img_error = '';
 
@@ -258,16 +259,16 @@ class portal_module
 					$module_permission = implode(',', $module_permission);
 
 					$sql_ary = array(
-						'module_image_src'		=> request_var('module_image', ''),
-						'module_image_width'	=> request_var('module_img_width', 0),
-						'module_image_height'	=> request_var('module_img_height', 0),
+						'module_image_src'		=> $this->request->variable('module_image', ''),
+						'module_image_width'	=> $this->request->variable('module_img_width', 0),
+						'module_image_height'	=> $this->request->variable('module_img_height', 0),
 						'module_group_ids'		=> $module_permission,
-						'module_status'			=> request_var('module_status', B3_MODULE_ENABLED),
+						'module_status'			=> $this->request->variable('module_status', B3_MODULE_ENABLED),
 					);
 
 					if(!(isset($this->c_class->hide_name) && $this->c_class->hide_name == true))
 					{
-						$sql_ary['module_name'] = utf8_normalize_nfc(request_var('module_name', '', true));
+						$sql_ary['module_name'] = $this->request->variable('module_name', '', true);
 					}
 
 					// check if module image file actually exists
@@ -378,8 +379,8 @@ class portal_module
 				}
 			break;
 			case 'modules':
-				$action = request_var('action', '');
-				$module_id = request_var('module_id', '');
+				$action = $this->request->variable('action', '');
+				$module_id = $this->request->variable('module_id', '');
 
 				// Create an array of already installed modules
 				$portal_modules = obtain_portal_modules();
@@ -413,14 +414,14 @@ class portal_module
 					$this->module_delete($id, $mode, $action, $module_id);
 				}
 
-				$add_module = key(request_var('add', array('' => '')));
-				$add_column = request_var('add_column', column_string_num($add_module));
+				$add_module = key($this->request->variable('add', array('' => '')));
+				$add_column = $this->request->variable('add_column', column_string_num($add_module));
 				if ($add_column)
 				{
-					$submit = (isset($_POST['submit'])) ? true : false;
+					$submit = ($this->request->is_set_post('submit')) ? true : false;
 					if ($submit)
 					{
-						$module_classname = request_var('module_classname', '');
+						$module_classname = $this->request->variable('module_classname', '');
 
 						$column_string = column_num_string($add_column);
 
@@ -751,9 +752,23 @@ class portal_module
 	{
 		if (confirm_box(true))
 		{
+			$sql = 'SELECT module_order, module_column, module_classname
+				FROM ' . PORTAL_MODULES_TABLE . '
+				WHERE module_id = ' . (int) $module_id;
+			$result = $this->db->sql_query_limit($sql, 1);
+			$module_data = $this->db->sql_fetchrow($result);
+			$this->db->sql_freeresult($result);
+
+			if (!isset($this->modules[$module_data['module_classname']]))
+			{
+				trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
+			}
+
+			$this->c_class = $this->modules[$module_data['module_classname']];
+
 			$sql_ary = array(
-				'module_name'		=> $this->c_class->name,
-				'module_image_src'	=> $this->c_class->image_src,
+				'module_name'		=> $this->c_class->get_name(),
+				'module_image_src'	=> $this->c_class->get_image(),
 				'module_group_ids'	=> '',
 				'module_image_height'	=> 16,
 				'module_image_width'	=> 16,
@@ -768,7 +783,7 @@ class portal_module
 			if (empty($affected_rows))
 			{
 				// We need to return to the module config
-				meta_refresh(3, reapply_sid($this->u_action . "&amp;module_id=$module_id"));
+				meta_refresh(3, $this->get_module_link('config', $module_id));
 				trigger_error($this->user->lang['MODULE_NOT_EXISTS'] . adm_back_link($this->u_action . "&amp;module_id=$module_id"), E_USER_WARNING);
 			}
 
@@ -779,7 +794,7 @@ class portal_module
 			$this->cache->purge();
 			
 			// We need to return to the module config
-			meta_refresh(3, reapply_sid($this->u_action . "&amp;module_id=$module_id"));
+			meta_refresh(3, $this->get_module_link('config', $module_id));
 			
 			trigger_error($this->user->lang['MODULE_RESET_SUCCESS'] . adm_back_link($this->u_action . "&amp;module_id=$module_id"));
 		}
@@ -888,16 +903,12 @@ class portal_module
 		$module_data = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
 		
-		$class = 'portal_' . $module_data['module_classname'] . '_module';
-		if (!class_exists($class))
-		{
-			include($this->root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ex);
-		}
-		if (!class_exists($class))
+		if (!isset($this->modules[$module_data['module_classname']]))
 		{
 			trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 		}
-		$this->c_class = new $class();
+
+		$this->c_class = $this->modules[$module_data['module_classname']];
 		
 		if ($module_data !== false)
 		{
@@ -1000,16 +1011,12 @@ class portal_module
 		$module_data = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
 		
-		$class = 'portal_' . $module_data['module_classname'] . '_module';
-		if (!class_exists($class))
-		{
-			include($this->root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ex);
-		}
-		if (!class_exists($class))
+		if (!isset($this->modules[$module_data['module_classname']]))
 		{
 			trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 		}
-		$this->c_class = new $class();
+
+		$this->c_class = $this->modules[$module_data['module_classname']];
 		
 		if ($module_data !== false)
 		{
@@ -1117,7 +1124,7 @@ class portal_module
 		
 		if ($module_data !== false)
 		{
-			$module_classname = request_var('module_classname', '');
+			$module_classname = $this->request->variable('module_classname', '');
 
 			if (!isset($this->modules[$module_classname]))
 			{
