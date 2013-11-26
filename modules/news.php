@@ -53,6 +53,9 @@ class news extends module_base
 	/** @var \phpbb\db\driver */
 	protected $db;
 
+	/** @var \phpbb\request\request */
+	protected $request;
+
 	/** @var \phpbb\template */
 	protected $template;
 
@@ -72,17 +75,19 @@ class news extends module_base
 	* @param \phpbb\cache $cache phpBB cache system
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\request\request $request phpBB request
 	* @param \phpbb\template $template phpBB template
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($auth, $cache, $config, $db, $template, $phpbb_root_path, $phpEx, $user)
+	public function __construct($auth, $cache, $config, $db, $request, $template, $phpbb_root_path, $phpEx, $user)
 	{
 		$this->auth = $auth;
 		$this->cache = $cache;
 		$this->config = $config;
 		$this->db = $db;
+		$this->request = $request;
 		$this->template = $template;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $phpEx;
@@ -94,10 +99,10 @@ class news extends module_base
 	*/
 	public function get_template_center($module_id)
 	{
-		$news = request_var('news', -1);
+		$news = $this->request->variable('news', -1);
 		$news = ($news > $this->config['board3_number_of_news_' . $module_id] -1) ? -1 : $news;
 		$this->user->add_lang('viewforum');
-		$start = request_var('np', 0);
+		$start = $this->request->variable('np', 0);
 		$start = ($start < 0) ? 0 : $start;
 
 		// Fetch news from portal/includes/functions.php with check if "read full" is requested.
@@ -203,7 +208,7 @@ class news extends module_base
 					$topic_id = $fetch_news[$i]['topic_id'];
 					$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 
-					$read_full_url = (isset($_GET['np'])) ? 'np='. $start . '&amp;news=' . $i . '#n' . $i : 'news=' . $i . '#n' . $i;
+					$read_full_url = ($this->request->is_set('np')) ? 'np='. $start . '&amp;news=' . $i . '#n' . $i : 'news=' . $i . '#n' . $i;
 					$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 					if ($this->config['board3_news_archive_' . $module_id])
 					{
@@ -320,7 +325,7 @@ class news extends module_base
 				$close_bracket = ' ]';
 				$read_full = $this->user->lang['BACK'];
 
-				$read_full_url = (isset($_GET['np'])) ? append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "np=$start#n$i") : append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal#n$i");
+				$read_full_url = ($this->request->is_set('np')) ? append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "np=$start#n$i") : append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal#n$i");
 				$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 				if ($this->config['board3_news_archive_' . $module_id])
 				{
@@ -504,7 +509,7 @@ class news extends module_base
 	public function store_selected_forums($key, $module_id)
 	{
 		// Get selected extensions
-		$values = request_var($key, array(0 => ''));
+		$values = $this->request->variable($key, array(0 => ''));
 
 		$news = implode(',', $values);
 
