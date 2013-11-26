@@ -56,6 +56,9 @@ class recent extends module_base
 	/** @var \phpbb\db\driver */
 	protected $db;
 
+	/** @var \phpbb\request\request */
+	protected $request;
+
 	/** @var \phpbb\template */
 	protected $template;
 
@@ -71,15 +74,17 @@ class recent extends module_base
 	* @param \phpbb\auth\auth $auth phpBB auth
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\request\request $request phpBB request
 	* @param \phpbb\template $template phpBB template
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	*/
-	public function __construct($auth, $config, $db, $template, $phpbb_root_path, $phpEx)
+	public function __construct($auth, $config, $db, $request, $template, $phpbb_root_path, $phpEx)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
 		$this->db = $db;
+		$this->request = $request;
 		$this->template = $template;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $phpEx;
@@ -289,11 +294,10 @@ class recent extends module_base
 	public function store_selected_forums($key, $module_id)
 	{
 		// Get selected extensions
-		$values = request_var($key, array(0 => ''));
+		$values = $this->request->variable($key, array(0 => ''));
 
 		$news = implode(',', $values);
 
 		set_config($key, $news);
-
 	}
 }
