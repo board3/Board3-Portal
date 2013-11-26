@@ -60,6 +60,9 @@ class main_menu extends module_base
 	/** @var \phpbb\db\driver */
 	protected $db;
 
+	/** @var \phpbb\request\request */
+	protected $request;
+
 	/** @var \phpbb\template */
 	protected $template;
 
@@ -77,15 +80,17 @@ class main_menu extends module_base
 	*
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\request\request $request phpBB request
 	* @param \phpbb\template $template phpBB template
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($config, $db, $template, $phpbb_root_path, $phpEx, $user)
+	public function __construct($config, $db, $request, $template, $phpbb_root_path, $phpEx, $user)
 	{
 		$this->config = $config;
 		$this->db = $db;
+		$this->request = $request;
 		$this->template = $template;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $phpEx;
@@ -282,10 +287,10 @@ class main_menu extends module_base
 	*/
 	public function manage_links($value, $key, $module_id)
 	{
-		$action = request_var('action', '');
-		$action = (isset($_POST['add'])) ? 'add' : $action;
-		$action = (isset($_POST['save'])) ? 'save' : $action;
-		$link_id = request_var('id', 99999999); // 0 will trigger unwanted behavior, therefore we set a number we should never reach
+		$action = $this->request->variable('action', '');
+		$action = ($this->request->is_set_post('add')) ? 'add' : $action;
+		$action = ($this->request->is_set_post('save')) ? 'save' : $action;
+		$link_id = $this->request->variable('id', 99999999); // 0 will trigger unwanted behavior, therefore we set a number we should never reach
 		$portal_config = obtain_portal_config();
 
 		$links = array();
@@ -303,12 +308,12 @@ class main_menu extends module_base
 					trigger_error($this->user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				$link_title = utf8_normalize_nfc(request_var('link_title', ' ', true));
-				$link_is_cat = request_var('link_is_cat', false);
-				$link_type = (!$link_is_cat) ? request_var('link_type', self::LINK_INT) : self::LINK_CAT;
-				$link_url = ($link_is_cat) ? ' ' : utf8_normalize_nfc(request_var('link_url', ' ', true));
+				$link_title = $this->request->variable('link_title', ' ', true);
+				$link_is_cat = $this->request->variable('link_is_cat', false);
+				$link_type = (!$link_is_cat) ? $this->request->variable('link_type', self::LINK_INT) : self::LINK_CAT;
+				$link_url = ($link_is_cat) ? ' ' : $this->request->variable('link_url', ' ', true);
 				$link_url = str_replace('&amp;', '&', $link_url);
-				$link_permission = request_var('permission-setting-menu', array(0 => ''));
+				$link_permission = $this->request->variable('permission-setting-menu', array(0 => ''));
 				$groups_ary = array();
 
 				// get groups and check if the selected groups actually exist
