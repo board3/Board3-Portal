@@ -257,9 +257,9 @@ class poll extends module_base
 				// Cookie based guest tracking ... I don't like this but hum ho
 				// it's oft requested. This relies on "nice" users who don't feel
 				// the need to delete cookies to mess with results.
-				if ($request->is_set($config['cookie_name'] . '_poll_' . $up_topic_id, \phpbb\request\request_interface::COOKIE))
+				if ($request->is_set($this->config['cookie_name'] . '_poll_' . $up_topic_id, \phpbb\request\request_interface::COOKIE))
 				{
-					$cur_voted_id = explode(',', $this->request->variable($config['cookie_name'] . '_poll_' . $up_topic_id, '', true, \phpbb\request\request_interface::COOKIE));
+					$cur_voted_id = explode(',', $this->request->variable($this->config['cookie_name'] . '_poll_' . $up_topic_id, '', true, \phpbb\request\request_interface::COOKIE));
 					$cur_voted_id = array_map('intval', $cur_voted_id);
 				}
 			}
@@ -451,7 +451,7 @@ class poll extends module_base
 							// Cookie based guest tracking ... I don't like this but hum ho
 							// it's oft requested. This relies on "nice" users who don't feel
 							// the need to delete cookies to mess with results.
-							if ($this->request->is_set($config['cookie_name'] . '_poll_' . $topic_id, \phpbb\request\request_interface::COOKIE))
+							if ($this->request->is_set($this->config['cookie_name'] . '_poll_' . $topic_id, \phpbb\request\request_interface::COOKIE))
 							{
 								$cur_voted_id = explode(',', $this->request->variable($this->config['cookie_name'] . '_poll_' . $topic_id, 0, false, true));
 								$cur_voted_id = array_map('intval', $cur_voted_id);
