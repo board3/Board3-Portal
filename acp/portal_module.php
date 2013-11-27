@@ -448,7 +448,7 @@ class portal_module
 						}
 
 						// do not install if module already exists in that column
-						if (!$submit && $module_classname != 'custom')
+						if (!$submit && $module_classname != '\board3\portal\modules\custom')
 						{
 							trigger_error($this->user->lang['MODULE_ADD_ONCE'] . adm_back_link($this->u_action), E_USER_WARNING);
 						}
@@ -579,6 +579,27 @@ class portal_module
 						'S_MODULE_NAMES'	=> $options,
 						'S_HIDDEN_FIELDS'	=> $s_hidden_fields,
 					));
+
+					if ($this->request->is_ajax())
+					{
+						$this->template->assign_vars(array(
+							'S_AJAX_REQUEST'	=> true,
+							'U_ACTION'		=> str_replace('&amp;', '&', $this->get_module_link('modules', $module_id)),
+						));
+						$this->template->set_filenames(array(
+							'body' => 'portal/acp_portal_modules.html')
+						);
+						$json_response = new \phpbb\json_response;
+						$json_response->send(array(
+							'MESSAGE_BODY'		=> $this->template->assign_display('body'),
+							'MESSAGE_TITLE'		=> $this->user->lang['ADD_MODULE'],
+							'MESSAGE_TEXT'		=> $this->user->lang['ADD_MODULE'],
+
+							'YES_VALUE'		=> $this->user->lang['SUBMIT'],
+							'S_CONFIRM_ACTION'	=> str_replace('&amp;', '&', $this->get_module_link('modules', $module_id)), //inefficient, rewrite whole function
+							'S_HIDDEN_FIELDS'	=> $s_hidden_fields
+						));
+					}
 				}
 				else
 				{
