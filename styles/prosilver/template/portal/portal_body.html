@@ -12,7 +12,7 @@
 
 <table id="portal-body">
 	<!-- IF S_TOP_COLUMN -->	
-	<tr>
+	<tr id="portal-top">
 	<!-- [+] top module area -->
 		<td colspan="3">
 			<!-- BEGIN modules_top -->
@@ -32,7 +32,7 @@
 	<tr>
 	<!-- [+] left module area -->
 		<!-- IF S_LEFT_COLUMN -->
-		<td style="width: {S_PORTAL_LEFT_COLUMN}px; padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->: {$BLOCK_DISTANCE};">
+		<td id="portal-left" style="width: {S_PORTAL_LEFT_COLUMN}px; padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->: {$BLOCK_DISTANCE};">
 			<!-- BEGIN modules_left -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_left.TEMPLATE_FILE}' -->
 				<!-- DEFINE $IMAGE_SRC = '{modules_left.IMAGE_SRC}' -->
@@ -49,7 +49,7 @@
 
 	<!-- [+] center module area -->
 		<!-- IF S_CENTER_COLUMN -->
-		<td>
+		<td id="portal-center">
 			<!-- BEGIN modules_center -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_center.TEMPLATE_FILE}' -->
 				<!-- DEFINE $IMAGE_SRC = '{modules_center.IMAGE_SRC}' -->
@@ -70,7 +70,7 @@
 
 	<!-- [+] right module area -->
 		<!-- IF S_RIGHT_COLUMN -->
-		<td style="width: {S_PORTAL_RIGHT_COLUMN}px; padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->: {$BLOCK_DISTANCE};">
+		<td id="portal-right" style="width: {S_PORTAL_RIGHT_COLUMN}px; padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->: {$BLOCK_DISTANCE};">
 			<!-- BEGIN modules_right -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_right.TEMPLATE_FILE}' -->
 				<!-- DEFINE $IMAGE_SRC = '{modules_right.IMAGE_SRC}' -->
@@ -86,7 +86,7 @@
 	<!-- [-] right module area -->
 	</tr>
 	<!-- IF S_BOTTOM_COLUMN -->
-	<tr>
+	<tr id="portal-bottom">
 	<!-- [+] bottom module area -->
 			<td colspan="3">
 			<!-- BEGIN modules_bottom -->
