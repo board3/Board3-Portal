@@ -92,6 +92,10 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 	padding: 1px 0 1px 12px;
 }
 
+#portal-body #viewpoll {
+	margin-left: 0px;
+}
+
 /**
 * margin spacing as in default prosilver for the forumlist
 */

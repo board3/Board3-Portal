@@ -14,9 +14,22 @@
 @media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
 {
 	.responsive-portal-news dd.lastpost { display: none !important; }
+	.responsive-portal-news dt .list-inner { margin-right: 0px !important; }
+	.responsive-portal-news dt { width: 100% !important; }
+	dt#n { width: 100% !important; }
+
+	.portal-responsive-poll .resultbar {
+		display: none !important;
+	}
+	.portal-responsive-poll dt { width: 45% !important; }
+	.portal-responsive-poll dd {
+		width: 45% !important;
+		float: right !important;
+	}
 }
 
 @media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
 {
 	#portal-left ul.topiclist dd { display: block !important; }
+	.portal-responsive-show { display: block !important; }
 }
