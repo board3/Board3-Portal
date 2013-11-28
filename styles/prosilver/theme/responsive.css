@@ -32,4 +32,5 @@
 {
 	#portal-left ul.topiclist dd { display: block !important; }
 	.portal-responsive-show { display: block !important; }
+	.portal-responsive-hide { display: none !important; }
 }
