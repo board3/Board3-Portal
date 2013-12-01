@@ -127,27 +127,27 @@ phpbb.b3pClock = function() {
 	var secR = now.getSeconds() % 10;
 
 	if (hour !== hour_cur) {
-		phpbb.b3pFlipClock('#portal-clock-front-hours-up', '#portal-clock-front-hours-down', hour, 'double');
+		phpbb.b3pFlipClock('.portal-clock-front-hours-up', '.portal-clock-front-hours-down', hour, 'double');
 		hour_cur = hour;
 	}
 
 	if (minR !== minR_cur) {
-		phpbb.b3pFlipClock('#portal-clock-front-minutes-up-right', '#portal-clock-front-minutes-down-right', minR, 'single');
+		phpbb.b3pFlipClock('.portal-clock-front-minutes-up-right', '.portal-clock-front-minutes-down-right', minR, 'single');
 		minR_cur = minR;
 	}
 
 	if (minL !== minL_cur) {
-		phpbb.b3pFlipClock('#portal-clock-front-minutes-up-left', '#portal-clock-front-minutes-down-left', minL, 'single');
+		phpbb.b3pFlipClock('.portal-clock-front-minutes-up-left', '.portal-clock-front-minutes-down-left', minL, 'single');
 		minL_cur = minL;
 	}
 
 	if (secR !== secR_cur) {
-		phpbb.b3pFlipClock('#portal-clock-front-seconds-up-right', '#portal-clock-front-seconds-down-right', secR, 'single');
+		phpbb.b3pFlipClock('.portal-clock-front-seconds-up-right', '.portal-clock-front-seconds-down-right', secR, 'single');
 		secR_cur = secR;
 	}
 
 	if (secL !== secL_cur) {
-		phpbb.b3pFlipClock('#portal-clock-front-seconds-up-left', '#portal-clock-front-seconds-down-left', secL, 'single');
+		phpbb.b3pFlipClock('.portal-clock-front-seconds-up-left', '.portal-clock-front-seconds-down-left', secL, 'single');
 		secL_cur = secL;
 	}
 };
