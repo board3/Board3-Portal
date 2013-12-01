@@ -68,6 +68,29 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 	list-style-type: none;
 }
 
+/**
+* Replacement for table layout
+*/
+#portal-left, #portal-right {
+	position: relative;
+	float: left;
+}
+
+#portal-center-wrapper {
+	width: 100%;
+	float: left;
+	display: block;
+}
+
+#portal-column-area {
+	width: 100%;
+	margin: 0 auto;
+}
+
+#portal-left {
+	margin-left: -100%;
+}
+
 /*
 * top spacing between portal body table and headerbar spacing is usually 10px
 */
