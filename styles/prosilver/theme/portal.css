@@ -126,6 +126,10 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 	margin-bottom: 4px;
 }
 
+.portal-no-margin {
+	margin: 0;
+}
+
 /* RTL language fixes */
 .rtl .portal-navigation ul li a{
 	background-image: url("./images/portal/arrowbullet_rtl.gif");
