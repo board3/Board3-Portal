@@ -280,6 +280,7 @@ class announcements extends module_base
 						'REPLIES'				=> $fetch_news[$i]['topic_replies'],
 						'TOPIC_VIEWS'			=> $fetch_news[$i]['topic_views'],
 						'A_ID'					=> $i,
+						'TOPIC_IMG_STYLE'		=> $folder_img,
 						'TOPIC_FOLDER_IMG'		=> $this->user->img($folder_img, $folder_alt),
 						'TOPIC_FOLDER_IMG_SRC'	=> $this->user->img($folder_img, $folder_alt, false, '', 'src'),
 						'TOPIC_FOLDER_IMG_ALT'	=> $this->user->lang[$folder_alt],
