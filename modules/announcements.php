@@ -56,6 +56,9 @@ class announcements extends module_base
 	/** @var \phpbb\db\driver */
 	protected $db;
 
+	/** @var \phpbb\pagination */
+	protected $pagination;
+
 	/** @var \phpbb\request\request */
 	protected $request;
 
@@ -76,18 +79,20 @@ class announcements extends module_base
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\db\driver $db Database driver
+	* @param \phpbb\pagination $pagination phpBB pagination
 	* @param \phpbb\request\request $request phpBB request
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($auth, $cache, $config, $template, $db, $request, $phpEx, $phpbb_root_path, $user)
+	public function __construct($auth, $cache, $config, $template, $db, $pagination, $request, $phpEx, $phpbb_root_path, $user)
 	{
 		$this->auth = $auth;
 		$this->cache = $cache;
 		$this->config = $config;
 		$this->template = $template;
 		$this->db = $db;
+		$this->pagination = $pagination;
 		$this->request = $request;
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
@@ -303,7 +308,7 @@ class announcements extends module_base
 						'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 					));
 
-					phpbb_generate_template_pagination($this->template, $view_topic_url, 'announcements_center_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
+					$this->pagination->generate_template_pagination($view_topic_url, 'announcements_center_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
 
 
 					if(!empty($fetch_news[$i]['attachments']))
@@ -320,7 +325,7 @@ class announcements extends module_base
 						$this->template->assign_vars(array(
 							'AP_PAGINATION'			=> $pagination,
 							'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $this->user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($this->user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
-							'AP_PAGE_NUMBER'		=> phpbb_on_page($this->template, $this->user, '', $total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start))
+							'AP_PAGE_NUMBER'		=> $this->pagination->on_page('', $total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start))
 						);
 					}
 				}
@@ -379,7 +384,7 @@ class announcements extends module_base
 					'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 				));
 
-				phpbb_generate_template_pagination($this->template, $view_topic_url, 'announcements_center_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
+				$this->pagination->generate_template_pagination($view_topic_url, 'announcements_center_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
 
 				if(!empty($fetch_news[$i]['attachments']))
 				{
@@ -396,7 +401,7 @@ class announcements extends module_base
 					$this->template->assign_vars(array(
 						'AP_PAGINATION'			=> $pagination,
 						'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $this->user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($this->user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
-						'AP_PAGE_NUMBER'		=> phpbb_on_page($this->template, $this->user, '', $total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start))
+						'AP_PAGE_NUMBER'		=> $this->pagination->on_page('', $total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start))
 					);
 				}
 			}
