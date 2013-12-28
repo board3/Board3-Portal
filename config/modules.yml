@@ -177,6 +177,7 @@ services:
             - @cache
             - @config
             - @dbal.conn
+            - @pagination
             - @request
             - @template
             - %core.root_path%
