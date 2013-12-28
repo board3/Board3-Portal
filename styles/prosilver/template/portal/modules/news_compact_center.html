@@ -12,12 +12,12 @@
 {$CC_BLOCK_H_L}
 	<dt id="n">{$TITLE}</dt>
 	<!-- IF S_DISPLAY_NEWS_RVS -->
-		<dd class="posts">{L_REPLIES}</dd>
-		<dd class="views">{L_VIEWS}</dd>
+		<dd class="posts responsive-portal-news">{L_REPLIES}</dd>
+		<dd class="views responsive-portal-news">{L_VIEWS}</dd>
 	<!-- ENDIF -->
-	<dd class="lastpost"><span>{L_LAST_POST}</span></dd>
+	<dd class="lastpost responsive-portal-news"><span>{L_LAST_POST}</span></dd>
 {$CC_BLOCK_H_R}
-<ul class="topiclist topics">
+<ul class="topiclist topics responsive-portal-news">
 <!-- ENDIF -->
 	<li class="row<!-- IF news_row.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
 		<dl class="icon {news_row.TOPIC_IMG_STYLE}">
@@ -25,8 +25,8 @@
 				<!-- IF news_row.S_UNREAD_TOPIC -->
 				<a href="{news_row.U_NEWEST_POST}">{NEWEST_POST_IMG}</a>
 				<!-- ENDIF -->
-				<!-- IF news_row.ATTACH_ICON_IMG -->{news_row.ATTACH_ICON_IMG} <!-- ENDIF -->
 				<div class="list-inner">
+					<!-- IF news_row.ATTACH_ICON_IMG -->{news_row.ATTACH_ICON_IMG} <!-- ENDIF -->
 					<a href="{news_row.U_VIEW_COMMENTS}" title="{news_row.TITLE}" class="topictitle">{news_row.TITLE}</a><!-- IF U_VIEW_UNREAD_POST and not S_IS_BOT --> &bull; <a href="{U_VIEW_UNREAD_POST}">{L_VIEW_UNREAD_POST}</a> &bull; <!-- ENDIF -->
 					<!-- IF news_row.PAGINATION -->
 					<div class="pagination">
@@ -49,8 +49,8 @@
 				</div> <!-- \END <div class="list-inner"> -->
 			</dt>
 			<!-- IF S_DISPLAY_NEWS_RVS -->
-				<dd class="posts">{news_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
-				<dd class="views">{news_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
+				<dd class="posts" data-skip-responsive="true">{news_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
+				<dd class="views" data-skip-responsive="true">{news_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
 			<!-- ENDIF -->
 			<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn>{L_POST_BY_AUTHOR} {news_row.USERNAME_FULL_LAST} <!-- IF news_row.S_UNREAD_INFO --><a href="{news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --><br />
 				{news_row.LAST_POST_TIME}</span>

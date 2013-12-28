@@ -68,6 +68,29 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 	list-style-type: none;
 }
 
+/**
+* Replacement for table layout
+*/
+#portal-left, #portal-right {
+	position: relative;
+	float: left;
+}
+
+#portal-center-wrapper {
+	width: 100%;
+	float: left;
+	display: block;
+}
+
+#portal-column-area {
+	width: 100%;
+	margin: 0 auto;
+}
+
+#portal-left {
+	margin-left: -100%;
+}
+
 /*
 * top spacing between portal body table and headerbar spacing is usually 10px
 */
@@ -92,11 +115,19 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 	padding: 1px 0 1px 12px;
 }
 
+#portal-body #viewpoll {
+	margin-left: 0px;
+}
+
 /**
 * margin spacing as in default prosilver for the forumlist
 */
 #portal-forumlist .forabg {
 	margin-bottom: 4px;
+}
+
+.portal-no-margin {
+	margin: 0;
 }
 
 /* RTL language fixes */
@@ -108,48 +139,60 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 
 /* Portal clock
 -------------------------------------- */
-#portal-clock {
-	position: relative;
-	width: 100%;
+.portal-clock-wrapper {
+	text-align: center;
+	min-height: 5em;
+	margin: 0 10%;
 }
 
-#portal-clock-front, #portal-clock-back {
+.portal-clock {
+	position: relative;
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.portal-clock * img {
+	float: left;
+}
+
+.portal-clock-front, .portal-clock-back {
 	position: absolute;
 	top: 0px;
 }
 
-#portal-clock-front-upper div {
+.portal-clock-front-upper div {
 	height: 21px;
 	position: absolute;
 	vertical-align: bottom;
 	visibility: hidden;
 }
 
-#portal-clock-front-lower div {
+.portal-clock-front-lower div {
 	height: 20px;
 	position: absolute;
 	vertical-align: top;
 	visibility: hidden;
 }
 
-#portal-clock-back-upper div {
+.portal-clock-back-upper div {
 	position: absolute;
 	vertical-align: bottom;
 }
 
-#portal-clock-back-lower div {
+.portal-clock-back-lower div {
 	position: absolute;
 	vertical-align: top;
 }
 
-#portal-clock-back-seconds-up-left, #portal-clock-back-seconds-up-right,
-#portal-clock-front-minutes-up-left, #portal-clock-front-minutes-up-right,
-#portal-clock-back-minutes-up-left, #portal-clock-back-minutes-up-right,
-#portal-clock-front-seconds-up-left, #portal-clock-front-seconds-up-right,
-#portal-clock-back-minutes-down-left, #portal-clock-back-minutes-down-right,
-#portal-clock-back-seconds-down-left, #portal-clock-back-seconds-down-right,
-#portal-clock-front-minutes-down-left, #portal-clock-front-minutes-down-right,
-#portal-clock-front-seconds-down-left, #portal-clock-front-seconds-down-right {
+.portal-clock-back-seconds-up-left, .portal-clock-back-seconds-up-right,
+.portal-clock-front-minutes-up-left, .portal-clock-front-minutes-up-right,
+.portal-clock-back-minutes-up-left, .portal-clock-back-minutes-up-right,
+.portal-clock-front-seconds-up-left, .portal-clock-front-seconds-up-right,
+.portal-clock-back-minutes-down-left, .portal-clock-back-minutes-down-right,
+.portal-clock-back-seconds-down-left, .portal-clock-back-seconds-down-right,
+.portal-clock-front-minutes-down-left, .portal-clock-front-minutes-down-right,
+.portal-clock-front-seconds-down-left, .portal-clock-front-seconds-down-right {
 	width: 21px;
 	height: 21px;
 	background-position: 0 0;
@@ -158,91 +201,91 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 
 /* Minutes start
 -------------------------------------- */
-#portal-clock-back-minutes-up-left{
+.portal-clock-back-minutes-up-left{
 	background-position: 0 0;
 	margin: 0 0 0 43px;
 }
 
-#portal-clock-back-minutes-up-right {
+.portal-clock-back-minutes-up-right {
 	background-position: 0 -43px;
 	margin: 0 0 0 64px;
 }
 
-#portal-clock-front-minutes-up-left {
+.portal-clock-front-minutes-up-left {
 	background-position: 0 0;
 	margin: 0 0 0 43px;
 }
 
-#portal-clock-front-minutes-up-right {
+.portal-clock-front-minutes-up-right {
 	background-position: 0 -43px;
 	margin: 0 0 0 63px;
 }
 
-#portal-clock-back-minutes-down-left{
+.portal-clock-back-minutes-down-left{
 	background-position: 0 -22px;
 	margin: 21px 0 0 43px;
 }
 
-#portal-clock-back-minutes-down-right {
+.portal-clock-back-minutes-down-right {
 	background-position: 0 -65px;
 	margin: 21px 0 0 64px;
 }
 
-#portal-clock-front-minutes-down-left {
+.portal-clock-front-minutes-down-left {
 	background-position: 0 -22px;
 	margin: 21px 0 0 42px;
 }
 
-#portal-clock-front-minutes-down-right {
+.portal-clock-front-minutes-down-right {
 	background-position: 0 -65px;
 	margin: 21px 0 0 63px;
 }
 
 /* Seconds start
 ---------------------------------------- */
-#portal-clock-back-seconds-up-left{
+.portal-clock-back-seconds-up-left{
 	background-position: 0 0;
 	margin: 0 0 0 85px;
 }
 
-#portal-clock-back-seconds-up-right {
+.portal-clock-back-seconds-up-right {
 	background-position: 0 -43px;
 	margin: 0 0 0 106px;
 }
 
-#portal-clock-front-seconds-up-left {
+.portal-clock-front-seconds-up-left {
 	background-position: 0 0;
 	margin: 0 0 0 84px;
 }
 
-#portal-clock-front-seconds-up-right {
+.portal-clock-front-seconds-up-right {
 	background-position: 0 -43px;
 	margin: 0 0 0 105px;
 }
 
-#portal-clock-back-seconds-down-left{
+.portal-clock-back-seconds-down-left{
 	background-position: 0 -22px;
 	margin: 21px 0 0 85px;
 }
 
-#portal-clock-back-seconds-down-right {
+.portal-clock-back-seconds-down-right {
 	background-position: 0 -65px;
 	margin: 21px 0 0 106px;
 }
 
-#portal-clock-front-seconds-down-left {
+.portal-clock-front-seconds-down-left {
 	background-position: 0 -22px;
 	margin: 21px 0 0 84px;
 }
 
-#portal-clock-front-seconds-down-right {
+.portal-clock-front-seconds-down-right {
 	background-position: 0 -65px;
 	margin: 21px 0 0 105px;
 }
 
 /* Hours start
 ---------------------------------------- */
-#portal-clock-back-hours-up, #portal-clock-front-hours-up {
+.portal-clock-back-hours-up, .portal-clock-front-hours-up {
 	width: 42px;
 	height: 21px;
 	background: url(./images/portal/portal_clock_double.png) no-repeat;
@@ -252,7 +295,7 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 	margin: 0 0 0 0;
 }
 
-#portal-clock-back-hours-down, #portal-clock-front-hours-down {
+.portal-clock-back-hours-down, .portal-clock-front-hours-down {
 	width: 42px;
 	height: 20px;
 	background: url(./images/portal/portal_clock_double.png) no-repeat;

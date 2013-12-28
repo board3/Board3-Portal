@@ -8,7 +8,7 @@
 		<div class="inner"><span class="portal-corners-top-inner"></span>
 			<span style="text-align: center;"><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
 	<!-- ELSE -->
-	<div style="margin-bottom: <!-- IF announcements_center_row.S_LAST_ROW -->0px<!-- ELSE -->1px<!-- ENDIF -->" class="post <!-- IF announcements_center_row.S_ROW_COUNT is odd -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
+	<div style="margin-bottom: <!-- IF announcements_center_row.S_LAST_ROW -->0px<!-- ELSE -->1px<!-- ENDIF -->;" class="post <!-- IF announcements_center_row.S_ROW_COUNT is odd -->bg1<!-- ELSE -->bg2<!-- ENDIF --> portal-no-margin">
 		<div class="inner"><span class="portal-corners-top-inner"></span>
 			<h4 class="first"><a <!-- IF announcements_center_row.S_FIRST_ROW -->id="a" <!-- ENDIF -->name="a{announcements_center_row.A_ID}"></a><!-- IF announcements_center_row.S_UNREAD_INFO --><a href="{announcements_center_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_center_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {announcements_center_row.ATTACH_ICON_IMG} <!-- IF announcements_center_row.S_POLL --> <strong>{L_VIEW_TOPIC_POLL}: </strong><!-- ENDIF --><!-- IF announcements_center_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{announcements_center_row.TOPIC_ICON_IMG}" width="{announcements_center_row.TOPIC_ICON_IMG_WIDTH}" height="{announcements_center_row.TOPIC_ICON_IMG_HEIGHT}" alt="" /> <!-- ENDIF --><a href="{announcements_center_row.U_VIEW_COMMENTS}"><strong>{announcements_center_row.TITLE}</strong></a></h4>
 			<!-- IF announcements_center_row.PAGINATION --><strong class="pagination"><span>{announcements_center_row.PAGINATION}</span></strong><!-- ENDIF -->

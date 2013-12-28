@@ -1,11 +1,11 @@
 {$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
 	<ul class="topiclist bg1">
-		<li><dl>
-			<dd style="border-left: 0px">
+		<li><dl><dt></dt>
+			<dd class="portal-responsive-show" style="border-left: 0px">
 				<div style="text-align: left; margin: 5px 5px 5px 5px">
 			<strong>{SITENAME}</strong> {L_DONATION_TEXT}
 			<br />
-			<div style="float: left; padding: 5px 5px 5px 5px"><img src="{T_THEME_PATH}/images/portal/paypal.gif" alt="" /></div>
+			<div style="float: left; padding: 5px 5px 5px 5px"><img src="{T_EXT_THEME_PATH}/images/portal/paypal.gif" alt="" /></div>
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="padding-top:15px">
 		<div>
 			<input type="hidden" name="cmd" value="_xclick" />
@@ -16,7 +16,7 @@
 			<input type="hidden" name="bn" value="PP-DonationsBF" />
 			<input type="hidden" name="tax" value="0" />
 			<!-- IF PAY_CUSTOM_CENTER -->
-			<input type="hidden" name="custom" value="{PAY_CUSTOM_CENTER}">
+			<input type="hidden" name="custom" value="{PAY_CUSTOM_CENTER}" />
 			<!-- ENDIF -->
 			<input type="text" tabindex="11" name="amount" size="10" maxlength="6" value="" class="inputbox autowidth" title="{L_PAY_MSG}" />
 			<select name="currency_code" class="autowidth">

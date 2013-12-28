@@ -10,11 +10,12 @@
 	</div>
 <!-- ENDIF -->
 
-<table id="portal-body">
+<div id="portal-body">
 	<!-- IF S_TOP_COLUMN -->	
-	<tr>
+	<div id="portal-top">
 	<!-- [+] top module area -->
-		<td colspan="3">
+		<ul>
+			<li>
 			<!-- BEGIN modules_top -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_top.TEMPLATE_FILE}' -->
 				<!-- DEFINE $IMAGE_SRC = '{modules_top.IMAGE_SRC}' -->
@@ -25,31 +26,15 @@
 				<!-- DEFINE $MODULE_ID = '{modules_top.MODULE_ID}' -->
 				<!-- INCLUDE {$TEMPLATE_FILE} -->
 			<!-- END modules_top -->
-		</td>
+			</li>
+		</ul>
 	<!-- [-] top module area -->
-	</tr>
+	</div>
 	<!-- ENDIF -->
-	<tr>
-	<!-- [+] left module area -->
-		<!-- IF S_LEFT_COLUMN -->
-		<td style="width: {S_PORTAL_LEFT_COLUMN}px; padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->: {$BLOCK_DISTANCE};">
-			<!-- BEGIN modules_left -->
-				<!-- DEFINE $TEMPLATE_FILE = '{modules_left.TEMPLATE_FILE}' -->
-				<!-- DEFINE $IMAGE_SRC = '{modules_left.IMAGE_SRC}' -->
-				<!-- DEFINE $IMAGE_WIDTH = '{modules_left.IMAGE_WIDTH}' -->
-				<!-- DEFINE $IMAGE_HEIGHT = '{modules_left.IMAGE_HEIGHT}' -->
-				<!-- DEFINE $CUSTOM_CODE = '{modules_left.CODE}' -->
-				<!-- DEFINE $TITLE = '{modules_left.TITLE}' -->
-				<!-- DEFINE $MODULE_ID = '{modules_left.MODULE_ID}' -->
-				<!-- INCLUDE {$TEMPLATE_FILE} -->
-			<!-- END modules_left -->
-		</td>
-		<!-- ENDIF -->
-	<!-- [-] left module area -->
-
 	<!-- [+] center module area -->
-		<!-- IF S_CENTER_COLUMN -->
-		<td>
+	<!-- IF S_CENTER_COLUMN -->
+	<div id="portal-center-wrapper">
+		<div id="portal-center" style="margin: 0 {S_PORTAL_LEFT_COLUMN}px 0 {S_PORTAL_RIGHT_COLUMN}px; padding: 0 {$BLOCK_DISTANCE};">
 			<!-- BEGIN modules_center -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_center.TEMPLATE_FILE}' -->
 				<!-- DEFINE $IMAGE_SRC = '{modules_center.IMAGE_SRC}' -->
@@ -64,13 +49,30 @@
 				<br />
 				<!-- INCLUDE portal/modules/jumpbox.html -->
 			<!-- ENDIF -->
-		</td>
-		<!-- ENDIF -->
+		</div>
+	</div>
+	<!-- ENDIF -->
 	<!-- [-] center module area -->
+	<!-- [+] left module area -->
+		<!-- IF S_LEFT_COLUMN -->
+		<div id="portal-left" style="width: {S_PORTAL_LEFT_COLUMN}px;">
+			<!-- BEGIN modules_left -->
+				<!-- DEFINE $TEMPLATE_FILE = '{modules_left.TEMPLATE_FILE}' -->
+				<!-- DEFINE $IMAGE_SRC = '{modules_left.IMAGE_SRC}' -->
+				<!-- DEFINE $IMAGE_WIDTH = '{modules_left.IMAGE_WIDTH}' -->
+				<!-- DEFINE $IMAGE_HEIGHT = '{modules_left.IMAGE_HEIGHT}' -->
+				<!-- DEFINE $CUSTOM_CODE = '{modules_left.CODE}' -->
+				<!-- DEFINE $TITLE = '{modules_left.TITLE}' -->
+				<!-- DEFINE $MODULE_ID = '{modules_left.MODULE_ID}' -->
+				<!-- INCLUDE {$TEMPLATE_FILE} -->
+			<!-- END modules_left -->
+		</div>
+		<!-- ENDIF -->
+	<!-- [-] left module area -->
 
 	<!-- [+] right module area -->
 		<!-- IF S_RIGHT_COLUMN -->
-		<td style="width: {S_PORTAL_RIGHT_COLUMN}px; padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->: {$BLOCK_DISTANCE};">
+		<div id="portal-right" style="width: {S_PORTAL_RIGHT_COLUMN}px; margin-left: -{S_PORTAL_RIGHT_COLUMN}px;">
 			<!-- BEGIN modules_right -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_right.TEMPLATE_FILE}' -->
 				<!-- DEFINE $IMAGE_SRC = '{modules_right.IMAGE_SRC}' -->
@@ -81,14 +83,15 @@
 				<!-- DEFINE $MODULE_ID = '{modules_right.MODULE_ID}' -->
 				<!-- INCLUDE {$TEMPLATE_FILE} -->
 			<!-- END modules_right -->
-		</td>
+		</div>
 		<!-- ENDIF -->
 	<!-- [-] right module area -->
-	</tr>
+	<br style="clear: both" />
 	<!-- IF S_BOTTOM_COLUMN -->
-	<tr>
+	<div id="portal-bottom">
 	<!-- [+] bottom module area -->
-			<td colspan="3">
+		<ul>
+			<li>
 			<!-- BEGIN modules_bottom -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_bottom.TEMPLATE_FILE}' -->
 				<!-- DEFINE $IMAGE_SRC = '{modules_bottom.IMAGE_SRC}' -->
@@ -99,11 +102,12 @@
 				<!-- DEFINE $MODULE_ID = '{modules_bottom.MODULE_ID}' -->
 				<!-- INCLUDE {$TEMPLATE_FILE} -->
 			<!-- END modules_bottom -->
-		</td>
+			</li>
+		</ul>
 	<!-- [-] bottom module area -->
-	</tr>
+	</div>
 	<!-- ENDIF -->
-</table>
+</div>
 
 <!--// board3 Portal by www.board3.de //-->
 <div class="copyright">Powered by <a href="http://www.board3.de/">Board3 Portal</a> &copy; 2009 - 2013 Board3 Group</div>

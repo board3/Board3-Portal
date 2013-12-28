@@ -53,6 +53,9 @@ class news extends module_base
 	/** @var \phpbb\db\driver */
 	protected $db;
 
+	/** @var \phpbb\pagination */
+	protected $pagination;
+
 	/** @var \phpbb\request\request */
 	protected $request;
 
@@ -75,18 +78,20 @@ class news extends module_base
 	* @param \phpbb\cache $cache phpBB cache system
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\pagination $pagination phpBB pagination
 	* @param \phpbb\request\request $request phpBB request
 	* @param \phpbb\template $template phpBB template
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($auth, $cache, $config, $db, $request, $template, $phpbb_root_path, $phpEx, $user)
+	public function __construct($auth, $cache, $config, $db, $pagination, $request, $template, $phpbb_root_path, $phpEx, $user)
 	{
 		$this->auth = $auth;
 		$this->cache = $cache;
 		$this->config = $config;
 		$this->db = $db;
+		$this->pagination = $pagination;
 		$this->request = $request;
 		$this->template = $template;
 		$this->phpbb_root_path = $phpbb_root_path;
@@ -255,7 +260,7 @@ class news extends module_base
 					// Grab icons
 					$icons = $this->cache->obtain_icons();
 
-					phpbb_generate_template_pagination($this->template, $view_topic_url, 'pagination', 'np', $fetch_news[$i]['topic_replies'], $this->config['board3_number_of_news_' . $module_id], $start);
+					$this->pagination->generate_template_pagination($view_topic_url, 'pagination', 'np', $fetch_news[$i]['topic_replies'], $this->config['board3_number_of_news_' . $module_id], $start);
 
 					$this->template->assign_block_vars('news_row', array(
 						'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $this->config['allow_attachments']) ? $this->user->img('icon_topic_attach', $this->user->lang['TOTAL_ATTACHMENTS']) : '',
@@ -309,7 +314,7 @@ class news extends module_base
 						$this->template->assign_vars(array(
 							'NP_PAGINATION'		=> $pagination,
 							'TOTAL_NEWS'		=> ($total_news == 1) ? sprintf($this->user->lang['VIEW_FORUM_TOPICS'][1], $total_news) : sprintf($this->user->lang['VIEW_FORUM_TOPICS'][2], $total_news),
-							'NP_PAGE_NUMBER'	=> phpbb_on_page($this->template, $this->user, $view_topic_url, $total_news, $this->config['board3_number_of_news_' . $module_id], $start))
+							'NP_PAGE_NUMBER'	=> $this->pagination->on_page($view_topic_url, $total_news, $this->config['board3_number_of_news_' . $module_id], $start))
 						);
 					}
 				}
@@ -356,7 +361,7 @@ class news extends module_base
 					'S_HAS_ATTACHMENTS'	=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 				));
 
-				phpbb_generate_template_pagination($this->template, $view_topic_url, 'news_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
+				$this->pagination->generate_template_pagination($view_topic_url, 'news_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
 
 				if(!empty($fetch_news[$i]['attachments']))
 				{
@@ -373,7 +378,7 @@ class news extends module_base
 					$this->template->assign_vars(array(
 						'NP_PAGINATION'		=> $pagination,
 						'TOTAL_NEWS'		=> ($total_news == 1) ? $this->user->lang['VIEW_FORUM_TOPIC'] : $this->user->lang('VIEW_FORUM_TOPICS', $total_news),
-						'NP_PAGE_NUMBER'	=> phpbb_on_page($this->template, $this->user, '', $total_news, $this->config['board3_number_of_news_' . $module_id], $start))
+						'NP_PAGE_NUMBER'	=> $this->pagination->on_page('', $total_news, $this->config['board3_number_of_news_' . $module_id], $start))
 					);
 				}
 			}
