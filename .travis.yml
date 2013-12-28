@@ -9,6 +9,11 @@ env:
   - DB=mysql
   - DB=postgres
 
+branches:
+  except:
+    - master
+    - develop-1_0_X
+
 before_script:
   # checkout phpBB and move your extension in place
   - cd ../../
