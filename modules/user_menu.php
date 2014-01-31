@@ -109,12 +109,12 @@ class user_menu extends module_base
 			else if ($this->auth->acl_getf_global('m_approve'))
 			{
 				$m_approve_fid_ary = array_diff(array_keys($this->auth->acl_getf('!m_approve', true)), $ex_fid_ary);
-				$m_approve_fid_sql = ' AND (p.post_approved = 1' . ((sizeof($m_approve_fid_ary)) ? ' OR ' . $this->db->sql_in_set('p.forum_id', $m_approve_fid_ary, true) : '') . ')';
+				$m_approve_fid_sql = ' AND (p.post_visibility = 1' . ((sizeof($m_approve_fid_ary)) ? ' OR ' . $this->db->sql_in_set('p.forum_id', $m_approve_fid_ary, true) : '') . ')';
 			}
 			else
 			{
 				$m_approve_fid_ary = array();
-				$m_approve_fid_sql = ' AND p.post_approved = 1';
+				$m_approve_fid_sql = ' AND p.post_visibility = 1';
 			}
 
 			$sql = 'SELECT COUNT(distinct t.topic_id) as total
