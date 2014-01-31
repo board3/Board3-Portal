@@ -1,6 +1,6 @@
 services:
     board3.module.announcements:
-        class: \board3\portal\modules\announcements
+        class: board3\portal\modules\announcements
         arguments:
             - @auth
             - @cache
@@ -16,7 +16,7 @@ services:
             - { name: board3.module }
 
     board3.module.attachments:
-        class: \board3\portal\modules\attachments
+        class: board3\portal\modules\attachments
         arguments:
             - @auth
             - @config
@@ -30,7 +30,7 @@ services:
             - { name: board3.module }
 
     board3.module.birthday_list:
-        class: \board3\portal\modules\birthday_list
+        class: board3\portal\modules\birthday_list
         arguments:
             - @config
             - @template
@@ -40,7 +40,7 @@ services:
             - { name: board3.module }
 
     board3.module.calendar:
-        class: \board3\portal\modules\calendar
+        class: board3\portal\modules\calendar
         arguments:
             - @config
             - @template
@@ -54,12 +54,12 @@ services:
             - { name: board3.module }
 
     board3.module.clock:
-        class: \board3\portal\modules\clock
+        class: board3\portal\modules\clock
         tags:
             - { name: board3.module }
 
     board3.module.custom:
-        class: \board3\portal\modules\custom
+        class: board3\portal\modules\custom
         arguments:
             - @config
             - @template
@@ -72,7 +72,7 @@ services:
             - { name: board3.module }
 
     board3.module.donation:
-        class: \board3\portal\modules\donation
+        class: board3\portal\modules\donation
         arguments:
             - @config
             - @template
@@ -81,7 +81,7 @@ services:
             - { name: board3.module }
 
     board3.module.forumlist:
-        class: \board3\portal\modules\forumlist
+        class: board3\portal\modules\forumlist
         arguments:
             - @auth
             - @config
@@ -93,7 +93,7 @@ services:
             - { name: board3.module }
 
     board3.module.friends:
-        class: \board3\portal\modules\friends
+        class: board3\portal\modules\friends
         arguments:
             - @auth
             - @config
@@ -104,7 +104,7 @@ services:
             - { name: board3.module }
 
     board3.module.latest_bots:
-        class: \board3\portal\modules\latest_bots
+        class: board3\portal\modules\latest_bots
         arguments:
             - @config
             - @dbal.conn
@@ -114,7 +114,7 @@ services:
             - { name: board3.module }
 
     board3.module.latest_members:
-        class: \board3\portal\modules\latest_members
+        class: board3\portal\modules\latest_members
         arguments:
             - @config
             - @dbal.conn
@@ -124,7 +124,7 @@ services:
             - { name: board3.module }
 
     board3.module.leaders:
-        class: \board3\portal\modules\leaders
+        class: board3\portal\modules\leaders
         arguments:
             - @auth
             - @config
@@ -137,7 +137,7 @@ services:
             - { name: board3.module }
 
     board3.module.link_us:
-        class: \board3\portal\modules\link_us
+        class: board3\portal\modules\link_us
         arguments:
             - @config
             - @template
@@ -146,7 +146,7 @@ services:
             - { name: board3.module }
 
     board3.module.links:
-        class: \board3\portal\modules\links
+        class: board3\portal\modules\links
         arguments:
             - @config
             - @dbal.conn
@@ -159,7 +159,7 @@ services:
             - { name: board3.module }
 
     board3.module.main_menu:
-        class: \board3\portal\modules\main_menu
+        class: board3\portal\modules\main_menu
         arguments:
             - @config
             - @dbal.conn
@@ -172,7 +172,7 @@ services:
             - { name: board3.module }
 
     board3.module.news:
-        class: \board3\portal\modules\news
+        class: board3\portal\modules\news
         arguments:
             - @auth
             - @cache
@@ -188,7 +188,7 @@ services:
             - { name: board3.module }
 
     board3.module.poll:
-        class: \board3\portal\modules\poll
+        class: board3\portal\modules\poll
         arguments:
             - @auth
             - @config
@@ -202,7 +202,7 @@ services:
             - { name: board3.module }
 
     board3.module.random_member:
-        class: \board3\portal\modules\random_member
+        class: board3\portal\modules\random_member
         arguments:
             - @dbal.conn
             - @template
@@ -211,7 +211,7 @@ services:
             - { name: board3.module }
 
     board3.module.recent:
-        class: \board3\portal\modules\recent
+        class: board3\portal\modules\recent
         arguments:
             - @auth
             - @config
@@ -224,7 +224,7 @@ services:
             - { name: board3.module }
 
     board3.module.search:
-        class: \board3\portal\modules\search
+        class: board3\portal\modules\search
         arguments:
             - @template
             - %core.php_ext%
@@ -233,7 +233,7 @@ services:
             - { name: board3.module }
 
     board3.module.statistics:
-        class: \board3\portal\modules\statistics
+        class: board3\portal\modules\statistics
         arguments:
             - @cache
             - @config
@@ -244,7 +244,7 @@ services:
             - { name: board3.module }
 
     board3.module.stylechanger:
-        class: \board3\portal\modules\stylechanger
+        class: board3\portal\modules\stylechanger
         arguments:
             - @config
             - @template
@@ -257,7 +257,7 @@ services:
             - { name: board3.module }
 
     board3.module.topposters:
-        class: \board3\portal\modules\topposters
+        class: board3\portal\modules\topposters
         arguments:
             - @config
             - @dbal.conn
@@ -268,7 +268,7 @@ services:
             - { name: board3.module }
 
     board3.module.user_menu:
-        class: \board3\portal\modules\user_menu
+        class: board3\portal\modules\user_menu
         arguments:
             - @auth
             - @config
@@ -281,7 +281,7 @@ services:
             - { name: board3.module }
 
     board3.module.welcome:
-        class: \board3\portal\modules\welcome
+        class: board3\portal\modules\welcome
         arguments:
             - @config
             - @request
@@ -293,7 +293,7 @@ services:
             - { name: board3.module }
 
     board3.module.whois_online:
-        class: \board3\portal\modules\whois_online
+        class: board3\portal\modules\whois_online
         arguments:
             - @auth
             - @dbal.conn
