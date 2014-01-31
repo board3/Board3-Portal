@@ -147,7 +147,7 @@ $lang = array_merge($lang, array(
 	'VERSION_CHECK'			=> 'MOD Version Check',
 
 	// Adding the permissions
-	'acl_a_manage_portal'		=> array('lang' => 'Kann Portal-Einstellungen ändern', 'cat' => 'misc'),
-	'acl_u_view_portal'			=> array('lang' => 'Kann das Portal sehen', 'cat' => 'misc'),
+	'ACL_A_MANAGE_PORTAL'		=> 'Kann Portal-Einstellungen ändern',
+	'ACL_U_VIEW_PORTAL'			=> 'Kann das Portal sehen',
 
 ));
