@@ -14,7 +14,7 @@ parameters:
 
 services:
     board3.portal.main:
-        class: \board3\portal\controller\main
+        class: board3\portal\controller\main
         arguments:
             - @auth
             - @config
@@ -26,7 +26,7 @@ services:
             - @board3.module_collection
 
     board3.version.check:
-        class: \board3\portal\includes\mod_version_check
+        class: board3\portal\includes\mod_version_check
         arguments:
             - %board3.version_data%
             - @config
