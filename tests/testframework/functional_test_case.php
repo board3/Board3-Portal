@@ -17,7 +17,7 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 	{
 		$enable_portal = false;
 
-		if ($this->portal_enabled === true)
+		if ($this->portal_enabled === true || $this->check_if_enabled())
 		{
 			return;
 		}
@@ -39,6 +39,27 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 			$crawler = self::submit($form);
 			$this->assertContains('The extension was enabled successfully', $crawler->text());
 			$this->portal_enabled = true;
+			$this->set_enabled();
 		}
+	}
+
+	protected function check_if_enabled()
+	{
+		$this->db = $this->get_db();
+
+		$sql = "SELECT config_value FROM phpbb_config WHERE config_name = 'b3p_ext_enabled'";
+		$result = $this->db->sql_query($sql);
+		$enabled = $this->db->sql_fetchfield('config_value');
+		$this->db->sql_freeresult($result);
+
+		return $enabled;
+	}
+
+	protected function set_enabled()
+	{
+		$this->db = $this->get_db();
+
+		$sql = "INSERT INTO phpbb_config (config_name, config_value, is_dynamic) VALUES ('b3p_ext_enabled', 1, 1)";
+		$this->db->sql_query($sql);
 	}
 }

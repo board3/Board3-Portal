@@ -110,7 +110,7 @@ class news extends module_base
 		$start = $this->request->variable('np', 0);
 		$start = ($start < 0) ? 0 : $start;
 
-		// Fetch news from portal/includes/functions.php with check if "read full" is requested.
+		// Fetch news from portal functions.php with check if "read full" is requested.
 		$portal_news_length = ($news < 0) ? $this->config['board3_news_length_' . $module_id] : 0;
 		$fetch_news = phpbb_fetch_posts($module_id, $this->config['board3_news_forum_' . $module_id], $this->config['board3_news_permissions_' . $module_id], $this->config['board3_number_of_news_' . $module_id], $portal_news_length, 0, ($this->config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news', $start, $this->config['board3_news_exclude_' . $module_id]);
 
