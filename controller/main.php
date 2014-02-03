@@ -98,15 +98,15 @@ class main
 		$this->php_ext = $php_ext;
 		$this->register_modules($modules);
 
-		$this->includes_path = $phpbb_root_path . 'ext/board3/portal/portal/';
+		$this->includes_path = $phpbb_root_path . 'ext/board3/portal/includes/';
 		$this->root_path = $phpbb_root_path . 'ext/board3/portal/';
 		$portal_root_path = $this->root_path;
 
 		if (!function_exists('obtain_portal_config'))
 		{
-			include($this->includes_path . 'includes/constants' . $this->php_ext);
-			include($this->includes_path . 'includes/functions_modules' . $this->php_ext);
-			include($this->includes_path . 'includes/functions' . $this->php_ext);
+			include($this->includes_path . 'constants' . $this->php_ext);
+			include($this->includes_path . 'functions_modules' . $this->php_ext);
+			include($this->includes_path . 'functions' . $this->php_ext);
 		}
 	}
 

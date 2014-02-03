@@ -22,7 +22,7 @@ class portal_module
 	public $u_action;
 	public $new_config = array();
 	protected $c_class;
-	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
+	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
 	protected $root_path, $mod_version_check, $request;
 
 	/** @var \phpbb\di\service_collection Portal modules */
@@ -31,14 +31,13 @@ class portal_module
 	public function __construct()
 	{
 		global $db, $user, $cache, $request, $template;
-		global $config, $phpbb_root_path, $portal_root_path, $phpbb_admin_path, $phpbb_container, $phpEx;
+		global $config, $phpbb_root_path, $phpbb_admin_path, $phpbb_container, $phpEx;
 
 		$user->add_lang_ext('board3/portal', 'portal');
 
 		$this->root_path = $phpbb_root_path . 'ext/board3/portal/';
 
-		include($this->root_path . 'portal/includes/constants.' . $phpEx);
-		$portal_root_path = PORTAL_ROOT_PATH;
+		include($this->root_path . 'includes/constants.' . $phpEx);
 
 		$this->db = $db;
 		$this->user = $user;
@@ -48,7 +47,6 @@ class portal_module
 		$this->request = $request;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->phpbb_admin_path = $phpbb_admin_path;
-		$this->portal_root_path = $this->root_path . 'portal/';
 		$this->php_ex = $phpEx;
 		$this->phpbb_container = $phpbb_container;
 		$this->mod_version_check = $this->phpbb_container->get('board3.version.check');
@@ -56,12 +54,12 @@ class portal_module
 
 		if (!function_exists('column_string_const'))
 		{
-			include($this->portal_root_path . 'includes/functions_modules.' . $this->php_ex);
+			include($this->root_path . 'includes/functions_modules.' . $this->php_ex);
 		}
 
 		if(!function_exists('obtain_portal_config'))
 		{
-			include($this->portal_root_path . 'includes/functions.' . $this->php_ex);
+			include($this->root_path . 'includes/functions.' . $this->php_ex);
 		}
 	}
 
@@ -722,7 +720,7 @@ class portal_module
 					{
 						trigger_error($this->user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
 					}
-					include($this->root_path . 'portal/includes/functions_upload.' . $this->php_ex);
+					include($this->root_path . 'includes/functions_upload.' . $this->php_ex);
 					// Default upload path is portal/upload/
 					$upload_path = $this->root_path . 'portal/upload/';
 
