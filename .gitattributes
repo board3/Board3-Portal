@@ -6,4 +6,3 @@ travis/		export-ignore
 .travis.yml	export-ignore
 phpunit.xml.*	export-ignore
 README.md	export-ignore
-portal.php	export-ignore
