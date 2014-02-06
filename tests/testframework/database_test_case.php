@@ -16,7 +16,6 @@ abstract class database_test_case extends \phpbb_database_test_case
 	public function setUp()
 	{
 		parent::setUp();
-
 		global $db;
 		$db = $this->db = $this->new_dbal();
 	}

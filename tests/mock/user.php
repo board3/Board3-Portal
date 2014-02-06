@@ -22,4 +22,23 @@ class user extends \PHPUnit_Framework_TestCase
 			$this->lang[$key] = $column;
 		}
 	}
+
+	public function add_lang_ext($ext, $file)
+	{
+		if ($ext != 'board3/portal')
+		{
+			return; // can't support other extensions
+		}
+
+		if (file_exists(dirname(__FILE__) . '/../../language/en/' . $file . '.php'))
+		{
+			include_once(dirname(__FILE__) . '/../../language/en/' . $file . '.php');
+
+			$this->set($lang);
+		}
+		else
+		{
+			$this->markTestIncomplete('Unable to include language file ' . $file);
+		}
+	}
 }

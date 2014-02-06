@@ -384,7 +384,7 @@ CREATE TABLE phpbb_forums (
 	forum_desc_options INT4 DEFAULT '7' NOT NULL CHECK (forum_desc_options >= 0),
 	forum_desc_uid varchar(8) DEFAULT '' NOT NULL,
 	forum_link varchar(255) DEFAULT '' NOT NULL,
-	forum_password varchar(40) DEFAULT '' NOT NULL,
+	forum_password varchar(255) DEFAULT '' NOT NULL,
 	forum_style INT4 DEFAULT '0' NOT NULL CHECK (forum_style >= 0),
 	forum_image varchar(255) DEFAULT '' NOT NULL,
 	forum_rules varchar(4000) DEFAULT '' NOT NULL,
@@ -541,8 +541,6 @@ CREATE TABLE phpbb_log (
 	log_time INT4 DEFAULT '0' NOT NULL CHECK (log_time >= 0),
 	log_operation varchar(4000) DEFAULT '' NOT NULL,
 	log_data TEXT DEFAULT '' NOT NULL,
-	album_id INT4 DEFAULT '0' NOT NULL CHECK (album_id >= 0),
-	image_id INT4 DEFAULT '0' NOT NULL CHECK (image_id >= 0),
 	PRIMARY KEY (log_id)
 );
 
@@ -711,6 +709,36 @@ CREATE INDEX phpbb_poll_votes_vote_user_id ON phpbb_poll_votes (vote_user_id);
 CREATE INDEX phpbb_poll_votes_vote_user_ip ON phpbb_poll_votes (vote_user_ip);
 
 /*
+	Table: 'phpbb_portal_modules'
+*/
+CREATE SEQUENCE phpbb_portal_modules_seq;
+
+CREATE TABLE phpbb_portal_modules (
+	module_id INT4 DEFAULT nextval('phpbb_portal_modules_seq'),
+	module_classname varchar(64) DEFAULT '' NOT NULL,
+	module_column INT2 DEFAULT '0' NOT NULL,
+	module_order INT2 DEFAULT '0' NOT NULL,
+	module_name varchar(255) DEFAULT '' NOT NULL,
+	module_image_src varchar(255) DEFAULT '' NOT NULL,
+	module_image_width INT4 DEFAULT '0' NOT NULL,
+	module_image_height INT4 DEFAULT '0' NOT NULL,
+	module_group_ids varchar(255) DEFAULT '' NOT NULL,
+	module_status INT2 DEFAULT '1' NOT NULL,
+	PRIMARY KEY (module_id)
+);
+
+
+/*
+	Table: 'phpbb_portal_config'
+*/
+CREATE TABLE phpbb_portal_config (
+	config_name varchar(255) DEFAULT '' NOT NULL,
+	config_value TEXT DEFAULT '' NOT NULL,
+	PRIMARY KEY (config_name)
+);
+
+
+/*
 	Table: 'phpbb_posts'
 */
 CREATE SEQUENCE phpbb_posts_seq;
@@ -855,7 +883,7 @@ CREATE SEQUENCE phpbb_profile_fields_seq;
 CREATE TABLE phpbb_profile_fields (
 	field_id INT4 DEFAULT nextval('phpbb_profile_fields_seq'),
 	field_name varchar(255) DEFAULT '' NOT NULL,
-	field_type INT2 DEFAULT '0' NOT NULL,
+	field_type varchar(100) DEFAULT '' NOT NULL,
 	field_ident varchar(20) DEFAULT '' NOT NULL,
 	field_length varchar(20) DEFAULT '' NOT NULL,
 	field_minlen varchar(255) DEFAULT '' NOT NULL,
@@ -895,7 +923,7 @@ CREATE TABLE phpbb_profile_fields_lang (
 	field_id INT4 DEFAULT '0' NOT NULL CHECK (field_id >= 0),
 	lang_id INT4 DEFAULT '0' NOT NULL CHECK (lang_id >= 0),
 	option_id INT4 DEFAULT '0' NOT NULL CHECK (option_id >= 0),
-	field_type INT2 DEFAULT '0' NOT NULL,
+	field_type varchar(100) DEFAULT '' NOT NULL,
 	lang_value varchar(255) DEFAULT '' NOT NULL,
 	PRIMARY KEY (field_id, lang_id, option_id)
 );
@@ -1028,14 +1056,12 @@ CREATE TABLE phpbb_sessions (
 	session_viewonline INT2 DEFAULT '1' NOT NULL CHECK (session_viewonline >= 0),
 	session_autologin INT2 DEFAULT '0' NOT NULL CHECK (session_autologin >= 0),
 	session_admin INT2 DEFAULT '0' NOT NULL CHECK (session_admin >= 0),
-	session_album_id INT4 DEFAULT '0' NOT NULL CHECK (session_album_id >= 0),
 	PRIMARY KEY (session_id)
 );
 
 CREATE INDEX phpbb_sessions_session_time ON phpbb_sessions (session_time);
 CREATE INDEX phpbb_sessions_session_user_id ON phpbb_sessions (session_user_id);
 CREATE INDEX phpbb_sessions_session_fid ON phpbb_sessions (session_forum_id);
-CREATE INDEX phpbb_sessions_session_aid ON phpbb_sessions (session_album_id);
 
 /*
 	Table: 'phpbb_sessions_keys'
@@ -1250,7 +1276,7 @@ CREATE TABLE phpbb_users (
 	user_regdate INT4 DEFAULT '0' NOT NULL CHECK (user_regdate >= 0),
 	username varchar_ci DEFAULT '' NOT NULL,
 	username_clean varchar_ci DEFAULT '' NOT NULL,
-	user_password varchar(40) DEFAULT '' NOT NULL,
+	user_password varchar(255) DEFAULT '' NOT NULL,
 	user_passchg INT4 DEFAULT '0' NOT NULL CHECK (user_passchg >= 0),
 	user_pass_convert INT2 DEFAULT '0' NOT NULL CHECK (user_pass_convert >= 0),
 	user_email varchar(100) DEFAULT '' NOT NULL,
@@ -1363,302 +1389,6 @@ CREATE TABLE phpbb_zebra (
 	PRIMARY KEY (user_id, zebra_id)
 );
 
-
-/*
-	Table: 'phpbb_gallery_albums'
-*/
-CREATE SEQUENCE phpbb_gallery_albums_seq;
-
-CREATE TABLE phpbb_gallery_albums (
-	album_id INT4 DEFAULT nextval('phpbb_gallery_albums_seq'),
-	parent_id INT4 DEFAULT '0' NOT NULL CHECK (parent_id >= 0),
-	left_id INT4 DEFAULT '1' NOT NULL CHECK (left_id >= 0),
-	right_id INT4 DEFAULT '2' NOT NULL CHECK (right_id >= 0),
-	album_parents TEXT DEFAULT '' NOT NULL,
-	album_type INT4 DEFAULT '1' NOT NULL CHECK (album_type >= 0),
-	album_status INT4 DEFAULT '1' NOT NULL CHECK (album_status >= 0),
-	album_contest INT4 DEFAULT '0' NOT NULL CHECK (album_contest >= 0),
-	album_name varchar(255) DEFAULT '' NOT NULL,
-	album_desc TEXT DEFAULT '' NOT NULL,
-	album_desc_options INT4 DEFAULT '7' NOT NULL CHECK (album_desc_options >= 0),
-	album_desc_uid varchar(8) DEFAULT '' NOT NULL,
-	album_desc_bitfield varchar(255) DEFAULT '' NOT NULL,
-	album_user_id INT4 DEFAULT '0' NOT NULL CHECK (album_user_id >= 0),
-	album_images INT4 DEFAULT '0' NOT NULL CHECK (album_images >= 0),
-	album_images_real INT4 DEFAULT '0' NOT NULL CHECK (album_images_real >= 0),
-	album_last_image_id INT4 DEFAULT '0' NOT NULL CHECK (album_last_image_id >= 0),
-	album_image varchar(255) DEFAULT '' NOT NULL,
-	album_last_image_time INT4 DEFAULT '0' NOT NULL,
-	album_last_image_name varchar(255) DEFAULT '' NOT NULL,
-	album_last_username varchar(255) DEFAULT '' NOT NULL,
-	album_last_user_colour varchar(6) DEFAULT '' NOT NULL,
-	album_last_user_id INT4 DEFAULT '0' NOT NULL CHECK (album_last_user_id >= 0),
-	album_watermark INT4 DEFAULT '1' NOT NULL CHECK (album_watermark >= 0),
-	album_sort_key varchar(8) DEFAULT '' NOT NULL,
-	album_sort_dir varchar(8) DEFAULT '' NOT NULL,
-	display_in_rrc INT4 DEFAULT '1' NOT NULL CHECK (display_in_rrc >= 0),
-	display_on_index INT4 DEFAULT '1' NOT NULL CHECK (display_on_index >= 0),
-	display_subalbum_list INT4 DEFAULT '1' NOT NULL CHECK (display_subalbum_list >= 0),
-	album_feed INT2 DEFAULT '1' NOT NULL CHECK (album_feed >= 0),
-	album_auth_access INT2 DEFAULT '0' NOT NULL,
-	PRIMARY KEY (album_id)
-);
-
-
-/*
-	Table: 'phpbb_gallery_albums_track'
-*/
-CREATE TABLE phpbb_gallery_albums_track (
-	user_id INT4 DEFAULT '0' NOT NULL CHECK (user_id >= 0),
-	album_id INT4 DEFAULT '0' NOT NULL CHECK (album_id >= 0),
-	mark_time INT4 DEFAULT '0' NOT NULL CHECK (mark_time >= 0),
-	PRIMARY KEY (user_id, album_id)
-);
-
-
-/*
-	Table: 'phpbb_gallery_comments'
-*/
-CREATE SEQUENCE phpbb_gallery_comments_seq;
-
-CREATE TABLE phpbb_gallery_comments (
-	comment_id INT4 DEFAULT nextval('phpbb_gallery_comments_seq'),
-	comment_image_id INT4 NOT NULL CHECK (comment_image_id >= 0),
-	comment_user_id INT4 DEFAULT '0' NOT NULL CHECK (comment_user_id >= 0),
-	comment_username varchar(255) DEFAULT '' NOT NULL,
-	comment_user_colour varchar(6) DEFAULT '' NOT NULL,
-	comment_user_ip varchar(40) DEFAULT '' NOT NULL,
-	comment_signature INT2 DEFAULT '0' NOT NULL CHECK (comment_signature >= 0),
-	comment_time INT4 DEFAULT '0' NOT NULL CHECK (comment_time >= 0),
-	comment TEXT DEFAULT '' NOT NULL,
-	comment_uid varchar(8) DEFAULT '' NOT NULL,
-	comment_bitfield varchar(255) DEFAULT '' NOT NULL,
-	comment_edit_time INT4 DEFAULT '0' NOT NULL CHECK (comment_edit_time >= 0),
-	comment_edit_count INT2 DEFAULT '0' NOT NULL CHECK (comment_edit_count >= 0),
-	comment_edit_user_id INT4 DEFAULT '0' NOT NULL CHECK (comment_edit_user_id >= 0),
-	PRIMARY KEY (comment_id)
-);
-
-CREATE INDEX phpbb_gallery_comments_id ON phpbb_gallery_comments (comment_image_id);
-CREATE INDEX phpbb_gallery_comments_uid ON phpbb_gallery_comments (comment_user_id);
-CREATE INDEX phpbb_gallery_comments_ip ON phpbb_gallery_comments (comment_user_ip);
-CREATE INDEX phpbb_gallery_comments_time ON phpbb_gallery_comments (comment_time);
-
-/*
-	Table: 'phpbb_gallery_contests'
-*/
-CREATE SEQUENCE phpbb_gallery_contests_seq;
-
-CREATE TABLE phpbb_gallery_contests (
-	contest_id INT4 DEFAULT nextval('phpbb_gallery_contests_seq'),
-	contest_album_id INT4 DEFAULT '0' NOT NULL CHECK (contest_album_id >= 0),
-	contest_start INT4 DEFAULT '0' NOT NULL CHECK (contest_start >= 0),
-	contest_rating INT4 DEFAULT '0' NOT NULL CHECK (contest_rating >= 0),
-	contest_end INT4 DEFAULT '0' NOT NULL CHECK (contest_end >= 0),
-	contest_marked INT2 DEFAULT '0' NOT NULL,
-	contest_first INT4 DEFAULT '0' NOT NULL CHECK (contest_first >= 0),
-	contest_second INT4 DEFAULT '0' NOT NULL CHECK (contest_second >= 0),
-	contest_third INT4 DEFAULT '0' NOT NULL CHECK (contest_third >= 0),
-	PRIMARY KEY (contest_id)
-);
-
-
-/*
-	Table: 'phpbb_gallery_favorites'
-*/
-CREATE SEQUENCE phpbb_gallery_favorites_seq;
-
-CREATE TABLE phpbb_gallery_favorites (
-	favorite_id INT4 DEFAULT nextval('phpbb_gallery_favorites_seq'),
-	user_id INT4 DEFAULT '0' NOT NULL CHECK (user_id >= 0),
-	image_id INT4 DEFAULT '0' NOT NULL CHECK (image_id >= 0),
-	PRIMARY KEY (favorite_id)
-);
-
-CREATE INDEX phpbb_gallery_favorites_uid ON phpbb_gallery_favorites (user_id);
-CREATE INDEX phpbb_gallery_favorites_id ON phpbb_gallery_favorites (image_id);
-
-/*
-	Table: 'phpbb_gallery_images'
-*/
-CREATE SEQUENCE phpbb_gallery_images_seq;
-
-CREATE TABLE phpbb_gallery_images (
-	image_id INT4 DEFAULT nextval('phpbb_gallery_images_seq'),
-	image_filename varchar(255) DEFAULT '' NOT NULL,
-	image_name varchar(255) DEFAULT '' NOT NULL,
-	image_name_clean varchar(255) DEFAULT '' NOT NULL,
-	image_desc TEXT DEFAULT '' NOT NULL,
-	image_desc_uid varchar(8) DEFAULT '' NOT NULL,
-	image_desc_bitfield varchar(255) DEFAULT '' NOT NULL,
-	image_user_id INT4 DEFAULT '0' NOT NULL CHECK (image_user_id >= 0),
-	image_username varchar(255) DEFAULT '' NOT NULL,
-	image_username_clean varchar(255) DEFAULT '' NOT NULL,
-	image_user_colour varchar(6) DEFAULT '' NOT NULL,
-	image_user_ip varchar(40) DEFAULT '' NOT NULL,
-	image_time INT4 DEFAULT '0' NOT NULL CHECK (image_time >= 0),
-	image_album_id INT4 DEFAULT '0' NOT NULL CHECK (image_album_id >= 0),
-	image_view_count INT4 DEFAULT '0' NOT NULL CHECK (image_view_count >= 0),
-	image_status INT4 DEFAULT '0' NOT NULL CHECK (image_status >= 0),
-	image_contest INT4 DEFAULT '0' NOT NULL CHECK (image_contest >= 0),
-	image_contest_end INT4 DEFAULT '0' NOT NULL CHECK (image_contest_end >= 0),
-	image_contest_rank INT4 DEFAULT '0' NOT NULL CHECK (image_contest_rank >= 0),
-	image_filemissing INT4 DEFAULT '0' NOT NULL CHECK (image_filemissing >= 0),
-	image_has_exif INT4 DEFAULT '2' NOT NULL CHECK (image_has_exif >= 0),
-	image_exif_data varchar(8000) DEFAULT '' NOT NULL,
-	image_rates INT4 DEFAULT '0' NOT NULL CHECK (image_rates >= 0),
-	image_rate_points INT4 DEFAULT '0' NOT NULL CHECK (image_rate_points >= 0),
-	image_rate_avg INT4 DEFAULT '0' NOT NULL CHECK (image_rate_avg >= 0),
-	image_comments INT4 DEFAULT '0' NOT NULL CHECK (image_comments >= 0),
-	image_last_comment INT4 DEFAULT '0' NOT NULL CHECK (image_last_comment >= 0),
-	image_allow_comments INT2 DEFAULT '1' NOT NULL,
-	image_favorited INT4 DEFAULT '0' NOT NULL CHECK (image_favorited >= 0),
-	image_reported INT4 DEFAULT '0' NOT NULL CHECK (image_reported >= 0),
-	filesize_upload INT4 DEFAULT '0' NOT NULL CHECK (filesize_upload >= 0),
-	filesize_medium INT4 DEFAULT '0' NOT NULL CHECK (filesize_medium >= 0),
-	filesize_cache INT4 DEFAULT '0' NOT NULL CHECK (filesize_cache >= 0),
-	PRIMARY KEY (image_id)
-);
-
-CREATE INDEX phpbb_gallery_images_aid ON phpbb_gallery_images (image_album_id);
-CREATE INDEX phpbb_gallery_images_uid ON phpbb_gallery_images (image_user_id);
-CREATE INDEX phpbb_gallery_images_time ON phpbb_gallery_images (image_time);
-
-/*
-	Table: 'phpbb_gallery_modscache'
-*/
-CREATE TABLE phpbb_gallery_modscache (
-	album_id INT4 DEFAULT '0' NOT NULL CHECK (album_id >= 0),
-	user_id INT4 DEFAULT '0' NOT NULL CHECK (user_id >= 0),
-	username varchar(255) DEFAULT '' NOT NULL,
-	group_id INT4 DEFAULT '0' NOT NULL CHECK (group_id >= 0),
-	group_name varchar(255) DEFAULT '' NOT NULL,
-	display_on_index INT2 DEFAULT '1' NOT NULL
-);
-
-CREATE INDEX phpbb_gallery_modscache_doi ON phpbb_gallery_modscache (display_on_index);
-CREATE INDEX phpbb_gallery_modscache_aid ON phpbb_gallery_modscache (album_id);
-
-/*
-	Table: 'phpbb_gallery_permissions'
-*/
-CREATE SEQUENCE phpbb_gallery_permissions_seq;
-
-CREATE TABLE phpbb_gallery_permissions (
-	perm_id INT4 DEFAULT nextval('phpbb_gallery_permissions_seq'),
-	perm_role_id INT4 DEFAULT '0' NOT NULL CHECK (perm_role_id >= 0),
-	perm_album_id INT4 DEFAULT '0' NOT NULL CHECK (perm_album_id >= 0),
-	perm_user_id INT4 DEFAULT '0' NOT NULL CHECK (perm_user_id >= 0),
-	perm_group_id INT4 DEFAULT '0' NOT NULL CHECK (perm_group_id >= 0),
-	perm_system INT4 DEFAULT '0' NOT NULL,
-	PRIMARY KEY (perm_id)
-);
-
-
-/*
-	Table: 'phpbb_gallery_rates'
-*/
-CREATE TABLE phpbb_gallery_rates (
-	rate_image_id INT4 DEFAULT '0' NOT NULL CHECK (rate_image_id >= 0),
-	rate_user_id INT4 DEFAULT '0' NOT NULL CHECK (rate_user_id >= 0),
-	rate_user_ip varchar(40) DEFAULT '' NOT NULL,
-	rate_point INT4 DEFAULT '0' NOT NULL CHECK (rate_point >= 0),
-	PRIMARY KEY (rate_image_id, rate_user_id)
-);
-
-
-/*
-	Table: 'phpbb_gallery_reports'
-*/
-CREATE SEQUENCE phpbb_gallery_reports_seq;
-
-CREATE TABLE phpbb_gallery_reports (
-	report_id INT4 DEFAULT nextval('phpbb_gallery_reports_seq'),
-	report_album_id INT4 DEFAULT '0' NOT NULL CHECK (report_album_id >= 0),
-	report_image_id INT4 DEFAULT '0' NOT NULL CHECK (report_image_id >= 0),
-	reporter_id INT4 DEFAULT '0' NOT NULL CHECK (reporter_id >= 0),
-	report_manager INT4 DEFAULT '0' NOT NULL CHECK (report_manager >= 0),
-	report_note TEXT DEFAULT '' NOT NULL,
-	report_time INT4 DEFAULT '0' NOT NULL CHECK (report_time >= 0),
-	report_status INT4 DEFAULT '0' NOT NULL CHECK (report_status >= 0),
-	PRIMARY KEY (report_id)
-);
-
-
-/*
-	Table: 'phpbb_gallery_roles'
-*/
-CREATE SEQUENCE phpbb_gallery_roles_seq;
-
-CREATE TABLE phpbb_gallery_roles (
-	role_id INT4 DEFAULT nextval('phpbb_gallery_roles_seq'),
-	a_list INT4 DEFAULT '0' NOT NULL CHECK (a_list >= 0),
-	i_view INT4 DEFAULT '0' NOT NULL CHECK (i_view >= 0),
-	i_watermark INT4 DEFAULT '0' NOT NULL CHECK (i_watermark >= 0),
-	i_upload INT4 DEFAULT '0' NOT NULL CHECK (i_upload >= 0),
-	i_edit INT4 DEFAULT '0' NOT NULL CHECK (i_edit >= 0),
-	i_delete INT4 DEFAULT '0' NOT NULL CHECK (i_delete >= 0),
-	i_rate INT4 DEFAULT '0' NOT NULL CHECK (i_rate >= 0),
-	i_approve INT4 DEFAULT '0' NOT NULL CHECK (i_approve >= 0),
-	i_lock INT4 DEFAULT '0' NOT NULL CHECK (i_lock >= 0),
-	i_report INT4 DEFAULT '0' NOT NULL CHECK (i_report >= 0),
-	i_count INT4 DEFAULT '0' NOT NULL CHECK (i_count >= 0),
-	i_unlimited INT4 DEFAULT '0' NOT NULL CHECK (i_unlimited >= 0),
-	c_read INT4 DEFAULT '0' NOT NULL CHECK (c_read >= 0),
-	c_post INT4 DEFAULT '0' NOT NULL CHECK (c_post >= 0),
-	c_edit INT4 DEFAULT '0' NOT NULL CHECK (c_edit >= 0),
-	c_delete INT4 DEFAULT '0' NOT NULL CHECK (c_delete >= 0),
-	m_comments INT4 DEFAULT '0' NOT NULL CHECK (m_comments >= 0),
-	m_delete INT4 DEFAULT '0' NOT NULL CHECK (m_delete >= 0),
-	m_edit INT4 DEFAULT '0' NOT NULL CHECK (m_edit >= 0),
-	m_move INT4 DEFAULT '0' NOT NULL CHECK (m_move >= 0),
-	m_report INT4 DEFAULT '0' NOT NULL CHECK (m_report >= 0),
-	m_status INT4 DEFAULT '0' NOT NULL CHECK (m_status >= 0),
-	a_count INT4 DEFAULT '0' NOT NULL CHECK (a_count >= 0),
-	a_unlimited INT4 DEFAULT '0' NOT NULL CHECK (a_unlimited >= 0),
-	a_restrict INT4 DEFAULT '0' NOT NULL CHECK (a_restrict >= 0),
-	PRIMARY KEY (role_id)
-);
-
-
-/*
-	Table: 'phpbb_gallery_users'
-*/
-CREATE TABLE phpbb_gallery_users (
-	user_id INT4 DEFAULT '0' NOT NULL CHECK (user_id >= 0),
-	watch_own INT4 DEFAULT '0' NOT NULL CHECK (watch_own >= 0),
-	watch_favo INT4 DEFAULT '0' NOT NULL CHECK (watch_favo >= 0),
-	watch_com INT4 DEFAULT '0' NOT NULL CHECK (watch_com >= 0),
-	user_images INT4 DEFAULT '0' NOT NULL CHECK (user_images >= 0),
-	personal_album_id INT4 DEFAULT '0' NOT NULL CHECK (personal_album_id >= 0),
-	user_lastmark INT4 DEFAULT '0' NOT NULL CHECK (user_lastmark >= 0),
-	user_last_update INT4 DEFAULT '0' NOT NULL CHECK (user_last_update >= 0),
-	user_viewexif INT4 DEFAULT '0' NOT NULL CHECK (user_viewexif >= 0),
-	user_permissions TEXT DEFAULT '' NOT NULL,
-	user_permissions_changed INT4 DEFAULT '0' NOT NULL CHECK (user_permissions_changed >= 0),
-	user_allow_comments INT2 DEFAULT '1' NOT NULL,
-	subscribe_pegas INT2 DEFAULT '0' NOT NULL,
-	PRIMARY KEY (user_id)
-);
-
-CREATE INDEX phpbb_gallery_users_pega ON phpbb_gallery_users (personal_album_id);
-
-/*
-	Table: 'phpbb_gallery_watch'
-*/
-CREATE SEQUENCE phpbb_gallery_watch_seq;
-
-CREATE TABLE phpbb_gallery_watch (
-	watch_id INT4 DEFAULT nextval('phpbb_gallery_watch_seq'),
-	album_id INT4 DEFAULT '0' NOT NULL CHECK (album_id >= 0),
-	image_id INT4 DEFAULT '0' NOT NULL CHECK (image_id >= 0),
-	user_id INT4 DEFAULT '0' NOT NULL CHECK (user_id >= 0),
-	PRIMARY KEY (watch_id)
-);
-
-CREATE INDEX phpbb_gallery_watch_uid ON phpbb_gallery_watch (user_id);
-CREATE INDEX phpbb_gallery_watch_id ON phpbb_gallery_watch (image_id);
-CREATE INDEX phpbb_gallery_watch_aid ON phpbb_gallery_watch (album_id);
 
 
 COMMIT;
