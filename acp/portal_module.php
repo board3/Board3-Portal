@@ -834,7 +834,7 @@ class portal_module
 	*
 	* @param int $module_id ID of the module that should be moved
 	*/
-	protected function move_module_up($module_id)
+	public function move_module_up($module_id)
 	{
 		$sql = 'SELECT module_order, module_column
 			FROM ' . PORTAL_MODULES_TABLE . '
