@@ -18,15 +18,14 @@ class base_database_test extends \board3\portal\tests\testframework\database_tes
 
 	public function test_check()
 	{
-		$sql = 'SELECT session_user_id, album_name
-			FROM phpbb_sessions s
-			LEFT JOIN phpbb_gallery_albums a
-				ON (s.session_album_id = a.album_id)';
+		$sql = 'SELECT module_id, module_column
+			FROM phpbb_portal_modules
+			WHERE module_id = 1';
 		$result = $this->db->sql_query($sql);
 		$this->assertEquals(array(
 			array(
-				'session_user_id'	=> 4,
-				'album_name'		=> 'Testalbum',
+				'module_id'	=> 1,
+				'module_column'		=> 2
 			),
 		), $this->db->sql_fetchrowset($result));
 		$this->db->sql_freeresult($result);

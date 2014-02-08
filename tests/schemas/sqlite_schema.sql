@@ -239,7 +239,7 @@ CREATE TABLE phpbb_forums (
 	forum_desc_options INTEGER UNSIGNED NOT NULL DEFAULT '7',
 	forum_desc_uid varchar(8) NOT NULL DEFAULT '',
 	forum_link varchar(255) NOT NULL DEFAULT '',
-	forum_password varchar(40) NOT NULL DEFAULT '',
+	forum_password varchar(255) NOT NULL DEFAULT '',
 	forum_style INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	forum_image varchar(255) NOT NULL DEFAULT '',
 	forum_rules text(65535) NOT NULL DEFAULT '',
@@ -369,9 +369,7 @@ CREATE TABLE phpbb_log (
 	log_ip varchar(40) NOT NULL DEFAULT '',
 	log_time INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	log_operation text(65535) NOT NULL DEFAULT '',
-	log_data mediumtext(16777215) NOT NULL DEFAULT '',
-	album_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_id INTEGER UNSIGNED NOT NULL DEFAULT '0'
+	log_data mediumtext(16777215) NOT NULL DEFAULT ''
 );
 
 CREATE INDEX phpbb_log_log_type ON phpbb_log (log_type);
@@ -509,6 +507,29 @@ CREATE INDEX phpbb_poll_votes_topic_id ON phpbb_poll_votes (topic_id);
 CREATE INDEX phpbb_poll_votes_vote_user_id ON phpbb_poll_votes (vote_user_id);
 CREATE INDEX phpbb_poll_votes_vote_user_ip ON phpbb_poll_votes (vote_user_ip);
 
+# Table: 'phpbb_portal_modules'
+CREATE TABLE phpbb_portal_modules (
+	module_id INTEGER PRIMARY KEY NOT NULL ,
+	module_classname varchar(64) NOT NULL DEFAULT '',
+	module_column tinyint(3) NOT NULL DEFAULT '0',
+	module_order tinyint(3) NOT NULL DEFAULT '0',
+	module_name varchar(255) NOT NULL DEFAULT '',
+	module_image_src varchar(255) NOT NULL DEFAULT '',
+	module_image_width int(3) NOT NULL DEFAULT '0',
+	module_image_height int(3) NOT NULL DEFAULT '0',
+	module_group_ids varchar(255) NOT NULL DEFAULT '',
+	module_status tinyint(1) NOT NULL DEFAULT '1'
+);
+
+
+# Table: 'phpbb_portal_config'
+CREATE TABLE phpbb_portal_config (
+	config_name varchar(255) NOT NULL DEFAULT '',
+	config_value mediumtext(16777215) NOT NULL DEFAULT '',
+	PRIMARY KEY (config_name)
+);
+
+
 # Table: 'phpbb_posts'
 CREATE TABLE phpbb_posts (
 	post_id INTEGER PRIMARY KEY NOT NULL ,
@@ -628,7 +649,7 @@ CREATE INDEX phpbb_privmsgs_to_usr_flder_id ON phpbb_privmsgs_to (user_id, folde
 CREATE TABLE phpbb_profile_fields (
 	field_id INTEGER PRIMARY KEY NOT NULL ,
 	field_name varchar(255) NOT NULL DEFAULT '',
-	field_type tinyint(4) NOT NULL DEFAULT '0',
+	field_type varchar(100) NOT NULL DEFAULT '',
 	field_ident varchar(20) NOT NULL DEFAULT '',
 	field_length varchar(20) NOT NULL DEFAULT '',
 	field_minlen varchar(255) NOT NULL DEFAULT '',
@@ -663,7 +684,7 @@ CREATE TABLE phpbb_profile_fields_lang (
 	field_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	lang_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	option_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	field_type tinyint(4) NOT NULL DEFAULT '0',
+	field_type varchar(100) NOT NULL DEFAULT '',
 	lang_value varchar(255) NOT NULL DEFAULT '',
 	PRIMARY KEY (field_id, lang_id, option_id)
 );
@@ -768,14 +789,12 @@ CREATE TABLE phpbb_sessions (
 	session_viewonline INTEGER UNSIGNED NOT NULL DEFAULT '1',
 	session_autologin INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	session_admin INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	session_album_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	PRIMARY KEY (session_id)
 );
 
 CREATE INDEX phpbb_sessions_session_time ON phpbb_sessions (session_time);
 CREATE INDEX phpbb_sessions_session_user_id ON phpbb_sessions (session_user_id);
 CREATE INDEX phpbb_sessions_session_fid ON phpbb_sessions (session_forum_id);
-CREATE INDEX phpbb_sessions_session_aid ON phpbb_sessions (session_album_id);
 
 # Table: 'phpbb_sessions_keys'
 CREATE TABLE phpbb_sessions_keys (
@@ -949,7 +968,7 @@ CREATE TABLE phpbb_users (
 	user_regdate INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	username varchar(255) NOT NULL DEFAULT '',
 	username_clean varchar(255) NOT NULL DEFAULT '',
-	user_password varchar(40) NOT NULL DEFAULT '',
+	user_password varchar(255) NOT NULL DEFAULT '',
 	user_passchg INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	user_pass_convert INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	user_email varchar(100) NOT NULL DEFAULT '',
@@ -1049,249 +1068,6 @@ CREATE TABLE phpbb_zebra (
 	PRIMARY KEY (user_id, zebra_id)
 );
 
-
-# Table: 'phpbb_gallery_albums'
-CREATE TABLE phpbb_gallery_albums (
-	album_id INTEGER PRIMARY KEY NOT NULL ,
-	parent_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	left_id INTEGER UNSIGNED NOT NULL DEFAULT '1',
-	right_id INTEGER UNSIGNED NOT NULL DEFAULT '2',
-	album_parents mediumtext(16777215) NOT NULL DEFAULT '',
-	album_type INTEGER UNSIGNED NOT NULL DEFAULT '1',
-	album_status INTEGER UNSIGNED NOT NULL DEFAULT '1',
-	album_contest INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	album_name varchar(255) NOT NULL DEFAULT '',
-	album_desc mediumtext(16777215) NOT NULL DEFAULT '',
-	album_desc_options INTEGER UNSIGNED NOT NULL DEFAULT '7',
-	album_desc_uid varchar(8) NOT NULL DEFAULT '',
-	album_desc_bitfield varchar(255) NOT NULL DEFAULT '',
-	album_user_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	album_images INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	album_images_real INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	album_last_image_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	album_image varchar(255) NOT NULL DEFAULT '',
-	album_last_image_time int(11) NOT NULL DEFAULT '0',
-	album_last_image_name varchar(255) NOT NULL DEFAULT '',
-	album_last_username varchar(255) NOT NULL DEFAULT '',
-	album_last_user_colour varchar(6) NOT NULL DEFAULT '',
-	album_last_user_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	album_watermark INTEGER UNSIGNED NOT NULL DEFAULT '1',
-	album_sort_key varchar(8) NOT NULL DEFAULT '',
-	album_sort_dir varchar(8) NOT NULL DEFAULT '',
-	display_in_rrc INTEGER UNSIGNED NOT NULL DEFAULT '1',
-	display_on_index INTEGER UNSIGNED NOT NULL DEFAULT '1',
-	display_subalbum_list INTEGER UNSIGNED NOT NULL DEFAULT '1',
-	album_feed INTEGER UNSIGNED NOT NULL DEFAULT '1',
-	album_auth_access tinyint(1) NOT NULL DEFAULT '0'
-);
-
-
-# Table: 'phpbb_gallery_albums_track'
-CREATE TABLE phpbb_gallery_albums_track (
-	user_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	album_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	mark_time INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	PRIMARY KEY (user_id, album_id)
-);
-
-
-# Table: 'phpbb_gallery_comments'
-CREATE TABLE phpbb_gallery_comments (
-	comment_id INTEGER PRIMARY KEY NOT NULL ,
-	comment_image_id INTEGER UNSIGNED NOT NULL ,
-	comment_user_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	comment_username varchar(255) NOT NULL DEFAULT '',
-	comment_user_colour varchar(6) NOT NULL DEFAULT '',
-	comment_user_ip varchar(40) NOT NULL DEFAULT '',
-	comment_signature INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	comment_time INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	comment mediumtext(16777215) NOT NULL DEFAULT '',
-	comment_uid varchar(8) NOT NULL DEFAULT '',
-	comment_bitfield varchar(255) NOT NULL DEFAULT '',
-	comment_edit_time INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	comment_edit_count INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	comment_edit_user_id INTEGER UNSIGNED NOT NULL DEFAULT '0'
-);
-
-CREATE INDEX phpbb_gallery_comments_id ON phpbb_gallery_comments (comment_image_id);
-CREATE INDEX phpbb_gallery_comments_uid ON phpbb_gallery_comments (comment_user_id);
-CREATE INDEX phpbb_gallery_comments_ip ON phpbb_gallery_comments (comment_user_ip);
-CREATE INDEX phpbb_gallery_comments_time ON phpbb_gallery_comments (comment_time);
-
-# Table: 'phpbb_gallery_contests'
-CREATE TABLE phpbb_gallery_contests (
-	contest_id INTEGER PRIMARY KEY NOT NULL ,
-	contest_album_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	contest_start INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	contest_rating INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	contest_end INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	contest_marked tinyint(1) NOT NULL DEFAULT '0',
-	contest_first INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	contest_second INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	contest_third INTEGER UNSIGNED NOT NULL DEFAULT '0'
-);
-
-
-# Table: 'phpbb_gallery_favorites'
-CREATE TABLE phpbb_gallery_favorites (
-	favorite_id INTEGER PRIMARY KEY NOT NULL ,
-	user_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_id INTEGER UNSIGNED NOT NULL DEFAULT '0'
-);
-
-CREATE INDEX phpbb_gallery_favorites_uid ON phpbb_gallery_favorites (user_id);
-CREATE INDEX phpbb_gallery_favorites_id ON phpbb_gallery_favorites (image_id);
-
-# Table: 'phpbb_gallery_images'
-CREATE TABLE phpbb_gallery_images (
-	image_id INTEGER PRIMARY KEY NOT NULL ,
-	image_filename varchar(255) NOT NULL DEFAULT '',
-	image_name varchar(255) NOT NULL DEFAULT '',
-	image_name_clean varchar(255) NOT NULL DEFAULT '',
-	image_desc mediumtext(16777215) NOT NULL DEFAULT '',
-	image_desc_uid varchar(8) NOT NULL DEFAULT '',
-	image_desc_bitfield varchar(255) NOT NULL DEFAULT '',
-	image_user_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_username varchar(255) NOT NULL DEFAULT '',
-	image_username_clean varchar(255) NOT NULL DEFAULT '',
-	image_user_colour varchar(6) NOT NULL DEFAULT '',
-	image_user_ip varchar(40) NOT NULL DEFAULT '',
-	image_time INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_album_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_view_count INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_status INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_contest INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_contest_end INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_contest_rank INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_filemissing INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_has_exif INTEGER UNSIGNED NOT NULL DEFAULT '2',
-	image_exif_data text(65535) NOT NULL DEFAULT '',
-	image_rates INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_rate_points INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_rate_avg INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_comments INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_last_comment INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_allow_comments tinyint(1) NOT NULL DEFAULT '1',
-	image_favorited INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_reported INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	filesize_upload INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	filesize_medium INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	filesize_cache INTEGER UNSIGNED NOT NULL DEFAULT '0'
-);
-
-CREATE INDEX phpbb_gallery_images_aid ON phpbb_gallery_images (image_album_id);
-CREATE INDEX phpbb_gallery_images_uid ON phpbb_gallery_images (image_user_id);
-CREATE INDEX phpbb_gallery_images_time ON phpbb_gallery_images (image_time);
-
-# Table: 'phpbb_gallery_modscache'
-CREATE TABLE phpbb_gallery_modscache (
-	album_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	user_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	username varchar(255) NOT NULL DEFAULT '',
-	group_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	group_name varchar(255) NOT NULL DEFAULT '',
-	display_on_index tinyint(1) NOT NULL DEFAULT '1'
-);
-
-CREATE INDEX phpbb_gallery_modscache_doi ON phpbb_gallery_modscache (display_on_index);
-CREATE INDEX phpbb_gallery_modscache_aid ON phpbb_gallery_modscache (album_id);
-
-# Table: 'phpbb_gallery_permissions'
-CREATE TABLE phpbb_gallery_permissions (
-	perm_id INTEGER PRIMARY KEY NOT NULL ,
-	perm_role_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	perm_album_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	perm_user_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	perm_group_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	perm_system int(3) NOT NULL DEFAULT '0'
-);
-
-
-# Table: 'phpbb_gallery_rates'
-CREATE TABLE phpbb_gallery_rates (
-	rate_image_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	rate_user_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	rate_user_ip varchar(40) NOT NULL DEFAULT '',
-	rate_point INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	PRIMARY KEY (rate_image_id, rate_user_id)
-);
-
-
-# Table: 'phpbb_gallery_reports'
-CREATE TABLE phpbb_gallery_reports (
-	report_id INTEGER PRIMARY KEY NOT NULL ,
-	report_album_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	report_image_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	reporter_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	report_manager INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	report_note mediumtext(16777215) NOT NULL DEFAULT '',
-	report_time INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	report_status INTEGER UNSIGNED NOT NULL DEFAULT '0'
-);
-
-
-# Table: 'phpbb_gallery_roles'
-CREATE TABLE phpbb_gallery_roles (
-	role_id INTEGER PRIMARY KEY NOT NULL ,
-	a_list INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	i_view INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	i_watermark INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	i_upload INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	i_edit INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	i_delete INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	i_rate INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	i_approve INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	i_lock INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	i_report INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	i_count INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	i_unlimited INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	c_read INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	c_post INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	c_edit INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	c_delete INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	m_comments INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	m_delete INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	m_edit INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	m_move INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	m_report INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	m_status INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	a_count INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	a_unlimited INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	a_restrict INTEGER UNSIGNED NOT NULL DEFAULT '0'
-);
-
-
-# Table: 'phpbb_gallery_users'
-CREATE TABLE phpbb_gallery_users (
-	user_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	watch_own INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	watch_favo INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	watch_com INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	user_images INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	personal_album_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	user_lastmark INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	user_last_update INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	user_viewexif INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	user_permissions mediumtext(16777215) NOT NULL DEFAULT '',
-	user_permissions_changed INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	user_allow_comments tinyint(1) NOT NULL DEFAULT '1',
-	subscribe_pegas tinyint(1) NOT NULL DEFAULT '0',
-	PRIMARY KEY (user_id)
-);
-
-CREATE INDEX phpbb_gallery_users_pega ON phpbb_gallery_users (personal_album_id);
-
-# Table: 'phpbb_gallery_watch'
-CREATE TABLE phpbb_gallery_watch (
-	watch_id INTEGER PRIMARY KEY NOT NULL ,
-	album_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	image_id INTEGER UNSIGNED NOT NULL DEFAULT '0',
-	user_id INTEGER UNSIGNED NOT NULL DEFAULT '0'
-);
-
-CREATE INDEX phpbb_gallery_watch_uid ON phpbb_gallery_watch (user_id);
-CREATE INDEX phpbb_gallery_watch_id ON phpbb_gallery_watch (image_id);
-CREATE INDEX phpbb_gallery_watch_aid ON phpbb_gallery_watch (album_id);
 
 
 COMMIT;
