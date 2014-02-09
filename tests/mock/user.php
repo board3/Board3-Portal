@@ -34,7 +34,10 @@ class user extends \PHPUnit_Framework_TestCase
 		{
 			include_once(dirname(__FILE__) . '/../../language/en/' . $file . '.php');
 
-			$this->set($lang);
+			if (isset($lang))
+			{
+				$this->set($lang);
+			}
 		}
 		else
 		{
