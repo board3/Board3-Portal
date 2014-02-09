@@ -830,18 +830,31 @@ class portal_module
 	}
 
 	/**
+	* Get module_data required for moving it
+	*
+	* @param int	$module_id	ID of the module that should be moved
+	* @return array|null		Module_data or empty if not successful
+	*/
+	public function get_move_module_data($module_id)
+	{
+		$sql = 'SELECT module_order, module_column, module_classname
+			FROM ' . PORTAL_MODULES_TABLE . '
+			WHERE module_id = ' . (int) $module_id;
+		$result = $this->db->sql_query_limit($sql, 1);
+		$module_data = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+
+		return $module_data;
+	}
+
+	/**
 	* Move module up one row
 	*
 	* @param int $module_id ID of the module that should be moved
 	*/
 	public function move_module_up($module_id)
 	{
-		$sql = 'SELECT module_order, module_column
-			FROM ' . PORTAL_MODULES_TABLE . '
-			WHERE module_id = ' . (int) $module_id;
-		$result = $this->db->sql_query_limit($sql, 1);
-		$module_data = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
+		$module_data = $this->get_move_module_data($module_id);
 
 		if (($module_data !== false) && ($module_data['module_order'] > 1))
 		{
@@ -876,12 +889,7 @@ class portal_module
 	*/
 	protected function move_module_down($module_id)
 	{
-		$sql = 'SELECT module_order, module_column
-			FROM ' . PORTAL_MODULES_TABLE . '
-			WHERE module_id = ' . (int) $module_id;
-		$result = $this->db->sql_query_limit($sql, 1);
-		$module_data = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
+		$module_data = $this->get_move_module_data($module_id);
 
 		if ($module_data !== false)
 		{
@@ -915,12 +923,7 @@ class portal_module
 	*/
 	protected function move_module_left($module_id)
 	{
-		$sql = 'SELECT module_order, module_column, module_classname
-			FROM ' . PORTAL_MODULES_TABLE . '
-			WHERE module_id = ' . (int) $module_id;
-		$result = $this->db->sql_query_limit($sql, 1);
-		$module_data = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
+		$module_data = $this->get_move_module_data($module_id);
 		
 		if (!isset($this->modules[$module_data['module_classname']]))
 		{
@@ -1023,12 +1026,7 @@ class portal_module
 	*/
 	protected function move_module_right($module_id)
 	{
-		$sql = 'SELECT module_order, module_column, module_classname
-			FROM ' . PORTAL_MODULES_TABLE . '
-			WHERE module_id = ' . (int) $module_id;
-		$result = $this->db->sql_query_limit($sql, 1);
-		$module_data = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
+		$module_data = $this->get_move_module_data($module_id);
 		
 		if (!isset($this->modules[$module_data['module_classname']]))
 		{

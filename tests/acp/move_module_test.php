@@ -49,6 +49,16 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/modules.xml');
 	}
 
+	public function test_get_move_module_data()
+	{
+		$module_data = $this->portal_module->get_move_module_data(1);
+		$this->assertEquals(array(
+			'module_order'		=> 1,
+			'module_column'		=> 2,
+			'module_classname'	=> '\board3\portal\modules\clock',
+		), $module_data);
+	}
+
 	public function test_move_module_up()
 	{
 		self::$redirected = false;
