@@ -943,13 +943,8 @@ class portal_module
 				$this->db->sql_query($sql);
 			}
 		}
-		else
-		{
-			trigger_error($this->user->lang['UNABLE_TO_MOVE_ROW'] . adm_back_link($this->u_action));
-		}
-		
-		$this->cache->destroy('portal_modules');
-		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
+
+		$this->handle_after_move($updated, true);
 	}
 
 	/**
