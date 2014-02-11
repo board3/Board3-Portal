@@ -33,14 +33,25 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 				new \board3\portal\modules\clock(),
 				new \board3\portal\modules\birthday_list(new \phpbb\config\config(array()), $template, $this->db, $user),
 			));
-		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists'));
+		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put'));
 		$cache->expects($this->any())
 			->method('destroy')
 			->with($this->equalTo('portal_modules'));
 		$cache->expects($this->any())
+			->method('get')
+			->with($this->anything())
+			->will($this->returnValue(false));
+		$cache->expects($this->any())
 			->method('sql_exists')
 			->with($this->anything());
+		$cache->expects($this->any())
+			->method('put')
+			->with($this->anything());
 		$db = $this->db;
+		$user->set(array(
+			'UNABLE_TO_MOVE'	=> 'UNABLE_TO_MOVE',
+			'UNABLE_TO_MOVE_ROW'	=> 'UNABLE_TO_MOVE_ROW',
+		));
 		$this->portal_module = new \board3\portal\acp\portal_module();
 	}
 
@@ -59,16 +70,76 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		), $module_data);
 	}
 
+	public function data_get_last_module_order()
+	{
+		return array(
+			array(1, 1),
+			array(2, 2),
+			array(2, 4),
+		);
+	}
+
+	/**
+	* @dataProvider data_get_last_module_order
+	*/
+	public function test_get_last_module_order($expected, $column)
+	{
+		$this->assertEquals($expected, $this->portal_module->get_last_module_order($column));
+	}
+
 	public function test_move_module_up()
 	{
 		self::$redirected = false;
 		$this->portal_module->move_module_up(2);
 		$this->assertTrue(self::$redirected);
 
-		$this->setExpectedTriggerError(E_USER_NOTICE);
+		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE_ROW');
 		self::$redirected = false;
 		$this->portal_module->move_module_up(2);
 		$this->assertFalse(self::$redirected);
+	}
+
+	public function test_move_module_down()
+	{
+		self::$redirected = false;
+		$this->portal_module->move_module_down(1);
+		$this->assertTrue(self::$redirected);
+
+		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE_ROW');
+		self::$redirected = false;
+		$this->portal_module->move_module_down(1);
+		$this->assertFalse(self::$redirected);
+	}
+
+	public function data_handle_after_move()
+	{
+		return array(
+			array(true, false, false),
+			array(false, false, 'UNABLE_TO_MOVE'),
+			array(false, true, 'UNABLE_TO_MOVE_ROW'),
+		);
+	}
+
+	/**
+	* @dataProvider data_handle_after_move
+	*/
+	public function test_handle_after_move($success, $is_row, $error)
+	{
+		if ($error)
+		{
+			$this->setExpectedTriggerError(E_USER_NOTICE, $error);
+		}
+		else
+		{
+			self::$redirected = false;
+		}
+
+		$this->portal_module->handle_after_move($success, $is_row);
+
+		if (!$error)
+		{
+			$this->assertTrue(self::$redirected);
+		}
 	}
 }
 

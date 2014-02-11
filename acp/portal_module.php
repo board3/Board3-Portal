@@ -848,6 +848,47 @@ class portal_module
 	}
 
 	/**
+	* Handle output after moving module
+	*
+	* @param bool $success	Whether moving module was successful
+	* @param bool $is_row	Whether the module move was inside a row
+	* @return void
+	*/
+	public function handle_after_move($success = true, $is_row = false)
+	{
+		if (!$success)
+		{
+			trigger_error($this->user->lang['UNABLE_TO_MOVE' . (($is_row) ? '_ROW' : '')] . adm_back_link($this->u_action));
+		}
+
+		$this->cache->destroy('portal_modules');
+		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
+	}
+
+	/**
+	* Get the module order to the last module in the column
+	*
+	* @param int $module_column	Module column to check
+	* @return int Module order of the last module in the column
+	*/
+	public function get_last_module_order($module_column)
+	{
+		$modules = obtain_portal_modules();
+		$last_order = 1;
+		foreach ($modules as $cur_module)
+		{
+			if ($cur_module['module_column'] != $module_column)
+			{
+				continue;
+			}
+
+			$last_order = max($last_order, $cur_module['module_order']);
+		}
+
+		return $last_order;
+	}
+
+	/**
 	* Move module up one row
 	*
 	* @param int $module_id ID of the module that should be moved
@@ -873,13 +914,8 @@ class portal_module
 				$this->db->sql_query($sql);
 			}
 		}
-		else
-		{
-			trigger_error($this->user->lang['UNABLE_TO_MOVE_ROW'] . adm_back_link($this->u_action));
-		}
-		
-		$this->cache->destroy('portal_modules');
-		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
+
+		$this->handle_after_move($updated, true);
 	}
 
 	/**
@@ -887,11 +923,11 @@ class portal_module
 	*
 	* @param int $module_id ID of the module that should be moved
 	*/
-	protected function move_module_down($module_id)
+	public function move_module_down($module_id)
 	{
 		$module_data = $this->get_move_module_data($module_id);
 
-		if ($module_data !== false)
+		if ($module_data !== false && $this->get_last_module_order($module_data['module_column']) != $module_data['module_order'])
 		{
 			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 				SET module_order = module_order - 1
