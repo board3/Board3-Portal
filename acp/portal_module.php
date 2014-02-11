@@ -952,7 +952,7 @@ class portal_module
 	*
 	* @param int $module_id ID of the module that should be moved
 	*/
-	protected function move_module_left($module_id)
+	public function move_module_left($module_id)
 	{
 		$module_data = $this->get_move_module_data($module_id);
 		
@@ -963,7 +963,7 @@ class portal_module
 
 		$this->c_class = $this->modules[$module_data['module_classname']];
 		
-		if ($module_data !== false)
+		if ($module_data !== false && $module_data['module_column'] > column_string_num('left'))
 		{
 			if($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 1)))
 			{
@@ -1043,11 +1043,10 @@ class portal_module
 		}
 		else
 		{
-			trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
+			$this->handle_after_move(false);
 		}
 		
-		$this->cache->destroy('portal_modules');
-		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
+		$this->handle_after_move(true);
 	}
 
 	/**
@@ -1055,7 +1054,7 @@ class portal_module
 	*
 	* @param int $module_id ID of the module that should be moved
 	*/
-	protected function move_module_right($module_id)
+	public function move_module_right($module_id)
 	{
 		$module_data = $this->get_move_module_data($module_id);
 		
@@ -1066,7 +1065,7 @@ class portal_module
 
 		$this->c_class = $this->modules[$module_data['module_classname']];
 		
-		if ($module_data !== false)
+		if ($module_data !== false && $module_data['module_column'] < column_string_num('right'))
 		{
 			if($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 1)))
 			{
@@ -1146,11 +1145,10 @@ class portal_module
 		}
 		else
 		{
-			trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
+			$this->handle_after_move(false);
 		}
-		
-		$this->cache->destroy('portal_modules');
-		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
+
+		$this->handle_after_move(true);
 	}
 
 	/**

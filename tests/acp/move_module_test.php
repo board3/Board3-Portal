@@ -28,10 +28,13 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 				->disableOriginalConstructor()
 				->getMock());
 		// Mock module service collection
+		$config = new \phpbb\config\config(array());
 		$phpbb_container->set('board3.module_collection',
 			array(
 				new \board3\portal\modules\clock(),
-				new \board3\portal\modules\birthday_list(new \phpbb\config\config(array()), $template, $this->db, $user),
+				new \board3\portal\modules\birthday_list($config, $template, $this->db, $user),
+				new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $phpbb_root_path, $phpEx),
+				new \board3\portal\modules\donation($config, $template, $user),
 			));
 		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put'));
 		$cache->expects($this->any())
@@ -65,7 +68,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$module_data = $this->portal_module->get_move_module_data(1);
 		$this->assertEquals(array(
 			'module_order'		=> 1,
-			'module_column'		=> 2,
+			'module_column'		=> 1,
 			'module_classname'	=> '\board3\portal\modules\clock',
 		), $module_data);
 	}
@@ -73,9 +76,10 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	public function data_get_last_module_order()
 	{
 		return array(
-			array(1, 1),
-			array(2, 2),
-			array(2, 4),
+			array(3, 1),
+			array(1, 2),
+			array(2, 3),
+			array(1, 4),
 		);
 	}
 
@@ -101,6 +105,10 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 
 	public function test_move_module_down()
 	{
+		self::$redirected = false;
+		$this->portal_module->move_module_down(1);
+		$this->assertTrue(self::$redirected);
+
 		self::$redirected = false;
 		$this->portal_module->move_module_down(1);
 		$this->assertTrue(self::$redirected);
@@ -140,6 +148,78 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		{
 			$this->assertTrue(self::$redirected);
 		}
+	}
+
+	public function data_move_module_right()
+	{
+		return array(
+			array(2, 1, 1, 1),
+			array(6, 1, 2, 2),
+			array(7, 4, 0, 0),
+		);
+	}
+
+	/**
+	* @dataProvider data_move_module_right
+	*/
+	public function test_move_module_right($module_id, $column_start, $move_right, $move_left)
+	{
+		if ($column_start > 3)
+		{
+			$this->setExpectedTriggerError(E_USER_ERROR, 'CLASS_NOT_FOUND');
+			$this->portal_module->move_module_right($module_id);
+			return;
+		}
+		for ($i = 1; $i <= $move_right; $i++)
+		{
+			$data = $this->portal_module->get_move_module_data($module_id);
+			$this->assertEquals($column_start, $data['module_column']);
+			$this->portal_module->move_module_right($module_id);
+			$column_start++;
+		}
+		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE');
+		$this->portal_module->move_module_right($module_id);
+	}
+
+	public function data_move_module_left()
+	{
+		return array(
+			array(2, 1, 1, 1),
+			array(6, 1, 2, 2),
+			array(7, 4, 0, 0),
+		);
+	}
+
+	/**
+	* @dataProvider data_move_module_left
+	*/
+	public function test_move_module_left($module_id, $column_start, $move_right, $move_left)
+	{
+		if ($column_start > 3)
+		{
+			$this->setExpectedTriggerError(E_USER_ERROR, 'CLASS_NOT_FOUND');
+			$this->portal_module->move_module_left($module_id);
+			return;
+		}
+		for ($i = 1; $i <= $move_right; $i++)
+		{
+			$data = $this->portal_module->get_move_module_data($module_id);
+			$this->assertEquals($column_start, $data['module_column']);
+			$this->portal_module->move_module_right($module_id);
+			$column_start++;
+		}
+
+		// We always start in the right column = 3
+		$column_start = 3;
+		for ($i = 1; $i <= $move_left; $i++)
+		{
+			$data = $this->portal_module->get_move_module_data($module_id);
+			$this->assertEquals($column_start, $data['module_column']);
+			$this->portal_module->move_module_left($module_id);
+			$column_start--;
+		}
+		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE');
+		$this->portal_module->move_module_left($module_id);
 	}
 }
 
