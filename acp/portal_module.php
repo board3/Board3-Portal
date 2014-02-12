@@ -976,7 +976,7 @@ class portal_module
 			}
 			else
 			{
-				// @todo: need an error handle here (i.e. trigger_error())
+				$this->handle_after_move(false);
 			}
 			
 			/**
@@ -1078,7 +1078,7 @@ class portal_module
 			}
 			else
 			{
-				// @todo: need an error handle here
+				$this->handle_after_move(false);
 			}
 			
 			/**
