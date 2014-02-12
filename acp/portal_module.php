@@ -24,6 +24,7 @@ class portal_module
 	protected $c_class;
 	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
 	protected $root_path, $mod_version_check, $request;
+	public $module_column = array();
 
 	/** @var \phpbb\di\service_collection Portal modules */
 	protected $modules;
@@ -382,13 +383,13 @@ class portal_module
 
 				// Create an array of already installed modules
 				$portal_modules = obtain_portal_modules();
-				$installed_modules = $module_column = array();
+				$installed_modules = array();
 
 				foreach($portal_modules as $cur_module) 
 				{ 
 					$installed_modules[] = $cur_module['module_classname'];
 					// Create an array with the columns the module is in
-					$module_column[$cur_module['module_classname']][] = column_num_string($cur_module['module_column']);
+					$this->module_column[$cur_module['module_classname']][] = column_num_string($cur_module['module_column']);
 				}
 
 				if ($action == 'move_up')
@@ -427,8 +428,8 @@ class portal_module
 						if (in_array($column_string, array('left', 'right')))
 						{
 							// does the module already exist in the side columns?
-							if (isset($module_column[$module_classname]) && 
-								(in_array('left', $module_column[$module_classname]) || in_array('right', $module_column[$module_classname])))
+							if (isset($this->module_column[$module_classname]) &&
+								(in_array('left', $this->module_column[$module_classname]) || in_array('right', $this->module_column[$module_classname])))
 							{
 								$submit = false;
 							}
@@ -436,10 +437,10 @@ class portal_module
 						elseif (in_array($column_string, array('center', 'top', 'bottom')))
 						{
 							// does the module already exist in the center columns?
-							if (isset($module_column[$module_classname]) && 
-								(in_array('center', $module_column[$module_classname]) || 
-								in_array('top', $module_column[$module_classname]) || 
-								in_array('bottom', $module_column[$module_classname])))
+							if (isset($this->module_column[$module_classname]) &&
+								(in_array('center', $this->module_column[$module_classname]) ||
+								in_array('top', $this->module_column[$module_classname]) ||
+								in_array('bottom', $this->module_column[$module_classname])))
 							{
 								$submit = false;
 							}
@@ -525,8 +526,8 @@ class portal_module
 							if (in_array($column_string, array('left', 'right')))
 							{
 								// does the module already exist in the side columns?
-								if (isset($module_column[$module_class]) &&
-									(in_array('left', $module_column[$module_class]) || in_array('right', $module_column[$module_class])))
+								if (isset($this->module_column[$module_class]) &&
+									(in_array('left', $this->module_column[$module_class]) || in_array('right', $this->module_column[$module_class])))
 								{
 									continue;
 								}
@@ -534,10 +535,10 @@ class portal_module
 							elseif (in_array($column_string, array('center', 'top', 'bottom')))
 							{
 								// does the module already exist in the center columns?
-								if (isset($module_column[$module_class]) &&
-									(in_array('center', $module_column[$module_class]) ||
-									in_array('top', $module_column[$module_class]) ||
-									in_array('bottom', $module_column[$module_class])))
+								if (isset($this->module_column[$module_class]) &&
+									(in_array('center', $this->module_column[$module_class]) ||
+									in_array('top', $this->module_column[$module_class]) ||
+									in_array('bottom', $this->module_column[$module_class])))
 								{
 									continue;
 								}
@@ -633,9 +634,9 @@ class portal_module
 								$column_string = column_num_string($row['module_column'] + 1); // move 1 right
 
 								if ($column_string == 'right' &&
-									isset($module_column[$row['module_classname']]) &&
-									(in_array('left', $module_column[$row['module_classname']]) ||
-									in_array('right', $module_column[$row['module_classname']])))
+									isset($this->module_column[$row['module_classname']]) &&
+									(in_array('left', $this->module_column[$row['module_classname']]) ||
+									in_array('right', $this->module_column[$row['module_classname']])))
 								{
 									$move_right = false;
 								}
@@ -666,9 +667,9 @@ class portal_module
 								$column_string = column_num_string($row['module_column'] - 1); // move 1 left
 
 								if ($column_string == 'left' &&
-									isset($module_column[$row['module_classname']]) &&
-									(in_array('left', $module_column[$row['module_classname']]) ||
-									in_array('right', $module_column[$row['module_classname']])))
+									isset($this->module_column[$row['module_classname']]) &&
+									(in_array('left', $this->module_column[$row['module_classname']]) ||
+									in_array('right', $this->module_column[$row['module_classname']])))
 								{
 									$move_left = false;
 								}
@@ -990,17 +991,17 @@ class portal_module
 				$column_string = column_num_string($module_data['module_column'] - $move_action);
 				// we can only move left to the left & center column
 				if ($column_string == 'left' &&
-					isset($module_column[$module_data['module_classname']]) &&
-					(in_array('left', $module_column[$module_data['module_classname']]) ||
-					in_array('right', $module_column[$module_data['module_classname']])))
+					isset($this->module_column[$module_data['module_classname']]) &&
+					(in_array('left', $this->module_column[$module_data['module_classname']]) ||
+					in_array('right', $this->module_column[$module_data['module_classname']])))
 				{
 					trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 				}
 				elseif ($column_string == 'center' &&
-					isset($module_column[$module_data['module_classname']]) &&
-					(in_array('center', $module_column[$module_data['module_classname']]) ||
-					in_array('top', $module_column[$module_data['module_classname']]) ||
-					in_array('bottom', $module_column[$module_data['module_classname']])))
+					isset($this->module_column[$module_data['module_classname']]) &&
+					(in_array('center', $this->module_column[$module_data['module_classname']]) ||
+					in_array('top', $this->module_column[$module_data['module_classname']]) ||
+					in_array('bottom', $this->module_column[$module_data['module_classname']])))
 				{
 					// we are moving from the right to the center column so we should move to the left column instead
 					$move_action = 2;
@@ -1092,17 +1093,17 @@ class portal_module
 				$column_string = column_num_string($module_data['module_column'] + $move_action);
 				// we can only move right to the right & center column
 				if ($column_string == 'right' &&
-					isset($module_column[$module_data['module_classname']]) &&
-					(in_array('left', $module_column[$module_data['module_classname']]) ||
-					in_array('right', $module_column[$module_data['module_classname']])))
+					isset($this->module_column[$module_data['module_classname']]) &&
+					(in_array('left', $this->module_column[$module_data['module_classname']]) ||
+					in_array('right', $this->module_column[$module_data['module_classname']])))
 				{
 					trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 				}
 				elseif ($column_string == 'center' &&
-					isset($module_column[$module_data['module_classname']]) &&
-					(in_array('center', $module_column[$module_data['module_classname']]) ||
-					in_array('top', $module_column[$module_data['module_classname']]) ||
-					in_array('bottom', $module_column[$module_data['module_classname']])))
+					isset($this->module_column[$module_data['module_classname']]) &&
+					(in_array('center', $this->module_column[$module_data['module_classname']]) ||
+					in_array('top', $this->module_column[$module_data['module_classname']]) ||
+					in_array('bottom', $this->module_column[$module_data['module_classname']])))
 				{
 					// we are moving from the left to the center column so we should move to the right column instead
 					$move_action = 2;
