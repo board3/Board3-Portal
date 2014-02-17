@@ -146,7 +146,7 @@ class portal_module
 							'MODULE_SHOW_IMAGE'		=> (in_array(column_num_string($module_data['module_column']), array('center', 'top', 'bottom'))) ? false : true,
 						));
 
-						if($module_data['module_classname'] != 'custom')
+						if($module_data['module_classname'] != '\board3\portal\modules\custom')
 						{
 							$groups_ary = explode(',', $module_data['module_group_ids']);
 
@@ -283,7 +283,7 @@ class portal_module
 
 					if(isset($module_name))
 					{
-						if ($module_data['module_classname'] !== 'custom')
+						if ($module_data['module_classname'] !== '\board3\portal\modules\custom')
 						{
 							add_log('admin', 'LOG_PORTAL_CONFIG', $module_name);
 						}
@@ -427,23 +427,11 @@ class portal_module
 						// do we want to add the module to the side columns or to the center columns?
 						if (in_array($column_string, array('left', 'right')))
 						{
-							// does the module already exist in the side columns?
-							if (isset($this->module_column[$module_classname]) &&
-								(in_array('left', $this->module_column[$module_classname]) || in_array('right', $this->module_column[$module_classname])))
-							{
-								$submit = false;
-							}
+							$submit = $this->can_move_module(array('left', 'right'), $module_classname);
 						}
 						elseif (in_array($column_string, array('center', 'top', 'bottom')))
 						{
-							// does the module already exist in the center columns?
-							if (isset($this->module_column[$module_classname]) &&
-								(in_array('center', $this->module_column[$module_classname]) ||
-								in_array('top', $this->module_column[$module_classname]) ||
-								in_array('bottom', $this->module_column[$module_classname])))
-							{
-								$submit = false;
-							}
+							$submit = $this->can_move_module(array('center', 'top', 'bottom'), $module_classname);
 						}
 
 						// do not install if module already exists in that column
@@ -526,8 +514,7 @@ class portal_module
 							if (in_array($column_string, array('left', 'right')))
 							{
 								// does the module already exist in the side columns?
-								if (isset($this->module_column[$module_class]) &&
-									(in_array('left', $this->module_column[$module_class]) || in_array('right', $this->module_column[$module_class])))
+								if (!$this->can_move_module(array('left', 'right'), $module_class))
 								{
 									continue;
 								}
@@ -535,10 +522,7 @@ class portal_module
 							elseif (in_array($column_string, array('center', 'top', 'bottom')))
 							{
 								// does the module already exist in the center columns?
-								if (isset($this->module_column[$module_class]) &&
-									(in_array('center', $this->module_column[$module_class]) ||
-									in_array('top', $this->module_column[$module_class]) ||
-									in_array('bottom', $this->module_column[$module_class])))
+								if (!$this->can_move_module(array('center', 'top', 'bottom'), $module_class))
 								{
 									continue;
 								}
@@ -629,14 +613,11 @@ class portal_module
 							* this only applies to modules in the center column as the side modules
 							* will automatically skip the center column when moving if they need to
 							*/
-							if ($row['module_classname'] != 'custom')
+							if ($row['module_classname'] != '\board3\portal\modules\custom')
 							{
 								$column_string = column_num_string($row['module_column'] + 1); // move 1 right
 
-								if ($column_string == 'right' &&
-									isset($this->module_column[$row['module_classname']]) &&
-									(in_array('left', $this->module_column[$row['module_classname']]) ||
-									in_array('right', $this->module_column[$row['module_classname']])))
+								if ($column_string == 'right' && !$this->can_move_module(array('left', 'right'), $row['module_classname']))
 								{
 									$move_right = false;
 								}
@@ -662,14 +643,11 @@ class portal_module
 							* this only applies to modules in the center column as the side modules
 							* will automatically skip the center column when moving if they need to
 							*/
-							if ($row['module_classname'] != 'custom')
+							if ($row['module_classname'] != '\board3\portal\modules\custom')
 							{
 								$column_string = column_num_string($row['module_column'] - 1); // move 1 left
 
-								if ($column_string == 'left' &&
-									isset($this->module_column[$row['module_classname']]) &&
-									(in_array('left', $this->module_column[$row['module_classname']]) ||
-									in_array('right', $this->module_column[$row['module_classname']])))
+								if ($column_string == 'left' && !$this->can_move_module(array('left', 'right'), $row['module_classname']))
 								{
 									$move_left = false;
 								}
@@ -986,22 +964,15 @@ class portal_module
 			* new column (side columns (left & right) or center columns (top, center, bottom)).
 			* of course this does not apply to custom modules.
 			*/
-			if ($module_data['module_classname'] != 'custom' && $move_action == 1)
+			if ($module_data['module_classname'] != '\board3\portal\modules\custom' && $move_action == 1)
 			{
 				$column_string = column_num_string($module_data['module_column'] - $move_action);
 				// we can only move left to the left & center column
-				if ($column_string == 'left' &&
-					isset($this->module_column[$module_data['module_classname']]) &&
-					(in_array('left', $this->module_column[$module_data['module_classname']]) ||
-					in_array('right', $this->module_column[$module_data['module_classname']])))
+				if ($column_string == 'left' && !$this->can_move_module(array('right', 'left'), $module_data['module_classname']))
 				{
 					trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 				}
-				elseif ($column_string == 'center' &&
-					isset($this->module_column[$module_data['module_classname']]) &&
-					(in_array('center', $this->module_column[$module_data['module_classname']]) ||
-					in_array('top', $this->module_column[$module_data['module_classname']]) ||
-					in_array('bottom', $this->module_column[$module_data['module_classname']])))
+				elseif ($column_string == 'center' && !$this->can_move_module(array('top', 'center', 'bottom'), $module_data['module_classname']))
 				{
 					// we are moving from the right to the center column so we should move to the left column instead
 					$move_action = 2;
@@ -1088,22 +1059,15 @@ class portal_module
 			* new column (side columns (left & right) or center columns (top, center, bottom)).
 			* of course this does not apply to custom modules.
 			*/
-			if ($module_data['module_classname'] != 'custom' && $move_action == 1)
+			if ($module_data['module_classname'] != '\board3\portal\modules\custom' && $move_action == 1)
 			{
 				$column_string = column_num_string($module_data['module_column'] + $move_action);
 				// we can only move right to the right & center column
-				if ($column_string == 'right' &&
-					isset($this->module_column[$module_data['module_classname']]) &&
-					(in_array('left', $this->module_column[$module_data['module_classname']]) ||
-					in_array('right', $this->module_column[$module_data['module_classname']])))
+				if ($column_string == 'right' && !$this->can_move_module(array('right', 'left'), $module_data['module_classname']))
 				{
 					trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 				}
-				elseif ($column_string == 'center' &&
-					isset($this->module_column[$module_data['module_classname']]) &&
-					(in_array('center', $this->module_column[$module_data['module_classname']]) ||
-					in_array('top', $this->module_column[$module_data['module_classname']]) ||
-					in_array('bottom', $this->module_column[$module_data['module_classname']])))
+				elseif ($column_string == 'center' && !$this->can_move_module(array('top', 'center', 'bottom'), $module_data['module_classname']))
 				{
 					// we are moving from the left to the center column so we should move to the right column instead
 					$move_action = 2;
@@ -1247,5 +1211,54 @@ class portal_module
 				$this->modules[$class_name] = $current_module;
 			}
 		}
+	}
+
+	/**
+	* Check if module can be moved to desired column(s)
+	*
+	* @param array|int	$target_column Column(s) the module should be
+	*				moved to
+	* @param string		$module_class Class of the module
+	* @return bool		True if module can be moved to desired column,
+	*			false if not
+	*/
+	public function can_move_module($target_column, $module_class)
+	{
+		$submit = true;
+
+		if (is_array($target_column))
+		{
+			foreach ($target_column as $column)
+			{
+				if (!$this->can_move_module($column, $module_class))
+				{
+					$submit = false;
+				}
+			}
+		}
+
+		// do we want to add the module to the side columns or to the center columns?
+		if (in_array($target_column, array('left', 'right')))
+		{
+			// does the module already exist in the side columns?
+			if (isset($this->module_column[$module_class]) &&
+				(in_array('left', $this->module_column[$module_class]) || in_array('right', $this->module_column[$module_class])))
+			{
+				$submit = false;
+			}
+		}
+		elseif (in_array($target_column, array('center', 'top', 'bottom')))
+		{
+			// does the module already exist in the center columns?
+			if (isset($this->module_column[$module_class]) &&
+				(in_array('center', $this->module_column[$module_class]) ||
+				in_array('top', $this->module_column[$module_class]) ||
+				in_array('bottom', $this->module_column[$module_class])))
+			{
+				$submit = false;
+			}
+		}
+
+		return $submit;
 	}
 }

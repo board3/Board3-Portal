@@ -251,6 +251,27 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE');
 		$this->portal_module->move_module_left($module_id);
 	}
+
+	public function data_can_move_module()
+	{
+		return array(
+			array(false, 'left', '\board3\portal\modules\clock'),
+			array(false, 'right', '\board3\portal\modules\clock'),
+			array(true, 'center', '\board3\portal\modules\clock'),
+			array(true, array('top', 'bottom', 'center'), '\board3\portal\modules\clock'),
+			array(false, array('left', 'right'), '\board3\portal\modules\clock'),
+			array(false, 'center', '\board3\portal\modules\birthday_list'),
+		);
+	}
+
+	/**
+	* @dataProvider data_can_move_module
+	*/
+	public function test_can_move_module($expected, $target_column, $module_class)
+	{
+		$this->update_portal_modules();
+		$this->assertEquals($expected, $this->portal_module->can_move_module($target_column, $module_class));
+	}
 }
 
 function redirect($url)
