@@ -24,6 +24,7 @@ class portal_module
 	protected $c_class;
 	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
 	protected $root_path, $mod_version_check, $request;
+	public $module_column = array();
 
 	/** @var \phpbb\di\service_collection Portal modules */
 	protected $modules;
@@ -145,7 +146,7 @@ class portal_module
 							'MODULE_SHOW_IMAGE'		=> (in_array(column_num_string($module_data['module_column']), array('center', 'top', 'bottom'))) ? false : true,
 						));
 
-						if($module_data['module_classname'] != 'custom')
+						if($module_data['module_classname'] != '\board3\portal\modules\custom')
 						{
 							$groups_ary = explode(',', $module_data['module_group_ids']);
 
@@ -282,7 +283,7 @@ class portal_module
 
 					if(isset($module_name))
 					{
-						if ($module_data['module_classname'] !== 'custom')
+						if ($module_data['module_classname'] !== '\board3\portal\modules\custom')
 						{
 							add_log('admin', 'LOG_PORTAL_CONFIG', $module_name);
 						}
@@ -382,13 +383,13 @@ class portal_module
 
 				// Create an array of already installed modules
 				$portal_modules = obtain_portal_modules();
-				$installed_modules = $module_column = array();
+				$installed_modules = array();
 
 				foreach($portal_modules as $cur_module) 
 				{ 
 					$installed_modules[] = $cur_module['module_classname'];
 					// Create an array with the columns the module is in
-					$module_column[$cur_module['module_classname']][] = column_num_string($cur_module['module_column']);
+					$this->module_column[$cur_module['module_classname']][] = column_num_string($cur_module['module_column']);
 				}
 
 				if ($action == 'move_up')
@@ -426,23 +427,11 @@ class portal_module
 						// do we want to add the module to the side columns or to the center columns?
 						if (in_array($column_string, array('left', 'right')))
 						{
-							// does the module already exist in the side columns?
-							if (isset($module_column[$module_classname]) && 
-								(in_array('left', $module_column[$module_classname]) || in_array('right', $module_column[$module_classname])))
-							{
-								$submit = false;
-							}
+							$submit = $this->can_move_module(array('left', 'right'), $module_classname);
 						}
 						elseif (in_array($column_string, array('center', 'top', 'bottom')))
 						{
-							// does the module already exist in the center columns?
-							if (isset($module_column[$module_classname]) && 
-								(in_array('center', $module_column[$module_classname]) || 
-								in_array('top', $module_column[$module_classname]) || 
-								in_array('bottom', $module_column[$module_classname])))
-							{
-								$submit = false;
-							}
+							$submit = $this->can_move_module(array('center', 'top', 'bottom'), $module_classname);
 						}
 
 						// do not install if module already exists in that column
@@ -525,8 +514,7 @@ class portal_module
 							if (in_array($column_string, array('left', 'right')))
 							{
 								// does the module already exist in the side columns?
-								if (isset($module_column[$module_class]) &&
-									(in_array('left', $module_column[$module_class]) || in_array('right', $module_column[$module_class])))
+								if (!$this->can_move_module(array('left', 'right'), $module_class))
 								{
 									continue;
 								}
@@ -534,10 +522,7 @@ class portal_module
 							elseif (in_array($column_string, array('center', 'top', 'bottom')))
 							{
 								// does the module already exist in the center columns?
-								if (isset($module_column[$module_class]) &&
-									(in_array('center', $module_column[$module_class]) ||
-									in_array('top', $module_column[$module_class]) ||
-									in_array('bottom', $module_column[$module_class])))
+								if (!$this->can_move_module(array('center', 'top', 'bottom'), $module_class))
 								{
 									continue;
 								}
@@ -628,14 +613,11 @@ class portal_module
 							* this only applies to modules in the center column as the side modules
 							* will automatically skip the center column when moving if they need to
 							*/
-							if ($row['module_classname'] != 'custom')
+							if ($row['module_classname'] != '\board3\portal\modules\custom')
 							{
 								$column_string = column_num_string($row['module_column'] + 1); // move 1 right
 
-								if ($column_string == 'right' &&
-									isset($module_column[$row['module_classname']]) &&
-									(in_array('left', $module_column[$row['module_classname']]) ||
-									in_array('right', $module_column[$row['module_classname']])))
+								if ($column_string == 'right' && !$this->can_move_module(array('left', 'right'), $row['module_classname']))
 								{
 									$move_right = false;
 								}
@@ -661,14 +643,11 @@ class portal_module
 							* this only applies to modules in the center column as the side modules
 							* will automatically skip the center column when moving if they need to
 							*/
-							if ($row['module_classname'] != 'custom')
+							if ($row['module_classname'] != '\board3\portal\modules\custom')
 							{
 								$column_string = column_num_string($row['module_column'] - 1); // move 1 left
 
-								if ($column_string == 'left' &&
-									isset($module_column[$row['module_classname']]) &&
-									(in_array('left', $module_column[$row['module_classname']]) ||
-									in_array('right', $module_column[$row['module_classname']])))
+								if ($column_string == 'left' && !$this->can_move_module(array('left', 'right'), $row['module_classname']))
 								{
 									$move_left = false;
 								}
@@ -830,18 +809,72 @@ class portal_module
 	}
 
 	/**
+	* Get module_data required for moving it
+	*
+	* @param int	$module_id	ID of the module that should be moved
+	* @return array|null		Module_data or empty if not successful
+	*/
+	public function get_move_module_data($module_id)
+	{
+		$sql = 'SELECT module_order, module_column, module_classname
+			FROM ' . PORTAL_MODULES_TABLE . '
+			WHERE module_id = ' . (int) $module_id;
+		$result = $this->db->sql_query_limit($sql, 1);
+		$module_data = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+
+		return $module_data;
+	}
+
+	/**
+	* Handle output after moving module
+	*
+	* @param bool $success	Whether moving module was successful
+	* @param bool $is_row	Whether the module move was inside a row
+	* @return void
+	*/
+	public function handle_after_move($success = true, $is_row = false)
+	{
+		if (!$success)
+		{
+			trigger_error($this->user->lang['UNABLE_TO_MOVE' . (($is_row) ? '_ROW' : '')] . adm_back_link($this->u_action));
+		}
+
+		$this->cache->destroy('portal_modules');
+		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
+	}
+
+	/**
+	* Get the module order to the last module in the column
+	*
+	* @param int $module_column	Module column to check
+	* @return int Module order of the last module in the column
+	*/
+	public function get_last_module_order($module_column)
+	{
+		$modules = obtain_portal_modules();
+		$last_order = 1;
+		foreach ($modules as $cur_module)
+		{
+			if ($cur_module['module_column'] != $module_column)
+			{
+				continue;
+			}
+
+			$last_order = max($last_order, $cur_module['module_order']);
+		}
+
+		return $last_order;
+	}
+
+	/**
 	* Move module up one row
 	*
 	* @param int $module_id ID of the module that should be moved
 	*/
 	public function move_module_up($module_id)
 	{
-		$sql = 'SELECT module_order, module_column
-			FROM ' . PORTAL_MODULES_TABLE . '
-			WHERE module_id = ' . (int) $module_id;
-		$result = $this->db->sql_query_limit($sql, 1);
-		$module_data = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
+		$module_data = $this->get_move_module_data($module_id);
 
 		if (($module_data !== false) && ($module_data['module_order'] > 1))
 		{
@@ -860,13 +893,8 @@ class portal_module
 				$this->db->sql_query($sql);
 			}
 		}
-		else
-		{
-			trigger_error($this->user->lang['UNABLE_TO_MOVE_ROW'] . adm_back_link($this->u_action));
-		}
-		
-		$this->cache->destroy('portal_modules');
-		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
+
+		$this->handle_after_move($updated, true);
 	}
 
 	/**
@@ -874,16 +902,11 @@ class portal_module
 	*
 	* @param int $module_id ID of the module that should be moved
 	*/
-	protected function move_module_down($module_id)
+	public function move_module_down($module_id)
 	{
-		$sql = 'SELECT module_order, module_column
-			FROM ' . PORTAL_MODULES_TABLE . '
-			WHERE module_id = ' . (int) $module_id;
-		$result = $this->db->sql_query_limit($sql, 1);
-		$module_data = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
+		$module_data = $this->get_move_module_data($module_id);
 
-		if ($module_data !== false)
+		if ($module_data !== false && $this->get_last_module_order($module_data['module_column']) != $module_data['module_order'])
 		{
 			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 				SET module_order = module_order - 1
@@ -899,13 +922,8 @@ class portal_module
 				$this->db->sql_query($sql);
 			}
 		}
-		else
-		{
-			trigger_error($this->user->lang['UNABLE_TO_MOVE_ROW'] . adm_back_link($this->u_action));
-		}
-		
-		$this->cache->destroy('portal_modules');
-		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
+
+		$this->handle_after_move($updated, true);
 	}
 
 	/**
@@ -913,14 +931,9 @@ class portal_module
 	*
 	* @param int $module_id ID of the module that should be moved
 	*/
-	protected function move_module_left($module_id)
+	public function move_module_left($module_id)
 	{
-		$sql = 'SELECT module_order, module_column, module_classname
-			FROM ' . PORTAL_MODULES_TABLE . '
-			WHERE module_id = ' . (int) $module_id;
-		$result = $this->db->sql_query_limit($sql, 1);
-		$module_data = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
+		$module_data = $this->get_move_module_data($module_id);
 		
 		if (!isset($this->modules[$module_data['module_classname']]))
 		{
@@ -929,7 +942,7 @@ class portal_module
 
 		$this->c_class = $this->modules[$module_data['module_classname']];
 		
-		if ($module_data !== false)
+		if ($module_data !== false && $module_data['module_column'] > column_string_num('left'))
 		{
 			if($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 1)))
 			{
@@ -941,7 +954,7 @@ class portal_module
 			}
 			else
 			{
-				// @todo: need an error handle here (i.e. trigger_error())
+				$this->handle_after_move(false);
 			}
 			
 			/**
@@ -951,22 +964,15 @@ class portal_module
 			* new column (side columns (left & right) or center columns (top, center, bottom)).
 			* of course this does not apply to custom modules.
 			*/
-			if ($module_data['module_classname'] != 'custom' && $move_action == 1)
+			if ($module_data['module_classname'] != '\board3\portal\modules\custom' && $move_action == 1)
 			{
 				$column_string = column_num_string($module_data['module_column'] - $move_action);
 				// we can only move left to the left & center column
-				if ($column_string == 'left' &&
-					isset($module_column[$module_data['module_classname']]) &&
-					(in_array('left', $module_column[$module_data['module_classname']]) ||
-					in_array('right', $module_column[$module_data['module_classname']])))
+				if ($column_string == 'left' && !$this->can_move_module(array('right', 'left'), $module_data['module_classname']))
 				{
 					trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 				}
-				elseif ($column_string == 'center' &&
-					isset($module_column[$module_data['module_classname']]) &&
-					(in_array('center', $module_column[$module_data['module_classname']]) ||
-					in_array('top', $module_column[$module_data['module_classname']]) ||
-					in_array('bottom', $module_column[$module_data['module_classname']])))
+				elseif ($column_string == 'center' && !$this->can_move_module(array('top', 'center', 'bottom'), $module_data['module_classname']))
 				{
 					// we are moving from the right to the center column so we should move to the left column instead
 					$move_action = 2;
@@ -1009,11 +1015,10 @@ class portal_module
 		}
 		else
 		{
-			trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
+			$this->handle_after_move(false);
 		}
 		
-		$this->cache->destroy('portal_modules');
-		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
+		$this->handle_after_move(true);
 	}
 
 	/**
@@ -1021,14 +1026,9 @@ class portal_module
 	*
 	* @param int $module_id ID of the module that should be moved
 	*/
-	protected function move_module_right($module_id)
+	public function move_module_right($module_id)
 	{
-		$sql = 'SELECT module_order, module_column, module_classname
-			FROM ' . PORTAL_MODULES_TABLE . '
-			WHERE module_id = ' . (int) $module_id;
-		$result = $this->db->sql_query_limit($sql, 1);
-		$module_data = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
+		$module_data = $this->get_move_module_data($module_id);
 		
 		if (!isset($this->modules[$module_data['module_classname']]))
 		{
@@ -1037,7 +1037,7 @@ class portal_module
 
 		$this->c_class = $this->modules[$module_data['module_classname']];
 		
-		if ($module_data !== false)
+		if ($module_data !== false && $module_data['module_column'] < column_string_num('right'))
 		{
 			if($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 1)))
 			{
@@ -1049,7 +1049,7 @@ class portal_module
 			}
 			else
 			{
-				// @todo: need an error handle here
+				$this->handle_after_move(false);
 			}
 			
 			/**
@@ -1059,22 +1059,15 @@ class portal_module
 			* new column (side columns (left & right) or center columns (top, center, bottom)).
 			* of course this does not apply to custom modules.
 			*/
-			if ($module_data['module_classname'] != 'custom' && $move_action == 1)
+			if ($module_data['module_classname'] != '\board3\portal\modules\custom' && $move_action == 1)
 			{
 				$column_string = column_num_string($module_data['module_column'] + $move_action);
 				// we can only move right to the right & center column
-				if ($column_string == 'right' &&
-					isset($module_column[$module_data['module_classname']]) &&
-					(in_array('left', $module_column[$module_data['module_classname']]) ||
-					in_array('right', $module_column[$module_data['module_classname']])))
+				if ($column_string == 'right' && !$this->can_move_module(array('right', 'left'), $module_data['module_classname']))
 				{
 					trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 				}
-				elseif ($column_string == 'center' &&
-					isset($module_column[$module_data['module_classname']]) &&
-					(in_array('center', $module_column[$module_data['module_classname']]) ||
-					in_array('top', $module_column[$module_data['module_classname']]) ||
-					in_array('bottom', $module_column[$module_data['module_classname']])))
+				elseif ($column_string == 'center' && !$this->can_move_module(array('top', 'center', 'bottom'), $module_data['module_classname']))
 				{
 					// we are moving from the left to the center column so we should move to the right column instead
 					$move_action = 2;
@@ -1117,11 +1110,10 @@ class portal_module
 		}
 		else
 		{
-			trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
+			$this->handle_after_move(false);
 		}
-		
-		$this->cache->destroy('portal_modules');
-		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
+
+		$this->handle_after_move(true);
 	}
 
 	/**
@@ -1219,5 +1211,54 @@ class portal_module
 				$this->modules[$class_name] = $current_module;
 			}
 		}
+	}
+
+	/**
+	* Check if module can be moved to desired column(s)
+	*
+	* @param array|int	$target_column Column(s) the module should be
+	*				moved to
+	* @param string		$module_class Class of the module
+	* @return bool		True if module can be moved to desired column,
+	*			false if not
+	*/
+	public function can_move_module($target_column, $module_class)
+	{
+		$submit = true;
+
+		if (is_array($target_column))
+		{
+			foreach ($target_column as $column)
+			{
+				if (!$this->can_move_module($column, $module_class))
+				{
+					$submit = false;
+				}
+			}
+		}
+
+		// do we want to add the module to the side columns or to the center columns?
+		if (in_array($target_column, array('left', 'right')))
+		{
+			// does the module already exist in the side columns?
+			if (isset($this->module_column[$module_class]) &&
+				(in_array('left', $this->module_column[$module_class]) || in_array('right', $this->module_column[$module_class])))
+			{
+				$submit = false;
+			}
+		}
+		elseif (in_array($target_column, array('center', 'top', 'bottom')))
+		{
+			// does the module already exist in the center columns?
+			if (isset($this->module_column[$module_class]) &&
+				(in_array('center', $this->module_column[$module_class]) ||
+				in_array('top', $this->module_column[$module_class]) ||
+				in_array('bottom', $this->module_column[$module_class])))
+			{
+				$submit = false;
+			}
+		}
+
+		return $submit;
 	}
 }
