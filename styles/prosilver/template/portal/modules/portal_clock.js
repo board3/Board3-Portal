@@ -69,7 +69,7 @@ phpbb.b3pFlipClock = function(identifierUp, identifierDown, val, type) {
 
 	// Workaround for Internet Explorer bug
 	if (backPosition === undefined) {
-		backPosition = $(backIdUp).css('background-position-x') + ' ' + $(backIdUp).css('background-position-y');
+		backPosition = $(identifierDown).css('background-position-x') + ' ' + $(identifierDown).css('background-position-y');
 	}
 
 	backPositionLength = backPosition.length;
@@ -99,6 +99,7 @@ phpbb.b3pFlipClock = function(identifierUp, identifierDown, val, type) {
 		return;
 	}
 
+	// Animate the top number flipping
 	$(identifierUp).animate({
 			height: '0px',
 			'margin-top': '21px'
@@ -107,13 +108,20 @@ phpbb.b3pFlipClock = function(identifierUp, identifierDown, val, type) {
 			'duration': 150,
 			defaultEasing: 'easeInOutSine',
 			'complete': function(){
+				// Now animate the bottom number flipping
 				$(identifierDown).animate(
 					{height: '20px'},
 					{
 						'duration': 150,
 						defaultEasing: 'easeInOutSine',
 						'complete': function(){
-							$(backIdDown).css('background-position', $(identifierDown).css('background-position'));
+							// For compatibility with IE8
+							if ($(identifierDown).css('background-position') !== undefined) {
+								$(backIdDown).css('background-position', $(identifierDown).css('background-position'));
+							} else {
+								$(backIdDown).css('background-position-x', $(identifierDown).css('background-position-x'));
+								$(backIdDown).css('background-position-y', $(identifierDown).css('background-position-y'));
+							}
 							$(identifierDown).css({
 								'visibility': 'hidden',
 								'display': 'inline-block'
