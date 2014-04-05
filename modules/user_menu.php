@@ -89,7 +89,7 @@ class user_menu extends module_base
 	*/
 	public function get_template_side($module_id)
 	{
-		if (!function_exists('get_user_avatar'))
+		if (!function_exists('get_user_rank'))
 		{
 			include($this->phpbb_root_path . 'includes/functions_display.' . $this->php_ext);
 		}
@@ -142,7 +142,7 @@ class user_menu extends module_base
 			$colour = $this->user->data['user_colour'];
 			$avatar_img = get_user_avatar($this->user->data['user_avatar'], $this->user->data['user_avatar_type'], $this->user->data['user_avatar_width'], $this->user->data['user_avatar_height']);
 			$rank_title = $rank_img = '';
-			get_user_rank($this->user->data['user_rank'], $this->user->data['user_posts'], $rank_title, $rank_img, $rank_img_src);
+			\get_user_rank($this->user->data['user_rank'], $this->user->data['user_posts'], $rank_title, $rank_img, $rank_img_src);
 
 			// Assign specific vars
 			$this->template->assign_vars(array(
