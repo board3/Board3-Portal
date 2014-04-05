@@ -150,6 +150,7 @@ class main
 		*/
 		$portal_config = obtain_portal_config();
 		$portal_modules = obtain_portal_modules();
+		$display_online = false;
 
 		/**
 		* set up column_count array
@@ -268,6 +269,13 @@ class main
 					'TITLE'				=> (isset($this->user->lang[$row['module_name']])) ? $this->user->lang[$row['module_name']] : utf8_normalize_nfc($row['module_name']),
 				));
 			}
+
+			// Check if we need to show the online list
+			if ($row['module_classname'] === '\board3\portal\modules\whois_online')
+			{
+				$display_online = true;
+			}
+
 			unset($template_module);
 		}
 		$module_count['total'] = sizeof($portal_modules);
@@ -294,7 +302,7 @@ class main
 		));
 
 		// And now to output the page.
-		page_header($this->user->lang('PORTAL'));
+		page_header($this->user->lang('PORTAL'), $display_online);
 
 		// foobar_body.html is in ./ext/foobar/example/styles/prosilver/template/foobar_body.html
 		$this->template->set_filenames(array(
