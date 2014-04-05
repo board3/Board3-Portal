@@ -6,9 +6,7 @@ php:
   - 5.5
 
 env:
-  - DB=mariadb
   - DB=mysql
-  - DB=postgres
 
 branches:
   except:
@@ -43,6 +41,13 @@ script:
   - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.5' -a '$DB' = 'mysql' ]; then ../phpBB/vendor/bin/phing sniff; fi"
   - cd ../phpBB/ext/board3/portal
   - ../../../vendor/bin/phpunit --configuration travis/phpunit-$DB-travis.xml
+
+matrix:
+  include:
+    - php: 5.4
+      env: DB=mariadb
+    - php: 5.4
+      env: DB=postgres
 
 notifications:
   email:
