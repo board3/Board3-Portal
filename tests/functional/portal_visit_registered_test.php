@@ -97,4 +97,13 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 		$this->logout();
 		$crawler = self::request('GET', 'app.php/portal');
 	}
+
+	public function test_whois_online_legend()
+	{
+		$crawler = self::request('GET', 'app.php/portal');
+
+		$legend = $crawler->filter('dd.portal-responsive-show p em')->text();
+		$this->assertContains('Administrators', $legend);
+		$this->assertContains('Global moderators', $legend);
+	}
 }
