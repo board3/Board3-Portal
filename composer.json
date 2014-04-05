@@ -5,7 +5,7 @@
 	"homepage": "http://www.board3.de",
 	"version": "2.1.0-dev",
 	"time": "2012-10-05 10:40:01",
-	"licence": "GPL-2.0",
+	"license": "GPL-2.0",
 	"authors": [{
 			"name": "Marc Alexander",
 			"username": "marc1706",
