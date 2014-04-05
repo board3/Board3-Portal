@@ -95,7 +95,7 @@ class whois_online extends module_base
 		{
 			$sql = 'SELECT group_id, group_name, group_colour, group_type
 				FROM ' . GROUPS_TABLE . '
-				WHERE group_legend = 1
+				WHERE group_legend > 0
 				ORDER BY group_name ASC';
 		}
 		else
@@ -108,7 +108,7 @@ class whois_online extends module_base
 						AND ug.user_id = ' . $this->user->data['user_id'] . '
 						AND ug.user_pending = 0
 					)
-				WHERE g.group_legend = 1
+				WHERE g.group_legend > 0
 					AND (g.group_type <> ' . GROUP_HIDDEN . ' OR ug.user_id = ' . $this->user->data['user_id'] . ')
 				ORDER BY g.group_name ASC';
 		}
