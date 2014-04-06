@@ -52,4 +52,6 @@ dt#a { width: 125% !important; }
 	#portal-left ul.topiclist dd, #portal-right ul.topiclist dd { display: block !important; }
 	.portal-responsive-show { display: block !important; }
 	.portal-responsive-hide { display: none !important; }
+	#portal-body { padding-top: 0px !important; }
+	.portal-clear { display: none !important; }
 }
