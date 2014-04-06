@@ -117,6 +117,7 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 
 #portal-body #viewpoll {
 	margin-left: 0px;
+	margin-right: 0px;
 }
 
 /**
@@ -128,6 +129,10 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 
 .portal-no-margin {
 	margin: 0;
+}
+
+.portal-clear {
+	clear: both;
 }
 
 /* RTL language fixes */
