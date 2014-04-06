@@ -17,4 +17,4 @@ The extension is currently under heavy development and not supported until furth
 ## AUTOMATED TESTING
 
 We are starting to have unit and functional tests in order to prevent regressions. You can check our travis build below.
-develop-2.1.x - [![Build Status](https://api.travis-ci.org/board3/Board3-Portal.png?branch=develop-2.1.x)](http://travis-ci.org/phpbb/phpbb)
+develop-2.1.x - [![Build Status](https://api.travis-ci.org/board3/Board3-Portal.png?branch=develop-2.1.x)](https://travis-ci.org/board3/Board3-Portal)
