@@ -272,7 +272,9 @@ services:
         arguments:
             - @auth
             - @config
+            - @controller.helper
             - @dbal.conn
+            - @path_helper
             - @template
             - @user
             - %core.root_path%

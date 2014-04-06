@@ -38,4 +38,22 @@ class phpbb_functional_portal_redirect_test extends \board3\portal\tests\testfra
 			$this->assertContains('Board3 Portal', $crawler->text());
 		}
 	}
+
+	public function test_redirect_after_login()
+	{
+		// Make sure we are logged out
+		$this->logout();
+
+		$crawler = self::request('GET', 'app.php/portal?sid=' . $this->sid);
+		$form = $crawler->selectButton('Login')->form();
+		$form->setValues(array(
+			'username'	=> 'admin',
+			'password'	=> 'adminadmin',
+		));
+
+		$crawler = self::submit($form);
+
+		// Should be redirected to portal and logged in
+		$this->assertContains('Site Admin', $crawler->text());
+	}
 }

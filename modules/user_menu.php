@@ -47,8 +47,14 @@ class user_menu extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
+	/** @var \phpbb\controller\helper */
+	protected $controller_helper;
+
 	/** @var \phpbb\db\driver */
 	protected $db;
+
+	/** @var \phpbb\path_helper */
+	protected $path_helper;
 
 	/** @var \phpbb\template */
 	protected $template;
@@ -67,17 +73,21 @@ class user_menu extends module_base
 	*
 	* @param \phpbb\auth\auth $auth phpBB auth
 	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\controller\helper $controller_helper Controller helper
 	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\path_helper $path_helper phpBB path helper
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\user $user phpBB user
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	*/
-	public function __construct($auth, $config, $db, $template, $user, $phpbb_root_path, $phpEx)
+	public function __construct($auth, $config, $controller_helper, $db, $path_helper, $template, $user, $phpbb_root_path, $phpEx)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
+		$this->controller_helper = $controller_helper;
 		$this->db = $db;
+		$this->path_helper = $path_helper;
 		$this->template = $template;
 		$this->user = $user;
 		$this->phpbb_root_path = $phpbb_root_path;
@@ -171,12 +181,16 @@ class user_menu extends module_base
 		}
 		else
 		{
-			// Assign specific vars
+			/*
+			* Assign specific vars
+			* Need to remove web root path as ucp.php will do the
+			* redirect
+			*/
 			$this->template->assign_vars(array(
-				'U_PORTAL'				=> append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"),
+				'U_PORTAL'		=> $this->path_helper->remove_web_root_path($this->controller_helper->route('board3_controller')),
 				'S_DISPLAY_FULL_LOGIN'	=> true,
 				'S_AUTOLOGIN_ENABLED'	=> ($this->config['allow_autologin']) ? true : false,
-				'S_LOGIN_ACTION'		=> append_sid("{$this->phpbb_root_path}ucp.{$this->php_ext}", 'mode=login'),
+				'S_LOGIN_ACTION'	=> append_sid("{$this->phpbb_root_path}ucp.{$this->php_ext}", 'mode=login'),
 				'S_SHOW_REGISTER'	=> ($this->config['board3_user_menu_register_' . $module_id]) ? true : false,
 			));
 
