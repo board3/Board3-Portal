@@ -34,7 +34,7 @@ class portal_module
 		global $db, $user, $cache, $request, $template;
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpbb_container, $phpEx;
 
-		$user->add_lang_ext('board3/portal', 'portal');
+		$user->add_lang_ext('board3/portal', array('portal', 'portal_acp'));
 
 		$this->root_path = $phpbb_root_path . 'ext/board3/portal/';
 
