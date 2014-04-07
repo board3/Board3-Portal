@@ -841,6 +841,12 @@ class portal_module
 		}
 
 		$this->cache->destroy('portal_modules');
+
+		if ($this->request->is_ajax())
+		{
+			$json_response = new \phpbb\json_response;
+			$json_response->send(array('success' => true));
+		}
 		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
 	}
 

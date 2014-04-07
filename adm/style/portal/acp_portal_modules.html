@@ -111,7 +111,7 @@
 				<td>
 					{modules_center.MODULE_IMAGE} {modules_center.MODULE_NAME}<br />
 					<br />
-					<!-- IF modules_center.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_center.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+					<!-- IF modules_center.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_center.U_MOVE_UP}" data-ajax="b3p_move_module_up">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
 					<!-- IF modules_center.U_MOVE_RIGHT --><a href="{modules_center.U_MOVE_RIGHT}">{ICON_MOVE_RIGHT}</a><!-- ELSE -->{ICON_MOVE_RIGHT_DISABLED}<!-- ENDIF -->&nbsp;
 					<a href="{modules_center.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_center.U_DELETE}">{ICON_DELETE}</a><br />
 					<!-- IF modules_center.U_MOVE_LEFT --><a href="{modules_center.U_MOVE_LEFT}">{ICON_MOVE_LEFT}</a><!-- ELSE -->{ICON_MOVE_LEFT_DISABLED}<!-- ENDIF -->&nbsp;
@@ -188,6 +188,8 @@
 </form>
 
 <!-- ENDIF -->
+
+<!-- INCLUDEJS portal/ajax.js -->
 
 <!-- INCLUDE overall_footer.html -->
 <!-- ENDIF -->
