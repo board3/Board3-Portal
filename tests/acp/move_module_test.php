@@ -15,11 +15,13 @@ require_once(dirname(__FILE__) . '/../../acp/portal_module.php');
 class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\database_test_case
 {
 	static public $redirected = false;
+	static public $error = false;
+	static public $override_trigger_error = false;
 
 	public function setUp()
 	{
 		parent::setUp();
-		global $db, $cache, $phpbb_root_path, $phpEx, $user, $phpbb_container, $template;
+		global $db, $cache, $phpbb_root_path, $phpEx, $user, $phpbb_container, $request, $template;
 		$user = new \board3\portal\tests\mock\user();
 		$phpbb_container = new \phpbb_mock_container_builder();
 		// Mock version check
@@ -55,6 +57,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			'UNABLE_TO_MOVE'	=> 'UNABLE_TO_MOVE',
 			'UNABLE_TO_MOVE_ROW'	=> 'UNABLE_TO_MOVE_ROW',
 		));
+		$request = new \phpbb_mock_request;
 		$this->portal_module = new \board3\portal\acp\portal_module();
 		$this->update_portal_modules();
 	}
@@ -282,4 +285,13 @@ function redirect($url)
 function adm_back_link($url)
 {
 	return $url;
+}
+
+function trigger_error($input, $type = E_USER_NOTICE)
+{
+	if (!phpbb_acp_move_module_test::$override_trigger_error)
+	{
+		\trigger_error($input, $type);
+	}
+	phpbb_acp_move_module_test::$error = $input;
 }

@@ -34,6 +34,26 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 	*/
 	public function test_acp_pages($mode)
 	{
-		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&amp;mode=' . $mode . '&sid=' . $this->sid);
+		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&mode=' . $mode . '&sid=' . $this->sid);
+	}
+
+	public function test_move_first_module_up()
+	{
+		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&mode=modules&sid=' . $this->sid);
+		$module_link = $crawler->filter('table')->eq(3)->filter('tr')->eq(1)->filter('a')->eq(0)->attr('href');
+		preg_match('/module_id=(?:([0-9]{1,3}))/', $module_link, $output);
+		$this->assertNotEmpty($output[1]);
+		$module_id = $output[1];
+		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&mode=modules&module_id=' . $module_id . '&action=move_up&sid=' . $this->sid);
+	}
+
+	public function test_move_last_module_down()
+	{
+		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&mode=modules&sid=' . $this->sid);
+		$module_link = $crawler->filter('table')->eq(3)->filter('tr')->last()->filter('a')->eq(0)->attr('href');
+		preg_match('/module_id=(?:([0-9]{1,3}))/', $module_link, $output);
+		$this->assertNotEmpty($output[1]);
+		$module_id = $output[1];
+		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&mode=modules&module_id=' . $module_id . '&action=move_down&sid=' . $this->sid);
 	}
 }

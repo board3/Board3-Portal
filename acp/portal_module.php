@@ -874,6 +874,7 @@ class portal_module
 	*/
 	public function move_module_up($module_id)
 	{
+		$updated = false;
 		$module_data = $this->get_move_module_data($module_id);
 
 		if (($module_data !== false) && ($module_data['module_order'] > 1))
@@ -904,6 +905,7 @@ class portal_module
 	*/
 	public function move_module_down($module_id)
 	{
+		$updated = false;
 		$module_data = $this->get_move_module_data($module_id);
 
 		if ($module_data !== false && $this->get_last_module_order($module_data['module_column']) != $module_data['module_order'])
