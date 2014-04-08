@@ -313,7 +313,7 @@ class portal_module
 					'S_ERROR'			=> (sizeof($error)) ? true : false,
 					'ERROR_MSG'			=> implode('<br />', $error),
 
-					'U_ACTION'			=> $this->u_action . (($module_id) ? '&amp;module_id=' . $module_id : ''),
+					'B3P_U_ACTION'			=> $this->get_module_link('config', $module_id),
 					'B3P_ACP_ROOT'		=> $this->root_path,
 				));
 
@@ -1199,7 +1199,7 @@ class portal_module
 	*/
 	protected function get_module_link($mode, $module_id)
 	{
-		return preg_replace(array('/i=[0-9]+/', '/mode=[a-zA-Z0-9_]+/'), array('i=%5C' . str_replace('\\', '%5C', __CLASS__), 'mode=' . $mode), $this->u_action) . '&amp;module_id=' . $module_id;
+		return preg_replace(array('/i=[0-9]+/', '/mode=[a-zA-Z0-9_]+/'), array('i=%5C' . str_replace('\\', '%5C', __CLASS__), 'mode=' . $mode), $this->u_action) . (($module_id) ? '&amp;module_id=' . $module_id : '');
 	}
 
 	/**
