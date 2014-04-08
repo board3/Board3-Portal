@@ -78,4 +78,22 @@ phpbb.addAjaxCallback('b3p_move_module_down', function(res) {
 	}
 });
 
+phpbb.addAjaxCallback('b3p_delete_module', function(res) {
+	if (typeof res.success === 'undefined' || !res.success) {
+		return;
+	}
+
+	var el = $(this).parents('tr:first'),
+		nextEl = el.next();
+
+	el.remove();
+
+	// Fix classes of next elements
+	while (nextEl !== undefined && nextEl.is('tr')) {
+		var nextElClass = (nextEl.attr('class') === 'row1') ? 'row2' : 'row1';
+		nextEl.attr('class', nextElClass);
+		nextEl = nextEl.next();
+	}
+});
+
 })(jQuery); // Avoid conflicts with other libraries

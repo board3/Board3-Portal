@@ -1167,6 +1167,15 @@ class portal_module
 				
 				$this->cache->purge(); // make sure we don't get errors after re-adding a module
 
+				if ($this->request->is_ajax())
+				{
+					$json_response = new \phpbb\json_response;
+					$json_response->send(array(
+						'success' => true,
+						'MESSAGE_TITLE'	=> $this->user->lang['INFORMATION'],
+						'MESSAGE_TEXT'	=> $this->user->lang['SUCCESS_DELETE'],
+					));
+				}
 				trigger_error($this->user->lang['SUCCESS_DELETE'] . adm_back_link($this->u_action));
 			}
 			else
