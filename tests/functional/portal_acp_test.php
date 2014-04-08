@@ -56,4 +56,23 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 		$module_id = $output[1];
 		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&mode=modules&module_id=' . $module_id . '&action=move_down&sid=' . $this->sid);
 	}
+
+	public function test_delete_module()
+	{
+		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&mode=modules&sid=' . $this->sid);
+		$module_link = str_replace(array('./../', '%5C'), array('', '\\'), $crawler->filter('table')->eq(3)->filter('tr')->last()->filter('a')->eq(3)->attr('href'));
+		$crawler = self::request('GET', $module_link);
+		preg_match('/module_classname=(?:([a-z0-9\\\_]+))/', $module_link, $module_name);
+		$module_name = $module_name[1];
+		$this->assertContains('Are you sure you wish to delete the module', $crawler->text());
+		$form = $crawler->selectButton('confirm')->form();
+		$crawler = self::submit($form);
+		$this->assertContains('The module was removed successfully.', $crawler->text());
+
+		// Add it back
+		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&mode=modules&add[center]=true&sid=' . $this->sid);
+		$form = $crawler->selectButton('submit')->form();
+		$form->setValues(array('module_classname' => $module_name));
+		$crawler = self::submit($form);
+	}
 }

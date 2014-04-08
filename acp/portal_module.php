@@ -671,7 +671,7 @@ class portal_module
 							'MODULE_IMAGE'		=> ($row['module_image_src']) ? '<img src="' . $this->root_path . 'styles/' .  $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'] . '" alt="' . $row['module_name'] . '" />' : '',
 							'MODULE_ENABLED'	=> ($row['module_status']) ? true : false,
 
-							'U_DELETE'			=> $this->get_module_link('modules', $row['module_id']) . '&amp;action=delete',
+							'U_DELETE'			=> $this->get_module_link('modules', $row['module_id']) . '&amp;action=delete&amp;module_classname=' . $row['module_classname'],
 							'U_EDIT'			=> $this->get_module_link('config', $row['module_id']),
 							'U_MOVE_UP'			=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_up',
 							'U_MOVE_DOWN'		=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_down',
