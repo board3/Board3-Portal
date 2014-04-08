@@ -51,11 +51,11 @@
 
 	<table class="portal-modules-overview">
 		<tr>
-			<th style="text-align: center;" colspan="3">{L_MODULE_POS_TOP}</th>
+			<th style="text-align: center;">{L_MODULE_POS_TOP}</th>
 		</tr>
 		<!-- BEGIN modules_top -->
 			<!-- IF not modules_top.MODULE_ENABLED --><tr class="row3"><!-- ELSEIF modules_top.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
-				<td colspan="3">
+				<td>
 					{modules_top.MODULE_IMAGE} {modules_top.MODULE_NAME}<br />
 					<br />
 					<span<!-- IF not modules_top.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_UP_DISABLED}&nbsp;</span>
@@ -78,7 +78,7 @@
 	<table style="background-color: transparent; border: none; padding: 0px; margin: 0px;">
 		<tr style="vertical-align: top;">
 				<td style="width: 20%; font-size: 100%; line-height: 100%; padding: 0px; margin: 0px;">
-	<table cellspacing="1">
+	<table class="portal-modules-overview">
 		<tr>
 				<th>{L_MODULE_POS_LEFT}</th>
 		</tr>
@@ -107,7 +107,7 @@
 	</p>
 				</td>
 				<td style="font-size: 100%; line-height: 100%; padding: 0 12px;">
-	<table cellspacing="1">
+	<table class="portal-modules-overview">
 		<tr>
 				<th style="text-align: center;">{L_MODULE_POS_CENTER}</th>
 		</tr>
@@ -136,7 +136,7 @@
 	</p>
 				</td>
 				<td style="width: 20%; font-size: 100%; line-height: 100%; padding: 0px;">
-	<table cellspacing="1">
+	<table class="portal-modules-overview">
 		<tr>
 				<th>{L_MODULE_POS_RIGHT}</th>
 		</tr>
@@ -168,13 +168,13 @@
 	</table>
 	<br />
 
-	<table cellspacing="1">
+	<table class="portal-modules-overview">
 		<tr>
-			<th style="text-align: center;" colspan="3">{L_MODULE_POS_BOTTOM}</th>
+			<th style="text-align: center;">{L_MODULE_POS_BOTTOM}</th>
 		</tr>
 		<!-- BEGIN modules_bottom -->
 			<!-- IF not modules_bottom.MODULE_ENABLED --><tr class="row3"><!-- ELSEIF modules_bottom.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
-				<td colspan="3">
+				<td>
 					{modules_bottom.MODULE_IMAGE} {modules_bottom.MODULE_NAME}<br />
 					<br />
 					<span<!-- IF not modules_bottom.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_UP_DISABLED}&nbsp;</span>
