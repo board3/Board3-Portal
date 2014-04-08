@@ -57,8 +57,10 @@
 				<td colspan="3">
 					{modules_top.MODULE_IMAGE} {modules_top.MODULE_NAME}<br />
 					<br />
-					<!-- IF modules_top.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_top.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
-					<!-- IF modules_top.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{modules_top.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->&nbsp;
+					<span<!-- IF not modules_top.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_UP_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_top.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_top.U_MOVE_UP}" data-ajax="b3p_move_module_up">{ICON_MOVE_UP}</a>&nbsp;</span>
+					<span<!-- IF not modules_top.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_DOWN_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_top.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_top.U_MOVE_DOWN}" data-ajax="b3p_move_module_down">{ICON_MOVE_DOWN}</a>&nbsp;</span>
 					<a href="{modules_top.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_top.U_DELETE}">{ICON_DELETE}</a>
 				</td>
 			</tr>
@@ -84,11 +86,13 @@
 				<td>
 					{modules_left.MODULE_IMAGE} {modules_left.MODULE_NAME}<br />
 					<br />
-					<!-- IF modules_left.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_left.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+					<span<!-- IF not modules_left.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_UP_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_left.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_left.U_MOVE_UP}" data-ajax="b3p_move_module_up">{ICON_MOVE_UP}</a>&nbsp;</span>
 					<!-- IF modules_left.U_MOVE_RIGHT --><a href="{modules_left.U_MOVE_RIGHT}"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{ICON_MOVE_LEFT}<!-- ELSE -->{ICON_MOVE_RIGHT}<!-- ENDIF --></a><!-- ELSE --><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{ICON_MOVE_LEFT_DISABLED}<!-- ELSE -->{ICON_MOVE_RIGHT_DISABLED}<!-- ENDIF --><!-- ENDIF -->&nbsp;
 					<a href="{modules_left.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_left.U_DELETE}">{ICON_DELETE}</a><br />
 					<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{ICON_MOVE_RIGHT_DISABLED}<!-- ELSE -->{ICON_MOVE_LEFT_DISABLED}<!-- ENDIF -->&nbsp;
-					<!-- IF modules_left.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{modules_left.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->
+					<span<!-- IF not modules_left.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_DOWN_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_left.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_left.U_MOVE_DOWN}" data-ajax="b3p_move_module_down">{ICON_MOVE_DOWN}</a></span>
 				</td>
 			</tr>
 		<!-- BEGINELSE -->
@@ -111,11 +115,13 @@
 				<td>
 					{modules_center.MODULE_IMAGE} {modules_center.MODULE_NAME}<br />
 					<br />
-					<!-- IF modules_center.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_center.U_MOVE_UP}" data-ajax="b3p_move_module_up">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+					<span<!-- IF not modules_center.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_UP_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_center.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_center.U_MOVE_UP}" data-ajax="b3p_move_module_up">{ICON_MOVE_UP}</a>&nbsp;</span>
 					<!-- IF modules_center.U_MOVE_RIGHT --><a href="{modules_center.U_MOVE_RIGHT}">{ICON_MOVE_RIGHT}</a><!-- ELSE -->{ICON_MOVE_RIGHT_DISABLED}<!-- ENDIF -->&nbsp;
 					<a href="{modules_center.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_center.U_DELETE}">{ICON_DELETE}</a><br />
 					<!-- IF modules_center.U_MOVE_LEFT --><a href="{modules_center.U_MOVE_LEFT}">{ICON_MOVE_LEFT}</a><!-- ELSE -->{ICON_MOVE_LEFT_DISABLED}<!-- ENDIF -->&nbsp;
-					<!-- IF modules_center.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{modules_center.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->
+					<span<!-- IF not modules_center.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_DOWN_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_center.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_center.U_MOVE_DOWN}" data-ajax="b3p_move_module_down">{ICON_MOVE_DOWN}</a></span>
 				</td>
 			</tr>
 		<!-- BEGINELSE -->
@@ -138,11 +144,13 @@
 				<td>
 					{modules_right.MODULE_IMAGE} {modules_right.MODULE_NAME}<br />
 					<br />
-					<!-- IF modules_right.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_right.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+					<span<!-- IF not modules_right.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_UP_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_right.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_right.U_MOVE_UP}" data-ajax="b3p_move_module_up">{ICON_MOVE_UP}</a>&nbsp;</span>
 					<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{ICON_MOVE_LEFT_DISABLED}<!-- ELSE -->{ICON_MOVE_RIGHT_DISABLED}<!-- ENDIF -->&nbsp;
 					<a href="{modules_right.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_right.U_DELETE}">{ICON_DELETE}</a><br />
 					<!-- IF modules_right.U_MOVE_LEFT --><a href="{modules_right.U_MOVE_LEFT}"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{ICON_MOVE_RIGHT}<!-- ELSE -->{ICON_MOVE_LEFT}<!-- ENDIF --></a><!-- ELSE --><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{ICON_MOVE_RIGHT_DISABLED}<!-- ELSE -->{ICON_MOVE_LEFT_DISABLED}<!-- ENDIF --><!-- ENDIF -->&nbsp;
-					<!-- IF modules_right.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{modules_right.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->
+					<span<!-- IF not modules_right.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_DOWN_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_right.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_right.U_MOVE_DOWN}" data-ajax="b3p_move_module_down">{ICON_MOVE_DOWN}</a></span>
 				</td>
 			</tr>
 		<!-- BEGINELSE -->
@@ -168,8 +176,10 @@
 				<td colspan="3">
 					{modules_bottom.MODULE_IMAGE} {modules_bottom.MODULE_NAME}<br />
 					<br />
-					<!-- IF modules_bottom.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{modules_bottom.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
-					<!-- IF modules_bottom.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{modules_bottom.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->&nbsp;
+					<span<!-- IF not modules_bottom.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_UP_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_bottom.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_bottom.U_MOVE_UP}" data-ajax="b3p_move_module_up">{ICON_MOVE_UP}</a>&nbsp;</span>
+					<span<!-- IF not modules_bottom.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_DOWN_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_bottom.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_bottom.U_MOVE_DOWN}" data-ajax="b3p_move_module_down">{ICON_MOVE_DOWN}</a>&nbsp;</span>
 					<a href="{modules_bottom.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_bottom.U_DELETE}">{ICON_DELETE}</a>
 				</td>
 			</tr>
