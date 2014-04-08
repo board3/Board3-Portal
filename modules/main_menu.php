@@ -297,7 +297,7 @@ class main_menu extends module_base
 
 		$links = $this->utf_unserialize($portal_config['board3_menu_array_' . $module_id]);
 
-		$u_action = append_sid('index.' . $this->php_ext, 'i=\board3\portal\modules\portal&amp;mode=config&amp;module_id=' . $module_id);
+		$u_action = append_sid('index.' . $this->php_ext, 'i=%5Cboard3%5Cportal%5Cacp%5Cportal_module&amp;mode=config&amp;module_id=' . $module_id);
 
 		switch ($action)
 		{

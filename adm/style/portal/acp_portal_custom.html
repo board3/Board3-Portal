@@ -1,6 +1,6 @@
 <!-- INCLUDE overall_header.html -->
 
-<!-- INCLUDEJS portal/acp_portal.js -->
+<!-- INCLUDEJS portal/acp_editor.js -->
 <script type="text/javascript">
 // <![CDATA[
 /**
@@ -55,7 +55,7 @@ var help_line = {
 
 function change_palette()
 {
-	dE('colour_palette');
+	phpbb.toggleDisplay('colour_palette');
 	e = document.getElementById('colour_palette');
 
 	if (e.style.display == 'block')
@@ -83,7 +83,7 @@ function change_palette()
 		<p>{ERROR_MSG}</p>
 	</div>
 <!-- ENDIF -->
-<form id="acp_portal_config" method="post" action="{U_ACTION}">
+<form id="acp_portal_config" method="post" action="{B3P_U_ACTION}">
 <!-- IF SHOW_MODULE_OPTIONS -->
 		<fieldset>
 			<legend>{L_MODULE_OPTIONS}</legend>
@@ -209,8 +209,8 @@ function change_palette()
 				<span>{L_ACP_PORTAL_CUSTOM_BBCODE_EXP}</span>
 			</dt>
 			<dd>
-				<label><input onchange="dE('bbcode-buttons', 1)" class="radio" type="radio" value="1" name="custom_use_bbcode" id="custom_use_bbcode"<!-- IF CUSTOM_USE_BBCODE --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
-				<label><input onchange="dE('bbcode-buttons', -1)" class="radio" type="radio" value="0" name="custom_use_bbcode"<!-- IF not CUSTOM_USE_BBCODE --> checked="checked"<!-- ENDIF --> />{L_NO}</label>
+				<label><input onchange="phpbb.toggleDisplay('bbcode-buttons', 1)" class="radio" type="radio" value="1" name="custom_use_bbcode" id="custom_use_bbcode"<!-- IF CUSTOM_USE_BBCODE --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
+				<label><input onchange="phpbb.toggleDisplay('bbcode-buttons', -1)" class="radio" type="radio" value="0" name="custom_use_bbcode"<!-- IF not CUSTOM_USE_BBCODE --> checked="checked"<!-- ENDIF --> />{L_NO}</label>
 			</dd>
 		</dl>
 <!-- IF S_AUTH -->

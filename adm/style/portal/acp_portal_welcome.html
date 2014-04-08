@@ -1,6 +1,6 @@
 <!-- INCLUDE overall_header.html -->
 
-<!-- INCLUDEJS portal/acp_portal.js -->
+<!-- INCLUDEJS portal/acp_editor.js -->
 <script type="text/javascript">
 // <![CDATA[
 /**
@@ -55,7 +55,7 @@ var help_line = {
 
 function change_palette()
 {
-	dE('colour_palette');
+	phpbb.toggleDisplay('colour_palette');
 	e = document.getElementById('colour_palette');
 
 	if (e.style.display == 'block')
@@ -83,7 +83,7 @@ function change_palette()
 		<p>{ERROR_MSG}</p>
 	</div>
 <!-- ENDIF -->
-<form id="acp_portal_config" method="post" action="{U_ACTION}">
+<form id="acp_portal_config" method="post" action="{B3P_U_ACTION}">
 <!-- IF SHOW_MODULE_OPTIONS -->
 		<fieldset>
 			<legend>{L_MODULE_OPTIONS}</legend>
@@ -145,7 +145,7 @@ function change_palette()
 		<!-- ENDIF -->
 		<fieldset>
 			<legend>{L_PORTAL_WELCOME}</legend>
-		<dl>
+		<dl><dt style="display: none;"></dt>
 			<dd>
 				<div id="colour_palette" style="display: none;">
 					<dl style="clear: left;">

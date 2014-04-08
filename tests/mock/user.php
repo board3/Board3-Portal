@@ -30,6 +30,15 @@ class user extends \PHPUnit_Framework_TestCase
 			return; // can't support other extensions
 		}
 
+		if (is_array($file))
+		{
+			foreach ($file as $cur_file)
+			{
+				$this->add_lang_ext($ext, $cur_file);
+			}
+			return;
+		}
+
 		if (file_exists(dirname(__FILE__) . '/../../language/en/' . $file . '.php'))
 		{
 			include_once(dirname(__FILE__) . '/../../language/en/' . $file . '.php');

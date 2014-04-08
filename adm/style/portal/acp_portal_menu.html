@@ -14,7 +14,7 @@
 <!-- ENDIF -->
 
 <!-- IF S_EDIT -->
-	<form id="acp_portal_links" method="post" action="{U_ACTION}">
+	<form id="acp_portal_links" method="post" action="{B3P_U_ACTION}">
 
 	<fieldset>
 		<legend>{L_ACP_PORTAL_MENU_LINK_SETTINGS}</legend>
@@ -24,8 +24,8 @@
 	</dl>
 	<dl>
 		<dt><label for="link_is_cat">{L_ACP_PORTAL_MENU_IS_CAT}:</label></dt>
-		<dd><label><input onchange="dE('url', -1)" type="radio" class="radio" name="link_is_cat" value="1" id="link_is_cat"<!-- IF S_LINK_IS_CAT --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
-			<label><input onchange="dE('url', 1)" type="radio" class="radio" name="link_is_cat" value="0"<!-- IF not S_LINK_IS_CAT --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		<dd><label><input onchange="phpbb.toggleDisplay('url', -1)" type="radio" class="radio" name="link_is_cat" value="1" id="link_is_cat"<!-- IF S_LINK_IS_CAT --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
+			<label><input onchange="phpbb.toggleDisplay('url', 1)" type="radio" class="radio" name="link_is_cat" value="0"<!-- IF not S_LINK_IS_CAT --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
 	</dl>
 	<div id="url"<!-- IF S_LINK_IS_CAT --> style="display: none;"<!-- ENDIF -->>
 	<dl>

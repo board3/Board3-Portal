@@ -14,7 +14,7 @@
 <!-- ENDIF -->
 
 <!-- IF S_EDIT -->
-	<form id="acp_portal_links" method="post" action="{U_ACTION}">
+	<form id="acp_portal_links" method="post" action="{B3P_U_ACTION}">
 
 	<fieldset>
 		<legend>{L_ACP_PORTAL_EVENTS}</legend>
@@ -43,8 +43,8 @@
 	<dl>
 		<dt><label for="event_all_day">{L_EVENT_ALL_DAY}:</label></dt>
 		<dd>
-			<label><input onchange="dE('end', -1)" type="radio" class="radio" name="event_all_day" value="1" id="event_all_day"<!-- IF EVENT_ALL_DAY --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
-			<label><input onchange="dE('end', 1)" type="radio" class="radio" name="event_all_day" value="0"<!-- IF not EVENT_ALL_DAY --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			<label><input onchange="phpbb.toggleDisplay('end', -1)" type="radio" class="radio" name="event_all_day" value="1" id="event_all_day"<!-- IF EVENT_ALL_DAY --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
+			<label><input onchange="phpbb.toggleDisplay('end', 1)" type="radio" class="radio" name="event_all_day" value="0"<!-- IF not EVENT_ALL_DAY --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 		</dd>
 	</dl>
 	<div id="end"<!-- IF EVENT_ALL_DAY -->style="display: none;"<!-- ENDIF -->>

@@ -1,0 +1,342 @@
+#!/bin/sh
+#
+# A hook to check for correct syntax similar to phpBB3 commit messages per:
+# * <http://wiki.phpbb.com/display/DEV/Git>
+# * <http://area51.phpbb.com/phpBB/viewtopic.php?p=209919#p209919>
+#
+# This is a commit-msg hook.
+#
+# To install this you can either copy or symlink it to
+# $GIT_DIR/hooks
+
+config_ns="b3p.hooks.commit-msg";
+
+if [ "$(git config --bool $config_ns.fatal)" = "true" ]
+then
+	fatal=1;
+	severity=Error;
+else
+	fatal=0;
+	severity=Warning;
+fi
+
+debug_level=$(git config --int $config_ns.debug || echo 0);
+
+# Error codes
+ERR_LENGTH=1;
+ERR_HEADER=2;
+ERR_EMPTY=3;
+ERR_DESCRIPTION=4;
+ERR_FOOTER=5;
+ERR_EOF=6;
+ERR_UNKNOWN=42;
+
+debug()
+{
+	local level;
+
+	level=$1;
+	shift;
+
+	if [ $debug_level -ge $level ]
+	then
+		echo $@;
+	fi
+}
+
+quit()
+{
+	if [ $1 -eq 0 ] || [ $1 -eq $ERR_UNKNOWN ]
+	then
+		# success
+		exit 0;
+	elif [ $fatal -eq 0 ]
+	then
+		# problems found but fatal is false
+		complain 'Please run `git commit --amend` and fix the problems mentioned.' 1>&2
+		exit 0;
+	else
+		complain "Aborting commit." 1>&2
+		exit $1;
+	fi
+}
+
+use_color()
+{
+	if [ -z "$use_color_cached" ]
+	then
+		case $(git config --bool $config_ns.color)
+		in
+		false)
+			use_color_cached=1
+			;;
+		true)
+			use_color_cached=0
+			;;
+		*)
+			# tty detection in shell:
+			# http://hwi.ath.cx/jsh/list/shext/isatty.sh.html
+			tty 0>/dev/stdout >/dev/null 2>&1
+			use_color_cached=$?
+			;;
+		esac
+	fi
+	# return value is the flag inverted -
+	# if return value is 0, this means use color
+	return $use_color_cached
+}
+
+complain()
+{
+	if use_color
+	then
+		# Careful: our argument may include arguments to echo like -n
+		# ANSI color codes:
+		# http://pueblo.sourceforge.net/doc/manual/ansi_color_codes.html
+		printf "\033[31m\033[1m"
+		if [ "$1" = "-n" ]
+		then
+			echo "$@"
+			printf "\033[0m"
+		else
+			# This will print one trailing space.
+			# Not sure how to avoid this at the moment.
+			echo "$@" $(printf "\033[0m")
+		fi
+	else
+		echo "$@"
+	fi
+}
+
+# Check for empty commit message
+if ! grep -qv '^#' "$1"
+then
+	# Commit message is empty (or contains only comments).
+	# Let git handle this.
+	# It will abort with a message like so:
+	#
+	# Aborting commit due to empty commit message.
+	exit 0
+fi
+
+msg=$(grep -v '^#' "$1" |grep -nE '.{81,}')
+
+if [ $? -eq 0 ]
+then
+	complain "The following lines are greater than 80 characters long:" >&2;
+	complain >&2
+	complain "$msg" >&2;
+
+	quit $ERR_LENGTH;
+fi
+
+lines=$(wc -l "$1" | awk '{ print $1; }');
+expecting=header;
+in_description=0;
+in_empty=0;
+ticket=0;
+branch_regex="[a-z]+[a-z0-9-]*[a-z0-9]+";
+i=1;
+tickets="";
+
+while [ $i -le $lines ]
+do
+	# Grab the line we are studying
+	line=$(head -n$i "$1" | tail -n1);
+
+	debug 1 "==> [$i] $line (description: $in_description, empty: $in_empty)";
+
+	err=$ERR_UNKNOWN;
+
+	if [ -z "$expecting" ]
+	then
+		quit $err;
+	fi
+
+	if [ "${expecting#comment}" = "$expecting" ]
+	then
+		# Prefix comments to the expected tokens list
+		expecting="comment $expecting";
+	fi
+
+	debug 2 "Expecting: $expecting";
+
+	# Loop over each of the expected line formats
+	for expect in $expecting
+	do
+		# Reset the error code each iteration
+		err=$ERR_UNKNOWN;
+
+		# Test for validity of each line format
+		# This is done first so $? contains the result
+		case $expect in
+			"header")
+				err=$ERR_HEADER;
+				echo "$line" | grep -Eq "^\[(ticket/[0-9]+|feature/$branch_regex|task/$branch_regex)\] .+$"
+				result=$?
+				if ! echo "$line" | grep -Eq "^\[(ticket/[0-9]+|feature/$branch_regex|task/$branch_regex)\] [A-Z].+$"
+				then
+					# Don't be too strict.
+					# Commits may be temporary, intended to be squashed later.
+					# Just issue a warning here.
+					complain "$severity: heading should be a sentence beginning with a capital letter." 1>&2
+					complain "You entered:" 1>&2
+					complain "$line" 1>&2
+				fi
+				# restore exit code
+				(exit $result)
+			;;
+			"empty")
+				err=$ERR_EMPTY;
+				echo "$line" | grep -Eq "^$"
+			;;
+			"description")
+				err=$ERR_DESCRIPTION;
+				# Free flow text, the line length was constrained by the initial check
+				echo "$line" | grep -Eq "^.+$";
+			;;
+			"footer")
+				err=$ERR_FOOTER;
+				# Each ticket is on its own line
+				echo "$line" | grep -Eq "^B3P-[0-9]+$";
+			;;
+			"eof")
+				err=$ERR_EOF;
+				# Should not end up here
+				false
+			;;
+			"possibly-eof")
+				# Allow empty and/or comment lines at the end
+				! tail -n +"$i" "$1" |grep -qvE '^($|#)'
+			;;
+			"comment")
+				echo "$line" | grep -Eq "^#";
+			;;
+			*)
+				complain "Unrecognised token $expect" >&2;
+				quit $err;
+			;;
+		esac
+
+		# Preserve the result of the line check
+		result=$?;
+
+		debug 2 "$expect - '$line' - $result";
+
+		if [ $result -eq 0 ]
+		then
+			# Break out the loop on success
+			# otherwise roll on round and keep looking for a match
+			break;
+		fi
+	done
+
+	if [ $result -eq 0 ]
+	then
+		# Have we switched out of description mode?
+		if [ $in_description -eq 1 ] && [ "$expect" != "description" ] && [ "$expect" != "empty" ] && [ "$expect" != "comment" ]
+		then
+			# Yes, okay we need to backtrace one line and reanalyse
+			in_description=0;
+			i=$(( $i - $in_empty ));
+
+			# Reset the empty counter
+			in_empty=0;
+			continue;
+		fi
+
+		# Successful match, but on which line format
+		case $expect in
+			"header")
+				expecting="empty";
+
+				echo "$line" | grep -Eq "^\[ticket/[0-9]+\]$" && (
+					ticket=$(echo "$line" | sed 's,\[ticket/\([0-9]*\)\].*,\1,');
+				)
+			;;
+			"empty")
+				# Description might have empty lines as spacing
+				expecting="footer description";
+				in_empty=$(($in_empty + 1));
+
+				if [ $in_description -eq 1 ]
+				then
+					expecting="$expecting empty";
+				fi
+			;;
+			"description")
+				expecting="description empty";
+				in_description=1;
+			;;
+			"footer")
+				expecting="footer possibly-eof";
+				if [ "$tickets" = "" ]
+				then
+					tickets="$line";
+				else
+					tickets="$tickets $line";
+				fi
+			;;
+			"comment")
+				# Comments should expect the same thing again
+			;;
+			"possibly-eof")
+				expecting="eof";
+			;;
+			*)
+				complain "Unrecognised token $expect" >&2;
+				quit 254;
+			;;
+		esac
+
+		if [ "$expect" != "empty" ]
+		then
+			in_empty=0;
+		fi
+
+		debug 3 "Now expecting: $expecting";
+	else
+		# None of the expected line formats matched
+		# Guess we'll call it a day here then
+		complain "Syntax error on line $i:" >&2;
+		complain ">> $line" >&2;
+		complain -n "Expecting: " >&2;
+		complain "$expecting" | sed 's/ /, /g' >&2;
+		quit $err;
+	fi
+
+	i=$(( $i + 1 ));
+done
+
+# If EOF is expected exit cleanly
+echo "$expecting" | grep -q "eof" || (
+	# Unexpected EOF, error
+	complain "Unexpected EOF encountered" >&2;
+	quit $ERR_EOF;
+) && (
+	# Do post scan checks
+	if [ ! -z "$tickets" ]
+	then
+		# Check for duplicate tickets
+		dupes=$(echo "$tickets" | sed 's/ /\n/g' | sort | uniq -d);
+
+		if [ ! -z "$dupes" ]
+		then
+			complain "The following tickets are repeated:" >&2;
+			complain "$dupes" | sed 's/ /\n/g;s/^/* /g' >&2;
+			quit $ERR_FOOTER;
+		fi
+	fi
+	# Check the branch ticket is mentioned, doesn't make sense otherwise
+	if [ $ticket -gt 0 ]
+	then
+		echo "$tickets" | grep -Eq "\bB3P-$ticket\b" || (
+			complain "Ticket ID [$ticket] of branch missing from list of tickets:" >&2;
+			complain "$tickets" | sed 's/ /\n/g;s/^/* /g' >&2;
+			quit $ERR_FOOTER;
+		) || exit $?;
+	fi
+	# Got here okay exit to reality
+	exit 0;
+);
+exit $?;

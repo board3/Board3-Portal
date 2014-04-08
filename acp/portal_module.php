@@ -313,7 +313,7 @@ class portal_module
 					'S_ERROR'			=> (sizeof($error)) ? true : false,
 					'ERROR_MSG'			=> implode('<br />', $error),
 
-					'U_ACTION'			=> $this->u_action . (($module_id) ? '&amp;module_id=' . $module_id : ''),
+					'B3P_U_ACTION'			=> $this->get_module_link('config', $module_id),
 					'B3P_ACP_ROOT'		=> $this->root_path,
 				));
 
@@ -671,7 +671,7 @@ class portal_module
 							'MODULE_IMAGE'		=> ($row['module_image_src']) ? '<img src="' . $this->root_path . 'styles/' .  $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'] . '" alt="' . $row['module_name'] . '" />' : '',
 							'MODULE_ENABLED'	=> ($row['module_status']) ? true : false,
 
-							'U_DELETE'			=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;module_classname=' . $row['module_classname'] . '&amp;action=delete',
+							'U_DELETE'			=> $this->get_module_link('modules', $row['module_id']) . '&amp;action=delete&amp;module_classname=' . $row['module_classname'],
 							'U_EDIT'			=> $this->get_module_link('config', $row['module_id']),
 							'U_MOVE_UP'			=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_up',
 							'U_MOVE_DOWN'		=> $this->u_action . '&amp;module_id=' . $row['module_id'] . '&amp;action=move_down',
@@ -841,6 +841,12 @@ class portal_module
 		}
 
 		$this->cache->destroy('portal_modules');
+
+		if ($this->request->is_ajax())
+		{
+			$json_response = new \phpbb\json_response;
+			$json_response->send(array('success' => true));
+		}
 		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
 	}
 
@@ -874,6 +880,7 @@ class portal_module
 	*/
 	public function move_module_up($module_id)
 	{
+		$updated = false;
 		$module_data = $this->get_move_module_data($module_id);
 
 		if (($module_data !== false) && ($module_data['module_order'] > 1))
@@ -904,6 +911,7 @@ class portal_module
 	*/
 	public function move_module_down($module_id)
 	{
+		$updated = false;
 		$module_data = $this->get_move_module_data($module_id);
 
 		if ($module_data !== false && $this->get_last_module_order($module_data['module_column']) != $module_data['module_order'])
@@ -1159,6 +1167,15 @@ class portal_module
 				
 				$this->cache->purge(); // make sure we don't get errors after re-adding a module
 
+				if ($this->request->is_ajax())
+				{
+					$json_response = new \phpbb\json_response;
+					$json_response->send(array(
+						'success' => true,
+						'MESSAGE_TITLE'	=> $this->user->lang['INFORMATION'],
+						'MESSAGE_TEXT'	=> $this->user->lang['SUCCESS_DELETE'],
+					));
+				}
 				trigger_error($this->user->lang['SUCCESS_DELETE'] . adm_back_link($this->u_action));
 			}
 			else
@@ -1191,7 +1208,7 @@ class portal_module
 	*/
 	protected function get_module_link($mode, $module_id)
 	{
-		return preg_replace(array('/i=[0-9]+/', '/mode=[a-zA-Z0-9_]+/'), array('i=\\' . __CLASS__, 'mode=' . $mode), $this->u_action) . '&amp;module_id=' . $module_id;
+		return preg_replace(array('/i=[0-9]+/', '/mode=[a-zA-Z0-9_]+/'), array('i=%5C' . str_replace('\\', '%5C', __CLASS__), 'mode=' . $mode), $this->u_action) . (($module_id) ? '&amp;module_id=' . $module_id : '');
 	}
 
 	/**
