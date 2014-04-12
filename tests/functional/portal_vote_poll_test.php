@@ -23,9 +23,9 @@ class phpbb_functional_portal_vote_poll_test extends \board3\portal\tests\testfr
 	public function test_with_poll()
 	{
 		// Create topic with poll
-		$data = $this->create_topic(2, 'Portal-poll', 'This is a poll for the portal', array(
+		$data = $this->create_topic(2, 'Portal-poll', 'This is a [b]poll[/b] for the portal', array(
 			'poll_title'	=> 'Is this a poll?',
-			'poll_option_text'	=> "Yes\nNo\nMaybe",
+			'poll_option_text'	=> "Yes\nN[b]o[/b]\nMaybe",
 		));
 
 		if (isset($data))
