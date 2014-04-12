@@ -325,7 +325,7 @@ class announcements extends module_base
 						$this->template->assign_vars(array(
 							'AP_PAGINATION'			=> $pagination,
 							'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $this->user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($this->user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
-							'AP_PAGE_NUMBER'		=> $this->pagination->on_page('', $total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start))
+							'AP_PAGE_NUMBER'		=> $this->pagination->on_page($total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start))
 						);
 					}
 				}
@@ -401,7 +401,7 @@ class announcements extends module_base
 					$this->template->assign_vars(array(
 						'AP_PAGINATION'			=> $pagination,
 						'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $this->user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($this->user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
-						'AP_PAGE_NUMBER'		=> $this->pagination->on_page('', $total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start))
+						'AP_PAGE_NUMBER'		=> $this->pagination->on_page($total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start))
 					);
 				}
 			}
