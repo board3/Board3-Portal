@@ -508,7 +508,7 @@ class poll extends module_base
 					// Parse BBCode title
 					if ($data['bbcode_bitfield'])
 					{
-						$poll_bbcode = new bbcode();
+						$poll_bbcode = new \bbcode();
 					}
 					else
 					{
@@ -551,7 +551,7 @@ class poll extends module_base
 						// Parse BBCode option text
 						if ($data['bbcode_bitfield'])
 						{
-							$poll_bbcode = new bbcode();
+							$poll_bbcode = new \bbcode();
 						}
 						else
 						{
