@@ -314,7 +314,7 @@ class news extends module_base
 						$this->template->assign_vars(array(
 							'NP_PAGINATION'		=> $pagination,
 							'TOTAL_NEWS'		=> ($total_news == 1) ? sprintf($this->user->lang['VIEW_FORUM_TOPICS'][1], $total_news) : sprintf($this->user->lang['VIEW_FORUM_TOPICS'][2], $total_news),
-							'NP_PAGE_NUMBER'	=> $this->pagination->on_page($view_topic_url, $total_news, $this->config['board3_number_of_news_' . $module_id], $start))
+							'NP_PAGE_NUMBER'	=> $this->pagination->on_page($total_news, $this->config['board3_number_of_news_' . $module_id], $start))
 						);
 					}
 				}
@@ -378,7 +378,7 @@ class news extends module_base
 					$this->template->assign_vars(array(
 						'NP_PAGINATION'		=> $pagination,
 						'TOTAL_NEWS'		=> ($total_news == 1) ? $this->user->lang['VIEW_FORUM_TOPIC'] : $this->user->lang('VIEW_FORUM_TOPICS', $total_news),
-						'NP_PAGE_NUMBER'	=> $this->pagination->on_page('', $total_news, $this->config['board3_number_of_news_' . $module_id], $start))
+						'NP_PAGE_NUMBER'	=> $this->pagination->on_page($total_news, $this->config['board3_number_of_news_' . $module_id], $start))
 					);
 				}
 			}
