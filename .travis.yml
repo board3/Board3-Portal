@@ -41,6 +41,7 @@ script:
   - cd ../../../../build
   - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.5' -a '$DB' = 'mysql' ]; then ../phpBB/vendor/bin/phing sniff; fi"
   - cd ../phpBB/ext/board3/portal
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.5' -a '$DB' = 'mysql' ]; then php develop/spellchecker.php; fi"
   - ../../../vendor/bin/phpunit --configuration travis/phpunit-$DB-travis.xml
 
 matrix:
