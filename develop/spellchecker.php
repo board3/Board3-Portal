@@ -110,3 +110,9 @@ if (PHP_SAPI == 'cli')
 }
 
 echo $output;
+
+// Exit with 1 if script encountered issues
+if (strlen($output) > 0)
+{
+	exit(1);
+}
