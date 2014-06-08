@@ -364,7 +364,7 @@ class links extends module_base
 					break;
 				}
 
-				/* 
+				/*
 				* on move_down, switch position with next order_id...
 				* on move_up, switch position with previous order_id...
 				* move up means a lower ID, move down means a higher ID
@@ -465,9 +465,9 @@ class links extends module_base
 	*
 	* @return string Unserialized string
 	*/
-	private function utf_unserialize($serial_str) 
+	private function utf_unserialize($serial_str)
 	{
-		$out = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str );
-		return unserialize($out);   
+		$out = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str);
+		return unserialize($out);
 	}
 }

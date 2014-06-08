@@ -140,7 +140,7 @@ class announcements extends module_base
 				if($permissions == true)
 				{
 					$disallow_access = array_unique(array_keys($this->auth->acl_getf('!f_read', true)));
-				} 
+				}
 				else
 				{
 					$disallow_access = array();
@@ -156,7 +156,7 @@ class announcements extends module_base
 
 				if(sizeof($forum_from))
 				{
-					$disallow_access = array_diff($forum_from, $disallow_access);		
+					$disallow_access = array_diff($forum_from, $disallow_access);
 					if(!sizeof($disallow_access))
 					{
 						return array();
@@ -197,7 +197,7 @@ class announcements extends module_base
 			$topic_tracking_info = (get_portal_tracking_info($fetch_news));
 
 			if($announcement < 0)
-			// Show the announcements overview 
+			// Show the announcements overview
 			{
 				$count = $fetch_news['topic_count'];
 				for ($i = 0; $i < $count; $i++)
@@ -310,7 +310,6 @@ class announcements extends module_base
 
 					$this->pagination->generate_template_pagination($view_topic_url, 'announcements_center_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
 
-
 					if(!empty($fetch_news[$i]['attachments']))
 					{
 						foreach ($fetch_news[$i]['attachments'] as $attachment)
@@ -332,7 +331,7 @@ class announcements extends module_base
 			}
 			else
 			// Show "read full" page
-			{ 
+			{
 				$i = $announcement;
 
 				/** 
@@ -358,7 +357,7 @@ class announcements extends module_base
 				if ($this->config['board3_announcements_archive_' . $module_id])
 				{
 					$pagination = generate_portal_pagination(append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"), $total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start, 'announcements');
-				}	
+				}
 
 				$this->template->assign_block_vars('announcements_center_row', array(
 					'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $this->config['allow_attachments']) ? $this->user->img('icon_topic_attach', $this->user->lang['TOTAL_ATTACHMENTS']) : '',

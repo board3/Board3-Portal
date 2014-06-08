@@ -232,7 +232,7 @@ class portal_module
 					$this->new_config[$config_name] = $config_value = $cfg_array[$config_name];
 
 					if ($submit)
-					{	
+					{
 						set_config($config_name, $config_value);
 					}
 				}
@@ -385,8 +385,8 @@ class portal_module
 				$portal_modules = obtain_portal_modules();
 				$installed_modules = array();
 
-				foreach($portal_modules as $cur_module) 
-				{ 
+				foreach($portal_modules as $cur_module)
+				{
 					$installed_modules[] = $cur_module['module_classname'];
 					// Create an array with the columns the module is in
 					$this->module_column[$cur_module['module_classname']][] = column_num_string($cur_module['module_column']);
@@ -790,10 +790,10 @@ class portal_module
 			$portal_config = obtain_portal_config(); // we need to prevent duplicate entry errors
 			$this->c_class->install($module_id);
 			$this->cache->purge();
-			
+
 			// We need to return to the module config
 			meta_refresh(3, $this->get_module_link('config', $module_id));
-			
+
 			trigger_error($this->user->lang['MODULE_RESET_SUCCESS'] . adm_back_link($this->u_action . "&amp;module_id=$module_id"));
 		}
 		else
@@ -942,14 +942,14 @@ class portal_module
 	public function move_module_left($module_id)
 	{
 		$module_data = $this->get_move_module_data($module_id);
-		
+
 		if (!isset($this->modules[$module_data['module_classname']]))
 		{
 			trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 		}
 
 		$this->c_class = $this->modules[$module_data['module_classname']];
-		
+
 		if ($module_data !== false && $module_data['module_column'] > column_string_num('left'))
 		{
 			if($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 1)))
@@ -964,7 +964,7 @@ class portal_module
 			{
 				$this->handle_after_move(false);
 			}
-			
+
 			/**
 			* moving only 1 column to the left means we will either end up in the left column
 			* or in the center column. this is not possible when moving 2 columns to the left.
@@ -998,13 +998,13 @@ class portal_module
 				SET module_column = module_column - ' . $move_action . '
 				WHERE module_id = ' . (int) $module_id;
 			$this->db->sql_query($sql);
-			
+
 			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 				SET module_order = module_order - 1
 				WHERE module_order >= ' . $module_data['module_order'] . '
 				AND module_column = ' . $module_data['module_column'];
 			$this->db->sql_query($sql);
-			
+
 			// the module that needs to moved is in the last row
 			if(!$updated)
 			{
@@ -1014,7 +1014,7 @@ class portal_module
 						AND module_column = ' . (int) ($module_data['module_column'] - $move_action);
 				$this->db->sql_query($sql);
 				$new_order = $this->db->sql_fetchfield('new_order') + 1;
-				
+
 				$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 					SET module_order = ' . $new_order . '
 					WHERE module_id = ' . (int) $module_id;
@@ -1025,7 +1025,7 @@ class portal_module
 		{
 			$this->handle_after_move(false);
 		}
-		
+
 		$this->handle_after_move(true);
 	}
 
@@ -1037,14 +1037,14 @@ class portal_module
 	public function move_module_right($module_id)
 	{
 		$module_data = $this->get_move_module_data($module_id);
-		
+
 		if (!isset($this->modules[$module_data['module_classname']]))
 		{
 			trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 		}
 
 		$this->c_class = $this->modules[$module_data['module_classname']];
-		
+
 		if ($module_data !== false && $module_data['module_column'] < column_string_num('right'))
 		{
 			if($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 1)))
@@ -1059,7 +1059,7 @@ class portal_module
 			{
 				$this->handle_after_move(false);
 			}
-			
+
 			/**
 			* moving only 1 column to the right means we will either end up in the right column
 			* or in the center column. this is not possible when moving 2 columns to the right.
@@ -1081,7 +1081,7 @@ class portal_module
 					$move_action = 2;
 				}
 			}
-			
+
 			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 				SET module_order = module_order + 1
 				WHERE module_order >= ' . (int) $module_data['module_order'] . '
@@ -1093,13 +1093,13 @@ class portal_module
 				SET module_column = module_column + ' . $move_action . '
 				WHERE module_id = ' . (int) $module_id;
 			$this->db->sql_query($sql);
-			
+
 			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 				SET module_order = module_order - 1
 				WHERE module_order >= ' . (int) $module_data['module_order'] . '
 				AND module_column = ' . (int) $module_data['module_column'];
 			$this->db->sql_query($sql);
-			
+
 			// the module that needs to moved is in the last row
 			if(!$updated)
 			{
@@ -1109,7 +1109,7 @@ class portal_module
 						AND module_column = ' . (int) ($module_data['module_column'] + $move_action);
 				$this->db->sql_query($sql);
 				$new_order = $this->db->sql_fetchfield('new_order') + 1;
-				
+
 				$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 					SET module_order = ' . (int) $new_order . '
 					WHERE module_id = ' . (int) $module_id;
@@ -1140,7 +1140,7 @@ class portal_module
 		$result = $this->db->sql_query_limit($sql, 1);
 		$module_data = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
-		
+
 		if ($module_data !== false)
 		{
 			$module_classname = $this->request->variable('module_classname', '');
@@ -1164,7 +1164,7 @@ class portal_module
 					WHERE module_column = ' . $module_data['module_column'] . '
 						AND module_order > ' . $module_data['module_order'];
 				$this->db->sql_query($sql);
-				
+
 				$this->cache->purge(); // make sure we don't get errors after re-adding a module
 
 				if ($this->request->is_ajax())
@@ -1194,7 +1194,7 @@ class portal_module
 				)));
 			}
 		}
-		
+
 		$this->cache->destroy('portal_modules');
 	}
 

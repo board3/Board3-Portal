@@ -129,7 +129,7 @@ class portal_upload
 
 					if (!sizeof($file->error))
 					{
-						// Let's start moving our files where they belong						
+						// Let's start moving our files where they belong
 						foreach ($actions['NEW_FILES'] as $source => $target)
 						{
 							/*
@@ -245,7 +245,7 @@ class portal_upload
 		}
 
 		foreach (scandir($dir) as $item)
-		{ 
+		{
 			if ($item == '.' || $item == '..')
 			{
 				continue;

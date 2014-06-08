@@ -629,7 +629,7 @@ class calendar extends module_base
 
 				return;
 
-			break;		
+			break;
 		}
 
 		for ($i = 0; $i < sizeof($events); $i++)

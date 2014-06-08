@@ -66,5 +66,5 @@ $lang = array_merge($lang, array(
 	'PORTAL_NEWS_ARCHIVE'					=> 'Das Archivsystem für die aktuellen Beiträge aktivieren',
 	'PORTAL_NEWS_ARCHIVE_EXP'				=> 'Wenn aktiviert, wird das Archivsystem und ggf. Seitenzahlen angezeigt.',
 	'PORTAL_SHOW_REPLIES_VIEWS'				=> '"Antworten" und "Zugriffe" in Extraspalten',
-	'PORTAL_SHOW_REPLIES_VIEWS_EXP'			=> 'Einstellung für den kompakter Bekanntmachungen-Block-Stil.<br />Wenn aktiviert, wird die Anzahl der Antworten und Zugriffe in gesonderten Spalten angezeigt. Wenn deaktiviert gibt es nur zwei Spalten und die Antworten und Zugriffe werden neben "Forum" angezeigt. Bei Darstellungsproblemen mit z.B. schmalen Styles bitte deaktivieren.', 
+	'PORTAL_SHOW_REPLIES_VIEWS_EXP'			=> 'Einstellung für den kompakter Bekanntmachungen-Block-Stil.<br />Wenn aktiviert, wird die Anzahl der Antworten und Zugriffe in gesonderten Spalten angezeigt. Wenn deaktiviert gibt es nur zwei Spalten und die Antworten und Zugriffe werden neben "Forum" angezeigt. Bei Darstellungsproblemen mit z.B. schmalen Styles bitte deaktivieren.',
 ));

@@ -110,7 +110,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 	if ($permissions == true)
 	{
 		$disallow_access = array_unique(array_keys($auth->acl_getf('!f_read', true)));
-	} 
+	}
 	else
 	{
 		$disallow_access = array();
@@ -316,7 +316,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 			$message = get_sub_taged_string($message, $row['bbcode_uid'], $maxlen);
 			$posts[$i]['striped'] = true;
 		}
-		else 
+		else
 		{
 			$message = str_replace("\n", '<br/> ', $row['post_text']);
 		}

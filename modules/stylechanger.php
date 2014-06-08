@@ -116,7 +116,6 @@ class stylechanger extends module_base
 			$this->template->assign_var('STYLE_SELECT', $style_select);
 		}
 
-
 		// Assign specific vars
 		$this->template->assign_vars(array(
 			'S_STYLE_OPTIONS'			=> ($this->config['override_user_style'] || $style_count < 2) ? '' : style_select($this->user->data['user_style']),

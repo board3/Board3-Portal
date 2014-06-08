@@ -40,5 +40,5 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_BIRTHDAYS_SETTINGS_EXP'		=> 'Hier kannst du die Einstellungen für den Geburtstage-Block ändern.',
 	'PORTAL_BIRTHDAYS'						=> 'Geburtstage',
 	'PORTAL_BIRTHDAYS_AHEAD'				=> 'Anstehende Geburtstage',
-	'PORTAL_BIRTHDAYS_AHEAD_EXP'			=> 'Zeitraum für die Geburtstagsvorschau (Tage).<br />"0" deaktiviert die Anzeige der bevorstehenden Geburtstage.',	
+	'PORTAL_BIRTHDAYS_AHEAD_EXP'			=> 'Zeitraum für die Geburtstagsvorschau (Tage).<br />"0" deaktiviert die Anzeige der bevorstehenden Geburtstage.',
 ));
