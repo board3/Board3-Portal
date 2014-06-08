@@ -322,7 +322,7 @@ class portal_upload
 
 	/**
 	* @author Michal Nazarewicz (from the php manual)
-	* Creates all non-existant directories in a path
+	* Creates all non-existent directories in a path
 	* @param $path - path to create
 	* @param $mode - CHMOD the new dir to these permissions
 	* @return bool

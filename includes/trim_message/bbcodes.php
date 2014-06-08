@@ -351,7 +351,7 @@ class phpbb_trim_message_bbcodes
 	}
 
 	/**
-	* Get the length of the content (substract code for smilie and url parsing)
+	* Get the length of the content (subtract code for smilie and url parsing)
 	*
 	* @param	string	$content	Message to get the content length from
 	*								Exp:     <markup>text<markup2>

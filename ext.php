@@ -2,14 +2,12 @@
 /**
 *
 * @package Board3 Portal v2.1
-* @copyright (c) 2013 Board3 Group ( www.board3.de )
+* @copyright (c) 2014 Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
-// this file is not really needed, when empty it can be ommitted
-// however you can override the default methods and add custom
-// installation logic
+// This file is needed for phpBB3 to properly register the extension
 
 namespace board3\portal;
 
