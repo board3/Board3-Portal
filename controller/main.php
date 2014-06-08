@@ -175,7 +175,7 @@ class main
 				continue;
 			}
 
-			// Do not try to load non-existant modules
+			// Do not try to load non-existent modules
 			if (!isset($this->modules[$row['module_classname']]))
 			{
 				if (file_exists("{$this->includes_path}modules/portal_{$row['module_classname']}{$this->php_ext}"))

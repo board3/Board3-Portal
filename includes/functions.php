@@ -453,7 +453,7 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 		break;
 
 		default:
-			// this shouldn't happend @todo: use trigger_error()
+			// this shouldn't happen but default to announcements
 			$pagination_type = 'ap';
 			$anker = '#a';
 	}
