@@ -13,7 +13,7 @@
          bootstrap="tests/bootstrap.php">
     <testsuites>
         <testsuite name="phpBB Gallery Test Suite">
-            <directory suffix="_test.php">./tests/</directory>
+            <directory suffix="_test.php">./tests</directory>
         </testsuite>
     </testsuites>
 
