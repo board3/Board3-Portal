@@ -114,7 +114,6 @@ class news extends module_base
 		$portal_news_length = ($news < 0) ? $this->config['board3_news_length_' . $module_id] : 0;
 		$fetch_news = phpbb_fetch_posts($module_id, $this->config['board3_news_forum_' . $module_id], $this->config['board3_news_permissions_' . $module_id], $this->config['board3_number_of_news_' . $module_id], $portal_news_length, 0, ($this->config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news', $start, $this->config['board3_news_exclude_' . $module_id]);
 
-
 		// Any news present? If not terminate it here.
 		if (sizeof($fetch_news) == 0)
 		{
@@ -268,7 +267,7 @@ class news extends module_base
 						'TITLE'					=> $fetch_news[$i]['topic_title'],
 						'POSTER'				=> $fetch_news[$i]['username'],
 						'POSTER_FULL'			=> $fetch_news[$i]['username_full'],
-						'USERNAME_FULL_LAST'	=> $fetch_news[$i]['username_full_last'],	
+						'USERNAME_FULL_LAST'	=> $fetch_news[$i]['username_full_last'],
 						'U_USER_PROFILE'		=> (($fetch_news[$i]['user_type'] == USER_NORMAL || $fetch_news[$i]['user_type'] == USER_FOUNDER) && $fetch_news[$i]['user_id'] != ANONYMOUS) ? append_sid("{$this->phpbb_root_path}memberlist.{$this->php_ext}", 'mode=viewprofile&amp;u=' . $fetch_news[$i]['user_id']) : '',
 						'TIME'					=> $fetch_news[$i]['topic_time'],
 						'LAST_POST_TIME'		=> $this->user->format_date($fetch_news[$i]['topic_last_post_time']),
@@ -355,7 +354,7 @@ class news extends module_base
 					'S_POLL'			=> $fetch_news[$i]['poll'],
 					'S_UNREAD_INFO'		=> $unread_topic,
 					'U_READ_FULL'		=> $read_full_url,
-					'L_READ_FULL'		=> $read_full,      
+					'L_READ_FULL'		=> $read_full,
 					'OPEN'				=> $open_bracket,
 					'CLOSE'				=> $close_bracket,
 					'S_HAS_ATTACHMENTS'	=> (!empty($fetch_news[$i]['attachments'])) ? true : false,

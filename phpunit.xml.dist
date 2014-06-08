@@ -12,14 +12,13 @@
          verbose="true"
          bootstrap="tests/bootstrap.php">
     <testsuites>
-        <testsuite name="phpBB Gallery Test Suite">
-            <directory suffix="_test.php">./tests/</directory>
+        <testsuite name="Board3 Portal Test Suite">
+            <directory suffix="_test.php">./tests</directory>
         </testsuite>
     </testsuites>
 
     <groups>
         <exclude>
-            <group>functional</group>
             <group>slow</group>
         </exclude>
     </groups>

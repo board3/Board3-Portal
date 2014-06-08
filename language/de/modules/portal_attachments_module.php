@@ -50,5 +50,5 @@ $lang = array_merge($lang, array(
 	'PORTAL_ATTACHMENTS_FILETYPE' 						=> 'Dateitypen',
 	'PORTAL_ATTACHMENTS_FILETYPE_EXP' 				=> 'Falls "Dateitypen ausschließen" auf "Ja" steht, wähle die Dateitypen die du ausschließen willst.<br />Falls "Dateitypen ausschließen" auf "Nein" steht, wähle die Dateitypen die du sehen willst.<br />Wähle mehrere Foren aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
 	'PORTAL_ATTACHMENTS_EXCLUDE'						=> 'Dateitypen ausschließen',
-	'PORTAL_ATTACHMENTS_EXCLUDE_EXP'				=> 'Wähle "Ja" wenn du die ausgewählten Dateitypen vom Dateianhänge-Block ausschließen willst, und "Nein" wenn du nur die ausgewählten Dateitypen im Dateianhänge-Block sehen willst.',	
+	'PORTAL_ATTACHMENTS_EXCLUDE_EXP'				=> 'Wähle "Ja" wenn du die ausgewählten Dateitypen vom Dateianhänge-Block ausschließen willst, und "Nein" wenn du nur die ausgewählten Dateitypen im Dateianhänge-Block sehen willst.',
 ));

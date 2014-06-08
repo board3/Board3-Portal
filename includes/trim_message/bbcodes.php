@@ -175,7 +175,6 @@ class phpbb_trim_message_bbcodes
 						$this->is_sensitive = true;
 					}
 
-
 					$this->open_bbcode($bbcode_tag, $this->cur_position);
 					$this->cur_position += utf8_strlen($exploded_parts[0]) + $bbcode_end_length;
 					$this->bbcode_action($bbcode_tag, 'open_end', $this->cur_position);
@@ -376,7 +375,7 @@ class phpbb_trim_message_bbcodes
 			{
 				break;
 			}
-			
+
 			if (($smiley_code = utf8_substr($content, $last_html_opening + 7, ($last_html_closing - $last_html_opening - 11))) != '--')
 			{
 				if ($last_smiley == $smiley_code)

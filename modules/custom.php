@@ -342,7 +342,7 @@ class custom extends module_base
 				display_custom_bbcodes();
 				$this->user->add_lang('posting');
 
-			break;		
+			break;
 		}
 	}
 

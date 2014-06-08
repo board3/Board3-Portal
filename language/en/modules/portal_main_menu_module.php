@@ -40,7 +40,7 @@ $lang = array_merge($lang, array(
 	'M_TERMS'	=> 'Terms of use',
 	'M_PRV'		=> 'Privacy policy',
 	'M_SEARCH'	=> 'Search',
-	'MENU_NO_LINKS'	=> 'No links', 
+	'MENU_NO_LINKS'	=> 'No links',
 
 	// ACP
 	'ACP_PORTAL_MENU'				=> 'Menu settings',

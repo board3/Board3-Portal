@@ -145,7 +145,6 @@ class user_menu extends module_base
 			$unread_list = get_unread_topics($this->user->data['user_id'], $sql_where, 'ORDER BY t.topic_id DESC');
 			$unread_posts_count = sizeof($unread_list);
 
-
 			// Get user avatar and rank
 			$user_id = $this->user->data['user_id'];
 			$username = $this->user->data['username'];
