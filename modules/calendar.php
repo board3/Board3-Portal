@@ -573,7 +573,7 @@ class calendar extends module_base
 					'EVENT_URL'			=> (isset($events[$link_id]['url']) && $action != 'add') ? $events[$link_id]['url'] : '',
 
 					//'U_BACK'	=> $u_action,
-					'U_ACTION'	=> $u_action . '&amp;id=' . $link_id,
+					'B3P_U_ACTION'	=> $u_action . '&amp;id=' . $link_id,
 
 					'S_EDIT'				=> true,
 				));
