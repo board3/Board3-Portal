@@ -2,7 +2,7 @@
 /**
 *
 * @package Board3 Portal v2.1
-* @copyright (c) 2013 Board3 Group ( www.board3.de )
+* @copyright (c) 2014 Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -168,7 +168,7 @@ class calendar extends module_base
 		$mini_cal_today = date('Ymd', $today_timestamp - date('Z'));
 		$this->stamp = $today_timestamp;
 		$s_cal_month = ($this->mini_cal_month != 0) ? $this->mini_cal_month . ' month' : $mini_cal_today;
-		$this->getMonth($s_cal_month);
+		$this->get_month($s_cal_month);
 		$mini_cal_count = $this->mini_cal_fdow;
 		$mini_cal_this_year = $this->dateYYYY;
 		$mini_cal_this_month = $this->dateMM;
@@ -644,22 +644,22 @@ class calendar extends module_base
 	*
 	* @return string Converted time
 	*/
-	protected function makeTimestamp($date)
+	protected function make_timestamp($date)
 	{
 		$this->stamp = strtotime($date);
-		return ($this->stamp);
+		return $this->stamp;
 	}
 
 	/**
 	* Get date listed in array
 	*
-	* @param string $callDate Date
+	* @param string $call_date Date
 	*
 	* @return null
 	*/
-	protected function getMonth($callDate)
+	protected function get_month($call_date)
 	{
-		$this->makeTimestamp($callDate);
+		$this->make_timestamp($call_date);
 		// last or first day of some months need to be treated in a special way
 		if (!empty($this->mini_cal_month))
 		{
@@ -672,27 +672,15 @@ class calendar extends module_base
 			// move back or forth the correct number of years
 			while ($correct_month < 1 || $correct_month > self::MONTHS_PER_YEAR)
 			{
-				if ($correct_month < 1)
-				{
-					$correct_month = $correct_month + self::MONTHS_PER_YEAR;
-				}
-				else
-				{
-					$correct_month = $correct_month - self::MONTHS_PER_YEAR;
-				}
+				$correct_month = ($correct_month < 1) ? $correct_month + self::MONTHS_PER_YEAR : $correct_month - self::MONTHS_PER_YEAR;
 			}
 
 			// fix incorrect months
 			while (date("n", $this->stamp) != $correct_month)
 			{
-				if (date("n", $this->stamp) > $correct_month)
-				{
-					$this->stamp = $this->stamp - self::TIME_DAY; // go back one day
-				}
-				else
-				{
-					$this->stamp = $this->stamp + self::TIME_DAY; // move forward one day
-				}
+				// Go back one day or move forward in order to
+				// get to the correct month
+				$this->stamp = (date("n", $this->stamp) > $correct_month) ? $this->stamp - self::TIME_DAY : $this->stamp + self::TIME_DAY;
 			}
 		}
 		$this->dateYYYY = date("Y", $this->stamp);
@@ -703,7 +691,7 @@ class calendar extends module_base
 
 		for ($i = 1; $i < $this->daysMonth + 1; $i++)
 		{
-			$this->makeTimestamp("$i {$this->ext_dateMM} {$this->dateYYYY}");
+			$this->make_timestamp("$i {$this->ext_dateMM} {$this->dateYYYY}");
 			$this->day[] = array(
 				'0' => "$i",
 				'1' => $this->dateMM,
