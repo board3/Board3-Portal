@@ -9,8 +9,8 @@
 
 namespace board3\portal\acp;
 
-require_once(dirname(__FILE__) . '/../../includes/functions.php');
-require_once(dirname(__FILE__) . '/../../acp/portal_module.php');
+require_once(dirname(__FILE__) . '/../../../includes/functions.php');
+require_once(dirname(__FILE__) . '/../../../acp/portal_module.php');
 
 class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\database_test_case
 {

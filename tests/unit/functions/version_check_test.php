@@ -7,7 +7,7 @@
 *
 */
 
-require_once(dirname(__FILE__) . '/../../../../../includes/utf/utf_tools.php');
+require_once(dirname(__FILE__) . '/../../../../../../includes/utf/utf_tools.php');
 
 class phpbb_functions_version_check_test extends \board3\portal\tests\testframework\test_case
 {
