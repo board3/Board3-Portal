@@ -19,12 +19,12 @@
 	<fieldset>
 		<legend>{L_ACP_PORTAL_LINKS}</legend>
 	<dl>
-		<dt><label for="link_title">{L_ACP_PORTAL_LINK_TITLE}:</label></dt>
+		<dt><label for="link_title">{L_ACP_PORTAL_LINK_TITLE}{L_COLON}</label></dt>
 		<dd><input name="link_title" type="text" id="link_title" value="{LINK_TITLE}" maxlength="255" /></dd>
 	</dl>
 	<dl>
 		<dt>
-			<label for="link_type">{L_ACP_PORTAL_LINK_TYPE}:</label><br />
+			<label for="link_type">{L_ACP_PORTAL_LINK_TYPE}{L_COLON}</label><br />
 			<span>{L_ACP_PORTAL_LINK_TYPE_EXP}</span>
 		</dt>
 		<dd>
@@ -34,14 +34,14 @@
 	</dl>
 	<dl>
 		<dt>
-			<label for="link_url">{L_ACP_PORTAL_LINK_URL}:</label><br />
+			<label for="link_url">{L_ACP_PORTAL_LINK_URL}{L_COLON}</label><br />
 			<span>{L_ACP_PORTAL_LINK_URL_EXP}</span>
 		</dt>
 		<dd><input name="link_url" type="text" id="link_url" value="{LINK_URL}" maxlength="255" /></dd>
 	</dl>
 	<dl>
 		<dt>
-			<label for="permission-setting-link">{L_ACP_PORTAL_LINK_PERMISSION}:</label><br />
+			<label for="permission-setting-link">{L_ACP_PORTAL_LINK_PERMISSION}{L_COLON}</label><br />
 			<span>{L_ACP_PORTAL_LINK_PERMISSION_EXP}</span>
 		</dt>
 		<dd>
@@ -68,32 +68,32 @@
 	<fieldset>
 		<legend>{L_MODULE_OPTIONS}</legend>
 		<dl>
-			<dt><label for="module_name">{L_MODULE_NAME}:</label><br /><span>{L_MODULE_NAME_EXP}</span></dt>
+			<dt><label for="module_name">{L_MODULE_NAME}{L_COLON}</label><br /><span>{L_MODULE_NAME_EXP}</span></dt>
 			<dd><input id="module_name" type="text" value="{MODULE_NAME}" name="module_name" maxlength="255" size="64" /></dd>
 		</dl>
 		<!-- IF MODULE_SHOW_IMAGE -->
 		<dl>
-			<dt><label for="module_image">{L_MODULE_IMAGE}:</label><br /><span>{L_MODULE_IMAGE_EXP}</span></dt>
+			<dt><label for="module_image">{L_MODULE_IMAGE}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_EXP}</span></dt>
 			<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
 			<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
 		</dl>
 		<!-- IF MODULE_IMAGE_SRC -->
 		<dl>
-			<dt><label for="module_img_width">{L_MODULE_IMAGE_WIDTH}:</label><br /><span>{L_MODULE_IMAGE_WIDTH_EXP}</span></dt>
+			<dt><label for="module_img_width">{L_MODULE_IMAGE_WIDTH}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_WIDTH_EXP}</span></dt>
 			<dd><input id="module_img_width" type="text" value="{MODULE_IMAGE_WIDTH}" name="module_img_width" maxlength="3" size="3" />px</dd>
 		</dl>
 		<dl>
-			<dt><label for="module_img_height">{L_MODULE_IMAGE_HEIGHT}:</label><br /><span>{L_MODULE_IMAGE_HEIGHT_EXP}</span></dt>
+			<dt><label for="module_img_height">{L_MODULE_IMAGE_HEIGHT}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_HEIGHT_EXP}</span></dt>
 			<dd><input id="module_img_height" type="text" value="{MODULE_IMAGE_HEIGHT}" name="module_img_height" maxlength="3" size="3" />px</dd>
 		</dl>
 		<!-- ENDIF -->
 		<!-- ENDIF -->
 		<dl>
-			<dt><label for="module_reset">{L_MODULE_RESET}:</label><br /><span style="color: #BC2A4D;">{L_MODULE_RESET_EXP}</span></dt>
+			<dt><label for="module_reset">{L_MODULE_RESET}{L_COLON}</label><br /><span style="color: #BC2A4D;">{L_MODULE_RESET_EXP}</span></dt>
 			<dd><input id="module_reset" type="checkbox" value="1" name="module_reset" /></dd>
 		</dl>
 		<dl>
-			<dt><label for="module_status">{L_MODULE_STATUS}:</label></dt>
+			<dt><label for="module_status">{L_MODULE_STATUS}{L_COLON}</label></dt>
 			<dd>
 				<label><input type="radio" class="radio" name="module_status" value="1" id="module_status"<!-- IF MODULE_ENABLED --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
 				<label><input type="radio" class="radio" name="module_status" value="0"<!-- IF not MODULE_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
@@ -101,7 +101,7 @@
 		</dl>
 		<!-- IF permission_setting -->
 		<dl>
-			<dt><label for="permission-setting">{L_MODULE_PERMISSIONS}:</label><br /><span>{L_MODULE_PERMISSIONS_EXP}</span></dt>
+			<dt><label for="permission-setting">{L_MODULE_PERMISSIONS}{L_COLON}</label><br /><span>{L_MODULE_PERMISSIONS_EXP}</span></dt>
 			<dd>
 				<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
 					<!-- BEGIN permission_setting -->
@@ -123,7 +123,7 @@
 	<!-- ELSE -->
 
 		<dl>
-			<dt><label for="{options.KEY}">{options.TITLE}:</label><!-- IF options.S_EXPLAIN --><br /><span>{options.TITLE_EXPLAIN}</span><!-- ENDIF --></dt>
+			<dt><label for="{options.KEY}">{options.TITLE}{L_COLON}</label><!-- IF options.S_EXPLAIN --><br /><span>{options.TITLE_EXPLAIN}</span><!-- ENDIF --></dt>
 			<dd>{options.CONTENT}</dd>
 		</dl>
 

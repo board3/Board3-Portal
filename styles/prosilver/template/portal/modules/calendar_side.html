@@ -34,7 +34,7 @@
 	</table>
 	<!-- IF minical.S_DISPLAY_EVENTS -->
 	<hr class="dashed" />
-	<div class="menutitle" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_CURRENT_EVENTS}:</div>
+	<div class="menutitle" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_CURRENT_EVENTS}{L_COLON}</div>
 	<ul class="portal-events">
 		<!-- BEGIN cur_events -->
 
@@ -42,9 +42,9 @@
 			<dl class="icon">
 				<dt style="width: 100%; padding-left: 0px; padding-bottom: 5px;">
 					<!-- IF minical.cur_events.EVENT_URL --><a href="{minical.cur_events.EVENT_URL}" title="{minical.cur_events.EVENT_TITLE}" <!-- IF minical.cur_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.cur_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
-					<span style="font-weight: bold;">{minical.cur_events.EVENT_TITLE}:</span><br />
-					<!-- IF minical.cur_events.ALL_DAY -->{L_EVENT_START}:&nbsp;{minical.cur_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
-					<!-- ELSEIF not minical.cur_events.ALL_DAY and minical.cur_events.END_TIME -->{L_EVENT_START}:&nbsp;{minical.cur_events.START_TIME}<br />{L_EVENT_END}:&nbsp;{minical.cur_events.END_TIME}<br />
+					<span style="font-weight: bold;">{minical.cur_events.EVENT_TITLE}{L_COLON}</span><br />
+					<!-- IF minical.cur_events.ALL_DAY -->{L_EVENT_START}{L_COLON}&nbsp;{minical.cur_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
+					<!-- ELSEIF not minical.cur_events.ALL_DAY and minical.cur_events.END_TIME -->{L_EVENT_START}{L_COLON}&nbsp;{minical.cur_events.START_TIME}<br />{L_EVENT_END}{L_COLON}&nbsp;{minical.cur_events.END_TIME}<br />
 					<!-- ELSE -->{L_EVENT_ALL_DAY}<br />
 					<!-- ENDIF -->
 					<!-- IF minical.cur_events.EVENT_DESC --><span style="font-style: italic;">{minical.cur_events.EVENT_DESC}</span><!-- ENDIF -->
@@ -58,7 +58,7 @@
 		<!-- END cur_events -->
 	</ul>
 	<hr style="margin: 5px 0; border-top: 0;" />
-	<div class="menutitle" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_UPCOMING_EVENTS}:</div>
+	<div class="menutitle" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_UPCOMING_EVENTS}{L_COLON}</div>
 	<ul class="portal-events">
 		<!-- BEGIN upcoming_events -->
 
@@ -66,10 +66,10 @@
 			<dl class="icon">
 				<dt style="width: 100%; padding-left: 0px; padding-bottom: 5px;">
 					<!-- IF minical.upcoming_events.EVENT_URL --><a href="{minical.upcoming_events.EVENT_URL}" title="{minical.upcoming_events.EVENT_TITLE}" <!-- IF minical.upcoming_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.upcoming_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
-					<span style="font-weight: bold;">{minical.upcoming_events.EVENT_TITLE}:</span><br />
-					<!-- IF not minical.upcoming_events.ALL_DAY and not minical.upcoming_events.END_TIME -->{L_EVENT_TIME}:&nbsp;{minical.upcoming_events.START_TIME}<br />
-					<!-- ELSEIF not minical.upcoming_events.ALL_DAY and minical.upcoming_events.END_TIME -->{L_EVENT_START}:&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_END}:&nbsp;{minical.upcoming_events.END_TIME}<br />
-					<!-- ELSE -->{L_EVENT_TIME}:&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
+					<span style="font-weight: bold;">{minical.upcoming_events.EVENT_TITLE}{L_COLON}</span><br />
+					<!-- IF not minical.upcoming_events.ALL_DAY and not minical.upcoming_events.END_TIME -->{L_EVENT_TIME}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />
+					<!-- ELSEIF not minical.upcoming_events.ALL_DAY and minical.upcoming_events.END_TIME -->{L_EVENT_START}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_END}{L_COLON}&nbsp;{minical.upcoming_events.END_TIME}<br />
+					<!-- ELSE -->{L_EVENT_TIME}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
 					<!-- ENDIF -->
 					<!-- IF minical.upcoming_events.EVENT_DESC --><span style="font-style: italic;">{minical.upcoming_events.EVENT_DESC}</span><br /><!-- ENDIF -->
 					<!-- IF minical.upcoming_events.EVENT_URL --></a><!-- ENDIF -->

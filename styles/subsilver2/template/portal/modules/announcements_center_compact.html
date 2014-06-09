@@ -28,15 +28,15 @@
 				<td class="row1" width="25" align="center">{announcements_center_row.TOPIC_FOLDER_IMG}</td>
 					<!-- IF S_TOPIC_ICONS --><td class="row1" width="25" align="center"><!-- IF announcements_center_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{announcements_center_row.TOPIC_ICON_IMG}" width="{announcements_center_row.TOPIC_ICON_IMG_WIDTH}" height="{announcements_center_row.TOPIC_ICON_IMG_HEIGHT}" alt="" title="" /><!-- ENDIF --></td><!-- ENDIF -->
 				<td class="row1">
-				<!-- IF announcements_center_row.PAGINATION --><span style="float: right; font-size:0.9em;"> [ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {announcements_center_row.PAGINATION} ] </span><!-- ENDIF -->
-					{announcements_center_row.ATTACH_ICON_IMG} <!-- IF announcements_center_row.S_POLL --> <strong style="font-size:1.1em;">{L_VIEW_TOPIC_POLL}: </strong><!-- ENDIF --><a title="{announcements_center_row.TITLE}" href="{announcements_center_row.U_VIEW_COMMENTS}" class="topictitle">{announcements_center_row.TITLE}</a>
+				<!-- IF announcements_center_row.PAGINATION --><span style="float: right; font-size:0.9em;"> [ {GOTO_PAGE_IMG}{L_GOTO_PAGE}{L_COLON} {announcements_center_row.PAGINATION} ] </span><!-- ENDIF -->
+					{announcements_center_row.ATTACH_ICON_IMG} <!-- IF announcements_center_row.S_POLL --> <strong style="font-size:1.1em;">{L_VIEW_TOPIC_POLL}{L_COLON} </strong><!-- ENDIF --><a title="{announcements_center_row.TITLE}" href="{announcements_center_row.U_VIEW_COMMENTS}" class="topictitle">{announcements_center_row.TITLE}</a>
 					<p class="gensmall">{L_POSTED} {L_POST_BY_AUTHOR} {announcements_center_row.POSTER_FULL} &raquo; {announcements_center_row.TIME}
 					<!-- IF announcements_center_row.FORUM_NAME -->
-						<br />{L_FORUM}: <a href="{announcements_center_row.U_VIEWFORUM}" style="font-weight: bold;">{announcements_center_row.FORUM_NAME}</a>
+						<br />{L_FORUM}{L_COLON} <a href="{announcements_center_row.U_VIEWFORUM}" style="font-weight: bold;">{announcements_center_row.FORUM_NAME}</a>
 			<!-- ELSE -->
 				{L_GLOBAL_ANNOUNCEMENT}
 			<!-- ENDIF -->
-			<!-- IF not S_DISPLAY_ANNOUNCEMENTS_RVS --><!-- IF announcements_center_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}: <strong>{announcements_center_row.REPLIES}</strong>  &bull; {L_VIEWS}: <strong>{announcements_center_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
+			<!-- IF not S_DISPLAY_ANNOUNCEMENTS_RVS --><!-- IF announcements_center_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}{L_COLON} <strong>{announcements_center_row.REPLIES}</strong>  &bull; {L_VIEWS}{L_COLON} <strong>{announcements_center_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
 					</p>
 				</td>
 				<!-- IF S_DISPLAY_ANNOUNCEMENTS_RVS -->

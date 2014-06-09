@@ -43,9 +43,9 @@
 					<!-- ENDIF -->
 						<br />{L_POSTED} {L_POST_BY_AUTHOR} {news_row.POSTER_FULL} &raquo; {news_row.TIME}
 					<!-- IF news_row.FORUM_NAME -->
-						<br />{L_FORUM}: <a href="{news_row.U_VIEWFORUM}" style="font-weight: bold;">{news_row.FORUM_NAME}</a>
+						<br />{L_FORUM}{L_COLON} <a href="{news_row.U_VIEWFORUM}" style="font-weight: bold;">{news_row.FORUM_NAME}</a>
 					<!-- ENDIF -->
-					<!-- IF not S_DISPLAY_NEWS_RVS --><!-- IF news_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}: <strong>{news_row.REPLIES}</strong>  &bull; {L_VIEWS}: <strong>{news_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
+					<!-- IF not S_DISPLAY_NEWS_RVS --><!-- IF news_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}{L_COLON} <strong>{news_row.REPLIES}</strong>  &bull; {L_VIEWS}{L_COLON} <strong>{news_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
 				</div> <!-- \END <div class="list-inner"> -->
 			</dt>
 			<!-- IF S_DISPLAY_NEWS_RVS -->
