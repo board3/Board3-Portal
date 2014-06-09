@@ -28,7 +28,7 @@ class portal_info
 			'modes'		=> array(
 				'config'		=> array('title' => 'ACP_PORTAL_GENERAL_INFO',	'auth' => 'acl_a_manage_portal', 'cat' => array('ACP_PORTAL')),
 				'modules'		=> array('title' => 'ACP_PORTAL_MODULES',	'auth' => 'acl_a_manage_portal', 'cat' => array('ACP_PORTAL')),
-				//'upload_module'		=> array('title' => 'ACP_PORTAL_UPLOAD',	'auth' => 'acl_a_manage_portal', 'cat' => array('ACP_PORTAL')),
+				// 'upload_module'		=> array('title' => 'ACP_PORTAL_UPLOAD',	'auth' => 'acl_a_manage_portal', 'cat' => array('ACP_PORTAL')),
 			),
 		);
 	}
