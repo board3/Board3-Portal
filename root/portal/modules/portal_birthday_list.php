@@ -165,7 +165,7 @@ class portal_birthday_list_module
 	*/
 	protected function format_birthday($user, $birthday, $date_settings)
 	{
-		if (!preg_match('/(?:[0-9])+-+(?:[0-9]{2})+-+(?:[0-9]{4})?/', $birthday, $match))
+		if (!preg_match('/[0-9]{1,2}-[ ]?[0-9]{1,2}-[0-9]{4}/', $birthday))
 		{
 			return '';
 		}
