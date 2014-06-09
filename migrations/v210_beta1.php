@@ -170,16 +170,6 @@ class v210_beta1 extends \phpbb\db\migration\migration
 					'module_langname'	=> 'ACP_PORTAL_MODULES',
 				),
 			)),
-			array('module.add', array(
-				'acp',
-				'ACP_PORTAL',
-				array(
-					'module_basename'	=> '\board3\portal\acp\portal_module',
-					'module_mode'		=> 'upload_module',
-					'module_auth'		=> 'acl_a_manage_portal',
-					'module_langname'	=> 'ACP_PORTAL_UPLOAD',
-				),
-			)),
 
 			array('custom', array(array($this, 'add_portal_data'))),
 		);
