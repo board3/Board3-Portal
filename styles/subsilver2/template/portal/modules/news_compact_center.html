@@ -29,13 +29,13 @@
 				<td class="row1" width="25" align="center">{news_row.TOPIC_FOLDER_IMG}</td>
 					<!-- IF S_TOPIC_ICONS --><td class="row1" width="25" align="center"><!-- IF news_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{news_row.TOPIC_ICON_IMG}" width="{news_row.TOPIC_ICON_IMG_WIDTH}" height="{news_row.TOPIC_ICON_IMG_HEIGHT}" alt="" title="" /><!-- ENDIF --></td><!-- ENDIF -->
 				<td class="row1">
-				<!-- IF news_row.PAGINATION --><span style="float: right; font-size:0.9em;"> [ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {news_row.PAGINATION} ] </span><!-- ENDIF -->
+				<!-- IF news_row.PAGINATION --><span style="float: right; font-size:0.9em;"> [ {GOTO_PAGE_IMG}{L_GOTO_PAGE}{L_COLON} {news_row.PAGINATION} ] </span><!-- ENDIF -->
 					{news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --> <strong style="font-size:1.1em;">{L_VIEW_TOPIC_POLL}</strong><!-- ENDIF --><a title="{news_row.TITLE}" href="{news_row.U_VIEW_COMMENTS}" class="topictitle">{news_row.TITLE}</a>
 					<p class="gensmall">{L_POSTED} {L_POST_BY_AUTHOR} {news_row.POSTER_FULL} &raquo; {news_row.TIME}
 					<!-- IF news_row.FORUM_NAME -->
-						<br />{L_FORUM}: <a href="{news_row.U_VIEWFORUM}" style="font-weight: bold;">{news_row.FORUM_NAME}</a>
+						<br />{L_FORUM}{L_COLON} <a href="{news_row.U_VIEWFORUM}" style="font-weight: bold;">{news_row.FORUM_NAME}</a>
 					<!-- ENDIF -->
-					<!-- IF not S_DISPLAY_NEWS_RVS --><!-- IF news_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}: <strong>{news_row.REPLIES}</strong>  &bull; {L_VIEWS}: <strong>{news_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
+					<!-- IF not S_DISPLAY_NEWS_RVS --><!-- IF news_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}{L_COLON} <strong>{news_row.REPLIES}</strong>  &bull; {L_VIEWS}{L_COLON} <strong>{news_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
 					</p>
 				</td>
 				<!-- IF S_DISPLAY_NEWS_RVS -->

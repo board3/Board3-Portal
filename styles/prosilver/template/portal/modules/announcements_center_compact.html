@@ -33,11 +33,11 @@
 					<!-- IF announcements_center_row.PAGINATION --><strong class="pagination"><span>{announcements_center_row.PAGINATION}</span></strong><!-- ENDIF -->
 						<br />{L_POSTED} {L_POST_BY_AUTHOR} {announcements_center_row.POSTER_FULL} &raquo; {announcements_center_row.TIME}
 					<!-- IF announcements_center_row.FORUM_NAME -->
-						<br />{L_FORUM}: <a href="{announcements_center_row.U_VIEWFORUM}" style="font-weight: bold;">{announcements_center_row.FORUM_NAME}</a>
+						<br />{L_FORUM}{L_COLON} <a href="{announcements_center_row.U_VIEWFORUM}" style="font-weight: bold;">{announcements_center_row.FORUM_NAME}</a>
 					<!-- ELSE -->
 						<br />{L_GLOBAL_ANNOUNCEMENT}
 					<!-- ENDIF -->
-					<!-- IF not S_DISPLAY_ANNOUNCEMENTS_RVS --><!-- IF announcements_center_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}: <strong>{announcements_center_row.REPLIES}</strong>  &bull; {L_VIEWS}: <strong>{announcements_center_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
+					<!-- IF not S_DISPLAY_ANNOUNCEMENTS_RVS --><!-- IF announcements_center_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}{L_COLON} <strong>{announcements_center_row.REPLIES}</strong>  &bull; {L_VIEWS}{L_COLON} <strong>{announcements_center_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
 				</div>
 			</dt>
 			<!-- IF S_DISPLAY_ANNOUNCEMENTS_RVS -->

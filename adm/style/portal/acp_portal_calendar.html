@@ -19,22 +19,22 @@
 	<fieldset>
 		<legend>{L_ACP_PORTAL_EVENTS}</legend>
 	<dl>
-		<dt><label for="event_title">{L_EVENT_TITLE}:</label></dt>
+		<dt><label for="event_title">{L_EVENT_TITLE}{L_COLON}</label></dt>
 		<dd><input name="event_title" type="text" id="event_title" value="{EVENT_TITLE}" maxlength="255" /></dd>
 	</dl>
 	<dl>
-		<dt><label for="event_desc">{L_EVENT_DESC}:</label></dt>
+		<dt><label for="event_desc">{L_EVENT_DESC}{L_COLON}</label></dt>
 		<dd><textarea id="event_desc" rows="6" cols="6" name="event_desc">{EVENT_DESC}</textarea></dd>
 	</dl>
 	<dl>
 		<dt>
-			<label for="event_start_date">{L_ACP_PORTAL_EVENT_START_DATE}:</label><br />
+			<label for="event_start_date">{L_ACP_PORTAL_EVENT_START_DATE}{L_COLON}</label><br />
 			<span>{L_ACP_PORTAL_EVENT_START_DATE_EXP}</span>
 		</dt>
 		<dd><input name="event_start_date" type="text" id="event_start_date" value="{EVENT_START_DATE}" maxlength="255" /></dd>
 	</dl>
 	<dl>
-		<dt><label for="event_all_day">{L_EVENT_ALL_DAY}:</label></dt>
+		<dt><label for="event_all_day">{L_EVENT_ALL_DAY}{L_COLON}</label></dt>
 		<dd>
 			<label><input onchange="phpbb.toggleDisplay('end', -1)" type="radio" class="radio" name="event_all_day" value="1" id="event_all_day"<!-- IF EVENT_ALL_DAY --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
 			<label><input onchange="phpbb.toggleDisplay('end', 1)" type="radio" class="radio" name="event_all_day" value="0"<!-- IF not EVENT_ALL_DAY --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
@@ -43,7 +43,7 @@
 	<div id="end"<!-- IF EVENT_ALL_DAY -->style="display: none;"<!-- ENDIF -->>
 	<dl>
 		<dt>
-			<label for="event_end_date">{L_ACP_PORTAL_EVENT_END_DATE}:</label><br />
+			<label for="event_end_date">{L_ACP_PORTAL_EVENT_END_DATE}{L_COLON}</label><br />
 			<span>{L_ACP_PORTAL_EVENT_END_DATE_EXP}</span>
 		</dt>
 		<dd><input name="event_end_date" type="text" id="event_end_date" value="{EVENT_END_DATE}" maxlength="255" /></dd>
@@ -51,14 +51,14 @@
 	</div>
 	<dl>
 		<dt>
-			<label for="event_url">{L_EVENT_LINK}:</label><br />
+			<label for="event_url">{L_EVENT_LINK}{L_COLON}</label><br />
 			<span>{L_EVENT_LINK_EXP}</span>
 		</dt>
 		<dd><input name="event_url" type="text" id="event_url" value="{EVENT_URL}" maxlength="255" /></dd>
 	</dl>
 	<dl>
 		<dt>
-			<label for="permission-setting-calendar">{L_ACP_PORTAL_CALENDAR_PERMISSION}:</label><br />
+			<label for="permission-setting-calendar">{L_ACP_PORTAL_CALENDAR_PERMISSION}{L_COLON}</label><br />
 			<span>{L_ACP_PORTAL_CALENDAR_PERMISSION_EXP}</span>
 		</dt>
 		<dd>
@@ -85,32 +85,32 @@
 	<fieldset>
 		<legend>{L_MODULE_OPTIONS}</legend>
 		<dl>
-			<dt><label for="module_name">{L_MODULE_NAME}:</label><br /><span>{L_MODULE_NAME_EXP}</span></dt>
+			<dt><label for="module_name">{L_MODULE_NAME}{L_COLON}</label><br /><span>{L_MODULE_NAME_EXP}</span></dt>
 			<dd><input id="module_name" type="text" value="{MODULE_NAME}" name="module_name" maxlength="255" size="64" /></dd>
 		</dl>
 		<!-- IF MODULE_SHOW_IMAGE -->
 		<dl>
-			<dt><label for="module_image">{L_MODULE_IMAGE}:</label><br /><span>{L_MODULE_IMAGE_EXP}</span></dt>
+			<dt><label for="module_image">{L_MODULE_IMAGE}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_EXP}</span></dt>
 			<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
 			<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
 		</dl>
 		<!-- IF MODULE_IMAGE_SRC -->
 		<dl>
-			<dt><label for="module_img_width">{L_MODULE_IMAGE_WIDTH}:</label><br /><span>{L_MODULE_IMAGE_WIDTH_EXP}</span></dt>
+			<dt><label for="module_img_width">{L_MODULE_IMAGE_WIDTH}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_WIDTH_EXP}</span></dt>
 			<dd><input id="module_img_width" type="text" value="{MODULE_IMAGE_WIDTH}" name="module_img_width" maxlength="3" size="3" />px</dd>
 		</dl>
 		<dl>
-			<dt><label for="module_img_height">{L_MODULE_IMAGE_HEIGHT}:</label><br /><span>{L_MODULE_IMAGE_HEIGHT_EXP}</span></dt>
+			<dt><label for="module_img_height">{L_MODULE_IMAGE_HEIGHT}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_HEIGHT_EXP}</span></dt>
 			<dd><input id="module_img_height" type="text" value="{MODULE_IMAGE_HEIGHT}" name="module_img_height" maxlength="3" size="3" />px</dd>
 		</dl>
 		<!-- ENDIF -->
 		<!-- ENDIF -->
 		<dl>
-			<dt><label for="module_reset">{L_MODULE_RESET}:</label><br /><span style="color: #BC2A4D;">{L_MODULE_RESET_EXP}</span></dt>
+			<dt><label for="module_reset">{L_MODULE_RESET}{L_COLON}</label><br /><span style="color: #BC2A4D;">{L_MODULE_RESET_EXP}</span></dt>
 			<dd><input id="module_reset" type="checkbox" value="1" name="module_reset" /></dd>
 		</dl>
 		<dl>
-			<dt><label for="module_status">{L_MODULE_STATUS}:</label></dt>
+			<dt><label for="module_status">{L_MODULE_STATUS}{L_COLON}</label></dt>
 			<dd>
 				<label><input type="radio" class="radio" name="module_status" value="1" id="module_status"<!-- IF MODULE_ENABLED --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
 				<label><input type="radio" class="radio" name="module_status" value="0"<!-- IF not MODULE_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
@@ -118,7 +118,7 @@
 		</dl>
 		<!-- IF permission_setting -->
 		<dl>
-			<dt><label for="permission-setting">{L_MODULE_PERMISSIONS}:</label><br /><span>{L_MODULE_PERMISSIONS_EXP}</span></dt>
+			<dt><label for="permission-setting">{L_MODULE_PERMISSIONS}{L_COLON}</label><br /><span>{L_MODULE_PERMISSIONS_EXP}</span></dt>
 			<dd>
 				<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
 					<!-- BEGIN permission_setting -->
@@ -140,7 +140,7 @@
 	<!-- ELSE -->
 
 		<dl>
-			<dt><label for="{options.KEY}">{options.TITLE}:</label><!-- IF options.S_EXPLAIN --><br /><span>{options.TITLE_EXPLAIN}</span><!-- ENDIF --></dt>
+			<dt><label for="{options.KEY}">{options.TITLE}{L_COLON}</label><!-- IF options.S_EXPLAIN --><br /><span>{options.TITLE_EXPLAIN}</span><!-- ENDIF --></dt>
 			<dd>{options.CONTENT}</dd>
 		</dl>
 
@@ -171,7 +171,7 @@
 		<!-- IF events.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
 		<td style="text-align: center;">{events.EVENT_TITLE}</td>
 		<td style="text-align: center;">{events.EVENT_DESC}</td>
-		<td style="text-align: center;"><!-- IF events.EVENT_END -->{L_EVENT_START}:&nbsp;{events.EVENT_START}&nbsp;&#124;&nbsp;{L_EVENT_END}:&nbsp;{events.EVENT_END}<!-- ELSE -->{L_EVENT_TIME}:&nbsp;{events.EVENT_START}<!-- IF events.EVENT_ALL_DAY -->&nbsp;&#124;&nbsp;{L_EVENT_ALL_DAY}<!-- ENDIF --><!-- ENDIF --></td>
+		<td style="text-align: center;"><!-- IF events.EVENT_END -->{L_EVENT_START}{L_COLON}&nbsp;{events.EVENT_START}&nbsp;&#124;&nbsp;{L_EVENT_END}{L_COLON}&nbsp;{events.EVENT_END}<!-- ELSE -->{L_EVENT_TIME}{L_COLON}&nbsp;{events.EVENT_START}<!-- IF events.EVENT_ALL_DAY -->&nbsp;&#124;&nbsp;{L_EVENT_ALL_DAY}<!-- ENDIF --><!-- ENDIF --></td>
 		<td style="text-align: center;"><a href="{events.EVENT_URL}" alt="{events.EVENT_TITLE}">{events.EVENT_URL_RAW}</td>
 		<td style="text-align: center;">
 			<a href="{events.U_EDIT}">{ICON_EDIT}</a> <a href="{events.U_DELETE}">{ICON_DELETE}</a>

@@ -39,15 +39,15 @@
 <!-- IF minical.S_DISPLAY_EVENTS -->
 <table class="tablebg" cellspacing="1" width="100%">
    <tr class="row3">
-      <td colspan="3" align="left"><span class="genmed" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_CURRENT_EVENTS}:</span></td>
+      <td colspan="3" align="left"><span class="genmed" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_CURRENT_EVENTS}{L_COLON}</span></td>
    </tr>   
    <!-- BEGIN cur_events -->
    <tr class="row1">
       <td style="width: 100%; padding-left: 5px; padding-bottom: 5px;">
                <!-- IF minical.cur_events.EVENT_URL --><a href="{minical.cur_events.EVENT_URL}" title="{minical.cur_events.EVENT_TITLE}" <!-- IF minical.cur_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.cur_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
-               <span style="font-weight: bold;">{minical.cur_events.EVENT_TITLE}:</span><br />
-               <!-- IF not minical.cur_events.ALL_DAY and not minical.cur_events.END_TIME -->{L_EVENT_TIME}:&nbsp;{minical.cur_events.START_TIME}<br />
-               <!-- ELSEIF not minical.cur_events.ALL_DAY and cur_events.END_TIME -->{L_EVENT_START}:&nbsp;{minical.cur_events.START_TIME}<br />{L_EVENT_END}:&nbsp;{minical.cur_events.END_TIME}<br />
+               <span style="font-weight: bold;">{minical.cur_events.EVENT_TITLE}{L_COLON}</span><br />
+               <!-- IF not minical.cur_events.ALL_DAY and not minical.cur_events.END_TIME -->{L_EVENT_TIME}{L_COLON}&nbsp;{minical.cur_events.START_TIME}<br />
+               <!-- ELSEIF not minical.cur_events.ALL_DAY and cur_events.END_TIME -->{L_EVENT_START}{L_COLON}&nbsp;{minical.cur_events.START_TIME}<br />{L_EVENT_END}{L_COLON}&nbsp;{minical.cur_events.END_TIME}<br />
                <!-- ELSE -->{L_EVENT_ALL_DAY}<br />
                <!-- ENDIF -->
                <!-- IF minical.cur_events.EVENT_DESC --><span style="font-style: italic;">{minical.cur_events.EVENT_DESC}</span><!-- ENDIF -->
@@ -61,16 +61,16 @@
    <!-- END cur_events -->
 
    <tr class="row3">
-      <td colspan="3" align="left"><span class="genmed" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_UPCOMING_EVENTS}:</span></td>
+      <td colspan="3" align="left"><span class="genmed" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_UPCOMING_EVENTS}{L_COLON}</span></td>
    </tr>
       <!-- BEGIN upcoming_events -->
       <tr class="row1">
          <td style="width: 100%; padding-left: 5px; padding-bottom: 5px;">
                   <!-- IF minical.upcoming_events.EVENT_URL --><a href="{minical.upcoming_events.EVENT_URL}" title="{minical.upcoming_events.EVENT_TITLE}" <!-- IF minical.upcoming_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.upcoming_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
-                  <span style="font-weight: bold;">{minical.upcoming_events.EVENT_TITLE}:</span><br />
-                  <!-- IF not minical.upcoming_events.ALL_DAY and not minical.upcoming_events.END_TIME -->{L_EVENT_TIME}:&nbsp;{minical.upcoming_events.START_TIME}<br />
-                  <!-- ELSEIF not minical.upcoming_events.ALL_DAY and minical.upcoming_events.END_TIME -->{L_EVENT_START}:&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_END}:&nbsp;{minical.upcoming_events.END_TIME}<br />
-                  <!-- ELSE -->{L_EVENT_TIME}:&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
+                  <span style="font-weight: bold;">{minical.upcoming_events.EVENT_TITLE}{L_COLON}</span><br />
+                  <!-- IF not minical.upcoming_events.ALL_DAY and not minical.upcoming_events.END_TIME -->{L_EVENT_TIME}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />
+                  <!-- ELSEIF not minical.upcoming_events.ALL_DAY and minical.upcoming_events.END_TIME -->{L_EVENT_START}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_END}{L_COLON}&nbsp;{minical.upcoming_events.END_TIME}<br />
+                  <!-- ELSE -->{L_EVENT_TIME}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
                   <!-- ENDIF -->
                   <!-- IF minical.upcoming_events.EVENT_DESC --><span style="font-style: italic;">{minical.upcoming_events.EVENT_DESC}</span><!-- ENDIF -->
                   <!-- IF minical.upcoming_events.EVENT_URL --></a><!-- ENDIF -->

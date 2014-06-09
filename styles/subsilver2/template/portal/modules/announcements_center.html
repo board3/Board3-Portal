@@ -12,16 +12,16 @@
 				<tr>
 					<td class="cat">
 					<a name="a"></a><a name="a{announcements_center_row.A_ID}"></a>
-						<!-- IF announcements_center_row.S_UNREAD_INFO --><a href="{announcements_center_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_center_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {announcements_center_row.ATTACH_ICON_IMG}<!-- IF announcements_center_row.S_POLL --> <strong>{L_VIEW_TOPIC_POLL}: </strong><!-- ENDIF --><!-- IF announcements_center_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{announcements_center_row.TOPIC_ICON_IMG}" width="{announcements_center_row.TOPIC_ICON_IMG_WIDTH}" height="{announcements_center_row.TOPIC_ICON_IMG_HEIGHT}" alt="" /> <!-- ENDIF --><a href="{announcements_center_row.U_VIEW_COMMENTS}"><strong>{announcements_center_row.TITLE}</strong></a>
+						<!-- IF announcements_center_row.S_UNREAD_INFO --><a href="{announcements_center_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements_center_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {announcements_center_row.ATTACH_ICON_IMG}<!-- IF announcements_center_row.S_POLL --> <strong>{L_VIEW_TOPIC_POLL}{L_COLON} </strong><!-- ENDIF --><!-- IF announcements_center_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{announcements_center_row.TOPIC_ICON_IMG}" width="{announcements_center_row.TOPIC_ICON_IMG_WIDTH}" height="{announcements_center_row.TOPIC_ICON_IMG_HEIGHT}" alt="" /> <!-- ENDIF --><a href="{announcements_center_row.U_VIEW_COMMENTS}"><strong>{announcements_center_row.TITLE}</strong></a>
 					</td>
 				</tr>
 				<tr class="row<!-- IF announcements_center_row.S_ROW_COUNT is odd -->1<!-- ELSE -->2<!-- ENDIF -->">
 					<td style="padding:5px 5px 5px 5px;">
 
-						<span class="gensmall" style="float: left;">{L_POSTED} {L_POST_BY_AUTHOR}: {announcements_center_row.POSTER_FULL} &raquo; {announcements_center_row.TIME}</span>
+						<span class="gensmall" style="float: left;">{L_POSTED} {L_POST_BY_AUTHOR}{L_COLON} {announcements_center_row.POSTER_FULL} &raquo; {announcements_center_row.TIME}</span>
 						<span class="gensmall" style="float: right;">
 							<!-- IF announcements_center_row.FORUM_NAME -->
-								{L_FORUM}: <strong><a href="{announcements_center_row.U_VIEWFORUM}">{announcements_center_row.FORUM_NAME}</a></strong>
+								{L_FORUM}{L_COLON} <strong><a href="{announcements_center_row.U_VIEWFORUM}">{announcements_center_row.FORUM_NAME}</a></strong>
 							<!-- ELSE -->
 								 {L_GLOBAL_ANNOUNCEMENT}
 							<!-- ENDIF -->
@@ -35,7 +35,7 @@
 
 							<table class="tablebg" width="100%" cellspacing="1">
 							<tr>
-								<td class="row3"><b class="genmed">{L_ATTACHMENTS}: </b></td>
+								<td class="row3"><b class="genmed">{L_ATTACHMENTS}{L_COLON} </b></td>
 							</tr>
 							<!-- BEGIN attachment -->
 								<tr>
@@ -45,12 +45,12 @@
 							</table>
 						<!-- ENDIF -->
 						<br /><br />
-						<!-- IF announcements_center_row.PAGINATION --><span style="float: right;">[ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {announcements_center_row.PAGINATION} ]</span><!-- ENDIF -->
+						<!-- IF announcements_center_row.PAGINATION --><span style="float: right;">[ {GOTO_PAGE_IMG}{L_GOTO_PAGE}{L_COLON} {announcements_center_row.PAGINATION} ]</span><!-- ENDIF -->
 					</td>
 				</tr>
 				<tr class="row<!-- IF announcements_center_row.S_ROW_COUNT is odd -->1<!-- ELSE -->2<!-- ENDIF -->">
 					<td>
-					<span style="float: left;">{L_TOPIC_VIEWS}: {announcements_center_row.TOPIC_VIEWS} &nbsp;&bull;&nbsp; <a href="{announcements_center_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}: {announcements_center_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{announcements_center_row.U_POST_COMMENT}">{L_POST_REPLY}</a></span>
+					<span style="float: left;">{L_TOPIC_VIEWS}{L_COLON} {announcements_center_row.TOPIC_VIEWS} &nbsp;&bull;&nbsp; <a href="{announcements_center_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}{L_COLON} {announcements_center_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{announcements_center_row.U_POST_COMMENT}">{L_POST_REPLY}</a></span>
 					<span style="float: right;">{announcements_center_row.OPEN}<a href="{announcements_center_row.U_READ_FULL}">{announcements_center_row.L_READ_FULL}</a>{announcements_center_row.CLOSE} <a href="#wrapheader" class="top" title="{L_BACK_TO_TOP}">{L_BACK_TO_TOP}</a></span>
 					</td>
 				</tr>
