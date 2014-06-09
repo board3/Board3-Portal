@@ -198,10 +198,10 @@ class calendar extends module_base
 		));
 
 		// output the days for the current month
-		for($i = 0; $i < $mini_cal_month_days;)
+		for ($i = 0; $i < $mini_cal_month_days;)
 		{
 			// is this the first day of the week?
-			if($mini_cal_count == $this->mini_cal_fdow)
+			if ($mini_cal_count == $this->mini_cal_fdow)
 			{
 				$this->template->assign_block_vars('minical.mini_cal_row', array(
 					'MODULE_ID'		=> $module_id,
@@ -209,7 +209,7 @@ class calendar extends module_base
 			}
 
 			// is this a valid weekday?
-			if($mini_cal_count == ($this->day[$i][3]))
+			if ($mini_cal_count == ($this->day[$i][3]))
 			{
 				$mini_cal_this_day = $this->day[$i][0];
 
@@ -257,10 +257,10 @@ class calendar extends module_base
 		*/
 		$events = $this->utf_unserialize($portal_config['board3_calendar_events_' . $module_id]);
 
-		if(!empty($events) && $this->config['board3_display_events_' . $module_id])
+		if (!empty($events) && $this->config['board3_display_events_' . $module_id])
 		{
 			// we sort the $events array by the start time
-			foreach($events as $key => $cur_event)
+			foreach ($events as $key => $cur_event)
 			{
 				$time_ary[$key] = $cur_event['start_time'];
 			}
@@ -268,16 +268,16 @@ class calendar extends module_base
 
 			$groups_ary = get_user_groups();
 
-			foreach($events as $key => $cur_event)
+			foreach ($events as $key => $cur_event)
 			{
-				if(($cur_event['start_time'] + $this->time->getOffset()) >= $today_timestamp ||
+				if (($cur_event['start_time'] + $this->time->getOffset()) >= $today_timestamp ||
 					($cur_event['end_time'] + $this->time->getOffset()) >= $today_timestamp ||
 					(($cur_event['start_time'] + $this->time->getOffset() + self::TIME_DAY) >= $today_timestamp && $cur_event['all_day']))
 				{
 					$cur_permissions = explode(',', $cur_event['permission']);
 					$permission_check = array_intersect($groups_ary, $cur_permissions);
 
-					if(!empty($permission_check) || $cur_event['permission'] == '')
+					if (!empty($permission_check) || $cur_event['permission'] == '')
 					{
 						// check if this is an external link
 						if (isset($cur_event['url']) && strpos($cur_event['url'], generate_board_url()) === false)
@@ -296,7 +296,7 @@ class calendar extends module_base
 						* - We have an all day event and the start of that event is less than 1 day (86400 seconds) away
 						* - We have a normal event with a start that is less then 1 day away and that hasn't ended yet
 						*/
-						if((($cur_event['start_time'] + $this->time->getOffset() - $today_timestamp) <= self::TIME_DAY && $cur_event['all_day']) ||
+						if ((($cur_event['start_time'] + $this->time->getOffset() - $today_timestamp) <= self::TIME_DAY && $cur_event['all_day']) ||
 						(($cur_event['start_time'] + $this->time->getOffset() - $today_timestamp) <= self::TIME_DAY && ($cur_event['end_time'] + $this->time->getOffset()) >= $today_timestamp))
 						{
 							$this->template->assign_block_vars('minical.cur_events', array(
@@ -417,7 +417,7 @@ class calendar extends module_base
 		// append_sid() adds adm/ already, no need to add it here
 		$u_action = append_sid('index.' . $this->php_ext, 'i=\board3\portal\acp\portal_module&amp;mode=config&amp;module_id=' . $module_id);
 
-		switch($action)
+		switch ($action)
 		{
 			// Save changes
 			case 'save':
@@ -428,62 +428,31 @@ class calendar extends module_base
 
 				$event_title = $this->request->variable('event_title', ' ', true);
 				$event_desc = $this->request->variable('event_desc', ' ', true);
-				$event_start_day = trim($this->request->variable('event_start_day', ''));
-				$event_start_time = trim($this->request->variable('event_start_time', ''));
-				$event_end_day = trim($this->request->variable('event_end_day', ''));
-				$event_end_time = trim($this->request->variable('event_end_time', ''));
+				$event_start_date = trim($this->request->variable('event_start_date', ''));
+				$event_end_date = trim($this->request->variable('event_end_date', ''));
 				$event_all_day = $this->request->variable('event_all_day', false); // default to false
 				$event_url = $this->request->variable('event_url', ' ');
 				$event_permission = $this->request->variable('permission-setting-calendar', array(0 => ''));
 				$groups_ary = array();
 
-				/*
-				* parse the event time
-				* first check for obvious errors, we don't want to waste server resources
-				*/
-				if(strlen($event_start_day) < 9 || strlen($event_start_day) > 10 || (strlen($event_start_time) < 4 && !$event_all_day) || strlen($event_start_time) > 5)
+				// Now get the unix timestamps out of the entered information
+				$start_time = $this->date_to_time($event_start_date);
+				$end_time = (!$event_all_day) ? $this->date_to_time($event_end_date) : '';
+
+				if (!$start_time)
 				{
 					trigger_error($this->user->lang['ACP_PORTAL_CALENDAR_START_INCORRECT']. adm_back_link($u_action), E_USER_WARNING);
 				}
-				elseif((strlen($event_end_day) < 9 || strlen($event_end_day) > 10 || strlen($event_end_time) < 4 || strlen($event_end_time) > 5) && !$event_all_day)
+				else if (!$event_all_day && !$end_time)
 				{
 					trigger_error($this->user->lang['ACP_PORTAL_CALENDAR_END_INCORRECT']. adm_back_link($u_action), E_USER_WARNING);
 				}
-				// Now get the needed numbers out of the entered information
-				$first_start_hyphen = strpos($event_start_day, '-', 0);
-				$second_start_hyphen = strpos($event_start_day, '-', $first_start_hyphen + 1);
-				$start_colon_pos = strpos($event_start_time, ':', 0);
-				$start_day_length = strlen($event_start_day);
-				$start_time_length = strlen($event_start_time);
-				$start_day = (int) substr($event_start_day, 0, $first_start_hyphen);
-				$start_month =  (int) substr($event_start_day, $first_start_hyphen + 1, ($second_start_hyphen - $first_start_hyphen - 1));
-				$start_year = (int) substr($event_start_day, $second_start_hyphen + 1, $start_day_length - $second_start_hyphen);
-				$start_hour = (int) substr($event_start_time, 0, $start_colon_pos);
-				$start_minute = (int) substr($event_start_time, $start_colon_pos + 1, ($start_time_length - $start_colon_pos) - 1);
 
-				if(!$event_all_day)
-				{
-					$first_end_hyphen = strpos($event_end_day, '-', 0);
-					$second_end_hyphen = strpos($event_end_day, '-', $first_end_hyphen + 1);
-					$end_colon_pos = strpos($event_end_time, ':', 0);
-					$end_day_length = strlen($event_end_day);
-					$end_time_length = strlen($event_end_time);
-					$end_day = (int) substr($event_end_day, 0, $first_end_hyphen);
-					$end_month = (int) substr($event_end_day, $first_end_hyphen + 1, ($second_end_hyphen - $first_end_hyphen - 1));
-					$end_year = (int) substr($event_end_day, $second_end_hyphen + 1, $end_day_length - $second_end_hyphen);
-					$end_hour = (int) substr($event_end_time, 0, $end_colon_pos);
-					$end_minute = (int) substr($event_end_time, $end_colon_pos + 1, ($end_time_length - $end_colon_pos) - 1);
-				}
-
-				// UNIX timestamps
-				$start_time = gmmktime($start_hour, $start_minute, 0, $start_month, $start_day, $start_year);
-				$end_time = (!$event_all_day) ? gmmktime($end_hour, $end_minute, 0, $end_month, $end_day, $end_year) : '';
-
-				if(($end_time) <= time() && !(($start_time + self::TIME_DAY) >= time() && $event_all_day))
+				if (($end_time) <= time() && !(($start_time + self::TIME_DAY) >= time() && $event_all_day))
 				{
 					trigger_error($this->user->lang['ACP_PORTAL_CALENDAR_EVENT_PAST']. adm_back_link($u_action), E_USER_WARNING);
 				}
-				elseif($end_time < $start_time && !$event_all_day)
+				elseif ($end_time < $start_time && !$event_all_day)
 				{
 					trigger_error($this->user->lang['ACP_PORTAL_CALENDAR_EVENT_START_FIRST']. adm_back_link($u_action), E_USER_WARNING);
 				}
@@ -493,7 +462,7 @@ class calendar extends module_base
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
 				$result = $this->db->sql_query($sql);
-				while($row = $this->db->sql_fetchrow($result))
+				while ($row = $this->db->sql_fetchrow($result))
 				{
 					$groups_ary[] = $row['group_id'];
 				}
@@ -547,7 +516,7 @@ class calendar extends module_base
 				}
 
 				// we sort the $events array by the start time
-				foreach($events as $key => $cur_event)
+				foreach ($events as $key => $cur_event)
 				{
 					$time_ary[$key] = $cur_event['start_time'];
 				}
@@ -593,14 +562,13 @@ class calendar extends module_base
 			case 'edit':
 			case 'add':
 				$event_all_day = (isset($events[$link_id]['all_day']) && $events[$link_id]['all_day'] == true) ? true : false;
+				$date_format = str_replace(array('D '), '', $this->user->data['user_dateformat']);
 
 				$this->template->assign_vars(array(
 					'EVENT_TITLE'		=> (isset($events[$link_id]['title']) && $action != 'add') ? $events[$link_id]['title'] : '',
 					'EVENT_DESC'		=> (isset($events[$link_id]['desc']) && $action != 'add') ? $events[$link_id]['desc'] : '',
-					'EVENT_START_DAY'	=> ($action != 'add') ? $this->user->format_date($events[$link_id]['start_time'], 'd-m-Y') : '',
-					'EVENT_START_TIME'	=> ($action != 'add') ? $this->user->format_date($events[$link_id]['start_time'], 'G:i') : '',
-					'EVENT_END_DAY'		=> ($action != 'add' && !$event_all_day) ? $this->user->format_date($events[$link_id]['end_time'], 'd-m-Y') : '',
-					'EVENT_END_TIME'	=> ($action != 'add' && !$event_all_day) ? $this->user->format_date($events[$link_id]['end_time'], 'G:i') : '',
+					'EVENT_START_DATE'	=> ($action != 'add') ? $this->user->format_date($events[$link_id]['start_time'], $date_format) : '',
+					'EVENT_END_DATE'	=> ($action != 'add' && !$event_all_day) ? $this->user->format_date($events[$link_id]['end_time'], $date_format) : '',
 					'EVENT_ALL_DAY'		=> (isset($events[$link_id]['all_day']) && $events[$link_id]['all_day'] == true) ? true : false,
 					'EVENT_URL'			=> (isset($events[$link_id]['url']) && $action != 'add') ? $events[$link_id]['url'] : '',
 
@@ -617,7 +585,7 @@ class calendar extends module_base
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
 				$result = $this->db->sql_query($sql);
-				while($row = $this->db->sql_fetchrow($result))
+				while ($row = $this->db->sql_fetchrow($result))
 				{
 					$this->template->assign_block_vars('permission_setting_calendar', array(
 						'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
@@ -784,5 +752,19 @@ class calendar extends module_base
 		}
 
 		return $url;
+	}
+
+	/**
+	* Returns timestamp from given date string
+	*
+	* @param string $date	Date and time string. It can contain just the
+	*			date or date and time info. The string should
+	*			be in a similar format: 17.06.1990 18:06
+	* @return int|bool	The timestamp of the given date or false if
+	*			given daten does not match any known formats.
+	*/
+	public function date_to_time($date)
+	{
+		return strtotime($date);
 	}
 }
