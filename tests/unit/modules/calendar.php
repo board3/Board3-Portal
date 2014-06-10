@@ -9,16 +9,22 @@
 
 require_once(dirname(__FILE__) . '/../../../includes/functions.php');
 
-class phpbb_functions_simple_test extends PHPUnit_Framework_TestCase
+class phpbb_functions_simple_test extends \board3\portal\tests\testframework\test_case
 {
+	protected $path_helper;
+	protected $calendar;
+
 	public function setUp()
 	{
+		parent::setUp();
+		global $phpbb_root_path;
+
 		$this->path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request(
 				new phpbb_mock_request()
 			),
 			new \phpbb\filesystem(),
-			$this->phpbb_root_path,
+			$phpbb_root_path,
 			'php'
 		);
 		$this->calendar = new \board3\portal\modules\calendar(array(), null, null, null, dirname(__FILE__) . '/../../../', 'php', null, $this->path_helper);

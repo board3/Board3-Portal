@@ -10,22 +10,20 @@
          stopOnFailure="false"
          syntaxCheck="false"
          verbose="true"
-         bootstrap="tests/bootstrap.php">
-    <testsuites>
-        <testsuite name="Board3 Portal Test Suite">
-            <directory suffix="_test.php">./tests</directory>
-        </testsuite>
-    </testsuites>
+         bootstrap="../../../../tests/bootstrap.php">
+	<testsuites>
+		<testsuite name="Extension Test Suite">
+			<directory suffix="_test.php">./tests</directory>
+			<exclude>./tests/functional</exclude>
+		</testsuite>
+		<testsuite name="Extension Functional Tests">
+			<directory suffix="_test.php" phpVersion="5.3.19" phpVersionOperator=">=">./tests/functional/</directory>
+		</testsuite>
+	</testsuites>
 
-    <groups>
-        <exclude>
-            <group>slow</group>
-        </exclude>
-    </groups>
-
-    <filter>
-        <blacklist>
-            <directory>./tests/</directory>
-        </blacklist>
-    </filter>
+	<filter>
+		<blacklist>
+			<directory>./tests/</directory>
+		</blacklist>
+	</filter>
 </phpunit>

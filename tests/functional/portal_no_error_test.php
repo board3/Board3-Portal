@@ -15,13 +15,13 @@ class phpbb_functional_portal_no_error_test extends \board3\portal\tests\testfra
 	public function setUp()
 	{
 		parent::setUp();
+
 		$this->login();
 		$this->admin_login();
-		$this->enable_board3_portal_ext();
 	}
 
 	public function test_vanilla_board()
 	{
-		$crawler = self::request('GET', 'app.php/portal');
+		self::request('GET', 'app.php/portal');
 	}
 }
