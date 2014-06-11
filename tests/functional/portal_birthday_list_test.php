@@ -15,9 +15,9 @@ class phpbb_functional_portal_birthday_list_test extends \board3\portal\tests\te
 	public function setUp()
 	{
 		parent::setUp();
+
 		$this->login();
 		$this->admin_login();
-		$this->enable_board3_portal_ext();
 	}
 
 	public function test_setup_birthday()
@@ -26,7 +26,7 @@ class phpbb_functional_portal_birthday_list_test extends \board3\portal\tests\te
 		$uid = $this->create_user('portal_birthday_user');
 		if (!$uid)
 		{
-			$this->markIncomplete('Unable to create portal_user');
+			$this->markTestIncomplete('Unable to create portal_user');
 		}
 		$this->login('portal_birthday_user');
 		$crawler = self::request('GET', 'ucp.php?i=ucp_profile&mode=profile_info&sid=' . $this->sid);
@@ -36,7 +36,7 @@ class phpbb_functional_portal_birthday_list_test extends \board3\portal\tests\te
 			'bday_month'	=> date('m', time() + 86400*2),
 			'bday_year'	=> date('Y', time() + 86400*2),
 		));
-		$crawler = self::submit($form);
+		self::submit($form);
 	}
 
 	/**

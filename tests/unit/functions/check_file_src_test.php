@@ -15,7 +15,8 @@ class phpbb_functions_check_file_src_test extends \board3\portal\tests\testframe
 	public function setUp()
 	{
 		parent::setUp();
-		global $db, $phpbb_root_path, $phpEx, $user;
+
+		global $user;
 		$user = new phpbb_mock_user();
 	}
 

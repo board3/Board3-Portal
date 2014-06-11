@@ -15,9 +15,9 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 	public function setUp()
 	{
 		parent::setUp();
+
 		$this->login();
 		$this->admin_login();
-		$this->enable_board3_portal_ext();
 	}
 
 	public function test_vanilla_board()
@@ -26,10 +26,10 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 		$uid = $this->create_user('portal_user');
 		if (!$uid)
 		{
-			$this->markIncomplete('Unable to create portal_user');
+			$this->markTestIncomplete('Unable to create portal_user');
 		}
 		$this->login('portal_user');
-		$crawler = self::request('GET', 'app.php/portal');
+		self::request('GET', 'app.php/portal');
 	}
 
 	public function test_with_announce()
@@ -42,7 +42,7 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 		if (isset($data))
 		{
 			// no errors should appear on portal
-			$crawler = self::request('GET', 'app.php/portal');
+			self::request('GET', 'app.php/portal');
 		}
 	}
 
@@ -56,7 +56,7 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 		if (isset($data))
 		{
 			// no errors should appear on portal
-			$crawler = self::request('GET', 'app.php/portal');
+			self::request('GET', 'app.php/portal');
 		}
 	}
 
@@ -66,7 +66,7 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 	public function test_after_announce()
 	{
 		$this->logout();
-		$crawler = self::request('GET', 'app.php/portal');
+		self::request('GET', 'app.php/portal');
 	}
 
 	public function test_with_poll()
@@ -82,10 +82,10 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 			$crawler = self::request('GET', 'app.php/portal');
 			$form = $crawler->selectButton('Submit vote')->form();
 			$form->setValues(array('vote_id' => array(1)));
-			$crawler = self::submit($form);
+			self::submit($form);
 
 			// no errors should appear on portal
-			$crawler = self::request('GET', 'app.php/portal');
+			self::request('GET', 'app.php/portal');
 		}
 	}
 
@@ -95,7 +95,7 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 	public function test_after_poll()
 	{
 		$this->logout();
-		$crawler = self::request('GET', 'app.php/portal');
+		self::request('GET', 'app.php/portal');
 	}
 
 	public function test_whois_online_legend()

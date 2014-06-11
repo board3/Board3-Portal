@@ -15,9 +15,9 @@ class phpbb_functional_portal_vote_poll_test extends \board3\portal\tests\testfr
 	public function setUp()
 	{
 		parent::setUp();
+
 		$this->login();
 		$this->admin_login();
-		$this->enable_board3_portal_ext();
 	}
 
 	public function test_with_poll()

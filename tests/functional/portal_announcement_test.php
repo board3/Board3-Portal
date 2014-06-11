@@ -15,9 +15,9 @@ class phpbb_functional_portal_announcement_test extends \board3\portal\tests\tes
 	public function setUp()
 	{
 		parent::setUp();
+
 		$this->login();
 		$this->admin_login();
-		$this->enable_board3_portal_ext();
 	}
 
 	public function test_with_announce()
@@ -30,7 +30,7 @@ class phpbb_functional_portal_announcement_test extends \board3\portal\tests\tes
 		if (isset($data))
 		{
 			// no errors should appear on portal
-			$crawler = self::request('GET', 'app.php/portal');
+			self::request('GET', 'app.php/portal');
 		}
 	}
 
@@ -44,7 +44,7 @@ class phpbb_functional_portal_announcement_test extends \board3\portal\tests\tes
 		if (isset($data))
 		{
 			// no errors should appear on portal
-			$crawler = self::request('GET', 'app.php/portal');
+			self::request('GET', 'app.php/portal');
 		}
 	}
 
@@ -54,6 +54,6 @@ class phpbb_functional_portal_announcement_test extends \board3\portal\tests\tes
 	public function test_after_announce()
 	{
 		$this->logout();
-		$crawler = self::request('GET', 'app.php/portal');
+		self::request('GET', 'app.php/portal');
 	}
 }
