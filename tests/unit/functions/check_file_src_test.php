@@ -9,6 +9,7 @@
 
 require_once(dirname(__FILE__) . '/../../../includes/functions.php');
 require_once(dirname(__FILE__) . '/../../../../../../includes/functions_acp.php');
+require_once(dirname(__FILE__) . '/../../../../../../includes/functions.php');
 
 class phpbb_functions_check_file_src_test extends \board3\portal\tests\testframework\database_test_case
 {
