@@ -24,15 +24,14 @@ matrix:
       env: DB=mysqli
   allow_failures:
     - php: hhvm
-    - env: DB=sqlite3
   fast_finish: true
 
 env:
   global:
     - EXTNAME="board3/portal"
-    - SNIFF="0"        # Should we run code sniffer on your code?
-    - IMAGE_ICC="0"    # Should we run icc profile sniffer on your images?
-    - PHPBB_BRANCH="ticket/12483" # - PHPBB_BRANCH="develop-ascraeus"
+    - SNIFF="1"        # Should we run code sniffer on your code?
+    - IMAGE_ICC="1"    # Should we run icc profile sniffer on your images?
+    - PHPBB_BRANCH="develop-ascraeus"
 
 branches:
   except:

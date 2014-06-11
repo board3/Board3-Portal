@@ -103,14 +103,22 @@ class birthday_list extends module_base
 				break;
 			}
 
-			$sql = 'SELECT u.user_id, u.username, u.user_colour, u.user_birthday
-				FROM ' . USERS_TABLE . ' u
-				LEFT JOIN ' . BANLIST_TABLE . " b ON (u.user_id = b.ban_userid)
-				WHERE (b.ban_id IS NULL
+			$sql_array = array(
+				'SELECT'		=> 'u.user_id, u.username, u.user_colour, u.user_birthday',
+				'FROM'		=> array(USERS_TABLE	=> 'u'),
+				'LEFT_JOIN'	=> array(
+					array(
+						'FROM'		=> array(BANLIST_TABLE	=> 'b'),
+						'ON'		=> 'u.user_id = b.ban_userid',
+					),
+				),
+				'WHERE'		=> "(b.ban_id IS NULL
 						OR b.ban_exclude = 1)
-					AND (u.user_birthday LIKE '" . $this->db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%' {$sql_days})
-					AND u.user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')
-				ORDER BY ' . $order_by;
+					AND (u.user_birthday " . $this->db->sql_like_expression($this->db->any_char . sprintf('%2d-%2d-', $now['mday'], $now['mon']) . $this->db->any_char) . " {$sql_days})
+					AND " . $this->db->sql_in_set('u.user_type', array(USER_NORMAL , USER_FOUNDER)),
+				'ORDER BY'	=> $order_by,
+			);
+			$sql = $this->db->sql_build_query('SELECT', $sql_array);
 			$result = $this->db->sql_query($sql);
 			$today = sprintf('%2d-%2d-', $now['mday'], $now['mon']);
 
