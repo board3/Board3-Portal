@@ -7,13 +7,6 @@
 *
 */
 
-// @codingStandardsIgnoreStart
-if (!defined('IN_PHPBB') && !defined('UMIL_AUTO') && !defined('IN_INSTALL'))
-{
-	exit;
-}
-// @codingStandardsIgnoreEnd
-
 // Get portal config
 function obtain_portal_config()
 {
