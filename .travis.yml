@@ -46,11 +46,16 @@ install:
 
 before_script:
   - travis/setup-database.sh $DB $TRAVIS_PHP_VERSION
+  - mkdir build/logs
+  - git clone "https://github.com/satooshi/php-coveralls.git" "phpBB/vendor/coveralls"
 
 script:
   - sh -c "if [ '$SNIFF' != '0' ]; then travis/phing-sniff.sh $DB $TRAVIS_PHP_VERSION; fi"
   - sh -c "if [ '$IMAGE_ICC' != '0' ]; then travis/check-image-icc-profiles.sh $DB $TRAVIS_PHP_VERSION; fi"
-  - phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/travis/phpunit-$DB-travis.xml --bootstrap ./tests/bootstrap.php
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' == '5.5' -a '$DB' == 'mysqli' ]; then phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/travis/phpunit-$DB-travis.xml --bootstrap ./tests/bootstrap.php --coverage-clover build/logs/clover.xml; else phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/travis/phpunit-$DB-travis.xml --bootstrap ./tests/bootstrap.php; fi"
+
+after_script:
+  - php phpBB/vendor/coveralls/composer/bin/coveralls
 
 notifications:
   email:
