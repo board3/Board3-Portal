@@ -452,7 +452,7 @@ class calendar extends module_base
 				{
 					trigger_error($this->user->lang['ACP_PORTAL_CALENDAR_EVENT_PAST']. adm_back_link($u_action), E_USER_WARNING);
 				}
-				elseif ($end_time < $start_time && !$event_all_day)
+				else if ($end_time < $start_time && !$event_all_day)
 				{
 					trigger_error($this->user->lang['ACP_PORTAL_CALENDAR_EVENT_START_FIRST']. adm_back_link($u_action), E_USER_WARNING);
 				}

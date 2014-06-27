@@ -209,7 +209,7 @@ class leaders extends module_base
 				{
 					$which_row = 'b3p_admins';
 				}
-				elseif ($row['group_name'] == 'GLOBAL_MODERATORS')
+				else if ($row['group_name'] == 'GLOBAL_MODERATORS')
 				{
 					$which_row = 'b3p_moderators';
 				}

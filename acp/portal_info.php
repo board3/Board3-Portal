@@ -9,11 +9,6 @@
 
 namespace board3\portal\acp;
 
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 /**
 * @package module_install
 */

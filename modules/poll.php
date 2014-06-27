@@ -229,7 +229,7 @@ class poll extends module_base
 		$update = $this->request->variable('update', false);
 		$poll_view = $this->request->variable('polls', '');
 
-		$poll_view_ar = (strpos($poll_view, ',') !== FALSE) ? explode(',', $poll_view) : (($poll_view != '') ? array($poll_view) : array());
+		$poll_view_ar = (strpos($poll_view, ',') !== false) ? explode(',', $poll_view) : (($poll_view != '') ? array($poll_view) : array());
 
 		if ($update && $this->config['board3_poll_allow_vote_' . $module_id])
 		{
@@ -493,7 +493,7 @@ class poll extends module_base
 
 					$make_poll_view = array();
 
-					if(in_array($topic_id, $poll_view_ar) === FALSE)
+					if(in_array($topic_id, $poll_view_ar) === false)
 					{
 						$make_poll_view[] = $topic_id;
 						$make_poll_view = array_merge($poll_view_ar, $make_poll_view);

@@ -7,10 +7,7 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace board3\portal\includes;
 
 /**
 * @ignore

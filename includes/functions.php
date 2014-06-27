@@ -7,10 +7,12 @@
 *
 */
 
+// @codingStandardsIgnoreStart
 if (!defined('IN_PHPBB') && !defined('UMIL_AUTO') && !defined('IN_INSTALL'))
 {
 	exit;
 }
+// @codingStandardsIgnoreEnd
 
 // Get portal config
 function obtain_portal_config()
@@ -102,7 +104,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 
 	$posts = $update_count = array();
 	$post_time = ($time == 0) ? '' : 'AND t.topic_time > ' . (time() - $time * 86400);
-	$forum_from = (strpos($forum_from, ',') !== FALSE) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
+	$forum_from = (strpos($forum_from, ',') !== false) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 	$str_where = '';
 	$topic_icons = array(0);
 	$have_icons = 0;
@@ -440,7 +442,7 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 {
 	global $template, $user;
 
-	switch($type)
+	switch ($type)
 	{
 		case "announcements":
 			$pagination_type = 'ap';

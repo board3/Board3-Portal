@@ -7,11 +7,6 @@
 *
 */
 
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 function column_num_string($column)
 {
 	switch ($column)

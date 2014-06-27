@@ -33,7 +33,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 			'add_tables' => array(
 				$this->table_prefix . 'portal_modules' => array(
 					'COLUMNS' => array(
-						'module_id' => array('UINT:3', NULL, 'auto_increment'),
+						'module_id' => array('UINT:3', null, 'auto_increment'),
 						'module_classname' => array('VCHAR:64', ''),
 						'module_column' => array('TINT:3', 0),
 						'module_order' => array('TINT:3', 0),

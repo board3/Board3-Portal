@@ -132,7 +132,7 @@ class birthday_list extends module_base
 						'AGE'		=> ($age = (int) substr($row['user_birthday'], -4)) ? ' (' . ($now['year'] - $age) . ')' : '',
 					));
 				}
-				elseif ($this->config['board3_birthdays_ahead_' . $module_id] > 0)
+				else if ($this->config['board3_birthdays_ahead_' . $module_id] > 0)
 				{
 					$birthday_ahead_list = true;
 					$this->template->assign_block_vars('board3_birthday_ahead_list', array(
