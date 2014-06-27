@@ -1,0 +1,4 @@
+#.coveralls.yml
+
+src_dir: .
+coverage_clover: ../build/logs/clover.xml
