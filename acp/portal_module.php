@@ -23,7 +23,7 @@ class portal_module
 
 	public function __construct()
 	{
-		global $db, $user, $cache, $request, $template;
+		global $db, $user, $cache, $request, $template, $table_prefix;
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpbb_container, $phpEx;
 
 		$user->add_lang_ext('board3/portal', array('portal', 'portal_acp'));
@@ -44,6 +44,8 @@ class portal_module
 		$this->phpbb_container = $phpbb_container;
 		$this->mod_version_check = $this->phpbb_container->get('board3.version.check');
 		$this->register_modules($this->phpbb_container->get('board3.module_collection'));
+		define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.modules.table'));
+		define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.config.table'));
 
 		if (!function_exists('column_string_const'))
 		{

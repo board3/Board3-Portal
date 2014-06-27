@@ -84,8 +84,10 @@ class main
 	* @param string $php_ext PHP file extension
 	* @param \phpbb\di\service_collection $modules Board3 Modules service
 	*						collection
+	* @param string $config_table Board3 config table
+	* @param string $modules_table Board3 modules table
 	*/
-	public function __construct($auth, $config, $template, $user, $path_helper, $phpbb_root_path, $php_ext, $modules)
+	public function __construct($auth, $config, $template, $user, $path_helper, $phpbb_root_path, $php_ext, $modules, $config_table, $modules_table)
 	{
 		global $portal_root_path;
 
@@ -101,6 +103,8 @@ class main
 		$this->includes_path = $phpbb_root_path . 'ext/board3/portal/includes/';
 		$this->root_path = $phpbb_root_path . 'ext/board3/portal/';
 		$portal_root_path = $this->root_path;
+		define('PORTAL_MODULES_TABLE', $modules_table);
+		define('PORTAL_CONFIG_TABLE', $config_table);
 
 		if (!function_exists('obtain_portal_config'))
 		{
