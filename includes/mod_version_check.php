@@ -9,15 +9,6 @@
 
 namespace board3\portal\includes;
 
-/**
-* @ignore
-*/
-
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 class mod_version_check
 {
 	/**

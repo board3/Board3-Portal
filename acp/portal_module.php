@@ -9,14 +9,6 @@
 
 namespace board3\portal\acp;
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 class portal_module
 {
 	public $u_action;
@@ -31,7 +23,7 @@ class portal_module
 
 	public function __construct()
 	{
-		global $db, $user, $cache, $request, $template;
+		global $db, $user, $cache, $request, $template, $table_prefix;
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpbb_container, $phpEx;
 
 		$user->add_lang_ext('board3/portal', array('portal', 'portal_acp'));
@@ -52,6 +44,8 @@ class portal_module
 		$this->phpbb_container = $phpbb_container;
 		$this->mod_version_check = $this->phpbb_container->get('board3.version.check');
 		$this->register_modules($this->phpbb_container->get('board3.module_collection'));
+		define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.modules.table'));
+		define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.config.table'));
 
 		if (!function_exists('column_string_const'))
 		{
@@ -396,19 +390,19 @@ class portal_module
 				{
 					$this->move_module_up($module_id);
 				}
-				elseif ($action == 'move_down')
+				else if ($action == 'move_down')
 				{
 					$this->move_module_down($module_id);
 				}
-				elseif($action == 'move_right')
+				else if($action == 'move_right')
 				{
 					$this->move_module_right($module_id);
 				}
-				elseif($action == 'move_left')
+				else if($action == 'move_left')
 				{
 					$this->move_module_left($module_id);
 				}
-				elseif ($action == 'delete')
+				else if ($action == 'delete')
 				{
 					$this->module_delete($id, $mode, $action, $module_id);
 				}
@@ -429,7 +423,7 @@ class portal_module
 						{
 							$submit = $this->can_move_module(array('left', 'right'), $module_classname);
 						}
-						elseif (in_array($column_string, array('center', 'top', 'bottom')))
+						else if (in_array($column_string, array('center', 'top', 'bottom')))
 						{
 							$submit = $this->can_move_module(array('center', 'top', 'bottom'), $module_classname);
 						}
@@ -519,7 +513,7 @@ class portal_module
 									continue;
 								}
 							}
-							elseif (in_array($column_string, array('center', 'top', 'bottom')))
+							else if (in_array($column_string, array('center', 'top', 'bottom')))
 							{
 								// does the module already exist in the center columns?
 								if (!$this->can_move_module(array('center', 'top', 'bottom'), $module_class))
@@ -956,7 +950,7 @@ class portal_module
 			{
 				$move_action = 1; // we move 1 column to the left
 			}
-			elseif($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 2)) && $module_data['module_column'] != 2)
+			else if($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 2)) && $module_data['module_column'] != 2)
 			{
 				$move_action = 2; // we move 2 columns to the left
 			}
@@ -980,7 +974,7 @@ class portal_module
 				{
 					trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 				}
-				elseif ($column_string == 'center' && !$this->can_move_module(array('top', 'center', 'bottom'), $module_data['module_classname']))
+				else if ($column_string == 'center' && !$this->can_move_module(array('top', 'center', 'bottom'), $module_data['module_classname']))
 				{
 					// we are moving from the right to the center column so we should move to the left column instead
 					$move_action = 2;
@@ -1051,7 +1045,7 @@ class portal_module
 			{
 				$move_action = 1; // we move 1 column to the right
 			}
-			elseif($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 2)) && $module_data['module_column'] != 2)
+			else if($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 2)) && $module_data['module_column'] != 2)
 			{
 				$move_action = 2; // we move 2 columns to the right
 			}
@@ -1075,7 +1069,7 @@ class portal_module
 				{
 					trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 				}
-				elseif ($column_string == 'center' && !$this->can_move_module(array('top', 'center', 'bottom'), $module_data['module_classname']))
+				else if ($column_string == 'center' && !$this->can_move_module(array('top', 'center', 'bottom'), $module_data['module_classname']))
 				{
 					// we are moving from the left to the center column so we should move to the right column instead
 					$move_action = 2;
@@ -1264,7 +1258,7 @@ class portal_module
 				$submit = false;
 			}
 		}
-		elseif (in_array($target_column, array('center', 'top', 'bottom')))
+		else if (in_array($target_column, array('center', 'top', 'bottom')))
 		{
 			// does the module already exist in the center columns?
 			if (isset($this->module_column[$module_class]) &&

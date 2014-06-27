@@ -21,7 +21,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	public function setUp()
 	{
 		parent::setUp();
-		global $db, $cache, $phpbb_root_path, $phpEx, $user, $phpbb_container, $request, $template;
+		global $db, $cache, $phpbb_root_path, $phpEx, $user, $phpbb_container, $request, $template, $table_prefix;
 		$user = new \board3\portal\tests\mock\user();
 		$phpbb_container = new \phpbb_mock_container_builder();
 		// Mock version check
@@ -38,6 +38,8 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 				new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $phpbb_root_path, $phpEx),
 				new \board3\portal\modules\donation($config, $template, $user),
 			));
+		$phpbb_container->setParameter('board3.modules.table', $table_prefix . 'portal_modules');
+		$phpbb_container->setParameter('board3.config.table', $table_prefix . 'portal_config');
 		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put'));
 		$cache->expects($this->any())
 			->method('destroy')

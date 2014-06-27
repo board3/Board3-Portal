@@ -56,4 +56,19 @@ class phpbb_functional_portal_announcement_test extends \board3\portal\tests\tes
 		$this->logout();
 		self::request('GET', 'app.php/portal');
 	}
+
+	public function test_shortened_message()
+	{
+		// Create topic as announcement
+		$data = $this->create_topic(2, 'Portal-announce-global', str_repeat('This is a global announcement for the portal', 6), array(
+			'topic_type'	=> POST_GLOBAL,
+		));
+
+		if (isset($data))
+		{
+			// no errors should appear on portal
+			$crawler = self::request('GET', 'app.php/portal');
+			$this->assertContains('This is a global announc [...]', $crawler->text());
+		}
+	}
 }

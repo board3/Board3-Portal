@@ -7,11 +7,6 @@
 *
 */
 
-if (!defined('IN_PHPBB') && !defined('UMIL_AUTO') && !defined('IN_INSTALL'))
-{
-	exit;
-}
-
 // Get portal config
 function obtain_portal_config()
 {
@@ -102,7 +97,7 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 
 	$posts = $update_count = array();
 	$post_time = ($time == 0) ? '' : 'AND t.topic_time > ' . (time() - $time * 86400);
-	$forum_from = (strpos($forum_from, ',') !== FALSE) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
+	$forum_from = (strpos($forum_from, ',') !== false) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 	$str_where = '';
 	$topic_icons = array(0);
 	$have_icons = 0;
@@ -410,21 +405,14 @@ function character_limit(&$title, $limit = 0)
 */
 function get_sub_taged_string($message, $bbcode_uid, $length)
 {
-	global $portal_root_path, $phpEx;
-
-	if(!class_exists('phpbb_trim_message'))
+	if (class_exists('\nickvergessen\trimmessage\trim_message'))
 	{
-		include($portal_root_path . 'includes/trim_message/trim_message.' . $phpEx);
+		$trim = new \nickvergessen\trimmessage\trim_message($message, $bbcode_uid, $length);
+		$message = $trim->message();
+		unset($trim);
 	}
 
-	if(!class_exists('phpbb_trim_message_bbcodes'))
-	{
-		include($portal_root_path . 'includes/trim_message/bbcodes.' . $phpEx);
-	}
-
-	$object = new phpbb_trim_message($message, $bbcode_uid, $length);
-	// Ready to get parsed:
-	return $object->message();
+	return $message;
 }
 
 function ap_validate($str)
@@ -440,7 +428,7 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 {
 	global $template, $user;
 
-	switch($type)
+	switch ($type)
 	{
 		case "announcements":
 			$pagination_type = 'ap';
