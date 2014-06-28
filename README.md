@@ -18,3 +18,4 @@ The extension is currently under heavy development and not supported until furth
 
 We are starting to have unit and functional tests in order to prevent regressions. You can check our travis build below.
 develop-2.1.x - [![Build Status](https://api.travis-ci.org/board3/Board3-Portal.png?branch=develop-2.1.x)](https://travis-ci.org/board3/Board3-Portal)
+[![Coverage Status](https://coveralls.io/repos/board3/Board3-Portal/badge.png?branch=develop-2.1.x)](https://coveralls.io/r/board3/Board3-Portal?branch=develop-2.1.x)
