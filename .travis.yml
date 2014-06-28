@@ -46,6 +46,7 @@ install:
   - sh -c "if [ '$COVERALLS' != '0' ]; then ../board3/Board3-Portal/travis/prepare-coveralls.sh $DB $TRAVIS_PHP_VERSION; fi"
   - travis/prepare-extension.sh $EXTNAME $PHPBB_BRANCH
   - travis/setup-phpbb.sh $DB $TRAVIS_PHP_VERSION
+  - sh -c "if [ '$COVERALLS' != '0' ]; then ../board3/Board3-Portal/travis/prepare-coverage.sh $DB $TRAVIS_PHP_VERSION; fi"
 
 before_script:
   - travis/setup-database.sh $DB $TRAVIS_PHP_VERSION
