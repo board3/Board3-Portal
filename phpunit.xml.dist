@@ -26,6 +26,11 @@
 			<directory>./</directory>
 			<exclude>
 				<directory>./tests/</directory>
+				<directory>./../../../cache/</directory>
+				<directory>./../../../includes/</directory>
+				<directory>./../../../language/</directory>
+				<directory>./../../../phpbb/</directory>
+				<directory>./../../../vendor/</directory>
 			</exclude>
 		</whitelist>
 	</filter>
