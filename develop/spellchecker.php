@@ -1,14 +1,11 @@
 <?php
 /**
 *
-* @package phpBB3
-* @copyright (c) 2006 phpBB Group
+* @package Board3 Portal v2.1
+* @copyright (c) 2014 Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
-* This file creates new schema files for every database.
-* The filenames will be prefixed with an underscore to not overwrite the current schema files.
-*
-* If you overwrite the original schema files please make sure you save the file with UNIX linefeeds.
+* This file checks the spelling in language files.
 */
 
 $root_path = dirname(__FILE__) . '/../';
@@ -41,7 +38,6 @@ foreach ($iterator as $file_info)
 				{
 					if (preg_match('/\b(?:(' . $misspell . '))\b/', $content) != false)
 					{
-						//$output .= "Found misspelling \"$misspell\" in $file<br />Should probably be: $correct<br /><br />";
 						$found_misspellings[$misspell] = $correct;
 					}
 				}
@@ -74,7 +70,6 @@ foreach ($iterator as $file_info)
 				{
 					if (preg_match('/\b(?:(' . $misspell . '))\b/', $content) != false)
 					{
-						//$output .= "Found misspelling \"$misspell\" in $file<br />Should probably be: $correct<br /><br />";
 						$found_misspellings[$misspell] = $correct;
 					}
 				}
