@@ -15,5 +15,4 @@ class phpbb_functions_simple_test extends PHPUnit_Framework_TestCase
 	{
 		$this->assertEquals('<br/>woot<br/><ul><li>test</li></ul>', ap_validate('<br />woot<br/><ul><li>test</li><br /></ul>'));
 	}
-
 }
