@@ -40,7 +40,6 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 		);
 		self::$config = new \phpbb\config\config(array());
 		$this->calendar = new \board3\portal\modules\calendar(array(), null, null, null, dirname(__FILE__) . '/../../../', 'php', null, $this->path_helper);
-		$this->offset = strtotime('17.06.1990') - 645573600;
 		define('PORTAL_MODULES_TABLE', 'phpbb_portal_modules');
 		define('PORTAL_CONFIG_TABLE', 'phpbb_portal_config');
 		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put'));
@@ -62,9 +61,9 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 	public function data_date_to_time()
 	{
 		return array(
-			array(1402848000, '2014-06-15 18:00'),
-			array(1402848000, '15.06.2014 18:00'),
-			array(1402848000, '06/15/2014 6:00 PM'),
+			array(strtotime('2014-06-15 18:00'), '2014-06-15 18:00'),
+			array(strtotime('2014-06-15 18:00'), '15.06.2014 18:00'),
+			array(strtotime('2014-06-15 18:00'), '06/15/2014 6:00 PM'),
 			array(false, '15/06'),
 		);
 	}
@@ -74,7 +73,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 	*/
 	public function test_date_to_time($expected, $date)
 	{
-		$this->assertEquals($expected, $this->calendar->date_to_time($date) + $this->offset);
+		$this->assertEquals($expected, $this->calendar->date_to_time($date));
 	}
 
 	public function test_install()
