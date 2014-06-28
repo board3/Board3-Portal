@@ -20,18 +20,4 @@
 			<directory suffix="_test.php" phpVersion="5.3.19" phpVersionOperator=">=">./tests/functional/</directory>
 		</testsuite>
 	</testsuites>
-
-	<filter>
-		<whitelist>
-			<directory>./</directory>
-			<exclude>
-				<directory>./tests/</directory>
-				<directory>./../../../cache/</directory>
-				<directory>./../../../includes/</directory>
-				<directory>./../../../language/</directory>
-				<directory>./../../../phpbb/</directory>
-				<directory>./../../../vendor/</directory>
-			</exclude>
-		</whitelist>
-	</filter>
 </phpunit>
