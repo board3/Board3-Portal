@@ -98,7 +98,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 	*/
 	public function test_uninstall()
 	{
-		$this->assertTrue($this->calendar->uninstall(1, $this->db));
+		$this->assertNotEmpty($this->calendar->uninstall(1, $this->db));
 
 		foreach ($this->expected_config as $key => $value)
 		{
