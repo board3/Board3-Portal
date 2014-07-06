@@ -75,7 +75,7 @@ class random_member extends module_base
 	*/
 	public function get_template_side($module_id)
 	{
-		switch ($this->db->sql_layer)
+		switch ($this->db->get_sql_layer())
 		{
 			case 'postgres':
 			$sql = 'SELECT *
