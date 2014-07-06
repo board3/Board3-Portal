@@ -86,12 +86,12 @@ class birthday_list extends module_base
 			while ($cache_days > 0)
 			{
 				$day = phpbb_gmgetdate($time->getTimestamp() + 86400 * $cache_days + $time->getOffset());
-				$like_expression = $this->db->sql_like_expression($this->db->any_char . (sprintf('%2d-%2d-', $day['mday'], $day['mon'])) . $this->db->any_char);
+				$like_expression = $this->db->sql_like_expression($this->db->get_any_char() . (sprintf('%2d-%2d-', $day['mday'], $day['mon'])) . $this->db->get_any_char());
 				$sql_days .= " OR u.user_birthday " . $like_expression . "";
 				$cache_days--;
 			}
 
-			switch ($this->db->sql_layer)
+			switch ($this->db->get_sql_layer())
 			{
 				case 'mssql':
 				case 'mssql_odbc':
@@ -114,7 +114,7 @@ class birthday_list extends module_base
 				),
 				'WHERE'		=> "(b.ban_id IS NULL
 						OR b.ban_exclude = 1)
-					AND (u.user_birthday " . $this->db->sql_like_expression($this->db->any_char . sprintf('%2d-%2d-', $now['mday'], $now['mon']) . $this->db->any_char) . " {$sql_days})
+					AND (u.user_birthday " . $this->db->sql_like_expression($this->db->get_any_char() . sprintf('%2d-%2d-', $now['mday'], $now['mon']) . $this->db->get_any_char()) . " {$sql_days})
 					AND " . $this->db->sql_in_set('u.user_type', array(USER_NORMAL , USER_FOUNDER)),
 				'ORDER BY'	=> $order_by,
 			);
