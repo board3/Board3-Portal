@@ -159,3 +159,16 @@
 		margin-left: -1px;
 	}
 }
+
+.portal-pagination ul {
+	display: inline-block;
+	list-style: none !important;
+	margin-left: 5px;
+}
+
+.portal-pagination ul li {
+	display: inline-block !important;
+	padding: 0;
+	font-size: 100%;
+	line-height: normal;
+}

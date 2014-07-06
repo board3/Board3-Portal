@@ -120,6 +120,14 @@ span.portal-corners-top-inner, span.portal-corners-bottom-inner{
 	margin-right: 0px;
 }
 
+.portal-news-pagination {
+	height: 2em;
+}
+
+.portal-news-pagination .pagination {
+	font-size: 1.1em;
+}
+
 /**
 * margin spacing as in default prosilver for the forumlist
 */
