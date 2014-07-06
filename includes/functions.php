@@ -555,7 +555,7 @@ function get_portal_tracking_info($fetch_news)
 {
 	global $config, $request, $user;
 
-	$last_read = $topic_ids = $forum_ids = $tracking_info = $rev_forum_ids = array();
+	$last_read = $topic_ids = $forum_ids = $tracking_info = $rev_forum_ids = $user_lastmark = array();
 
 	/**
 	* group everything by the forum IDs
@@ -614,7 +614,10 @@ function get_portal_tracking_info($fetch_news)
 				// @todo: also check if $user_lastmark has been defined for this specific forum_id
 				foreach ($topic_ids as $topic_id)
 				{
-					$last_read[$topic_id] = (!isset($last_read[$topic_id]) || $user_lastmark[$rev_forum_ids[$topic_id]] > $last_read[$topic_id]) ? $user_lastmark[$rev_forum_ids[$topic_id]] : $last_read[$topic_id];
+					if (!isset($last_read[$topic_id]) || (isset($user_lastmark[$rev_forum_ids[$topic_id]]) && $user_lastmark[$rev_forum_ids[$topic_id]] > $last_read[$topic_id]))
+					{
+						$last_read[$topic_id] =  $user_lastmark[$rev_forum_ids[$topic_id]];
+					}
 				}
 			}
 		}
@@ -628,11 +631,11 @@ function get_portal_tracking_info($fetch_news)
 				{
 					if (STRIP)
 					{
-						$tracking_topics = stripslashes($this->request->variable($config['cookie_name'] . '_track', '', true, \phpbb\request\request_interface::COOKIE));
+						$tracking_topics = stripslashes($request->variable($config['cookie_name'] . '_track', '', true, \phpbb\request\request_interface::COOKIE));
 					}
 					else
 					{
-						$tracking_topics = $this->request->variable($config['cookie_name'] . '_track', '', true, \phpbb\request\request_interface::COOKIE);
+						$tracking_topics = $request->variable($config['cookie_name'] . '_track', '', true, \phpbb\request\request_interface::COOKIE);
 					}
 				}
 				else
@@ -686,7 +689,14 @@ function get_portal_tracking_info($fetch_news)
 }
 
 /**
-* check if the entered source file actually exists
+* Check if the entered source file actually exists
+*
+* @param string	$value		Filename of file to check
+* @param string	$key		Key of the acp setting (unused here)
+* @param int	$module_id	Module ID of this module
+* @param bool	$force_error	Whether an error message should be triggered on
+*				errors.
+* @return bool|string False if file exists, an error string if file doesn't exist.
 */
 function check_file_src($value, $key, $module_id, $force_error = true)
 {

@@ -12,7 +12,7 @@ namespace board3\portal\includes;
 class mod_version_check
 {
 	/**
-	* @var version_data
+	* @var array version_data
 	*/
 	protected $version_data;
 
@@ -22,12 +22,12 @@ class mod_version_check
 	protected $config;
 
 	/**
-	* @var phpbb_root_path
+	* @var string phpbb_root_path
 	*/
 	protected $phpbb_root_path;
 
 	/**
-	* @var phpEx
+	* @var string PHP file extension
 	*/
 	protected $php_ext;
 
@@ -80,16 +80,15 @@ class mod_version_check
 		$errstr = '';
 		$errno = 0;
 
-		if (!$return_version)
-		{
-			$mod_version = $this->user->lang['NO_INFO'];
-			$data = array(
-				'title'			=> $var['title'],
-				'description'	=> $this->user->lang['NO_INFO'],
-				'download'		=> $this->user->lang['NO_INFO'],
-				'announcement'	=> $this->user->lang['NO_INFO'],
-			);
-		}
+		// Fill with bogus data
+		$mod_version = $this->user->lang['NO_INFO'];
+		$data = array(
+			'title'			=> $var['title'],
+			'description'	=> $this->user->lang['NO_INFO'],
+			'download'		=> $this->user->lang['NO_INFO'],
+			'announcement'	=> $this->user->lang['NO_INFO'],
+		);
+
 		$file = get_remote_file($var['file'][0], '/' . $var['file'][1], $var['file'][2], $errstr, $errno);
 
 		if ($file)

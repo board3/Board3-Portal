@@ -15,7 +15,7 @@ class portal_module
 	public $new_config = array();
 	protected $c_class;
 	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
-	protected $root_path, $mod_version_check, $request;
+	protected $root_path, $mod_version_check, $request, $php_ext;
 	public $module_column = array();
 
 	/** @var \phpbb\di\service_collection Portal modules */
@@ -40,7 +40,7 @@ class portal_module
 		$this->request = $request;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->phpbb_admin_path = $phpbb_admin_path;
-		$this->php_ex = $phpEx;
+		$this->php_ext = $phpEx;
 		$this->phpbb_container = $phpbb_container;
 		$this->mod_version_check = $this->phpbb_container->get('board3.version.check');
 		$this->register_modules($this->phpbb_container->get('board3.module_collection'));
@@ -49,12 +49,12 @@ class portal_module
 
 		if (!function_exists('column_string_const'))
 		{
-			include($this->root_path . 'includes/functions_modules.' . $this->php_ex);
+			include($this->root_path . 'includes/functions_modules.' . $this->php_ext);
 		}
 
 		if(!function_exists('obtain_portal_config'))
 		{
-			include($this->root_path . 'includes/functions.' . $this->php_ex);
+			include($this->root_path . 'includes/functions.' . $this->php_ext);
 		}
 	}
 
@@ -108,7 +108,7 @@ class portal_module
 							$class = 'portal_' . $module_data['module_classname'] . '_module';
 							if (!class_exists($class))
 							{
-								include($this->root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ex);
+								include($this->root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ext);
 							}
 							if (class_exists($class))
 							{
@@ -189,7 +189,7 @@ class portal_module
 				// Reset module
 				$reset_module = $this->request->variable('module_reset', 0);
 
-				if($reset_module)
+				if($reset_module && !empty($module_data))
 				{
 					$this->reset_module($id, $mode, $module_id, $module_data);
 				}
@@ -235,7 +235,6 @@ class portal_module
 				{
 					$module_permission = $this->request->variable('permission-setting', array(0 => ''));
 					$groups_ary = array();
-					$img_error = '';
 
 					// get groups and check if the selected groups actually exist
 					$sql = 'SELECT group_id
@@ -286,7 +285,7 @@ class portal_module
 					{
 						add_log('admin', 'LOG_PORTAL_CONFIG', $this->user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']);
 					}
-					trigger_error($this->user->lang['CONFIG_UPDATED'] . ((!empty($img_error) ? '<br /><br />' . $this->user->lang['MODULE_IMAGE_ERROR'] . '<br />' . $img_error : '')) . adm_back_link(($module_id) ? append_sid("{$this->phpbb_root_path}adm/index.{$this->php_ex}", 'i=\board3\portal\acp\portal_module&amp;mode=modules') : $this->u_action));
+					trigger_error($this->user->lang['CONFIG_UPDATED'] . ((!empty($img_error) ? '<br /><br />' . $this->user->lang['MODULE_IMAGE_ERROR'] . '<br />' . $img_error : '')) . adm_back_link(($module_id) ? append_sid("{$this->phpbb_root_path}adm/index.{$this->php_ext}", 'i=\board3\portal\acp\portal_module&amp;mode=modules') : $this->u_action));
 				}
 
 				// show custom HTML files on the settings page of the modules instead of the standard board3 portal one, if chosen by module
@@ -407,7 +406,8 @@ class portal_module
 					$this->module_delete($id, $mode, $action, $module_id);
 				}
 
-				$add_module = key($this->request->variable('add', array('' => '')));
+				$add_list = $this->request->variable('add', array('' => ''));
+				$add_module = key($add_list);
 				$add_column = $this->request->variable('add_column', column_string_num($add_module));
 				if ($add_column)
 				{
@@ -472,13 +472,14 @@ class portal_module
 						$this->cache->purge(); // make sure we don't get errors after re-adding a module
 
 						// if something went wrong, handle the errors accordingly and undo the above query
-						if (sizeof($error) && $error != true)
+						if (!empty($error) && $error != true)
 						{
 							if (is_array($error))
 							{
+								$error_output = '';
 								foreach($error as $cur_error)
 								{
-									$error_output = $cur_error . '<br />';
+									$error_output .= $cur_error . '<br />';
 								}
 							}
 							else
@@ -487,6 +488,7 @@ class portal_module
 							}
 
 							$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE . ' WHERE module_id = ' . (int) $module_id;
+							$this->db->sql_query($sql);
 
 							trigger_error($error_output . adm_back_link($this->u_action));
 						}
@@ -497,7 +499,7 @@ class portal_module
 					}
 
 					$this->template->assign_var('S_EDIT', true);
-					$fileinfo = array();
+					$fileinfo = $name_ary = array();
 					$column_string = column_num_string($add_column);
 
 					// Find new modules
@@ -693,11 +695,11 @@ class portal_module
 					{
 						trigger_error($this->user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
 					}
-					include($this->root_path . 'includes/functions_upload.' . $this->php_ex);
+					include($this->root_path . 'includes/functions_upload.' . $this->php_ext);
 					// Default upload path is portal/upload/
 					$upload_path = $this->root_path . 'portal/upload/';
 
-					$portal_upload = new portal_upload($upload_path, $this->u_action);
+					new portal_upload($upload_path, $this->u_action);
 
 					$this->tpl_name = 'portal/acp_portal_upload_module';
 					$this->page_title = $this->user->lang['ACP_PORTAL_UPLOAD'];
@@ -943,6 +945,7 @@ class portal_module
 		}
 
 		$this->c_class = $this->modules[$module_data['module_classname']];
+		$move_action = 0;
 
 		if ($module_data !== false && $module_data['module_column'] > column_string_num('left'))
 		{
@@ -1038,6 +1041,7 @@ class portal_module
 		}
 
 		$this->c_class = $this->modules[$module_data['module_classname']];
+		$move_action = 0;
 
 		if ($module_data !== false && $module_data['module_column'] < column_string_num('right'))
 		{
