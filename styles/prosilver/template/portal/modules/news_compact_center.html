@@ -59,11 +59,11 @@
 	</li>
 <!-- IF news_row.S_LAST_ROW -->
     <!-- IF NP_PAGINATION or TOTAL_NEWS -->
-		<li class="row<!-- IF news_row.S_ROW_COUNT is even --> bg2<!-- ELSE --> bg1<!-- ENDIF -->">
+		<li class="row<!-- IF news_row.S_ROW_COUNT is even --> bg2<!-- ELSE --> bg1<!-- ENDIF --> portal-news-pagination">
 			<div class="topic-actions">
 				<div class="pagination">
 					{TOTAL_NEWS}
-					<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; <span>{NP_PAGINATION}</span><!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --> &nbsp;
+					<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; {NP_PAGINATION}<!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --> &nbsp;
 				</div>
 			</div>
 		</li>

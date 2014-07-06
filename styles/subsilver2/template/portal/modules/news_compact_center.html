@@ -53,8 +53,8 @@
 <!-- IF news_row.S_LAST_ROW -->
 	<!-- IF NP_PAGINATION or TOTAL_NEWS -->
 	<tr class="row<!-- IF news_row.S_ROW_COUNT is even -->2<!-- ELSE -->1<!-- ENDIF -->">
-		<td class="gensmall" valign="middle" align="right" nowrap="nowrap" colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_NEWS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->">{TOTAL_NEWS}
-		<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; <span>{NP_PAGINATION}</span><!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
+		<td class="gensmall portal-pagination" valign="middle" align="right" nowrap="nowrap" colspan="<!-- IF S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->6<!-- ELSEIF not S_TOPIC_ICONS and S_DISPLAY_NEWS_RVS -->5<!-- ELSEIF S_TOPIC_ICONS and not S_DISPLAY_NEWS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->">{TOTAL_NEWS}
+		<!-- IF NP_PAGE_NUMBER --><!-- IF NP_PAGINATION --> &bull; {NP_PAGE_NUMBER} &bull; {NP_PAGINATION}<!-- ELSE --> &bull; {NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
 	</tr>
 	<!-- ENDIF -->
 </table>

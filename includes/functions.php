@@ -449,7 +449,7 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 	// Make sure $per_page is a valid value
 	$per_page = ($per_page <= 0) ? 1 : $per_page;
 
-	$seperator = '<span class="page-sep">' . $user->lang['COMMA_SEPARATOR'] . '</span>';
+	$seperator = '<li>&nbsp;</li>';
 	$total_pages = ceil($num_items / $per_page);
 
 	if ($total_pages == 1 || !$num_items)
@@ -460,24 +460,27 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 	$on_page = floor($start_item / $per_page) + 1;
 	$url_delim = (strpos($base_url, '?') === false) ? '?' : '&amp;';
 
-	$page_string = ($on_page == 1) ? '<strong>1</strong>' : '<a href="' . $base_url . $anker .'">1</a>';
+	$page_string = ($on_page == 1) ? '<ul><li class="active"><span>1</span></li>' : '<ul><li><a href="' . $base_url . $anker .'">1</a></li>';
 
 	if ($total_pages > 5)
 	{
 		$start_cnt = min(max(1, $on_page - 4), $total_pages - 5);
 		$end_cnt = max(min($total_pages, $on_page + 4), 6);
 
-		$page_string .= ($start_cnt > 1) ? ' ... ' : $seperator;
+		// Add ... separator to pagination
+		$page_string .= ($start_cnt > 1) ? '<li class="ellipsis" role="separator"><span>' . $user->lang['ELLIPSIS'] . '</span></li>' : $seperator;
 
 		for ($i = $start_cnt + 1; $i < $end_cnt; ++$i)
 		{
-			$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . $anker . '">' . $i . '</a>';
+			$page_string .= ($i == $on_page) ? '<li class="active"><span>' . $i . '</span></li>' : '<li><a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . $anker . '">' . $i . '</a></li>';
 			if ($i < $end_cnt - 1)
 			{
 				$page_string .= $seperator;
 			}
 		}
-		$page_string .= ($end_cnt < $total_pages) ? ' ... ' : $seperator;
+
+		// Add ... separator to pagination
+		$page_string .= ($end_cnt < $total_pages) ? '<li class="ellipsis" role="separator"><span>' . $user->lang['ELLIPSIS'] . '</span></li>' : $seperator;
 	}
 	else
 	{
@@ -485,14 +488,14 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 
 		for ($i = 2; $i < $total_pages; ++$i)
 		{
-			$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . $anker . '">' . $i . '</a>';
+			$page_string .= ($i == $on_page) ? '<li class="active"><span>' . $i . '</span></li>' : '<li><a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . $anker . '">' . $i . '</a></li>';
 			if ($i < $total_pages)
 			{
 				$page_string .= $seperator;
 			}
 		}
 	}
-	$page_string .= ($on_page == $total_pages) ? '<strong>' . $total_pages . '</strong>' : '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($total_pages - 1) * $per_page) . $anker . '">' . $total_pages . '</a>';
+	$page_string .= ($on_page == $total_pages) ? '<li class="active"><span>' . $total_pages . '</span></li></ul>' : '<li><a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($total_pages - 1) * $per_page) . $anker . '">' . $total_pages . '</a></li></ul>';
 
 	if ($add_prevnext_text)
 	{
