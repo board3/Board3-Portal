@@ -46,10 +46,12 @@
 			"role": "Developer"
 		}],
 	"require": {
-		"php": ">=5.3.3",
-		"phpbb/phpbb": "3.1.*@dev"
+		"php": ">=5.3.3"
 	},
 	"extra": {
-		"display-name": "Board3 Portal"
+		"display-name": "Board3 Portal",
+		"soft-require": {
+			"phpbb/phpbb": "3.1.*@dev"
+		}
 	}
 }
