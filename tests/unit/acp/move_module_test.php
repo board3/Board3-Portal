@@ -26,7 +26,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$phpbb_container = new \phpbb_mock_container_builder();
 		// Mock version check
 		$phpbb_container->set('board3.version.check',
-			$this->getMockBuilder('\board3\portal\includes\mod_version_check')
+			$this->getMockBuilder('\board3\portal\includes\version_check')
 				->disableOriginalConstructor()
 				->getMock());
 		// Mock module service collection
