@@ -74,22 +74,74 @@ class mod_version_check
 			include($this->phpbb_root_path . 'includes/functions_admin.' . $this->php_ext);
 		}
 
-		$var = $this->version_data;
+		// Fill with bogus data
+		$this->get_empty_data($mod_version, $data);
 
-		// Get current and latest version
-		$errstr = '';
-		$errno = 0;
+		// Get version info from server
+		$this->get_version_info($mod_version, $data);
 
+		// remove spaces from the version in the mod file stored locally
+		$version = $this->config[str_replace(' ', '', $this->version_data['version'])];
+		if ($return_version)
+		{
+			return $version;
+		}
+
+		$version_compare = (version_compare($version, $mod_version, '<')) ? false : true;
+
+		$this->template->assign_block_vars('mods', array(
+			'ANNOUNCEMENT'		=> (string) $data['announcement'],
+			'AUTHOR'			=> $this->version_data['author'],
+			'CURRENT_VERSION'	=> $version,
+			'DESCRIPTION'		=> (string) $data['description'],
+			'DOWNLOAD'			=> (string) $data['download'],
+			'LATEST_VERSION'	=> $mod_version,
+			'TITLE'				=> (string) $data['title'],
+
+			'UP_TO_DATE'		=> sprintf((!$version_compare) ? $this->user->lang['NOT_UP_TO_DATE'] : $this->user->lang['UP_TO_DATE'], $data['title']),
+
+			'S_UP_TO_DATE'		=> $version_compare,
+
+			'U_AUTHOR'			=> 'http://www.phpbb.com/community/memberlist.php?mode=viewprofile&un=' . $this->version_data['author'],
+		));
+	}
+
+	/**
+	* Fill variables with empty bogus data
+	*
+	* @param string	$mod_version Mod version
+	* @param array	$data Array containing mod info
+	*
+	* @return null
+	*/
+	protected function get_empty_data(&$mod_version, &$data)
+	{
 		// Fill with bogus data
 		$mod_version = $this->user->lang['NO_INFO'];
 		$data = array(
-			'title'			=> $var['title'],
+			'title'			=> $this->version_data['title'],
 			'description'	=> $this->user->lang['NO_INFO'],
 			'download'		=> $this->user->lang['NO_INFO'],
 			'announcement'	=> $this->user->lang['NO_INFO'],
 		);
+	}
 
-		$file = get_remote_file($var['file'][0], '/' . $var['file'][1], $var['file'][2], $errstr, $errno);
+	/**
+	* Get version info from remote server
+	*
+	* @param string	$mod_version Mod version
+	* @param array	$data Array containing mod info
+	*
+	* @return null
+	*/
+	protected function get_version_info(&$mod_version, &$data)
+	{
+		// Get current and latest version
+		$errstr = '';
+		$errno = 0;
+		$var = $this->version_data;
+
+		$file = get_remote_file($this->version_data['file'][0], '/' . $this->version_data['file'][1], $this->version_data['file'][2], $errstr, $errno);
 
 		if ($file)
 		{
@@ -109,30 +161,5 @@ class mod_version_check
 				);
 			}
 		}
-
-		// remove spaces from the version in the mod file stored locally
-		$version = $this->config[str_replace(' ', '', $var['version'])];
-		if ($return_version)
-		{
-			return $version;
-		}
-
-		$version_compare = (version_compare($version, $mod_version, '<')) ? false : true;
-
-		$this->template->assign_block_vars('mods', array(
-			'ANNOUNCEMENT'		=> (string) $data['announcement'],
-			'AUTHOR'			=> $var['author'],
-			'CURRENT_VERSION'	=> $version,
-			'DESCRIPTION'		=> (string) $data['description'],
-			'DOWNLOAD'			=> (string) $data['download'],
-			'LATEST_VERSION'	=> $mod_version,
-			'TITLE'				=> (string) $data['title'],
-
-			'UP_TO_DATE'		=> sprintf((!$version_compare) ? $this->user->lang['NOT_UP_TO_DATE'] : $this->user->lang['UP_TO_DATE'], $data['title']),
-
-			'S_UP_TO_DATE'		=> $version_compare,
-
-			'U_AUTHOR'			=> 'http://www.phpbb.com/community/memberlist.php?mode=viewprofile&un=' . $var['author'],
-		));
 	}
 }
