@@ -276,7 +276,7 @@ class portal_module
 
 					if(isset($module_name))
 					{
-						if ($module_data['module_classname'] !== '\board3\portal\modules\custom')
+						if (isset($module_data) && $module_data['module_classname'] !== '\board3\portal\modules\custom')
 						{
 							add_log('admin', 'LOG_PORTAL_CONFIG', $module_name);
 						}
@@ -783,7 +783,7 @@ class portal_module
 
 			$this->cache->destroy('config');
 			$this->cache->destroy('portal_config');
-			$portal_config = obtain_portal_config(); // we need to prevent duplicate entry errors
+			obtain_portal_config(); // we need to prevent duplicate entry errors
 			$this->c_class->install($module_id);
 			$this->cache->purge();
 
