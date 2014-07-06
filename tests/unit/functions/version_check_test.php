@@ -33,7 +33,7 @@ class phpbb_functions_version_check_test extends \board3\portal\tests\testframew
 			'NOT_UP_TO_DATE'	=> 'NOT_UP_TO_DATE',
 			'UP_TO_DATE'		=> 'UP_TO_DATE',
 		));
-		$this->version_check = new \board3\portal\includes\mod_version_check($version_data, $config, $phpbb_root_path, $phpEx, $this->template, $user);
+		$this->version_check = new \board3\portal\includes\version_check($version_data, $config, $phpbb_root_path, $phpEx, $this->template, $user);
 	}
 
 	public function test_version_check()

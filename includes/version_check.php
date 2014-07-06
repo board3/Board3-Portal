@@ -9,7 +9,7 @@
 
 namespace board3\portal\includes;
 
-class mod_version_check
+class version_check
 {
 	/**
 	* @var array version_data
@@ -42,7 +42,7 @@ class mod_version_check
 	protected $user;
 
 	/**
-	* Construct a mod_version_check object
+	* Construct a version_check object
 	*
 	* @param array $version_data Version data
 	* @param \phpbb\config\config $config phpBB config

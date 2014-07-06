@@ -30,7 +30,7 @@ services:
             - %board3.modules.table%
 
     board3.version.check:
-        class: board3\portal\includes\mod_version_check
+        class: board3\portal\includes\version_check
         arguments:
             - %board3.version_data%
             - @config

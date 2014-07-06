@@ -15,7 +15,7 @@ class portal_module
 	public $new_config = array();
 	protected $c_class;
 	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
-	protected $root_path, $mod_version_check, $request, $php_ext;
+	protected $root_path, $version_check, $request, $php_ext;
 	public $module_column = array();
 
 	/** @var \phpbb\di\service_collection Portal modules */
@@ -42,7 +42,7 @@ class portal_module
 		$this->phpbb_admin_path = $phpbb_admin_path;
 		$this->php_ext = $phpEx;
 		$this->phpbb_container = $phpbb_container;
-		$this->mod_version_check = $this->phpbb_container->get('board3.version.check');
+		$this->version_check = $this->phpbb_container->get('board3.version.check');
 		$this->register_modules($this->phpbb_container->get('board3.module_collection'));
 		define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.modules.table'));
 		define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.config.table'));
@@ -166,7 +166,7 @@ class portal_module
 				else
 				{
 					// only show the mod version check if we are on the General Settings page
-					$this->mod_version_check->version_check();
+					$this->version_check->version_check();
 				}
 
 				$this->new_config = $this->config;
