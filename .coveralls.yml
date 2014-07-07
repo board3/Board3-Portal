@@ -1,5 +1,5 @@
 #.coveralls.yml
 
 src_dir: .
-coverage_clover: ../build/logs/clover.xml
-json_path: ../build/logs/coveralls-upload.json
+coverage_clover: ../../phpBB3/build/logs/clover.xml
+json_path: ../../phpBB3/build/logs/coveralls-upload.json
