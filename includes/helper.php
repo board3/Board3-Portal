@@ -72,4 +72,24 @@ class helper
 			return false;
 		}
 	}
+
+	/**
+	* Get an array of disallowed forums
+	*
+	* @param bool $disallow_access Whether the array for disallowing access
+	*			should be filled
+	*/
+	public function get_disallowed_forums($disallow_access)
+	{
+		if ($disallow_access == true)
+		{
+			$disallow_access = array_unique(array_keys($this->auth->acl_getf('!f_read', true)));
+		}
+		else
+		{
+			$disallow_access = array();
+		}
+
+		return $disallow_access;
+	}
 }
