@@ -15,11 +15,8 @@ class portal_module
 	public $new_config = array();
 	protected $c_class;
 	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
-	protected $root_path, $version_check, $request, $php_ext;
+	protected $root_path, $version_check, $request, $php_ext, $portal_helper;
 	public $module_column = array();
-
-	/** @var \phpbb\di\service_collection Portal modules */
-	protected $modules;
 
 	public function __construct()
 	{
@@ -43,7 +40,7 @@ class portal_module
 		$this->php_ext = $phpEx;
 		$this->phpbb_container = $phpbb_container;
 		$this->version_check = $this->phpbb_container->get('board3.version.check');
-		$this->register_modules($this->phpbb_container->get('board3.module_collection'));
+		$this->portal_helper = $this->phpbb_container->get('board3.portal.helper');
 		define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.modules.table'));
 		define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.config.table'));
 
@@ -103,25 +100,10 @@ class portal_module
 
 					if ($module_data !== false)
 					{
-						if (!isset($this->modules[$module_data['module_classname']]))
+
+						if (!($this->c_class = $this->portal_helper->get_module($module_data['module_classname'])))
 						{
-							$class = 'portal_' . $module_data['module_classname'] . '_module';
-							if (!class_exists($class))
-							{
-								include($this->root_path . 'portal/modules/portal_' . $module_data['module_classname'] . '.' . $this->php_ext);
-							}
-							if (class_exists($class))
-							{
-								$this->c_class = new $class();
-							}
-							else
-							{
-								continue;
-							}
-						}
-						else
-						{
-							$this->c_class = $this->modules[$module_data['module_classname']];
+							continue;
 						}
 
 						if ($this->c_class->get_language())
@@ -434,11 +416,7 @@ class portal_module
 							trigger_error($this->user->lang['MODULE_ADD_ONCE'] . adm_back_link($this->u_action), E_USER_WARNING);
 						}
 
-						if (isset($this->modules[$module_classname]))
-						{
-							$this->c_class = $this->modules[$module_classname];
-						}
-						else
+						if (!($this->c_class = $this->portal_helper->get_module($module_classname)))
 						{
 							continue;
 						}
@@ -501,9 +479,10 @@ class portal_module
 					$this->template->assign_var('S_EDIT', true);
 					$fileinfo = $name_ary = array();
 					$column_string = column_num_string($add_column);
+					$modules_list = $this->portal_helper->get_all_modules();
 
 					// Find new modules
-					foreach ($this->modules as $module_class => $module)
+					foreach ($modules_list as $module_class => $module)
 					{
 						if ($module_class !== '\board3\portal\modules\custom')
 						{
@@ -586,13 +565,9 @@ class portal_module
 
 					foreach($portal_modules as $row)
 					{
-						if (!isset($this->modules[$row['module_classname']]))
+						if (!($this->c_class = $this->portal_helper->get_module($row['module_classname'])))
 						{
 							continue;
-						}
-						else
-						{
-							$this->c_class = $this->modules[$row['module_classname']];
 						}
 
 						if ($this->c_class->get_language())
@@ -753,12 +728,10 @@ class portal_module
 			$module_data = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
 
-			if (!isset($this->modules[$module_data['module_classname']]))
+			if (!($this->c_class = $this->portal_helper->get_module($module_data['module_classname'])))
 			{
 				trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 			}
-
-			$this->c_class = $this->modules[$module_data['module_classname']];
 
 			$sql_ary = array(
 				'module_name'		=> $this->c_class->get_name(),
@@ -939,12 +912,11 @@ class portal_module
 	{
 		$module_data = $this->get_move_module_data($module_id);
 
-		if (!isset($this->modules[$module_data['module_classname']]))
+		if (!($this->c_class = $this->portal_helper->get_module($module_data['module_classname'])))
 		{
 			trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 		}
 
-		$this->c_class = $this->modules[$module_data['module_classname']];
 		$move_action = 0;
 
 		if ($module_data !== false && $module_data['module_column'] > column_string_num('left'))
@@ -1035,12 +1007,11 @@ class portal_module
 	{
 		$module_data = $this->get_move_module_data($module_id);
 
-		if (!isset($this->modules[$module_data['module_classname']]))
+		if (!($this->c_class = $this->portal_helper->get_module($module_data['module_classname'])))
 		{
 			trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 		}
 
-		$this->c_class = $this->modules[$module_data['module_classname']];
 		$move_action = 0;
 
 		if ($module_data !== false && $module_data['module_column'] < column_string_num('right'))
@@ -1143,14 +1114,13 @@ class portal_module
 		{
 			$module_classname = $this->request->variable('module_classname', '');
 
-			if (!isset($this->modules[$module_classname]))
+			if (!($this->c_class = $this->portal_helper->get_module($module_data['module_classname'])))
 			{
 				trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 			}
 
 			if (confirm_box(true))
 			{
-				$this->c_class = $this->modules[$module_classname];
 				$this->c_class->uninstall($module_data['module_id'], $this->db);
 
 				$sql = 'DELETE FROM ' . PORTAL_MODULES_TABLE . '
@@ -1178,7 +1148,6 @@ class portal_module
 			}
 			else
 			{
-				$this->c_class = $this->modules[$module_classname];
 				if ($this->c_class->get_language())
 				{
 					$this->user->add_lang_ext('board3/portal', 'modules/' . $this->c_class->get_language());
@@ -1207,25 +1176,6 @@ class portal_module
 	protected function get_module_link($mode, $module_id)
 	{
 		return preg_replace(array('/i=[0-9]+/', '/mode=[a-zA-Z0-9_]+/'), array('i=%5C' . str_replace('\\', '%5C', __CLASS__), 'mode=' . $mode), $this->u_action) . (($module_id) ? '&amp;module_id=' . $module_id : '');
-	}
-
-	/**
-	* Register list of Board3 Portal modules
-	*
-	* @param \phpbb\di\service_collection $modules Board3 Modules service
-	*						collection
-	* @return null
-	*/
-	protected function register_modules($modules)
-	{
-		foreach ($modules as $current_module)
-		{
-			$class_name = '\\' . get_class($current_module);
-			if (!isset($this->modules[$class_name]))
-			{
-				$this->modules[$class_name] = $current_module;
-			}
-		}
 	}
 
 	/**

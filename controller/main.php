@@ -80,7 +80,7 @@ class main
 	* @param \phpbb\template $template Template object
 	* @param \phpbb\user $user User object
 	* @param \phpbb\path_helper $path_helper phpBB path helper
-	* @param \board3\portal\includes\portal_helper $portal_helper Portal helper class
+	* @param \board3\portal\includes\helper $portal_helper Portal helper class
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $php_ext PHP file extension
 	* @param string $config_table Board3 config table
@@ -120,19 +120,9 @@ class main
 	*/
 	public function handle()
 	{
-		$this->check_permission();
-		// We defined the phpBB objects in __construct() and can use them in the rest of our class like this
-		//echo 'Welcome, ' . $this->user->data['username'];
+		$this->run_initial_tasks();
 
-		// The following takes two arguments:
-		// 1) which extension language folder we're using (it's not smart enough to use its own automatically)
-		// 2) what language file to use
-		$this->user->add_lang_ext('board3/portal', 'portal');
-
-		/**
-		* get initial data
-		*/
-		$portal_config = obtain_portal_config();
+		// Set default data
 		$portal_modules = obtain_portal_modules();
 		$display_online = false;
 
@@ -182,19 +172,16 @@ class main
 			if ($row['module_column'] == column_string_num('left') && $this->config['board3_left_column'])
 			{
 				$template_module = $module->get_template_side($row['module_id']);
-				$template_column = 'left';
 				++$module_count['left'];
 			}
 			if ($row['module_column'] == column_string_num('center'))
 			{
 				$template_module = $module->get_template_center($row['module_id']);
-				$template_column = 'center';
 				++$module_count['center'];
 			}
 			if ($row['module_column'] == column_string_num('right') && $this->config['board3_right_column'])
 			{
 				$template_module = $module->get_template_side($row['module_id']);
-				$template_column = 'right';
 				++$module_count['right'];
 			}
 			if ($row['module_column'] == column_string_num('top'))
@@ -279,12 +266,34 @@ class main
 		page_footer();
 	}
 
-	// check if user should be able to access this page
+	/**
+	* Check if user should be able to access this page. Redirect to index
+	* if this does not apply.
+	*
+	* @return null
+	*/
 	protected function check_permission()
 	{
 		if (!isset($this->config['board3_enable']) || !$this->config['board3_enable'] || !$this->auth->acl_get('u_view_portal'))
 		{
 			redirect(append_sid($this->phpbb_root_path . 'index' . $this->php_ext));
 		}
+	}
+
+	/**
+	* Run initial tasks that are required for a properly setup extension
+	*
+	* @return null
+	*/
+	protected function run_initial_tasks()
+	{
+		// Check for permissions first
+		$this->check_permission();
+
+		// Load language file
+		$this->user->add_lang_ext('board3/portal', 'portal');
+
+		// Obtain portal config
+		obtain_portal_config();
 	}
 }

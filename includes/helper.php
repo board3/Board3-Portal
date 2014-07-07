@@ -52,6 +52,8 @@ class helper
 	* Get module specified by module class name
 	*
 	* @param string $module_name Module class name
+	*
+	* @return bool|object The module object if it exists, false if not
 	*/
 	public function get_module($module_name)
 	{
@@ -63,5 +65,15 @@ class helper
 		{
 			return false;
 		}
+	}
+
+	/**
+	* Get all supported modules
+	*
+	* @return array An array containing all supported modules
+	*/
+	public function get_all_modules()
+	{
+		return $this->modules;
 	}
 }

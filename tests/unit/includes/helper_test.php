@@ -50,4 +50,9 @@ class board3_includes_helper_test extends \board3\portal\tests\testframework\tes
 		}
 		$this->assertEquals($expected, $this->portal_helper->get_module($module_name));
 	}
+
+	public function test_get_all_modules()
+	{
+		$this->assertEquals($this->modules, $this->portal_helper->get_all_modules());
+	}
 }
