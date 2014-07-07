@@ -93,7 +93,7 @@ function obtain_portal_modules()
 // fetch post for news & announce
 function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0, $invert = false)
 {
-	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode, $portal_config, $config, $cache;
+	global $db, $phpbb_root_path, $auth, $user, $bbcode_bitfield, $bbcode, $portal_config, $config, $cache, $phpbb_container;
 
 	$posts = $update_count = array();
 	$post_time = ($time == 0) ? '' : 'AND t.topic_time > ' . (time() - $time * 86400);
@@ -101,15 +101,10 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 	$str_where = '';
 	$topic_icons = array(0);
 	$have_icons = 0;
+	$modules_helper = $phpbb_container->get('board3.portal.modules_helper');
 
-	if ($permissions == true)
-	{
-		$disallow_access = array_unique(array_keys($auth->acl_getf('!f_read', true)));
-	}
-	else
-	{
-		$disallow_access = array();
-	}
+	// Get disallowed forums
+	$disallow_access = $modules_helper->get_disallowed_forums($permissions);
 
 	if ($invert == true)
 	{

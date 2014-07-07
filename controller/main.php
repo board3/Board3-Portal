@@ -13,51 +13,51 @@ class main
 {
 	/**
 	* Auth object
-	* @var phpbb_auth
+	* @var \phpbb\auth\auth
 	*/
-	private $auth;
+	protected $auth;
 
 	/**
 	* phpBB Config object
-	* @var phpbb_config_db
+	* @var \phpbb\config\config
 	*/
-	private $config;
+	protected $config;
 
 	/**
 	* Template object
-	* @var phpbb_template
+	* @var \phpbb\template
 	*/
-	private $template;
+	protected $template;
 
 	/**
 	* User object
-	* @var phpbb_user
+	* @var \phpbb\user
 	*/
-	private $user;
+	protected $user;
 
 	/**
 	* phpBB root path
 	* @var string
 	*/
-	private $phpbb_root_path;
+	protected $phpbb_root_path;
 
 	/**
 	* PHP file extension
 	* @var string
 	*/
-	private $php_ext;
+	protected $php_ext;
 
 	/**
 	* Portal root path
 	* @var string
 	*/
-	private $root_path;
+	protected $root_path;
 
 	/**
 	* Portal includes path
 	* @var string
 	*/
-	private $includes_path;
+	protected $includes_path;
 
 	/**
 	* phpBB path helper
@@ -66,28 +66,27 @@ class main
 	protected $path_helper;
 
 	/**
-	* Board3 Modules service collection
-	* @var phpbb\di\service_collection
+	* Portal Helper object
+	* @var \board3\portal\includes\helper
 	*/
-	protected $modules;
+	protected $portal_helper;
 
 	/**
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
 	* the dependencies defined in the services.yml file for this service.
-	* @param phpbb_auth $auth Auth object
-	* @param phpbb_config_db $config phpBB Config object
-	* @param phpbb_template $template Template object
-	* @param phpbb_user $user User object
+	* @param \phpbb\auth\auth $auth Auth object
+	* @param \phpbb\config\config $config phpBB Config object
+	* @param \phpbb\template $template Template object
+	* @param \phpbb\user $user User object
 	* @param \phpbb\path_helper $path_helper phpBB path helper
+	* @param \board3\portal\includes\portal_helper $portal_helper Portal helper class
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $php_ext PHP file extension
-	* @param \phpbb\di\service_collection $modules Board3 Modules service
-	*						collection
 	* @param string $config_table Board3 config table
 	* @param string $modules_table Board3 modules table
 	*/
-	public function __construct($auth, $config, $template, $user, $path_helper, $phpbb_root_path, $php_ext, $modules, $config_table, $modules_table)
+	public function __construct($auth, $config, $template, $user, $path_helper, $portal_helper, $phpbb_root_path, $php_ext, $config_table, $modules_table)
 	{
 		global $portal_root_path;
 
@@ -98,7 +97,7 @@ class main
 		$this->path_helper = $path_helper;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $php_ext;
-		$this->register_modules($modules);
+		$this->portal_helper = $portal_helper;
 
 		$this->includes_path = $phpbb_root_path . 'ext/board3/portal/includes/';
 		$this->root_path = $phpbb_root_path . 'ext/board3/portal/';
@@ -111,25 +110,6 @@ class main
 			include($this->includes_path . 'constants' . $this->php_ext);
 			include($this->includes_path . 'functions_modules' . $this->php_ext);
 			include($this->includes_path . 'functions' . $this->php_ext);
-		}
-	}
-
-	/**
-	* Register list of Board3 Portal modules
-	*
-	* @param \phpbb\di\service_collection $modules Board3 Modules service
-	*						collection
-	* @return null
-	*/
-	protected function register_modules($modules)
-	{
-		foreach ($modules as $current_module)
-		{
-			$class_name = '\\' . get_class($current_module);
-			if (!isset($this->modules[$class_name]))
-			{
-				$this->modules[$class_name] = $current_module;
-			}
 		}
 	}
 
@@ -180,26 +160,9 @@ class main
 			}
 
 			// Do not try to load non-existent modules
-			if (!isset($this->modules[$row['module_classname']]))
+			if (!($module = $this->portal_helper->get_module($row['module_classname'])))
 			{
-				if (file_exists("{$this->includes_path}modules/portal_{$row['module_classname']}{$this->php_ext}"))
-				{
-					include("{$this->includes_path}modules/portal_{$row['module_classname']}{$this->php_ext}");
-				}
-
-				$class_name = 'portal_' . $row['module_classname'] . '_module';
-				if (class_exists($class_name))
-				{
-					$module = new $class_name();
-				}
-				else
-				{
-					continue;
-				}
-			}
-			else
-			{
-				$module = $this->modules[$row['module_classname']];
+				continue;
 			}
 
 			/**
@@ -317,7 +280,7 @@ class main
 	}
 
 	// check if user should be able to access this page
-	private function check_permission()
+	protected function check_permission()
 	{
 		if (!isset($this->config['board3_enable']) || !$this->config['board3_enable'] || !$this->auth->acl_get('u_view_portal'))
 		{

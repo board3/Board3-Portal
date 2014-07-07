@@ -59,6 +59,9 @@ class announcements extends module_base
 	/** @var \phpbb\pagination */
 	protected $pagination;
 
+	/** @var \board3\portal\includes\modules_helper */
+	protected $modules_helper;
+
 	/** @var \phpbb\request\request */
 	protected $request;
 
@@ -80,12 +83,13 @@ class announcements extends module_base
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\db\driver $db Database driver
 	* @param \phpbb\pagination $pagination phpBB pagination
+	* @param \board3\portal\includes\modules_helper $modules_helper Portal modules helper
 	* @param \phpbb\request\request $request phpBB request
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($auth, $cache, $config, $template, $db, $pagination, $request, $phpEx, $phpbb_root_path, $user)
+	public function __construct($auth, $cache, $config, $template, $db, $pagination, $modules_helper, $request, $phpEx, $phpbb_root_path, $user)
 	{
 		$this->auth = $auth;
 		$this->cache = $cache;
@@ -93,6 +97,7 @@ class announcements extends module_base
 		$this->template = $template;
 		$this->db = $db;
 		$this->pagination = $pagination;
+		$this->modules_helper = $modules_helper;
 		$this->request = $request;
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
@@ -137,14 +142,8 @@ class announcements extends module_base
 
 				$str_where = '';
 
-				if($permissions == true)
-				{
-					$disallow_access = array_unique(array_keys($this->auth->acl_getf('!f_read', true)));
-				}
-				else
-				{
-					$disallow_access = array();
-				}
+				// Get disallowed forums
+				$disallow_access = $this->modules_helper->get_disallowed_forums($permissions);
 
 				if($this->config['board3_announcements_forum_exclude_' . $module_id] == true)
 				{
