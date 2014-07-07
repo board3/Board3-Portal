@@ -1114,7 +1114,7 @@ class portal_module
 		{
 			$module_classname = $this->request->variable('module_classname', '');
 
-			if (!($this->c_class = $this->portal_helper->get_module($module_data['module_classname'])))
+			if (!($this->c_class = $this->portal_helper->get_module($module_classname)))
 			{
 				trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 			}
