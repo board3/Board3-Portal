@@ -12,12 +12,6 @@ namespace board3\portal\includes;
 class helper
 {
 	/**
-	* Auth object
-	* @var \phpbb\auth\auth
-	*/
-	private $auth;
-
-	/**
 	* Board3 Modules service collection
 	* @var \phpbb\di\service_collection
 	*/
@@ -27,13 +21,11 @@ class helper
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
 	* the dependencies defined in the services.yml file for this service.
-	* @param \phpbb\auth\auth $auth Auth object
 	* @param \phpbb\di\service_collection $modules Board3 Modules service
 	*						collection
 	*/
-	public function __construct($auth, $modules)
+	public function __construct($modules)
 	{
-		$this->auth = $auth;
 		$this->register_modules($modules);
 	}
 
@@ -71,25 +63,5 @@ class helper
 		{
 			return false;
 		}
-	}
-
-	/**
-	* Get an array of disallowed forums
-	*
-	* @param bool $disallow_access Whether the array for disallowing access
-	*			should be filled
-	*/
-	public function get_disallowed_forums($disallow_access)
-	{
-		if ($disallow_access == true)
-		{
-			$disallow_access = array_unique(array_keys($this->auth->acl_getf('!f_read', true)));
-		}
-		else
-		{
-			$disallow_access = array();
-		}
-
-		return $disallow_access;
 	}
 }

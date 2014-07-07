@@ -26,7 +26,7 @@ class board3_includes_helper_test extends \board3\portal\tests\testframework\tes
 
 	protected function get_portal_helper($modules)
 	{
-		$this->portal_helper = new \board3\portal\includes\helper(array(), $modules);
+		$this->portal_helper = new \board3\portal\includes\helper($modules);
 
 		return $this->portal_helper;
 	}

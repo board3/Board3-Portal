@@ -49,5 +49,9 @@ services:
     board3.portal.helper:
         class: board3\portal\includes\helper
         arguments:
-            - @auth
             - @board3.module_collection
+
+    board3.portal.modules_helper:
+        class: board3\portal\includes\modules_helper
+        arguments:
+            - @auth

@@ -56,6 +56,9 @@ class news extends module_base
 	/** @var \phpbb\pagination */
 	protected $pagination;
 
+	/** @var \board3\portal\includes\modules_helper */
+	protected $modules_helper;
+
 	/** @var \phpbb\request\request */
 	protected $request;
 
@@ -79,19 +82,21 @@ class news extends module_base
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\db\driver $db phpBB db driver
 	* @param \phpbb\pagination $pagination phpBB pagination
+	* @param \board3\portal\includes\modules_helper $modules_helper Portal modules helper
 	* @param \phpbb\request\request $request phpBB request
 	* @param \phpbb\template $template phpBB template
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($auth, $cache, $config, $db, $pagination, $request, $template, $phpbb_root_path, $phpEx, $user)
+	public function __construct($auth, $cache, $config, $db, $pagination, $modules_helper, $request, $template, $phpbb_root_path, $phpEx, $user)
 	{
 		$this->auth = $auth;
 		$this->cache = $cache;
 		$this->config = $config;
 		$this->db = $db;
 		$this->pagination = $pagination;
+		$this->modules_helper = $modules_helper;
 		$this->request = $request;
 		$this->template = $template;
 		$this->phpbb_root_path = $phpbb_root_path;
@@ -134,14 +139,8 @@ class news extends module_base
 
 				$str_where = '';
 
-				if($permissions == true)
-				{
-					$disallow_access = array_unique(array_keys($this->auth->acl_getf('!f_read', true)));
-				}
-				else
-				{
-					$disallow_access = array();
-				}
+				// Get disallowed forums
+				$disallow_access = $this->modules_helper->get_disallowed_forums($permissions);
 
 				if($this->config['board3_news_exclude_' . $module_id] == true)
 				{

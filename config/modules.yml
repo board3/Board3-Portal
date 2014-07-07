@@ -8,6 +8,7 @@ services:
             - @template
             - @dbal.conn
             - @pagination
+            - @board3.portal.modules_helper
             - @request
             - %core.php_ext%
             - %core.root_path%
@@ -179,6 +180,7 @@ services:
             - @config
             - @dbal.conn
             - @pagination
+            - @board3.portal.modules_helper
             - @request
             - @template
             - %core.root_path%
