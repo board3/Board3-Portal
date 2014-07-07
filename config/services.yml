@@ -23,9 +23,9 @@ services:
             - @template
             - @user
             - @path_helper
+            - @board3.portal.helper
             - %core.root_path%
             - .%core.php_ext%
-            - @board3.module_collection
             - %board3.config.table%
             - %board3.modules.table%
 
@@ -45,3 +45,9 @@ services:
             - @service_container
         tags:
             - { name: service_collection, tag: board3.module }
+
+    board3.portal.helper:
+        class: board3\portal\includes\helper
+        arguments:
+            - @auth
+            - @board3.module_collection
