@@ -40,10 +40,10 @@ branches:
     - develop-1_0_X
 
 install:
+  - php composer.phar install --dev --no-interaction --prefer-source
   - travis/prepare-phpbb.sh $EXTNAME $PHPBB_BRANCH
   - cp .coveralls.yml ../../phpBB3/phpBB/.coveralls.yml
   - cd ../../phpBB3
-  - sh -c "if [ '$COVERALLS' != '0' ]; then ../board3/Board3-Portal/travis/prepare-coveralls.sh $DB $TRAVIS_PHP_VERSION; fi"
   - travis/prepare-extension.sh $EXTNAME $PHPBB_BRANCH
   - travis/setup-phpbb.sh $DB $TRAVIS_PHP_VERSION
   - sh -c "if [ '$COVERALLS' != '0' ]; then ../board3/Board3-Portal/travis/prepare-coverage.sh $DB $TRAVIS_PHP_VERSION; fi"
@@ -59,7 +59,7 @@ script:
   - ../board3/Board3-Portal/travis/run-testsuite.sh $DB $TRAVIS_PHP_VERSION
 
 after_script:
-  - php phpBB/vendor/bin/coveralls -v
+  - php ../board3/Board3-Portal/vendor/bin/coveralls -v
 
 notifications:
   email:
