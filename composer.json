@@ -41,7 +41,8 @@
 		}],
 	"require": {
 		"php": ">=5.3.3",
-		"satooshi/php-coveralls": "dev-master"
+		"satooshi/php-coveralls": "dev-master",
+		"nickvergessen/phpbb-tool-trimmessage": "1.3.*"
 	},
 	"extra": {
 		"display-name": "Board3 Portal",

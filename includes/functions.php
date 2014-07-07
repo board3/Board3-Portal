@@ -400,9 +400,9 @@ function character_limit(&$title, $limit = 0)
 */
 function get_sub_taged_string($message, $bbcode_uid, $length)
 {
-	if (class_exists('\nickvergessen\trimmessage\trim_message'))
+	if (class_exists('\Nickvergessen\TrimMessage\TrimMessage'))
 	{
-		$trim = new \nickvergessen\trimmessage\trim_message($message, $bbcode_uid, $length);
+		$trim = new \Nickvergessen\TrimMessage\TrimMessage($message, $bbcode_uid, $length);
 		$message = $trim->message();
 		unset($trim);
 	}
