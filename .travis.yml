@@ -29,7 +29,7 @@ matrix:
 env:
   global:
     - EXTNAME="board3/portal"
-    - SNIFF="0"        # Should we run code sniffer on your code?
+    - SNIFF="1"        # Should we run code sniffer on your code?
     - IMAGE_ICC="0"    # Should we run icc profile sniffer on your images?
     - COVERALLS="1"    # Should we run coveralls?
     - PHPBB_BRANCH="develop-ascraeus"
@@ -54,7 +54,7 @@ before_script:
   - chmod +wx build/logs
 
 script:
-  - sh -c "if [ '$SNIFF' != '0' ]; then travis/phing-sniff.sh $DB $TRAVIS_PHP_VERSION; fi"
+  - sh -c "if [ '$SNIFF' != '0' ]; then travis/ext-sniff.sh $DB $TRAVIS_PHP_VERSION $EXTNAME; fi"
   - sh -c "if [ '$IMAGE_ICC' != '0' ]; then travis/check-image-icc-profiles.sh $DB $TRAVIS_PHP_VERSION; fi"
   - ../board3/Board3-Portal/travis/run-testsuite.sh $DB $TRAVIS_PHP_VERSION
 
