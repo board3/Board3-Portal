@@ -27,7 +27,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$user->timezone = new \DateTimeZone('UTC');
 		$user->add_lang('common');
 		$phpbb_dispatcher = new phpbb_mock_event_dispatcher();
-		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get'));
+		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists'));
 		$cache->expects($this->any())
 			->method('obtain_word_list')
 			->with()
