@@ -148,7 +148,7 @@ class portal_module
 				else
 				{
 					// only show the mod version check if we are on the General Settings page
-					$this->version_check->version_check();
+					$this->version_check->check();
 				}
 
 				$this->new_config = $this->config;
