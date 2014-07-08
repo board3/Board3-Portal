@@ -35,6 +35,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 				new \phpbb_mock_request()
 			),
 			new \phpbb\filesystem(),
+			new \phpbb_mock_request(),
 			$phpbb_root_path,
 			'php'
 		);
