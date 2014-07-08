@@ -67,7 +67,7 @@ class version_check
 	* @param bool $return_version Yes if current version should be returned
 	* @return string Current version if $return_version is set to true
 	*/
-	public function version_check($return_version = false)
+	public function check($return_version = false)
 	{
 		if (!function_exists('get_remote_file'))
 		{

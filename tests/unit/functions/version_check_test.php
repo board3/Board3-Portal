@@ -39,8 +39,8 @@ class phpbb_functions_version_check_test extends \board3\portal\tests\testframew
 	public function test_version_check()
 	{
 		$this->assertTrue(true);
-		$this->assertNull($this->version_check->version_check());
-		$this->assertEquals('2.1.0', $this->version_check->version_check(true));
+		$this->assertNull($this->version_check->check());
+		$this->assertEquals('2.1.0', $this->version_check->check(true));
 		$this->template->assert_equals(array(
 			'CURRENT_VERSION' => '2.1.0',
 			'TITLE' => 'Board3 Portal',
