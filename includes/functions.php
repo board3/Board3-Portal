@@ -166,9 +166,8 @@ function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_pos
 		break;
 
 		default:
-			$topic_type = $str_where = $user_link = $post_link = '';
-			$topic_order = 't.topic_time DESC';
-			// maybe use trigger_error here, as this shouldn't happen
+			// Method was called with unsupported type
+			throw new \InvalidArgumentexception($user->lang('B3P_WRONG_METHOD_CALL', __FUNCTION__));
 	}
 
 	if ($type == 'announcements' && $global_f < 1)
