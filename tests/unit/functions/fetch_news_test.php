@@ -13,6 +13,8 @@ require_once(dirname(__FILE__) . '/../../../../../../includes/functions.php');
 
 class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework\database_test_case
 {
+	protected $default_main_columns = array('topic_count', 'global_id', 'topic_icons');
+
 	public function setUp()
 	{
 		parent::setUp();
@@ -28,11 +30,15 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$user->add_lang('common');
 		$user->add_lang('../../ext/board3/portal/language/en/portal');
 		$phpbb_dispatcher = new phpbb_mock_event_dispatcher();
-		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists'));
+		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put'));
 		$cache->expects($this->any())
 			->method('obtain_word_list')
 			->with()
 			->will($this->returnValue(array()));
+		$cache->expects($this->any())
+			->method('get')
+			->with($this->anything())
+			->will($this->returnValue(false));
 		require_once(dirname(__FILE__) . '/../../../../../../includes/functions_content.php');
 	}
 
@@ -94,24 +100,28 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 				'attachments',
 				'forum_name',
 			)),
-			array('announcements', array(), 5, true),
-			array('news', array(), 0),
-			array('foobar', array(), 5, false, '\InvalidArgumentException'),
+			array('announcements', array(), array('topic_icons', 'topic_count'), 5, ''),
+			array('news', array(), array(), 0),
+			array('foobar', array(), array(), 5, '', false, false, false, '\InvalidArgumentException'),
+			array('news', array(), array(), 5, '', true, true),
+			array('announcements', array(), array('topic_icons', 'topic_count'), 5, '3'),
+			array('announcements', array(), array(), 5, '1,2', true, true),
+			array('news', array(), array(), 5, '1,2', true, false, true),
+			array('announcements', array(), array(), 5, '', true, true),
+			array('announcements', array(), array(), 5, '1,2', true, true, true),
 		);
 	}
 
 	/**
 	* @dataProvider data_phpbb_fetch_news
 	*/
-	public function test_phpbb_fetch_news($type, $expected_columns, $number_of_posts = 5, $empty = false, $expected_exception = false)
+	public function test_phpbb_fetch_news($type, $expected_columns, $expected_main_columns = array(), $number_of_posts = 5, $forum_from = '', $empty = false, $permissions = false,
+		$invert = false, $expected_exception = false)
 	{
 		$module_id = 5;
-		$forum_from = '';
-		$permissions = false;
 		$text_length = 150;
 		$time = time();
 		$start = 0;
-		$invert = false;
 
 		if ($expected_exception)
 		{
@@ -122,13 +132,16 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 
 		if (!$empty)
 		{
-			$this->assertArrayHasKey('topic_count', $fetch_posts);
-			$this->assertArrayHasKey('global_id', $fetch_posts);
-			$this->assertArrayHasKey('topic_icons', $fetch_posts);
+			if (empty($expected_main_columns))
+			{
+				$expected_main_columns = $this->default_main_columns;
+			}
 
-			unset($fetch_posts['topic_count']);
-			unset($fetch_posts['global_id']);
-			unset($fetch_posts['topic_icons']);
+			foreach ($expected_main_columns as $main_column)
+			{
+				$this->assertArrayHasKey($main_column, $fetch_posts);
+				unset($fetch_posts[$main_column]);
+			}
 
 			foreach ($fetch_posts as $post)
 			{
@@ -141,7 +154,29 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		}
 		else
 		{
+			if (!empty($fetch_posts))
+			{
+				var_export($fetch_posts);
+			}
 			$this->assertEmpty($fetch_posts);
 		}
+	}
+
+	public function test_cached_first_forum_id()
+	{
+		global $cache;
+
+		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put'));
+		$cache->expects($this->any())
+			->method('obtain_word_list')
+			->with()
+			->will($this->returnValue(array()));
+		$cache->expects($this->any())
+			->method('get')
+			->with($this->anything())
+			->will($this->returnValue(array()));
+
+		$fetch_posts = phpbb_fetch_posts(5, '', false, 5, 150, time(), 'announcements');
+		$this->assertEmpty($fetch_posts);
 	}
 }

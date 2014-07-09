@@ -80,12 +80,14 @@
 		<column>forum_parents</column>
 		<column>forum_desc</column>
 		<column>forum_rules</column>
+		<column>forum_type</column>
 		<row>
 			<value>1</value>
 			<value>0</value>
 			<value></value>
 			<value></value>
 			<value></value>
+			<value>1</value>
 		</row>
 		<row>
 			<value>2</value>
@@ -93,6 +95,7 @@
 			<value></value>
 			<value></value>
 			<value></value>
+			<value>1</value>
 		</row>
 	</table>
 	<table name="phpbb_topics_posted">
