@@ -26,6 +26,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$user->data['user_id'] = 2;
 		$user->timezone = new \DateTimeZone('UTC');
 		$user->add_lang('common');
+		$user->add_lang('../../ext/board3/portal/language/en/portal');
 		$phpbb_dispatcher = new phpbb_mock_event_dispatcher();
 		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists'));
 		$cache->expects($this->any())
@@ -93,23 +94,31 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 				'attachments',
 				'forum_name',
 			)),
-			array('announcements', array(), true),
+			array('announcements', array(), 5, true),
+			array('news', array(), 0),
+			array('foobar', array(), 5, false, '\InvalidArgumentException'),
 		);
 	}
 
 	/**
 	* @dataProvider data_phpbb_fetch_news
 	*/
-	public function test_phpbb_fetch_news($type, $expected_columns, $empty = false)
+	public function test_phpbb_fetch_news($type, $expected_columns, $number_of_posts = 5, $empty = false, $expected_exception = false)
 	{
 		$module_id = 5;
 		$forum_from = '';
 		$permissions = false;
-		$number_of_posts = 5;
 		$text_length = 150;
 		$time = time();
+		$start = 0;
+		$invert = false;
 
-		$fetch_posts = phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_posts, $text_length, $time, $type);
+		if ($expected_exception)
+		{
+			$this->setExpectedException($expected_exception);
+		}
+
+		$fetch_posts = phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start, $invert);
 
 		if (!$empty)
 		{
