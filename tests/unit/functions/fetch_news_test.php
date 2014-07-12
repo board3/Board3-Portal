@@ -38,7 +38,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 			->with($this->anything())
 			->will($this->returnValue(false));
 		require_once(dirname(__FILE__) . '/../../../../../../includes/functions_content.php');
-		$config = new \phpbb\config\config(array('allow_attachments' => 1));
+		$this->config = new \phpbb\config\config(array('allow_attachments' => 1));
 		$auth = new \phpbb\auth\auth();
 		$userdata = array(
 			'user_id'	=> 2,
@@ -48,8 +48,12 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$auth->acl[0][0] = true;
 		// Pretend to allow downloads in forum 1
 		$auth->acl[1][0] = true;
+		$this->auth = $auth;
+		$this->user = $user;
 		$phpbb_container = new \phpbb_mock_container_builder();
-		$phpbb_container->set('board3.portal.modules_helper', new \board3\portal\includes\modules_helper($auth));
+		$this->modules_helper = new \board3\portal\includes\modules_helper($auth);
+		$phpbb_container->set('board3.portal.modules_helper', $this->modules_helper);
+		$phpbb_container->set('board3.portal.fetch_posts', new \board3\portal\portal\fetch_posts($auth, $cache, $this->config, $this->db, $this->modules_helper, $user));
 		$template = $this->getMock('\phpbb\template', array('set_filenames', 'destroy_block_vars', 'assign_block_vars', 'assign_display'));
 	}
 
@@ -223,7 +227,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 
 	public function test_cached_first_forum_id()
 	{
-		global $cache;
+		global $cache, $phpbb_container;
 
 		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put'));
 		$cache->expects($this->any())
@@ -235,6 +239,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 			->with($this->anything())
 			->will($this->returnValue(array()));
 
+		$phpbb_container->set('board3.portal.fetch_posts', new \board3\portal\portal\fetch_posts($this->auth, $cache, $this->config, $this->db, $this->modules_helper, $this->user));
 		$fetch_posts = phpbb_fetch_posts(5, '', false, 5, 150, time(), 'announcements');
 		$this->assertEmpty($fetch_posts);
 	}
