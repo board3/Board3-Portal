@@ -59,7 +59,7 @@ script:
   - ../board3/Board3-Portal/travis/run-testsuite.sh $DB $TRAVIS_PHP_VERSION
 
 after_script:
-  - php ../board3/Board3-Portal/vendor/bin/coveralls -v
+  - sh -c "if [ '$COVERALLS' != '0' ]; then ../board3/Board3-Portal/travis/run-coveralls.sh $DB $TRAVIS_PHP_VERSION; fi"
 
 notifications:
   email:
