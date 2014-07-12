@@ -443,20 +443,7 @@ class fetch_posts
 		{
 			if (!empty($this->where_string) || ($row = $this->cache->get('_forum_id_first_forum_post')) === false)
 			{
-				$sql = 'SELECT forum_id
-					FROM ' . FORUMS_TABLE . '
-					WHERE forum_type = ' . FORUM_POST . '
-					' . str_replace('t.', '', $this->where_string) . '
-					ORDER BY forum_id';
-				$result = $this->db->sql_query_limit($sql, 1);
-				$row = $this->db->sql_fetchrow($result);
-				$this->db->sql_freeresult($result);
-
-				if (empty($this->where_string))
-				{
-					// Cache first forum ID for one day = 86400 s
-					$this->cache->put('_forum_id_first_forum_post', $row, 86400);
-				}
+				$row = $this->get_first_forum_id();
 			}
 
 			if (empty($row))
@@ -467,6 +454,31 @@ class fetch_posts
 		}
 
 		return true;
+	}
+
+	/**
+	* Gets the first forum_id of FORUM_POST type forums
+	*
+	* @return array Database row of query
+	*/
+	protected function get_first_forum_id()
+	{
+		$sql = 'SELECT forum_id
+			FROM ' . FORUMS_TABLE . '
+			WHERE forum_type = ' . FORUM_POST . '
+			' . str_replace('t.', '', $this->where_string) . '
+			ORDER BY forum_id';
+		$result = $this->db->sql_query_limit($sql, 1);
+		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+
+		if (empty($this->where_string))
+		{
+			// Cache first forum ID for one day = 86400 s
+			$this->cache->put('_forum_id_first_forum_post', $row, 86400);
+		}
+
+		return $row;
 	}
 
 	/**
