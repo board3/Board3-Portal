@@ -388,7 +388,6 @@ class fetch_posts
 		if ($invert == true)
 		{
 			$access_list = array_merge($disallowed_forums, $forum_from);
-			$forum_from = array();
 			$sql_operator = '<>';
 			$sql_append = 'AND';
 		}
@@ -404,6 +403,24 @@ class fetch_posts
 			}
 		}
 
+		// Generate where string
+		$this->generate_where_string($access_list, $sql_operator, $sql_append);
+
+		return true;
+	}
+
+	/**
+	* Generate where string for database query
+	*
+	* @param	array	$access_list	Array containing the forum IDs
+	*					the user has access to
+	* @param	string	$sql_operator	The sql operator to use
+	* @param	string	$sql_append	The sql append type to use.
+	*					Should be either AND or OR
+	* @return null
+	*/
+	protected function generate_where_string($access_list, $sql_operator, $sql_append)
+	{
 		foreach ($access_list as $acc_id)
 		{
 			$acc_id = (int) $acc_id;
@@ -413,8 +430,6 @@ class fetch_posts
 				$this->global_id = $acc_id;
 			}
 		}
-
-		return true;
 	}
 
 	/**
