@@ -12,15 +12,16 @@ require_once(dirname(__FILE__) . '/../../../../../../includes/functions_acp.php'
 require_once(dirname(__FILE__) . '/../../../../../../includes/functions.php');
 require_once(dirname(__FILE__) . '/../../../../../../includes/utf/utf_tools.php');
 
-class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework\database_test_case
+class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\database_test_case
 {
 	protected $default_main_columns = array('topic_count', 'global_id', 'topic_icons');
+	protected $fetch_posts;
 
 	public function setUp()
 	{
-		parent::setUp();
+		global $auth, $cache, $phpbb_dispatcher, $template, $user;;
 
-		global $auth, $cache, $config, $phpbb_container, $phpbb_dispatcher, $template, $user;
+		parent::setUp();
 
 		$user = new \phpbb\user();
 		$user->data['user_id'] = 2;
@@ -49,12 +50,10 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		// Pretend to allow downloads in forum 1
 		$auth->acl[1][0] = true;
 		$this->auth = $auth;
-		$this->user = $user;
-		$phpbb_container = new \phpbb_mock_container_builder();
 		$this->modules_helper = new \board3\portal\includes\modules_helper($auth);
-		$phpbb_container->set('board3.portal.modules_helper', $this->modules_helper);
-		$phpbb_container->set('board3.portal.fetch_posts', new \board3\portal\portal\fetch_posts($auth, $cache, $this->config, $this->db, $this->modules_helper, $user));
+		$this->user = $user;
 		$template = $this->getMock('\phpbb\template', array('set_filenames', 'destroy_block_vars', 'assign_block_vars', 'assign_display'));
+		$this->fetch_posts = new \board3\portal\portal\fetch_posts($auth, $cache, $this->config, $this->db, $this->modules_helper, $user);
 	}
 
 	public function getDataSet()
@@ -191,7 +190,8 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 			$this->setExpectedException($expected_exception);
 		}
 
-		$fetch_posts = phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start, $invert);
+		$this->fetch_posts->set_module_id($module_id);
+		$fetch_posts = $this->fetch_posts->get_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start, $invert);
 
 		if (!$empty)
 		{
@@ -227,7 +227,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 
 	public function test_cached_first_forum_id()
 	{
-		global $cache, $phpbb_container;
+		global $cache;
 
 		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put'));
 		$cache->expects($this->any())
@@ -239,8 +239,10 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 			->with($this->anything())
 			->will($this->returnValue(array()));
 
-		$phpbb_container->set('board3.portal.fetch_posts', new \board3\portal\portal\fetch_posts($this->auth, $cache, $this->config, $this->db, $this->modules_helper, $this->user));
-		$fetch_posts = phpbb_fetch_posts(5, '', false, 5, 150, time(), 'announcements');
+		$this->fetch_posts = new \board3\portal\portal\fetch_posts($this->auth, $cache, $this->config, $this->db, $this->modules_helper, $this->user);
+		$this->fetch_posts->set_module_id(5);
+
+		$fetch_posts = $this->fetch_posts->get_posts('', false, 5, 150, time(), 'announcements');
 		$this->assertEmpty($fetch_posts);
 	}
 
@@ -250,7 +252,8 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 
 		$auth = new \phpbb\auth\auth();
 
-		$fetch_posts = phpbb_fetch_posts(5, '2', true, 5, 150, time(), 'announcements');
+		$this->fetch_posts->set_module_id(5);
+		$fetch_posts = $this->fetch_posts->get_posts('2', true, 5, 150, time(), 'announcements');
 		$this->assertSame(array(), $fetch_posts);
 	}
 }

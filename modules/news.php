@@ -74,6 +74,9 @@ class news extends module_base
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var \board3\portal\portal\fetch_posts */
+	protected $fetch_posts;
+
 	/**
 	* Construct a news object
 	*
@@ -88,8 +91,9 @@ class news extends module_base
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	* @param \phpbb\user $user phpBB user object
+	* @param \board3\portal\portal\fetch_posts $fetch_posts Fetch posts object
 	*/
-	public function __construct($auth, $cache, $config, $db, $pagination, $modules_helper, $request, $template, $phpbb_root_path, $phpEx, $user)
+	public function __construct($auth, $cache, $config, $db, $pagination, $modules_helper, $request, $template, $phpbb_root_path, $phpEx, $user, $fetch_posts)
 	{
 		$this->auth = $auth;
 		$this->cache = $cache;
@@ -102,6 +106,7 @@ class news extends module_base
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $phpEx;
 		$this->user = $user;
+		$this->fetch_posts = $fetch_posts;
 	}
 
 	/**
@@ -117,7 +122,17 @@ class news extends module_base
 
 		// Fetch news from portal functions.php with check if "read full" is requested.
 		$portal_news_length = ($news < 0) ? $this->config['board3_news_length_' . $module_id] : 0;
-		$fetch_news = phpbb_fetch_posts($module_id, $this->config['board3_news_forum_' . $module_id], $this->config['board3_news_permissions_' . $module_id], $this->config['board3_number_of_news_' . $module_id], $portal_news_length, 0, ($this->config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news', $start, $this->config['board3_news_exclude_' . $module_id]);
+		$this->fetch_posts->set_module_id($module_id);
+		$fetch_news = $this->fetch_posts->get_posts(
+			$this->config['board3_news_forum_' . $module_id],
+			$this->config['board3_news_permissions_' . $module_id],
+			$this->config['board3_number_of_news_' . $module_id],
+			$portal_news_length,
+			0,
+			($this->config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news',
+			$start,
+			$this->config['board3_news_exclude_' . $module_id]
+		);
 
 		// Any news present? If not terminate it here.
 		if (sizeof($fetch_news) == 0)

@@ -13,6 +13,7 @@ services:
             - %core.php_ext%
             - %core.root_path%
             - @user
+            - @board3.portal.fetch_posts
         tags:
             - { name: board3.module }
 
@@ -186,6 +187,7 @@ services:
             - %core.root_path%
             - %core.php_ext%
             - @user
+            - @board3.portal.fetch_posts
         tags:
             - { name: board3.module }
 
