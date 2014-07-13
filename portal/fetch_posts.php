@@ -149,81 +149,7 @@ class fetch_posts
 			return array();
 		}
 
-		$sql_array = array(
-			'SELECT' => 't.forum_id,
-				t.topic_id,
-				t.topic_last_post_id,
-				t.topic_last_post_time,
-				t.topic_time,
-				t.topic_title,
-				t.topic_attachment,
-				t.topic_views,
-				t.poll_title,
-				t.topic_posts_approved,
-				t.topic_posts_unapproved,
-				t.topic_posts_softdeleted,
-				t.topic_poster,
-				t.topic_type,
-				t.topic_status,
-				t.topic_last_poster_name,
-				t.topic_last_poster_id,
-				t.topic_last_poster_colour,
-				t.icon_id,
-				u.username,
-				u.user_id,
-				u.user_type,
-				u.user_colour,
-				p.post_id,
-				p.poster_id,
-				p.post_time,
-				p.post_text,
-				p.post_attachment,
-				p.post_username,
-				p.enable_smilies,
-				p.enable_bbcode,
-				p.enable_magic_url,
-				p.bbcode_bitfield,
-				p.bbcode_uid,
-				f.forum_name,
-				f.enable_icons',
-			'FROM' => array(
-				TOPICS_TABLE => 't',
-			),
-			'LEFT_JOIN' => array(
-				array(
-					'FROM' => array(USERS_TABLE => 'u'),
-					'ON' => $this->user_link,
-				),
-				array(
-					'FROM' => array(FORUMS_TABLE => 'f'),
-					'ON' => 't.forum_id=f.forum_id',
-				),
-				array(
-					'FROM' => array(POSTS_TABLE => 'p'),
-					'ON' => $this->post_link,
-				),
-			),
-			'WHERE' => $this->topic_type . '
-					' . $post_time . '
-					AND t.topic_status <> ' . ITEM_MOVED . '
-					AND t.topic_visibility = 1
-					AND t.topic_moved_id = 0
-					' . $this->where_string,
-			'ORDER_BY' => $this->topic_order,
-		);
-
-		$sql_array['LEFT_JOIN'][] = array('FROM' => array(TOPICS_POSTED_TABLE => 'tp'), 'ON' => 'tp.topic_id = t.topic_id AND tp.user_id = ' . $this->user->data['user_id']);
-		$sql_array['SELECT'] .= ', tp.topic_posted';
-		$sql = $this->db->sql_build_query('SELECT', $sql_array);
-
-		if ($number_of_posts != 0)
-		{
-			$result = $this->db->sql_query_limit($sql, $number_of_posts, $start);
-		}
-		else
-		{
-			$result = $this->db->sql_query($sql);
-		}
+		$result = $this->run_sql_query($post_time, $number_of_posts, $start);
 
 		$i = 0;
 
@@ -320,6 +246,96 @@ class fetch_posts
 		{
 			return $posts;
 		}
+	}
+
+	/**
+	* Run SQL query for fetching posts from database
+	*
+	* @param int	$post_time		Post time
+	* @param int	$number_of_posts	Number of posts to fetch
+	* @param int	$start			Start of query
+	*
+	* @return int Result pointer
+	*/
+	protected function run_sql_query($post_time, $number_of_posts, $start)
+	{
+		$sql_array = array(
+			'SELECT' => 't.forum_id,
+				t.topic_id,
+				t.topic_last_post_id,
+				t.topic_last_post_time,
+				t.topic_time,
+				t.topic_title,
+				t.topic_attachment,
+				t.topic_views,
+				t.poll_title,
+				t.topic_posts_approved,
+				t.topic_posts_unapproved,
+				t.topic_posts_softdeleted,
+				t.topic_poster,
+				t.topic_type,
+				t.topic_status,
+				t.topic_last_poster_name,
+				t.topic_last_poster_id,
+				t.topic_last_poster_colour,
+				t.icon_id,
+				u.username,
+				u.user_id,
+				u.user_type,
+				u.user_colour,
+				p.post_id,
+				p.poster_id,
+				p.post_time,
+				p.post_text,
+				p.post_attachment,
+				p.post_username,
+				p.enable_smilies,
+				p.enable_bbcode,
+				p.enable_magic_url,
+				p.bbcode_bitfield,
+				p.bbcode_uid,
+				f.forum_name,
+				f.enable_icons',
+			'FROM' => array(
+				TOPICS_TABLE => 't',
+			),
+			'LEFT_JOIN' => array(
+				array(
+					'FROM' => array(USERS_TABLE => 'u'),
+					'ON' => $this->user_link,
+				),
+				array(
+					'FROM' => array(FORUMS_TABLE => 'f'),
+					'ON' => 't.forum_id=f.forum_id',
+				),
+				array(
+					'FROM' => array(POSTS_TABLE => 'p'),
+					'ON' => $this->post_link,
+				),
+			),
+			'WHERE' => $this->topic_type . '
+					' . $post_time . '
+					AND t.topic_status <> ' . ITEM_MOVED . '
+					AND t.topic_visibility = 1
+					AND t.topic_moved_id = 0
+					' . $this->where_string,
+			'ORDER_BY' => $this->topic_order,
+		);
+
+		$sql_array['LEFT_JOIN'][] = array('FROM' => array(TOPICS_POSTED_TABLE => 'tp'), 'ON' => 'tp.topic_id = t.topic_id AND tp.user_id = ' . $this->user->data['user_id']);
+		$sql_array['SELECT'] .= ', tp.topic_posted';
+		$sql = $this->db->sql_build_query('SELECT', $sql_array);
+
+		if ($number_of_posts != 0)
+		{
+			$result = $this->db->sql_query_limit($sql, $number_of_posts, $start);
+		}
+		else
+		{
+			$result = $this->db->sql_query($sql);
+		}
+
+		return $result;
 	}
 
 	/**
