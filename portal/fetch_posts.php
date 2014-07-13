@@ -333,31 +333,59 @@ class fetch_posts
 		switch($this->type)
 		{
 			case "announcements":
-				$this->topic_type = '((t.topic_type = ' . POST_ANNOUNCE . ') OR (t.topic_type = ' . POST_GLOBAL . '))';
-				$this->where_string = (strlen($this->where_string) > 0) ? 'AND (t.forum_id = 0 OR (' . trim(substr($this->where_string, 0, -4)) . '))' : '';
-				$this->user_link = 't.topic_poster = u.user_id';
-				$this->post_link = 't.topic_first_post_id = p.post_id';
-				$this->topic_order = 't.topic_time DESC';
+				$this->get_announcements_constraints();
 			break;
 			case "news":
-				$this->topic_type = 't.topic_type = ' . POST_NORMAL;
-				$this->where_string = (strlen($this->where_string) > 0) ? 'AND (' . trim(substr($this->where_string, 0, -4)) . ')' : '';
-				$this->user_link = ($this->config['board3_news_style_' . $this->module_id]) ? 't.topic_poster = u.user_id' : (($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
-				$this->post_link = ($this->config['board3_news_style_' . $this->module_id]) ? 't.topic_first_post_id = p.post_id' : (($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
-				$this->topic_order = ($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+				$this->get_news_constraints();
 			break;
 			case "news_all":
-				$this->topic_type = '(t.topic_type <> ' . POST_ANNOUNCE . ') AND (t.topic_type <> ' . POST_GLOBAL . ')';
-				$this->where_string = (strlen($this->where_string) > 0) ? 'AND (' . trim(substr($this->where_string, 0, -4)) . ')' : '';
-				$this->user_link = ($this->config['board3_news_style_' . $this->module_id]) ? 't.topic_poster = u.user_id' : (($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
-				$this->post_link = ($this->config['board3_news_style_' . $this->module_id]) ? 't.topic_first_post_id = p.post_id' : (($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
-				$this->topic_order = ($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+				$this->get_news_all_constraints();
 			break;
 
 			default:
 				// Method was called with unsupported type
 				throw new \InvalidArgumentexception($this->user->lang('B3P_WRONG_METHOD_CALL', __FUNCTION__));
 		}
+	}
+
+	/**
+	* Get type constraints for announcements
+	*
+	* @return null
+	*/
+	protected function get_announcements_constraints()
+	{
+		$this->topic_type = '((t.topic_type = ' . POST_ANNOUNCE . ') OR (t.topic_type = ' . POST_GLOBAL . '))';
+		$this->where_string = (strlen($this->where_string) > 0) ? 'AND (t.forum_id = 0 OR (' . trim(substr($this->where_string, 0, -4)) . '))' : '';
+		$this->user_link = 't.topic_poster = u.user_id';
+		$this->post_link = 't.topic_first_post_id = p.post_id';
+		$this->topic_order = 't.topic_time DESC';
+	}
+
+	/**
+	* Get type constraints for news
+	*
+	* @return null
+	*/
+	protected function get_news_constraints()
+	{
+		$this->topic_type = 't.topic_type = ' . POST_NORMAL;
+		$this->where_string = (strlen($this->where_string) > 0) ? 'AND (' . trim(substr($this->where_string, 0, -4)) . ')' : '';
+		$this->user_link = ($this->config['board3_news_style_' . $this->module_id]) ? 't.topic_poster = u.user_id' : (($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
+		$this->post_link = ($this->config['board3_news_style_' . $this->module_id]) ? 't.topic_first_post_id = p.post_id' : (($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
+		$this->topic_order = ($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+	}
+
+	/**
+	* Get additional type constraints for all news
+	* Overwrites topic type of get_news_constraints().
+	*
+	* @return null
+	*/
+	protected function get_news_all_constraints()
+	{
+		$this->get_news_constraints();
+		$this->topic_type = '(t.topic_type <> ' . POST_ANNOUNCE . ') AND (t.topic_type <> ' . POST_GLOBAL . ')';
 	}
 
 	/**
