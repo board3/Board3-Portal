@@ -74,6 +74,9 @@ class announcements extends module_base
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var \board3\portal\portal\fetch_posts */
+	protected $fetch_posts;
+
 	/**
 	* Construct an announcements object
 	*
@@ -88,8 +91,9 @@ class announcements extends module_base
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
+	* @param \board3\portal\portal\fetch_posts $fetch_posts Fetch posts object
 	*/
-	public function __construct($auth, $cache, $config, $template, $db, $pagination, $modules_helper, $request, $phpEx, $phpbb_root_path, $user)
+	public function __construct($auth, $cache, $config, $template, $db, $pagination, $modules_helper, $request, $phpEx, $phpbb_root_path, $user, $fetch_posts)
 	{
 		$this->auth = $auth;
 		$this->cache = $cache;
@@ -102,6 +106,7 @@ class announcements extends module_base
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
+		$this->fetch_posts = $fetch_posts;
 	}
 
 	/**
@@ -114,9 +119,19 @@ class announcements extends module_base
 		$start = $this->request->variable('ap', 0);
 		$start = ($start < 0) ? 0 : $start;
 
-		// Fetch announcements from porta functions.php with check if "read full" is requested.
+		// Fetch announcements from portal functions.php with check if "read full" is requested.
 		$portal_announcement_length = ($announcement < 0) ? $this->config['board3_announcements_length_' . $module_id] : 0;
-		$fetch_news = phpbb_fetch_posts($module_id, $this->config['board3_global_announcements_forum_' . $module_id], $this->config['board3_announcements_permissions_' . $module_id], $this->config['board3_number_of_announcements_' . $module_id], $portal_announcement_length, $this->config['board3_announcements_day_' . $module_id], 'announcements', $start, $this->config['board3_announcements_forum_exclude_' . $module_id]);
+		$this->fetch_posts->set_module_id($module_id);
+		$fetch_news = $this->fetch_posts->get_posts(
+			$this->config['board3_global_announcements_forum_' . $module_id],
+			$this->config['board3_announcements_permissions_' . $module_id],
+			$this->config['board3_number_of_announcements_' . $module_id],
+			$portal_announcement_length,
+			$this->config['board3_announcements_day_' . $module_id],
+			'announcements',
+			$start,
+			$this->config['board3_announcements_forum_exclude_' . $module_id]
+		);
 
 		// Any announcements present? If not terminate it here.
 		if (sizeof($fetch_news) == 0)
