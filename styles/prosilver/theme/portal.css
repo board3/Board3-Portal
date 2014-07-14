@@ -1,22 +1,3 @@
-/* inner corners */
-
-span.portal-corners-top-inner {
-	margin: 0 -5px;
-}
-
-span.portal-corners-bottom-inner {
-	margin: 0 -5px;
-	clear: both;
-}
-
-span.portal-corners-top-inner, span.portal-corners-bottom-inner{
-	font-size: 1px;
-	line-height: 1px;
-	display: block;
-	height: 5px;
-	background-repeat: no-repeat;
-}
-
 /* main menu, user menu and the links */
 
 .portal-navigation{
