@@ -64,25 +64,25 @@ class calendar extends module_base
 	const DAYS_PER_WEEK = 6; // indexes start at 0
 	const MONTHS_PER_YEAR = 12;
 
-	/** @var year in numeric format (YYYY) */
+	/** @var int year in numeric format (YYYY) */
 	protected $dateYYY;
 
-	/** @var month in numeric format (MM) */
+	/** @var int month in numeric format (MM) */
 	protected $dateMM;
 
-	/** @var day in numeric format (DD) */
+	/** @var int day in numeric format (DD) */
 	protected $dateDD;
 
-	/** @var extended month (e.g. February) */
+	/** @var string extended month (e.g. February) */
 	protected $ext_dateMM;
 
-	/** @var count of days in month */
+	/** @var int count of days in month */
 	protected $daysMonth;
 
-	/** @var timestamp */
+	/** @var int timestamp */
 	protected $stamp;
 
-	/** @var return array s.a. */
+	/** @var array return array s.a. */
 	protected $day;
 
 	/** @var \phpbb\config\config */
@@ -97,10 +97,10 @@ class calendar extends module_base
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	/** @var php file extension */
+	/** @var string PHP file extension */
 	protected $php_ext;
 
-	/** @var phpbb root path */
+	/** @var string phpBB root path */
 	protected $phpbb_root_path;
 
 	/** @var \phpbb\user */
@@ -109,7 +109,7 @@ class calendar extends module_base
 	/** @var \phpbb\path_helper */
 	protected $path_helper;
 
-	/** @var Portal root path */
+	/** @var string Portal root path */
 	protected $portal_root_path;
 
 	/**
