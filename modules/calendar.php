@@ -65,7 +65,7 @@ class calendar extends module_base
 	const MONTHS_PER_YEAR = 12;
 
 	/** @var int year in numeric format (YYYY) */
-	protected $dateYYY;
+	protected $dateYYYY;
 
 	/** @var int month in numeric format (MM) */
 	protected $dateMM;
@@ -166,7 +166,7 @@ class calendar extends module_base
 		$now = phpbb_gmgetdate($this->time->getTimestamp() + $this->time->getOffset());
 		$today_timestamp = $now[0];
 		$mini_cal_today = date('Ymd', $today_timestamp - date('Z'));
-		$this->stamp = $today_timestamp;
+		$this->stamp = (int) $today_timestamp;
 		$s_cal_month = ($this->mini_cal_month != 0) ? $this->mini_cal_month . ' month' : $mini_cal_today;
 		$this->get_month($s_cal_month);
 		$mini_cal_count = $this->mini_cal_fdow;
@@ -683,11 +683,11 @@ class calendar extends module_base
 				$this->stamp = (date("n", $this->stamp) > $correct_month) ? $this->stamp - self::TIME_DAY : $this->stamp + self::TIME_DAY;
 			}
 		}
-		$this->dateYYYY = date("Y", $this->stamp);
-		$this->dateMM = date("n", $this->stamp);
+		$this->dateYYYY = (int) date("Y", $this->stamp);
+		$this->dateMM = (int) date("n", $this->stamp);
 		$this->ext_dateMM = date("F", $this->stamp);
-		$this->dateDD = date("d", $this->stamp);
-		$this->daysMonth = date("t", $this->stamp);
+		$this->dateDD = (int) date("d", $this->stamp);
+		$this->daysMonth = (int) date("t", $this->stamp);
 
 		for ($i = 1; $i < $this->daysMonth + 1; $i++)
 		{
