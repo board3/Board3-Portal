@@ -212,29 +212,7 @@ class main
 			}
 
 			// Custom Blocks that have been defined in the ACP will return an array instead of just the name of the template file
-			if (is_array($template_module))
-			{
-				$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
-					'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module['template'],
-					'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $template_module['image_src'],
-					'TITLE'				=> $template_module['title'],
-					'CODE'				=> $template_module['code'],
-					'MODULE_ID'			=> $row['module_id'],
-					'IMAGE_WIDTH'			=> $row['module_image_width'],
-					'IMAGE_HEIGHT'			=> $row['module_image_height'],
-				));
-			}
-			else
-			{
-				$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
-					'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module,
-					'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'],
-					'IMAGE_WIDTH'			=> $row['module_image_width'],
-					'IMAGE_HEIGHT'			=> $row['module_image_height'],
-					'MODULE_ID'			=> $row['module_id'],
-					'TITLE'				=> (isset($this->user->lang[$row['module_name']])) ? $this->user->lang[$row['module_name']] : utf8_normalize_nfc($row['module_name']),
-				));
-			}
+			$this->assign_module_vars($row, $template_module);
 
 			// Check if we need to show the online list
 			if ($row['module_classname'] === '\board3\portal\modules\whois_online')
@@ -308,6 +286,41 @@ class main
 			'B3P_DISPLAY_JUMPBOX'		=> $this->config['board3_display_jumpbox'],
 			'T_EXT_THEME_PATH'		=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/',
 		));
+	}
+
+	/**
+	* Assign module's template vars
+	*
+	* @param array $row Database row of module
+	* @param mixed $template_module Template data as returned by module
+	*
+	* @return null
+	*/
+	protected function assign_module_vars($row, $template_module)
+	{
+		if (is_array($template_module))
+		{
+			$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
+				'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module['template'],
+				'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $template_module['image_src'],
+				'TITLE'				=> $template_module['title'],
+				'CODE'				=> $template_module['code'],
+				'MODULE_ID'			=> $row['module_id'],
+				'IMAGE_WIDTH'			=> $row['module_image_width'],
+				'IMAGE_HEIGHT'			=> $row['module_image_height'],
+			));
+		}
+		else
+		{
+			$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
+				'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module,
+				'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'],
+				'IMAGE_WIDTH'			=> $row['module_image_width'],
+				'IMAGE_HEIGHT'			=> $row['module_image_height'],
+				'MODULE_ID'			=> $row['module_id'],
+				'TITLE'				=> (isset($this->user->lang[$row['module_name']])) ? $this->user->lang[$row['module_name']] : utf8_normalize_nfc($row['module_name']),
+			));
+		}
 	}
 
 	/**
