@@ -64,25 +64,25 @@ class calendar extends module_base
 	const DAYS_PER_WEEK = 6; // indexes start at 0
 	const MONTHS_PER_YEAR = 12;
 
-	/** @var year in numeric format (YYYY) */
-	protected $dateYYY;
+	/** @var int year in numeric format (YYYY) */
+	protected $dateYYYY;
 
-	/** @var month in numeric format (MM) */
+	/** @var int month in numeric format (MM) */
 	protected $dateMM;
 
-	/** @var day in numeric format (DD) */
+	/** @var int day in numeric format (DD) */
 	protected $dateDD;
 
-	/** @var extended month (e.g. February) */
+	/** @var string extended month (e.g. February) */
 	protected $ext_dateMM;
 
-	/** @var count of days in month */
+	/** @var int count of days in month */
 	protected $daysMonth;
 
-	/** @var timestamp */
+	/** @var int timestamp */
 	protected $stamp;
 
-	/** @var return array s.a. */
+	/** @var array return array s.a. */
 	protected $day;
 
 	/** @var \phpbb\config\config */
@@ -97,10 +97,10 @@ class calendar extends module_base
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	/** @var php file extension */
+	/** @var string PHP file extension */
 	protected $php_ext;
 
-	/** @var phpbb root path */
+	/** @var string phpBB root path */
 	protected $phpbb_root_path;
 
 	/** @var \phpbb\user */
@@ -109,7 +109,7 @@ class calendar extends module_base
 	/** @var \phpbb\path_helper */
 	protected $path_helper;
 
-	/** @var Portal root path */
+	/** @var string Portal root path */
 	protected $portal_root_path;
 
 	/**
@@ -166,7 +166,7 @@ class calendar extends module_base
 		$now = phpbb_gmgetdate($this->time->getTimestamp() + $this->time->getOffset());
 		$today_timestamp = $now[0];
 		$mini_cal_today = date('Ymd', $today_timestamp - date('Z'));
-		$this->stamp = $today_timestamp;
+		$this->stamp = (int) $today_timestamp;
 		$s_cal_month = ($this->mini_cal_month != 0) ? $this->mini_cal_month . ' month' : $mini_cal_today;
 		$this->get_month($s_cal_month);
 		$mini_cal_count = $this->mini_cal_fdow;
@@ -683,11 +683,11 @@ class calendar extends module_base
 				$this->stamp = (date("n", $this->stamp) > $correct_month) ? $this->stamp - self::TIME_DAY : $this->stamp + self::TIME_DAY;
 			}
 		}
-		$this->dateYYYY = date("Y", $this->stamp);
-		$this->dateMM = date("n", $this->stamp);
+		$this->dateYYYY = (int) date("Y", $this->stamp);
+		$this->dateMM = (int) date("n", $this->stamp);
 		$this->ext_dateMM = date("F", $this->stamp);
-		$this->dateDD = date("d", $this->stamp);
-		$this->daysMonth = date("t", $this->stamp);
+		$this->dateDD = (int) date("d", $this->stamp);
+		$this->daysMonth = (int) date("t", $this->stamp);
 
 		for ($i = 1; $i < $this->daysMonth + 1; $i++)
 		{

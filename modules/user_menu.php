@@ -62,10 +62,10 @@ class user_menu extends module_base
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var php file extension */
+	/** @var string PHP file extension */
 	protected $php_ext;
 
-	/** @var phpbb root path */
+	/** @var string phpBB root path */
 	protected $phpbb_root_path;
 
 	/**

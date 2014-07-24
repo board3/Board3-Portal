@@ -53,10 +53,10 @@ class stylechanger extends module_base
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	/** @var php file extension */
+	/** @var string PHP file extension */
 	protected $php_ext;
 
-	/** @var phpbb root path */
+	/** @var string phpBB root path */
 	protected $phpbb_root_path;
 
 	/** @var \phpbb\user */
