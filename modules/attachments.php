@@ -47,6 +47,9 @@ class attachments extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
+	/** @var \board3\portal\includes\modules_helper */
+	protected $helper;
+
 	/** @var \phpbb\request\request */
 	protected $request;
 
@@ -70,6 +73,7 @@ class attachments extends module_base
 	*
 	* @param \phpbb\auth\auth $auth phpBB auth service
 	* @param \phpbb\config\config $config phpBB config
+	* @param \board3\portal\includes\modules_helper $helper Modules helper
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\db\driver $db Database driver
 	* @param \phpbb\request\request $request phpBB request
@@ -77,10 +81,11 @@ class attachments extends module_base
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($auth, $config, $template, $db, $request, $phpEx, $phpbb_root_path, $user)
+	public function __construct($auth, $config, $helper, $template, $db, $request, $phpEx, $phpbb_root_path, $user)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
+		$this->helper = $helper;
 		$this->template = $template;
 		$this->db = $db;
 		$this->request = $request;
@@ -177,20 +182,15 @@ class attachments extends module_base
 
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$extensions[] = $row;
+			$extensions[] = array(
+				'value'	=> $row['extension'],
+				'title'	=> $row['extension'],
+			);
 		}
 
 		$selected = $this->get_selected_filetypes($module_id);
 
-		// Build options
-		$ext_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
-		foreach ($extensions as $id => $ext)
-		{
-			$ext_options .= '<option value="' . $ext['extension'] . '"' . ((in_array($ext['extension'], $selected)) ? ' selected="selected"' : '') . '>' . $ext['extension'] . '</option>';
-		}
-		$ext_options .= '</select>';
-
-		return $ext_options;
+		return $this->helper->generate_select_box($key, $extensions, $selected);
 	}
 
 	/**

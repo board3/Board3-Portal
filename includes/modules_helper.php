@@ -47,4 +47,28 @@ class modules_helper
 
 		return $disallow_access;
 	}
+
+	/**
+	* Generate select box
+	*
+	* @param string	$key			Key of select box
+	* @param array	$select_ary		Array of select box options
+	* @param array	$selected_options	Array of selected options
+	* @param string	$select_key		Key inside select box options
+	*					that holds the option value
+	* @return string HTML code of select box
+	* @access public
+	*/
+	public function generate_select_box($key, $select_ary, $selected_options)
+	{
+		// Build options
+		$options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
+		foreach ($select_ary as $id => $option)
+		{
+			$options .= '<option value="' . $option['value'] . '"' . ((in_array($option['value'], $selected_options)) ? ' selected="selected"' : '') . '>' . $option['title'] . '</option>';
+		}
+		$options .= '</select>';
+
+		return $options;
+	}
 }
