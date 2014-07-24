@@ -156,23 +156,7 @@ class main
 		*/
 		foreach ($this->portal_modules as $row)
 		{
-			if($row['module_status'] == B3_MODULE_DISABLED)
-			{
-				continue;
-			}
-
-			// Do not try to load non-existent modules
-			if (!($module = $this->portal_helper->get_module($row['module_classname'])))
-			{
-				continue;
-			}
-
-			/**
-			* Check for permissions before loading anything
-			* the default group of a user always defines his/her permission (KISS)
-			*/
-			$group_ary = (!empty($row['module_group_ids'])) ? explode(',', $row['module_group_ids']) : '';
-			if ((is_array($group_ary) && !in_array($this->user->data['group_id'], $group_ary)))
+			if (!($module = $this->get_portal_module($row)))
 			{
 				continue;
 			}
@@ -272,6 +256,47 @@ class main
 	protected function check_online_list($module_classname, $display_online)
 	{
 		return ($module_classname === '\board3\portal\modules\whois_online') ? true : $display_online;
+	}
+
+	/**
+	* Get portal module and run module start checks
+	*
+	* @param array $row Module row
+	*
+	* @return mixed False if one of the module checks failed, the module
+	*		object if checks were successful
+	*/
+	protected function get_portal_module($row)
+	{
+		// Do not try to load non-existent or disabled modules
+		if ($row['module_status'] == B3_MODULE_DISABLED || !is_object($module = $this->portal_helper->get_module($row['module_classname'])))
+		{
+			return false;
+		}
+
+		/**
+		* Check for permissions before loading anything
+		* the default group of a user always defines his/her permission
+		*/
+		return ($this->check_group_access($row)) ? $module : false;
+	}
+
+	/**
+	* Check if user is in required groups
+	*
+	* @param array $row Module row
+	*/
+	protected function check_group_access($row)
+	{
+		$group_ary = (!empty($row['module_group_ids'])) ? explode(',', $row['module_group_ids']) : '';
+		if ((is_array($group_ary) && !in_array($this->user->data['group_id'], $group_ary)))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 
 	/**
