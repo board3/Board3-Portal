@@ -70,8 +70,7 @@ class modules_helper
 	* @param string	$key			Key of select box
 	* @param array	$select_ary		Array of select box options
 	* @param array	$selected_options	Array of selected options
-	* @param string	$select_key		Key inside select box options
-	*					that holds the option value
+	*
 	* @return string HTML code of select box
 	* @access public
 	*/
