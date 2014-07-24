@@ -24,8 +24,9 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 		parent::setUp();
 
 		$auth = new \phpbb\auth\auth();
+		$config = new \phpbb\config\config(array());
 
-		$this->modules_helper = new \board3\portal\includes\modules_helper($auth);
+		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $config);
 	}
 
 	public function data_get_disallowed_forums()

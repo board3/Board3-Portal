@@ -18,14 +18,22 @@ class modules_helper
 	protected $auth;
 
 	/**
+	* phpBB config
+	* @var \phpbb\config\config
+	*/
+	protected $config;
+
+	/**
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
 	* the dependencies defined in the services.yml file for this service.
 	* @param \phpbb\auth\auth $auth Auth object
+	* @param \phpbb\config\config $config phpBB config
 	*/
-	public function __construct($auth)
+	public function __construct($auth, $config)
 	{
 		$this->auth = $auth;
+		$this->config = $config;
 	}
 
 	/**
