@@ -167,6 +167,8 @@ class attachments extends module_base
 	*/
 	public function select_filetype($value, $key, $module_id)
 	{
+		$extensions = array();
+
 		// Get extensions
 		$sql = 'SELECT *
 			FROM ' . EXTENSIONS_TABLE . '
@@ -178,11 +180,7 @@ class attachments extends module_base
 			$extensions[] = $row;
 		}
 
-		$selected = array();
-		if(isset($this->config['board3_attachments_filetype_' . $module_id]) && strlen($this->config['board3_attachments_filetype_' . $module_id]) > 0)
-		{
-			$selected = explode(',', $this->config['board3_attachments_filetype_' . $module_id]);
-		}
+		$selected = $this->get_selected_filetypes($module_id);
 
 		// Build options
 		$ext_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
@@ -276,10 +274,7 @@ class attachments extends module_base
 		$filetypes = array();
 
 		// Get filetypes and put them into an array
-		if(isset($this->config['board3_attachments_filetype_' . $module_id]) && strlen($this->config['board3_attachments_filetype_' . $module_id]) > 0)
-		{
-			$filetypes = explode(',', $this->config['board3_attachments_filetype_' . $module_id]);
-		}
+		$filetypes = $this->get_selected_filetypes($module_id);
 
 		if($this->config['board3_attachments_forum_ids_' . $module_id] !== '')
 		{
@@ -367,5 +362,23 @@ class attachments extends module_base
 		}
 
 		return 'attachments_' . $type . '.html';
+	}
+
+	/**
+	* Get the filetypes that were selected in the ACP
+	*
+	* @param int $module_id Module ID
+	*
+	* @return array An array with the selected filetypes
+	*/
+	protected function get_selected_filetypes($module_id)
+	{
+		$selected = array();
+		if(isset($this->config['board3_attachments_filetype_' . $module_id]) && strlen($this->config['board3_attachments_filetype_' . $module_id]) > 0)
+		{
+			$selected = explode(',', $this->config['board3_attachments_filetype_' . $module_id]);
+		}
+
+		return $selected;
 	}
 }
