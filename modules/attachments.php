@@ -271,7 +271,6 @@ class attachments extends module_base
 	{
 		$attach_forums = false;
 		$where = '';
-		$filetypes = array();
 
 		// Get filetypes and put them into an array
 		$filetypes = $this->get_selected_filetypes($module_id);
