@@ -83,4 +83,12 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 	{
 		$this->assertEquals($expected, $this->modules_helper->generate_select_box($key, $select_ary, $selected_options));
 	}
+
+	public function test_generate_forum_select()
+	{
+		$this->assertEquals(
+			'<select id="bar" name="bar[]" multiple="multiple"><option value="1" disabled="disabled" class="disabled-option">forum_one</option><option value="2" disabled="disabled" class="disabled-option">forum_two</option></select>',
+			$this->modules_helper->generate_forum_select('foo', 'bar')
+		);
+	}
 }

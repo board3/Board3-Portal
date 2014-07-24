@@ -15,7 +15,7 @@ class portal_module
 	public $new_config = array();
 	protected $c_class;
 	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
-	protected $root_path, $version_check, $request, $php_ext, $portal_helper;
+	protected $root_path, $version_check, $request, $php_ext, $portal_helper, $modules_helper;
 	public $module_column = array();
 
 	public function __construct()
@@ -41,6 +41,7 @@ class portal_module
 		$this->phpbb_container = $phpbb_container;
 		$this->version_check = $this->phpbb_container->get('board3.version.check');
 		$this->portal_helper = $this->phpbb_container->get('board3.portal.helper');
+		$this->modules_helper = $this->phpbb_container->get('board3.portal.modules_helper');
 		define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.modules.table'));
 		define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.config.table'));
 
@@ -331,7 +332,14 @@ class portal_module
 						}
 						else
 						{
-							$func = $vars['method'];
+							if ($vars['method'][0] == 'board3.portal.modules_helper')
+							{
+								$func = array($this->modules_helper, $vars['method'][1]);
+							}
+							else
+							{
+								$func = $vars['method'];
+							}
 						}
 						$content = call_user_func_array($func, $args);
 					}

@@ -65,10 +65,42 @@ class modules_helper
 		$options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
 		foreach ($select_ary as $id => $option)
 		{
-			$options .= '<option value="' . $option['value'] . '"' . ((in_array($option['value'], $selected_options)) ? ' selected="selected"' : '') . '>' . $option['title'] . '</option>';
+			$options .= '<option value="' . $option['value'] . '"' . ((in_array($option['value'], $selected_options)) ? ' selected="selected"' : '') . (!empty($option['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $option['title'] . '</option>';
 		}
 		$options .= '</select>';
 
 		return $options;
+	}
+
+	/**
+	* Generate forum select box
+	*
+	* @param string $value	Value of select box
+	* @param string $key	Key of select box
+	*
+	* @return string HTML code of select box
+	* @access public
+	*/
+	public function generate_forum_select($value, $key)
+	{
+		$forum_list = make_forum_select(false, false, true, true, true, false, true);
+
+		$selected_options = $select_ary = array();
+		if(isset($this->config[$key]) && strlen($this->config[$key]) > 0)
+		{
+			$selected_options = explode(',', $this->config[$key]);
+		}
+
+		// Build forum options
+		foreach ($forum_list as $f_id => $f_row)
+		{
+			$select_ary[] = array(
+				'value'		=> $f_id,
+				'title'		=> $f_row['padding'] . $f_row['forum_name'],
+				'disabled'	=> $f_row['disabled'],
+			);
+		}
+
+		return $this->generate_select_box($key, $select_ary, $selected_options);
 	}
 }

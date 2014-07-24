@@ -17,12 +17,14 @@
 	<table name="phpbb_forums">
 		<column>forum_id</column>
 		<column>parent_id</column>
+		<column>forum_name</column>
 		<column>forum_parents</column>
 		<column>forum_desc</column>
 		<column>forum_rules</column>
 		<row>
 			<value>1</value>
 			<value>0</value>
+			<value>forum_one</value>
 			<value></value>
 			<value></value>
 			<value></value>
@@ -30,6 +32,7 @@
 		<row>
 			<value>2</value>
 			<value>1</value>
+			<value>forum_two</value>
 			<value></value>
 			<value></value>
 			<value></value>
