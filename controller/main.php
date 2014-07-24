@@ -72,6 +72,12 @@ class main
 	protected $portal_helper;
 
 	/**
+	* Portal modules count
+	* @var array
+	*/
+	protected $module_count;
+
+	/**
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
 	* the dependencies defined in the services.yml file for this service.
@@ -130,7 +136,7 @@ class main
 		* set up column_count array
 		* with this we can hide unneeded parts of the portal
 		*/
-		$module_count = array(
+		$this->module_count = array(
 			'total' 	=> 0,
 			'top'		=> 0,
 			'left'		=> 0,
@@ -172,27 +178,27 @@ class main
 			if ($row['module_column'] == column_string_num('left') && $this->config['board3_left_column'])
 			{
 				$template_module = $module->get_template_side($row['module_id']);
-				++$module_count['left'];
+				++$this->module_count['left'];
 			}
 			if ($row['module_column'] == column_string_num('center'))
 			{
 				$template_module = $module->get_template_center($row['module_id']);
-				++$module_count['center'];
+				++$this->module_count['center'];
 			}
 			if ($row['module_column'] == column_string_num('right') && $this->config['board3_right_column'])
 			{
 				$template_module = $module->get_template_side($row['module_id']);
-				++$module_count['right'];
+				++$this->module_count['right'];
 			}
 			if ($row['module_column'] == column_string_num('top'))
 			{
 				$template_module = $module->get_template_center($row['module_id']);
-				++$module_count['top'];
+				++$this->module_count['top'];
 			}
 			if ($row['module_column'] == column_string_num('bottom'))
 			{
 				$template_module = $module->get_template_center($row['module_id']);
-				++$module_count['bottom'];
+				++$this->module_count['bottom'];
 			}
 			if (!isset($template_module))
 			{
@@ -232,28 +238,16 @@ class main
 
 			unset($template_module);
 		}
-		$module_count['total'] = sizeof($portal_modules);
+		$this->module_count['total'] = sizeof($portal_modules);
 
 		// Redirect to index if there are currently no active modules
-		if($module_count['total'] < 1)
+		if($this->module_count['total'] < 1)
 		{
 			redirect(append_sid($this->phpbb_root_path . 'index' . $this->php_ext));
 		}
 
 		// Assign specific vars
-		$this->template->assign_vars(array(
-		// 	'S_SMALL_BLOCK'			=> true,
-			'S_PORTAL_LEFT_COLUMN'	=> $this->config['board3_left_column_width'],
-			'S_PORTAL_RIGHT_COLUMN'	=> $this->config['board3_right_column_width'],
-			'S_LEFT_COLUMN'			=> ($module_count['left'] > 0 && $this->config['board3_left_column']) ? true : false,
-			'S_CENTER_COLUMN'		=> ($module_count['center'] > 0) ? true : false,
-			'S_RIGHT_COLUMN'		=> ($module_count['right'] > 0 && $this->config['board3_right_column']) ? true : false,
-			'S_TOP_COLUMN'			=> ($module_count['top'] > 0) ? true : false,
-			'S_BOTTOM_COLUMN'		=> ($module_count['bottom'] > 0) ? true : false,
-			'S_DISPLAY_PHPBB_MENU'	=> $this->config['board3_phpbb_menu'],
-			'B3P_DISPLAY_JUMPBOX'	=> $this->config['board3_display_jumpbox'],
-			'T_EXT_THEME_PATH'		=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/',
-		));
+		$this->assign_template_vars();
 
 		// And now to output the page.
 		page_header($this->user->lang('PORTAL'), $display_online);
@@ -278,6 +272,27 @@ class main
 		{
 			redirect(append_sid($this->phpbb_root_path . 'index' . $this->php_ext));
 		}
+	}
+
+	/**
+	* Assign template vars for portal
+	*
+	* @return null
+	*/
+	protected function assign_template_vars()
+	{
+		$this->template->assign_vars(array(
+			'S_PORTAL_LEFT_COLUMN'	=> $this->config['board3_left_column_width'],
+			'S_PORTAL_RIGHT_COLUMN'	=> $this->config['board3_right_column_width'],
+			'S_LEFT_COLUMN'			=> ($this->module_count['left'] > 0 && $this->config['board3_left_column']) ? true : false,
+			'S_CENTER_COLUMN'		=> ($this->module_count['center'] > 0) ? true : false,
+			'S_RIGHT_COLUMN'		=> ($this->module_count['right'] > 0 && $this->config['board3_right_column']) ? true : false,
+			'S_TOP_COLUMN'			=> ($this->module_count['top'] > 0) ? true : false,
+			'S_BOTTOM_COLUMN'		=> ($this->module_count['bottom'] > 0) ? true : false,
+			'S_DISPLAY_PHPBB_MENU'	=> $this->config['board3_phpbb_menu'],
+			'B3P_DISPLAY_JUMPBOX'	=> $this->config['board3_display_jumpbox'],
+			'T_EXT_THEME_PATH'		=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/',
+		));
 	}
 
 	/**
