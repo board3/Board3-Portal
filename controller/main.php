@@ -78,6 +78,12 @@ class main
 	protected $module_count;
 
 	/**
+	* Portal modules array
+	* @var array
+	*/
+	protected $portal_modules;
+
+	/**
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
 	* the dependencies defined in the services.yml file for this service.
@@ -129,7 +135,7 @@ class main
 		$this->run_initial_tasks();
 
 		// Set default data
-		$portal_modules = obtain_portal_modules();
+		$this->portal_modules = obtain_portal_modules();
 		$display_online = false;
 
 		/**
@@ -148,7 +154,7 @@ class main
 		/**
 		* start assigning block vars
 		*/
-		foreach ($portal_modules as $row)
+		foreach ($this->portal_modules as $row)
 		{
 			if($row['module_status'] == B3_MODULE_DISABLED)
 			{
@@ -238,13 +244,9 @@ class main
 
 			unset($template_module);
 		}
-		$this->module_count['total'] = sizeof($portal_modules);
 
 		// Redirect to index if there are currently no active modules
-		if($this->module_count['total'] < 1)
-		{
-			redirect(append_sid($this->phpbb_root_path . 'index' . $this->php_ext));
-		}
+		$this->check_redirect();
 
 		// Assign specific vars
 		$this->assign_template_vars();
@@ -269,6 +271,19 @@ class main
 	protected function check_permission()
 	{
 		if (!isset($this->config['board3_enable']) || !$this->config['board3_enable'] || !$this->auth->acl_get('u_view_portal'))
+		{
+			redirect(append_sid($this->phpbb_root_path . 'index' . $this->php_ext));
+		}
+	}
+
+	/**
+	* Check if portal needs to redirect to index page
+	*/
+	protected function check_redirect()
+	{
+		$this->module_count['total'] = sizeof($this->portal_modules);
+
+		if ($this->module_count['total'] < 1)
 		{
 			redirect(append_sid($this->phpbb_root_path . 'index' . $this->php_ext));
 		}
