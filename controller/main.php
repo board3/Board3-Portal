@@ -177,10 +177,9 @@ class main
 				continue;
 			}
 
-			if ($language_file = $module->get_language())
-			{
-				$this->user->add_lang_ext('board3/portal', 'modules/' . $language_file);
-			}
+			// Load module language file
+			$this->load_module_language($module);
+
 			if ($row['module_column'] == column_string_num('left') && $this->config['board3_left_column'])
 			{
 				$template_module = $module->get_template_side($row['module_id']);
@@ -215,10 +214,7 @@ class main
 			$this->assign_module_vars($row, $template_module);
 
 			// Check if we need to show the online list
-			if ($row['module_classname'] === '\board3\portal\modules\whois_online')
-			{
-				$display_online = true;
-			}
+			$display_online = $this->check_online_list($row['module_classname'], $display_online);
 
 			unset($template_module);
 		}
@@ -264,6 +260,30 @@ class main
 		if ($this->module_count['total'] < 1)
 		{
 			redirect(append_sid($this->phpbb_root_path . 'index' . $this->php_ext));
+		}
+	}
+
+	/**
+	* Return true if online list should be displayed
+	*
+	* @return mixed True if online list should be display, current value
+	*		if unsure
+	*/
+	protected function check_online_list($module_classname, $display_online)
+	{
+		return ($module_classname === '\board3\portal\modules\whois_online') ? true : $display_online;
+	}
+
+	/**
+	* Load language file of module
+	*
+	* @param object $module Module of which language file should be loaded
+	*/
+	protected function load_module_language($module)
+	{
+		if ($language_file = $module->get_language())
+		{
+			$this->user->add_lang_ext('board3/portal', 'modules/' . $language_file);
 		}
 	}
 
