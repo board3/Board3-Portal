@@ -213,36 +213,6 @@ class attachments extends module_base
 	}
 
 	/**
-	* Create forum select box
-	*
-	* @param mixed $value Value of input
-	* @param string $key Key name
-	* @param int $module_id Module ID
-	*
-	* @return string Forum select box HTML
-	*/
-	public function select_forums($value, $key)
-	{
-		$forum_list = make_forum_select(false, false, true, true, true, false, true);
-
-		$selected = array();
-		if(isset($this->config[$key]) && strlen($this->config[$key]) > 0)
-		{
-			$selected = explode(',', $this->config[$key]);
-		}
-		// Build forum options
-		$s_forum_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
-		foreach ($forum_list as $f_id => $f_row)
-		{
-			$s_forum_options .= '<option value="' . $f_id . '"' . ((in_array($f_id, $selected)) ? ' selected="selected"' : '') . (($f_row['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $f_row['padding'] . $f_row['forum_name'] . '</option>';
-		}
-		$s_forum_options .= '</select>';
-
-		return $s_forum_options;
-
-	}
-
-	/**
 	* Store selected forums
 	*
 	* @param string $key Key name

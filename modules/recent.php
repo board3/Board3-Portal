@@ -219,7 +219,7 @@ class recent extends module_base
 				'legend1'							=> 'ACP_PORTAL_RECENT_SETTINGS',
 				'board3_max_topics_' . $module_id				=> array('lang' => 'PORTAL_MAX_TOPIC',			'validate' => 'int',		'type' => 'text:3:3',		'explain' => true),
 				'board3_recent_title_limit_' . $module_id		=> array('lang' => 'PORTAL_RECENT_TITLE_LIMIT',	'validate' => 'int',		'type' => 'text:3:3',		'explain' => true),
-				'board3_recent_forum_' . $module_id				=> array('lang' => 'PORTAL_RECENT_FORUM',		'validate' => 'string',		'type' => 'custom',			'explain' => true, 'method' => 'select_forums', 'submit' => 'store_selected_forums'),
+				'board3_recent_forum_' . $module_id				=> array('lang' => 'PORTAL_RECENT_FORUM',		'validate' => 'string',		'type' => 'custom',			'explain' => true, 'method' => array('board3.portal.modules_helper', 'generate_forum_select'), 'submit' => 'store_selected_forums'),
 				'board3_recent_exclude_forums_' . $module_id	=> array('lang' => 'PORTAL_EXCLUDE_FORUM',		'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 			)
 		);
@@ -251,36 +251,6 @@ class recent extends module_base
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
-	}
-
-	/**
-	* Create forum select box
-	*
-	* @param mixed $value Value of input
-	* @param string $key Key name
-	* @param int $module_id Module ID
-	*
-	* @return null
-	*/
-	public function select_forums($value, $key, $module_id)
-	{
-		$forum_list = make_forum_select(false, false, true, true, true, false, true);
-
-		$selected = array();
-		if(isset($this->config[$key]) && strlen($this->config[$key]) > 0)
-		{
-			$selected = explode(',', $this->config[$key]);
-		}
-		// Build forum options
-		$s_forum_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
-		foreach ($forum_list as $f_id => $f_row)
-		{
-			$s_forum_options .= '<option value="' . $f_id . '"' . ((in_array($f_id, $selected)) ? ' selected="selected"' : '') . (($f_row['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $f_row['padding'] . $f_row['forum_name'] . '</option>';
-		}
-		$s_forum_options .= '</select>';
-
-		return $s_forum_options;
-
 	}
 
 	/**

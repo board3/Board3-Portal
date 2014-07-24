@@ -457,7 +457,7 @@ class announcements extends module_base
 				'board3_number_of_announcements_' . $module_id			=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 				'board3_announcements_day_' . $module_id				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 				'board3_announcements_length_' . $module_id				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-				'board3_global_announcements_forum_' . $module_id		=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'custom',			'explain' => true, 'method' => 'select_forums', 'submit' => 'store_selected_forums'),
+				'board3_global_announcements_forum_' . $module_id		=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'custom',			'explain' => true, 'method' => array('board3.portal.modules_helper', 'generate_forum_select'), 'submit' => 'store_selected_forums'),
 				'board3_announcements_forum_exclude_' . $module_id		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_FORUM_EXCLUDE',	'validate' => 'string', 'type' => 'radio:yes_no',	'explain' => true),
 				'board3_announcements_archive_' . $module_id			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 				'board3_announcements_permissions_' . $module_id		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_PERMISSIONS'	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
@@ -503,36 +503,6 @@ class announcements extends module_base
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
-	}
-
-	/**
-	* Create forum select box
-	*
-	* @param mixed $value Value of input
-	* @param string $key Key name
-	* @param int $module_id Module ID
-	*
-	* @return string Forum select box HTML
-	*/
-	public function select_forums($value, $key, $module_id)
-	{
-		$forum_list = make_forum_select(false, false, true, true, true, false, true);
-
-		$selected = array();
-		if(isset($this->config[$key]) && strlen($this->config[$key]) > 0)
-		{
-			$selected = explode(',', $this->config[$key]);
-		}
-		// Build forum options
-		$s_forum_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
-		foreach ($forum_list as $f_id => $f_row)
-		{
-			$s_forum_options .= '<option value="' . $f_id . '"' . ((in_array($f_id, $selected)) ? ' selected="selected"' : '') . (($f_row['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $f_row['padding'] . $f_row['forum_name'] . '</option>';
-		}
-		$s_forum_options .= '</select>';
-
-		return $s_forum_options;
-
 	}
 
 	/**

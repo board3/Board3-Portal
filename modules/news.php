@@ -436,7 +436,7 @@ class news extends module_base
 				'board3_show_all_news_' . $module_id				=> array('lang' => 'PORTAL_SHOW_ALL_NEWS',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 				'board3_number_of_news_' . $module_id				=> array('lang' => 'PORTAL_NUMBER_OF_NEWS',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 				'board3_news_length_' . $module_id				=> array('lang' => 'PORTAL_NEWS_LENGTH',	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-				'board3_news_forum_' . $module_id					=> array('lang' => 'PORTAL_NEWS_FORUM',		'validate' => 'string',		'type' => 'custom',	 		'explain' => true,	'method' => 'select_forums', 'submit' => 'store_selected_forums'),
+				'board3_news_forum_' . $module_id					=> array('lang' => 'PORTAL_NEWS_FORUM',		'validate' => 'string',		'type' => 'custom',	 		'explain' => true,	'method' => array('board3.portal.modules_helper', 'generate_forum_select'), 'submit' => 'store_selected_forums'),
 				'board3_news_exclude_' . $module_id				=> array('lang' => 'PORTAL_NEWS_EXCLUDE',	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 				'board3_news_show_last_' . $module_id             => array('lang' => 'PORTAL_NEWS_SHOW_LAST',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 				'board3_news_archive_' . $module_id               => array('lang' => 'PORTAL_NEWS_ARCHIVE',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
@@ -484,36 +484,6 @@ class news extends module_base
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
-	}
-
-	/**
-	* Create forum select box
-	*
-	* @param mixed $value Value of input
-	* @param string $key Key name
-	* @param int $module_id Module ID
-	*
-	* @return null
-	*/
-	public function select_forums($value, $key, $module_id)
-	{
-		$forum_list = make_forum_select(false, false, true, true, true, false, true);
-
-		$selected = array();
-		if(isset($this->config[$key]) && strlen($this->config[$key]) > 0)
-		{
-			$selected = explode(',', $this->config[$key]);
-		}
-		// Build forum options
-		$s_forum_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
-		foreach ($forum_list as $f_id => $f_row)
-		{
-			$s_forum_options .= '<option value="' . $f_id . '"' . ((in_array($f_id, $selected)) ? ' selected="selected"' : '') . (($f_row['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $f_row['padding'] . $f_row['forum_name'] . '</option>';
-		}
-		$s_forum_options .= '</select>';
-
-		return $s_forum_options;
-
 	}
 
 	/**
