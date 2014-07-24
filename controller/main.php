@@ -282,17 +282,30 @@ class main
 	protected function assign_template_vars()
 	{
 		$this->template->assign_vars(array(
-			'S_PORTAL_LEFT_COLUMN'	=> $this->config['board3_left_column_width'],
-			'S_PORTAL_RIGHT_COLUMN'	=> $this->config['board3_right_column_width'],
-			'S_LEFT_COLUMN'			=> ($this->module_count['left'] > 0 && $this->config['board3_left_column']) ? true : false,
-			'S_CENTER_COLUMN'		=> ($this->module_count['center'] > 0) ? true : false,
-			'S_RIGHT_COLUMN'		=> ($this->module_count['right'] > 0 && $this->config['board3_right_column']) ? true : false,
-			'S_TOP_COLUMN'			=> ($this->module_count['top'] > 0) ? true : false,
-			'S_BOTTOM_COLUMN'		=> ($this->module_count['bottom'] > 0) ? true : false,
-			'S_DISPLAY_PHPBB_MENU'	=> $this->config['board3_phpbb_menu'],
-			'B3P_DISPLAY_JUMPBOX'	=> $this->config['board3_display_jumpbox'],
+			'S_PORTAL_LEFT_COLUMN'		=> $this->config['board3_left_column_width'],
+			'S_PORTAL_RIGHT_COLUMN'		=> $this->config['board3_right_column_width'],
+			'S_LEFT_COLUMN'			=> $this->check_module_count('left', $this->config['board3_left_column']),
+			'S_CENTER_COLUMN'		=> $this->check_module_count('center'),
+			'S_RIGHT_COLUMN'		=> $this->check_module_count('right', $this->config['board3_right_column']),
+			'S_TOP_COLUMN'			=> $this->check_module_count('top'),
+			'S_BOTTOM_COLUMN'		=> $this->check_module_count('bottom'),
+			'S_DISPLAY_PHPBB_MENU'		=> $this->config['board3_phpbb_menu'],
+			'B3P_DISPLAY_JUMPBOX'		=> $this->config['board3_display_jumpbox'],
 			'T_EXT_THEME_PATH'		=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/',
 		));
+	}
+
+	/**
+	* Check module count and related config setting
+	*
+	* @param string $column Column to check
+	* @param bool $config Config value to check
+	*
+	* @return bool True if module count is bigger than 0 and $config is true
+	*/
+	protected function check_module_count($column, $config = true)
+	{
+		return $this->module_count[$column] > 0 && $config;
 	}
 
 	/**
