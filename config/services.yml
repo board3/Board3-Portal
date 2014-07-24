@@ -55,6 +55,8 @@ services:
         class: board3\portal\includes\modules_helper
         arguments:
             - @auth
+            - @config
+            - @request
 
     board3.portal.fetch_posts:
         class: board3\portal\portal\fetch_posts

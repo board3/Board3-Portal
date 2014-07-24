@@ -120,7 +120,7 @@ class poll extends module_base
 			'title'	=> 'ACP_PORTAL_POLLS_SETTINGS',
 			'vars'	=> array(
 				'legend1'							=> 'ACP_PORTAL_POLLS_SETTINGS',
-				'board3_poll_topic_id_' . $module_id	=> array('lang' => 'PORTAL_POLL_TOPIC_ID'				,	'validate' => 'string',		'type' => 'custom',			'explain' => true, 'method' => 'select_forums', 'submit' => 'store_selected_forums'),
+				'board3_poll_topic_id_' . $module_id	=> array('lang' => 'PORTAL_POLL_TOPIC_ID'				,	'validate' => 'string',		'type' => 'custom',			'explain' => true, 'method' => array('board3.portal.modules_helper', 'generate_forum_select'), 'submit' => array('board3.portal.modules_helper', 'store_selected_forums')),
 				'board3_poll_exclude_id_' . $module_id	=> array('lang' => 'PORTAL_POLL_EXCLUDE_ID'				,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 				'board3_poll_limit_' . $module_id		=> array('lang' => 'PORTAL_POLL_LIMIT'					,	'validate' => 'int',		'type' => 'text:3:3',	 	'explain' => true),
 				'board3_poll_allow_vote_' . $module_id	=> array('lang' => 'PORTAL_POLL_ALLOW_VOTE'				,	'validate' => 'ibool',		'type' => 'radio:yes_no',	 'explain' => true),
@@ -157,54 +157,6 @@ class poll extends module_base
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
-	}
-
-	/**
-	* Create forum select box
-	*
-	* @param mixed $value Value of input
-	* @param string $key Key name
-	* @param int $module_id Module ID
-	*
-	* @return null
-	*/
-	public function select_forums($value, $key, $module_id)
-	{
-		$forum_list = make_forum_select(false, false, true, true, true, false, true);
-
-		$selected = array();
-		if(isset($this->config[$key]) && strlen($this->config[$key]) > 0)
-		{
-			$selected = explode(',', $this->config[$key]);
-		}
-		// Build forum options
-		$s_forum_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
-		foreach ($forum_list as $f_id => $f_row)
-		{
-			$s_forum_options .= '<option value="' . $f_id . '"' . ((in_array($f_id, $selected)) ? ' selected="selected"' : '') . (($f_row['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $f_row['padding'] . $f_row['forum_name'] . '</option>';
-		}
-		$s_forum_options .= '</select>';
-
-		return $s_forum_options;
-	}
-
-	/**
-	* Store selected forums
-	*
-	* @param string $key Key name
-	* @param int $module_id Module ID
-	*
-	* @return null
-	*/
-	public function store_selected_forums($key, $module_id)
-	{
-		// Get selected forums
-		$values = $this->request->variable($key, array(0 => ''));
-
-		$news = implode(',', $values);
-
-		set_config($key, $news);
-
 	}
 
 	/**

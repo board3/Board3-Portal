@@ -47,6 +47,9 @@ class attachments extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
+	/** @var \board3\portal\includes\modules_helper */
+	protected $helper;
+
 	/** @var \phpbb\request\request */
 	protected $request;
 
@@ -70,6 +73,7 @@ class attachments extends module_base
 	*
 	* @param \phpbb\auth\auth $auth phpBB auth service
 	* @param \phpbb\config\config $config phpBB config
+	* @param \board3\portal\includes\modules_helper $helper Modules helper
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\db\driver $db Database driver
 	* @param \phpbb\request\request $request phpBB request
@@ -77,10 +81,11 @@ class attachments extends module_base
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($auth, $config, $template, $db, $request, $phpEx, $phpbb_root_path, $user)
+	public function __construct($auth, $config, $helper, $template, $db, $request, $phpEx, $phpbb_root_path, $user)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
+		$this->helper = $helper;
 		$this->template = $template;
 		$this->db = $db;
 		$this->request = $request;
@@ -116,7 +121,7 @@ class attachments extends module_base
 				'legend1'							=> 'ACP_PORTAL_ATTACHMENTS_NUMBER_SETTINGS',
 				'board3_attachments_number_' . $module_id			=> array('lang' => 'PORTAL_ATTACHMENTS_NUMBER'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
 				'board3_attach_max_length_' . $module_id			=> array('lang' => 'PORTAL_ATTACHMENTS_MAX_LENGTH'		 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
-				'board3_attachments_forum_ids_' . $module_id		=> array('lang' => 'PORTAL_ATTACHMENTS_FORUM_IDS',	'validate' => 'string',		'type' => 'custom',	'explain' => true,	'method' => 'select_forums', 'submit' => 'store_selected_forums'),
+				'board3_attachments_forum_ids_' . $module_id		=> array('lang' => 'PORTAL_ATTACHMENTS_FORUM_IDS',	'validate' => 'string',		'type' => 'custom',	'explain' => true,	'method' => array('board3.portal.modules_helper', 'generate_forum_select'), 'submit' => array('board3.portal.modules_helper', 'store_selected_forums')),
 				'board3_attachments_forum_exclude_' . $module_id	=> array('lang' => 'PORTAL_ATTACHMENTS_FORUM_EXCLUDE', 'validate' => 'bool', 'type' => 'radio:yes_no',	 'explain' => true),
 				'board3_attachments_filetype_' . $module_id			=> array('lang' => 'PORTAL_ATTACHMENTS_FILETYPE',	'validate' => 'string', 	'type' => 'custom',	'explain' => true,	'method' => 'select_filetype', 'submit' => 'store_filetypes'),
 				'board3_attachments_exclude_' . $module_id			=> array('lang' => 'PORTAL_ATTACHMENTS_EXCLUDE', 	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
@@ -167,6 +172,8 @@ class attachments extends module_base
 	*/
 	public function select_filetype($value, $key, $module_id)
 	{
+		$extensions = array();
+
 		// Get extensions
 		$sql = 'SELECT *
 			FROM ' . EXTENSIONS_TABLE . '
@@ -175,24 +182,15 @@ class attachments extends module_base
 
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$extensions[] = $row;
+			$extensions[] = array(
+				'value'	=> $row['extension'],
+				'title'	=> $row['extension'],
+			);
 		}
 
-		$selected = array();
-		if(isset($this->config['board3_attachments_filetype_' . $module_id]) && strlen($this->config['board3_attachments_filetype_' . $module_id]) > 0)
-		{
-			$selected = explode(',', $this->config['board3_attachments_filetype_' . $module_id]);
-		}
+		$selected = $this->get_selected_filetypes($module_id);
 
-		// Build options
-		$ext_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
-		foreach ($extensions as $id => $ext)
-		{
-			$ext_options .= '<option value="' . $ext['extension'] . '"' . ((in_array($ext['extension'], $selected)) ? ' selected="selected"' : '') . '>' . $ext['extension'] . '</option>';
-		}
-		$ext_options .= '</select>';
-
-		return $ext_options;
+		return $this->helper->generate_select_box($key, $extensions, $selected);
 	}
 
 	/**
@@ -215,52 +213,6 @@ class attachments extends module_base
 	}
 
 	/**
-	* Create forum select box
-	*
-	* @param mixed $value Value of input
-	* @param string $key Key name
-	* @param int $module_id Module ID
-	*
-	* @return string Forum select box HTML
-	*/
-	public function select_forums($value, $key)
-	{
-		$forum_list = make_forum_select(false, false, true, true, true, false, true);
-
-		$selected = array();
-		if(isset($this->config[$key]) && strlen($this->config[$key]) > 0)
-		{
-			$selected = explode(',', $this->config[$key]);
-		}
-		// Build forum options
-		$s_forum_options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
-		foreach ($forum_list as $f_id => $f_row)
-		{
-			$s_forum_options .= '<option value="' . $f_id . '"' . ((in_array($f_id, $selected)) ? ' selected="selected"' : '') . (($f_row['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $f_row['padding'] . $f_row['forum_name'] . '</option>';
-		}
-		$s_forum_options .= '</select>';
-
-		return $s_forum_options;
-
-	}
-
-	/**
-	* Store selected forums
-	*
-	* @param string $key Key name
-	* @param int $module_id Module ID
-	*
-	* @return null
-	*/
-	public function store_selected_forums($key)
-	{
-		// Get selected extensions
-		$values = $this->request->variable($key, array(0 => ''));
-		$news = implode(',', $values);
-		set_config($key, $news);
-	}
-
-	/**
 	* Parse template variables for module
 	*
 	* @param int $module_id	Module ID
@@ -273,13 +225,9 @@ class attachments extends module_base
 	{
 		$attach_forums = false;
 		$where = '';
-		$filetypes = array();
 
 		// Get filetypes and put them into an array
-		if(isset($this->config['board3_attachments_filetype_' . $module_id]) && strlen($this->config['board3_attachments_filetype_' . $module_id]) > 0)
-		{
-			$filetypes = explode(',', $this->config['board3_attachments_filetype_' . $module_id]);
-		}
+		$filetypes = $this->get_selected_filetypes($module_id);
 
 		if($this->config['board3_attachments_forum_ids_' . $module_id] !== '')
 		{
@@ -367,5 +315,23 @@ class attachments extends module_base
 		}
 
 		return 'attachments_' . $type . '.html';
+	}
+
+	/**
+	* Get the filetypes that were selected in the ACP
+	*
+	* @param int $module_id Module ID
+	*
+	* @return array An array with the selected filetypes
+	*/
+	protected function get_selected_filetypes($module_id)
+	{
+		$selected = array();
+		if(isset($this->config['board3_attachments_filetype_' . $module_id]) && strlen($this->config['board3_attachments_filetype_' . $module_id]) > 0)
+		{
+			$selected = explode(',', $this->config['board3_attachments_filetype_' . $module_id]);
+		}
+
+		return $selected;
 	}
 }

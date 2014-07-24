@@ -27,6 +27,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$user->timezone = new \DateTimeZone('UTC');
 		$user->add_lang('common');
 		$user->add_lang('../../ext/board3/portal/language/en/portal');
+		$request = new \phpbb_mock_request;
 		$phpbb_dispatcher = new phpbb_mock_event_dispatcher();
 		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put', 'obtain_attach_extensions'));
 		$cache->expects($this->any())
@@ -51,7 +52,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$this->auth = $auth;
 		$this->user = $user;
 		$phpbb_container = new \phpbb_mock_container_builder();
-		$this->modules_helper = new \board3\portal\includes\modules_helper($auth);
+		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $request);
 		$phpbb_container->set('board3.portal.modules_helper', $this->modules_helper);
 		$phpbb_container->set('board3.portal.fetch_posts', new \board3\portal\portal\fetch_posts($auth, $cache, $this->config, $this->db, $this->modules_helper, $user));
 		$template = $this->getMock('\phpbb\template', array('set_filenames', 'destroy_block_vars', 'assign_block_vars', 'assign_display'));
