@@ -219,7 +219,7 @@ class recent extends module_base
 				'legend1'							=> 'ACP_PORTAL_RECENT_SETTINGS',
 				'board3_max_topics_' . $module_id				=> array('lang' => 'PORTAL_MAX_TOPIC',			'validate' => 'int',		'type' => 'text:3:3',		'explain' => true),
 				'board3_recent_title_limit_' . $module_id		=> array('lang' => 'PORTAL_RECENT_TITLE_LIMIT',	'validate' => 'int',		'type' => 'text:3:3',		'explain' => true),
-				'board3_recent_forum_' . $module_id				=> array('lang' => 'PORTAL_RECENT_FORUM',		'validate' => 'string',		'type' => 'custom',			'explain' => true, 'method' => array('board3.portal.modules_helper', 'generate_forum_select'), 'submit' => 'store_selected_forums'),
+				'board3_recent_forum_' . $module_id				=> array('lang' => 'PORTAL_RECENT_FORUM',		'validate' => 'string',		'type' => 'custom',			'explain' => true, 'method' => array('board3.portal.modules_helper', 'generate_forum_select'), 'submit' => array('board3.portal.modules_helper', 'store_selected_forums')),
 				'board3_recent_exclude_forums_' . $module_id	=> array('lang' => 'PORTAL_EXCLUDE_FORUM',		'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 			)
 		);
@@ -251,23 +251,5 @@ class recent extends module_base
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);
-	}
-
-	/**
-	* Store selected forums
-	*
-	* @param string $key Key name
-	* @param int $module_id Module ID
-	*
-	* @return null
-	*/
-	public function store_selected_forums($key, $module_id)
-	{
-		// Get selected extensions
-		$values = $this->request->variable($key, array(0 => ''));
-
-		$news = implode(',', $values);
-
-		set_config($key, $news);
 	}
 }

@@ -24,16 +24,24 @@ class modules_helper
 	protected $config;
 
 	/**
+	* phpBB request
+	* @var \phpbb\request\request
+	*/
+	protected $request;
+
+	/**
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
 	* the dependencies defined in the services.yml file for this service.
 	* @param \phpbb\auth\auth $auth Auth object
 	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\request\request $request phpBB request
 	*/
-	public function __construct($auth, $config)
+	public function __construct($auth, $config, $request)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
+		$this->request = $request;
 	}
 
 	/**
@@ -110,5 +118,22 @@ class modules_helper
 		}
 
 		return $this->generate_select_box($key, $select_ary, $selected_options);
+	}
+
+	/**
+	* Store selected forums
+	*
+	* @param string $key Key name
+	* @param int $module_id Module ID
+	*
+	* @return null
+	* @access public
+	*/
+	public function store_selected_forums($key)
+	{
+		// Get selected extensions
+		$values = $this->request->variable($key, array(0 => ''));
+		$news = implode(',', $values);
+		$this->config->set($key, $news);
 	}
 }

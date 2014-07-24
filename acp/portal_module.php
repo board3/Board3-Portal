@@ -182,18 +182,26 @@ class portal_module
 				{
 					if ($submit && ((isset($null['type']) && $null['type'] == 'custom') || (isset($null['submit_type']) && $null['submit_type'] == 'custom')))
 					{
-						$func = array($this->c_class, $null['submit']);
-
-						if(method_exists($this->c_class, $null['submit']))
+						if (!is_array($null['submit']))
 						{
+							$func = array($this->c_class, $null['submit']);
 							$args = ($module_id != 0) ? array($config_name, $module_id) : $config_name;
-							call_user_func_array($func, $args);
 						}
 						else
 						{
-							$args = ($module_id != 0) ? array($cfg_array[$config_name], $config_name, $module_id) : $config_name;
-							call_user_func_array($null['submit'], $args);
+							if ($null['submit'][0] == 'board3.portal.modules_helper')
+							{
+								$func = array($this->modules_helper, $null['submit'][1]);
+								$args = ($module_id != 0) ? array($config_name, $module_id) : $config_name;
+							}
+							else
+							{
+								$args = ($module_id != 0) ? array($cfg_array[$config_name], $config_name, $module_id) : $config_name;
+								$func = $null['submit'];
+							}
 						}
+
+						call_user_func_array($func, $args);
 					}
 
 					if (!isset($cfg_array[$config_name]) || strpos($config_name, 'legend') !== false)

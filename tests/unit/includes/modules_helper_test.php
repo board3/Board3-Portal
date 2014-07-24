@@ -14,6 +14,8 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 
 	protected $modules;
 
+	protected $config;
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/auth.xml');
@@ -24,9 +26,10 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 		parent::setUp();
 
 		$auth = new \phpbb\auth\auth();
-		$config = new \phpbb\config\config(array());
+		$this->config = new \phpbb\config\config(array());
+		$request = new \phpbb_mock_request(array('foo' => array('bar')));
 
-		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $config);
+		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $request);
 	}
 
 	public function data_get_disallowed_forums()
@@ -91,5 +94,12 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 			'<select id="bar" name="bar[]" multiple="multiple"><option value="1" disabled="disabled" class="disabled-option">forum_one</option><option value="2" disabled="disabled" class="disabled-option">forum_two</option></select>',
 			$this->modules_helper->generate_forum_select('foo', 'bar')
 		);
+	}
+
+	public function test_store_selected_forums()
+	{
+		$this->assertEmpty($this->config['foo']);
+		$this->modules_helper->store_selected_forums('foo');
+		$this->assertEquals('bar', $this->config['foo']);
 	}
 }

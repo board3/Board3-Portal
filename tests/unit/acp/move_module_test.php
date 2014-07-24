@@ -23,6 +23,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		parent::setUp();
 		global $db, $cache, $phpbb_root_path, $phpEx, $user, $phpbb_container, $request, $template, $table_prefix;
 		$user = new \board3\portal\tests\mock\user();
+		$request = new \phpbb_mock_request;
 		$phpbb_container = new \phpbb_mock_container_builder();
 		// Mock version check
 		$phpbb_container->set('board3.version.check',
@@ -39,7 +40,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 				new \board3\portal\modules\donation($config, $template, $user),
 			));
 		$phpbb_container->set('board3.portal.helper', new \board3\portal\includes\helper($phpbb_container->get('board3.module_collection')));
-		$phpbb_container->set('board3.portal.modules_helper', new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), $config));
+		$phpbb_container->set('board3.portal.modules_helper', new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), $config, $request));
 		$phpbb_container->setParameter('board3.modules.table', $table_prefix . 'portal_modules');
 		$phpbb_container->setParameter('board3.config.table', $table_prefix . 'portal_config');
 		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put'));
@@ -61,7 +62,6 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			'UNABLE_TO_MOVE'	=> 'UNABLE_TO_MOVE',
 			'UNABLE_TO_MOVE_ROW'	=> 'UNABLE_TO_MOVE_ROW',
 		));
-		$request = new \phpbb_mock_request;
 		$this->portal_module = new \board3\portal\acp\portal_module();
 		$this->update_portal_modules();
 	}

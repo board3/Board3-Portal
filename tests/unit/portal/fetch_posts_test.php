@@ -50,7 +50,8 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 		// Pretend to allow downloads in forum 1
 		$auth->acl[1][0] = true;
 		$this->auth = $auth;
-		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config);
+		$request = new \phpbb_mock_request;
+		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $request);
 		$this->user = $user;
 		$template = $this->getMock('\phpbb\template', array('set_filenames', 'destroy_block_vars', 'assign_block_vars', 'assign_display'));
 		$this->fetch_posts = new \board3\portal\portal\fetch_posts($auth, $cache, $this->config, $this->db, $this->modules_helper, $user);
