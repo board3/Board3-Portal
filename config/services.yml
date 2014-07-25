@@ -18,6 +18,19 @@ services:
     board3.portal.main:
         class: board3\portal\controller\main
         arguments:
+            - @config
+            - @board3.portal.controller_helper
+            - @template
+            - @user
+            - @path_helper
+            - %core.root_path%
+            - .%core.php_ext%
+            - %board3.config.table%
+            - %board3.modules.table%
+
+    board3.portal.controller_helper:
+        class: board3\portal\controller\helper
+        arguments:
             - @auth
             - @config
             - @template
@@ -26,8 +39,6 @@ services:
             - @board3.portal.helper
             - %core.root_path%
             - .%core.php_ext%
-            - %board3.config.table%
-            - %board3.modules.table%
 
     board3.version.check:
         class: board3\portal\includes\version_check
