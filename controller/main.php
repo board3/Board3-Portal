@@ -156,32 +156,9 @@ class main
 			// Load module language file
 			$this->controller_helper->load_module_language($module);
 
-			if ($row['module_column'] == column_string_num('left') && $this->config['board3_left_column'])
-			{
-				$template_module = $module->get_template_side($row['module_id']);
-				++$this->module_count['left'];
-			}
-			if ($row['module_column'] == column_string_num('center'))
-			{
-				$template_module = $module->get_template_center($row['module_id']);
-				++$this->module_count['center'];
-			}
-			if ($row['module_column'] == column_string_num('right') && $this->config['board3_right_column'])
-			{
-				$template_module = $module->get_template_side($row['module_id']);
-				++$this->module_count['right'];
-			}
-			if ($row['module_column'] == column_string_num('top'))
-			{
-				$template_module = $module->get_template_center($row['module_id']);
-				++$this->module_count['top'];
-			}
-			if ($row['module_column'] == column_string_num('bottom'))
-			{
-				$template_module = $module->get_template_center($row['module_id']);
-				++$this->module_count['bottom'];
-			}
-			if (!isset($template_module))
+			$template_module = $this->get_module_template($row, $module);
+
+			if (empty($template_module))
 			{
 				continue;
 			}
@@ -210,6 +187,34 @@ class main
 		));
 
 		page_footer();
+	}
+
+	/**
+	* Get module's template
+	*
+	* @param array $row Database row of module
+	* @param object $module Module object
+	*
+	* @return mixed False if module is not inside possible columns or if
+	*		module shouldn't be shown, otherwise module's template
+	*/
+	public function get_module_template($row, $module)
+	{
+		$template_module = false;
+		$column = column_num_string($row['module_column']);
+
+		if (in_array($column, array('left', 'right')) && $this->config['board3_' . $column . '_column'])
+		{
+			++$this->module_count[$column];
+			$template_module = $module->get_template_side($row['module_id']);
+		}
+		else if (in_array($column, array('top', 'center', 'bottom')))
+		{
+			++$this->module_count[$column];
+			$template_module = $module->get_template_center($row['module_id']);
+		}
+
+		return $template_module;
 	}
 
 	/**
