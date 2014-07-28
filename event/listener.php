@@ -94,10 +94,9 @@ class listener implements EventSubscriberInterface
 	/**
 	* Add portal link
 	*
-	* @param object $event The event object
 	* @return null
 	*/
-	public function add_portal_link($event)
+	public function add_portal_link()
 	{
 		if (strpos($this->user->data['session_page'], '/portal') === false)
 		{
