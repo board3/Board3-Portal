@@ -78,3 +78,14 @@ services:
             - @dbal.conn
             - @board3.portal.modules_helper
             - @user
+
+    board3.portal.listener:
+        class: board3\portal\event\listener
+        arguments:
+            - @controller.helper
+            - @path_helper
+            - @template
+            - @user
+            - %core.php_ext%
+        tags:
+            - { name: event.listener }
