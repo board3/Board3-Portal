@@ -186,7 +186,7 @@ class user_menu extends module_base
 			* redirect
 			*/
 			$this->template->assign_vars(array(
-				'U_PORTAL'		=> $this->path_helper->remove_web_root_path($this->controller_helper->route('board3_controller')),
+				'U_PORTAL_REDIRECT'	=> $this->path_helper->remove_web_root_path($this->controller_helper->route('board3_controller')),
 				'S_DISPLAY_FULL_LOGIN'	=> true,
 				'S_AUTOLOGIN_ENABLED'	=> ($this->config['allow_autologin']) ? true : false,
 				'S_LOGIN_ACTION'	=> append_sid("{$this->phpbb_root_path}ucp.{$this->php_ext}", 'mode=login'),

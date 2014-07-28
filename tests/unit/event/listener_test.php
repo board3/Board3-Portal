@@ -51,8 +51,19 @@ class listener_test extends \phpbb_template_template_test_case
 		$provider->find(dirname(__FILE__) . '/');
 		$this->controller_helper = new \phpbb_mock_controller_helper($this->template, $this->user, $this->config, $provider, $manager, '', 'php', dirname(__FILE__) . '/');
 
+		$this->path_helper = new \phpbb\path_helper(
+			new \phpbb\symfony_request(
+				new \phpbb_mock_request()
+			),
+			new \phpbb\filesystem(),
+			new \phpbb_mock_request(),
+			$this->phpbb_root_path,
+			$this->php_ext
+		);
+
 		$this->listener = new \board3\portal\event\listener(
 			$this->controller_helper,
+			$this->path_helper,
 			$this->template,
 			$this->user,
 			'php'
@@ -105,6 +116,11 @@ class listener_test extends \phpbb_template_template_test_case
 
 		$vars = array();
 
+		$result = $this->phpbb_dispatcher->trigger_event('core.page_header', compact($vars));
+
+		$this->assertEmpty($result);
+
+		$this->user->data['session_page'] = '/app.php/portal';
 		$result = $this->phpbb_dispatcher->trigger_event('core.page_header', compact($vars));
 
 		$this->assertEmpty($result);

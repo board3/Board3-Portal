@@ -16,6 +16,9 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\controller\helper */
 	protected $controller_helper;
 
+	/** @var \phpbb\path_helper */
+	protected $path_helper;
+
 	/** @var \phpbb\template\template */
 	protected $template;
 
@@ -29,13 +32,15 @@ class listener implements EventSubscriberInterface
 	* Constructor of Board3 Portal event listener
 	*
 	* @param \phpbb\controller\helper	$controller_helper	Controller helper object
+	* @param \phpbb\path_helper		$path_helper		phpBB path helper
 	* @param \phpbb\template\template	$template		Template object
 	* @param \phpbb\user			$user			User object
 	* @param string				$php_ext		phpEx
 	*/
-	public function __construct(\phpbb\controller\helper $controller_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
+	public function __construct(\phpbb\controller\helper $controller_helper, \phpbb\path_helper $path_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
 		$this->controller_helper = $controller_helper;
+		$this->path_helper = $path_helper;
 		$this->template = $template;
 		$this->user = $user;
 		$this->php_ext = $php_ext;
@@ -94,8 +99,17 @@ class listener implements EventSubscriberInterface
 	*/
 	public function add_portal_link($event)
 	{
+		if (strpos($this->user->data['session_page'], '/portal') === false)
+		{
+			$portal_link = $this->controller_helper->route('board3_controller');
+		}
+		else
+		{
+			$portal_link = $this->path_helper->remove_web_root_path($this->controller_helper->route('board3_controller'));
+		}
+
 		$this->template->assign_vars(array(
-			'U_PORTAL'	=> $this->controller_helper->route('board3_controller'),
+			'U_PORTAL'	=> $portal_link,
 		));
 	}
 }

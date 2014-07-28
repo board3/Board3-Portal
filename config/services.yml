@@ -83,6 +83,7 @@ services:
         class: board3\portal\event\listener
         arguments:
             - @controller.helper
+            - @path_helper
             - @template
             - @user
             - %core.php_ext%
