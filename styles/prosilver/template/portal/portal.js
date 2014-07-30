@@ -10,6 +10,8 @@
 
 "use strict";
 
+var portal_right_width;
+
 /**
  * Correctly align the right column underneath the left column.
  * This will make sure that the right column doesn't start before the end of
@@ -18,18 +20,21 @@
 phpbb.b3p_fix_right_column_margin = function() {
 	var width = $(window).width();
 
-	if (width <= 700) {
+	if (width <= 880) {
 		// Get height of left and center column
 		var center_height = $('#portal-center').outerHeight();
 		var left_height = $('#portal-left').outerHeight();
 
 		$('#portal-right').css('margin-top', -(center_height - left_height) + 'px');
+		$('#portal-right').width($('#portal-left').width());
 	} else {
 		$('#portal-right').css('margin-top', '0px');
+		$('#portal-right').width(portal_right_width);
 	}
 };
 
 $(document).ready(function() {
+	portal_right_width = $('#portal-right').width();
 	phpbb.b3p_fix_right_column_margin();
 	$(window).resize(function() {
 		phpbb.b3p_fix_right_column_margin();
