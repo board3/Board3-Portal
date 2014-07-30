@@ -139,11 +139,29 @@ class helper
 			return false;
 		}
 
+		// Check if module shouldn't be loaded
+		if ($this->check_column_disabled($row))
+		{
+			return false;
+		}
+
 		/**
 		* Check for permissions before loading anything
 		* the default group of a user always defines his/her permission
 		*/
 		return ($this->check_group_access($row)) ? $module : false;
+	}
+
+	/**
+	* Check if column is disabled
+	*
+	* @param array $row Module database row
+	*
+	* @return bool False if column is not disabled, true if it is
+	*/
+	protected function check_column_disabled($row)
+	{
+		return ($this->config['board3_left_column'] === false && column_num_string($row['module_column']) === 'left') || ($this->config['board3_right_column'] === false && column_num_string($row['module_column']) === 'right');
 	}
 
 	/**
