@@ -34,7 +34,7 @@
 	<!-- [+] center module area -->
 	<!-- IF S_CENTER_COLUMN -->
 	<div id="portal-center-wrapper">
-		<div id="portal-center" style="margin: 0 {S_PORTAL_LEFT_COLUMN}px 0 {S_PORTAL_RIGHT_COLUMN}px; padding: 0 {$BLOCK_DISTANCE};">
+		<div id="portal-center" style="margin: 0 <!-- IF S_RIGHT_COLUMN -->{S_PORTAL_RIGHT_COLUMN}px<!-- ELSE -->-{$BLOCK_DISTANCE}<!-- ENDIF --> 0 <!-- IF S_LEFT_COLUMN -->{S_PORTAL_LEFT_COLUMN}px<!-- ELSE -->-{$BLOCK_DISTANCE}<!-- ENDIF -->; padding: 0 {$BLOCK_DISTANCE};">
 			<!-- BEGIN modules_center -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_center.TEMPLATE_FILE}' -->
 				<!-- DEFINE $IMAGE_SRC = '{modules_center.IMAGE_SRC}' -->
