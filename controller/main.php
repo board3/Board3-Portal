@@ -186,6 +186,8 @@ class main
 			'body' => 'portal/portal_body.html'
 		));
 
+		$this->make_jumpbox($this->config['board3_display_jumpbox']);
+
 		page_footer();
 	}
 
@@ -262,5 +264,19 @@ class main
 	protected function check_module_count($column, $config = true)
 	{
 		return $this->module_count[$column] > 0 && $config;
+	}
+
+	/**
+	* Wrapper method for running make_jumpbox
+	*
+	* @param bool $display Whether jumpbox should be displayed
+	* @return null
+	*/
+	protected function make_jumpbox($display = false)
+	{
+		if ($display)
+		{
+			make_jumpbox(append_sid("{$this->phpbb_root_path}viewforum{$this->php_ext}"));
+		}
 	}
 }
