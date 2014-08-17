@@ -20,7 +20,7 @@ foreach ($iterator as $file_info)
 {
 	$file_path = $file_info->getPath();
 	$file = $file_info->getFilename();
-	if ($file === 'spellchecker.php')
+	if ($file === 'spellchecker.php' || strpos(realpath($file_path), 'board3/portal/develop') !== false || strpos(realpath($file_path), 'board3/portal/vendor') !== false)
 	{
 		continue;
 	}
@@ -110,4 +110,8 @@ echo $output;
 if (strlen($output) > 0)
 {
 	exit(1);
+}
+else
+{
+	echo("Done. Tests passed." . ((PHP_SAPI == 'cli') ? "\n" : '<br />'));
 }
