@@ -530,6 +530,9 @@ class v210_beta1 extends \phpbb\db\migration\migration
 	/**
 	* Set config value. Creates missing config entry.
 	* Only use this if your config value might exceed 255 characters, otherwise please use set_config
+	*
+	* @param string $config_name Name of config entry to add or update
+	* @param mixed $config_value Value of config entry to add or update
 	*/
 	private function set_portal_config($config_name, $config_value)
 	{

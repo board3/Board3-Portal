@@ -128,9 +128,11 @@ function character_limit(&$title, $limit = 0)
 /**
 * Cut post text to given length
 *
-* @param $message string post text
-* @param $bbcode_uid string bbcode uid
-* @param $length int The desired length
+* @param string $message post text
+* @param string $bbcode_uid bbcode uid
+* @param int $length The desired length
+*
+* @return string Shortened message
 */
 function get_sub_taged_string($message, $bbcode_uid, $length)
 {
