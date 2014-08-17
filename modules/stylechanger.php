@@ -108,7 +108,7 @@ class stylechanger extends module_base
 				$url = append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", 'style=' . $row['style_id']);
 			}
 			++$style_count;
-			$style_select .= '<option value="' . $url . '"' . ($row['style_id'] == $this->user->style['style_id'] ? ' selected="selected"' : '') . '>' . htmlspecialchars($row['style_name']) . '</option>';
+			$style_select .= '<option value="' . $url . '"' . ($row['style_id'] == $this->user->style['style_id'] ? ' selected="selected"' : '') . '>' . utf8_htmlspecialchars($row['style_name']) . '</option>';
 		}
 		$this->db->sql_freeresult($result);
 		if(strlen($style_select))
