@@ -60,7 +60,6 @@ script:
   - sh -c "if [ '$IMAGE_ICC' != '0' ]; then travis/check-image-icc-profiles.sh $DB $TRAVIS_PHP_VERSION; fi"
   - ../board3/Board3-Portal/travis/run-testsuite.sh $DB $TRAVIS_PHP_VERSION
   - sh -c "if [ '$EPV' != '0' ]; then ../board3/Board3-Portal/travis/run-epv.sh $DB $TRAVIS_PHP_VERSION $EXTNAME; fi"
-  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.5' -a '$DB' = 'mysqli' -a '$SPELLCHECK' != '0' ]; then php ../board3/Board3-Portal/develop/spellchecker.php; fi"
 
 after_script:
   - sh -c "if [ '$COVERALLS' != '0' ]; then ../board3/Board3-Portal/travis/run-coveralls.sh $DB $TRAVIS_PHP_VERSION; fi"
