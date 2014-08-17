@@ -36,7 +36,7 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 			'board3_enable'	=> true,
 		));
 		$this->template = new \board3\portal\tests\mock\template($this);
-		$this->user = $this->getMock('\phpbb\user', array('add_lang_ext'));
+		$this->user = $this->getMock('\phpbb\user', array('add_lang_ext'), array('\phpbb\datetime'));
 		$this->user->data['group_id'] = 2;
 		$this->phpbb_root_path = dirname(__FILE__) . '/../../../../../../';
 		$this->php_ext = 'php';
