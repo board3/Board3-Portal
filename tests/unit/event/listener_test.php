@@ -32,7 +32,7 @@ class listener_test extends \phpbb_template_template_test_case
 
 	public function setup_listener()
 	{
-		$this->user = $this->getMock('\phpbb\user');
+		$this->user = $this->getMock('\phpbb\user', array(), array('\phpbb\datetime'));
 		$this->user->expects($this->any())
 			->method('lang')
 			->will($this->returnValue('foo'));

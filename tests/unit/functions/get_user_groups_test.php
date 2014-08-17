@@ -22,7 +22,7 @@ class phpbb_unit_functions_get_user_groups_test extends \board3\portal\tests\tes
 
 		parent::setUp();
 
-		$user = $this->getMock('\phpbb\user', array('optionget'));
+		$user = $this->getMock('\phpbb\user', array('optionget'), array('\phpbb\datetime'));
 		$cache = $this->getMock('\phpbb\cache\cache', array('get', 'put', 'sql_exists'));
 		$cache->expects($this->any())
 			->method('get')

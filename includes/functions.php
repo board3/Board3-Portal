@@ -241,7 +241,7 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 
 	$template->assign_vars(array(
 		$tpl_prefix . 'BASE_URL'      => $base_url,
-		'A_' . $tpl_prefix . 'BASE_URL'   => addslashes($base_url),
+		'A_' . $tpl_prefix . 'BASE_URL'   => is_string($base_url) ? $base_url : '',
 		$tpl_prefix . 'PER_PAGE'      => $per_page,
 
 		$tpl_prefix . 'PREVIOUS_PAGE'   => ($on_page == 1) ? '' : $base_url . "{$url_delim}" . $pagination_type . '=' . (($on_page - 2) * $per_page) . $anker,
@@ -358,14 +358,7 @@ function get_portal_tracking_info($fetch_news)
 			{
 				if ($request->is_set($config['cookie_name'] . '_track', \phpbb\request\request_interface::COOKIE))
 				{
-					if (STRIP)
-					{
-						$tracking_topics = stripslashes($request->variable($config['cookie_name'] . '_track', '', true, \phpbb\request\request_interface::COOKIE));
-					}
-					else
-					{
-						$tracking_topics = $request->variable($config['cookie_name'] . '_track', '', true, \phpbb\request\request_interface::COOKIE);
-					}
+					$tracking_topics = $request->variable($config['cookie_name'] . '_track', '', true, \phpbb\request\request_interface::COOKIE);
 				}
 				else
 				{

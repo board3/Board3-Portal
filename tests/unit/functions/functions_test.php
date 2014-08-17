@@ -24,7 +24,7 @@ class phpbb_unit_functions_functions_test extends \board3\portal\tests\testframe
 
 		parent::setUp();
 
-		$user = $this->getMock('\phpbb\user', array('optionget'));
+		$user = $this->getMock('\phpbb\user', array('optionget'), array('\phpbb\datetime'));
 		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'sql_exists'));
 		$cache->expects($this->any())
 			->method('obtain_word_list')

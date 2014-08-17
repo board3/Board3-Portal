@@ -19,11 +19,11 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 
 	public function setUp()
 	{
-		global $auth, $cache, $phpbb_dispatcher, $template, $user;;
+		global $auth, $cache, $phpbb_dispatcher, $template, $user;
 
 		parent::setUp();
 
-		$user = new \phpbb\user();
+		$user = new \phpbb\user('\phpbb\datetime');
 		$user->data['user_id'] = 2;
 		$user->timezone = new \DateTimeZone('UTC');
 		$user->add_lang('common');
@@ -50,8 +50,7 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 		// Pretend to allow downloads in forum 1
 		$auth->acl[1][0] = true;
 		$this->auth = $auth;
-		$request = new \phpbb_mock_request;
-		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $request);
+		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, new phpbb_mock_request());
 		$this->user = $user;
 		$template = $this->getMock('\phpbb\template', array('set_filenames', 'destroy_block_vars', 'assign_block_vars', 'assign_display'));
 		$this->fetch_posts = new \board3\portal\portal\fetch_posts($auth, $cache, $this->config, $this->db, $this->modules_helper, $user);

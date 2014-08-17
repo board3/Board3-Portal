@@ -22,7 +22,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 
 		global $auth, $cache, $config, $phpbb_container, $phpbb_dispatcher, $template, $user;
 
-		$user = new \phpbb\user();
+		$user = new \phpbb\user('\phpbb\datetime');
 		$user->data['user_id'] = 2;
 		$user->timezone = new \DateTimeZone('UTC');
 		$user->add_lang('common');
