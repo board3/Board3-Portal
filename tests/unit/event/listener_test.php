@@ -2,7 +2,7 @@
 /**
 *
 * @package Quickedit
-* @copyright (c) 2014 Marc Alexander ( www.m-a-styles.de )
+* @copyright (c) 2014 Board3 Group ( www.board3.de )
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
