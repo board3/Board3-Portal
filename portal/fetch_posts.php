@@ -119,6 +119,17 @@ class fetch_posts
 	/**
 	* Get posts defined by type and other settings
 	*
+	* @param string $forum_from Forums from which the posts should be retrieved
+	* @param bool $permissions Whether permissions should be taken into account
+	* 					during retrieval
+	* @param int $number_of_posts Number of posts to get
+	* @param int $text_length Length the text should be shortened to
+	* @param int $time The amount of days ago the posts could have been posted
+	* @param string $type Type of posts to get
+	* @param int $start At which position the query should start
+	* @param bool $invert Whether the permissions should be inverted
+	*
+	* @return array An array containing the posts that were retrieved from the database
 	*/
 	public function get_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0, $invert = false)
 	{

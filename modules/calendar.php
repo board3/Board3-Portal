@@ -642,7 +642,7 @@ class calendar extends module_base
 	*
 	* @param string $date Date to convert
 	*
-	* @return string Converted time
+	* @return int Converted time
 	*/
 	protected function make_timestamp($date)
 	{
@@ -749,7 +749,7 @@ class calendar extends module_base
 	*			date or date and time info. The string should
 	*			be in a similar format: 17.06.1990 18:06
 	* @return int|bool	The timestamp of the given date or false if
-	*			given daten does not match any known formats.
+	*			given date does not match any known formats.
 	*/
 	public function date_to_time($date)
 	{

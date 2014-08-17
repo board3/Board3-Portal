@@ -49,6 +49,7 @@ class modules_helper
 	*
 	* @param bool $disallow_access Whether the array for disallowing access
 	*			should be filled
+	* @return array Array of forums the user is not allowed to access
 	*/
 	public function get_disallowed_forums($disallow_access)
 	{
@@ -123,7 +124,6 @@ class modules_helper
 	* Store selected forums
 	*
 	* @param string $key Key name
-	* @param int $module_id Module ID
 	*
 	* @return null
 	* @access public
