@@ -87,7 +87,7 @@ class listener implements EventSubscriberInterface
 		if ($event['on_page'][1] == 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/portal') === 0)
 		{
 			$event['location'] = $this->user->lang('VIEWING_PORTAL');
-			$event['location_url'] = $this->controller_helper->route('board3_controller');
+			$event['location_url'] = $this->controller_helper->route('board3_portal_controller');
 		}
 	}
 
@@ -100,11 +100,11 @@ class listener implements EventSubscriberInterface
 	{
 		if (strpos($this->user->data['session_page'], '/portal') === false)
 		{
-			$portal_link = $this->controller_helper->route('board3_controller');
+			$portal_link = $this->controller_helper->route('board3_portal_controller');
 		}
 		else
 		{
-			$portal_link = $this->path_helper->remove_web_root_path($this->controller_helper->route('board3_controller'));
+			$portal_link = $this->path_helper->remove_web_root_path($this->controller_helper->route('board3_portal_controller'));
 		}
 
 		$this->template->assign_vars(array(

@@ -1,5 +1,5 @@
 services:
-    board3.module.announcements:
+    board3.portal.module.announcements:
         class: board3\portal\modules\announcements
         arguments:
             - @auth
@@ -15,9 +15,9 @@ services:
             - @user
             - @board3.portal.fetch_posts
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.attachments:
+    board3.portal.module.attachments:
         class: board3\portal\modules\attachments
         arguments:
             - @auth
@@ -30,9 +30,9 @@ services:
             - %core.root_path%
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.birthday_list:
+    board3.portal.module.birthday_list:
         class: board3\portal\modules\birthday_list
         arguments:
             - @config
@@ -40,9 +40,9 @@ services:
             - @dbal.conn
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.calendar:
+    board3.portal.module.calendar:
         class: board3\portal\modules\calendar
         arguments:
             - @config
@@ -55,14 +55,14 @@ services:
             - @path_helper
             - @log
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.clock:
+    board3.portal.module.clock:
         class: board3\portal\modules\clock
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.custom:
+    board3.portal.module.custom:
         class: board3\portal\modules\custom
         arguments:
             - @config
@@ -74,18 +74,18 @@ services:
             - @user
             - @log
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.donation:
+    board3.portal.module.donation:
         class: board3\portal\modules\donation
         arguments:
             - @config
             - @template
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.forumlist:
+    board3.portal.module.forumlist:
         class: board3\portal\modules\forumlist
         arguments:
             - @auth
@@ -95,9 +95,9 @@ services:
             - %core.php_ext%
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.friends:
+    board3.portal.module.friends:
         class: board3\portal\modules\friends
         arguments:
             - @auth
@@ -106,9 +106,9 @@ services:
             - @template
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.latest_bots:
+    board3.portal.module.latest_bots:
         class: board3\portal\modules\latest_bots
         arguments:
             - @config
@@ -116,9 +116,9 @@ services:
             - @template
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.latest_members:
+    board3.portal.module.latest_members:
         class: board3\portal\modules\latest_members
         arguments:
             - @config
@@ -126,9 +126,9 @@ services:
             - @template
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.leaders:
+    board3.portal.module.leaders:
         class: board3\portal\modules\leaders
         arguments:
             - @auth
@@ -139,18 +139,18 @@ services:
             - %core.php_ext%
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.link_us:
+    board3.portal.module.link_us:
         class: board3\portal\modules\link_us
         arguments:
             - @config
             - @template
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.links:
+    board3.portal.module.links:
         class: board3\portal\modules\links
         arguments:
             - @config
@@ -162,9 +162,9 @@ services:
             - @user
             - @log
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.main_menu:
+    board3.portal.module.main_menu:
         class: board3\portal\modules\main_menu
         arguments:
             - @config
@@ -176,9 +176,9 @@ services:
             - @user
             - @log
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.news:
+    board3.portal.module.news:
         class: board3\portal\modules\news
         arguments:
             - @auth
@@ -194,9 +194,9 @@ services:
             - @user
             - @board3.portal.fetch_posts
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.poll:
+    board3.portal.module.poll:
         class: board3\portal\modules\poll
         arguments:
             - @auth
@@ -208,18 +208,18 @@ services:
             - %core.php_ext%
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.random_member:
+    board3.portal.module.random_member:
         class: board3\portal\modules\random_member
         arguments:
             - @dbal.conn
             - @template
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.recent:
+    board3.portal.module.recent:
         class: board3\portal\modules\recent
         arguments:
             - @auth
@@ -230,18 +230,18 @@ services:
             - %core.root_path%
             - %core.php_ext%
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.search:
+    board3.portal.module.search:
         class: board3\portal\modules\search
         arguments:
             - @template
             - %core.php_ext%
             - %core.root_path%
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.statistics:
+    board3.portal.module.statistics:
         class: board3\portal\modules\statistics
         arguments:
             - @cache
@@ -250,9 +250,9 @@ services:
             - @template
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.stylechanger:
+    board3.portal.module.stylechanger:
         class: board3\portal\modules\stylechanger
         arguments:
             - @config
@@ -263,9 +263,9 @@ services:
             - %core.root_path%
             - @user
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.topposters:
+    board3.portal.module.topposters:
         class: board3\portal\modules\topposters
         arguments:
             - @config
@@ -274,9 +274,9 @@ services:
             - %core.root_path%
             - %core.php_ext%
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.user_menu:
+    board3.portal.module.user_menu:
         class: board3\portal\modules\user_menu
         arguments:
             - @auth
@@ -289,9 +289,9 @@ services:
             - %core.root_path%
             - %core.php_ext%
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.welcome:
+    board3.portal.module.welcome:
         class: board3\portal\modules\welcome
         arguments:
             - @config
@@ -301,9 +301,9 @@ services:
             - %core.root_path%
             - %core.php_ext%
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
 
-    board3.module.whois_online:
+    board3.portal.module.whois_online:
         class: board3\portal\modules\whois_online
         arguments:
             - @auth
@@ -313,4 +313,4 @@ services:
             - %core.root_path%
             - %core.php_ext%
         tags:
-            - { name: board3.module }
+            - { name: board3.portal.module }
