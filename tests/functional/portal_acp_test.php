@@ -75,4 +75,26 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 		$form->setValues(array('module_classname' => $module_name));
 		self::submit($form);
 	}
+
+	public function test_portal_logs()
+	{
+		$this->add_lang_ext('board3/portal', 'info_acp_portal');
+		$crawler = self::request('GET', 'adm/index.php?i=-board3-portal-acp-portal_module&mode=config&sid=' . $this->sid);
+		$form = $crawler->selectButton('submit')->form();
+		$crawler = self::submit($form);
+		$this->assertContainsLang('CONFIG_UPDATED', $crawler->text());
+
+		// Take a look at the logs
+		$crawler = self::request('GET', 'adm/index.php?i=acp_logs&mode=admin&sid=' . $this->sid);
+		$this->assertContains(strip_tags(html_entity_decode($this->lang('LOG_PORTAL_CONFIG', $this->lang('ACP_PORTAL_GENERAL_INFO')), ENT_COMPAT, 'UTF-8')), $crawler->text());
+	}
+
+	public function test_portal_permissions()
+	{
+		$this->add_lang_ext('board3/portal', 'info_acp_portal');
+		$crawler = self::request('GET', 'adm/index.php?i=acp_permissions&mode=setting_group_global&sid=' . $this->sid);
+		$form = $crawler->selectButton('submit')->form();
+		$crawler = self::submit($form);
+		$this->assertContainsLang('ACL_U_VIEW_PORTAL', $crawler->text());
+	}
 }
