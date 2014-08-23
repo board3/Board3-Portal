@@ -193,8 +193,8 @@ class links extends module_base
 
 		$board3_menu_array = serialize($links);
 		set_portal_config('board3_links_array_' . $module_id, $board3_menu_array);
-		set_config('board3_links_' . $module_id, '');
-		set_config('board3_links_url_new_window_' . $module_id, 0);
+		$this->config->set('board3_links_' . $module_id, '');
+		$this->config->set('board3_links_url_new_window_' . $module_id, 0);
 
 		return true;
 	}

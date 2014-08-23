@@ -356,13 +356,13 @@ class calendar extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_sunday_first_' . $module_id, 1);
-		set_config('board3_calendar_today_color_' . $module_id, '#000000');
-		set_config('board3_calendar_sunday_color_' . $module_id, '#FF0000');
-		set_config('board3_long_month_' . $module_id, 0);
-		set_config('board3_display_events_' . $module_id, 0);
-		set_config('board3_events_' . $module_id, '');
-		set_config('board3_events_url_new_window_' . $module_id, 0);
+		$this->config->set('board3_sunday_first_' . $module_id, 1);
+		$this->config->set('board3_calendar_today_color_' . $module_id, '#000000');
+		$this->config->set('board3_calendar_sunday_color_' . $module_id, '#FF0000');
+		$this->config->set('board3_long_month_' . $module_id, 0);
+		$this->config->set('board3_display_events_' . $module_id, 0);
+		$this->config->set('board3_events_' . $module_id, '');
+		$this->config->set('board3_events_url_new_window_' . $module_id, 0);
 
 		set_portal_config('board3_calendar_events_' . $module_id, '');
 		return true;

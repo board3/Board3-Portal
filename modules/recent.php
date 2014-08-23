@@ -230,10 +230,10 @@ class recent extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_max_topics_' . $module_id, 10);
-		set_config('board3_recent_title_limit_' . $module_id, 100);
-		set_config('board3_recent_forum_' . $module_id, '');
-		set_config('board3_recent_exclude_forums_' . $module_id, 1);
+		$this->config->set('board3_max_topics_' . $module_id, 10);
+		$this->config->set('board3_recent_title_limit_' . $module_id, 100);
+		$this->config->set('board3_recent_forum_' . $module_id, '');
+		$this->config->set('board3_recent_exclude_forums_' . $module_id, 1);
 		return true;
 	}
 

@@ -263,7 +263,7 @@ class leaders extends module_base
 	public function install($module_id)
 	{
 		// Show normal team block by default
-		set_config('board3_leaders_ext_' . $module_id, 0);
+		$this->config->set('board3_leaders_ext_' . $module_id, 0);
 		return true;
 	}
 

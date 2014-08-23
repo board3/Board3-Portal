@@ -126,13 +126,13 @@ class custom extends module_base
 	public function install($module_id)
 	{
 		set_portal_config('board3_custom_' . $module_id . '_code', '');
-		set_config('board3_custom_' . $module_id . '_code', '');
-		set_config('board3_custom_' . $module_id . '_bbcode', 1);
-		set_config('board3_custom_' . $module_id . '_title', '');
-		set_config('board3_custom_' . $module_id . '_image_src', '');
-		set_config('board3_custom_' . $module_id . '_uid', '');
-		set_config('board3_custom_' . $module_id . '_bitfield', '');
-		set_config('board3_custom_' . $module_id . '_permission', '');
+		$this->config->set('board3_custom_' . $module_id . '_code', '');
+		$this->config->set('board3_custom_' . $module_id . '_bbcode', 1);
+		$this->config->set('board3_custom_' . $module_id . '_title', '');
+		$this->config->set('board3_custom_' . $module_id . '_image_src', '');
+		$this->config->set('board3_custom_' . $module_id . '_uid', '');
+		$this->config->set('board3_custom_' . $module_id . '_bitfield', '');
+		$this->config->set('board3_custom_' . $module_id . '_permission', '');
 		return true;
 	}
 
@@ -236,12 +236,12 @@ class custom extends module_base
 
 				// set_portal_config will take care of escaping the welcome message
 				set_portal_config('board3_custom_' . $module_id . '_code', $custom_code);
-				set_config('board3_custom_' . $module_id . '_bbcode', $custom_bbcode);
-				set_config('board3_custom_' . $module_id . '_title', $custom_title);
-				set_config('board3_custom_' . $module_id . '_image_src', $custom_image_src);
-				set_config('board3_custom_' . $module_id . '_uid', $uid);
-				set_config('board3_custom_' . $module_id . '_bitfield', $bitfield);
-				set_config('board3_custom_' . $module_id . '_permission', $custom_permission);
+				$this->config->set('board3_custom_' . $module_id . '_bbcode', $custom_bbcode);
+				$this->config->set('board3_custom_' . $module_id . '_title', $custom_title);
+				$this->config->set('board3_custom_' . $module_id . '_image_src', $custom_image_src);
+				$this->config->set('board3_custom_' . $module_id . '_uid', $uid);
+				$this->config->set('board3_custom_' . $module_id . '_bitfield', $bitfield);
+				$this->config->set('board3_custom_' . $module_id . '_permission', $custom_permission);
 
 				//trigger_error($this->user->lang['CONFIG_UPDATED'] . adm_back_link(($module_id) ? append_sid("{$phpbb_admin_path}index.$phpEx", 'i=portal&mode=modules') : $u_action));
 

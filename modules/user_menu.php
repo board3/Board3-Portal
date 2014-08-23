@@ -216,7 +216,7 @@ class user_menu extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_user_menu_register_' . $module_id, 1);
+		$this->config->set('board3_user_menu_register_' . $module_id, 1);
 
 		return true;
 	}

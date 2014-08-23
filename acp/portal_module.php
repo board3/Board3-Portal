@@ -218,7 +218,7 @@ class portal_module
 
 					if ($submit)
 					{
-						set_config($config_name, $config_value);
+						$this->config->set($config_name, $config_value);
 					}
 				}
 

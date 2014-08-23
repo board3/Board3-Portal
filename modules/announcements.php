@@ -471,15 +471,15 @@ class announcements extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_announcements_style_' . $module_id, 0);
-		set_config('board3_number_of_announcements_' . $module_id, 1);
-		set_config('board3_announcements_day_' . $module_id, 0);
-		set_config('board3_announcements_length_' . $module_id, 200);
-		set_config('board3_global_announcements_forum_' . $module_id, '');
-		set_config('board3_announcements_forum_exclude_' . $module_id, 0);
-		set_config('board3_announcements_archive_' . $module_id, 1);
-		set_config('board3_announcements_permissions_' . $module_id, 1);
-		set_config('board3_show_announcements_replies_views_' . $module_id, 1);
+		$this->config->set('board3_announcements_style_' . $module_id, 0);
+		$this->config->set('board3_number_of_announcements_' . $module_id, 1);
+		$this->config->set('board3_announcements_day_' . $module_id, 0);
+		$this->config->set('board3_announcements_length_' . $module_id, 200);
+		$this->config->set('board3_global_announcements_forum_' . $module_id, '');
+		$this->config->set('board3_announcements_forum_exclude_' . $module_id, 0);
+		$this->config->set('board3_announcements_archive_' . $module_id, 1);
+		$this->config->set('board3_announcements_permissions_' . $module_id, 1);
+		$this->config->set('board3_show_announcements_replies_views_' . $module_id, 1);
 
 		return true;
 	}

@@ -124,7 +124,7 @@ class latest_bots extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_last_visited_bots_number_' . $module_id, 1);
+		$this->config->set('board3_last_visited_bots_number_' . $module_id, 1);
 		return true;
 	}
 

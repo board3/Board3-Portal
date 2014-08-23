@@ -119,7 +119,7 @@ class topposters extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_topposters_' . $module_id, 5);
+		$this->config->set('board3_topposters_' . $module_id, 5);
 		return true;
 	}
 

@@ -125,9 +125,9 @@ class welcome extends module_base
 	public function install($module_id)
 	{
 		set_portal_config('board3_welcome_message_' . $module_id, 'Welcome to my Community!');
-		set_config('board3_welcome_message_' . $module_id, '');
-		set_config('board3_welcome_message_uid_' . $module_id, '');
-		set_config('board3_welcome_message_bitfield_' . $module_id, '');
+		$this->config->set('board3_welcome_message_' . $module_id, '');
+		$this->config->set('board3_welcome_message_uid_' . $module_id, '');
+		$this->config->set('board3_welcome_message_bitfield_' . $module_id, '');
 		return true;
 	}
 
@@ -195,8 +195,8 @@ class welcome extends module_base
 
 				// set_portal_config will take care of escaping the welcome message
 				set_portal_config('board3_welcome_message_' . $module_id, $welcome_message);
-				set_config('board3_welcome_message_uid_' . $module_id, $uid);
-				set_config('board3_welcome_message_bitfield_' . $module_id, $bitfield);
+				$this->config->set('board3_welcome_message_uid_' . $module_id, $uid);
+				$this->config->set('board3_welcome_message_bitfield_' . $module_id, $bitfield);
 			break;
 
 			case 'preview':
