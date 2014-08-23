@@ -98,12 +98,6 @@ $lang = array_merge($lang, array(
 
 	'LINK_ADDED'							=> 'Der Link wurde erfolgreich eingetragen',
 	'LINK_UPDATED'							=> 'Der Link wurde erfolgreich geändert',
-	'LOG_PORTAL_LINK_ADDED'					=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Link hinzugefügt: %s ',
-	'LOG_PORTAL_LINK_UPDATED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Link geändert: %s ',
-	'LOG_PORTAL_LINK_REMOVED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Link gelöscht: %s ',
-	'LOG_PORTAL_EVENT_ADDED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin eingetragen: %s ',
-	'LOG_PORTAL_EVENT_UPDATED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin geändert: %s ',
-	'LOG_PORTAL_EVENT_REMOVED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin gelöscht: %s ',
 
 	// Upload Module
 	'MODULE_UPLOAD'					=> 'Lade ein Modul hoch',
@@ -126,9 +120,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_BASIC_INSTALL'			=> 'Füge Basismodule hinzu',
 	'PORTAL_BASIC_UNINSTALL'		=> 'Entferne Module von Datenbank',
 
-	// Logs
-	'LOG_PORTAL_CONFIG'			=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; %s',
-
 	/**
 	* A copy of Handyman` s MOD version check, to view it on the gallery overview
 	*/
@@ -141,9 +132,4 @@ $lang = array_merge($lang, array(
 	'RELEASE_ANNOUNCEMENT'	=> 'Ankündigungsthema',
 	'UP_TO_DATE'			=> '%s ist aktuell',
 	'VERSION_CHECK'			=> 'MOD Version Check',
-
-	// Adding the permissions
-	'ACL_A_MANAGE_PORTAL'		=> 'Kann Portal-Einstellungen ändern',
-	'ACL_U_VIEW_PORTAL'			=> 'Kann das Portal sehen',
-
 ));

@@ -38,4 +38,17 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL'			=> 'Portal',
 	'ACP_PORTAL_GENERAL_INFO'	=> 'Allgemeine Einstellungen',
 	'ACP_PORTAL_UPLOAD'		=> 'Modul hochladen',
+
+	// Logs
+	'LOG_PORTAL_LINK_ADDED'				=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Link hinzugefügt: %s ',
+	'LOG_PORTAL_LINK_UPDATED'			=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Link geändert: %s ',
+	'LOG_PORTAL_LINK_REMOVED'			=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Link gelöscht: %s ',
+	'LOG_PORTAL_EVENT_ADDED'			=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin eingetragen: %s ',
+	'LOG_PORTAL_EVENT_UPDATED'			=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin geändert: %s ',
+	'LOG_PORTAL_EVENT_REMOVED'			=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; Termin gelöscht: %s ',
+	'LOG_PORTAL_CONFIG'					=> '<strong>Portal-Einstellungen geändert</strong><br />&raquo; %s',
+
+	// Adding the permissions
+	'ACL_A_MANAGE_PORTAL'		=> 'Kann Portal-Einstellungen ändern',
+	'ACL_U_VIEW_PORTAL'			=> 'Kann das Portal sehen',
 ));

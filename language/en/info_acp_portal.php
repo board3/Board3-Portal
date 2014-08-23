@@ -37,4 +37,17 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL'			=> 'Portal',
 	'ACP_PORTAL_GENERAL_INFO'	=> 'General settings',
 	'ACP_PORTAL_UPLOAD'		=> 'Upload module',
+
+	// Portal logs
+	'LOG_PORTAL_LINK_ADDED'				=> '<strong>Altered Portal settings</strong><br />&raquo; Link added: %s ',
+	'LOG_PORTAL_LINK_UPDATED'			=> '<strong>Altered Portal settings</strong><br />&raquo; Link updated: %s ',
+	'LOG_PORTAL_LINK_REMOVED'			=> '<strong>Altered Portal settings</strong><br />&raquo; Link removed: %s ',
+	'LOG_PORTAL_EVENT_ADDED'			=> '<strong>Altered Portal settings</strong><br />&raquo; Event added: %s ',
+	'LOG_PORTAL_EVENT_UPDATED'			=> '<strong>Altered Portal settings</strong><br />&raquo; Event updated: %s ',
+	'LOG_PORTAL_EVENT_REMOVED'			=> '<strong>Altered Portal settings</strong><br />&raquo; Event removed: %s ',
+	'LOG_PORTAL_CONFIG'					=> '<strong>Altered Portal settings</strong><br />&raquo; %s',
+
+	// Adding the permissions
+	'ACL_A_MANAGE_PORTAL'		=> 'Can alter Portal settings',
+	'ACL_U_VIEW_PORTAL'			=> 'Can view the Portal',
 ));
