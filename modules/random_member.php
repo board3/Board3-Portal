@@ -106,7 +106,7 @@ class random_member extends module_base
 		$result = $this->db->sql_query_limit($sql, 1);
 		$row = $this->db->sql_fetchrow($result);
 
-		$avatar_img = get_user_avatar($row['user_avatar'], $row['user_avatar_type'], $row['user_avatar_width'], $row['user_avatar_height']);
+		$avatar_img = phpbb_get_avatar(\phpbb\avatar\manager::clean_row($row, 'user'), 'USER_AVATAR');
 
 		$rank_title = $rank_img = '';
 		get_user_rank($row['user_rank'], $row['user_posts'], $rank_title, $rank_img, $rank_img_src);
@@ -128,9 +128,9 @@ class random_member extends module_base
 			'USER_POSTS'	=> (int) $row['user_posts'],
 			'AVATAR_IMG'	=> $avatar_img,
 			'JOINED'		=> $this->user->format_date($row['user_regdate'], 'd.M.Y'),
-			'USER_OCC'		=> censor_text($row['user_occ']),
-			'USER_FROM'		=> censor_text($row['user_from']),
-			'U_WWW'			=> censor_text($row['user_website']),
+//			'USER_OCC'		=> censor_text($row['user_occ']),
+//			'USER_FROM'		=> censor_text($row['user_from']),
+//			'U_WWW'			=> censor_text($row['user_website']),
 		));
 		$this->db->sql_freeresult($result);
 

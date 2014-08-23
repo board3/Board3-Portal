@@ -114,8 +114,8 @@ class modulename extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_configname_' . $module_id, 'Hello World!');
-		set_config('board3_configname2_' . $module_id, 1337);
+		$this->config->set('board3_configname_' . $module_id, 'Hello World!');
+		$this->config->set('board3_configname2_' . $module_id, 1337);
 		return true;
 	}
 

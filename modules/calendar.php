@@ -112,6 +112,9 @@ class calendar extends module_base
 	/** @var string Portal root path */
 	protected $portal_root_path;
 
+	/** @var \phpbb\log\log phpBB log */
+	protected $log;
+
 	/**
 	* Construct a calendar object
 	*
@@ -123,8 +126,9 @@ class calendar extends module_base
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	* @param \phpbb\path_helper $path_helper phpBB path helper
+	* @param \phpbb\log\log $log phpBB log object
 	*/
-	public function __construct($config, $template, $db, $request, $phpbb_root_path, $phpEx, $user, $path_helper)
+	public function __construct($config, $template, $db, $request, $phpbb_root_path, $phpEx, $user, $path_helper, $log)
 	{
 		$this->config = $config;
 		$this->template = $template;
@@ -134,6 +138,7 @@ class calendar extends module_base
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
 		$this->path_helper = $path_helper;
+		$this->log = $log;
 		$this->portal_root_path = $this->path_helper->get_web_root_path() . $this->phpbb_root_path . 'ext/board3/portal/';
 	}
 
@@ -356,13 +361,13 @@ class calendar extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_sunday_first_' . $module_id, 1);
-		set_config('board3_calendar_today_color_' . $module_id, '#000000');
-		set_config('board3_calendar_sunday_color_' . $module_id, '#FF0000');
-		set_config('board3_long_month_' . $module_id, 0);
-		set_config('board3_display_events_' . $module_id, 0);
-		set_config('board3_events_' . $module_id, '');
-		set_config('board3_events_url_new_window_' . $module_id, 0);
+		$this->config->set('board3_sunday_first_' . $module_id, 1);
+		$this->config->set('board3_calendar_today_color_' . $module_id, '#000000');
+		$this->config->set('board3_calendar_sunday_color_' . $module_id, '#FF0000');
+		$this->config->set('board3_long_month_' . $module_id, 0);
+		$this->config->set('board3_display_events_' . $module_id, 0);
+		$this->config->set('board3_events_' . $module_id, '');
+		$this->config->set('board3_events_url_new_window_' . $module_id, 0);
 
 		set_portal_config('board3_calendar_events_' . $module_id, '');
 		return true;
@@ -497,7 +502,7 @@ class calendar extends module_base
 						'url'			=> htmlspecialchars_decode($event_url),
 					);
 
-					add_log('admin', 'LOG_PORTAL_EVENT_UPDATED', $event_title);
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_EVENT_UPDATED', false, array($event_title));
 				}
 				else
 				{
@@ -512,7 +517,7 @@ class calendar extends module_base
 						'permission'	=> $event_permission,
 						'url'			=> $event_url, // optional
 					);
-					add_log('admin', 'LOG_PORTAL_EVENT_ADDED', $event_title);
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_EVENT_ADDED', false, array($event_title));
 				}
 
 				// we sort the $events array by the start time
@@ -546,7 +551,7 @@ class calendar extends module_base
 					$board3_events_array = serialize($events);
 					set_portal_config('board3_calendar_events_' . $module_id, $board3_events_array);
 
-					add_log('admin', 'LOG_PORTAL_EVENT_REMOVED', $cur_event_title);
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_EVENT_REMOVED', false, array($cur_event_title));
 				}
 				else
 				{

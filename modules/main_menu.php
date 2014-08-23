@@ -75,6 +75,9 @@ class main_menu extends module_base
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var \phpbb\log\log phpBB log */
+	protected $log;
+
 	/**
 	* Construct a main menu object
 	*
@@ -85,8 +88,9 @@ class main_menu extends module_base
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	* @param \phpbb\user $user phpBB user object
+	* @param \phpbb\log\log $log phpBB log
 	*/
-	public function __construct($config, $db, $request, $template, $phpbb_root_path, $phpEx, $user)
+	public function __construct($config, $db, $request, $template, $phpbb_root_path, $phpEx, $user, $log)
 	{
 		$this->config = $config;
 		$this->db = $db;
@@ -95,6 +99,7 @@ class main_menu extends module_base
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $phpEx;
 		$this->user = $user;
+		$this->log = $log;
 	}
 
 	/**
@@ -248,8 +253,8 @@ class main_menu extends module_base
 
 		$board3_menu_array = serialize($links);
 		set_portal_config('board3_menu_array_' . $module_id, $board3_menu_array);
-		set_config('board3_menu_' . $module_id, '');
-		set_config('board3_menu_url_new_window_' . $module_id, 0);
+		$this->config->set('board3_menu_' . $module_id, '');
+		$this->config->set('board3_menu_url_new_window_' . $module_id, 0);
 
 		return true;
 	}
@@ -353,7 +358,7 @@ class main_menu extends module_base
 						'permission'	=> $link_permissions,
 					);
 
-					add_log('admin', 'LOG_PORTAL_LINK_UPDATED', $link_title);
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_LINK_UPDATED', false, array($link_title));
 				}
 				else
 				{
@@ -369,7 +374,7 @@ class main_menu extends module_base
 						'type'			=> $link_type,
 						'permission'	=> $link_permissions,
 					);
-					add_log('admin', 'LOG_PORTAL_LINK_ADDED', $link_title);
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_LINK_ADDED', false, array($link_title));
 				}
 
 				$board3_menu_array = serialize($links);
@@ -397,7 +402,7 @@ class main_menu extends module_base
 					$board3_menu_array = serialize($links);
 					set_portal_config('board3_menu_array_' . $module_id, $board3_menu_array);
 
-					add_log('admin', 'LOG_PORTAL_LINK_REMOVED', $cur_link_title);
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_LINK_REMOVED', false, array($cur_link_title));
 				}
 				else
 				{

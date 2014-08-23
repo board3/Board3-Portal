@@ -176,7 +176,7 @@ class birthday_list extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_birthdays_ahead_' . $module_id, 30);
+		$this->config->set('board3_birthdays_ahead_' . $module_id, 30);
 		return true;
 	}
 

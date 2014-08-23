@@ -134,12 +134,12 @@ class attachments extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_attachments_number_' . $module_id, 8);
-		set_config('board3_attach_max_length_' . $module_id, 15);
-		set_config('board3_attachments_forum_ids_' . $module_id, '');
-		set_config('board3_attachments_forum_exclude_' . $module_id, 0);
-		set_config('board3_attachments_filetype_' . $module_id, '');
-		set_config('board3_attachments_exclude_' . $module_id, 0);
+		$this->config->set('board3_attachments_number_' . $module_id, 8);
+		$this->config->set('board3_attach_max_length_' . $module_id, 15);
+		$this->config->set('board3_attachments_forum_ids_' . $module_id, '');
+		$this->config->set('board3_attachments_forum_exclude_' . $module_id, 0);
+		$this->config->set('board3_attachments_filetype_' . $module_id, '');
+		$this->config->set('board3_attachments_exclude_' . $module_id, 0);
 		return true;
 	}
 
@@ -208,7 +208,7 @@ class attachments extends module_base
 
 		$filetypes = implode(',', $values);
 
-		set_config('board3_attachments_filetype_' . $module_id, $filetypes);
+		$this->config->set('board3_attachments_filetype_' . $module_id, $filetypes);
 
 	}
 

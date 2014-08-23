@@ -110,8 +110,8 @@ class donation extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_pay_acc_' . $module_id, 'your@paypal.com');
-		set_config('board3_pay_custom_' . $module_id, true);
+		$this->config->set('board3_pay_acc_' . $module_id, 'your@paypal.com');
+		$this->config->set('board3_pay_custom_' . $module_id, true);
 		return true;
 	}
 

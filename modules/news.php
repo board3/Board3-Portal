@@ -451,16 +451,16 @@ class news extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_news_length_' . $module_id, 250);
-		set_config('board3_news_forum_' . $module_id, '');
-		set_config('board3_news_permissions_' . $module_id, 1);
-		set_config('board3_number_of_news_' . $module_id, 5);
-		set_config('board3_show_all_news_' . $module_id, 1);
-		set_config('board3_news_exclude_' . $module_id, 0);
-		set_config('board3_news_archive_' . $module_id, 1);
-		set_config('board3_news_show_last_' . $module_id, 0);
-		set_config('board3_show_news_replies_views_' . $module_id, 1);
-		set_config('board3_news_style_' . $module_id, 1);
+		$this->config->set('board3_news_length_' . $module_id, 250);
+		$this->config->set('board3_news_forum_' . $module_id, '');
+		$this->config->set('board3_news_permissions_' . $module_id, 1);
+		$this->config->set('board3_number_of_news_' . $module_id, 5);
+		$this->config->set('board3_show_all_news_' . $module_id, 1);
+		$this->config->set('board3_news_exclude_' . $module_id, 0);
+		$this->config->set('board3_news_archive_' . $module_id, 1);
+		$this->config->set('board3_news_show_last_' . $module_id, 0);
+		$this->config->set('board3_show_news_replies_views_' . $module_id, 1);
+		$this->config->set('board3_news_style_' . $module_id, 1);
 		return true;
 	}
 

@@ -134,11 +134,11 @@ class poll extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_poll_allow_vote_' . $module_id, 1);
-		set_config('board3_poll_topic_id_' . $module_id, '');
-		set_config('board3_poll_exclude_id_' . $module_id, 0);
-		set_config('board3_poll_hide_' . $module_id, 0);
-		set_config('board3_poll_limit_' . $module_id, 3);
+		$this->config->set('board3_poll_allow_vote_' . $module_id, 1);
+		$this->config->set('board3_poll_topic_id_' . $module_id, '');
+		$this->config->set('board3_poll_exclude_id_' . $module_id, 0);
+		$this->config->set('board3_poll_hide_' . $module_id, 0);
+		$this->config->set('board3_poll_limit_' . $module_id, 3);
 		return true;
 	}
 

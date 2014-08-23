@@ -74,6 +74,9 @@ class links extends module_base
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var \phpbb\log\log phpBB log */
+	protected $log;
+
 	/**
 	* Construct a links object
 	*
@@ -84,8 +87,9 @@ class links extends module_base
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
+	* @param \phpbb\log\log phpBB log
 	*/
-	public function __construct($config, $db, $request, $template, $phpbb_root_path, $phpEx, $user)
+	public function __construct($config, $db, $request, $template, $phpbb_root_path, $phpEx, $user, $log)
 	{
 		$this->config = $config;
 		$this->db = $db;
@@ -94,6 +98,7 @@ class links extends module_base
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
+		$this->log = $log;
 	}
 
 	/**
@@ -193,8 +198,8 @@ class links extends module_base
 
 		$board3_menu_array = serialize($links);
 		set_portal_config('board3_links_array_' . $module_id, $board3_menu_array);
-		set_config('board3_links_' . $module_id, '');
-		set_config('board3_links_url_new_window_' . $module_id, 0);
+		$this->config->set('board3_links_' . $module_id, '');
+		$this->config->set('board3_links_url_new_window_' . $module_id, 0);
 
 		return true;
 	}
@@ -297,7 +302,7 @@ class links extends module_base
 						'permission'	=> $link_permissions,
 					);
 
-					add_log('admin', 'LOG_PORTAL_LINK_UPDATED', $link_title);
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_LINK_UPDATED', false, array($link_title));
 				}
 				else
 				{
@@ -309,7 +314,7 @@ class links extends module_base
 						'type'			=> $link_type,
 						'permission'	=> $link_permissions,
 					);
-					add_log('admin', 'LOG_PORTAL_LINK_ADDED', $link_title);
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'],'LOG_PORTAL_LINK_ADDED', false, array($link_title));
 				}
 
 				$board3_links_array = serialize($links);
@@ -337,7 +342,7 @@ class links extends module_base
 					$board3_links_array = serialize($links);
 					set_portal_config('board3_links_array_' . $module_id, $board3_links_array);
 
-					add_log('admin', 'LOG_PORTAL_LINK_REMOVED', $cur_link_title);
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_LINK_REMOVED', false, array($cur_link_title));
 				}
 				else
 				{

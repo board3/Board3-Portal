@@ -149,7 +149,7 @@ class user_menu extends module_base
 			$user_id = $this->user->data['user_id'];
 			$username = $this->user->data['username'];
 			$colour = $this->user->data['user_colour'];
-			$avatar_img = get_user_avatar($this->user->data['user_avatar'], $this->user->data['user_avatar_type'], $this->user->data['user_avatar_width'], $this->user->data['user_avatar_height']);
+			$avatar_img = phpbb_get_avatar(\phpbb\avatar\manager::clean_row($this->user->data, 'user'), 'USER_AVATAR');
 			$rank_title = $rank_img = '';
 			\get_user_rank($this->user->data['user_rank'], $this->user->data['user_posts'], $rank_title, $rank_img, $rank_img_src);
 
@@ -216,7 +216,7 @@ class user_menu extends module_base
 	*/
 	public function install($module_id)
 	{
-		set_config('board3_user_menu_register_' . $module_id, 1);
+		$this->config->set('board3_user_menu_register_' . $module_id, 1);
 
 		return true;
 	}
