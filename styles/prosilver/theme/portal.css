@@ -100,6 +100,9 @@
 	margin-left: 0px;
 	margin-right: 0px;
 }
+#portal-body li {
+	list-style-type: none;
+}
 
 .portal-news-pagination {
 	height: 2em;
