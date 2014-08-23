@@ -40,7 +40,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 			'php'
 		);
 		self::$config = new \phpbb\config\config(array());
-		$this->calendar = new \board3\portal\modules\calendar(array(), null, null, null, dirname(__FILE__) . '/../../../', 'php', null, $this->path_helper);
+		$this->calendar = new \board3\portal\modules\calendar(self::$config, null, null, null, dirname(__FILE__) . '/../../../', 'php', null, $this->path_helper);
 		define('PORTAL_MODULES_TABLE', 'phpbb_portal_modules');
 		define('PORTAL_CONFIG_TABLE', 'phpbb_portal_config');
 		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put'));
