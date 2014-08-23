@@ -68,6 +68,9 @@ class custom extends module_base
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var \phpbb\log\log phpBB log*/
+	protected $log;
+
 	/**
 	* Construct a custom module object
 	*
@@ -78,8 +81,9 @@ class custom extends module_base
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
+	* @param \phpbb\log\log $log phpBB log
 	*/
-	public function __construct($config, $template, $db, $request, $phpbb_root_path, $phpEx, $user)
+	public function __construct($config, $template, $db, $request, $phpbb_root_path, $phpEx, $user, $log)
 	{
 		$this->config = $config;
 		$this->template = $template;
@@ -88,6 +92,7 @@ class custom extends module_base
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
+		$this->log = $log;
 	}
 
 	/**
@@ -232,7 +237,7 @@ class custom extends module_base
 					$log_title = $custom_title;
 				}
 
-				add_log('admin', 'LOG_PORTAL_CONFIG', $this->user->lang['PORTAL_CUSTOM'] . ':&nbsp;' . $log_title);
+				$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_CONFIG', false, array($this->user->lang['PORTAL_CUSTOM'] . ':&nbsp;' . $log_title));
 
 				// set_portal_config will take care of escaping the welcome message
 				set_portal_config('board3_custom_' . $module_id . '_code', $custom_code);

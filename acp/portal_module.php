@@ -15,13 +15,13 @@ class portal_module
 	public $new_config = array();
 	protected $c_class;
 	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
-	protected $root_path, $version_check, $request, $php_ext, $portal_helper, $modules_helper;
+	protected $root_path, $version_check, $request, $php_ext, $portal_helper, $modules_helper, $log;
 	public $module_column = array();
 
 	public function __construct()
 	{
 		global $db, $user, $cache, $request, $template, $table_prefix;
-		global $config, $phpbb_root_path, $phpbb_admin_path, $phpbb_container, $phpEx;
+		global $config, $phpbb_root_path, $phpbb_admin_path, $phpbb_container, $phpEx, $phpbb_log;
 
 		$user->add_lang_ext('board3/portal', array('portal', 'portal_acp'));
 
@@ -42,6 +42,7 @@ class portal_module
 		$this->version_check = $this->phpbb_container->get('board3.version.check');
 		$this->portal_helper = $this->phpbb_container->get('board3.portal.helper');
 		$this->modules_helper = $this->phpbb_container->get('board3.portal.modules_helper');
+		$this->log = $phpbb_log;
 		define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.modules.table'));
 		define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.config.table'));
 
@@ -269,12 +270,12 @@ class portal_module
 					{
 						if (isset($module_data) && $module_data['module_classname'] !== '\board3\portal\modules\custom')
 						{
-							add_log('admin', 'LOG_PORTAL_CONFIG', $module_name);
+							$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_CONFIG', false, array($module_name));
 						}
 					}
 					else
 					{
-						add_log('admin', 'LOG_PORTAL_CONFIG', $this->user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']);
+						$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_CONFIG', false, array($this->user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']));
 					}
 					trigger_error($this->user->lang['CONFIG_UPDATED'] . ((!empty($img_error) ? '<br /><br />' . $this->user->lang['MODULE_IMAGE_ERROR'] . '<br />' . $img_error : '')) . adm_back_link(($module_id) ? append_sid("{$this->phpbb_root_path}adm/index.{$this->php_ext}", 'i=\board3\portal\acp\portal_module&amp;mode=modules') : $this->u_action));
 				}
