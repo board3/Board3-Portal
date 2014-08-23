@@ -193,8 +193,6 @@ class welcome extends module_base
 					trigger_error($this->user->lang['ACP_PORTAL_WELCOME_MESSAGE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				add_log('admin', 'LOG_PORTAL_CONFIG', $this->user->lang['PORTAL_WELCOME']);
-
 				// set_portal_config will take care of escaping the welcome message
 				set_portal_config('board3_welcome_message_' . $module_id, $welcome_message);
 				set_config('board3_welcome_message_uid_' . $module_id, $uid);
