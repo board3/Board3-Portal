@@ -86,7 +86,7 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 
 		// Take a look at the logs
 		$crawler = self::request('GET', 'adm/index.php?i=acp_logs&mode=admin&sid=' . $this->sid);
-		$this->assertContains(strip_tags(html_entity_decode($this->lang('LOG_PORTAL_CONFIG', $this->lang('ACP_PORTAL_GENERAL_INFO')))), $crawler->text());
+		$this->assertContains(strip_tags(html_entity_decode($this->lang('LOG_PORTAL_CONFIG', $this->lang('ACP_PORTAL_GENERAL_INFO')), ENT_COMPAT, 'UTF-8')), $crawler->text());
 	}
 
 	public function test_portal_permissions()
