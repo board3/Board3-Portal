@@ -1,13 +1,13 @@
-board3_controller:
+board3_portal_controller:
     pattern: /portal
     defaults: { _controller: board3.portal.main:handle }
 
 # This is currently not supported yet
-board3_pages_controller:
-    pattern: /portal/{page}
-    defaults: { _controller: board3.portal.main:handle_page, page: "portal" }
+# board3_portal_pages_controller:
+#     pattern: /portal/{page}
+#     defaults: { _controller: board3.portal.main:handle_page, page: "portal" }
 
 # Redirect to portal by default
-board3_redirect_controller:
+board3_portal_redirect_controller:
     pattern: /
     defaults: { _controller: board3.portal.main:handle }

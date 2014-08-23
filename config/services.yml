@@ -11,8 +11,8 @@ parameters:
             - board3.de
             - updatecheck
             - board3_portal.xml
-    board3.config.table: %core.table_prefix%portal_config
-    board3.modules.table: %core.table_prefix%portal_modules
+    board3.portal.config.table: %core.table_prefix%portal_config
+    board3.portal.modules.table: %core.table_prefix%portal_modules
 
 services:
     board3.portal.main:
@@ -25,8 +25,8 @@ services:
             - @path_helper
             - %core.root_path%
             - .%core.php_ext%
-            - %board3.config.table%
-            - %board3.modules.table%
+            - %board3.portal.config.table%
+            - %board3.portal.modules.table%
 
     board3.portal.controller_helper:
         class: board3\portal\controller\helper
@@ -40,7 +40,7 @@ services:
             - %core.root_path%
             - .%core.php_ext%
 
-    board3.version.check:
+    board3.portal.version.check:
         class: board3\portal\includes\version_check
         arguments:
             - %board3.version_data%
@@ -50,17 +50,17 @@ services:
             - @template
             - @user
 
-    board3.module_collection:
+    board3.portal.module_collection:
         class: phpbb\di\service_collection
         arguments:
             - @service_container
         tags:
-            - { name: service_collection, tag: board3.module }
+            - { name: service_collection, tag: board3.portal.module }
 
     board3.portal.helper:
         class: board3\portal\includes\helper
         arguments:
-            - @board3.module_collection
+            - @board3.portal.module_collection
 
     board3.portal.modules_helper:
         class: board3\portal\includes\modules_helper

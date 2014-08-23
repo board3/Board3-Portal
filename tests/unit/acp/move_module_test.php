@@ -26,23 +26,23 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$request = new \phpbb_mock_request;
 		$phpbb_container = new \phpbb_mock_container_builder();
 		// Mock version check
-		$phpbb_container->set('board3.version.check',
+		$phpbb_container->set('board3.portal.version.check',
 			$this->getMockBuilder('\board3\portal\includes\version_check')
 				->disableOriginalConstructor()
 				->getMock());
 		// Mock module service collection
 		$config = new \phpbb\config\config(array());
-		$phpbb_container->set('board3.module_collection',
+		$phpbb_container->set('board3.portal.module_collection',
 			array(
 				new \board3\portal\modules\clock(),
 				new \board3\portal\modules\birthday_list($config, $template, $this->db, $user),
 				new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $phpbb_root_path, $phpEx),
 				new \board3\portal\modules\donation($config, $template, $user),
 			));
-		$phpbb_container->set('board3.portal.helper', new \board3\portal\includes\helper($phpbb_container->get('board3.module_collection')));
+		$phpbb_container->set('board3.portal.helper', new \board3\portal\includes\helper($phpbb_container->get('board3.portal.module_collection')));
 		$phpbb_container->set('board3.portal.modules_helper', new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), $config, $request));
-		$phpbb_container->setParameter('board3.modules.table', $table_prefix . 'portal_modules');
-		$phpbb_container->setParameter('board3.config.table', $table_prefix . 'portal_config');
+		$phpbb_container->setParameter('board3.portal.modules.table', $table_prefix . 'portal_modules');
+		$phpbb_container->setParameter('board3.portal.config.table', $table_prefix . 'portal_config');
 		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put'));
 		$cache->expects($this->any())
 			->method('destroy')

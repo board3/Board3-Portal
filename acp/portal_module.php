@@ -39,12 +39,12 @@ class portal_module
 		$this->phpbb_admin_path = $phpbb_admin_path;
 		$this->php_ext = $phpEx;
 		$this->phpbb_container = $phpbb_container;
-		$this->version_check = $this->phpbb_container->get('board3.version.check');
+		$this->version_check = $this->phpbb_container->get('board3.portal.version.check');
 		$this->portal_helper = $this->phpbb_container->get('board3.portal.helper');
 		$this->modules_helper = $this->phpbb_container->get('board3.portal.modules_helper');
 		$this->log = $phpbb_log;
-		define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.modules.table'));
-		define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.config.table'));
+		define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.portal.modules.table'));
+		define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.portal.config.table'));
 
 		if (!function_exists('column_string_const'))
 		{
