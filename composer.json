@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Adds a portal with several blocks to your forum. You can change the settings, move the blocks, add new blocks and more in the ACP.",
 	"homepage": "http://www.board3.de",
-	"version": "2.1.0-dev",
-	"time": "2012-10-05 10:40:01",
+	"version": "2.1.0-b1",
+	"time": "2014-08-24 14:02:18",
 	"license": "GPL-2.0",
 	"authors": [{
 			"name": "Marc Alexander",
@@ -16,27 +16,6 @@
 			"name": "Joas Schilling",
 			"email": "nickvergessen@gmx.de",
 			"homepage": "http://mods.flying-bits.org",
-			"role": "Developer"
-		},
-		{
-			"name": "Kevin",
-			"homepage": "http://www.board3.de",
-			"role": "Developer"
-		},
-		{
-			"name": "Ice",
-			"homepage": "http://www.board3.de",
-			"role": "Developer"
-		},
-		{
-			"name": "Christian",
-			"homepage": "http://www.phpbb-projekt.de",
-			"role": "Developer"
-		},
-		{
-			"name": "Walter",
-			"email": "w.bobeth@digitalfotografie-foren.de",
-			"homepage": "http://www.digitalfotografie-foren.de",
 			"role": "Developer"
 		}],
 	"require": {
@@ -50,7 +29,7 @@
 	"extra": {
 		"display-name": "Board3 Portal",
 		"soft-require": {
-			"phpbb/phpbb": "3.1.*@dev"
+			"phpbb/phpbb": ">=3.1.0-RC3,<3.2.*@dev"
 		},
 		"version-check": {
 			"host": "board3.de",
