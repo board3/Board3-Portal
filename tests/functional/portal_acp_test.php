@@ -97,4 +97,17 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 		$crawler = self::submit($form);
 		$this->assertContainsLang('ACL_U_VIEW_PORTAL', $crawler->text());
 	}
+
+	public function test_edit_menu_link()
+	{
+		$this->add_lang_ext('board3/portal', 'info_acp_portal');
+		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&mode=config&module_id=1&action=edit&id=10&sid=' . $this->sid);
+		$form = $crawler->selectButton('submit')->form();
+		$form->setValues(array('link_title'	=> 'foobar'));
+		$crawler = self::submit($form);
+		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&mode=config&module_id=1&sid=' . $this->sid);
+		$this->assertContains('foobar', $crawler->text());
+		$crawler = self::request('GET', 'app.php/portal?sid=' . $this->sid);
+		$this->assertContains('foobar', $crawler->text());
+	}
 }

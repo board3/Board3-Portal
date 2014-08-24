@@ -467,8 +467,7 @@ class main_menu extends module_base
 					'LINK_TITLE'	=> (isset($links[$link_id]['title']) && $action != 'add') ? $links[$link_id]['title'] : '',
 					'LINK_URL'		=> (isset($links[$link_id]['url']) && $links[$link_id]['type'] != self::LINK_CAT && $action != 'add') ? str_replace('&', '&amp;', $links[$link_id]['url']) : '',
 
-					//'U_BACK'	=> $u_action,
-					'U_ACTION'	=> $u_action . '&amp;id=' . $link_id,
+					'LINK_ID'		=> $link_id,
 
 					'S_EDIT'				=> true,
 					'S_LINK_IS_CAT'			=> (!isset($links[$link_id]['type']) || $links[$link_id]['type'] == self::LINK_CAT) ? true : false,
