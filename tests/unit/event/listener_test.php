@@ -15,6 +15,7 @@ class listener_test extends \phpbb_template_template_test_case
 {
 	/** @var \board3\portal\event\listener */
 	protected $listener;
+	protected $auth;
 
 	static public $hidden_fields = array();
 
@@ -32,6 +33,19 @@ class listener_test extends \phpbb_template_template_test_case
 
 	public function setup_listener()
 	{
+		global $cache, $db;
+
+		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put', 'obtain_attach_extensions'));
+		$cache->expects($this->any())
+			->method('obtain_word_list')
+			->with()
+			->will($this->returnValue(array()));
+		$cache->expects($this->any())
+			->method('get')
+			->with($this->anything())
+			->will($this->returnValue(false));
+		$db = $this->getMock('\phpbb\db\driver\driver_interface');
+
 		$this->user = $this->getMock('\phpbb\user', array(), array('\phpbb\datetime'));
 		$this->user->expects($this->any())
 			->method('lang')
@@ -61,7 +75,17 @@ class listener_test extends \phpbb_template_template_test_case
 			$this->php_ext
 		);
 
+		$this->auth = new \phpbb\auth\auth();
+		$userdata = array(
+			'user_id'	=> 2,
+		);
+		$this->auth->acl($userdata);
+		// Pretend to allow downloads
+		$this->auth->acl_options['global']['u_view_portal'] = 0;
+		$this->auth->acl[0][0] = true;
+
 		$this->listener = new \board3\portal\event\listener(
+			$this->auth,
 			$this->controller_helper,
 			$this->path_helper,
 			$this->template,
@@ -121,6 +145,13 @@ class listener_test extends \phpbb_template_template_test_case
 		$this->assertEmpty($result);
 
 		$this->user->data['session_page'] = '/app.php/portal';
+		$result = $this->phpbb_dispatcher->trigger_event('core.page_header', compact($vars));
+
+		$this->assertEmpty($result);
+
+		// Make sure user shouldn't see link
+		unset($this->auth->cache[0]['u_view_portal']);
+		$this->auth->acl[0][0] = false;
 		$result = $this->phpbb_dispatcher->trigger_event('core.page_header', compact($vars));
 
 		$this->assertEmpty($result);

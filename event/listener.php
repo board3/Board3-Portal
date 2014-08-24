@@ -13,6 +13,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
+	/** @var \phpbb\auth\auth */
+	protected $auth;
+
 	/** @var \phpbb\controller\helper */
 	protected $controller_helper;
 
@@ -31,14 +34,16 @@ class listener implements EventSubscriberInterface
 	/**
 	* Constructor of Board3 Portal event listener
 	*
+	* @param \phpbb\auth\auth		$auth	phpBB auth object
 	* @param \phpbb\controller\helper	$controller_helper	Controller helper object
 	* @param \phpbb\path_helper		$path_helper		phpBB path helper
 	* @param \phpbb\template\template	$template		Template object
 	* @param \phpbb\user			$user			User object
 	* @param string				$php_ext		phpEx
 	*/
-	public function __construct(\phpbb\controller\helper $controller_helper, \phpbb\path_helper $path_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $controller_helper, \phpbb\path_helper $path_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
+		$this->auth = $auth;
 		$this->controller_helper = $controller_helper;
 		$this->path_helper = $path_helper;
 		$this->template = $template;
@@ -92,12 +97,17 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Add portal link
+	* Add portal link if user is authed to see it
 	*
 	* @return null
 	*/
 	public function add_portal_link()
 	{
+		if (!$this->auth->acl_get('u_view_portal'))
+		{
+			return;
+		}
+
 		if (strpos($this->user->data['session_page'], '/portal') === false)
 		{
 			$portal_link = $this->controller_helper->route('board3_portal_controller');
