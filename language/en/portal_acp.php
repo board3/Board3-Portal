@@ -130,5 +130,5 @@ $lang = array_merge($lang, array(
 	'NOT_UP_TO_DATE'		=> '%s is not up to date',
 	'RELEASE_ANNOUNCEMENT'	=> 'Annoucement Topic',
 	'UP_TO_DATE'			=> '%s is up to date',
-	'VERSION_CHECK'			=> 'MOD Version Check',
+	'VERSION_CHECK'			=> 'Extension Version Check',
 ));
