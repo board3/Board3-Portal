@@ -51,6 +51,11 @@
 		"display-name": "Board3 Portal",
 		"soft-require": {
 			"phpbb/phpbb": "3.1.*@dev"
+		},
+		"version-check": {
+			"host": "board3.de",
+			"directory": "/updatecheck",
+			"filename": "board3_portal.json"
 		}
 	}
 }
