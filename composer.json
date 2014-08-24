@@ -17,27 +17,6 @@
 			"email": "nickvergessen@gmx.de",
 			"homepage": "http://mods.flying-bits.org",
 			"role": "Developer"
-		},
-		{
-			"name": "Kevin",
-			"homepage": "http://www.board3.de",
-			"role": "Developer"
-		},
-		{
-			"name": "Ice",
-			"homepage": "http://www.board3.de",
-			"role": "Developer"
-		},
-		{
-			"name": "Christian",
-			"homepage": "http://www.phpbb-projekt.de",
-			"role": "Developer"
-		},
-		{
-			"name": "Walter",
-			"email": "w.bobeth@digitalfotografie-foren.de",
-			"homepage": "http://www.digitalfotografie-foren.de",
-			"role": "Developer"
 		}],
 	"require": {
 		"php": ">=5.3.3",
