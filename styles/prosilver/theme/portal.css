@@ -49,6 +49,21 @@
 	list-style-type: none;
 }
 
+.portal-user-span {
+	background-image: url("./images/portal/portal_user.png");
+	padding-left: 16px;
+	padding-top: 16px;
+}
+
+.portal-paypal-icon {
+	background-image: url("./images/portal/paypal.gif");
+	background-repeat: no-repeat;
+	padding-left: 73px;
+	padding-top: 44px;
+	float: left;
+	margin: 5px;
+}
+
 /**
 * Replacement for table layout
 */
@@ -149,6 +164,14 @@
 	width: 100%;
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+.portal-clock-spacer-up {
+	content: url("./images/portal/spacer_up.png");
+}
+
+.portal-clock-spacer-down {
+	content: url("./images/portal/spacer_down.png");
 }
 
 .portal-clock * img {
