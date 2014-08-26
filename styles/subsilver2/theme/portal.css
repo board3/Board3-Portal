@@ -34,6 +34,16 @@
 	vertical-align: top;
 }
 
+.portal-clock-spacer-up {
+	content: url("./images/portal/spacer_up.png");
+	float: left;
+}
+
+.portal-clock-spacer-down {
+	content: url("./images/portal/spacer_down.png");
+	float: left;
+}
+
 #portal-clock-back-seconds-up-left, #portal-clock-back-seconds-up-right,
 #portal-clock-front-minutes-up-left, #portal-clock-front-minutes-up-right,
 #portal-clock-back-minutes-up-left, #portal-clock-back-minutes-up-right,
@@ -171,4 +181,20 @@
 	padding: 0;
 	font-size: 100%;
 	line-height: normal;
+}
+
+.portal-arrow-bullet {
+	background: url(./images/portal/arrowbullet.gif) no-repeat;
+	padding-left: 12px;
+}
+
+.rtl .portal-arrow-bullet {
+	background: url(./images/portal/arrowbullet_rtl.gif) no-repeat;
+}
+
+.portal-user-span {
+	background-image: url("./images/portal/portal_user.png");
+	padding-left: 16px;
+	padding-top: 16px;
+	margin-bottom: 2px;
 }
