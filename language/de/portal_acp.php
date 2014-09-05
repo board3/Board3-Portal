@@ -91,8 +91,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEFT_COLUMN_WIDTH_EXP'			=> 'Ändere hier die Breite der linken Spalte in Pixel, empfohlener Wert 180',
 	'PORTAL_RIGHT_COLUMN_WIDTH'				=> 'Breite der rechten Spalte',
 	'PORTAL_RIGHT_COLUMN_WIDTH_EXP'			=> 'Ändere hier die Breite der rechten Spalte in Pixel, empfohlener Wert 180',
-	'PORTAL_PHPBB_MENU'						=> 'phpBB-Menü',
-	'PORTAL_PHPBB_MENU_EXP'					=> 'Den phpBB Header auf dem Portal anzeigen.',
 	'PORTAL_DISPLAY_JUMPBOX'				=> 'Zeige Jumpbox',
 	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Die Jumpbox auf dem Portal anzeigen. Die Jumpbox wird nur angezeigt, wenn sie gleichzeitig in den Board-Funktionalitäten aktiviert ist.',
 
