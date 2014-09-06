@@ -54,12 +54,33 @@
 	padding-left: 16px;
 	padding-top: 16px;
 	float: left;
+	margin-bottom: 2px;
 }
 
 .rtl .portal-user-icon {
 	float: right;
-	padding-right: 10px;
+}
+
+.portal-user-span {
+	float: left;
+	padding-left: 5px;
 	padding-top: 2px;
+}
+
+.rtl .portal-user-span {
+	float: right;
+	padding: 2px 5px 0 0;
+}
+
+.portal-user-annotation {
+	float: right;
+	padding-top: 2px;
+	padding-right: 10px;
+}
+
+.rtl .portal-user-annotation {
+	float: left;
+	padding-right: 0px;
 }
 
 .portal-paypal-icon {

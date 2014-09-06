@@ -1,18 +1,8 @@
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
-	<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
-	<span style="float:right;padding-right:10px;"><strong>{L_USERNAME}</strong></span>
-	<span style="float:left;"><strong>{L_POSTS}</strong></span><br style="clear:both" />
-	<!-- ELSE -->
-	<span style="float:left;"><strong>{L_USERNAME}</strong></span>
-	<span style="float:right;padding-right:10px;"><strong>{L_POSTS}</strong></span><br style="clear:both" />
-	<!-- ENDIF -->
+	<span class="portal-user-span"><strong>{L_USERNAME}</strong></span>
+	<span class="portal-user-annotation"><strong>{L_POSTS}</strong></span><br class="portal-clear" />
 	<!-- BEGIN topposters -->
-		<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
-		<span class="portal-user-icon"></span><span style="float:right; padding-right:5px; padding-top:2px;">{topposters.USERNAME_FULL}</span>
-		<span style="float:left;"><a href="{topposters.S_SEARCH_ACTION}">{topposters.POSTER_POSTS}</a></span><br style="clear:both" />
-		<!-- ELSE -->
-		<span class="portal-user-icon"></span><span style="float:left; padding-left:5px; padding-top:2px;">{topposters.USERNAME_FULL}</span>
-		<span style="float:right; padding-right:10px; padding-top:2px;"><a href="{topposters.S_SEARCH_ACTION}">{topposters.POSTER_POSTS}</a></span><br style="clear:both" />
-		<!-- ENDIF -->
+		<span class="portal-user-icon"></span><span class="portal-user-span">{topposters.USERNAME_FULL}</span>
+		<span class="portal-user-annotation"><a href="{topposters.S_SEARCH_ACTION}">{topposters.POSTER_POSTS}</a></span><br class="portal-clear" />
 	<!-- END topposters -->
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
