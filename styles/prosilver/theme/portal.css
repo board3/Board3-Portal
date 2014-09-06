@@ -49,10 +49,17 @@
 	list-style-type: none;
 }
 
-.portal-user-span {
+.portal-user-icon {
 	background-image: url("./images/portal/portal_user.png");
 	padding-left: 16px;
 	padding-top: 16px;
+	float: left;
+}
+
+.rtl .portal-user-icon {
+	float: right;
+	padding-right: 10px;
+	padding-top: 2px;
 }
 
 .portal-paypal-icon {
