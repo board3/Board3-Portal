@@ -83,6 +83,41 @@
 	padding-right: 0px;
 }
 
+.portal-title-span {
+	float: left;
+}
+
+.rtl .portal-title-span {
+	float: right;
+}
+
+.rtl .portal-title-link {
+	float: right;
+	padding-right: 2px;
+}
+
+.portal-text-span {
+	float: left;
+	padding-right: 10px;
+}
+
+.rtl .portal-text-span {
+	float: right;
+	padding-right: 0px;
+	padding-left: 10px;
+}
+
+.portal-data-span {
+	float: right;
+	padding-right: 10px;
+}
+
+.rtl .portal-data-span {
+	float: left;
+	padding-right: 0px;
+	padding-left: 10px;
+}
+
 .portal-paypal-icon {
 	background-image: url("./images/portal/paypal.gif");
 	background-repeat: no-repeat;
