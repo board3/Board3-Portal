@@ -1,14 +1,14 @@
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
-	<strong<!-- IF S_CONTENT_DIRECTION eq 'rtl' --> style="float: right;"<!-- ENDIF -->>{L_ADMINISTRATORS}</strong><br />
+	<strong class="portal-user-span">{L_ADMINISTRATORS}</strong><br class="portal-clear" />
 	<!-- BEGIN b3p_admins -->
-		<span class="portal-user-span" style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"></span><span style="<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->float:right; padding-right:5px;<!-- ELSE -->float:left; padding-left:5px;<!-- ENDIF --> padding-top:2px;"><strong>{b3p_admins.USERNAME_FULL}</strong></span><br style="clear:both" />
+		<span class="portal-user-icon"></span><span class="portal-user-span"><strong>{b3p_admins.USERNAME_FULL}</strong></span><br class="portal-clear" />
 	<!-- BEGINELSE -->
 		{L_NO_ADMINISTRATORS_P}<br /><br />
 	<!-- END b3p_admins -->
-	<br style="clear:both" />
-	<strong<!-- IF S_CONTENT_DIRECTION eq 'rtl' --> style="float: right;"<!-- ENDIF -->>{L_MODERATORS}</strong><br />
+	<br class="portal-clear" />
+	<strong class="portal-user-span">{L_MODERATORS}</strong><br class="portal-clear" />
 	<!-- BEGIN b3p_moderator -->
-		<span class="portal-user-span" style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"></span><span style="<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->float:right; padding-right:5px;<!-- ELSE -->float:left; padding-left:5px;<!-- ENDIF --> padding-top:2px;"><strong>{b3p_moderator.USERNAME_FULL}</strong></span><br style="clear:both" />
+		<span class="portal-user-icon"></span><span class="portal-user-span"><strong>{b3p_moderator.USERNAME_FULL}</strong></span><br class="portal-clear" />
 	<!-- BEGINELSE -->
 		{L_NO_MODERATORS_P}
 	<!-- END b3p_moderator -->

@@ -49,10 +49,73 @@
 	list-style-type: none;
 }
 
-.portal-user-span {
+.portal-user-icon {
 	background-image: url("./images/portal/portal_user.png");
 	padding-left: 16px;
 	padding-top: 16px;
+	float: left;
+	margin-bottom: 2px;
+}
+
+.rtl .portal-user-icon {
+	float: right;
+}
+
+.portal-user-span {
+	float: left;
+	padding-left: 5px;
+	padding-top: 2px;
+}
+
+.rtl .portal-user-span {
+	float: right;
+	padding: 2px 5px 0 0;
+}
+
+.portal-user-annotation {
+	float: right;
+	padding-top: 2px;
+	padding-right: 10px;
+}
+
+.rtl .portal-user-annotation {
+	float: left;
+	padding-right: 0px;
+}
+
+.portal-title-span {
+	float: left;
+}
+
+.rtl .portal-title-span {
+	float: right;
+}
+
+.rtl .portal-title-link {
+	float: right;
+	padding-right: 2px;
+}
+
+.portal-text-span {
+	float: left;
+	padding-right: 10px;
+}
+
+.rtl .portal-text-span {
+	float: right;
+	padding-right: 0px;
+	padding-left: 10px;
+}
+
+.portal-data-span {
+	float: right;
+	padding-right: 10px;
+}
+
+.rtl .portal-data-span {
+	float: left;
+	padding-right: 0px;
+	padding-left: 10px;
 }
 
 .portal-paypal-icon {
