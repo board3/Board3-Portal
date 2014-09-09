@@ -130,6 +130,13 @@
 	width: 150px;
 }
 
+.portal-whois-online-content {
+	border-left: 0 !important;
+}
+.portal-whois-online-content p {
+	margin: 0 5px 0 5px;
+}
+
 .portal-paypal-icon {
 	background-image: url("./images/portal/paypal.gif");
 	background-repeat: no-repeat;
