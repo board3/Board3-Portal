@@ -150,6 +150,11 @@
 	text-align: center;
 }
 
+.portal-read-all-link {
+	float: right;
+	margin: 0 0 5px 0;
+}
+
 .portal-paypal-icon {
 	background-image: url("./images/portal/paypal.gif");
 	background-repeat: no-repeat;
