@@ -1,9 +1,9 @@
 <!-- BEGIN news_row -->
 <!-- IF news_row.S_NO_TOPICS -->
 {$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
-	<div class="post bg2" style="margin-bottom: 0px">
+	<div class="post bg2 portal-no-margin">
 		<div class="inner">
-			<span style="text-align: center;"><strong>{L_NO_NEWS}</strong></span>
+			<span><strong>{L_NO_NEWS}</strong></span>
 		</div>
 	</div>
 {$C_BLOCK_F_L}{$C_BLOCK_F_R}
@@ -43,7 +43,7 @@
 					<!-- ENDIF -->
 						<br />{L_POSTED} {L_POST_BY_AUTHOR} {news_row.POSTER_FULL} &raquo; {news_row.TIME}
 					<!-- IF news_row.FORUM_NAME -->
-						<br />{L_FORUM}{L_COLON} <a href="{news_row.U_VIEWFORUM}" style="font-weight: bold;">{news_row.FORUM_NAME}</a>
+						<br />{L_FORUM}{L_COLON} <a href="{news_row.U_VIEWFORUM}" class="portal-forumtitle">{news_row.FORUM_NAME}</a>
 					<!-- ENDIF -->
 					<!-- IF not S_DISPLAY_NEWS_RVS --><!-- IF news_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}{L_COLON} <strong>{news_row.REPLIES}</strong>  &bull; {L_VIEWS}{L_COLON} <strong>{news_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
 				</div> <!-- \END <div class="list-inner"> -->

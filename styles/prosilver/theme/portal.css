@@ -137,6 +137,32 @@
 	margin: 0 5px 0 5px;
 }
 
+.portal-donation-center-content {
+	border-left: 0;
+}
+
+.portal-donation-center-content > div {
+	text-align: left;
+	margin: 5px 5px 5px 5px;
+}
+
+.portal-centered-content {
+	text-align: center;
+}
+
+.portal-read-all-link {
+	float: right;
+	margin: 0 0 5px 0;
+}
+
+.portal-module-postbody .post:not(:last-child) {
+	margin-bottom: 1px;
+}
+
+a.portal-forumtitle {
+	font-weight: bold;
+}
+
 .portal-paypal-icon {
 	background-image: url("./images/portal/paypal.gif");
 	background-repeat: no-repeat;
