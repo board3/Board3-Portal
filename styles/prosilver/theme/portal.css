@@ -155,7 +155,7 @@
 	margin: 0 0 5px 0;
 }
 
-div.inner > .portal-module-postbody:not(:last-child) .post {
+.portal-module-postbody .post:not(:last-child) {
 	margin-bottom: 1px;
 }
 

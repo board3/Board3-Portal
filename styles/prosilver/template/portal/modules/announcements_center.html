@@ -1,12 +1,10 @@
-<!-- BEGIN announcements_center_row -->
-<!-- IF announcements_center_row.S_FIRST_ROW -->
 {$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
-<!-- ENDIF -->
 <!-- IF $S_POSTBODY_TOP --><div class="postbody portal-module-postbody"><!-- ENDIF -->
+<!-- BEGIN announcements_center_row -->
 	<!-- IF announcements_center_row.S_NO_TOPICS  -->
 	<div class="post bg2">
 		<div class="inner">
-			<span class="portal-centered-content"><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
+			<span><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
 	<!-- ELSE -->
 	<div class="post <!-- IF announcements_center_row.S_ROW_COUNT is odd -->bg1<!-- ELSE -->bg2<!-- ENDIF --> portal-no-margin">
 		<div class="inner">
@@ -44,8 +42,6 @@
 		<!-- ENDIF -->
 		</div>
 	</div>
-<!-- IF $S_POSTBODY_TOP --></div><!-- ENDIF -->
-<!-- IF announcements_center_row.S_LAST_ROW -->
-{$C_BLOCK_F_L}{$C_BLOCK_F_R}
-<!-- ENDIF -->
 <!-- END announcements_center_row -->
+<!-- IF $S_POSTBODY_TOP --></div><!-- ENDIF -->
+		{$C_BLOCK_F_L}{$C_BLOCK_F_R}
