@@ -159,6 +159,10 @@ div.inner > .portal-module-postbody:not(:last-child) .post {
 	margin-bottom: 1px;
 }
 
+a.portal-forumtitle {
+	font-weight: bold;
+}
+
 .portal-paypal-icon {
 	background-image: url("./images/portal/paypal.gif");
 	background-repeat: no-repeat;
