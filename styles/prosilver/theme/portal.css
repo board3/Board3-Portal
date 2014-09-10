@@ -137,6 +137,19 @@
 	margin: 0 5px 0 5px;
 }
 
+.portal-donation-center-content {
+	border-left: 0;
+}
+
+.portal-donation-center-content > div {
+	text-align: left;
+	margin: 5px 5px 5px 5px;
+}
+
+.portal-donation-side-content {
+	text-align: center;
+}
+
 .portal-paypal-icon {
 	background-image: url("./images/portal/paypal.gif");
 	background-repeat: no-repeat;
