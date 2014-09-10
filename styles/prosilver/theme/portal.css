@@ -155,6 +155,10 @@
 	margin: 0 0 5px 0;
 }
 
+div.inner > .portal-module-postbody:not(:last-child) .post {
+	margin-bottom: 1px;
+}
+
 .portal-paypal-icon {
 	background-image: url("./images/portal/paypal.gif");
 	background-repeat: no-repeat;
