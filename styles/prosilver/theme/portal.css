@@ -163,6 +163,12 @@ a.portal-forumtitle {
 	font-weight: bold;
 }
 
+.portal-random-member-name {
+	font-size: 12px;
+	padding-top: 1px;
+	margin-bottom: 5px;
+}
+
 .portal-paypal-icon {
 	background-image: url("./images/portal/paypal.gif");
 	background-repeat: no-repeat;
