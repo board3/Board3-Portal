@@ -1,32 +1,32 @@
 <!-- BEGIN minical -->
 <!-- IF minical.MODULE_ID eq $MODULE_ID -->
-<a id="minical{minical.MODULE_ID}" style="float: right;"></a>
+<a id="minical{minical.MODULE_ID}"></a>
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}	
-	<table style="width: 100%;">
+	<table class="portal-module-postbody">
 		<tr>
-			<td style="text-align: left;" colspan="2"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{minical.U_NEXT_MONTH}<!-- ELSE -->{minical.U_PREV_MONTH}<!-- ENDIF --></td>
-			<td colspan="3" style="text-align: center;"><span class="genmed">{minical.L_MINI_CAL_MONTH}</span></td>
-			<td style="text-align: right;" colspan="2"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{minical.U_PREV_MONTH}<!-- ELSE -->{minical.U_NEXT_MONTH}<!-- ENDIF --></td>
+			<td class="portal-calendar-go-previous" colspan="2"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{minical.U_NEXT_MONTH}<!-- ELSE -->{minical.U_PREV_MONTH}<!-- ENDIF --></td>
+			<td colspan="3" class="portal-calendar-current-month"><span class="genmed">{minical.L_MINI_CAL_MONTH}</span></td>
+			<td class="portal-calendar-go-next" colspan="2"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{minical.U_PREV_MONTH}<!-- ELSE -->{minical.U_NEXT_MONTH}<!-- ENDIF --></td>
 		</tr>
-		<tr>
+		<tr class="portal-calendar-days-title">
 			<!-- IF minical.S_SUNDAY_FIRST -->
-				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_SUN}</span></td>
+				<td><span class="gensmall">{minical.L_MINI_CAL_SUN}</span></td>
 			<!-- ENDIF -->
-				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_MON}</span></td>
-				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_TUE}</span></td>
-				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_WED}</span></td>
-				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_THU}</span></td>
-				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_FRI}</span></td>
-				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_SAT}</span></td>
+				<td><span class="gensmall">{minical.L_MINI_CAL_MON}</span></td>
+				<td><span class="gensmall">{minical.L_MINI_CAL_TUE}</span></td>
+				<td><span class="gensmall">{minical.L_MINI_CAL_WED}</span></td>
+				<td><span class="gensmall">{minical.L_MINI_CAL_THU}</span></td>
+				<td><span class="gensmall">{minical.L_MINI_CAL_FRI}</span></td>
+				<td><span class="gensmall">{minical.L_MINI_CAL_SAT}</span></td>
 			<!-- IF not minical.S_SUNDAY_FIRST -->
-				<td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_SUN}</span></td>
+				<td><span class="gensmall">{minical.L_MINI_CAL_SUN}</span></td>
 			<!-- ENDIF -->
 		</tr>
 		<!-- BEGIN mini_cal_row -->
 		<!-- IF minical.mini_cal_row.MODULE_ID eq $MODULE_ID -->
-		<tr>
+		<tr class="portal-calendar-days">
 			<!-- BEGIN mini_cal_days -->
-				<td style="width: 14%; text-align: center;"><span class="gensmall">{minical.mini_cal_row.mini_cal_days.MINI_CAL_DAY}</span></td>
+				<td><span class="gensmall">{minical.mini_cal_row.mini_cal_days.MINI_CAL_DAY}</span></td>
 			<!-- END mini_cal_days -->
 		</tr>
 		<!-- ENDIF -->
@@ -34,51 +34,51 @@
 	</table>
 	<!-- IF minical.S_DISPLAY_EVENTS -->
 	<hr class="dashed" />
-	<div class="menutitle" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_CURRENT_EVENTS}{L_COLON}</div>
+	<div class="menutitle portal-calendar-events-heading">{L_CURRENT_EVENTS}{L_COLON}</div>
 	<ul class="portal-events">
 		<!-- BEGIN cur_events -->
 
 		<li class="row">
 			<dl class="icon">
-				<dt style="width: 100%; padding-left: 0px; padding-bottom: 5px;">
+				<dt class="portal-calendar-event-listing">
 					<!-- IF minical.cur_events.EVENT_URL --><a href="{minical.cur_events.EVENT_URL}" title="{minical.cur_events.EVENT_TITLE}" <!-- IF minical.cur_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.cur_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
-					<span style="font-weight: bold;">{minical.cur_events.EVENT_TITLE}{L_COLON}</span><br />
+					<span class="portal-calendar-event-title">{minical.cur_events.EVENT_TITLE}{L_COLON}</span><br />
 					<!-- IF minical.cur_events.ALL_DAY -->{L_EVENT_START}{L_COLON}&nbsp;{minical.cur_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
 					<!-- ELSEIF not minical.cur_events.ALL_DAY and minical.cur_events.END_TIME -->{L_EVENT_START}{L_COLON}&nbsp;{minical.cur_events.START_TIME}<br />{L_EVENT_END}{L_COLON}&nbsp;{minical.cur_events.END_TIME}<br />
 					<!-- ELSE -->{L_EVENT_ALL_DAY}<br />
 					<!-- ENDIF -->
-					<!-- IF minical.cur_events.EVENT_DESC --><span style="font-style: italic;">{minical.cur_events.EVENT_DESC}</span><!-- ENDIF -->
+					<!-- IF minical.cur_events.EVENT_DESC --><span class="portal-calendar-event-description">{minical.cur_events.EVENT_DESC}</span><!-- ENDIF -->
 					<!-- IF minical.cur_events.EVENT_URL --></a><!-- ENDIF -->
 				</dt>
 			</dl>
 		</li>
 
 		<!-- BEGINELSE -->
-		<li class="calendar-info"><span style="float:left;" class="gensmall"><strong>{L_NO_CUR_EVENTS}</strong></span><br /></li>
+		<li class="calendar-info"><span class="gensmall portal-title-span"><strong>{L_NO_CUR_EVENTS}</strong></span><br /></li>
 		<!-- END cur_events -->
 	</ul>
-	<hr style="margin: 5px 0; border-top: 0;" />
-	<div class="menutitle" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_UPCOMING_EVENTS}{L_COLON}</div>
+	<hr class="portal-calendar-divider" />
+	<div class="menutitle portal-calendar-events-heading">{L_UPCOMING_EVENTS}{L_COLON}</div>
 	<ul class="portal-events">
 		<!-- BEGIN upcoming_events -->
 
 		<li class="row">
 			<dl class="icon">
-				<dt style="width: 100%; padding-left: 0px; padding-bottom: 5px;">
+				<dt class="portal-calendar-event-listing">
 					<!-- IF minical.upcoming_events.EVENT_URL --><a href="{minical.upcoming_events.EVENT_URL}" title="{minical.upcoming_events.EVENT_TITLE}" <!-- IF minical.upcoming_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.upcoming_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
-					<span style="font-weight: bold;">{minical.upcoming_events.EVENT_TITLE}{L_COLON}</span><br />
+					<span class="portal-calendar-event-title">{minical.upcoming_events.EVENT_TITLE}{L_COLON}</span><br />
 					<!-- IF not minical.upcoming_events.ALL_DAY and not minical.upcoming_events.END_TIME -->{L_EVENT_TIME}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />
 					<!-- ELSEIF not minical.upcoming_events.ALL_DAY and minical.upcoming_events.END_TIME -->{L_EVENT_START}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_END}{L_COLON}&nbsp;{minical.upcoming_events.END_TIME}<br />
 					<!-- ELSE -->{L_EVENT_TIME}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
 					<!-- ENDIF -->
-					<!-- IF minical.upcoming_events.EVENT_DESC --><span style="font-style: italic;">{minical.upcoming_events.EVENT_DESC}</span><br /><!-- ENDIF -->
+					<!-- IF minical.upcoming_events.EVENT_DESC --><span class="portal-calendar-event-description">{minical.upcoming_events.EVENT_DESC}</span><br /><!-- ENDIF -->
 					<!-- IF minical.upcoming_events.EVENT_URL --></a><!-- ENDIF -->
 				</dt>
 			</dl>
 		</li>
 
 		<!-- BEGINELSE -->
-		<li class="calendar-info"><span style="float:left;" class="gensmall"><strong>{L_NO_UPCOMING_EVENTS}</strong></span><br /></li>
+		<li class="calendar-info"><span class="gensmall portal-title-span"><strong>{L_NO_UPCOMING_EVENTS}</strong></span><br /></li>
 		<!-- END upcoming_events -->
 	</ul>
 	<br />

@@ -146,6 +146,10 @@
 	margin: 5px 5px 5px 5px;
 }
 
+.portal-donation-form {
+	padding-top: 15px;
+}
+
 .portal-centered-content {
 	text-align: center;
 }
@@ -163,6 +167,17 @@ a.portal-forumtitle {
 	font-weight: bold;
 }
 
+.portal-random-member-name {
+	font-size: 12px;
+	padding-top: 1px;
+	margin-bottom: 5px;
+}
+
+.portal-recent-column {
+	width: 33%;
+	vertical-align: top;
+}
+
 .portal-paypal-icon {
 	background-image: url("./images/portal/paypal.gif");
 	background-repeat: no-repeat;
@@ -170,6 +185,88 @@ a.portal-forumtitle {
 	padding-top: 44px;
 	float: left;
 	margin: 5px;
+}
+
+.portal-poll-subtext {
+	font-size: 1.0em !important;
+	width: 10em;
+}
+
+.portal-poll-vote {
+	border-top: none;
+}
+
+.portal-poll-side-option dt {
+	width: 30% !important;
+}
+
+.portal-poll-side-option dt:first-child {
+	width: 60% !important;
+}
+
+.portal-poll-side-option-info {
+	width: 30% !important;
+}
+
+.portal-poll-side-checkbox {
+	float: right;
+}
+
+.portal-poll-side-checkbox input {
+	vertical-align: top;
+	margin-top: 0;
+}
+
+/**
+* Calendar CSS rules
+*/
+.portal-calendar-go-previous {
+	text-align: left;
+}
+
+.portal-calendar-current-month {
+	text-align: center;
+}
+
+.portal-calendar-go-next {
+	text-align: right;
+}
+
+.portal-calendar-days-title td, .portal-calendar-days td {
+	width: 14%;
+}
+
+.portal-calendar-days-title span {
+	font-weight: bold;
+}
+
+.portal-calendar-days td {
+	text-align: center;
+}
+
+.portal-calendar-events-heading {
+	font-weight: bold;
+	font-size: 12px;
+	text-decoration: underline;
+}
+
+.portal-calendar-event-listing {
+	width: 100%;
+	padding-left: 0;
+	padding-bottom: 5px;
+}
+
+.portal-calendar-event-title {
+	font-weight: bold;
+}
+
+.portal-calendar-event-description {
+	font-style: italic;
+}
+
+.portal-calendar-divider {
+	margin: 5px 0;
+	border-top: 0;
 }
 
 /**
