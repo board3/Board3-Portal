@@ -169,6 +169,11 @@ a.portal-forumtitle {
 	margin-bottom: 5px;
 }
 
+.portal-recent-column {
+	width: 33%;
+	vertical-align: top;
+}
+
 .portal-paypal-icon {
 	background-image: url("./images/portal/paypal.gif");
 	background-repeat: no-repeat;
