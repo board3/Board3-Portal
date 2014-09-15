@@ -188,11 +188,33 @@ a.portal-forumtitle {
 }
 
 .portal-poll-subtext {
-	font-size: 1.0em;
+	font-size: 1.0em !important;
+	width: 10em;
 }
 
 .portal-poll-vote {
 	border-top: none;
+}
+
+.portal-poll-side-option dt {
+	width: 30% !important;
+}
+
+.portal-poll-side-option dt:first-child {
+	width: 60% !important;
+}
+
+.portal-poll-side-option-info {
+	width: 30% !important;
+}
+
+.portal-poll-side-checkbox {
+	float: right;
+}
+
+.portal-poll-side-checkbox input {
+	vertical-align: top;
+	margin-top: 0;
 }
 
 /**
