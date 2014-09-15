@@ -187,6 +187,14 @@ a.portal-forumtitle {
 	margin: 5px;
 }
 
+.portal-poll-subtext {
+	font-size: 1.0em;
+}
+
+.portal-poll-vote {
+	border-top: none;
+}
+
 /**
 * Calendar CSS rules
 */

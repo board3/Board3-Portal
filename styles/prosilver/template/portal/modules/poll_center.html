@@ -1,6 +1,6 @@
 {$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
 	<!-- IF S_HAS_POLL -->
-	<div id="viewpoll" class="panel bg1" style="margin-bottom: 0px">
+	<div id="viewpoll" class="panel bg1 portal-no-margin">
 		<div class="inner">
 		<!-- BEGIN poll -->
 			<!-- IF poll.S_CAN_VOTE --><form method="post" action="{poll.S_POLL_ACTION}"><!-- ENDIF -->
@@ -13,7 +13,7 @@
 					<!-- BEGIN poll_option -->
 						<dl class="<!-- IF poll.poll_option.POLL_OPTION_VOTED -->voted<!-- ENDIF --> portal-responsive-poll"<!-- IF poll.poll_option.POLL_OPTION_VOTED --> title="{L_POLL_VOTED_OPTION}"<!-- ENDIF -->>
 							<dt><!-- IF poll.S_CAN_VOTE --><label for="poll_{poll.TOPIC_ID}_vote_{poll.poll_option.POLL_OPTION_ID}">{poll.poll_option.POLL_OPTION_CAPTION}</label><!-- ELSE -->{poll.poll_option.POLL_OPTION_CAPTION}<!-- ENDIF --></dt>
-							<!-- IF poll.S_CAN_VOTE --><dd style="width: auto;"><!-- IF poll.S_IS_MULTI_CHOICE --><input type="checkbox" name="vote_id[]" id="poll_{poll.TOPIC_ID}_vote_{poll.poll_option.POLL_OPTION_ID}" value="{poll.poll_option.POLL_OPTION_ID}"<!-- IF poll.poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF --> /><!-- ELSE --><input type="radio" name="vote_id[]" id="poll_{poll.TOPIC_ID}_vote_{poll.poll_option.POLL_OPTION_ID}" value="{poll.poll_option.POLL_OPTION_ID}"<!-- IF poll.poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF --> /><!-- ENDIF --></dd><!-- ENDIF -->
+							<!-- IF poll.S_CAN_VOTE --><dd><!-- IF poll.S_IS_MULTI_CHOICE --><input type="checkbox" name="vote_id[]" id="poll_{poll.TOPIC_ID}_vote_{poll.poll_option.POLL_OPTION_ID}" value="{poll.poll_option.POLL_OPTION_ID}"<!-- IF poll.poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF --> /><!-- ELSE --><input type="radio" name="vote_id[]" id="poll_{poll.TOPIC_ID}_vote_{poll.poll_option.POLL_OPTION_ID}" value="{poll.poll_option.POLL_OPTION_ID}"<!-- IF poll.poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF --> /><!-- ENDIF --></dd><!-- ENDIF -->
 							<!-- IF poll.S_DISPLAY_RESULTS --><dd class="resultbar"><div class="<!-- IF poll.poll_option.POLL_OPTION_PCT < 20 -->pollbar1<!-- ELSEIF poll.poll_option.POLL_OPTION_PCT < 40 -->pollbar2<!-- ELSEIF poll.poll_option.POLL_OPTION_PCT < 60 -->pollbar3<!-- ELSEIF poll.poll_option.POLL_OPTION_PCT < 80 -->pollbar4<!-- ELSE -->pollbar5<!-- ENDIF -->" style="width:{poll.poll_option.POLL_OPTION_PERCENT};">{poll.poll_option.POLL_OPTION_RESULT}</div></dd>
 							<dd><!-- IF poll.poll_option.POLL_OPTION_RESULT == 0 -->{L_NO_VOTES}<!-- ELSE -->{poll.poll_option.POLL_OPTION_PERCENT}<!-- ENDIF --></dd><!-- ENDIF -->
 						</dl>
@@ -25,27 +25,27 @@
 					<!-- IF poll.S_DISPLAY_RESULTS -->
 						<dl>
 							<dt>&nbsp;</dt>
-							<dd class="resultbar"><p style="font-size:1.0em; width: 10em;">{L_TOTAL_VOTES} : {poll.TOTAL_VOTES}</p></dd>
+							<dd class="resultbar"><p class="portal-poll-subtext">{L_TOTAL_VOTES} : {poll.TOTAL_VOTES}</p></dd>
 						</dl>
 					<!-- ENDIF -->
 
 					<!-- IF poll.S_CAN_VOTE -->
-						<dl style="border-top: none;">
+						<dl class="portal-poll-vote">
 							<dt>&nbsp;</dt>
 							<dd class="resultbar"><input type="submit" name="update" value="{L_SUBMIT_VOTE}" class="button1" /></dd>
 						</dl>
 					<!-- ENDIF -->
 
 					<!-- IF not poll.S_DISPLAY_RESULTS -->
-						<dl style="border-top: none;">
+						<dl class="portal-poll-vote">
 							<dt>&nbsp;</dt>
-							<dd class="resultbar"><p style="font-size:1.0em;"><a href="{poll.U_VIEW_RESULTS}">{L_VIEW_RESULTS}</a></p></dd>
+							<dd class="resultbar"><p class="portal-poll-subtext"><a href="{poll.U_VIEW_RESULTS}">{L_VIEW_RESULTS}</a></p></dd>
 						</dl>
 					<!-- ENDIF -->
 
-						<dl style="border-top: none;">
+						<dl class="portal-poll-vote">
 							<dt>&nbsp;</dt>
-							<dd class="resultbar"><p style="font-size:1.0em;"><a href="{poll.U_VIEW_TOPIC}">{L_VIEW_TOPIC}</a></p></dd>
+							<dd class="resultbar"><p class="portal-poll-subtext"><a href="{poll.U_VIEW_TOPIC}">{L_VIEW_TOPIC}</a></p></dd>
 						</dl>
 					</fieldset>
 				</div>
@@ -55,9 +55,9 @@
 		</div>
 	</div>
 	<!-- ELSE -->
-	<div class="panel bg1" style="margin-bottom: 0px">
+	<div class="panel bg1 portal-no-margin">
 		<div class="inner">
-			<span style="text-align: center;"><strong>{L_NO_POLL}</strong></span>
+			<span><strong>{L_NO_POLL}</strong></span>
 		</div>
 	</div>
 	<!-- ENDIF -->
