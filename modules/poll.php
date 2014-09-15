@@ -22,7 +22,7 @@ class poll extends module_base
 	* right		8
 	* bottom	16
 	*/
-	public $columns = 21;
+	public $columns = 31;
 
 	/**
 	* Default modulename
