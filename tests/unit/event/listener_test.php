@@ -58,12 +58,16 @@ class listener_test extends \phpbb_template_template_test_case
 			new \phpbb_mock_cache()
 		);
 		$finder->set_extensions(array_keys($manager->all_enabled()));
+		$request = new \phpbb_mock_request();
+		$request->overwrite('SCRIPT_NAME', 'app.php', \phpbb\request\request_interface::SERVER);
+		$request->overwrite('SCRIPT_FILENAME', 'app.php', \phpbb\request\request_interface::SERVER);
+		$request->overwrite('REQUEST_URI', 'app.php', \phpbb\request\request_interface::SERVER);
 
 		$this->config = new \phpbb\config\config(array('enable_mod_rewrite' => '1'));
 		$provider = new \phpbb\controller\provider();
 		$provider->find_routing_files($finder);
 		$provider->find(dirname(__FILE__) . '/');
-		$this->controller_helper = new \phpbb_mock_controller_helper($this->template, $this->user, $this->config, $provider, $manager, '', 'php', dirname(__FILE__) . '/');
+		$this->controller_helper = new \phpbb_mock_controller_helper($this->template, $this->user, $this->config, $provider, $manager, new \phpbb\symfony_request($request), new \phpbb\filesystem(), '', 'php', dirname(__FILE__) . '/');
 
 		$this->path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request(
