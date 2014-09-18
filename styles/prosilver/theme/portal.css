@@ -39,6 +39,10 @@
 	text-decoration: underline;
 }
 
+.rtl .portal-navigation .menutitle {
+	text-align: right;
+}
+
 .calendar-info {
 	list-style-type: none;
 }
@@ -300,6 +304,20 @@ a.portal-forumtitle {
 	width: 100%;
 }
 
+.portal-side {
+	text-align: left;
+	margin: 5px 5px 5px 5px
+}
+
+.rtl .portal-side {
+	text-align: right;
+}
+
+.portal-side-wrapper {
+	border-left: 0;
+	width: 100%;
+}
+
 /*
 * This is needed in order to have the same spacing between blocks
 * as we have between the top blocks and the headerbar
@@ -352,6 +370,7 @@ a.portal-forumtitle {
 	background-image: url("./images/portal/arrowbullet_rtl.gif");
 	background-position: center right; /* custom bullet list image */
 	padding-right: 19px; /* link text is indented 19px */
+	text-align: right;
 }
 
 /* Portal clock
