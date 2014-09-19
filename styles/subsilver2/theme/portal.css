@@ -2,12 +2,18 @@
 -------------------------------------- */
 #portal-clock {
 	position: relative;
-	width: 100%;
+	width: 128px;
+	margin: -20px auto;
+}
+
+.rtl #portal-clock {
+	/* Arabic clocks are ltr */
+	direction: ltr;
 }
 
 #portal-clock-front, #portal-clock-back {
 	position: absolute;
-	top: 0px;
+	top: 0;
 }
 
 #portal-clock-front-upper div {
