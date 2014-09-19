@@ -383,6 +383,11 @@ a.portal-forumtitle {
 	height: 50px;
 }
 
+.rtl .portal-clock-wrapper {
+	/* Arabic clocks are ltr */
+	direction: ltr;
+}
+
 .portal-clock {
 	position: relative;
 	width: 100%;
