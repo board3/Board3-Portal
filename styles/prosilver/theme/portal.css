@@ -281,10 +281,18 @@ a.portal-forumtitle {
 	float: left;
 }
 
+.rtl #portal-left, .rtl #portal-right {
+	float: right;
+}
+
 #portal-center-wrapper {
 	width: 100%;
 	float: left;
 	display: block;
+}
+
+.rtl #portal-center-wrapper {
+	float: right;
 }
 
 #portal-column-area {
@@ -294,6 +302,11 @@ a.portal-forumtitle {
 
 #portal-left {
 	margin-left: -100%;
+}
+
+.rtl #portal-left {
+	margin-right: -100%;
+	margin-left: 0;
 }
 
 /*
