@@ -134,6 +134,6 @@ class listener implements EventSubscriberInterface
 	 */
 	protected function has_portal_access()
 	{
-		return $this->auth->acl_get('u_view_portal') && $this->config['board3_portal_enable'];
+		return $this->auth->acl_get('u_view_portal') && $this->config['board3_enable'];
 	}
 }
