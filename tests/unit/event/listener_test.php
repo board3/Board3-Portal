@@ -63,7 +63,10 @@ class listener_test extends \phpbb_template_template_test_case
 		$request->overwrite('SCRIPT_FILENAME', 'app.php', \phpbb\request\request_interface::SERVER);
 		$request->overwrite('REQUEST_URI', 'app.php', \phpbb\request\request_interface::SERVER);
 
-		$this->config = new \phpbb\config\config(array('enable_mod_rewrite' => '1'));
+		$this->config = new \phpbb\config\config(array(
+			'enable_mod_rewrite' => '1',
+			'board3_portal_enable' => '1',
+		));
 		$provider = new \phpbb\controller\provider();
 		$provider->find_routing_files($finder);
 		$provider->find(dirname(__FILE__) . '/');
@@ -90,6 +93,7 @@ class listener_test extends \phpbb_template_template_test_case
 
 		$this->listener = new \board3\portal\event\listener(
 			$this->auth,
+			$this->config,
 			$this->controller_helper,
 			$this->path_helper,
 			$this->template,
