@@ -16,6 +16,9 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\auth\auth */
 	protected $auth;
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
 	/** @var \phpbb\controller\helper */
 	protected $controller_helper;
 
@@ -35,15 +38,17 @@ class listener implements EventSubscriberInterface
 	* Constructor of Board3 Portal event listener
 	*
 	* @param \phpbb\auth\auth		$auth	phpBB auth object
+	* @param \phpbb\config\config		$config phpBB config
 	* @param \phpbb\controller\helper	$controller_helper	Controller helper object
 	* @param \phpbb\path_helper		$path_helper		phpBB path helper
 	* @param \phpbb\template\template	$template		Template object
 	* @param \phpbb\user			$user			User object
 	* @param string				$php_ext		phpEx
 	*/
-	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $controller_helper, \phpbb\path_helper $path_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\path_helper $path_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
 		$this->auth = $auth;
+		$this->config = $config;
 		$this->controller_helper = $controller_helper;
 		$this->path_helper = $path_helper;
 		$this->template = $template;
@@ -103,7 +108,7 @@ class listener implements EventSubscriberInterface
 	*/
 	public function add_portal_link()
 	{
-		if (!$this->auth->acl_get('u_view_portal'))
+		if (!$this->has_portal_access())
 		{
 			return;
 		}
@@ -120,5 +125,15 @@ class listener implements EventSubscriberInterface
 		$this->template->assign_vars(array(
 			'U_PORTAL'	=> $portal_link,
 		));
+	}
+
+	/**
+	 * Check if user should be able to access portal
+	 *
+	 * @return bool True of user should be able to access it, false if not
+	 */
+	protected function has_portal_access()
+	{
+		return $this->auth->acl_get('u_view_portal') && $this->config['board3_enable'];
 	}
 }

@@ -82,6 +82,7 @@ services:
         class: board3\portal\event\listener
         arguments:
             - @auth
+            - @config
             - @controller.helper
             - @path_helper
             - @template
