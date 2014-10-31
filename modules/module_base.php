@@ -14,8 +14,20 @@ namespace board3\portal\modules;
 */
 class module_base implements module_interface
 {
+	/** @var int Module's allowed columns */
+	protected $columns;
+
+	/** @var string Module name */
+	protected $name;
+
+	/** @var string Module image source */
+	protected $image_src;
+
+	/** @var string Module language file */
+	protected $language;
+
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_allowed_columns()
 	{
@@ -23,7 +35,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_name()
 	{
@@ -31,7 +43,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_image()
 	{
@@ -39,7 +51,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_language()
 	{
@@ -47,7 +59,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_side($module_id)
 	{
@@ -55,7 +67,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_center($module_id)
 	{
@@ -63,15 +75,15 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_acp($module_id)
 	{
-		return false;
+		return array();
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function install($module_id)
 	{
@@ -79,7 +91,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function uninstall($module_id, $db)
 	{

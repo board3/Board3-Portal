@@ -86,7 +86,7 @@ class welcome extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_center($module_id)
 	{
@@ -106,7 +106,7 @@ class welcome extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_acp($module_id)
 	{
@@ -120,7 +120,7 @@ class welcome extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function install($module_id)
 	{
@@ -132,7 +132,7 @@ class welcome extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function uninstall($module_id, $db)
 	{
@@ -184,7 +184,6 @@ class welcome extends module_base
 
 				$welcome_message = $this->request->variable('welcome_message', '', true);
 				$uid = $bitfield = $flags = '';
-				$options = 7;
 				generate_text_for_storage($welcome_message, $uid, $bitfield, $flags, true, true, true);
 
 				// first check for obvious errors, we don't want to waste server resources

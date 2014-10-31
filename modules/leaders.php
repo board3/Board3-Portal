@@ -85,7 +85,7 @@ class leaders extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_side($module_id)
 	{
@@ -213,6 +213,10 @@ class leaders extends module_base
 				{
 					$which_row = 'b3p_moderators';
 				}
+				else
+				{
+					continue;
+				}
 
 				if ($row['group_type'] == GROUP_HIDDEN && !$this->auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel') && $row['ug_user_id'] != $this->user->data['user_id'])
 				{
@@ -244,7 +248,7 @@ class leaders extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_acp($module_id)
 	{
@@ -258,7 +262,7 @@ class leaders extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function install($module_id)
 	{
@@ -268,7 +272,7 @@ class leaders extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function uninstall($module_id, $db)
 	{

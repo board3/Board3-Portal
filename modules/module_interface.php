@@ -56,7 +56,7 @@ interface module_interface
 	*
 	* @param int $module_id Module's ID
 	*
-	* @return string Module template file
+	* @return string|array Module template file
 	*/
 	public function get_template_side($module_id);
 
@@ -65,7 +65,7 @@ interface module_interface
 	*
 	* @param int $module_id Module's ID
 	*
-	* @return string Module template file
+	* @return string|array Module template file
 	*/
 	public function get_template_center($module_id);
 

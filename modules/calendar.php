@@ -51,6 +51,7 @@ class calendar extends module_base
 	* additional variables
 	*/
 	protected $mini_cal_fdow;
+	protected $mini_cal_month;
 
 	/**
 	* User datetime object
@@ -143,7 +144,7 @@ class calendar extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_side($module_id)
 	{
@@ -177,7 +178,6 @@ class calendar extends module_base
 		$mini_cal_count = $this->mini_cal_fdow;
 		$mini_cal_this_year = $this->dateYYYY;
 		$mini_cal_this_month = $this->dateMM;
-		$mini_cal_this_day = $this->dateDD;
 		$mini_cal_month_days = $this->daysMonth;
 
 		// output our general calendar bits
@@ -264,6 +264,7 @@ class calendar extends module_base
 
 		if (!empty($events) && $this->config['board3_display_events_' . $module_id])
 		{
+			$time_ary = array();
 			// we sort the $events array by the start time
 			foreach ($events as $key => $cur_event)
 			{
@@ -337,7 +338,7 @@ class calendar extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_acp($module_id)
 	{
@@ -357,7 +358,7 @@ class calendar extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function install($module_id)
 	{
@@ -374,7 +375,7 @@ class calendar extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function uninstall($module_id, $db)
 	{
@@ -520,6 +521,7 @@ class calendar extends module_base
 					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_EVENT_ADDED', false, array($event_title));
 				}
 
+				$time_ary = array();
 				// we sort the $events array by the start time
 				foreach ($events as $key => $cur_event)
 				{
@@ -601,8 +603,6 @@ class calendar extends module_base
 				$this->db->sql_freeresult($result);
 
 				return;
-
-			break;
 		}
 
 		for ($i = 0; $i < sizeof($events); $i++)
@@ -618,7 +618,7 @@ class calendar extends module_base
 				'EVENT_TITLE'	=> ($action != 'add') ? ((isset($this->user->lang[$events[$i]['title']])) ? $this->user->lang[$events[$i]['title']] : $events[$i]['title']) : '',
 				'EVENT_DESC'	=> ($action != 'add') ? $events[$i]['desc'] : '',
 				'EVENT_START'	=> ($action != 'add') ? $this->user->format_date($events[$i]['start_time'], $start_time_format) : '',
-				'EVENT_END'		=> ($action != 'add' && !$event_all_day) ? $this->user->format_date($events[$i]['end_time'], $end_time_format) : '',
+				'EVENT_END'		=> ($action != 'add' && !$event_all_day && !empty($end_time_format)) ? $this->user->format_date($events[$i]['end_time'], $end_time_format) : '',
 				'EVENT_URL'		=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? $this->validate_url($events[$i]['url']) : '',
 				'EVENT_URL_RAW'	=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? $events[$i]['url'] : '',
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,

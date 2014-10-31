@@ -42,7 +42,7 @@ class clock extends module_base
 	public $language = 'portal_clock_module';
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_side($module_id)
 	{
@@ -50,7 +50,7 @@ class clock extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_acp($module_id)
 	{
