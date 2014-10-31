@@ -107,7 +107,6 @@ class main_menu extends module_base
 	*/
 	public function get_template_side($module_id)
 	{
-		$links = array();
 		$portal_config = obtain_portal_config();
 
 		$links = $this->utf_unserialize($portal_config['board3_menu_array_' . $module_id]);
@@ -117,7 +116,7 @@ class main_menu extends module_base
 
 		for ($i = 0; $i < sizeof($links); $i++)
 		{
-			if($links[$i]['type'] == self::LINK_CAT)
+			if ($links[$i]['type'] == self::LINK_CAT)
 			{
 				$this->template->assign_block_vars('portalmenu', array(
 					'CAT_TITLE'		=> (isset($this->user->lang[$links[$i]['title']])) ? $this->user->lang[$links[$i]['title']] : $links[$i]['title'],
@@ -126,7 +125,7 @@ class main_menu extends module_base
 			}
 			else
 			{
-				if($links[$i]['type'] == self::LINK_INT)
+				if ($links[$i]['type'] == self::LINK_INT)
 				{
 					$links[$i]['url'] = str_replace('&', '&amp;', $links[$i]['url']); // we need to do this in order to prevent XHTML validation errors
 					$cur_url = append_sid($this->phpbb_root_path . $links[$i]['url']); // the user should know what kind of file it is
@@ -139,7 +138,7 @@ class main_menu extends module_base
 				$cur_permissions = explode(',', $links[$i]['permission']);
 				$permission_check = array_intersect($groups_ary, $cur_permissions);
 
-				if(!empty($permission_check) || $links[$i]['permission'] == '')
+				if (!empty($permission_check) || $links[$i]['permission'] == '')
 				{
 					$this->template->assign_block_vars('portalmenu.links', array(
 						'LINK_TITLE'		=> (isset($this->user->lang[$links[$i]['title']])) ? $this->user->lang[$links[$i]['title']] : $links[$i]['title'],
@@ -175,10 +174,11 @@ class main_menu extends module_base
 	{
 		// get the correct group IDs from the database
 		$in_ary = array('GUESTS', 'REGISTERED', 'REGISTERED_COPPA');
+		$groups_ary = array();
 
 		$sql = 'SELECT group_id, group_name FROM ' . GROUPS_TABLE . ' WHERE ' . $this->db->sql_in_set('group_name', $in_ary);
 		$result = $this->db->sql_query($sql);
-		while($row = $this->db->sql_fetchrow($result))
+		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$groups_ary[$row['group_name']] = $row['group_id'];
 		}
@@ -241,7 +241,7 @@ class main_menu extends module_base
 			'',
 		);
 
-		foreach($links_urls as $i => $url)
+		foreach ($links_urls as $i => $url)
 		{
 			$links[] = array(
 				'title' 		=> $links_titles[$i],
@@ -298,8 +298,6 @@ class main_menu extends module_base
 		$link_id = $this->request->variable('id', 99999999); // 0 will trigger unwanted behavior, therefore we set a number we should never reach
 		$portal_config = obtain_portal_config();
 
-		$links = array();
-
 		$links = $this->utf_unserialize($portal_config['board3_menu_array_' . $module_id]);
 
 		$u_action = append_sid('index.' . $this->php_ext, 'i=%5Cboard3%5Cportal%5Cacp%5Cportal_module&amp;mode=config&amp;module_id=' . $module_id);
@@ -326,7 +324,7 @@ class main_menu extends module_base
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
 				$result = $this->db->sql_query($sql);
-				while($row = $this->db->sql_fetchrow($result))
+				while ($row = $this->db->sql_fetchrow($result))
 				{
 					$groups_ary[] = $row['group_id'];
 				}
@@ -481,7 +479,7 @@ class main_menu extends module_base
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
 				$result = $this->db->sql_query($sql);
-				while($row = $this->db->sql_fetchrow($result))
+				while ($row = $this->db->sql_fetchrow($result))
 				{
 					$this->template->assign_block_vars('permission_setting_menu', array(
 						'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
@@ -492,8 +490,6 @@ class main_menu extends module_base
 				$this->db->sql_freeresult($result);
 
 				return;
-
-			break;
 		}
 
 		for ($i = 0; $i < sizeof($links); $i++)
