@@ -186,7 +186,7 @@ class custom extends module_base
 
 		$u_action = append_sid('index.' . $this->php_ext, 'i=\board3\portal\acp\portal_module&amp;mode=config&amp;module_id=' . $module_id);
 
-		switch($action)
+		switch ($action)
 		{
 			// Save changes
 			case 'save':
@@ -202,14 +202,14 @@ class custom extends module_base
 				$custom_image_src = $this->request->variable('module_image', '', true);
 				$groups_ary = array();
 				$uid = $bitfield = $flags = '';
-				$options = 7;
-				if($custom_bbcode)
+
+				if ($custom_bbcode)
 				{
 					generate_text_for_storage($custom_code, $uid, $bitfield, $flags, true, true, true);
 				}
 
 				// first check for obvious errors, we don't want to waste server resources
-				if(empty($custom_code))
+				if (empty($custom_code))
 				{
 					trigger_error($this->user->lang['ACP_PORTAL_CUSTOM_CODE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
 				}
@@ -219,7 +219,7 @@ class custom extends module_base
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
 				$result = $this->db->sql_query($sql);
-				while($row = $this->db->sql_fetchrow($result))
+				while ($row = $this->db->sql_fetchrow($result))
 				{
 					$groups_ary[] = $row['group_id'];
 				}
@@ -261,12 +261,12 @@ class custom extends module_base
 				$groups_ary = array();
 
 				// first check for obvious errors, we don't want to waste server resources
-				if(empty($custom_code))
+				if (empty($custom_code))
 				{
 					trigger_error($this->user->lang['ACP_PORTAL_CUSTOM_CODE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				if($custom_bbcode)
+				if ($custom_bbcode)
 				{
 					$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
 					$uid  =  (isset($this->config['board3_custom_' . $module_id . '_uid'])) ? $this->config['board3_custom_' . $module_id . '_uid'] : '';
@@ -291,7 +291,7 @@ class custom extends module_base
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
 				$result = $this->db->sql_query($sql);
-				while($row = $this->db->sql_fetchrow($result))
+				while ($row = $this->db->sql_fetchrow($result))
 				{
 					$groups_ary[] = $row['group_id'];
 				}
@@ -302,7 +302,7 @@ class custom extends module_base
 			// Edit or add menu item
 			case 'reset':
 			default:
-				if(!isset($custom_code))
+				if (!isset($custom_code))
 				{
 					$custom_code = generate_text_for_edit($portal_config['board3_custom_' . $module_id . '_code'], $this->config['board3_custom_' . $module_id . '_uid'], '');
 				}
@@ -328,7 +328,7 @@ class custom extends module_base
 						FROM ' . GROUPS_TABLE . '
 						ORDER BY group_id ASC';
 				$result = $this->db->sql_query($sql);
-				while($row = $this->db->sql_fetchrow($result))
+				while ($row = $this->db->sql_fetchrow($result))
 				{
 					$this->template->assign_block_vars('permission_setting', array(
 						'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
@@ -338,7 +338,7 @@ class custom extends module_base
 				}
 				$this->db->sql_freeresult($result);
 
-				if(!function_exists('display_forums'))
+				if (!function_exists('display_forums'))
 				{
 					include($this->phpbb_root_path . 'includes/functions_display.' . $this->php_ext);
 				}
@@ -396,7 +396,7 @@ class custom extends module_base
 
 		$title = (!empty($this->config['board3_custom_' . $module_id . '_title'])) ? ((isset($this->user->lang[$this->config['board3_custom_' . $module_id . '_title']])) ? $this->user->lang[$this->config['board3_custom_' . $module_id . '_title']] : $this->config['board3_custom_' . $module_id . '_title']) : $this->user->lang[$this->name];
 
-		if(!empty($assign_code))
+		if (!empty($assign_code))
 		{
 			return array(
 				'template'	=> 'custom_' . $type . '.html',
