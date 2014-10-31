@@ -14,6 +14,18 @@ namespace board3\portal\modules;
 */
 class module_base implements module_interface
 {
+	/** @var int Module's allowed columns */
+	protected $columns;
+
+	/** @var string Module name */
+	protected $name;
+
+	/** @var string Module image source */
+	protected $image_src;
+
+	/** @var string Module language file */
+	protected $language;
+
 	/**
 	* {@inheritdoc}
 	*/
@@ -67,7 +79,7 @@ class module_base implements module_interface
 	*/
 	public function get_template_acp($module_id)
 	{
-		return false;
+		return array();
 	}
 
 	/**
