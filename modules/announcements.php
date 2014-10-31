@@ -409,7 +409,7 @@ class announcements extends module_base
 				if ($this->config['board3_number_of_announcements_' . $module_id] <> 0 && $this->config['board3_announcements_archive_' . $module_id])
 				{
 					$this->template->assign_vars(array(
-						'AP_PAGINATION'			=> $pagination,
+						'AP_PAGINATION'			=> (!empty($pagination)) ? $pagination : '',
 						'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $this->user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($this->user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
 						'AP_PAGE_NUMBER'		=> $this->pagination->on_page($total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start))
 					);

@@ -390,7 +390,7 @@ class news extends module_base
 				if ($this->config['board3_number_of_news_' . $module_id] <> 0 && $this->config['board3_news_archive_' . $module_id])
 				{
 					$this->template->assign_vars(array(
-						'NP_PAGINATION'		=> $pagination,
+						'NP_PAGINATION'		=> (!empty($pagination)) ? $pagination : '',
 						'TOTAL_NEWS'		=> ($total_news == 1) ? $this->user->lang['VIEW_FORUM_TOPIC'] : $this->user->lang('VIEW_FORUM_TOPICS', $total_news),
 						'NP_PAGE_NUMBER'	=> $this->pagination->on_page($total_news, $this->config['board3_number_of_news_' . $module_id], $start))
 					);
