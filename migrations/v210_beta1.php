@@ -72,6 +72,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
+			array('custom', array(array($this, 'clean_portal_data'))),
 			array('config.add', array('board3_portal_version', '2.1.0b1')),
 			array('config.add', array('board3_enable', 1)),
 			array('config.add', array('board3_left_column', 1)),
@@ -552,5 +553,28 @@ class v210_beta1 extends \phpbb\db\migration\migration
 		}
 
 		$this->portal_config[$config_name] = $config_value;
+	}
+
+	/**
+	 * Clean portal data upon fresh install from config table
+	 */
+	public function clean_portal_data()
+	{
+		// Only run if portal version is not beta 1 or doesn't exist
+		if (!isset($this->config['board3_portal_version']) || $this->config['board3_portal_version'] !== '2.1.0-b1')
+		{
+			foreach ($this->config as $key => $entry)
+			{
+				if (strpos($key, 'board3_porrtal_') === 0)
+				{
+					$this->config->delete($key);
+				}
+			}
+
+			// Make sure entries are removed from database
+			$sql = 'DELETE FROM ' . CONFIG_TABLE . '
+					WHERE config_name ' . $this->db->sql_like_expression('board3_portal_' . $this->db->get_any_char());
+			$this->db->sql_query($sql);
+		}
 	}
 }
