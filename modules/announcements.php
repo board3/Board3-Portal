@@ -231,7 +231,7 @@ class announcements extends module_base
 					// unread?
 					$forum_id = $fetch_news[$i]['forum_id'];
 					$topic_id = $fetch_news[$i]['topic_id'];
-					//$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
+
 					$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 					$real_forum_id = ($forum_id == 0) ? $fetch_news['global_id']: $forum_id;
 					$read_full_url = ($this->request->is_set('ap')) ? 'ap='. $start . '&amp;announcement=' . $i . '#a' . $i : 'announcement=' . $i . '#a' . $i;
@@ -243,7 +243,7 @@ class announcements extends module_base
 					}
 
 					$replies = ($this->auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
-					$folder_img = $folder_alt = $topic_type = $folder = $folder_new = '';
+
 					switch ($fetch_news[$i]['topic_type'])
 					{
 						case POST_GLOBAL:
@@ -270,10 +270,7 @@ class announcements extends module_base
 						$folder .= '_locked';
 						$folder_new .= '_locked';
 					}
-					if ($fetch_news[$i]['topic_type'] == POST_GLOBAL)
-					{
-						$global_announce_list[$fetch_news[$i]['topic_id']] = true;
-					}
+
 					if ($fetch_news[$i]['topic_posted'])
 					{
 						$folder .= '_mine';
@@ -336,7 +333,7 @@ class announcements extends module_base
 					if ($this->config['board3_number_of_announcements_' . $module_id] != 0 && $this->config['board3_announcements_archive_' . $module_id])
 					{
 						$this->template->assign_vars(array(
-							'AP_PAGINATION'			=> $pagination,
+							'AP_PAGINATION'			=> (isset($pagination)) ? $pagination : '',
 							'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $this->user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($this->user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
 							'AP_PAGE_NUMBER'		=> $this->pagination->on_page($total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start))
 						);
@@ -359,7 +356,7 @@ class announcements extends module_base
 
 				$forum_id = $fetch_news[$i]['forum_id'];
 				$topic_id = $fetch_news[$i]['topic_id'];
-				$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id, $global_announce_list = false);
+				$topic_tracking_info = get_complete_topic_tracking($forum_id, $topic_id);
 				$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 				$open_bracket = '[ ';
 				$close_bracket = ' ]';
