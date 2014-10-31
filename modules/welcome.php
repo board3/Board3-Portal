@@ -184,7 +184,6 @@ class welcome extends module_base
 
 				$welcome_message = $this->request->variable('welcome_message', '', true);
 				$uid = $bitfield = $flags = '';
-				$options = 7;
 				generate_text_for_storage($welcome_message, $uid, $bitfield, $flags, true, true, true);
 
 				// first check for obvious errors, we don't want to waste server resources

@@ -113,7 +113,6 @@ class user_menu extends module_base
 
 			if ($this->auth->acl_get('m_approve'))
 			{
-				$m_approve_fid_ary = array(-1);
 				$m_approve_fid_sql = '';
 			}
 			else if ($this->auth->acl_getf_global('m_approve'))
@@ -123,7 +122,6 @@ class user_menu extends module_base
 			}
 			else
 			{
-				$m_approve_fid_ary = array();
 				$m_approve_fid_sql = ' AND p.post_visibility = 1';
 			}
 
@@ -141,7 +139,6 @@ class user_menu extends module_base
 			$sql_where = 'AND t.topic_moved_id = 0
 							' . str_replace(array('p.', 'post_'), array('t.', 'topic_'), $m_approve_fid_sql) . '
 							' . ((sizeof($ex_fid_ary)) ? 'AND ' . $this->db->sql_in_set('t.forum_id', $ex_fid_ary, true) : '');
-			$unread_list = array();
 			$unread_list = get_unread_topics($this->user->data['user_id'], $sql_where, 'ORDER BY t.topic_id DESC');
 			$unread_posts_count = sizeof($unread_list);
 
@@ -150,7 +147,7 @@ class user_menu extends module_base
 			$username = $this->user->data['username'];
 			$colour = $this->user->data['user_colour'];
 			$avatar_img = phpbb_get_avatar(\phpbb\avatar\manager::clean_row($this->user->data, 'user'), 'USER_AVATAR');
-			$rank_title = $rank_img = '';
+			$rank_title = $rank_img = $rank_img_src = '';
 			\get_user_rank($this->user->data['user_rank'], $this->user->data['user_posts'], $rank_title, $rank_img, $rank_img_src);
 
 			// Assign specific vars

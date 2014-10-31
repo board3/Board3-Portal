@@ -209,7 +209,7 @@ class poll extends module_base
 				// Cookie based guest tracking ... I don't like this but hum ho
 				// it's oft requested. This relies on "nice" users who don't feel
 				// the need to delete cookies to mess with results.
-				if ($request->is_set($this->config['cookie_name'] . '_poll_' . $up_topic_id, \phpbb\request\request_interface::COOKIE))
+				if ($this->request->is_set($this->config['cookie_name'] . '_poll_' . $up_topic_id, \phpbb\request\request_interface::COOKIE))
 				{
 					$cur_voted_id = explode(',', $this->request->variable($this->config['cookie_name'] . '_poll_' . $up_topic_id, '', true, \phpbb\request\request_interface::COOKIE));
 					$cur_voted_id = array_map('intval', $cur_voted_id);
@@ -317,12 +317,9 @@ class poll extends module_base
 			}
 		}
 
-		$where = '';
 		$poll_forums = false;
 
 		// Get readable forums
-		$forum_list = array();
-
 		$forum_list = array_unique(array_keys($this->auth->acl_getf('f_read', true)));
 
 		if($this->config['board3_poll_topic_id_' . $module_id] !== '')

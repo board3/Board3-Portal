@@ -119,6 +119,7 @@ class news extends module_base
 		$this->user->add_lang('viewforum');
 		$start = $this->request->variable('np', 0);
 		$start = ($start < 0) ? 0 : $start;
+		$total_news = 1;
 
 		// Fetch news from portal functions.php with check if "read full" is requested.
 		$portal_news_length = ($news < 0) ? $this->config['board3_news_length_' . $module_id] : 0;
@@ -234,7 +235,7 @@ class news extends module_base
 					}
 
 					$replies = ($this->auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
-					$folder_img = $folder_alt = $topic_type = $folder = $folder_new = '';
+
 					switch ($fetch_news[$i]['topic_type'])
 					{
 						case POST_STICKY:
@@ -325,7 +326,7 @@ class news extends module_base
 					if ($this->config['board3_number_of_news_' . $module_id] <> 0 && $this->config['board3_news_archive_' . $module_id])
 					{
 						$this->template->assign_vars(array(
-							'NP_PAGINATION'		=> $pagination,
+							'NP_PAGINATION'		=> (!empty($pagination)) ? $pagination : '',
 							'TOTAL_NEWS'		=> ($total_news == 1) ? sprintf($this->user->lang['VIEW_FORUM_TOPICS'][1], $total_news) : sprintf($this->user->lang['VIEW_FORUM_TOPICS'][2], $total_news),
 							'NP_PAGE_NUMBER'	=> $this->pagination->on_page($total_news, $this->config['board3_number_of_news_' . $module_id], $start))
 						);

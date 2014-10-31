@@ -108,7 +108,7 @@ class random_member extends module_base
 
 		$avatar_img = phpbb_get_avatar(\phpbb\avatar\manager::clean_row($row, 'user'), 'USER_AVATAR');
 
-		$rank_title = $rank_img = '';
+		$rank_title = $rank_img = $rank_img_src = '';
 		get_user_rank($row['user_rank'], $row['user_posts'], $rank_title, $rank_img, $rank_img_src);
 
 		$username = $row['username'];
