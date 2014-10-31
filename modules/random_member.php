@@ -71,7 +71,7 @@ class random_member extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_side($module_id)
 	{
@@ -138,7 +138,7 @@ class random_member extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_acp($module_id)
 	{

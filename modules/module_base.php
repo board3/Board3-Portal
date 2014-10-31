@@ -15,7 +15,7 @@ namespace board3\portal\modules;
 class module_base implements module_interface
 {
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_allowed_columns()
 	{
@@ -23,7 +23,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_name()
 	{
@@ -31,7 +31,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_image()
 	{
@@ -39,7 +39,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_language()
 	{
@@ -47,7 +47,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_side($module_id)
 	{
@@ -55,7 +55,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_center($module_id)
 	{
@@ -63,7 +63,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_acp($module_id)
 	{
@@ -71,7 +71,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function install($module_id)
 	{
@@ -79,7 +79,7 @@ class module_base implements module_interface
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function uninstall($module_id, $db)
 	{

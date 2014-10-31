@@ -71,7 +71,7 @@ class modulename extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_center($module_id)
 	{
@@ -83,7 +83,7 @@ class modulename extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_side($module_id)
 	{
@@ -95,7 +95,7 @@ class modulename extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function get_template_acp($module_id)
 	{
@@ -110,7 +110,7 @@ class modulename extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function install($module_id)
 	{
@@ -120,7 +120,7 @@ class modulename extends module_base
 	}
 
 	/**
-	* @inheritdoc
+	* {@inheritdoc}
 	*/
 	public function uninstall($module_id, $db)
 	{

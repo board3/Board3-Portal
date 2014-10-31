@@ -266,7 +266,7 @@ class portal_upload
 	* @param $from string Can be a file or a directory. Will move either the file or all files within the directory
 	* @param $to string Where to move the file(s) to. If not specified then will get moved to the root folder
 	* @param $strip Used for FTP only
-	* @return mixed: Bool true on success, error string on failure, NULL if no action was taken
+	* @return mixed Bool true on success, error string on failure, NULL if no action was taken
 	* 
 	* NOTE: function should preferably not return in case of failure on only one file.  
 	* 	The current method makes error handling difficult 
