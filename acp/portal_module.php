@@ -1170,10 +1170,11 @@ class portal_module
 				}
 				$confirm_text = (isset($this->user->lang[$module_data['module_name']])) ? sprintf($this->user->lang['DELETE_MODULE_CONFIRM'], $this->user->lang[$module_data['module_name']]) : sprintf($this->user->lang['DELETE_MODULE_CONFIRM'], utf8_normalize_nfc($module_data['module_name']));
 				confirm_box(false, $confirm_text, build_hidden_fields(array(
-					'i'			=> $id,
-					'mode'		=> $mode,
-					'action'	=> $action,
-					'module_id'	=> $module_id,
+					'i'					=> $id,
+					'mode'				=> $mode,
+					'action'			=> $action,
+					'module_id'			=> $module_id,
+					'module_classname'	=> $module_classname,
 				)));
 			}
 		}

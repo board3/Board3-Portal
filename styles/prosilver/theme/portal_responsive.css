@@ -23,11 +23,15 @@
 
 @media only screen and (max-width: 895px), only screen and (max-device-width: 895px)
 {
-	#portal-right { margin-left: 0 !important; }
-	#portal-center {
+	div#portal-right { width: 49% !important; }
+	div#portal-left { width: 50% !important; }
+	div#portal-center {
 		margin-right: 0 !important;
+		margin-left: 0 !important;
 		padding-right: 0 !important;
+		padding-left: 0 !important;
 	}
+	.responsive-portal-news dt { width: 100% !important; }
 }
 
 @media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
@@ -52,5 +56,13 @@
 	.portal-responsive-show { display: block !important; }
 	.portal-responsive-hide { display: none !important; }
 	#portal-body { padding-top: 0px !important; }
-	.portal-clear { display: none !important; }
+	#portal-right > .portal-clear, #portal-body > .portal-clear, #portal-left > .portal-clear,
+	#portal-center > .portal-clear, #portal-login-box .portal-clear { display: none !important; }
+	#portal-right { width: 50% !important; }
+	#portal-left { width: 50% !important; }
+	#portal-center {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding-left: 0 !important;
+	}
 }
