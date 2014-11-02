@@ -19,17 +19,22 @@ var portal_right_width;
  */
 phpbb.b3p_fix_right_column_margin = function() {
 	var width = $(window).width();
+	var $portal_right = $('#portal-right');
+	var $portal_left = $('#portal-left');
+	var $portal_center = $('#portal-center');
 
-	if (width <= 880) {
+	if (width <= 895) {
 		// Get height of left and center column
-		var center_height = $('#portal-center').outerHeight();
-		var left_height = $('#portal-left').outerHeight();
-
-		$('#portal-right').css('margin-top', -(center_height - left_height) + 'px');
-		$('#portal-right').width($('#portal-left').width());
+		var right_height = $portal_right.height();
+		var left_height = $portal_left.height();
+		// Get correct margin-left for portal-right and add 10px for padding
+		$portal_right.css('margin-left', - ($portal_right.width() + 1));
+		$portal_center.css('margin-top', Math.max(left_height, right_height) + 'px');
 	} else {
-		$('#portal-right').css('margin-top', '0px');
-		$('#portal-right').width(portal_right_width);
+		$portal_right.css('margin-top', '0px');
+		$portal_right.css('margin-left', -$portal_left.width());
+		$portal_right.width($portal_left.width());
+		$portal_center.css('margin-top', 0);
 	}
 };
 
