@@ -23,7 +23,7 @@ phpbb.b3p_fix_right_column_margin = function() {
 	var $portal_left = $('#portal-left');
 	var $portal_center = $('#portal-center');
 
-	if (width <= 895) {
+	if (width <= (895 - $.getScrollbarWidth())) {
 		// Get height of left and center column
 		var right_height = $portal_right.height();
 		var left_height = $portal_left.height();
