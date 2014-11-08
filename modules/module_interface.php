@@ -47,7 +47,9 @@ interface module_interface
 	* File must be in "board3/portal/language/{$user->lang}/portal/" or
 	* this should return false.
 	*
-	* @return string|bool Language file or false
+	* @return string|bool|array	Language file, array of vendor and language file
+	*		or false. Array has to match this format:
+	*		array('vendor' => 'foo', 'file' => 'bar')
 	*/
 	public function get_language();
 
