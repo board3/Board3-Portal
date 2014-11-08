@@ -191,7 +191,15 @@ class helper
 	{
 		if ($language_file = $module->get_language())
 		{
-			$this->user->add_lang_ext('board3/portal', 'modules/' . $language_file);
+			// Load language file from vendor if specified
+			if (is_array($language_file))
+			{
+				$this->user->add_lang_ext($language_file['vendor'], $language_file['file']);
+			}
+			else
+			{
+				$this->user->add_lang_ext('board3/portal', 'modules/' . $language_file);
+			}
 		}
 	}
 
