@@ -1,4 +1,4 @@
-?php
+<?php
 /**
 *
 * [Dutch] translated by Dutch Translators (https://github.com/dutch-translators)
