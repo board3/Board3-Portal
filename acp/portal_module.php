@@ -426,24 +426,6 @@ class portal_module
 					{
 						$module_classname = $this->request->variable('module_classname', '');
 
-						$column_string = column_num_string($add_column);
-
-						// do we want to add the module to the side columns or to the center columns?
-						if (in_array($column_string, array('left', 'right')))
-						{
-							$submit = $this->can_move_module(array('left', 'right'), $module_classname);
-						}
-						else if (in_array($column_string, array('center', 'top', 'bottom')))
-						{
-							$submit = $this->can_move_module(array('center', 'top', 'bottom'), $module_classname);
-						}
-
-						// do not install if module already exists in that column
-						if (!$submit && $module_classname != '\board3\portal\modules\custom')
-						{
-							trigger_error($this->user->lang['MODULE_ADD_ONCE'] . adm_back_link($this->u_action), E_USER_WARNING);
-						}
-
 						if (!($this->c_class = $this->portal_helper->get_module($module_classname)))
 						{
 							continue;
@@ -512,26 +494,6 @@ class portal_module
 					// Find new modules
 					foreach ($modules_list as $module_class => $module)
 					{
-						if ($module_class !== '\board3\portal\modules\custom')
-						{
-							if (in_array($column_string, array('left', 'right')))
-							{
-								// does the module already exist in the side columns?
-								if (!$this->can_move_module(array('left', 'right'), $module_class))
-								{
-									continue;
-								}
-							}
-							else if (in_array($column_string, array('center', 'top', 'bottom')))
-							{
-								// does the module already exist in the center columns?
-								if (!$this->can_move_module(array('center', 'top', 'bottom'), $module_class))
-								{
-									continue;
-								}
-							}
-						}
-
 						if ($module->get_allowed_columns() & column_string_const($add_module))
 						{
 							if ($module->get_language())
