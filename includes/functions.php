@@ -155,7 +155,7 @@ function ap_validate($str)
 /**
 * Pagination routine, generates archive number sequence
 */
-function generate_portal_pagination($base_url, $num_items, $per_page, $start_item, $type, $add_prevnext_text = false, $tpl_prefix = '')
+function generate_portal_pagination($base_url, $num_items, $per_page, $start_item, $type, $module_id = 0, $add_prevnext_text = false, $tpl_prefix = '')
 {
 	global $template, $user;
 
@@ -167,8 +167,8 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 		break;
 		case "news":
 		case "news_all":
-			$pagination_type = 'np';
-			$anker = '#n';
+			$pagination_type = 'np_' . $module_id;
+			$anker = '#n_' . $module_id;
 		break;
 
 		default:
