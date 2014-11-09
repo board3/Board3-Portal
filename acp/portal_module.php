@@ -488,7 +488,6 @@ class portal_module
 
 					$this->template->assign_var('S_EDIT', true);
 					$fileinfo = $name_ary = array();
-					$column_string = column_num_string($add_column);
 					$modules_list = $this->portal_helper->get_all_modules();
 
 					// Find new modules
