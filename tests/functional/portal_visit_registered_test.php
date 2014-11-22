@@ -106,4 +106,74 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 		$this->assertContains('Administrators', $legend);
 		$this->assertContains('Global moderators', $legend);
 	}
+
+	public function test_setup_hidden_forum()
+	{
+		$this->logout();
+		$this->login();
+		$this->admin_login();
+		$crawler = self::request('GET', 'adm/index.php?i=acp_forums&mode=manage&parent_id=1&sid=' . $this->sid);
+		$form = $crawler->selectButton('Create new forum')->form();
+		$form->setValues(array('forum_name' => 'Hidden forum'));
+		$crawler = self::submit($form);
+
+		// Create the forum
+		$form = $crawler->selectButton('Submit')->form();
+		$form['forum_perm_from']->select(2);
+		$crawler = self::submit($form);
+		$this->assertContains('Forum created successfully', $crawler->text());
+
+		// Hide forum using permissions from registered users
+		$crawler = self::request('GET', 'adm/index.php?i=acp_permissions&mode=setting_group_local&sid=' . $this->sid);
+		$form = $crawler->selectButton('Submit')->form();
+		$group_id = 0;
+		$crawler->filter('option')->each(function ($node) use (&$group_id) {
+			if ($node->text() === 'Registered users')
+			{
+				$group_id = $node->attr('value');
+			}
+		});
+		$form->setValues(array('group_id[0]' => $group_id));
+		$crawler = self::submit($form);
+		$form = $crawler->selectButton('Submit')->form();
+		$forum_id = 0;
+		$crawler->filter('option')->each(function ($node) use (&$forum_id) {
+			if (strpos($node->text(), 'Hidden forum') !== false)
+			{
+				$forum_id = $node->attr('value');
+			}
+		});
+		$form['forum_id']->select($forum_id);
+		$crawler = self::submit($form);
+		$form = $crawler->selectButton('Apply all permissions')->form();
+		$role_id = 0;
+		$crawler->filter('option')->each(function ($node) use (&$role_id) {
+			if ($node->text() === 'No Access')
+			{
+				$role_id = $node->attr('value');
+			}
+		});
+		$form["role[{$group_id}][{$forum_id}]"]->select($role_id);
+		$crawler = self::submit($form);
+		$this->assertContains('Permissions have been updated', $crawler->text());
+
+		// Create standard registered user
+		$this->create_user('standard-user');
+		$this->add_user_group('REGISTERED_USERS', array('standard-user'));
+		$this->remove_user_group('NEWLY_REGISTERED_USERS', array('standard-user'));
+
+		// Create topic in hidden forum
+		$this->create_topic($forum_id, 'Hidden topic', 'Very very hidden topic (for registered users that is)');
+	}
+
+	/**
+	 * @dependsOn test_setup_hidden_forum
+	 */
+	public function test_news_with_hidden_forum()
+	{
+		$this->logout();
+		$this->login('standard-user');
+		$crawler = self::request('GET', 'app.php/portal');
+		$this->assertNotContains('Hidden topic', $crawler->text());
+	}
 }
