@@ -440,7 +440,7 @@ class fetch_posts
 	*/
 	protected function set_forum_constraints($forum_from, $disallowed_forums, $invert = false)
 	{
-		if ($invert == true)
+		if ($invert == true || empty($forum_from))
 		{
 			$access_list = array_merge($disallowed_forums, $forum_from);
 			$sql_operator = '<>';

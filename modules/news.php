@@ -132,7 +132,7 @@ class news extends module_base
 			0,
 			($this->config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news',
 			$start,
-			$this->config['board3_news_exclude_' . $module_id]
+			(bool) $this->config['board3_news_exclude_' . $module_id]
 		);
 
 		// Any news present? If not terminate it here.
