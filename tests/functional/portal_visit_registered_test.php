@@ -153,9 +153,15 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 				$role_id = $node->attr('value');
 			}
 		});
-		$form["role[{$group_id}][{$forum_id}]"]->select($role_id);
-		$crawler = self::submit($form);
-		$this->assertContains('Permissions have been updated', $crawler->text());
+
+		$db = $this->get_db();
+		$sql = 'DELETE FROM ' . ACL_GROUPS_TABLE . "
+			WHERE group_id = {$group_id}
+				AND forum_id = {$forum_id}";
+		$db->sql_query($sql);
+		$sql = 'INSERT INTO ' . ACL_GROUPS_TABLE . " (group_id, forum_id, auth_option_id, auth_role_id, auth_setting)
+			VALUES({$group_id}, {$forum_id}, 0, {$role_id}, 0)";
+		$db->sql_query($sql);
 
 		// Create standard registered user
 		$this->create_user('standard-user');
@@ -173,6 +179,8 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 	{
 		$this->logout();
 		$this->login('standard-user');
+		$crawler = self::request('GET', 'index.php');
+		$this->assertNotContains('Hidden forum', $crawler->text());
 		$crawler = self::request('GET', 'app.php/portal');
 		$this->assertNotContains('Hidden topic', $crawler->text());
 	}
