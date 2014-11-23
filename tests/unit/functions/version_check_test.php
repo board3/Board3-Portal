@@ -45,7 +45,7 @@ class phpbb_functions_version_check_test extends \board3\portal\tests\testframew
 		$this->config->set('board3_portal_version', $version);
 
 		$this->template = new \board3\portal\tests\mock\template($this);
-		$version_helper = new \phpbb\version_helper($this->cache, $this->config, new \phpbb\user('\phpbb\datetime'));
+		$version_helper = new \phpbb\version_helper($this->cache, $this->config, new \phpbb\file_downloader(), new \phpbb\user('\phpbb\datetime'));
 		$this->version_check = new \board3\portal\includes\version_check($this->version_data, $this->config, $version_helper, $this->template, $this->user);
 	}
 

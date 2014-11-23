@@ -130,7 +130,7 @@ class announcements extends module_base
 			$this->config['board3_announcements_day_' . $module_id],
 			'announcements',
 			$start,
-			$this->config['board3_announcements_forum_exclude_' . $module_id]
+			(bool) $this->config['board3_announcements_forum_exclude_' . $module_id]
 		);
 
 		// Any announcements present? If not terminate it here.
