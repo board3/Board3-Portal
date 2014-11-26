@@ -17,6 +17,7 @@ services:
     board3.portal.main:
         class: board3\portal\controller\main
         arguments:
+            - @board3.portal.columns
             - @config
             - @board3.portal.controller_helper
             - @template
@@ -31,6 +32,7 @@ services:
         class: board3\portal\controller\helper
         arguments:
             - @auth
+            - @board3.portal.columns
             - @config
             - @template
             - @user
@@ -67,6 +69,9 @@ services:
             - @auth
             - @config
             - @request
+
+    board3.portal.columns:
+        class: board3\portal\portal\columns
 
     board3.portal.fetch_posts:
         class: board3\portal\portal\fetch_posts

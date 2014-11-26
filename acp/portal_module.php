@@ -15,7 +15,7 @@ class portal_module
 	public $new_config = array();
 	protected $c_class;
 	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
-	protected $root_path, $version_check, $request, $php_ext, $portal_helper, $modules_helper, $log;
+	protected $root_path, $version_check, $request, $php_ext, $portal_helper, $modules_helper, $log, $portal_columns;
 	public $module_column = array();
 
 	public function __construct()
@@ -43,13 +43,9 @@ class portal_module
 		$this->portal_helper = $this->phpbb_container->get('board3.portal.helper');
 		$this->modules_helper = $this->phpbb_container->get('board3.portal.modules_helper');
 		$this->log = $phpbb_log;
+		$this->portal_columns = $this->phpbb_container->get('board3.portal.columns');
 		define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.portal.modules.table'));
 		define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.portal.config.table'));
-
-		if (!function_exists('column_string_const'))
-		{
-			include($this->root_path . 'includes/functions_modules.' . $this->php_ext);
-		}
 
 		if(!function_exists('obtain_portal_config'))
 		{
@@ -120,7 +116,7 @@ class portal_module
 							'MODULE_IMAGE_HEIGHT'	=> $module_data['module_image_height'],
 							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $module_data['module_image_src'] : '',
 							'MODULE_ENABLED'		=> ($module_data['module_status']) ? true : false,
-							'MODULE_SHOW_IMAGE'		=> (in_array(column_num_string($module_data['module_column']), array('center', 'top', 'bottom'))) ? false : true,
+							'MODULE_SHOW_IMAGE'		=> (in_array($this->portal_columns->number_to_string($module_data['module_column']), array('center', 'top', 'bottom'))) ? false : true,
 						));
 
 						if($module_data['module_classname'] != '\board3\portal\modules\custom')
@@ -392,7 +388,7 @@ class portal_module
 				{
 					$installed_modules[] = $cur_module['module_classname'];
 					// Create an array with the columns the module is in
-					$this->module_column[$cur_module['module_classname']][] = column_num_string($cur_module['module_column']);
+					$this->module_column[$cur_module['module_classname']][] = $this->portal_columns->number_to_string($cur_module['module_column']);
 				}
 
 				if ($action == 'move_up')
@@ -418,7 +414,7 @@ class portal_module
 
 				$add_list = $this->request->variable('add', array('' => ''));
 				$add_module = key($add_list);
-				$add_column = $this->request->variable('add_column', column_string_num($add_module));
+				$add_column = $this->request->variable('add_column', $this->portal_columns->string_to_number($add_module));
 				if ($add_column)
 				{
 					$submit = ($this->request->is_set_post('submit')) ? true : false;
@@ -493,7 +489,7 @@ class portal_module
 					// Find new modules
 					foreach ($modules_list as $module_class => $module)
 					{
-						if ($module->get_allowed_columns() & column_string_const($add_module))
+						if ($module->get_allowed_columns() & $this->portal_columns->string_to_constant($add_module))
 						{
 							if ($module->get_language())
 							{
@@ -520,7 +516,7 @@ class portal_module
 					}
 
 					$s_hidden_fields = build_hidden_fields(array(
-						'add_column'	=> column_string_num($add_module),
+						'add_column'	=> $this->portal_columns->string_to_number($add_module),
 					));
 					$this->template->assign_vars(array(
 						'S_MODULE_NAMES'	=> $options,
@@ -563,10 +559,10 @@ class portal_module
 						{
 							$this->user->add_lang_ext('board3/portal', 'modules/' . $this->c_class->get_language());
 						}
-						$template_column = column_num_string($row['module_column']);
+						$template_column = $this->portal_columns->number_to_string($row['module_column']);
 
 						// find out of we can move modules to the left or right
-						if(($this->c_class->get_allowed_columns() & column_string_const(column_num_string($row['module_column'] + 1))) || ($this->c_class->get_allowed_columns() & column_string_const(column_num_string($row['module_column'] + 2)) && $row['module_column'] != 2))
+						if(($this->c_class->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($row['module_column'] + 1))) || ($this->c_class->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($row['module_column'] + 2)) && $row['module_column'] != 2))
 						{
 							/**
 							* check if we can actually move
@@ -575,7 +571,7 @@ class portal_module
 							*/
 							if ($row['module_classname'] != '\board3\portal\modules\custom')
 							{
-								$column_string = column_num_string($row['module_column'] + 1); // move 1 right
+								$column_string = $this->portal_columns->number_to_string($row['module_column'] + 1); // move 1 right
 
 								if ($column_string == 'right' && !$this->can_move_module(array('left', 'right'), $row['module_classname']))
 								{
@@ -596,7 +592,7 @@ class portal_module
 							$move_right = false;
 						}
 
-						if(($this->c_class->get_allowed_columns() & column_string_const(column_num_string($row['module_column'] - 1))) || ($this->c_class->get_allowed_columns() & column_string_const(column_num_string($row['module_column'] - 2)) && $row['module_column'] != 2))
+						if(($this->c_class->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($row['module_column'] - 1))) || ($this->c_class->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($row['module_column'] - 2)) && $row['module_column'] != 2))
 						{
 							/**
 							* check if we can actually move
@@ -605,7 +601,7 @@ class portal_module
 							*/
 							if ($row['module_classname'] != '\board3\portal\modules\custom')
 							{
-								$column_string = column_num_string($row['module_column'] - 1); // move 1 left
+								$column_string = $this->portal_columns->number_to_string($row['module_column'] - 1); // move 1 left
 
 								if ($column_string == 'left' && !$this->can_move_module(array('left', 'right'), $row['module_classname']))
 								{
@@ -868,13 +864,13 @@ class portal_module
 
 		$move_action = 0;
 
-		if ($module_data !== false && $module_data['module_column'] > column_string_num('left'))
+		if ($module_data !== false && $module_data['module_column'] > $this->portal_columns->string_to_number('left'))
 		{
-			if($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 1)))
+			if($this->c_class->columns & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($module_data['module_column'] - 1)))
 			{
 				$move_action = 1; // we move 1 column to the left
 			}
-			else if($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] - 2)) && $module_data['module_column'] != 2)
+			else if($this->c_class->columns & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($module_data['module_column'] - 2)) && $module_data['module_column'] != 2)
 			{
 				$move_action = 2; // we move 2 columns to the left
 			}
@@ -892,7 +888,7 @@ class portal_module
 			*/
 			if ($module_data['module_classname'] != '\board3\portal\modules\custom' && $move_action == 1)
 			{
-				$column_string = column_num_string($module_data['module_column'] - $move_action);
+				$column_string = $this->portal_columns->number_to_string($module_data['module_column'] - $move_action);
 				// we can only move left to the left & center column
 				if ($column_string == 'left' && !$this->can_move_module(array('right', 'left'), $module_data['module_classname']))
 				{
@@ -963,13 +959,13 @@ class portal_module
 
 		$move_action = 0;
 
-		if ($module_data !== false && $module_data['module_column'] < column_string_num('right'))
+		if ($module_data !== false && $module_data['module_column'] < $this->portal_columns->string_to_number('right'))
 		{
-			if($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 1)))
+			if($this->c_class->columns & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($module_data['module_column'] + 1)))
 			{
 				$move_action = 1; // we move 1 column to the right
 			}
-			else if($this->c_class->columns & column_string_const(column_num_string($module_data['module_column'] + 2)) && $module_data['module_column'] != 2)
+			else if($this->c_class->columns & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($module_data['module_column'] + 2)) && $module_data['module_column'] != 2)
 			{
 				$move_action = 2; // we move 2 columns to the right
 			}
@@ -987,7 +983,7 @@ class portal_module
 			*/
 			if ($module_data['module_classname'] != '\board3\portal\modules\custom' && $move_action == 1)
 			{
-				$column_string = column_num_string($module_data['module_column'] + $move_action);
+				$column_string = $this->portal_columns->number_to_string($module_data['module_column'] + $move_action);
 				// we can only move right to the right & center column
 				if ($column_string == 'right' && !$this->can_move_module(array('right', 'left'), $module_data['module_classname']))
 				{

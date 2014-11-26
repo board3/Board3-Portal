@@ -43,6 +43,8 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$phpbb_container->set('board3.portal.modules_helper', new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), $config, $request));
 		$phpbb_container->setParameter('board3.portal.modules.table', $table_prefix . 'portal_modules');
 		$phpbb_container->setParameter('board3.portal.config.table', $table_prefix . 'portal_config');
+		$this->portal_columns = new \board3\portal\portal\columns();
+		$phpbb_container->set('board3.portal.columns', $this->portal_columns);
 		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put'));
 		$cache->expects($this->any())
 			->method('destroy')
@@ -72,7 +74,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$portal_modules = obtain_portal_modules();
 		foreach($portal_modules as $cur_module)
 		{
-			$this->portal_module->module_column[$cur_module['module_classname']][] = column_num_string($cur_module['module_column']);
+			$this->portal_module->module_column[$cur_module['module_classname']][] = $this->portal_columns->number_to_string($cur_module['module_column']);
 		}
 	}
 
@@ -191,7 +193,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		if ($add_to_column)
 		{
 			$module_data = $this->portal_module->get_move_module_data($module_id);
-			$this->portal_module->module_column[$module_data['module_classname']][] = column_num_string($add_to_column);
+			$this->portal_module->module_column[$module_data['module_classname']][] = $this->portal_columns->number_to_string($add_to_column);
 		}
 
 		for ($i = 1; $i <= $move_right; $i++)
@@ -242,7 +244,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		if ($add_to_column)
 		{
 			$module_data = $this->portal_module->get_move_module_data($module_id);
-			$this->portal_module->module_column[$module_data['module_classname']][] = column_num_string($add_to_column);
+			$this->portal_module->module_column[$module_data['module_classname']][] = $this->portal_columns->number_to_string($add_to_column);
 		}
 
 		// We always start in the right column = 3

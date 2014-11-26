@@ -40,6 +40,7 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 		$this->user->data['group_id'] = 2;
 		$this->phpbb_root_path = dirname(__FILE__) . '/../../../../../../';
 		$this->php_ext = 'php';
+		$this->portal_columns = new \board3\portal\portal\columns();
 		$this->modules = array(
 			'\board3\portal\modules\link_us'	=> new \board3\portal\modules\link_us($config, new \board3\portal\tests\mock\template($this), new \board3\portal\tests\mock\user),
 		);
@@ -60,6 +61,7 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 	{
 		$controller_helper = new \board3\portal\controller\helper(
 			$this->auth,
+			$this->portal_columns,
 			$this->config,
 			$this->template,
 			$this->user,
