@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Adds a portal with several blocks to your forum. You can change the settings, move the blocks, add new blocks and more in the ACP.",
 	"homepage": "http://www.board3.de",
-	"version": "2.1.0-b1",
-	"time": "2014-08-24 14:02:18",
+	"version": "2.1.0-rc1",
+	"time": "2014-11-26 14:23:15",
 	"license": "GPL-2.0",
 	"authors": [{
 			"name": "Marc Alexander",
@@ -29,7 +29,7 @@
 	"extra": {
 		"display-name": "Board3 Portal",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.1.0-RC3,<3.2.*@dev"
+			"phpbb/phpbb": ">=3.1.2,<3.2.*@dev"
 		},
 		"version-check": {
 			"host": "board3.de",

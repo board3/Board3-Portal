@@ -10,3 +10,5 @@ git-tools/	export-ignore
 .coveralls.yml	export-ignore
 composer.phar	export-ignore
 composer.lock	export-ignore
+portal/upload/	export-ignore
+includes/functions_upload.php	export-ignore
