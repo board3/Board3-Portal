@@ -184,8 +184,20 @@ class portal_module
 					{
 						if (!is_array($null['submit']))
 						{
-							$func = array($this->c_class, $null['submit']);
-							$args = ($module_id != 0) ? array($config_name, $module_id) : $config_name;
+							if (method_exists($this->c_class, $null['submit']))
+							{
+								$func = array($this->c_class, $null['submit']);
+								$args = ($module_id != 0) ? array($config_name, $module_id) : $config_name;
+							}
+							else if (function_exists($null['submit']))
+							{
+								$func = $null['submit'];
+								$args = ($module_id != 0) ? array($cfg_array[$config_name], $config_name, $module_id) : $config_name;
+							}
+							else
+							{
+								throw new \RuntimeException($this->user->lang('UNKNOWN_MODULE_METHOD', $module_data['module_classname']));
+							}
 						}
 						else
 						{
