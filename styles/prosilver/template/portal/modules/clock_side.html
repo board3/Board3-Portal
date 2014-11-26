@@ -1,4 +1,5 @@
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+<!-- IF not B3P_CLOCK_SRC -->
 		<div class="portal-clock-wrapper">
 			<div class="portal-clock">
 				<div class="portal-clock-back">
@@ -29,4 +30,13 @@
 		</div>
 <!-- INCLUDEJS portal/assets/jquery_easing_1_3.js -->
 <!-- INCLUDEJS portal/assets/portal_clock.js -->
+<!-- ELSE -->
+		<div style="text-align: center;">
+			<br />
+			<object type="application/x-shockwave-flash" data="{T_THEME_PATH}/images/portal/{B3P_CLOCK_SRC}" width="140">
+				<param name="wmode" value="transparent" />
+				<param name="movie" value="{T_THEME_PATH}/images/portal/{B3P_CLOCK_SRC}" />
+			</object>
+		</div>
+<!-- ENDIF -->
 {$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

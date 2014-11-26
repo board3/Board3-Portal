@@ -34,7 +34,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$config = new \phpbb\config\config(array());
 		$phpbb_container->set('board3.portal.module_collection',
 			array(
-				new \board3\portal\modules\clock(),
+				new \board3\portal\modules\clock($config, $template),
 				new \board3\portal\modules\birthday_list($config, $template, $this->db, $user),
 				new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $phpbb_root_path, $phpEx),
 				new \board3\portal\modules\donation($config, $template, $user),
