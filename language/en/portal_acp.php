@@ -73,6 +73,7 @@ $lang = array_merge($lang, array(
 	'MODULE_STATUS'				=> 'Enable module',
 	'MODULE_ADD_ONCE'			=> 'This module can only be added once.',
 	'MODULE_IMAGE_ERROR'		=> 'There was an error while checking for the module image:',
+	'UNKNOWN_MODULE_METHOD'		=> 'The %1$s module’s module method couldn’t be resolved.',
 
 	// general
 	'ACP_PORTAL_CONFIG_INFO'				=> 'General settings',

@@ -59,6 +59,9 @@ services:
 
     board3.portal.module.clock:
         class: board3\portal\modules\clock
+        arguments:
+            - @config
+            - @template
         tags:
             - { name: board3.portal.module }
 
