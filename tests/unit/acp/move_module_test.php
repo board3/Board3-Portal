@@ -87,9 +87,16 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	{
 		$module_data = $this->portal_module->get_move_module_data(1);
 		$this->assertEquals(array(
-			'module_order'		=> 1,
-			'module_column'		=> 1,
+			'module_order'		=> '1',
+			'module_column'		=> '1',
 			'module_classname'	=> '\board3\portal\modules\clock',
+			'module_id' => '1',
+			'module_name' => '',
+			'module_image_src' => '',
+			'module_image_width' => '0',
+			'module_image_height' => '0',
+			'module_group_ids' => '',
+			'module_status' => '1',
 		), $module_data);
 	}
 

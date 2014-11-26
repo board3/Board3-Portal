@@ -666,12 +666,7 @@ class portal_module
 	{
 		if (confirm_box(true))
 		{
-			$sql = 'SELECT module_order, module_column, module_classname
-				FROM ' . PORTAL_MODULES_TABLE . '
-				WHERE module_id = ' . (int) $module_id;
-			$result = $this->db->sql_query_limit($sql, 1);
-			$module_data = $this->db->sql_fetchrow($result);
-			$this->db->sql_freeresult($result);
+			$module_data = $this->get_move_module_data($module_id);
 
 			if (!($this->c_class = $this->portal_helper->get_module($module_data['module_classname'])))
 			{
@@ -730,7 +725,7 @@ class portal_module
 	*/
 	public function get_move_module_data($module_id)
 	{
-		$sql = 'SELECT module_order, module_column, module_classname
+		$sql = 'SELECT *
 			FROM ' . PORTAL_MODULES_TABLE . '
 			WHERE module_id = ' . (int) $module_id;
 		$result = $this->db->sql_query_limit($sql, 1);
@@ -1048,12 +1043,7 @@ class portal_module
 	*/
 	protected function module_delete($id, $mode, $action, $module_id)
 	{
-		$sql = 'SELECT *
-			FROM ' . PORTAL_MODULES_TABLE . '
-			WHERE module_id = ' . (int) $module_id;
-		$result = $this->db->sql_query_limit($sql, 1);
-		$module_data = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
+		$module_data = $this->get_move_module_data($module_id);
 
 		if ($module_data !== false)
 		{
