@@ -11,12 +11,22 @@ namespace board3\portal\portal;
 
 class columns
 {
+	/** @var array Column string to number map */
 	protected $column_map = array(
 		'left'		=> 1,
 		'center'	=> 2,
 		'right'		=> 3,
 		'top'		=> 4,
 		'bottom'	=> 5,
+	);
+
+	/** @var array Column string to constant map */
+	protected $constant_map = array(
+		'top'		=> 1,
+		'left'		=> 2,
+		'center'	=> 4,
+		'right'		=> 8,
+		'bottom'	=> 16,
 	);
 
 	/**
@@ -52,20 +62,6 @@ class columns
 	 */
 	public function string_to_constant($column)
 	{
-		switch ($column)
-		{
-			case 'top':
-				return 1;
-			case 'left':
-				return 2;
-			case 'center':
-				return 4;
-			case 'right':
-				return 8;
-			case 'bottom':
-				return 16;
-			default:
-				return 0;
-		}
+		return (isset($this->constant_map[$column])) ? $this->constant_map[$column] : 0;
 	}
 }
