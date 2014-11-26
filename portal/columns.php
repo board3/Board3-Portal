@@ -11,6 +11,14 @@ namespace board3\portal\portal;
 
 class columns
 {
+	protected $column_map = array(
+		'left'		=> 1,
+		'center'	=> 2,
+		'right'		=> 3,
+		'top'		=> 4,
+		'bottom'	=> 5,
+	);
+
 	/**
 	 * Convert column number to string equivalent
 	 *
@@ -20,21 +28,7 @@ class columns
 	 */
 	public function number_to_string($column)
 	{
-		switch ($column)
-		{
-			case 1:
-				return 'left';
-			case 2:
-				return 'center';
-			case 3:
-				return 'right';
-			case 4:
-				return 'top';
-			case 5:
-				return 'bottom';
-			default:
-				return '';
-		}
+		return (in_array($column, $this->column_map)) ? array_search($column, $this->column_map) : '';
 	}
 
 	/**
@@ -46,21 +40,7 @@ class columns
 	 */
 	public function string_to_number($column)
 	{
-		switch ($column)
-		{
-			case 'left':
-				return 1;
-			case 'center':
-				return 2;
-			case 'right':
-				return 3;
-			case 'top':
-				return 4;
-			case 'bottom':
-				return 5;
-			default:
-				return 0;
-		}
+		return (isset($this->column_map[$column])) ? $this->column_map[$column] : 0;
 	}
 
 	/**
