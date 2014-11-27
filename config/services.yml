@@ -95,3 +95,13 @@ services:
             - %core.php_ext%
         tags:
             - { name: event.listener }
+
+    board3.portal.modules.manager:
+        class: board3\portal\portal\modules\manager
+        arguments:
+            - @cache
+            - @dbal.conn
+            - @board3.portal.columns
+            - @board3.portal.helper
+            - @request
+            - @user
