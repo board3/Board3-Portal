@@ -97,6 +97,20 @@ class manager
 	}
 
 	/**
+	 * Get module object
+	 *
+	 * @param string $class_name Module class name
+	 * @return null
+	 */
+	protected function get_module($class_name)
+	{
+		if (($this->module = $this->portal_helper->get_module($class_name)) === false)
+		{
+			trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
+		}
+	}
+
+	/**
 	 * Reset module settings to default options
 	 *
 	 * @param int $id ID of the acp_portal module
@@ -110,10 +124,7 @@ class manager
 		{
 			$module_data = $this->get_move_module_data($module_id);
 
-			if (!($this->module = $this->portal_helper->get_module($module_data['module_classname'])))
-			{
-				trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
-			}
+			$this->get_module($module_data['module_classname']);
 
 			$sql_ary = array(
 				'module_name'		=> $this->module->get_name(),
@@ -294,10 +305,7 @@ class manager
 	{
 		$module_data = $this->get_move_module_data($module_id);
 
-		if (!($this->module = $this->portal_helper->get_module($module_data['module_classname'])))
-		{
-			trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
-		}
+		$this->get_module($module_data['module_classname']);
 
 		$move_action = 0;
 
@@ -389,10 +397,7 @@ class manager
 	{
 		$module_data = $this->get_move_module_data($module_id);
 
-		if (!($this->module = $this->portal_helper->get_module($module_data['module_classname'])))
-		{
-			trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
-		}
+		$this->get_module($module_data['module_classname']);
 
 		$move_action = 0;
 
@@ -492,10 +497,7 @@ class manager
 		{
 			$module_classname = $this->request->variable('module_classname', '');
 
-			if (!($this->module = $this->portal_helper->get_module($module_classname)))
-			{
-				trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
-			}
+			$this->get_module($module_data['module_classname']);
 
 			if (confirm_box(true))
 			{
