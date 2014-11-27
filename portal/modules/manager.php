@@ -129,19 +129,7 @@ class manager
 
 			$this->get_module($module_data['module_classname']);
 
-			$sql_ary = array(
-				'module_name'		=> $this->module->get_name(),
-				'module_image_src'	=> $this->module->get_image(),
-				'module_group_ids'	=> '',
-				'module_image_height'	=> 16,
-				'module_image_width'	=> 16,
-				'module_status'		=> B3_MODULE_ENABLED,
-			);
-			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-					SET ' . $this->db->sql_build_array('UPDATE', $sql_ary) . '
-					WHERE module_id = ' . (int) $module_id;
-			$this->db->sql_query($sql);
-			$affected_rows = $this->db->sql_affectedrows();
+			$affected_rows = $this->database_handler->reset_module($this->module, $module_id);
 
 			if (empty($affected_rows))
 			{

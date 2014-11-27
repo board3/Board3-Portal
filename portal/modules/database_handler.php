@@ -44,4 +44,30 @@ class database_handler
 
 		return $module_data;
 	}
+
+	/**
+	 * Run database part for resetting a module
+	 *
+	 * @param \board3\portal\modules\module_interface $module Module to reset
+	 * @param int $module_id Module ID of module
+	 *
+	 * @return int Number of affected rows
+	 */
+	public function reset_module($module, $module_id)
+	{
+		$sql_ary = array(
+			'module_name'		=> $module->get_name(),
+			'module_image_src'	=> $module->get_image(),
+			'module_group_ids'	=> '',
+			'module_image_height'	=> 16,
+			'module_image_width'	=> 16,
+			'module_status'		=> B3_MODULE_ENABLED,
+		);
+		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+					SET ' . $this->db->sql_build_array('UPDATE', $sql_ary) . '
+					WHERE module_id = ' . (int) $module_id;
+		$this->db->sql_query($sql);
+
+		return $this->db->sql_affectedrows();
+	}
 }
