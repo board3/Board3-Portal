@@ -11,10 +11,8 @@ namespace board3\portal\portal\modules;
 
 use board3\portal\includes\helper;
 use board3\portal\portal\columns;
-use phpbb\cache\service;
 use phpbb\db\driver\driver_interface;
 use phpbb\request\request_interface;
-use phpbb\user;
 
 class manager
 {

@@ -35,7 +35,6 @@ $lang = array_merge($lang, array(
 	'NO_ADMINISTRATORS_P'	=> 'No Administrators',
 	'NO_MODERATORS_P'		=> 'No Moderators',
 	'NO_GROUPS_P'			=> 'No Groups',
-	'ACP_PORTAL_LEADERS'	=> 'The Team',
 
 	// ACP
 	'ACP_PORTAL_LEADERS'		=> 'Team Settings',
