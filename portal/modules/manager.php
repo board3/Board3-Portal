@@ -114,6 +114,23 @@ class manager
 	}
 
 	/**
+	 * Handle ajax request.
+	 * Method will return supplied data if request is an ajax request
+	 *
+	 * @param array $data Data to send
+	 *
+	 * @return null
+	 */
+	public function handle_ajax_request($data)
+	{
+		if ($this->request->is_ajax())
+		{
+			$json_response = new \phpbb\json_response;
+			$json_response->send($data);
+		}
+	}
+
+	/**
 	 * Reset module settings to default options
 	 *
 	 * @param int $id ID of the acp_portal module
@@ -188,11 +205,9 @@ class manager
 
 		$this->cache->destroy('portal_modules');
 
-		if ($this->request->is_ajax())
-		{
-			$json_response = new \phpbb\json_response;
-			$json_response->send(array('success' => true));
-		}
+		// Handle ajax requests
+		$this->handle_ajax_request(array('success' => true));
+
 		redirect($this->u_action); // redirect in order to get rid of excessive URL parameters
 	}
 
@@ -499,15 +514,13 @@ class manager
 
 				$this->cache->purge(); // make sure we don't get errors after re-adding a module
 
-				if ($this->request->is_ajax())
-				{
-					$json_response = new \phpbb\json_response;
-					$json_response->send(array(
-						'success' => true,
-						'MESSAGE_TITLE'	=> $this->user->lang['INFORMATION'],
-						'MESSAGE_TEXT'	=> $this->user->lang['SUCCESS_DELETE'],
-					));
-				}
+				// Handle ajax request
+				$this->handle_ajax_request(array(
+					'success' => true,
+					'MESSAGE_TITLE'	=> $this->user->lang['INFORMATION'],
+					'MESSAGE_TEXT'	=> $this->user->lang['SUCCESS_DELETE'],
+				));
+
 				trigger_error($this->user->lang['SUCCESS_DELETE'] . adm_back_link($this->u_action));
 			}
 			else

@@ -542,8 +542,7 @@ class portal_module
 						$this->template->set_filenames(array(
 							'body' => 'portal/acp_portal_modules.html')
 						);
-						$json_response = new \phpbb\json_response;
-						$json_response->send(array(
+						$this->modules_manager->handle_ajax_request(array(
 							'MESSAGE_BODY'		=> $this->template->assign_display('body'),
 							'MESSAGE_TITLE'		=> $this->user->lang['ADD_MODULE'],
 							'MESSAGE_TEXT'		=> $this->user->lang['ADD_MODULE'],
