@@ -25,6 +25,9 @@ class manager
 	/** @var \board3\portal\includes\helper */
 	protected $portal_helper;
 
+	/** @var \board3\portal\portal\modules\database_handler */
+	protected $database_handler;
+
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
@@ -53,15 +56,17 @@ class manager
 	 * @param \phpbb\db\driver\driver_interface $db Database driver
 	 * @param \board3\portal\portal\columns $portal_columns Portal columns helper
 	 * @param \board3\portal\includes\helper $portal_helper Portal helper
+	 * @param \board3\portal\portal\modules\database_handler $database_handler Modules database handler
 	 * @param \phpbb\request\request_interface $request phpBB request
 	 * @param \phpbb\user $user phpBB user
 	 */
-	public function __construct($cache, driver_interface $db, columns $portal_columns, helper $portal_helper, request_interface $request, $user)
+	public function __construct($cache, driver_interface $db, columns $portal_columns, helper $portal_helper, database_handler $database_handler, request_interface $request, $user)
 	{
 		$this->cache = $cache;
 		$this->db = $db;
 		$this->portal_columns = $portal_columns;
 		$this->portal_helper = $portal_helper;
+		$this->database_handler = $database_handler;
 		$this->request = $request;
 		$this->user = $user;
 	}
@@ -176,14 +181,7 @@ class manager
 	 */
 	public function get_move_module_data($module_id)
 	{
-		$sql = 'SELECT *
-			FROM ' . PORTAL_MODULES_TABLE . '
-			WHERE module_id = ' . (int) $module_id;
-		$result = $this->db->sql_query_limit($sql, 1);
-		$module_data = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
-
-		return $module_data;
+		return $this->database_handler->get_module_data($module_id);
 	}
 
 	/**

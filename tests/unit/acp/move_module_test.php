@@ -71,7 +71,8 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			'UNABLE_TO_MOVE'	=> 'UNABLE_TO_MOVE',
 			'UNABLE_TO_MOVE_ROW'	=> 'UNABLE_TO_MOVE_ROW',
 		));
-		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->portal_columns, $portal_helper, $request, $user);
+		$this->database_handler = new \board3\portal\portal\modules\database_handler($db);
+		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->portal_columns, $portal_helper, $this->database_handler, $request, $user);
 		$phpbb_container->set('board3.portal.modules.manager', $this->modules_manager);
 		$this->portal_module = new \board3\portal\acp\portal_module();
 		$this->update_portal_modules();

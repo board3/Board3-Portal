@@ -103,5 +103,11 @@ services:
             - @dbal.conn
             - @board3.portal.columns
             - @board3.portal.helper
+            - @board.portal.modules.database_handler
             - @request
             - @user
+
+    board.portal.modules.database_handler:
+        class: board3\portal\portal\modules\database_handler
+        arguments:
+            - @dbal.conn
