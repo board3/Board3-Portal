@@ -246,20 +246,7 @@ class manager
 
 		if (($module_data !== false) && ($module_data['module_order'] > 1))
 		{
-			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-				SET module_order = module_order + 1
-				WHERE module_order = ' . (int) ($module_data['module_order'] - 1) . '
-					AND module_column = ' . (int) $module_data['module_column'];
-
-			$this->db->sql_query($sql);
-			$updated = $this->db->sql_affectedrows();
-			if ($updated)
-			{
-				$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-					SET module_order = module_order - 1
-					WHERE module_id = ' . (int) $module_id;
-				$this->db->sql_query($sql);
-			}
+			$updated = $this->database_handler->move_module_vertical($module_id, $module_data, database_handler::MOVE_DIRECTION_UP, 1);
 		}
 
 		$this->handle_after_move($updated, true);
@@ -277,19 +264,7 @@ class manager
 
 		if ($module_data !== false && $this->get_last_module_order($module_data['module_column']) != $module_data['module_order'])
 		{
-			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-				SET module_order = module_order - 1
-				WHERE module_order = ' . (int) ($module_data['module_order'] + 1) . '
-					AND module_column = ' . (int) $module_data['module_column'];
-			$this->db->sql_query($sql);
-			$updated = $this->db->sql_affectedrows();
-			if ($updated)
-			{
-				$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-					SET module_order = module_order + 1
-					WHERE module_id = ' . (int) $module_id;
-				$this->db->sql_query($sql);
-			}
+			$updated = $this->database_handler->move_module_vertical($module_id, $module_data, database_handler::MOVE_DIRECTION_DOWN, 1);
 		}
 
 		$this->handle_after_move($updated, true);

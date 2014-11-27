@@ -13,6 +13,11 @@ use phpbb\db\driver\driver_interface;
 
 class database_handler
 {
+	/** @var int Move direction up */
+	const MOVE_DIRECTION_UP = -1;
+
+	/** @var int Move driection down */
+	const MOVE_DIRECTION_DOWN = 1;
 
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
@@ -69,5 +74,45 @@ class database_handler
 		$this->db->sql_query($sql);
 
 		return $this->db->sql_affectedrows();
+	}
+
+	/**
+	 * Move module vertically
+	 *
+	 * @param int $module_id Module ID
+	 * @param array $module_data Module data array
+	 * @param int $direction Direction to move, see constants in this class
+	 * @param int $step Moving step
+	 *
+	 * @return int Number of affected rows, 0 if unsuccessful
+	 */
+	public function move_module_vertical($module_id, $module_data, $direction, $step = 1)
+	{
+		if ($direction == self::MOVE_DIRECTION_DOWN)
+		{
+			$current_increment = ' + ' . $step;
+			$other_increment = ' - ' . $step;
+		}
+		else
+		{
+			$current_increment = ' - ' . $step;
+			$other_increment = ' + ' . $step;
+		}
+
+		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+				SET module_order = module_order' . $other_increment . '
+				WHERE module_order = ' . (int) ($module_data['module_order'] + ($direction * $step)) . '
+					AND module_column = ' . (int) $module_data['module_column'];
+		$this->db->sql_query($sql);
+		$updated = $this->db->sql_affectedrows();
+		if ($updated)
+		{
+			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+					SET module_order = module_order' . $current_increment . '
+					WHERE module_id = ' . (int) $module_id;
+			$this->db->sql_query($sql);
+		}
+
+		return $updated;
 	}
 }
