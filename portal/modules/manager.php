@@ -10,6 +10,7 @@
 namespace board3\portal\portal\modules;
 
 use board3\portal\includes\helper;
+use board3\portal\modules\module_interface;
 use board3\portal\portal\columns;
 use phpbb\db\driver\driver_interface;
 use phpbb\request\request_interface;
@@ -107,7 +108,9 @@ class manager
 	 */
 	protected function get_module($class_name)
 	{
-		if (($this->module = $this->portal_helper->get_module($class_name)) === false)
+		$this->module = $this->portal_helper->get_module($class_name);
+
+		if (!$this->module instanceof module_interface)
 		{
 			trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 		}
