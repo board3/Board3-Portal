@@ -108,12 +108,18 @@ class manager
 	 */
 	protected function get_module($class_name)
 	{
-		$this->module = $this->portal_helper->get_module($class_name);
+		$module = $this->portal_helper->get_module($class_name);
 
-		if (!$this->module instanceof module_interface)
+		if (!$module instanceof module_interface)
 		{
 			trigger_error('CLASS_NOT_FOUND', E_USER_ERROR);
 		}
+		else
+		{
+			$this->module = $module;
+		}
+
+		unset($module);
 	}
 
 	/**
