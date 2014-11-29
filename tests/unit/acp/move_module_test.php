@@ -17,6 +17,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	static public $redirected = false;
 	static public $error = false;
 	static public $override_trigger_error = false;
+	static public $error_type = E_USER_NOTICE;
 
 	/** @var \board3\portal\portal\modules\manager */
 	protected $modules_manager;
@@ -317,4 +318,5 @@ function trigger_error($input, $type = E_USER_NOTICE)
 		\trigger_error($input, $type);
 	}
 	phpbb_acp_move_module_test::$error = $input;
+	phpbb_acp_move_module_test::$error_type = $type;
 }
