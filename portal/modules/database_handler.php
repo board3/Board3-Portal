@@ -104,7 +104,7 @@ class database_handler
 				WHERE module_order = ' . (int) ($module_data['module_order'] + ($direction * $step)) . '
 					AND module_column = ' . (int) $module_data['module_column'];
 		$this->db->sql_query($sql);
-		$updated = $this->db->sql_affectedrows();
+		$updated = (bool) $this->db->sql_affectedrows();
 		if ($updated)
 		{
 			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
