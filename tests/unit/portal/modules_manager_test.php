@@ -25,10 +25,7 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 		parent::setUp();
 
 		$user = new \board3\portal\tests\mock\user();
-		$request = $this->getMock('\phpbb_mock_request', array('is_ajax', 'variable'));
-		$request->expects($this->any())
-			->method('is_ajax')
-			->will($this->returnValue(\board3_portal_modules_manager_test::$is_ajax));
+		$request =new \phpbb_mock_request();
 
 		$config = new \phpbb\config\config(array());
 
@@ -36,7 +33,7 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 			new \board3\portal\modules\clock($config, null),
 			new \board3\portal\modules\birthday_list($config, null, $this->db, $user),
 			new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $this->phpbb_root_path, $this->phpEx),
-			new \board3\portal\modules\donation($config, $template, $user),
+			new \board3\portal\modules\donation($config, null, $user),
 		));
 
 		$this->portal_columns = new \board3\portal\portal\columns();
@@ -81,8 +78,6 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 
 	public function test_handle_ajax_request()
 	{
-		$this->assertNull($this->modules_manager->handle_ajax_request(array('foobar' => true)));
-		self::$is_ajax = true;
 		$this->assertNull($this->modules_manager->handle_ajax_request(array('foobar' => true)));
 	}
 }
