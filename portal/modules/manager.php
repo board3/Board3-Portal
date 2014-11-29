@@ -281,39 +281,7 @@ class manager
 		$move_action = $this->get_horizontal_move_action($module_data, $direction);
 		$this->check_module_conflict($module_data, $move_action);
 
-		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-				SET module_order = module_order + 1
-				WHERE module_order >= ' . $module_data['module_order'] . '
-					AND module_column = ' . ($module_data['module_column'] + $move_action);
-		$this->db->sql_query($sql);
-		$updated = $this->db->sql_affectedrows();
-
-		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-				SET module_column = ' . ($module_data['module_column'] + $move_action) . '
-				WHERE module_id = ' . (int) $module_id;
-		$this->db->sql_query($sql);
-
-		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-				SET module_order = module_order - 1
-				WHERE module_order >= ' . $module_data['module_order'] . '
-				AND module_column = ' . $module_data['module_column'];
-		$this->db->sql_query($sql);
-
-		// the module that needs to moved is in the last row
-		if (!$updated)
-		{
-			$sql = 'SELECT MAX(module_order) as new_order
-						FROM ' . PORTAL_MODULES_TABLE . '
-						WHERE module_order < ' . $module_data['module_order'] . '
-						AND module_column = ' . (int) ($module_data['module_column'] + $move_action);
-			$this->db->sql_query($sql);
-			$new_order = $this->db->sql_fetchfield('new_order') + 1;
-
-			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-					SET module_order = ' . $new_order . '
-					WHERE module_id = ' . (int) $module_id;
-			$this->db->sql_query($sql);
-		}
+		$this->database_handler->move_module_horizontal($module_id, $module_data, $move_action);
 
 		$this->handle_after_move(true);
 	}
