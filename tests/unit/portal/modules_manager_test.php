@@ -10,13 +10,14 @@
 class board3_portal_modules_manager_test extends \board3\portal\tests\testframework\database_test_case
 {
 	protected $portal_columns;
+	static public $is_ajax = false;
 
 	/** @var \board3\portal\portal\modules\manager */
 	protected $modules_manager;
 
 	public function getDataSet()
 	{
-		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/news.xml');
+		return $this->createXMLDataSet(dirname(__FILE__) . '/../acp/fixtures/modules.xml');
 	}
 
 	public function setUp()
@@ -24,7 +25,10 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 		parent::setUp();
 
 		$user = new \board3\portal\tests\mock\user();
-		$request = new \phpbb_mock_request;
+		$request = $this->getMock('\phpbb_mock_request', array('is_ajax', 'variable'));
+		$request->expects($this->any())
+			->method('is_ajax')
+			->will($this->returnValue(\board3_portal_modules_manager_test::$is_ajax));
 
 		$config = new \phpbb\config\config(array());
 
@@ -73,5 +77,12 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 	{
 		$this->modules_manager->set_acp_class('foo\bar')->set_u_action('index.php?i=25&amp;mode=barfoo');
 		$this->assertEquals('index.php?i=%5Cfoo%5Cbar&amp;mode=test&amp;module_id=5', $this->modules_manager->get_module_link('test', 5));
+	}
+
+	public function test_handle_ajax_request()
+	{
+		$this->assertNull($this->modules_manager->handle_ajax_request(array('foobar' => true)));
+		self::$is_ajax = true;
+		$this->assertNull($this->modules_manager->handle_ajax_request(array('foobar' => true)));
 	}
 }
