@@ -36,10 +36,12 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 
 		$user = new \board3\portal\tests\mock\user();
 		$request =new \phpbb_mock_request();
+		$this->request = $request;
+		$this->user = $user;
 
 		$config = new \phpbb\config\config(array());
 
-		$portal_helper = new \board3\portal\includes\helper(array(
+		$this->portal_helper = new \board3\portal\includes\helper(array(
 			new \board3\portal\modules\clock($config, null),
 			new \board3\portal\modules\birthday_list($config, null, $this->db, $user),
 			new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $this->phpbb_root_path, $this->phpEx),
@@ -47,30 +49,32 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		));
 
 		$this->portal_columns = new \board3\portal\portal\columns();
-		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'purge'));
-		$cache->expects($this->any())
+		$this->cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'purge'));
+		$this->cache->expects($this->any())
 			->method('destroy')
 			->withConsecutive(array($this->equalTo('config')), array($this->equalTo('portal_config')));
-		$cache->expects($this->any())
+		$this->cache->expects($this->any())
 			->method('get')
 			->with($this->anything())
 			->will($this->returnValue(false));
-		$cache->expects($this->any())
+		$this->cache->expects($this->any())
 			->method('sql_exists')
 			->with($this->anything());
-		$cache->expects($this->any())
+		$this->cache->expects($this->any())
 			->method('put')
 			->with($this->anything());
-		$cache->expects($this->any())
+		$this->cache->expects($this->any())
 			->method('purge');
+		$cache = $this->cache;
 		$db = $this->db;
 		$user->set(array(
 			'UNABLE_TO_MOVE'	=> 'UNABLE_TO_MOVE',
 			'UNABLE_TO_MOVE_ROW'	=> 'UNABLE_TO_MOVE_ROW',
+			'SUCCESS_DELETE'		=> 'SUCCESS_DELETE',
 		));
 
 		$this->database_handler = new \board3\portal\portal\modules\database_handler($db);
-		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->portal_columns, $portal_helper, $this->database_handler, $request, $user);
+		$this->modules_manager = new \board3\portal\portal\modules\manager($this->cache, $db, $this->portal_columns, $this->portal_helper, $this->database_handler, $request, $user);
 		$portal_config = array();
 	}
 
@@ -96,6 +100,46 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		), self::$meta_refresh);
 		$this->assertEquals(phpbb_acp_move_module_test::$error_type, E_USER_NOTICE);
 		$this->assertEquals(phpbb_acp_move_module_test::$error, 'adm/index.php?i=15&amp;mode=foobar&amp;module_id=6');
+	}
+
+	public function test_module_delete()
+	{
+		$this->cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'purge'));
+		$this->cache->expects($this->any())
+			->method('destroy')
+			->with($this->equalTo('portal_modules'));
+		$this->cache->expects($this->any())
+			->method('get')
+			->with($this->anything())
+			->will($this->returnValue(false));
+		$this->cache->expects($this->any())
+			->method('sql_exists')
+			->with($this->anything());
+		$this->cache->expects($this->any())
+			->method('put')
+			->with($this->anything());
+		$this->cache->expects($this->any())
+			->method('purge');
+		$this->request->overwrite('module_classname', '\board3\portal\modules\donation');
+		$this->modules_manager = new \board3\portal\portal\modules\manager($this->cache, $this->db, $this->portal_columns, $this->portal_helper, $this->database_handler, $this->request, $this->user);
+		$this->modules_manager->set_u_action('adm/index.php?i=15&amp;mode=foobar')->set_acp_class('foo\bar');
+
+		// Trigger confirm box creation
+		modules_manager_confirm_box_test::$confirm = false;
+		$this->assertNull($this->modules_manager->module_delete(6, 'foobar', 'module_delete', 6));
+		$this->assertEquals('<input type="hidden" name="i" value="6" />
+<input type="hidden" name="mode" value="foobar" />
+<input type="hidden" name="action" value="module_delete" />
+<input type="hidden" name="module_id" value="6" />
+<input type="hidden" name="module_classname" value="\board3\portal\modules\donation" />
+', self::$hidden_fields);
+
+		// Actually delete module
+		phpbb_acp_move_module_test::$override_trigger_error = true;
+		modules_manager_confirm_box_test::$confirm = true;
+		$this->assertNull($this->modules_manager->module_delete(6, 'foobar', 'module_delete', 6));
+		$this->assertEquals(E_USER_NOTICE, phpbb_acp_move_module_test::$error_type);
+		$this->assertEquals('SUCCESS_DELETEadm/index.php?i=15&amp;mode=foobar', phpbb_acp_move_module_test::$error);
 	}
 }
 
