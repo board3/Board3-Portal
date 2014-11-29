@@ -235,39 +235,24 @@ class manager
 	}
 
 	/**
-	 * Move module up one row
+	 * Move module vertically
 	 *
-	 * @param int $module_id ID of the module that should be moved
+	 * @param int $module_id Module ID
+	 * @param int $direction Direction of move, either -1 for up or 1 for down
 	 */
-	public function move_module_up($module_id)
+	public function move_module_vertical($module_id, $direction)
 	{
-		$updated = false;
 		$module_data = $this->get_move_module_data($module_id);
 
-		if (($module_data !== false) && ($module_data['module_order'] > 1))
+		if ($module_data === false || ($direction == database_handler::MOVE_DIRECTION_UP && $module_data['module_order'] <= 1) ||
+			($direction == database_handler::MOVE_DIRECTION_DOWN && $this->get_last_module_order($module_data['module_column']) == $module_data['module_order']))
 		{
-			$updated = $this->database_handler->move_module_vertical($module_id, $module_data, database_handler::MOVE_DIRECTION_UP, 1);
+			$this->handle_after_move(false, true);
 		}
-
-		$this->handle_after_move($updated, true);
-	}
-
-	/**
-	 * Move module down one row
-	 *
-	 * @param int $module_id ID of the module that should be moved
-	 */
-	public function move_module_down($module_id)
-	{
-		$updated = false;
-		$module_data = $this->get_move_module_data($module_id);
-
-		if ($module_data !== false && $this->get_last_module_order($module_data['module_column']) != $module_data['module_order'])
+		else
 		{
-			$updated = $this->database_handler->move_module_vertical($module_id, $module_data, database_handler::MOVE_DIRECTION_DOWN, 1);
+			$this->handle_after_move($this->database_handler->move_module_vertical($module_id, $module_data, $direction, 1), true);
 		}
-
-		$this->handle_after_move($updated, true);
 	}
 
 	/**

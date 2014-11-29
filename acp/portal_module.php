@@ -403,11 +403,11 @@ class portal_module
 
 				if ($action == 'move_up')
 				{
-					$this->modules_manager->move_module_up($module_id);
+					$this->modules_manager->move_module_vertical($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_UP);
 				}
 				else if ($action == 'move_down')
 				{
-					$this->modules_manager->move_module_down($module_id);
+					$this->modules_manager->move_module_vertical($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_DOWN);
 				}
 				else if($action == 'move_right')
 				{

@@ -132,24 +132,24 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	public function test_move_module_up()
 	{
 		self::$redirected = false;
-		$this->modules_manager->move_module_up(2);
+		$this->modules_manager->move_module_vertical(2, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_UP);
 		$this->assertTrue(self::$redirected);
 
 		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE_ROW');
 		self::$redirected = false;
-		$this->modules_manager->move_module_up(2);
+		$this->modules_manager->move_module_vertical(2, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_UP);
 		$this->assertFalse(self::$redirected);
 	}
 
 	public function test_move_module_down()
 	{
 		self::$redirected = false;
-		$this->modules_manager->move_module_down(3);
+		$this->modules_manager->move_module_vertical(3, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_DOWN);
 		$this->assertTrue(self::$redirected);
 
 		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE_ROW');
 		self::$redirected = false;
-		$this->modules_manager->move_module_down(3);
+		$this->modules_manager->move_module_vertical(3, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_DOWN);
 		$this->assertFalse(self::$redirected);
 	}
 
