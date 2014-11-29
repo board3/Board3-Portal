@@ -19,6 +19,12 @@ class database_handler
 	/** @var int Move driection down */
 	const MOVE_DIRECTION_DOWN = 1;
 
+	/** @var int Move direction right */
+	const MOVE_DIRECTION_RIGHT = 1;
+
+	/** @var int Move direction left */
+	const MOVE_DIRECTION_LEFT = -1;
+
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 

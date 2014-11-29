@@ -204,7 +204,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		if ($column_start > 3)
 		{
 			$this->setExpectedTriggerError(E_USER_ERROR, 'CLASS_NOT_FOUND');
-			$this->modules_manager->move_module_right($module_id);
+			$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_RIGHT);
 			return;
 		}
 
@@ -218,12 +218,12 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		{
 			$data = $this->modules_manager->get_move_module_data($module_id);
 			$this->assertEquals($column_start, $data['module_column']);
-			$this->modules_manager->move_module_right($module_id);
+			$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_RIGHT);
 			$column_start++;
 			$this->update_portal_modules();
 		}
 		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE');
-		$this->modules_manager->move_module_right($module_id);
+		$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_RIGHT);
 	}
 
 	public function data_move_module_left()
@@ -246,7 +246,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		if ($column_start > 3)
 		{
 			$this->setExpectedTriggerError(E_USER_ERROR, 'CLASS_NOT_FOUND');
-			$this->modules_manager->move_module_left($module_id);
+			$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_LEFT);
 			return;
 		}
 
@@ -254,7 +254,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		{
 			$data = $this->modules_manager->get_move_module_data($module_id);
 			$this->assertEquals($column_start, $data['module_column']);
-			$this->modules_manager->move_module_right($module_id);
+			$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_RIGHT);
 			$this->update_portal_modules();
 			$column_start++;
 		}
@@ -271,12 +271,12 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		{
 			$data = $this->modules_manager->get_move_module_data($module_id);
 			$this->assertEquals($column_start, $data['module_column']);
-			$this->modules_manager->move_module_left($module_id);
+			$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_LEFT);
 			$this->update_portal_modules();
 			$column_start--;
 		}
 		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE');
-		$this->modules_manager->move_module_left($module_id);
+		$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_LEFT);
 	}
 
 	public function data_can_move_module()

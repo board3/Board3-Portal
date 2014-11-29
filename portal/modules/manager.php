@@ -259,188 +259,138 @@ class manager
 	}
 
 	/**
-	 * Move module left one column
+	 * Move module horizontally
 	 *
 	 * @param int $module_id ID of the module that should be moved
+	 * @param int $direction The direction to move the module
+	 *
+	 * @return null
 	 */
-	public function move_module_left($module_id)
+	public function move_module_horizontal($module_id, $direction)
 	{
 		$module_data = $this->get_move_module_data($module_id);
 
 		$this->get_module($module_data['module_classname']);
 
-		$move_action = 0;
+		$move_action = $this->get_horizontal_move_action($module_data, $direction);
+		$this->check_module_conflict($module_data, $move_action);
 
-		if ($module_data !== false && $module_data['module_column'] > $this->portal_columns->string_to_number('left'))
-		{
-			if($this->module->columns & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($module_data['module_column'] - 1)))
-			{
-				$move_action = 1; // we move 1 column to the left
-			}
-			else if($this->module->columns & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($module_data['module_column'] - 2)) && $module_data['module_column'] != 2)
-			{
-				$move_action = 2; // we move 2 columns to the left
-			}
-			else
-			{
-				$this->handle_after_move(false);
-			}
-
-			/**
-			 * moving only 1 column to the left means we will either end up in the left column
-			 * or in the center column. this is not possible when moving 2 columns to the left.
-			 * therefore we only need to check if we won't end up with a duplicate module in the
-			 * new column (side columns (left & right) or center columns (top, center, bottom)).
-			 * of course this does not apply to custom modules.
-			 */
-			if ($module_data['module_classname'] != '\board3\portal\modules\custom' && $move_action == 1)
-			{
-				$column_string = $this->portal_columns->number_to_string($module_data['module_column'] - $move_action);
-				// we can only move left to the left & center column
-				if ($column_string == 'left' && !$this->can_move_module(array('right', 'left'), $module_data['module_classname']))
-				{
-					trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
-				}
-				else if ($column_string == 'center' && !$this->can_move_module(array('top', 'center', 'bottom'), $module_data['module_classname']))
-				{
-					// we are moving from the right to the center column so we should move to the left column instead
-					$move_action = 2;
-				}
-			}
-
-			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 				SET module_order = module_order + 1
 				WHERE module_order >= ' . $module_data['module_order'] . '
-					AND module_column = ' . ($module_data['module_column'] - $move_action);
-			$this->db->sql_query($sql);
-			$updated = $this->db->sql_affectedrows();
+					AND module_column = ' . ($module_data['module_column'] + $move_action);
+		$this->db->sql_query($sql);
+		$updated = $this->db->sql_affectedrows();
 
-			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-				SET module_column = module_column - ' . $move_action . '
+		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+				SET module_column = ' . ($module_data['module_column'] + $move_action) . '
 				WHERE module_id = ' . (int) $module_id;
-			$this->db->sql_query($sql);
+		$this->db->sql_query($sql);
 
-			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 				SET module_order = module_order - 1
 				WHERE module_order >= ' . $module_data['module_order'] . '
 				AND module_column = ' . $module_data['module_column'];
-			$this->db->sql_query($sql);
+		$this->db->sql_query($sql);
 
-			// the module that needs to moved is in the last row
-			if(!$updated)
-			{
-				$sql = 'SELECT MAX(module_order) as new_order
+		// the module that needs to moved is in the last row
+		if (!$updated)
+		{
+			$sql = 'SELECT MAX(module_order) as new_order
 						FROM ' . PORTAL_MODULES_TABLE . '
 						WHERE module_order < ' . $module_data['module_order'] . '
-						AND module_column = ' . (int) ($module_data['module_column'] - $move_action);
-				$this->db->sql_query($sql);
-				$new_order = $this->db->sql_fetchfield('new_order') + 1;
+						AND module_column = ' . (int) ($module_data['module_column'] + $move_action);
+			$this->db->sql_query($sql);
+			$new_order = $this->db->sql_fetchfield('new_order') + 1;
 
-				$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
+			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 					SET module_order = ' . $new_order . '
 					WHERE module_id = ' . (int) $module_id;
-				$this->db->sql_query($sql);
-			}
-		}
-		else
-		{
-			$this->handle_after_move(false);
+			$this->db->sql_query($sql);
 		}
 
 		$this->handle_after_move(true);
 	}
 
 	/**
-	 * Move module right one column
+	 * Get the horizontal move action (columns to move)
 	 *
-	 * @param int $module_id ID of the module that should be moved
+	 * @param array $module_data Array containing the module data
+	 * @param int $direction Direction to move; 1 for right, -1 for left
+	 *
+	 * @return int|null Move action if module can be moved, calls
+	 *		handle_after_move() if it can't be moved
 	 */
-	public function move_module_right($module_id)
+	public function get_horizontal_move_action($module_data, $direction)
 	{
-		$module_data = $this->get_move_module_data($module_id);
-
-		$this->get_module($module_data['module_classname']);
-
-		$move_action = 0;
-
-		if ($module_data !== false && $module_data['module_column'] < $this->portal_columns->string_to_number('right'))
+		if ($this->can_move_horizontally($module_data, $direction))
 		{
-			if($this->module->columns & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($module_data['module_column'] + 1)))
+			if ($this->module->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($module_data['module_column'] + $direction)))
 			{
-				$move_action = 1; // we move 1 column to the right
+				return $direction; // we move 1 column
 			}
-			else if($this->module->columns & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($module_data['module_column'] + 2)) && $module_data['module_column'] != 2)
+			else if ($this->module->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($module_data['module_column'] + $direction * 2)) && $module_data['module_column'] != $this->portal_columns->string_to_number('center'))
 			{
-				$move_action = 2; // we move 2 columns to the right
+				return 2 * $direction; // we move 2 columns
 			}
-			else
+		}
+
+		$this->handle_after_move(false);
+	}
+
+	/**
+	 * Check if there is conflict between the move action and existing modules
+	 *
+	 * @param array $module_data The module's data
+	 * @param int $move_action The move action
+	 *
+	 * @return null
+	 */
+	protected function check_module_conflict($module_data, &$move_action)
+	{
+		/**
+		 * Moving only 1 column means we will either end up in a side column
+		 * or in the center column. This is not possible when moving 2 columns.
+		 * Therefore we only need to check if we won't end up with a duplicate
+		 * module in the new column (side columns (left & right) or center
+		 * columns (top, center, bottom)). Of course this does not apply to
+		 * custom modules.
+		 */
+		if ($module_data['module_classname'] != '\board3\portal\modules\custom' && abs($move_action) == 1)
+		{
+			$column_string = $this->portal_columns->number_to_string($module_data['module_column'] + $move_action);
+
+			// we can only move horizontally to center or side columns
+			if (in_array($column_string, array('right', 'left')) && !$this->can_move_module(array('right', 'left'), $module_data['module_classname']))
 			{
-				$this->handle_after_move(false);
+				trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
 			}
-
-			/**
-			 * moving only 1 column to the right means we will either end up in the right column
-			 * or in the center column. this is not possible when moving 2 columns to the right.
-			 * therefore we only need to check if we won't end up with a duplicate module in the
-			 * new column (side columns (left & right) or center columns (top, center, bottom)).
-			 * of course this does not apply to custom modules.
-			 */
-			if ($module_data['module_classname'] != '\board3\portal\modules\custom' && $move_action == 1)
+			else if ($column_string == 'center' && !$this->can_move_module(array('top', 'center', 'bottom'), $module_data['module_classname']))
 			{
-				$column_string = $this->portal_columns->number_to_string($module_data['module_column'] + $move_action);
-
-				// we can only move right to the right & center column
-				if ($column_string == 'right' && !$this->can_move_module(array('right', 'left'), $module_data['module_classname']))
-				{
-					trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
-				}
-				else if ($column_string == 'center' && !$this->can_move_module(array('top', 'center', 'bottom'), $module_data['module_classname']))
-				{
-					// we are moving from the left to the center column so we should move to the right column instead
-					$move_action = 2;
-				}
+				// we are moving from the right to the center column so we should move to the left column instead
+				$move_action = 2 * $move_action;
 			}
+		}
+	}
 
-			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-				SET module_order = module_order + 1
-				WHERE module_order >= ' . (int) $module_data['module_order'] . '
-					AND module_column = ' . (int) ($module_data['module_column'] + $move_action);
-			$this->db->sql_query($sql);
-			$updated = $this->db->sql_affectedrows();
-
-			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-				SET module_column = module_column + ' . $move_action . '
-				WHERE module_id = ' . (int) $module_id;
-			$this->db->sql_query($sql);
-
-			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-				SET module_order = module_order - 1
-				WHERE module_order >= ' . (int) $module_data['module_order'] . '
-				AND module_column = ' . (int) $module_data['module_column'];
-			$this->db->sql_query($sql);
-
-			// the module that needs to moved is in the last row
-			if(!$updated)
-			{
-				$sql = 'SELECT MAX(module_order) as new_order
-						FROM ' . PORTAL_MODULES_TABLE . '
-						WHERE module_order < ' . (int) $module_data['module_order'] . '
-						AND module_column = ' . (int) ($module_data['module_column'] + $move_action);
-				$this->db->sql_query($sql);
-				$new_order = $this->db->sql_fetchfield('new_order') + 1;
-
-				$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-					SET module_order = ' . (int) $new_order . '
-					WHERE module_id = ' . (int) $module_id;
-				$this->db->sql_query($sql);
-			}
+	/**
+	 * Check if module can be moved horizontally
+	 *
+	 * @param array $module_data Module's module data
+	 * @param int $direction Direction to move the module
+	 *
+	 * @return bool True if module can be moved, false if not
+	 */
+	protected function can_move_horizontally($module_data, $direction)
+	{
+		if (isset($module_data['module_column']))
+		{
+			return ($direction === database_handler::MOVE_DIRECTION_RIGHT) ? $module_data['module_column'] < $this->portal_columns->string_to_number('right') : $module_data['module_column'] > $this->portal_columns->string_to_number('left');
 		}
 		else
 		{
-			$this->handle_after_move(false);
+			return false;
 		}
-
-		$this->handle_after_move(true);
 	}
 
 	/**

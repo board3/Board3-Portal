@@ -411,11 +411,11 @@ class portal_module
 				}
 				else if($action == 'move_right')
 				{
-					$this->modules_manager->move_module_right($module_id);
+					$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_RIGHT);
 				}
 				else if($action == 'move_left')
 				{
-					$this->modules_manager->move_module_left($module_id);
+					$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_LEFT);
 				}
 				else if ($action == 'delete')
 				{

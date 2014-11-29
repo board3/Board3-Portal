@@ -100,6 +100,7 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		), self::$meta_refresh);
 		$this->assertEquals(phpbb_acp_move_module_test::$error_type, E_USER_NOTICE);
 		$this->assertEquals(phpbb_acp_move_module_test::$error, 'adm/index.php?i=15&amp;mode=foobar&amp;module_id=6');
+		phpbb_acp_move_module_test::$override_trigger_error = false;
 	}
 
 	public function test_module_delete()
@@ -140,6 +141,7 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		$this->assertNull($this->modules_manager->module_delete(6, 'foobar', 'module_delete', 6));
 		$this->assertEquals(E_USER_NOTICE, phpbb_acp_move_module_test::$error_type);
 		$this->assertEquals('SUCCESS_DELETEadm/index.php?i=15&amp;mode=foobar', phpbb_acp_move_module_test::$error);
+		phpbb_acp_move_module_test::$override_trigger_error = false;
 	}
 }
 

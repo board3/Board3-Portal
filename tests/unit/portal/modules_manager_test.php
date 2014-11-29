@@ -80,4 +80,10 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 	{
 		$this->assertNull($this->modules_manager->handle_ajax_request(array('foobar' => true)));
 	}
+
+	public function test_get_horizontal_move_action()
+	{
+		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE');
+		$this->modules_manager->get_horizontal_move_action(array(), 6);
+	}
 }
