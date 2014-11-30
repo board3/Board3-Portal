@@ -23,6 +23,9 @@ class portal_module
 	/** @var \board3\portal\portal\modules\manager */
 	protected $modules_manager;
 
+	/** @var \board3\portal\portal\modules\constraints_handler */
+	protected $modules_constraints;
+
 	public function __construct()
 	{
 		global $db, $user, $cache, $request, $template, $table_prefix;
