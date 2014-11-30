@@ -31,8 +31,8 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	'USER_MENU'			=> 'Gebruikersmenu',
-	'UM_LOG_ME_IN'		=> 'Ondhoud me',
-	'UM_HIDE_ME'		=> 'Verberg me',
+	'UM_LOG_ME_IN'		=> 'Onthouden',
+	'UM_HIDE_ME'		=> 'Verberg mij',
 	'UM_REGISTER_NOW'	=> 'Registreer nu!',
 	'UM_MAIN_SUBSCRIBED'=> 'Abonnementen',
 	'UM_BOOKMARKS'		=> 'Favorieten',
