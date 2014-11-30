@@ -7,6 +7,8 @@
  *
  */
 
+namespace board3\portal\portal\modules;
+
 class board3_portal_modules_manager_test extends \board3\portal\tests\testframework\database_test_case
 {
 	protected $portal_columns;
@@ -15,6 +17,9 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 	/** @var \board3\portal\portal\modules\manager */
 	protected $modules_manager;
 
+	/** @var \board3\portal\portal\modules\constraints_handler */
+	protected $constraints_handler;
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(dirname(__FILE__) . '/../acp/fixtures/modules.xml');
@@ -22,6 +27,8 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 
 	public function setUp()
 	{
+		global $cache, $db;
+
 		parent::setUp();
 
 		$user = new \board3\portal\tests\mock\user();
@@ -57,7 +64,13 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 			'UNABLE_TO_MOVE_ROW'	=> 'UNABLE_TO_MOVE_ROW',
 		));
 		$this->database_handler = new \board3\portal\portal\modules\database_handler($db);
-		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->portal_columns, $portal_helper, $this->database_handler, $request, $user);
+		$this->constraints_handler = new \board3\portal\portal\modules\constraints_handler($this->portal_columns, $user);
+		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->portal_columns, $portal_helper, $this->constraints_handler, $this->database_handler, $request, $user);
+		$portal_modules = obtain_portal_modules();
+		foreach($portal_modules as $cur_module)
+		{
+			$this->constraints_handler->module_column[$cur_module['module_classname']][] = $this->portal_columns->number_to_string($cur_module['module_column']);
+		}
 	}
 
 	public function test_set_u_action()
@@ -85,5 +98,25 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 	{
 		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE');
 		$this->modules_manager->get_horizontal_move_action(array(), 6);
+	}
+
+	public function test_set_module_column()
+	{
+		$module_column = $this->constraints_handler->module_column;
+		$this->constraints_handler->set_module_column(array());
+		$this->assertEquals(array(), $this->constraints_handler->module_column);
+		$this->constraints_handler->set_module_column($module_column);
+		$this->assertEquals($module_column, $this->constraints_handler->module_column);
+	}
+
+	public function test_check_module_conflict()
+	{
+		phpbb_acp_move_module_test::$override_trigger_error = true;
+		phpbb_acp_move_module_test::$error = '';
+		phpbb_acp_move_module_test::$error_type = 0;
+		$move_action = 1;
+		$this->constraints_handler->check_module_conflict($this->modules_manager->get_move_module_data(2), $move_action);
+		$this->assertEquals('UNABLE_TO_MOVE', phpbb_acp_move_module_test::$error);
+		phpbb_acp_move_module_test::$override_trigger_error = false;
 	}
 }

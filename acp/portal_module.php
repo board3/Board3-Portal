@@ -50,6 +50,7 @@ class portal_module
 		$this->log = $phpbb_log;
 		$this->portal_columns = $this->phpbb_container->get('board3.portal.columns');
 		$this->modules_manager = $this->phpbb_container->get('board3.portal.modules.manager');
+		$this->modules_constraints = $this->phpbb_container->get('board3.portal.modules.constraints_handler');
 		define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.portal.modules.table'));
 		define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.portal.config.table'));
 
@@ -392,14 +393,16 @@ class portal_module
 
 				// Create an array of already installed modules
 				$portal_modules = obtain_portal_modules();
-				$installed_modules = array();
+				$installed_modules = $module_column = array();
 
 				foreach($portal_modules as $cur_module)
 				{
 					$installed_modules[] = $cur_module['module_classname'];
 					// Create an array with the columns the module is in
-					$this->modules_manager->module_column[$cur_module['module_classname']][] = $this->portal_columns->number_to_string($cur_module['module_column']);
+					$module_column[$cur_module['module_classname']][] = $this->portal_columns->number_to_string($cur_module['module_column']);
 				}
+				$this->modules_constraints->set_module_column($module_column);
+				unset($module_column);
 
 				if ($action == 'move_up')
 				{
@@ -582,7 +585,7 @@ class portal_module
 							{
 								$column_string = $this->portal_columns->number_to_string($row['module_column'] + 1); // move 1 right
 
-								if ($column_string == 'right' && !$this->modules_manager->can_move_module(array('left', 'right'), $row['module_classname']))
+								if ($column_string == 'right' && !$this->modules_constraints->can_move_module(array('left', 'right'), $row['module_classname']))
 								{
 									$move_right = false;
 								}
@@ -612,7 +615,7 @@ class portal_module
 							{
 								$column_string = $this->portal_columns->number_to_string($row['module_column'] - 1); // move 1 left
 
-								if ($column_string == 'left' && !$this->modules_manager->can_move_module(array('left', 'right'), $row['module_classname']))
+								if ($column_string == 'left' && !$this->modules_constraints->can_move_module(array('left', 'right'), $row['module_classname']))
 								{
 									$move_left = false;
 								}

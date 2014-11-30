@@ -25,6 +25,9 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	/** @var \board3\portal\portal\columns */
 	protected $portal_columns;
 
+	/** @var \board3\portal\portal\modules\constraints_handler */
+	protected $constraints_handler;
+
 	public function setUp()
 	{
 		parent::setUp();
@@ -73,19 +76,21 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			'UNABLE_TO_MOVE_ROW'	=> 'UNABLE_TO_MOVE_ROW',
 		));
 		$this->database_handler = new \board3\portal\portal\modules\database_handler($db);
-		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->portal_columns, $portal_helper, $this->database_handler, $request, $user);
+		$this->constraints_handler = new \board3\portal\portal\modules\constraints_handler($this->portal_columns, $user);
+		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->portal_columns, $portal_helper, $this->constraints_handler, $this->database_handler, $request, $user);
 		$phpbb_container->set('board3.portal.modules.manager', $this->modules_manager);
+		$phpbb_container->set('board3.portal.modules.constraints_handler', $this->constraints_handler);
 		$this->portal_module = new \board3\portal\acp\portal_module();
 		$this->update_portal_modules();
 	}
 
 	protected function update_portal_modules()
 	{
-		$this->modules_manager->module_column = array();
+		$this->constraints_handler->module_column = array();
 		$portal_modules = obtain_portal_modules();
 		foreach($portal_modules as $cur_module)
 		{
-			$this->modules_manager->module_column[$cur_module['module_classname']][] = $this->portal_columns->number_to_string($cur_module['module_column']);
+			$this->constraints_handler->module_column[$cur_module['module_classname']][] = $this->portal_columns->number_to_string($cur_module['module_column']);
 		}
 	}
 
@@ -211,7 +216,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		if ($add_to_column)
 		{
 			$module_data = $this->modules_manager->get_move_module_data($module_id);
-			$this->modules_manager->module_column[$module_data['module_classname']][] = $this->portal_columns->number_to_string($add_to_column);
+			$this->constraints_handler->module_column[$module_data['module_classname']][] = $this->portal_columns->number_to_string($add_to_column);
 		}
 
 		for ($i = 1; $i <= $move_right; $i++)
@@ -262,7 +267,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		if ($add_to_column)
 		{
 			$module_data = $this->modules_manager->get_move_module_data($module_id);
-			$this->modules_manager->module_column[$module_data['module_classname']][] = $this->portal_columns->number_to_string($add_to_column);
+			$this->constraints_handler->module_column[$module_data['module_classname']][] = $this->portal_columns->number_to_string($add_to_column);
 		}
 
 		// We always start in the right column = 3
@@ -297,7 +302,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	public function test_can_move_module($expected, $target_column, $module_class)
 	{
 		$this->update_portal_modules();
-		$this->assertEquals($expected, $this->modules_manager->can_move_module($target_column, $module_class));
+		$this->assertEquals($expected, $this->constraints_handler->can_move_module($target_column, $module_class));
 	}
 }
 

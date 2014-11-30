@@ -26,6 +26,9 @@ class manager
 	/** @var \board3\portal\includes\helper */
 	protected $portal_helper;
 
+	/** @var \board3\portal\portal\modules\constraints_handler */
+	protected $constraints_handler;
+
 	/** @var \board3\portal\portal\modules\database_handler */
 	protected $database_handler;
 
@@ -47,9 +50,6 @@ class manager
 	/** @var string class of acp module */
 	protected $acp_class;
 
-	/** @var array Array of module columns */
-	public $module_column = array();
-
 	/**
 	 * Constructor for modules manager
 	 *
@@ -57,16 +57,18 @@ class manager
 	 * @param \phpbb\db\driver\driver_interface $db Database driver
 	 * @param \board3\portal\portal\columns $portal_columns Portal columns helper
 	 * @param \board3\portal\includes\helper $portal_helper Portal helper
+	 * @param \board3\portal\portal\modules\constraints_handler $constraints_handler Modules constraints handler
 	 * @param \board3\portal\portal\modules\database_handler $database_handler Modules database handler
 	 * @param \phpbb\request\request_interface $request phpBB request
 	 * @param \phpbb\user $user phpBB user
 	 */
-	public function __construct($cache, driver_interface $db, columns $portal_columns, helper $portal_helper, database_handler $database_handler, request_interface $request, $user)
+	public function __construct($cache, driver_interface $db, columns $portal_columns, helper $portal_helper, constraints_handler $constraints_handler, database_handler $database_handler, request_interface $request, $user)
 	{
 		$this->cache = $cache;
 		$this->db = $db;
 		$this->portal_columns = $portal_columns;
 		$this->portal_helper = $portal_helper;
+		$this->constraints_handler = $constraints_handler;
 		$this->database_handler = $database_handler;
 		$this->request = $request;
 		$this->user = $user;
@@ -82,6 +84,7 @@ class manager
 	public function set_u_action($u_action)
 	{
 		$this->u_action = $u_action;
+		$this->constraints_handler->set_u_action($u_action);
 
 		return $this;
 	}
@@ -279,7 +282,7 @@ class manager
 		$this->get_module($module_data['module_classname']);
 
 		$move_action = $this->get_horizontal_move_action($module_data, $direction);
-		$this->check_module_conflict($module_data, $move_action);
+		$this->constraints_handler->check_module_conflict($module_data, $move_action);
 
 		$this->database_handler->move_module_horizontal($module_id, $module_data, $move_action);
 
@@ -297,7 +300,7 @@ class manager
 	 */
 	public function get_horizontal_move_action($module_data, $direction)
 	{
-		if ($this->can_move_horizontally($module_data, $direction))
+		if ($this->constraints_handler->can_move_horizontally($module_data, $direction))
 		{
 			if ($this->module->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($module_data['module_column'] + $direction)))
 			{
@@ -310,61 +313,6 @@ class manager
 		}
 
 		$this->handle_after_move(false);
-	}
-
-	/**
-	 * Check if there is conflict between the move action and existing modules
-	 *
-	 * @param array $module_data The module's data
-	 * @param int $move_action The move action
-	 *
-	 * @return null
-	 */
-	protected function check_module_conflict($module_data, &$move_action)
-	{
-		/**
-		 * Moving only 1 column means we will either end up in a side column
-		 * or in the center column. This is not possible when moving 2 columns.
-		 * Therefore we only need to check if we won't end up with a duplicate
-		 * module in the new column (side columns (left & right) or center
-		 * columns (top, center, bottom)). Of course this does not apply to
-		 * custom modules.
-		 */
-		if ($module_data['module_classname'] != '\board3\portal\modules\custom' && abs($move_action) == 1)
-		{
-			$column_string = $this->portal_columns->number_to_string($module_data['module_column'] + $move_action);
-
-			// we can only move horizontally to center or side columns
-			if (in_array($column_string, array('right', 'left')) && !$this->can_move_module(array('right', 'left'), $module_data['module_classname']))
-			{
-				trigger_error($this->user->lang['UNABLE_TO_MOVE'] . adm_back_link($this->u_action));
-			}
-			else if ($column_string == 'center' && !$this->can_move_module(array('top', 'center', 'bottom'), $module_data['module_classname']))
-			{
-				// we are moving from the right to the center column so we should move to the left column instead
-				$move_action = 2 * $move_action;
-			}
-		}
-	}
-
-	/**
-	 * Check if module can be moved horizontally
-	 *
-	 * @param array $module_data Module's module data
-	 * @param int $direction Direction to move the module
-	 *
-	 * @return bool True if module can be moved, false if not
-	 */
-	protected function can_move_horizontally($module_data, $direction)
-	{
-		if (isset($module_data['module_column']))
-		{
-			return ($direction === database_handler::MOVE_DIRECTION_RIGHT) ? $module_data['module_column'] < $this->portal_columns->string_to_number('right') : $module_data['module_column'] > $this->portal_columns->string_to_number('left');
-		}
-		else
-		{
-			return false;
-		}
 	}
 
 	/**
@@ -441,54 +389,5 @@ class manager
 	public function get_module_link($mode, $module_id)
 	{
 		return preg_replace(array('/i=[0-9]+/', '/mode=[a-zA-Z0-9_]+/'), array('i=%5C' . str_replace('\\', '%5C', $this->acp_class), 'mode=' . $mode), $this->u_action) . (($module_id) ? '&amp;module_id=' . $module_id : '');
-	}
-
-	/**
-	 * Check if module can be moved to desired column(s)
-	 *
-	 * @param array|int	$target_column Column(s) the module should be
-	 *				moved to
-	 * @param string		$module_class Class of the module
-	 * @return bool		True if module can be moved to desired column,
-	 *			false if not
-	 */
-	public function can_move_module($target_column, $module_class)
-	{
-		$submit = true;
-
-		if (is_array($target_column))
-		{
-			foreach ($target_column as $column)
-			{
-				if (!$this->can_move_module($column, $module_class))
-				{
-					$submit = false;
-				}
-			}
-		}
-
-		// do we want to add the module to the side columns or to the center columns?
-		if (in_array($target_column, array('left', 'right')))
-		{
-			// does the module already exist in the side columns?
-			if (isset($this->module_column[$module_class]) &&
-				(in_array('left', $this->module_column[$module_class]) || in_array('right', $this->module_column[$module_class])))
-			{
-				$submit = false;
-			}
-		}
-		else if (in_array($target_column, array('center', 'top', 'bottom')))
-		{
-			// does the module already exist in the center columns?
-			if (isset($this->module_column[$module_class]) &&
-				(in_array('center', $this->module_column[$module_class]) ||
-					in_array('top', $this->module_column[$module_class]) ||
-					in_array('bottom', $this->module_column[$module_class])))
-			{
-				$submit = false;
-			}
-		}
-
-		return $submit;
 	}
 }
