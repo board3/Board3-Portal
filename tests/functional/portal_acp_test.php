@@ -25,7 +25,6 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 		return array(
 			array('config'),
 			array('modules'),
-			// array('upload_module'),
 		);
 	}
 
