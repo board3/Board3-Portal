@@ -162,8 +162,8 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 	switch ($type)
 	{
 		case "announcements":
-			$pagination_type = 'ap';
-			$anker = '#a';
+			$pagination_type = 'ap_' . $module_id;
+			$anker = '#a_' . $module_id;
 		break;
 		case "news":
 		case "news_all":
@@ -173,8 +173,8 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 
 		default:
 			// this shouldn't happen but default to announcements
-			$pagination_type = 'ap';
-			$anker = '#a';
+			$pagination_type = 'ap_' . $module_id;
+			$anker = '#a_' . $module_id;
 	}
 
 	// Make sure $per_page is a valid value
