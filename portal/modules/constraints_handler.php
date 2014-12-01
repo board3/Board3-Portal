@@ -134,16 +134,29 @@ class constraints_handler
 		}
 
 		// Check if module already exists in the target columns
+		return $this->check_module_already_exists($target_column, $module_class);
+	}
+
+	/**
+	 * Check if module already exists in specified target column type
+	 *
+	 * @param string $column Column to check
+	 * @param string $module_class Module class
+	 *
+	 * @return bool False if it already exists, true if not
+	 */
+	public function check_module_already_exists($column, $module_class)
+	{
 		if (isset($this->module_column[$module_class]))
 		{
 			// does the module already exist in the side columns?
-			if (in_array($target_column, array('left', 'right')) &&
+			if (in_array($column, array('left', 'right')) &&
 				(in_array('left', $this->module_column[$module_class]) || in_array('right', $this->module_column[$module_class])))
 			{
 				return false;
 			}
 			// does the module already exist in the center columns?
-			else if (in_array($target_column, array('center', 'top', 'bottom')) &&
+			else if (in_array($column, array('center', 'top', 'bottom')) &&
 				(in_array('center', $this->module_column[$module_class]) || in_array('top', $this->module_column[$module_class]) || in_array('bottom', $this->module_column[$module_class])))
 			{
 				return false;
