@@ -97,23 +97,6 @@ $lang = array_merge($lang, array(
 	'LINK_ADDED'							=> 'The link has been successfully added',
 	'LINK_UPDATED'							=> 'The link has been successfully updated',
 
-	// Upload Module
-	'MODULE_UPLOAD'					=> 'Upload a module',
-	'MODULE_UPLOAD_EXP'				=> 'Choose the zip file of the module you want to upload:',
-	'MODULE_UPLOAD_GO'				=> 'Upload',
-	'NO_MODULE_UPLOAD'				=> 'Your server configuration does not allow file uploads.',
-	'NO_FILE_B3P'					=> 'No zip file specified.',
-	'MODULE_UPLOADED'				=> 'Module uploaded successfully.',
-	'MODULE_UPLOAD_MKDIR_FAILURE'	=> 'Unable to create a folder.',
-	'MODULE_COPY_FAILURE'			=> 'Unable to copy the following file: %1$s',
-	'MODULE_CORRUPTED'				=> 'The module you are trying to upload seems to be corrupted.',
-	'PORTAL_NEW_FILES'				=> 'New files',
-	'PORTAL_MODULE_SOURCE'			=> 'Source',
-	'PORTAL_MODULE_TARGET'			=> 'Target',
-	'PORTAL_MODULE_STATUS'			=> 'Status',
-	'PORTAL_MODULE_SUCCESS'			=> 'Success',
-	'PORTAL_MODULE_ERROR'			=> 'Error',
-
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Adding basic set of modules',
 	'PORTAL_BASIC_UNINSTALL'		=> 'Removing modules from database',

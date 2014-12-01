@@ -690,47 +690,7 @@ class portal_module
 				$this->tpl_name = 'portal/acp_portal_modules';
 				$this->page_title = 'ACP_PORTAL_MODULES';
 			break;
-			case 'upload_module':
-				$error = array();
-				if($submit)
-				{
-					if(!check_form_key('acp_portal_module_upload'))
-					{
-						trigger_error($this->user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
-					}
-					include($this->root_path . 'includes/functions_upload.' . $this->php_ext);
-					// Default upload path is portal/upload/
-					$upload_path = $this->root_path . 'portal/upload/';
 
-					new portal_upload($upload_path, $this->u_action);
-
-					$this->tpl_name = 'portal/acp_portal_upload_module';
-					$this->page_title = $this->user->lang['ACP_PORTAL_UPLOAD'];
-				}
-				else
-				{
-					// start the page
-					$this->template->assign_vars(array(
-						'U_UPLOAD'			=> $this->u_action,
-						'S_FORM_ENCTYPE'	=> ' enctype="multipart/form-data"',
-					));
-
-					add_form_key('acp_portal_module_upload');
-
-					$this->tpl_name = 'portal/acp_portal_upload_module';
-					$this->page_title = $this->user->lang['ACP_PORTAL_UPLOAD'];
-
-					$this->template->assign_vars(array(
-						'L_TITLE'			=> $this->user->lang['ACP_PORTAL_UPLOAD'],
-						'L_TITLE_EXPLAIN'	=> '',
-
-						'S_ERROR'			=> (sizeof($error)) ? true : false,
-						'ERROR_MSG'			=> implode('<br />', $error),
-
-						'U_ACTION'			=> $this->u_action,
-					));
-				}
-			break;
 			default:
 				trigger_error('NO_MODE', E_USER_ERROR);
 			break;
