@@ -131,6 +131,8 @@ class constraints_handler
 					return false;
 				}
 			}
+
+			return true;
 		}
 
 		// Check if module already exists in the target columns
