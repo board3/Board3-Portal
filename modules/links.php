@@ -56,13 +56,13 @@ class links extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var string PHP file extension */
@@ -81,9 +81,9 @@ class links extends module_base
 	* Construct a links object
 	*
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\db\driver\driver_interface $db phpBB db driver
 	* @param \phpbb\request\request $request phpBB request
-	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\template\template $template phpBB template
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
@@ -113,6 +113,8 @@ class links extends module_base
 		// get user's groups
 		$groups_ary = get_user_groups();
 
+		$this->template->assign_block_vars('portal_links', array('MODULE_ID' => $module_id));
+
 		for ($i = 0; $i < sizeof($links); $i++)
 		{
 			if ($links[$i]['type'] == self::LINK_INT)
@@ -130,7 +132,7 @@ class links extends module_base
 
 			if (!empty($permission_check) || $links[$i]['permission'] == '')
 			{
-				$this->template->assign_block_vars('portallinks', array(
+				$this->template->assign_block_vars('portal_links.links', array(
 					'LINK_TITLE'		=> (isset($this->user->lang[$links[$i]['title']])) ? $this->user->lang[$links[$i]['title']] : $links[$i]['title'],
 					'LINK_URL'			=> $cur_url,
 					'MODULE_ID'			=> $module_id,
