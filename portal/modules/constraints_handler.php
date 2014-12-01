@@ -115,7 +115,7 @@ class constraints_handler
 	/**
 	 * Check if module can be moved to desired column(s)
 	 *
-	 * @param array|int	$target_column Column(s) the module should be moved to
+	 * @param array|string	$target_column Column(s) the module should be moved to
 	 * @param string		$module_class Class of the module
 	 * @return bool		True if module can be moved to desired column,
 	 *			false if not
