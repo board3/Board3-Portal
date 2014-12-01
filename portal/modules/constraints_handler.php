@@ -122,41 +122,34 @@ class constraints_handler
 	 */
 	public function can_move_module($target_column, $module_class)
 	{
-		$submit = true;
-
 		if (is_array($target_column))
 		{
 			foreach ($target_column as $column)
 			{
 				if (!$this->can_move_module($column, $module_class))
 				{
-					$submit = false;
+					return false;
 				}
 			}
 		}
 
-		// do we want to add the module to the side columns or to the center columns?
-		if (in_array($target_column, array('left', 'right')))
+		// Check if module already exists in the target columns
+		if (isset($this->module_column[$module_class]))
 		{
 			// does the module already exist in the side columns?
-			if (isset($this->module_column[$module_class]) &&
+			if (in_array($target_column, array('left', 'right')) &&
 				(in_array('left', $this->module_column[$module_class]) || in_array('right', $this->module_column[$module_class])))
 			{
-				$submit = false;
+				return false;
 			}
-		}
-		else if (in_array($target_column, array('center', 'top', 'bottom')))
-		{
 			// does the module already exist in the center columns?
-			if (isset($this->module_column[$module_class]) &&
-				(in_array('center', $this->module_column[$module_class]) ||
-					in_array('top', $this->module_column[$module_class]) ||
-					in_array('bottom', $this->module_column[$module_class])))
+			else if (in_array($target_column, array('center', 'top', 'bottom')) &&
+				(in_array('center', $this->module_column[$module_class]) || in_array('top', $this->module_column[$module_class]) || in_array('bottom', $this->module_column[$module_class])))
 			{
-				$submit = false;
+				return false;
 			}
 		}
 
-		return $submit;
+		return true;
 	}
 }
