@@ -57,13 +57,13 @@ class main_menu extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var string PHP file extension */
@@ -82,9 +82,9 @@ class main_menu extends module_base
 	* Construct a main menu object
 	*
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\db\driver\driver_interface $db phpBB db driver
 	* @param \phpbb\request\request $request phpBB request
-	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\template\template $template phpBB template
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	* @param \phpbb\user $user phpBB user object
@@ -111,6 +111,8 @@ class main_menu extends module_base
 
 		$links = $this->utf_unserialize($portal_config['board3_menu_array_' . $module_id]);
 
+		$this->template->assign_block_vars('portal_menu', array('MODULE_ID' => $module_id));
+
 		// get user's groups
 		$groups_ary = get_user_groups();
 
@@ -118,9 +120,8 @@ class main_menu extends module_base
 		{
 			if ($links[$i]['type'] == self::LINK_CAT)
 			{
-				$this->template->assign_block_vars('portalmenu', array(
+				$this->template->assign_block_vars('portal_menu.category', array(
 					'CAT_TITLE'		=> (isset($this->user->lang[$links[$i]['title']])) ? $this->user->lang[$links[$i]['title']] : $links[$i]['title'],
-					'MODULE_ID'		=> $module_id,
 				));
 			}
 			else
@@ -140,7 +141,7 @@ class main_menu extends module_base
 
 				if (!empty($permission_check) || $links[$i]['permission'] == '')
 				{
-					$this->template->assign_block_vars('portalmenu.links', array(
+					$this->template->assign_block_vars('portal_menu.category.links', array(
 						'LINK_TITLE'		=> (isset($this->user->lang[$links[$i]['title']])) ? $this->user->lang[$links[$i]['title']] : $links[$i]['title'],
 						'LINK_URL'			=> $cur_url,
 						'NEW_WINDOW'		=> ($links[$i]['type'] != self::LINK_INT && $this->config['board3_menu_url_new_window_' . $module_id]) ? true : false,
