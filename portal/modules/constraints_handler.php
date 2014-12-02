@@ -140,6 +140,19 @@ class constraints_handler
 	}
 
 	/**
+	 * Check if module can be moved to desired column
+	 *
+	 * @param \board3\portal\modules\module_interface $module
+	 * @param string $column Column string
+	 *
+	 * @return bool True if module can be moved, false if not
+	 */
+	public function can_add_module($module, $column)
+	{
+		return $module->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($column));
+	}
+
+	/**
 	 * Check if module already exists in specified target column type
 	 *
 	 * @param string $column Column to check

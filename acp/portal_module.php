@@ -443,6 +443,12 @@ class portal_module
 							continue;
 						}
 
+						// Do not add modules that shouldn't be added
+						if (!$this->modules_constraints->can_add_module($this->c_class, $add_column))
+						{
+							trigger_error($this->user->lang('UNABLE_TO_ADD_MODULE') . adm_back_link($this->u_action), E_USER_WARNING);
+						}
+
 						// Do not install if module already exists in the
 						// column and it can't be added more than once
 						if (!$this->c_class->can_multi_include() && !$this->modules_constraints->can_move_module($this->portal_columns->number_to_string($add_column), $module_classname))
@@ -512,6 +518,12 @@ class portal_module
 					// Find new modules
 					foreach ($modules_list as $module_class => $module)
 					{
+						// Module can't be added to this column
+						if (!$this->modules_constraints->can_add_module($module, $add_column))
+						{
+							continue;
+						}
+
 						// Do not install if module already exists in the
 						// column and it can't be added more than once
 						if (!$module->can_multi_include() && !$this->modules_constraints->can_move_module($this->portal_columns->number_to_string($add_column), $module_class))
