@@ -41,16 +41,19 @@ class news extends module_base
 	*/
 	public $language = 'portal_news_module';
 
+	/** @var bool Can include this module multiple times */
+	protected $multiple_includes = true;
+
 	/** @var \phpbb\auth\auth */
 	protected $auth;
 
-	/** @var \phpbb\cache */
+	/** @var \phpbb\cache\service */
 	protected $cache;
 
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\db\driver\driver_Interface */
 	protected $db;
 
 	/** @var \phpbb\pagination */
@@ -62,7 +65,7 @@ class news extends module_base
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var string PHP file extension */
@@ -81,13 +84,13 @@ class news extends module_base
 	* Construct a news object
 	*
 	* @param \phpbb\auth\auth $auth phpBB auth
-	* @param \phpbb\cache $cache phpBB cache system
+	* @param \phpbb\cache\service $cache phpBB cache system
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\db\driver\driver_interface $db phpBB db driver
 	* @param \phpbb\pagination $pagination phpBB pagination
 	* @param \board3\portal\includes\modules_helper $modules_helper Portal modules helper
 	* @param \phpbb\request\request $request phpBB request
-	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\template\template $template phpBB template
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	* @param \phpbb\user $user phpBB user object
@@ -114,10 +117,10 @@ class news extends module_base
 	*/
 	public function get_template_center($module_id)
 	{
-		$news = $this->request->variable('news', -1);
+		$news = $this->request->variable('news_' . $module_id, -1);
 		$news = ($news > $this->config['board3_number_of_news_' . $module_id] -1) ? -1 : $news;
 		$this->user->add_lang('viewforum');
-		$start = $this->request->variable('np', 0);
+		$start = $this->request->variable('np_' . $module_id, 0);
 		$start = ($start < 0) ? 0 : $start;
 		$total_news = 1;
 
@@ -135,10 +138,28 @@ class news extends module_base
 			(bool) $this->config['board3_news_exclude_' . $module_id]
 		);
 
+		$topic_icons = false;
+		if(!empty($fetch_news['topic_icons']))
+		{
+			$topic_icons = true;
+		}
+
+		// Standard news row
+		$news_row = array(
+			'S_NEWEST_OR_FIRST'			=> ($this->config['board3_news_show_last_' . $module_id]) ? $this->user->lang['JUMP_NEWEST'] : $this->user->lang['JUMP_FIRST'],
+			'POSTED_BY_TEXT'			=> ($this->config['board3_news_show_last_' . $module_id]) ? $this->user->lang['LAST_POST'] : $this->user->lang['POSTED'],
+			'S_DISPLAY_NEWS_RVS'		=> ($this->config['board3_show_news_replies_views_' . $module_id]) ? true : false,
+			'S_TOPIC_ICONS'				=> $topic_icons,
+			'MODULE_ID'					=> $module_id,
+		);
+
 		// Any news present? If not terminate it here.
 		if (sizeof($fetch_news) == 0)
 		{
-			$this->template->assign_block_vars('news_row', array(
+			// Create standard news row
+			$this->template->assign_block_vars('news', $news_row);
+
+			$this->template->assign_block_vars('news.news_row', array(
 				'S_NO_TOPICS'	=> true,
 				'S_NOT_LAST'	=> false,
 			));
@@ -204,6 +225,24 @@ class news extends module_base
 
 			$topic_tracking_info = get_portal_tracking_info($fetch_news);
 
+			// Create pagination if necessary
+			if ($this->config['board3_news_archive_' . $module_id])
+			{
+				$pagination = generate_portal_pagination(append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"), $total_news, $this->config['board3_number_of_news_' . $module_id], $start, ($this->config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news', $module_id);
+			}
+
+			if ($this->config['board3_number_of_news_' . $module_id] <> 0 && $this->config['board3_news_archive_' . $module_id])
+			{
+				$news_row = array_merge($news_row, array(
+					'NP_PAGINATION'		=> (!empty($pagination)) ? $pagination : '',
+					'TOTAL_NEWS'		=> ($total_news == 1) ? sprintf($this->user->lang['VIEW_FORUM_TOPICS'][1], $total_news) : sprintf($this->user->lang['VIEW_FORUM_TOPICS'][2], $total_news),
+					'NP_PAGE_NUMBER'	=> $this->pagination->on_page($total_news, $this->config['board3_number_of_news_' . $module_id], $start),
+				));
+			}
+
+			// Create standard news row
+			$this->template->assign_block_vars('news', $news_row);
+
 			if($news < 0)
 			// Show the news overview
 			{
@@ -227,12 +266,8 @@ class news extends module_base
 					$topic_id = $fetch_news[$i]['topic_id'];
 					$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 
-					$read_full_url = ($this->request->is_set('np')) ? 'np='. $start . '&amp;news=' . $i . '#n' . $i : 'news=' . $i . '#n' . $i;
+					$read_full_url = ($this->request->is_set('np_' . $module_id)) ? "np_$module_id=$start&amp;news_$module_id=$i#n_{$module_id}_$i" : "news_$module_id=$i#n_{$module_id}_$i";
 					$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-					if ($this->config['board3_news_archive_' . $module_id])
-					{
-						$pagination = generate_portal_pagination(append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"), $total_news, $this->config['board3_number_of_news_' . $module_id], $start, ($this->config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news');
-					}
 
 					$replies = ($this->auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
 
@@ -274,9 +309,9 @@ class news extends module_base
 					// Grab icons
 					$icons = $this->cache->obtain_icons();
 
-					$this->pagination->generate_template_pagination($view_topic_url, 'pagination', 'np', $fetch_news[$i]['topic_replies'], $this->config['board3_number_of_news_' . $module_id], $start);
+					$this->pagination->generate_template_pagination($view_topic_url, 'pagination', 'np_' . $module_id, $fetch_news[$i]['topic_replies'], $this->config['board3_number_of_news_' . $module_id], $start);
 
-					$this->template->assign_block_vars('news_row', array(
+					$this->template->assign_block_vars('news.news_row', array(
 						'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $this->config['allow_attachments']) ? $this->user->img('icon_topic_attach', $this->user->lang['TOTAL_ATTACHMENTS']) : '',
 						'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 						'TITLE'					=> $fetch_news[$i]['topic_title'],
@@ -317,19 +352,10 @@ class news extends module_base
 					{
 						foreach ($fetch_news[$i]['attachments'] as $attachment)
 						{
-							$this->template->assign_block_vars('news_row.attachment', array(
+							$this->template->assign_block_vars('news.news_row.attachment', array(
 								'DISPLAY_ATTACHMENT'	=> $attachment)
 							);
 						}
-					}
-
-					if ($this->config['board3_number_of_news_' . $module_id] <> 0 && $this->config['board3_news_archive_' . $module_id])
-					{
-						$this->template->assign_vars(array(
-							'NP_PAGINATION'		=> (!empty($pagination)) ? $pagination : '',
-							'TOTAL_NEWS'		=> ($total_news == 1) ? sprintf($this->user->lang['VIEW_FORUM_TOPICS'][1], $total_news) : sprintf($this->user->lang['VIEW_FORUM_TOPICS'][2], $total_news),
-							'NP_PAGE_NUMBER'	=> $this->pagination->on_page($total_news, $this->config['board3_number_of_news_' . $module_id], $start))
-						);
 					}
 				}
 			}
@@ -344,14 +370,10 @@ class news extends module_base
 				$close_bracket = ' ]';
 				$read_full = $this->user->lang['BACK'];
 
-				$read_full_url = ($this->request->is_set('np')) ? append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "np=$start#n$i") : append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal#n$i");
+				$read_full_url = ($this->request->is_set('np_' . $module_id)) ? append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "np_$module_id=$start#n_{$module_id}_$i") : append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal#n_{$module_id}_$i");
 				$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-				if ($this->config['board3_news_archive_' . $module_id])
-				{
-					$pagination = generate_portal_pagination(append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"), $total_news, $this->config['board3_number_of_news_' . $module_id], $start, ($this->config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news');
-				}
 
-				$this->template->assign_block_vars('news_row', array(
+				$this->template->assign_block_vars('news.news_row', array(
 					'ATTACH_ICON_IMG'	=> ($fetch_news[$i]['attachment'] && $this->config['allow_attachments']) ? $this->user->img('icon_topic_attach', $this->user->lang['TOTAL_ATTACHMENTS']) : '',
 					'FORUM_NAME'		=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 					'TITLE'				=> $fetch_news[$i]['topic_title'],
@@ -381,37 +403,18 @@ class news extends module_base
 				{
 					foreach ($fetch_news[$i]['attachments'] as $attachment)
 					{
-						$this->template->assign_block_vars('news_row.attachment', array(
+						$this->template->assign_block_vars('news.news_row.attachment', array(
 							'DISPLAY_ATTACHMENT'	=> $attachment)
 						);
 					}
 				}
-
-				if ($this->config['board3_number_of_news_' . $module_id] <> 0 && $this->config['board3_news_archive_' . $module_id])
-				{
-					$this->template->assign_vars(array(
-						'NP_PAGINATION'		=> (!empty($pagination)) ? $pagination : '',
-						'TOTAL_NEWS'		=> ($total_news == 1) ? $this->user->lang['VIEW_FORUM_TOPIC'] : $this->user->lang('VIEW_FORUM_TOPICS', $total_news),
-						'NP_PAGE_NUMBER'	=> $this->pagination->on_page($total_news, $this->config['board3_number_of_news_' . $module_id], $start))
-					);
-				}
 			}
-		}
-
-		$topic_icons = false;
-		if(!empty($fetch_news['topic_icons']))
-		{
-			$topic_icons = true;
 		}
 
 		$this->template->assign_vars(array(
 			'NEWEST_POST_IMG'			=> $this->user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 			'READ_POST_IMG'				=> $this->user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
 			'GOTO_PAGE_IMG'				=> $this->user->img('icon_post_target', 'GOTO_PAGE'),
-			'S_NEWEST_OR_FIRST'			=> ($this->config['board3_news_show_last_' . $module_id]) ? $this->user->lang['JUMP_NEWEST'] : $this->user->lang['JUMP_FIRST'],
-			'POSTED_BY_TEXT'			=> ($this->config['board3_news_show_last_' . $module_id]) ? $this->user->lang['LAST_POST'] : $this->user->lang['POSTED'],
-			'S_DISPLAY_NEWS_RVS'		=> ($this->config['board3_show_news_replies_views_' . $module_id]) ? true : false,
-			'S_TOPIC_ICONS'				=> $topic_icons,
 		));
 
 		if($this->config['board3_news_style_' . $module_id])

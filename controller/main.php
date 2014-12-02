@@ -11,6 +11,9 @@ namespace board3\portal\controller;
 
 class main
 {
+	/** @var \board3\portal\portal\columns */
+	protected $portal_columns;
+
 	/**
 	* phpBB Config object
 	* @var \phpbb\config\config
@@ -81,6 +84,7 @@ class main
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
 	* the dependencies defined in the services.yml file for this service.
+	* @param \board3\portal\portal\columns $portal_columns Board3 Portal columns object
 	* @param \phpbb\config\config $config phpBB Config object
 	* @param \board3\portal\controller\helper $controller_helper Controller helper
 	* @param \phpbb\template $template Template object
@@ -91,10 +95,11 @@ class main
 	* @param string $config_table Board3 config table
 	* @param string $modules_table Board3 modules table
 	*/
-	public function __construct($config, $controller_helper, $template, $user, $path_helper, $phpbb_root_path, $php_ext, $config_table, $modules_table)
+	public function __construct($portal_columns, $config, $controller_helper, $template, $user, $path_helper, $phpbb_root_path, $php_ext, $config_table, $modules_table)
 	{
 		global $portal_root_path;
 
+		$this->portal_columns = $portal_columns;
 		$this->config = $config;
 		$this->controller_helper = $controller_helper;
 		$this->template = $template;
@@ -203,7 +208,7 @@ class main
 	public function get_module_template($row, $module)
 	{
 		$template_module = false;
-		$column = column_num_string($row['module_column']);
+		$column = $this->portal_columns->number_to_string($row['module_column']);
 
 		if (in_array($column, array('left', 'right')) && $this->config['board3_' . $column . '_column'])
 		{

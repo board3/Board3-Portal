@@ -17,6 +17,7 @@ services:
     board3.portal.main:
         class: board3\portal\controller\main
         arguments:
+            - @board3.portal.columns
             - @config
             - @board3.portal.controller_helper
             - @template
@@ -31,6 +32,7 @@ services:
         class: board3\portal\controller\helper
         arguments:
             - @auth
+            - @board3.portal.columns
             - @config
             - @template
             - @user
@@ -68,6 +70,9 @@ services:
             - @config
             - @request
 
+    board3.portal.columns:
+        class: board3\portal\portal\columns
+
     board3.portal.fetch_posts:
         class: board3\portal\portal\fetch_posts
         arguments:
@@ -90,3 +95,26 @@ services:
             - %core.php_ext%
         tags:
             - { name: event.listener }
+
+    board3.portal.modules.manager:
+        class: board3\portal\portal\modules\manager
+        arguments:
+            - @cache
+            - @dbal.conn
+            - @board3.portal.columns
+            - @board3.portal.helper
+            - @board3.portal.modules.constraints_handler
+            - @board3.portal.modules.database_handler
+            - @request
+            - @user
+
+    board3.portal.modules.database_handler:
+        class: board3\portal\portal\modules\database_handler
+        arguments:
+            - @dbal.conn
+
+    board3.portal.modules.constraints_handler:
+        class: board3\portal\portal\modules\constraints_handler
+        arguments:
+            - @board3.portal.columns
+            - @user

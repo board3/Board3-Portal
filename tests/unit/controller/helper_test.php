@@ -19,7 +19,7 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 
 	public function setUp()
 	{
-		global $cache;
+		global $cache, $phpbb_extension_manager;
 
 		parent::setUp();
 
@@ -36,12 +36,14 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 			'board3_enable'	=> true,
 		));
 		$this->template = new \board3\portal\tests\mock\template($this);
-		$this->user = $this->getMock('\phpbb\user', array('add_lang_ext'), array('\phpbb\datetime'));
+		$this->user = new \phpbb\user('\phpbb\datetime');
 		$this->user->data['group_id'] = 2;
 		$this->phpbb_root_path = dirname(__FILE__) . '/../../../../../../';
+		$phpbb_extension_manager = new \phpbb_mock_extension_manager($this->phpbb_root_path, array('board3/portal'));
 		$this->php_ext = 'php';
+		$this->portal_columns = new \board3\portal\portal\columns();
 		$this->modules = array(
-			'\board3\portal\modules\link_us'	=> new \board3\portal\modules\link_us($config, new \board3\portal\tests\mock\template($this), new \board3\portal\tests\mock\user),
+			'\board3\portal\modules\link_us'	=> new \board3\portal\modules\link_us($this->config, new \board3\portal\tests\mock\template($this), new \board3\portal\tests\mock\user),
 		);
 		$this->portal_helper = new \board3\portal\includes\helper($this->modules);
 		$this->path_helper = new \phpbb\path_helper(
@@ -60,6 +62,7 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 	{
 		$controller_helper = new \board3\portal\controller\helper(
 			$this->auth,
+			$this->portal_columns,
 			$this->config,
 			$this->template,
 			$this->user,
@@ -109,7 +112,7 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 			array(false, array(
 				'module_status'		=> 1,
 				'module_classname'	=> '\board3\portal\modules\link_us',
-				'module_group_ids'	=> 3,4,
+				'module_group_ids'	=> '3,4',
 			)),
 		);
 	}
@@ -122,9 +125,30 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 		$this->assertEquals(($expected) ? $this->modules['\board3\portal\modules\link_us'] : false, $this->controller_helper->get_portal_module($row));
 	}
 
+	public function test_get_portal_module_disabled_column()
+	{
+		$this->config['board3_left_column'] = false;
+		$this->assertEquals(false, $this->controller_helper->get_portal_module(array(
+			'module_status'		=> 1,
+			'module_classname'	=> '\board3\portal\modules\link_us',
+			'module_column'		=> 1,
+		)));
+	}
+
 	public function test_load_module_language()
 	{
 		$this->assertNull($this->controller_helper->load_module_language($this->modules['\board3\portal\modules\link_us']));
+		$this->assertEquals('Link to us', $this->user->lang('LINK_US'));
+		$this->assertFalse(isset($this->user->lang['PORTAL_LEADERS_EXT']));
+		$module = $this->getMock('\board3\portal\modules\link_us', array('get_language'), array($this->config, new \board3\portal\tests\mock\template($this), new \board3\portal\tests\mock\user));
+		$module->expects($this->any())
+			->method('get_language')
+			->willReturn(array(
+				'vendor'	=> 'board3/portal',
+				'file'		=> 'modules/portal_leaders_module',
+			));
+		$this->assertNull($this->controller_helper->load_module_language($module));
+		$this->assertEquals('Team Settings', $this->user->lang('ACP_PORTAL_LEADERS'));
 	}
 
 	public function data_assign_module_vars()

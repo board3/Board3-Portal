@@ -26,6 +26,9 @@ class module_base implements module_interface
 	/** @var string Module language file */
 	protected $language;
 
+	/** @var bool Can include this module multiple times */
+	protected $multiple_includes = false;
+
 	/**
 	* {@inheritdoc}
 	*/
@@ -96,5 +99,13 @@ class module_base implements module_interface
 	public function uninstall($module_id, $db)
 	{
 		return true;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function can_multi_include()
+	{
+		return $this->multiple_includes;
 	}
 }

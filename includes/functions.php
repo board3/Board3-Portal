@@ -155,26 +155,26 @@ function ap_validate($str)
 /**
 * Pagination routine, generates archive number sequence
 */
-function generate_portal_pagination($base_url, $num_items, $per_page, $start_item, $type, $add_prevnext_text = false, $tpl_prefix = '')
+function generate_portal_pagination($base_url, $num_items, $per_page, $start_item, $type, $module_id = 0, $add_prevnext_text = false, $tpl_prefix = '')
 {
 	global $template, $user;
 
 	switch ($type)
 	{
 		case "announcements":
-			$pagination_type = 'ap';
-			$anker = '#a';
+			$pagination_type = 'ap_' . $module_id;
+			$anker = '#a_' . $module_id;
 		break;
 		case "news":
 		case "news_all":
-			$pagination_type = 'np';
-			$anker = '#n';
+			$pagination_type = 'np_' . $module_id;
+			$anker = '#n_' . $module_id;
 		break;
 
 		default:
 			// this shouldn't happen but default to announcements
-			$pagination_type = 'ap';
-			$anker = '#a';
+			$pagination_type = 'ap_' . $module_id;
+			$anker = '#a_' . $module_id;
 	}
 
 	// Make sure $per_page is a valid value

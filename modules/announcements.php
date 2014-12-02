@@ -41,19 +41,22 @@ class announcements extends module_base
 	*/
 	public $language = 'portal_announcements_module';
 
+	/** @var bool Can include this module multiple times */
+	protected $multiple_includes = true;
+
 	/** @var \phpbb\auth\auth */
 	protected $auth;
 
-	/** @var \phpbb\cache\driver */
+	/** @var \phpbb\cache\service */
 	protected $cache;
 
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
 	/** @var \phpbb\pagination */
@@ -81,10 +84,10 @@ class announcements extends module_base
 	* Construct an announcements object
 	*
 	* @param \phpbb\auth\auth $auth phpBB auth service
-	* @param \phpbb\cache\driver $cache phpBB cache driver
+	* @param \phpbb\cache\service $cache phpBB cache driver
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\template $template phpBB template
-	* @param \phpbb\db\driver $db Database driver
+	* @param \phpbb\template\template $template phpBB template
+	* @param \phpbb\db\driver\driver_interface $db Database driver
 	* @param \phpbb\pagination $pagination phpBB pagination
 	* @param \board3\portal\includes\modules_helper $modules_helper Portal modules helper
 	* @param \phpbb\request\request $request phpBB request
@@ -114,10 +117,11 @@ class announcements extends module_base
 	*/
 	public function get_template_center($module_id)
 	{
-		$announcement = $this->request->variable('announcement', -1);
+		$announcement = $this->request->variable('announcement_' . $module_id, -1);
 		$announcement = ($announcement > $this->config['board3_announcements_length_' . $module_id] -1) ? -1 : $announcement;
-		$start = $this->request->variable('ap', 0);
+		$start = $this->request->variable('ap_' . $module_id, 0);
 		$start = ($start < 0) ? 0 : $start;
+		$total_announcements = 1;
 
 		// Fetch announcements from portal functions.php with check if "read full" is requested.
 		$portal_announcement_length = ($announcement < 0) ? $this->config['board3_announcements_length_' . $module_id] : 0;
@@ -133,10 +137,28 @@ class announcements extends module_base
 			(bool) $this->config['board3_announcements_forum_exclude_' . $module_id]
 		);
 
+		$topic_icons = false;
+		if(!empty($fetch_news['topic_icons']))
+		{
+			$topic_icons = true;
+		}
+
+		// Standard announcements row
+		$announcements_row = array(
+			'NEWEST_POST_IMG'				=> $this->user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
+			'READ_POST_IMG'					=> $this->user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
+			'GOTO_PAGE_IMG'					=> $this->user->img('icon_post_target', 'GOTO_PAGE'),
+			'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ($this->config['board3_show_announcements_replies_views_' . $module_id]) ? true : false,
+			'S_TOPIC_ICONS'					=> $topic_icons,
+			'MODULE_ID'						=> $module_id,
+		);
+
 		// Any announcements present? If not terminate it here.
 		if (sizeof($fetch_news) == 0)
 		{
-			$this->template->assign_block_vars('announcements_center_row', array(
+			$this->template->assign_block_vars('announcements', $announcements_row);
+
+			$this->template->assign_block_vars('announcements.center_row', array(
 				'S_NO_TOPICS'	=> true,
 				'S_NOT_LAST'	=> false
 			));
@@ -210,6 +232,20 @@ class announcements extends module_base
 
 			$topic_tracking_info = (get_portal_tracking_info($fetch_news));
 
+			if ($this->config['board3_number_of_announcements_' . $module_id] != 0 && $this->config['board3_announcements_archive_' . $module_id])
+			{
+				$pagination = generate_portal_pagination(append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"), $total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start, 'announcements', $module_id);
+
+				$announcements_row = array_merge($announcements_row, array(
+						'AP_PAGINATION'			=> (isset($pagination)) ? $pagination : '',
+						'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $this->user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($this->user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
+						'AP_PAGE_NUMBER'		=> $this->pagination->on_page($total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start),
+					));
+			}
+
+			// Assign announcements row
+			$this->template->assign_block_vars('announcements', $announcements_row);
+
 			if($announcement < 0)
 			// Show the announcements overview
 			{
@@ -234,13 +270,8 @@ class announcements extends module_base
 
 					$unread_topic = (isset($topic_tracking_info[$topic_id]) && $fetch_news[$i]['topic_last_post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 					$real_forum_id = ($forum_id == 0) ? $fetch_news['global_id']: $forum_id;
-					$read_full_url = ($this->request->is_set('ap')) ? 'ap='. $start . '&amp;announcement=' . $i . '#a' . $i : 'announcement=' . $i . '#a' . $i;
+					$read_full_url = ($this->request->is_set('ap_' . $module_id)) ? "ap_{$module_id}=$start&amp;announcement_{$module_id}=$i#a_{$module_id}_$i" : "announcement_{$module_id}=$i#a_{$module_id}_$i";
 					$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-
-					if ($this->config['board3_announcements_archive_' . $module_id])
-					{
-						$pagination = generate_portal_pagination(append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"), $total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start, 'announcements');
-					}
 
 					$replies = ($this->auth->acl_get('m_approve', $forum_id)) ? $fetch_news[$i]['topic_replies_real'] : $fetch_news[$i]['topic_replies'];
 
@@ -282,7 +313,7 @@ class announcements extends module_base
 					// Grab icons
 					$icons = $this->cache->obtain_icons();
 
-					$this->template->assign_block_vars('announcements_center_row', array(
+					$this->template->assign_block_vars('announcements.center_row', array(
 						'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $this->config['allow_attachments']) ? $this->user->img('icon_topic_attach', $this->user->lang['TOTAL_ATTACHMENTS']) : '',
 						'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 						'TITLE'					=> $fetch_news[$i]['topic_title'],
@@ -319,24 +350,16 @@ class announcements extends module_base
 						'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 					));
 
-					$this->pagination->generate_template_pagination($view_topic_url, 'announcements_center_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
+					$this->pagination->generate_template_pagination($view_topic_url, 'announcements.center_row.pagination', 'ap_' . $module_id, $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
 
 					if(!empty($fetch_news[$i]['attachments']))
 					{
 						foreach ($fetch_news[$i]['attachments'] as $attachment)
 						{
-							$this->template->assign_block_vars('announcements_center_row.attachment', array(
+							$this->template->assign_block_vars('announcements.center_row.attachment', array(
 								'DISPLAY_ATTACHMENT'	=> $attachment)
 							);
 						}
-					}
-					if ($this->config['board3_number_of_announcements_' . $module_id] != 0 && $this->config['board3_announcements_archive_' . $module_id])
-					{
-						$this->template->assign_vars(array(
-							'AP_PAGINATION'			=> (isset($pagination)) ? $pagination : '',
-							'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $this->user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($this->user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
-							'AP_PAGE_NUMBER'		=> $this->pagination->on_page($total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start))
-						);
 					}
 				}
 			}
@@ -363,14 +386,10 @@ class announcements extends module_base
 				$read_full = $this->user->lang['BACK'];
 				$real_forum_id = ($forum_id == 0) ? $fetch_news['global_id']: $forum_id;
 
-				$read_full_url = ($this->request->is_set('ap')) ? append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "ap=$start#a$i") : append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal#a$i");
+				$read_full_url = ($this->request->is_set('ap_' . $module_id)) ? append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "ap_{$module_id}=$start#a_{$module_id}_$i") : append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal#a_{$module_id}_$i");
 				$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-				if ($this->config['board3_announcements_archive_' . $module_id])
-				{
-					$pagination = generate_portal_pagination(append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"), $total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start, 'announcements');
-				}
 
-				$this->template->assign_block_vars('announcements_center_row', array(
+				$this->template->assign_block_vars('announcements.center_row', array(
 					'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $this->config['allow_attachments']) ? $this->user->img('icon_topic_attach', $this->user->lang['TOTAL_ATTACHMENTS']) : '',
 					'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 					'TITLE'					=> $fetch_news[$i]['topic_title'],
@@ -394,42 +413,19 @@ class announcements extends module_base
 					'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 				));
 
-				$this->pagination->generate_template_pagination($view_topic_url, 'announcements_center_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
+				$this->pagination->generate_template_pagination($view_topic_url, 'announcements.center_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
 
 				if(!empty($fetch_news[$i]['attachments']))
 				{
 					foreach ($fetch_news[$i]['attachments'] as $attachment)
 					{
-						$this->template->assign_block_vars('announcements_center_row.attachment', array(
+						$this->template->assign_block_vars('announcements.center_row.attachment', array(
 							'DISPLAY_ATTACHMENT'	=> $attachment)
 						);
 					}
 				}
-
-				if ($this->config['board3_number_of_announcements_' . $module_id] <> 0 && $this->config['board3_announcements_archive_' . $module_id])
-				{
-					$this->template->assign_vars(array(
-						'AP_PAGINATION'			=> (!empty($pagination)) ? $pagination : '',
-						'TOTAL_ANNOUNCEMENTS'	=> ($total_announcements == 1) ? $this->user->lang['VIEW_LATEST_ANNOUNCEMENT'] : sprintf($this->user->lang['VIEW_LATEST_ANNOUNCEMENTS'], $total_announcements),
-						'AP_PAGE_NUMBER'		=> $this->pagination->on_page($total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start))
-					);
-				}
 			}
 		}
-
-		$topic_icons = false;
-		if(!empty($fetch_news['topic_icons']))
-		{
-			$topic_icons = true;
-		}
-
-		$this->template->assign_vars(array(
-			'NEWEST_POST_IMG'				=> $this->user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
-			'READ_POST_IMG'					=> $this->user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
-			'GOTO_PAGE_IMG'					=> $this->user->img('icon_post_target', 'GOTO_PAGE'),
-			'S_DISPLAY_ANNOUNCEMENTS_RVS'	=> ($this->config['board3_show_announcements_replies_views_' . $module_id]) ? true : false,
-			'S_TOPIC_ICONS'					=> $topic_icons,
-		));
 
 		if ($this->config['board3_announcements_style_' . $module_id])
 		{

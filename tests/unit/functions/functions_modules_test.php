@@ -14,8 +14,8 @@ class phpbb_functions_functions_modules_test extends PHPUnit_Framework_TestCase
 	public function data_column_num_string()
 	{
 		return array(
-			array(0, ''),
-			array(0, false),
+			array('', ''),
+			array('', false),
 			array('left', 1),
 			array('center', 2),
 			array('right', 3),

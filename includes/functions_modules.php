@@ -7,59 +7,44 @@
 *
 */
 
+/**
+ * Convert column number to string equivalent
+ *
+ * @param int $column Column number
+ *
+ * @return string String representation of column number; default: ''
+ * @deprecated 2.1.0-RC1 (to be removed: 2.1.0)
+ */
 function column_num_string($column)
 {
-	switch ($column)
-	{
-		case 1:
-			return 'left';
-		case 2:
-			return 'center';
-		case 3:
-			return 'right';
-		case 4:
-			return 'top';
-		case 5:
-			return 'bottom';
-		default:
-			return 0;
-	}
+	$portal_columns = new \board3\portal\portal\columns();
+	return $portal_columns->number_to_string($column);
 }
 
+/**
+ * Convert column string to equivalent number
+ *
+ * @param string $column Column name
+ *
+ * @return int The column number; default: 0
+ * @deprecated 2.1.0-RC1 (to be removed: 2.1.0)
+ */
 function column_string_num($column)
 {
-	switch ($column)
-	{
-		case 'left':
-			return 1;
-		case 'center':
-			return 2;
-		case 'right':
-			return 3;
-		case 'top':
-			return 4;
-		case 'bottom':
-			return 5;
-		default:
-			return 0;
-	}
+	$portal_columns = new \board3\portal\portal\columns();
+	return $portal_columns->string_to_number($column);
 }
 
+/**
+ * Convert column string to equivalent constant
+ *
+ * @param string $column Column name
+ *
+ * @return int Column constant; default: 0
+ * @deprecated 2.1.0-RC1 (to be removed: 2.1.0)
+ */
 function column_string_const($column)
 {
-	switch ($column)
-	{
-		case 'top':
-			return 1;
-		case 'left':
-			return 2;
-		case 'center':
-			return 4;
-		case 'right':
-			return 8;
-		case 'bottom':
-			return 16;
-		default:
-			return 0;
-	}
+	$portal_columns = new \board3\portal\portal\columns();
+	return $portal_columns->string_to_constant($column);
 }

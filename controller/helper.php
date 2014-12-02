@@ -11,6 +11,9 @@ namespace board3\portal\controller;
 
 class helper
 {
+	/** @var \board3\portal\portal\columns */
+	protected $portal_columns;
+
 	/**
 	* Auth object
 	* @var \phpbb\auth\auth
@@ -76,6 +79,7 @@ class helper
 	* NOTE: The parameters of this method must match in order and type with
 	* the dependencies defined in the services.yml file for this service.
 	* @param \phpbb\auth\auth $auth Auth object
+	* @param \board3\portal\portal\columns $portal_columns Board3 Portal columns object
 	* @param \phpbb\config\config $config phpBB Config object
 	* @param \phpbb\template $template Template object
 	* @param \phpbb\user $user User object
@@ -84,9 +88,10 @@ class helper
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $php_ext PHP file extension
 	*/
-	public function __construct($auth, $config, $template, $user, $path_helper, $portal_helper, $phpbb_root_path, $php_ext)
+	public function __construct($auth, $portal_columns, $config, $template, $user, $path_helper, $portal_helper, $phpbb_root_path, $php_ext)
 	{
 		$this->auth = $auth;
+		$this->portal_columns = $portal_columns;
 		$this->config = $config;
 		$this->template = $template;
 		$this->user = $user;
@@ -161,13 +166,15 @@ class helper
 	*/
 	protected function check_column_disabled($row)
 	{
-		return ($this->config['board3_left_column'] === false && column_num_string($row['module_column']) === 'left') || ($this->config['board3_right_column'] === false && column_num_string($row['module_column']) === 'right');
+		return ($this->config['board3_left_column'] === false && $this->portal_columns->number_to_string($row['module_column']) === 'left') || ($this->config['board3_right_column'] === false && $this->portal_columns->number_to_string($row['module_column']) === 'right');
 	}
 
 	/**
 	* Check if user is in required groups
 	*
 	* @param array $row Module row
+	*
+	* @return bool True if group has access, false if not
 	*/
 	protected function check_group_access($row)
 	{
@@ -215,7 +222,7 @@ class helper
 	{
 		if (is_array($template_module))
 		{
-			$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
+			$this->template->assign_block_vars('modules_' . $this->portal_columns->number_to_string($row['module_column']), array(
 				'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module['template'],
 				'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $template_module['image_src'],
 				'TITLE'				=> $template_module['title'],
@@ -227,7 +234,7 @@ class helper
 		}
 		else
 		{
-			$this->template->assign_block_vars('modules_' . column_num_string($row['module_column']), array(
+			$this->template->assign_block_vars('modules_' . $this->portal_columns->number_to_string($row['module_column']), array(
 				'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module,
 				'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'],
 				'IMAGE_WIDTH'			=> $row['module_image_width'],
