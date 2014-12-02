@@ -443,6 +443,13 @@ class portal_module
 							continue;
 						}
 
+						// Do not install if module already exists in the
+						// column and it can't be added more than once
+						if (!$this->c_class->can_multi_include() && !$this->modules_constraints->can_move_module($this->portal_columns->number_to_string($add_column), $module_classname))
+						{
+							trigger_error($this->user->lang['MODULE_ADD_ONCE'] . adm_back_link($this->u_action), E_USER_WARNING);
+						}
+
 						$sql = 'SELECT module_order
 							FROM ' . PORTAL_MODULES_TABLE . '
 							WHERE module_column = ' . $add_column . '
@@ -505,6 +512,13 @@ class portal_module
 					// Find new modules
 					foreach ($modules_list as $module_class => $module)
 					{
+						// Do not install if module already exists in the
+						// column and it can't be added more than once
+						if (!$module->can_multi_include() && !$this->modules_constraints->can_move_module($this->portal_columns->number_to_string($add_column), $module_class))
+						{
+							continue;
+						}
+
 						if ($module->get_allowed_columns() & $this->portal_columns->string_to_constant($add_module))
 						{
 							if ($module->get_language())

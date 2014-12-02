@@ -95,9 +95,16 @@ interface module_interface
 	* Executes any additional commands for uninstalling the module
 	*
 	* @param int $module_id Module's ID
-	* @param \phpbb\db\driver $db phpBB dbal driver
+	* @param \phpbb\db\driver\driver_interface $db phpBB dbal driver
 	*
 	* @return bool True if uninstall was successful, false if not
 	*/
 	public function uninstall($module_id, $db);
+
+	/**
+	 * Whether module can be included more than once
+	 *
+	 * @return bool True if module can be included more than once, false if not
+	 */
+	public function can_multi_include();
 }

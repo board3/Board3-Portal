@@ -47,6 +47,9 @@ class links extends module_base
 	*/
 	public $custom_acp_tpl = 'acp_portal_links';
 
+	/** @var bool Can include this module multiple times */
+	protected $multiple_includes = true;
+
 	/**
 	* constants
 	*/

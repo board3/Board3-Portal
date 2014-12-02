@@ -47,6 +47,9 @@ class custom extends module_base
 	*/
 	public $custom_acp_tpl = 'acp_portal_custom';
 
+	/** @var bool Can include this module multiple times */
+	protected $multiple_includes = true;
+
 	/** @var \phpbb\config\config */
 	protected $config;
 

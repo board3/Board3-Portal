@@ -41,16 +41,19 @@ class news extends module_base
 	*/
 	public $language = 'portal_news_module';
 
+	/** @var bool Can include this module multiple times */
+	protected $multiple_includes = true;
+
 	/** @var \phpbb\auth\auth */
 	protected $auth;
 
-	/** @var \phpbb\cache */
+	/** @var \phpbb\cache\service */
 	protected $cache;
 
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\db\driver\driver_Interface */
 	protected $db;
 
 	/** @var \phpbb\pagination */
@@ -62,7 +65,7 @@ class news extends module_base
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var string PHP file extension */
@@ -81,13 +84,13 @@ class news extends module_base
 	* Construct a news object
 	*
 	* @param \phpbb\auth\auth $auth phpBB auth
-	* @param \phpbb\cache $cache phpBB cache system
+	* @param \phpbb\cache\service $cache phpBB cache system
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\db\driver $db phpBB db driver
+	* @param \phpbb\db\driver\driver_interface $db phpBB db driver
 	* @param \phpbb\pagination $pagination phpBB pagination
 	* @param \board3\portal\includes\modules_helper $modules_helper Portal modules helper
 	* @param \phpbb\request\request $request phpBB request
-	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\template\template $template phpBB template
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	* @param \phpbb\user $user phpBB user object

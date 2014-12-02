@@ -41,6 +41,9 @@ class announcements extends module_base
 	*/
 	public $language = 'portal_announcements_module';
 
+	/** @var bool Can include this module multiple times */
+	protected $multiple_includes = true;
+
 	/** @var \phpbb\auth\auth */
 	protected $auth;
 
