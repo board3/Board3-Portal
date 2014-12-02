@@ -388,10 +388,6 @@ class announcements extends module_base
 
 				$read_full_url = ($this->request->is_set('ap_' . $module_id)) ? append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "ap_{$module_id}=$start#a_{$module_id}_$i") : append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal#a_{$module_id}_$i");
 				$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
-				if ($this->config['board3_announcements_archive_' . $module_id])
-				{
-					$pagination = generate_portal_pagination(append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"), 1, $this->config['board3_number_of_announcements_' . $module_id], $start, 'announcements');
-				}
 
 				$this->template->assign_block_vars('announcements.center_row', array(
 					'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $this->config['allow_attachments']) ? $this->user->img('icon_topic_attach', $this->user->lang['TOTAL_ATTACHMENTS']) : '',
