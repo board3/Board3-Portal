@@ -31,4 +31,9 @@ class phpbb_unit_modules_module_base_test extends \board3\portal\tests\testframe
 		$this->assertTrue($this->module_base->install(5));
 		$this->assertTrue($this->module_base->uninstall(5, null));
 	}
+
+	public function test_can_multi_include()
+	{
+		$this->assertFalse($this->module_base->can_multi_include());
+	}
 }
