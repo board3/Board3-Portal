@@ -28,6 +28,9 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	/** @var \board3\portal\portal\modules\constraints_handler */
 	protected $constraints_handler;
 
+	/** @var \board3\portal\includes\helper */
+	protected $portal_helper;
+
 	public function setUp()
 	{
 		parent::setUp();
@@ -49,8 +52,8 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 				new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $phpbb_root_path, $phpEx),
 				new \board3\portal\modules\donation($config, $template, $user),
 			));
-		$portal_helper = new \board3\portal\includes\helper($phpbb_container->get('board3.portal.module_collection'));
-		$phpbb_container->set('board3.portal.helper', $portal_helper);
+		$this->portal_helper = new \board3\portal\includes\helper($phpbb_container->get('board3.portal.module_collection'));
+		$phpbb_container->set('board3.portal.helper', $this->portal_helper);
 		$phpbb_container->set('board3.portal.modules_helper', new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), $config, $request));
 		$phpbb_container->setParameter('board3.portal.modules.table', $table_prefix . 'portal_modules');
 		$phpbb_container->setParameter('board3.portal.config.table', $table_prefix . 'portal_config');
@@ -77,7 +80,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		));
 		$this->database_handler = new \board3\portal\portal\modules\database_handler($db);
 		$this->constraints_handler = new \board3\portal\portal\modules\constraints_handler($this->portal_columns, $user);
-		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->portal_columns, $portal_helper, $this->constraints_handler, $this->database_handler, $request, $user);
+		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->portal_columns, $this->portal_helper, $this->constraints_handler, $this->database_handler, $request, $user);
 		$phpbb_container->set('board3.portal.modules.manager', $this->modules_manager);
 		$phpbb_container->set('board3.portal.modules.constraints_handler', $this->constraints_handler);
 		$this->portal_module = new \board3\portal\acp\portal_module();
@@ -303,6 +306,23 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	{
 		$this->update_portal_modules();
 		$this->assertEquals($expected, $this->constraints_handler->can_move_module($target_column, $module_class));
+	}
+
+	public function data_can_add_module()
+	{
+		return array(
+			array('\board3\portal\modules\clock', 1, true),
+			array('\board3\portal\modules\clock', 2, false),
+			array('\board3\portal\modules\birthday_list', 5, false),
+		);
+	}
+
+	/**
+	 * @dataProvider data_can_add_module
+	 */
+	public function test_can_add_module($module_class, $column, $expected)
+	{
+		$this->assertSame($expected, $this->constraints_handler->can_add_module($this->portal_helper->get_module($module_class), $column));
 	}
 }
 
