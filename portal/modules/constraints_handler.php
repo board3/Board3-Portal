@@ -149,7 +149,7 @@ class constraints_handler
 	 */
 	public function can_add_module($module, $column)
 	{
-		return $module->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($column));
+		return (bool) ($module->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($column)));
 	}
 
 	/**
