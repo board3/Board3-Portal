@@ -47,28 +47,31 @@ class statistics extends module_base
 	*/
 	public $custom_acp_tpl = '';
 
-	/** @var \phpbb\cache */
+	/** @var \phpbb\cache\service */
 	protected $cache;
 
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var int Board days */
+	protected $board_days;
+
 	/**
 	* Construct a search object
 	*
-	* @param \phpbb\cache $cache phpBB cache system
+	* @param \phpbb\cache\service $cache phpBB cache system
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\db\driver $db phpBB database system
-	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\db\driver\driver_interface $db phpBB database system
+	* @param \phpbb\template\template $template phpBB template
 	* @param \phpbb\user $user phpBB user object
 	*/
 	public function __construct($cache, $config, $db, $template, $user)
@@ -85,62 +88,36 @@ class statistics extends module_base
 	*/
 	public function get_template_side($module_id)
 	{
-		// Set some stats, get posts count from forums data if we... hum... retrieve all forums data
-		$total_posts		= $this->config['num_posts'];
-		$total_topics		= $this->config['num_topics'];
-		$total_users		= $this->config['num_users'];
-		$total_files 		= $this->config['num_files'];
+		// Get totals language strings
+		$l_total_user_s = $this->get_totals_language($this->config['num_users'], 'TOTAL_USERS');
+		$l_total_post_s = $this->get_totals_language($this->config['num_posts'], 'TOTAL_POSTS', 'TOTAL_POSTS_COUNT');
+		$l_total_topic_s = $this->get_totals_language($this->config['num_topics'], 'TOTAL_TOPICS');
 
-		$l_total_user_s 	= ($total_users == 0) ? sprintf($this->user->lang['TOTAL_USERS_ZERO'], $total_users) : sprintf($this->user->lang['TOTAL_USERS'][2], $total_users);
-		$l_total_post_s 	= ($total_posts == 0) ? sprintf($this->user->lang['TOTAL_POSTS_ZERO'], $total_posts) : sprintf($this->user->lang['TOTAL_POSTS_COUNT'][2], $total_posts);
-		$l_total_topic_s	= ($total_topics == 0) ? sprintf($this->user->lang['TOTAL_TOPICS_ZERO'], $total_topics) : sprintf($this->user->lang['TOTAL_TOPICS'][2], $total_topics);
+		// Average statistics
+		$this->board_days = (time() - $this->config['board_startdate']) / 86400;
 
-		// avarage stat
-		$board_days = (time() - $this->config['board_startdate']) / 86400;
+		$topics_per_day		= round($this->config['num_topics'] / $this->board_days, 0);
+		$posts_per_day		= round($this->config['num_posts'] / $this->board_days, 0);
+		$users_per_day		= round($this->config['num_users'] / $this->board_days, 0);
+		$topics_per_user	= round($this->config['num_topics'] / $this->config['num_users'], 0);
+		$posts_per_user		= round($this->config['num_posts'] / $this->config['num_users'], 0);
+		$posts_per_topic	= ($this->config['num_topics']) ? round($this->config['num_posts'] / $this->config['num_topics'], 0) : 0;
 
-		$topics_per_day		= ($total_topics) ? round($total_topics / $board_days, 0) : 0;
-		$posts_per_day		= ($total_posts) ? round($total_posts / $board_days, 0) : 0;
-		$users_per_day		= round($total_users / $board_days, 0);
-		$topics_per_user	= ($total_topics) ? round($total_topics / $total_users, 0) : 0;
-		$posts_per_user		= ($total_posts) ? round($total_posts / $total_users, 0) : 0;
-		$posts_per_topic	= ($total_topics) ? round($total_posts / $total_topics, 0) : 0;
+		// Mitigate incorrect averages on first day
+		$topics_per_day = $this->get_first_day_average($topics_per_day, $this->config['num_topics']);
+		$posts_per_day = $this->get_first_day_average($posts_per_day, $this->config['num_posts']);
+		$users_per_day = $this->get_first_day_average($users_per_day, $this->config['num_users']);
+		$topics_per_user = $this->get_first_day_average($topics_per_user, $this->config['num_topics']);
+		$posts_per_user = $this->get_first_day_average($posts_per_user, $this->config['num_topics']);
+		$posts_per_topic = $this->get_first_day_average($posts_per_topic, $this->config['num_posts']);
 
-		if ($topics_per_day > $total_topics)
-		{
-			$topics_per_day = $total_topics;
-		}
-
-		if ($posts_per_day > $total_posts)
-		{
-			$posts_per_day = $total_posts;
-		}
-
-		if ($users_per_day > $total_users)
-		{
-			$users_per_day = $total_users;
-		}
-
-		if ($topics_per_user > $total_topics)
-		{
-			$topics_per_user = $total_topics;
-		}
-
-		if ($posts_per_user > $total_posts)
-		{
-			$posts_per_user = $total_posts;
-		}
-
-		if ($posts_per_topic > $total_posts)
-		{
-			$posts_per_topic = $total_posts;
-		}
-
-		$l_topics_per_day_s = ($total_topics == 0) ? 'TOPICS_PER_DAY_ZERO' : 'TOPICS_PER_DAY_OTHER';
-		$l_posts_per_day_s = ($total_posts == 0) ? 'POSTS_PER_DAY_ZERO' : 'POSTS_PER_DAY_OTHER';
-		$l_users_per_day_s = ($total_users == 0) ? 'USERS_PER_DAY_ZERO' : 'USERS_PER_DAY_OTHER';
-		$l_topics_per_user_s = ($total_topics == 0) ? 'TOPICS_PER_USER_ZERO' : 'TOPICS_PER_USER_OTHER';
-		$l_posts_per_user_s = ($total_posts == 0) ? 'POSTS_PER_USER_ZERO' : 'POSTS_PER_USER_OTHER';
-		$l_posts_per_topic_s = ($total_posts == 0) ? 'POSTS_PER_TOPIC_ZERO' : 'POSTS_PER_TOPIC_OTHER';
+		// Get language variables for averages
+		$l_topics_per_day_s = $this->get_average_language($this->config['num_topics'], 'TOPICS_PER_DAY');
+		$l_posts_per_day_s = $this->get_average_language($this->config['num_posts'], 'POSTS_PER_DAY');
+		$l_users_per_day_s = $this->get_average_language($this->config['num_users'], 'USERS_PER_DAY');
+		$l_topics_per_user_s = $this->get_average_language($this->config['num_topics'], 'TOPICS_PER_USER');
+		$l_posts_per_user_s = $this->get_average_language($this->config['num_posts'], 'POSTS_PER_USER');
+		$l_posts_per_topic_s = $this->get_average_language($this->config['num_posts'], 'POSTS_PER_TOPIC');
 
 		$topics_count = $this->get_topics_count();
 
@@ -152,7 +129,7 @@ class statistics extends module_base
 			'B3_NEWEST_USER'				=> sprintf($this->user->lang['NEWEST_USER'], get_username_string('full', $this->config['newest_user_id'], $this->config['newest_username'], $this->config['newest_user_colour'])),
 			'B3_ANNOUNCE_COUNT'				=> $topics_count[POST_ANNOUNCE],
 			'B3_STICKY_COUNT'				=> $topics_count[POST_STICKY],
-			'B3_TOTAL_ATTACH'				=> ($this->config['allow_attachments']) ? $total_files : 0,
+			'B3_TOTAL_ATTACH'				=> ($this->config['allow_attachments']) ? $this->config['num_files'] : 0,
 
 			// average stat
 			'B3_TOPICS_PER_DAY'		=> sprintf($this->user->lang[$l_topics_per_day_s], $topics_per_day),
@@ -220,5 +197,52 @@ class statistics extends module_base
 		}
 
 		return $return_ary;
+	}
+
+	/**
+	 * Get correct average per day on first day.
+	 * The per day average will be higher than the total amount. This will
+	 * result in incorrect statistics.
+	 *
+	 * @param int $average Average per day
+	 * @param int $total Total value
+	 *
+	 * @return int Corrected average per day, if correction was necessary
+	 */
+	protected function get_first_day_average($average, $total)
+	{
+		return ($average > $total) ? $total : $average;
+	}
+
+	/**
+	 * Get language string for totals
+	 *
+	 * @param int $total The total value
+	 * @param string $language_variable Language variable of the total
+	 * @param string $count_language_variable Optional language variable for count
+	 *
+	 * @return string Language string for total
+	 */
+	protected function get_totals_language($total, $language_variable, $count_language_variable = '')
+	{
+		if ($count_language_variable === '')
+		{
+			$count_language_variable = $language_variable;
+		}
+
+		return ($total == 0) ? sprintf($this->user->lang[$language_variable . '_ZERO'], $total) : sprintf($this->user->lang[$count_language_variable][2], $total);
+	}
+
+	/**
+	 * Get language variable for averages
+	 *
+	 * @param int $total The total value
+	 * @param string $language_variable Language variable of the total
+	 *
+	 * @return string Language string for total
+	 */
+	protected function get_average_language($total, $language_variable)
+	{
+		return ($total == 0) ? $language_variable . '_ZERO' : $language_variable . '_OTHER';
 	}
 }
