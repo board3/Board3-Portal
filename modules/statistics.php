@@ -62,7 +62,7 @@ class statistics extends module_base
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var int Board days */
+	/** @var double Board days */
 	protected $board_days;
 
 	/**
@@ -94,7 +94,7 @@ class statistics extends module_base
 		$l_total_topic_s = $this->get_totals_language($this->config['num_topics'], 'TOTAL_TOPICS');
 
 		// Average statistics
-		$this->board_days = (time() - $this->config['board_startdate']) / 86400;
+		$this->board_days = (double) ((time() - $this->config['board_startdate']) / 86400);
 
 		$topics_per_day		= round($this->config['num_topics'] / $this->board_days, 0);
 		$posts_per_day		= round($this->config['num_posts'] / $this->board_days, 0);
