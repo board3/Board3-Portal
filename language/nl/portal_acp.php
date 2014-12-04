@@ -48,6 +48,7 @@ $lang = array_merge($lang, array(
 	'B3P_FILE_NOT_FOUND'			=> 'Het gevraagde bestand kan niet worden gevonden',
 	'UNABLE_TO_MOVE'				=> 'Het is niet mogelijk om het blok naar de geselecteerde kolom te verplaatsen.',
 	'UNABLE_TO_MOVE_ROW'			=> 'Het is niet mogelijk om het blok naar de geselecteerde rij te verplaatsen.',
+	'UNABLE_TO_ADD_MODULE'                  => 'Het is niet mogelijk om een module toe te voegen aan de geselecteerde kolom.',
 	'DELETE_MODULE_CONFIRM'			=> 'Weet je zeker dat je de module "%1$s" wilt verwijderen?',
 	'MODULE_RESET_SUCCESS'			=> 'Module instellingen succesvol gereset.',
 	'MODULE_RESET_CONFIRM'			=> 'Weet je zeker dat je de instellingen van de module "%1$s" wilt resetten?',
