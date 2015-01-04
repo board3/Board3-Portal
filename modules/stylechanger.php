@@ -44,20 +44,17 @@ class stylechanger extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\template */
+	/** @var \board3\portal\includes\modules_helper */
+	protected $modules_helper;
+
+	/** @var \phpbb\template\template */
 	protected $template;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
-	/** @var \phpbb\request\request */
+	/** @var \phpbb\request\request_interface */
 	protected $request;
-
-	/** @var string PHP file extension */
-	protected $php_ext;
-
-	/** @var string phpBB root path */
-	protected $phpbb_root_path;
 
 	/** @var \phpbb\user */
 	protected $user;
@@ -66,21 +63,19 @@ class stylechanger extends module_base
 	* Construct a stylechanger object
 	*
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\template $template phpBB template
-	* @param \phpbb\db\driver $db Database driver
-	* @param \phpbb\request\request $request phpBB request
-	* @param string $phpEx php file extension
-	* @param string $phpbb_root_path phpBB root path
+	* @param \board3\portal\includes\modules_helper $modules_helper Modules helper
+	* @param \phpbb\template\template $template phpBB template
+	* @param \phpbb\db\driver\driver_interface $db Database driver
+	* @param \phpbb\request\request_interface $request phpBB request
 	* @param \phpbb\user $user phpBB user object
 	*/
-	public function __construct($config, $template, $db, $request, $phpEx, $phpbb_root_path, $user)
+	public function __construct($config, $modules_helper, $template, $db, $request, $user)
 	{
 		$this->config = $config;
+		$this->modules_helper = $modules_helper;
 		$this->template = $template;
 		$this->db = $db;
 		$this->request = $request;
-		$this->php_ext = $phpEx;
-		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
 	}
 
@@ -101,11 +96,11 @@ class stylechanger extends module_base
 			$style = $this->request->variable('style', 0);
 			if (!empty($style))
 			{
-				$url = str_replace('style=' . $style, 'style=' . $row['style_id'], append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"));
+				$url = str_replace('style=' . $style, 'style=' . $row['style_id'], $this->modules_helper->route('board3_portal_controller'));
 			}
 			else
 			{
-				$url = append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", 'style=' . $row['style_id']);
+				$url = $this->modules_helper->route('board3_portal_controller') . '?style=' . $row['style_id'];
 			}
 			++$style_count;
 			$style_select .= '<option value="' . $url . '"' . ($row['style_id'] == $this->user->style['style_id'] ? ' selected="selected"' : '') . '>' . utf8_htmlspecialchars($row['style_name']) . '</option>';

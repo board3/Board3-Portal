@@ -14,7 +14,6 @@ services:
             - %core.root_path%
             - @user
             - @board3.portal.fetch_posts
-            - @controller.helper
         tags:
             - { name: board3.portal.module }
 
@@ -47,6 +46,7 @@ services:
         class: board3\portal\modules\calendar
         arguments:
             - @config
+            - @board3.portal.modules_helper
             - @template
             - @dbal.conn
             - @request
@@ -211,6 +211,7 @@ services:
             - %core.root_path%
             - %core.php_ext%
             - @user
+            - @board3.portal.modules_helper
         tags:
             - { name: board3.portal.module }
 
@@ -260,11 +261,10 @@ services:
         class: board3\portal\modules\stylechanger
         arguments:
             - @config
+            - @board3.portal.modules_helper
             - @template
             - @dbal.conn
             - @request
-            - %core.php_ext%
-            - %core.root_path%
             - @user
         tags:
             - { name: board3.portal.module }

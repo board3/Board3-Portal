@@ -228,7 +228,7 @@ class news extends module_base
 			// Create pagination if necessary
 			if ($this->config['board3_news_archive_' . $module_id])
 			{
-				$pagination = generate_portal_pagination(append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"), $total_news, $this->config['board3_number_of_news_' . $module_id], $start, ($this->config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news', $module_id);
+				$pagination = generate_portal_pagination($this->modules_helper->route('board3_portal_controller'), $total_news, $this->config['board3_number_of_news_' . $module_id], $start, ($this->config['board3_show_all_news_' . $module_id]) ? 'news_all' : 'news', $module_id);
 			}
 
 			if ($this->config['board3_number_of_news_' . $module_id] <> 0 && $this->config['board3_news_archive_' . $module_id])
@@ -338,7 +338,7 @@ class news extends module_base
 						'U_VIEW_COMMENTS'		=> append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id']),
 						'U_VIEW_UNREAD'			=> append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id'] . '&amp;view=unread#unread'),
 						'U_POST_COMMENT'		=> append_sid("{$this->phpbb_root_path}posting.{$this->php_ext}", 'mode=reply&amp;f=' . $fetch_news[$i]['forum_id'] . '&amp;t=' . $fetch_news[$i]['topic_id']),
-						'U_READ_FULL'			=> append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", $read_full_url),
+						'U_READ_FULL'			=> $this->modules_helper->route('board3_portal_controller') . '?' . $read_full_url,
 						'L_READ_FULL'			=> $read_full,
 						'OPEN'					=> $open_bracket,
 						'CLOSE'					=> $close_bracket,
@@ -370,7 +370,7 @@ class news extends module_base
 				$close_bracket = ' ]';
 				$read_full = $this->user->lang['BACK'];
 
-				$read_full_url = ($this->request->is_set('np_' . $module_id)) ? append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "np_$module_id=$start#n_{$module_id}_$i") : append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal#n_{$module_id}_$i");
+				$read_full_url = ($this->request->is_set('np_' . $module_id)) ? $this->modules_helper->route('board3_portal_controller') . "?np_$module_id=$start#n_{$module_id}_$i" : $this->modules_helper->route('board3_portal_controller') . "#n_{$module_id}_$i";
 				$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 
 				$this->template->assign_block_vars('news.news_row', array(
