@@ -80,6 +80,9 @@ class announcements extends module_base
 	/** @var \board3\portal\portal\fetch_posts */
 	protected $fetch_posts;
 
+	/** @var \phpbb\controller\helper */
+	protected $controller_helper;
+
 	/**
 	* Construct an announcements object
 	*
@@ -95,8 +98,9 @@ class announcements extends module_base
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	* @param \board3\portal\portal\fetch_posts $fetch_posts Fetch posts object
+	* @param \phpbb\controller\helper $controller_helper Controller helper
 	*/
-	public function __construct($auth, $cache, $config, $template, $db, $pagination, $modules_helper, $request, $phpEx, $phpbb_root_path, $user, $fetch_posts)
+	public function __construct($auth, $cache, $config, $template, $db, $pagination, $modules_helper, $request, $phpEx, $phpbb_root_path, $user, $fetch_posts, $controller_helper)
 	{
 		$this->auth = $auth;
 		$this->cache = $cache;
@@ -110,6 +114,7 @@ class announcements extends module_base
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
 		$this->fetch_posts = $fetch_posts;
+		$this->controller_helper = $controller_helper;
 	}
 
 	/**
@@ -234,7 +239,7 @@ class announcements extends module_base
 
 			if ($this->config['board3_number_of_announcements_' . $module_id] != 0 && $this->config['board3_announcements_archive_' . $module_id])
 			{
-				$pagination = generate_portal_pagination(append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal"), $total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start, 'announcements', $module_id);
+				$pagination = generate_portal_pagination($this->controller_helper->route('board3_portal_controller'), $total_announcements, $this->config['board3_number_of_announcements_' . $module_id], $start, 'announcements', $module_id);
 
 				$announcements_row = array_merge($announcements_row, array(
 						'AP_PAGINATION'			=> (isset($pagination)) ? $pagination : '',
@@ -340,7 +345,7 @@ class announcements extends module_base
 						'U_VIEW_COMMENTS'		=> append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id),
 						'U_VIEW_UNREAD'			=> append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id . '&amp;view=unread#unread'),
 						'U_POST_COMMENT'		=> append_sid("{$this->phpbb_root_path}posting.{$this->php_ext}", 'mode=reply&amp;' . (($real_forum_id) ? 'f=' . $real_forum_id . '&amp;' : '') . 't=' . $topic_id),
-						'U_READ_FULL'			=> append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", $read_full_url),
+						'U_READ_FULL'			=> $this->controller_helper->route('board3_portal_controller') . '?' . $read_full_url,
 						'L_READ_FULL'			=> $read_full,
 						'OPEN'					=> $open_bracket,
 						'CLOSE'					=> $close_bracket,
@@ -374,7 +379,7 @@ class announcements extends module_base
 				*/
 				if (!isset($fetch_news[$i]))
 				{
-					redirect(append_sid($this->phpbb_root_path . 'app.' . $this->php_ext, '/portal#top'));
+					redirect($this->controller_helper->route('board3_portal_controller') . '#top');
 				}
 
 				$forum_id = $fetch_news[$i]['forum_id'];
@@ -386,7 +391,7 @@ class announcements extends module_base
 				$read_full = $this->user->lang['BACK'];
 				$real_forum_id = ($forum_id == 0) ? $fetch_news['global_id']: $forum_id;
 
-				$read_full_url = ($this->request->is_set('ap_' . $module_id)) ? append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "ap_{$module_id}=$start#a_{$module_id}_$i") : append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal#a_{$module_id}_$i");
+				$read_full_url = ($this->request->is_set('ap_' . $module_id)) ? $this->controller_helper->route('board3_portal_controller') . "?ap_{$module_id}=$start#a_{$module_id}_$i" : $this->controller_helper->route('board3_portal_controller') . "#a_{$module_id}_$i";
 				$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
 
 				$this->template->assign_block_vars('announcements.center_row', array(

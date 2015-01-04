@@ -14,6 +14,7 @@ services:
             - %core.root_path%
             - @user
             - @board3.portal.fetch_posts
+            - @controller.helper
         tags:
             - { name: board3.portal.module }
 
