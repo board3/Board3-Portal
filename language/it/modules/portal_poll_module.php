@@ -40,7 +40,7 @@ $lang = array_merge($lang, array(
 
 	// ACP
 	'ACP_PORTAL_POLLS_SETTINGS'			=> 'Impostazioni sondaggio',
-	'ACP_PORTAL_POLLS_SETTINGS_EXP'	=> 'This is where you customize the poll block.',
+	'ACP_PORTAL_POLLS_SETTINGS_EXP'	=> 'Qui è possibile personalizzare il blocco sondaggio.',
 	'PORTAL_POLL_TOPIC_ID'				=> 'Forum sondaggio',
 	'PORTAL_POLL_TOPIC_ID_EXP'		=> 'Specificare da quale forum recuperare i sondaggi. Lasciare in bianco per recuperare i sondaggi da tutti i forum. Se "Escludi forum" è impostato su "Sì". selezionare i forum da escludere.<br />Se "Escludi forum" è impostato su "No", selezionare i forum di cui vedere i sondaggi.<br />Selezionare/Deselezionare più forum tenendo premuto <samp>CTRL</samp> mentre si clicca.',
 	'PORTAL_POLL_EXCLUDE_ID'			=> 'Escludi forum',
