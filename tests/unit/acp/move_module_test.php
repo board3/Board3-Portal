@@ -53,8 +53,10 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 				new \board3\portal\modules\donation($config, $template, $user),
 			));
 		$this->portal_helper = new \board3\portal\includes\helper($phpbb_container->get('board3.portal.module_collection'));
+		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
+		$controller_helper->add_route('board3_portal_controller', 'portal');
 		$phpbb_container->set('board3.portal.helper', $this->portal_helper);
-		$phpbb_container->set('board3.portal.modules_helper', new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), $config, $request));
+		$phpbb_container->set('board3.portal.modules_helper', new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), $config, $controller_helper, $request));
 		$phpbb_container->setParameter('board3.portal.modules.table', $table_prefix . 'portal_modules');
 		$phpbb_container->setParameter('board3.portal.config.table', $table_prefix . 'portal_config');
 		$this->portal_columns = new \board3\portal\portal\columns();

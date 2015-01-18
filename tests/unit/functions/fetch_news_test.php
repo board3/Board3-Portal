@@ -20,7 +20,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 	{
 		parent::setUp();
 
-		global $auth, $cache, $config, $phpbb_container, $phpbb_dispatcher, $template, $user;
+		global $auth, $cache, $phpbb_container, $phpbb_dispatcher, $template, $user, $phpbb_root_path, $phpEx;
 
 		$user = new \phpbb\user('\phpbb\datetime');
 		$user->data['user_id'] = 2;
@@ -52,7 +52,9 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$this->auth = $auth;
 		$this->user = $user;
 		$phpbb_container = new \phpbb_mock_container_builder();
-		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $request);
+		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
+		$controller_helper->add_route('board3_portal_controller', 'portal');
+		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $controller_helper, $request);
 		$phpbb_container->set('board3.portal.modules_helper', $this->modules_helper);
 		$phpbb_container->set('board3.portal.fetch_posts', new \board3\portal\portal\fetch_posts($auth, $cache, $this->config, $this->db, $this->modules_helper, $user));
 		$template = $this->getMock('\phpbb\template', array('set_filenames', 'destroy_block_vars', 'assign_block_vars', 'assign_display'));
