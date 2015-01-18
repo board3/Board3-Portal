@@ -398,9 +398,9 @@ class fetch_posts
 	{
 		$this->topic_type = 't.topic_type = ' . POST_NORMAL;
 		$this->where_string = (strlen($this->where_string) > 0) ? 'AND (' . trim(substr($this->where_string, 0, -4)) . ')' : '';
-		$this->user_link = ($this->config['board3_news_style_' . $this->module_id]) ? 't.topic_poster = u.user_id' : (($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
-		$this->post_link = ($this->config['board3_news_style_' . $this->module_id]) ? 't.topic_first_post_id = p.post_id' : (($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
-		$this->topic_order = ($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+		$this->user_link = $this->get_setting_based_string($this->config['board3_news_style_' . $this->module_id], 't.topic_poster = u.user_id', $this->get_setting_based_string($this->config['board3_news_show_last_' . $this->module_id], 't.topic_last_poster_id = u.user_id', 't.topic_poster = u.user_id')) ;
+		$this->post_link = $this->get_setting_based_string($this->config['board3_news_style_' . $this->module_id], 't.topic_first_post_id = p.post_id', $this->get_setting_based_string($this->config['board3_news_show_last_' . $this->module_id], 't.topic_last_post_id = p.post_id', 't.topic_first_post_id = p.post_id'));
+		$this->topic_order = $this->get_setting_based_string($this->config['board3_news_show_last_' . $this->module_id], 't.topic_last_post_time DESC', 't.topic_time DESC');
 	}
 
 	/**
@@ -544,5 +544,19 @@ class fetch_posts
 	protected function reset_constraints()
 	{
 		$this->where_string = '';
+	}
+
+	/**
+	 * Get valid string based on setting
+	 *
+	 * @param string $setting Setting to check
+	 * @param string $string_on String if setting is on
+	 * @param string $string_off String if setting is off
+	 *
+	 * @return string Valid string based on setting
+	 */
+	protected function get_setting_based_string($setting, $string_on, $string_off)
+	{
+		return (!empty($setting)) ? $string_on : $string_off;
 	}
 }
