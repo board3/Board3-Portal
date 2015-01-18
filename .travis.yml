@@ -31,7 +31,7 @@ env:
     - EXTNAME="board3/portal"
     - SNIFF="1"        # Should we run code sniffer on your code?
     - IMAGE_ICC="0"    # Should we run icc profile sniffer on your images?
-    - COVERALLS="1"    # Should we run coveralls?
+    - COVERAGE="1"     # Should we send coverage?
     - EPV="1"          # Should we run EPV (Extension Pre Validator) on your code?
     - SPELLCHECK="1"   # Should the php files be checked for obvious spelling errors?
     - PHPBB_BRANCH="develop-ascraeus"
@@ -44,11 +44,10 @@ branches:
 install:
   - php composer.phar install --dev --no-interaction --prefer-source
   - travis/prepare-phpbb.sh $EXTNAME $PHPBB_BRANCH
-  - cp .coveralls.yml ../../phpBB3/phpBB/.coveralls.yml
   - cd ../../phpBB3
   - travis/prepare-extension.sh $EXTNAME $PHPBB_BRANCH
   - travis/setup-phpbb.sh $DB $TRAVIS_PHP_VERSION
-  - sh -c "if [ '$COVERALLS' != '0' ]; then ../board3/Board3-Portal/travis/prepare-coverage.sh $DB $TRAVIS_PHP_VERSION; fi"
+  - sh -c "if [ '$COVERAGE' != '0' ]; then ../board3/Board3-Portal/travis/prepare-coverage.sh $DB $TRAVIS_PHP_VERSION; fi"
 
 before_script:
   - travis/setup-database.sh $DB $TRAVIS_PHP_VERSION
@@ -62,7 +61,7 @@ script:
   - sh -c "if [ '$EPV' != '0' ]; then ../board3/Board3-Portal/travis/run-epv.sh $DB $TRAVIS_PHP_VERSION $EXTNAME; fi"
 
 after_script:
-  - sh -c "if [ '$COVERALLS' != '0' ]; then ../board3/Board3-Portal/travis/run-coveralls.sh $DB $TRAVIS_PHP_VERSION; fi"
+  - sh -c "if [ '$COVERAGE' != '0' ]; then ../board3/Board3-Portal/travis/send-coverage.sh $DB $TRAVIS_PHP_VERSION; fi"
 
 notifications:
   email:
