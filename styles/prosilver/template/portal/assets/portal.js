@@ -24,17 +24,20 @@ phpbb.b3p_fix_right_column_margin = function() {
 	var $portal_center = $('#portal-center');
 
 	if (width <= (895 - $.getScrollbarWidth())) {
-		// Get height of left and center column
-		var right_height = $portal_right.height();
-		var left_height = $portal_left.height();
 		// Get correct margin-left for portal-right and add 10px for padding
-		$portal_right.css('margin-left', - ($portal_right.width() + 1));
-		$portal_center.css('margin-top', Math.max(left_height, right_height) + 'px');
+		if ($portal_left.width() > 0) {
+			$portal_right.css('margin-left', - ($portal_right.width() + 1));
+			$portal_right.css('margin-top', $portal_center.height() + 'px');
+			$portal_left.css('margin-top', $portal_center.height() + 'px');
+		} else {
+			$portal_right.css('margin-left', 0);
+			$portal_right.css('margin-top', 0);
+		}
 	} else {
 		$portal_right.css('margin-top', '0px');
-		$portal_right.css('margin-left', -$portal_left.width());
-		$portal_right.width($portal_left.width());
-		$portal_center.css('margin-top', 0);
+		$portal_right.css('margin-left', -portal_right_width);
+		$portal_right.width(portal_right_width);
+		$portal_left.css('margin-top', 0);
 	}
 };
 
