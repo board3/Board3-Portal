@@ -166,23 +166,8 @@ class fetch_posts
 
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$attachments = array();
-			if (($this->auth->acl_get('u_download') && ($this->auth->acl_get('f_download', $row['forum_id']) || $row['forum_id'] == 0)) && $this->config['allow_attachments'] && $row['post_id'] && $row['post_attachment'])
-			{
-				// Pull attachment data
-				$sql2 = 'SELECT *
-					FROM ' . ATTACHMENTS_TABLE . '
-					WHERE post_msg_id = '. $row['post_id'] .'
-					AND in_message = 0
-					ORDER BY filetime DESC';
-				$result2 = $this->db->sql_query($sql2);
-
-				while ($row2 = $this->db->sql_fetchrow($result2))
-				{
-					$attachments[] = $row2;
-				}
-				$this->db->sql_freeresult($result2);
-			}
+			// Get attachments
+			$attachments = $this->get_post_attachments($row);
 
 			$posts[$i]['bbcode_uid'] = $row['bbcode_uid'];
 			$len_check = $row['post_text'];
@@ -558,5 +543,66 @@ class fetch_posts
 	protected function get_setting_based_string($setting, $string_on, $string_off)
 	{
 		return (!empty($setting)) ? $string_on : $string_off;
+	}
+
+	/**
+	 * Assert that all supplied arguments evaluate to true
+	 *
+	 * @return bool True if all evaluate to true, false if not
+	 */
+	protected function assert_all_true()
+	{
+		$args = func_get_args();
+		$return = true;
+
+		foreach ($args as $argument)
+		{
+			$return = $return && $argument;
+		}
+
+		return $return;
+	}
+
+	/**
+	 * Get attachments of posts
+	 *
+	 * @param array $row Database row of post
+	 *
+	 * @return array Attachment data
+	 */
+	protected function get_post_attachments($row)
+	{
+		$attachments = array();
+
+		if ($this->user_can_download($row['forum_id']) && $this->assert_all_true($this->config['allow_attachments'], $row['post_id'], $row['post_attachment']))
+		{
+			// Pull attachment data
+			$sql = 'SELECT *
+					FROM ' . ATTACHMENTS_TABLE . '
+					WHERE post_msg_id = '. (int) $row['post_id'] .'
+					AND in_message = 0
+					ORDER BY filetime DESC';
+			$result = $this->db->sql_query($sql);
+
+			while ($row = $this->db->sql_fetchrow($result))
+			{
+				$attachments[] = $row;
+			}
+			$this->db->sql_freeresult($result);
+		}
+
+		return $attachments;
+	}
+
+	/**
+	 * Check if user can download a file in this forum
+	 *
+	 * @param int $forum_id Forum ID to check
+	 *
+	 * @return bool True if user can download, false if not
+	 */
+	protected function user_can_download($forum_id)
+	{
+		return $this->auth->acl_get('u_download') && ($this->auth->acl_get('f_download', $forum_id) || $forum_id == 0);
 	}
 }
