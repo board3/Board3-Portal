@@ -28,7 +28,7 @@ class main
 
 	/**
 	* Template object
-	* @var \phpbb\template
+	* @var \phpbb\template\template
 	*/
 	protected $template;
 
@@ -87,7 +87,7 @@ class main
 	* @param \board3\portal\portal\columns $portal_columns Board3 Portal columns object
 	* @param \phpbb\config\config $config phpBB Config object
 	* @param \board3\portal\controller\helper $controller_helper Controller helper
-	* @param \phpbb\template $template Template object
+	* @param \phpbb\template\template $template Template object
 	* @param \phpbb\user $user User object
 	* @param \phpbb\path_helper $path_helper phpBB path helper
 	* @param string $phpbb_root_path phpBB root path
