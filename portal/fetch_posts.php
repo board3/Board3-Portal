@@ -134,8 +134,8 @@ class fetch_posts
 	public function get_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0, $invert = false)
 	{
 		$posts = $update_count = array();
-		$post_time = ($time == 0) ? '' : 'AND t.topic_time > ' . (time() - $time * 86400);
-		$forum_from = (strpos($forum_from, ',') !== false) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
+		$post_time = $this->get_setting_based_data($time == 0, '', 'AND t.topic_time > ' . (time() - $time * 86400));
+		$forum_from = $this->get_setting_based_data(strpos($forum_from, ',') !== false, explode(',', $forum_from), $this->get_setting_based_data($forum_from != '', array($forum_from), array()));
 		$topic_icons = array(0);
 		$have_icons = 0;
 		$this->global_id = 0;
@@ -166,40 +166,15 @@ class fetch_posts
 
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$attachments = array();
-			if (($this->auth->acl_get('u_download') && ($this->auth->acl_get('f_download', $row['forum_id']) || $row['forum_id'] == 0)) && $this->config['allow_attachments'] && $row['post_id'] && $row['post_attachment'])
-			{
-				// Pull attachment data
-				$sql2 = 'SELECT *
-					FROM ' . ATTACHMENTS_TABLE . '
-					WHERE post_msg_id = '. $row['post_id'] .'
-					AND in_message = 0
-					ORDER BY filetime DESC';
-				$result2 = $this->db->sql_query($sql2);
-
-				while ($row2 = $this->db->sql_fetchrow($result2))
-				{
-					$attachments[] = $row2;
-				}
-				$this->db->sql_freeresult($result2);
-			}
+			// Get attachments
+			$attachments = $this->get_post_attachments($row);
 
 			$posts[$i]['bbcode_uid'] = $row['bbcode_uid'];
-			$len_check = $row['post_text'];
-			$maxlen = $text_length;
 
-			if (($text_length != 0) && (strlen($len_check) > $text_length))
-			{
-				$message = str_replace(array("\n", "\r"), array('<br />', "\n"), $row['post_text']);
-				$message = get_sub_taged_string($message, $row['bbcode_uid'], $maxlen);
-				$posts[$i]['striped'] = true;
-			}
-			else
-			{
-				$message = str_replace("\n", '<br/> ', $row['post_text']);
-			}
+			// Format message
+			$message = $this->format_message($row, $text_length, $posts[$i]['striped']);
 
-			$row['bbcode_options'] = (($row['enable_bbcode']) ? OPTION_FLAG_BBCODE : 0) + (($row['enable_smilies']) ? OPTION_FLAG_SMILIES : 0) + (($row['enable_magic_url']) ? OPTION_FLAG_LINKS : 0);
+			$row['bbcode_options'] = $this->get_setting_based_data($row['enable_bbcode'], OPTION_FLAG_BBCODE, 0) + $this->get_setting_based_data($row['enable_smilies'], OPTION_FLAG_SMILIES, 0) + $this->get_setting_based_data($row['enable_magic_url'], OPTION_FLAG_LINKS, 0);
 			$message = generate_text_for_display($message, $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
 
 			if (!empty($attachments))
@@ -207,20 +182,18 @@ class fetch_posts
 				parse_attachments($row['forum_id'], $message, $attachments, $update_count);
 			}
 
-			if ($this->global_id < 1)
-			{
-				$this->global_id = $row['forum_id'];
-			}
+			// Get proper global ID
+			$this->global_id = $this->get_setting_based_data($this->global_id, $this->global_id, $row['forum_id']);
 
 			$topic_icons[] = $row['enable_icons'];
-			$have_icons = ($row['icon_id'] > 0) ? 1 : $have_icons;
+			$have_icons = $this->get_setting_based_data($row['icon_id'], 1, $have_icons);
 
 			$posts[$i] = array_merge($posts[$i], array(
 				'post_text'				=> ap_validate($message),
 				'topic_id'				=> $row['topic_id'],
 				'topic_last_post_id'	=> $row['topic_last_post_id'],
 				'topic_type'			=> $row['topic_type'],
-				'topic_posted'			=> (isset($row['topic_posted']) && $row['topic_posted']) ? true : false,
+				'topic_posted'			=> $this->get_setting_based_data(isset($row['topic_posted']) && $row['topic_posted'], true, false),
 				'icon_id'				=> $row['icon_id'],
 				'topic_status'			=> $row['topic_status'],
 				'forum_id'				=> $row['forum_id'],
@@ -235,18 +208,18 @@ class fetch_posts
 				'user_id'				=> $row['user_id'],
 				'user_type'				=> $row['user_type'],
 				'user_colour'			=> $row['user_colour'],
-				'poll'					=> ($row['poll_title']) ? true : false,
-				'attachment'			=> ($row['topic_attachment']) ? true : false,
+				'poll'					=> $this->get_setting_based_data($row['poll_title'], true, false),
+				'attachment'			=> $this->get_setting_based_data($row['topic_attachment'], true, false),
 				'topic_views'			=> $row['topic_views'],
 				'forum_name'			=> $row['forum_name'],
-				'attachments'			=> (!empty($attachments)) ? $attachments : array(),
+				'attachments'			=> $this->get_setting_based_data($attachments, $attachments, array()),
 			));
 			$posts['global_id'] = $this->global_id;
 			++$i;
 		}
 		$this->db->sql_freeresult($result);
 
-		$posts['topic_icons'] = ((max($topic_icons) > 0) && $have_icons) ? true : false;
+		$posts['topic_icons'] = $this->get_setting_based_data(max($topic_icons) > 0 && $have_icons, true, false);
 		$posts['topic_count'] = $i;
 
 		if ($this->global_id < 1)
@@ -398,9 +371,9 @@ class fetch_posts
 	{
 		$this->topic_type = 't.topic_type = ' . POST_NORMAL;
 		$this->where_string = (strlen($this->where_string) > 0) ? 'AND (' . trim(substr($this->where_string, 0, -4)) . ')' : '';
-		$this->user_link = ($this->config['board3_news_style_' . $this->module_id]) ? 't.topic_poster = u.user_id' : (($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_poster_id = u.user_id' : 't.topic_poster = u.user_id' ) ;
-		$this->post_link = ($this->config['board3_news_style_' . $this->module_id]) ? 't.topic_first_post_id = p.post_id' : (($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_post_id = p.post_id' : 't.topic_first_post_id = p.post_id' ) ;
-		$this->topic_order = ($this->config['board3_news_show_last_' . $this->module_id]) ? 't.topic_last_post_time DESC' : 't.topic_time DESC' ;
+		$this->user_link = $this->get_setting_based_data($this->config['board3_news_style_' . $this->module_id], 't.topic_poster = u.user_id', $this->get_setting_based_data($this->config['board3_news_show_last_' . $this->module_id], 't.topic_last_poster_id = u.user_id', 't.topic_poster = u.user_id')) ;
+		$this->post_link = $this->get_setting_based_data($this->config['board3_news_style_' . $this->module_id], 't.topic_first_post_id = p.post_id', $this->get_setting_based_data($this->config['board3_news_show_last_' . $this->module_id], 't.topic_last_post_id = p.post_id', 't.topic_first_post_id = p.post_id'));
+		$this->topic_order = $this->get_setting_based_data($this->config['board3_news_show_last_' . $this->module_id], 't.topic_last_post_time DESC', 't.topic_time DESC');
 	}
 
 	/**
@@ -544,5 +517,105 @@ class fetch_posts
 	protected function reset_constraints()
 	{
 		$this->where_string = '';
+	}
+
+	/**
+	 * Get valid data based on setting
+	 *
+	 * @param mixed $setting Setting to check
+	 * @param mixed $setting_true Data if setting is 'on' (not empty)
+	 * @param mixed $setting_false Data if setting is 'off' (empty or 0)
+	 *
+	 * @return mixed Valid data based on setting
+	 */
+	protected function get_setting_based_data($setting, $setting_true, $setting_false)
+	{
+		return (!empty($setting)) ? $setting_true : $setting_false;
+	}
+
+	/**
+	 * Assert that all supplied arguments evaluate to true
+	 *
+	 * @return bool True if all evaluate to true, false if not
+	 */
+	protected function assert_all_true()
+	{
+		$args = func_get_args();
+		$return = true;
+
+		foreach ($args as $argument)
+		{
+			$return = $return && $argument;
+		}
+
+		return $return;
+	}
+
+	/**
+	 * Get attachments of posts
+	 *
+	 * @param array $row Database row of post
+	 *
+	 * @return array Attachment data
+	 */
+	protected function get_post_attachments($row)
+	{
+		$attachments = array();
+
+		if ($this->user_can_download($row['forum_id']) && $this->assert_all_true($this->config['allow_attachments'], $row['post_id'], $row['post_attachment']))
+		{
+			// Pull attachment data
+			$sql = 'SELECT *
+					FROM ' . ATTACHMENTS_TABLE . '
+					WHERE post_msg_id = '. (int) $row['post_id'] .'
+					AND in_message = 0
+					ORDER BY filetime DESC';
+			$result = $this->db->sql_query($sql);
+
+			while ($row = $this->db->sql_fetchrow($result))
+			{
+				$attachments[] = $row;
+			}
+			$this->db->sql_freeresult($result);
+		}
+
+		return $attachments;
+	}
+
+	/**
+	 * Check if user can download a file in this forum
+	 *
+	 * @param int $forum_id Forum ID to check
+	 *
+	 * @return bool True if user can download, false if not
+	 */
+	protected function user_can_download($forum_id)
+	{
+		return $this->auth->acl_get('u_download') && ($this->auth->acl_get('f_download', $forum_id) || $forum_id == 0);
+	}
+
+	/**
+	 * Format message for display
+	 *
+	 * @param array $row Database row
+	 * @param int $text_length Length of text
+	 * @param bool $posts_striped Whether post is striped
+	 *
+	 * @return mixed|string
+	 */
+	protected function format_message($row, $text_length, &$posts_striped)
+	{
+		if (($text_length !== 0) && (strlen($row['post_text']) > $text_length))
+		{
+			$message = str_replace(array("\n", "\r"), array('<br />', "\n"), $row['post_text']);
+			$message = get_sub_taged_string($message, $row['bbcode_uid'], $text_length);
+			$posts_striped = true;
+		}
+		else
+		{
+			$message = str_replace("\n", '<br/> ', $row['post_text']);
+		}
+
+		return $message;
 	}
 }
