@@ -454,8 +454,8 @@ class poll extends module_base
 					}
 
 					$poll_view_str = urlencode(implode(',', $make_poll_view));
-					$portalpoll_url= $this->modules_helper->route('board3_portal_controller') .  "polls=$poll_view_str";
-					$portalvote_url= $this->modules_helper->route('board3_portal_controller') . "f=$forum_id&amp;t=$topic_id";
+					$portalpoll_url= $this->modules_helper->route('board3_portal_controller') . "?polls=$poll_view_str";
+					$portalvote_url= $this->modules_helper->route('board3_portal_controller') . "?f=$forum_id&amp;t=$topic_id";
 					$viewtopic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", "f=$forum_id&amp;t=$topic_id");
 					$poll_end = $data['poll_length'] + $data['poll_start'];
 
