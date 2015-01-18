@@ -133,7 +133,7 @@ class fetch_posts
 	*/
 	public function get_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0, $invert = false)
 	{
-		$posts = $update_count = array();
+		$posts = array();
 		$post_time = $this->get_setting_based_data($time == 0, '', 'AND t.topic_time > ' . (time() - $time * 86400));
 		$forum_from = $this->get_setting_based_data(strpos($forum_from, ',') !== false, explode(',', $forum_from), $this->get_setting_based_data($forum_from != '', array($forum_from), array()));
 		$topic_icons = array(0);
@@ -167,7 +167,7 @@ class fetch_posts
 		// Fill posts array
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$this->fill_posts_array($row, $text_length, $i, $have_icons, $posts);
+			$this->fill_posts_array($row, $text_length, $i, $have_icons, $posts, $topic_icons);
 			++$i;
 		}
 		$this->db->sql_freeresult($result);
@@ -281,11 +281,14 @@ class fetch_posts
 	 * @param array $row Database row
 	 * @param int $text_length Text length
 	 * @param int $i Array pointer
-	 * @param bool $have_icons Whether any post has icons
+	 * @param int $have_icons Whether any post has icons
 	 * @param array $posts The posts array
+	 * @param array $topic_icons List of topic icons
 	 */
-	public function fill_posts_array($row, $text_length, $i, &$have_icons, &$posts)
+	public function fill_posts_array($row, $text_length, $i, &$have_icons, &$posts, &$topic_icons)
 	{
+		$update_count = array();
+
 		// Get attachments
 		$attachments = $this->get_post_attachments($row);
 
