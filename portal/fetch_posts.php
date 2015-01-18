@@ -134,8 +134,8 @@ class fetch_posts
 	public function get_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0, $invert = false)
 	{
 		$posts = $update_count = array();
-		$post_time = ($time == 0) ? '' : 'AND t.topic_time > ' . (time() - $time * 86400);
-		$forum_from = (strpos($forum_from, ',') !== false) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
+		$post_time = $this->get_setting_based_data($time == 0, '', 'AND t.topic_time > ' . (time() - $time * 86400));
+		$forum_from = $this->get_setting_based_data(strpos($forum_from, ',') !== false, explode(',', $forum_from), $this->get_setting_based_data($forum_from != '', array($forum_from), array()));
 		$topic_icons = array(0);
 		$have_icons = 0;
 		$this->global_id = 0;
@@ -184,7 +184,7 @@ class fetch_posts
 				$message = str_replace("\n", '<br/> ', $row['post_text']);
 			}
 
-			$row['bbcode_options'] = (($row['enable_bbcode']) ? OPTION_FLAG_BBCODE : 0) + (($row['enable_smilies']) ? OPTION_FLAG_SMILIES : 0) + (($row['enable_magic_url']) ? OPTION_FLAG_LINKS : 0);
+			$row['bbcode_options'] = $this->get_setting_based_data($row['enable_bbcode'], OPTION_FLAG_BBCODE, 0) + $this->get_setting_based_data($row['enable_smilies'], OPTION_FLAG_SMILIES, 0) + $this->get_setting_based_data($row['enable_magic_url'], OPTION_FLAG_LINKS, 0);
 			$message = generate_text_for_display($message, $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
 
 			if (!empty($attachments))
@@ -192,20 +192,18 @@ class fetch_posts
 				parse_attachments($row['forum_id'], $message, $attachments, $update_count);
 			}
 
-			if ($this->global_id < 1)
-			{
-				$this->global_id = $row['forum_id'];
-			}
+			// Get proper global ID
+			$this->global_id = $this->get_setting_based_data($this->global_id, $this->global_id, $row['forum_id']);
 
 			$topic_icons[] = $row['enable_icons'];
-			$have_icons = ($row['icon_id'] > 0) ? 1 : $have_icons;
+			$have_icons = $this->get_setting_based_data($row['icon_id'], 1, $have_icons);
 
 			$posts[$i] = array_merge($posts[$i], array(
 				'post_text'				=> ap_validate($message),
 				'topic_id'				=> $row['topic_id'],
 				'topic_last_post_id'	=> $row['topic_last_post_id'],
 				'topic_type'			=> $row['topic_type'],
-				'topic_posted'			=> (isset($row['topic_posted']) && $row['topic_posted']) ? true : false,
+				'topic_posted'			=> $this->get_setting_based_data(isset($row['topic_posted']) && $row['topic_posted'], true, false),
 				'icon_id'				=> $row['icon_id'],
 				'topic_status'			=> $row['topic_status'],
 				'forum_id'				=> $row['forum_id'],
@@ -220,18 +218,18 @@ class fetch_posts
 				'user_id'				=> $row['user_id'],
 				'user_type'				=> $row['user_type'],
 				'user_colour'			=> $row['user_colour'],
-				'poll'					=> ($row['poll_title']) ? true : false,
-				'attachment'			=> ($row['topic_attachment']) ? true : false,
+				'poll'					=> $this->get_setting_based_data($row['poll_title'], true, false),
+				'attachment'			=> $this->get_setting_based_data($row['topic_attachment'], true, false),
 				'topic_views'			=> $row['topic_views'],
 				'forum_name'			=> $row['forum_name'],
-				'attachments'			=> (!empty($attachments)) ? $attachments : array(),
+				'attachments'			=> $this->get_setting_based_data($attachments, $attachments, array()),
 			));
 			$posts['global_id'] = $this->global_id;
 			++$i;
 		}
 		$this->db->sql_freeresult($result);
 
-		$posts['topic_icons'] = ((max($topic_icons) > 0) && $have_icons) ? true : false;
+		$posts['topic_icons'] = $this->get_setting_based_data(max($topic_icons) > 0 && $have_icons, true, false);
 		$posts['topic_count'] = $i;
 
 		if ($this->global_id < 1)
@@ -383,9 +381,9 @@ class fetch_posts
 	{
 		$this->topic_type = 't.topic_type = ' . POST_NORMAL;
 		$this->where_string = (strlen($this->where_string) > 0) ? 'AND (' . trim(substr($this->where_string, 0, -4)) . ')' : '';
-		$this->user_link = $this->get_setting_based_string($this->config['board3_news_style_' . $this->module_id], 't.topic_poster = u.user_id', $this->get_setting_based_string($this->config['board3_news_show_last_' . $this->module_id], 't.topic_last_poster_id = u.user_id', 't.topic_poster = u.user_id')) ;
-		$this->post_link = $this->get_setting_based_string($this->config['board3_news_style_' . $this->module_id], 't.topic_first_post_id = p.post_id', $this->get_setting_based_string($this->config['board3_news_show_last_' . $this->module_id], 't.topic_last_post_id = p.post_id', 't.topic_first_post_id = p.post_id'));
-		$this->topic_order = $this->get_setting_based_string($this->config['board3_news_show_last_' . $this->module_id], 't.topic_last_post_time DESC', 't.topic_time DESC');
+		$this->user_link = $this->get_setting_based_data($this->config['board3_news_style_' . $this->module_id], 't.topic_poster = u.user_id', $this->get_setting_based_data($this->config['board3_news_show_last_' . $this->module_id], 't.topic_last_poster_id = u.user_id', 't.topic_poster = u.user_id')) ;
+		$this->post_link = $this->get_setting_based_data($this->config['board3_news_style_' . $this->module_id], 't.topic_first_post_id = p.post_id', $this->get_setting_based_data($this->config['board3_news_show_last_' . $this->module_id], 't.topic_last_post_id = p.post_id', 't.topic_first_post_id = p.post_id'));
+		$this->topic_order = $this->get_setting_based_data($this->config['board3_news_show_last_' . $this->module_id], 't.topic_last_post_time DESC', 't.topic_time DESC');
 	}
 
 	/**
@@ -532,17 +530,17 @@ class fetch_posts
 	}
 
 	/**
-	 * Get valid string based on setting
+	 * Get valid data based on setting
 	 *
-	 * @param string $setting Setting to check
-	 * @param string $string_on String if setting is on
-	 * @param string $string_off String if setting is off
+	 * @param mixed $setting Setting to check
+	 * @param mixed $setting_true Data if setting is 'on' (not empty)
+	 * @param mixed $setting_false Data if setting is 'off' (empty or 0)
 	 *
-	 * @return string Valid string based on setting
+	 * @return mixed Valid data based on setting
 	 */
-	protected function get_setting_based_string($setting, $string_on, $string_off)
+	protected function get_setting_based_data($setting, $setting_true, $setting_false)
 	{
-		return (!empty($setting)) ? $string_on : $string_off;
+		return (!empty($setting)) ? $setting_true : $setting_false;
 	}
 
 	/**
