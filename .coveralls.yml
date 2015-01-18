@@ -1,5 +1,0 @@
-#.coveralls.yml
-
-src_dir: ../../phpBB3
-coverage_clover: ../../phpBB3/build/logs/clover.xml
-json_path: ../../phpBB3/build/logs/coveralls-upload.json
