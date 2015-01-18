@@ -164,57 +164,10 @@ class fetch_posts
 
 		$i = 0;
 
+		// Fill posts array
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			// Get attachments
-			$attachments = $this->get_post_attachments($row);
-
-			$posts[$i]['bbcode_uid'] = $row['bbcode_uid'];
-
-			// Format message
-			$message = $this->format_message($row, $text_length, $posts[$i]['striped']);
-
-			$row['bbcode_options'] = $this->get_setting_based_data($row['enable_bbcode'], OPTION_FLAG_BBCODE, 0) + $this->get_setting_based_data($row['enable_smilies'], OPTION_FLAG_SMILIES, 0) + $this->get_setting_based_data($row['enable_magic_url'], OPTION_FLAG_LINKS, 0);
-			$message = generate_text_for_display($message, $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
-
-			if (!empty($attachments))
-			{
-				parse_attachments($row['forum_id'], $message, $attachments, $update_count);
-			}
-
-			// Get proper global ID
-			$this->global_id = $this->get_setting_based_data($this->global_id, $this->global_id, $row['forum_id']);
-
-			$topic_icons[] = $row['enable_icons'];
-			$have_icons = $this->get_setting_based_data($row['icon_id'], 1, $have_icons);
-
-			$posts[$i] = array_merge($posts[$i], array(
-				'post_text'				=> ap_validate($message),
-				'topic_id'				=> $row['topic_id'],
-				'topic_last_post_id'	=> $row['topic_last_post_id'],
-				'topic_type'			=> $row['topic_type'],
-				'topic_posted'			=> $this->get_setting_based_data(isset($row['topic_posted']) && $row['topic_posted'], true, false),
-				'icon_id'				=> $row['icon_id'],
-				'topic_status'			=> $row['topic_status'],
-				'forum_id'				=> $row['forum_id'],
-				'topic_replies'			=> $row['topic_posts_approved'] + $row['topic_posts_unapproved'] + $row['topic_posts_softdeleted'],
-				'topic_replies_real'	=> $row['topic_posts_approved'],
-				'topic_time'			=> $this->user->format_date($row['post_time']),
-				'topic_last_post_time'	=> $row['topic_last_post_time'],
-				'topic_title'			=> $row['topic_title'],
-				'username'				=> $row['username'],
-				'username_full'			=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour'], $row['post_username']),
-				'username_full_last'	=> get_username_string('full', $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour'], $row['topic_last_poster_name']),
-				'user_id'				=> $row['user_id'],
-				'user_type'				=> $row['user_type'],
-				'user_colour'			=> $row['user_colour'],
-				'poll'					=> $this->get_setting_based_data($row['poll_title'], true, false),
-				'attachment'			=> $this->get_setting_based_data($row['topic_attachment'], true, false),
-				'topic_views'			=> $row['topic_views'],
-				'forum_name'			=> $row['forum_name'],
-				'attachments'			=> $this->get_setting_based_data($attachments, $attachments, array()),
-			));
-			$posts['global_id'] = $this->global_id;
+			$this->fill_posts_array($row, $text_length, $i, $have_icons, $posts);
 			++$i;
 		}
 		$this->db->sql_freeresult($result);
@@ -320,6 +273,68 @@ class fetch_posts
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Fill posts array with data
+	 *
+	 * @param array $row Database row
+	 * @param int $text_length Text length
+	 * @param int $i Array pointer
+	 * @param bool $have_icons Whether any post has icons
+	 * @param array $posts The posts array
+	 */
+	public function fill_posts_array($row, $text_length, $i, &$have_icons, &$posts)
+	{
+		// Get attachments
+		$attachments = $this->get_post_attachments($row);
+
+		$posts[$i]['bbcode_uid'] = $row['bbcode_uid'];
+
+		// Format message
+		$message = $this->format_message($row, $text_length, $posts[$i]['striped']);
+
+		$row['bbcode_options'] = $this->get_setting_based_data($row['enable_bbcode'], OPTION_FLAG_BBCODE, 0) + $this->get_setting_based_data($row['enable_smilies'], OPTION_FLAG_SMILIES, 0) + $this->get_setting_based_data($row['enable_magic_url'], OPTION_FLAG_LINKS, 0);
+		$message = generate_text_for_display($message, $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
+
+		if (!empty($attachments))
+		{
+			parse_attachments($row['forum_id'], $message, $attachments, $update_count);
+		}
+
+		// Get proper global ID
+		$this->global_id = $this->get_setting_based_data($this->global_id, $this->global_id, $row['forum_id']);
+
+		$topic_icons[] = $row['enable_icons'];
+		$have_icons = $this->get_setting_based_data($row['icon_id'], 1, $have_icons);
+
+		$posts[$i] = array_merge($posts[$i], array(
+			'post_text'				=> ap_validate($message),
+			'topic_id'				=> $row['topic_id'],
+			'topic_last_post_id'	=> $row['topic_last_post_id'],
+			'topic_type'			=> $row['topic_type'],
+			'topic_posted'			=> $this->get_setting_based_data(isset($row['topic_posted']) && $row['topic_posted'], true, false),
+			'icon_id'				=> $row['icon_id'],
+			'topic_status'			=> $row['topic_status'],
+			'forum_id'				=> $row['forum_id'],
+			'topic_replies'			=> $row['topic_posts_approved'] + $row['topic_posts_unapproved'] + $row['topic_posts_softdeleted'],
+			'topic_replies_real'	=> $row['topic_posts_approved'],
+			'topic_time'			=> $this->user->format_date($row['post_time']),
+			'topic_last_post_time'	=> $row['topic_last_post_time'],
+			'topic_title'			=> $row['topic_title'],
+			'username'				=> $row['username'],
+			'username_full'			=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour'], $row['post_username']),
+			'username_full_last'	=> get_username_string('full', $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour'], $row['topic_last_poster_name']),
+			'user_id'				=> $row['user_id'],
+			'user_type'				=> $row['user_type'],
+			'user_colour'			=> $row['user_colour'],
+			'poll'					=> $this->get_setting_based_data($row['poll_title'], true, false),
+			'attachment'			=> $this->get_setting_based_data($row['topic_attachment'], true, false),
+			'topic_views'			=> $row['topic_views'],
+			'forum_name'			=> $row['forum_name'],
+			'attachments'			=> $this->get_setting_based_data($attachments, $attachments, array()),
+		));
+		$posts['global_id'] = $this->global_id;
 	}
 
 	/**
