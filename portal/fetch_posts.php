@@ -170,19 +170,9 @@ class fetch_posts
 			$attachments = $this->get_post_attachments($row);
 
 			$posts[$i]['bbcode_uid'] = $row['bbcode_uid'];
-			$len_check = $row['post_text'];
-			$maxlen = $text_length;
 
-			if (($text_length != 0) && (strlen($len_check) > $text_length))
-			{
-				$message = str_replace(array("\n", "\r"), array('<br />', "\n"), $row['post_text']);
-				$message = get_sub_taged_string($message, $row['bbcode_uid'], $maxlen);
-				$posts[$i]['striped'] = true;
-			}
-			else
-			{
-				$message = str_replace("\n", '<br/> ', $row['post_text']);
-			}
+			// Format message
+			$message = $this->format_message($row, $text_length, $posts[$i]['striped']);
 
 			$row['bbcode_options'] = $this->get_setting_based_data($row['enable_bbcode'], OPTION_FLAG_BBCODE, 0) + $this->get_setting_based_data($row['enable_smilies'], OPTION_FLAG_SMILIES, 0) + $this->get_setting_based_data($row['enable_magic_url'], OPTION_FLAG_LINKS, 0);
 			$message = generate_text_for_display($message, $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
@@ -602,5 +592,30 @@ class fetch_posts
 	protected function user_can_download($forum_id)
 	{
 		return $this->auth->acl_get('u_download') && ($this->auth->acl_get('f_download', $forum_id) || $forum_id == 0);
+	}
+
+	/**
+	 * Format message for display
+	 *
+	 * @param array $row Database row
+	 * @param int $text_length Length of text
+	 * @param bool $posts_striped Whether post is striped
+	 *
+	 * @return mixed|string
+	 */
+	protected function format_message($row, $text_length, &$posts_striped)
+	{
+		if (($text_length !== 0) && (strlen($row['post_text']) > $text_length))
+		{
+			$message = str_replace(array("\n", "\r"), array('<br />', "\n"), $row['post_text']);
+			$message = get_sub_taged_string($message, $row['bbcode_uid'], $text_length);
+			$posts_striped = true;
+		}
+		else
+		{
+			$message = str_replace("\n", '<br/> ', $row['post_text']);
+		}
+
+		return $message;
 	}
 }
