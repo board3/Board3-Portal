@@ -23,13 +23,17 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 
 	public function setUp()
 	{
+		global $phpbb_root_path, $phpEx;
+
 		parent::setUp();
 
 		$auth = new \phpbb\auth\auth();
 		$this->config = new \phpbb\config\config(array());
 		$request = new \phpbb_mock_request(array('foo' => array('bar')));
+		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
+		$controller_helper->add_route('board3_portal_controller', 'portal');
 
-		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $request);
+		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $controller_helper, $request);
 	}
 
 	public function data_get_disallowed_forums()

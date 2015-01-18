@@ -28,7 +28,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 	public function setUp()
 	{
 		parent::setUp();
-		global $cache, $phpbb_root_path;
+		global $cache, $phpbb_root_path, $phpEx;
 
 		$this->path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request(
@@ -40,7 +40,10 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 			'php'
 		);
 		self::$config = new \phpbb\config\config(array());
-		$this->calendar = new \board3\portal\modules\calendar(self::$config, null, null, null, dirname(__FILE__) . '/../../../', 'php', null, $this->path_helper, null);
+		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
+		$controller_helper->add_route('board3_portal_controller', 'portal');
+		$modules_helper = new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), new \phpbb\config\config(array()), $controller_helper, new \phpbb_mock_request());
+		$this->calendar = new \board3\portal\modules\calendar(self::$config, $modules_helper, null, null, null, dirname(__FILE__) . '/../../../', 'php', null, $this->path_helper, null);
 		define('PORTAL_MODULES_TABLE', 'phpbb_portal_modules');
 		define('PORTAL_CONFIG_TABLE', 'phpbb_portal_config');
 		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put'));

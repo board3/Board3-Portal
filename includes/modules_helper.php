@@ -9,6 +9,8 @@
 
 namespace board3\portal\includes;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 class modules_helper
 {
 	/**
@@ -23,6 +25,9 @@ class modules_helper
 	*/
 	protected $config;
 
+	/** @var \phpbb\controller\helper Controller helper */
+	protected $controller_helper;
+
 	/**
 	* phpBB request
 	* @var \phpbb\request\request
@@ -35,12 +40,14 @@ class modules_helper
 	* the dependencies defined in the services.yml file for this service.
 	* @param \phpbb\auth\auth $auth Auth object
 	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\controller\helper $controller_helper Controller helper
 	* @param \phpbb\request\request $request phpBB request
 	*/
-	public function __construct($auth, $config, $request)
+	public function __construct($auth, $config, $controller_helper, $request)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
+		$this->controller_helper = $controller_helper;
 		$this->request = $request;
 	}
 
@@ -134,5 +141,21 @@ class modules_helper
 		$values = $this->request->variable($key, array(0 => ''));
 		$news = implode(',', $values);
 		$this->config->set($key, $news);
+	}
+
+	/**
+	 * Wrapper method for controller_helper::route()
+	 *
+	 * @param string $route Route name
+	 * @param array $params Route parameters
+	 * @param bool $is_amp
+	 * @param bool $session_id
+	 * @param bool $reference_type
+	 *
+	 * @return string URL for route
+	 */
+	public function route($route, $params = array(), $is_amp = true, $session_id = false, $reference_type = UrlGeneratorInterface::ABSOLUTE_PATH)
+	{
+		return $this->controller_helper->route($route, $params, $is_amp, $session_id, $reference_type);
 	}
 }

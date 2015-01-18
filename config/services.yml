@@ -68,6 +68,7 @@ services:
         arguments:
             - @auth
             - @config
+            - @controller.helper
             - @request
 
     board3.portal.columns:

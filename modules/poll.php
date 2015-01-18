@@ -71,6 +71,9 @@ class poll extends module_base
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var \board3\portal\includes\modules_helper */
+	protected $modules_helper;
+
 	/**
 	* Construct a poll object
 	*
@@ -82,8 +85,9 @@ class poll extends module_base
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
+	* @param \board3\portal\includes\modules_helper $modules_helper Modules helper
 	*/
-	public function __construct($auth, $config, $db, $request, $template, $phpbb_root_path, $phpEx, $user)
+	public function __construct($auth, $config, $db, $request, $template, $phpbb_root_path, $phpEx, $user, $modules_helper)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
@@ -93,6 +97,7 @@ class poll extends module_base
 		$this->php_ext = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->user = $user;
+		$this->modules_helper = $modules_helper;
 	}
 
 	/**
@@ -231,7 +236,7 @@ class poll extends module_base
 
 			if($s_can_up_vote)
 			{
-				$redirect_url = append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal");
+				$redirect_url = $this->modules_helper->route('board3_portal_controller');
 
 				if (!sizeof($voted_id) || sizeof($voted_id) > $topic_data['poll_max_options'] || in_array(VOTE_CONVERTED, $cur_voted_id))
 				{
@@ -449,8 +454,8 @@ class poll extends module_base
 					}
 
 					$poll_view_str = urlencode(implode(',', $make_poll_view));
-					$portalpoll_url= append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "polls=$poll_view_str");
-					$portalvote_url= append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "f=$forum_id&amp;t=$topic_id");
+					$portalpoll_url= $this->modules_helper->route('board3_portal_controller') . "?polls=$poll_view_str";
+					$portalvote_url= $this->modules_helper->route('board3_portal_controller') . "?f=$forum_id&amp;t=$topic_id";
 					$viewtopic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", "f=$forum_id&amp;t=$topic_id");
 					$poll_end = $data['poll_length'] + $data['poll_start'];
 

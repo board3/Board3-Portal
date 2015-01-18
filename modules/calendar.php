@@ -89,13 +89,13 @@ class calendar extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
-	/** @var \phpbb\request\request */
+	/** @var \phpbb\request\request_interface */
 	protected $request;
 
 	/** @var string PHP file extension */
@@ -116,22 +116,27 @@ class calendar extends module_base
 	/** @var \phpbb\log\log phpBB log */
 	protected $log;
 
+	/** @var \board3\portal\includes\modules_helper */
+	protected $modules_helper;
+
 	/**
 	* Construct a calendar object
 	*
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\template $template phpBB template
-	* @param \phpbb\db\driver $db Database driver
-	* @param \phpbb\request\request $request phpBB request
+	* @param \board3\portal\includes\modules_helper $modules_helper Modules helper
+	* @param \phpbb\template\template $template phpBB template
+	* @param \phpbb\db\driver\driver_interface $db Database driver
+	* @param \phpbb\request\request_interface $request phpBB request
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
 	* @param \phpbb\path_helper $path_helper phpBB path helper
 	* @param \phpbb\log\log $log phpBB log object
 	*/
-	public function __construct($config, $template, $db, $request, $phpbb_root_path, $phpEx, $user, $path_helper, $log)
+	public function __construct($config, $modules_helper, $template, $db, $request, $phpbb_root_path, $phpEx, $user, $path_helper, $log)
 	{
 		$this->config = $config;
+		$this->modules_helper = $modules_helper;
 		$this->template = $template;
 		$this->db = $db;
 		$this->request = $request;
@@ -183,8 +188,8 @@ class calendar extends module_base
 		// output our general calendar bits
 		$down = $this->mini_cal_month - 1;
 		$up = $this->mini_cal_month + 1;
-		$prev_month = '<a href="' . append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "m$module_id=$down#minical$module_id") . '"><img src="' . $this->portal_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/cal_icon_left_arrow.png' . '" title="' . $this->user->lang['VIEW_PREVIOUS_MONTH'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
-		$next_month = '<a href="' . append_sid("{$this->phpbb_root_path}app.{$this->php_ext}/portal", "m$module_id=$up#minical$module_id") . '"><img src="' . $this->portal_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $this->user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
+		$prev_month = '<a href="' . $this->modules_helper->route('board3_portal_controller') . "?m$module_id=$down#minical$module_id" . '"><img src="' . $this->portal_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/cal_icon_left_arrow.png' . '" title="' . $this->user->lang['VIEW_PREVIOUS_MONTH'] . '" height="16" width="16" alt="&lt;&lt;" /></a>';
+		$next_month = '<a href="' . $this->modules_helper->route('board3_portal_controller') . "?m$module_id=$up#minical$module_id" . '"><img src="' . $this->portal_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/cal_icon_right_arrow.png' . '" title="' . $this->user->lang['VIEW_NEXT_MONTH'] . '" height="16" width="16" alt="&gt;&gt;" /></a>';
 
 		$this->template->assign_block_vars('minical', array(
 			'S_SUNDAY_FIRST'	=> ($this->config['board3_sunday_first_' . $module_id]) ? true : false,
