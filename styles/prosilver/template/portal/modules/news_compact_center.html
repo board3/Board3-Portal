@@ -47,10 +47,10 @@
 					<!-- IF news.news_row.FORUM_NAME -->
 						<br />{L_FORUM}{L_COLON} <a href="{news.news_row.U_VIEWFORUM}" class="portal-forumtitle">{news.news_row.FORUM_NAME}</a>
 					<!-- ENDIF -->
-					<!-- IF not S_DISPLAY_NEWS_RVS --><!-- IF news.news_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}{L_COLON} <strong>{news.news_row.REPLIES}</strong>  &bull; {L_VIEWS}{L_COLON} <strong>{news.news_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
+					<!-- IF not news.S_DISPLAY_NEWS_RVS --><!-- IF news.news_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}{L_COLON} <strong>{news.news_row.REPLIES}</strong>  &bull; {L_VIEWS}{L_COLON} <strong>{news.news_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
 				</div> <!-- \END <div class="list-inner"> -->
 			</dt>
-			<!-- IF S_DISPLAY_NEWS_RVS -->
+			<!-- IF news.S_DISPLAY_NEWS_RVS -->
 				<dd class="posts" data-skip-responsive="true">{news.news_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
 				<dd class="views" data-skip-responsive="true">{news.news_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
 			<!-- ENDIF -->
