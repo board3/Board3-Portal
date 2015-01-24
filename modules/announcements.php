@@ -350,7 +350,7 @@ class announcements extends module_base
 						'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 					));
 
-					$this->pagination->generate_template_pagination($view_topic_url, 'announcements.center_row.pagination', 'ap_' . $module_id, $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
+					$this->pagination->generate_template_pagination($view_topic_url, 'announcements.center_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
 
 					if(!empty($fetch_news[$i]['attachments']))
 					{

@@ -8,7 +8,7 @@
 	}
 
 	dt#a { width: 125% !important; }
-	.responsive-portal-announcements dt { width: 125% !important; }
+	.responsive-portal-announcements dt { width: 130% !important; }
 	dd.responsive-portal-news { display: none !important; }
 
 	.responsive-portal-news dd.posts, .responsive-portal-news dd.views {
@@ -32,6 +32,7 @@
 		padding-left: 0 !important;
 	}
 	.responsive-portal-news dt { width: 100% !important; }
+	.responsive-portal-announcements dt { width: 100% !important; }
 }
 
 @media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
