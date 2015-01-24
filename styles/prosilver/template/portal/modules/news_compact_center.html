@@ -30,16 +30,17 @@
 				<div class="list-inner">
 					<!-- IF news.news_row.ATTACH_ICON_IMG -->{news.news_row.ATTACH_ICON_IMG} <!-- ENDIF -->
 					<a href="{news.news_row.U_VIEW_COMMENTS}" title="{news.news_row.TITLE}" class="topictitle">{news.news_row.TITLE}</a><!-- IF U_VIEW_UNREAD_POST and not S_IS_BOT --> &bull; <a href="{U_VIEW_UNREAD_POST}">{L_VIEW_UNREAD_POST}</a> &bull; <!-- ENDIF -->
-					<!-- IF news.news_row.PAGINATION -->
+					<!-- IF news.news_row.pagination -->
 					<div class="pagination">
-						<ul><!-- BEGIN pagination -->
+						<ul>
+						<!-- BEGIN pagination -->
 								<!-- IF news.news_row.pagination.S_IS_PREV -->
-								<!-- ELSEIF news.news_row.pagination.S_IS_CURRENT --><li class="active"><span>{news.news_row.pagination.PAGE_NUMBER}</span></li>
+								<!-- ELSEIF news.news_row.pagination.S_IS_CURRENT --><li><a href="{news.news_row.pagination.PAGE_URL}">{news.news_row.pagination.PAGE_NUMBER}</a></li>
 								<!-- ELSEIF news.news_row.pagination.S_IS_ELLIPSIS --><li class="ellipsis"><span>{L_ELLIPSIS}</span></li>
 								<!-- ELSEIF news.news_row.pagination.S_IS_NEXT -->
 								<!-- ELSE --><li><a href="{news.news_row.pagination.PAGE_URL}">{news.news_row.pagination.PAGE_NUMBER}</a></li>
 								<!-- ENDIF -->
-						<!-- END pagination --->
+						<!-- END pagination -->
 						</ul>
 					</div>
 					<!-- ENDIF -->

@@ -309,8 +309,6 @@ class news extends module_base
 					// Grab icons
 					$icons = $this->cache->obtain_icons();
 
-					$this->pagination->generate_template_pagination($view_topic_url, 'pagination', 'np_' . $module_id, $fetch_news[$i]['topic_replies'], $this->config['board3_number_of_news_' . $module_id], $start);
-
 					$this->template->assign_block_vars('news.news_row', array(
 						'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $this->config['allow_attachments']) ? $this->user->img('icon_topic_attach', $this->user->lang['TOTAL_ATTACHMENTS']) : '',
 						'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
@@ -347,6 +345,9 @@ class news extends module_base
 						'S_UNREAD_INFO'			=> $unread_topic,
 						'S_HAS_ATTACHMENTS'		=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 					));
+
+					// Assign pagination
+					$this->pagination->generate_template_pagination($view_topic_url, 'news.news_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1);
 
 					if(!empty($fetch_news[$i]['attachments']))
 					{

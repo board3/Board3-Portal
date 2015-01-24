@@ -32,7 +32,20 @@
 					<!-- IF announcements.center_row.S_POLL --><strong>{L_VIEW_TOPIC_POLL}</strong><!-- ENDIF -->
 					<a href="{announcements.center_row.U_VIEW_COMMENTS}" title="{announcements.center_row.TITLE}" class="topictitle">{announcements.center_row.TITLE}</a>
 					<!-- IF U_VIEW_UNREAD_POST and not S_IS_BOT --> &bull; <a href="{U_VIEW_UNREAD_POST}">{L_VIEW_UNREAD_POST}</a> &bull; <!-- ENDIF -->
-					<!-- IF announcements.center_row.PAGINATION --><strong class="pagination"><span>{announcements.center_row.PAGINATION}</span></strong><!-- ENDIF -->
+					<!-- IF announcements.center_row.pagination -->
+					<div class="pagination">
+						<ul>
+							<!-- BEGIN pagination -->
+							<!-- IF announcements.center_row.pagination.S_IS_PREV -->
+							<!-- ELSEIF announcements.center_row.pagination.S_IS_CURRENT --><li><a href="{announcements.center_row.pagination.PAGE_URL}">{announcements.center_row.pagination.PAGE_NUMBER}</a></li>
+							<!-- ELSEIF announcements.center_row.pagination.S_IS_ELLIPSIS --><li class="ellipsis"><span>{L_ELLIPSIS}</span></li>
+							<!-- ELSEIF announcements.center_row.pagination.S_IS_NEXT -->
+							<!-- ELSE --><li><a href="{announcements.center_row.pagination.PAGE_URL}">{announcements.center_row.pagination.PAGE_NUMBER}</a></li>
+							<!-- ENDIF -->
+							<!-- END pagination -->
+						</ul>
+					</div>
+					<!-- ENDIF -->
 						<br />{L_POSTED} {L_POST_BY_AUTHOR} {announcements.center_row.POSTER_FULL} &raquo; {announcements.center_row.TIME}
 					<!-- IF announcements.center_row.FORUM_NAME -->
 						<br />{L_FORUM}{L_COLON} <a href="{announcements.center_row.U_VIEWFORUM}" class="portal-forumtitle">{announcements.center_row.FORUM_NAME}</a>
