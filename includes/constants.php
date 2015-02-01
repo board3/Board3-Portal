@@ -7,6 +7,14 @@
 *
 */
 
+/**
+ * @ignore
+ */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 // Config constants
 define('B3_MODULE_DISABLED', 0);
 define('B3_MODULE_ENABLED', 1);

@@ -8,6 +8,14 @@
 */
 
 /**
+ * @ignore
+ */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
+/**
  * Convert column number to string equivalent
  *
  * @param int $column Column number
