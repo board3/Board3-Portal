@@ -74,6 +74,9 @@ class helper
 	*/
 	protected $portal_modules;
 
+	/** @var int Board3 module disabled */
+	const B3_MODULE_DISABLED = 0;
+
 	/**
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
@@ -139,7 +142,7 @@ class helper
 	public function get_portal_module($row)
 	{
 		// Do not try to load non-existent or disabled modules
-		if ($row['module_status'] == B3_MODULE_DISABLED || !is_object($module = $this->portal_helper->get_module($row['module_classname'])))
+		if ($row['module_status'] == self::B3_MODULE_DISABLED || !is_object($module = $this->portal_helper->get_module($row['module_classname'])))
 		{
 			return false;
 		}

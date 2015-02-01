@@ -26,6 +26,9 @@ class portal_module
 	/** @var \board3\portal\portal\modules\constraints_handler */
 	protected $modules_constraints;
 
+	/** @var int Board3 module enabled */
+	const B3_MODULE_ENABLED = 1;
+
 	public function __construct()
 	{
 		global $db, $user, $cache, $request, $template, $table_prefix;
@@ -34,8 +37,6 @@ class portal_module
 		$user->add_lang_ext('board3/portal', array('portal', 'portal_acp'));
 
 		$this->root_path = $phpbb_root_path . 'ext/board3/portal/';
-
-		include($this->root_path . 'includes/constants.' . $phpEx);
 
 		$this->db = $db;
 		$this->user = $user;
@@ -268,7 +269,7 @@ class portal_module
 						'module_image_width'	=> $this->request->variable('module_img_width', 0),
 						'module_image_height'	=> $this->request->variable('module_img_height', 0),
 						'module_group_ids'		=> $module_permission,
-						'module_status'			=> $this->request->variable('module_status', B3_MODULE_ENABLED),
+						'module_status'			=> $this->request->variable('module_status', self::B3_MODULE_ENABLED),
 					);
 
 					if(!(isset($this->c_class->hide_name) && $this->c_class->hide_name == true))
@@ -473,7 +474,7 @@ class portal_module
 							'module_group_ids'	=> '',
 							'module_image_height'	=> 16,
 							'module_image_width'	=> 16,
-							'module_status'		=> B3_MODULE_ENABLED,
+							'module_status'		=> self::B3_MODULE_ENABLED,
 						);
 						$sql = 'INSERT INTO ' . PORTAL_MODULES_TABLE . ' ' . $this->db->sql_build_array('INSERT', $sql_ary);
 						$this->db->sql_query($sql);

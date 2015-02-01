@@ -25,6 +25,9 @@ class database_handler
 	/** @var int Move direction left */
 	const MOVE_DIRECTION_LEFT = -1;
 
+	/** @var int Board3 module enabled */
+	const B3_MODULE_ENABLED = 1;
+
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
@@ -72,7 +75,7 @@ class database_handler
 			'module_group_ids'	=> '',
 			'module_image_height'	=> 16,
 			'module_image_width'	=> 16,
-			'module_status'		=> B3_MODULE_ENABLED,
+			'module_status'		=> self::B3_MODULE_ENABLED,
 		);
 		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 					SET ' . $this->db->sql_build_array('UPDATE', $sql_ary) . '

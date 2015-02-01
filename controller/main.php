@@ -116,7 +116,6 @@ class main
 
 		if (!function_exists('obtain_portal_config'))
 		{
-			include($this->includes_path . 'constants' . $this->php_ext);
 			include($this->includes_path . 'functions_modules' . $this->php_ext);
 			include($this->includes_path . 'functions' . $this->php_ext);
 		}
