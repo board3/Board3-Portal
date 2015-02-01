@@ -23,9 +23,6 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 
 		parent::setUp();
 
-		define(B3_MODULE_DISABLED, 0);
-		define(B3_MODULE_ENABLED, 1);
-
 		$cache = $this->getMock('\phpbb\cache\driver', array('get', 'put'));
 		$this->auth = $this->getMock('\phpbb\auth\auth', array('acl_get'));
 		$this->auth->expects($this->any())

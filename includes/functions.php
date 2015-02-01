@@ -7,6 +7,18 @@
 *
 */
 
+// @codingStandardsIgnoreStart
+
+/**
+ * @ignore
+ */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
+// @codingStandardsIgnoreEnd
+
 // Get portal config
 function obtain_portal_config()
 {
