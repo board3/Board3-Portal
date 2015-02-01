@@ -7,6 +7,7 @@
 *
 */
 
+// @codingStandardsIgnoreStart
 /**
  * @ignore
  */
@@ -14,6 +15,8 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
+
+// @codingStandardsIgnoreEnd
 
 /**
  * Convert column number to string equivalent
