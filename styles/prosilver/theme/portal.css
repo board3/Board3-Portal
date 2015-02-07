@@ -327,7 +327,7 @@ a.portal-forumtitle {
 }
 
 .portal-side-wrapper {
-	border-left: 0;
+	border-left: 0 !important;
 	width: 100%;
 }
 
