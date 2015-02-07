@@ -64,7 +64,7 @@ class phpbb_functions_version_check_test extends \board3\portal\tests\testframew
 				'TITLE' => 'Board3 Portal',
 				'UP_TO_DATE' => 'NOT_UP_TO_DATE',
 				'S_UP_TO_DATE' => false,
-				'LATEST_VERSION' => '2.1.0-rc1',
+				'LATEST_VERSION' => '2.1.0-rc2',
 			)),
 		);
 	}
