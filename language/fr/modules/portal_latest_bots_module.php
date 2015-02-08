@@ -33,7 +33,7 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	'LATEST_BOTS'			=> 'Derniers robots',
+	'LATEST_BOTS'			=> 'Dernières visites des robots',
 	'LAST_VISITED_BOTS'		=> 'Dernières visites des robots',
 
 	// ACP

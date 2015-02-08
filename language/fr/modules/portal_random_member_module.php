@@ -34,9 +34,9 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	'PORTAL_RANDOM_MEMBER'	=> 'Membre aléatoire',
-	'RND_JOIN'				=> 'Inscrit',
+	'RND_JOIN'				=> 'Enregistré le',
 	'RND_POSTS'				=> 'Messages',
-	'RND_OCC'				=> 'Métier',
+	'RND_OCC'				=> 'Emploi',
 	'RND_FROM'				=> 'Localisation',
 	'RND_WWW'				=> 'Site Internet',
 ));
