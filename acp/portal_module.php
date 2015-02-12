@@ -101,6 +101,11 @@ class portal_module
 						'legend2'					=> 'ACP_PORTAL_COLUMN_WIDTH_SETTINGS',
 						'board3_left_column_width'	=> array('lang' => 'PORTAL_LEFT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 						'board3_right_column_width'	=> array('lang' => 'PORTAL_RIGHT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+
+						'legend3'					=> 'ACP_PORTAL_SHOW_ALL',
+						'board3_show_all_pages'		=> array('lang' => 'ACP_PORTAL_SHOW_ALL',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'board3_show_all_left'		=> array('lang' => 'PORTAL_SHOW_ALL_LEFT',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'board3_show_all_right'		=> array('lang' => 'PORTAL_SHOW_ALL_RIGHT',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 					)
 				);
 
