@@ -623,7 +623,7 @@ class fetch_posts
 	 */
 	protected function format_message($row, $text_length, &$posts_striped)
 	{
-		if (($text_length !== 0) && (strlen($row['post_text']) > $text_length))
+		if ($text_length > 0 && (strlen($row['post_text']) > $text_length))
 		{
 			$message = str_replace(array("\n", "\r"), array('<br />', "\n"), $row['post_text']);
 			$message = get_sub_taged_string($message, $row['bbcode_uid'], $text_length);
