@@ -125,7 +125,7 @@ class news extends module_base
 		$total_news = 1;
 
 		// Fetch news from portal functions.php with check if "read full" is requested.
-		$portal_news_length = ($news < 0) ? $this->config['board3_news_length_' . $module_id] : 0;
+		$portal_news_length = ($news < 0 && !$this->config['board3_news_style_' . $module_id]) ? $this->config['board3_news_length_' . $module_id] : 0;
 		$this->fetch_posts->set_module_id($module_id);
 		$fetch_news = $this->fetch_posts->get_posts(
 			$this->config['board3_news_forum_' . $module_id],

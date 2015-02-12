@@ -124,7 +124,7 @@ class announcements extends module_base
 		$total_announcements = 1;
 
 		// Fetch announcements from portal functions.php with check if "read full" is requested.
-		$portal_announcement_length = ($announcement < 0) ? $this->config['board3_announcements_length_' . $module_id] : 0;
+		$portal_announcement_length = ($announcement < 0 && !$this->config['board3_announcements_style_' . $module_id]) ? $this->config['board3_announcements_length_' . $module_id] : 0;
 		$this->fetch_posts->set_module_id($module_id);
 		$fetch_news = $this->fetch_posts->get_posts(
 			$this->config['board3_global_announcements_forum_' . $module_id],
