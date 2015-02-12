@@ -55,8 +55,12 @@ class portal_module
 		$this->portal_columns = $this->phpbb_container->get('board3.portal.columns');
 		$this->modules_manager = $this->phpbb_container->get('board3.portal.modules.manager');
 		$this->modules_constraints = $this->phpbb_container->get('board3.portal.modules.constraints_handler');
-		define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.portal.modules.table'));
-		define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.portal.config.table'));
+
+		if (!defined('PORTAL_MODULES_TABLE'))
+		{
+			define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.portal.modules.table'));
+			define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.portal.config.table'));
+		}
 
 		if(!function_exists('obtain_portal_config'))
 		{
