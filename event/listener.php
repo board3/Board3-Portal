@@ -118,7 +118,7 @@ class listener implements EventSubscriberInterface
 			return;
 		}
 
-		if (strpos($this->user->data['session_page'], '/portal') === false)
+		if (strpos($this->controller_helper->get_current_url(), '/portal') === false)
 		{
 			$portal_link = $this->controller_helper->route('board3_portal_controller');
 			$this->display_portal();
