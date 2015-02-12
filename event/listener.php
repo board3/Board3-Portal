@@ -13,6 +13,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
+	/** @var \board3\portal\controller\main */
+	protected $board3_controller;
+
 	/** @var \phpbb\auth\auth */
 	protected $auth;
 
@@ -37,6 +40,7 @@ class listener implements EventSubscriberInterface
 	/**
 	* Constructor of Board3 Portal event listener
 	*
+	* @param \board3\portal\controller\main $board3_controller Board3 Portal controller
 	* @param \phpbb\auth\auth		$auth	phpBB auth object
 	* @param \phpbb\config\config		$config phpBB config
 	* @param \phpbb\controller\helper	$controller_helper	Controller helper object
@@ -45,8 +49,9 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\user			$user			User object
 	* @param string				$php_ext		phpEx
 	*/
-	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\path_helper $path_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
+	public function __construct(\board3\portal\controller\main $board3_controller, \phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\path_helper $path_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
+		$this->board3_controller = $board3_controller;
 		$this->auth = $auth;
 		$this->config = $config;
 		$this->controller_helper = $controller_helper;
@@ -116,6 +121,7 @@ class listener implements EventSubscriberInterface
 		if (strpos($this->user->data['session_page'], '/portal') === false)
 		{
 			$portal_link = $this->controller_helper->route('board3_portal_controller');
+			$this->display_portal();
 		}
 		else
 		{
@@ -135,5 +141,20 @@ class listener implements EventSubscriberInterface
 	protected function has_portal_access()
 	{
 		return $this->auth->acl_get('u_view_portal') && $this->config['board3_enable'];
+	}
+
+	/**
+	 * Display portal columns on all pages if specified in portal settings
+	 */
+	protected function display_portal()
+	{
+		// Check if we should show the portal
+		if (isset($this->config['board3_show_all_pages']) && ($this->config['board3_show_all_left'] || $this->config['board3_show_all_right']) && !defined('ADMIN_START'))
+		{
+			$this->board3_controller->handle(array(
+				'left'	=> $this->config['board3_show_all_left'],
+				'right'	=> $this->config['board3_show_all_right'],
+			));
+		}
 	}
 }
