@@ -80,7 +80,7 @@ class main
 	*/
 	protected $portal_modules;
 
-	/** @var string Allowed columns */
+	/** @var int Allowed columns */
 	protected $allowed_columns;
 
 	/**
