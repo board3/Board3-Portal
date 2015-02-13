@@ -104,8 +104,7 @@ class portal_module
 
 						'legend3'					=> 'ACP_PORTAL_SHOW_ALL',
 						'board3_show_all_pages'		=> array('lang' => 'ACP_PORTAL_SHOW_ALL',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'board3_show_all_left'		=> array('lang' => 'PORTAL_SHOW_ALL_LEFT',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'board3_show_all_right'		=> array('lang' => 'PORTAL_SHOW_ALL_RIGHT',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'board3_show_all_side'		=> array('lang' => 'PORTAL_SHOW_ALL_SIDE',	'validate' => 'bool',	'type' => 'custom',	'method' => array('board3.portal.modules_helper', 'display_left_right'),	'explain' => true),
 					)
 				);
 

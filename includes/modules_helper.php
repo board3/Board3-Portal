@@ -158,4 +158,19 @@ class modules_helper
 	{
 		return $this->controller_helper->route($route, $params, $is_amp, $session_id, $reference_type);
 	}
+
+	/**
+	 * Display radio buttons for left/right choice
+	 *
+	 * @param int $value Selected value
+	 * @param string $key Key of config variable
+	 *
+	 * @return string
+	 */
+	public function display_left_right($value, $key)
+	{
+		$radio_ary = array(0 => 'PORTAL_SHOW_ALL_LEFT', 1 => 'PORTAL_SHOW_ALL_RIGHT');
+
+		return h_radio($key, $radio_ary, $value, $key);
+	}
 }

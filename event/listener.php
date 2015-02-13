@@ -149,11 +149,11 @@ class listener implements EventSubscriberInterface
 	protected function display_portal()
 	{
 		// Check if we should show the portal
-		if (isset($this->config['board3_show_all_pages']) && ($this->config['board3_show_all_left'] || $this->config['board3_show_all_right']) && !defined('ADMIN_START'))
+		if (isset($this->config['board3_show_all_pages']))
 		{
 			$this->board3_controller->handle(array(
-				'left'	=> $this->config['board3_show_all_left'],
-				'right'	=> $this->config['board3_show_all_right'],
+				'left'	=> $this->config['board3_show_all_side'] == false,
+				'right'	=> $this->config['board3_show_all_side'] == true,
 			));
 		}
 	}
