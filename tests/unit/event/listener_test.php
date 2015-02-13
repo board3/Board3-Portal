@@ -17,6 +17,9 @@ class listener_test extends \phpbb_template_template_test_case
 	protected $listener;
 	protected $auth;
 
+	/** @var \board3\portal\controller\main */
+	protected $controller;
+
 	static public $hidden_fields = array();
 
 	public function setup()
@@ -91,7 +94,12 @@ class listener_test extends \phpbb_template_template_test_case
 		$this->auth->acl_options['global']['u_view_portal'] = 0;
 		$this->auth->acl[0][0] = true;
 
+		$this->controller = $this->getMockBuilder('\board3\portal\controller\main')
+			->disableOriginalConstructor()
+			->getMock();
+
 		$this->listener = new \board3\portal\event\listener(
+			$this->controller,
 			$this->auth,
 			$this->config,
 			$this->controller_helper,

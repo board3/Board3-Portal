@@ -104,7 +104,7 @@ class portal_module
 
 						'legend3'					=> 'ACP_PORTAL_SHOW_ALL',
 						'board3_show_all_pages'		=> array('lang' => 'ACP_PORTAL_SHOW_ALL',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'board3_show_all_side'		=> array('lang' => 'PORTAL_SHOW_ALL_SIDE',	'validate' => 'bool',	'type' => 'custom',	'method' => array('board3.portal.modules_helper', 'display_left_right'),	'explain' => true),
+						'board3_show_all_side'		=> array('lang' => 'PORTAL_SHOW_ALL_SIDE',	'validate' => 'bool',	'type' => 'custom',	'method' => array('board3.portal.modules_helper', 'display_left_right'),	'submit' => array('board3.portal.modules_helper', 'store_left_right'),	'explain' => true),
 					)
 				);
 
@@ -223,11 +223,11 @@ class portal_module
 							if ($null['submit'][0] == 'board3.portal.modules_helper')
 							{
 								$func = array($this->modules_helper, $null['submit'][1]);
-								$args = ($module_id != 0) ? array($config_name, $module_id) : $config_name;
+								$args = ($module_id != 0) ? array($config_name, $module_id) : array($config_name);
 							}
 							else
 							{
-								$args = ($module_id != 0) ? array($cfg_array[$config_name], $config_name, $module_id) : $config_name;
+								$args = ($module_id != 0) ? array($cfg_array[$config_name], $config_name, $module_id) : array($config_name);
 								$func = $null['submit'];
 							}
 						}

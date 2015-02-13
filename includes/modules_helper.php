@@ -173,4 +173,17 @@ class modules_helper
 
 		return h_radio($key, $radio_ary, $value, $key);
 	}
+
+	/**
+	 * Store left right choice
+	 *
+	 * @param string $key Config key
+	 */
+	public function store_left_right($key)
+	{
+		// Get selected side
+		$value = $this->request->variable($key, false);
+
+		$this->config->set($key, $value);
+	}
 }
