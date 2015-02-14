@@ -1,0 +1,14 @@
+@media only screen and (max-width: 870px), only screen and (max-device-width: 870px) {
+    .portal-body-center dd.posts, .portal-body-center dd.views {
+        display: none !important;
+    }
+    .portal-body-center dt { width: 130% !important; }
+}
+
+@media only screen and (max-width: 740px), only screen and (max-device-width: 740px) {
+    .portal-body-center dt { width: 140% !important; }
+    #portal-left ul.topiclist dd, #portal-right ul.topiclist dd { display: block !important; }
+
+    #portal-right > .portal-clear, #portal-body > .portal-clear, #portal-left > .portal-clear,
+    #portal-center > .portal-clear, #portal-login-box .portal-clear { display: none !important; }
+}

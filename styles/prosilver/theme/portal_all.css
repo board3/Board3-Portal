@@ -1,0 +1,15 @@
+.portal-body-wrapper {
+	width: 100%;
+	float: left;
+	display: block;
+}
+
+#portal-page-body {
+	clear: both;
+	margin: 4px 0;
+}
+
+#page-body {
+	float: left;
+	width: 100%;
+}

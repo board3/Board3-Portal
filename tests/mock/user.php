@@ -53,4 +53,9 @@ class user extends \PHPUnit_Framework_TestCase
 			$this->markTestIncomplete('Unable to include language file ' . $file);
 		}
 	}
+
+	public function lang($var)
+	{
+		return $this->lang[$var];
+	}
 }

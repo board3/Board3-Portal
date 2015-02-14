@@ -80,6 +80,9 @@ class main
 	*/
 	protected $portal_modules;
 
+	/** @var int Allowed columns */
+	protected $allowed_columns;
+
 	/**
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
@@ -123,11 +126,17 @@ class main
 	/**
 	* Extension front handler method. This is called automatically when your extension is accessed
 	* through index.php?ext=example/foobar
+	*
+	* @param array $columns Columns to display
+	*
 	* @return null
 	*/
-	public function handle()
+	public function handle($columns = array())
 	{
 		$this->controller_helper->run_initial_tasks();
+
+		// Check if we should limit the columns to display
+		$this->set_allowed_columns($columns);
 
 		// Set default data
 		$this->portal_modules = obtain_portal_modules();
@@ -181,6 +190,14 @@ class main
 		// Assign specific vars
 		$this->assign_template_vars();
 
+		// Return if columns were specified. Columns are only specified if
+		// portal columns are displayed on pages other than the portal itself.
+		if ($this->allowed_columns !== 0)
+		{
+			$this->template->assign_var('S_PORTAL_ALL', true);
+			return;
+		}
+
 		// And now to output the page.
 		page_header($this->user->lang('PORTAL'), $display_online);
 
@@ -206,7 +223,14 @@ class main
 	public function get_module_template($row, $module)
 	{
 		$template_module = false;
+
 		$column = $this->portal_columns->number_to_string($row['module_column']);
+
+		// Make sure we should actually load this module
+		if (!$this->display_module_allowed($this->portal_columns->string_to_constant($column)))
+		{
+			return false;
+		}
 
 		if (in_array($column, array('left', 'right')) && $this->config['board3_' . $column . '_column'])
 		{
@@ -252,7 +276,7 @@ class main
 			'S_BOTTOM_COLUMN'		=> $this->check_module_count('bottom'),
 			'S_DISPLAY_PHPBB_MENU'		=> $this->config['board3_phpbb_menu'],
 			'B3P_DISPLAY_JUMPBOX'		=> $this->config['board3_display_jumpbox'],
-			'T_EXT_THEME_PATH'		=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/',
+			'T_EXT_THEME_PATH'		=> $this->path_helper->get_web_root_path() . ltrim($this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/', './'),
 		));
 	}
 
@@ -280,6 +304,38 @@ class main
 		if ($display)
 		{
 			make_jumpbox(append_sid("{$this->phpbb_root_path}viewforum{$this->php_ext}"));
+		}
+	}
+
+	/**
+	 * Check whether displaying the module is allowed
+	 *
+	 * @param int $module_column The column of the module
+	 *
+	 * @return bool True if module can be displayed, false if not
+	 */
+	protected function display_module_allowed($module_column)
+	{
+		return ($this->allowed_columns > 0) ? (bool) ($this->allowed_columns & $module_column) : true;
+	}
+
+	/**
+	 * Set allowed columns based on supplied columns array
+	 *
+	 * @param array $columns Allowed columns
+	 */
+	protected function set_allowed_columns($columns)
+	{
+		if (!empty($columns))
+		{
+			foreach ($columns as $column => $show)
+			{
+				$this->allowed_columns |= ($show) ? $this->portal_columns->string_to_constant($column) : 0;
+			}
+		}
+		else
+		{
+			$this->allowed_columns = 0;
 		}
 	}
 }

@@ -55,8 +55,12 @@ class portal_module
 		$this->portal_columns = $this->phpbb_container->get('board3.portal.columns');
 		$this->modules_manager = $this->phpbb_container->get('board3.portal.modules.manager');
 		$this->modules_constraints = $this->phpbb_container->get('board3.portal.modules.constraints_handler');
-		define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.portal.modules.table'));
-		define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.portal.config.table'));
+
+		if (!defined('PORTAL_MODULES_TABLE'))
+		{
+			define('PORTAL_MODULES_TABLE', $this->phpbb_container->getParameter('board3.portal.modules.table'));
+			define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.portal.config.table'));
+		}
 
 		if(!function_exists('obtain_portal_config'))
 		{
@@ -97,6 +101,10 @@ class portal_module
 						'legend2'					=> 'ACP_PORTAL_COLUMN_WIDTH_SETTINGS',
 						'board3_left_column_width'	=> array('lang' => 'PORTAL_LEFT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
 						'board3_right_column_width'	=> array('lang' => 'PORTAL_RIGHT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+
+						'legend3'					=> 'ACP_PORTAL_SHOW_ALL',
+						'board3_show_all_pages'		=> array('lang' => 'ACP_PORTAL_SHOW_ALL',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
+						'board3_show_all_side'		=> array('lang' => 'PORTAL_SHOW_ALL_SIDE',	'validate' => 'bool',	'type' => 'custom',	'method' => array('board3.portal.modules_helper', 'display_left_right'),	'submit' => array('board3.portal.modules_helper', 'store_left_right'),	'explain' => true),
 					)
 				);
 
@@ -215,11 +223,11 @@ class portal_module
 							if ($null['submit'][0] == 'board3.portal.modules_helper')
 							{
 								$func = array($this->modules_helper, $null['submit'][1]);
-								$args = ($module_id != 0) ? array($config_name, $module_id) : $config_name;
+								$args = ($module_id != 0) ? array($config_name, $module_id) : array($config_name);
 							}
 							else
 							{
-								$args = ($module_id != 0) ? array($cfg_array[$config_name], $config_name, $module_id) : $config_name;
+								$args = ($module_id != 0) ? array($cfg_array[$config_name], $config_name, $module_id) : array($config_name);
 								$func = $null['submit'];
 							}
 						}

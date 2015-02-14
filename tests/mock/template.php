@@ -36,11 +36,26 @@ class template
 		}
 	}
 
+	public function assign_vars($vars)
+	{
+		$this->data = array_merge($this->data, $vars);
+	}
+
+	public function assign_var($key, $var)
+	{
+		$this->data[$key] = $var;
+	}
+
 	public function assert_equals($data, $row)
 	{
 		foreach ($data as $key => $value)
 		{
 			$this->test_case->assertEquals($value, $this->data[$row][$key]);
 		}
+	}
+
+	public function assert_same($expected, $row)
+	{
+		$this->test_case->assertSame($expected, $this->data[$row]);
 	}
 }

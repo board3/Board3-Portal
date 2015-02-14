@@ -1,0 +1,22 @@
+<!-- IF S_PORTAL_ALL === true -->
+	<!-- INCLUDE portal/_block_config.html -->
+	<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+		<tr>
+			<!-- [+] left module area -->
+			<!-- IF S_LEFT_COLUMN -->
+			<td width="{S_PORTAL_LEFT_COLUMN}px" valign="top" style="padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->:{$BLOCK_DISTANCE};">
+				<!-- BEGIN modules_left -->
+				<!-- DEFINE $TEMPLATE_FILE = '{modules_left.TEMPLATE_FILE}' -->
+				<!-- DEFINE $IMAGE_SRC = '{modules_left.IMAGE_SRC}' -->
+				<!-- DEFINE $IMAGE_WIDTH = '{modules_left.IMAGE_WIDTH}' -->
+				<!-- DEFINE $IMAGE_HEIGHT = '{modules_left.IMAGE_HEIGHT}' -->
+				<!-- DEFINE $CUSTOM_CODE = '{modules_left.CODE}' -->
+				<!-- DEFINE $TITLE = '{modules_left.TITLE}' -->
+				<!-- DEFINE $MODULE_ID = '{modules_left.MODULE_ID}' -->
+				<!-- INCLUDE {$TEMPLATE_FILE} -->
+				<!-- END modules_left -->
+			</td>
+			<!-- ENDIF -->
+			<!-- [-] left module area -->
+			<td valign="top">
+<!-- ENDIF -->

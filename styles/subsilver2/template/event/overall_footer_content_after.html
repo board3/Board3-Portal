@@ -1,0 +1,21 @@
+<!-- IF S_PORTAL_ALL === true -->
+		</td>
+		<!-- [+] right module area -->
+		<!-- IF S_RIGHT_COLUMN -->
+		<td width="{S_PORTAL_RIGHT_COLUMN}px" valign="top" style="padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->:{$BLOCK_DISTANCE};">
+			<!-- BEGIN modules_right -->
+			<!-- DEFINE $TEMPLATE_FILE = '{modules_right.TEMPLATE_FILE}' -->
+			<!-- DEFINE $IMAGE_SRC = '{modules_right.IMAGE_SRC}' -->
+			<!-- DEFINE $IMAGE_WIDTH = '{modules_right.IMAGE_WIDTH}' -->
+			<!-- DEFINE $IMAGE_HEIGHT = '{modules_right.IMAGE_HEIGHT}' -->
+			<!-- DEFINE $CUSTOM_CODE = '{modules_right.CODE}' -->
+			<!-- DEFINE $TITLE = '{modules_right.TITLE}' -->
+			<!-- DEFINE $MODULE_ID = '{modules_right.MODULE_ID}' -->
+			<!-- INCLUDE {$TEMPLATE_FILE} -->
+			<!-- END modules_right -->
+		</td>
+		<!-- ENDIF -->
+		<!-- [-] right module area -->
+	</tr>
+</table>
+<!-- ENDIF -->
