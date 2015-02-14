@@ -20,8 +20,8 @@ class v210_rc3 extends \phpbb\db\migration\migration
 	{
 		return array(
 			array('config.update', array('board3_portal_version', '2.1.0-rc3')),
-			array('config.add', array('board3_show_all_pages', false)),
-			array('config.add', array('board3_show_all_side', false)),
+			array('config.add', array('board3_show_all_pages', 0)),
+			array('config.add', array('board3_show_all_side', 0)),
 		);
 	}
 }

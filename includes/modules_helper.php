@@ -182,7 +182,7 @@ class modules_helper
 	public function store_left_right($key)
 	{
 		// Get selected side
-		$value = $this->request->variable($key, false);
+		$value = $this->request->variable($key, 0);
 
 		$this->config->set($key, $value);
 	}
