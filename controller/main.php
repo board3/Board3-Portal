@@ -276,7 +276,7 @@ class main
 			'S_BOTTOM_COLUMN'		=> $this->check_module_count('bottom'),
 			'S_DISPLAY_PHPBB_MENU'		=> $this->config['board3_phpbb_menu'],
 			'B3P_DISPLAY_JUMPBOX'		=> $this->config['board3_display_jumpbox'],
-			'T_EXT_THEME_PATH'		=> $this->path_helper->get_web_root_path() . $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/',
+			'T_EXT_THEME_PATH'		=> $this->path_helper->get_web_root_path() . ltrim($this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/', './'),
 		));
 	}
 
