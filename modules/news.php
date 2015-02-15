@@ -398,7 +398,7 @@ class news extends module_base
 					'S_HAS_ATTACHMENTS'	=> (!empty($fetch_news[$i]['attachments'])) ? true : false,
 				));
 
-				$this->pagination->generate_template_pagination($view_topic_url, 'news_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
+				$this->pagination->generate_template_pagination($view_topic_url, 'news.news_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1);
 
 				if(!empty($fetch_news[$i]['attachments']))
 				{
