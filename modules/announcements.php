@@ -154,7 +154,7 @@ class announcements extends module_base
 		);
 
 		// Any announcements present? If not terminate it here.
-		if (sizeof($fetch_news) == 0)
+		if (sizeof($fetch_news) < 3)
 		{
 			$this->template->assign_block_vars('announcements', $announcements_row);
 
