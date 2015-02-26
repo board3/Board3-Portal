@@ -56,7 +56,7 @@
 	#portal-left ul.topiclist dd, #portal-right ul.topiclist dd { display: block !important; }
 	.portal-responsive-show { display: block !important; }
 	.portal-responsive-hide { display: none !important; }
-	#portal-body { padding-top: 0px !important; }
+	#portal-body { padding-top: 0 !important; }
 	#portal-right > .portal-clear, #portal-body > .portal-clear, #portal-left > .portal-clear,
 	#portal-center > .portal-clear, #portal-login-box .portal-clear { display: none !important; }
 	#portal-right { width: 50% !important; }
