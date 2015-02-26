@@ -34,7 +34,7 @@ env:
     - COVERAGE="1"     # Should we send coverage?
     - EPV="1"          # Should we run EPV (Extension Pre Validator) on your code?
     - SPELLCHECK="1"   # Should the php files be checked for obvious spelling errors?
-    - PHPBB_BRANCH="develop-ascraeus"
+    - PHPBB_BRANCH="3.1.x"
 
 branches:
   except:
