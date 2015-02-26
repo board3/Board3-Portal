@@ -335,8 +335,10 @@ a.portal-forumtitle {
 * This is needed in order to have the same spacing between blocks
 * as we have between the top blocks and the headerbar
 */
-#portal-body .forabg {
-	margin-bottom: 0px;
+#portal-left .forabg, #portal-center .forabg,
+#portal-right .forabg, #portal-top .forabg,
+#portal-bottom .forabg {
+	margin-bottom: 0;
 }
 
 #portal-body td {
@@ -351,7 +353,10 @@ a.portal-forumtitle {
 	margin-left: 0px;
 	margin-right: 0px;
 }
-#portal-body li {
+
+#portal-left li, #portal-center li,
+#portal-right li, #portal-top li,
+#portal-bottom li {
 	list-style-type: none;
 }
 
