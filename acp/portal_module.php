@@ -307,7 +307,7 @@ class portal_module
 					{
 						$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_CONFIG', false, array($this->user->lang['ACP_PORTAL_' . strtoupper($mode) . '_INFO']));
 					}
-					trigger_error($this->user->lang['CONFIG_UPDATED'] . ((!empty($img_error) ? '<br /><br />' . $this->user->lang['MODULE_IMAGE_ERROR'] . '<br />' . $img_error : '')) . adm_back_link(($module_id) ? append_sid("{$this->phpbb_root_path}adm/index.{$this->php_ext}", 'i=\board3\portal\acp\portal_module&amp;mode=modules') : $this->u_action));
+					trigger_error($this->user->lang['CONFIG_UPDATED'] . ((!empty($img_error) ? '<br /><br />' . $this->user->lang['MODULE_IMAGE_ERROR'] . '<br />' . $img_error : '')) . adm_back_link(($module_id) ? append_sid("{$this->phpbb_admin_path}index.{$this->php_ext}", 'i=\board3\portal\acp\portal_module&amp;mode=modules') : $this->u_action));
 				}
 
 				// show custom HTML files on the settings page of the modules instead of the standard board3 portal one, if chosen by module
