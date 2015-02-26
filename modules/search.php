@@ -75,8 +75,6 @@ class search extends module_base
 	*/
 	public function get_template_side($module_id)
 	{
-		$this->template->assign_var('S_SEARCH_ACTION', append_sid("{$this->phpbb_root_path}search.{$this->php_ext}"));
-
 		return 'search_side.html';
 	}
 
