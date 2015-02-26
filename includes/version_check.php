@@ -76,7 +76,15 @@ class version_check
 
 		$this->version_helper->force_stability(($this->config['extension_force_unstable'] || !$this->version_helper->is_stable($this->current_version)) ? 'unstable' : null);
 
-		$updates = $this->version_helper->get_suggested_updates(true);
+		// Expect version_helper to throw RuntimeExceptions
+		try
+		{
+			$updates = $this->version_helper->get_suggested_updates(true);
+		}
+		catch (\RuntimeException $e)
+		{
+			return false;
+		}
 
 		// Return version if $return_version is set to true
 		if ($return_version)
