@@ -41,6 +41,12 @@ class version_check
 	 */
 	protected $current_version;
 
+	/** @var array Update data */
+	protected $update_data;
+
+	/** @var array Template data */
+	protected $template_data;
+
 	/**
 	* Construct a version_check object
 	*
@@ -79,7 +85,7 @@ class version_check
 		// Expect version_helper to throw RuntimeExceptions
 		try
 		{
-			$updates = $this->version_helper->get_suggested_updates(true);
+			$this->update_data = $this->version_helper->get_suggested_updates(true);
 		}
 		catch (\RuntimeException $e)
 		{
@@ -92,9 +98,9 @@ class version_check
 			return $this->current_version;
 		}
 
-		$version_up_to_date = empty($updates);
+		$version_up_to_date = empty($this->update_data);
 
-		$template_data = array(
+		$this->template_data = array(
 			'AUTHOR'			=> $this->version_data['author'],
 			'CURRENT_VERSION'	=> $this->current_version,
 			'UP_TO_DATE'		=> sprintf((!$version_up_to_date) ? $this->user->lang['NOT_UP_TO_DATE'] : $this->user->lang['UP_TO_DATE'], $this->version_data['title']),
@@ -104,27 +110,24 @@ class version_check
 			'LATEST_VERSION'	=> $this->current_version,
 		);
 
-		$this->display_update_information($updates, $template_data);
-		$this->template->assign_block_vars('mods', $template_data);
+		$this->display_update_information();
+		$this->template->assign_block_vars('mods', $this->template_data);
 
 		return false;
 	}
 
 	/**
 	 * Display update information if updates exist
-	 *
-	 * @param array $updates Updates data array
-	 * @param array $template_data Template data array
 	 */
-	protected function display_update_information(&$updates, &$template_data)
+	protected function display_update_information()
 	{
-		if (!empty($updates))
+		if (!empty($this->update_data))
 		{
-			$updates = array_shift($updates);
-			$template_data = array_merge($template_data, array(
-				'ANNOUNCEMENT'		=> (string) $updates['announcement'],
-				'DOWNLOAD'			=> (string) $updates['download'],
-				'LATEST_VERSION'	=> $updates['current'],
+			$update = array_shift($this->update_data);
+			$this->template_data = array_merge($this->template_data, array(
+				'ANNOUNCEMENT'		=> (string) $update['announcement'],
+				'DOWNLOAD'			=> (string) $update['download'],
+				'LATEST_VERSION'	=> $update['current'],
 			));
 		}
 	}
