@@ -65,7 +65,7 @@ class version_check
 	* returning current version
 	*
 	* @param bool $return_version Yes if current version should be returned
-	* @return string Current version if $return_version is set to true
+	* @return string|bool Current version if $return_version is set to true, false if not
 	*/
 	public function check($return_version = false)
 	{
@@ -104,7 +104,21 @@ class version_check
 			'LATEST_VERSION'	=> $this->current_version,
 		);
 
-		if (!$version_up_to_date)
+		$this->display_update_information($updates, $template_data);
+		$this->template->assign_block_vars('mods', $template_data);
+
+		return false;
+	}
+
+	/**
+	 * Display update information if updates exist
+	 *
+	 * @param array $updates Updates data array
+	 * @param array $template_data Template data array
+	 */
+	protected function display_update_information(&$updates, &$template_data)
+	{
+		if (!empty($updates))
 		{
 			$updates = array_shift($updates);
 			$template_data = array_merge($template_data, array(
@@ -113,6 +127,5 @@ class version_check
 				'LATEST_VERSION'	=> $updates['current'],
 			));
 		}
-		$this->template->assign_block_vars('mods', $template_data);
 	}
 }
