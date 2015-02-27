@@ -76,7 +76,7 @@ class phpbb_functions_version_check_test extends \board3\portal\tests\testframew
 	{
 		$this->get_version_helper($version);
 		$this->assertEquals($version, $this->version_check->check(true));
-		$this->assertNull($this->version_check->check());
+		$this->assertFalse($this->version_check->check());
 		$this->template->assert_equals($template_data, 'mods');
 	}
 }
