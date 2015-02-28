@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_RECENT_TITLE_LIMIT'				=> 'Limite de caractères pour chaque titre des sujets récents',
 	'PORTAL_RECENT_TITLE_LIMIT_EXP'		=> '0 signifie un nombre infini.',
 	'PORTAL_RECENT_FORUM'					=> 'Forums des sujets récents',
-	'PORTAL_RECENT_FORUM_EXP'			=> 'Forums depuis lesquels les sujets récents seront affichés. Laisser vide pour afficher les sujets récents de tous les forums. Si “Exclure des forums” est paramétré sur “Oui”, sélectionner les forums souhaitant être exclus.<br />Si “Exclure des forums” est paramétré sur “Non”, sélectionner les forums souhaités.<br />Pour sélectionner / désélectionner plusieurs forums maintenir la touche <samp>CTRL</samp> tout en cliquant.',
+	'PORTAL_RECENT_FORUM_EXP'			=> 'Forums depuis lesquels les sujets récents seront affichés. Laisser vide pour afficher les sujets récents de tous les forums. Si « Exclure des forums » est paramétré sur « Oui », sélectionner les forums souhaitant être exclus.<br />Si « Exclure des forums » est paramétré sur « Non », sélectionner les forums souhaités.<br />Pour sélectionner / désélectionner plusieurs forums maintenir la touche <samp>CTRL</samp> tout en cliquant.',
 	'PORTAL_EXCLUDE_FORUM'					=> 'Exclure des forums',
-	'PORTAL_EXCLUDE_FORUM_EXP'			=> 'Sélectionner “Oui” pour exclure les sujets récents de certains forums et “Non” pour voir uniquement les sujets récents de certains forums.',
+	'PORTAL_EXCLUDE_FORUM_EXP'			=> 'Sélectionner « Oui » pour exclure les sujets récents de certains forums et « Non » pour voir uniquement les sujets récents de certains forums.',
 ));
