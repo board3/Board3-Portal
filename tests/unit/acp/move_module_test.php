@@ -85,6 +85,41 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->portal_columns, $this->portal_helper, $this->constraints_handler, $this->database_handler, $request, $user);
 		$phpbb_container->set('board3.portal.modules.manager', $this->modules_manager);
 		$phpbb_container->set('board3.portal.modules.constraints_handler', $this->constraints_handler);
+
+		$path_helper = new \phpbb\path_helper(
+			new \phpbb\symfony_request(
+				new \phpbb_mock_request()
+			),
+			new \phpbb\filesystem(),
+			new \phpbb_mock_request(),
+			$phpbb_root_path,
+			$phpEx
+		);
+
+		$modules = array(
+			'\board3\portal\modules\clock'	=> new \board3\portal\modules\clock($config, $template),
+		);
+		$portal_helper = new \board3\portal\includes\helper($modules);
+		$auth = $this->getMock('\phpbb\auth\auth', array('acl_get'));
+		$auth->expects($this->any())
+			->method('acl_get')
+			->with($this->anything())
+			->will($this->returnValue(true));
+
+		$controller_helper = new \board3\portal\controller\helper(
+			$auth,
+			$this->portal_columns,
+			$config,
+			$template,
+			$user,
+			$path_helper,
+			$portal_helper,
+			$phpbb_root_path,
+			'.' . $phpEx
+		);
+
+		$phpbb_container->set('board3.portal.controller_helper', $controller_helper);
+
 		$this->portal_module = new \board3\portal\acp\portal_module();
 		$this->update_portal_modules();
 	}
