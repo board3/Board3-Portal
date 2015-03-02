@@ -26,6 +26,9 @@ class portal_module
 	/** @var \board3\portal\portal\modules\constraints_handler */
 	protected $modules_constraints;
 
+	/** @var \board3\portal\controller\helper */
+	protected $board3_controller_helper;
+
 	/** @var int Board3 module enabled */
 	const B3_MODULE_ENABLED = 1;
 
@@ -55,6 +58,7 @@ class portal_module
 		$this->portal_columns = $this->phpbb_container->get('board3.portal.columns');
 		$this->modules_manager = $this->phpbb_container->get('board3.portal.modules.manager');
 		$this->modules_constraints = $this->phpbb_container->get('board3.portal.modules.constraints_handler');
+		$this->board3_controller_helper = $this->phpbb_container->get('board3.portal.controller_helper');
 
 		if (!defined('PORTAL_MODULES_TABLE'))
 		{
@@ -126,10 +130,9 @@ class portal_module
 							continue;
 						}
 
-						if ($this->c_class->get_language())
-						{
-							$this->user->add_lang_ext('board3/portal', 'modules/' . $this->c_class->get_language());
-						}
+						// Load module language
+						$this->board3_controller_helper->load_module_language($this->c_class);
+
 						$module_name = $this->user->lang[$this->c_class->get_name()];
 						$display_vars = $this->c_class->get_template_acp($module_id);
 						$this->template->assign_vars(array(
@@ -542,10 +545,9 @@ class portal_module
 
 						if ($module->get_allowed_columns() & $this->portal_columns->string_to_constant($add_module))
 						{
-							if ($module->get_language())
-							{
-								$this->user->add_lang_ext('board3/portal', 'modules/' . $module->get_language());
-							}
+							// Load module language
+							$this->board3_controller_helper->load_module_language($module);
+
 							$fileinfo[] = array(
 								'module'		=> $module_class,
 								'name'			=> $this->user->lang[$module->get_name()],
@@ -605,10 +607,9 @@ class portal_module
 							continue;
 						}
 
-						if ($this->c_class->get_language())
-						{
-							$this->user->add_lang_ext('board3/portal', 'modules/' . $this->c_class->get_language());
-						}
+						// Load module language
+						$this->board3_controller_helper->load_module_language($this->c_class);
+
 						$template_column = $this->portal_columns->number_to_string($row['module_column']);
 
 						// find out of we can move modules to the left or right
