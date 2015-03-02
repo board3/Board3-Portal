@@ -54,9 +54,9 @@ $lang = array_merge($lang, array(
 	'UNABLE_TO_MOVE'				=> 'Il n’est pas possible de déplacer le bloc dans la colonne sélectionnée.',
 	'UNABLE_TO_MOVE_ROW'			=> 'Il n’est pas possible de déplacer le bloc dans la rangée sélectionnée.',
 	'UNABLE_TO_ADD_MODULE'			=> 'Il n’est pas possible d’ajouter le module dans la colonne sélectionnée.',
-	'DELETE_MODULE_CONFIRM'			=> 'Êtes-vous sûr de vouloir supprimer le module “%1$s” ?',
+	'DELETE_MODULE_CONFIRM'			=> 'Êtes-vous sûr de vouloir supprimer le module « %1$s » ?',
 	'MODULE_RESET_SUCCESS'			=> 'Les paramètres du module ont été réinitialisés avec succès.',
-	'MODULE_RESET_CONFIRM'			=> 'Êtes-vous sûr de vouloir réinitialiser les paramètres du module “%1$s” ?',
+	'MODULE_RESET_CONFIRM'			=> 'Êtes-vous sûr de vouloir réinitialiser les paramètres du module « %1$s » ?',
 	'MODULE_NOT_EXISTS'				=> 'Le module sélectionné n’existe pas.',
 
 	'MODULE_OPTIONS'			=> 'Options des modules',
@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'MODULE_STATUS'				=> 'Activer le module',
 	'MODULE_ADD_ONCE'			=> 'Ce module ne peut être ajouté qu’une seule fois.',
 	'MODULE_IMAGE_ERROR'		=> 'Il y avait une erreur lors de la vérification de l’image du module:',
-	'UNKNOWN_MODULE_METHOD'		=> 'Le système de module du module “%1$s” ne peut être résolu.',
+	'UNKNOWN_MODULE_METHOD'		=> 'Le système de module du module « %1$s » ne peut être résolu.',
 
 	// general
 	'ACP_PORTAL_CONFIG_INFO'				=> 'Paramètres généraux',
@@ -86,9 +86,9 @@ $lang = array_merge($lang, array(
 	'PORTAL_ENABLE'							=> 'Activer le portail',
 	'PORTAL_ENABLE_EXP'						=> 'Activer / désactiver tout le portail.',
 	'PORTAL_LEFT_COLUMN'					=> 'Activer la colonne de gauche',
-	'PORTAL_LEFT_COLUMN_EXP'				=> 'Changer sur “Non” si vous souhaitez désactiver la colonne de gauche.',
+	'PORTAL_LEFT_COLUMN_EXP'				=> 'Changer sur « Non » si vous souhaitez désactiver la colonne de gauche.',
 	'PORTAL_RIGHT_COLUMN'					=> 'Activer la colonne de droite',
-	'PORTAL_RIGHT_COLUMN_EXP'				=> 'Changer sur “Non” si vous souhaitez désactiver la colonne de droite.',
+	'PORTAL_RIGHT_COLUMN_EXP'				=> 'Changer sur « Non » si vous souhaitez désactiver la colonne de droite.',
 	'PORTAL_VERSION_CHECK'					=> 'Vérification de la version du portail',
 	'PORTAL_DISPLAY_JUMPBOX'				=> 'Afficher l’accès rapide aux forums',
 	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Afficher l’accès rapide aux forums sur le portail. L’accès rapide aux forums ne sera affiché que si il est également activé dans les fonctionnalités du forum.',
