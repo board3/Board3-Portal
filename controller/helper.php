@@ -226,7 +226,7 @@ class helper
 		if (is_array($template_module))
 		{
 			$this->template->assign_block_vars('modules_' . $this->portal_columns->number_to_string($row['module_column']), array(
-				'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module['template'],
+				'TEMPLATE_FILE'			=> $this->parse_template_file($template_module['template']),
 				'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . ltrim($this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $template_module['image_src'], './'),
 				'TITLE'				=> $template_module['title'],
 				'CODE'				=> $template_module['code'],
@@ -238,7 +238,7 @@ class helper
 		else
 		{
 			$this->template->assign_block_vars('modules_' . $this->portal_columns->number_to_string($row['module_column']), array(
-				'TEMPLATE_FILE'			=> 'portal/modules/' . $template_module,
+				'TEMPLATE_FILE'			=> $this->parse_template_file($template_module),
 				'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . ltrim($this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'], './'),
 				'IMAGE_WIDTH'			=> $row['module_image_width'],
 				'IMAGE_HEIGHT'			=> $row['module_image_height'],
@@ -263,5 +263,22 @@ class helper
 
 		// Obtain portal config
 		obtain_portal_config();
+	}
+
+	/**
+	 * Parse template file by prefixing default modules with the portal path
+	 *
+	 * @param string $template_file HTML template
+	 *
+	 * @return string Parsed template file
+	 */
+	protected function parse_template_file($template_file)
+	{
+		if (strpos($template_file, '@') === false)
+		{
+			$template_file = 'portal/modules/' . $template_file;
+		}
+
+		return $template_file;
 	}
 }

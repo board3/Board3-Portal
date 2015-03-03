@@ -692,6 +692,7 @@ class portal_module
 						'ICON_MOVE_LEFT_DISABLED'		=> '<img src="' . $this->root_path . 'adm/images/icon_left_disabled.gif" alt="' . $this->user->lang['MOVE_LEFT'] . '" title="' . $this->user->lang['MOVE_LEFT'] . '" />',
 						'ICON_MOVE_RIGHT'				=> '<img src="' . $this->root_path . 'adm/images/icon_right.gif" alt="' . $this->user->lang['MOVE_RIGHT'] . '" title="' . $this->user->lang['MOVE_RIGHT'] . '" />',
 						'ICON_MOVE_RIGHT_DISABLED'		=> '<img src="' . $this->root_path . 'adm/images/icon_right_disabled.gif" alt="' . $this->user->lang['MOVE_RIGHT'] . '" title="' . $this->user->lang['MOVE_RIGHT'] . '" />',
+						'B3P_U_ACTION'					=> $this->modules_manager->get_module_link('modules', $module_id),
 					));
 				}
 
