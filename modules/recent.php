@@ -121,7 +121,7 @@ class recent extends module_base
 			$forum_sql = ' AND ' . $this->db->sql_in_set('t.forum_id', $forum_ary, true);
 		}
 
-		$result = $this->db->sql_query_limit($sql, 1);
+		$result = $this->db->sql_query_limit($sql, 1, 0, 600);
 		$g_forum_id = (int) $this->db->sql_fetchfield('forum_id');
 		$this->db->sql_freeresult($result);
 
@@ -134,9 +134,9 @@ class recent extends module_base
 				AND topic_visibility = ' . ITEM_APPROVED . '
 				AND (topic_type = ' . POST_ANNOUNCE . ' OR topic_type = ' . POST_GLOBAL . ')
 				AND topic_moved_id = 0
-				' . $sql_where . '' .  $forum_sql . '
+				' . $sql_where .  $forum_sql . '
 			ORDER BY topic_time DESC';
-		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id]);
+		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id], 0 , 600);
 
 		while(($row = $this->db->sql_fetchrow($result)) && ($row['topic_title']))
 		{
@@ -160,9 +160,9 @@ class recent extends module_base
 			WHERE topic_visibility = ' . ITEM_APPROVED . '
 				AND topic_posts_approved >' . $this->config['hot_threshold'] . '
 				AND topic_moved_id = 0
-				' . $sql_where . '' .  $forum_sql . '
+				' . $sql_where . $forum_sql . '
 			ORDER BY topic_time DESC';
-		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id]);
+		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id], 0, 600);
 
 		while(($row = $this->db->sql_fetchrow($result)) && ($row['topic_title']))
 		{
@@ -187,9 +187,9 @@ class recent extends module_base
 				AND topic_visibility = ' . ITEM_APPROVED . '
 				AND topic_type = ' . POST_NORMAL . '
 				AND topic_moved_id = 0
-				' . $sql_where . '' .  $forum_sql . '
+				' . $sql_where . $forum_sql . '
 			ORDER BY topic_time DESC';
-		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id]);
+		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id], 0, 600);
 
 		while(($row = $this->db->sql_fetchrow($result)) && ($row['topic_title']))
 		{

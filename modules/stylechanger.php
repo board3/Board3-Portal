@@ -90,7 +90,7 @@ class stylechanger extends module_base
 			FROM ' . STYLES_TABLE . '
 			WHERE style_active = 1
 			ORDER BY LOWER(style_name) ASC';
-		$result = $this->db->sql_query($sql);
+		$result = $this->db->sql_query($sql, 3600);
 		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$style = $this->request->variable('style', 0);
@@ -113,7 +113,7 @@ class stylechanger extends module_base
 
 		// Assign specific vars
 		$this->template->assign_vars(array(
-			'S_STYLE_OPTIONS'			=> ($this->config['override_user_style'] || $style_count < 2) ? '' : style_select($this->user->data['user_style']),
+			'S_STYLE_OPTIONS'			=> ($this->config['override_user_style'] || $style_count < 2) ? '' : $style_select,
 		));
 
 		return 'stylechanger_side.html';

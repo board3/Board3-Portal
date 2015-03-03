@@ -44,10 +44,10 @@ class latest_members extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var \phpbb\user */
@@ -57,8 +57,8 @@ class latest_members extends module_base
 	* Construct a latest_members object
 	*
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\db\driver $db phpBB db driver
-	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\db\driver\driver_interface $db phpBB db driver
+	* @param \phpbb\template\template $template phpBB template
 	* @param \phpbb\user $user phpBB user object
 	*/
 	public function __construct($config, $db, $template, $user)
@@ -79,7 +79,7 @@ class latest_members extends module_base
 			WHERE user_type <> ' . USER_IGNORE . '
 				AND user_inactive_time = 0
 			ORDER BY user_regdate DESC';
-		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_last_member_' . $module_id]);
+		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_last_member_' . $module_id], 0, 600);
 
 		while(($row = $this->db->sql_fetchrow($result)) && ($row['username']))
 		{

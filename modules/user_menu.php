@@ -125,13 +125,13 @@ class user_menu extends module_base
 				$m_approve_fid_sql = ' AND p.post_visibility = 1';
 			}
 
-			$sql = 'SELECT COUNT(distinct t.topic_id) as total
+			$sql = 'SELECT COUNT(DISTINCT t.topic_id) as total
 						FROM ' . TOPICS_TABLE . ' t
 						WHERE t.topic_last_post_time > ' . $this->user->data['user_lastvisit'] . '
 							AND t.topic_moved_id = 0
 							' . str_replace(array('p.', 'post_'), array('t.', 'topic_'), $m_approve_fid_sql) . '
 							' . ((sizeof($ex_fid_ary)) ? 'AND ' . $this->db->sql_in_set('t.forum_id', $ex_fid_ary, true) : '');
-			$result = $this->db->sql_query($sql);
+			$result = $this->db->sql_query($sql, 600);
 			$new_posts_count = (int) $this->db->sql_fetchfield('total');
 			$this->db->sql_freeresult($result);
 

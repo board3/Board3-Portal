@@ -44,10 +44,10 @@ class topposters extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var string PHP file extension */
@@ -60,8 +60,8 @@ class topposters extends module_base
 	* Construct a topposers object
 	*
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\db\driver $db phpBB db driver
-	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\db\driver\driver_interface $db phpBB db driver
+	* @param \phpbb\template\template $template phpBB template
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	*/
@@ -85,7 +85,7 @@ class topposters extends module_base
 				AND user_posts <> 0
 				AND username <> ''
 			ORDER BY user_posts DESC";
-		$result = $this->db->sql_query_limit($sql, $this->config['board3_topposters_' . $module_id]);
+		$result = $this->db->sql_query_limit($sql, $this->config['board3_topposters_' . $module_id], 0, 600);
 
 		while (($row = $this->db->sql_fetchrow($result)))
 		{

@@ -19,7 +19,7 @@ class fetch_posts
 
 	/**
 	* phpBB cache
-	* @var \phpbb\cache\driver
+	* @var \phpbb\cache\driver\driver_interface
 	*/
 	protected $cache;
 
@@ -31,7 +31,7 @@ class fetch_posts
 
 	/**
 	* phpBB db driver
-	* @var \phpbb\db\driver_interface
+	* @var \phpbb\db\driver\driver_interface
 	*/
 	protected $db;
 
@@ -263,13 +263,14 @@ class fetch_posts
 		$sql_array['SELECT'] .= ', tp.topic_posted';
 		$sql = $this->db->sql_build_query('SELECT', $sql_array);
 
+		// Cache queries for 10 minutes
 		if ($number_of_posts != 0)
 		{
-			$result = $this->db->sql_query_limit($sql, $number_of_posts, $start);
+			$result = $this->db->sql_query_limit($sql, $number_of_posts, $start, 600);
 		}
 		else
 		{
-			$result = $this->db->sql_query($sql);
+			$result = $this->db->sql_query($sql, 600);
 		}
 
 		return $result;

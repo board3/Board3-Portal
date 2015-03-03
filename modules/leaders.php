@@ -118,7 +118,7 @@ class leaders extends module_base
 						AND (g.group_type <> ' . GROUP_HIDDEN . ' OR ug.user_id = ' . $this->user->data['user_id'] . ')
 					ORDER BY g.group_name ASC';
 			}
-			$result = $this->db->sql_query($sql);
+			$result = $this->db->sql_query($sql, 600);
 
 			while ($row = $this->db->sql_fetchrow($result))
 			{
@@ -144,7 +144,7 @@ class leaders extends module_base
 							ug.user_id = u.user_id
 							AND '. $this->db->sql_in_set('ug.group_id', $legends) . '
 						ORDER BY u.username_clean ASC';
-				$result = $this->db->sql_query($sql);
+				$result = $this->db->sql_query($sql, 600);
 
 				while ($row = $this->db->sql_fetchrow($result))
 				{
@@ -201,7 +201,7 @@ class leaders extends module_base
 				'ORDER_BY'	=> 'g.group_name ASC, u.username_clean ASC'
 			));
 
-			$result = $this->db->sql_query($sql);
+			$result = $this->db->sql_query($sql, 600);
 
 			while ($row = $this->db->sql_fetchrow($result))
 			{

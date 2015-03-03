@@ -53,10 +53,10 @@ class attachments extends module_base
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
 	/** @var string PHP file extension */
@@ -74,8 +74,8 @@ class attachments extends module_base
 	* @param \phpbb\auth\auth $auth phpBB auth service
 	* @param \phpbb\config\config $config phpBB config
 	* @param \board3\portal\includes\modules_helper $helper Modules helper
-	* @param \phpbb\template $template phpBB template
-	* @param \phpbb\db\driver $db Database driver
+	* @param \phpbb\template\template $template phpBB template
+	* @param \phpbb\db\driver\driver_interface $db Database driver
 	* @param \phpbb\request\request $request phpBB request
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
@@ -281,7 +281,7 @@ class attachments extends module_base
 						' . $where . '
 					ORDER BY
 						filetime ' . ((!$this->config['display_order']) ? 'DESC' : 'ASC') . ', post_msg_id ASC';
-			$result = $this->db->sql_query_limit($sql, $this->config['board3_attachments_number_' . $module_id]);
+			$result = $this->db->sql_query_limit($sql, $this->config['board3_attachments_number_' . $module_id], 0, 600);
 
 			while ($row = $this->db->sql_fetchrow($result))
 			{
