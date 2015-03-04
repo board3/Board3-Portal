@@ -61,7 +61,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$phpbb_container->setParameter('board3.portal.config.table', $table_prefix . 'portal_config');
 		$this->portal_columns = new \board3\portal\portal\columns();
 		$phpbb_container->set('board3.portal.columns', $this->portal_columns);
-		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put'));
+		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'sql_load', 'sql_save'));
 		$cache->expects($this->any())
 			->method('destroy')
 			->with($this->equalTo('portal_modules'));
@@ -75,6 +75,14 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$cache->expects($this->any())
 			->method('put')
 			->with($this->anything());
+		$cache->expects($this->any())
+			->method('sql_load')
+			->with($this->anything())
+			->will($this->returnValue(false));
+		$cache->expects($this->any())
+			->method('sql_save')
+			->with($this->anything())
+			->will($this->returnArgument(2));
 		$db = $this->db;
 		$user->set(array(
 			'UNABLE_TO_MOVE'	=> 'UNABLE_TO_MOVE',

@@ -29,7 +29,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$user->add_lang('../../ext/board3/portal/language/en/portal');
 		$request = new \phpbb_mock_request;
 		$phpbb_dispatcher = new phpbb_mock_event_dispatcher();
-		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put', 'obtain_attach_extensions'));
+		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put', 'obtain_attach_extensions', 'sql_load', 'sql_save'));
 		$cache->expects($this->any())
 			->method('obtain_word_list')
 			->with()
@@ -38,6 +38,14 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 			->method('get')
 			->with($this->anything())
 			->will($this->returnValue(false));
+		$cache->expects($this->any())
+			->method('sql_load')
+			->with($this->anything())
+			->will($this->returnValue(false));
+		$cache->expects($this->any())
+			->method('sql_save')
+			->with($this->anything())
+			->will($this->returnArgument(2));
 		require_once(dirname(__FILE__) . '/../../../../../../includes/functions_content.php');
 		$this->config = new \phpbb\config\config(array('allow_attachments' => 1));
 		$auth = new \phpbb\auth\auth();
