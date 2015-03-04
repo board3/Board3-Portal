@@ -112,7 +112,7 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		$this->cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'purge'));
 		$this->cache->expects($this->any())
 			->method('destroy')
-			->with($this->equalTo('portal_modules'));
+			->with($this->equalTo('sql'));
 		$this->cache->expects($this->any())
 			->method('get')
 			->with($this->anything())

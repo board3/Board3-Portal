@@ -215,7 +215,7 @@ class manager
 			trigger_error($this->user->lang['UNABLE_TO_MOVE' . (($is_row) ? '_ROW' : '')] . adm_back_link($this->u_action));
 		}
 
-		$this->cache->destroy('portal_modules');
+		$this->cache->destroy('sql', PORTAL_MODULES_TABLE);
 
 		// Handle ajax requests
 		$this->handle_ajax_request(array('success' => true));
@@ -375,7 +375,7 @@ class manager
 			}
 		}
 
-		$this->cache->destroy('portal_modules');
+		$this->cache->destroy('sql', PORTAL_MODULES_TABLE);
 	}
 
 	/**

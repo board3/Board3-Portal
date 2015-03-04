@@ -64,7 +64,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'sql_load', 'sql_save'));
 		$cache->expects($this->any())
 			->method('destroy')
-			->with($this->equalTo('portal_modules'));
+			->with($this->equalTo('sql'));
 		$cache->expects($this->any())
 			->method('get')
 			->with($this->anything())
