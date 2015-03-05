@@ -296,7 +296,7 @@ class portal_module
 						WHERE module_id = ' . (int) $module_id;
 					$this->db->sql_query($sql);
 
-					$this->cache->destroy('portal_modules');
+					$this->cache->destroy('sql', PORTAL_MODULES_TABLE);
 					$this->cache->destroy('sql', CONFIG_TABLE);
 
 					if(isset($module_name))

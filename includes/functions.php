@@ -70,32 +70,26 @@ function set_portal_config($config_name, $config_value)
 }
 
 /**
-* Get portal modules
-*/
+ * Get portal modules
+ *
+ * @return array Portal modules array
+ */
 function obtain_portal_modules()
 {
-	global $db, $cache, $portal_modules;
+	global $db;
 
-	if (($portal_modules = $cache->get('portal_modules')) === false || defined('DEBUG'))
+	$portal_modules = array();
+
+	$sql = 'SELECT *
+		FROM ' . PORTAL_MODULES_TABLE . '
+		ORDER BY module_order ASC';
+	$result = $db->sql_query($sql, 3600);
+
+	while ($row = $db->sql_fetchrow($result))
 	{
-		$portal_modules = $portal_cached_modules = array();
-
-		$sql = 'SELECT *
-			FROM ' . PORTAL_MODULES_TABLE . '
-			ORDER BY module_order ASC';
-		$result = $db->sql_query($sql);
-
-		while ($row = $db->sql_fetchrow($result))
-		{
-			$portal_cached_modules[] = $row;
-
-			$portal_modules[] = $row;
-		}
-		$db->sql_freeresult($result);
-
-		$cache->put('portal_modules', $portal_cached_modules);
+		$portal_modules[] = $row;
 	}
-
+	$db->sql_freeresult($result);
 	return $portal_modules;
 }
 

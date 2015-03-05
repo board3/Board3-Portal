@@ -44,7 +44,7 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 		));
 
 		$this->portal_columns = new \board3\portal\portal\columns();
-		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put'));
+		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'sql_load', 'sql_save'));
 		$cache->expects($this->any())
 			->method('destroy')
 			->with($this->equalTo('portal_modules'));
@@ -58,6 +58,14 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 		$cache->expects($this->any())
 			->method('put')
 			->with($this->anything());
+		$cache->expects($this->any())
+			->method('sql_load')
+			->with($this->anything())
+			->will($this->returnValue(false));
+		$cache->expects($this->any())
+			->method('sql_save')
+			->with($this->anything())
+			->will($this->returnArgument(2));
 		$db = $this->db;
 		$user->set(array(
 			'UNABLE_TO_MOVE'	=> 'UNABLE_TO_MOVE',
