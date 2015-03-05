@@ -15,11 +15,11 @@
 	<br />
 <!-- ENDIF -->
 
-<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center" role="grid">
 		<!-- IF S_TOP_COLUMN -->	
 		<tr>
 		<!-- [+] top module area -->
-			<td colspan="3">
+			<td colspan="3" role="gridcell">
 				<!-- BEGIN modules_top -->
 					<!-- DEFINE $TEMPLATE_FILE = '{modules_top.TEMPLATE_FILE}' -->
 					<!-- DEFINE $IMAGE_SRC = '{modules_top.IMAGE_SRC}' -->
@@ -37,7 +37,7 @@
     <tr>
 		<!-- [+] left module area -->
 			<!-- IF S_LEFT_COLUMN -->
-				<td width="{S_PORTAL_LEFT_COLUMN}px" valign="top" style="padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->:{$BLOCK_DISTANCE};">
+				<td width="{S_PORTAL_LEFT_COLUMN}px" valign="top" style="padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->:{$BLOCK_DISTANCE};" role="gridcell">
 					<!-- BEGIN modules_left -->
 						<!-- DEFINE $TEMPLATE_FILE = '{modules_left.TEMPLATE_FILE}' -->
 						<!-- DEFINE $IMAGE_SRC = '{modules_left.IMAGE_SRC}' -->
@@ -54,7 +54,7 @@
 
 		<!-- [+] center module area -->
 			<!-- IF S_CENTER_COLUMN -->
-				<td valign="top">
+				<td valign="top" role="gridcell">
 					<!-- BEGIN modules_center -->
 						<!-- DEFINE $TEMPLATE_FILE = '{modules_center.TEMPLATE_FILE}' -->
 						<!-- DEFINE $IMAGE_SRC = '{modules_center.IMAGE_SRC}' -->
@@ -75,7 +75,7 @@
 
 		<!-- [+] right module area -->
 			<!-- IF S_RIGHT_COLUMN -->
-				<td width="{S_PORTAL_RIGHT_COLUMN}px" valign="top" style="padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->:{$BLOCK_DISTANCE};">
+				<td width="{S_PORTAL_RIGHT_COLUMN}px" valign="top" style="padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->:{$BLOCK_DISTANCE};" role="gridcell">
 					<!-- BEGIN modules_right -->
 						<!-- DEFINE $TEMPLATE_FILE = '{modules_right.TEMPLATE_FILE}' -->
 						<!-- DEFINE $IMAGE_SRC = '{modules_right.IMAGE_SRC}' -->
@@ -93,7 +93,7 @@
 	<!-- IF S_BOTTOM_COLUMN -->
 	<tr>
 	<!-- [+] bottom module area -->
-		<td colspan="3">
+		<td colspan="3" role="gridcell">
 			<!-- BEGIN modules_bottom -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_bottom.TEMPLATE_FILE}' -->
 				<!-- DEFINE $IMAGE_SRC = '{modules_bottom.IMAGE_SRC}' -->

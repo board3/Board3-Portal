@@ -1,7 +1,7 @@
 <!-- BEGIN portal_menu -->
 <!-- IF portal_menu.MODULE_ID eq $MODULE_ID -->
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
-<table class="tablebg" cellspacing="1" width="100%">
+<table class="tablebg" cellspacing="1" width="100%" role="menu">
 	<!-- BEGIN category -->
 			<tr class="row3">
 				<td>
@@ -11,7 +11,7 @@
 			<!-- BEGIN links -->
 			<tr class="row1">
 				<td>
-					<a class="portal-arrow-bullet" href="{portal_menu.category.links.LINK_URL}" title="{portal_menu.category.links.LINK_TITLE}" <!-- IF portal_menu.category.links.NEW_WINDOW -->onclick="window.open('{portal_menu.category.links.LINK_URL}'); return false;"<!-- ENDIF -->>&nbsp;{portal_menu.category.links.LINK_TITLE}</a>
+					<a class="portal-arrow-bullet" href="{portal_menu.category.links.LINK_URL}" role="menuitem" title="{portal_menu.category.links.LINK_TITLE}" <!-- IF portal_menu.category.links.NEW_WINDOW -->onclick="window.open('{portal_menu.category.links.LINK_URL}'); return false;"<!-- ENDIF -->>&nbsp;{portal_menu.category.links.LINK_TITLE}</a>
 				</td>
 			</tr>
 			<!-- END links -->
