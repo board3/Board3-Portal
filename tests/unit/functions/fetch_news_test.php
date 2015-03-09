@@ -264,4 +264,12 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$fetch_posts = phpbb_fetch_posts(5, '2', true, 5, 150, time(), 'announcements');
 		$this->assertSame(array(), $fetch_posts);
 	}
+
+	public function test_number_replies()
+	{
+		$fetch_posts = phpbb_fetch_posts(5, '', false, 5, 150, time(), 'news');
+		// Topic has 2 posts which means there is only one reply
+		$this->assertEquals(1, $fetch_posts[0]['topic_replies']);
+		$this->assertEquals(1, $fetch_posts[0]['topic_replies_real']);
+	}
 }
