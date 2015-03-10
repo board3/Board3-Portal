@@ -291,6 +291,10 @@ a.portal-forumtitle {
 	display: block;
 }
 
+#portal-center-wrapper .panel, #portal-center-wrapper .post {
+	border-radius: 0;
+}
+
 .rtl #portal-center-wrapper {
 	float: right;
 }
