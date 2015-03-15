@@ -91,4 +91,13 @@ class main_test extends \board3\portal\tests\testframework\database_test_case
 		$this->assertNull($this->controller_main->handle(array('left' => 1)));
 		$this->template->assert_same(true, 'S_PORTAL_ALL');
 	}
+
+	public function test_display_all_pages_twice()
+	{
+		$this->assertNull($this->controller_main->handle(array('left' => 1)));
+		$this->template->assert_same(true, 'S_PORTAL_ALL');
+		$this->template->delete_var('S_PORTAL_ALL');
+		$this->assertNull($this->controller_main->handle(array('left' => 1)));
+		$this->template->assert_same(null, 'S_PORTAL_ALL');
+	}
 }
