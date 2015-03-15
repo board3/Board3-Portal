@@ -50,10 +50,13 @@ class whois_online extends module_base
 	/** @var \phpbb\auth\auth */
 	protected $auth;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var \phpbb\user */
@@ -69,15 +72,17 @@ class whois_online extends module_base
 	* Construct a user menu object
 	*
 	* @param \phpbb\auth\auth $auth phpBB auth
-	* @param \phpbb\db\driver $db phpBB db driver
-	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\config\config $config phpBB config
+	* @param \phpbb\db\driver\driver_interface $db phpBB db driver
+	* @param \phpbb\template\template $template phpBB template
 	* @param \phpbb\user $user phpBB user
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $phpEx php file extension
 	*/
-	public function __construct($auth, $db, $template, $user, $phpbb_root_path, $phpEx)
+	public function __construct($auth, $config, $db, $template, $user, $phpbb_root_path, $phpEx)
 	{
 		$this->auth = $auth;
+		$this->config = $config;
 		$this->db = $db;
 		$this->template = $template;
 		$this->user = $user;
@@ -90,13 +95,15 @@ class whois_online extends module_base
 	*/
 	public function get_template_center($module_id)
 	{
+		$order_legend = ($this->config['legend_sort_groupname']) ? 'group_name' : 'group_legend';
+
 		// Grab group details for legend display
 		if ($this->auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel'))
 		{
 			$sql = 'SELECT group_id, group_name, group_colour, group_type
 				FROM ' . GROUPS_TABLE . '
 				WHERE group_legend > 0
-				ORDER BY group_name ASC';
+				ORDER BY ' . $order_legend . ' ASC';
 		}
 		else
 		{
@@ -110,7 +117,7 @@ class whois_online extends module_base
 					)
 				WHERE g.group_legend > 0
 					AND (g.group_type <> ' . GROUP_HIDDEN . ' OR ug.user_id = ' . $this->user->data['user_id'] . ')
-				ORDER BY g.group_name ASC';
+				ORDER BY g.' . $order_legend . ' ASC';
 		}
 		$result = $this->db->sql_query($sql);
 
