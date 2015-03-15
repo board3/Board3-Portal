@@ -58,4 +58,9 @@ class template
 	{
 		$this->test_case->assertSame($expected, $this->data[$row]);
 	}
+
+	public function delete_var($key)
+	{
+		unset($this->data[$key]);
+	}
 }

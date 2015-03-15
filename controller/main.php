@@ -83,6 +83,9 @@ class main
 	/** @var int Allowed columns */
 	protected $allowed_columns;
 
+	/** @var bool Portal active flag */
+	protected $portal_active = false;
+
 	/**
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
@@ -133,7 +136,16 @@ class main
 	*/
 	public function handle($columns = array())
 	{
+		// Do not run portal if it's already active
+		if ($this->portal_active)
+		{
+			return;
+		}
+
 		$this->controller_helper->run_initial_tasks();
+
+		// Set portal active
+		$this->portal_active = true;
 
 		// Check if we should limit the columns to display
 		$this->set_allowed_columns($columns);
