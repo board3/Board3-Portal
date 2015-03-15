@@ -427,36 +427,24 @@ function get_portal_tracking_info($fetch_news)
 */
 function check_file_src($value, $key, $module_id, $force_error = true)
 {
-	global $db, $phpbb_root_path, $phpEx, $user;
+	global $phpbb_admin_path, $portal_root_path, $phpEx, $user;
 
 	$error = '';
 
-	// We check if the chosen file is present in all active styles
-	$sql = 'SELECT style_path
-			FROM ' . STYLES_TABLE . '
-			WHERE style_active = 1';
-
-	$result = $db->sql_query($sql);
-	while ($row = $db->sql_fetchrow($result))
+	// We check if the chosen file is present in the styles/all/ folder
+	if (!file_exists($portal_root_path . 'styles/all/theme/images/portal/' . $value))
 	{
-		if (!file_exists($phpbb_root_path . 'styles/' . $row['style_path'] . '/theme/images/portal/' . $value) &&
-			!file_exists($phpbb_root_path . 'ext/board3/portal/styles/' . $row['style_path'] . '/theme/images/portal/' . $value))
-		{
-			$error .= $user->lang['B3P_FILE_NOT_FOUND'] . ': styles/' . $row['style_path'] . '/theme/images/portal/' . $value . '<br />';
-		}
+		$error .= $user->lang['B3P_FILE_NOT_FOUND'] . ': styles/all/theme/images/portal/' . $value . '<br />';
 	}
-	$db->sql_freeresult($result);
 
 	if (!empty($error))
 	{
 		if ($force_error)
 		{
-			trigger_error($error . adm_back_link(append_sid("{$phpbb_root_path}adm/index.$phpEx", 'i=\board3\portal\acp\portal_module&amp;mode=config&amp;module_id=' . $module_id)), E_USER_WARNING);
+			trigger_error($error . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", 'i=\board3\portal\acp\portal_module&amp;mode=config&amp;module_id=' . $module_id)), E_USER_WARNING);
 		}
-		else
-		{
-			return $error;
-		}
+
+		return $error;
 	}
 	else
 	{

@@ -15,10 +15,14 @@ class phpbb_functions_check_file_src_test extends \board3\portal\tests\testframe
 {
 	public function setUp()
 	{
+		global $phpbb_root_path, $portal_root_path;
+
 		parent::setUp();
 
 		global $user;
 		$user = new phpbb_mock_user();
+
+		$portal_root_path = $phpbb_root_path . 'ext/board3/portal/';
 	}
 
 	public function getDataSet()
@@ -29,7 +33,7 @@ class phpbb_functions_check_file_src_test extends \board3\portal\tests\testframe
 	public function test_check_file_src()
 	{
 		$this->assertFalse(check_file_src('portal_attach.png', '', 15, false));
-		$this->assertEquals(': styles/prosilver/theme/images/portal/portal_foobar.png<br />', check_file_src('portal_foobar.png', '', 15, false));
+		$this->assertEquals(': styles/all/theme/images/portal/portal_foobar.png<br />', check_file_src('portal_foobar.png', '', 15, false));
 	}
 
 	public function test_check_file_src_error()
@@ -38,6 +42,6 @@ class phpbb_functions_check_file_src_test extends \board3\portal\tests\testframe
 
 		$phpbb_dispatcher = new phpbb_mock_event_dispatcher;
 		$this->setExpectedTriggerError(E_USER_WARNING);
-		$this->assertEquals(': styles/prosilver/theme/images/portal/portal_foobar.png<br />', check_file_src('portal_foobar.png', '', 15));
+		$this->assertEquals(': styles/all/theme/images/portal/portal_foobar.png<br />', check_file_src('portal_foobar.png', '', 15));
 	}
 }
