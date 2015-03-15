@@ -311,6 +311,7 @@ services:
         class: board3\portal\modules\whois_online
         arguments:
             - @auth
+            - @config
             - @dbal.conn
             - @template
             - @user
