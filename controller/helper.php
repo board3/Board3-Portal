@@ -227,7 +227,7 @@ class helper
 		{
 			$this->template->assign_block_vars('modules_' . $this->portal_columns->number_to_string($row['module_column']), array(
 				'TEMPLATE_FILE'			=> $this->parse_template_file($template_module['template']),
-				'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . ltrim($this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $template_module['image_src'], './'),
+				'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . ltrim($this->root_path . 'styles/all/theme/images/portal/' . $template_module['image_src'], './'),
 				'TITLE'				=> $template_module['title'],
 				'CODE'				=> $template_module['code'],
 				'MODULE_ID'			=> $row['module_id'],
@@ -239,7 +239,7 @@ class helper
 		{
 			$this->template->assign_block_vars('modules_' . $this->portal_columns->number_to_string($row['module_column']), array(
 				'TEMPLATE_FILE'			=> $this->parse_template_file($template_module),
-				'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . ltrim($this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'], './'),
+				'IMAGE_SRC'			=> $this->path_helper->get_web_root_path() . ltrim($this->root_path . 'styles/all/theme/images/portal/' . $row['module_image_src'], './'),
 				'IMAGE_WIDTH'			=> $row['module_image_width'],
 				'IMAGE_HEIGHT'			=> $row['module_image_height'],
 				'MODULE_ID'			=> $row['module_id'],

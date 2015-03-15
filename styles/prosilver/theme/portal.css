@@ -54,7 +54,7 @@
 }
 
 .portal-user-icon {
-	background-image: url("./images/portal/portal_user.png");
+	background-image: url("../../all/theme/images/portal/portal_user.png");
 	padding-left: 16px;
 	padding-top: 16px;
 	float: left;
@@ -469,7 +469,7 @@ a.portal-forumtitle {
 	width: 21px;
 	height: 21px;
 	background-position: 0 0;
-	background: url(./images/portal/portal_clock_single.png) no-repeat;
+	background: url("../../all/theme/images/portal/portal_clock_single.png") no-repeat;
 }
 
 /* Minutes start
@@ -561,7 +561,7 @@ a.portal-forumtitle {
 .portal-clock-back-hours-up, .portal-clock-front-hours-up {
 	width: 42px;
 	height: 21px;
-	background: url(./images/portal/portal_clock_double.png) no-repeat;
+	background: url("../../all/theme/images/portal/portal_clock_double.png") no-repeat;
 	background-position: 0 0;
 	vertical-align: bottom;
 	display: inline-block;
@@ -571,7 +571,7 @@ a.portal-forumtitle {
 .portal-clock-back-hours-down, .portal-clock-front-hours-down {
 	width: 42px;
 	height: 20px;
-	background: url(./images/portal/portal_clock_double.png) no-repeat;
+	background: url("../../all/theme/images/portal/portal_clock_double.png") no-repeat;
 	background-position: 0 -44px;
 	vertical-align: top;
 	display: inline-block;

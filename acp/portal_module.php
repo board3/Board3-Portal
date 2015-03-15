@@ -140,7 +140,7 @@ class portal_module
 							'MODULE_IMAGE'			=> $module_data['module_image_src'],
 							'MODULE_IMAGE_WIDTH'	=> $module_data['module_image_width'],
 							'MODULE_IMAGE_HEIGHT'	=> $module_data['module_image_height'],
-							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $this->root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/portal/' . $module_data['module_image_src'] : '',
+							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $this->root_path . 'styles/all/theme/images/portal/' . $module_data['module_image_src'] : '',
 							'MODULE_ENABLED'		=> ($module_data['module_status']) ? true : false,
 							'MODULE_SHOW_IMAGE'		=> (in_array($this->portal_columns->number_to_string($module_data['module_column']), array('center', 'top', 'bottom'))) ? false : true,
 						));
@@ -675,7 +675,7 @@ class portal_module
 
 						$this->template->assign_block_vars('modules_' . $template_column, array(
 							'MODULE_NAME'		=> (isset($this->user->lang[$row['module_name']])) ? $this->user->lang[$row['module_name']] : $row['module_name'],
-							'MODULE_IMAGE'		=> ($row['module_image_src']) ? '<img src="' . $this->root_path . 'styles/' .  $this->user->style['style_path'] . '/theme/images/portal/' . $row['module_image_src'] . '" alt="' . $row['module_name'] . '" />' : '',
+							'MODULE_IMAGE'		=> ($row['module_image_src']) ? '<img src="' . $this->root_path . 'styles/all/theme/images/portal/' . $row['module_image_src'] . '" alt="' . $row['module_name'] . '" />' : '',
 							'MODULE_ENABLED'	=> ($row['module_status']) ? true : false,
 
 							'U_DELETE'			=> $this->modules_manager->get_module_link('modules', $row['module_id']) . '&amp;action=delete&amp;module_classname=' . $row['module_classname'],
