@@ -33,10 +33,8 @@
 	text-decoration: underline;
 }
 
-.portal-navigation tr.menutitle{
-	font: bold 90% 'Trebuchet MS', 'Lucida Grande', Arial, sans-serif;
-	font-size: 12px;
-	text-decoration: underline;
+.portal-navigation hr.dashed:last-child {
+	display: none;
 }
 
 .rtl .portal-navigation .menutitle {
