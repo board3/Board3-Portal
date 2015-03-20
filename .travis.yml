@@ -22,8 +22,11 @@ matrix:
       env: DB=mysqli
     - php: hhvm
       env: DB=mysqli
+    - php: 7.0
+      env: DB=mysqli
   allow_failures:
     - php: hhvm
+    - php: 7.0
   fast_finish: true
 
 env:
