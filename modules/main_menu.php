@@ -526,12 +526,12 @@ class main_menu extends module_base
 	}
 
 	/**
-	* Unserialize links array
-	*
-	* @param string $serial_str Serialized string
-	*
-	* @return array Unserialized string
-	*/
+	 * Unserialize links array
+	 *
+	 * @param string $serial_str Serialized string
+	 *
+	 * @return array Unserialized string
+	 */
 	private function utf_unserialize($serial_str)
 	{
 		$out = preg_replace_callback('!s:(\d+):"(.*?)";!s', function ($result) {
