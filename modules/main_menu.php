@@ -534,7 +534,9 @@ class main_menu extends module_base
 	*/
 	private function utf_unserialize($serial_str)
 	{
-		$out = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str);
+		$out = preg_replace_callback('!s:(\d+):"(.*?)";!s', function ($result) {
+			return 's:' . strlen($result[2]) . ":\"{$result[2]}\";";
+		}, $serial_str);
 		return unserialize($out);
 	}
 }
