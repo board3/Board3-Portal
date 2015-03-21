@@ -41,6 +41,7 @@
     <property name="version" value="HEAD" override="true" />
     <property name="build-directory" value="build" override="true" />
     <property name="package-directory" value="${build-directory}/package/${vendor-name}/${extension-name}" />
+    <property  name="phpbb-root" value="${build-directory}/../../../../../" />
 
     <!-- These are the main targets which you will probably want to use -->
     <target name="all" depends="prepare-structure,package" />
@@ -52,10 +53,31 @@
         <delete dir="${build-directory}" />
     </target>
 
+    <target name="composer">
+        <exec dir="${build-directory}/../"
+              command="php composer.phar install"
+              passthru="true" />
+    </target>
+
+    <target name="test" depends="clean,composer">
+        <exec dir="${phpbb-root}"
+              command="phpBB/vendor/bin/phpunit
+              -c phpBB/ext/${vendor-name}/${extension-name}/"
+              passthru="true" />
+    </target>
+
+    <target name="test-slow" depends="clean,composer">
+        <exec dir="${phpbb-root}"
+              command="phpBB/vendor/bin/phpunit
+               -c phpBB/ext/${vendor-name}/${extension-name}/
+               --group slow"
+              passthru="true" />
+    </target>
+
     <!--
     Recreate the necessary folders
     -->
-    <target name="prepare-structure" depends="clean">
+    <target name="prepare-structure" depends="clean,composer,test,test-slow">
         <mkdir dir="${build-directory}" />
         <mkdir dir="${build-directory}/checkout" />
         <mkdir dir="${build-directory}/package" />
