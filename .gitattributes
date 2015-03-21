@@ -8,5 +8,4 @@ phpunit.xml.*	export-ignore
 README.md	export-ignore
 git-tools/	export-ignore
 .coveralls.yml	export-ignore
-composer.phar	export-ignore
-composer.lock	export-ignore
+build.xml	export-ignore

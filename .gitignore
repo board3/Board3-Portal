@@ -1,3 +1,4 @@
 /.idea/*
 /tests/test_config.php
 /vendor/
+/build/
