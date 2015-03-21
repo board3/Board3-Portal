@@ -91,6 +91,7 @@ class leaders extends module_base
 	{
 		// Display a listing of board admins, moderators
 		$this->user->add_lang('groups');
+		$order_legend = ($this->config['legend_sort_groupname']) ? 'group_name' : 'group_legend';
 
 		if($this->config['board3_leaders_ext_' . $module_id])
 		{
@@ -99,14 +100,14 @@ class leaders extends module_base
 
 			if ($this->auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel'))
 			{
-				$sql = 'SELECT group_id, group_name, group_colour, group_type
+				$sql = 'SELECT group_id, group_name, group_colour, group_type, group_legend
 					FROM ' . GROUPS_TABLE . '
 					WHERE group_legend >= 1
-					ORDER BY group_name ASC';
+					ORDER BY ' . $order_legend . ' ASC';
 			}
 			else
 			{
-				$sql = 'SELECT g.group_id, g.group_name, g.group_colour, g.group_type
+				$sql = 'SELECT g.group_id, g.group_name, g.group_colour, g.group_type, g.group_legend
 					FROM ' . GROUPS_TABLE . ' g
 					LEFT JOIN ' . USER_GROUP_TABLE . ' ug
 						ON (
@@ -116,7 +117,7 @@ class leaders extends module_base
 						)
 					WHERE g.group_legend >= 1
 						AND (g.group_type <> ' . GROUP_HIDDEN . ' OR ug.user_id = ' . $this->user->data['user_id'] . ')
-					ORDER BY g.group_name ASC';
+					ORDER BY g.' . $order_legend . ' ASC';
 			}
 			$result = $this->db->sql_query($sql, 600);
 
@@ -187,7 +188,7 @@ class leaders extends module_base
 		else
 		{
 			$sql = $this->db->sql_build_query('SELECT', array(
-				'SELECT'	=> 'u.user_id, u.group_id as default_group, u.username, u.user_colour, u.user_allow_pm, g.group_id, g.group_name, g.group_colour, g.group_type, ug.user_id as ug_user_id',
+				'SELECT'	=> 'u.user_id, u.group_id as default_group, u.username, u.user_colour, u.user_allow_pm, g.group_id, g.group_name, g.group_colour, g.group_type, g.group_legend, ug.user_id as ug_user_id',
 				'FROM'		=> array(
 					USERS_TABLE		=> 'u',
 					GROUPS_TABLE	=> 'g'
@@ -198,7 +199,7 @@ class leaders extends module_base
 						'ON'	=> 'ug.group_id = g.group_id AND ug.user_pending = 0 AND ug.user_id = ' . $this->user->data['user_id']
 					)),
 				'WHERE'		=> 'u.group_id = g.group_id AND ' . $this->db->sql_in_set('g.group_name', array('ADMINISTRATORS', 'GLOBAL_MODERATORS')),
-				'ORDER_BY'	=> 'g.group_name ASC, u.username_clean ASC'
+				'ORDER_BY'	=> 'g.' . $order_legend . ' ASC, u.username_clean ASC'
 			));
 
 			$result = $this->db->sql_query($sql, 600);
