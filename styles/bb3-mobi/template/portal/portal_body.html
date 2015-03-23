@@ -1,0 +1,128 @@
+<!-- INCLUDE overall_header.html -->
+<!-- IF S_USER_LOGGED_IN and not S_IS_BOT -->
+<div class="panel">
+	<span class="avatar">
+	<!-- IF CURRENT_USER_AVATAR -->{CURRENT_USER_AVATAR}<!-- ELSE --><img src="{T_THEME_PATH}/images/no_avatar.gif" alt="no_avatar" /><!-- ENDIF --></span>
+	<a href="{U_USER_PROFILE}"><b>{USERNAME_FULL}</b></a><!-- IF B3P_RANK_IMG --><span class="rightside">{B3P_RANK_IMG}</span><!-- ELSEIF B3P_RANK_TITLE --><span class="rightside">[{B3P_RANK_TITLE}]</span><!-- ENDIF -->
+	<div class="bg3">
+		<p><a href="{U_PROFILE}">{L_PROFILE}</a></p>
+		<!-- IF U_UM_BOOKMARKS or S_DISPLAY_SUBSCRIPTIONS --><p><!-- ENDIF -->
+		<!-- IF U_UM_BOOKMARKS --><a href="{U_UM_BOOKMARKS}">{L_UM_BOOKMARKS}</a><!-- ENDIF -->
+		<!-- IF S_DISPLAY_SUBSCRIPTIONS -->
+		<!-- IF U_UM_BOOKMARKS --> | <!-- ENDIF --><a href="{U_UM_MAIN_SUBSCRIBED}">{L_UM_MAIN_SUBSCRIBED}</a><!-- ENDIF -->
+		<!-- IF U_UM_BOOKMARKS or S_DISPLAY_SUBSCRIPTIONS --></p><!-- ENDIF -->
+	</div>
+</div>
+<!-- ENDIF -->
+
+<!-- IF .latest_topics -->
+<div class="forumbg">
+<div class="header">{L_PORTAL_RECENT_TOPIC}</div>
+<!-- BEGIN latest_topics -->
+<div class="row<!-- IF latest_topics.S_ROW_COUNT is odd --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
+	<a href="{latest_topics.U_VIEW_TOPIC}" title="{latest_topics.FULL_TITLE}">{latest_topics.TITLE}</a></div>
+<!-- END latest_topics -->
+</div>
+<!-- ENDIF -->
+
+<!-- BEGIN news -->
+<!-- BEGIN news_row -->
+<!-- IF news.news_row.S_FIRST_ROW  --><div class="header">{L_LATEST_NEWS}</div><!-- ENDIF -->
+<div class="post<!-- IF news.news_row.S_ROW_COUNT is odd --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
+<div class="inner">
+	<!-- IF news.news_row.S_UNREAD_TOPIC and not S_IS_BOT -->
+	<a href="{news.news_row.U_NEWEST_POST}"><img src="{T_THEME_PATH}/images/icon_post_target_unread.gif" alt=""/></a>
+	<!-- ENDIF -->
+	<!-- IF news_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{news.news_row.TOPIC_ICON_IMG}" alt="" /> <!-- ENDIF -->
+	<!-- IF news.news_row.ATTACH_ICON_IMG --><img src="{T_THEME_PATH}/images/icon_topic_attach.gif" alt=""/><!-- ENDIF -->
+	<!-- IF news.news_row.S_POLL --><img src="{T_THEME_PATH}/images/icon_topic_poll.gif" alt=""/><!-- ENDIF -->
+	<a href="{news.news_row.U_VIEW_COMMENTS}" class="topictitle">{news.news_row.TITLE}</a> [{news.news_row.REPLIES}]<br />
+	{news.news_row.USERNAME_FULL_LAST} &raquo; <a href="{news.news_row.U_LAST_POST}" title="{L_GOTO_LAST_POST}">{news.news_row.LAST_POST_TIME}</a>
+	<!-- IF news.news_row.pagination -->
+	<div class="rightside pagination">
+		<!-- BEGIN pagination -->
+			<!-- IF news.news_row.pagination.S_IS_PREV -->
+			<!-- ELSEIF news.news_row.pagination.S_IS_CURRENT --><span class="active button">{news.news_row.pagination.PAGE_NUMBER}</span>
+			<!-- ELSEIF news.news_row.pagination.S_IS_ELLIPSIS --><span class="ellipsis button">{L_ELLIPSIS}</span>
+			<!-- ELSEIF news.news_row.pagination.S_IS_NEXT -->
+			<!-- ELSE --><a href="{news.news_row.pagination.PAGE_URL}" class="button">{news.news_row.pagination.PAGE_NUMBER}</a> 
+			<!-- ENDIF -->
+		<!-- END pagination -->
+	</div>
+	<!-- ENDIF -->
+	<br />{L_FORUM}: <a href="{news.news_row.U_VIEWFORUM}">{news.news_row.FORUM_NAME}</a>
+</div>
+</div>
+<!-- END news_row -->
+<!-- END news -->
+
+<!-- BEGIN announcements -->
+<!-- BEGIN center_row -->
+<!-- IF announcements.center_row.S_FIRST_ROW  --><div class="header">{L_LATEST_ANNOUNCEMENTS}</div><!-- ENDIF -->
+<div class="post<!-- IF announcements.center_row.S_ROW_COUNT is odd --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
+<div class="inner">
+	<!-- IF announcements.center_row.S_UNREAD_TOPIC and not S_IS_BOT -->
+	<a href="{announcements.center_row.U_NEWEST_POST}"><img src="{T_THEME_PATH}/images/icon_post_target_unread.gif" alt=""/></a><!-- ENDIF -->
+	<!-- IF announcements.center_row.ATTACH_ICON_IMG --><img src="{T_THEME_PATH}/images/icon_topic_attach.gif" alt=""/><!-- ENDIF -->
+	<!-- IF announcements.center_row.S_POLL --><img src="{T_THEME_PATH}/images/icon_topic_poll.gif" alt=""/><!-- ENDIF -->
+	<a href="{announcements.center_row.U_VIEW_COMMENTS}" class="topictitle">{announcements.center_row.TITLE}</a> [{announcements.center_row.REPLIES}]<br />
+	{announcements.center_row.USERNAME_FULL_LAST} &raquo; <a href="{announcements.center_row.U_LAST_POST}" title="{L_GOTO_LAST_POST}">{announcements.center_row.LAST_POST_TIME}</a>
+	<!-- IF announcements.center_row.pagination -->
+	<div class="rightside pagination">
+		<!-- BEGIN pagination -->
+			<!-- IF announcements.center_row.pagination.S_IS_PREV -->
+			<!-- ELSEIF announcements.center_row.pagination.S_IS_CURRENT --><span class="active button">{announcements.center_row.pagination.PAGE_NUMBER}</span>
+			<!-- ELSEIF announcements.center_row.pagination.S_IS_ELLIPSIS --><span class="ellipsis button">{L_ELLIPSIS}</span>
+			<!-- ELSEIF announcements.center_row.pagination.S_IS_NEXT -->
+			<!-- ELSE --><a href="{announcements.center_row.pagination.PAGE_URL}" class="button">{announcements.center_row.pagination.PAGE_NUMBER}</a> 
+			<!-- ENDIF -->
+		<!-- END pagination -->
+	</div>
+	<!-- ENDIF -->
+	<br />{L_FORUM}: <a href="{announcements.center_row.U_VIEWFORUM}">{announcements.center_row.FORUM_NAME}</a>
+</div>
+</div>
+<!-- END center_row -->
+<!-- END announcements -->
+
+<div class="panel">
+	<div class="post bg3"><a href="{U_MEMBERLIST}">{L_MEMBERLIST}</a></div>
+	<div class="post bg3"><a href="{U_TEAM}">{L_THE_TEAM}</a></div>
+	<!-- IF S_DISPLAY_SEARCH -->
+	<div class="post bg3">
+	<a href="{U_SEARCH_ACTIVE_TOPICS}">{L_SEARCH_ACTIVE_TOPICS}</a></div>
+	<!-- ENDIF -->
+	<!-- IF S_USER_LOGGED_IN and not S_IS_BOT and S_DISPLAY_SEARCH -->
+	<div class="post bg3">
+	<a href="<!-- IF U_NEW_POSTS -->{U_NEW_POSTS}<!-- ELSE -->{U_SEARCH_NEW}<!-- ENDIF -->"><!-- IF L_NEW_POSTS -->{L_NEW_POSTS}<!-- ELSE -->{L_SEARCH_NEW}<!-- ENDIF --></a></div>
+	<!-- ENDIF -->
+	<!-- IF U_UM_MCP -->
+	<div class="post bg3"><a href="{U_UM_MCP}">{L_MCP}</a></div><!-- ENDIF -->
+	<!-- IF U_ACP -->
+	<div class="post bg3"><a href="{U_ACP}">{L_ACP}</a></div><!-- ENDIF -->
+</div>
+
+<!-- BEGIN portal_links -->
+<div class="panel"><b>{L_PORTAL_LINKS}</b>
+<p class="post bg3">
+<!-- BEGIN links -->
+<a href="{portal_links.links.LINK_URL}">{portal_links.links.LINK_TITLE}</a><br />
+<!-- END links -->
+</p>
+</div>
+<!-- END portal_links -->
+
+<!-- IF S_STYLE_OPTIONS -->
+<div class="submit-buttons">
+	<select class="portal-stylechanger-select" name="demo" id="demo" onchange="document.location.href = this.options[this.selectedIndex].value;">
+		{STYLE_SELECT}
+	</select>
+</div>
+<!-- ENDIF -->
+
+<!-- IF U_VIEWONLINE or PORTAL_LEGEND -->
+<div class="panel">
+<!-- IF U_VIEWONLINE --><div class="post bg3"><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></div><!-- ENDIF -->
+<!-- IF PORTAL_LEGEND --><i>{L_LEGEND}: {PORTAL_LEGEND}</i><!-- ENDIF --></div>
+<!-- ENDIF -->
+<!-- INCLUDE overall_footer.html -->
