@@ -47,13 +47,13 @@ $lang = array_merge($lang, array(
 
 	'mini_cal'	=> array(
 		'day'	=> array(
-			'1'	=> 'Lu',
-			'2'	=> 'Ma',
-			'3'	=> 'Me',
-			'4'	=> 'Je',
-			'5'	=> 'Ve',
-			'6'	=> 'Sa',
-			'7'	=> 'Di',
+			'1'	=> 'Di',
+			'2'	=> 'Lu',
+			'3'	=> 'Ma',
+			'4'	=> 'Me',
+			'5'	=> 'Je',
+			'6'	=> 'Ve',
+			'7'	=> 'Sa',
 		),
 
 		'month'	=> array(
@@ -98,7 +98,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_LONG_MONTH'						=> 'Afficher le nom complet des mois',
 	'PORTAL_LONG_MONTH_EXP'				=> 'Si désactivé  le nom des mois sera tronqué, comme par exemple : Jan. à la place de Janvier.',
 	'PORTAL_SUNDAY_FIRST'					=> 'Premier jour de la semaine',
-	'PORTAL_SUNDAY_FIRST_EXP'			=> 'Si désactivé le calendrier affichera Ma --> Lu, à la place de Lu --> Di.',
+	'PORTAL_SUNDAY_FIRST_EXP'			=> 'Si désactivé le calendrier affichera Lu. --> Di., à la place de Di. --> Sa.',
 	'PORTAL_DISPLAY_EVENTS'					=> 'Afficher les évènements',
 	'PORTAL_DISPLAY_EVENTS_EXP'				=> 'Afficher les événements qui ont été créés pour le bloc calendrier.',
 	'PORTAL_EVENTS_MANAGE'					=> 'Gérer les évènements',
