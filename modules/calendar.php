@@ -176,7 +176,7 @@ class calendar extends module_base
 		$this->time = $this->user->create_datetime();
 		$now = phpbb_gmgetdate($this->time->getTimestamp() + $this->time->getOffset());
 		$today_timestamp = $now[0];
-		$mini_cal_today = date('Ymd', $today_timestamp - date('Z'));
+		$mini_cal_today = date('Ymd', $today_timestamp);
 		$this->stamp = (int) $today_timestamp;
 		$s_cal_month = ($this->mini_cal_month != 0) ? $this->mini_cal_month . ' month' : $mini_cal_today;
 		$this->get_month($s_cal_month);
