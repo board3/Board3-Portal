@@ -1,3 +1,3 @@
 board3_portal_controller:
-    pattern: /portal
+    path: /portal
     defaults: { _controller: board3.portal.main:handle }
