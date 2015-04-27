@@ -20,6 +20,12 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 	/** @var \board3\portal\portal\modules\constraints_handler */
 	protected $constraints_handler;
 
+	/** @var \phpbb\path_helper */
+	protected $path_helper;
+
+	/** @var \board3\portal\controller\helper */
+	protected $b3p_controller_helper;
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(dirname(__FILE__) . '/../acp/fixtures/modules.xml');
@@ -73,7 +79,30 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 		));
 		$this->database_handler = new \board3\portal\portal\modules\database_handler($db);
 		$this->constraints_handler = new \board3\portal\portal\modules\constraints_handler($this->portal_columns, $user);
-		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->portal_columns, $portal_helper, $this->constraints_handler, $this->database_handler, $request, $user);
+
+		$this->path_helper = new \phpbb\path_helper(
+			new \phpbb\symfony_request(
+				new \phpbb_mock_request()
+			),
+			new \phpbb\filesystem(),
+			new \phpbb_mock_request(),
+			$phpbb_root_path,
+			$phpEx
+		);
+
+		$this->b3p_controller_helper = new \board3\portal\controller\helper(
+			new \phpbb\auth\auth(),
+			$this->portal_columns,
+			$config,
+			new \board3\portal\tests\mock\template($this),
+			$user,
+			$this->path_helper,
+			$this->portal_helper,
+			$phpbb_root_path,
+			$phpEx
+		);
+
+		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->b3p_controller_helper, $this->portal_columns, $portal_helper, $this->constraints_handler, $this->database_handler, $request, $user);
 		$portal_modules = obtain_portal_modules();
 		foreach($portal_modules as $cur_module)
 		{
