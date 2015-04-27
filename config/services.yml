@@ -103,6 +103,7 @@ services:
         arguments:
             - @cache
             - @dbal.conn
+            - @board3.portal.controller_helper
             - @board3.portal.columns
             - @board3.portal.helper
             - @board3.portal.modules.constraints_handler

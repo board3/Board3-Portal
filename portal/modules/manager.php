@@ -20,6 +20,9 @@ class manager
 	/** @var \phpbb\cache\service */
 	protected $cache;
 
+	/** @var \board3\portal\controller\helper */
+	protected $controller_helper;
+
 	/** @var \board3\portal\portal\columns */
 	protected $portal_columns;
 
@@ -55,6 +58,7 @@ class manager
 	 *
 	 * @param \phpbb\cache\service $cache phpBB cache
 	 * @param \phpbb\db\driver\driver_interface $db Database driver
+	 * @param \board3\portal\controller\helper $controller_helper Board3 Portal controller helper
 	 * @param \board3\portal\portal\columns $portal_columns Portal columns helper
 	 * @param \board3\portal\includes\helper $portal_helper Portal helper
 	 * @param \board3\portal\portal\modules\constraints_handler $constraints_handler Modules constraints handler
@@ -62,10 +66,11 @@ class manager
 	 * @param \phpbb\request\request_interface $request phpBB request
 	 * @param \phpbb\user $user phpBB user
 	 */
-	public function __construct($cache, driver_interface $db, columns $portal_columns, helper $portal_helper, constraints_handler $constraints_handler, database_handler $database_handler, request_interface $request, $user)
+	public function __construct($cache, driver_interface $db, \board3\portal\controller\helper $controller_helper, columns $portal_columns, helper $portal_helper, constraints_handler $constraints_handler, database_handler $database_handler, request_interface $request, $user)
 	{
 		$this->cache = $cache;
 		$this->db = $db;
+		$this->controller_helper = $controller_helper;
 		$this->portal_columns = $portal_columns;
 		$this->portal_helper = $portal_helper;
 		$this->constraints_handler = $constraints_handler;
@@ -362,7 +367,7 @@ class manager
 			{
 				if ($this->module->get_language())
 				{
-					$this->user->add_lang_ext('board3/portal', 'modules/' . $this->module->get_language());
+					$this->controller_helper->load_module_language($this->module);
 				}
 				$confirm_text = (isset($this->user->lang[$module_data['module_name']])) ? sprintf($this->user->lang['DELETE_MODULE_CONFIRM'], $this->user->lang[$module_data['module_name']]) : sprintf($this->user->lang['DELETE_MODULE_CONFIRM'], utf8_normalize_nfc($module_data['module_name']));
 				confirm_box(false, $confirm_text, build_hidden_fields(array(
