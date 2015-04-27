@@ -90,9 +90,6 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		));
 		$this->database_handler = new \board3\portal\portal\modules\database_handler($db);
 		$this->constraints_handler = new \board3\portal\portal\modules\constraints_handler($this->portal_columns, $user);
-		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->portal_columns, $this->portal_helper, $this->constraints_handler, $this->database_handler, $request, $user);
-		$phpbb_container->set('board3.portal.modules.manager', $this->modules_manager);
-		$phpbb_container->set('board3.portal.modules.constraints_handler', $this->constraints_handler);
 
 		$path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request(
@@ -104,6 +101,21 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			$phpEx
 		);
 
+		$b3p_controller_helper = new \board3\portal\controller\helper(
+			new \phpbb\auth\auth(),
+			$this->portal_columns,
+			$config,
+			$template,
+			$user,
+			$path_helper,
+			$this->portal_helper,
+			$phpbb_root_path,
+			$phpEx
+		);
+
+		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $b3p_controller_helper, $this->portal_columns, $this->portal_helper, $this->constraints_handler, $this->database_handler, $request, $user);
+		$phpbb_container->set('board3.portal.modules.manager', $this->modules_manager);
+		$phpbb_container->set('board3.portal.modules.constraints_handler', $this->constraints_handler);
 		$modules = array(
 			'\board3\portal\modules\clock'	=> new \board3\portal\modules\clock($config, $template),
 		);
