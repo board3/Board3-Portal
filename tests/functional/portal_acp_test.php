@@ -114,28 +114,22 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 	{
 		return array(
 			array('\board3\portal\modules\news', 2, 'The module was added successfully.'),
-			array('\board3\portal\modules\news', 1, 'It is not possible to add the module to the selected column.', true),
+			array('\board3\portal\modules\news', 1, 'It is not possible to add the module to the selected column.'),
 			array('\board3\portal\modules\attachments', 2, 'The module was added successfully'),
-			array('\board3\portal\modules\attachments', 2, 'This module can only be added once', true),
-			array('\board3\portal\modules\attachments', 1, 'This module can only be added once', true),
+			array('\board3\portal\modules\attachments', 2, 'This module can only be added once'),
+			array('\board3\portal\modules\attachments', 1, 'This module can only be added once'),
 		);
 	}
 
 	/**
 	 * @dataProvider data_add_second_module
 	 */
-	public function test_add_second_news($module_class, $column, $expected_message, $incomplete = false)
+	public function test_add_second_news($module_class, $column, $expected_message)
 	{
-		// Mark tests as incomplete that can't be run with the current DomCrawler
-		if ($incomplete)
-		{
-			$this->markTestIncomplete('Cannot select invalid value in select in current DomCrawler');
-		}
-
 		$this->add_lang_ext('board3/portal', 'info_acp_portal');
 		$crawler = self::request('GET', 'adm/index.php?i=-board3-portal-acp-portal_module&mode=modules&add_column=' . $column . '&add[center]=add&sid=' . $this->sid);
 		$form = $crawler->selectButton('submit')->form();
-		$form->setValues(array('module_classname' => $module_class));
+		$form['module_classname']->disableValidation()->select($module_class);
 		$crawler = self::submit($form);
 		$this->assertContains($expected_message, $crawler->text());
 	}
