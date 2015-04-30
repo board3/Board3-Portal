@@ -41,7 +41,7 @@ env:
 
 branches:
   except:
-    - master
+    - 2.0.x
     - develop-1_0_X
 
 install:
