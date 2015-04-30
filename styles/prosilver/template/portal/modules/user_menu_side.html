@@ -1,0 +1,45 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<div class="portal-centered-content">
+        {USERNAME_FULL}<br />
+        <!-- IF B3P_AVATAR_IMG -->
+            <a href="{U_PROFILE}">{B3P_AVATAR_IMG}</a>
+        <!-- ELSEIF $NO_AVATAR_IMG -->
+            <a href="{U_PROFILE}"><img src="{T_THEME_PATH}{$NO_AVATAR_IMG}" alt="" /></a>
+        <!-- ENDIF -->
+        <!-- IF B3P_RANK_TITLE --><br /><span class="gensmall">{B3P_RANK_TITLE}</span><!-- ENDIF -->
+        <!-- IF B3P_RANK_IMG --><br />{B3P_RANK_IMG}<!-- ENDIF -->
+    </div> 
+	<hr class="dashed" />
+	<div class="portal-navigation">
+		<div class="menutitle">{L_M_MENU}</div>
+			<ul>
+				<!-- IF S_DISPLAY_SEARCH -->
+					<li><a href="{U_NEW_POSTS}">{L_NEW_POSTS}</a></li>
+					<li><a href="{U_UNREAD_POSTS}">{L_UNREAD_POSTS}</a></li>
+					<li><a href="{U_SELF_POSTS}">{L_SELF_POSTS}</a></li>
+				<!-- ENDIF -->
+				<!-- IF U_UM_BOOKMARKS -->
+					<li><a href="{U_UM_BOOKMARKS}">{L_UM_BOOKMARKS}</a></li>
+				<!-- ENDIF -->
+				<!-- IF S_DISPLAY_SUBSCRIPTIONS -->
+					<li><a href="{U_UM_MAIN_SUBSCRIBED}">{L_UM_MAIN_SUBSCRIBED}</a></li>
+				<!-- ENDIF -->
+				<!-- IF S_NOTIFICATIONS_DISPLAY -->
+				<li data-skip-responsive="true">
+					<a href="{U_VIEW_ALL_NOTIFICATIONS}"><span>{L_NOTIFICATIONS} [</span><strong>{NOTIFICATIONS_COUNT}</strong><span>]</span></a>
+				</li>
+				<!-- ENDIF -->
+				<!-- IF S_DISPLAY_PM -->
+					<li><a href="{U_PRIVATEMSGS}"><span>{L_PRIVATE_MESSAGES} [</span><strong>{PRIVATE_MESSAGE_COUNT}</strong><span>]</span></a></li>
+				<!-- ENDIF -->
+				<li><a href="{U_PROFILE}">{L_PROFILE}</a></li>
+				<!-- IF U_UM_MCP -->
+					<li><a href="{U_UM_MCP}">{L_MCP}</a></li>
+				<!-- ENDIF -->
+				<!-- IF U_ACP -->
+					<li><a href="{U_ACP}">{L_M_ACP}</a></li>
+				<!-- ENDIF -->
+				<li><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></li>
+			</ul>
+	</div>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

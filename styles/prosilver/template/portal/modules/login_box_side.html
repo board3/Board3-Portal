@@ -1,0 +1,22 @@
+<form action="{S_LOGIN_ACTION}" method="post" id="portal-login-box">
+<div>
+{$LR_BLOCK_H_L}<a href="{U_LOGIN_LOGOUT}"><!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}</a>{$LR_BLOCK_H_R}
+	<span class="genmed">{L_USERNAME}{L_COLON}</span><br />
+	<input type="text" tabindex="1" name="username" id="username" value="" class="inputbox autowidth" /><br /><br /> 
+	<span class="genmed">{L_PASSWORD}{L_COLON}</span><br />
+	<input type="password" tabindex="2" id="password" name="password" class="inputbox autowidth" /> 
+	<!-- IF S_DISPLAY_FULL_LOGIN -->			
+		<br /><br />
+		<!-- IF S_AUTOLOGIN_ENABLED -->
+			<input type="checkbox" class="radio" name="autologin" tabindex="3" /> <span class="gensmall">{L_UM_LOG_ME_IN}</span><br />
+		<!-- ENDIF -->
+	<!-- ENDIF -->
+	<!-- IF S_SHOW_REGISTER and S_REGISTER_ENABLED -->
+		<br /><a href="{U_REGISTER}">{L_UM_REGISTER_NOW}</a><br />
+	<!-- ENDIF -->
+	<br />
+	<input type="hidden" name="redirect" value="{U_PORTAL_REDIRECT}" />
+	<input type="submit" name="login" tabindex="5" value="{L_LOGIN}" class="button1" />
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+</div>
+</form>

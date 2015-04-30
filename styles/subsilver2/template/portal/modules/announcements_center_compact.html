@@ -1,0 +1,68 @@
+<!-- BEGIN announcements -->
+<!-- IF announcements.MODULE_ID eq $MODULE_ID -->
+<!-- BEGIN center_row -->
+<!-- IF announcements.center_row.S_FIRST_ROW -->
+{$C_BLOCK_H_L}{$TITLE} <a name="a_{$MODULE_ID}"></a>{$C_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<!-- IF not announcements.center_row.S_NO_TOPICS  -->
+		<tr class="nav">
+			<!-- IF announcements.S_TOPIC_ICONS -->
+				<td class="cat" align="center" colspan="3">&nbsp;{L_TOPICS}&nbsp;</td>
+			<!-- ELSE -->
+				<td class="cat" align="center" colspan="2">&nbsp;{L_TOPICS}&nbsp;</td>
+			<!-- ENDIF -->
+			<!-- IF announcements.S_DISPLAY_ANNOUNCEMENTS_RVS -->
+			<td class="cat" align="center">&nbsp;{L_REPLIES}&nbsp;</td>
+			<td class="cat" align="center">&nbsp;{L_VIEWS}&nbsp;</td>
+			<!-- ENDIF -->
+			<td class="cat" align="center">&nbsp;{L_LAST_POST}&nbsp;</td>
+		</tr>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+	<!-- IF announcements.center_row.S_NO_TOPICS  -->
+	<tr class="row1">
+		<td align="center">
+			<span class="gensmall"><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
+		</td>
+	</tr>
+	<!-- ELSE -->
+			<tr>
+				<td class="row1" width="25" align="center">{announcements.center_row.TOPIC_FOLDER_IMG}</td>
+					<!-- IF announcements.S_TOPIC_ICONS --><td class="row1" width="25" align="center"><!-- IF announcements.center_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{announcements.center_row.TOPIC_ICON_IMG}" width="{announcements.center_row.TOPIC_ICON_IMG_WIDTH}" height="{announcements.center_row.TOPIC_ICON_IMG_HEIGHT}" alt="" title="" /><!-- ENDIF --></td><!-- ENDIF -->
+				<td class="row1">
+				<!-- IF announcements.center_row.PAGINATION --><span style="float: right; font-size:0.9em;"> [ {GOTO_PAGE_IMG}{L_GOTO_PAGE}{L_COLON} {announcements.center_row.PAGINATION} ] </span><!-- ENDIF -->
+					{announcements.center_row.ATTACH_ICON_IMG} <!-- IF announcements.center_row.S_POLL --> <strong style="font-size:1.1em;">{L_VIEW_TOPIC_POLL}{L_COLON} </strong><!-- ENDIF --><a title="{announcements.center_row.TITLE}" href="{announcements.center_row.U_VIEW_COMMENTS}" class="topictitle">{announcements.center_row.TITLE}</a>
+					<p class="gensmall">{L_POSTED} {L_POST_BY_AUTHOR} {announcements.center_row.POSTER_FULL} &raquo; {announcements.center_row.TIME}
+					<!-- IF announcements.center_row.FORUM_NAME -->
+						<br />{L_FORUM}{L_COLON} <a href="{announcements.center_row.U_VIEWFORUM}" style="font-weight: bold;">{announcements.center_row.FORUM_NAME}</a>
+			<!-- ELSE -->
+				{L_GLOBAL_ANNOUNCEMENT}
+			<!-- ENDIF -->
+			<!-- IF not announcements.S_DISPLAY_ANNOUNCEMENTS_RVS --><!-- IF announcements.center_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}{L_COLON} <strong>{announcements.center_row.REPLIES}</strong>  &bull; {L_VIEWS}{L_COLON} <strong>{announcements.center_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
+					</p>
+				</td>
+				<!-- IF announcements.S_DISPLAY_ANNOUNCEMENTS_RVS -->
+				<td class="row1" width="50" align="center"><p class="topicdetails">{announcements.center_row.REPLIES}</p></td>
+				<td class="row2" width="50" align="center"><p class="topicdetails">{announcements.center_row.TOPIC_VIEWS}</p></td>
+				<!-- ENDIF -->
+				<td class="row1" width="140" align="center">
+					<p class="topicdetails" style="white-space: nowrap;"> {announcements.center_row.LAST_POST_TIME}</p>
+					<p class="topicdetails">{announcements.center_row.USERNAME_FULL_LAST}
+						<!-- IF not S_IS_BOT --><!-- IF announcements.center_row.S_UNREAD_INFO --><a href="{announcements.center_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements.center_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --><!-- ENDIF -->
+					</p>
+				</td>		
+			</tr>
+	<!-- ENDIF -->
+<!-- IF announcements.center_row.S_LAST_ROW -->
+	<!-- IF announcements.AP_PAGINATION or announcements.TOTAL_ANNOUNCEMENTS -->
+	<tr class="row<!-- IF announcements.center_row.S_ROW_COUNT is even -->2<!-- ELSE -->1<!-- ENDIF -->">
+		<td class="gensmall portal-pagination" valign="middle" align="right" nowrap="nowrap"  colspan="<!-- IF announcements.S_TOPIC_ICONS and announcements.S_DISPLAY_ANNOUNCEMENTS_RVS -->6<!-- ELSEIF not announcements.S_TOPIC_ICONS and announcements.S_DISPLAY_ANNOUNCEMENTS_RVS -->5<!-- ELSEIF announcements.S_TOPIC_ICONS and not announcements.S_DISPLAY_ANNOUNCEMENTS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->">{TOTAL_ANNOUNCEMENTS}
+		<!-- IF announcements.AP_PAGE_NUMBER --><!-- IF announcements.AP_PAGINATION --> &bull; {announcements.AP_PAGE_NUMBER} &bull; {announcements.AP_PAGINATION}<!-- ELSE --> &bull; {announcements.AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
+	</tr>
+	<!-- ENDIF -->
+</table>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END center_row -->
+<!-- ENDIF -->
+<!-- END announcements -->

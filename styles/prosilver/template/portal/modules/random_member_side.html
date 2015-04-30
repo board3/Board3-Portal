@@ -1,0 +1,21 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+<!-- BEGIN random_member -->
+	<div class="portal-centered-content"><span class="portal-random-member-name">{random_member.USERNAME_FULL}</span><br class="portal-clear" />
+		<!-- IF random_member.AVATAR_IMG --><a href="{random_member.U_VIEW_PROFILE}">{random_member.AVATAR_IMG}</a><br class="portal-clear" /><!-- ENDIF -->
+		<!-- IF random_member.RANK_TITLE --><span class="gensmall">{random_member.RANK_TITLE}</span><br class="portal-clear" /><!-- ENDIF -->
+		<!-- IF random_member.RANK_IMG -->{random_member.RANK_IMG}<br class="portal-clear" /><!-- ENDIF -->
+	</div>
+	<br class="portal-clear" />
+	<span class="portal-title-span"><strong>{L_RND_JOIN}{L_COLON}</strong></span><span class="portal-data-span">{random_member.JOINED}</span><br class="portal-clear" />
+	<span class="portal-title-span"><strong>{L_RND_POSTS}{L_COLON}</strong></span><span class="portal-data-span">{random_member.USER_POSTS}</span><br class="portal-clear" />
+	<!-- IF random_member.USER_OCC -->
+		<span class="portal-title-span"><strong>{L_RND_OCC}{L_COLON}</strong></span><span class="portal-data-span"> &nbsp; {random_member.USER_OCC}</span><br class="portal-clear" />
+	<!-- ENDIF -->
+	<!-- IF random_member.USER_FROM -->
+		<span class="portal-title-span"><strong>{L_RND_FROM}{L_COLON}</strong></span><span class="portal-data-span"> &nbsp; {random_member.USER_FROM}</span><br class="portal-clear" />
+	<!-- ENDIF -->
+	<!-- IF random_member.U_WWW -->
+		<span class="portal-title-span"><a href="{random_member.U_WWW}" title="{random_member.U_WWW}"><strong>{L_RND_WWW}</strong></a></span><br class="portal-clear" />
+	<!-- ENDIF -->
+<!-- END random_member -->	
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+	<table name="phpbb_portal_modules">
+		<column>module_id</column>
+		<column>module_classname</column>
+		<column>module_column</column>
+		<column>module_order</column>
+		<row>
+			<value>1</value>
+			<value>\board3\portal\modules\clock</value>
+			<value>1</value>
+			<value>1</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>\board3\portal\modules\birthday_list</value>
+			<value>2</value>
+			<value>2</value>
+		</row>
+		<row>
+			<value>6</value>
+			<value>\board3\portal\modules\donation</value>
+			<value>1</value>
+			<value>3</value>
+		</row>
+		<row>
+			<value>3</value>
+			<value>\board3\portal\modules\clock</value>
+			<value>3</value>
+			<value>1</value>
+		</row>
+		<row>
+			<value>4</value>
+			<value>\board3\portal\modules\birthday_list</value>
+			<value>3</value>
+			<value>2</value>
+		</row>
+		<row>
+			<value>5</value>
+			<value>\board3\portal\modules\welcome</value>
+			<value>2</value>
+			<value>1</value>
+		</row>
+		<row>
+			<value>7</value>
+			<value>\board3\portal\modules\custom</value>
+			<value>4</value>
+			<value>1</value>
+		</row>
+	</table>
+</dataset>

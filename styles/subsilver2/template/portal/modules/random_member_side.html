@@ -1,0 +1,27 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr class="row1">
+		<td>
+			<!-- BEGIN random_member -->
+			<div style="text-align: center;"><span style="font-size:12px; padding-top:1px; margin-bottom: 5px;">{random_member.USERNAME_FULL}</span><br style="clear:both" />
+				<!-- IF random_member.AVATAR_IMG --><a href="{random_member.U_VIEW_PROFILE}">{random_member.AVATAR_IMG}</a><br style="clear:both" /><!-- ENDIF -->
+				<!-- IF random_member.RANK_TITLE --><span class="gensmall">{random_member.RANK_TITLE}</span><br style="clear:both" /><!-- ENDIF -->
+				<!-- IF random_member.RANK_IMG -->{random_member.RANK_IMG}<br style="clear:both" /><!-- ENDIF -->
+			</div>
+			<br style="clear:both" />
+			<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"><strong>{L_RND_JOIN}{L_COLON}</strong></span><span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->;padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->:10px;">{random_member.JOINED}</span><br style="clear:both" />
+			<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"><strong>{L_RND_POSTS}{L_COLON}</strong></span><span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->;padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->:10px;">{random_member.USER_POSTS}</span><br style="clear:both" />
+			<!-- IF random_member.USER_OCC -->
+			<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"><strong>{L_RND_OCC}{L_COLON}</strong></span><span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->;padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->:10px;"> &nbsp; {random_member.USER_OCC}</span><br style="clear:both" />
+			<!-- ENDIF -->
+			<!-- IF random_member.USER_FROM -->
+			<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"><strong>{L_RND_FROM}{L_COLON}</strong></span><span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->;padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->:10px;"> &nbsp; {random_member.USER_FROM}</span><br style="clear:both" />
+			<!-- ENDIF -->
+			<!-- IF random_member.U_WWW -->
+			<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"><a href="{random_member.U_WWW}" title="{random_member.U_WWW}"><strong>{L_RND_WWW}</strong></a></span><br style="clear:both" />
+			<!-- ENDIF -->
+			<!-- END random_member -->	
+		</td>
+	</tr>
+</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

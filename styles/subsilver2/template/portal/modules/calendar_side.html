@@ -1,0 +1,88 @@
+<!-- BEGIN minical -->
+<!-- IF minical.MODULE_ID eq $MODULE_ID -->
+<a name="minical{minical.MODULE_ID}"></a>
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+   <tr class="row1">
+      <td>   
+         <table width="100%" cellspacing="1">
+            <tr>
+               <td align="left" colspan="2"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{minical.U_NEXT_MONTH}<!-- ELSE -->{minical.U_PREV_MONTH}<!-- ENDIF --></td>
+               <td colspan="3" align="center"><span class="genmed">{minical.L_MINI_CAL_MONTH}</span></td>
+               <td align="right" colspan="2"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{minical.U_PREV_MONTH}<!-- ELSE -->{minical.U_NEXT_MONTH}<!-- ENDIF --></td>
+            </tr>
+            <tr>
+               <!-- IF minical.S_SUNDAY_FIRST -->
+                  <td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_SUN}</span></td>
+               <!-- ENDIF -->
+                  <td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_MON}</span></td>
+                  <td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_TUE}</span></td>
+                  <td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_WED}</span></td>
+                  <td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_THU}</span></td>
+                  <td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_FRI}</span></td>
+                  <td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_SAT}</span></td>
+               <!-- IF not minical.S_SUNDAY_FIRST -->
+                  <td style="width: 14%;"><span class="gensmall" style="font-weight: bold">{minical.L_MINI_CAL_SUN}</span></td>
+               <!-- ENDIF -->
+            </tr>
+            <!-- BEGIN mini_cal_row -->
+            <tr>
+               <!-- BEGIN mini_cal_days -->
+                  <td class="row1" align="center"><span class="gensmall">{minical.mini_cal_row.mini_cal_days.MINI_CAL_DAY}</span></td>
+               <!-- END mini_cal_days -->
+            </tr>
+            <!-- END mini_cal_row -->
+         </table>
+      </td>
+   </tr>
+</table>
+<!-- IF minical.S_DISPLAY_EVENTS -->
+<table class="tablebg" cellspacing="1" width="100%">
+   <tr class="row3">
+      <td colspan="3" align="left"><span class="genmed" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_CURRENT_EVENTS}{L_COLON}</span></td>
+   </tr>   
+   <!-- BEGIN cur_events -->
+   <tr class="row1">
+      <td style="width: 100%; padding-left: 5px; padding-bottom: 5px;">
+               <!-- IF minical.cur_events.EVENT_URL --><a href="{minical.cur_events.EVENT_URL}" title="{minical.cur_events.EVENT_TITLE}" <!-- IF minical.cur_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.cur_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
+               <span style="font-weight: bold;">{minical.cur_events.EVENT_TITLE}{L_COLON}</span><br />
+               <!-- IF not minical.cur_events.ALL_DAY and not minical.cur_events.END_TIME -->{L_EVENT_TIME}{L_COLON}&nbsp;{minical.cur_events.START_TIME}<br />
+               <!-- ELSEIF not minical.cur_events.ALL_DAY and cur_events.END_TIME -->{L_EVENT_START}{L_COLON}&nbsp;{minical.cur_events.START_TIME}<br />{L_EVENT_END}{L_COLON}&nbsp;{minical.cur_events.END_TIME}<br />
+               <!-- ELSE -->{L_EVENT_ALL_DAY}<br />
+               <!-- ENDIF -->
+               <!-- IF minical.cur_events.EVENT_DESC --><span style="font-style: italic;">{minical.cur_events.EVENT_DESC}</span><!-- ENDIF -->
+               <!-- IF minical.cur_events.EVENT_URL --></a><!-- ENDIF -->
+      </td>
+   </tr>
+   <!-- BEGINELSE -->
+   <tr class="row1">
+      <td><span style="float:left;" class="gensmall"><strong>{L_NO_CUR_EVENTS}</strong></span><br /></td>
+   </tr>
+   <!-- END cur_events -->
+
+   <tr class="row3">
+      <td colspan="3" align="left"><span class="genmed" style="font: bold 12px 'Trebuchet MS','Lucida Grande',Arial,sans-serif; text-decoration: underline;">{L_UPCOMING_EVENTS}{L_COLON}</span></td>
+   </tr>
+      <!-- BEGIN upcoming_events -->
+      <tr class="row1">
+         <td style="width: 100%; padding-left: 5px; padding-bottom: 5px;">
+                  <!-- IF minical.upcoming_events.EVENT_URL --><a href="{minical.upcoming_events.EVENT_URL}" title="{minical.upcoming_events.EVENT_TITLE}" <!-- IF minical.upcoming_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.upcoming_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
+                  <span style="font-weight: bold;">{minical.upcoming_events.EVENT_TITLE}{L_COLON}</span><br />
+                  <!-- IF not minical.upcoming_events.ALL_DAY and not minical.upcoming_events.END_TIME -->{L_EVENT_TIME}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />
+                  <!-- ELSEIF not minical.upcoming_events.ALL_DAY and minical.upcoming_events.END_TIME -->{L_EVENT_START}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_END}{L_COLON}&nbsp;{minical.upcoming_events.END_TIME}<br />
+                  <!-- ELSE -->{L_EVENT_TIME}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
+                  <!-- ENDIF -->
+                  <!-- IF minical.upcoming_events.EVENT_DESC --><span style="font-style: italic;">{minical.upcoming_events.EVENT_DESC}</span><!-- ENDIF -->
+                  <!-- IF minical.upcoming_events.EVENT_URL --></a><!-- ENDIF -->
+         </td>
+      </tr>
+      <!-- BEGINELSE -->
+      <tr class="row1">
+         <td><span style="float:left;" class="gensmall"><strong>{L_NO_UPCOMING_EVENTS}</strong></span><br /></td>
+      </tr>
+      <!-- END upcoming_events -->
+</table>
+<!-- ENDIF -->
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END minical -->

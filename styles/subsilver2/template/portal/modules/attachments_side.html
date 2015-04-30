@@ -1,0 +1,19 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<table class="tablebg" cellspacing="1" width="100%">
+		<tr class="row1">
+			<td>
+				<!-- IF .attach_side -->
+					<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"><strong>{L_FILENAME}</strong></span><br style="clear:both" />
+					<!-- BEGIN attach_side -->
+						<span class="imageset icon_topic_attach"></span>&nbsp;<a href="{attach_side.U_TOPIC}" title="{attach_side.REAL_FILENAME}"><strong>{attach_side.FILENAME}</strong></a><br style="clear:both" />
+						<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;">{L_FILESIZE}{L_COLON}</span><span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->;" class="gensmall"><strong>{attach_side.FILESIZE}</strong></span><br style="clear:both" />
+						<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;">{L_DOWNLOADS}{L_COLON}</span><span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->left<!-- ELSE -->right<!-- ENDIF -->;" class="gensmall"><strong>{attach_side.DOWNLOAD_COUNT}</strong></span><br style="clear:both" />
+						<!-- IF not attach_side.S_LAST_ROW --><hr /><!-- ENDIF -->
+					<!-- END attach_side -->
+				<!-- ELSE -->
+					<span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;" class="gensmall"><strong>{L_NO_ATTACHMENTS}</strong></span>
+				<!-- ENDIF -->
+			</td>
+		</tr>
+	</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

@@ -1,0 +1,13 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<!-- IF .attach_side -->
+		<span class="portal-title-span"><strong>{L_FILENAME}</strong></span><br />
+		<!-- BEGIN attach_side -->
+			<span class="portal-title-span portal-gensmall imageset icon_topic_attach">&nbsp;</span>&nbsp;<a class="portal-title-link" href="{attach_side.U_TOPIC}" title="{attach_side.REAL_FILENAME}"><strong>{attach_side.FILENAME}</strong></a><br class="portal-clear" />
+			<span class="portal-text-span">{L_FILESIZE}{L_COLON}</span><span class="portal-data-span portal-gensmall"><strong>{attach_side.FILESIZE}</strong></span><br class="portal-clear" />
+			<span class="portal-text-span">{L_DOWNLOADS}{L_COLON}</span><span class="portal-data-span portal-gensmall"><strong>{attach_side.DOWNLOAD_COUNT}</strong></span><br class="portal-clear" />
+			<!-- IF not attach_side.S_LAST_ROW --><hr class="dashed" /><!-- ENDIF -->
+		<!-- END attach_side -->
+	<!-- ELSE -->
+		<span class="portal-title-span portal-gensmall"><strong>{L_NO_ATTACHMENTS}</strong></span><br />
+	<!-- ENDIF -->
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

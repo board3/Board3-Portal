@@ -1,0 +1,8 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<span class="portal-user-span"><strong>{L_USERNAME}</strong></span>
+	<span class="portal-user-annotation"><strong>{L_POSTS}</strong></span><br class="portal-clear" />
+	<!-- BEGIN topposters -->
+		<span class="portal-user-icon"></span><span class="portal-user-span">{topposters.USERNAME_FULL}</span>
+		<span class="portal-user-annotation"><a href="{topposters.S_SEARCH_ACTION}">{topposters.POSTER_POSTS}</a></span><br class="portal-clear" />
+	<!-- END topposters -->
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

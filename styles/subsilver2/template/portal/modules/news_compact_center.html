@@ -1,0 +1,66 @@
+<!-- BEGIN news -->
+<!-- IF news.MODULE_ID eq $MODULE_ID -->
+<!-- BEGIN news_row -->
+<!-- IF news.news_row.S_FIRST_ROW -->
+{$C_BLOCK_H_L}{$TITLE} <a id="n_{$MODULE_ID}"></a>{$C_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<!-- IF not news.news_row.S_NO_TOPICS  -->
+		<tr class="nav">
+			<!-- IF news.S_TOPIC_ICONS -->
+				<td class="cat" align="center" colspan="3">&nbsp;{L_TOPICS}&nbsp;</td>
+			<!-- ELSE -->
+				<td class="cat" align="center" colspan="2">&nbsp;{L_TOPICS}&nbsp;</td>
+			<!-- ENDIF -->
+			<!-- IF news.S_DISPLAY_NEWS_RVS -->
+			<td class="cat" align="center">&nbsp;{L_REPLIES}&nbsp;</td>
+			<td class="cat" align="center">&nbsp;{L_VIEWS}&nbsp;</td>
+			<!-- ENDIF -->
+			<td class="cat" align="center">&nbsp;{L_LAST_POST}&nbsp;</td>
+		</tr>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+	<!-- IF news.news_row.S_NO_TOPICS  -->
+	<tr class="row1">
+		<td align="center">
+			<span class="gensmall"><strong>{L_NO_NEWS}</strong></span>
+		</td>
+	</tr>
+	<!-- ELSE -->
+			<tr>
+				<td class="row1" width="25" align="center">{news.news_row.TOPIC_FOLDER_IMG}</td>
+					<!-- IF S_TOPIC_ICONS --><td class="row1" width="25" align="center"><!-- IF news.news_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{news.news_row.TOPIC_ICON_IMG}" width="{news.news_row.TOPIC_ICON_IMG_WIDTH}" height="{news.news_row.TOPIC_ICON_IMG_HEIGHT}" alt="" title="" /><!-- ENDIF --></td><!-- ENDIF -->
+				<td class="row1">
+				<!-- IF news.news_row.PAGINATION --><span style="float: right; font-size:0.9em;"> [ {GOTO_PAGE_IMG}{L_GOTO_PAGE}{L_COLON} {news.news_row.PAGINATION} ] </span><!-- ENDIF -->
+					{news.news_row.ATTACH_ICON_IMG} <!-- IF news.news_row.S_POLL --> <strong style="font-size:1.1em;">{L_VIEW_TOPIC_POLL}</strong><!-- ENDIF --><a title="{news.news_row.TITLE}" href="{news.news_row.U_VIEW_COMMENTS}" class="topictitle">{news.news_row.TITLE}</a>
+					<p class="gensmall">{L_POSTED} {L_POST_BY_AUTHOR} {news.news_row.POSTER_FULL} &raquo; {news.news_row.TIME}
+					<!-- IF news.news_row.FORUM_NAME -->
+						<br />{L_FORUM}{L_COLON} <a href="{news.news_row.U_VIEWFORUM}" style="font-weight: bold;">{news.news_row.FORUM_NAME}</a>
+					<!-- ENDIF -->
+					<!-- IF not news.S_DISPLAY_NEWS_RVS --><!-- IF news.news_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}{L_COLON} <strong>{news.news_row.REPLIES}</strong>  &bull; {L_VIEWS}{L_COLON} <strong>{news.news_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
+					</p>
+				</td>
+				<!-- IF news.S_DISPLAY_NEWS_RVS -->
+				<td class="row1" width="50" align="center"><p class="topicdetails">{news.news_row.REPLIES}</p></td>
+				<td class="row2" width="50" align="center"><p class="topicdetails">{news.news_row.TOPIC_VIEWS}</p></td>
+				<!-- ENDIF -->
+				<td class="row1" width="140" align="center">
+					<p class="topicdetails" style="white-space: nowrap;"> {news.news_row.LAST_POST_TIME}</p>
+					<p class="topicdetails">{news.news_row.USERNAME_FULL_LAST}
+						<!-- IF not S_IS_BOT --><!-- IF news.news_row.S_UNREAD_INFO --><a href="{news.news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news.news_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --><!-- ENDIF -->
+					</p>
+				</td>		
+			</tr>
+	<!-- ENDIF -->
+<!-- IF news.news_row.S_LAST_ROW -->
+	<!-- IF news.NP_PAGINATION or news.TOTAL_NEWS -->
+	<tr class="row<!-- IF news.news_row.S_ROW_COUNT is even -->2<!-- ELSE -->1<!-- ENDIF -->">
+		<td class="gensmall portal-pagination" valign="middle" align="right" nowrap="nowrap" colspan="<!-- IF news.S_TOPIC_ICONS and news.S_DISPLAY_NEWS_RVS -->6<!-- ELSEIF not news.S_TOPIC_ICONS and news.S_DISPLAY_NEWS_RVS -->5<!-- ELSEIF news.S_TOPIC_ICONS and not news.S_DISPLAY_NEWS_RVS -->4<!-- ELSE -->3<!-- ENDIF -->">{news.TOTAL_NEWS}
+		<!-- IF news.NP_PAGE_NUMBER --><!-- IF news.NP_PAGINATION --> &bull; {news.NP_PAGE_NUMBER} &bull; {news.NP_PAGINATION}<!-- ELSE --> &bull; {news.NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
+	</tr>
+	<!-- ENDIF -->
+</table>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END news_row -->
+<!-- ENDIF -->
+<!-- END news -->

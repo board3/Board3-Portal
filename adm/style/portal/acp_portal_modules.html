@@ -1,0 +1,206 @@
+<!-- IF S_AJAX_REQUEST -->
+	<form id="acp_portal_modules" method="post" action="{U_ACTION}">
+		<fieldset>
+			<dl>
+				<dt><label for="module_classname" style="display: inline;">{L_CHOOSE_MODULE}{L_COLON}</label><br /><span>{L_CHOOSE_MODULE_EXP}</span></dt>
+				<dd><select name="module_classname" id="module_classname">{S_MODULE_NAMES}</select></dd>
+			</dl>
+
+			<p class="submit-buttons">
+				<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+				<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+				{S_FORM_TOKEN}{S_HIDDEN_FIELDS}
+			</p>
+		</fieldset>
+	</form>
+
+<!-- ELSE -->
+<!-- INCLUDECSS portal/b3p_admin.css -->
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<!-- IF S_EDIT -->
+
+<h1>{L_ACP_PORTAL_MODULES}</h1>
+<p>{L_ACP_PORTAL_MODULES_EXP}</p>
+
+<form id="acp_portal_modules" method="post" action="{B3P_U_ACTION}">
+	<fieldset>
+		<dl>
+			<dt><label for="module_classname">{L_CHOOSE_MODULE}{L_COLON}</label><br /><span>{L_CHOOSE_MODULE_EXP}</span></dt>
+			<dd><select name="module_classname" id="module_classname">{S_MODULE_NAMES}</select></dd>
+		</dl>
+
+		<p class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+			{S_FORM_TOKEN}{S_HIDDEN_FIELDS}
+		</p>
+	</fieldset>
+</form>
+
+<!-- ELSE -->
+
+<h1>{L_ACP_PORTAL_MODULES}</h1>
+<p>{L_ACP_PORTAL_MODULES_EXP}</p>
+
+<form id="acp_portal_modules" method="post" action="{B3P_U_ACTION}" data-ajax="true">
+	<fieldset class="tabulated">
+	<legend>{L_ACP_PORTAL_MODULES}</legend>
+
+	<table class="portal-modules-overview">
+		<tr>
+			<th style="text-align: center;">{L_MODULE_POS_TOP}</th>
+		</tr>
+		<!-- BEGIN modules_top -->
+			<!-- IF not modules_top.MODULE_ENABLED --><tr class="row3"><!-- ELSEIF modules_top.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+				<td>
+					{modules_top.MODULE_IMAGE} {modules_top.MODULE_NAME}<br />
+					<br />
+					<span<!-- IF not modules_top.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_UP_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_top.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_top.U_MOVE_UP}" data-ajax="b3p_move_module_up">{ICON_MOVE_UP}</a>&nbsp;</span>
+					<span<!-- IF not modules_top.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_DOWN_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_top.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_top.U_MOVE_DOWN}" data-ajax="b3p_move_module_down">{ICON_MOVE_DOWN}</a>&nbsp;</span>
+					<a href="{modules_top.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_top.U_DELETE}" data-ajax="b3p_delete_module">{ICON_DELETE}</a>
+				</td>
+			</tr>
+		<!-- BEGINELSE -->
+			<tr>
+				<td class="row1" style="text-align: center;">{L_NO_MODULES}</td>
+			</tr>
+		<!-- END modules_top -->
+	</table>
+	<p class="quick">
+		<input class="button2" name="add[top]" type="submit" value="{L_ADD_MODULE}" />
+	</p>
+
+	<table style="background-color: transparent; border: none; padding: 0px; margin: 0px;">
+		<tr style="vertical-align: top;">
+				<td style="width: 20%; font-size: 100%; line-height: 100%; padding: 0px; margin: 0px;">
+	<table class="portal-modules-overview">
+		<tr>
+				<th>{L_MODULE_POS_LEFT}</th>
+		</tr>
+		<!-- BEGIN modules_left -->
+			<!-- IF not modules_left.MODULE_ENABLED --><tr class="row3"><!-- ELSEIF modules_left.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+				<td>
+					{modules_left.MODULE_IMAGE} {modules_left.MODULE_NAME}<br />
+					<br />
+					<span<!-- IF not modules_left.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_UP_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_left.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_left.U_MOVE_UP}" data-ajax="b3p_move_module_up">{ICON_MOVE_UP}</a>&nbsp;</span>
+					<!-- IF modules_left.U_MOVE_RIGHT --><a href="{modules_left.U_MOVE_RIGHT}"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{ICON_MOVE_LEFT}<!-- ELSE -->{ICON_MOVE_RIGHT}<!-- ENDIF --></a><!-- ELSE --><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{ICON_MOVE_LEFT_DISABLED}<!-- ELSE -->{ICON_MOVE_RIGHT_DISABLED}<!-- ENDIF --><!-- ENDIF -->&nbsp;
+					<a href="{modules_left.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_left.U_DELETE}" data-ajax="b3p_delete_module">{ICON_DELETE}</a><br />
+					<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{ICON_MOVE_RIGHT_DISABLED}<!-- ELSE -->{ICON_MOVE_LEFT_DISABLED}<!-- ENDIF -->&nbsp;
+					<span<!-- IF not modules_left.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_DOWN_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_left.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_left.U_MOVE_DOWN}" data-ajax="b3p_move_module_down">{ICON_MOVE_DOWN}</a></span>
+				</td>
+			</tr>
+		<!-- BEGINELSE -->
+			<tr>
+				<td class="row1" style="text-align: center;">{L_NO_MODULES}</td>
+			</tr>
+		<!-- END modules_left -->
+	</table>
+	<p class="quick">
+		<input class="button2" name="add[left]" type="submit" value="{L_ADD_MODULE}" />
+	</p>
+				</td>
+				<td style="font-size: 100%; line-height: 100%; padding: 0 12px;">
+	<table class="portal-modules-overview">
+		<tr>
+				<th style="text-align: center;">{L_MODULE_POS_CENTER}</th>
+		</tr>
+		<!-- BEGIN modules_center -->
+			<!-- IF not modules_center.MODULE_ENABLED --><tr class="row3"><!-- ELSEIF modules_center.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+				<td>
+					{modules_center.MODULE_IMAGE} {modules_center.MODULE_NAME}<br />
+					<br />
+					<span<!-- IF not modules_center.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_UP_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_center.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_center.U_MOVE_UP}" data-ajax="b3p_move_module_up">{ICON_MOVE_UP}</a>&nbsp;</span>
+					<!-- IF modules_center.U_MOVE_RIGHT --><a href="{modules_center.U_MOVE_RIGHT}">{ICON_MOVE_RIGHT}</a><!-- ELSE -->{ICON_MOVE_RIGHT_DISABLED}<!-- ENDIF -->&nbsp;
+					<a href="{modules_center.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_center.U_DELETE}" data-ajax="b3p_delete_module">{ICON_DELETE}</a><br />
+					<!-- IF modules_center.U_MOVE_LEFT --><a href="{modules_center.U_MOVE_LEFT}">{ICON_MOVE_LEFT}</a><!-- ELSE -->{ICON_MOVE_LEFT_DISABLED}<!-- ENDIF -->&nbsp;
+					<span<!-- IF not modules_center.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_DOWN_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_center.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_center.U_MOVE_DOWN}" data-ajax="b3p_move_module_down">{ICON_MOVE_DOWN}</a></span>
+				</td>
+			</tr>
+		<!-- BEGINELSE -->
+			<tr>
+				<td class="row1" style="text-align: center;">{L_NO_MODULES}</td>
+			</tr>
+		<!-- END modules_center -->
+	</table>
+	<p class="quick">
+		<input class="button2" name="add[center]" type="submit" value="{L_ADD_MODULE}" />
+	</p>
+				</td>
+				<td style="width: 20%; font-size: 100%; line-height: 100%; padding: 0px;">
+	<table class="portal-modules-overview">
+		<tr>
+				<th>{L_MODULE_POS_RIGHT}</th>
+		</tr>
+		<!-- BEGIN modules_right -->
+			<!-- IF not modules_right.MODULE_ENABLED --><tr class="row3"><!-- ELSEIF modules_right.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+				<td>
+					{modules_right.MODULE_IMAGE} {modules_right.MODULE_NAME}<br />
+					<br />
+					<span<!-- IF not modules_right.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_UP_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_right.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_right.U_MOVE_UP}" data-ajax="b3p_move_module_up">{ICON_MOVE_UP}</a>&nbsp;</span>
+					<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{ICON_MOVE_LEFT_DISABLED}<!-- ELSE -->{ICON_MOVE_RIGHT_DISABLED}<!-- ENDIF -->&nbsp;
+					<a href="{modules_right.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_right.U_DELETE}" data-ajax="b3p_delete_module">{ICON_DELETE}</a><br />
+					<!-- IF modules_right.U_MOVE_LEFT --><a href="{modules_right.U_MOVE_LEFT}"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{ICON_MOVE_RIGHT}<!-- ELSE -->{ICON_MOVE_LEFT}<!-- ENDIF --></a><!-- ELSE --><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{ICON_MOVE_RIGHT_DISABLED}<!-- ELSE -->{ICON_MOVE_LEFT_DISABLED}<!-- ENDIF --><!-- ENDIF -->&nbsp;
+					<span<!-- IF not modules_right.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_DOWN_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_right.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_right.U_MOVE_DOWN}" data-ajax="b3p_move_module_down">{ICON_MOVE_DOWN}</a></span>
+				</td>
+			</tr>
+		<!-- BEGINELSE -->
+			<tr>
+				<td class="row1" style="text-align: center;">{L_NO_MODULES}</td>
+			</tr>
+		<!-- END modules_right -->
+	</table>
+	<p class="quick">
+		<input class="button2" name="add[right]" type="submit" value="{L_ADD_MODULE}" />
+	</p>
+				</td>
+		</tr>
+	</table>
+	<br />
+
+	<table class="portal-modules-overview">
+		<tr>
+			<th style="text-align: center;">{L_MODULE_POS_BOTTOM}</th>
+		</tr>
+		<!-- BEGIN modules_bottom -->
+			<!-- IF not modules_bottom.MODULE_ENABLED --><tr class="row3"><!-- ELSEIF modules_bottom.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+				<td>
+					{modules_bottom.MODULE_IMAGE} {modules_bottom.MODULE_NAME}<br />
+					<br />
+					<span<!-- IF not modules_bottom.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_UP_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_bottom.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_bottom.U_MOVE_UP}" data-ajax="b3p_move_module_up">{ICON_MOVE_UP}</a>&nbsp;</span>
+					<span<!-- IF not modules_bottom.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->>{ICON_MOVE_DOWN_DISABLED}&nbsp;</span>
+					<span<!-- IF modules_bottom.S_LAST_ROW --> style="display: none;"<!-- ENDIF -->><a href="{modules_bottom.U_MOVE_DOWN}" data-ajax="b3p_move_module_down">{ICON_MOVE_DOWN}</a>&nbsp;</span>
+					<a href="{modules_bottom.U_EDIT}">{ICON_EDIT}</a> <a href="{modules_bottom.U_DELETE}" data-ajax="b3p_delete_module">{ICON_DELETE}</a>
+				</td>
+			</tr>
+		<!-- BEGINELSE -->
+			<tr>
+				<td class="row1" style="text-align: center;">{L_NO_MODULES}</td>
+			</tr>
+		<!-- END modules_bottom -->
+	</table>
+	<p class="quick">
+		<input class="button2" name="add[bottom]" type="submit" value="{L_ADD_MODULE}" />
+	</p>
+
+	{S_FORM_TOKEN}
+	</fieldset>
+</form>
+
+<!-- ENDIF -->
+
+<!-- INCLUDEJS portal/ajax.js -->
+
+<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->

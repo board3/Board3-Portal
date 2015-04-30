@@ -1,0 +1,3 @@
+board3_portal_controller:
+    path: /portal
+    defaults: { _controller: board3.portal.main:handle }

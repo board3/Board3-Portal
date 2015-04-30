@@ -1,0 +1,34 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+			<!-- IF BIRTHDAY_LIST -->
+			<strong>{L_CONGRATULATIONS}{L_COLON}</strong><br />
+			<!-- BEGIN board3_birthday_list -->
+			<span class="portal-user-icon"></span>
+			<span class="portal-user-span">
+				{board3_birthday_list.USER}
+			</span>
+			<span class="portal-user-annotation">
+				<!-- IF board3_birthday_list.AGE -->{board3_birthday_list.AGE}<!-- ENDIF -->
+			</span><br class="portal-clear" />
+			<!-- END board3_birthday_list -->
+			<!-- ELSE -->
+			{L_NO_BIRTHDAYS}
+			<!-- ENDIF -->
+			<!-- IF S_DISPLAY_BIRTHDAY_AHEAD_LIST -->
+				<hr class="dashed" />
+				<strong>{L_BIRTHDAYS_AHEAD}</strong>
+				<br />
+				<!-- IF BIRTHDAYS_AHEAD_LIST -->
+				<!-- BEGIN board3_birthday_ahead_list -->
+				<span class="portal-user-icon"></span>
+				<span class="portal-user-span">
+					<span title="{board3_birthday_ahead_list.DATE}">{board3_birthday_ahead_list.USER}</span>
+				</span>
+				<span class="portal-user-annotation">
+					<!-- IF board3_birthday_ahead_list.AGE -->{board3_birthday_ahead_list.AGE}<!-- ENDIF -->
+				</span><br class="portal-clear" />
+				<!-- END board3_birthday_ahead_list -->
+				<!-- ELSE -->
+				{L_NO_BIRTHDAYS_AHEAD}
+				<!-- ENDIF -->
+			<!-- ENDIF -->
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

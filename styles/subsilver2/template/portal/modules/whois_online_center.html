@@ -1,0 +1,19 @@
+{$C_BLOCK_H_L}<!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}">{$TITLE}</a><!-- ELSE -->{$TITLE}<!-- ENDIF -->{$C_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+<tr>
+<!-- IF $WHOS_IMAGES -->
+	<!-- IF LEGEND -->
+		<td class="row1" rowspan="2" align="center" valign="middle"><img src="{T_THEME_PATH}{$WHOS_IMAGES}" alt="{L_WHO_IS_ONLINE}" /></td>
+	<!-- ELSE -->
+		<td class="row1" rowspan="2" align="center" valign="middle"><img src="{T_THEME_PATH}{$WHOS_IMAGES}" alt="{L_WHO_IS_ONLINE}" /></td>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+	<td class="row1" width="100%"><span class="genmed">{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /><br />{LOGGED_IN_USER_LIST}</span></td>
+</tr>
+<!-- IF PORTAL_LEGEND -->
+	<tr>
+		<td class="row1"><b class="gensmall">{L_LEGEND}{L_COLON} {PORTAL_LEGEND}</b></td>
+	</tr>
+<!-- ENDIF -->
+</table>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}

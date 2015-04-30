@@ -1,0 +1,34 @@
+<!-- IF .latest_announcements or .latest_hot_topics or .latest_topics -->
+{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr class="cat">
+		<!-- IF .latest_announcements --><td><strong>{L_PORTAL_RECENT_ANN}</strong></td><!-- ENDIF -->
+		<!-- IF .latest_hot_topics --><td><strong>{L_PORTAL_RECENT_HOT_TOPIC}</strong></td><!-- ENDIF -->
+		<!-- IF .latest_topics --><td><strong>{L_PORTAL_RECENT_TOPIC}</strong></td><!-- ENDIF -->
+	</tr>
+	<tr>
+		<!-- IF .latest_announcements -->
+		<td class="row1" width="33%" valign="top">
+			<!-- BEGIN latest_announcements -->
+						<a class="portal-arrow-bullet" href="{latest_announcements.U_VIEW_TOPIC}" title="{latest_announcements.FULL_TITLE}">&nbsp;{latest_announcements.TITLE}</a><br />
+			<!-- END latest_announcements -->
+		</td>
+		<!-- ENDIF -->
+		<!-- IF .latest_hot_topics -->
+		<td class="row1" width="33%" valign="top">
+			<!-- BEGIN latest_hot_topics -->
+				<a class="portal-arrow-bullet" href="{latest_hot_topics.U_VIEW_TOPIC}" title="{latest_hot_topics.FULL_TITLE}">&nbsp;{latest_hot_topics.TITLE}</a><br />
+			<!-- END latest_hot_topics -->
+		</td>
+		<!-- ENDIF -->
+		<!-- IF .latest_topics -->
+		<td class="row1" width="33%" valign="top">
+			<!-- BEGIN latest_topics -->
+				<a class="portal-arrow-bullet" href="{latest_topics.U_VIEW_TOPIC}" title="{latest_topics.FULL_TITLE}">&nbsp;{latest_topics.TITLE}</a><br />
+			<!-- END latest_topics -->
+		</td>
+		<!-- ENDIF -->
+	</tr>
+</table>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+<!-- ENDIF -->

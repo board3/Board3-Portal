@@ -1,0 +1,52 @@
+<!-- IF .latest_announcements or .latest_hot_topics or .latest_topics -->
+{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
+<div class="panel bg1 portal-no-margin">
+	<div class="inner">
+	<div class="portal-navigation">
+	<ul class="topiclist bg1">
+		<li><dl><dt></dt>
+			<dd class="portal-responsive-show portal-module-postbody portal-whois-online-content">
+			<table class="portal-module-postbody">
+			<tr class="menutitle">
+				<!-- IF .latest_announcements --><td class="portal-responsive-hide"><strong>{L_PORTAL_RECENT_ANN}</strong></td><!-- ENDIF -->
+				<!-- IF .latest_hot_topics --><td class="portal-responsive-hide"><strong>{L_PORTAL_RECENT_HOT_TOPIC}</strong></td><!-- ENDIF -->
+				<!-- IF .latest_topics --><td><strong>{L_PORTAL_RECENT_TOPIC}</strong></td><!-- ENDIF -->
+			</tr>
+			<tr>
+				<!-- IF .latest_announcements -->
+				<td class="row1 portal-responsive-hide portal-recent-column">
+					<span class="gensmall">
+					<!-- BEGIN latest_announcements -->
+								<a href="{latest_announcements.U_VIEW_TOPIC}" title="{latest_announcements.FULL_TITLE}">{latest_announcements.TITLE}</a>
+					<!-- END latest_announcements -->
+					</span>
+				</td>
+				<!-- ENDIF -->
+				<!-- IF .latest_hot_topics -->
+				<td class="row1 portal-responsive-hide portal-recent-column">
+					<span class="gensmall">
+					<!-- BEGIN latest_hot_topics -->
+						<a href="{latest_hot_topics.U_VIEW_TOPIC}" title="{latest_hot_topics.FULL_TITLE}">{latest_hot_topics.TITLE}</a>
+					<!-- END latest_hot_topics -->
+					</span>
+				</td>
+				<!-- ENDIF -->
+				<!-- IF .latest_topics -->
+				<td class="row1 portal-recent-column">
+					<span class="gensmall">
+					<!-- BEGIN latest_topics -->
+						<a href="{latest_topics.U_VIEW_TOPIC}" title="{latest_topics.FULL_TITLE}">{latest_topics.TITLE}</a>
+					<!-- END latest_topics -->
+					</span>
+				</td>
+				<!-- ENDIF -->
+			</tr>
+			</table>
+			</dd>
+		</dl></li>
+	</ul>
+	</div>
+	</div>
+</div>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+<!-- ENDIF -->

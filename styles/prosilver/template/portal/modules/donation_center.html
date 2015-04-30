@@ -1,0 +1,51 @@
+{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
+	<ul class="topiclist bg1">
+		<li><dl><dt></dt>
+			<dd class="portal-donation-center-content portal-responsive-show">
+				<div>
+			<strong>{SITENAME}</strong> {L_DONATION_TEXT}
+			<br />
+			<div class="portal-paypal-icon">&nbsp;</div>
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" class="portal-donation-form">
+		<div>
+			<input type="hidden" name="cmd" value="_xclick" />
+			<input type="hidden" name="business" value="{PAY_ACC_CENTER}" />
+			<input type="hidden" name="item_name" value="{L_PAY_ITEM}" />
+			<input type="hidden" name="no_note" value="1" />
+			<input type="hidden" name="no_shipping" value="2" />
+			<input type="hidden" name="bn" value="PP-DonationsBF" />
+			<input type="hidden" name="tax" value="0" />
+			<!-- IF PAY_CUSTOM_CENTER -->
+			<input type="hidden" name="custom" value="{PAY_CUSTOM_CENTER}" />
+			<!-- ENDIF -->
+			<input type="text" tabindex="11" name="amount" size="10" maxlength="6" value="" class="inputbox autowidth" title="{L_PAY_MSG}" />
+			<select name="currency_code" class="autowidth">
+				<option value="USD">{L_USD}</option>
+				<option value="AUD">{L_AUD}</option>
+				<option value="CAD">{L_CAD}</option>
+				<option value="CZK">{L_CZK}</option>
+				<option value="DKK">{L_DKK}</option>
+				<option value="EUR" selected="selected">{L_EUR}</option>
+				<option value="HKD">{L_HKD}</option>
+				<option value="HUF">{L_HUF}</option>
+				<option value="NZD">{L_NZD}</option>
+				<option value="NOK">{L_NOK}</option>
+				<option value="PLN">{L_PLN}</option>
+				<option value="GBP">{L_GBP}</option>
+				<option value="SGD">{L_SGD}</option>
+				<option value="SEK">{L_SEK}</option>
+				<option value="CHF">{L_CHF}</option>
+				<option value="JPY">{L_JPY}</option>
+				<option value="MXN">{L_MXN}</option>
+				<option value="ILS">{L_ILS}</option>
+			</select>
+			<input type="submit" name="submit" value="{L_DONATION}" class="button1" />
+		</div>
+		</form>
+			<br />
+			<strong>{L_PAY_MSG}</strong>
+		</div>
+			</dd>
+		</dl></li>
+	</ul>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}

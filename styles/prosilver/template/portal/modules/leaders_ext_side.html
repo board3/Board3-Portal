@@ -1,0 +1,11 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<!-- BEGIN group -->
+		<strong class="portal-user-span"><a href="{group.U_GROUP}" style="color: #{group.GROUP_COLOUR};" class="username-coloured">{group.GROUP_NAME}</a></strong><br class="portal-clear" />
+	<!-- BEGIN member -->
+		<span class="portal-user-icon"></span><span class="portal-user-span"><strong>{group.member.USERNAME_FULL}</strong></span><br class="portal-clear" />
+	<!-- END member -->
+	<br class="portal-clear" />
+	<!-- BEGINELSE -->
+		{L_NO_GROUPS_P}
+	<!-- END group -->
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

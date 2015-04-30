@@ -1,0 +1,76 @@
+<script type="text/javascript">
+<!--
+
+function qsearch_onSubmit()
+{
+	qs_enginename = document.getElementById('qsearch_select').value;
+	qs_keywords = document.getElementById('searchfield').value;
+	switch( qs_enginename )
+	{
+	case 'site':
+		break;
+	case 'author':
+		window.open('search.php?author=' + qs_keywords, '_self', '');
+		return false;
+	case 'wikipedia':
+		window.open('http://en.wikipedia.org/wiki/Spezial:Search?search=' + qs_keywords, '_wikipedia', '');
+		return false;
+	case 'google':
+		window.open('http://www.google.com/search?q=' + qs_keywords, '_google', '');
+		return false;
+	case 'yahoo':
+		window.open('http://search.yahoo.com/search?p=' + qs_keywords, '_yahoo', '');
+		return false;	
+	case 'bing':
+		window.open('http://www.bing.com/search?q=' + qs_keywords, '_bing', '');
+		return false;
+	case 'altavista':
+		window.open('http://www.altavista.com/web/results?itag=ody&q=' + qs_keywords + '&kgs=0&kls=0', '_altavista', '');
+		return false;
+	case 'lycos':
+		window.open('http://search.lycos.com/?query=' + qs_keywords, '_lycos', '');
+		return false;
+	case 'odp':
+		window.open('http://search.dmoz.org/cgi-bin/search?search=' + qs_keywords, '_odp', '');
+		return false;
+	default:
+		if( (i = qsearch_findEngine(qs_enginename)) >= 0 )
+		{
+			window.open(qsearch_engines[i].url + qs_keywords, '_blank', '');
+			return false;
+		}
+		break;
+	}
+	return true;
+}
+//-->
+</script>
+
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<form id="qsearch_form" method="post" action="{U_SEARCH}" onsubmit="return qsearch_onSubmit();">
+	<p>
+		<input type="text" tabindex="6" name="keywords" id="searchfield" maxlength="40" title="{L_SEARCH_KEYWORDS}" class="inputbox search autowidth" value="<!-- IF SEARCH_WORDS-->{SEARCH_WORDS}<!-- ELSE -->{L_SEARCH_MINI}<!-- ENDIF -->" onclick="if(this.value=='{LA_SEARCH_MINI}')this.value='';" onblur="if(this.value=='')this.value='{LA_SEARCH_MINI}';" />
+	</p>
+	<p>
+	<select id="qsearch_select" tabindex="7">
+		<optgroup label="{L_PORTAL_SEARCH_SITE}">
+			<option value="site">{L_PORTAL_SEARCH_POSTS}</option>
+			<option value="author">{L_PORTAL_SEARCH_AUTHOR}</option>
+		</optgroup>
+		<optgroup label="{L_PORTAL_SEARCH_ENGINE}">
+			<option value="wikipedia">Wikipedia</option>
+			<option value="google">Google</option>
+			<option value="yahoo">Yahoo</option>
+			<option value="bing">Bing</option>
+			<option value="altavista">Altavista</option>
+			<option value="lycos">Lycos</option>
+			<option value="odp">Open directory</option>
+		</optgroup>
+	</select>
+	<input type="hidden" name="search_fields" value="all" />
+	<input type="hidden" name="show_results" value="topics" />
+	<input type="submit" value="{L_PORTAL_SEARCH_GO}" class="button2" tabindex="8" />
+	</p>
+	</form>
+	<p><a href="{U_SEARCH}">{L_PORTAL_SEARCH_ADV}</a></p>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

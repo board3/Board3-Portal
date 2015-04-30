@@ -1,0 +1,28 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<!-- BEGIN group -->
+		<tr class="row3">
+			<td>
+				<strong<!-- IF S_CONTENT_DIRECTION eq 'rtl' --> style="float: right;"<!-- ENDIF -->><a href="{group.U_GROUP}" style="color: #{group.GROUP_COLOUR};" class="username-coloured">{group.GROUP_NAME}</a></strong>
+			</td>
+		</tr>
+		<!-- BEGIN member -->
+			<tr  class="row1">
+				<td>
+					<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
+					<span class="portal-user-span" style="float:right;"></span><span style="float:right; padding-right:5px; padding-top:2px;"><strong>{group.member.USERNAME_FULL}</strong></span><br style="clear:both" />
+					<!-- ELSE -->
+					<span class="portal-user-span" style="float:left;"></span><span style="float:left; padding-left:5px; padding-top:2px;"><strong>{group.member.USERNAME_FULL}</strong></span><br style="clear:both" />
+					<!-- ENDIF -->
+				</td>
+			</tr>
+		<!-- END member -->
+	<!-- BEGINELSE -->
+		<tr  class="row1">
+			<td>
+				{L_NO_GROUPS_P}
+			</td>
+		</tr>
+	<!-- END group -->
+</table>	
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

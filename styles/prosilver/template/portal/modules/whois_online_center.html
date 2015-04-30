@@ -1,0 +1,10 @@
+{$C_BLOCK_H_L}<!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}">{$TITLE}</a><!-- ELSE -->{$TITLE}<!-- ENDIF -->{$C_BLOCK_H_R}
+	<ul class="topiclist bg1">
+		<li><dl><dt></dt>
+			<dd class="portal-whois-online-content portal-responsive-show">
+				<p>{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
+				<!-- IF PORTAL_LEGEND --><br /><em>{L_LEGEND}{L_COLON} {PORTAL_LEGEND}</em><!-- ENDIF --></p>
+			</dd>
+		</dl></li>
+	</ul>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}

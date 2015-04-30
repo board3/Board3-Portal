@@ -1,0 +1,21 @@
+<!-- BEGIN portal_menu -->
+<!-- IF portal_menu.MODULE_ID eq $MODULE_ID -->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<div class="portal-navigation" role="menu">
+	<!-- BEGIN category -->
+		<div class="menutitle">{portal_menu.category.CAT_TITLE}</div>
+			<ul>
+			<!-- BEGIN links -->
+				<li><a href="{portal_menu.category.links.LINK_URL}" role="menuitem" <!-- IF portal_menu.category.links.NEW_WINDOW -->onclick="window.open('{portal_menu.category.links.LINK_URL}'); return false;"<!-- ENDIF -->>{portal_menu.category.links.LINK_TITLE}</a></li>
+			<!-- END links -->
+			</ul>
+		<hr class="dashed" />
+	<!-- BEGINELSE -->
+		<ul>
+			<li><span class="portal-title-span gensmall"><strong>{L_MENU_NO_LINKS}</strong></span><br /></li>
+		</ul>
+	<!-- END category -->
+	</div>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END portal_menu -->

@@ -1,0 +1,43 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr class="row1">
+		<td>
+			<!-- IF BIRTHDAY_LIST -->
+			<strong>{L_CONGRATULATIONS}{L_COLON}</strong><br />
+			<!-- BEGIN board3_birthday_list -->
+			<span class="portal-user-span" style="float:left;"></span>
+			<span style="float:left; padding-left:5px; padding-top:2px;">
+				{board3_birthday_list.USER}
+			</span>
+			<span style="float: right;">
+				<!-- IF board3_birthday_list.AGE -->{board3_birthday_list.AGE}<!-- ENDIF -->
+			</span><br style="clear: both" />
+			<!-- END board3_birthday_list -->
+			<!-- ELSE -->
+			{L_NO_BIRTHDAYS}
+			<!-- ENDIF -->
+		</td>
+	</tr>
+	<!-- IF S_DISPLAY_BIRTHDAY_AHEAD_LIST -->
+	<tr class="row1">
+		<td>
+			<strong>{L_BIRTHDAYS_AHEAD}{L_COLON}</strong>
+			<br />
+			<!-- IF BIRTHDAYS_AHEAD_LIST -->
+			<!-- BEGIN board3_birthday_ahead_list -->
+			<span class="portal-user-span" style="float:left;"></span>
+			<span style="float:left; padding-left:5px; padding-top:2px;">
+				<span title="{board3_birthday_ahead_list.DATE}">{board3_birthday_ahead_list.USER}</span>
+			</span>
+			<span style="float: right;">
+				<!-- IF board3_birthday_ahead_list.AGE -->{board3_birthday_ahead_list.AGE}<!-- ENDIF -->
+			</span><br style="clear: both" />
+			<!-- END board3_birthday_ahead_list -->
+			<!-- ELSE -->
+			{L_NO_BIRTHDAYS_AHEAD}
+			<!-- ENDIF -->
+		</td>
+	</tr>
+	<!-- ENDIF -->
+</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

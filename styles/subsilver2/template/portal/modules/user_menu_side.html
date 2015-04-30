@@ -1,0 +1,87 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr class="row1">
+		<td>
+			<div align="center">
+                <a href="{U_VIEW_PROFILE}"><!-- IF B3P_USER_COLOR --><span style="color: {B3P_USER_COLOR}; font-weight: bold;"><!-- ELSE --><span><!-- ENDIF -->{USERNAME_FULL}</span></a><br />
+                <!-- IF B3P_AVATAR_IMG -->
+                    <a href="{U_PROFILE}">{B3P_AVATAR_IMG}</a>
+                <!-- ELSEIF $NO_AVATAR_IMG -->
+                    <a href="{U_PROFILE}"><img src="{T_THEME_PATH}{$NO_AVATAR_IMG}" alt="" /></a>
+                <!-- ENDIF -->
+                <!-- IF B3P_RANK_TITLE --><br /><span class="gensmall">{B3P_RANK_TITLE}</span><!-- ENDIF -->
+                <!-- IF B3P_RANK_IMG --><br />{B3P_RANK_IMG}<!-- ENDIF -->
+            </div>
+		</td>
+	</tr>
+	<!-- IF S_DISPLAY_SEARCH -->
+	<tr class="row1">
+		<td>
+			<a class="portal-arrow-bullet" href="{U_NEW_POSTS}" title="{L_NEW_POSTS}">&nbsp;{L_NEW_POSTS}</a>
+		</td>
+	</tr>
+	<tr class="row1">
+		<td>
+			<a class="portal-arrow-bullet" href="{U_UNREAD_POSTS}" title="{L_UNREAD_POSTS}">&nbsp;{L_UNREAD_POSTS}</a>
+		</td>
+	</tr>
+	<tr class="row1">
+		<td>
+			<a class="portal-arrow-bullet" href="{U_SELF_POSTS}" title="{L_SELF_POSTS}">&nbsp;{L_SELF_POSTS}</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF U_UM_BOOKMARKS -->
+	<tr class="row1">
+		<td>
+			<a class="portal-arrow-bullet" href="{U_UM_BOOKMARKS}" title="{L_UM_BOOKMARKS}">&nbsp;{L_UM_BOOKMARKS}</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF S_DISPLAY_SUBSCRIPTIONS -->
+	<tr class="row1">
+		<td>
+			<a class="portal-arrow-bullet" href="{U_UM_MAIN_SUBSCRIBED}" title="{L_UM_MAIN_SUBSCRIBED}">&nbsp;{L_UM_MAIN_SUBSCRIBED}</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF S_NOTIFICATIONS_DISPLAY and not S_IS_BOT and S_USER_LOGGED_IN -->
+	<tr class="row1">
+		<td>
+			<a href="{U_VIEW_ALL_NOTIFICATIONS}" id="notification_list_button"><img src="{T_THEME_PATH}/images/icon_mini_notification.gif" width="12" height="13" alt="*" /> {L_NOTIFICATIONS} [<strong>{NOTIFICATIONS_COUNT}</strong>]</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF S_DISPLAY_PM -->
+	<tr class="row1">
+		<td>
+			<a href="{U_PRIVATEMSGS}" title="{L_MESSAGE}"><img src="{T_THEME_PATH}/images/icon_mini_message.gif" width="12" height="13" alt="*" /> {L_PRIVATE_MESSAGES} [<strong>{PRIVATE_MESSAGE_COUNT}</strong>]</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<tr class="row1">
+		<td>
+			<a class="portal-arrow-bullet" href="{U_PROFILE}" title="{L_PROFILE}">&nbsp;{L_PROFILE}</a>
+		</td>
+	</tr>
+	<!-- IF U_UM_MCP -->
+	<tr class="row1">
+		<td>
+			<a class="portal-arrow-bullet" href="{U_UM_MCP}" title="{L_MCP}">&nbsp;{L_MCP}</a>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF U_ACP -->
+	<tr class="row1">
+		<td>
+			<a class="portal-arrow-bullet" href="{U_ACP}" title="{L_M_ACP}">&nbsp;{L_M_ACP}</a><br />
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<tr class="row1">
+		<td>
+			<a class="portal-arrow-bullet" href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}">&nbsp;{L_LOGIN_LOGOUT}</a>
+		</td>
+	</tr>
+</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

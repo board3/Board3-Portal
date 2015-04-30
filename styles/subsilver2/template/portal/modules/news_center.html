@@ -1,0 +1,72 @@
+{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr class="row1">
+		<td>
+		<!-- BEGIN news -->
+		<!-- IF news.MODULE_ID eq $MODULE_ID -->
+		<!-- BEGIN news_row -->
+		<!-- IF news.news_row.S_NO_TOPICS  -->
+			<span class="gensmall"><strong>{L_NO_NEWS}</strong></span>
+		<!-- ELSE -->
+			<table class="tablebg" cellspacing="1" width="100%">
+				<tr>
+					<td class="cat">
+						<!-- IF news.news_row.S_FIRST_ROW --><a id="n_{$MODULE_ID}"></a><!-- ENDIF --><a name="n_{$MODULE_ID}_{news.news_row.N_ID}"></a>
+						<!-- IF news.news_row.S_UNREAD_INFO --><a href="{news.news_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{news.news_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --> {news.news_row.ATTACH_ICON_IMG} <!-- IF news.news_row.S_POLL --><strong>{L_VIEW_TOPIC_POLL}{L_COLON} </strong><!-- ENDIF --><!-- IF news.news_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{news.news_row.TOPIC_ICON_IMG}" width="{news.news_row.TOPIC_ICON_IMG_WIDTH}" height="{news.news_row.TOPIC_ICON_IMG_HEIGHT}" alt="" /> <!-- ENDIF --><a href="{news.news_row.U_LAST_COMMENTS}"><strong>{news.news_row.TITLE}</strong></a></td>
+				</tr>
+				<tr class="row<!-- IF news.news_row.S_ROW_COUNT is odd -->1<!-- ELSE -->2<!-- ENDIF -->">
+					<td style="padding:5px 5px 5px 5px;">
+						<span class="gensmall" style="float: left;">{L_POSTED} {L_POST_BY_AUTHOR}{L_COLON} {news.news_row.POSTER_FULL} &raquo; {news.news_row.TIME}</span>
+						<span class="gensmall" style="float: right;">
+						<!-- IF news.news_row.FORUM_NAME -->
+							{L_FORUM}{L_COLON} <strong><a href="{news.news_row.U_VIEWFORUM}">{news.news_row.FORUM_NAME}</a></strong>
+						<!-- ENDIF -->
+						</span>
+						<br /><br />
+						<div class="postbody">
+						{news.news_row.TEXT}
+						</div>
+						<!-- IF news.news_row.S_HAS_ATTACHMENTS -->
+							<br clear="all" /><br />
+
+							<table class="tablebg" width="100%" cellspacing="1">
+							<tr>
+								<td class="row3"><b class="genmed">{L_ATTACHMENTS}{L_COLON} </b></td>
+							</tr>
+							<!-- BEGIN attachment -->
+								<tr>
+									<!-- IF news.news_row.attachment.S_ROW_COUNT is even --><td class="row2"><!-- ELSE --><td class="row1"><!-- ENDIF -->{news.news_row.attachment.DISPLAY_ATTACHMENT}</td>
+								</tr>
+							<!-- END attachment -->
+							</table>
+						<!-- ENDIF -->
+						<br /><br />
+						<!-- IF news.news_row.PAGINATION --><span style="float: right;">[ {GOTO_PAGE_IMG}{L_GOTO_PAGE}{L_COLON} {news.news_row.PAGINATION} ]</span><!-- ENDIF -->
+					</td>
+				</tr>
+				<tr class="row<!-- IF news.news_row.S_ROW_COUNT is odd -->1<!-- ELSE -->2<!-- ENDIF -->">
+					<td>
+					<span style="float: left;">{L_TOPIC_VIEWS}{L_COLON} {news.news_row.TOPIC_VIEWS} &nbsp;&bull;&nbsp; <a href="{news.news_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}{L_COLON} {news.news_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{news.news_row.U_POST_COMMENT}">{L_POST_REPLY}</a></span>
+					<span style="float: right;">{news.news_row.OPEN}<a href="{news.news_row.U_READ_FULL}">{news.news_row.L_READ_FULL}</a>{news.news_row.CLOSE} <a href="#wrapheader" class="top" title="{L_BACK_TO_TOP}">{L_BACK_TO_TOP}</a></span>
+					</td>
+				</tr>
+			</table>
+			<br />
+		<!-- ENDIF -->
+		<!-- END news_row -->
+			<!-- IF news.NP_PAGINATION or news.TOTAL_NEWS -->
+			<hr />
+			<table width="100%" cellspacing="0">
+			<tr>
+				<td class="gensmall portal-pagination" valign="middle" align="right" nowrap="nowrap">
+					  {news.TOTAL_NEWS}
+					  <!-- IF news.NP_PAGE_NUMBER --><!-- IF news.NP_PAGINATION --> &bull; {news.NP_PAGE_NUMBER} &bull; {news.NP_PAGINATION}<!-- ELSE --> &bull; {news.NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --></td>
+			</tr>
+			</table>
+			<!-- ENDIF -->
+		<!-- ENDIF -->
+		<!-- END news -->
+		</td>
+	</tr>
+</table>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}

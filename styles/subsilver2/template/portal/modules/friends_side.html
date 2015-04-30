@@ -1,0 +1,22 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr class="row1">
+		<td>
+			<strong style="color:green">{L_FRIENDS_ONLINE}</strong><br />
+			<!-- BEGIN b3p_friends_online -->
+                <span class="portal-user-span" style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"></span><span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->; padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->:5px; padding-top:2px;">{b3p_friends_online.USERNAME_FULL}</span><br style="clear:both" />
+            <!-- BEGINELSE -->
+                <span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->; padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->:5px; padding-top:2px;">{L_NO_FRIENDS_ONLINE}</span>
+                <br style="clear:both" />
+            <!-- END b3p_friends_online -->
+				<br style="clear:both" />
+			<strong style="color:red">{L_FRIENDS_OFFLINE}</strong><br />
+			<!-- BEGIN b3p_friends_offline -->
+                <span class="portal-user-span" style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->;"></span><span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->; padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->:5px; padding-top:2px;">{b3p_friends_offline.USERNAME_FULL}</span><br style="clear:both" />
+            <!-- BEGINELSE -->
+                <span style="float:<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->; padding-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->:5px; padding-top:2px;">{L_NO_FRIENDS_OFFLINE}</span>
+            <!-- END b3p_friends_offline -->
+		</td>
+	</tr>
+</table>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

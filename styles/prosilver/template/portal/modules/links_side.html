@@ -1,0 +1,15 @@
+<!-- BEGIN portal_links -->
+<!-- IF portal_links.MODULE_ID eq $MODULE_ID -->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<div class="portal-navigation">
+			<ul>
+			<!-- BEGIN links -->
+				<li><a href="{portal_links.links.LINK_URL}" title="{portal_links.links.LINK_TITLE}" <!-- IF portal_links.links.NEW_WINDOW -->onclick="window.open('{portal_links.links.LINK_URL}'); return false;"<!-- ENDIF -->>{portal_links.links.LINK_TITLE}</a></li>
+			<!-- BEGINELSE -->
+				<span class="portal-title-span gensmall"><strong>{L_LINKS_NO_LINKS}</strong></span><br />
+			<!-- END links -->
+			</ul>
+	</div>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END portal_links -->

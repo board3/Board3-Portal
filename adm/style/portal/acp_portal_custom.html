@@ -1,0 +1,231 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- INCLUDEJS portal/acp_editor.js -->
+<script type="text/javascript">
+// <![CDATA[
+/**
+* bbCode control by subBlue design [ www.subBlue.com ]
+* Includes unixsafe colour palette selector by SHS`
+*/
+
+// Startup variables
+var imageTag = false;
+var theSelection = false;
+
+var bbcodeEnabled = true;
+// Check for Browser & Platform for PC & IE specific bits
+// More details from: http://www.mozilla.org/docs/web-developer/sniffer/browser_type.html
+var clientPC = navigator.userAgent.toLowerCase(); // Get client info
+var clientVer = parseInt(navigator.appVersion); // Get browser version
+
+var is_ie = ((clientPC.indexOf('msie') != -1) && (clientPC.indexOf('opera') == -1));
+var is_win = ((clientPC.indexOf('win') != -1) || (clientPC.indexOf('16bit') != -1));
+var baseHeight;
+
+var form_name = 'acp_portal_welcome';
+var text_name = 'custom_code';
+var load_draft = false;
+var upload = false;
+
+// Define the bbCode tags
+var bbcode = new Array();
+var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->);
+var imageTag = false;
+
+// Helpline messages
+var help_line = {
+	b: '{LA_BBCODE_B_HELP}',
+	i: '{LA_BBCODE_I_HELP}',
+	u: '{LA_BBCODE_U_HELP}',
+	q: '{LA_BBCODE_Q_HELP}',
+	c: '{LA_BBCODE_C_HELP}',
+	l: '{LA_BBCODE_L_HELP}',
+	o: '{LA_BBCODE_O_HELP}',
+	p: '{LA_BBCODE_P_HELP}',
+	w: '{LA_BBCODE_W_HELP}',
+	a: '{LA_BBCODE_A_HELP}',
+	s: '{LA_BBCODE_S_HELP}',
+	f: '{LA_BBCODE_F_HELP}',
+	e: '{LA_BBCODE_E_HELP}',
+	d: '{LA_BBCODE_D_HELP}'
+	<!-- BEGIN custom_tags -->
+		,cb_{custom_tags.BBCODE_ID}: '{custom_tags.A_BBCODE_HELPLINE}'
+	<!-- END custom_tags -->
+}
+
+function change_palette()
+{
+	phpbb.toggleDisplay('colour_palette');
+	e = document.getElementById('colour_palette');
+
+	if (e.style.display == 'block')
+	{
+		document.getElementById('bbpalette').value = '{LA_FONT_COLOR_HIDE}';
+	}
+	else
+	{
+		document.getElementById('bbpalette').value = '{LA_FONT_COLOR}';
+	}
+}
+
+// ]]>
+</script>
+
+<a name="maincontent"></a>
+
+<h1>{L_TITLE}</h1>
+
+<p>{L_TITLE_EXPLAIN}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+<form id="acp_portal_config" method="post" action="{B3P_U_ACTION}">
+<!-- IF SHOW_MODULE_OPTIONS -->
+		<fieldset>
+			<legend>{L_MODULE_OPTIONS}</legend>
+			<dl>
+				<dt><label for="module_name">{L_MODULE_NAME}{L_COLON}</label><br /><span>{L_MODULE_NAME_EXP}</span></dt>
+				<dd><input id="module_name" type="text" value="{MODULE_NAME}" name="module_name" maxlength="255" size="64" /></dd>
+			</dl>
+			<!-- IF MODULE_SHOW_IMAGE -->
+			<dl>
+				<dt><label for="module_image">{L_MODULE_IMAGE}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_EXP}</span></dt>
+				<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
+				<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
+			</dl>
+			<!-- IF MODULE_IMAGE_SRC -->
+			<dl>
+				<dt><label for="module_img_width">{L_MODULE_IMAGE_WIDTH}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_WIDTH_EXP}</span></dt>
+				<dd><input id="module_img_width" type="text" value="{MODULE_IMAGE_WIDTH}" name="module_img_width" maxlength="3" size="3" />px</dd>
+			</dl>
+			<dl>
+				<dt><label for="module_img_height">{L_MODULE_IMAGE_HEIGHT}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_HEIGHT_EXP}</span></dt>
+				<dd><input id="module_img_height" type="text" value="{MODULE_IMAGE_HEIGHT}" name="module_img_height" maxlength="3" size="3" />px</dd>
+			</dl>
+			<!-- ENDIF -->
+			<!-- ENDIF -->
+			<dl>
+				<dt><label for="module_reset">{L_MODULE_RESET}{L_COLON}</label><br /><span style="color: #BC2A4D;">{L_MODULE_RESET_EXP}</span></dt>
+				<dd><input id="module_reset" type="checkbox" value="1" name="module_reset" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="module_status">{L_MODULE_STATUS}{L_COLON}</label></dt>
+				<dd>
+					<label><input type="radio" class="radio" name="module_status" value="1" id="module_status"<!-- IF MODULE_ENABLED --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
+					<label><input type="radio" class="radio" name="module_status" value="0"<!-- IF not MODULE_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<!-- IF .permission_setting -->
+			<dl>
+				<dt><label for="permission-setting">{L_ACP_PORTAL_CUSTOM_PERMISSION}{L_COLON}</label><br /><span>{L_ACP_PORTAL_CUSTOM_PERMISSION_EXP}</span></dt>
+				<dd>
+					<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
+						<!-- BEGIN permission_setting -->
+						<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
+						<!-- END permission_setting -->
+					</select>
+				</dd>
+			</dl>
+			<!-- ENDIF -->
+		</fieldset>
+<!-- ENDIF -->
+		<!-- IF S_PREVIEW -->
+		<fieldset>
+			<legend>{L_ACP_PORTAL_CUSTOM_PREVIEW}</legend>
+		<dl>
+			<dt style="border: none; width: 100%;">
+				{PREVIEW_TEXT}
+			</dt>
+		</dl>
+		</fieldset>
+		<!-- ENDIF -->
+		<fieldset>
+			<legend>{L_PORTAL_CUSTOM}</legend>
+		<dl id="bbcode-buttons"<!-- IF not CUSTOM_USE_BBCODE --> style="display: none;"<!-- ENDIF -->>
+			<dt></dt>
+			<dd>
+				<div id="colour_palette" style="display: none;">
+					<dl style="clear: left;">
+						<dt style="border: none;"><label>{L_FONT_COLOR}{L_COLON}</label></dt>
+						<dd></dd>
+					</dl>
+					<dl style="clear: left;">
+						<dt id="color_palette_placeholder" style="border: none;"></dt>
+						<dd></dd>
+					</dl>
+				</div>
+				<div id="format-buttons">
+					<input type="button" class="button2" accesskey="b" name="addbbcode0" value=" B " style="font-weight:bold; width: 30px" onclick="bbstyle(0)" title="{L_BBCODE_B_HELP}" />
+					<input type="button" class="button2" accesskey="i" name="addbbcode2" value=" i " style="font-style:italic; width: 30px" onclick="bbstyle(2)" title="{L_BBCODE_I_HELP}" />
+					<input type="button" class="button2" accesskey="u" name="addbbcode4" value=" u " style="text-decoration: underline; width: 30px" onclick="bbstyle(4)" title="{L_BBCODE_U_HELP}" />
+					<!-- IF S_BBCODE_QUOTE -->
+						<input type="button" class="button2" accesskey="q" name="addbbcode6" value="Quote" style="width: 50px" onclick="bbstyle(6)" title="{L_BBCODE_Q_HELP}" />
+					<!-- ENDIF -->
+					<input type="button" class="button2" accesskey="c" name="addbbcode8" value="Code" style="width: 40px" onclick="bbstyle(8)" title="{L_BBCODE_C_HELP}" />
+					<input type="button" class="button2" accesskey="l" name="addbbcode10" value="List" style="width: 40px" onclick="bbstyle(10)" title="{L_BBCODE_L_HELP}" />
+					<input type="button" class="button2" accesskey="o" name="addbbcode12" value="List=" style="width: 40px" onclick="bbstyle(12)" title="{L_BBCODE_O_HELP}" />
+					<input type="button" class="button2" accesskey="t" name="addlitsitem" value="[*]" style="width: 40px" onclick="bbstyle(-1)" title="{L_BBCODE_LISTITEM_HELP}" />
+					<!-- IF S_BBCODE_IMG -->
+						<input type="button" class="button2" accesskey="p" name="addbbcode14" value="Img" style="width: 40px" onclick="bbstyle(14)" title="{L_BBCODE_P_HELP}" />
+					<!-- ENDIF -->
+					<!-- IF S_LINKS_ALLOWED -->
+						<input type="button" class="button2" accesskey="w" name="addbbcode16" value="URL" style="text-decoration: underline; width: 40px" onclick="bbstyle(16)" title="{L_BBCODE_W_HELP}" />
+					<!-- ENDIF -->
+					<!-- IF S_BBCODE_FLASH -->
+						<input type="button" class="button2" accesskey="d" name="addbbcode18" value="Flash" onclick="bbstyle(18)" title="{L_BBCODE_D_HELP}" />
+					<!-- ENDIF -->
+					<select name="addbbcode20" onchange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]');this.form.addbbcode20.selectedIndex = 2;" title="{L_BBCODE_F_HELP}">
+						<option value="50">{L_FONT_TINY}</option>
+						<option value="85">{L_FONT_SMALL}</option>
+						<option value="100" selected="selected">{L_FONT_NORMAL}</option>
+						<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 150 -->
+							<option value="150">{L_FONT_LARGE}</option>
+							<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 200 -->
+								<option value="200">{L_FONT_HUGE}</option>
+							<!-- ENDIF -->
+						<!-- ENDIF -->
+					</select>
+					<input type="button" class="button2" name="bbpalette" id="bbpalette" value="{L_FONT_COLOR}" onclick="change_palette();" title="{L_BBCODE_S_HELP}" />
+					<!-- BEGIN custom_tags -->
+						<input type="button" class="button2" name="addbbcode{custom_tags.BBCODE_ID}" value="{custom_tags.BBCODE_TAG}" onclick="bbstyle({custom_tags.BBCODE_ID})" title="{custom_tags.BBCODE_HELPLINE}" />
+					<!-- END custom_tags -->
+				</div>
+			</dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="custom_code">{L_ACP_PORTAL_CUSTOM_CODE}{L_COLON}</label><br />
+				<span>{L_ACP_PORTAL_CUSTOM_CODE_EXP}</span>
+			</dt>
+			<dd><textarea name="custom_code" id="custom_code" cols="6" rows="12">{CUSTOM_CODE}</textarea></dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="custom_use_bbcode">{L_ACP_PORTAL_CUSTOM_BBCODE}</label><br />
+				<span>{L_ACP_PORTAL_CUSTOM_BBCODE_EXP}</span>
+			</dt>
+			<dd>
+				<label><input onchange="phpbb.toggleDisplay('bbcode-buttons', 1)" class="radio" type="radio" value="1" name="custom_use_bbcode" id="custom_use_bbcode"<!-- IF CUSTOM_USE_BBCODE --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
+				<label><input onchange="phpbb.toggleDisplay('bbcode-buttons', -1)" class="radio" type="radio" value="0" name="custom_use_bbcode"<!-- IF not CUSTOM_USE_BBCODE --> checked="checked"<!-- ENDIF --> />{L_NO}</label>
+			</dd>
+		</dl>
+<!-- IF S_AUTH -->
+	<!-- BEGIN auth_tpl -->
+		{auth_tpl.TPL}
+	<!-- END auth_tpl -->
+<!-- ENDIF -->
+
+	<p class="submit-buttons">
+		<input class="button2" type="submit" id="preview" name="preview" value="{L_PREVIEW}" />&nbsp;
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	</p>
+	{S_FORM_TOKEN}
+</fieldset>
+</form>
+
+<!-- INCLUDE overall_footer.html -->
