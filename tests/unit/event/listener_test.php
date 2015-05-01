@@ -70,10 +70,12 @@ class listener_test extends \phpbb_template_template_test_case
 			'enable_mod_rewrite' => '1',
 			'board3_portal_enable' => '1',
 		));
-		$provider = new \phpbb\controller\provider();
-		$provider->find_routing_files($finder);
-		$provider->find(dirname(__FILE__) . '/');
-		$this->controller_helper = new \phpbb_mock_controller_helper($this->template, $this->user, $this->config, $provider, $manager, new \phpbb\symfony_request($request), $request, new \phpbb\filesystem(), '', 'php', dirname(__FILE__) . '/');
+
+		$filesystem = new \phpbb\filesystem\filesystem();
+		$router = new \phpbb_mock_router($filesystem, $manager, dirname(__FILE__) . '/', 'php', PHPBB_ENVIRONMENT);
+		$router->find_routing_files($manager->all_enabled(false));
+		$router->find(dirname(__FILE__) . '/');
+		$this->controller_helper = new \phpbb_mock_controller_helper($this->template, $this->user, $this->config, $router, new \phpbb\symfony_request($request), $request, new \phpbb\filesystem(), '', 'php', dirname(__FILE__) . '/');
 
 		$this->path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request(

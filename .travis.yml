@@ -2,8 +2,6 @@ language: php
 
 matrix:
   include:
-    - php: 5.3.3
-      env: DB=mysqli
     - php: 5.3
       env: DB=mysqli # MyISAM
     - php: 5.4
