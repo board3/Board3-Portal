@@ -17,7 +17,7 @@ The extension is currently under heavy development and not supported until furth
 ## AUTOMATED TESTING
 
 We are starting to have unit and functional tests in order to prevent regressions. You can check our travis build below.
-develop-2.1.x - [![Build Status](https://api.travis-ci.org/board3/Board3-Portal.png?branch=develop-2.1.x)](https://travis-ci.org/board3/Board3-Portal)
+2.1.x - [![Build Status](https://travis-ci.org/board3/Board3-Portal.svg?branch=2.1.x)](https://travis-ci.org/board3/Board3-Portal)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/board3/Board3-Portal/badges/quality-score.png?b=develop-2.1.x)](https://scrutinizer-ci.com/g/board3/Board3-Portal/?branch=develop-2.1.x)
 [![Code Coverage](https://scrutinizer-ci.com/g/board3/Board3-Portal/badges/coverage.png?b=develop-2.1.x)](https://scrutinizer-ci.com/g/board3/Board3-Portal/?branch=develop-2.1.x)
 
