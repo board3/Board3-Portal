@@ -25,35 +25,6 @@ class phpbb_functional_portal_no_error_test extends \board3\portal\tests\testfra
 		self::request('GET', 'app.php/portal');
 	}
 
-	public function test_enable_subsilver()
-	{
-		$crawler = self::request('GET', 'adm/index.php?i=acp_styles&mode=install&sid=' . $this->sid);
-		$links = $crawler->filter('.actions a');
-		$link = $links->selectLink('Install style')->link()->getUri();
-		for ($i = 0; $i < sizeof($links); $i++)
-		{
-			$link = $links->eq($i)->selectLink('Install style')->link()->getUri();
-
-			if (strpos($link, 'subsilver2') !== false)
-			{
-				break;
-			}
-		}
-
-		$crawler = self::request('GET', substr($link, strpos($link, '/adm') + 1));
-		$this->assertContains('Style "subsilver2" has been installed', $crawler->text());
-	}
-
-	/**
-	 * @dependsOn test_enable_subsilver
-	 */
-	public function test_portal_subsilver()
-	{
-		$crawler = self::request('GET', 'app.php/portal');
-		$this->assertContains('subsilver', $crawler->text());
-		self::request('GET', 'app.php/portal?style=2');
-	}
-
 	public function data_portal_all_pages()
 	{
 		return array(

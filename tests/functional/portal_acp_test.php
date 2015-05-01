@@ -113,21 +113,21 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 	public function data_add_second_module()
 	{
 		return array(
-			array('\board3\portal\modules\news', 2, 'The module was added successfully.'),
-			array('\board3\portal\modules\news', 1, 'It is not possible to add the module to the selected column.'),
-			array('\board3\portal\modules\attachments', 2, 'The module was added successfully'),
-			array('\board3\portal\modules\attachments', 2, 'This module can only be added once'),
-			array('\board3\portal\modules\attachments', 1, 'This module can only be added once'),
+			array('\board3\portal\modules\news', 2, 'center', 'The module was added successfully.'),
+			array('\board3\portal\modules\news', 1, 'left', 'It is not possible to add the module to the selected column.'),
+			array('\board3\portal\modules\attachments', 2, 'center', 'The module was added successfully'),
+			array('\board3\portal\modules\attachments', 2, 'center', 'This module can only be added once'),
+			array('\board3\portal\modules\attachments', 1, 'left', 'This module can only be added once'),
 		);
 	}
 
 	/**
 	 * @dataProvider data_add_second_module
 	 */
-	public function test_add_second_news($module_class, $column, $expected_message)
+	public function test_add_second_news($module_class, $column, $column_name, $expected_message)
 	{
 		$this->add_lang_ext('board3/portal', 'info_acp_portal');
-		$crawler = self::request('GET', 'adm/index.php?i=-board3-portal-acp-portal_module&mode=modules&add_column=' . $column . '&add[center]=add&sid=' . $this->sid);
+		$crawler = self::request('GET', 'adm/index.php?i=-board3-portal-acp-portal_module&mode=modules&add_column=' . $column . '&add[' . $column_name . ']=add&sid=' . $this->sid);
 		$form = $crawler->selectButton('submit')->form();
 		$form['module_classname']->disableValidation()->select($module_class);
 		$crawler = self::submit($form);
