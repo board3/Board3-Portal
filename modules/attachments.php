@@ -187,6 +187,7 @@ class attachments extends module_base
 				'title'	=> $row['extension'],
 			);
 		}
+		$this->db->sql_freeresult($result);
 
 		$selected = $this->get_selected_filetypes($module_id);
 

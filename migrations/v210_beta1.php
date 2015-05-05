@@ -183,6 +183,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 			$sql = 'SELECT * FROM ' . $this->table_prefix . 'portal_config';
 			$result = $this->db->sql_query_limit($sql, 1);
 			$row = $this->db->sql_fetchrow($result);
+			$this->db->sql_freeresult($result);
 			if (!empty($row))
 			{
 				return;
@@ -204,6 +205,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 		{
 			$groups_ary[$row['group_name']] = $row['group_id'];
 		}
+		$this->db->sql_freeresult($result);
 
 		// set portal config
 		$this->set_portal_config('board3_menu_array_1', serialize(array(
