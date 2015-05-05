@@ -121,7 +121,7 @@ class listener implements EventSubscriberInterface
 		if (strpos($this->controller_helper->get_current_url(), '/portal') === false)
 		{
 			$portal_link = $this->controller_helper->route('board3_portal_controller');
-			$this->display_portal();
+			$this->check_portal_all();
 		}
 		else
 		{
@@ -144,17 +144,35 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	 * Display portal columns on all pages if specified in portal settings
+	 * Check if portal on all pages should be shown and display it accordignly
+	 */
+	protected function check_portal_all()
+	{
+		// Check if we should show the portal
+		if (isset($this->config['board3_show_all_pages']) && $this->config['board3_show_all_pages'] && !$this->board_disabled())
+		{
+			$this->display_portal();
+		}
+	}
+
+	/**
+	 * Display portal on all pages
 	 */
 	protected function display_portal()
 	{
-		// Check if we should show the portal
-		if (isset($this->config['board3_show_all_pages']) && $this->config['board3_show_all_pages'])
-		{
-			$this->board3_controller->handle(array(
-				'left'	=> $this->config['board3_show_all_side'] == false,
-				'right'	=> $this->config['board3_show_all_side'] == true,
-			));
-		}
+		$this->board3_controller->handle(array(
+			'left'	=> $this->config['board3_show_all_side'] == false,
+			'right'	=> $this->config['board3_show_all_side'] == true,
+		));
+	}
+
+	/**
+	 * Check whether the board has been disabled and should not be shown
+	 *
+	 * @return bool True if board has been disabled, false if not
+	 */
+	protected function board_disabled()
+	{
+		return $this->config['board_disable'] && !defined('IN_LOGIN') && !defined('SKIP_CHECK_DISABLED') && !$this->auth->acl_gets('a_', 'm_') && !$this->auth->acl_getf_global('m_');
 	}
 }
