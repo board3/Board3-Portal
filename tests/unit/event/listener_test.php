@@ -36,7 +36,7 @@ class listener_test extends \phpbb_template_template_test_case
 
 	public function setup_listener()
 	{
-		global $cache, $db;
+		global $cache, $db, $phpbb_root_path;
 
 		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put', 'obtain_attach_extensions'));
 		$cache->expects($this->any())
@@ -48,8 +48,10 @@ class listener_test extends \phpbb_template_template_test_case
 			->with($this->anything())
 			->will($this->returnValue(false));
 		$db = $this->getMock('\phpbb\db\driver\driver_interface');
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
 
-		$this->user = $this->getMock('\phpbb\user', array(), array('\phpbb\datetime'));
+		$this->user = $this->getMock('\phpbb\user', array(), array($this->language, '\phpbb\datetime'));
 		$this->user->expects($this->any())
 			->method('lang')
 			->will($this->returnValue('foo'));

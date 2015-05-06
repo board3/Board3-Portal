@@ -18,11 +18,13 @@ class phpbb_unit_functions_get_user_groups_test extends \board3\portal\tests\tes
 
 	public function setUp()
 	{
-		global $cache, $user;
+		global $cache, $user, $phpbb_root_path;
 
 		parent::setUp();
 
-		$user = $this->getMock('\phpbb\user', array('optionget'), array('\phpbb\datetime'));
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$user = $this->getMock('\phpbb\user', array('optionget'), array($this->language, '\phpbb\datetime'));
 		$cache = $this->getMock('\phpbb\cache\cache', array('get', 'put', 'sql_exists'));
 		$cache->expects($this->any())
 			->method('get')

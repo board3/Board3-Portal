@@ -23,7 +23,9 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 
 		parent::setUp();
 
-		$user = new \phpbb\user('\phpbb\datetime');
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$user->data['user_id'] = 2;
 		$user->timezone = new \DateTimeZone('UTC');
 		$user->add_lang('common');

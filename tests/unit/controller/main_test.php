@@ -59,11 +59,14 @@ class main_test extends \board3\portal\tests\testframework\database_test_case
 			->method('acl_get')
 			->with($this->anything())
 			->will($this->returnValue(true));
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
 
 		$controller_helper = new \board3\portal\controller\helper(
 			$auth,
 			$portal_columns,
 			$this->config,
+			$this->language,
 			$this->template,
 			$user,
 			$path_helper,

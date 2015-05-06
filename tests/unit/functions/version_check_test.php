@@ -42,10 +42,14 @@ class phpbb_functions_version_check_test extends \board3\portal\tests\testframew
 
 	protected function get_version_helper($version)
 	{
+		global $phpbb_root_path;
+
 		$this->config->set('board3_portal_version', $version);
 
 		$this->template = new \board3\portal\tests\mock\template($this);
-		$version_helper = new \phpbb\version_helper($this->cache, $this->config, new \phpbb\file_downloader(), new \phpbb\user('\phpbb\datetime'));
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$version_helper = new \phpbb\version_helper($this->cache, $this->config, new \phpbb\file_downloader(), new \phpbb\user($this->language, '\phpbb\datetime'));
 		$this->version_check = new \board3\portal\includes\version_check($this->version_data, $this->config, $version_helper, $this->template, $this->user);
 	}
 
