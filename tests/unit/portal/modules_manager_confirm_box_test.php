@@ -39,7 +39,7 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 
 	public function setUp()
 	{
-		global $cache, $db, $portal_config;
+		global $cache, $db, $portal_config, $phpbb_root_path, $phpEx;
 
 		parent::setUp();
 
@@ -95,10 +95,14 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 			$phpEx
 		);
 
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+
 		$this->b3p_controller_helper = new \board3\portal\controller\helper(
 			new \phpbb\auth\auth(),
 			$this->portal_columns,
 			$config,
+			$this->language,
 			new \board3\portal\tests\mock\template($this),
 			$user,
 			$this->path_helper,

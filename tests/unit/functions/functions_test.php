@@ -20,11 +20,13 @@ class phpbb_unit_functions_functions_test extends \board3\portal\tests\testframe
 
 	public function setUp()
 	{
-		global $cache, $user;
+		global $cache, $user, $phpbb_root_path;
 
 		parent::setUp();
 
-		$user = $this->getMock('\phpbb\user', array('optionget'), array('\phpbb\datetime'));
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$user = $this->getMock('\phpbb\user', array('optionget'), array($this->language, '\phpbb\datetime'));
 		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'sql_exists'));
 		$cache->expects($this->any())
 			->method('obtain_word_list')

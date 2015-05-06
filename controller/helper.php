@@ -26,6 +26,9 @@ class helper
 	*/
 	protected $config;
 
+	/** @var \phpbb\language\language */
+	protected $language;
+
 	/**
 	* Template object
 	* @var \phpbb\template
@@ -84,6 +87,7 @@ class helper
 	* @param \phpbb\auth\auth $auth Auth object
 	* @param \board3\portal\portal\columns $portal_columns Board3 Portal columns object
 	* @param \phpbb\config\config $config phpBB Config object
+	* @param \phpbb\language\language $language phpBB language
 	* @param \phpbb\template $template Template object
 	* @param \phpbb\user $user User object
 	* @param \phpbb\path_helper $path_helper phpBB path helper
@@ -91,11 +95,12 @@ class helper
 	* @param string $phpbb_root_path phpBB root path
 	* @param string $php_ext PHP file extension
 	*/
-	public function __construct($auth, $portal_columns, $config, $template, $user, $path_helper, $portal_helper, $phpbb_root_path, $php_ext)
+	public function __construct($auth, $portal_columns, $config, $language, $template, $user, $path_helper, $portal_helper, $phpbb_root_path, $php_ext)
 	{
 		$this->auth = $auth;
 		$this->portal_columns = $portal_columns;
 		$this->config = $config;
+		$this->language = $language;
 		$this->template = $template;
 		$this->user = $user;
 		$this->path_helper = $path_helper;
@@ -204,11 +209,11 @@ class helper
 			// Load language file from vendor if specified
 			if (is_array($language_file))
 			{
-				$this->user->add_lang_ext($language_file['vendor'], $language_file['file']);
+				$this->language->add_lang($language_file['file'], $language_file['vendor']);
 			}
 			else
 			{
-				$this->user->add_lang_ext('board3/portal', 'modules/' . $language_file);
+				$this->language->add_lang('modules/' . $language_file, 'board3/portal');
 			}
 		}
 	}

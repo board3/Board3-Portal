@@ -34,6 +34,7 @@ services:
             - @auth
             - @board3.portal.columns
             - @config
+            - @language
             - @template
             - @user
             - @path_helper

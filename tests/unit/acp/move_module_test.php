@@ -101,10 +101,14 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			$phpEx
 		);
 
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+
 		$b3p_controller_helper = new \board3\portal\controller\helper(
 			new \phpbb\auth\auth(),
 			$this->portal_columns,
 			$config,
+			$this->language,
 			$template,
 			$user,
 			$path_helper,
@@ -130,6 +134,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			$auth,
 			$this->portal_columns,
 			$config,
+			$this->language,
 			$template,
 			$user,
 			$path_helper,

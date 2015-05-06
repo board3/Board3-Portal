@@ -9,6 +9,8 @@
 
 namespace board3\portal\controller;
 
+require_once(__DIR__ . '/../../../includes/functions.php');
+
 class helper_test extends \board3\portal\tests\testframework\test_case
 {
 	protected $controller_helper;
@@ -19,7 +21,7 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 
 	public function setUp()
 	{
-		global $cache, $phpbb_extension_manager;
+		global $cache, $phpbb_extension_manager, $phpbb_root_path;
 
 		parent::setUp();
 
@@ -33,10 +35,13 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 			'board3_enable'	=> true,
 		));
 		$this->template = new \board3\portal\tests\mock\template($this);
-		$this->user = new \phpbb\user('\phpbb\datetime');
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$this->user->data['group_id'] = 2;
 		$this->phpbb_root_path = dirname(__FILE__) . '/../../../../../../';
 		$phpbb_extension_manager = new \phpbb_mock_extension_manager($this->phpbb_root_path, array('board3/portal'));
+		$this->language_file_loader->set_extension_manager($phpbb_extension_manager);
 		$this->php_ext = 'php';
 		$this->portal_columns = new \board3\portal\portal\columns();
 		$this->modules = array(
@@ -61,6 +66,7 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 			$this->auth,
 			$this->portal_columns,
 			$this->config,
+			$this->language,
 			$this->template,
 			$this->user,
 			$this->path_helper,
