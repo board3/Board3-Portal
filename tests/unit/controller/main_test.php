@@ -41,7 +41,7 @@ class main_test extends \board3\portal\tests\testframework\database_test_case
 			$phpEx
 		);
 
-		$cache = new \phpbb\cache\driver\null();
+		$cache = new \phpbb\cache\driver\dummy();
 
 		$user = new \board3\portal\tests\mock\user();
 
