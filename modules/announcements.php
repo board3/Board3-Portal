@@ -246,8 +246,8 @@ class announcements extends module_base
 			// Assign announcements row
 			$this->template->assign_block_vars('announcements', $announcements_row);
 
-			if($announcement < 0)
 			// Show the announcements overview
+			if($announcement < 0)
 			{
 				$count = $fetch_news['topic_count'];
 				for ($i = 0; $i < $count; $i++)
@@ -363,12 +363,12 @@ class announcements extends module_base
 					}
 				}
 			}
-			else
 			// Show "read full" page
+			else
 			{
 				$i = $announcement;
 
-				/** 
+				/**
 				* redirect to portal page if the specified announcement does not exist
 				* force #top anchor in order to get rid of the #a anchor
 				*/
