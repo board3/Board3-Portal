@@ -243,8 +243,8 @@ class news extends module_base
 			// Create standard news row
 			$this->template->assign_block_vars('news', $news_row);
 
-			if($news < 0)
 			// Show the news overview
+			if($news < 0)
 			{
 				$count = $fetch_news['topic_count'];
 				for ($i = 0; $i < $count; $i++)
@@ -360,8 +360,8 @@ class news extends module_base
 					}
 				}
 			}
-			else
 			// Show "read full" page
+			else
 			{
 				$i = $news;
 				$forum_id = $fetch_news[$i]['forum_id'];
