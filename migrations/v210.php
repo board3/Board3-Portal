@@ -20,6 +20,23 @@ class v210 extends \phpbb\db\migration\migration
 	{
 		return array(
 			array('config.update', array('board3_portal_version', '2.1.0')),
+			array('custom', array(array($this, 'add_donation_setting'))),
 		);
+	}
+
+	/**
+	 * Adds default currency setting to already installed donation modules
+	 */
+	public function add_donation_setting()
+	{
+		$sql = 'SELECT module_id
+			FROM ' . $this->table_prefix . "portal_modules
+			WHERE module_classname = '\\\board3\\\portal\\\modules\\\donation'";
+		$result = $this->db->sql_query($sql);
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			$this->config->set('board3_pay_default_' . $row['module_id'], 'EUR');
+		}
+		$this->db->sql_freeresult($result);
 	}
 }
