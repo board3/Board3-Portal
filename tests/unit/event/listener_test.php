@@ -36,7 +36,7 @@ class listener_test extends \phpbb_template_template_test_case
 
 	public function setup_listener()
 	{
-		global $cache, $db, $phpbb_root_path;
+		global $cache, $db, $phpbb_root_path, $phpEx;
 
 		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put', 'obtain_attach_extensions'));
 		$cache->expects($this->any())
@@ -73,8 +73,10 @@ class listener_test extends \phpbb_template_template_test_case
 			'board3_portal_enable' => '1',
 		));
 
+		$container = new \phpbb_mock_container_builder();
+
 		$filesystem = new \phpbb\filesystem\filesystem();
-		$router = new \phpbb_mock_router($filesystem, $manager, dirname(__FILE__) . '/', 'php', PHPBB_ENVIRONMENT);
+		$router = new \phpbb_mock_router($container, $filesystem, dirname(__FILE__) . '/', 'php', PHPBB_ENVIRONMENT, $manager);
 		$router->find_routing_files($manager->all_enabled(false));
 		$router->find(dirname(__FILE__) . '/');
 		$this->controller_helper = new \phpbb_mock_controller_helper($this->template, $this->user, $this->config, $router, new \phpbb\symfony_request($request), $request, new \phpbb\filesystem(), '', 'php', dirname(__FILE__) . '/');
