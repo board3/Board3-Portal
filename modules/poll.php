@@ -177,7 +177,7 @@ class poll extends module_base
 		$this->user->add_lang('viewtopic');
 
 		// check if we need to include the bbcode class
-		if(!class_exists('bbcode'))
+		if (!class_exists('bbcode'))
 		{
 			include($this->phpbb_root_path . 'includes/bbcode.' . $this->php_ext);
 		}
@@ -234,7 +234,7 @@ class poll extends module_base
 				$topic_data['topic_status'] != ITEM_LOCKED &&
 				$topic_data['forum_status'] != ITEM_LOCKED) ? true : false;
 
-			if($s_can_up_vote)
+			if ($s_can_up_vote)
 			{
 				$redirect_url = $this->modules_helper->route('board3_portal_controller');
 
@@ -327,11 +327,11 @@ class poll extends module_base
 		// Get readable forums
 		$forum_list = array_unique(array_keys($this->auth->acl_getf('f_read', true)));
 
-		if($this->config['board3_poll_topic_id_' . $module_id] !== '')
+		if ($this->config['board3_poll_topic_id_' . $module_id] !== '')
 		{
 			$poll_forums_config  = explode(',' ,$this->config['board3_poll_topic_id_' . $module_id]);
 
-			if($this->config['board3_poll_exclude_id_' . $module_id])
+			if ($this->config['board3_poll_exclude_id_' . $module_id])
 			{
 				$forum_list = array_unique(array_diff($forum_list, $poll_forums_config));
 			}
@@ -343,7 +343,7 @@ class poll extends module_base
 
 		$where = '';
 
-		if(sizeof($forum_list))
+		if (sizeof($forum_list))
 		{
 			$poll_forums = true;
 			$where = 'AND ' . $this->db->sql_in_set('t.forum_id', $forum_list);
@@ -375,7 +375,7 @@ class poll extends module_base
 
 			if ($result)
 			{
-				while($data = $this->db->sql_fetchrow($result))
+				while ($data = $this->db->sql_fetchrow($result))
 				{
 					$has_poll = true;
 					$poll_has_options = false;
@@ -384,7 +384,7 @@ class poll extends module_base
 					$forum_id = (int) $data['forum_id'];
 
 					$cur_voted_id = array();
-					if($this->config['board3_poll_allow_vote_' . $module_id])
+					if ($this->config['board3_poll_allow_vote_' . $module_id])
 					{
 						if ($this->user->data['is_registered'])
 						{
@@ -436,7 +436,7 @@ class poll extends module_base
 
 					if ($poll_result)
 					{
-						while($polls_data = $this->db->sql_fetchrow($poll_result))
+						while ($polls_data = $this->db->sql_fetchrow($poll_result))
 						{
 							$poll_has_options = true;
 							$poll_data[] = $polls_data;
@@ -447,7 +447,7 @@ class poll extends module_base
 
 					$make_poll_view = array();
 
-					if(in_array($topic_id, $poll_view_ar) === false)
+					if (in_array($topic_id, $poll_view_ar) === false)
 					{
 						$make_poll_view[] = $topic_id;
 						$make_poll_view = array_merge($poll_view_ar, $make_poll_view);
@@ -497,7 +497,7 @@ class poll extends module_base
 						'U_VIEW_TOPIC'			=> $viewtopic_url,
 					));
 
-					foreach($poll_data as $pd)
+					foreach ($poll_data as $pd)
 					{
 						$option_pct = ($poll_total_votes > 0) ? $pd['poll_option_total'] / $poll_total_votes : 0;
 						$option_pct_txt = sprintf("%.1d%%", round($option_pct * 100));

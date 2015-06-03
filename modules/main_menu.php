@@ -366,7 +366,7 @@ class main_menu extends module_base
 				{
 					$message = $this->user->lang['LINK_ADDED'];
 
-					if($link_type != self::LINK_CAT && sizeof($links) < 1)
+					if ($link_type != self::LINK_CAT && sizeof($links) < 1)
 					{
 						trigger_error($this->user->lang['ACP_PORTAL_MENU_CREATE_CAT'] . adm_back_link($u_action), E_USER_WARNING);
 					}

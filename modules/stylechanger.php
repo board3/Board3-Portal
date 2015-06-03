@@ -106,7 +106,7 @@ class stylechanger extends module_base
 			$style_select .= '<option value="' . $url . '"' . ($row['style_id'] == $this->user->style['style_id'] ? ' selected="selected"' : '') . '>' . utf8_htmlspecialchars($row['style_name']) . '</option>';
 		}
 		$this->db->sql_freeresult($result);
-		if(strlen($style_select))
+		if (strlen($style_select))
 		{
 			$this->template->assign_var('STYLE_SELECT', $style_select);
 		}

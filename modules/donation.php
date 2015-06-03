@@ -44,24 +44,56 @@ class donation extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\request\request_interface */
+	protected $request;
+
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var \board3\portal\includes\modules_helper */
+	protected $helper;
+
+	/** @var array List of currencies supported in donations */
+	protected $currencies = array(
+		'AUD',
+		'CAD',
+		'CZK',
+		'DKK',
+		'HKD',
+		'HUF',
+		'NZD',
+		'NOK',
+		'PLN',
+		'GBP',
+		'SGD',
+		'SEK',
+		'CHF',
+		'JPY',
+		'USD',
+		'EUR',
+		'MXN',
+		'ILS',
+	);
+
 	/**
-	* Construct a stylechanger object
+	* Construct a donation module object
 	*
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\request\request_interface $request Request
+	* @param \phpbb\template\template $template phpBB template
 	* @param \phpbb\user $user phpBB user object
+	* @param \board3\portal\includes\modules_helper $helper Board3 Portal modules helper
 	*/
-	public function __construct($config, $template, $user)
+	public function __construct($config, $request, $template, $user, $helper)
 	{
 		$this->config = $config;
+		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
+		$this->helper = $helper;
 	}
 
 	/**
@@ -73,6 +105,8 @@ class donation extends module_base
 			'PAY_ACC_CENTER'	=> $this->config['board3_pay_acc_' . $module_id],
 			'PAY_CUSTOM_CENTER'	=> (!empty($this->config['board3_pay_custom_' . $module_id])) ? $this->user->data['username_clean'] : false,
 		));
+
+		$this->build_currency_select($module_id, 'b3p_donation_currency_center');
 
 		return 'donation_center.html';
 	}
@@ -86,6 +120,8 @@ class donation extends module_base
 			'PAY_ACC_SIDE'	=> $this->config['board3_pay_acc_' . $module_id],
 			'PAY_CUSTOM_SIDE'	=> (!empty($this->config['board3_pay_custom_' . $module_id])) ? $this->user->data['username_clean'] : false,
 		));
+
+		$this->build_currency_select($module_id, 'b3p_donation_currency_side', true);
 
 		return 'donation_side.html';
 	}
@@ -101,8 +137,67 @@ class donation extends module_base
 				'legend1'							=> 'ACP_PORTAL_PAYPAL_SETTINGS',
 				'board3_pay_acc_' . $module_id		=> array('lang' => 'PORTAL_PAY_ACC', 'validate' => 'string', 'type' => 'text:25:100', 'explain' => true),
 				'board3_pay_custom_' . $module_id	=> array('lang' => 'PORTAL_PAY_CUSTOM', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => false),
+				'board3_pay_default_' . $module_id	=> array('lang' => 'PORTAL_PAY_DEFAULT', 'validate' => 'string', 'type' => 'custom', 'method' => 'select_currency', 'submit' => 'save_currency', 'explain' => true),
 			)
 		);
+	}
+
+	/**
+	 * Build currency select for block name
+	 *
+	 * @param int $module_id Module ID
+	 * @param string $block_name Name of template block
+	 * @param bool $short Whether short ISO titles should be used
+	 */
+	protected function build_currency_select($module_id, $block_name, $short = false)
+	{
+		foreach ($this->currencies as $currency)
+		{
+			$this->template->assign_block_vars($block_name, array(
+				'VALUE'				=> $currency,
+				'TITLE'				=> ($short) ? $currency : $this->user->lang($currency),
+				'SELECTED'			=> $currency === $this->config['board3_pay_default_' . $module_id],
+			));
+		}
+	}
+
+	/**
+	 * Create select box for attachment filetype
+	 *
+	 * @param mixed $value Value of input
+	 * @param string $key Key name
+	 * @param int $module_id Module ID
+	 *
+	 * @return string Forum select box HTML
+	 */
+	public function select_currency($value, $key, $module_id)
+	{
+		$currencies = $selected = array();
+		foreach ($this->currencies as $currency)
+		{
+			$currencies[] = array(
+				'title'		=> $this->user->lang($currency),
+				'value'		=> $currency,
+			);
+
+			if ($currency === $this->config['board3_pay_default_' . $module_id])
+			{
+				$selected[] = $currency;
+			}
+		}
+
+		return $this->helper->generate_select_box($key, $currencies, $selected);
+	}
+
+	/**
+	 * Save currency setting
+	 *
+	 * @param string $key
+	 * @param int $module_id
+	 */
+	public function save_currency($key, $module_id)
+	{
+		$this->config->set($key, $this->request->variable('board3_pay_default_' . $module_id, ''));
 	}
 
 	/**
@@ -112,6 +207,7 @@ class donation extends module_base
 	{
 		$this->config->set('board3_pay_acc_' . $module_id, 'your@paypal.com');
 		$this->config->set('board3_pay_custom_' . $module_id, true);
+		$this->config->set('board3_pay_default_' . $module_id, 'EUR');
 		return true;
 	}
 
@@ -123,6 +219,7 @@ class donation extends module_base
 		$del_config = array(
 			'board3_pay_acc_' . $module_id,
 			'board3_pay_custom_' . $module_id,
+			'board3_pay_default_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);

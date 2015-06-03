@@ -93,7 +93,7 @@ class leaders extends module_base
 		$this->user->add_lang('groups');
 		$order_legend = ($this->config['legend_sort_groupname']) ? 'group_name' : 'group_legend';
 
-		if($this->config['board3_leaders_ext_' . $module_id])
+		if ($this->config['board3_leaders_ext_' . $module_id])
 		{
 			$legends = array();
 			$groups = array();
@@ -160,9 +160,9 @@ class leaders extends module_base
 
 			if (sizeof($groups))
 			{
-				foreach($groups as $group_id => $group)
+				foreach ($groups as $group_id => $group)
 				{
-					if(sizeof($group['group_users']))
+					if (sizeof($group['group_users']))
 					{
 						$group_name = ($group['group_type'] == GROUP_SPECIAL) ? $this->user->lang['G_' . $group['group_name']] : $group['group_name'];
 						$u_group = append_sid("{$this->phpbb_root_path}memberlist.{$this->php_ext}", 'mode=group&amp;g=' . $group_id);
@@ -173,7 +173,7 @@ class leaders extends module_base
 							'U_GROUP'		=> $u_group,
 						));
 
-						foreach($group['group_users'] as $group_user)
+						foreach ($group['group_users'] as $group_user)
 						{
 							$this->template->assign_block_vars('group.member', array(
 								'USER_ID'			=> $group_user['user_id'],

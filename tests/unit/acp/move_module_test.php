@@ -45,16 +45,22 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 				->getMock());
 		// Mock module service collection
 		$config = new \phpbb\config\config(array());
+		$auth = $this->getMock('\phpbb\auth\auth', array('acl_get'));
+		$auth->expects($this->any())
+			->method('acl_get')
+			->with($this->anything())
+			->will($this->returnValue(true));
+		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
+		$controller_helper->add_route('board3_portal_controller', 'portal');
+		$modules_helper = new \board3\portal\includes\modules_helper($auth, $config, $controller_helper, new \phpbb_mock_request);
 		$phpbb_container->set('board3.portal.module_collection',
 			array(
 				new \board3\portal\modules\clock($config, $template),
 				new \board3\portal\modules\birthday_list($config, $template, $this->db, $user),
 				new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $phpbb_root_path, $phpEx),
-				new \board3\portal\modules\donation($config, $template, $user),
+				new \board3\portal\modules\donation($config, new \phpbb_mock_request, $template, $user, $modules_helper),
 			));
 		$this->portal_helper = new \board3\portal\includes\helper($phpbb_container->get('board3.portal.module_collection'));
-		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
-		$controller_helper->add_route('board3_portal_controller', 'portal');
 		$phpbb_container->set('board3.portal.helper', $this->portal_helper);
 		$phpbb_container->set('board3.portal.modules_helper', new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), $config, $controller_helper, $request));
 		$phpbb_container->setParameter('board3.portal.modules.table', $table_prefix . 'portal_modules');
@@ -124,11 +130,6 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			'\board3\portal\modules\clock'	=> new \board3\portal\modules\clock($config, $template),
 		);
 		$portal_helper = new \board3\portal\includes\helper($modules);
-		$auth = $this->getMock('\phpbb\auth\auth', array('acl_get'));
-		$auth->expects($this->any())
-			->method('acl_get')
-			->with($this->anything())
-			->will($this->returnValue(true));
 
 		$controller_helper = new \board3\portal\controller\helper(
 			$auth,
@@ -153,7 +154,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	{
 		$this->constraints_handler->module_column = array();
 		$portal_modules = obtain_portal_modules();
-		foreach($portal_modules as $cur_module)
+		foreach ($portal_modules as $cur_module)
 		{
 			$this->constraints_handler->module_column[$cur_module['module_classname']][] = $this->portal_columns->number_to_string($cur_module['module_column']);
 		}

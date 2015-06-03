@@ -66,7 +66,7 @@ class portal_module
 			define('PORTAL_CONFIG_TABLE', $this->phpbb_container->getParameter('board3.portal.config.table'));
 		}
 
-		if(!function_exists('obtain_portal_config'))
+		if (!function_exists('obtain_portal_config'))
 		{
 			include($this->root_path . 'includes/functions.' . $this->php_ext);
 		}
@@ -145,7 +145,7 @@ class portal_module
 							'MODULE_SHOW_IMAGE'		=> (in_array($this->portal_columns->number_to_string($module_data['module_column']), array('center', 'top', 'bottom'))) ? false : true,
 						));
 
-						if($module_data['module_classname'] != '\board3\portal\modules\custom')
+						if ($module_data['module_classname'] != '\board3\portal\modules\custom')
 						{
 							$groups_ary = explode(',', $module_data['module_group_ids']);
 
@@ -154,7 +154,7 @@ class portal_module
 									FROM ' . GROUPS_TABLE . '
 									ORDER BY group_id ASC';
 							$result = $this->db->sql_query($sql);
-							while($row = $this->db->sql_fetchrow($result))
+							while ($row = $this->db->sql_fetchrow($result))
 							{
 								$this->template->assign_block_vars('permission_setting', array(
 									'SELECTED'		=> (in_array($row['group_id'], $groups_ary)) ? true : false,
@@ -194,7 +194,7 @@ class portal_module
 				// Reset module
 				$reset_module = $this->request->variable('module_reset', 0);
 
-				if($reset_module && !empty($module_data))
+				if ($reset_module && !empty($module_data))
 				{
 					$this->modules_manager->reset_module($id, $mode, $module_id, $module_data);
 				}
@@ -243,7 +243,7 @@ class portal_module
 						continue;
 					}
 
-					if(isset($null['type']) && $null['type'] == 'custom')
+					if (isset($null['type']) && $null['type'] == 'custom')
 					{
 						continue;
 					}
@@ -266,7 +266,7 @@ class portal_module
 							FROM ' . GROUPS_TABLE . '
 							ORDER BY group_id ASC';
 					$result = $this->db->sql_query($sql);
-					while($row = $this->db->sql_fetchrow($result))
+					while ($row = $this->db->sql_fetchrow($result))
 					{
 						$groups_ary[] = $row['group_id'];
 					}
@@ -283,7 +283,7 @@ class portal_module
 						'module_status'			=> $this->request->variable('module_status', self::B3_MODULE_ENABLED),
 					);
 
-					if(!(isset($this->c_class->hide_name) && $this->c_class->hide_name == true))
+					if (!(isset($this->c_class->hide_name) && $this->c_class->hide_name == true))
 					{
 						$sql_ary['module_name'] = $this->request->variable('module_name', '', true);
 					}
@@ -299,7 +299,7 @@ class portal_module
 					$this->cache->destroy('sql', PORTAL_MODULES_TABLE);
 					$this->cache->destroy('sql', CONFIG_TABLE);
 
-					if(isset($module_name))
+					if (isset($module_name))
 					{
 						if (isset($module_data) && $module_data['module_classname'] !== '\board3\portal\modules\custom')
 						{
@@ -314,7 +314,7 @@ class portal_module
 				}
 
 				// show custom HTML files on the settings page of the modules instead of the standard board3 portal one, if chosen by module
-				if(!isset($this->c_class->custom_acp_tpl) || empty($this->c_class->custom_acp_tpl))
+				if (!isset($this->c_class->custom_acp_tpl) || empty($this->c_class->custom_acp_tpl))
 				{
 					$this->tpl_name = 'portal/acp_portal_config';
 				}
@@ -361,7 +361,7 @@ class portal_module
 						$l_explain = (isset($this->user->lang[$vars['lang'] . '_EXP'])) ? $this->user->lang[$vars['lang'] . '_EXP'] : '';
 					}
 
-					if($vars['type'] != 'custom')
+					if ($vars['type'] != 'custom')
 					{
 						$content = build_cfg_template($type, $config_key, $this->new_config, $config_key, $vars);
 					}
@@ -410,7 +410,7 @@ class portal_module
 				$portal_modules = obtain_portal_modules();
 				$installed_modules = $module_column = array();
 
-				foreach($portal_modules as $cur_module)
+				foreach ($portal_modules as $cur_module)
 				{
 					$installed_modules[] = $cur_module['module_classname'];
 					// Create an array with the columns the module is in
@@ -427,11 +427,11 @@ class portal_module
 				{
 					$this->modules_manager->move_module_vertical($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_DOWN);
 				}
-				else if($action == 'move_right')
+				else if ($action == 'move_right')
 				{
 					$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_RIGHT);
 				}
-				else if($action == 'move_left')
+				else if ($action == 'move_left')
 				{
 					$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_LEFT);
 				}
@@ -502,7 +502,7 @@ class portal_module
 							if (is_array($error))
 							{
 								$error_output = '';
-								foreach($error as $cur_error)
+								foreach ($error as $cur_error)
 								{
 									$error_output .= $cur_error . '<br />';
 								}
@@ -556,7 +556,7 @@ class portal_module
 					}
 
 					// we sort the $fileinfo array by the name of the modules
-					foreach($fileinfo as $key => $cur_file)
+					foreach ($fileinfo as $key => $cur_file)
 					{
 						$name_ary[$key] = $cur_file['name'];
 					}
@@ -600,7 +600,7 @@ class portal_module
 				{
 					$portal_modules = obtain_portal_modules();
 
-					foreach($portal_modules as $row)
+					foreach ($portal_modules as $row)
 					{
 						if (!($this->c_class = $this->portal_helper->get_module($row['module_classname'])))
 						{
@@ -613,7 +613,7 @@ class portal_module
 						$template_column = $this->portal_columns->number_to_string($row['module_column']);
 
 						// find out of we can move modules to the left or right
-						if(($this->c_class->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($row['module_column'] + 1))) || ($this->c_class->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($row['module_column'] + 2)) && $row['module_column'] != 2))
+						if (($this->c_class->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($row['module_column'] + 1))) || ($this->c_class->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($row['module_column'] + 2)) && $row['module_column'] != 2))
 						{
 							/**
 							* check if we can actually move
@@ -643,7 +643,7 @@ class portal_module
 							$move_right = false;
 						}
 
-						if(($this->c_class->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($row['module_column'] - 1))) || ($this->c_class->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($row['module_column'] - 2)) && $row['module_column'] != 2))
+						if (($this->c_class->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($row['module_column'] - 1))) || ($this->c_class->get_allowed_columns() & $this->portal_columns->string_to_constant($this->portal_columns->number_to_string($row['module_column'] - 2)) && $row['module_column'] != 2))
 						{
 							/**
 							* check if we can actually move

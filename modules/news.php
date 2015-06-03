@@ -139,7 +139,7 @@ class news extends module_base
 		);
 
 		$topic_icons = false;
-		if(!empty($fetch_news['topic_icons']))
+		if (!empty($fetch_news['topic_icons']))
 		{
 			$topic_icons = true;
 		}
@@ -179,21 +179,21 @@ class news extends module_base
 				// Get disallowed forums
 				$disallow_access = $this->modules_helper->get_disallowed_forums($permissions);
 
-				if($this->config['board3_news_exclude_' . $module_id] == true)
+				if ($this->config['board3_news_exclude_' . $module_id] == true)
 				{
 					$disallow_access = array_merge($disallow_access, $forum_from);
 					$forum_from = array();
 				}
 
-				if(sizeof($forum_from))
+				if (sizeof($forum_from))
 				{
 					$disallow_access = array_diff($forum_from, $disallow_access);
-					if(!sizeof($disallow_access))
+					if (!sizeof($disallow_access))
 					{
 						return array();
 					}
 
-					foreach($disallow_access as $acc_id)
+					foreach ($disallow_access as $acc_id)
 					{
 						$acc_id = (int) $acc_id;
 						$str_where .= "forum_id = $acc_id OR ";
@@ -201,7 +201,7 @@ class news extends module_base
 				}
 				else
 				{
-					foreach($disallow_access as $acc_id)
+					foreach ($disallow_access as $acc_id)
 					{
 						$acc_id = (int) $acc_id;
 						$str_where .= "forum_id <> $acc_id AND ";
@@ -244,12 +244,12 @@ class news extends module_base
 			$this->template->assign_block_vars('news', $news_row);
 
 			// Show the news overview
-			if($news < 0)
+			if ($news < 0)
 			{
 				$count = $fetch_news['topic_count'];
 				for ($i = 0; $i < $count; $i++)
 				{
-					if(isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true)
+					if (isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true)
 					{
 						$open_bracket = '[ ';
 						$close_bracket = ' ]';
@@ -349,7 +349,7 @@ class news extends module_base
 					// Assign pagination
 					$this->pagination->generate_template_pagination($view_topic_url, 'news.news_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1);
 
-					if(!empty($fetch_news[$i]['attachments']))
+					if (!empty($fetch_news[$i]['attachments']))
 					{
 						foreach ($fetch_news[$i]['attachments'] as $attachment)
 						{
@@ -400,7 +400,7 @@ class news extends module_base
 
 				$this->pagination->generate_template_pagination($view_topic_url, 'news.news_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1);
 
-				if(!empty($fetch_news[$i]['attachments']))
+				if (!empty($fetch_news[$i]['attachments']))
 				{
 					foreach ($fetch_news[$i]['attachments'] as $attachment)
 					{
@@ -418,7 +418,7 @@ class news extends module_base
 			'GOTO_PAGE_IMG'				=> $this->user->img('icon_post_target', 'GOTO_PAGE'),
 		));
 
-		if($this->config['board3_news_style_' . $module_id])
+		if ($this->config['board3_news_style_' . $module_id])
 		{
 			return 'news_compact_center.html';
 		}
