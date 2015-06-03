@@ -57,9 +57,11 @@ $lang = array_merge($lang, array(
 	'ILS'						=> 'Neue Israelische Schekel (ILS)',
 
 	// ACP
-	'ACP_PORTAL_PAYPAL_SETTINGS'				=> 'Paypal Einstellungen',
+	'ACP_PORTAL_PAYPAL_SETTINGS'			=> 'Paypal Einstellungen',
 	'ACP_PORTAL_PAYPAL_SETTINGS_EXP'		=> 'Hier kannst du die Paypal Einstellungen ändern.',
-	'PORTAL_PAY_ACC'							=> 'Paypal Account',
+	'PORTAL_PAY_ACC'						=> 'Paypal Account',
 	'PORTAL_PAY_ACC_EXP'					=> 'Gib deine e-mail-Adresse an, die du bei Paypal benutzt, z.B. xxx@xxx.com',
-	'PORTAL_PAY_CUSTOM'				=> 'Benutzername an die Paypal Zahlung anhängen',
+	'PORTAL_PAY_CUSTOM'						=> 'Benutzername an die Paypal Zahlung anhängen',
+	'PORTAL_PAY_DEFAULT'					=> 'Standard-Währung',
+	'PORTAL_PAY_DEFAULT_EXP'				=> 'Währung die standardmäßig in der Drop-Down-Liste ausgewählt ist.'
 ));
