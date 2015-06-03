@@ -41,12 +41,17 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 		$request =new \phpbb_mock_request();
 
 		$config = new \phpbb\config\config(array());
+		$auth = new \phpbb\auth\auth();
+
+		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
+		$controller_helper->add_route('board3_portal_controller', 'portal');
+		$modules_helper = new \board3\portal\includes\modules_helper($auth, $config, $controller_helper, $this->request);
 
 		$portal_helper = new \board3\portal\includes\helper(array(
 			new \board3\portal\modules\clock($config, null),
 			new \board3\portal\modules\birthday_list($config, null, $this->db, $user),
 			new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $this->phpbb_root_path, $this->phpEx),
-			new \board3\portal\modules\donation($config, null, $user),
+			new \board3\portal\modules\donation($config, $request, null, $user, $modules_helper),
 		));
 
 		$this->portal_columns = new \board3\portal\portal\columns();

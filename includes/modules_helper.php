@@ -86,7 +86,6 @@ class modules_helper
 	{
 		// Build options
 		$options = '<select id="' . $key . '" name="' . $key;
-		var_dump($selected_options, sizeof($selected_options));
 		$options .= (sizeof($selected_options) > 1) ? '[]" multiple="multiple">' : '">';
 		foreach ($select_ary as $id => $option)
 		{
@@ -115,6 +114,11 @@ class modules_helper
 		{
 			$selected_options = explode(',', $this->config[$key]);
 		}
+		// Add useless values to force multi drop down list
+		$selected_options += array(
+			'-1' => '',
+			'-2' => '',
+		);
 
 		// Build forum options
 		foreach ($forum_list as $f_id => $f_row)

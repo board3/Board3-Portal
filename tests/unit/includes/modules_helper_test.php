@@ -55,7 +55,7 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 	public function data_generate_select_box()
 	{
 		return array(
-			array('<select id="foobar" name="foobar[]" multiple="multiple"><option value="one">one</option><option value="two" selected="selected">two</option></select>',
+			array('<select id="foobar" name="foobar"><option value="one">one</option><option value="two" selected="selected">two</option></select>',
 			'foobar',
 			array(
 				'1'	=> array(
@@ -68,7 +68,7 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 				),
 			),
 			array('two')),
-			array('<select id="foobar" name="foobar[]" multiple="multiple"><option value="one" selected="selected">two</option><option value="two">three</option></select>',
+			array('<select id="foobar" name="foobar"><option value="one" selected="selected">two</option><option value="two">three</option></select>',
 			'foobar',
 			array(
 				'1'	=> array(
@@ -81,6 +81,19 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 				),
 			),
 			array('one')),
+			array('<select id="foobar" name="foobar[]" multiple="multiple"><option value="one" selected="selected">two</option><option value="two" selected="selected">three</option></select>',
+				'foobar',
+				array(
+					'1'	=> array(
+						'value'	=> 'one',
+						'title'	=> 'two',
+					),
+					'2'	=> array(
+						'value'	=> 'two',
+						'title'	=> 'three',
+					),
+				),
+				array('one', 'two')),
 		);
 	}
 
