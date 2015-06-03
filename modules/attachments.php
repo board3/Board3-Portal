@@ -230,12 +230,12 @@ class attachments extends module_base
 		// Get filetypes and put them into an array
 		$filetypes = $this->get_selected_filetypes($module_id);
 
-		if($this->config['board3_attachments_forum_ids_' . $module_id] !== '')
+		if ($this->config['board3_attachments_forum_ids_' . $module_id] !== '')
 		{
 			$attach_forums_config = (strpos($this->config['board3_attachments_forum_ids_' . $module_id], ',') !== false) ? explode(',', $this->config['board3_attachments_forum_ids_' . $module_id]) : array($this->config['board3_attachments_forum_ids_' . $module_id]);
 			$forum_list =  array_unique(array_keys($this->auth->acl_getf('f_read', true)));
 
-			if($this->config['board3_attachments_forum_exclude_' . $module_id])
+			if ($this->config['board3_attachments_forum_exclude_' . $module_id])
 			{
 				$forum_list = array_unique(array_diff($forum_list, $attach_forums_config));
 			}
@@ -249,15 +249,15 @@ class attachments extends module_base
 			$forum_list =  array_unique(array_keys($this->auth->acl_getf('f_read', true)));
 		}
 
-		if(sizeof($forum_list))
+		if (sizeof($forum_list))
 		{
 			$attach_forums = true;
 			$where = 'AND ' . $this->db->sql_in_set('t.forum_id', $forum_list);
 		}
 
-		if(sizeof($filetypes))
+		if (sizeof($filetypes))
 		{
-			if($this->config['board3_attachments_exclude_' . $module_id])
+			if ($this->config['board3_attachments_exclude_' . $module_id])
 			{
 				$where .= ' AND ' . $this->db->sql_in_set('a.extension', $filetypes, true);
 			}
@@ -267,7 +267,7 @@ class attachments extends module_base
 			}
 		}
 
-		if($attach_forums === true)
+		if ($attach_forums === true)
 		{
 			// Just grab all attachment info from database
 			$sql = 'SELECT
@@ -328,7 +328,7 @@ class attachments extends module_base
 	protected function get_selected_filetypes($module_id)
 	{
 		$selected = array();
-		if(isset($this->config['board3_attachments_filetype_' . $module_id]) && strlen($this->config['board3_attachments_filetype_' . $module_id]) > 0)
+		if (isset($this->config['board3_attachments_filetype_' . $module_id]) && strlen($this->config['board3_attachments_filetype_' . $module_id]) > 0)
 		{
 			$selected = explode(',', $this->config['board3_attachments_filetype_' . $module_id]);
 		}

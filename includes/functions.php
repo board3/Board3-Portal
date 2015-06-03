@@ -340,7 +340,7 @@ function get_portal_tracking_info($fetch_news)
 				$db->sql_freeresult($result);
 
 				// @todo: do not use $current_forum here as this is already used by the outside foreach
-				foreach($forum_ids as $current_forum)
+				foreach ($forum_ids as $current_forum)
 				{
 					$user_lastmark[$current_forum] = (isset($mark_time[$current_forum])) ? $mark_time[$current_forum] : $user->data['user_lastmark'];
 				}
@@ -471,7 +471,7 @@ function get_user_groups()
 				WHERE user_id = ' . (int) $user->data['user_id'] . '
 				ORDER BY group_id ASC';
 		$result = $db->sql_query($sql);
-		while($row = $db->sql_fetchrow($result))
+		while ($row = $db->sql_fetchrow($result))
 		{
 			$groups_ary[] = $row['group_id'];
 		}

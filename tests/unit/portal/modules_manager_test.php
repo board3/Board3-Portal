@@ -104,7 +104,7 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 
 		$this->modules_manager = new \board3\portal\portal\modules\manager($cache, $db, $this->b3p_controller_helper, $this->portal_columns, $portal_helper, $this->constraints_handler, $this->database_handler, $request, $user);
 		$portal_modules = obtain_portal_modules();
-		foreach($portal_modules as $cur_module)
+		foreach ($portal_modules as $cur_module)
 		{
 			$this->constraints_handler->module_column[$cur_module['module_classname']][] = $this->portal_columns->number_to_string($cur_module['module_column']);
 		}

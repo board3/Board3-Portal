@@ -138,7 +138,7 @@ class recent extends module_base
 			ORDER BY topic_time DESC';
 		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id], 0 , 600);
 
-		while(($row = $this->db->sql_fetchrow($result)) && ($row['topic_title']))
+		while (($row = $this->db->sql_fetchrow($result)) && ($row['topic_title']))
 		{
 			// auto auth
 			if (($this->auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0'))
@@ -164,7 +164,7 @@ class recent extends module_base
 			ORDER BY topic_time DESC';
 		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id], 0, 600);
 
-		while(($row = $this->db->sql_fetchrow($result)) && ($row['topic_title']))
+		while (($row = $this->db->sql_fetchrow($result)) && ($row['topic_title']))
 		{
 			// auto auth
 			if (($this->auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0'))
@@ -191,7 +191,7 @@ class recent extends module_base
 			ORDER BY topic_time DESC';
 		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id], 0, 600);
 
-		while(($row = $this->db->sql_fetchrow($result)) && ($row['topic_title']))
+		while (($row = $this->db->sql_fetchrow($result)) && ($row['topic_title']))
 		{
 			// auto auth
 			if (($this->auth->acl_get('f_read', $row['forum_id'])) || ($row['forum_id'] == '0'))

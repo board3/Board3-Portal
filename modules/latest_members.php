@@ -81,7 +81,7 @@ class latest_members extends module_base
 			ORDER BY user_regdate DESC';
 		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_last_member_' . $module_id], 0, 600);
 
-		while(($row = $this->db->sql_fetchrow($result)) && ($row['username']))
+		while (($row = $this->db->sql_fetchrow($result)) && ($row['username']))
 		{
 			$this->template->assign_block_vars('latest_members', array(
 				'USERNAME_FULL'	=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
