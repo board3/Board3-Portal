@@ -149,7 +149,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	{
 		$this->constraints_handler->module_column = array();
 		$portal_modules = obtain_portal_modules();
-		foreach($portal_modules as $cur_module)
+		foreach ($portal_modules as $cur_module)
 		{
 			$this->constraints_handler->module_column[$cur_module['module_classname']][] = $this->portal_columns->number_to_string($cur_module['module_column']);
 		}

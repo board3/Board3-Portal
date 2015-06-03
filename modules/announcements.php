@@ -138,7 +138,7 @@ class announcements extends module_base
 		);
 
 		$topic_icons = false;
-		if(!empty($fetch_news['topic_icons']))
+		if (!empty($fetch_news['topic_icons']))
 		{
 			$topic_icons = true;
 		}
@@ -182,7 +182,7 @@ class announcements extends module_base
 				// Get disallowed forums
 				$disallow_access = $this->modules_helper->get_disallowed_forums($permissions);
 
-				if($this->config['board3_announcements_forum_exclude_' . $module_id] == true)
+				if ($this->config['board3_announcements_forum_exclude_' . $module_id] == true)
 				{
 					$disallow_access = array_merge($disallow_access, $forum_from);
 					$forum_from = array();
@@ -190,18 +190,18 @@ class announcements extends module_base
 
 				$global_f = 0;
 
-				if(sizeof($forum_from))
+				if (sizeof($forum_from))
 				{
 					$disallow_access = array_diff($forum_from, $disallow_access);
-					if(!sizeof($disallow_access))
+					if (!sizeof($disallow_access))
 					{
 						return array();
 					}
 
-					foreach($disallow_access as $acc_id)
+					foreach ($disallow_access as $acc_id)
 					{
 						$str_where .= 'forum_id = ' . (int) $acc_id . ' OR ';
-						if($global_f < 1 && $acc_id > 0)
+						if ($global_f < 1 && $acc_id > 0)
 						{
 							$global_f = $acc_id;
 						}
@@ -209,7 +209,7 @@ class announcements extends module_base
 				}
 				else
 				{
-					foreach($disallow_access as $acc_id)
+					foreach ($disallow_access as $acc_id)
 					{
 						$str_where .= 'forum_id <> ' . (int) $acc_id . ' AND ';
 					}
@@ -247,12 +247,12 @@ class announcements extends module_base
 			$this->template->assign_block_vars('announcements', $announcements_row);
 
 			// Show the announcements overview
-			if($announcement < 0)
+			if ($announcement < 0)
 			{
 				$count = $fetch_news['topic_count'];
 				for ($i = 0; $i < $count; $i++)
 				{
-					if(isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true)
+					if (isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true)
 					{
 						$open_bracket = '[ ';
 						$close_bracket = ' ]';
@@ -352,7 +352,7 @@ class announcements extends module_base
 
 					$this->pagination->generate_template_pagination($view_topic_url, 'announcements.center_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
 
-					if(!empty($fetch_news[$i]['attachments']))
+					if (!empty($fetch_news[$i]['attachments']))
 					{
 						foreach ($fetch_news[$i]['attachments'] as $attachment)
 						{
@@ -415,7 +415,7 @@ class announcements extends module_base
 
 				$this->pagination->generate_template_pagination($view_topic_url, 'announcements.center_row.pagination', 'start', $fetch_news[$i]['topic_replies'] + 1, $this->config['posts_per_page'], 1, true, true);
 
-				if(!empty($fetch_news[$i]['attachments']))
+				if (!empty($fetch_news[$i]['attachments']))
 				{
 					foreach ($fetch_news[$i]['attachments'] as $attachment)
 					{

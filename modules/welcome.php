@@ -187,7 +187,7 @@ class welcome extends module_base
 				generate_text_for_storage($welcome_message, $uid, $bitfield, $flags, true, true, true);
 
 				// first check for obvious errors, we don't want to waste server resources
-				if(empty($welcome_message))
+				if (empty($welcome_message))
 				{
 					trigger_error($this->user->lang['ACP_PORTAL_WELCOME_MESSAGE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
 				}
@@ -217,7 +217,7 @@ class welcome extends module_base
 			// Edit or add menu item
 			case 'reset':
 			default:
-				if(!isset($welcome_message))
+				if (!isset($welcome_message))
 				{
 					$welcome_message = generate_text_for_edit($portal_config['board3_welcome_message_' . $module_id], $this->config['board3_welcome_message_uid_' . $module_id], '');
 				}
@@ -235,7 +235,7 @@ class welcome extends module_base
 					'MAX_FONT_SIZE'			=> (int) $this->config['max_post_font_size'],
 				));
 
-				if(!function_exists('display_forums'))
+				if (!function_exists('display_forums'))
 				{
 					include($this->phpbb_root_path . 'includes/functions_display.' . $this->php_ext);
 				}

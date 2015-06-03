@@ -110,7 +110,7 @@ class modules_helper
 		$forum_list = make_forum_select(false, false, true, true, true, false, true);
 
 		$selected_options = $select_ary = array();
-		if(isset($this->config[$key]) && strlen($this->config[$key]) > 0)
+		if (isset($this->config[$key]) && strlen($this->config[$key]) > 0)
 		{
 			$selected_options = explode(',', $this->config[$key]);
 		}

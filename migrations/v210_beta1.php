@@ -201,7 +201,7 @@ class v210_beta1 extends \phpbb\db\migration\migration
 		$sql = 'SELECT group_id, group_name FROM ' . $this->table_prefix . 'groups
 			WHERE ' . $this->db->sql_in_set('group_name', $in_ary);
 		$result = $this->db->sql_query($sql);
-		while($row = $this->db->sql_fetchrow($result))
+		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$groups_ary[$row['group_name']] = $row['group_id'];
 		}
