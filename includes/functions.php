@@ -1,4 +1,5 @@
 <?php
+// @codingStandardsIgnoreFile
 /**
 *
 * @package Board3 Portal v2.1
@@ -9,7 +10,6 @@
 
 /**
  * @ignore
- * @codingStandardsIgnoreFile
  */
 if (!defined('IN_PHPBB'))
 {
