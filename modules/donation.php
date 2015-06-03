@@ -44,7 +44,7 @@ class donation extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var \phpbb\user */
@@ -54,7 +54,7 @@ class donation extends module_base
 	* Construct a stylechanger object
 	*
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\template\template $template phpBB template
 	* @param \phpbb\user $user phpBB user object
 	*/
 	public function __construct($config, $template, $user)
@@ -112,6 +112,7 @@ class donation extends module_base
 	{
 		$this->config->set('board3_pay_acc_' . $module_id, 'your@paypal.com');
 		$this->config->set('board3_pay_custom_' . $module_id, true);
+		$this->config->set('board3_pay_default_' . $module_id, 'EUR');
 		return true;
 	}
 
@@ -123,6 +124,7 @@ class donation extends module_base
 		$del_config = array(
 			'board3_pay_acc_' . $module_id,
 			'board3_pay_custom_' . $module_id,
+			'board3_pay_default_' . $module_id,
 		);
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
