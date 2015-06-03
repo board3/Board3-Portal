@@ -84,8 +84,10 @@ services:
         class: board3\portal\modules\donation
         arguments:
             - @config
+            - @request
             - @template
             - @user
+            - @board3.portal.modules_helper
         tags:
             - { name: board3.portal.module }
 

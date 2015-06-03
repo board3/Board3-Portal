@@ -14,22 +14,9 @@
 		<!-- ENDIF -->
 		<input type="text" tabindex="10" name="amount" size="10" maxlength="6" value="" class="inputbox autowidth" title="{L_PAY_MSG}" />
 		<select name="currency_code" class="autowidth">
-        	<option value="USD">USD</option>
-			<option value="AUD">AUD</option>
-			<option value="CAD">CAD</option>
-			<option value="CZK">CZK</option>
-			<option value="DKK">DKK</option>
-			<option value="EUR" selected="selected">EUR</option>
-			<option value="HKD">HKD</option>
-			<option value="HUF">HUF</option>
-			<option value="NZD">NZD</option>
-			<option value="NOK">NOK</option>
-			<option value="PLN">PLN</option>
-			<option value="GBP">GBP</option>
-			<option value="SGD">SGD</option>
-			<option value="SEK">SEK</option>
-			<option value="CHF">CHF</option>
-			<option value="JPY">JPY</option>
+		<!-- BEGIN b3p_donation_currency_side -->
+			<option value="{b3p_donation_currency_side.VALUE"<!-- IF b3p_donation_currency_side.SELECTED --> selected="selected"<!-- ENDIF -->>{b3p_donation_currency_side.TITLE}</option>
+		<!-- END b3p_donation_currency_side -->
 		</select>
 		<input type="submit" name="submit" value="{L_DONATION}" class="button1" />
     </div>
