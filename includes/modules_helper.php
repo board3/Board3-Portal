@@ -85,7 +85,8 @@ class modules_helper
 	public function generate_select_box($key, $select_ary, $selected_options)
 	{
 		// Build options
-		$options = '<select id="' . $key . '" name="' . $key . '[]" multiple="multiple">';
+		$options = '<select id="' . $key . '" name="' . $key;
+		$options .= (sizeof($selected_options) > 1) ? '[]" multiple="multiple">' : '">';
 		foreach ($select_ary as $id => $option)
 		{
 			$options .= '<option value="' . $option['value'] . '"' . ((in_array($option['value'], $selected_options)) ? ' selected="selected"' : '') . (!empty($option['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $option['title'] . '</option>';
@@ -113,6 +114,11 @@ class modules_helper
 		{
 			$selected_options = explode(',', $this->config[$key]);
 		}
+		// Add useless values to force multi drop down list
+		$selected_options += array(
+			'-1' => '',
+			'-2' => '',
+		);
 
 		// Build forum options
 		foreach ($forum_list as $f_id => $f_row)
