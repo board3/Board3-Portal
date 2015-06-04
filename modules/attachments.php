@@ -191,7 +191,7 @@ class attachments extends module_base
 
 		$selected = $this->get_selected_filetypes($module_id);
 
-		return $this->helper->generate_select_box($key, $extensions, $selected);
+		return $this->helper->generate_select_box($key, $extensions, $selected, true);
 	}
 
 	/**
