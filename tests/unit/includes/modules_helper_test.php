@@ -93,16 +93,17 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 						'title'	=> 'three',
 					),
 				),
-				array('one', 'two')),
+				array('one', 'two'),
+				true),
 		);
 	}
 
 	/**
 	* @dataProvider data_generate_select_box
 	*/
-	public function test_generate_select_box($expected, $key, $select_ary, $selected_options)
+	public function test_generate_select_box($expected, $key, $select_ary, $selected_options, $multiple = false)
 	{
-		$this->assertEquals($expected, $this->modules_helper->generate_select_box($key, $select_ary, $selected_options));
+		$this->assertEquals($expected, $this->modules_helper->generate_select_box($key, $select_ary, $selected_options, $multiple));
 	}
 
 	public function test_generate_forum_select()
