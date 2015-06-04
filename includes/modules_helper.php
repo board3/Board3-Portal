@@ -78,15 +78,16 @@ class modules_helper
 	* @param string	$key			Key of select box
 	* @param array	$select_ary		Array of select box options
 	* @param array	$selected_options	Array of selected options
+	* @param bool $multiple Whether multiple options should be selectable
 	*
 	* @return string HTML code of select box
 	* @access public
 	*/
-	public function generate_select_box($key, $select_ary, $selected_options)
+	public function generate_select_box($key, $select_ary, $selected_options, $multiple = false)
 	{
 		// Build options
 		$options = '<select id="' . $key . '" name="' . $key;
-		$options .= (sizeof($selected_options) > 1) ? '[]" multiple="multiple">' : '">';
+		$options .= ($multiple) ? '[]" multiple="multiple">' : '">';
 		foreach ($select_ary as $id => $option)
 		{
 			$options .= '<option value="' . $option['value'] . '"' . ((in_array($option['value'], $selected_options)) ? ' selected="selected"' : '') . (!empty($option['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $option['title'] . '</option>';
@@ -114,11 +115,6 @@ class modules_helper
 		{
 			$selected_options = explode(',', $this->config[$key]);
 		}
-		// Add useless values to force multi drop down list
-		$selected_options += array(
-			'-1' => '',
-			'-2' => '',
-		);
 
 		// Build forum options
 		foreach ($forum_list as $f_id => $f_row)
@@ -130,7 +126,7 @@ class modules_helper
 			);
 		}
 
-		return $this->generate_select_box($key, $select_ary, $selected_options);
+		return $this->generate_select_box($key, $select_ary, $selected_options, true);
 	}
 
 	/**
