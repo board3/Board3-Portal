@@ -204,3 +204,19 @@
 	padding-top: 16px;
 	margin-bottom: 2px;
 }
+
+.portal-arrow-left-icon {
+	background-image: url('../../all/theme/images/portal/cal_icon_left_arrow.png');
+	padding-left: 16px;
+	padding-top: 16px;
+	float: left;
+	margin-bottom: 2px;
+}
+
+.portal-arrow-right-icon {
+	background-image: url('../../all/theme/images/portal/cal_icon_right_arrow.png');
+	padding-left: 16px;
+	padding-top: 16px;
+	float: right;
+	margin-bottom: 2px;
+}
