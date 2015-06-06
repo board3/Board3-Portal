@@ -7,7 +7,6 @@
 *
 */
 
-
 class board3_includes_helper_test extends \board3\portal\tests\testframework\test_case
 {
 	protected $portal_helper;

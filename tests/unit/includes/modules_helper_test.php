@@ -7,6 +7,7 @@
 *
 */
 
+require_once dirname(__FILE__) . '/../../../../../../includes/functions_admin.php';
 
 class board3_includes_modules_helper_test extends \board3\portal\tests\testframework\database_test_case
 {
