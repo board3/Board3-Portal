@@ -81,7 +81,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEFT_COLUMN_EXP'				=> 'Verander naar nee als je de linkerkolom wilt uitschakelen',
 	'PORTAL_RIGHT_COLUMN'					=> 'Rechterkolom inschakelen',
 	'PORTAL_RIGHT_COLUMN_EXP'				=> 'Verander naar nee als je de rechterkolom wilt uitschakelen',
-	'PORTAL_VERSION_CHECK'					=> 'Versiecontrole op portaalpagina',
 	'PORTAL_DISPLAY_JUMPBOX'				=> 'Jumpbox weergeven',
 	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Jumpbox op de portaalpagina weergeven. De jumpbox wordt alleen zichtbaar als je hem hebt ingeschakeld bij de forumfuncties.',
 	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'		=> 'Linker en rechterkolom breedte instellingen',
@@ -95,17 +94,4 @@ $lang = array_merge($lang, array(
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Basisset van modules toevoegen',
 	'PORTAL_BASIC_UNINSTALL'		=> 'Modules verwijderen uit de database',
-
-	/**
-	* A copy of Handyman` s MOD version check, to view it on the portal overview
-	*/
-	'ANNOUNCEMENT_TOPIC'	=> 'Release aankondiging',
-	'CURRENT_VERSION'		=> 'Huidige versie',
-	'DOWNLOAD_LATEST'		=> 'Download de laatste versie',
-	'LATEST_VERSION'		=> 'Laatste versie',
-	'NO_INFO'				=> 'De server voor de versie controle kan niet worden bereikt',
-	'NOT_UP_TO_DATE'		=> '%s is niet up-to-date',
-	'RELEASE_ANNOUNCEMENT'	=> 'Aankondigingsonderwerp',
-	'UP_TO_DATE'			=> '%s is up-to-date',
-	'VERSION_CHECK'			=> 'EXT Versie Controle',
 ));

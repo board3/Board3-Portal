@@ -86,7 +86,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEFT_COLUMN_EXP'				=> 'Cambie a No si desea deshabilitar la columna de la izquierda.',
 	'PORTAL_RIGHT_COLUMN'					=> 'Habilitar columna derecha',
 	'PORTAL_RIGHT_COLUMN_EXP'				=> 'Cambie a No si desea deshabilitar la columna de la derecha.',
-	'PORTAL_VERSION_CHECK'					=> 'Versioncheck en el Portal',
 	'PORTAL_DISPLAY_JUMPBOX'				=> 'Mostrar Ir a',
 	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Mostrar Ir a en el portal. El Ir a sólo se muestra si está activo también en las Características del sitio.',
 	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'		=> 'Configuración de ancho de columnas izquierda y derecha',
@@ -101,17 +100,4 @@ $lang = array_merge($lang, array(
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Agregando un conjunto básico de módulos',
 	'PORTAL_BASIC_UNINSTALL'		=> 'Eliminando módulos de la base de datos',
-
-	/**
-	* A copy of Handyman` s MOD version check, to view it on the portal overview
-	*/
-	'ANNOUNCEMENT_TOPIC'	=> 'Anuncio de lanzamiento',
-	'CURRENT_VERSION'		=> 'Versión Actual',
-	'DOWNLOAD_LATEST'		=> 'Descarga la última versión',
-	'LATEST_VERSION'		=> 'Última versión',
-	'NO_INFO'				=> 'Version server could not be contacted',
-	'NOT_UP_TO_DATE'		=> '%s no está actualizado',
-	'RELEASE_ANNOUNCEMENT'	=> 'Tema del Anuncio',
-	'UP_TO_DATE'			=> '%s está actualizado',
-	'VERSION_CHECK'			=> 'Comprobar versión de extensión',
 ));

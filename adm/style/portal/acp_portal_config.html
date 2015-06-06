@@ -13,31 +13,6 @@
 	</div>
 <!-- ENDIF -->
 
-<!-- BEGIN mods -->
-
-	<fieldset>
-		<legend>{L_VERSION_CHECK}</legend>
-		<p style="font-weight: bold; color: <!-- IF mods.S_UP_TO_DATE -->#228822<!-- ELSE -->#BC2A4D<!-- ENDIF -->;">{mods.UP_TO_DATE}</p>
-		<dl>
-			<dt><label>{L_CURRENT_VERSION}</label></dt>
-			<dd><strong>{mods.CURRENT_VERSION}</strong></dd>
-		</dl>
-		<dl>
-			<dt><label>{L_LATEST_VERSION}</label></dt>
-			<dd><strong>{mods.LATEST_VERSION}</strong></dd>
-		</dl>
-		<!-- IF not mods.S_UP_TO_DATE -->
-			<dl>
-				<dt><label>{L_DOWNLOAD_LATEST}</label></dt>
-				<dd><strong><a href="{mods.DOWNLOAD}">{L_DOWNLOAD} {mods.TITLE} {mods.LATEST_VERSION}</a></strong></dd>
-			</dl>
-			<dl>
-				<dt><label>{L_ANNOUNCEMENT_TOPIC}</label></dt>
-				<dd><strong><a href="{mods.ANNOUNCEMENT}">{L_RELEASE_ANNOUNCEMENT}</a></strong></dd>
-			</dl>
-		<!-- ENDIF -->
-	</fieldset>
-<!-- END mods -->
 <form id="acp_portal_config" method="post" action="{B3P_U_ACTION}">
 <!-- IF SHOW_MODULE_OPTIONS -->
 		<fieldset>

@@ -38,11 +38,6 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$user = new \board3\portal\tests\mock\user();
 		$request = new \phpbb_mock_request;
 		$phpbb_container = new \phpbb_mock_container_builder();
-		// Mock version check
-		$phpbb_container->set('board3.portal.version.check',
-			$this->getMockBuilder('\board3\portal\includes\version_check')
-				->disableOriginalConstructor()
-				->getMock());
 		// Mock module service collection
 		$config = new \phpbb\config\config(array());
 		$auth = $this->getMock('\phpbb\auth\auth', array('acl_get'));

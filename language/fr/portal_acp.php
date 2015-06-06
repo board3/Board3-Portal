@@ -89,7 +89,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEFT_COLUMN_EXP'				=> 'Changer sur « Non » si vous souhaitez désactiver la colonne de gauche.',
 	'PORTAL_RIGHT_COLUMN'					=> 'Activer la colonne de droite',
 	'PORTAL_RIGHT_COLUMN_EXP'				=> 'Changer sur « Non » si vous souhaitez désactiver la colonne de droite.',
-	'PORTAL_VERSION_CHECK'					=> 'Vérification de la version du portail',
 	'PORTAL_DISPLAY_JUMPBOX'				=> 'Afficher l’accès rapide aux forums',
 	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Afficher l’accès rapide aux forums sur le portail. L’accès rapide aux forums ne sera affiché que si il est également activé dans les fonctionnalités du forum.',
 	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'		=> 'Paramètres de largeur des colonnes de gauche et de droite',
@@ -108,17 +107,4 @@ $lang = array_merge($lang, array(
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Ajout d’un ensemble de modules de base',
 	'PORTAL_BASIC_UNINSTALL'		=> 'Suppression des modules de la base de données',
-
-	/**
-	* A copy of Handyman` s MOD version check, to view it on the portal overview
-	*/
-	'ANNOUNCEMENT_TOPIC'	=> 'Annonce',
-	'CURRENT_VERSION'		=> 'Version actuelle',
-	'DOWNLOAD_LATEST'		=> 'Télécharger la dernière version',
-	'LATEST_VERSION'		=> 'Dernière version',
-	'NO_INFO'				=> 'Le serveur n’a pu être contacté',
-	'NOT_UP_TO_DATE'		=> '%s n’est pas à jour',
-	'RELEASE_ANNOUNCEMENT'	=> ' Date de publication de l’annonce',
-	'UP_TO_DATE'			=> 'L’extension %s est à jour',
-	'VERSION_CHECK'			=> 'Vérification de la version du portail',
 ));
