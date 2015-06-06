@@ -111,7 +111,7 @@ class links extends module_base
 	{
 		$portal_config = obtain_portal_config();
 
-		$links = $this->utf_unserialize($portal_config['board3_links_array_' . $module_id]);
+		$links = json_decode($portal_config['board3_links_array_' . $module_id], true);
 
 		// get user's groups
 		$groups_ary = get_user_groups();
@@ -200,7 +200,7 @@ class links extends module_base
 			);
 		}
 
-		$board3_menu_array = serialize($links);
+		$board3_menu_array = json_encode($links);
 		set_portal_config('board3_links_array_' . $module_id, $board3_menu_array);
 		$this->config->set('board3_links_' . $module_id, '');
 		$this->config->set('board3_links_url_new_window_' . $module_id, 0);
@@ -247,7 +247,7 @@ class links extends module_base
 		$link_id = $this->request->variable('id', 99999999); // 0 will trigger unwanted behavior, therefore we set a number we should never reach
 		$portal_config = obtain_portal_config();
 
-		$links = $this->utf_unserialize($portal_config['board3_links_array_' . $module_id]);
+		$links = json_decode($portal_config['board3_links_array_' . $module_id], true);
 
 		$u_action = append_sid('index.' . $this->php_ext, 'i=\board3\portal\acp\portal_module&amp;mode=config&amp;module_id=' . $module_id);
 
@@ -319,7 +319,7 @@ class links extends module_base
 					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'],'LOG_PORTAL_LINK_ADDED', false, array($link_title));
 				}
 
-				$board3_links_array = serialize($links);
+				$board3_links_array = json_encode($links);
 				set_portal_config('board3_links_array_' . $module_id, $board3_links_array);
 
 				trigger_error($message . adm_back_link($u_action));
@@ -341,7 +341,7 @@ class links extends module_base
 					array_splice($links, $link_id, 1);
 					$links = array_merge($links);
 
-					$board3_links_array = serialize($links);
+					$board3_links_array = json_encode($links);
 					set_portal_config('board3_links_array_' . $module_id, $board3_links_array);
 
 					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_LINK_REMOVED', false, array($cur_link_title));
@@ -397,7 +397,7 @@ class links extends module_base
 				// insert the info of the moved link
 				$links[$switch_order_id] = $cur_link;
 
-				$board3_links_array = serialize($links);
+				$board3_links_array = json_encode($links);
 				set_portal_config('board3_links_array_' . $module_id, $board3_links_array);
 
 			break;
@@ -459,20 +459,5 @@ class links extends module_base
 	public function update_links($key, $module_id)
 	{
 		$this->manage_links('', $key, $module_id);
-	}
-
-	/**
-	 * Unserialize links array
-	 *
-	 * @param string $serial_str Serialized string
-	 *
-	 * @return array Unserialized string
-	 */
-	private function utf_unserialize($serial_str)
-	{
-		$out = preg_replace_callback('!s:(\d+):"(.*?)";!s', function ($result) {
-			return 's:' . strlen($result[2]) . ":\"{$result[2]}\";";
-		}, $serial_str);
-		return unserialize($out);
 	}
 }
