@@ -35,15 +35,34 @@ phpbb.b3p_fix_right_column_margin = function() {
 		}
 	} else {
 		$portal_right.css('margin-top', '0px');
-		$portal_right.css('margin-left', -portal_right_width);
+		if ($portal_center.length && $portal_left.length) {
+			$portal_right.css('margin-left', -portal_right_width);
+		} else {
+			$portal_right.css('margin-left', 0);
+		}
 		$portal_right.width(portal_right_width);
 		$portal_left.css('margin-top', 0);
+	}
+};
+
+/**
+ * Correctly align left column if center column does not exist
+ */
+phpbb.b3pFixLeftColumnMargin = function() {
+	var $portalLeft = $('#portal-left');
+
+	if ($portalLeft.length && !$('#portal-center').length) {
+		$portalLeft.css({
+			'margin-left': '0px',
+			'margin-right': 10
+		});
 	}
 };
 
 $(document).ready(function() {
 	portal_right_width = $('#portal-right').width();
 	phpbb.b3p_fix_right_column_margin();
+	phpbb.b3pFixLeftColumnMargin();
 	$(window).resize(function() {
 		phpbb.b3p_fix_right_column_margin();
 	});
