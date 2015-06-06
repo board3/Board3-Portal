@@ -97,6 +97,9 @@ class database_handler
 	 */
 	public function move_module_vertical($module_id, $module_data, $direction, $step = 1)
 	{
+		$direction = (int) $direction;
+		$step = (int) $step;
+
 		if ($direction == self::MOVE_DIRECTION_DOWN)
 		{
 			$current_increment = ' + ' . $step;
@@ -109,15 +112,15 @@ class database_handler
 		}
 
 		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-				SET module_order = module_order' . (int) $other_increment . '
-				WHERE module_order = ' . (int) ($module_data['module_order'] + ($direction * $step)) . '
+				SET module_order = module_order' . $other_increment . '
+				WHERE module_order = ' . ($module_data['module_order'] + ($direction * $step)) . '
 					AND module_column = ' . (int) $module_data['module_column'];
 		$this->db->sql_query($sql);
 		$updated = (bool) $this->db->sql_affectedrows();
 		if ($updated)
 		{
 			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-					SET module_order = module_order' . (int) $current_increment . '
+					SET module_order = module_order' . $current_increment . '
 					WHERE module_id = ' . (int) $module_id;
 			$this->db->sql_query($sql);
 		}

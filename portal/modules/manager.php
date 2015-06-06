@@ -393,6 +393,6 @@ class manager
 	 */
 	public function get_module_link($mode, $module_id)
 	{
-		return preg_replace(array('/i=[0-9]+/', '/mode=[a-zA-Z0-9_]+/'), array('i=%5C' . str_replace('\\', '-', $this->acp_class), 'mode=' . $mode), $this->u_action) . (($module_id) ? '&amp;module_id=' . $module_id : '');
+		return preg_replace(array('/i=[0-9]+/', '/mode=[a-zA-Z0-9_]+/'), array('i=-' . str_replace('\\', '-', $this->acp_class), 'mode=' . $mode), $this->u_action) . (($module_id) ? '&amp;module_id=' . $module_id : '');
 	}
 }
