@@ -470,7 +470,7 @@ class portal_module
 
 						$sql = 'SELECT module_order
 							FROM ' . PORTAL_MODULES_TABLE . '
-							WHERE module_column = ' . $add_column . '
+							WHERE module_column = ' . (int) $add_column . '
 							ORDER BY module_order DESC';
 						$result = $this->db->sql_query_limit($sql, 1);
 						$module_order = 1 + (int) $this->db->sql_fetchfield('module_order');

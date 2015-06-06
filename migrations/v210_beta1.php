@@ -180,7 +180,8 @@ class v210_beta1 extends \phpbb\db\migration\migration
 	{
 		if ($this->db_tools->sql_table_exists($this->table_prefix . 'portal_config'))
 		{
-			$sql = 'SELECT * FROM ' . $this->table_prefix . 'portal_config';
+			$sql = 'SELECT *
+				FROM ' . $this->table_prefix . 'portal_config';
 			$result = $this->db->sql_query_limit($sql, 1);
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
@@ -198,7 +199,8 @@ class v210_beta1 extends \phpbb\db\migration\migration
 		$in_ary = array('GUESTS', 'REGISTERED', 'REGISTERED_COPPA');
 		$groups_ary = array();
 
-		$sql = 'SELECT group_id, group_name FROM ' . $this->table_prefix . 'groups
+		$sql = 'SELECT group_id, group_name
+			FROM ' . $this->table_prefix . 'groups
 			WHERE ' . $this->db->sql_in_set('group_name', $in_ary);
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))

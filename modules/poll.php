@@ -199,8 +199,8 @@ class poll extends module_base
 			{
 				$sql = 'SELECT poll_option_id
 					FROM ' . POLL_VOTES_TABLE . '
-					WHERE topic_id = ' . $up_topic_id . '
-						AND vote_user_id = ' . $this->user->data['user_id'];
+					WHERE topic_id = ' . (int) $up_topic_id . '
+						AND vote_user_id = ' . (int) $this->user->data['user_id'];
 				$result = $this->db->sql_query($sql);
 
 				while ($row = $this->db->sql_fetchrow($result))
@@ -222,8 +222,10 @@ class poll extends module_base
 			}
 
 			$sql = 'SELECT t.poll_length, t.poll_start, t.poll_vote_change, t.topic_status, f.forum_status, t.poll_max_options
-					FROM ' . TOPICS_TABLE . ' t, ' . FORUMS_TABLE . " f
-					WHERE t.forum_id = f.forum_id AND t.topic_id = " . (int) $up_topic_id . " AND t.forum_id = " . (int) $up_forum_id;
+				FROM ' . TOPICS_TABLE . ' t, ' . FORUMS_TABLE . " f
+				WHERE t.forum_id = f.forum_id
+					AND t.topic_id = " . (int) $up_topic_id . "
+					AND t.forum_id = " . (int) $up_forum_id;
 			$result = $this->db->sql_query_limit($sql, 1);
 			$topic_data = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
@@ -312,8 +314,8 @@ class poll extends module_base
 				}
 
 				$sql = 'UPDATE ' . TOPICS_TABLE . '
-					SET poll_last_vote = ' . time() . "
-					WHERE topic_id = $up_topic_id";
+					SET poll_last_vote = ' . time() . '
+					WHERE topic_id = ' . (int) $up_topic_id;
 				//, topic_last_post_time = ' . time() . " -- for bumping topics with new votes, ignore for now
 				$this->db->sql_query($sql);
 
@@ -351,7 +353,7 @@ class poll extends module_base
 
 		if ($this->config['board3_poll_hide_' . $module_id])
 		{
-			$portal_poll_hide = "AND (t.poll_start + t.poll_length > ". time() ." OR t.poll_length = 0)";
+			$portal_poll_hide = 'AND (t.poll_start + t.poll_length > ' . time() . ' OR t.poll_length = 0)';
 		}
 		else
 		{
@@ -362,13 +364,15 @@ class poll extends module_base
 		{
 
 			$sql = 'SELECT t.poll_title, t.poll_start, t.topic_id,  t.topic_first_post_id, t.forum_id, t.poll_length, t.poll_vote_change, t.poll_max_options, t.topic_status, f.forum_status, p.bbcode_bitfield, p.bbcode_uid
-					FROM ' . TOPICS_TABLE . ' t, ' . POSTS_TABLE . ' p, ' . FORUMS_TABLE . " f
-					WHERE t.forum_id = f.forum_id AND t.topic_visibility = 1 AND t.poll_start > 0
+				FROM ' . TOPICS_TABLE . ' t, ' . POSTS_TABLE . ' p, ' . FORUMS_TABLE . " f
+				WHERE t.forum_id = f.forum_id
+					AND t.topic_visibility = 1
+					AND t.poll_start > 0
 					{$where}
 					AND t.topic_moved_id = 0
 					AND p.post_id = t.topic_first_post_id
 					{$portal_poll_hide}
-					ORDER BY t.poll_start DESC";
+				ORDER BY t.poll_start DESC";
 			$limit = (isset($this->config['board3_poll_limit_' . $module_id])) ? $this->config['board3_poll_limit_' . $module_id] : 3;
 			$result = $this->db->sql_query_limit($sql, $limit);
 			$has_poll = false;
@@ -390,8 +394,8 @@ class poll extends module_base
 						{
 							$vote_sql = 'SELECT poll_option_id
 								FROM ' . POLL_VOTES_TABLE . '
-								WHERE topic_id = ' . $topic_id . '
-									AND vote_user_id = ' . $this->user->data['user_id'];
+								WHERE topic_id = ' . (int) $topic_id . '
+									AND vote_user_id = ' . (int) $this->user->data['user_id'];
 							$vote_result = $this->db->sql_query($vote_sql);
 
 							while ($row = $this->db->sql_fetchrow($vote_result))
@@ -426,9 +430,9 @@ class poll extends module_base
 					$s_display_results = (!$s_can_vote || ($s_can_vote && sizeof($cur_voted_id)) || ($view == 'viewpoll' && in_array($topic_id, $poll_view_ar))) ? true : false;
 
 					$poll_sql = 'SELECT po.poll_option_id, po.poll_option_text, po.poll_option_total
-						FROM ' . POLL_OPTIONS_TABLE . " po
-						WHERE po.topic_id = {$topic_id}
-						ORDER BY po.poll_option_id";
+						FROM ' . POLL_OPTIONS_TABLE . ' po
+						WHERE po.topic_id = ' . (int) $topic_id .'
+						ORDER BY po.poll_option_id';
 
 					$poll_result = $this->db->sql_query($poll_sql);
 					$poll_total_votes = 0;
@@ -483,7 +487,7 @@ class poll extends module_base
 					$this->template->assign_block_vars(($type !== '') ? 'poll_' . $type : 'poll', array(
 						'S_POLL_HAS_OPTIONS'	=> $poll_has_options,
 						'POLL_QUESTION'			=> $data['poll_title'],
-						'U_POLL_TOPIC'			=> append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext . '?t=' . $topic_id . '&amp;f=' . $forum_id),
+						'U_POLL_TOPIC'			=> append_sid($this->phpbb_root_path . 'viewtopic.' . $this->php_ext, 't=' . $topic_id . '&amp;f=' . $forum_id),
 						'POLL_LENGTH'			=> $data['poll_length'],
 						'TOPIC_ID'				=> $topic_id,
 						'TOTAL_VOTES'			=> $poll_total_votes,

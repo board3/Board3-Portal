@@ -265,7 +265,7 @@ class calendar extends module_base
 		* Let's start displaying the events
 		* make sure we only display events in the future
 		*/
-		$events = $this->utf_unserialize($portal_config['board3_calendar_events_' . $module_id]);
+		$events = json_decode($portal_config['board3_calendar_events_' . $module_id], true);
 
 		if (!empty($events) && $this->config['board3_display_events_' . $module_id])
 		{
@@ -313,8 +313,8 @@ class calendar extends module_base
 							$this->template->assign_block_vars('minical.cur_events', array(
 								'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
 								'EVENT_TITLE'	=> $cur_event['title'],
-								'START_TIME'	=> $this->user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
-								'END_TIME'		=> (!empty($cur_event['end_time'])) ? $this->user->format_date($cur_event['end_time'], 'j. M Y, H:i') : false,
+								'START_TIME'	=> $this->user->format_date($cur_event['start_time']),
+								'END_TIME'		=> (!empty($cur_event['end_time'])) ? $this->user->format_date($cur_event['end_time']) : false,
 								'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
 								'ALL_DAY'	=> ($cur_event['all_day']) ? true : false,
 								'MODULE_ID'		=> $module_id,
@@ -326,8 +326,8 @@ class calendar extends module_base
 							$this->template->assign_block_vars('minical.upcoming_events', array(
 								'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
 								'EVENT_TITLE'	=> $cur_event['title'],
-								'START_TIME'	=> $this->user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
-								'END_TIME'		=> (!$cur_event['all_day']) ? $this->user->format_date($cur_event['end_time'], 'j. M Y, H:i') : '',
+								'START_TIME'	=> $this->user->format_date($cur_event['start_time']),
+								'END_TIME'		=> (!$cur_event['all_day']) ? $this->user->format_date($cur_event['end_time']) : '',
 								'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
 								'ALL_DAY'	=> (($cur_event['start_time'] - $cur_event['end_time']) == 1) ? true : false,
 								'MODULE_ID'		=> $module_id,
@@ -423,10 +423,10 @@ class calendar extends module_base
 		$link_id = $this->request->variable('id', 99999999); // 0 will trigger unwanted behavior, therefore we set a number we should never reach
 		$portal_config = obtain_portal_config();
 
-		$events = (strlen($portal_config['board3_calendar_events_' . $module_id]) >= 1) ? $this->utf_unserialize($portal_config['board3_calendar_events_' . $module_id]) : array();
+		$events = (strlen($portal_config['board3_calendar_events_' . $module_id]) >= 1) ? json_decode($portal_config['board3_calendar_events_' . $module_id], true) : array();
 
 		// append_sid() adds adm/ already, no need to add it here
-		$u_action = append_sid('index.' . $this->php_ext, 'i=\board3\portal\acp\portal_module&amp;mode=config&amp;module_id=' . $module_id);
+		$u_action = append_sid('index.' . $this->php_ext, 'i=-board3-portal-acp-portal_module&amp;mode=config&amp;module_id=' . $module_id);
 
 		switch ($action)
 		{
@@ -533,7 +533,7 @@ class calendar extends module_base
 					$time_ary[$key] = $cur_event['start_time'];
 				}
 				array_multisort($time_ary, SORT_NUMERIC, $events);
-				$board3_events_array = serialize($events);
+				$board3_events_array = json_encode($events);
 				set_portal_config('board3_calendar_events_' . $module_id, $board3_events_array);
 
 				trigger_error($message . adm_back_link($u_action));
@@ -555,7 +555,7 @@ class calendar extends module_base
 					array_splice($events, $link_id, 1);
 					$events = array_merge($events);
 
-					$board3_events_array = serialize($events);
+					$board3_events_array = json_encode($events);
 					set_portal_config('board3_calendar_events_' . $module_id, $board3_events_array);
 
 					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_EVENT_REMOVED', false, array($cur_event_title));
@@ -613,17 +613,12 @@ class calendar extends module_base
 		for ($i = 0; $i < sizeof($events); $i++)
 		{
 			$event_all_day = ($events[$i]['all_day'] == true) ? true : false;
-			$start_time_format = (!intval($this->user->format_date($events[$i]['start_time'], 'H')) && !intval($this->user->format_date($events[$i]['start_time'], 'i'))) ? 'j. M Y' : 'j. M Y, H:i';
-			if (!empty($events[$i]['end_time']))
-			{
-				$end_time_format = (!intval($this->user->format_date($events[$i]['end_time'], 'H')) && !intval($this->user->format_date($events[$i]['end_time'], 'i'))) ? 'j. M Y' : 'j. M Y, H:i';
-			}
 
 			$this->template->assign_block_vars('events', array(
 				'EVENT_TITLE'	=> ($action != 'add') ? ((isset($this->user->lang[$events[$i]['title']])) ? $this->user->lang[$events[$i]['title']] : $events[$i]['title']) : '',
 				'EVENT_DESC'	=> ($action != 'add') ? $events[$i]['desc'] : '',
-				'EVENT_START'	=> ($action != 'add') ? $this->user->format_date($events[$i]['start_time'], $start_time_format) : '',
-				'EVENT_END'		=> ($action != 'add' && !$event_all_day && !empty($end_time_format)) ? $this->user->format_date($events[$i]['end_time'], $end_time_format) : '',
+				'EVENT_START'	=> ($action != 'add') ? $this->user->format_date($events[$i]['start_time']) : '',
+				'EVENT_END'		=> ($action != 'add' && !$event_all_day && !empty($end_time_format)) ? $this->user->format_date($events[$i]['end_time']) : '',
 				'EVENT_URL'		=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? $this->validate_url($events[$i]['url']) : '',
 				'EVENT_URL_RAW'	=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? $events[$i]['url'] : '',
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
@@ -709,21 +704,6 @@ class calendar extends module_base
 				'3' => date('w', $this->stamp)
 				);
 		}
-	}
-
-	/**
-	 * Unserialize links array
-	 *
-	 * @param string $serial_str Serialized string
-	 *
-	 * @return array Unserialized string
-	 */
-	private function utf_unserialize($serial_str)
-	{
-		$out = preg_replace_callback('!s:(\d+):"(.*?)";!s', function ($result) {
-			return 's:' . strlen($result[2]) . ":\"{$result[2]}\";";
-		}, $serial_str);
-		return unserialize($out);
 	}
 
 	/**

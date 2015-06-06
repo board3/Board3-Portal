@@ -127,7 +127,7 @@ class random_member extends module_base
 
 			'USER_POSTS'	=> (int) $row['user_posts'],
 			'AVATAR_IMG'	=> $avatar_img,
-			'JOINED'		=> $this->user->format_date($row['user_regdate'], 'd.M.Y'),
+			'JOINED'		=> $this->user->format_date($row['user_regdate']),
 //			'USER_OCC'		=> censor_text($row['user_occ']),
 //			'USER_FROM'		=> censor_text($row['user_from']),
 //			'U_WWW'			=> censor_text($row['user_website']),

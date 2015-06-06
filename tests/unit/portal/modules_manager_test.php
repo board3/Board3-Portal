@@ -132,7 +132,7 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 	public function test_get_module_link()
 	{
 		$this->modules_manager->set_acp_class('foo\bar')->set_u_action('index.php?i=25&amp;mode=barfoo');
-		$this->assertEquals('index.php?i=%5Cfoo%5Cbar&amp;mode=test&amp;module_id=5', $this->modules_manager->get_module_link('test', 5));
+		$this->assertEquals('index.php?i=-foo-bar&amp;mode=test&amp;module_id=5', $this->modules_manager->get_module_link('test', 5));
 	}
 
 	public function test_handle_ajax_request()

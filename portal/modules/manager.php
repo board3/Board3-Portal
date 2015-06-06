@@ -348,8 +348,8 @@ class manager
 
 				$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 					SET module_order = module_order - 1
-					WHERE module_column = ' . $module_data['module_column'] . '
-						AND module_order > ' . $module_data['module_order'];
+					WHERE module_column = ' . (int) $module_data['module_column'] . '
+						AND module_order > ' . (int) $module_data['module_order'];
 				$this->db->sql_query($sql);
 
 				$this->cache->purge(); // make sure we don't get errors after re-adding a module
@@ -393,6 +393,6 @@ class manager
 	 */
 	public function get_module_link($mode, $module_id)
 	{
-		return preg_replace(array('/i=[0-9]+/', '/mode=[a-zA-Z0-9_]+/'), array('i=%5C' . str_replace('\\', '%5C', $this->acp_class), 'mode=' . $mode), $this->u_action) . (($module_id) ? '&amp;module_id=' . $module_id : '');
+		return preg_replace(array('/i=[0-9]+/', '/mode=[a-zA-Z0-9_]+/'), array('i=-' . str_replace('\\', '-', $this->acp_class), 'mode=' . $mode), $this->u_action) . (($module_id) ? '&amp;module_id=' . $module_id : '');
 	}
 }

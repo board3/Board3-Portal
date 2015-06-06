@@ -127,7 +127,7 @@ class user_menu extends module_base
 
 			$sql = 'SELECT COUNT(DISTINCT t.topic_id) as total
 						FROM ' . TOPICS_TABLE . ' t
-						WHERE t.topic_last_post_time > ' . $this->user->data['user_lastvisit'] . '
+						WHERE t.topic_last_post_time > ' . (int) $this->user->data['user_lastvisit'] . '
 							AND t.topic_moved_id = 0
 							' . str_replace(array('p.', 'post_'), array('t.', 'topic_'), $m_approve_fid_sql) . '
 							' . ((sizeof($ex_fid_ary)) ? 'AND ' . $this->db->sql_in_set('t.forum_id', $ex_fid_ary, true) : '');
