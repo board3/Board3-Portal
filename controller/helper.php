@@ -114,7 +114,7 @@ class helper
 	*/
 	protected function check_permission()
 	{
-		if (!isset($this->config['board3_enable']) || !$this->config['board3_enable'] || !$this->auth->acl_get('u_view_portal'))
+		if (empty($this->config['board3_enable']) || !$this->auth->acl_get('u_view_portal'))
 		{
 			redirect(append_sid($this->phpbb_root_path . 'index' . $this->php_ext));
 		}
@@ -173,7 +173,9 @@ class helper
 	}
 
 	/**
-	* Check if user is in required groups
+	* Check if user is in required groups.
+	* If the group_ary is empty, this means that there are no limitation on
+	* which groups can see this module.
 	*
 	* @param array $row Module row
 	*
