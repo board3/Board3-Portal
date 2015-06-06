@@ -88,7 +88,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEFT_COLUMN_EXP'				=> 'Die Linke Spalte auf dem Portal anzeigen',
 	'PORTAL_RIGHT_COLUMN'					=> 'Rechte Spalte aktivieren',
 	'PORTAL_RIGHT_COLUMN_EXP'				=> 'Die Rechte Spalte auf dem Portal anzeigen',
-	'PORTAL_VERSION_CHECK'					=> 'Versioncheck auf Portal',
 	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'		=> 'Breiteneinstellung der rechten und linken Spalte',
 	'PORTAL_LEFT_COLUMN_WIDTH'				=> 'Breite der linken Spalte',
 	'PORTAL_LEFT_COLUMN_WIDTH_EXP'			=> 'Ändere hier die Breite der linken Spalte in Pixel, empfohlener Wert 180',
@@ -107,17 +106,4 @@ $lang = array_merge($lang, array(
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Füge Basismodule hinzu',
 	'PORTAL_BASIC_UNINSTALL'		=> 'Entferne Module von Datenbank',
-
-	/**
-	* A copy of Handyman` s MOD version check, to view it on the gallery overview
-	*/
-	'ANNOUNCEMENT_TOPIC'	=> 'Release Ankündigung',
-	'CURRENT_VERSION'		=> 'Derzeitige Version',
-	'DOWNLOAD_LATEST'		=> 'Neueste Version herunterladen',
-	'LATEST_VERSION'		=> 'Neueste Version',
-	'NO_INFO'					=> 'Der Server konnte nicht erreicht werden',
-	'NOT_UP_TO_DATE'			=> '%s ist nicht aktuell',
-	'RELEASE_ANNOUNCEMENT'	=> 'Ankündigungsthema',
-	'UP_TO_DATE'			=> '%s ist aktuell',
-	'VERSION_CHECK'			=> 'Extension Version Check',
 ));

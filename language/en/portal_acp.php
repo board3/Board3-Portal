@@ -88,7 +88,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEFT_COLUMN_EXP'				=> 'Switch to no if you wish to turn off the left column',
 	'PORTAL_RIGHT_COLUMN'					=> 'Enable right column',
 	'PORTAL_RIGHT_COLUMN_EXP'				=> 'Switch to no if you wish to turn off the right column',
-	'PORTAL_VERSION_CHECK'					=> 'Versioncheck on Portal',
 	'PORTAL_DISPLAY_JUMPBOX'				=> 'Display jumpbox',
 	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Display the jumpbox on the portal. The jumpbox will only be displayed if it is also enabled in the board features.',
 	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'		=> 'Left and right column width settings',
@@ -107,17 +106,4 @@ $lang = array_merge($lang, array(
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Adding basic set of modules',
 	'PORTAL_BASIC_UNINSTALL'		=> 'Removing modules from database',
-
-	/**
-	* A copy of Handyman` s MOD version check, to view it on the portal overview
-	*/
-	'ANNOUNCEMENT_TOPIC'	=> 'Release Announcement',
-	'CURRENT_VERSION'		=> 'Current Version',
-	'DOWNLOAD_LATEST'		=> 'Download Latest Version',
-	'LATEST_VERSION'		=> 'Latest Version',
-	'NO_INFO'				=> 'Version server could not be contacted',
-	'NOT_UP_TO_DATE'		=> '%s is not up to date',
-	'RELEASE_ANNOUNCEMENT'	=> 'Annoucement Topic',
-	'UP_TO_DATE'			=> '%s is up to date',
-	'VERSION_CHECK'			=> 'Extension Version Check',
 ));

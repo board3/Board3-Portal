@@ -2,14 +2,6 @@ imports:
     - { resource: modules.yml }
 
 parameters:
-    board3.version_data:
-        author: Marc
-        title: Board3 Portal
-        version: board3_portal_version
-        file:
-            - board3.de
-            - /updatecheck
-            - board3_portal.json
     board3.portal.config.table: %core.table_prefix%portal_config
     board3.portal.modules.table: %core.table_prefix%portal_modules
 
@@ -40,16 +32,6 @@ services:
             - @board3.portal.helper
             - %core.root_path%
             - .%core.php_ext%
-
-    board3.portal.version.check:
-        class: board3\portal\includes\version_check
-        scope: prototype
-        arguments:
-            - %board3.version_data%
-            - @config
-            - @version_helper
-            - @template
-            - @user
 
     board3.portal.module_collection:
         class: phpbb\di\service_collection
