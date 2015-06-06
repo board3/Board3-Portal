@@ -313,8 +313,8 @@ class calendar extends module_base
 							$this->template->assign_block_vars('minical.cur_events', array(
 								'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
 								'EVENT_TITLE'	=> $cur_event['title'],
-								'START_TIME'	=> $this->user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
-								'END_TIME'		=> (!empty($cur_event['end_time'])) ? $this->user->format_date($cur_event['end_time'], 'j. M Y, H:i') : false,
+								'START_TIME'	=> $this->user->format_date($cur_event['start_time']),
+								'END_TIME'		=> (!empty($cur_event['end_time'])) ? $this->user->format_date($cur_event['end_time']) : false,
 								'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
 								'ALL_DAY'	=> ($cur_event['all_day']) ? true : false,
 								'MODULE_ID'		=> $module_id,
@@ -326,8 +326,8 @@ class calendar extends module_base
 							$this->template->assign_block_vars('minical.upcoming_events', array(
 								'EVENT_URL'		=> (isset($cur_event['url']) && $cur_event['url'] != '') ? $this->validate_url($cur_event['url']) : '',
 								'EVENT_TITLE'	=> $cur_event['title'],
-								'START_TIME'	=> $this->user->format_date($cur_event['start_time'], 'j. M Y, H:i'),
-								'END_TIME'		=> (!$cur_event['all_day']) ? $this->user->format_date($cur_event['end_time'], 'j. M Y, H:i') : '',
+								'START_TIME'	=> $this->user->format_date($cur_event['start_time']),
+								'END_TIME'		=> (!$cur_event['all_day']) ? $this->user->format_date($cur_event['end_time']) : '',
 								'EVENT_DESC'	=> (isset($cur_event['desc']) && $cur_event['desc'] != '') ? $cur_event['desc'] : '',
 								'ALL_DAY'	=> (($cur_event['start_time'] - $cur_event['end_time']) == 1) ? true : false,
 								'MODULE_ID'		=> $module_id,
@@ -613,17 +613,12 @@ class calendar extends module_base
 		for ($i = 0; $i < sizeof($events); $i++)
 		{
 			$event_all_day = ($events[$i]['all_day'] == true) ? true : false;
-			$start_time_format = (!intval($this->user->format_date($events[$i]['start_time'], 'H')) && !intval($this->user->format_date($events[$i]['start_time'], 'i'))) ? 'j. M Y' : 'j. M Y, H:i';
-			if (!empty($events[$i]['end_time']))
-			{
-				$end_time_format = (!intval($this->user->format_date($events[$i]['end_time'], 'H')) && !intval($this->user->format_date($events[$i]['end_time'], 'i'))) ? 'j. M Y' : 'j. M Y, H:i';
-			}
 
 			$this->template->assign_block_vars('events', array(
 				'EVENT_TITLE'	=> ($action != 'add') ? ((isset($this->user->lang[$events[$i]['title']])) ? $this->user->lang[$events[$i]['title']] : $events[$i]['title']) : '',
 				'EVENT_DESC'	=> ($action != 'add') ? $events[$i]['desc'] : '',
-				'EVENT_START'	=> ($action != 'add') ? $this->user->format_date($events[$i]['start_time'], $start_time_format) : '',
-				'EVENT_END'		=> ($action != 'add' && !$event_all_day && !empty($end_time_format)) ? $this->user->format_date($events[$i]['end_time'], $end_time_format) : '',
+				'EVENT_START'	=> ($action != 'add') ? $this->user->format_date($events[$i]['start_time']) : '',
+				'EVENT_END'		=> ($action != 'add' && !$event_all_day && !empty($end_time_format)) ? $this->user->format_date($events[$i]['end_time']) : '',
 				'EVENT_URL'		=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? $this->validate_url($events[$i]['url']) : '',
 				'EVENT_URL_RAW'	=> ($action != 'add' && isset($events[$i]['url']) && !empty($events[$i]['url'])) ? $events[$i]['url'] : '',
 				'U_EDIT'		=> $u_action . '&amp;action=edit&amp;id=' . $i,
