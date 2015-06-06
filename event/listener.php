@@ -173,6 +173,6 @@ class listener implements EventSubscriberInterface
 	 */
 	protected function board_disabled()
 	{
-		return $this->config['board_disable'] && !defined('IN_LOGIN') && !defined('SKIP_CHECK_DISABLED') && !$this->auth->acl_gets('a_', 'm_') && !$this->auth->acl_getf_global('m_');
+		return $this->config['board_disable'] && !defined('SKIP_CHECK_DISABLED') && !$this->auth->acl_gets('a_', 'm_') && !$this->auth->acl_getf_global('m_');
 	}
 }
