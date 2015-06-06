@@ -109,7 +109,7 @@ class database_handler
 		}
 
 		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-				SET module_order = module_order' . $other_increment . '
+				SET module_order = module_order' . (int) $other_increment . '
 				WHERE module_order = ' . (int) ($module_data['module_order'] + ($direction * $step)) . '
 					AND module_column = ' . (int) $module_data['module_column'];
 		$this->db->sql_query($sql);
@@ -117,7 +117,7 @@ class database_handler
 		if ($updated)
 		{
 			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-					SET module_order = module_order' . $current_increment . '
+					SET module_order = module_order' . (int) $current_increment . '
 					WHERE module_id = ' . (int) $module_id;
 			$this->db->sql_query($sql);
 		}
@@ -136,20 +136,20 @@ class database_handler
 	{
 		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 				SET module_order = module_order + 1
-				WHERE module_order >= ' . $module_data['module_order'] . '
-					AND module_column = ' . ($module_data['module_column'] + $move_action);
+				WHERE module_order >= ' . (int) $module_data['module_order'] . '
+					AND module_column = ' . (int) ($module_data['module_column'] + $move_action);
 		$this->db->sql_query($sql);
 		$updated = $this->db->sql_affectedrows();
 
 		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-				SET module_column = ' . ($module_data['module_column'] + $move_action) . '
+				SET module_column = ' . (int) ($module_data['module_column'] + $move_action) . '
 				WHERE module_id = ' . (int) $module_id;
 		$this->db->sql_query($sql);
 
 		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 				SET module_order = module_order - 1
-				WHERE module_order >= ' . $module_data['module_order'] . '
-				AND module_column = ' . $module_data['module_column'];
+				WHERE module_order >= ' . (int) $module_data['module_order'] . '
+				AND module_column = ' . (int) $module_data['module_column'];
 		$this->db->sql_query($sql);
 
 		// the module that needs to moved is in the last row
@@ -157,13 +157,13 @@ class database_handler
 		{
 			$sql = 'SELECT MAX(module_order) as new_order
 						FROM ' . PORTAL_MODULES_TABLE . '
-						WHERE module_order < ' . $module_data['module_order'] . '
+						WHERE module_order < ' . (int) $module_data['module_order'] . '
 						AND module_column = ' . (int) ($module_data['module_column'] + $move_action);
 			$this->db->sql_query($sql);
 			$new_order = $this->db->sql_fetchfield('new_order') + 1;
 
 			$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
-					SET module_order = ' . $new_order . '
+					SET module_order = ' . (int) $new_order . '
 					WHERE module_id = ' . (int) $module_id;
 			$this->db->sql_query($sql);
 		}

@@ -348,8 +348,8 @@ class manager
 
 				$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 					SET module_order = module_order - 1
-					WHERE module_column = ' . $module_data['module_column'] . '
-						AND module_order > ' . $module_data['module_order'];
+					WHERE module_column = ' . (int) $module_data['module_column'] . '
+						AND module_order > ' . (int) $module_data['module_order'];
 				$this->db->sql_query($sql);
 
 				$this->cache->purge(); // make sure we don't get errors after re-adding a module
