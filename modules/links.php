@@ -249,7 +249,7 @@ class links extends module_base
 
 		$links = json_decode($portal_config['board3_links_array_' . $module_id], true);
 
-		$u_action = append_sid('index.' . $this->php_ext, 'i=\board3\portal\acp\portal_module&amp;mode=config&amp;module_id=' . $module_id);
+		$u_action = append_sid('index.' . $this->php_ext, 'i=-board3-portal-acp-portal_module&amp;mode=config&amp;module_id=' . $module_id);
 
 		switch ($action)
 		{

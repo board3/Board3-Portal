@@ -312,9 +312,9 @@ function get_portal_tracking_info($fetch_news)
 			$mark_time = array();
 
 			$sql = 'SELECT topic_id, mark_time
-				FROM ' . TOPICS_TRACK_TABLE . "
-				WHERE user_id = {$user->data['user_id']}
-					AND " . $db->sql_in_set('topic_id', $current_forum);
+				FROM ' . TOPICS_TRACK_TABLE . '
+				WHERE user_id =  ' . (int) $user->data['user_id'] . '
+					AND ' . $db->sql_in_set('topic_id', $current_forum);
 			$result = $db->sql_query($sql);
 
 			while ($row = $db->sql_fetchrow($result))
@@ -328,9 +328,9 @@ function get_portal_tracking_info($fetch_news)
 			if (sizeof($topic_ids))
 			{
 				$sql = 'SELECT forum_id, mark_time
-					FROM ' . FORUMS_TRACK_TABLE . "
-					WHERE user_id = {$user->data['user_id']}
-						AND " . $db->sql_in_set('forum_id', $forum_ids);
+					FROM ' . FORUMS_TRACK_TABLE . '
+					WHERE user_id =  ' . (int) $user->data['user_id'] . '
+						AND ' . $db->sql_in_set('forum_id', $forum_ids);
 				$result = $db->sql_query($sql);
 
 				while ($row = $db->sql_fetchrow($result))
@@ -339,10 +339,10 @@ function get_portal_tracking_info($fetch_news)
 				}
 				$db->sql_freeresult($result);
 
-				// @todo: do not use $current_forum here as this is already used by the outside foreach
-				foreach ($forum_ids as $current_forum)
+				// Set user last mark time
+				foreach ($forum_ids as $current_forum_id)
 				{
-					$user_lastmark[$current_forum] = (isset($mark_time[$current_forum])) ? $mark_time[$current_forum] : $user->data['user_lastmark'];
+					$user_lastmark[$current_forum_id] = (isset($mark_time[$current_forum_id])) ? $mark_time[$current_forum_id] : $user->data['user_lastmark'];
 				}
 
 				// @todo: also check if $user_lastmark has been defined for this specific forum_id

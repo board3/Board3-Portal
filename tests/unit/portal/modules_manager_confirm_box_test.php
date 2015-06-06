@@ -134,7 +134,7 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		$this->assertNull($this->modules_manager->reset_module(15, 'barfoo', 6, array()));
 		$this->assertEquals(array(
 			'seconds'	=> 3,
-			'link'		=> 'adm/index.php?i=%5Cfoo%5Cbar&amp;mode=config&amp;module_id=6',
+			'link'		=> 'adm/index.php?i=-foo-bar&amp;mode=config&amp;module_id=6',
 		), self::$meta_refresh);
 		$this->assertEquals(phpbb_acp_move_module_test::$error_type, E_USER_NOTICE);
 		$this->assertEquals(phpbb_acp_move_module_test::$error, 'adm/index.php?i=15&amp;mode=foobar&amp;module_id=6');
