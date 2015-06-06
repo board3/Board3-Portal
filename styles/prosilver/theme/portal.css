@@ -305,7 +305,10 @@ a.portal-forumtitle {
 	display: block;
 }
 
-#portal-center-wrapper .panel, #portal-center-wrapper .post {
+#portal-center-wrapper .panel, #portal-center-wrapper .post,
+#portal-top .panel, #portal-top .post,
+#portal-bottom .panel, #portal-bottom .post
+{
 	border-radius: 0;
 }
 
