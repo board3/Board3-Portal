@@ -83,16 +83,20 @@ phpbb.addAjaxCallback('b3p_delete_module', function(res) {
 		return;
 	}
 
-	var el = $(this).parents('tr:first'),
-		nextEl = el.next();
+	var $deletedRow = $(this).parents('tr:first'),
+		$nextRow = $deletedRow.next();
 
-	el.remove();
+	$deletedRow.remove();
 
 	// Fix classes of next elements
-	while (nextEl !== undefined && nextEl.is('tr')) {
-		var nextElClass = (nextEl.attr('class') === 'row1') ? 'row2' : 'row1';
-		nextEl.attr('class', nextElClass);
-		nextEl = nextEl.next();
+	while ($nextRow !== undefined && $nextRow.is('tr')) {
+		var nextRowClass = ($nextRow.attr('class') === 'row1') ? 'row2' : 'row1';
+
+		if ($nextRow.attr('class') !== 'row3') {
+			$nextRow.attr('class', nextRowClass);
+		}
+
+		$nextRow = $nextRow.next();
 	}
 });
 
