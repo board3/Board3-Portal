@@ -426,7 +426,7 @@ class calendar extends module_base
 		$events = (strlen($portal_config['board3_calendar_events_' . $module_id]) >= 1) ? $this->utf_unserialize($portal_config['board3_calendar_events_' . $module_id]) : array();
 
 		// append_sid() adds adm/ already, no need to add it here
-		$u_action = append_sid('index.' . $this->php_ext, 'i=\board3\portal\acp\portal_module&amp;mode=config&amp;module_id=' . $module_id);
+		$u_action = append_sid('index.' . $this->php_ext, 'i=-board3-portal-acp-portal_module&amp;mode=config&amp;module_id=' . $module_id);
 
 		switch ($action)
 		{
