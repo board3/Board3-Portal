@@ -20,4 +20,16 @@
 			<directory suffix="_test.php" phpVersion="5.3.19" phpVersionOperator=">=">./tests/functional/</directory>
 		</testsuite>
 	</testsuites>
+	<filter>
+		<whitelist>
+			<directory>../../../../phpBB/ext/board3/portal/</directory>
+			<exclude>
+				<directory>../../../../phpBB/ext/board3/portal/tests/</directory>
+				<directory>../../../../phpBB/ext/board3/portal/develop/</directory>
+				<directory>../../../../phpBB/ext/board3/portal/migrations/</directory>
+				<directory>../../../../phpBB/ext/board3/portal/language/</directory>
+				<directory>../../../../phpBB/ext/board3/portal/vendor/</directory>
+			</exclude>
+		</whitelist>
+	</filter>
 </phpunit>
