@@ -22,13 +22,13 @@
 	</testsuites>
 	<filter>
 		<whitelist>
-			<directory>phpBB/ext/board3/portal/</directory>
+			<directory>../../../../phpBB/ext/board3/portal/</directory>
 			<exclude>
-				<directory>../tests/</directory>
-				<directory>../develop/</directory>
-				<directory>../migrations/</directory>
-				<directory>../language/</directory>
-				<directory>../vendor/</directory>
+				<directory>../../../../phpBB/ext/board3/portal/tests/</directory>
+				<directory>../../../../phpBB/ext/board3/portal/develop/</directory>
+				<directory>../../../../phpBB/ext/board3/portal/migrations/</directory>
+				<directory>../../../../phpBB/ext/board3/portal/language/</directory>
+				<directory>../../../../phpBB/ext/board3/portal/vendor/</directory>
 			</exclude>
 		</whitelist>
 	</filter>
