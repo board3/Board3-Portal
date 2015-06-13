@@ -91,33 +91,50 @@
 	</target>
 
     <target name="test" depends="clean,composer,prepare-tests">
-        <exec dir="${phpbb-root}"
-              command="phpBB/vendor/bin/phpunit
-              -c phpBB/ext/${vendor-name}/${extension-name}/ --coverage-clover=${clover-path} --coverage-html=${coverage-html-path}"
-              passthru="true" returnProperty="test.pass" />
 		<if>
-			<not>
-				<equals arg1="${test.pass}" arg2="0"/>
-			</not>
+			<available property="phpunit-available" file="phpbb/phpBB/vendor/bin/phpunit" type="dir" />
 			<then>
-				<fail msg="PHPUnit tests failed."/>
+				<exec dir="${phpbb-root}"
+					  command="phpBB/vendor/bin/phpunit
+              -c phpBB/ext/${vendor-name}/${extension-name}/ --coverage-clover=${clover-path} --coverage-html=${coverage-html-path}"
+					  passthru="true" returnProperty="test.pass" />
+				<if>
+					<not>
+						<equals arg1="${test.pass}" arg2="0"/>
+					</not>
+					<then>
+						<fail msg="PHPUnit tests failed."/>
+					</then>
+				</if>
 			</then>
+			<else>
+				<echo msg="PHPUnit couldn't be found." />
+			</else>
 		</if>
+
     </target>
 
     <target name="test-slow" depends="clean,composer">
-        <exec dir="${phpbb-root}"
-              command="phpBB/vendor/bin/phpunit
-               -c phpBB/ext/${vendor-name}/${extension-name}/
-               --group slow"
-              passthru="true" />
 		<if>
-			<not>
-				<equals arg1="${test.pass}" arg2="0"/>
-			</not>
-			<then>
-				<fail msg="PHPUnit slow tests failed."/>
-			</then>
+		<available property="phpunit-available" file="phpbb/phpBB/vendor/bin/phpunit" type="dir" />
+		<then>
+			<exec dir="${phpbb-root}"
+				  command="phpBB/vendor/bin/phpunit
+				   -c phpBB/ext/${vendor-name}/${extension-name}/
+				   --group slow"
+				  passthru="true" />
+			<if>
+				<not>
+					<equals arg1="${test.pass}" arg2="0"/>
+				</not>
+				<then>
+					<fail msg="PHPUnit slow tests failed."/>
+				</then>
+			</if>
+		</then>
+		<else>
+			<echo msg="PHPUnit couldn't be found." />
+		</else>
 		</if>
     </target>
 
