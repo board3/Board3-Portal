@@ -173,7 +173,7 @@ class welcome extends module_base
 
 		$u_action = append_sid('index.' . $this->php_ext, 'i=-board3-portal-acp-portal_module&amp;mode=config&amp;module_id=' . $module_id);
 
-		switch($action)
+		switch ($action)
 		{
 			// Save changes
 			case 'save':
