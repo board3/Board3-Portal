@@ -86,7 +86,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEFT_COLUMN_EXP'				=> 'Impostare su "No" per nascondere la colonna sinistra',
 	'PORTAL_RIGHT_COLUMN'					=> 'Enable right column',
 	'PORTAL_RIGHT_COLUMN_EXP'				=> 'Impostare su "No" per nascondere la colonna destra',
-	'PORTAL_VERSION_CHECK'					=> 'Versioncheck on Portal',
 	'PORTAL_DISPLAY_JUMPBOX'				=> 'Mostra jumpbox',
 	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Mostra la jumpbox nel portale. La jumpbox sarà mostrata se abilitata nelle impostazioni della board.',
 	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'		=> 'Impostazioni larghezza colonna sinistra e destra',
@@ -101,17 +100,4 @@ $lang = array_merge($lang, array(
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Aggiunta moduli di base',
 	'PORTAL_BASIC_UNINSTALL'		=> 'Rimozione dei moduli dal database',
-
-	/**
-	* A copy of Handyman` s MOD version check, to view it on the portal overview
-	*/
-	'ANNOUNCEMENT_TOPIC'	=> 'Annuncio rilascio',
-	'CURRENT_VERSION'		=> 'Versione corrente',
-	'DOWNLOAD_LATEST'		=> 'Scarica ultima versione',
-	'LATEST_VERSION'		=> 'Ultima versione',
-	'NO_INFO'				=> 'Impossibile contattare il server per il controllo versione',
-	'NOT_UP_TO_DATE'		=> '%s non è aggiornato',
-	'RELEASE_ANNOUNCEMENT'	=> 'Topic annuncio',
-	'UP_TO_DATE'			=> '%s è aggiornato',
-	'VERSION_CHECK'			=> 'Estensione controllo versione',
 ));

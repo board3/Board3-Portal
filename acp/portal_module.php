@@ -18,7 +18,7 @@ class portal_module
 	protected $c_class;
 
 	protected $db, $user, $cache, $template, $display_vars, $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
-	protected $root_path, $version_check, $request, $php_ext, $portal_helper, $modules_helper, $log, $portal_columns;
+	protected $root_path, $request, $php_ext, $portal_helper, $modules_helper, $log, $portal_columns;
 
 	/** @var \board3\portal\portal\modules\manager */
 	protected $modules_manager;
@@ -51,7 +51,6 @@ class portal_module
 		$this->phpbb_admin_path = $phpbb_admin_path;
 		$this->php_ext = $phpEx;
 		$this->phpbb_container = $phpbb_container;
-		$this->version_check = $this->phpbb_container->get('board3.portal.version.check');
 		$this->portal_helper = $this->phpbb_container->get('board3.portal.helper');
 		$this->modules_helper = $this->phpbb_container->get('board3.portal.modules_helper');
 		$this->log = $phpbb_log;
@@ -99,7 +98,6 @@ class portal_module
 						'board3_enable'				=> array('lang' => 'PORTAL_ENABLE',				'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'board3_left_column'		=> array('lang' => 'PORTAL_LEFT_COLUMN',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'board3_right_column'		=> array('lang' => 'PORTAL_RIGHT_COLUMN',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-						'board3_version_check'		=> array('lang' => 'PORTAL_VERSION_CHECK',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => false),
 						'board3_display_jumpbox'	=> array('lang' => 'PORTAL_DISPLAY_JUMPBOX',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 
 						'legend2'					=> 'ACP_PORTAL_COLUMN_WIDTH_SETTINGS',
@@ -167,11 +165,6 @@ class portal_module
 
 						$this->template->assign_var('SHOW_MODULE_OPTIONS', true);
 					}
-				}
-				else
-				{
-					// only show the mod version check if we are on the General Settings page
-					$this->version_check->check();
 				}
 
 				$this->new_config = $this->config;

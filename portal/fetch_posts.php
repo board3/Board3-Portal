@@ -349,7 +349,7 @@ class fetch_posts
 	*/
 	protected function get_type_constraints()
 	{
-		switch($this->type)
+		switch ($this->type)
 		{
 			case "announcements":
 				$this->get_announcements_constraints();

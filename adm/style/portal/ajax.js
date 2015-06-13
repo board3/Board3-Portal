@@ -13,33 +13,39 @@ phpbb.addAjaxCallback('b3p_move_module_up', function(res) {
 		return;
 	}
 
-	var el = $(this).parents('tr:first'),
-		trSwap = el.prev(),
-		elClass = trSwap.attr('class'),
-		trSwapClass = el.attr('class');
+	var $bottomRow = $(this).parents('tr:first'),
+		$topRow = $bottomRow.prev(),
+		topRowClass = $topRow.attr('class'),
+		bottomRowClass = $bottomRow.attr('class');
 
-	el.insertBefore(trSwap);
-	el.attr('class', elClass);
-	trSwap.attr('class', trSwapClass);
+	$bottomRow.insertBefore($topRow);
+	if (bottomRowClass !== 'row3' && topRowClass !== 'row3') {
+		$bottomRow.attr('class', topRowClass);
+		$topRow.attr('class', bottomRowClass);
+	} else if (bottomRowClass === 'row3') {
+		$topRow.attr('class', (topRowClass === 'row1') ? 'row2' : 'row1');
+	} else if (topRowClass === 'row3') {
+		$bottomRow.attr('class', (bottomRowClass === 'row1') ? 'row2' : 'row1');
+	}
 
 	// Swap images if swap element is first row
-	var swapIsFirstRow = trSwap.find('img[src*="icon_up_disabled"]').parents('span:first').is(':visible');
+	var swapIsFirstRow = $topRow.find('img[src*="icon_up_disabled"]').parents('span:first').is(':visible');
 
 	if (swapIsFirstRow) {
-		trSwap.find('img[src*="icon_up_disabled"]').parents('span:first').toggle();
-		trSwap.find('img[src*="icon_up."]').parents('span:first').toggle();
-		el.find('img[src*="icon_up."]').parents('span:first').toggle();
-		el.find('img[src*="icon_up_disabled"]').parents('span:first').toggle();
+		$topRow.find('img[src*="icon_up_disabled"]').parents('span:first').toggle();
+		$topRow.find('img[src*="icon_up."]').parents('span:first').toggle();
+		$bottomRow.find('img[src*="icon_up."]').parents('span:first').toggle();
+		$bottomRow.find('img[src*="icon_up_disabled"]').parents('span:first').toggle();
 	}
 
 	// Swap images if move element is last row
-	var elIsLastRow = el.find('img[src*="icon_down_disabled"]').parents('span:first').is(':visible');
+	var elIsLastRow = $bottomRow.find('img[src*="icon_down_disabled"]').parents('span:first').is(':visible');
 
 	if (elIsLastRow) {
-		trSwap.find('img[src*="icon_down_disabled"]').parents('span:first').toggle();
-		trSwap.find('img[src*="icon_down."]').parents('span:first').toggle();
-		el.find('img[src*="icon_down."]').parents('span:first').toggle();
-		el.find('img[src*="icon_down_disabled"]').parents('span:first').toggle();
+		$topRow.find('img[src*="icon_down_disabled"]').parents('span:first').toggle();
+		$topRow.find('img[src*="icon_down."]').parents('span:first').toggle();
+		$bottomRow.find('img[src*="icon_down."]').parents('span:first').toggle();
+		$bottomRow.find('img[src*="icon_down_disabled"]').parents('span:first').toggle();
 	}
 });
 
@@ -48,33 +54,39 @@ phpbb.addAjaxCallback('b3p_move_module_down', function(res) {
 		return;
 	}
 
-	var el = $(this).parents('tr:first'),
-		trSwap = el.next(),
-		elClass = trSwap.attr('class'),
-		trSwapClass = el.attr('class');
+	var $topRow = $(this).parents('tr:first'),
+		$bottomRow = $topRow.next(),
+		bottomRowClass = $bottomRow.attr('class'),
+		topRowClass = $topRow.attr('class');
 
-	el.insertAfter(trSwap);
-	el.attr('class', elClass);
-	trSwap.attr('class', trSwapClass);
+	$topRow.insertAfter($bottomRow);
+	if (bottomRowClass !== 'row3' && topRowClass !== 'row3') {
+		$bottomRow.attr('class', topRowClass);
+		$topRow.attr('class', bottomRowClass);
+	} else if (bottomRowClass === 'row3') {
+		$topRow.attr('class', (topRowClass === 'row1') ? 'row2' : 'row1');
+	} else if (topRowClass === 'row3') {
+		$bottomRow.attr('class', (bottomRowClass === 'row1') ? 'row2' : 'row1');
+	}
 
 	// Swap images if swap element is last row
-	var swapIsLastRow = trSwap.find('img[src*="icon_down_disabled"]').parents('span:first').is(':visible');
+	var swapIsLastRow = $bottomRow.find('img[src*="icon_down_disabled"]').parents('span:first').is(':visible');
 
 	if (swapIsLastRow) {
-		trSwap.find('img[src*="icon_down_disabled"]').parents('span:first').toggle();
-		trSwap.find('img[src*="icon_down."]').parents('span:first').toggle();
-		el.find('img[src*="icon_down."]').parents('span:first').toggle();
-		el.find('img[src*="icon_down_disabled"]').parents('span:first').toggle();
+		$bottomRow.find('img[src*="icon_down_disabled"]').parents('span:first').toggle();
+		$bottomRow.find('img[src*="icon_down."]').parents('span:first').toggle();
+		$topRow.find('img[src*="icon_down."]').parents('span:first').toggle();
+		$topRow.find('img[src*="icon_down_disabled"]').parents('span:first').toggle();
 	}
 
 	// Swap images if move element is first row
-	var elIsFirstRow = el.find('img[src*="icon_up_disabled"]').parents('span:first').is(':visible');
+	var elIsFirstRow = $topRow.find('img[src*="icon_up_disabled"]').parents('span:first').is(':visible');
 
 	if (elIsFirstRow) {
-		trSwap.find('img[src*="icon_up_disabled"]').parents('span:first').toggle();
-		trSwap.find('img[src*="icon_up."]').parents('span:first').toggle();
-		el.find('img[src*="icon_up."]').parents('span:first').toggle();
-		el.find('img[src*="icon_up_disabled"]').parents('span:first').toggle();
+		$bottomRow.find('img[src*="icon_up_disabled"]').parents('span:first').toggle();
+		$bottomRow.find('img[src*="icon_up."]').parents('span:first').toggle();
+		$topRow.find('img[src*="icon_up."]').parents('span:first').toggle();
+		$topRow.find('img[src*="icon_up_disabled"]').parents('span:first').toggle();
 	}
 });
 
@@ -83,16 +95,20 @@ phpbb.addAjaxCallback('b3p_delete_module', function(res) {
 		return;
 	}
 
-	var el = $(this).parents('tr:first'),
-		nextEl = el.next();
+	var $deletedRow = $(this).parents('tr:first'),
+		$nextRow = $deletedRow.next();
 
-	el.remove();
+	$deletedRow.remove();
 
 	// Fix classes of next elements
-	while (nextEl !== undefined && nextEl.is('tr')) {
-		var nextElClass = (nextEl.attr('class') === 'row1') ? 'row2' : 'row1';
-		nextEl.attr('class', nextElClass);
-		nextEl = nextEl.next();
+	while ($nextRow !== undefined && $nextRow.is('tr')) {
+		var nextRowClass = ($nextRow.attr('class') === 'row1') ? 'row2' : 'row1';
+
+		if ($nextRow.attr('class') !== 'row3') {
+			$nextRow.attr('class', nextRowClass);
+		}
+
+		$nextRow = $nextRow.next();
 	}
 });
 

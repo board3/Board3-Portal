@@ -20,6 +20,7 @@ class v210 extends \phpbb\db\migration\migration
 	{
 		return array(
 			array('config.update', array('board3_portal_version', '2.1.0')),
+			array('config.remove', array('board3_version_check')),
 			array('custom', array(array($this, 'add_donation_setting'))),
 			array('custom', array(array($this, 'convert_serialize_to_json'))),
 		);

@@ -41,7 +41,9 @@
     <property name="version" value="HEAD" override="true" />
     <property name="build-directory" value="build" override="true" />
     <property name="package-directory" value="${build-directory}/package/${vendor-name}/${extension-name}" />
-    <property  name="phpbb-root" value="${build-directory}/../../../../../" />
+    <property name="phpbb-root" value="${build-directory}/../../../../../" />
+	<property name="clover-path" value="${build-directory}/logs/clover.xml" />
+	<property name="coverage-html-path" value="${build-directory}/coverage" />
 
     <!-- These are the main targets which you will probably want to use -->
     <target name="all" depends="prepare-structure,package" />
@@ -59,19 +61,81 @@
               passthru="true" />
     </target>
 
-    <target name="test" depends="clean,composer">
-        <exec dir="${phpbb-root}"
-              command="phpBB/vendor/bin/phpunit
-              -c phpBB/ext/${vendor-name}/${extension-name}/"
-              passthru="true" />
+	<target name="prepare-tests" depends="clean,composer">
+		<exec command="if [ -d '${build-directory}/../../../../../' ]; then echo 'true'; else echo 'false'; fi;" outputProperty="output.IS_DIRECTORY_EXISTS" />
+		<if>
+			<equals arg1="${output.IS_DIRECTORY_EXISTS}" arg2="true" />
+			<then>
+				<echo msg="phpBB is already set up." />
+			</then>
+			<else>
+				<!-- Move Board3 Portal and set up phpBB -->
+				<exec command="CURRENT_BUILD_REV=$(git rev-parse --abbrev-ref HEAD)" passthru="true" />
+				<exec command="echo $GIT_BRANCH" passthru="true" />
+				<exec command="git clone https://github.com/phpbb/phpbb.git phpbb" passthru="true" />
+				<exec dir="${build-directory}/../phpbb/phpBB" command="php ../composer.phar install" passthru="true" />
+				<mkdir dir="phpbb/phpBB/ext/board3" />
+				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3" command="git clone https://github.com/board3/Board3-Portal.git portal" passthru="true" />
+				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3/portal" command="git checkout $GIT_BRANCH" passthru="true" />
+				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3/portal" command="php composer.phar install" passthru="true" />
+				<property name="phpbb-root" value="${build-directory}/../phpbb" override="true" />
+				<property name="clover-path" value="../build/logs/clover.xml" override="true" />
+				<property name="coverage-html-path" value="../build/coverage" override="true" />
+				<exec dir="${build-directory}/../phpbb" command="cp ~/workspace/test_config.php tests/test_config.php" passthru="true" />
+				<exec dir="${build-directory}/../phpbb" command="chmod 777 phpBB/cache" passthru="true" />
+				<exec dir="${build-directory}/../phpbb" command="chmod 777 phpBB/files" passthru="true" />
+				<exec dir="${build-directory}/../phpbb" command="chmod 777 phpBB/store" passthru="true" />
+				<exec dir="${build-directory}/../phpbb" command="chmod 777 phpBB/images/avatars/upload" passthru="true" />
+			</else>
+		</if>
+	</target>
+
+    <target name="test" depends="clean,composer,prepare-tests">
+		<if>
+			<available property="phpunit-available" file="phpbb/phpBB/vendor/bin/phpunit" type="file" />
+			<then>
+				<exec dir="${phpbb-root}"
+					  command="phpBB/vendor/bin/phpunit
+              -c phpBB/ext/${vendor-name}/${extension-name}/ --coverage-clover=${clover-path} --coverage-html=${coverage-html-path}"
+					  passthru="true" returnProperty="test.pass" />
+				<if>
+					<not>
+						<equals arg1="${test.pass}" arg2="0"/>
+					</not>
+					<then>
+						<fail msg="PHPUnit tests failed."/>
+					</then>
+				</if>
+			</then>
+			<else>
+				<echo msg="PHPUnit couldn't be found." />
+			</else>
+		</if>
+
     </target>
 
     <target name="test-slow" depends="clean,composer">
-        <exec dir="${phpbb-root}"
-              command="phpBB/vendor/bin/phpunit
-               -c phpBB/ext/${vendor-name}/${extension-name}/
-               --group slow"
-              passthru="true" />
+		<if>
+		<available property="phpunit-available" file="phpbb/phpBB/vendor/bin/phpunit" type="file" />
+		<then>
+			<exec dir="${phpbb-root}"
+				  command="phpBB/vendor/bin/phpunit
+				   -c phpBB/ext/${vendor-name}/${extension-name}/
+				   --group slow"
+				  passthru="true" />
+			<if>
+				<not>
+					<equals arg1="${test.pass}" arg2="0"/>
+				</not>
+				<then>
+					<fail msg="PHPUnit slow tests failed."/>
+				</then>
+			</if>
+		</then>
+		<else>
+			<echo msg="PHPUnit couldn't be found." />
+		</else>
+		</if>
     </target>
 
     <!--
