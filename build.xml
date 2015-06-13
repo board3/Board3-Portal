@@ -92,7 +92,7 @@
 
     <target name="test" depends="clean,composer,prepare-tests">
 		<if>
-			<available property="phpunit-available" file="phpbb/phpBB/vendor/bin/phpunit" type="dir" />
+			<available property="phpunit-available" file="phpbb/phpBB/vendor/bin/phpunit" type="file" />
 			<then>
 				<exec dir="${phpbb-root}"
 					  command="phpBB/vendor/bin/phpunit
@@ -116,7 +116,7 @@
 
     <target name="test-slow" depends="clean,composer">
 		<if>
-		<available property="phpunit-available" file="phpbb/phpBB/vendor/bin/phpunit" type="dir" />
+		<available property="phpunit-available" file="phpbb/phpBB/vendor/bin/phpunit" type="file" />
 		<then>
 			<exec dir="${phpbb-root}"
 				  command="phpBB/vendor/bin/phpunit
