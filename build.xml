@@ -63,9 +63,8 @@
     </target>
 
 	<target name="prepare-tests" depends="clean,composer">
-		<exec command="if [ -d '${build-directory}/../../../../../' ]; then echo 'true'; else echo 'false'; fi;" outputProperty="output.IS_DIRECTORY_EXISTS" />
 		<if>
-			<equals arg1="${output.IS_DIRECTORY_EXISTS}" arg2="true" />
+			<available property="phpbb-is-available" file="${phpbb-root}/phpBB/vendor/bin/phpunit" type="file" />
 			<then>
 				<echo msg="phpBB is already set up." />
 			</then>
