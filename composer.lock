@@ -1,22 +1,22 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b5a11feb74a85a9825b7b83aaaf8fa0e",
+    "hash": "c994b2b8ddc0cceee41f2d5c294b6677",
     "packages": [
         {
             "name": "nickvergessen/phpbb-tool-trimmessage",
             "version": "1.3.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nickvergessen/phpbb-tool-trimmessage.git",
+                "url": "git@github.com:nickvergessen/phpbb-tool-trimmessage.git",
                 "reference": "0ed883bc2d473ec2e84cabb9c9395785daeeebcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nickvergessen/phpbb-tool-trimmessage/zipball/0ed883bc2d473ec2e84cabb9c9395785daeeebcf",
+                "url": "https://api.github.com/repos/nickvergessen/phpbb-tool-trimmessage/zipball/6e43785db5e6c6d6db0f6b0a3852e5f45806f4ca",
                 "reference": "0ed883bc2d473ec2e84cabb9c9395785daeeebcf",
                 "shasum": ""
             },
@@ -157,7 +157,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpbb/epv/zipball/75df9936ffbb8f05a1351cf622cf6f41c7d2d9f2",
+                "url": "https://api.github.com/repos/phpbb/epv/zipball/d837a835dfdfdac233854d9e50d58565542764cb",
                 "reference": "75df9936ffbb8f05a1351cf622cf6f41c7d2d9f2",
                 "shasum": ""
             },
