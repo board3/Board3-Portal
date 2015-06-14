@@ -53,6 +53,7 @@
     -->
     <target name="clean">
         <delete dir="${build-directory}" />
+		<mkdir dir="${build-directory}" />
     </target>
 
     <target name="composer">
@@ -72,7 +73,7 @@
 				<!-- Move Board3 Portal and set up phpBB -->
 				<exec command="CURRENT_BUILD_REV=$(git rev-parse --abbrev-ref HEAD)" passthru="true" />
 				<exec command="echo $GIT_BRANCH" passthru="true" />
-				<exec command="git clone https://github.com/phpbb/phpbb.git phpbb" passthru="true" />
+				<exec command="git clone -v --progress https://github.com/phpbb/phpbb.git phpbb" passthru="true" />
 				<exec dir="${build-directory}/../phpbb/phpBB" command="php ../composer.phar install" passthru="true" />
 				<mkdir dir="phpbb/phpBB/ext/board3" />
 				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3" command="git clone https://github.com/board3/Board3-Portal.git portal" passthru="true" />
@@ -86,6 +87,27 @@
 				<exec dir="${build-directory}/../phpbb" command="chmod 777 phpBB/files" passthru="true" />
 				<exec dir="${build-directory}/../phpbb" command="chmod 777 phpBB/store" passthru="true" />
 				<exec dir="${build-directory}/../phpbb" command="chmod 777 phpBB/images/avatars/upload" passthru="true" />
+			</else>
+		</if>
+		<if>
+			<equals arg1="$JENKINS_URL" arg2="" />
+			<then>
+				<echo msg="JENKINS_URL is not set" />
+			</then>
+			<else>
+				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3/portal" command="wget https://phar.phpunit.de/phploc.phar" passthru="true" />
+				<if>
+					<available property="logs-dir-available" file="${build-directory}/logs" type="dir" />
+					<then>
+						<echo msg="Logs dir already set up." />
+					</then>
+					<else>
+						<mkdir dir="${build-directory}/logs" />
+						<exec dir="${build-directory}/logs" command="touch phploc.csv" />
+					</else>
+				</if>
+				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3" command="php portal/phploc.phar --exclude=portal/vendor,portal/language,portal/styles,portal/tests,portal/travis --git-repository . portal --log-csv ${build-directory}/logs/phploc.csv --progress" passthru="true" />
+				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3/portal" command="rm phploc.phar" passthru="true" />
 			</else>
 		</if>
 	</target>
