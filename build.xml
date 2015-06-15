@@ -73,6 +73,7 @@
 				<exec command="CURRENT_BUILD_REV=$(git rev-parse --abbrev-ref HEAD)" passthru="true" />
 				<exec command="echo $GIT_BRANCH" passthru="true" />
 				<exec command="git clone -v --progress https://github.com/phpbb/phpbb.git phpbb" passthru="true" />
+				<exec dir="${build-directory}/../phpbb" command="git checkout master" passthru="true" />
 				<exec dir="${build-directory}/../phpbb/phpBB" command="php ../composer.phar install" passthru="true" />
 				<mkdir dir="phpbb/phpBB/ext/board3" />
 				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3" command="git clone https://github.com/board3/Board3-Portal.git portal" passthru="true" />
