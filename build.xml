@@ -106,7 +106,7 @@
 						<exec dir="${build-directory}/logs" command="touch phploc.csv" />
 					</else>
 				</if>
-				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3" command="php portal/phploc.phar --exclude=portal/vendor,portal/language,portal/styles,portal/tests,portal/travis --log-csv ../../../../build/logs/phploc.csv --progress portal/" passthru="true" />
+				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3" command="php portal/phploc.phar --exclude=vendor --exclude=travis --log-csv ../../../../build/logs/phploc.csv --progress portal/" passthru="true" />
 				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3/portal" command="rm phploc.phar" passthru="true" />
 			</else>
 		</if>
