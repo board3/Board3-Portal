@@ -82,8 +82,8 @@
 				<property name="phpbb-root" value="${build-directory}/../phpbb" override="true" />
 				<property name="clover-path" value="../build/logs/clover.xml" override="true" />
 				<property name="coverage-html-path" value="../build/coverage" override="true" />
-				<exec dir="${build-directory}/../phpbb" command="cp ~/workspace/test_config.php tests/test_config.php" passthru="true" />
-				<exec dir="${build-directory}/../phpbb" command="chmod -R 777 phpBB/cache" passthru="true" />
+				<exec dir="${build-directory}/../phpbb" command="cp ../../workspace/test_config.php tests/test_config.php" passthru="true" />
+				<exec dir="${build-directory}/../phpbb" command="chmod 777 phpBB/cache" passthru="true" />
 				<exec dir="${build-directory}/../phpbb" command="chmod 777 phpBB/files" passthru="true" />
 				<exec dir="${build-directory}/../phpbb" command="chmod 777 phpBB/store" passthru="true" />
 				<exec dir="${build-directory}/../phpbb" command="chmod 777 phpBB/images/avatars/upload" passthru="true" />
