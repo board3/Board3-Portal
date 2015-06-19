@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c994b2b8ddc0cceee41f2d5c294b6677",
+    "hash": "16fa7b983ba4704c2b4fb11611f8c1d7",
     "packages": [
         {
             "name": "nickvergessen/phpbb-tool-trimmessage",
