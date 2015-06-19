@@ -147,10 +147,10 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 		$crawler = self::submit($form);
 		$form = $crawler->selectButton('Apply all permissions')->form();
 		$role_id = 0;
-		$crawler->filter('option')->each(function ($node) use (&$role_id) {
+		$crawler->filter('li')->each(function ($node) use (&$role_id) {
 			if ($node->text() === 'No Access')
 			{
-				$role_id = $node->attr('value');
+				$role_id = $node->attr('data-id');
 			}
 		});
 
