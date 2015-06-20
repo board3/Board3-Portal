@@ -413,11 +413,11 @@ a.portal-forumtitle {
 }
 
 ul.topiclist dt .list-inner {
-	margin-right: 50%;
+	margin-right: 60%;
 }
 
 ul.topiclist dt {
-	margin-right: -50%;
+	margin-right: -60%;
 }
 
 ul.responsive-portal-news dd:last-of-type, ul.responsive-portal-announcements dd:last-of-type {
@@ -429,19 +429,19 @@ dd.responsive-portal-news:last-of-type, dd.responsive-portal-announcements:last-
 }
 
 .rtl ul.topiclist dt .list-inner {
-	margin-left: 50%;
+	margin-left: 60%;
 }
 
 .rtl ul.topiclist dt {
-	margin-left: -50%;
+	margin-left: -60%;
 }
 
 .rtl ul.responsive-portal-news dd:last-of-type, ul.responsive-portal-announcements dd:last-of-type {
-	width: 25%;
+	width: 30%;
 }
 
 .rtl dd.responsive-portal-news:last-of-type, dd.responsive-portal-announcements:last-of-type {
-	width: 25%;
+	width: 30%;
 }
 
 /* Portal clock
