@@ -103,7 +103,7 @@ class helper
 		$this->php_ext = $php_ext;
 		$this->portal_helper = $portal_helper;
 
-		$this->root_path = $phpbb_root_path . 'ext/board3/portal/';
+		$this->root_path = str_replace($this->path_helper->get_web_root_path(), '', $phpbb_root_path . 'ext/board3/portal/');
 	}
 
 	/**
