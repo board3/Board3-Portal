@@ -13,3 +13,19 @@
 	float: left;
 	width: 100%;
 }
+
+ul.topiclist dt .list-inner {
+	margin-right: 440px;
+}
+
+ul.topiclist dt {
+	margin-right: -440px;
+}
+
+.rtl ul.topiclist dt .list-inner {
+	margin-left: 440px;
+}
+
+.rtl ul.topiclist dt {
+	margin-left: -440px;
+}
