@@ -2,7 +2,14 @@
 	.portal-body-center dd.posts, .portal-body-center dd.views {
 		display: none !important;
 	}
-	.portal-body-center dt { width: 130% !important; }
+
+	.portal-body-center ul.topiclist dt .list-inner {
+		margin-right: 60%;
+	}
+
+	.portal-body-center ul.topiclist dt {
+		margin-right: -60%;
+	}
 	.portal-body-center dd.lastpost { width: auto; }
 }
 
