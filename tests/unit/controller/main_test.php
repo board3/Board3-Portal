@@ -100,4 +100,13 @@ class main_test extends \board3\portal\tests\testframework\database_test_case
 		$this->assertNull($this->controller_main->handle(array('left' => 1)));
 		$this->template->assert_same(null, 'S_PORTAL_ALL');
 	}
+
+	public function test_is_enabled_side_column()
+	{
+		$this->assertFalse($this->controller_main->get_module_template(array(), new \board3\portal\modules\clock($this->config, $this->template)));
+		$this->assertNull($this->controller_main->handle(array('left' => 1)));
+		$this->template->assert_same(true, 'S_PORTAL_ALL');
+		$this->config['board3_left_column'] = false;
+		$this->assertSame('clock_side.html', $this->controller_main->get_module_template(array('module_column' => 1), new \board3\portal\modules\clock($this->config, $this->template)));
+	}
 }
