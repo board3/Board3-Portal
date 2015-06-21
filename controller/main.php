@@ -244,7 +244,7 @@ class main
 			return false;
 		}
 
-		if (in_array($column, array('left', 'right')) && $this->config['board3_' . $column . '_column'])
+		if ($this->is_enabled_side_column($column))
 		{
 			++$this->module_count[$column];
 			$template_module = $module->get_template_side($row['module_id']);
@@ -256,6 +256,18 @@ class main
 		}
 
 		return $template_module;
+	}
+
+	/**
+	 * Check if column is enabled side column
+	 *
+	 * @param string $column Column string
+	 *
+	 * @return bool True if column is side column and enabled, false if not
+	 */
+	protected function is_enabled_side_column($column)
+	{
+		return in_array($column, array('left', 'right')) && ($this->config['board3_' . $column . '_column'] || $this->allowed_columns);
 	}
 
 	/**
@@ -302,7 +314,7 @@ class main
 	*/
 	protected function check_module_count($column, $config = true)
 	{
-		return $this->module_count[$column] > 0 && $config;
+		return $this->module_count[$column] > 0 && ($config || $this->allowed_columns);
 	}
 
 	/**
