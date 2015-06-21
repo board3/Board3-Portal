@@ -23,6 +23,7 @@ class v210 extends \phpbb\db\migration\migration
 			array('config.remove', array('board3_version_check')),
 			array('custom', array(array($this, 'add_donation_setting'))),
 			array('custom', array(array($this, 'convert_serialize_to_json'))),
+			array('custom', array(array($this, 'add_module_permissions'))),
 		);
 	}
 
@@ -87,6 +88,18 @@ class v210 extends \phpbb\db\migration\migration
 			set_portal_config($setting, json_encode($this->utf_unserialize($portal_config[$setting])));
 		}
 		$this->db->sql_freeresult($result);
+	}
+
+	/**
+	 * Add correct module permissions to ACP modules
+	 */
+	public function add_module_permissions()
+	{
+		$sql = 'UPDATE ' . $this->table_prefix . "modules
+			SET module_auth = 'ext_board3/portal && acl_a_manage_portal'
+			WHERE module_basename = '\\\\board3\\\\portal\\\\acp\\\\portal_module'
+				AND module_auth = 'acl_a_manage_portal'";
+		$this->db->sql_query($sql);
 	}
 
 	/**
