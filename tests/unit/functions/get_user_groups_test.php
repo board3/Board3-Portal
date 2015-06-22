@@ -7,8 +7,6 @@
 *
 */
 
-require_once(dirname(__FILE__) . '/../../../includes/functions.php');
-
 class phpbb_unit_functions_get_user_groups_test extends \board3\portal\tests\testframework\database_test_case
 {
 	public function getDataSet()
