@@ -9,6 +9,8 @@
 
 namespace board3\portal\modules;
 
+require_once dirname(__FILE__) . '/../../mock/check_form_key.php';
+
 class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework\database_test_case
 {
 	protected $path_helper;
@@ -27,8 +29,6 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 
 	protected $expected_config = array();
 	protected $expected_portal_config = array();
-
-	static public $form_key_valid = false;
 
 	public function getDataSet()
 	{
@@ -74,6 +74,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 		$this->welcome = new \board3\portal\modules\welcome($this->config, $this->request, $this->template, $this->user, $phpbb_root_path, $phpEx);
 		\set_config('foobar', 0, false, $this->config);
 		$this->config->delete('foobar');
+		check_form_key::$form_key_valid = false;
 	}
 
 	public function test_get_template_center()
@@ -143,10 +144,10 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 		$this->request = new \phpbb_mock_request();
 		$this->welcome = new \board3\portal\modules\welcome($this->config, $this->request, $this->template, $this->user, '', '');
 		$this->request->overwrite('submit', true, \phpbb\request\request_interface::POST);
-		self::$form_key_valid = true;
+		check_form_key::$form_key_valid = true;
 		$this->request->overwrite('welcome_message', 'foobar101');
 		$this->welcome->update_welcome('foobar', 5);
-		self::$form_key_valid = false;
+		check_form_key::$form_key_valid = false;
 	}
 
 	public function test_update_welcome_invalid_form_key()
@@ -166,12 +167,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 		$this->request->overwrite('submit', true, \phpbb\request\request_interface::POST);
 		$this->request->overwrite('welcome_message', '');
 		$this->setExpectedTriggerError(E_USER_WARNING);
-		self::$form_key_valid = true;
+		check_form_key::$form_key_valid = true;
 		$this->welcome->update_welcome('foobar', 5);
 	}
-}
-
-function check_form_key($value)
-{
-	return phpbb_unit_modules_welcome_test::$form_key_valid;
 }
