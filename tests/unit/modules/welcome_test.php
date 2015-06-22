@@ -166,6 +166,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 		$this->request->overwrite('submit', true, \phpbb\request\request_interface::POST);
 		$this->request->overwrite('welcome_message', '');
 		$this->setExpectedTriggerError(E_USER_WARNING);
+		self::$form_key_valid = true;
 		$this->welcome->update_welcome('foobar', 5);
 	}
 }
