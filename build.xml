@@ -39,6 +39,7 @@
     -->
 
     <property name="version" value="HEAD" override="true" />
+	<property name="package.version" value="HEAD" />
     <property name="build-directory" value="build" override="true" />
     <property name="package-directory" value="${build-directory}/package/${vendor-name}/${extension-name}" />
     <property name="phpbb-root" value="${build-directory}/../../../../../" />
@@ -108,6 +109,17 @@
 				</if>
 				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3" command="php portal/phploc.phar --exclude=vendor --exclude=travis --log-csv ../../../../build/logs/phploc.csv --progress portal/" passthru="true" />
 				<exec dir="${build-directory}/../phpbb/phpBB/ext/board3/portal" command="rm phploc.phar" passthru="true" />
+			</else>
+		</if>
+		<if>
+			<equals arg1="$BUILD_NUMBER" arg2="" />
+			<then>
+				<echo msg="BUILD_NUMBER is not available" />
+			</then>
+			<else>
+				<property environment="env" />
+				<echo>Build number is ${env.BUILD_NUMBER}</echo>
+				<property name="package.version" value="${env.BUILD_NUMBER}" override="true" />
 			</else>
 		</if>
 	</target>
@@ -195,7 +207,7 @@
         </phingcall>
 
         <phingcall target="wrap-package">
-            <property name="destination-filename" value="${build-directory}/upload/${vendor-name}_${extension-name}-${version}" />
+            <property name="destination-filename" value="${build-directory}/upload/${vendor-name}_${extension-name}_${package.version}" />
         </phingcall>
     </target>
 
