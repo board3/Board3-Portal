@@ -39,6 +39,7 @@
     -->
 
     <property name="version" value="HEAD" override="true" />
+	<property name="package.version" value="HEAD" />
     <property name="build-directory" value="build" override="true" />
     <property name="package-directory" value="${build-directory}/package/${vendor-name}/${extension-name}" />
     <property name="phpbb-root" value="${build-directory}/../../../../../" />
@@ -115,8 +116,9 @@
 				<echo msg="BUILD_NUMBER is not available" />
 			</then>
 			<else>
-				<exec dir="${build-directory}" command="echo $BUILD_NUMBER" outputProperty="version.override" passthru="true" />
-				<property name="version" value="${version.override}" override="true" />
+				<property environment="env" />
+				<echo>Build number is ${env.BUILD_NUMBER}</echo>
+				<property name="package.version" value="${env.BUILD_NUMBER}" override="true" />
 			</else>
 		</if>
 	</target>
@@ -204,7 +206,7 @@
         </phingcall>
 
         <phingcall target="wrap-package">
-            <property name="destination-filename" value="${build-directory}/upload/${vendor-name}_${extension-name}_${version}" />
+            <property name="destination-filename" value="${build-directory}/upload/${vendor-name}_${extension-name}_${package.version}" />
         </phingcall>
     </target>
 
