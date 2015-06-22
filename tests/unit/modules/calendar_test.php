@@ -9,8 +9,6 @@
 
 namespace board3\portal\modules;
 
-require_once(dirname(__FILE__) . '/../../../includes/functions.php');
-
 class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframework\database_test_case
 {
 	protected $path_helper;
