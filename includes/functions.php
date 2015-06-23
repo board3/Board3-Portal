@@ -128,27 +128,6 @@ function character_limit(&$title, $limit = 0)
 	}
 }
 
-/**
-* Cut post text to given length
-*
-* @param string $message post text
-* @param string $bbcode_uid bbcode uid
-* @param int $length The desired length
-*
-* @return string Shortened message
-*/
-function get_sub_taged_string($message, $bbcode_uid, $length)
-{
-	if (class_exists('\Nickvergessen\TrimMessage\TrimMessage'))
-	{
-		$trim = new \Nickvergessen\TrimMessage\TrimMessage($message, $bbcode_uid, $length);
-		$message = $trim->message();
-		unset($trim);
-	}
-
-	return $message;
-}
-
 function ap_validate($str)
 {
 	$s = str_replace('<br />', '<br/>', $str);

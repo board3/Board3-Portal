@@ -627,12 +627,33 @@ class fetch_posts
 		if ($text_length > 0 && (strlen($row['post_text']) > $text_length))
 		{
 			$message = str_replace(array("\n", "\r"), array('<br />', "\n"), $row['post_text']);
-			$message = get_sub_taged_string($message, $row['bbcode_uid'], $text_length);
+			$message = $this->shorten_message($message, $row['bbcode_uid'], $text_length);
 			$posts_striped = true;
 		}
 		else
 		{
 			$message = str_replace("\n", '<br/> ', $row['post_text']);
+		}
+
+		return $message;
+	}
+
+	/**
+	 * Shorten message to specified length
+	 *
+	 * @param string $message Post text
+	 * @param string $bbcode_uid BBCode UID
+	 * @param int $length Length the text should have after shortening
+	 *
+	 * @return string Shortened messsage
+	 */
+	public function shorten_message($message, $bbcode_uid, $length)
+	{
+		if (class_exists('\Nickvergessen\TrimMessage\TrimMessage'))
+		{
+			$trim = new \Nickvergessen\TrimMessage\TrimMessage($message, $bbcode_uid, $length);
+			$message = $trim->message();
+			unset($trim);
 		}
 
 		return $message;
