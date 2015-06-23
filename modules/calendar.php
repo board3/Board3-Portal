@@ -437,12 +437,12 @@ class calendar extends module_base
 					trigger_error($this->user->lang['FORM_INVALID']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
-				$event_title = $this->request->variable('event_title', ' ', true);
-				$event_desc = $this->request->variable('event_desc', ' ', true);
+				$event_title = $this->request->variable('event_title', '', true);
+				$event_desc = $this->request->variable('event_desc', '', true);
 				$event_start_date = trim($this->request->variable('event_start_date', ''));
 				$event_end_date = trim($this->request->variable('event_end_date', ''));
 				$event_all_day = $this->request->variable('event_all_day', false); // default to false
-				$event_url = $this->request->variable('event_url', ' ');
+				$event_url = $this->request->variable('event_url', '');
 				$event_permission = $this->request->variable('permission-setting-calendar', array(0 => ''));
 				$groups_ary = array();
 
@@ -486,11 +486,6 @@ class calendar extends module_base
 				if (!$event_title)
 				{
 					trigger_error($this->user->lang['NO_EVENT_TITLE'] . adm_back_link($u_action), E_USER_WARNING);
-				}
-
-				if (!$start_time || $start_time == 0)
-				{
-					trigger_error($this->user->lang['NO_EVENT_START'] . adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				// overwrite already existing events and make sure we don't try to save an event outside of the normal array size of $events
