@@ -237,29 +237,6 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 }
 
 /**
-* Check if table exists
-* @copyright (c) 2007 phpBB Group
-*
-* @param string	$table_name	The table name to check for
-* @return bool true if table exists, else false
-*/
-function sql_table_exists($table_name)
-{
-	global $db;
-	$db->sql_return_on_error(true);
-	$result = $db->sql_query_limit('SELECT * FROM ' . $db->sql_escape($table_name), 1);
-	$db->sql_return_on_error(false);
-
-	if ($result)
-	{
-		$db->sql_freeresult($result);
-		return true;
-	}
-
-	return false;
-}
-
-/**
 * get topic tracking info for news
 * based on get_complete_tracking_info of phpBB3
 * this should reduce the queries for the news and announcements block
