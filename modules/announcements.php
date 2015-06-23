@@ -482,19 +482,16 @@ class announcements extends module_base
 	*/
 	public function uninstall($module_id, $db)
 	{
-		$del_config = array(
-			'board3_announcements_style_' . $module_id,
-			'board3_number_of_announcements_' . $module_id,
-			'board3_announcements_day_' . $module_id,
-			'board3_announcements_length_' . $module_id,
-			'board3_global_announcements_forum_' . $module_id,
-			'board3_announcements_forum_exclude_' . $module_id,
-			'board3_announcements_archive_' . $module_id,
-			'board3_announcements_permissions_' . $module_id,
-			'board3_show_announcements_replies_views_' . $module_id,
-		);
-		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
-			WHERE ' . $db->sql_in_set('config_name', $del_config);
-		return $db->sql_query($sql);
+		$this->config->delete('board3_announcements_style_' . $module_id);
+		$this->config->delete('board3_number_of_announcements_' . $module_id);
+		$this->config->delete('board3_announcements_day_' . $module_id);
+		$this->config->delete('board3_announcements_length_' . $module_id);
+		$this->config->delete('board3_global_announcements_forum_' . $module_id);
+		$this->config->delete('board3_announcements_forum_exclude_' . $module_id);
+		$this->config->delete('board3_announcements_archive_' . $module_id);
+		$this->config->delete('board3_announcements_permissions_' . $module_id);
+		$this->config->delete('board3_show_announcements_replies_views_' . $module_id);
+
+		return true;
 	}
 }
