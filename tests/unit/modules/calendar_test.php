@@ -184,6 +184,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 	public function test_update_events_no_error()
 	{
 		$this->calendar->update_events('foobar', 5);
+		$this->assertNull($this->template->get_row('events'));
 	}
 
 	public function data_update_events()
