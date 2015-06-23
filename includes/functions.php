@@ -465,6 +465,8 @@ function get_user_groups()
 
 	if ($groups_ary === false)
 	{
+		$groups_ary = array();
+
 		// get user's groups
 		$sql = 'SELECT group_id
 				FROM ' . USER_GROUP_TABLE . '

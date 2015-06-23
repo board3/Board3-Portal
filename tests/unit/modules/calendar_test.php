@@ -37,7 +37,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 	public function setUp()
 	{
 		parent::setUp();
-		global $cache, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request;
+		global $cache, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request, $user;
 
 		$this->path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request(
@@ -57,6 +57,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 			->with($this->anything())
 			->will($this->returnArgument(1));
 		self::$config = new \phpbb\config\config(array());
+		\set_config('foobar', false, false, self::$config);
 		$this->template = new \board3\portal\tests\mock\template($this);
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
 		$controller_helper->add_route('board3_portal_controller', 'portal');
@@ -149,12 +150,35 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 
 	public function test_get_template_side()
 	{
+		set_portal_config('board3_calendar_events_5', '[{"title":"foobar","desc":" ","start_time":' . (time() - 3600) . ',"end_time":"","all_day":true,"permission":"","url":" "},{"title":"foobar","desc":" ","start_time":' . (time() + 90000) . ',"end_time":"","all_day":true,"permission":"","url":" "}]');
 		$this->assertSame('calendar_side.html', $this->calendar->get_template_side(5));
+
 		self::$config->set('board3_sunday_first_5', true);
 		$this->request->overwrite('m5', 1);
 		$this->assertSame('calendar_side.html', $this->calendar->get_template_side(5));
+
 		$this->request->overwrite('m5', -1);
 		$this->assertSame('calendar_side.html', $this->calendar->get_template_side(5));
+
+		self::$config->set('board3_display_events_5', true);
+		$this->assertSame('calendar_side.html', $this->calendar->get_template_side(5));
+		$this->assertSame(1, sizeof($this->template->get_row('minical.cur_events')));
+		$this->assertSame(1, sizeof($this->template->get_row('minical.upcoming_events')));
+
+		set_portal_config('board3_calendar_events_5', '[{"title":"foobar","desc":" ","start_time":' . (time() - 10800) . ',"end_time":"","all_day":true,"permission":"","url":"http://example.com"},{"title":"foobar","desc":" ","start_time":' . (time() + 108000) . ',"end_time":"","all_day":true,"permission":"","url":"' . generate_board_url() . '"},{"title":"foobar3","desc":" ","start_time":' . (time() - 90000) . ',"end_time":' . (time() + 90000) . ',"all_day":false,"permission":"","url":" "}]');
+		$this->template->delete_var('minical.cur_events');
+		$this->template->delete_var('minical.upcoming_events');
+		$this->assertSame('calendar_side.html', $this->calendar->get_template_side(5));
+		$this->assertSame(2, sizeof($this->template->get_row('minical.cur_events')));
+		$this->assertSame(1, sizeof($this->template->get_row('minical.upcoming_events')));
+	}
+
+	public function test_get_template_acp()
+	{
+		$acp_template = $this->calendar->get_template_acp(5);
+		$this->assertArrayHasKey('title', $acp_template);
+		$this->assertArrayHasKey('vars', $acp_template);
+		$this->assertArrayHasKey('board3_display_events_5', $acp_template['vars']);
 	}
 
 	public function test_update_events_no_error()
@@ -162,51 +186,172 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 		$this->calendar->update_events('foobar', 5);
 	}
 
-	public function test_update_events_form_key_fail()
+	public function data_update_events()
 	{
-		// Save event
-		check_form_key::$form_key_valid = false;
-		$this->request->overwrite('save', true, \phpbb\request\request_interface::POST);
-		$this->setExpectedTriggerError(E_USER_WARNING);
-		$this->calendar->update_events('foobar', 5);
+		return array(
+			array(
+				array(
+					'event_start_date'		=> date('d.m.Y G:i', time() + 3600 * 3),
+					'event_all_day'			=> true,
+					'event_title'			=> 'foobar',
+					'id'					=> 0,
+				),
+				array(
+					'save'					=> true,
+				),
+				E_USER_NOTICE,
+				'<br /><br /><a href="index.php?i=-board3-portal-acp-portal_module&amp;mode=config&amp;module_id=5">&laquo; Back to previous page</a>',
+				'[{"title":"foobar","desc":" ","start_time":' . (time() + 3600) . ',"end_time":"","all_day":true,"permission":"","url":" "}]',
+				true,
+			),
+			// Form key invalid
+			array(
+				array(),
+				array(
+					'save'					=> true,
+				),
+				E_USER_WARNING,
+				'',
+				'',
+				false,
+			),
+			// Wrong start time
+			array(
+				array(),
+				array(
+					'save'					=> true,
+				),
+				E_USER_WARNING,
+				'',
+				'',
+				true,
+			),
+			// Wrong end time
+			array(
+				array(
+					'event_start_date'		=> '15.06.2035 13:00',
+				),
+				array(
+					'save'					=> true,
+				),
+				E_USER_WARNING,
+				'',
+				'',
+				true,
+			),
+			// End time in past
+			array(
+				array(
+					'event_start_date'		=> '15.06.2035 13:00',
+					'event_end_date'		=> '15.06.2005 19:00',
+				),
+				array(
+					'save'					=> true,
+				),
+				E_USER_WARNING,
+				'',
+				'',
+				true,
+			),
+			// End time before start
+			array(
+				array(
+					'event_start_date'		=> '15.06.2035 13:00',
+					'event_end_date'		=> '15.06.2035 12:00',
+				),
+				array(
+					'save'					=> true,
+				),
+				E_USER_WARNING,
+				'',
+				'',
+				true,
+			),
+			// No event title
+			array(
+				array(
+					'event_start_date'		=> date('d.m.Y G:i', time() + 3600 * 3),
+					'event_all_day'			=> true,
+				),
+				array(
+					'save'					=> true,
+				),
+				E_USER_WARNING,
+				'',
+				'[{"title":"foobar","desc":" ","start_time":' . (time() + 3600) . ',"end_time":"","all_day":true,"permission":"","url":" "}]',
+				true,
+			),
+			// Create valid event
+			array(
+				array(
+					'event_start_date'		=> date('d.m.Y G:i', time() + 3600 * 3),
+					'event_all_day'			=> true,
+					'event_title'			=> 'foobar',
+				),
+				array(
+					'save'					=> true,
+				),
+				E_USER_NOTICE,
+				'<br /><br /><a href="index.php?i=-board3-portal-acp-portal_module&amp;mode=config&amp;module_id=5">&laquo; Back to previous page</a>',
+				'[{"title":"foobar","desc":" ","start_time":' . (time() + 3600) . ',"end_time":"","all_day":true,"permission":"","url":" "}]',
+				true,
+			),
+			// Display existing events
+			array(
+				array(),
+				array(),
+				false,
+				'',
+				'board3_calendar_events_5'	=> '[{"title":"foobar","desc":" ","start_time":2065518000,"end_time":"","all_day":true,"permission":"","url":" "}]',
+				false,
+			),
+			// Edit event
+			array(
+				array(
+					'id'					=> 0,
+					'action'					=> 'edit',
+				),
+				array(),
+				false,
+				'',
+				'[{"title":"foobar","desc":" ","start_time":' . (time() + 3600) . ',"end_time":"","all_day":true,"permission":"","url":" "}]',
+				true,
+			),
+		);
 	}
 
-	public function test_update_events_wrong_start_time()
+	/**
+	 * @dataProvider data_update_events
+	 */
+	public function test_update_events($get_variables, $post_variables, $expected_error = E_USER_WARNING, $expected_error_message = '', $portal_config = array(), $form_key_valid = false)
 	{
-		// Save event
-		check_form_key::$form_key_valid = true;
-		$this->request->overwrite('save', true, \phpbb\request\request_interface::POST);
-		$this->setExpectedTriggerError(E_USER_WARNING);
-		$this->calendar->update_events('foobar', 5);
-	}
+		check_form_key::$form_key_valid = $form_key_valid;
 
-	public function test_update_events_wrong_end_time()
-	{
-		// Save event
-		check_form_key::$form_key_valid = true;
-		$this->request->overwrite('event_start_date', '15.06.2035 13:00');
-		$this->request->overwrite('save', true, \phpbb\request\request_interface::POST);
-		$this->setExpectedTriggerError(E_USER_WARNING);
-		$this->calendar->update_events('foobar', 5);
-	}
+		foreach ($get_variables as $key => $value)
+		{
+			$this->request->overwrite($key, $value);
+		}
 
-	public function test_update_events_all_day()
-	{
-		// Save event
-		check_form_key::$form_key_valid = true;
-		$this->request->overwrite('event_start_date', '15.06.2035 13:00');
-		$this->request->overwrite('event_all_day', true);
-		$this->request->overwrite('event_title', 'foobar');
-		$this->request->overwrite('save', true, \phpbb\request\request_interface::POST);
-		$this->setExpectedTriggerError(E_USER_NOTICE, '<br /><br /><a href="index.php?i=-board3-portal-acp-portal_module&amp;mode=config&amp;module_id=5">&laquo; </a>');
-		$this->calendar->update_events('foobar', 5);
-	}
+		foreach ($post_variables as $key => $value)
+		{
+			$this->request->overwrite($key, $value, \phpbb\request\request_interface::POST);
+		}
 
-	public function test_display_events()
-	{
-		set_portal_config('board3_calendar_events_5', '[{"title":"foobar","desc":" ","start_time":2065518000,"end_time":"","all_day":true,"permission":"","url":" "}]');
-		check_form_key::$form_key_valid = false;
-		$this->calendar->manage_events('', 'foobar', 5);
+		set_portal_config('board3_calendar_events_5', $portal_config);
+
+		if ($expected_error !== false)
+		{
+			if (!empty($expected_error_message))
+			{
+				$this->setExpectedTriggerError($expected_error, $expected_error_message);
+			}
+			else
+			{
+				$this->setExpectedTriggerError($expected_error);
+			}
+		}
+
+		$this->calendar->update_events('foobar', 5);
 	}
 }
 
