@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+	<table name="phpbb_users">
+		<column>username</column>
+		<column>user_id</column>
+		<column>user_colour</column>
+		<column>user_birthday</column>
+	</table>
+</dataset>
