@@ -29,10 +29,15 @@ class template
 			$this->data[$row] = array();
 		}
 
+		$index = (sizeof($this->data[$row])) ? sizeof($this->data[$row]) : 0;
 		foreach ($values as $key => $column)
 		{
 			$this->test_case->assertArrayNotHasKey($key, $this->data[$row]);
-			$this->data[$row][$key] = $column;
+			if (!isset($this->data[$row][$index]))
+			{
+				$this->data[$row][$index] = array();
+			}
+			$this->data[$row][$index][$key] = $column;
 		}
 	}
 
@@ -62,5 +67,10 @@ class template
 	public function delete_var($key)
 	{
 		unset($this->data[$key]);
+	}
+
+	public function get_row($row)
+	{
+		return $this->data[$row];
 	}
 }

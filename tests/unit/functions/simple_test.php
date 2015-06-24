@@ -7,8 +7,6 @@
 *
 */
 
-require_once(dirname(__FILE__) . '/../../../includes/functions.php');
-
 class phpbb_functions_simple_test extends PHPUnit_Framework_TestCase
 {
 	public function test_ap_validate()

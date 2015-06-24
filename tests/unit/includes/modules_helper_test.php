@@ -11,10 +11,12 @@ require_once dirname(__FILE__) . '/../../../../../../includes/functions_admin.ph
 
 class board3_includes_modules_helper_test extends \board3\portal\tests\testframework\database_test_case
 {
+	/** @var \board3\portal\includes\modules_helper */
 	protected $modules_helper;
 
 	protected $modules;
 
+	/** @var \phpbb\config\config */
 	protected $config;
 
 	public function getDataSet()
@@ -113,6 +115,11 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 			'<select id="bar" name="bar[]" multiple="multiple"><option value="1" disabled="disabled" class="disabled-option">forum_one</option><option value="2" disabled="disabled" class="disabled-option">forum_two</option></select>',
 			$this->modules_helper->generate_forum_select('foo', 'bar')
 		);
+		$this->config->set('bar', '1,2');
+		$this->assertEquals(
+			'<select id="bar" name="bar[]" multiple="multiple"><option value="1" selected="selected" disabled="disabled" class="disabled-option">forum_one</option><option value="2" selected="selected" disabled="disabled" class="disabled-option">forum_two</option></select>',
+			$this->modules_helper->generate_forum_select('foo', 'bar')
+		);
 	}
 
 	public function test_store_selected_forums()
@@ -120,5 +127,12 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 		$this->assertEmpty($this->config['foo']);
 		$this->modules_helper->store_selected_forums('foo');
 		$this->assertEquals('bar', $this->config['foo']);
+	}
+
+	public function test_store_left_right()
+	{
+		$this->assertEmpty($this->config['store_left_right']);
+		$this->modules_helper->store_left_right('store_left_right');
+		$this->assertEquals(0, $this->config['store_left_right']);
 	}
 }

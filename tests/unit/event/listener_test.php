@@ -70,7 +70,7 @@ class listener_test extends \phpbb_template_template_test_case
 
 		$this->config = new \phpbb\config\config(array(
 			'enable_mod_rewrite' => '1',
-			'board3_portal_enable' => '1',
+			'board3_enable' => '1',
 		));
 
 		$container = new \phpbb_mock_container_builder();
@@ -79,7 +79,7 @@ class listener_test extends \phpbb_template_template_test_case
 		$router = new \phpbb_mock_router($container, $filesystem, dirname(__FILE__) . '/', 'php', PHPBB_ENVIRONMENT, $manager);
 		$router->find_routing_files($manager->all_enabled(false));
 		$router->find(dirname(__FILE__) . '/');
-		$this->controller_helper = new \phpbb_mock_controller_helper($this->template, $this->user, $this->config, $router, new \phpbb\symfony_request($request), $request, new \phpbb\filesystem(), '', 'php', dirname(__FILE__) . '/');
+		$this->controller_helper = new mock_controller_helper($this->template, $this->user, $this->config, $router, new \phpbb\symfony_request($request), $request, new \phpbb\filesystem(), '', 'php', dirname(__FILE__) . '/');
 
 		$this->path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request(
@@ -91,14 +91,13 @@ class listener_test extends \phpbb_template_template_test_case
 			$this->php_ext
 		);
 
-		$this->auth = new \phpbb\auth\auth();
-		$userdata = array(
-			'user_id'	=> 2,
-		);
-		$this->auth->acl($userdata);
-		// Pretend to allow downloads
-		$this->auth->acl_options['global']['u_view_portal'] = 0;
-		$this->auth->acl[0][0] = true;
+		$this->auth = $this->getMockBuilder('\phpbb\auth\auth')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->auth->expects($this->any())
+			->method('acl_get')
+			->with($this->anything())
+			->will($this->returnValue(true));
 
 		$this->controller = $this->getMockBuilder('\board3\portal\controller\main')
 			->disableOriginalConstructor()
@@ -166,14 +165,30 @@ class listener_test extends \phpbb_template_template_test_case
 
 		$this->assertEmpty($result);
 
-		$this->user->data['session_page'] = '/app.php/portal';
+		$this->controller_helper->set_current_url('/app.php/portal');
 		$result = $this->phpbb_dispatcher->trigger_event('core.page_header', compact($vars));
 
 		$this->assertEmpty($result);
 
 		// Make sure user shouldn't see link
-		unset($this->auth->cache[0]['u_view_portal']);
-		$this->auth->acl[0][0] = false;
+		$this->config->set('board3_enable', 0);
+		$this->controller_helper->set_current_url('');
+		$result = $this->phpbb_dispatcher->trigger_event('core.page_header', compact($vars));
+
+		$this->assertEmpty($result);
+		$this->config->set('board3_enable', 1);
+	}
+
+	public function test_check_portal_all()
+	{
+		$this->phpbb_dispatcher->addListener('core.page_header', array($this->listener, 'add_portal_link'));
+
+		$this->controller_helper->set_current_url('');
+		$result = $this->phpbb_dispatcher->trigger_event('core.page_header', compact($vars));
+
+		$this->assertEmpty($result);
+
+		$this->config->set('board3_show_all_pages', true);
 		$result = $this->phpbb_dispatcher->trigger_event('core.page_header', compact($vars));
 
 		$this->assertEmpty($result);
@@ -200,5 +215,20 @@ class listener_test extends \phpbb_template_template_test_case
 			'ext_name' => 'board3/portal',
 			'lang_set' => 'portal',
 		)), $result['lang_set_ext']);
+	}
+}
+
+class mock_controller_helper extends \phpbb_mock_controller_helper
+{
+	protected $current_url = '';
+
+	public function set_current_url($url)
+	{
+		$this->current_url = $url;
+	}
+
+	public function get_current_url()
+	{
+		return $this->current_url;
 	}
 }

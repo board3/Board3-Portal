@@ -8,4 +8,14 @@
 		<column>config_name</column>
 		<column>config_value</column>
 	</table>
+	<table name="phpbb_groups">
+		<column>group_id</column>
+		<column>group_name</column>
+		<column>group_desc</column>
+		<row>
+			<value>5</value>
+			<value>admins</value>
+			<value></value>
+		</row>
+	</table>
 </dataset>

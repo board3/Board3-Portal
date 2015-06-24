@@ -7,7 +7,6 @@
 *
 */
 
-require_once(dirname(__FILE__) . '/../../../includes/functions.php');
 require_once(dirname(__FILE__) . '/../../../../../../includes/utf/utf_tools.php');
 require_once(dirname(__FILE__) . '/../../../../../../includes/functions_content.php');
 
@@ -32,23 +31,6 @@ class phpbb_unit_functions_functions_test extends \board3\portal\tests\testframe
 			->method('obtain_word_list')
 			->with()
 			->will($this->returnValue(array('match' => array('/disallowed_word/'), 'replace' => array(''))));
-	}
-
-	public function data_sql_table_exists()
-	{
-		return array(
-			array(true, 'phpbb_config'),
-			array(true, 'phpbb_styles'),
-			array(false, 'phpbb_foobar'),
-		);
-	}
-
-	/**
-	* @dataProvider data_sql_table_exists
-	*/
-	public function test_sql_table_exists($expected, $table)
-	{
-		$this->assertEquals($expected, sql_table_exists($table));
 	}
 
 	public function data_character_limit()

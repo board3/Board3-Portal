@@ -128,27 +128,6 @@ function character_limit(&$title, $limit = 0)
 	}
 }
 
-/**
-* Cut post text to given length
-*
-* @param string $message post text
-* @param string $bbcode_uid bbcode uid
-* @param int $length The desired length
-*
-* @return string Shortened message
-*/
-function get_sub_taged_string($message, $bbcode_uid, $length)
-{
-	if (class_exists('\Nickvergessen\TrimMessage\TrimMessage'))
-	{
-		$trim = new \Nickvergessen\TrimMessage\TrimMessage($message, $bbcode_uid, $length);
-		$message = $trim->message();
-		unset($trim);
-	}
-
-	return $message;
-}
-
 function ap_validate($str)
 {
 	$s = str_replace('<br />', '<br/>', $str);
@@ -255,29 +234,6 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 	));
 
 	return $page_string;
-}
-
-/**
-* Check if table exists
-* @copyright (c) 2007 phpBB Group
-*
-* @param string	$table_name	The table name to check for
-* @return bool true if table exists, else false
-*/
-function sql_table_exists($table_name)
-{
-	global $db;
-	$db->sql_return_on_error(true);
-	$result = $db->sql_query_limit('SELECT * FROM ' . $db->sql_escape($table_name), 1);
-	$db->sql_return_on_error(false);
-
-	if ($result)
-	{
-		$db->sql_freeresult($result);
-		return true;
-	}
-
-	return false;
 }
 
 /**
@@ -465,6 +421,8 @@ function get_user_groups()
 
 	if ($groups_ary === false)
 	{
+		$groups_ary = array();
+
 		// get user's groups
 		$sql = 'SELECT group_id
 				FROM ' . USER_GROUP_TABLE . '

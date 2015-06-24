@@ -9,9 +9,6 @@
 
 namespace board3\portal\portal\modules;
 
-require_once(dirname(__FILE__) . '/../../../includes/functions.php');
-require_once(dirname(__FILE__) . '/../../../acp/portal_module.php');
-
 class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\database_test_case
 {
 	static public $redirected = false;
@@ -31,12 +28,26 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	/** @var \board3\portal\includes\helper */
 	protected $portal_helper;
 
+	/** @var \board3\portal\acp\portal_module */
+	protected $portal_module;
+
+	/** @var \board3\portal\tests\mock\template */
+	protected $template;
+
+	/** @var \phpbb_mock_request */
+	protected $request;
+
 	public function setUp()
 	{
 		parent::setUp();
 		global $db, $cache, $phpbb_root_path, $phpEx, $user, $phpbb_container, $request, $template, $table_prefix;
+		global $phpbb_dispatcher;
+
 		$user = new \board3\portal\tests\mock\user();
+		$template = new \board3\portal\tests\mock\template($this);
+		$this->template = $template;
 		$request = new \phpbb_mock_request;
+		$this->request = $request;
 		$phpbb_container = new \phpbb_mock_container_builder();
 		// Mock module service collection
 		$config = new \phpbb\config\config(array());
@@ -91,6 +102,11 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		));
 		$this->database_handler = new \board3\portal\portal\modules\database_handler($db);
 		$this->constraints_handler = new \board3\portal\portal\modules\constraints_handler($this->portal_columns, $user);
+		$phpbb_dispatcher = $this->getMock('\phpbb\event\dispatcher', array('trigger_event'), array($phpbb_container));
+		$phpbb_dispatcher->expects($this->any())
+			->method('trigger_event')
+			->with($this->anything())
+			->will($this->returnArgument(1));
 
 		$path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request(
@@ -381,6 +397,32 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	public function test_can_add_module($module_class, $column, $expected)
 	{
 		$this->assertSame($expected, $this->constraints_handler->can_add_module($this->portal_helper->get_module($module_class), $column));
+	}
+
+	public function test_main_wrong_mode()
+	{
+		$this->setExpectedTriggerError(E_USER_ERROR, 'NO_MODE');
+		$this->portal_module->main(5, 'foobar');
+	}
+
+	public function test_main_config()
+	{
+		$this->portal_module->main(5, 'config');
+		$this->template->assert_equals(array(), 'options');
+		$options = $this->template->get_row('options');
+		$this->assertNotEmpty($this->template->get_row('options'));
+		$this->assertEquals(true, in_array('board3_show_all_pages', $options[9]));
+	}
+
+	public function test_main_invalid_submit()
+	{
+		$this->request->overwrite('submit', true, \phpbb\request\request_interface::POST);
+		$this->portal_module->main(5, 'config');
+		$this->template->assert_equals(array(), 'options');
+		$options = $this->template->get_row('options');
+		$this->assertNotEmpty($this->template->get_row('options'));
+		$this->assertEquals(true, in_array('board3_show_all_pages', $options[9]));
+		$this->template->assert_same(true, 'S_ERROR');
 	}
 }
 

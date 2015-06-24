@@ -7,10 +7,12 @@
 *
 */
 
-require_once(dirname(__FILE__) . '/../../../includes/functions.php');
 require_once(dirname(__FILE__) . '/../../../../../../includes/functions_acp.php');
 require_once(dirname(__FILE__) . '/../../../../../../includes/functions.php');
 require_once(dirname(__FILE__) . '/../../../../../../includes/utf/utf_tools.php');
+require_once(dirname(__FILE__) . '/../../../vendor/nickvergessen/phpbb-tool-trimmessage/src/Nickvergessen/TrimMessage/TrimMessage.php');
+require_once(dirname(__FILE__) . '/../../../vendor/nickvergessen/phpbb-tool-trimmessage/src/Nickvergessen/TrimMessage/PhpbbBbcodes.php');
+
 
 class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\database_test_case
 {
