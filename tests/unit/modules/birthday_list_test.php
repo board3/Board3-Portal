@@ -33,13 +33,15 @@ class phpbb_unit_modules_birthday_list_test extends \board3\portal\tests\testfra
 
 	public function setUp()
 	{
-		global $auth, $phpbb_dispatcher;
+		global $auth, $phpbb_dispatcher, $phpbb_root_path;
 
 		parent::setUp();
 
 		$this->template = new \board3\portal\tests\mock\template($this);
 		$this->config = new \phpbb\config\config(array());
-		$this->user = new \phpbb\user('\phpbb\datetime');
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$this->user->timezone = new \DateTimeZone('UTC');
 		$this->user->add_lang('common');
 		$this->birthday_list = new \board3\portal\modules\birthday_list($this->config, $this->template, $this->new_dbal(), $this->user);

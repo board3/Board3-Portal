@@ -38,13 +38,15 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 	public function setUp()
 	{
 		parent::setUp();
-		global $cache, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request;
+		global $cache, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request, $config, $phpbb_container;
 
-		$this->config = new \phpbb\config\config(array());
+		$config = $this->config = new \phpbb\config\config(array());
 		$this->request = new \phpbb_mock_request();
 		$request = $this->request;
 		$this->template = new \board3\portal\tests\mock\template($this);
-		$this->user = new \phpbb\user('\phpbb\datetime');
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'sql_load'));
 		$cache->expects($this->any())
 			->method('destroy')
@@ -70,6 +72,34 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 			->method('trigger_event')
 			->with($this->anything())
 			->will($this->returnArgument(1));
+		$phpbb_container = new \phpbb_mock_container_builder();
+		$s9e_factory = new \phpbb\textformatter\s9e\factory(
+			new \phpbb\textformatter\data_access($this->db, BBCODES_TABLE, SMILIES_TABLE, STYLES_TABLE, WORDS_TABLE, $phpbb_root_path . 'styles/'),
+			new \phpbb\cache\driver\dummy(),
+			$phpbb_dispatcher,
+			$phpbb_root_path . 'cache',
+			'_text_formatter_parser',
+			'_text_formatter_renderer'
+		);
+		$phpbb_container->set(
+			'text_formatter.parser',
+			new \phpbb\textformatter\s9e\parser(
+				new \phpbb\cache\driver\dummy(),
+				'_text_formatter_parser',
+				$s9e_factory,
+				$phpbb_dispatcher
+			)
+		);
+		$phpbb_container->set(
+			'text_formatter.renderer',
+			new \phpbb\textformatter\s9e\renderer(
+				new \phpbb\cache\driver\dummy(),
+				$phpbb_root_path . 'cache',
+				'_text_formatter_renderer',
+				$s9e_factory,
+				$phpbb_dispatcher
+			)
+		);
 
 		$this->welcome = new \board3\portal\modules\welcome($this->config, $this->request, $this->template, $this->user, $phpbb_root_path, $phpEx);
 		\set_config('foobar', 0, false, $this->config);

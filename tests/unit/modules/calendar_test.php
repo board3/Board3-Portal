@@ -10,6 +10,7 @@
 namespace board3\portal\modules;
 
 require_once dirname(__FILE__) . '/../../mock/check_form_key.php';
+require_once dirname(__FILE__) . '/../../../../../../includes/functions_compatibility.php';
 
 class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframework\database_test_case
 {
@@ -63,7 +64,9 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 		$controller_helper->add_route('board3_portal_controller', 'portal');
 		$modules_helper = new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), new \phpbb\config\config(array()), $controller_helper, new \phpbb_mock_request());
 		$request = $this->request = new \phpbb_mock_request();
-		$user = new \phpbb\user('\phpbb\datetime');
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$user->timezone = new \DateTimeZone('UTC');
 		$user->add_lang('common');
 		$log = $this->getMockBuilder('\phpbb\log')
