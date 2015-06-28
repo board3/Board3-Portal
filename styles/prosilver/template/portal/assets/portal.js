@@ -6,6 +6,8 @@
 *
 */
 
+/* global phpbb, jQuery */
+
 (function($) {  // Avoid conflicts with other libraries
 
 "use strict";
