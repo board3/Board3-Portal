@@ -1,5 +1,5 @@
 @media only screen and (max-width: 870px), only screen and (max-device-width: 870px) {
-	.portal-body-center dd.posts, .portal-body-center dd.views {
+	.portal-body-center dd.posts, .portal-body-center dd.views, .portal-body-center dd.topics {
 		display: none !important;
 	}
 
@@ -7,9 +7,20 @@
 		margin-right: 60%;
 	}
 
+	.rtl .portal-body-center ul.topiclist dt .list-inner {
+		margin-right: 0;
+		margin-left: 60%;
+	}
+
 	.portal-body-center ul.topiclist dt {
 		margin-right: -60%;
 	}
+
+	.rtl .portal-body-center ul.topiclist dt {
+		margin-right: 0;
+		margin-left: -60%;
+	}
+
 	.portal-body-center dd.lastpost { width: auto; }
 }
 

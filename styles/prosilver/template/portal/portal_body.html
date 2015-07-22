@@ -3,7 +3,7 @@
 
 <div id="portal-body" role="grid">
 	<!-- IF S_TOP_COLUMN -->	
-	<div id="portal-top" role="gridcell">
+	<div id="portal-top" role="rowgroup">
 	<!-- [+] top module area -->
 		<ul>
 			<li>
@@ -25,7 +25,7 @@
 	<!-- [+] center module area -->
 	<!-- IF S_CENTER_COLUMN -->
 	<div id="portal-center-wrapper">
-		<div id="portal-center" style="margin: 0 <!-- IF S_RIGHT_COLUMN -->{S_PORTAL_RIGHT_COLUMN}px<!-- ELSE -->-{$BLOCK_DISTANCE}<!-- ENDIF --> 0 <!-- IF S_LEFT_COLUMN -->{S_PORTAL_LEFT_COLUMN}px<!-- ELSE -->-{$BLOCK_DISTANCE}<!-- ENDIF -->; padding: 0 {$BLOCK_DISTANCE};" role="gridcell">
+		<div id="portal-center" style="margin: 0 <!-- IF S_RIGHT_COLUMN -->{S_PORTAL_RIGHT_COLUMN}px<!-- ELSE -->-{$BLOCK_DISTANCE}<!-- ENDIF --> 0 <!-- IF S_LEFT_COLUMN -->{S_PORTAL_LEFT_COLUMN}px<!-- ELSE -->-{$BLOCK_DISTANCE}<!-- ENDIF -->; padding: 0 {$BLOCK_DISTANCE};" role="rowgroup">
 			<!-- BEGIN modules_center -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_center.TEMPLATE_FILE}' -->
 				<!-- DEFINE $IMAGE_SRC = '{modules_center.IMAGE_SRC}' -->
@@ -46,7 +46,7 @@
 	<!-- [-] center module area -->
 	<!-- [+] left module area -->
 		<!-- IF S_LEFT_COLUMN -->
-		<div id="portal-left" style="width: {S_PORTAL_LEFT_COLUMN}px;" role="gridcell">
+		<div id="portal-left" style="width: {S_PORTAL_LEFT_COLUMN}px;" role="rowgroup">
 			<!-- BEGIN modules_left -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_left.TEMPLATE_FILE}' -->
 				<!-- DEFINE $IMAGE_SRC = '{modules_left.IMAGE_SRC}' -->
@@ -63,7 +63,7 @@
 
 	<!-- [+] right module area -->
 		<!-- IF S_RIGHT_COLUMN -->
-		<div id="portal-right" style="width: {S_PORTAL_RIGHT_COLUMN}px; margin-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->: -{S_PORTAL_RIGHT_COLUMN}px;" data-width="{S_PORTAL_RIGHT_COLUMN}" role="gridcell">
+		<div id="portal-right" style="width: {S_PORTAL_RIGHT_COLUMN}px; margin-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->: -{S_PORTAL_RIGHT_COLUMN}px;" data-width="{S_PORTAL_RIGHT_COLUMN}" role="rowgroup">
 			<!-- BEGIN modules_right -->
 				<!-- DEFINE $TEMPLATE_FILE = '{modules_right.TEMPLATE_FILE}' -->
 				<!-- DEFINE $IMAGE_SRC = '{modules_right.IMAGE_SRC}' -->
@@ -79,7 +79,7 @@
 	<!-- [-] right module area -->
 	<br class="portal-clear" />
 	<!-- IF S_BOTTOM_COLUMN -->
-	<div id="portal-bottom" role="gridcell">
+	<div id="portal-bottom" role="rowgroup">
 	<!-- [+] bottom module area -->
 		<ul>
 			<li>

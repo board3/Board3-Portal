@@ -6,6 +6,8 @@
 *
 */
 
+/* global phpbb, jQuery */
+
 (function($) {  // Avoid conflicts with other libraries
 
 "use strict";
@@ -40,21 +42,16 @@ phpbb.b3p_fix_right_column_margin = function() {
 			} else {
 				$portal_right.css(marginLeft, - ($portal_right.width() + 1));
 			}
-			$portal_right.css('margin-top', $portal_center.height() + 'px');
-			$portal_left.css('margin-top', $portal_center.height() + 'px');
 		} else {
 			$portal_right.css(marginLeft, 0);
-			$portal_right.css('margin-top', 0);
 		}
 	} else {
-		$portal_right.css('margin-top', '0px');
 		if (!$portal_center.length && $portal_left.length) {
 			$portal_right.css(marginLeft, 0);
 		} else {
 			$portal_right.css(marginLeft, -portal_right_width);
 		}
 		$portal_right.width(portal_right_width);
-		$portal_left.css('margin-top', 0);
 		phpbb.b3pFixLeftColumnMargin();
 	}
 };

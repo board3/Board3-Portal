@@ -4,6 +4,10 @@
 	display: block;
 }
 
+.rtl .portal-body-wrapper {
+	float: right;
+}
+
 #portal-page-body {
 	clear: both;
 	margin: 4px 0;
