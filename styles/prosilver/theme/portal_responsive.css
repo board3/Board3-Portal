@@ -23,8 +23,26 @@
 
 @media only screen and (max-width: 895px), only screen and (max-device-width: 895px)
 {
-	div#portal-right { width: 49% !important; }
-	div#portal-left { width: 50% !important; }
+	div#portal-right {
+		width: 49% !important;
+		margin-left: 1% !important;
+	}
+
+	div#portal-left {
+		width: 50% !important;
+		margin-left: 0 !important;
+	}
+
+	.rtl div#portal-right {
+		margin-left: 0 !important;
+		margin-right: 1% !important;
+	}
+
+	.rtl div#portal-left {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+
 	div#portal-center {
 		margin-right: 0 !important;
 		margin-left: 0 !important;
