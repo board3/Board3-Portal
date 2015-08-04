@@ -119,7 +119,7 @@ class birthday_list extends module_base
 				'ORDER BY'	=> $order_by,
 			);
 			$sql = $this->db->sql_build_query('SELECT', $sql_array);
-			$result = $this->db->sql_query($sql, 3600);
+			$result = $this->db->sql_query($sql, 300);
 			$today = sprintf('%2d-%2d-', $now['mday'], $now['mon']);
 
 			while ($row = $this->db->sql_fetchrow($result))
