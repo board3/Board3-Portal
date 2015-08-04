@@ -263,14 +263,14 @@ class fetch_posts
 		$sql_array['SELECT'] .= ', tp.topic_posted';
 		$sql = $this->db->sql_build_query('SELECT', $sql_array);
 
-		// Cache queries for 10 minutes
+		// Cache queries for 30 seconds
 		if ($number_of_posts != 0)
 		{
 			$result = $this->db->sql_query_limit($sql, $number_of_posts, $start, 600);
 		}
 		else
 		{
-			$result = $this->db->sql_query($sql, 600);
+			$result = $this->db->sql_query($sql, 30);
 		}
 
 		return $result;
