@@ -225,7 +225,7 @@ class announcements extends module_base
 						AND topic_moved_id = 0
 						' . $post_time . '
 						' . $str_where;
-					$result = $this->db->sql_query($sql, 300);
+					$result = $this->db->sql_query($sql, 30);
 					$total_announcements = (int) $this->db->sql_fetchfield('num_topics');
 					$this->db->sql_freeresult($result);
 			}
