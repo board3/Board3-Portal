@@ -47,8 +47,4 @@ $lang = array_merge($lang, array(
 	'LOG_PORTAL_EVENT_UPDATED'			=> '<strong>Paramètres du portail modifiés</strong><br />&raquo; Évènement mis à jour : %s ',
 	'LOG_PORTAL_EVENT_REMOVED'			=> '<strong>Paramètres du portail modifiés</strong><br />&raquo; Évènement retiré : %s ',
 	'LOG_PORTAL_CONFIG'					=> '<strong>Paramètres du portail modifiés</strong><br />&raquo; %s',
-
-	// Adding the permissions
-	'ACL_A_MANAGE_PORTAL'		=> 'Peut modifier les paramètres du portail',
-	'ACL_U_VIEW_PORTAL'			=> 'Peut afficher le portail',
 ));
