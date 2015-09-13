@@ -72,7 +72,7 @@ class listener implements EventSubscriberInterface
 			'core.user_setup'			=> 'load_portal_language',
 			'core.viewonline_overwrite_location'	=> 'viewonline_page',
 			'core.page_header'			=> 'add_portal_link',
-			'core.permissions event'	=> 'load_permissions',
+			'core.permissions'			=> 'load_permissions',
 		);
 	}
 
@@ -182,7 +182,7 @@ class listener implements EventSubscriberInterface
 	 *
 	 * @param array $event Event data
 	 */
-	protected function load_permissions($event)
+	public function load_permissions($event)
 	{
 		$permissions = $event['permissions'];
 		$permissions['a_manage_portal'] = array('lang' => 'ACL_A_MANAGE_PORTAL', 'cat' => 'misc');
