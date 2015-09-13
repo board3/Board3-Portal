@@ -99,7 +99,7 @@ class user_menu extends module_base
 	*/
 	public function get_template_side($module_id)
 	{
-		if (!function_exists('get_user_rank'))
+		if (!function_exists('phpbb_get_user_rank'))
 		{
 			include($this->phpbb_root_path . 'includes/functions_display.' . $this->php_ext);
 		}
@@ -147,8 +147,7 @@ class user_menu extends module_base
 			$username = $this->user->data['username'];
 			$colour = $this->user->data['user_colour'];
 			$avatar_img = phpbb_get_avatar(\phpbb\avatar\manager::clean_row($this->user->data, 'user'), 'USER_AVATAR');
-			$rank_title = $rank_img = $rank_img_src = '';
-			\get_user_rank($this->user->data['user_rank'], $this->user->data['user_posts'], $rank_title, $rank_img, $rank_img_src);
+			$rank_data = phpbb_get_user_rank($this->user->data, $this->user->data['user_posts']);
 
 			// Assign specific vars
 			$this->template->assign_vars(array(
@@ -157,9 +156,9 @@ class user_menu extends module_base
 				'L_UNREAD_POSTS'=> $this->user->lang['SEARCH_UNREAD'] . '&nbsp;(' . $unread_posts_count . ')',
 
 				'B3P_AVATAR_IMG'    => $avatar_img,
-				'B3P_RANK_TITLE'    => $rank_title,
-				'B3P_RANK_IMG'        => $rank_img,
-				'RANK_IMG_SRC'    => $rank_img_src,
+				'B3P_RANK_TITLE'    => $rank_data['title'],
+				'B3P_RANK_IMG'        => $rank_data['img'],
+				'RANK_IMG_SRC'    => $rank_data['img_src'],
 
 				'USERNAME_FULL'        => get_username_string('full', $user_id, $username, $colour),
 				'U_VIEW_PROFILE'	=> get_username_string('profile', $user_id, $username, $colour),

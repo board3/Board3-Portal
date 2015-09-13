@@ -72,6 +72,7 @@ class listener implements EventSubscriberInterface
 			'core.user_setup'			=> 'load_portal_language',
 			'core.viewonline_overwrite_location'	=> 'viewonline_page',
 			'core.page_header'			=> 'add_portal_link',
+			'core.permissions'			=> 'load_permissions',
 		);
 	}
 
@@ -174,5 +175,18 @@ class listener implements EventSubscriberInterface
 	protected function board_disabled()
 	{
 		return $this->config['board_disable'] && !defined('SKIP_CHECK_DISABLED') && !$this->auth->acl_gets('a_', 'm_') && !$this->auth->acl_getf_global('m_');
+	}
+
+	/**
+	 * Load permissions into permissions array
+	 *
+	 * @param array $event Event data
+	 */
+	public function load_permissions($event)
+	{
+		$permissions = $event['permissions'];
+		$permissions['a_manage_portal'] = array('lang' => 'ACL_A_MANAGE_PORTAL', 'cat' => 'misc');
+		$permissions['u_view_portal'] = array('lang' => 'ACL_U_VIEW_PORTAL', 'cat' => 'misc');
+		$event['permissions'] = $permissions;
 	}
 }
