@@ -58,7 +58,7 @@ class listener_test extends \phpbb_template_template_test_case
 
 		$manager = new \phpbb_mock_extension_manager(dirname(__FILE__) . '/', array());
 		$finder = new \phpbb\finder(
-			new \phpbb\filesystem(),
+			new \phpbb\filesystem\filesystem(),
 			dirname(__FILE__) . '/',
 			new \phpbb_mock_cache()
 		);
@@ -79,13 +79,15 @@ class listener_test extends \phpbb_template_template_test_case
 		$router = new \phpbb_mock_router($container, $filesystem, dirname(__FILE__) . '/', 'php', PHPBB_ENVIRONMENT, $manager);
 		$router->find_routing_files($manager->all_enabled(false));
 		$router->find(dirname(__FILE__) . '/');
-		$this->controller_helper = new mock_controller_helper($this->template, $this->user, $this->config, $router, new \phpbb\symfony_request($request), $request, new \phpbb\filesystem(), '', 'php', dirname(__FILE__) . '/');
+		$symfony_request = new \phpbb\symfony_request($request);
+		$routing_helper = new \phpbb\routing\helper($this->config, $router, $symfony_request, $request, $filesystem, $phpbb_root_path, 'php');
+		$this->controller_helper = new mock_controller_helper($this->template, $this->user, $this->config, $symfony_request, $request, $routing_helper);
 
 		$this->path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request(
 				new \phpbb_mock_request()
 			),
-			new \phpbb\filesystem(),
+			new \phpbb\filesystem\filesystem(),
 			new \phpbb_mock_request(),
 			$this->phpbb_root_path,
 			$this->php_ext

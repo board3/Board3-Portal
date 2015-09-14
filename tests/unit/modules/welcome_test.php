@@ -40,7 +40,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 		parent::setUp();
 		global $cache, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request, $config, $phpbb_container;
 
-		$config = $this->config = new \phpbb\config\config(array());
+		$config = $this->config = new \phpbb\config\config(array('allowed_schemes_links' => 'http,https,ftp'));
 		$this->request = new \phpbb_mock_request();
 		$request = $this->request;
 		$this->template = new \board3\portal\tests\mock\template($this);
@@ -77,6 +77,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 			new \phpbb\textformatter\data_access($this->db, BBCODES_TABLE, SMILIES_TABLE, STYLES_TABLE, WORDS_TABLE, $phpbb_root_path . 'styles/'),
 			new \phpbb\cache\driver\dummy(),
 			$phpbb_dispatcher,
+			$config,
 			$phpbb_root_path . 'cache',
 			'_text_formatter_parser',
 			'_text_formatter_renderer'

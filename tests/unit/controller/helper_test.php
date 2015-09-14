@@ -52,7 +52,7 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 			new \phpbb\symfony_request(
 				new \phpbb_mock_request()
 			),
-			new \phpbb\filesystem(),
+			new \phpbb\filesystem\filesystem(),
 			new \phpbb_mock_request(),
 			$this->phpbb_root_path,
 			$this->php_ext

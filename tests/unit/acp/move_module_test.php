@@ -112,7 +112,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			new \phpbb\symfony_request(
 				new \phpbb_mock_request()
 			),
-			new \phpbb\filesystem(),
+			new \phpbb\filesystem\filesystem(),
 			new \phpbb_mock_request(),
 			$phpbb_root_path,
 			$phpEx

@@ -94,7 +94,7 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 			new \phpbb\symfony_request(
 				new \phpbb_mock_request()
 			),
-			new \phpbb\filesystem(),
+			new \phpbb\filesystem\filesystem(),
 			new \phpbb_mock_request(),
 			$phpbb_root_path,
 			$phpEx
