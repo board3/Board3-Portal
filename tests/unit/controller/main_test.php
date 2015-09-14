@@ -35,7 +35,7 @@ class main_test extends \board3\portal\tests\testframework\database_test_case
 			new \phpbb\symfony_request(
 				new \phpbb_mock_request()
 			),
-			new \phpbb\filesystem(),
+			new \phpbb\filesystem\filesystem(),
 			new \phpbb_mock_request(),
 			$phpbb_root_path,
 			$phpEx
