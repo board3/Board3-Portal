@@ -127,6 +127,7 @@ class listener_test extends \phpbb_template_template_test_case
 			'core.user_setup',
 			'core.viewonline_overwrite_location',
 			'core.page_header',
+			'core.permissions',
 		), array_keys(\board3\portal\event\listener::getSubscribedEvents()));
 	}
 

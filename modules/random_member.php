@@ -108,8 +108,7 @@ class random_member extends module_base
 
 		$avatar_img = phpbb_get_avatar(\phpbb\avatar\manager::clean_row($row, 'user'), 'USER_AVATAR');
 
-		$rank_title = $rank_img = $rank_img_src = '';
-		get_user_rank($row['user_rank'], $row['user_posts'], $rank_title, $rank_img, $rank_img_src);
+		$rank_data = phpbb_get_user_rank($row, $row['user_posts']);
 
 		$username = $row['username'];
 		$user_id = (int) $row['user_id'];
@@ -121,9 +120,9 @@ class random_member extends module_base
 			'USER_COLOR'		=> get_username_string('colour', $user_id, $username, $colour),
 			'U_VIEW_PROFILE'	=> get_username_string('profile', $user_id, $username, $colour),
 
-			'RANK_TITLE'	=> $rank_title,
-			'RANK_IMG'		=> $rank_img,
-			'RANK_IMG_SRC'	=> $rank_img_src,
+			'RANK_TITLE'		=> $rank_data['title'],
+			'RANK_IMG'			=> $rank_data['img'],
+			'RANK_IMG_SRC'		=> $rank_data['img_src'],
 
 			'USER_POSTS'	=> (int) $row['user_posts'],
 			'AVATAR_IMG'	=> $avatar_img,

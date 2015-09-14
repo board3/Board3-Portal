@@ -46,8 +46,4 @@ $lang = array_merge($lang, array(
 	'LOG_PORTAL_EVENT_UPDATED'			=> '<strong>Ajustes del Portal alterados</strong><br />&raquo; Evento actualizado: %s ',
 	'LOG_PORTAL_EVENT_REMOVED'			=> '<strong>Ajustes del Portal alterados</strong><br />&raquo; Evento eliminado: %s ',
 	'LOG_PORTAL_CONFIG'					=> '<strong>Ajustes del Portal alterados</strong><br />&raquo; %s',
-
-	// Adding the permissions
-	'ACL_A_MANAGE_PORTAL'		=> 'Puede alterar ajustes del Portal',
-	'ACL_U_VIEW_PORTAL'			=> 'Puede ver el Portal',
 ));

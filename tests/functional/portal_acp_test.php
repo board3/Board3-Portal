@@ -90,7 +90,7 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 
 	public function test_portal_permissions()
 	{
-		$this->add_lang_ext('board3/portal', 'info_acp_portal');
+		$this->add_lang_ext('board3/portal', 'permissions_portal');
 		$crawler = self::request('GET', 'adm/index.php?i=acp_permissions&mode=setting_group_global&sid=' . $this->sid);
 		$form = $crawler->selectButton('submit')->form();
 		$crawler = self::submit($form);
