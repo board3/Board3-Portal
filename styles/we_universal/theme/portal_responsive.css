@@ -1,0 +1,87 @@
+@media only screen and (max-width: 1040px), only screen and (max-device-width: 1040px)
+{
+	.responsive-portal-announcements dd.views { display: none !important; }
+	dd.responsive-portal-announcements { display: none !important; }
+
+	.responsive-portal-announcements dd.posts, .responsive-portal-announcements dd.views {
+		display: none !important;
+	}
+
+	dt#a { width: 125% !important; }
+	.responsive-portal-announcements dt { width: 130% !important; }
+	dd.responsive-portal-news { display: none !important; }
+
+	.responsive-portal-news dd.posts, .responsive-portal-news dd.views {
+		display: none !important;
+	}
+
+	.responsive-portal-news dt { width: 130% !important; }
+	dt#n { width: 125% !important; }
+	.topiclist .topics, .topiclist .posts { display: none !important; }
+	#portal-forumlist dl.icon dt { width: 125% !important; }
+}
+
+@media only screen and (max-width: 895px), only screen and (max-device-width: 895px)
+{
+	div#portal-right {
+		width: 49% !important;
+		margin-left: 1% !important;
+	}
+
+	div#portal-left {
+		width: 50% !important;
+		margin-left: 0 !important;
+	}
+
+	.rtl div#portal-right {
+		margin-left: 0 !important;
+		margin-right: 1% !important;
+	}
+
+	.rtl div#portal-left {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+
+	div#portal-center {
+		margin-right: 0 !important;
+		margin-left: 0 !important;
+		padding-right: 0 !important;
+		padding-left: 0 !important;
+	}
+	.responsive-portal-news dt { width: 100% !important; }
+	.responsive-portal-announcements dt { width: 100% !important; }
+}
+
+@media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
+{
+	.responsive-portal-news dd.lastpost, .responsive-portal-announcements dd.lastpost { display: none !important; }
+	.responsive-portal-news dt .list-inner, .responsive-portal-announcements dt .list-inner { margin-right: 0 !important; }
+	.responsive-portal-news dt, .responsive-portal-announcements dt { width: 100% !important; }
+	dt#n, dt#a { width: 100% !important; }
+
+	.portal-responsive-poll .resultbar {
+		display: none !important;
+	}
+
+	.portal-responsive-poll dt { width: 45% !important; }
+	.portal-responsive-poll dd {
+		width: 45% !important;
+		float: right !important;
+	}
+
+	#portal-forumlist dl.icon dt { width: 100% !important; }
+	#portal-left ul.topiclist dd, #portal-right ul.topiclist dd { display: block !important; }
+	.portal-responsive-show { display: block !important; }
+	.portal-responsive-hide { display: none !important; }
+	#portal-body { padding-top: 0 !important; }
+	#portal-right > .portal-clear, #portal-body > .portal-clear, #portal-left > .portal-clear,
+	#portal-center > .portal-clear, #portal-login-box .portal-clear { display: none !important; }
+	#portal-right { width: 50% !important; }
+	#portal-left { width: 50% !important; }
+	#portal-center {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding-left: 0 !important;
+	}
+}
