@@ -18,7 +18,6 @@
 	.responsive-portal-news dt { width: 130% !important; }
 	dt#n { width: 125% !important; }
 	.topiclist .topics, .topiclist .posts { display: none !important; }
-	#portal-forumlist dl.icon dt { width: 125% !important; }
 }
 
 @media only screen and (max-width: 895px), only screen and (max-device-width: 895px)
