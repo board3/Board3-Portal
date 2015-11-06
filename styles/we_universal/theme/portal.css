@@ -638,49 +638,68 @@ dd.responsive-portal-news:last-of-type, dd.responsive-portal-announcements:last-
 
 /* Ajustements http://forums.phpbb-fr.com/styles-modifications-recherche-phpbb31/sujet205884.html */
 
-ul.topiclist li.header dl, ul.topiclist li.row dl {
+[role="row"] ul.topiclist li.header dl, [role="row"] ul.topiclist li.row dl {
 	display: inherit;
 	width: auto;
 	padding: 2px 0;
 }
 
-.forabg ul.topiclist li.header dt, .forumbg ul.topiclist li.header dt {
+#portal-center [role="row"] ul.topiclist li.header dl {
+	padding: 2px 7px;
+}
+
+.forabg[role="row"] ul.topiclist li.header dt {
 	display: inherit;
 	width: 100%;
 }
 
-.header img {
+#portal-forumlist li.row dt {
+	width: 45px;
+}
+
+#portal-forumlist dt + dd {
+	padding-left: 0;
+}
+
+[role="row"] .header img {
 	vertical-align: bottom;
 	padding: 2px 0 0 5px;
 }
 
-ul.topiclist dt, ul.topiclist dd {
-	font-size: 11px;
+[role="row"] ul.topiclist dt, [role="row"] ul.topiclist dd {
 	float: left;
 	display: block;
 	padding: 5px;
 }
 
-ul.topiclist li.header dt, ul.topiclist li.header dd {
-	line-height: inherit;
-	padding: 5px;
+ul.topiclist li.header dt {
+	font-size: 11px;
 	text-align: left;
 }
 
-ul.topiclist.forums li.row dt, ul.topiclist.topics li.row dt {
+ul.topiclist li.header dd {
+	font-size: 11px;
+}
+
+ul.topiclist li.header dd.lastpost {
+	text-align: left;
+}
+
+[role="row"] ul.topiclist li.header dt, [role="row"] ul.topiclist li.header dd {
+	line-height: inherit;
+	padding: 5px 0;
+}
+
+[role="row"] ul.topiclist.forums li.row dt, [role="row"] ul.topiclist.topics li.row dt {
 	text-align: inherit;
 	width: 100%;
 }
 
-ul.topiclist dt .list-inner {
-	margin-right: 440px;
-}
-
-dl.icon dt .list-inner {
+[role="row"] dl.icon dt .list-inner {
 	padding-left: 45px;
 }
 
-dd.posts, dd.topics, dd.views {
+[role="row"] dd.posts, [role="row"] dd.topics, [role="row"] dd.views {
 	width: 80px;
 }
 
