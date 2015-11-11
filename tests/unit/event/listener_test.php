@@ -76,9 +76,12 @@ class listener_test extends \phpbb_template_template_test_case
 		$container = new \phpbb_mock_container_builder();
 
 		$filesystem = new \phpbb\filesystem\filesystem();
-		$router = new \phpbb_mock_router($container, $filesystem, dirname(__FILE__) . '/', 'php', PHPBB_ENVIRONMENT, $manager);
-		$router->find_routing_files($manager->all_enabled(false));
-		$router->find(dirname(__FILE__) . '/');
+		$loader = new \Symfony\Component\Routing\Loader\YamlFileLoader(
+				new \phpbb\routing\file_locator($filesystem, dirname(__FILE__) . '/')
+		);
+		$routing_locator = new \phpbb\routing\resources_locator\default_resources_locator(dirname(__FILE__) . '/', PHPBB_ENVIRONMENT);
+		$router = new \phpbb_mock_router($container, $routing_locator, $loader, dirname(__FILE__) . '/', 'php', PHPBB_ENVIRONMENT);
+		$routes = $router->get_routes();
 		$symfony_request = new \phpbb\symfony_request($request);
 		$routing_helper = new \phpbb\routing\helper($this->config, $router, $symfony_request, $request, $filesystem, $phpbb_root_path, 'php');
 		$this->controller_helper = new mock_controller_helper($this->template, $this->user, $this->config, $symfony_request, $request, $routing_helper);
