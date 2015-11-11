@@ -1,9 +1,12 @@
+# Opt into fully virtualized infrastructure
+sudo: required
+
 language: php
 
 matrix:
   include:
-    - php: 5.3
-      env: DB=mysqli # MyISAM
+    - php: 5.4
+      env: DB=none;NOTESTS=1
     - php: 5.4
       env: DB=mysqli
     - php: 5.4
@@ -56,9 +59,9 @@ before_script:
   - chmod +wx build/logs
 
 script:
-  - sh -c "if [ '$SNIFF' != '0' ]; then travis/ext-sniff.sh $DB $TRAVIS_PHP_VERSION $EXTNAME; fi"
-  - sh -c "if [ '$IMAGE_ICC' != '0' ]; then travis/check-image-icc-profiles.sh $DB $TRAVIS_PHP_VERSION; fi"
-  - ../board3/Board3-Portal/travis/run-testsuite.sh $DB $TRAVIS_PHP_VERSION
+  - sh -c "if [ '$SNIFF' != '0' ]; then travis/ext-sniff.sh $DB $TRAVIS_PHP_VERSION $EXTNAME $NOTESTS; fi"
+  - sh -c "if [ '$IMAGE_ICC' != '0' ]; then travis/check-image-icc-profiles.sh $DB $TRAVIS_PHP_VERSION $NOTESTS; fi"
+  - sh -c "if [ '$NOTESTS' != '1' ]; then ../board3/Board3-Portal/travis/run-testsuite.sh $DB $TRAVIS_PHP_VERSION; fi"
   - sh -c "if [ '$EPV' != '0' ]; then ../board3/Board3-Portal/travis/run-epv.sh $DB $TRAVIS_PHP_VERSION $EXTNAME; fi"
 
 after_script:
