@@ -657,7 +657,7 @@ dd.responsive-portal-news:last-of-type, dd.responsive-portal-announcements:last-
 	width: 45px;
 }
 
-#portal-forumlist dt + dd {
+#portal-forumlist dt + dd, .portal-body-wrapper ul.topiclist dt + dd {
 	padding-left: 0;
 }
 
@@ -681,7 +681,7 @@ ul.topiclist li.header dd {
 	font-size: 11px;
 }
 
-ul.topiclist li.header dd.lastpost {
+ul.topiclist li.header dd.lastpost, .inventea-no-items {
 	text-align: left;
 }
 
@@ -728,4 +728,20 @@ ul.topiclist li.row:nth-child(even) dd:nth-child(even),
 ul.topiclist li.reported dt:nth-child(even),
 ul.topiclist li.reported dd:nth-child(even) {
 	background-color: transparent;
+}
+
+@media only screen and (max-width: 870px), only screen and (max-device-width: 870px) {
+	.inventea-wrapper .portal-body-center dd.lastpost {
+		width: 25%;
+	}
+}
+
+@media only screen and (max-width: 700px), only screen and (max-device-width: 700px) {	
+	.portal-body-wrapper ul.topiclist dt, .portal-body-wrapper ul.topiclist dd {
+		padding: 5px;
+	}	
+	
+	.portal-body-wrapper ul.topiclist li.row dt {
+		width: 45px !important;
+	}
 }
