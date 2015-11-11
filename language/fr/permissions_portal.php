@@ -1,8 +1,10 @@
 <?php
 /**
 *
-* @package Board3 Portal v2.1
-* @copyright (c) 2015 Board3 Group ( www.board3.de )
+* Board3 Portal extension for the phpBB Forum Software package.
+* French translation by Galixte (http://www.galixte.com)
+*
+* @copyright (c) 2015 Board3 Group <http://www.board3.de>
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -31,9 +33,13 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 $lang = array_merge($lang, array(
 	// Adding the permissions
-	'ACL_A_MANAGE_PORTAL'		=> 'Peut modifier les param�tres du portail',
-	'ACL_U_VIEW_PORTAL'			=> 'Peut afficher le portail',
+	'ACL_A_MANAGE_PORTAL'		=> 'Peut modifier les paramètres du portail.',
+	'ACL_U_VIEW_PORTAL'			=> 'Peut afficher le portail.',
 ));
