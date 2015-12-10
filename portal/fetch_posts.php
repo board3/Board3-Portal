@@ -266,7 +266,7 @@ class fetch_posts
 		// Cache queries for 30 seconds
 		if ($number_of_posts != 0)
 		{
-			$result = $this->db->sql_query_limit($sql, $number_of_posts, $start, 600);
+			$result = $this->db->sql_query_limit($sql, $number_of_posts, $start, 30);
 		}
 		else
 		{
