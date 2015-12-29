@@ -35,6 +35,6 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	// Adding the permissions
-	'ACL_A_MANAGE_PORTAL'		=> 'يستطيع تعديل إعدادات المجلة',
+	'ACL_A_MANAGE_PORTAL'		=> 'يستطيع تغيير إعدادات المجلة',
 	'ACL_U_VIEW_PORTAL'			=> 'يستطيع مُشاهدة المجلة',
 ));
