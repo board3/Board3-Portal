@@ -47,8 +47,4 @@ $lang = array_merge($lang, array(
 	'LOG_PORTAL_EVENT_UPDATED'			=> '<strong>تغيير إعدادات المجلة</strong><br />&raquo; تم تحديث حدث : %s ',
 	'LOG_PORTAL_EVENT_REMOVED'			=> '<strong>تغيير إعدادات المجلة</strong><br />&raquo; تم إزالة حدث : %s ',
 	'LOG_PORTAL_CONFIG'					=> '<strong>تغيير إعدادات المجلة</strong><br />&raquo; %s',
-
-	// Adding the permissions
-	'ACL_A_MANAGE_PORTAL'		=> 'يستطيع تغيير إعدادات المجلة',
-	'ACL_U_VIEW_PORTAL'			=> 'يستطيع مُشاهدة المجلة',
 ));
