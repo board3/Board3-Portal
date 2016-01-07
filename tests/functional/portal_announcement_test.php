@@ -15,6 +15,7 @@ class phpbb_functional_portal_announcement_test extends \board3\portal\tests\tes
 	public function setUp()
 	{
 		parent::setUp();
+		$this->purge_cache();
 
 		$this->login();
 		$this->admin_login();
