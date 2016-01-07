@@ -15,6 +15,7 @@ class phpbb_functional_portal_announcement_test extends \board3\portal\tests\tes
 	public function setUp()
 	{
 		parent::setUp();
+		$this->purge_cache();
 
 		$this->login();
 		$this->admin_login();
@@ -59,6 +60,11 @@ class phpbb_functional_portal_announcement_test extends \board3\portal\tests\tes
 
 	public function test_shortened_message()
 	{
+		if (!class_exists('\Nickvergessen\TrimMessage\TrimMessage'))
+		{
+			$this->markTestSkipped('Unable to test shortening message without TrimMessage tool');
+		}
+
 		// Create topic as announcement
 		$data = $this->create_topic(2, 'Portal-announce-global', str_repeat('This is a global announcement for the portal', 6), array(
 			'topic_type'	=> POST_GLOBAL,

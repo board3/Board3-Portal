@@ -16,6 +16,8 @@ class phpbb_functional_portal_birthday_list_test extends \board3\portal\tests\te
 	{
 		parent::setUp();
 
+		$this->purge_cache();
+
 		$this->login();
 		$this->admin_login();
 	}
