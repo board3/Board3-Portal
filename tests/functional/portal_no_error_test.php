@@ -16,6 +16,8 @@ class phpbb_functional_portal_no_error_test extends \board3\portal\tests\testfra
 	{
 		parent::setUp();
 
+		$this->purge_cache();
+
 		$this->login();
 		$this->admin_login();
 	}
