@@ -35,6 +35,12 @@
 	.portal-body-center dt { width: 100% !important; }
 }
 
+@media only screen and (max-width: 550px), only screen and (max-device-width: 550px) {
+	.portal-body-center ul.topiclist dt .list-inner {
+		margin-right: 0;
+	}
+}
+
 @media only screen and (max-width: 540px), only screen and (max-device-width: 540px) {
 	#portal-left, #portal-right {
 		display: none;
