@@ -3,6 +3,7 @@
 	<div id="viewpoll" class="panel bg1 portal-no-margin">
 		<div class="inner">
 		<!-- BEGIN poll -->
+			<!-- IF not poll.S_FIRST_ROW --><hr class="dashed" /><!-- ENDIF -->
 			<!-- IF poll.S_CAN_VOTE --><form method="post" action="{poll.S_POLL_ACTION}"><!-- ENDIF -->
 				<div class="content">
 					<h2>{poll.POLL_QUESTION}</h2>

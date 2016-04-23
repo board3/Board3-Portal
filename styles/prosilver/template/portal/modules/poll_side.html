@@ -2,6 +2,7 @@
 	<!-- IF S_HAS_POLL -->
 		<div id="viewpoll" class="inner">
 		<!-- BEGIN poll_side -->
+			<!-- IF not poll_side.S_FIRST_ROW --><hr class="dashed" /><!-- ENDIF -->
 			<!-- IF poll_side.S_CAN_VOTE --><form method="post" action="{poll_side.S_POLL_ACTION}"><!-- ENDIF -->
 				<div class="content">
 					<h2>{poll_side.POLL_QUESTION}</h2>
