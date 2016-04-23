@@ -78,6 +78,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 			new \phpbb\cache\driver\dummy(),
 			$phpbb_dispatcher,
 			$config,
+			new \phpbb\textformatter\s9e\link_helper(),
 			$phpbb_root_path . 'cache',
 			'_text_formatter_parser',
 			'_text_formatter_renderer'
