@@ -10,8 +10,9 @@
 require_once(dirname(__FILE__) . '/../../../../../../includes/functions_acp.php');
 require_once(dirname(__FILE__) . '/../../../../../../includes/functions.php');
 require_once(dirname(__FILE__) . '/../../../../../../includes/utf/utf_tools.php');
-require_once(dirname(__FILE__) . '/../../../vendor/nickvergessen/phpbb-tool-trimmessage/src/Nickvergessen/TrimMessage/TrimMessage.php');
-require_once(dirname(__FILE__) . '/../../../vendor/nickvergessen/phpbb-tool-trimmessage/src/Nickvergessen/TrimMessage/PhpbbBbcodes.php');
+require_once(dirname(__FILE__) . '/../../../vendor/marc1706/phpbb-text-shortener/src/Shortener.php');
+require_once(dirname(__FILE__) . '/../../../vendor/marc1706/phpbb-text-shortener/src/Helper.php');
+require_once(dirname(__FILE__) . '/../../../vendor/marc1706/phpbb-text-shortener/src/TextIterator.php');
 
 
 class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\database_test_case
