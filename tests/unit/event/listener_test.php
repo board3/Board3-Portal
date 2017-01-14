@@ -59,8 +59,7 @@ class listener_test extends \phpbb_template_template_test_case
 		$manager = new \phpbb_mock_extension_manager(dirname(__FILE__) . '/', array());
 		$finder = new \phpbb\finder(
 			new \phpbb\filesystem\filesystem(),
-			dirname(__FILE__) . '/',
-			new \phpbb_mock_cache()
+			dirname(__FILE__) . '/'
 		);
 		$finder->set_extensions(array_keys($manager->all_enabled()));
 		$request = new \phpbb_mock_request();

@@ -219,7 +219,7 @@ class welcome extends module_base
 			default:
 				if (!isset($welcome_message))
 				{
-					$welcome_message = generate_text_for_edit($portal_config['board3_welcome_message_' . $module_id], $this->config['board3_welcome_message_uid_' . $module_id], '');
+					$welcome_message = generate_text_for_edit($portal_config['board3_welcome_message_' . $module_id], $this->config['board3_welcome_message_uid_' . $module_id], 0);
 				}
 
 				$this->template->assign_vars(array(

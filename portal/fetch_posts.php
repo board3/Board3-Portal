@@ -134,7 +134,7 @@ class fetch_posts
 	public function get_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0, $invert = false)
 	{
 		$posts = array();
-		$post_time = $this->get_setting_based_data($time == 0, '', 'AND t.topic_time > ' . (time() - $time * 86400));
+		$post_time = $this->get_setting_based_data($time == 0, '', 'AND t.topic_time > ' . (time() - (int) $time * 86400));
 		$forum_from = $this->get_setting_based_data(strpos($forum_from, ',') !== false, explode(',', $forum_from), $this->get_setting_based_data($forum_from != '', array($forum_from), array()));
 		$topic_icons = array(0);
 		$have_icons = 0;
@@ -298,7 +298,9 @@ class fetch_posts
 		// Format message
 		$message = $this->format_message($row, $text_length, $posts[$i]['striped']);
 
-		$row['bbcode_options'] = $this->get_setting_based_data($row['enable_bbcode'], OPTION_FLAG_BBCODE, 0) + $this->get_setting_based_data($row['enable_smilies'], OPTION_FLAG_SMILIES, 0) + $this->get_setting_based_data($row['enable_magic_url'], OPTION_FLAG_LINKS, 0);
+		$row['bbcode_options'] = (int) $this->get_setting_based_data($row['enable_bbcode'], OPTION_FLAG_BBCODE, 0)
+			+  (int) $this->get_setting_based_data($row['enable_smilies'], OPTION_FLAG_SMILIES, 0)
+			+ (int) $this->get_setting_based_data($row['enable_magic_url'], OPTION_FLAG_LINKS, 0);
 		$message = generate_text_for_display($message, $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
 
 		if (!empty($attachments))
@@ -649,10 +651,11 @@ class fetch_posts
 	 */
 	public function shorten_message($message, $bbcode_uid, $length)
 	{
-		if (class_exists('\Nickvergessen\TrimMessage\TrimMessage'))
+		if (class_exists('\Marc1706\TextShortener\Shortener'))
 		{
-			$trim = new \Nickvergessen\TrimMessage\TrimMessage($message, $bbcode_uid, $length);
-			$message = $trim->message();
+			$trim = new \Marc1706\TextShortener\Shortener();
+			$message = $trim->setText($message)
+				->shortenText($length);
 			unset($trim);
 		}
 

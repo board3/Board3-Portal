@@ -281,6 +281,9 @@ class calendar extends module_base
 
 			foreach ($events as $key => $cur_event)
 			{
+				$cur_event['start_time'] = (int) $cur_event['start_time'];
+				$cur_event['end_time'] = (int) $cur_event['end_time'];
+
 				if (($cur_event['start_time'] + $this->time->getOffset()) >= $today_timestamp ||
 					($cur_event['end_time'] + $this->time->getOffset()) >= $today_timestamp ||
 					(($cur_event['start_time'] + $this->time->getOffset() + self::TIME_DAY) >= $today_timestamp && $cur_event['all_day']))

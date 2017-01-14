@@ -26,7 +26,7 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 
 	public function setUp()
 	{
-		global $phpbb_root_path, $phpEx;
+		global $phpbb_root_path, $phpEx, $phpbb_dispatcher;
 
 		parent::setUp();
 
@@ -37,6 +37,7 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 		$controller_helper->add_route('board3_portal_controller', 'portal');
 
 		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $controller_helper, $request);
+		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 	}
 
 	public function data_get_disallowed_forums()
