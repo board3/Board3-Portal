@@ -34,6 +34,6 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	// Adding the permissions
-	'ACL_A_MANAGE_PORTAL'		=> 'Kann Portal-Einstellungen ändern',
+	'ACL_A_MANAGE_PORTAL'		=> 'Kann Portal-Einstellungen ï¿½ndern',
 	'ACL_U_VIEW_PORTAL'			=> 'Kann das Portal sehen',
 ));
