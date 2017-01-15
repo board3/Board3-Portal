@@ -9,50 +9,50 @@ services:
     board3.portal.main:
         class: board3\portal\controller\main
         arguments:
-            - @board3.portal.columns
-            - @config
-            - @board3.portal.controller_helper
-            - @template
-            - @user
-            - @path_helper
-            - %core.root_path%
-            - .%core.php_ext%
-            - %board3.portal.config.table%
-            - %board3.portal.modules.table%
+            - '@board3.portal.columns'
+            - '@config'
+            - '@board3.portal.controller_helper'
+            - '@template'
+            - '@user'
+            - '@path_helper'
+            - '%core.root_path%'
+            - '.%core.php_ext%'
+            - '%board3.portal.config.table%'
+            - '%board3.portal.modules.table%'
 
     board3.portal.controller_helper:
         class: board3\portal\controller\helper
         arguments:
-            - @auth
-            - @board3.portal.columns
-            - @config
-            - @language
-            - @template
-            - @user
-            - @path_helper
-            - @board3.portal.helper
-            - %core.root_path%
-            - .%core.php_ext%
+            - '@auth'
+            - '@board3.portal.columns'
+            - '@config'
+            - '@language'
+            - '@template'
+            - '@user'
+            - '@path_helper'
+            - '@board3.portal.helper'
+            - '%core.root_path%'
+            - '.%core.php_ext%'
 
     board3.portal.module_collection:
         class: phpbb\di\service_collection
         arguments:
-            - @service_container
+            - '@service_container'
         tags:
             - { name: service_collection, tag: board3.portal.module }
 
     board3.portal.helper:
         class: board3\portal\includes\helper
         arguments:
-            - @board3.portal.module_collection
+            - '@board3.portal.module_collection'
 
     board3.portal.modules_helper:
         class: board3\portal\includes\modules_helper
         arguments:
-            - @auth
-            - @config
-            - @controller.helper
-            - @request
+            - '@auth'
+            - '@config'
+            - '@controller.helper'
+            - '@request'
 
     board3.portal.columns:
         class: board3\portal\portal\columns
@@ -60,47 +60,47 @@ services:
     board3.portal.fetch_posts:
         class: board3\portal\portal\fetch_posts
         arguments:
-            - @auth
-            - @cache
-            - @config
-            - @dbal.conn
-            - @board3.portal.modules_helper
-            - @user
+            - '@auth'
+            - '@cache'
+            - '@config'
+            - '@dbal.conn'
+            - '@board3.portal.modules_helper'
+            - '@user'
 
     board3.portal.listener:
         class: board3\portal\event\listener
         arguments:
-            - @board3.portal.main
-            - @auth
-            - @config
-            - @controller.helper
-            - @path_helper
-            - @template
-            - @user
-            - %core.php_ext%
+            - '@board3.portal.main'
+            - '@auth'
+            - '@config'
+            - '@controller.helper'
+            - '@path_helper'
+            - '@template'
+            - '@user'
+            - '%core.php_ext%'
         tags:
             - { name: event.listener }
 
     board3.portal.modules.manager:
         class: board3\portal\portal\modules\manager
         arguments:
-            - @cache
-            - @dbal.conn
-            - @board3.portal.controller_helper
-            - @board3.portal.columns
-            - @board3.portal.helper
-            - @board3.portal.modules.constraints_handler
-            - @board3.portal.modules.database_handler
-            - @request
-            - @user
+            - '@cache'
+            - '@dbal.conn'
+            - '@board3.portal.controller_helper'
+            - '@board3.portal.columns'
+            - '@board3.portal.helper'
+            - '@board3.portal.modules.constraints_handler'
+            - '@board3.portal.modules.database_handler'
+            - '@request'
+            - '@user'
 
     board3.portal.modules.database_handler:
         class: board3\portal\portal\modules\database_handler
         arguments:
-            - @dbal.conn
+            - '@dbal.conn'
 
     board3.portal.modules.constraints_handler:
         class: board3\portal\portal\modules\constraints_handler
         arguments:
-            - @board3.portal.columns
-            - @user
+            - '@board3.portal.columns'
+            - '@user'
