@@ -223,7 +223,8 @@ a.portal-forumtitle {
 }
 
 .portal-poll-side-option-info {
-	width: 30% !important;
+	width: 58% !important;
+	float: right !important;
 }
 
 .portal-poll-side-checkbox {
@@ -232,6 +233,7 @@ a.portal-forumtitle {
 
 .portal-poll-side-checkbox input {
 	vertical-align: top;
+	margin-left: 39px;
 	margin-top: 0;
 }
 
@@ -367,7 +369,7 @@ a.portal-forumtitle {
 }
 
 #portal-body .row .pagination {
-	padding: 1px 0 1px 12px;
+	margin: 1px 0 1px 12px;
 }
 
 #portal-body #viewpoll {
@@ -633,4 +635,12 @@ dd.responsive-portal-news:last-of-type, dd.responsive-portal-announcements:last-
 	.portal-clock-back-hours-down, .portal-clock-front-hours-down {
 		margin-left: -1px;
 	}
+}
+
+.content li {
+	list-style-type: inherit !important;
+}
+
+a {
+	display: inline;
 }

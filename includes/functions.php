@@ -173,7 +173,7 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 	$on_page = floor($start_item / $per_page) + 1;
 	$url_delim = (strpos($base_url, '?') === false) ? '?' : '&amp;';
 
-	$page_string = ($on_page == 1) ? '<ul><li class="active"><span>1</span></li>' : '<ul><li><a href="' . $base_url . $anker .'" role="button">1</a></li>';
+	$page_string = ($on_page == 1) ? '<ul><li class="active"><span>1</span></li>' : '<ul><li><a class="button" href="' . $base_url . $anker .'" role="button">1</a></li>';
 
 	if ($total_pages > 5)
 	{
@@ -185,7 +185,7 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 
 		for ($i = $start_cnt + 1; $i < $end_cnt; ++$i)
 		{
-			$page_string .= ($i == $on_page) ? '<li class="active"><span>' . $i . '</span></li>' : '<li><a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . $anker . '" role="button">' . $i . '</a></li>';
+			$page_string .= ($i == $on_page) ? '<li class="active"><span>' . $i . '</span></li>' : '<li><a class="button" href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . $anker . '" role="button">' . $i . '</a></li>';
 			if ($i < $end_cnt - 1)
 			{
 				$page_string .= $seperator;
@@ -201,25 +201,25 @@ function generate_portal_pagination($base_url, $num_items, $per_page, $start_ite
 
 		for ($i = 2; $i < $total_pages; ++$i)
 		{
-			$page_string .= ($i == $on_page) ? '<li class="active"><span>' . $i . '</span></li>' : '<li><a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . $anker . '" role="button">' . $i . '</a></li>';
+			$page_string .= ($i == $on_page) ? '<li class="active"><span>' . $i . '</span></li>' : '<li><a class="button" href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($i - 1) * $per_page) . $anker . '" role="button">' . $i . '</a></li>';
 			if ($i < $total_pages)
 			{
 				$page_string .= $seperator;
 			}
 		}
 	}
-	$page_string .= ($on_page == $total_pages) ? '<li class="active"><span>' . $total_pages . '</span></li></ul>' : '<li><a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($total_pages - 1) * $per_page) . $anker . '" role="button">' . $total_pages . '</a></li></ul>';
+	$page_string .= ($on_page == $total_pages) ? '<li class="active"><span>' . $total_pages . '</span></li></ul>' : '<li><a class="button" href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($total_pages - 1) * $per_page) . $anker . '" role="button">' . $total_pages . '</a></li></ul>';
 
 	if ($add_prevnext_text)
 	{
 		if ($on_page != 1)
 		{
-			$page_string = '<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($on_page - 2) * $per_page) . $anker . '" role="button">' . $user->lang['PREVIOUS'] . '</a>&nbsp;&nbsp;' . $page_string;
+			$page_string = '<a class="button" href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . (($on_page - 2) * $per_page) . $anker . '" role="button">' . $user->lang['PREVIOUS'] . '</a>&nbsp;&nbsp;' . $page_string;
 		}
 
 		if ($on_page != $total_pages)
 		{
-			$page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . ($on_page * $per_page) . $anker . '" role="button">' . $user->lang['NEXT'] . '</a>';
+			$page_string .= '&nbsp;&nbsp;<a class="button" href="' . $base_url . "{$url_delim}" . $pagination_type . '=' . ($on_page * $per_page) . $anker . '" role="button">' . $user->lang['NEXT'] . '</a>';
 		}
 	}
 
