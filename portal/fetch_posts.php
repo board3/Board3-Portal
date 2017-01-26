@@ -205,7 +205,7 @@ class fetch_posts
 				t.topic_title,
 				t.topic_attachment,
 				t.topic_views,
-				t.poll_title,
+				t.poll_start,
 				t.topic_posts_approved,
 				t.topic_posts_unapproved,
 				t.topic_posts_softdeleted,
@@ -334,7 +334,7 @@ class fetch_posts
 			'user_id'				=> $row['user_id'],
 			'user_type'				=> $row['user_type'],
 			'user_colour'			=> $row['user_colour'],
-			'poll'					=> $this->get_setting_based_data($row['poll_title'], true, false),
+			'poll'					=> $this->get_setting_based_data($row['poll_start'], true, false),
 			'attachment'			=> $this->get_setting_based_data($row['topic_attachment'], true, false),
 			'topic_views'			=> $row['topic_views'],
 			'forum_name'			=> $row['forum_name'],
@@ -651,11 +651,10 @@ class fetch_posts
 	 */
 	public function shorten_message($message, $bbcode_uid, $length)
 	{
-		if (class_exists('\Marc1706\TextShortener\Shortener'))
+		if (class_exists('\Nickvergessen\TrimMessage\TrimMessage'))
 		{
-			$trim = new \Marc1706\TextShortener\Shortener();
-			$message = $trim->setText($message)
-				->shortenText($length);
+			$trim = new \Nickvergessen\TrimMessage\TrimMessage($message, $bbcode_uid, $length);
+			$message = $trim->message();
 			unset($trim);
 		}
 
