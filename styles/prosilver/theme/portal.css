@@ -122,6 +122,10 @@
 	min-height: 1em;
 }
 
+.content li {
+    list-style-type: inherit !important;
+}
+
 .portal-stylechanger-select {
 	width: 150px;
 }
