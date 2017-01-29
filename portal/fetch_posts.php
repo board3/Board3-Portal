@@ -651,10 +651,11 @@ class fetch_posts
 	 */
 	public function shorten_message($message, $bbcode_uid, $length)
 	{
-		if (class_exists('\Nickvergessen\TrimMessage\TrimMessage'))
+		if (class_exists('\Marc1706\TextShortener\Shortener'))
 		{
-			$trim = new \Nickvergessen\TrimMessage\TrimMessage($message, $bbcode_uid, $length);
-			$message = $trim->message();
+			$trim = new \Marc1706\TextShortener\Shortener();
+			$message = $trim->setText($message)
+				->shortenText($length);
 			unset($trim);
 		}
 
