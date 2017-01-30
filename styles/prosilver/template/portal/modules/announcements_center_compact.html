@@ -22,33 +22,38 @@
 <ul class="topiclist topics responsive-portal-announcements">
 <!-- ENDIF -->
 	<li class="row<!-- IF announcements.center_row.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
-		<dl class="icon {announcements.center_row.TOPIC_IMG_STYLE}">
-			<dt style="<!-- IF announcements.center_row.TOPIC_ICON_IMG -->background-image: url({T_ICONS_PATH}{announcements.center_row.TOPIC_ICON_IMG}); background-repeat: no-repeat;<!-- ENDIF -->" title="{announcements.center_row.TOPIC_FOLDER_IMG_ALT}">
-				<!-- IF announcements.center_row.S_UNREAD_TOPIC -->
-				<a href="{announcements.center_row.U_NEWEST_POST}">{NEWEST_POST_IMG}</a>
-				<!-- ENDIF -->
+		<dl class="row-item {announcements.center_row.TOPIC_IMG_STYLE}">
+			<dt style="<!-- IF announcements.center_row.TOPIC_ICON_IMG and S_TOPIC_ICONS -->background-image: url({T_ICONS_PATH}{announcements.center_row.TOPIC_ICON_IMG}); background-repeat: no-repeat;<!-- ENDIF -->" title="{announcements.center_row.TOPIC_FOLDER_IMG_ALT}">
+				<!-- IF announcements.center_row.S_UNREAD_INFO and not S_IS_BOT --><a href="{announcements.center_row.U_VIEW_UNREAD}" class="row-item-link"></a><!-- ENDIF -->
 				<div class="list-inner">
-					<!-- IF announcements.center_row.ATTACH_ICON_IMG -->{announcements.center_row.ATTACH_ICON_IMG} <!-- ENDIF -->
-					<!-- IF announcements.center_row.S_POLL --><strong>{L_VIEW_TOPIC_POLL}</strong><!-- ENDIF -->
-					<a href="{announcements.center_row.U_VIEW_COMMENTS}" title="{announcements.center_row.TITLE}" class="topictitle">{announcements.center_row.TITLE}</a>
-					<!-- IF U_VIEW_UNREAD_POST and not S_IS_BOT --> &bull; <a href="{U_VIEW_UNREAD_POST}">{L_VIEW_UNREAD_POST}</a> &bull; <!-- ENDIF -->
+							<a href="{announcements.center_row.U_VIEW_COMMENTS}" title="{announcements.center_row.TITLE}" class="topictitle">{announcements.center_row.TITLE}</a>
 					<!-- IF announcements.center_row.pagination -->
 					<div class="pagination">
+						<span><i class="icon fa-clone fa-fw" aria-hidden="true"></i></span>
 						<ul>
 							<!-- BEGIN pagination -->
 							<!-- IF announcements.center_row.pagination.S_IS_PREV -->
-							<!-- ELSEIF announcements.center_row.pagination.S_IS_CURRENT --><li><a href="{announcements.center_row.pagination.PAGE_URL}">{announcements.center_row.pagination.PAGE_NUMBER}</a></li>
+							<!-- ELSEIF announcements.center_row.pagination.S_IS_CURRENT --><li><a class="button" href="{announcements.center_row.pagination.PAGE_URL}">{announcements.center_row.pagination.PAGE_NUMBER}</a></li>
 							<!-- ELSEIF announcements.center_row.pagination.S_IS_ELLIPSIS --><li class="ellipsis"><span>{L_ELLIPSIS}</span></li>
 							<!-- ELSEIF announcements.center_row.pagination.S_IS_NEXT -->
-							<!-- ELSE --><li><a href="{announcements.center_row.pagination.PAGE_URL}">{announcements.center_row.pagination.PAGE_NUMBER}</a></li>
+							<!-- ELSE --><li><a class="button" href="{announcements.center_row.pagination.PAGE_URL}">{announcements.center_row.pagination.PAGE_NUMBER}</a></li>
 							<!-- ENDIF -->
 							<!-- END pagination -->
 						</ul>
 					</div>
 					<!-- ENDIF -->
-						<br />{L_POSTED} {L_POST_BY_AUTHOR} {announcements.center_row.POSTER_FULL} &raquo; {announcements.center_row.TIME}
+						<div class="responsive-show" style="display: none;">
+							{L_LAST_POST} {L_POST_BY_AUTHOR} {announcements.center_row.USERNAME_FULL_LAST} &raquo; <a href="{announcements.center_row.U_LAST_COMMENTS}" title="{L_GOTO_LAST_POST}" title="{L_VIEW_LATEST_POST}"> {announcements.center_row.LAST_POST_TIME}</a>
+						</div>
+
+						<div class="responsive-hide">
+							<!-- IF announcements.center_row.ATTACH_ICON_IMG --><i class="icon fa-paperclip fa-fw" aria-hidden="true"></i><!-- ENDIF -->
+							<!-- IF announcements.center_row.S_POLL --><i class="icon fa-bar-chart fa-fw" aria-hidden="true"></i><!-- ENDIF -->
+							{L_POST_BY_AUTHOR} {announcements.center_row.POSTER_FULL} &raquo; {announcements.center_row.TIME}
+						</div>
+					<!-- IF U_VIEW_UNREAD_POST and not S_IS_BOT --> &bull; <a href="{U_VIEW_UNREAD_POST}">{L_VIEW_UNREAD_POST}</a> &bull; <!-- ENDIF -->
 					<!-- IF announcements.center_row.FORUM_NAME -->
-						<br />{L_FORUM}{L_COLON} <a href="{announcements.center_row.U_VIEWFORUM}" class="portal-forumtitle">{announcements.center_row.FORUM_NAME}</a>
+						{L_FORUM}{L_COLON} <a href="{announcements.center_row.U_VIEWFORUM}" class="portal-forumtitle">{announcements.center_row.FORUM_NAME}</a>
 					<!-- ELSE -->
 						<br />{L_GLOBAL_ANNOUNCEMENT}
 					<!-- ENDIF -->
@@ -59,7 +64,7 @@
 				<dd class="posts">{announcements.center_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
 				<dd class="views">{announcements.center_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
 			<!-- ENDIF -->
-			<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn>{L_POST_BY_AUTHOR} {announcements.center_row.USERNAME_FULL_LAST} <!-- IF announcements.center_row.S_UNREAD_INFO --><a href="{announcements.center_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements.center_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --><br />
+			<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn>{L_POST_BY_AUTHOR} {announcements.center_row.USERNAME_FULL_LAST} <!-- IF announcements.center_row.S_UNREAD_INFO --><a href="{announcements.center_row.U_VIEW_UNREAD}" title="{L_VIEW_NEWEST_POST}"><i class="icon fa-external-link-square fa-fw icon-red icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span></a><!-- ELSE --><a href="{announcements.center_row.U_LAST_COMMENTS}" title="{L_VIEW_LATEST_POST}"><i class="icon fa-external-link-square fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span></a><!-- ENDIF --><br />
 				{announcements.center_row.LAST_POST_TIME}</span>
 			</dd>
 		</dl>

@@ -16,12 +16,8 @@
 }
 
 .portal-navigation ul li a{
-	background-image: url("./images/portal/arrowbullet.gif");
-	background-repeat: no-repeat;
-	background-position: center left; /*custom bullet list image*/
 	display: block;
 	padding: 2px 0;
-	padding-left: 19px; /*link text is indented 19px*/
 	font-weight: bold;
 	font-size: 90%;
 }
@@ -52,8 +48,6 @@
 }
 
 .portal-user-icon {
-	background-image: url("../../all/theme/images/portal/portal_user.png");
-	padding-left: 16px;
 	padding-top: 16px;
 	float: left;
 	margin-bottom: 2px;
@@ -61,22 +55,6 @@
 
 .rtl .portal-user-icon {
 	float: right;
-}
-
-.portal-arrow-left-icon {
-	background-image: url('../../all/theme/images/portal/cal_icon_left_arrow.png');
-	padding-left: 16px;
-	padding-top: 16px;
-	float: left;
-	margin-bottom: 2px;
-}
-
-.portal-arrow-right-icon {
-	background-image: url('../../all/theme/images/portal/cal_icon_right_arrow.png');
-	padding-left: 16px;
-	padding-top: 16px;
-	float: right;
-	margin-bottom: 2px;
 }
 
 .portal-user-span {
@@ -142,6 +120,10 @@
 
 .portal-module-content {
 	min-height: 1em;
+}
+
+.content li {
+    list-style-type: inherit !important;
 }
 
 .portal-stylechanger-select {
@@ -367,7 +349,7 @@ a.portal-forumtitle {
 }
 
 #portal-body .row .pagination {
-	padding: 1px 0 1px 12px;
+   margin: 1px 0 1px 12px;
 }
 
 #portal-body #viewpoll {
@@ -406,9 +388,6 @@ a.portal-forumtitle {
 
 /* RTL language fixes */
 .rtl .portal-navigation ul li a{
-	background-image: url("./images/portal/arrowbullet_rtl.gif");
-	background-position: center right; /* custom bullet list image */
-	padding-right: 19px; /* link text is indented 19px */
 	text-align: right;
 }
 
@@ -633,4 +612,9 @@ dd.responsive-portal-news:last-of-type, dd.responsive-portal-announcements:last-
 	.portal-clock-back-hours-down, .portal-clock-front-hours-down {
 		margin-left: -1px;
 	}
+}
+
+.fa-backward, .fa-forward {
+	font-size: 1.4em;
+	margin-bottom: 4px;
 }
