@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "marc1706/phpbb-text-shortener",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/marc1706/phpbb-text-shortener.git",
-                "reference": "c698ea6e7527513e8ac98f385e076cdbc405a5d2"
+                "reference": "3200fcfaf22f91d31cffcba475475e90bbe1d3bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marc1706/phpbb-text-shortener/zipball/c698ea6e7527513e8ac98f385e076cdbc405a5d2",
-                "reference": "c698ea6e7527513e8ac98f385e076cdbc405a5d2",
+                "url": "https://api.github.com/repos/marc1706/phpbb-text-shortener/zipball/3200fcfaf22f91d31cffcba475475e90bbe1d3bf",
+                "reference": "3200fcfaf22f91d31cffcba475475e90bbe1d3bf",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "post",
                 "shortening"
             ],
-            "time": "2016-01-10 11:01:04"
+            "time": "2017-02-11 17:30:06"
         }
     ],
     "packages-dev": [
