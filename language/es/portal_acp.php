@@ -79,7 +79,9 @@ $lang = array_merge($lang, array(
 	// general
 	'ACP_PORTAL_CONFIG_INFO'				=> 'Ajustes generales',
 	'ACP_PORTAL_GENERAL_TITLE'				=> 'Administración del Portal',
-	'ACP_PORTAL_GENERAL_TITLE_EXP'			=> 'Gracias por elegir board3 Portal! Aquí es donde puede manejar el portal de su página. Las siguientes opciones permiten personalizar la configuración general.',
+	'ACP_PORTAL_GENERAL_TITLE_EXP'			=> '¡Gracias por elegir board3 Portal! Aquí es donde puede manejar el portal de su página. Las siguientes opciones permiten personalizar la configuración general.',
+	'ACP_PORTAL_SHOW_ALL'					=> 'Mostrar el portal en todas las páginas',
+	'ACP_PORTAL_SHOW_ALL_EXP'				=> 'Muestra el portal en todas las páginas',
 	'PORTAL_ENABLE'							=> 'Habilitar Portal',
 	'PORTAL_ENABLE_EXP'						=> 'Activar o desactivar todo el Portal.',
 	'PORTAL_LEFT_COLUMN'					=> 'Habilitar columna izquierda',
@@ -93,6 +95,10 @@ $lang = array_merge($lang, array(
 	'PORTAL_LEFT_COLUMN_WIDTH_EXP'			=> 'Cambiar el ancho en píxeles de la columna de la izquierda; valor recomendado es de 180.',
 	'PORTAL_RIGHT_COLUMN_WIDTH'				=> 'Ancho de la columna de la derecha',
 	'PORTAL_RIGHT_COLUMN_WIDTH_EXP'			=> 'Cambiar el ancho en píxeles de la columna de la derecha; valor recomendado es de 180.',
+	'PORTAL_SHOW_ALL_SIDE'					=> 'Columna que se mostrará en todas las páginas',
+	'PORTAL_SHOW_ALL_SIDE_EXP'				=> 'Escoge que columna debería mostrarse en todas las páginas.',
+	'PORTAL_SHOW_ALL_LEFT'					=> 'Izquierda',
+	'PORTAL_SHOW_ALL_RIGHT'					=> 'Derecha',
 
 	'LINK_ADDED'							=> 'El enlace ha sido agregado correctamente',
 	'LINK_UPDATED'							=> 'El enlace ha sido actualizado correctamente',
