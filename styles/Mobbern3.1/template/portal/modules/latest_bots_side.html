@@ -1,0 +1,10 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><!-- IF $FA_ENABLED -->
+<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
+<!-- ELSE -->
+<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
+<!-- ENDIF --><!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<!-- BEGIN last_visited_bots -->
+		<span class="genmed">{last_visited_bots.BOT_NAME}</span> <br /> <span class="gensmall">{last_visited_bots.LAST_VISIT_DATE}</span>
+		<!-- IF not last_visited_bots.S_LAST_ROW --><hr /><!-- ENDIF -->
+	<!-- END last_visited_bots -->
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

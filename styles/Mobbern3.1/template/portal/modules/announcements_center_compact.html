@@ -1,0 +1,84 @@
+<!-- BEGIN announcements -->
+<!-- IF announcements.MODULE_ID eq $MODULE_ID -->
+<!-- BEGIN center_row -->
+<!-- IF announcements.center_row.S_NO_TOPICS -->
+{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
+	<div class="post bg2 portal-no-margin">
+		<div class="inner">
+			<span><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
+		</div>
+	</div>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+<!-- ELSE -->
+<!-- IF announcements.center_row.S_FIRST_ROW -->
+{$CC_BLOCK_H_L}
+	<dt id="a_{$MODULE_ID}">{$TITLE}</dt>
+	<!-- IF announcements.S_DISPLAY_ANNOUNCEMENTS_RVS -->
+		<dd class="posts responsive-portal-announcements">{L_REPLIES}</dd>
+		<dd class="views responsive-portal-announcements">{L_VIEWS}</dd>
+	<!-- ENDIF -->
+	<dd class="lastpost responsive-portal-announcements"><span>{L_LAST_POST}</span></dd>
+{$CC_BLOCK_H_R}
+<ul class="topiclist topics responsive-portal-announcements">
+<!-- ENDIF -->
+	<li class="row<!-- IF announcements.center_row.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
+		<dl class="icon {announcements.center_row.TOPIC_IMG_STYLE}">
+			<dt style="<!-- IF announcements.center_row.TOPIC_ICON_IMG -->background-image: url({T_ICONS_PATH}{announcements.center_row.TOPIC_ICON_IMG}); background-repeat: no-repeat;<!-- ENDIF -->" title="{announcements.center_row.TOPIC_FOLDER_IMG_ALT}">
+				<!-- IF announcements.center_row.S_UNREAD_TOPIC -->
+				<a href="{announcements.center_row.U_NEWEST_POST}">{NEWEST_POST_IMG}</a>
+				<!-- ENDIF -->
+				<div class="list-inner">
+					<!-- IF announcements.center_row.ATTACH_ICON_IMG -->{announcements.center_row.ATTACH_ICON_IMG} <!-- ENDIF -->
+					<!-- IF announcements.center_row.S_POLL --><strong>{L_VIEW_TOPIC_POLL}</strong><!-- ENDIF -->
+					<a href="{announcements.center_row.U_VIEW_COMMENTS}" title="{announcements.center_row.TITLE}" class="topictitle">{announcements.center_row.TITLE}</a>
+					<!-- IF U_VIEW_UNREAD_POST and not S_IS_BOT --> &bull; <a href="{U_VIEW_UNREAD_POST}">{L_VIEW_UNREAD_POST}</a> &bull; <!-- ENDIF -->
+					<!-- IF announcements.center_row.pagination -->
+					<div class="pagination">
+						<ul>
+							<!-- BEGIN pagination -->
+							<!-- IF announcements.center_row.pagination.S_IS_PREV -->
+							<!-- ELSEIF announcements.center_row.pagination.S_IS_CURRENT --><li><a href="{announcements.center_row.pagination.PAGE_URL}">{announcements.center_row.pagination.PAGE_NUMBER}</a></li>
+							<!-- ELSEIF announcements.center_row.pagination.S_IS_ELLIPSIS --><li class="ellipsis"><span>{L_ELLIPSIS}</span></li>
+							<!-- ELSEIF announcements.center_row.pagination.S_IS_NEXT -->
+							<!-- ELSE --><li><a href="{announcements.center_row.pagination.PAGE_URL}">{announcements.center_row.pagination.PAGE_NUMBER}</a></li>
+							<!-- ENDIF -->
+							<!-- END pagination -->
+						</ul>
+					</div>
+					<!-- ENDIF -->
+						<br />{L_POSTED} {L_POST_BY_AUTHOR} {announcements.center_row.POSTER_FULL} &raquo; {announcements.center_row.TIME}
+					<!-- IF announcements.center_row.FORUM_NAME -->
+						<br />{L_FORUM}{L_COLON} <a href="{announcements.center_row.U_VIEWFORUM}" class="portal-forumtitle">{announcements.center_row.FORUM_NAME}</a>
+					<!-- ELSE -->
+						<br />{L_GLOBAL_ANNOUNCEMENT}
+					<!-- ENDIF -->
+					<!-- IF not announcements.S_DISPLAY_ANNOUNCEMENTS_RVS --><!-- IF announcements.center_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}{L_COLON} <strong>{announcements.center_row.REPLIES}</strong>  &bull; {L_VIEWS}{L_COLON} <strong>{announcements.center_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
+				</div>
+			</dt>
+			<!-- IF announcements.S_DISPLAY_ANNOUNCEMENTS_RVS -->
+				<dd class="posts">{announcements.center_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
+				<dd class="views">{announcements.center_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
+			<!-- ENDIF -->
+			<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn>{L_POST_BY_AUTHOR} {announcements.center_row.USERNAME_FULL_LAST} <!-- IF announcements.center_row.S_UNREAD_INFO --><a href="{announcements.center_row.U_VIEW_UNREAD}">{NEWEST_POST_IMG}</a><!-- ELSE --><a href="{announcements.center_row.U_LAST_COMMENTS}">{READ_POST_IMG}</a><!-- ENDIF --><br />
+				{announcements.center_row.LAST_POST_TIME}</span>
+			</dd>
+		</dl>
+	</li>
+<!-- IF announcements.center_row.S_LAST_ROW -->
+	<!-- IF announcements.AP_PAGINATION or announcements.TOTAL_ANNOUNCEMENTS -->
+	<li class="row<!-- IF announcements.center_row.S_ROW_COUNT is even --> bg2<!-- ELSE --> bg1<!-- ENDIF --> portal-news-pagination">
+		<div class="topic-actions">
+			<div class="pagination">
+				{announcements.TOTAL_ANNOUNCEMENTS}
+				<!-- IF announcements.AP_PAGE_NUMBER --><!-- IF announcements.AP_PAGINATION --> &bull; {announcements.AP_PAGE_NUMBER} &bull; {announcements.AP_PAGINATION}<!-- ELSE --> &bull; {announcements.AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --> &nbsp;
+			</div>
+		</div>
+	</li>
+	<!-- ENDIF -->
+	</ul>
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- ENDIF -->
+<!-- END center_row -->
+<!-- ENDIF -->
+<!-- END announcements -->
