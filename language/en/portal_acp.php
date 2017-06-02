@@ -106,4 +106,12 @@ $lang = array_merge($lang, array(
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Adding basic set of modules',
 	'PORTAL_BASIC_UNINSTALL'		=> 'Removing modules from database',
+
+    // Font Awesome
+    'ACP_FA'                => 'Font Awesome styles',
+    'ACP_FA_EXP'            => 'Here you can define which styles should use the Font Awesome icons.',
+    'MODULE_FA'             => 'Font Awesome icon',
+    'MODULE_FA_EXP'         => 'Here you can select a Font Awesome icon. This will be used when your selected style uses Font Awesome icons.',
+    'MODULE_FA_SIZE'        => 'Font Awesome icon size',
+    'MODULE_FA_SIZE_EXP'    => 'Here you can change the size of the Font Awesome icon in pixel.',
 ));
