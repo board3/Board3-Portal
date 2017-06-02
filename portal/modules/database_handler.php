@@ -75,6 +75,8 @@ class database_handler
 			'module_group_ids'	=> '',
 			'module_image_height'	=> 16,
 			'module_image_width'	=> 16,
+			'module_fa_icon'    => '',
+			'module_fa_size'    => 1,
 			'module_status'		=> self::B3_MODULE_ENABLED,
 		);
 		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
