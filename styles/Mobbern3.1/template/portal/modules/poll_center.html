@@ -1,0 +1,64 @@
+{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
+	<!-- IF S_HAS_POLL -->
+	<div id="viewpoll" class="panel bg1 portal-no-margin">
+		<div class="inner">
+		<!-- BEGIN poll -->
+			<!-- IF poll.S_CAN_VOTE --><form method="post" action="{poll.S_POLL_ACTION}"><!-- ENDIF -->
+				<div class="content">
+					<h2>{poll.POLL_QUESTION}</h2>
+					<p class="author">{poll.L_POLL_LENGTH}<!-- IF poll.S_CAN_VOTE and poll.L_POLL_LENGTH --><br /><!-- ENDIF --><!-- IF poll.S_CAN_VOTE -->{poll.L_MAX_VOTES}<!-- ENDIF --></p>
+
+					<fieldset class="polls">
+					<!-- IF poll.S_POLL_HAS_OPTIONS -->
+					<!-- BEGIN poll_option -->
+						<dl class="<!-- IF poll.poll_option.POLL_OPTION_VOTED -->voted<!-- ENDIF --> portal-responsive-poll"<!-- IF poll.poll_option.POLL_OPTION_VOTED --> title="{L_POLL_VOTED_OPTION}"<!-- ENDIF -->>
+							<dt><!-- IF poll.S_CAN_VOTE --><label for="poll_{poll.TOPIC_ID}_vote_{poll.poll_option.POLL_OPTION_ID}">{poll.poll_option.POLL_OPTION_CAPTION}</label><!-- ELSE -->{poll.poll_option.POLL_OPTION_CAPTION}<!-- ENDIF --></dt>
+							<!-- IF poll.S_CAN_VOTE --><dd><!-- IF poll.S_IS_MULTI_CHOICE --><input type="checkbox" name="vote_id[]" id="poll_{poll.TOPIC_ID}_vote_{poll.poll_option.POLL_OPTION_ID}" value="{poll.poll_option.POLL_OPTION_ID}"<!-- IF poll.poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF --> /><!-- ELSE --><input type="radio" name="vote_id[]" id="poll_{poll.TOPIC_ID}_vote_{poll.poll_option.POLL_OPTION_ID}" value="{poll.poll_option.POLL_OPTION_ID}"<!-- IF poll.poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF --> /><!-- ENDIF --></dd><!-- ENDIF -->
+							<!-- IF poll.S_DISPLAY_RESULTS --><dd class="resultbar"><div class="<!-- IF poll.poll_option.POLL_OPTION_PCT < 20 -->pollbar1<!-- ELSEIF poll.poll_option.POLL_OPTION_PCT < 40 -->pollbar2<!-- ELSEIF poll.poll_option.POLL_OPTION_PCT < 60 -->pollbar3<!-- ELSEIF poll.poll_option.POLL_OPTION_PCT < 80 -->pollbar4<!-- ELSE -->pollbar5<!-- ENDIF -->" style="width:{poll.poll_option.POLL_OPTION_PERCENT};">{poll.poll_option.POLL_OPTION_RESULT}</div></dd>
+							<dd><!-- IF poll.poll_option.POLL_OPTION_RESULT == 0 -->{L_NO_VOTES}<!-- ELSE -->{poll.poll_option.POLL_OPTION_PERCENT}<!-- ENDIF --></dd><!-- ENDIF -->
+						</dl>
+					<!-- END poll_option -->
+					<!-- ELSE -->
+						{L_NO_OPTIONS}
+					<!-- ENDIF -->
+
+					<!-- IF poll.S_DISPLAY_RESULTS -->
+						<dl>
+							<dt>&nbsp;</dt>
+							<dd class="resultbar"><p class="portal-poll-subtext">{L_TOTAL_VOTES} : {poll.TOTAL_VOTES}</p></dd>
+						</dl>
+					<!-- ENDIF -->
+
+					<!-- IF poll.S_CAN_VOTE -->
+						<dl class="portal-poll-vote">
+							<dt>&nbsp;</dt>
+							<dd class="resultbar"><input type="submit" name="update" value="{L_SUBMIT_VOTE}" class="button1" /></dd>
+						</dl>
+					<!-- ENDIF -->
+
+					<!-- IF not poll.S_DISPLAY_RESULTS -->
+						<dl class="portal-poll-vote">
+							<dt>&nbsp;</dt>
+							<dd class="resultbar"><p class="portal-poll-subtext"><a href="{poll.U_VIEW_RESULTS}">{L_VIEW_RESULTS}</a></p></dd>
+						</dl>
+					<!-- ENDIF -->
+
+						<dl class="portal-poll-vote">
+							<dt>&nbsp;</dt>
+							<dd class="resultbar"><p class="portal-poll-subtext"><a href="{poll.U_VIEW_TOPIC}">{L_VIEW_TOPIC}</a></p></dd>
+						</dl>
+					</fieldset>
+				</div>
+				<!-- IF poll.S_CAN_VOTE -->{poll.S_HIDDEN_FIELDS}<!-- ENDIF -->
+			<!-- IF poll.S_CAN_VOTE --></form><!-- ENDIF -->
+		<!-- END poll -->
+		</div>
+	</div>
+	<!-- ELSE -->
+	<div class="panel bg1 portal-no-margin">
+		<div class="inner">
+			<span><strong>{L_NO_POLL}</strong></span>
+		</div>
+	</div>
+	<!-- ENDIF -->
+{$C_BLOCK_F_L}{$C_BLOCK_F_R}

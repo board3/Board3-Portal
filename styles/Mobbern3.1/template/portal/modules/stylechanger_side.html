@@ -1,0 +1,12 @@
+<!-- IF S_STYLE_OPTIONS -->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><!-- IF $FA_ENABLED -->
+<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
+<!-- ELSE -->
+<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
+<!-- ENDIF --><!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<select class="portal-stylechanger-select" name="demo" id="demo" onchange="document.location.href = this.options[this.selectedIndex].value;">
+		{STYLE_SELECT}
+	</select>
+<br />
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ENDIF -->
