@@ -1,4 +1,11 @@
-{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+{$LR_BLOCK_H_L}
+			<!-- IF $S_BLOCK_ICON -->
+				<!-- IF $FA_ENABLED -->
+					<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
+				<!-- ELSE -->
+					<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
+				<!-- ENDIF -->
+			<!-- ENDIF -->&nbsp;{$TITLE}{$LR_BLOCK_H_R}
 			<!-- IF BIRTHDAY_LIST -->
 			<strong>{L_CONGRATULATIONS}{L_COLON}</strong><br />
 			<!-- BEGIN board3_birthday_list -->
