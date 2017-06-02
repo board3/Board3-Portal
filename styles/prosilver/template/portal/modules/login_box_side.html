@@ -1,6 +1,12 @@
 <form action="{S_LOGIN_ACTION}" method="post" id="portal-login-box">
 <div>
-{$LR_BLOCK_H_L}<a href="{U_LOGIN_LOGOUT}"><!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}</a>{$LR_BLOCK_H_R}
+{$LR_BLOCK_H_L}<a href="{U_LOGIN_LOGOUT}"><!-- IF $S_BLOCK_ICON -->
+	<!-- IF $FA_ENABLED -->
+	<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
+	<!-- ELSE -->
+	<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
+	<!-- ENDIF -->
+	<!-- ENDIF -->{$TITLE}</a>{$LR_BLOCK_H_R}
 	<span class="genmed">{L_USERNAME}{L_COLON}</span><br />
 	<input type="text" tabindex="1" name="username" id="username" value="" class="inputbox autowidth" /><br /><br /> 
 	<span class="genmed">{L_PASSWORD}{L_COLON}</span><br />

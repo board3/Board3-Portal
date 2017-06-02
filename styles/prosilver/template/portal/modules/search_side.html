@@ -46,7 +46,13 @@ function qsearch_onSubmit()
 //-->
 </script>
 
-{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON -->
+<!-- IF $FA_ENABLED -->
+<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
+<!-- ELSE -->
+<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
+<!-- ENDIF -->
+<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
 	<form id="qsearch_form" method="post" action="{U_SEARCH}" onsubmit="return qsearch_onSubmit();">
 	<p>
 		<input type="text" tabindex="6" name="keywords" id="searchfield" maxlength="40" title="{L_SEARCH_KEYWORDS}" class="inputbox search autowidth" value="<!-- IF SEARCH_WORDS-->{SEARCH_WORDS}<!-- ELSE -->{L_SEARCH_MINI}<!-- ENDIF -->" onclick="if(this.value=='{LA_SEARCH_MINI}')this.value='';" onblur="if(this.value=='')this.value='{LA_SEARCH_MINI}';" />
