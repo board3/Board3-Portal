@@ -38,7 +38,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 	public function setUp()
 	{
 		parent::setUp();
-		global $cache, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request, $config, $phpbb_container;
+		global $cache, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request, $config, $phpbb_container, $user;
 
 		$config = $this->config = new \phpbb\config\config(array('allowed_schemes_links' => 'http,https,ftp'));
 		$this->request = new \phpbb_mock_request();
@@ -47,6 +47,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
 		$this->language = new \phpbb\language\language($this->language_file_loader);
 		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
+		$user = $this->user;
 		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'sql_load'));
 		$cache->expects($this->any())
 			->method('destroy')
