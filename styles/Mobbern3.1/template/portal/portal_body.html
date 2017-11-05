@@ -1,0 +1,133 @@
+<!-- DEFINE $S_IN_PORTAL = 1 -->
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE portal/_block_config.html -->
+
+<!-- IF PORTAL_VERSION_CHECK and U_ACP --> 
+	<div id="portal_version_check" class="rules">
+		<div class="inner"><span class="corners-top"><span></span></span>
+		<strong>{L_INFORMATION}{L_COLON}</strong> {PORTAL_VERSION_CHECK}
+		<span class="corners-bottom"><span></span></span></div>
+	</div>
+<!-- ENDIF -->
+
+<div id="portal-body">
+	<!-- IF S_TOP_COLUMN -->	
+	<div id="portal-top">
+	<!-- [+] top module area -->
+		<ul>
+			<li>
+			<!-- BEGIN modules_top -->
+				<!-- DEFINE $TEMPLATE_FILE = '{modules_top.TEMPLATE_FILE}' -->
+				<!-- DEFINE $IMAGE_SRC = '{modules_top.IMAGE_SRC}' -->
+				<!-- DEFINE $IMAGE_WIDTH = '{modules_top.IMAGE_WIDTH}' -->
+				<!-- DEFINE $IMAGE_HEIGHT = '{modules_top.IMAGE_HEIGHT}' -->
+				<!-- DEFINE $CUSTOM_CODE = '{modules_top.CODE}' -->
+				<!-- DEFINE $TITLE = '{modules_top.TITLE}' -->
+				<!-- DEFINE $MODULE_ID = '{modules_top.MODULE_ID}' -->
+				<!-- DEFINE $FA_ICON = '{modules_top.FA_ICON}' -->
+				<!-- DEFINE $FA_SIZE = '{modules_top.FA_SIZE}' -->
+				<!-- DEFINE $FA_ENABLED = '{modules_top.FA_ENABLED}' -->
+				<!-- INCLUDE {$TEMPLATE_FILE} -->
+			<!-- END modules_top -->
+			</li>
+		</ul>
+	<!-- [-] top module area -->
+	</div>
+	<!-- ENDIF -->
+	<!-- [+] center module area -->
+	<!-- IF S_CENTER_COLUMN -->
+	<div id="portal-center-wrapper">
+		<div id="portal-center" style="margin: 0 <!-- IF S_RIGHT_COLUMN -->{S_PORTAL_RIGHT_COLUMN}px<!-- ELSE -->-{$BLOCK_DISTANCE}<!-- ENDIF --> 0 <!-- IF S_LEFT_COLUMN -->{S_PORTAL_LEFT_COLUMN}px<!-- ELSE -->-{$BLOCK_DISTANCE}<!-- ENDIF -->; padding: 0 {$BLOCK_DISTANCE};">
+			<!-- BEGIN modules_center -->
+				<!-- DEFINE $TEMPLATE_FILE = '{modules_center.TEMPLATE_FILE}' -->
+				<!-- DEFINE $IMAGE_SRC = '{modules_center.IMAGE_SRC}' -->
+				<!-- DEFINE $IMAGE_WIDTH = '{modules_center.IMAGE_WIDTH}' -->
+				<!-- DEFINE $IMAGE_HEIGHT = '{modules_center.IMAGE_HEIGHT}' -->
+				<!-- DEFINE $CUSTOM_CODE = '{modules_center.CODE}' -->
+				<!-- DEFINE $TITLE = '{modules_center.TITLE}' -->
+				<!-- DEFINE $MODULE_ID = '{modules_center.MODULE_ID}' -->
+				<!-- DEFINE $FA_ICON = '{modules_center.FA_ICON}' -->
+				<!-- DEFINE $FA_SIZE = '{modules_center.FA_SIZE}' -->
+				<!-- DEFINE $FA_ENABLED = '{modules_center.FA_ENABLED}' -->
+				<!-- INCLUDE {$TEMPLATE_FILE} -->
+			<!-- END modules_center -->
+			<!-- IF S_DISPLAY_JUMPBOX and B3P_DISPLAY_JUMPBOX -->
+				<br />
+				<!-- INCLUDE portal/modules/jumpbox.html -->
+			<!-- ENDIF -->
+		</div>
+	</div>
+	<!-- ENDIF -->
+	<!-- [-] center module area -->
+	<!-- [+] left module area -->
+		<!-- IF S_LEFT_COLUMN -->
+		<div id="portal-left" style="width: {S_PORTAL_LEFT_COLUMN}px;">
+			<!-- BEGIN modules_left -->
+				<!-- DEFINE $TEMPLATE_FILE = '{modules_left.TEMPLATE_FILE}' -->
+				<!-- DEFINE $IMAGE_SRC = '{modules_left.IMAGE_SRC}' -->
+				<!-- DEFINE $IMAGE_WIDTH = '{modules_left.IMAGE_WIDTH}' -->
+				<!-- DEFINE $IMAGE_HEIGHT = '{modules_left.IMAGE_HEIGHT}' -->
+				<!-- DEFINE $CUSTOM_CODE = '{modules_left.CODE}' -->
+				<!-- DEFINE $TITLE = '{modules_left.TITLE}' -->
+				<!-- DEFINE $MODULE_ID = '{modules_left.MODULE_ID}' -->
+				<!-- DEFINE $FA_ICON = '{modules_left.FA_ICON}' -->
+				<!-- DEFINE $FA_SIZE = '{modules_left.FA_SIZE}' -->
+				<!-- DEFINE $FA_ENABLED = '{modules_left.FA_ENABLED}' -->
+				<!-- INCLUDE {$TEMPLATE_FILE} -->
+			<!-- END modules_left -->
+		</div>
+		<!-- ENDIF -->
+	<!-- [-] left module area -->
+
+	<!-- [+] right module area -->
+		<!-- IF S_RIGHT_COLUMN -->
+		<div id="portal-right" style="width: {S_PORTAL_RIGHT_COLUMN}px; margin-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->: -{S_PORTAL_RIGHT_COLUMN}px;">
+			<!-- BEGIN modules_right -->
+				<!-- DEFINE $TEMPLATE_FILE = '{modules_right.TEMPLATE_FILE}' -->
+				<!-- DEFINE $IMAGE_SRC = '{modules_right.IMAGE_SRC}' -->
+				<!-- DEFINE $IMAGE_WIDTH = '{modules_right.IMAGE_WIDTH}' -->
+				<!-- DEFINE $IMAGE_HEIGHT = '{modules_right.IMAGE_HEIGHT}' -->
+				<!-- DEFINE $CUSTOM_CODE = '{modules_right.CODE}' -->
+				<!-- DEFINE $TITLE = '{modules_right.TITLE}' -->
+				<!-- DEFINE $MODULE_ID = '{modules_right.MODULE_ID}' -->
+				<!-- DEFINE $FA_ICON = '{modules_right.FA_ICON}' -->
+				<!-- DEFINE $FA_SIZE = '{modules_right.FA_SIZE}' -->
+				<!-- DEFINE $FA_ENABLED = '{modules_right.FA_ENABLED}' -->
+				<!-- INCLUDE {$TEMPLATE_FILE} -->
+			<!-- END modules_right -->
+		</div>
+		<!-- ENDIF -->
+	<!-- [-] right module area -->
+	<br class="portal-clear" />
+	<!-- IF S_BOTTOM_COLUMN -->
+	<div id="portal-bottom">
+	<!-- [+] bottom module area -->
+		<ul>
+			<li>
+			<!-- BEGIN modules_bottom -->
+				<!-- DEFINE $TEMPLATE_FILE = '{modules_bottom.TEMPLATE_FILE}' -->
+				<!-- DEFINE $IMAGE_SRC = '{modules_bottom.IMAGE_SRC}' -->
+				<!-- DEFINE $IMAGE_WIDTH = '{modules_bottom.IMAGE_WIDTH}' -->
+				<!-- DEFINE $IMAGE_HEIGHT = '{modules_bottom.IMAGE_HEIGHT}' -->
+				<!-- DEFINE $CUSTOM_CODE = '{modules_bottom.CODE}' -->
+				<!-- DEFINE $TITLE = '{modules_bottom.TITLE}' -->
+				<!-- DEFINE $MODULE_ID = '{modules_bottom.MODULE_ID}' -->
+				<!-- DEFINE $FA_ICON = '{modules_bottom.FA_ICON}' -->
+				<!-- DEFINE $FA_SIZE = '{modules_bottom.FA_SIZE}' -->
+				<!-- DEFINE $FA_ENABLED = '{modules_bottom.FA_ENABLED}' -->
+				<!-- INCLUDE {$TEMPLATE_FILE} -->
+			<!-- END modules_bottom -->
+			</li>
+		</ul>
+	<!-- [-] bottom module area -->
+	</div>
+	<!-- ENDIF -->
+</div>
+
+<!--// board3 Portal by www.board3.de //-->
+<div class="copyright">Powered by <a href="http://www.board3.de/">Board3 Portal</a> &copy; 2009 - 2015 Board3 Group</div>
+
+<!-- INCLUDEJS portal/assets/jquery.getscrollbarwidth.js -->
+<!-- INCLUDEJS portal/assets/portal.js -->
+
+<!-- INCLUDE overall_footer.html -->

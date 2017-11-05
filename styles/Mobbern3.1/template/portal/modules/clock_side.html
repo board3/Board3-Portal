@@ -1,0 +1,46 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><!-- IF $FA_ENABLED -->
+<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
+<!-- ELSE -->
+<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
+<!-- ENDIF --><!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+<!-- IF not B3P_CLOCK_SRC -->
+		<div class="portal-clock-wrapper">
+			<div class="portal-clock">
+				<div class="portal-clock-back">
+					<div class="portal-clock-back-upper">
+						<div class="portal-clock-spacer-up"></div><div class="portal-clock-back-hours-up"></div>
+						<div class="portal-clock-back-minutes-up-left" ></div><div class="portal-clock-back-minutes-up-right"></div>
+						<div class="portal-clock-back-seconds-up-left"></div><div class="portal-clock-back-seconds-up-right"></div>
+					</div>
+					<div class="portal-clock-back-lower">
+						<div class="portal-clock-spacer-down"></div><div class="portal-clock-back-hours-down"></div>
+						<div class="portal-clock-back-minutes-down-left"></div><div class="portal-clock-back-minutes-down-right"></div>
+						<div class="portal-clock-back-seconds-down-left"></div><div class="portal-clock-back-seconds-down-right"></div>
+					</div>
+				</div>
+				<div class="portal-clock-front">
+					<div class="portal-clock-front-upper">
+						<div class="portal-clock-spacer-up"></div><div class="portal-clock-front-hours-up"></div>
+						<div class="portal-clock-front-minutes-up-left"></div><div class="portal-clock-front-minutes-up-right"></div>
+						<div class="portal-clock-front-seconds-up-left"></div><div class="portal-clock-front-seconds-up-right"></div>
+					</div>
+					<div class="portal-clock-front-lower">
+						<div class="portal-clock-spacer-down"></div><div class="portal-clock-front-hours-down"></div>
+						<div class="portal-clock-front-minutes-down-left"></div><div class="portal-clock-front-minutes-down-right"></div>
+						<div class="portal-clock-front-seconds-down-left"></div><div class="portal-clock-front-seconds-down-right"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- INCLUDEJS portal/assets/jquery_easing_1_3.js -->
+<!-- INCLUDEJS portal/assets/portal_clock.js -->
+<!-- ELSE -->
+		<div style="text-align: center;">
+			<br />
+			<object type="application/x-shockwave-flash" data="{T_THEME_PATH}/images/portal/{B3P_CLOCK_SRC}" width="140">
+				<param name="wmode" value="transparent" />
+				<param name="movie" value="{T_THEME_PATH}/images/portal/{B3P_CLOCK_SRC}" />
+			</object>
+		</div>
+<!-- ENDIF -->
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

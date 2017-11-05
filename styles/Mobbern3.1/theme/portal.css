@@ -1,0 +1,647 @@
+/* main menu, user menu and the links */
+
+.portal-navigation{
+	width: auto;
+}
+
+.portal-navigation ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 8px; /*bottom spacing between each UL and rest of content*/
+}
+
+.portal-navigation ul li{
+	padding-bottom: 2px; /*bottom spacing between menu items*/
+}
+
+.portal-navigation ul li a{
+	background-image: url("./images/portal/arrowbullet.gif");
+	background-repeat: no-repeat;
+	background-position: center left; /*custom bullet list image*/
+	display: block;
+	padding: 2px 0;
+	padding-left: 19px; /*link text is indented 19px*/
+	font-weight: bold;
+	font-size: 90%;
+}
+
+.portal-navigation div.menutitle{
+	padding: 1px 0;
+	font: bold 90% 'Trebuchet MS', 'Lucida Grande', Arial, sans-serif;
+	font-size: 12px;
+	text-decoration: underline;
+}
+
+.portal-navigation tr.menutitle{
+	font: bold 90% 'Trebuchet MS', 'Lucida Grande', Arial, sans-serif;
+	font-size: 12px;
+	text-decoration: underline;
+}
+
+.rtl .portal-navigation .menutitle {
+	text-align: right;
+}
+
+.calendar-info {
+	list-style-type: none;
+}
+
+.portal-events li.row
+{
+	border-top: 0px;
+	list-style-type: none;
+}
+
+.portal-user-icon {
+	background-image: url("./images/portal/portal_user.png");
+	padding-left: 16px;
+	padding-top: 16px;
+	float: left;
+	margin-bottom: 2px;
+}
+
+.rtl .portal-user-icon {
+	float: right;
+}
+
+.portal-user-span {
+	float: left;
+	padding-left: 5px;
+	padding-top: 2px;
+}
+
+.rtl .portal-user-span {
+	float: right;
+	padding: 2px 5px 0 0;
+}
+
+.portal-user-annotation {
+	float: right;
+	padding-top: 2px;
+	padding-right: 10px;
+}
+
+.rtl .portal-user-annotation {
+	float: left;
+	padding-right: 0px;
+}
+
+.portal-title-span {
+	float: left;
+}
+
+.rtl .portal-title-span {
+	float: right;
+}
+
+.rtl .portal-title-link {
+	float: right;
+	padding-right: 2px;
+}
+
+.portal-text-span {
+	float: left;
+	padding-right: 10px;
+}
+
+.rtl .portal-text-span {
+	float: right;
+	padding-right: 0px;
+	padding-left: 10px;
+}
+
+.portal-data-span {
+	float: right;
+	padding-right: 10px;
+}
+
+.rtl .portal-data-span {
+	float: left;
+	padding-right: 0px;
+	padding-left: 10px;
+}
+
+.portal-module-content {
+	min-height: 1em;
+}
+
+.portal-stylechanger-select {
+	width: 150px;
+}
+
+.portal-whois-online-content {
+	border-left: 0 !important;
+}
+.portal-whois-online-content p {
+	margin: 0 5px 0 5px;
+}
+
+.portal-donation-center-content {
+	border-left: 0;
+}
+
+.portal-donation-center-content > div {
+	text-align: left;
+	margin: 5px 5px 5px 5px;
+}
+
+.portal-donation-form {
+	padding-top: 15px;
+}
+
+.portal-centered-content {
+	text-align: center;
+}
+
+.portal-read-all-link {
+	float: right;
+	margin: 0 0 5px 0;
+}
+
+.portal-module-postbody .post:not(:last-child) {
+	margin-bottom: 1px;
+}
+
+a.portal-forumtitle {
+	font-weight: bold;
+}
+
+.portal-random-member-name {
+	font-size: 12px;
+	padding-top: 1px;
+	margin-bottom: 5px;
+}
+
+.portal-recent-column {
+	width: 33%;
+	vertical-align: top;
+}
+
+.portal-paypal-icon {
+	background-image: url("./images/portal/paypal.gif");
+	background-repeat: no-repeat;
+	padding-left: 73px;
+	padding-top: 44px;
+	float: left;
+	margin: 5px;
+}
+
+.portal-poll-subtext {
+	font-size: 1.0em !important;
+	width: 10em;
+}
+
+.portal-poll-vote {
+	border-top: none;
+}
+
+.portal-poll-side-option dt {
+	width: 30% !important;
+}
+
+.portal-poll-side-option dt:first-child {
+	width: 60% !important;
+}
+
+.portal-poll-side-option-info {
+	width: 30% !important;
+}
+
+.portal-poll-side-checkbox {
+	float: right;
+}
+
+.portal-poll-side-checkbox input {
+	vertical-align: top;
+	margin-top: 0;
+}
+
+/**
+* Calendar CSS rules
+*/
+.portal-calendar-go-previous {
+	text-align: left;
+}
+
+.portal-calendar-current-month {
+	text-align: center;
+}
+
+.portal-calendar-go-next {
+	text-align: right;
+}
+
+.portal-calendar-days-title td, .portal-calendar-days td {
+	width: 14%;
+}
+
+.portal-calendar-days-title span {
+	font-weight: bold;
+}
+
+.portal-calendar-days td {
+	text-align: center;
+}
+
+.portal-calendar-events-heading {
+	font-weight: bold;
+	font-size: 12px;
+	text-decoration: underline;
+}
+
+.portal-calendar-event-listing {
+	width: 100%;
+	padding-left: 0;
+	padding-bottom: 5px;
+}
+
+.portal-calendar-event-title {
+	font-weight: bold;
+}
+
+.portal-calendar-event-description {
+	font-style: italic;
+}
+
+.portal-calendar-divider {
+	margin: 5px 0;
+	border-top: 0;
+}
+
+/**
+* Replacement for table layout
+*/
+#portal-left, #portal-right {
+	position: relative;
+	float: left;
+}
+
+.rtl #portal-left, .rtl #portal-right {
+	float: right;
+}
+
+#portal-center-wrapper {
+	width: 100%;
+	float: left;
+	display: block;
+}
+
+.rtl #portal-center-wrapper {
+	float: right;
+}
+
+#portal-column-area {
+	width: 100%;
+	margin: 0 auto;
+}
+
+#portal-left {
+	margin-left: -100%;
+}
+
+.rtl #portal-left {
+	margin-right: -100%;
+	margin-left: 0;
+}
+
+/*
+* top spacing between portal body table and headerbar spacing is usually 10px
+*/
+#portal-body {
+	padding-top: 10px;
+	width: 100%;
+}
+
+.portal-side {
+	text-align: left;
+	margin: 5px 5px 5px 5px
+}
+
+.rtl .portal-side {
+	text-align: right;
+}
+
+.portal-side-wrapper {
+	border-left: 0 !important;
+	width: 100%;
+}
+
+/*
+* This is needed in order to have the same spacing between blocks
+* as we have between the top blocks and the headerbar
+*/
+#portal-body .forabg {
+	margin-bottom: 0px;
+}
+
+#portal-body td {
+	vertical-align: top;
+}
+
+#portal-body .row .pagination {
+	padding: 1px 0 1px 12px;
+}
+
+#portal-body #viewpoll {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+#portal-body li {
+	list-style-type: none;
+}
+
+.portal-news-pagination {
+	height: 2em;
+}
+
+.portal-news-pagination .pagination {
+	font-size: 1.1em;
+}
+
+/**
+* margin spacing as in default prosilver for the forumlist
+*/
+#portal-forumlist .forabg {
+	margin-bottom: 4px;
+}
+
+.portal-no-margin {
+	margin: 0;
+}
+
+.portal-clear {
+	clear: both;
+}
+
+/* RTL language fixes */
+.rtl .portal-navigation ul li a{
+	background-image: url("./images/portal/arrowbullet_rtl.gif");
+	background-position: center right; /* custom bullet list image */
+	padding-right: 19px; /* link text is indented 19px */
+	text-align: right;
+}
+
+/* Portal clock
+-------------------------------------- */
+.portal-clock-wrapper {
+	text-align: center;
+	min-height: 5em;
+	margin: 0 10%;
+	/* set a fixed height to get rid of the trembling clock in IE9 */
+	height: 50px;
+}
+
+.rtl .portal-clock-wrapper {
+	/* Arabic clocks are ltr */
+	direction: ltr;
+}
+
+.portal-clock {
+	position: relative;
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.portal-clock-spacer-up {
+	content: url("./images/portal/spacer_up.png");
+}
+
+.portal-clock-spacer-down {
+	content: url("./images/portal/spacer_down.png");
+}
+
+.portal-clock * img {
+	float: left;
+}
+
+.portal-clock-front, .portal-clock-back {
+	position: absolute;
+	top: 0px;
+}
+
+.portal-clock-front-upper div {
+	height: 21px;
+	position: absolute;
+	vertical-align: bottom;
+	visibility: hidden;
+}
+
+.portal-clock-front-lower div {
+	height: 20px;
+	position: absolute;
+	vertical-align: top;
+	visibility: hidden;
+}
+
+.portal-clock-back-upper div {
+	position: absolute;
+	vertical-align: bottom;
+}
+
+.portal-clock-back-lower div {
+	position: absolute;
+	vertical-align: top;
+}
+
+.portal-clock-back-seconds-up-left, .portal-clock-back-seconds-up-right,
+.portal-clock-front-minutes-up-left, .portal-clock-front-minutes-up-right,
+.portal-clock-back-minutes-up-left, .portal-clock-back-minutes-up-right,
+.portal-clock-front-seconds-up-left, .portal-clock-front-seconds-up-right,
+.portal-clock-back-minutes-down-left, .portal-clock-back-minutes-down-right,
+.portal-clock-back-seconds-down-left, .portal-clock-back-seconds-down-right,
+.portal-clock-front-minutes-down-left, .portal-clock-front-minutes-down-right,
+.portal-clock-front-seconds-down-left, .portal-clock-front-seconds-down-right {
+	width: 21px;
+	height: 21px;
+	background-position: 0 0;
+	background: url(./images/portal/portal_clock_single.png) no-repeat;
+}
+
+/* Minutes start
+-------------------------------------- */
+.portal-clock-back-minutes-up-left{
+	background-position: 0 0;
+	margin: 0 0 0 43px;
+}
+
+.portal-clock-back-minutes-up-right {
+	background-position: 0 -43px;
+	margin: 0 0 0 64px;
+}
+
+.portal-clock-front-minutes-up-left {
+	background-position: 0 0;
+	margin: 0 0 0 43px;
+}
+
+.portal-clock-front-minutes-up-right {
+	background-position: 0 -43px;
+	margin: 0 0 0 63px;
+}
+
+.portal-clock-back-minutes-down-left{
+	background-position: 0 -22px;
+	margin: 21px 0 0 43px;
+}
+
+.portal-clock-back-minutes-down-right {
+	background-position: 0 -65px;
+	margin: 21px 0 0 64px;
+}
+
+.portal-clock-front-minutes-down-left {
+	background-position: 0 -22px;
+	margin: 21px 0 0 42px;
+}
+
+.portal-clock-front-minutes-down-right {
+	background-position: 0 -65px;
+	margin: 21px 0 0 63px;
+}
+
+/* Seconds start
+---------------------------------------- */
+.portal-clock-back-seconds-up-left{
+	background-position: 0 0;
+	margin: 0 0 0 85px;
+}
+
+.portal-clock-back-seconds-up-right {
+	background-position: 0 -43px;
+	margin: 0 0 0 106px;
+}
+
+.portal-clock-front-seconds-up-left {
+	background-position: 0 0;
+	margin: 0 0 0 84px;
+}
+
+.portal-clock-front-seconds-up-right {
+	background-position: 0 -43px;
+	margin: 0 0 0 105px;
+}
+
+.portal-clock-back-seconds-down-left{
+	background-position: 0 -22px;
+	margin: 21px 0 0 85px;
+}
+
+.portal-clock-back-seconds-down-right {
+	background-position: 0 -65px;
+	margin: 21px 0 0 106px;
+}
+
+.portal-clock-front-seconds-down-left {
+	background-position: 0 -22px;
+	margin: 21px 0 0 84px;
+}
+
+.portal-clock-front-seconds-down-right {
+	background-position: 0 -65px;
+	margin: 21px 0 0 105px;
+}
+
+/* Hours start
+---------------------------------------- */
+.portal-clock-back-hours-up, .portal-clock-front-hours-up {
+	width: 42px;
+	height: 21px;
+	background: url(./images/portal/portal_clock_double.png) no-repeat;
+	background-position: 0 0;
+	vertical-align: bottom;
+	display: inline-block;
+	margin: 0 0 0 0;
+}
+
+.portal-clock-back-hours-down, .portal-clock-front-hours-down {
+	width: 42px;
+	height: 20px;
+	background: url(./images/portal/portal_clock_double.png) no-repeat;
+	background-position: 0 -44px;
+	vertical-align: top;
+	display: inline-block;
+	margin: 21px 0 0 0;
+}
+
+@media all\0 {
+	.portal-clock-back-hours-down, .portal-clock-front-hours-down {
+		margin-left: -1px;
+	}
+}
+
+/* Changed */
+.portal-module-postbody {
+	width: 100%;
+	min-height: 1em;
+	background-color: rgb(255, 255, 255);
+}
+
+/* New */
+a.portal-top {
+	width: auto;
+	margin-top: 10px;
+	margin-right: -10px;
+}
+
+div.bg1, div.bg2, ul.bg1, ul.bg2 {
+	background-color: rgb(255, 255, 255);
+	padding: 5px;
+}
+
+div.portal-postbody {
+	border: none;
+}
+
+input.portal-input {
+	width: 100% !important;
+}
+
+li.portal-header dt {
+	padding-left: 10px;
+	color: rgb(255, 255, 255);
+}
+
+p.portal-search select {
+	width: 75% !important;
+}
+
+p.portal-search input.button2 {
+	width: 22% !important;
+}
+
+ul.portal-bg {
+	background-color: rgb(255, 255, 255);
+}
+
+div.topic-actions {
+	background-color: #DDD;
+	margin-top: 10px;
+}
+
+div.topic-actions div.pagination {
+	height: 38px;
+	line-height: 38px;
+	vertical-align: middle;
+	margin: 0px;
+}
+
+div.topic-actions div.pagination a {
+	width: 22px;
+	height: 22px;
+	line-height: 20px;
+	text-align: center;
+	margin-top: 8px;
+	padding: 0px;
+}
+
+.portal-navigation ul li a.fa-icon {
+	display: block;
+	padding: 2px 0;
+	padding-left: 19px;
+	font-weight: bold;
+	font-size: 90%;
+	background: none;
+	padding-left: 0;
+}

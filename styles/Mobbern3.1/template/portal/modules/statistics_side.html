@@ -1,0 +1,24 @@
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><!-- IF $FA_ENABLED -->
+<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
+<!-- ELSE -->
+<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
+<!-- ENDIF --><!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<strong>{L_ST_TOP}</strong><br />
+	{B3_TOTAL_POSTS}<br />
+	{B3_TOTAL_TOPICS}<br />
+	{L_ST_TOP_ANNS} <strong>{B3_ANNOUNCE_COUNT}</strong><br />
+	{L_ST_TOP_STICKYS} <strong>{B3_STICKY_COUNT}</strong><br />
+	{L_ST_TOT_ATTACH} <strong>{B3_TOTAL_ATTACH}</strong><br />
+
+	<hr class="dashed" />
+	{B3_TOPICS_PER_DAY}<br />
+	{B3_POSTS_PER_DAY}<br />
+	{B3_USERS_PER_DAY}<br />
+	{B3_TOPICS_PER_USER}<br />
+	{B3_POSTS_PER_USER}<br />
+	{B3_POSTS_PER_TOPIC}<br />
+	<hr class="dashed" />
+
+	{B3_TOTAL_USERS}<br />
+	{B3_NEWEST_USER}
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}

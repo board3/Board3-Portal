@@ -188,4 +188,53 @@ class modules_helper
 
 		$this->config->set($key, $value);
 	}
+
+    /**
+     * Show available styles
+     *
+     * @return string Select with available styles
+     */
+    public function display_fa_styles()
+    {
+        global $phpbb_container;
+        $table_prefix = $phpbb_container->getParameter('core.table_prefix');
+        $db = $phpbb_container->get('dbal.conn');
+        $selected = explode(';', $this->config['board3_portal_fa_styles']);
+        $options = '';
+        $query = 'SELECT style_name
+                    FROM ' . $table_prefix . 'styles';
+        $result = $db->sql_query($query);
+        while ($row = $db->sql_fetchrow($result))
+        {
+            $options .= '<option value="' . $row['style_name'] . '"';
+            foreach ($selected as $style)
+            {
+                if ($style == $row['style_name'])
+                {
+                    $options .= ' selected';
+                    break;
+                }
+            }
+            $options .= '>' . $row['style_name'] . '</option>';
+        }
+        $db->sql_freeresult($result);
+        return '<select id="board3_fa_styles" name="board3_fa_styles[]" multiple>' . $options . '</select>';
+    }
+
+    /**
+     * Save styles that have been set as Font Awesome styles
+     *
+     * @param string $key Key of the parameter
+     */
+    public function store_fa_styles($key)
+    {
+        $style_array = $this->request->variable($key, array(''));
+        $styles = '';
+        foreach ($style_array as $style)
+        {
+            $styles .= ($styles == '' ? '' : ';') . $style;
+        }
+        var_dump($styles);
+        $this->config->set('board3_portal_fa_styles', $styles);
+    }
 }

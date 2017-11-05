@@ -1,4 +1,10 @@
-{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON -->
+<!-- IF $FA_ENABLED -->
+<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
+<!-- ELSE -->
+<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
+<!-- ENDIF -->
+<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
        <strong class="portal-user-span">{L_ADMINISTRATORS}</strong><br class="portal-clear" />
        <!-- BEGIN b3p_admins -->
           <span class="portal-user-icon"></span><span class="portal-user-span"><i class="icon fa-user fa-fw" aria-hidden="true"></i><span><strong>{b3p_admins.USERNAME_FULL}</strong></span></span><br class="portal-clear" />

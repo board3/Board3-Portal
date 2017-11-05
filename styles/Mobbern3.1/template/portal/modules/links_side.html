@@ -1,0 +1,23 @@
+<!-- BEGIN portal_links -->
+<!-- IF portal_links.MODULE_ID eq $MODULE_ID -->
+{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><!-- IF $FA_ENABLED -->
+<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
+<!-- ELSE -->
+<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
+<!-- ENDIF --><!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+	<div class="portal-navigation">
+			<ul>
+			<!-- BEGIN links -->
+				<!-- IF $FA_ENABLED -->
+					<li><a class="fa-icon" href="{portal_links.links.LINK_URL}" title="{portal_links.links.LINK_TITLE}" <!-- IF portal_links.links.NEW_WINDOW -->onclick="window.open('{portal_links.links.LINK_URL}'); return false;"<!-- ENDIF -->><i class="icon fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;{portal_links.links.LINK_TITLE}</a></li>
+				<!-- ELSE -->
+					<li><a href="{portal_links.links.LINK_URL}" title="{portal_links.links.LINK_TITLE}" <!-- IF portal_links.links.NEW_WINDOW -->onclick="window.open('{portal_links.links.LINK_URL}'); return false;"<!-- ENDIF -->>{portal_links.links.LINK_TITLE}</a></li>
+				<!-- ENDIF -->
+			<!-- BEGINELSE -->
+				<span class="portal-title-span gensmall"><strong>{L_LINKS_NO_LINKS}</strong></span><br />
+			<!-- END links -->
+			</ul>
+	</div>
+{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+<!-- ENDIF -->
+<!-- END portal_links -->
