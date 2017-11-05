@@ -26,7 +26,7 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 
 	public function setUp()
 	{
-		global $phpbb_root_path, $phpEx, $phpbb_dispatcher;;
+		global $phpbb_root_path, $phpEx, $phpbb_dispatcher;
 
 		parent::setUp();
 
