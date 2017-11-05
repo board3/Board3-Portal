@@ -35,6 +35,12 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 		$request = new \phpbb_mock_request(array('foo' => array('bar')));
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
 		$controller_helper->add_route('board3_portal_controller', 'portal');
+		$phpbb_container = new \phpbb_mock_container_builder();
+		$phpbb_dispatcher = $this->getMock('\phpbb\event\dispatcher', array('trigger_event'), array($phpbb_container));
+		$phpbb_dispatcher->expects($this->any())
+			->method('trigger_event')
+			->with($this->anything())
+			->will($this->returnArgument(1));
 
 		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $controller_helper, $request);
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
