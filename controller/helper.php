@@ -183,8 +183,14 @@ class helper
 	*/
 	protected function check_group_access($row)
 	{
+		if (!function_exists('group_memberships'))
+		{
+			include(realpath($this->path_helper->get_phpbb_root_path()) . '/includes/functions_user' . $this->php_ext);
+		}
+
 		$group_ary = (!empty($row['module_group_ids'])) ? explode(',', $row['module_group_ids']) : '';
-		if ((is_array($group_ary) && !in_array($this->user->data['group_id'], $group_ary)))
+		$memberships = group_memberships($group_ary ,$this->user->data['user_id']);
+		if (is_array($group_ary) && empty($memberships))
 		{
 			return false;
 		}
