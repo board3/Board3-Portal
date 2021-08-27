@@ -1,5 +1,17 @@
 /* main menu, user menu and the links */
 
+.content li {
+	list-style-type: inherit !important;
+}
+
+a {
+	display: inline-block;
+}
+
+ul {
+	list-style-type: disc !important;
+}
+
 .portal-navigation{
 	width: auto;
 }
@@ -122,10 +134,6 @@
 	min-height: 1em;
 }
 
-.content li {
-    list-style-type: inherit !important;
-}
-
 .portal-stylechanger-select {
 	width: 150px;
 }
@@ -205,7 +213,8 @@ a.portal-forumtitle {
 }
 
 .portal-poll-side-option-info {
-	width: 30% !important;
+	width: 58% !important;
+	float: right !important;
 }
 
 .portal-poll-side-checkbox {
@@ -214,6 +223,7 @@ a.portal-forumtitle {
 
 .portal-poll-side-checkbox input {
 	vertical-align: top;
+	margin-left: 39px;
 	margin-top: 0;
 }
 
@@ -234,6 +244,7 @@ a.portal-forumtitle {
 
 .portal-calendar-days-title td, .portal-calendar-days td {
 	width: 14%;
+	text-align: center;
 }
 
 .portal-calendar-days-title span {
@@ -617,4 +628,11 @@ dd.responsive-portal-news:last-of-type, dd.responsive-portal-announcements:last-
 .fa-backward, .fa-forward {
 	font-size: 1.4em;
 	margin-bottom: 4px;
+}
+
+.icon_portal_search {
+	background-image: url("../../prosilver/theme/images/portal/icon_portal_search.png") !important;
+	background-position: left 1px;
+	background-repeat: no-repeat;
+	padding-left: 17px;
 }

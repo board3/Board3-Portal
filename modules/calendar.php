@@ -188,8 +188,8 @@ class calendar extends module_base
 		// output our general calendar bits
 		$down = $this->mini_cal_month - 1;
 		$up = $this->mini_cal_month + 1;
-		$prev_month = '<a href="' . $this->modules_helper->route('board3_portal_controller') . "?m$module_id=$down#minical$module_id" . '" rel="nofollow"><span class="portal-arrow-left-icon" title="' . $this->user->lang['VIEW_PREVIOUS_MONTH'] . '"></span></a>';
-		$next_month = '<a href="' . $this->modules_helper->route('board3_portal_controller') . "?m$module_id=$up#minical$module_id" . '" rel="nofollow"><span class="portal-arrow-right-icon" title="' . $this->user->lang['VIEW_NEXT_MONTH'] . '"></span></a>';
+		$prev_month = '<a href="' . $this->modules_helper->route('board3_portal_controller') . "?m$module_id=$down#minical$module_id" . '" rel="nofollow"><i class="fa fa-backward" aria-hidden="true" title="' . $this->user->lang['VIEW_PREVIOUS_MONTH'] . '"></i></a>';
+		$next_month = '<a href="' . $this->modules_helper->route('board3_portal_controller') . "?m$module_id=$up#minical$module_id" . '" rel="nofollow"><i class="fa fa-forward" aria-hidden="true" title="' . $this->user->lang['VIEW_NEXT_MONTH'] . '"></i></a>';
 
 		$this->template->assign_block_vars('minical', array(
 			'S_SUNDAY_FIRST'	=> ($this->config['board3_sunday_first_' . $module_id]) ? true : false,

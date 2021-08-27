@@ -31,7 +31,7 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 		return $this->createXMLDataSet(dirname(__FILE__) . '/../acp/fixtures/modules.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $cache, $db, $phpbb_root_path, $phpEx;
 
@@ -55,7 +55,9 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 		));
 
 		$this->portal_columns = new \board3\portal\portal\columns();
-		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'sql_load', 'sql_save'));
+		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+			->setMethods(['destroy', 'sql_exists', 'get', 'put', 'sql_load', 'sql_save'])
+			->getMock();
 		$cache->expects($this->any())
 			->method('destroy')
 			->with($this->equalTo('portal_modules'));

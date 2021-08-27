@@ -35,7 +35,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/configs.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 		global $cache, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request, $config, $phpbb_container, $user;
@@ -48,7 +48,9 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 		$this->language = new \phpbb\language\language($this->language_file_loader);
 		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$user = $this->user;
-		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'sql_load'));
+		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+			->setMethods(['destroy', 'sql_exists', 'get', 'put', 'sql_load'])
+			->getMock();
 		$cache->expects($this->any())
 			->method('destroy')
 			->with($this->equalTo('portal_config'));
@@ -74,12 +76,16 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 			->with($this->anything())
 			->will($this->returnArgument(1));
 		$phpbb_container = new \phpbb_mock_container_builder();
+		$phpbb_log = $this->getMockBuilder('\phpbb\log\log')
+			->disableOriginalConstructor()
+			->getMock();
 		$s9e_factory = new \phpbb\textformatter\s9e\factory(
 			new \phpbb\textformatter\data_access($this->db, BBCODES_TABLE, SMILIES_TABLE, STYLES_TABLE, WORDS_TABLE, $phpbb_root_path . 'styles/'),
 			new \phpbb\cache\driver\dummy(),
 			$phpbb_dispatcher,
 			$config,
 			new \phpbb\textformatter\s9e\link_helper(),
+			$phpbb_log,
 			$phpbb_root_path . 'cache',
 			'_text_formatter_parser',
 			'_text_formatter_renderer'

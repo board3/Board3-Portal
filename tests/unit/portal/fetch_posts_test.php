@@ -20,7 +20,7 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 	protected $default_main_columns = array('topic_count', 'global_id', 'topic_icons');
 	protected $fetch_posts;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $auth, $cache, $phpbb_dispatcher, $phpbb_root_path, $phpEx, $template, $user;
 
@@ -34,7 +34,9 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 		$user->add_lang('common');
 		$user->add_lang('../../ext/board3/portal/language/en/portal');
 		$phpbb_dispatcher = new phpbb_mock_event_dispatcher();
-		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put', 'obtain_attach_extensions', 'sql_load', 'sql_save'));
+		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+			->setMethods(['obtain_word_list', 'get', 'sql_exists', 'put', 'obtain_attach_extensions', 'sql_load', 'sql_save'])
+			->getMock();
 		$cache->expects($this->any())
 			->method('obtain_word_list')
 			->with()
@@ -67,7 +69,9 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 		$controller_helper->add_route('board3_portal_controller', 'portal');
 		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $controller_helper, new phpbb_mock_request());
 		$this->user = $user;
-		$template = $this->getMock('\phpbb\template', array('set_filenames', 'destroy_block_vars', 'assign_block_vars', 'assign_display'));
+		$template = $this->getMockBuilder('\phpbb\template')
+			->setMethods(['set_filenames', 'destroy_block_vars', 'assign_block_vars', 'assign_display'])
+			->getMock();
 		$this->fetch_posts = new \board3\portal\portal\fetch_posts($auth, $cache, $this->config, $this->db, $this->modules_helper, $user);
 	}
 
@@ -202,7 +206,7 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 
 		if ($expected_exception)
 		{
-			$this->setExpectedException($expected_exception);
+			$this->expectException($expected_exception);
 		}
 
 		$this->fetch_posts->set_module_id($module_id);
@@ -244,7 +248,9 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 	{
 		global $cache;
 
-		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put'));
+		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+			->setMethods(['obtain_word_list', 'get', 'sql_exists', 'put'])
+			->getMock();
 		$cache->expects($this->any())
 			->method('obtain_word_list')
 			->with()

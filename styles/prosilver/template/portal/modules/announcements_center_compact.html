@@ -42,9 +42,13 @@
 						</ul>
 					</div>
 					<!-- ENDIF -->
+					<!-- IF not S_IS_BOT -->
 						<div class="responsive-show" style="display: none;">
-							{L_LAST_POST} {L_POST_BY_AUTHOR} {announcements.center_row.USERNAME_FULL_LAST} &raquo; <a href="{announcements.center_row.U_LAST_COMMENTS}" title="{L_GOTO_LAST_POST}" title="{L_VIEW_LATEST_POST}"> {announcements.center_row.LAST_POST_TIME}</a>
+							{L_LAST_POST} {L_POST_BY_AUTHOR} {announcements.center_row.USERNAME_FULL_LAST} &raquo; <a href="{announcements.center_row.U_LAST_COMMENTS}" title="{L_GOTO_LAST_POST}"> {announcements.center_row.LAST_POST_TIME}</a>
 						</div>
+					<!-- ELSE -->
+					<br />
+					<!-- ENDIF -->
 
 						<div class="responsive-hide">
 							<!-- IF announcements.center_row.ATTACH_ICON_IMG --><i class="icon fa-paperclip fa-fw" aria-hidden="true"></i><!-- ENDIF -->
@@ -64,8 +68,8 @@
 				<dd class="posts">{announcements.center_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
 				<dd class="views">{announcements.center_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
 			<!-- ENDIF -->
-			<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn>{L_POST_BY_AUTHOR} {announcements.center_row.USERNAME_FULL_LAST} <!-- IF announcements.center_row.S_UNREAD_INFO --><a href="{announcements.center_row.U_VIEW_UNREAD}" title="{L_VIEW_NEWEST_POST}"><i class="icon fa-external-link-square fa-fw icon-red icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span></a><!-- ELSE --><a href="{announcements.center_row.U_LAST_COMMENTS}" title="{L_VIEW_LATEST_POST}"><i class="icon fa-external-link-square fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span></a><!-- ENDIF --><br />
-				{announcements.center_row.LAST_POST_TIME}</span>
+			<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn>{L_POST_BY_AUTHOR} {announcements.center_row.USERNAME_FULL_LAST} <!-- IF not S_IS_BOT --><!-- IF announcements.center_row.S_UNREAD_INFO --><a href="{announcements.center_row.U_VIEW_UNREAD}" title="{L_VIEW_NEWEST_POST}"><i class="icon fa-external-link-square fa-fw icon-red icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span></a><!-- ELSE --><a href="{announcements.center_row.U_LAST_COMMENTS}" title="{L_VIEW_LATEST_POST}"><i class="icon fa-external-link-square fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span></a><!-- ENDIF --><br />
+				{announcements.center_row.LAST_POST_TIME}</span><!-- ENDIF -->
 			</dd>
 		</dl>
 	</li>
@@ -74,6 +78,7 @@
 	<li class="row<!-- IF announcements.center_row.S_ROW_COUNT is even --> bg2<!-- ELSE --> bg1<!-- ENDIF --> portal-news-pagination">
 		<div class="topic-actions">
 			<div class="pagination">
+				<span><i class="icon fa-clone fa-fw" aria-hidden="true"></i></span>
 				{announcements.TOTAL_ANNOUNCEMENTS}
 				<!-- IF announcements.AP_PAGE_NUMBER --><!-- IF announcements.AP_PAGINATION --> &bull; {announcements.AP_PAGE_NUMBER} &bull; {announcements.AP_PAGINATION}<!-- ELSE --> &bull; {announcements.AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --> &nbsp;
 			</div>

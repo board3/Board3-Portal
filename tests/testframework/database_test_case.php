@@ -18,7 +18,7 @@ abstract class database_test_case extends \phpbb_database_test_case
 
 	protected $db;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 		global $db;

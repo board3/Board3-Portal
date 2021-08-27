@@ -24,7 +24,7 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/auth.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $phpbb_root_path, $phpEx, $phpbb_dispatcher;
 
@@ -36,7 +36,9 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
 		$controller_helper->add_route('board3_portal_controller', 'portal');
 		$phpbb_container = new \phpbb_mock_container_builder();
-		$phpbb_dispatcher = $this->getMock('\phpbb\event\dispatcher', array('trigger_event'), array($phpbb_container));
+		$phpbb_dispatcher = $this->getMockBuilder('\phpbb\event\dispatcher')
+			->setMethods(['trigger_event'])
+			->getMock();
 		$phpbb_dispatcher->expects($this->any())
 			->method('trigger_event')
 			->with($this->anything())

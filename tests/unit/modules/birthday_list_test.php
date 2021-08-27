@@ -31,7 +31,7 @@ class phpbb_unit_modules_birthday_list_test extends \board3\portal\tests\testfra
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/users.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $auth, $phpbb_dispatcher, $phpbb_root_path;
 
@@ -45,7 +45,9 @@ class phpbb_unit_modules_birthday_list_test extends \board3\portal\tests\testfra
 		$this->user->timezone = new \DateTimeZone('UTC');
 		$this->user->add_lang('common');
 		$this->birthday_list = new \board3\portal\modules\birthday_list($this->config, $this->template, $this->new_dbal(), $this->user);
-		$auth = $this->getMock('\phpbb\auth\auth', array('acl_get'));
+		$auth = $this->getMockBuilder('\phpbb\auth\auth')
+			->setMethods(['acl_get'])
+			->getMock();
 		$auth->expects($this->any())
 			->method('acl_get')
 			->with($this->anything())

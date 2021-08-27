@@ -12,7 +12,7 @@ class phpbb_unit_modules_module_base_test extends \board3\portal\tests\testframe
 	/** @var \board3\portal\modules\module_base */
 	protected $module_base;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 

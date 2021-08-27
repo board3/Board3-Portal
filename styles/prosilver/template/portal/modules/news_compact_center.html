@@ -42,14 +42,18 @@
 						</ul>
 					</div>
 					<!-- ENDIF -->
+					<!-- IF not S_IS_BOT -->
 						<div class="responsive-show" style="display: none;">
-							{L_LAST_POST} {L_POST_BY_AUTHOR} {news.news_row.USERNAME_FULL_LAST} &raquo; <a href="{news.news_row.U_LAST_COMMENTS}" title="{L_GOTO_LAST_POST}" title="{L_VIEW_LATEST_POST}"> {news.news_row.LAST_POST_TIME}</a>
+							{L_LAST_POST} {L_POST_BY_AUTHOR} {news.news_row.USERNAME_FULL_LAST} &raquo; <a href="{news.news_row.U_LAST_COMMENTS}" title="{L_GOTO_LAST_POST}"> {news.news_row.LAST_POST_TIME}</a>
 						</div>
+					<!-- ELSE -->
+					<br />
+					<!-- ENDIF -->
 
 						<div class="responsive-hide">
 							<!-- IF news.news_row.ATTACH_ICON_IMG --><i class="icon fa-paperclip fa-fw" aria-hidden="true"></i><!-- ENDIF -->
-							<!-- IF news.news_row.S_POLL --> <i class="icon fa-bar-chart fa-fw" aria-hidden="true"></i> <!-- ENDIF -->
-							{L_POST_BY_AUTHOR} {news.news_row.POSTER_FULL} &raquo; {news.news_row.TIME}
+							<!-- IF news.news_row.S_POLL --><i class="icon fa-bar-chart fa-fw" aria-hidden="true"></i> <!-- ENDIF -->
+							{L_POSTED} {L_POST_BY_AUTHOR} {news.news_row.POSTER_FULL} &raquo; {news.news_row.TIME}
 						</div>
 					<!-- IF news.news_row.FORUM_NAME -->
 						{L_FORUM}{L_COLON} <a href="{news.news_row.U_VIEWFORUM}" class="portal-forumtitle">{news.news_row.FORUM_NAME}</a>
@@ -61,8 +65,8 @@
 				<dd class="posts" data-skip-responsive="true">{news.news_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
 				<dd class="views" data-skip-responsive="true">{news.news_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
 			<!-- ENDIF -->
-			<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn>{L_POST_BY_AUTHOR} {news.news_row.USERNAME_FULL_LAST} <!-- IF news.news_row.S_UNREAD_INFO --><a href="{news.news_row.U_VIEW_UNREAD}" title="{L_VIEW_NEWEST_POST}"><i class="icon fa-external-link-square fa-fw icon-red icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span></a><!-- ELSE --><a href="{news.news_row.U_LAST_COMMENTS}" title="{L_VIEW_LATEST_POST}"><i class="icon fa-external-link-square fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span></a><!-- ENDIF --><br />
-				{news.news_row.LAST_POST_TIME}</span>
+			<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn>{L_POST_BY_AUTHOR} {news.news_row.USERNAME_FULL_LAST} <!-- IF not S_IS_BOT --><!-- IF news.news_row.S_UNREAD_INFO --><a href="{news.news_row.U_VIEW_UNREAD}" title="{L_VIEW_NEWEST_POST}"><i class="icon fa-external-link-square fa-fw icon-red icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span></a><!-- ELSE --><a href="{news.news_row.U_LAST_COMMENTS}" title="{L_VIEW_LATEST_POST}"><i class="icon fa-external-link-square fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span></a><!-- ENDIF --><br />
+				{news.news_row.LAST_POST_TIME}</span><!-- ENDIF -->
 			</dd>
 		</dl>
 	</li>

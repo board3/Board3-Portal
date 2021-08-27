@@ -15,7 +15,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 {
 	protected $default_main_columns = array('topic_count', 'global_id', 'topic_icons');
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 
@@ -30,7 +30,9 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$user->add_lang('../../ext/board3/portal/language/en/portal');
 		$request = new \phpbb_mock_request;
 		$phpbb_dispatcher = new phpbb_mock_event_dispatcher();
-		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put', 'obtain_attach_extensions', 'sql_load', 'sql_save'));
+		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+			->setMethods(['obtain_word_list', 'get', 'sql_exists', 'put', 'obtain_attach_extensions', 'sql_load', 'sql_save'])
+			->getMock();
 		$cache->expects($this->any())
 			->method('obtain_word_list')
 			->with()
@@ -66,7 +68,9 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $controller_helper, $request);
 		$phpbb_container->set('board3.portal.modules_helper', $this->modules_helper);
 		$phpbb_container->set('board3.portal.fetch_posts', new \board3\portal\portal\fetch_posts($auth, $cache, $this->config, $this->db, $this->modules_helper, $user));
-		$template = $this->getMock('\phpbb\template', array('set_filenames', 'destroy_block_vars', 'assign_block_vars', 'assign_display'));
+		$template = $this->getMockBuilder('\phpbb\template')
+			->setMethods(['set_filenames', 'destroy_block_vars', 'assign_block_vars', 'assign_display'])
+			->getMock();
 	}
 
 	public function getDataSet()
@@ -200,7 +204,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 
 		if ($expected_exception)
 		{
-			$this->setExpectedException($expected_exception);
+			$this->expectException($expected_exception);
 		}
 
 		$fetch_posts = phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start, $invert);
@@ -241,7 +245,9 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 	{
 		global $cache, $phpbb_container;
 
-		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put'));
+		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+			->setMethods(['obtain_word_list', 'get', 'sql_exists', 'put'])
+			->getMock();
 		$cache->expects($this->any())
 			->method('obtain_word_list')
 			->with()
