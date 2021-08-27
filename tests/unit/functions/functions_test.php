@@ -17,7 +17,7 @@ class phpbb_unit_functions_functions_test extends \board3\portal\tests\testframe
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/styles.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $cache, $user, $phpbb_root_path;
 

@@ -17,7 +17,7 @@ class phpbb_unit_modules_search_test extends \board3\portal\tests\testframework\
 	/** @var \board3\portal\modules\search */
 	protected $search;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 

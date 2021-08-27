@@ -37,7 +37,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	/** @var \phpbb_mock_request */
 	protected $request;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 		global $db, $cache, $phpbb_root_path, $phpEx, $user, $phpbb_container, $request, $template, $table_prefix;

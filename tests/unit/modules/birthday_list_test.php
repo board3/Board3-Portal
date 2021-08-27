@@ -31,7 +31,7 @@ class phpbb_unit_modules_birthday_list_test extends \board3\portal\tests\testfra
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/users.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $auth, $phpbb_dispatcher, $phpbb_root_path;
 

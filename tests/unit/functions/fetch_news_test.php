@@ -15,7 +15,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 {
 	protected $default_main_columns = array('topic_count', 'global_id', 'topic_icons');
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 

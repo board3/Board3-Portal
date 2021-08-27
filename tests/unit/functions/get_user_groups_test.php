@@ -14,7 +14,7 @@ class phpbb_unit_functions_get_user_groups_test extends \board3\portal\tests\tes
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/user_groups.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $cache, $user, $phpbb_root_path;
 

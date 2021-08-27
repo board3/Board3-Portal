@@ -13,7 +13,7 @@ class board3_includes_helper_test extends \board3\portal\tests\testframework\tes
 
 	protected $modules;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		$config = new \phpbb\config\config(array());
 		$this->modules = array(

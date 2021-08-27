@@ -22,7 +22,7 @@ class listener_test extends \phpbb_template_template_test_case
 
 	static public $hidden_fields = array();
 
-	public function setup()
+	public function setup(): void
 	{
 		parent::setUp();
 

@@ -20,7 +20,7 @@ class phpbb_unit_modules_clock_test extends \board3\portal\tests\testframework\t
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 

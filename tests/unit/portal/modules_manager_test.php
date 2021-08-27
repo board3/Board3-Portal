@@ -31,7 +31,7 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 		return $this->createXMLDataSet(dirname(__FILE__) . '/../acp/fixtures/modules.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $cache, $db, $phpbb_root_path, $phpEx;
 

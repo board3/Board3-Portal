@@ -19,7 +19,7 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 
 	static public $redirect = false;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $cache, $phpbb_extension_manager, $phpbb_root_path;
 

@@ -12,7 +12,7 @@
 */
 class phpbb_functional_portal_birthday_list_test extends \board3\portal\tests\testframework\functional_test_case
 {
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 

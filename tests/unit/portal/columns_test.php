@@ -11,7 +11,7 @@ class board3_portal_columns_test extends \board3\portal\tests\testframework\test
 {
 	protected $portal_columns;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 

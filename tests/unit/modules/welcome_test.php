@@ -35,7 +35,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/configs.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 		global $cache, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request, $config, $phpbb_container, $user;

@@ -24,7 +24,7 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/auth.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $phpbb_root_path, $phpEx, $phpbb_dispatcher;
 

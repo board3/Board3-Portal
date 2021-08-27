@@ -7,7 +7,7 @@
 *
 */
 
-class phpbb_functions_simple_test extends PHPUnit_Framework_TestCase
+class phpbb_functions_simple_test extends \PHPUnit\Framework\TestCase
 {
 	public function test_ap_validate()
 	{

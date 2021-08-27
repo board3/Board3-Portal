@@ -20,7 +20,7 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 	protected $default_main_columns = array('topic_count', 'global_id', 'topic_icons');
 	protected $fetch_posts;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $auth, $cache, $phpbb_dispatcher, $phpbb_root_path, $phpEx, $template, $user;
 

@@ -35,7 +35,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/configs.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 		global $cache, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request, $user;
@@ -122,7 +122,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 		{
 			$this->expected_config[$key] = $value;
 		}
-		
+
 		$portal_config = obtain_portal_config();
 
 		foreach ($portal_config as $key => $value)

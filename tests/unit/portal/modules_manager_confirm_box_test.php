@@ -37,7 +37,7 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		return $this->createXMLDataSet(dirname(__FILE__) . '/../acp/fixtures/modules.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $cache, $db, $portal_config, $phpbb_root_path, $phpEx;
 

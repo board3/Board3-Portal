@@ -25,7 +25,7 @@ class main_test extends \board3\portal\tests\testframework\database_test_case
 		return $this->createXMLDataSet(dirname(__FILE__) . '/../acp/fixtures/modules.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		global $phpbb_root_path, $phpEx, $table_prefix, $cache;
 
