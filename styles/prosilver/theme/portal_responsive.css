@@ -1,5 +1,4 @@
-@media only screen and (max-width: 1040px), only screen and (max-device-width: 1040px)
-{
+@media (max-width: 1040px) {
 	.responsive-portal-announcements dd.views { display: none !important; }
 	dd.responsive-portal-announcements { display: none !important; }
 
@@ -21,8 +20,7 @@
 	#portal-forumlist dl.icon dt { width: 125% !important; }
 }
 
-@media only screen and (max-width: 895px), only screen and (max-device-width: 895px)
-{
+@media (max-width: 895px) {
 	div#portal-right {
 		width: 49% !important;
 		margin-left: 1% !important;
@@ -53,8 +51,7 @@
 	.responsive-portal-announcements dt { width: 100% !important; }
 }
 
-@media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
-{
+@media (max-width: 700px) {
 	.responsive-portal-news dd.lastpost, .responsive-portal-announcements dd.lastpost { display: none !important; }
 	.responsive-portal-news dt .list-inner, .responsive-portal-announcements dt .list-inner { margin-right: 0 !important; }
 	.responsive-portal-news dt, .responsive-portal-announcements dt { width: 100% !important; }
@@ -70,6 +67,11 @@
 		float: right !important;
 	}
 
+	.row .pagination .ellipsis + li {
+		display: inline !important;
+		vertical-align: bottom !important;
+	}
+
 	#portal-forumlist dl.icon dt { width: 100% !important; }
 	#portal-left ul.topiclist dd, #portal-right ul.topiclist dd { display: block !important; }
 	.portal-responsive-show { display: block !important; }
@@ -83,5 +85,18 @@
 		margin-left: 0 !important;
 		margin-right: 0 !important;
 		padding-left: 0 !important;
+	}
+
+	.b3p-jumpbox {
+		margin: 15px auto;
+	}
+	.b3p-copyright {
+		clear: both;
+	}
+}
+
+@media (max-width: 500px) {
+	.portal-news-pagination .pagination {
+		display: none;
 	}
 }

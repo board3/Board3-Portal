@@ -307,7 +307,7 @@ class custom extends module_base
 			default:
 				if (!isset($custom_code))
 				{
-					$custom_code = generate_text_for_edit($portal_config['board3_custom_' . $module_id . '_code'], $this->config['board3_custom_' . $module_id . '_uid'], '');
+					$custom_code = generate_text_for_edit($portal_config['board3_custom_' . $module_id . '_code'], $this->config['board3_custom_' . $module_id . '_uid'], 0);
 				}
 
 				$this->template->assign_vars(array(

@@ -18,7 +18,7 @@
              </h4>
              <!-- IF announcements.center_row.PAGINATION --><strong class="pagination"><span>{announcements.center_row.PAGINATION}</span></strong><!-- ENDIF -->
              <ul class="linklist">
-                <li>{L_POSTED} {L_POST_BY_AUTHOR}{L_COLON} {announcements.center_row.POSTER_FULL} &raquo; {announcements.center_row.TIME}</li>
+				<li>{L_POSTED} {L_POST_BY_AUTHOR}{L_COLON} {announcements.center_row.POSTER_FULL} &raquo; <a href="{announcements.center_row.U_LAST_COMMENTS}" title="{L_GOTO_LAST_POST}"> {announcements.center_row.TIME}</a></li>
                 <li class="rightside"><!-- IF announcements.center_row.FORUM_NAME -->{L_FORUM}{L_COLON} <strong><a href="{announcements.center_row.U_VIEWFORUM}">{announcements.center_row.FORUM_NAME}</a></strong><!-- ELSE -->{L_GLOBAL_ANNOUNCEMENT}<!-- ENDIF --></li>
              </ul>
              <!-- IF not $S_POSTBODY_TOP --><div class="postbody portal-module-postbody"><!-- ENDIF -->

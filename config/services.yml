@@ -2,9 +2,8 @@ imports:
     - { resource: modules.yml }
 
 parameters:
-    board3.portal.config.table: %core.table_prefix%portal_config
-    board3.portal.modules.table: %core.table_prefix%portal_modules
-
+    board3.portal.config.table: '%core.table_prefix%portal_config'
+    board3.portal.modules.table: '%core.table_prefix%portal_modules'
 services:
     board3.portal.main:
         class: board3\portal\controller\main

@@ -125,7 +125,7 @@ class portal_module
 
 						if (!($this->c_class = $this->portal_helper->get_module($module_data['module_classname'])))
 						{
-							continue;
+							break;
 						}
 
 						// Load module language
@@ -445,7 +445,7 @@ class portal_module
 
 						if (!($this->c_class = $this->portal_helper->get_module($module_classname)))
 						{
-							continue;
+							break;
 						}
 
 						// Do not add modules that shouldn't be added

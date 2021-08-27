@@ -1,7 +1,7 @@
 {$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON --><img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />&nbsp;<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
 <!-- BEGIN random_member -->
 	<div class="portal-centered-content"><span class="portal-random-member-name">{random_member.USERNAME_FULL}</span><br class="portal-clear" />
-		<!-- IF random_member.AVATAR_IMG --><a href="{random_member.U_VIEW_PROFILE}">{random_member.AVATAR_IMG}</a><br class="portal-clear" /><!-- ENDIF -->
+		<!-- IF random_member.AVATAR_IMG --><a href="{random_member.U_VIEW_PROFILE}">{random_member.AVATAR_IMG}</a><!-- ELSEIF $NO_AVATAR_IMG --><a href="{random_member.U_VIEW_PROFILE}"><img src="{T_THEME_PATH}{$NO_AVATAR_IMG}" alt="" /></a><br class="portal-clear" /><!-- ENDIF -->
 		<!-- IF random_member.RANK_TITLE --><span class="gensmall">{random_member.RANK_TITLE}</span><br class="portal-clear" /><!-- ENDIF -->
 		<!-- IF random_member.RANK_IMG -->{random_member.RANK_IMG}<br class="portal-clear" /><!-- ENDIF -->
 	</div>
