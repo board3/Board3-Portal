@@ -80,7 +80,9 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 		$this->calendar = new \board3\portal\modules\calendar(self::$config, $modules_helper, $this->template, $db, $this->request, dirname(__FILE__) . '/../../../', 'php', $user, $this->path_helper, $log);
 		define('PORTAL_MODULES_TABLE', 'phpbb_portal_modules');
 		define('PORTAL_CONFIG_TABLE', 'phpbb_portal_config');
-		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put'));
+		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+			->setMethods(['destroy', 'sql_exists', 'get', 'put'])
+			->getMock();
 		$cache->expects($this->any())
 			->method('destroy')
 			->with($this->equalTo('portal_config'));

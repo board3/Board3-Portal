@@ -51,10 +51,12 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$phpbb_container = new \phpbb_mock_container_builder();
 		// Mock module service collection
 		$config = new \phpbb\config\config(array());
-		$auth = $this->getMock('\phpbb\auth\auth', array('acl_get'));
+		$auth = $this->getMockBuilder('\phpbb\auth\auth')
+			->setMethods(['acl_get'])
+			->getMock();
 		$auth->expects($this->any())
 			->method('acl_get')
-			->with($this->anything())
+			->withAnyParameters()
 			->will($this->returnValue(true));
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
 		$controller_helper->add_route('board3_portal_controller', 'portal');
@@ -73,7 +75,9 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$phpbb_container->setParameter('board3.portal.config.table', $table_prefix . 'portal_config');
 		$this->portal_columns = new \board3\portal\portal\columns();
 		$phpbb_container->set('board3.portal.columns', $this->portal_columns);
-		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'sql_load', 'sql_save'));
+		$cache = $this->getMockBuilder('\phpbb\cache\cache')
+			->setMethods(['destroy', 'sql_exists', 'get', 'put', 'sql_load', 'sql_save'])
+			->getMock();
 		$cache->expects($this->any())
 			->method('destroy')
 			->with($this->equalTo('sql'));
@@ -102,7 +106,9 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		));
 		$this->database_handler = new \board3\portal\portal\modules\database_handler($db);
 		$this->constraints_handler = new \board3\portal\portal\modules\constraints_handler($this->portal_columns, $user);
-		$phpbb_dispatcher = $this->getMock('\phpbb\event\dispatcher', array('trigger_event'), array($phpbb_container));
+		$phpbb_dispatcher = $this->getMockBuilder('\phpbb\event\dispatcher')
+			->setMethods(['trigger_event'])
+			->getMock();
 		$phpbb_dispatcher->expects($this->any())
 			->method('trigger_event')
 			->with($this->anything())

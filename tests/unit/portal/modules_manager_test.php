@@ -55,7 +55,9 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 		));
 
 		$this->portal_columns = new \board3\portal\portal\columns();
-		$cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'sql_load', 'sql_save'));
+		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+			->setMethods(['destroy', 'sql_exists', 'get', 'put', 'sql_load', 'sql_save'])
+			->getMock();
 		$cache->expects($this->any())
 			->method('destroy')
 			->with($this->equalTo('portal_modules'));

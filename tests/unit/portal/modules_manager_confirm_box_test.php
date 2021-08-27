@@ -63,7 +63,9 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		));
 
 		$this->portal_columns = new \board3\portal\portal\columns();
-		$this->cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'purge'));
+		$this->cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+			->setMethods(['destroy', 'sql_exists', 'get', 'put', 'purge'])
+			->getMock();
 		$this->cache->expects($this->any())
 			->method('destroy')
 			->withConsecutive(array($this->equalTo('config')), array($this->equalTo('portal_config')));
@@ -147,7 +149,9 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 
 	public function test_module_delete()
 	{
-		$this->cache = $this->getMock('\phpbb\cache\cache', array('destroy', 'sql_exists', 'get', 'put', 'purge'));
+		$this->cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+			->setMethods(['destroy', 'sql_exists', 'get', 'put', 'purge'])
+			->getMock();
 		$this->cache->expects($this->any())
 			->method('destroy')
 			->with($this->equalTo('sql'));

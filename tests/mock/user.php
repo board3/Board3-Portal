@@ -9,7 +9,7 @@
 
 namespace board3\portal\tests\mock;
 
-class user extends \PHPUnit_Framework_TestCase
+class user extends \PHPUnit\Framework\TestCase
 {
 	public $lang = array();
 

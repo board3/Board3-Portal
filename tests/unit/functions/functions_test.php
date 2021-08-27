@@ -25,8 +25,13 @@ class phpbb_unit_functions_functions_test extends \board3\portal\tests\testframe
 
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
 		$this->language = new \phpbb\language\language($this->language_file_loader);
-		$user = $this->getMock('\phpbb\user', array('optionget'), array($this->language, '\phpbb\datetime'));
-		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'sql_exists'));
+		$user = $this->getMockBuilder('\phpbb\user')
+			->setMethods(['optionget'])
+			->setConstructorArgs([$this->language, '\phpbb\datetime'])
+			->getMock();
+		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+			->setMethods(['obtain_word_list', 'sql_exists'])
+			->getMock();
 		$cache->expects($this->any())
 			->method('obtain_word_list')
 			->with()

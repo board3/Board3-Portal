@@ -25,8 +25,12 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 
 		parent::setUp();
 
-		$cache = $this->getMock('\phpbb\cache\driver', array('get', 'put'));
-		$this->auth = $this->getMock('\phpbb\auth\auth', array('acl_get'));
+		$cache = $this->getMockBuilder('\phpbb\cache\driver')
+			->setMethods(['get', 'put'])
+			->getMock();
+		$this->auth = $this->getMockBuilder('\phpbb\auth\auth')
+			->setMethods(['acl_get'])
+			->getMock();
 		$this->auth->expects($this->any())
 			->method('acl_get')
 			->with($this->anything())
@@ -143,7 +147,10 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 		$this->assertNull($this->controller_helper->load_module_language($this->modules['\board3\portal\modules\link_us']));
 		$this->assertEquals('Link to us', $this->user->lang('LINK_US'));
 		$this->assertFalse(isset($this->user->lang['PORTAL_LEADERS_EXT']));
-		$module = $this->getMock('\board3\portal\modules\link_us', array('get_language'), array($this->config, new \board3\portal\tests\mock\template($this), new \board3\portal\tests\mock\user));
+		$module = $this->getMockBuilder('\board3\portal\modules\link_us')
+			->setMethods(['get_language'])
+			->setConstructorArgs([$this->config, new \board3\portal\tests\mock\template($this), new \board3\portal\tests\mock\user])
+			->getMock();
 		$module->expects($this->any())
 			->method('get_language')
 			->willReturn(array(

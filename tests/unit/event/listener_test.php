@@ -36,9 +36,11 @@ class listener_test extends \phpbb_template_template_test_case
 
 	public function setup_listener()
 	{
-		global $cache, $db, $phpbb_root_path, $phpEx;
+		global $cache, $db, $phpbb_root_path, $phpEx, $phpbb_admin_path;
 
-		$cache = $this->getMock('\phpbb\cache\cache', array('obtain_word_list', 'get', 'sql_exists', 'put', 'obtain_attach_extensions'));
+		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+			->setMethods(['obtain_word_list', 'get', 'sql_exists', 'put', 'obtain_attach_extensions'])
+			->getMock();
 		$cache->expects($this->any())
 			->method('obtain_word_list')
 			->with()
@@ -47,14 +49,24 @@ class listener_test extends \phpbb_template_template_test_case
 			->method('get')
 			->with($this->anything())
 			->will($this->returnValue(false));
-		$db = $this->getMock('\phpbb\db\driver\driver_interface');
+		$db = $this->getMockBuilder('\phpbb\db\driver\driver_interface')
+			->getMock();
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
 		$this->language = new \phpbb\language\language($this->language_file_loader);
 
-		$this->user = $this->getMock('\phpbb\user', array(), array($this->language, '\phpbb\datetime'));
+		$this->user = $this->getMockBuilder('\phpbb\user')
+			->setConstructorArgs([$this->language, '\phpbb\datetime'])
+			->getMock();
 		$this->user->expects($this->any())
 			->method('lang')
 			->will($this->returnValue('foo'));
+		$this->auth = $this->getMockBuilder('\phpbb\auth\auth')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->auth->expects($this->any())
+			->method('acl_get')
+			->with($this->anything())
+			->will($this->returnValue(true));
 
 		$manager = new \phpbb_mock_extension_manager(dirname(__FILE__) . '/', array());
 		$finder = new \phpbb\finder(
@@ -83,7 +95,26 @@ class listener_test extends \phpbb_template_template_test_case
 		$routes = $router->get_routes();
 		$symfony_request = new \phpbb\symfony_request($request);
 		$routing_helper = new \phpbb\routing\helper($this->config, $router, $symfony_request, $request, $filesystem, $phpbb_root_path, 'php');
-		$this->controller_helper = new mock_controller_helper($this->template, $this->user, $this->config, $symfony_request, $request, $routing_helper);
+		$cron_manager = $this->getMockBuilder('\phpbb\cron\manager')->disableOriginalConstructor()->getMock();
+		$dispatcher = $this->getMockBuilder('\phpbb\event\dispatcher')->getMock();
+		$language = $this->getMockBuilder('\phpbb\language\language')->disableOriginalConstructor()->getMock();
+		$this->controller_helper = new mock_controller_helper(
+			$this->auth,
+			$cache,
+			$this->config,
+			$cron_manager,
+			$db,
+			$dispatcher,
+			$language,
+			$request,
+			$routing_helper,
+			$symfony_request,
+			$this->template,
+			$this->user,
+			$phpbb_root_path,
+			$phpbb_admin_path,
+			$phpEx
+		);
 
 		$this->path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request(
@@ -94,14 +125,6 @@ class listener_test extends \phpbb_template_template_test_case
 			$this->phpbb_root_path,
 			$this->php_ext
 		);
-
-		$this->auth = $this->getMockBuilder('\phpbb\auth\auth')
-			->disableOriginalConstructor()
-			->getMock();
-		$this->auth->expects($this->any())
-			->method('acl_get')
-			->with($this->anything())
-			->will($this->returnValue(true));
 
 		$this->controller = $this->getMockBuilder('\board3\portal\controller\main')
 			->disableOriginalConstructor()

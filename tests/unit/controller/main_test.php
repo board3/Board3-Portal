@@ -54,7 +54,9 @@ class main_test extends \board3\portal\tests\testframework\database_test_case
 			'\board3\portal\modules\clock'	=> new \board3\portal\modules\clock($this->config, $this->template),
 		);
 		$portal_helper = new \board3\portal\includes\helper($modules);
-		$auth = $this->getMock('\phpbb\auth\auth', array('acl_get'));
+		$auth = $this->getMockBuilder('\phpbb\auth\auth')
+			->setMethods(['acl_get'])
+			->getMock();
 		$auth->expects($this->any())
 			->method('acl_get')
 			->with($this->anything())
