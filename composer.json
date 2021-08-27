@@ -5,7 +5,7 @@
 	"homepage": "https://www.board3.de",
 	"version": "2.3.0",
 	"time": "2015-08-04 12:49:14",
-	"license": "GPL-2.0",
+	"license": "GPL-2.0-only",
 	"authors": [{
 			"name": "Marc Alexander",
 			"email": "admin@m-a-styles.de",
@@ -28,7 +28,7 @@
 	"extra": {
 		"display-name": "Board3 Portal",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.3.0,<3.4.*@dev"
+			"phpbb/phpbb": ">=3.3.0,<3.4@dev"
 		},
 		"version-check": {
 			"host": "board3.de",
