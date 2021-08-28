@@ -28,13 +28,13 @@ class database_handler
 	/** @var int Board3 module enabled */
 	const B3_MODULE_ENABLED = 1;
 
-	/** @var \phpbb\db\driver\driver_interface */
+	/** @var driver_interface */
 	protected $db;
 
 	/**
 	 * Constructor for modules manager
 	 *
-	 * @param \phpbb\db\driver\driver_interface $db Database driver
+	 * @param driver_interface $db Database driver
 	 */
 	public function __construct(driver_interface $db)
 	{

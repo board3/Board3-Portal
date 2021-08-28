@@ -9,42 +9,45 @@
 
 namespace board3\portal\portal\modules;
 
+use board3\portal\controller\helper as b3p_controller_helper;
 use board3\portal\includes\helper;
 use board3\portal\modules\module_interface;
 use board3\portal\portal\columns;
+use phpbb\cache\service;
 use phpbb\db\driver\driver_interface;
 use phpbb\request\request_interface;
+use phpbb\user;
 
 class manager
 {
-	/** @var \phpbb\cache\service */
+	/** @var service */
 	protected $cache;
 
-	/** @var \board3\portal\controller\helper */
+	/** @var b3p_controller_helper */
 	protected $controller_helper;
 
-	/** @var \board3\portal\portal\columns */
+	/** @var columns */
 	protected $portal_columns;
 
-	/** @var \board3\portal\includes\helper */
+	/** @var helper */
 	protected $portal_helper;
 
-	/** @var \board3\portal\portal\modules\constraints_handler */
+	/** @var constraints_handler */
 	protected $constraints_handler;
 
-	/** @var \board3\portal\portal\modules\database_handler */
+	/** @var database_handler */
 	protected $database_handler;
 
-	/** @var \phpbb\db\driver\driver_interface */
+	/** @var driver_interface */
 	protected $db;
 
-	/** @var \phpbb\request\request_interface */
+	/** @var request_interface */
 	protected $request;
 
-	/** @var \phpbb\user */
+	/** @var user */
 	protected $user;
 
-	/** @var \board3\portal\modules\module_interface */
+	/** @var module_interface */
 	protected $module;
 
 	/** @var string u_action of acp module */
@@ -56,17 +59,27 @@ class manager
 	/**
 	 * Constructor for modules manager
 	 *
-	 * @param \phpbb\cache\service $cache phpBB cache
-	 * @param \phpbb\db\driver\driver_interface $db Database driver
-	 * @param \board3\portal\controller\helper $controller_helper Board3 Portal controller helper
-	 * @param \board3\portal\portal\columns $portal_columns Portal columns helper
-	 * @param \board3\portal\includes\helper $portal_helper Portal helper
-	 * @param \board3\portal\portal\modules\constraints_handler $constraints_handler Modules constraints handler
-	 * @param \board3\portal\portal\modules\database_handler $database_handler Modules database handler
-	 * @param \phpbb\request\request_interface $request phpBB request
-	 * @param \phpbb\user $user phpBB user
+	 * @param service $cache phpBB cache
+	 * @param driver_interface $db Database driver
+	 * @param b3p_controller_helper $controller_helper Board3 Portal controller helper
+	 * @param columns $portal_columns Portal columns helper
+	 * @param helper $portal_helper Portal helper
+	 * @param constraints_handler $constraints_handler Modules constraints handler
+	 * @param database_handler $database_handler Modules database handler
+	 * @param request_interface $request phpBB request
+	 * @param user $user phpBB user
 	 */
-	public function __construct($cache, driver_interface $db, \board3\portal\controller\helper $controller_helper, columns $portal_columns, helper $portal_helper, constraints_handler $constraints_handler, database_handler $database_handler, request_interface $request, $user)
+	public function __construct(
+		service $cache,
+		driver_interface $db,
+		b3p_controller_helper $controller_helper,
+		columns $portal_columns,
+		helper $portal_helper,
+		constraints_handler
+		$constraints_handler,
+		database_handler $database_handler,
+		request_interface $request,
+		user $user)
 	{
 		$this->cache = $cache;
 		$this->db = $db;
@@ -84,7 +97,7 @@ class manager
 	 *
 	 * @param string $u_action u_action for module
 	 *
-	 * @return \board3\portal\portal\modules\manager This class
+	 * @return manager This class
 	 */
 	public function set_u_action($u_action)
 	{
@@ -99,7 +112,7 @@ class manager
 	 *
 	 * @param string $acp_class ACP module class
 	 *
-	 * @return \board3\portal\portal\modules\manager This class
+	 * @return manager This class
 	 */
 	public function set_acp_class($acp_class)
 	{
