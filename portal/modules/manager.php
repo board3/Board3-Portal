@@ -75,8 +75,7 @@ class manager
 		b3p_controller_helper $controller_helper,
 		columns $portal_columns,
 		helper $portal_helper,
-		constraints_handler
-		$constraints_handler,
+		constraints_handler $constraints_handler,
 		database_handler $database_handler,
 		request_interface $request,
 		user $user)
