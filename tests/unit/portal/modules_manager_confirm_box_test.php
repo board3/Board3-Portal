@@ -43,7 +43,9 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 
 		parent::setUp();
 
-		$user = new \board3\portal\tests\mock\user();
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$user = new \board3\portal\tests\mock\user($this->language, '\phpbb\datetime');
 		$request =new \phpbb_mock_request();
 		$this->request = $request;
 		$this->user = $user;
@@ -63,7 +65,8 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		));
 
 		$this->portal_columns = new \board3\portal\portal\columns();
-		$this->cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+		$this->cache = $this->getMockBuilder('\phpbb\cache\service')
+			->disableOriginalConstructor()
 			->setMethods(['destroy', 'sql_exists', 'get', 'put', 'purge'])
 			->getMock();
 		$this->cache->expects($this->any())
@@ -83,11 +86,6 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 			->method('purge');
 		$cache = $this->cache;
 		$db = $this->db;
-		$user->set(array(
-			'UNABLE_TO_MOVE'	=> 'UNABLE_TO_MOVE',
-			'UNABLE_TO_MOVE_ROW'	=> 'UNABLE_TO_MOVE_ROW',
-			'SUCCESS_DELETE'		=> 'SUCCESS_DELETE',
-		));
 
 		$this->database_handler = new \board3\portal\portal\modules\database_handler($db);
 		$this->constraints_handler = new \board3\portal\portal\modules\constraints_handler($this->portal_columns, $user);
@@ -101,9 +99,6 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 			$phpbb_root_path,
 			$phpEx
 		);
-
-		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
-		$this->language = new \phpbb\language\language($this->language_file_loader);
 
 		$this->b3p_controller_helper = new \board3\portal\controller\helper(
 			new \phpbb\auth\auth(),
@@ -149,7 +144,8 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 
 	public function test_module_delete()
 	{
-		$this->cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+		$this->cache = $this->getMockBuilder('\phpbb\cache\service')
+			->disableOriginalConstructor()
 			->setMethods(['destroy', 'sql_exists', 'get', 'put', 'purge'])
 			->getMock();
 		$this->cache->expects($this->any())
@@ -186,7 +182,7 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		modules_manager_confirm_box_test::$confirm = true;
 		$this->assertNull($this->modules_manager->module_delete(6, 'foobar', 'module_delete', 6));
 		$this->assertEquals(E_USER_NOTICE, phpbb_acp_move_module_test::$error_type);
-		$this->assertEquals('SUCCESS_DELETEadm/index.php?i=15&amp;mode=foobar', phpbb_acp_move_module_test::$error);
+		$this->assertEquals('adm/index.php?i=15&amp;mode=foobar', phpbb_acp_move_module_test::$error);
 		phpbb_acp_move_module_test::$override_trigger_error = false;
 	}
 }

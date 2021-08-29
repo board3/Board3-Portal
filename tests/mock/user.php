@@ -9,53 +9,48 @@
 
 namespace board3\portal\tests\mock;
 
-class user extends \PHPUnit\Framework\TestCase
+class user extends \phpbb\user
 {
 	public $lang = array();
 
 	public function set($data)
 	{
-		$this->assertTrue(is_array($data));
-
 		foreach ($data as $key => $column)
 		{
 			$this->lang[$key] = $column;
 		}
 	}
 
-	public function add_lang_ext($ext, $file)
+	public function add_lang_ext($ext_name, $lang_set, $use_db = false, $use_help = false)
 	{
-		if ($ext != 'board3/portal')
+		if ($ext_name != 'board3/portal')
 		{
 			return; // can't support other extensions
 		}
 
-		if (is_array($file))
+		if (is_array($lang_set))
 		{
-			foreach ($file as $cur_file)
+			foreach ($lang_set as $cur_file)
 			{
-				$this->add_lang_ext($ext, $cur_file);
+				$this->add_lang_ext($ext_name, $cur_file);
 			}
 			return;
 		}
 
-		if (file_exists(dirname(__FILE__) . '/../../language/en/' . $file . '.php'))
+		if (file_exists(dirname(__FILE__) . '/../../language/en/' . $lang_set . '.php'))
 		{
-			include_once(dirname(__FILE__) . '/../../language/en/' . $file . '.php');
+			include_once(dirname(__FILE__) . '/../../language/en/' . $lang_set . '.php');
 
 			if (isset($lang))
 			{
 				$this->set($lang);
 			}
 		}
-		else
-		{
-			$this->markTestIncomplete('Unable to include language file ' . $file);
-		}
 	}
 
-	public function lang($var)
+	public function lang()
 	{
-		return $this->lang[$var];
+		$args = func_get_args();
+		return $this->lang[$args[0]];
 	}
 }

@@ -43,7 +43,10 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		global $db, $cache, $phpbb_root_path, $phpEx, $user, $phpbb_container, $request, $template, $table_prefix;
 		global $phpbb_dispatcher;
 
-		$user = new \board3\portal\tests\mock\user();
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$user = new \board3\portal\tests\mock\user($this->language, '\phpbb\datetime');
+
 		$template = new \board3\portal\tests\mock\template($this);
 		$this->template = $template;
 		$request = new \phpbb_mock_request;
@@ -75,7 +78,8 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$phpbb_container->setParameter('board3.portal.config.table', $table_prefix . 'portal_config');
 		$this->portal_columns = new \board3\portal\portal\columns();
 		$phpbb_container->set('board3.portal.columns', $this->portal_columns);
-		$cache = $this->getMockBuilder('\phpbb\cache\cache')
+		$cache = $this->getMockBuilder('\phpbb\cache\service')
+			->disableOriginalConstructor()
 			->setMethods(['destroy', 'sql_exists', 'get', 'put', 'sql_load', 'sql_save'])
 			->getMock();
 		$cache->expects($this->any())
@@ -123,9 +127,6 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			$phpbb_root_path,
 			$phpEx
 		);
-
-		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
-		$this->language = new \phpbb\language\language($this->language_file_loader);
 
 		$b3p_controller_helper = new \board3\portal\controller\helper(
 			new \phpbb\auth\auth(),

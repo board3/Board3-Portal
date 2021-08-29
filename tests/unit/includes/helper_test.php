@@ -15,9 +15,14 @@ class board3_includes_helper_test extends \board3\portal\tests\testframework\tes
 
 	public function setUp(): void
 	{
+		global $phpbb_root_path;
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$user = new \board3\portal\tests\mock\user($this->language, '\phpbb\datetime');
+
 		$config = new \phpbb\config\config(array());
 		$this->modules = array(
-			'\board3\portal\modules\link_us'	=> new \board3\portal\modules\link_us($config, new \board3\portal\tests\mock\template($this), new \board3\portal\tests\mock\user),
+			'\board3\portal\modules\link_us'	=> new \board3\portal\modules\link_us($config, new \board3\portal\tests\mock\template($this), $user),
 		);
 
 		$this->portal_helper = $this->get_portal_helper($this->modules);

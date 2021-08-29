@@ -37,7 +37,10 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 
 		parent::setUp();
 
-		$user = new \board3\portal\tests\mock\user();
+		$language = $this->getMockBuilder('\phpbb\language\language')
+			->disableOriginalConstructor()
+			->getMock();
+		$user = new \board3\portal\tests\mock\user($language, '\phpbb\datetime');
 		$request =new \phpbb_mock_request();
 
 		$config = new \phpbb\config\config(array());
@@ -55,7 +58,8 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 		));
 
 		$this->portal_columns = new \board3\portal\portal\columns();
-		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
+		$cache = $this->getMockBuilder('\phpbb\cache\service')
+			->disableOriginalConstructor()
 			->setMethods(['destroy', 'sql_exists', 'get', 'put', 'sql_load', 'sql_save'])
 			->getMock();
 		$cache->expects($this->any())
