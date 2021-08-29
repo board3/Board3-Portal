@@ -23,7 +23,6 @@
 		"marc1706/phpbb-text-shortener": "^0.2.0"
 	},
 	"require-dev": {
-		"phpbb/epv": "dev-master"
 	},
 	"extra": {
 		"display-name": "Board3 Portal",
