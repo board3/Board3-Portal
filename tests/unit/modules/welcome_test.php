@@ -207,7 +207,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 		$this->welcome = new \board3\portal\modules\welcome($this->config, $this->request, $this->template, $this->user, '', '');
 		$this->request->overwrite('submit', true, \phpbb\request\request_interface::POST);
 		$this->request->overwrite('welcome_message', '');
-		$this->setExpectedTriggerError(E_WARNING);
+		$this->setExpectedTriggerError(version_compare(PHP_VERSION, '8', '>=') ? E_WARNING : E_USER_WARNING);
 		check_form_key::$form_key_valid = true;
 		$this->welcome->update_welcome('foobar', 5);
 	}
