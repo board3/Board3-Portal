@@ -42,7 +42,7 @@ class phpbb_functional_portal_no_error_test extends \board3\portal\tests\testfra
 	public function test_portal_all_pages($style_id)
 	{
 		$crawler = self::request('GET', 'index.php?style=' . $style_id);
-		$this->assertNotContains('Menu', $crawler->text());
+		$this->assertStringNotContainsString('Menu', $crawler->text());
 
 		$crawler = self::request('GET', 'adm/index.php?i=-board3-portal-acp-portal_module&mode=config&sid=' . $this->sid);
 
@@ -54,7 +54,7 @@ class phpbb_functional_portal_no_error_test extends \board3\portal\tests\testfra
 		$this->assertContainsLang('CONFIG_UPDATED', $crawler->text());
 
 		$crawler = self::request('GET', 'index.php?style=' . $style_id);
-		$this->assertContains('Menu', $crawler->text());
+		$this->assertStringContainsString('Menu', $crawler->text());
 
 		$crawler = self::request('GET', 'adm/index.php?i=-board3-portal-acp-portal_module&mode=config&sid=' . $this->sid);
 
@@ -66,8 +66,8 @@ class phpbb_functional_portal_no_error_test extends \board3\portal\tests\testfra
 		$this->assertContainsLang('CONFIG_UPDATED', $crawler->text());
 
 		$crawler = self::request('GET', 'index.php?style=' . $style_id);
-		$this->assertNotContains('Board Style', $crawler->text());
-		$this->assertContains('User menu', $crawler->text());
+		$this->assertStringNotContainsString('Board Style', $crawler->text());
+		$this->assertStringContainsString('User menu', $crawler->text());
 
 		$crawler = self::request('GET', 'adm/index.php?i=-board3-portal-acp-portal_module&mode=config&sid=' . $this->sid);
 
@@ -79,6 +79,6 @@ class phpbb_functional_portal_no_error_test extends \board3\portal\tests\testfra
 		$this->assertContainsLang('CONFIG_UPDATED', $crawler->text());
 
 		$crawler = self::request('GET', 'index.php?style=' . $style_id);
-		$this->assertNotContains('Menu', $crawler->text());
+		$this->assertStringNotContainsString('Menu', $crawler->text());
 	}
 }

@@ -40,7 +40,10 @@ class phpbb_unit_modules_birthday_list_test extends \board3\portal\tests\testfra
 		$this->template = new \board3\portal\tests\mock\template($this);
 		$this->config = new \phpbb\config\config(array());
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
-		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$this->language = new \board3\portal\tests\mock\language($this->language_file_loader);
+		$this->language->set([
+			'BIRTHDAYS_AHEAD'		=> 'BIRTHDAYS_AHEAD',
+		]);
 		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$this->user->timezone = new \DateTimeZone('UTC');
 		$this->user->add_lang('common');
@@ -73,7 +76,6 @@ class phpbb_unit_modules_birthday_list_test extends \board3\portal\tests\testfra
 				'username'			=> 'foobar',
 				'username_clean'	=> 'foobar',
 				'user_birthday'		=> preg_replace('/([0-9]+)-([0-9])-([0-9]+)/', '$1- $2-$3', date('d-n-Y', time())),
-				'user_id'			=> 2,
 				'user_permissions'	=> '',
 				'user_sig'			=> '',
 				'user_type'			=> USER_NORMAL,
@@ -82,7 +84,6 @@ class phpbb_unit_modules_birthday_list_test extends \board3\portal\tests\testfra
 				'username'			=> 'foobar2',
 				'username_clean'	=> 'foobar2',
 				'user_birthday'		=> preg_replace('/([0-9]+)-([0-9])-([0-9]+)/', '$1- $2-$3', date('d-n-Y',  time() + 86400 * 3)),
-				'user_id'			=> 3,
 				'user_permissions'	=> '',
 				'user_sig'			=> '',
 				'user_type'			=> USER_NORMAL,

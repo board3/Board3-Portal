@@ -266,7 +266,7 @@ class helper
 		$this->check_permission();
 
 		// Load language file
-		$this->user->add_lang_ext('board3/portal', 'portal');
+		$this->language->add_lang('portal', 'board3/portal');
 
 		// Obtain portal config
 		obtain_portal_config();

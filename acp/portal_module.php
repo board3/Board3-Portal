@@ -12,7 +12,7 @@ namespace board3\portal\acp;
 class portal_module
 {
 	public $u_action;
-	public $new_config = array();
+	public $new_config = [];
 
 	/** @var \board3\portal\modules\module_interface */
 	protected $c_class;
@@ -148,7 +148,7 @@ class portal_module
 							$groups_ary = explode(',', $module_data['module_group_ids']);
 
 							// get group info from database and assign the block vars
-							$sql = 'SELECT group_id, group_name 
+							$sql = 'SELECT group_id, group_name
 									FROM ' . GROUPS_TABLE . '
 									ORDER BY group_id ASC';
 							$result = $this->db->sql_query($sql);
@@ -318,7 +318,7 @@ class portal_module
 				$this->page_title = $display_vars['title'];
 
 				$this->template->assign_vars(array(
-					'L_TITLE'			=> $this->user->lang[$display_vars['title']],
+					'L_TITLE'			=> $this->user->lang($display_vars['title']),
 					'L_TITLE_EXPLAIN'	=> (isset($this->user->lang[$display_vars['title'] . '_EXP'])) ? $this->user->lang[$display_vars['title'] . '_EXP'] : '',
 
 					'S_ERROR'			=> (sizeof($error)) ? true : false,

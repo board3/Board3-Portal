@@ -5,7 +5,7 @@ env:
     SNIFF: 1            # Run code sniffer on your code? 1 or 0
     IMAGE_ICC: 0        # Run icc profile sniffer on your images? 1 or 0
     EPV: 1              # Run EPV (Extension Pre Validator) on your code? 1 or 0
-    EXECUTABLE_FILES: 1 # Run check for executable files? 1 or 0
+    EXECUTABLE_FILES: 0 # Run check for executable files? 1 or 0
     PHPBB_BRANCH: 3.3.x # The phpBB branch to run tests on
 
 on:

@@ -29,13 +29,13 @@ class phpbb_functional_portal_redirect_test extends \board3\portal\tests\testfra
 		}
 		else
 		{
-			$mod_rewrite = (getenv('HTTP_MOD_REWRITE')=='On') ? true : false;
+			$mod_rewrite = getenv('HTTP_MOD_REWRITE') == 'On';
 		}
 
 		if ($mod_rewrite)
 		{
 			$crawler = self::request('GET', '');
-			$this->assertContains('Board3 Portal', $crawler->text());
+			$this->assertStringContainsString('Board3 Portal', $crawler->text());
 		}
 	}
 
@@ -44,7 +44,7 @@ class phpbb_functional_portal_redirect_test extends \board3\portal\tests\testfra
 		// Make sure we are logged out
 		$this->logout();
 
-		$crawler = self::request('GET', 'app.php/portal?sid=' . $this->sid);
+		$crawler = self::request('GET', 'app.php/portal');
 		$form = $crawler->selectButton('Login')->form();
 		$form->setValues(array(
 			'username'	=> 'admin',
@@ -54,6 +54,6 @@ class phpbb_functional_portal_redirect_test extends \board3\portal\tests\testfra
 		$crawler = self::submit($form);
 
 		// Should be redirected to portal and logged in
-		$this->assertContains('Site Admin', $crawler->text());
+		$this->assertStringContainsString('Site Admin', $crawler->text());
 	}
 }

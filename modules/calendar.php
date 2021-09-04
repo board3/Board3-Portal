@@ -188,19 +188,19 @@ class calendar extends module_base
 		// output our general calendar bits
 		$down = $this->mini_cal_month - 1;
 		$up = $this->mini_cal_month + 1;
-		$prev_month = '<a href="' . $this->modules_helper->route('board3_portal_controller') . "?m$module_id=$down#minical$module_id" . '" rel="nofollow"><i class="fa fa-backward" aria-hidden="true" title="' . $this->user->lang['VIEW_PREVIOUS_MONTH'] . '"></i></a>';
-		$next_month = '<a href="' . $this->modules_helper->route('board3_portal_controller') . "?m$module_id=$up#minical$module_id" . '" rel="nofollow"><i class="fa fa-forward" aria-hidden="true" title="' . $this->user->lang['VIEW_NEXT_MONTH'] . '"></i></a>';
+		$prev_month = '<a href="' . $this->modules_helper->route('board3_portal_controller') . "?m$module_id=$down#minical$module_id" . '" rel="nofollow"><i class="fa fa-backward" aria-hidden="true" title="' . $this->user->lang('VIEW_PREVIOUS_MONTH') . '"></i></a>';
+		$next_month = '<a href="' . $this->modules_helper->route('board3_portal_controller') . "?m$module_id=$up#minical$module_id" . '" rel="nofollow"><i class="fa fa-forward" aria-hidden="true" title="' . $this->user->lang('VIEW_NEXT_MONTH') . '"></i></a>';
 
 		$this->template->assign_block_vars('minical', array(
 			'S_SUNDAY_FIRST'	=> ($this->config['board3_sunday_first_' . $module_id]) ? true : false,
-			'L_MINI_CAL_MONTH'	=> (($this->config['board3_long_month_' . $module_id]) ? $this->user->lang['mini_cal']['long_month'][$this->day[0][1]] : $this->user->lang['mini_cal']['month'][$this->day[0][1]]) . " " . $this->day[0][2],
-			'L_MINI_CAL_SUN'	=> '<span style="color: ' . $this->config['board3_calendar_sunday_color_' . $module_id] . ';">' . $this->user->lang['mini_cal']['day'][1] . '</span>',
-			'L_MINI_CAL_MON'	=> $this->user->lang['mini_cal']['day'][2],
-			'L_MINI_CAL_TUE'	=> $this->user->lang['mini_cal']['day'][3],
-			'L_MINI_CAL_WED'	=> $this->user->lang['mini_cal']['day'][4],
-			'L_MINI_CAL_THU'	=> $this->user->lang['mini_cal']['day'][5],
-			'L_MINI_CAL_FRI'	=> $this->user->lang['mini_cal']['day'][6],
-			'L_MINI_CAL_SAT'	=> $this->user->lang['mini_cal']['day'][7],
+			'L_MINI_CAL_MONTH'	=> (($this->config['board3_long_month_' . $module_id]) ? $this->user->lang(['mini_cal', 'long_month'], $this->day[0][1]) : $this->user->lang(['mini_cal', 'month'], $this->day[0][1])) . " " . $this->day[0][2],
+			'L_MINI_CAL_SUN'	=> '<span style="color: ' . $this->config['board3_calendar_sunday_color_' . $module_id] . ';">' . $this->user->lang(['mini_cal', 'day'], 1) . '</span>',
+			'L_MINI_CAL_MON'	=> $this->user->lang(['mini_cal', 'day'], 2),
+			'L_MINI_CAL_TUE'	=> $this->user->lang(['mini_cal', 'day'], 3),
+			'L_MINI_CAL_WED'	=> $this->user->lang(['mini_cal', 'day'], 4),
+			'L_MINI_CAL_THU'	=> $this->user->lang(['mini_cal', 'day'], 5),
+			'L_MINI_CAL_FRI'	=> $this->user->lang(['mini_cal', 'day'], 6),
+			'L_MINI_CAL_SAT'	=> $this->user->lang(['mini_cal', 'day'], 7),
 			'U_PREV_MONTH'		=> $prev_month,
 			'U_NEXT_MONTH'		=> $next_month,
 			'S_DISPLAY_EVENTS'	=> ($this->config['board3_display_events_' . $module_id]) ? true : false,
@@ -488,13 +488,13 @@ class calendar extends module_base
 				// Check for errors
 				if (!$event_title)
 				{
-					trigger_error($this->user->lang['NO_EVENT_TITLE'] . adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang('NO_EVENT_TITLE') . adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				// overwrite already existing events and make sure we don't try to save an event outside of the normal array size of $events
 				if (isset($link_id) && $link_id < sizeof($events))
 				{
-					$message = $this->user->lang['EVENT_UPDATED'];
+					$message = $this->user->lang('EVENT_UPDATED');
 
 					$events[$link_id] = array(
 						'title' 		=> $event_title,
@@ -510,7 +510,7 @@ class calendar extends module_base
 				}
 				else
 				{
-					$message = $this->user->lang['EVENT_ADDED'];
+					$message = $this->user->lang('EVENT_ADDED');
 
 					$events[] = array(
 						'title'			=> $event_title,

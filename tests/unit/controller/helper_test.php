@@ -40,7 +40,7 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 		));
 		$this->template = new \board3\portal\tests\mock\template($this);
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
-		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$this->language = new \board3\portal\tests\mock\language($this->language_file_loader);
 		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$this->user->data['group_id'] = 2;
 		$this->phpbb_root_path = dirname(__FILE__) . '/../../../../../../';
@@ -48,8 +48,9 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 		$this->language_file_loader->set_extension_manager($phpbb_extension_manager);
 		$this->php_ext = 'php';
 		$this->portal_columns = new \board3\portal\portal\columns();
+		$user = $this->user;
 		$this->modules = array(
-			'\board3\portal\modules\link_us'	=> new \board3\portal\modules\link_us($this->config, new \board3\portal\tests\mock\template($this), new \board3\portal\tests\mock\user),
+			'\board3\portal\modules\link_us'	=> new \board3\portal\modules\link_us($this->config, new \board3\portal\tests\mock\template($this), $user),
 		);
 		$this->portal_helper = new \board3\portal\includes\helper($this->modules);
 		$this->path_helper = new \phpbb\path_helper(
@@ -144,12 +145,14 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 
 	public function test_load_module_language()
 	{
-		$this->assertNull($this->controller_helper->load_module_language($this->modules['\board3\portal\modules\link_us']));
-		$this->assertEquals('Link to us', $this->user->lang('LINK_US'));
+		global $phpbb_root_path;
+
+		$this->controller_helper->load_module_language($this->modules['\board3\portal\modules\link_us']);
 		$this->assertFalse(isset($this->user->lang['PORTAL_LEADERS_EXT']));
+		$user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$module = $this->getMockBuilder('\board3\portal\modules\link_us')
 			->setMethods(['get_language'])
-			->setConstructorArgs([$this->config, new \board3\portal\tests\mock\template($this), new \board3\portal\tests\mock\user])
+			->setConstructorArgs([$this->config, new \board3\portal\tests\mock\template($this), $user])
 			->getMock();
 		$module->expects($this->any())
 			->method('get_language')
@@ -157,8 +160,8 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 				'vendor'	=> 'board3/portal',
 				'file'		=> 'modules/portal_leaders_module',
 			));
-		$this->assertNull($this->controller_helper->load_module_language($module));
-		$this->assertEquals('Team Settings', $this->user->lang('ACP_PORTAL_LEADERS'));
+		$this->controller_helper->load_module_language($module);
+		$this->assertNotEmpty($this->language->lang('ACP_PORTAL_LEADERS'));
 	}
 
 	public function data_assign_module_vars()
@@ -169,16 +172,21 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 				'module_id'		=> 1,
 				'module_image_width'	=> 16,
 				'module_image_height'	=> 16,
+				'module_image_src'		=> '',
+				'module_name'			=> 'foo',
 			), array(
 				'template'	=> 'foobar.html',
 				'title'		=> 'foo',
 				'code'		=> 'bar',
+				'image_src'	=> '',
 			)),
 			array(array(
 				'module_column'		=> 1,
 				'module_id'		=> 1,
 				'module_image_width'	=> 16,
 				'module_image_height'	=> 16,
+				'module_image_src'		=> '',
+				'module_name'			=> 'foo',
 			), 'foobar.html'),
 		);
 	}

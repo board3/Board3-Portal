@@ -10,13 +10,14 @@
 namespace board3\portal\portal\modules;
 
 use board3\portal\portal\columns;
+use phpbb\user;
 
 class constraints_handler
 {
-	/** @var \board3\portal\portal\columns */
+	/** @var columns */
 	protected $portal_columns;
 
-	/** @var \phpbb\user */
+	/** @var user */
 	protected $user;
 
 	/** @var string Form action (link) */
@@ -29,7 +30,7 @@ class constraints_handler
 	 * Constructor for constraints handler
 	 *
 	 * @param columns $portal_columns Portal columns
-	 * @param \phpbb\user $user phpBB user object
+	 * @param user $user phpBB user object
 	 */
 	public function __construct(columns $portal_columns, $user)
 	{

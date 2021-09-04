@@ -64,6 +64,11 @@ class template
 		$this->test_case->assertSame($expected, $this->data[$row]);
 	}
 
+	public function assert_not_exist($row)
+	{
+		$this->test_case->assertArrayNotHasKey($row, $this->data);
+	}
+
 	public function delete_var($key)
 	{
 		unset($this->data[$key]);
@@ -71,6 +76,6 @@ class template
 
 	public function get_row($row)
 	{
-		return $this->data[$row];
+		return $this->data[$row] ?? null;
 	}
 }

@@ -63,10 +63,10 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 		$crawler = self::request('GET', $module_link);
 		preg_match('/module_classname=(?:([a-z0-9\\\_]+))/', $module_link, $module_name);
 		$module_name = $module_name[1];
-		$this->assertContains('Are you sure you wish to delete the module', $crawler->text());
+		$this->assertStringContainsString('Are you sure you wish to delete the module', $crawler->text());
 		$form = $crawler->selectButton('confirm')->form();
 		$crawler = self::submit($form);
-		$this->assertContains('The module was removed successfully.', $crawler->text());
+		$this->assertStringContainsString('The module was removed successfully.', $crawler->text());
 
 		// Add it back
 		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&mode=modules&add[center]=true&module_column=2&sid=' . $this->sid);
@@ -85,7 +85,7 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 
 		// Take a look at the logs
 		$crawler = self::request('GET', 'adm/index.php?i=acp_logs&mode=admin&sid=' . $this->sid);
-		$this->assertContains(strip_tags(html_entity_decode($this->lang('LOG_PORTAL_CONFIG', $this->lang('ACP_PORTAL_GENERAL_INFO')), ENT_COMPAT, 'UTF-8')), $crawler->text());
+		$this->assertStringContainsString(strip_tags(html_entity_decode($this->lang('LOG_PORTAL_CONFIG', $this->lang('ACP_PORTAL_GENERAL_INFO')), ENT_COMPAT, 'UTF-8')), $crawler->text());
 	}
 
 	public function test_portal_permissions()
@@ -105,9 +105,9 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 		$form->setValues(array('link_title'	=> 'foobar'));
 		$crawler = self::submit($form);
 		$crawler = self::request('GET', 'adm/index.php?i=\board3\portal\acp\portal_module&mode=config&module_id=1&sid=' . $this->sid);
-		$this->assertContains('foobar', $crawler->text());
+		$this->assertStringContainsString('foobar', $crawler->text());
 		$crawler = self::request('GET', 'app.php/portal?sid=' . $this->sid);
-		$this->assertContains('foobar', $crawler->text());
+		$this->assertStringContainsString('foobar', $crawler->text());
 	}
 
 	public function data_add_second_module()
@@ -131,6 +131,6 @@ class phpbb_functional_portal_acp_test extends \board3\portal\tests\testframewor
 		$form = $crawler->selectButton('submit')->form();
 		$form['module_classname']->disableValidation()->select($module_class);
 		$crawler = self::submit($form);
-		$this->assertContains($expected_message, $crawler->text());
+		$this->assertStringContainsString($expected_message, $crawler->text());
 	}
 }

@@ -38,7 +38,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 	public function setUp(): void
 	{
 		parent::setUp();
-		global $cache, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request, $user;
+		global $cache, $config, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request, $user;
 
 		$this->path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request(
@@ -57,7 +57,10 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 			->method('trigger_event')
 			->with($this->anything())
 			->will($this->returnArgument(1));
-		self::$config = new \phpbb\config\config(array());
+		self::$config = new \phpbb\config\config([
+			'force_server_vars'		=> false,
+		]);
+		$config = self::$config;
 		\set_config('foobar', false, false, self::$config);
 		$this->template = new \board3\portal\tests\mock\template($this);
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
@@ -65,10 +68,16 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 		$modules_helper = new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), new \phpbb\config\config(array()), $controller_helper, new \phpbb_mock_request());
 		$request = $this->request = new \phpbb_mock_request();
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
-		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$this->language = new \board3\portal\tests\mock\language($this->language_file_loader);
+		$this->language->add_lang('common');
+		$this->language->add_lang_ext('board3/portal', 'modules/portal_calendar_module');
 		$user = new \phpbb\user($this->language, '\phpbb\datetime');
+		$user->data = [
+			'user_id'			=> 2,
+			'user_ip'			=> '127.0.0.1',
+			'user_dateformat'	=> 'dmY',
+		];
 		$user->timezone = new \DateTimeZone('UTC');
-		$user->add_lang('common');
 		$log = $this->getMockBuilder('\phpbb\log')
 			->setMethods(array('add'))
 			->disableOriginalConstructor()
@@ -78,8 +87,6 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 			->with($this->anything())
 			->will($this->returnValue(true));
 		$this->calendar = new \board3\portal\modules\calendar(self::$config, $modules_helper, $this->template, $db, $this->request, dirname(__FILE__) . '/../../../', 'php', $user, $this->path_helper, $log);
-		define('PORTAL_MODULES_TABLE', 'phpbb_portal_modules');
-		define('PORTAL_CONFIG_TABLE', 'phpbb_portal_config');
 		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
 			->setMethods(['destroy', 'sql_exists', 'get', 'put'])
 			->getMock();
@@ -188,6 +195,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 
 	public function test_update_events_no_error()
 	{
+		set_portal_config('board3_calendar_events_5', '[]');
 		$this->calendar->update_events('foobar', 5);
 		$this->assertNull($this->template->get_row('events'));
 	}

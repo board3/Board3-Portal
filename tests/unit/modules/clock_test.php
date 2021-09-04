@@ -32,7 +32,7 @@ class phpbb_unit_modules_clock_test extends \board3\portal\tests\testframework\t
 	public function test_get_template_side()
 	{
 		$this->assertSame('clock_side.html', $this->clock->get_template_side(5));
-		$this->template->assert_same(null, 'B3P_CLOCK_SRC');
+		$this->template->assert_not_exist( 'B3P_CLOCK_SRC');
 		$this->config->set('board3_clock_src_5', 'foobar');
 		$this->assertSame('clock_side.html', $this->clock->get_template_side(5));
 		$this->template->assert_same('foobar', 'B3P_CLOCK_SRC');
