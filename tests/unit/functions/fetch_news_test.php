@@ -19,7 +19,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 	{
 		parent::setUp();
 
-		global $auth, $cache, $config, $phpbb_container, $phpbb_dispatcher, $template, $user, $phpbb_root_path, $phpEx;
+		global $auth, $cache, $config, $phpbb_container, $phpbb_dispatcher, $template, $user, $phpbb_root_path, $phpEx, $table_prefix;
 
 		$config = new \phpbb\config\config([
 			'allow_nocensors'	=> false,
@@ -71,7 +71,7 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$phpbb_container = new \phpbb_mock_container_builder();
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
 		$controller_helper->add_route('board3_portal_controller', 'portal');
-		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $controller_helper, $request);
+		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $controller_helper, $this->db, $request, $table_prefix . 'styles');
 		$phpbb_container->set('board3.portal.modules_helper', $this->modules_helper);
 		$phpbb_container->set('board3.portal.fetch_posts', new \board3\portal\portal\fetch_posts($auth, $cache, $this->config, $this->db, $this->modules_helper, $user));
 		$template = $this->getMockBuilder('\phpbb\template')

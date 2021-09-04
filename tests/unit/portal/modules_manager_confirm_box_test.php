@@ -39,7 +39,7 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 
 	public function setUp(): void
 	{
-		global $cache, $db, $portal_config, $phpbb_root_path, $phpEx;
+		global $cache, $db, $portal_config, $phpbb_root_path, $phpEx, $table_prefix;
 
 		parent::setUp();
 
@@ -56,7 +56,7 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
 		$controller_helper->add_route('board3_portal_controller', 'portal');
-		$modules_helper = new \board3\portal\includes\modules_helper($auth, $config, $controller_helper, $this->request);
+		$modules_helper = new \board3\portal\includes\modules_helper($auth, $config, $controller_helper, $this->db, $this->request, $table_prefix . 'styles');
 
 		$this->portal_helper = new \board3\portal\includes\helper(array(
 			new \board3\portal\modules\clock($config, null),

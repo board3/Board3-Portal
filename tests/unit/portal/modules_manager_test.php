@@ -33,7 +33,7 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 
 	public function setUp(): void
 	{
-		global $cache, $db, $phpbb_root_path, $phpEx;
+		global $cache, $db, $phpbb_root_path, $phpEx, $table_prefix;
 
 		parent::setUp();
 
@@ -47,7 +47,7 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
 		$controller_helper->add_route('board3_portal_controller', 'portal');
-		$modules_helper = new \board3\portal\includes\modules_helper($auth, $config, $controller_helper, $request);
+		$modules_helper = new \board3\portal\includes\modules_helper($auth, $config, $controller_helper, $this->db, $request, $table_prefix . 'styles');
 
 		$portal_helper = new \board3\portal\includes\helper(array(
 			new \board3\portal\modules\clock($config, null),

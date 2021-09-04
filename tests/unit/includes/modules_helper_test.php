@@ -26,7 +26,7 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 
 	public function setUp(): void
 	{
-		global $phpbb_root_path, $phpEx, $phpbb_dispatcher;
+		global $phpbb_root_path, $phpEx, $phpbb_dispatcher, $table_prefix;
 
 		parent::setUp();
 
@@ -35,7 +35,6 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 		$request = new \phpbb_mock_request(array('foo' => array('bar')));
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
 		$controller_helper->add_route('board3_portal_controller', 'portal');
-		$phpbb_container = new \phpbb_mock_container_builder();
 		$phpbb_dispatcher = $this->getMockBuilder('\phpbb\event\dispatcher')
 			->setMethods(['trigger_event'])
 			->getMock();
@@ -44,7 +43,7 @@ class board3_includes_modules_helper_test extends \board3\portal\tests\testframe
 			->with($this->anything())
 			->will($this->returnArgument(1));
 
-		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $controller_helper, $request);
+		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $controller_helper, $this->db, $request, $table_prefix . 'styles');
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 	}
 

@@ -51,7 +51,9 @@ services:
             - '@auth'
             - '@config'
             - '@controller.helper'
+            - '@dbal.conn'
             - '@request'
+            - '%tables.styles%'
 
     board3.portal.columns:
         class: board3\portal\portal\columns

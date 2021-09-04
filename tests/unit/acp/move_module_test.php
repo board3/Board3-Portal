@@ -65,6 +65,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$phpbb_container = new \phpbb_mock_container_builder();
 		// Mock module service collection
 		$config = new \phpbb\config\config([]);
+		$db = $this->db;
 		$auth = $this->getMockBuilder('\phpbb\auth\auth')
 			->setMethods(['acl_get'])
 			->getMock();
@@ -74,7 +75,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			->will($this->returnValue(true));
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
 		$controller_helper->add_route('board3_portal_controller', 'portal');
-		$modules_helper = new \board3\portal\includes\modules_helper($auth, $config, $controller_helper, new \phpbb_mock_request);
+		$modules_helper = new \board3\portal\includes\modules_helper($auth, $config, $controller_helper, $db, new \phpbb_mock_request, $table_prefix . 'styles');
 		$phpbb_container->set('board3.portal.module_collection',
 			array(
 				new \board3\portal\modules\clock($config, $template),
@@ -84,9 +85,10 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			));
 		$this->portal_helper = new \board3\portal\includes\helper($phpbb_container->get('board3.portal.module_collection'));
 		$phpbb_container->set('board3.portal.helper', $this->portal_helper);
-		$phpbb_container->set('board3.portal.modules_helper', new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), $config, $controller_helper, $request));
+		$phpbb_container->set('board3.portal.modules_helper', $modules_helper);
 		$phpbb_container->setParameter('board3.portal.modules.table', $table_prefix . 'portal_modules');
 		$phpbb_container->setParameter('board3.portal.config.table', $table_prefix . 'portal_config');
+		$phpbb_container->setParameter('core.table_prefix', $table_prefix);
 		$this->portal_columns = new \board3\portal\portal\columns();
 		$phpbb_container->set('board3.portal.columns', $this->portal_columns);
 		$cache = $this->getMockBuilder('\phpbb\cache\service')
@@ -114,7 +116,6 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			->method('sql_save')
 			->with($this->anything())
 			->will($this->returnArgument(2));
-		$db = $this->db;
 		$this->language->set(array(
 			'UNABLE_TO_MOVE'	=> 'UNABLE_TO_MOVE',
 			'UNABLE_TO_MOVE_ROW'	=> 'UNABLE_TO_MOVE_ROW',
@@ -208,6 +209,8 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			'module_image_height' => '0',
 			'module_group_ids' => '',
 			'module_status' => '1',
+			'module_fa_icon'	=> '',
+			'module_fa_size'	=> '16',
 		), $module_data);
 	}
 
