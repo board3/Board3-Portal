@@ -28,6 +28,9 @@ class database_handler
 	/** @var int Board3 module enabled */
 	const B3_MODULE_ENABLED = 1;
 
+	/** @var int Default icon size in px */
+	const DEFAULT_ICON_SIZE = 16;
+
 	/** @var driver_interface */
 	protected $db;
 
@@ -70,14 +73,14 @@ class database_handler
 	public function reset_module($module, $module_id)
 	{
 		$sql_ary = array(
-			'module_name'		=> $module->get_name(),
-			'module_image_src'	=> $module->get_image(),
-			'module_group_ids'	=> '',
-			'module_image_height'	=> 16,
-			'module_image_width'	=> 16,
-			'module_fa_icon'    => '',
-			'module_fa_size'    => 1,
-			'module_status'		=> self::B3_MODULE_ENABLED,
+			'module_name'			=> $module->get_name(),
+			'module_image_src'		=> $module->get_image(),
+			'module_group_ids'		=> '',
+			'module_image_height'	=> self::DEFAULT_ICON_SIZE,
+			'module_image_width'	=> self::DEFAULT_ICON_SIZE,
+			'module_fa_icon'		=> '',
+			'module_fa_size'		=> self::DEFAULT_ICON_SIZE,
+			'module_status'			=> self::B3_MODULE_ENABLED,
 		);
 		$sql = 'UPDATE ' . PORTAL_MODULES_TABLE . '
 					SET ' . $this->db->sql_build_array('UPDATE', $sql_ary) . '

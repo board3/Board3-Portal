@@ -142,8 +142,8 @@ class portal_module
 							'MODULE_IMAGE_WIDTH'	=> $module_data['module_image_width'],
 							'MODULE_IMAGE_HEIGHT'	=> $module_data['module_image_height'],
 							'MODULE_IMAGE_SRC'		=> ($module_data['module_image_src']) ? $this->root_path . 'styles/all/theme/images/portal/' . $module_data['module_image_src'] : '',
-							'MODULE_FA'             => $module_data['module_fa_icon'],
-							'MODULE_FA_SIZE'        => $module_data['module_fa_size'],
+							'MODULE_FA'				=> $module_data['module_fa_icon'],
+							'MODULE_FA_SIZE'		=> $module_data['module_fa_size'],
 							'MODULE_ENABLED'		=> ($module_data['module_status']) ? true : false,
 							'MODULE_SHOW_IMAGE'		=> (in_array($this->portal_columns->number_to_string($module_data['module_column']), array('center', 'top', 'bottom'))) ? false : true,
 						));
@@ -277,8 +277,8 @@ class portal_module
 						'module_image_src'		=> $this->request->variable('module_image', ''),
 						'module_image_width'	=> $this->request->variable('module_img_width', 0),
 						'module_image_height'	=> $this->request->variable('module_img_height', 0),
-						'module_fa_icon'        => $this->request->variable('module_fa', ''),
-						'module_fa_size'        => $this->request->variable('module_fa_size', 16),
+						'module_fa_icon'		=> $this->request->variable('module_fa', ''),
+						'module_fa_size'		=> $this->request->variable('module_fa_size', 16),
 						'module_group_ids'		=> $module_permission,
 						'module_status'			=> $this->request->variable('module_status', self::B3_MODULE_ENABLED),
 					);
