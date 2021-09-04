@@ -23,7 +23,7 @@ class phpbb_functional_portal_link_test extends \board3\portal\tests\testframewo
 	public function test_portal_link()
 	{
 		$crawler = self::request('GET', 'index.php?sid=' . $this->sid);
-		$this->assertContains('Portal', $crawler->text());
+		$this->assertStringContainsString('Portal', $crawler->text());
 	}
 
 	public function test_disabled_portal_link()
@@ -46,7 +46,7 @@ class phpbb_functional_portal_link_test extends \board3\portal\tests\testframewo
 		});
 		foreach ($vals as $val)
 		{
-			$this->assertNotContains('Portal', $val);
+			$this->assertStringNotContainsString('Portal', $val);
 		}
 
 		// Try to access portal directly
@@ -56,7 +56,7 @@ class phpbb_functional_portal_link_test extends \board3\portal\tests\testframewo
 		});
 		foreach ($vals as $val)
 		{
-			$this->assertNotContains('Portal', $val);
+			$this->assertStringNotContainsString('Portal', $val);
 		}
 
 		// Enable portal again

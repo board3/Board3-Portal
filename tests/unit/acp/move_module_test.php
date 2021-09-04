@@ -40,12 +40,23 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	public function setUp(): void
 	{
 		parent::setUp();
-		global $db, $cache, $phpbb_root_path, $phpEx, $user, $phpbb_container, $request, $template, $table_prefix;
+		global $config, $db, $cache, $phpbb_root_path, $phpEx, $user, $phpbb_container, $request, $template, $table_prefix;
 		global $phpbb_dispatcher;
 
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
-		$this->language = new \phpbb\language\language($this->language_file_loader);
-		$user = new \board3\portal\tests\mock\user($this->language, '\phpbb\datetime');
+		$this->language = new \board3\portal\tests\mock\language($this->language_file_loader);
+		$user = new \phpbb\user($this->language, '\phpbb\datetime');
+		$user->data['user_id'] = 2;
+		$user->data['user_form_salt'] = 'foobar';
+		$user->lang['ACP_PORTAL_GENERAL_TITLE'] = 'ACP_PORTAL_GENERAL_TITLE';
+		$user->lang['YES'] = 'YES';
+		$user->lang['NO'] = 'NO';
+		$this->language->add_lang_ext('board3/portal', 'portal_acp');
+		$this->language->set([
+			'ACP_PORTAL_GENERAL_TITLE'	=> 'ACP_PORTAL_GENERAL_TITLE',
+			'PORTAL_SHOW_ALL_LEFT'		=> 'PORTAL_SHOW_ALL_LEFT',
+			'PORTAL_SHOW_ALL_RIGHT'		=> 'PORTAL_SHOW_ALL_RIGHT',
+		]);
 
 		$template = new \board3\portal\tests\mock\template($this);
 		$this->template = $template;
@@ -53,7 +64,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$this->request = $request;
 		$phpbb_container = new \phpbb_mock_container_builder();
 		// Mock module service collection
-		$config = new \phpbb\config\config(array());
+		$config = new \phpbb\config\config([]);
 		$auth = $this->getMockBuilder('\phpbb\auth\auth')
 			->setMethods(['acl_get'])
 			->getMock();
@@ -104,7 +115,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			->with($this->anything())
 			->will($this->returnArgument(2));
 		$db = $this->db;
-		$user->set(array(
+		$this->language->set(array(
 			'UNABLE_TO_MOVE'	=> 'UNABLE_TO_MOVE',
 			'UNABLE_TO_MOVE_ROW'	=> 'UNABLE_TO_MOVE_ROW',
 		));
@@ -224,7 +235,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$this->modules_manager->move_module_vertical(2, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_UP);
 		$this->assertTrue(self::$redirected);
 
-		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE_ROW');
+		$this->setExpectedTriggerError(E_USER_NOTICE, $this->language->lang('UNABLE_TO_MOVE_ROW'));
 		self::$redirected = false;
 		$this->modules_manager->move_module_vertical(2, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_UP);
 		$this->assertFalse(self::$redirected);
@@ -236,7 +247,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$this->modules_manager->move_module_vertical(3, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_DOWN);
 		$this->assertTrue(self::$redirected);
 
-		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE_ROW');
+		$this->setExpectedTriggerError(E_USER_NOTICE, $this->language->lang('UNABLE_TO_MOVE_ROW'));
 		self::$redirected = false;
 		$this->modules_manager->move_module_vertical(3, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_DOWN);
 		$this->assertFalse(self::$redirected);
@@ -258,7 +269,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	{
 		if ($error)
 		{
-			$this->setExpectedTriggerError(E_USER_NOTICE, $error);
+			$this->setExpectedTriggerError(E_USER_NOTICE, $this->language->lang($error));
 		}
 		else
 		{
@@ -311,7 +322,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			$column_start++;
 			$this->update_portal_modules();
 		}
-		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE');
+		$this->setExpectedTriggerError(E_USER_NOTICE, $this->language->lang('UNABLE_TO_MOVE'));
 		$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_RIGHT);
 	}
 
@@ -364,7 +375,7 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			$this->update_portal_modules();
 			$column_start--;
 		}
-		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE');
+		$this->setExpectedTriggerError(E_USER_NOTICE, $this->language->lang('UNABLE_TO_MOVE'));
 		$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_LEFT);
 	}
 

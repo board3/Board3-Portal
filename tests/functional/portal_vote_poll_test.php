@@ -33,10 +33,10 @@ class phpbb_functional_portal_vote_poll_test extends \board3\portal\tests\testfr
 			$crawler = self::request('GET', 'app.php/portal');
 			$form = $crawler->selectButton('Submit vote')->form();
 			$form->setValues(array('vote_id' => array(1)));
-			$crawler = self::submit($form);
+			self::submit($form);
 
 			// no errors should appear on portal
-			$crawler = self::request('GET', 'app.php/portal');
+			self::request('GET', 'app.php/portal');
 		}
 	}
 
@@ -46,6 +46,6 @@ class phpbb_functional_portal_vote_poll_test extends \board3\portal\tests\testfr
 	public function test_after_poll()
 	{
 		$this->logout();
-		$crawler = self::request('GET', 'app.php/portal');
+		self::request('GET', 'app.php/portal');
 	}
 }

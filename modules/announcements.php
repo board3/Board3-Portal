@@ -131,7 +131,7 @@ class announcements extends module_base
 			$this->config['board3_announcements_permissions_' . $module_id],
 			$this->config['board3_number_of_announcements_' . $module_id],
 			$portal_announcement_length,
-			$this->config['board3_announcements_day_' . $module_id],
+			(int) $this->config['board3_announcements_day_' . $module_id],
 			'announcements',
 			$start,
 			(bool) $this->config['board3_announcements_forum_exclude_' . $module_id]
@@ -174,7 +174,7 @@ class announcements extends module_base
 				$forum_from = $this->config['board3_global_announcements_forum_' . $module_id];
 				$forum_from = (strpos($forum_from, ',') !== false) ? explode(',', $forum_from) : (($forum_from != '') ? array($forum_from) : array());
 
-				$time = ($this->config['board3_announcements_day_' . $module_id] == 0) ? 0 : $this->config['board3_announcements_day_' . $module_id];
+				$time = ($this->config['board3_announcements_day_' . $module_id] == 0) ? 0 : (int) $this->config['board3_announcements_day_' . $module_id];
 				$post_time = ($time == 0) ? '' : 'AND topic_time > ' . (time() - $time * 86400);
 
 				$str_where = '';

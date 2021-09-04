@@ -19,8 +19,11 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 	{
 		parent::setUp();
 
-		global $auth, $cache, $phpbb_container, $phpbb_dispatcher, $template, $user, $phpbb_root_path, $phpEx;
+		global $auth, $cache, $config, $phpbb_container, $phpbb_dispatcher, $template, $user, $phpbb_root_path, $phpEx;
 
+		$config = new \phpbb\config\config([
+			'allow_nocensors'	=> false,
+		]);
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
 		$this->language = new \phpbb\language\language($this->language_file_loader);
 		$user = new \phpbb\user($this->language, '\phpbb\datetime');
@@ -54,7 +57,10 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 		$auth = new \phpbb\auth\auth();
 		$userdata = array(
 			'user_id'	=> 2,
+			'user_permissions'	=> '',
+			'user_type'	=> USER_NORMAL,
 		);
+		$user->data['user_options'] = 0;
 		$auth->acl($userdata);
 		// Pretend to allow downloads
 		$auth->acl[0][0] = true;
@@ -198,6 +204,8 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 	public function test_phpbb_fetch_news($type, $expected_columns, $expected_main_columns = array(), $number_of_posts = 5, $forum_from = '', $empty = false, $permissions = false,
 		$invert = false, $text_length = 150, $expected_exception = false)
 	{
+		global $phpbb_container;
+
 		$module_id = 5;
 		$time = time();
 		$start = 0;
@@ -207,7 +215,10 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 			$this->expectException($expected_exception);
 		}
 
-		$fetch_posts = phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start, $invert);
+		$b3p_fetch_posts = $phpbb_container->get('board3.portal.fetch_posts');
+		$b3p_fetch_posts->set_module_id($module_id);
+
+		$fetch_posts = $b3p_fetch_posts->get_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start, $invert);
 
 		if (!$empty)
 		{
@@ -257,24 +268,31 @@ class phpbb_functions_fetch_news_test extends \board3\portal\tests\testframework
 			->with($this->anything())
 			->will($this->returnValue(array()));
 
-		$phpbb_container->set('board3.portal.fetch_posts', new \board3\portal\portal\fetch_posts($this->auth, $cache, $this->config, $this->db, $this->modules_helper, $this->user));
-		$fetch_posts = phpbb_fetch_posts(5, '', false, 5, 150, time(), 'announcements');
+		$b3p_fetch_posts = new \board3\portal\portal\fetch_posts($this->auth, $cache, $this->config, $this->db, $this->modules_helper, $this->user);
+		$b3p_fetch_posts->set_module_id(5);
+		$fetch_posts = $b3p_fetch_posts->get_posts('', false, 5, 150, time(), 'announcements');
 		$this->assertEmpty($fetch_posts);
 	}
 
 	public function test_no_allowed_forums()
 	{
-		global $auth;
+		global $auth, $phpbb_container;
 
 		$auth = new \phpbb\auth\auth();
 
-		$fetch_posts = phpbb_fetch_posts(5, '2', true, 5, 150, time(), 'announcements');
+		$b3p_fetch_posts = $phpbb_container->get('board3.portal.fetch_posts');
+		$b3p_fetch_posts->set_module_id(5);
+		$fetch_posts = $b3p_fetch_posts->get_posts('2', true, 5, 150, time(), 'announcements');
 		$this->assertSame(array(), $fetch_posts);
 	}
 
 	public function test_number_replies()
 	{
-		$fetch_posts = phpbb_fetch_posts(5, '', false, 5, 150, time(), 'news');
+		global $phpbb_container;
+
+		$b3p_fetch_posts = $phpbb_container->get('board3.portal.fetch_posts');
+		$b3p_fetch_posts->set_module_id(5);
+		$fetch_posts = $b3p_fetch_posts->get_posts('', false, 5, 150, time(), 'news');
 		// Topic has 2 posts which means there is only one reply
 		$this->assertEquals(1, $fetch_posts[0]['topic_replies']);
 		$this->assertEquals(1, $fetch_posts[0]['topic_replies_real']);

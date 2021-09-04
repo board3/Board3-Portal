@@ -117,8 +117,11 @@ class main
 		$this->includes_path = $phpbb_root_path . 'ext/board3/portal/includes/';
 		$this->root_path = $phpbb_root_path . 'ext/board3/portal/';
 		$portal_root_path = $this->root_path;
-		define('PORTAL_MODULES_TABLE', $modules_table);
-		define('PORTAL_CONFIG_TABLE', $config_table);
+		if (!defined('PORTAL_MODULES_TABLE'))
+		{
+			define('PORTAL_MODULES_TABLE', $modules_table);
+			define('PORTAL_CONFIG_TABLE', $config_table);
+		}
 
 		if (!function_exists('obtain_portal_config'))
 		{

@@ -94,21 +94,6 @@ function obtain_portal_modules()
 }
 
 /**
-* Fetch post for news & announce
-*
-* @deprecated 2.1.0-b1 (To be removed: 2.2.0)
-*/
-function phpbb_fetch_posts($module_id, $forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start = 0, $invert = false)
-{
-	global $phpbb_container;
-
-	$fetch_posts = $phpbb_container->get('board3.portal.fetch_posts');
-	$fetch_posts->set_module_id($module_id);
-
-	return $fetch_posts->get_posts($forum_from, $permissions, $number_of_posts, $text_length, $time, $type, $start, $invert);
-}
-
-/**
 * Censor title, return short title
 *
 * @param $title string title to censor
@@ -390,7 +375,7 @@ function check_file_src($value, $key, $module_id, $force_error = true)
 	// We check if the chosen file is present in the styles/all/ folder
 	if (!file_exists($portal_root_path . 'styles/all/theme/images/portal/' . $value))
 	{
-		$error .= $user->lang['B3P_FILE_NOT_FOUND'] . ': styles/all/theme/images/portal/' . $value . '<br />';
+		$error .= $user->lang('B3P_FILE_NOT_FOUND') . ': styles/all/theme/images/portal/' . $value . '<br />';
 	}
 
 	if (!empty($error))

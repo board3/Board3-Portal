@@ -37,10 +37,9 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 
 		parent::setUp();
 
-		$language = $this->getMockBuilder('\phpbb\language\language')
-			->disableOriginalConstructor()
-			->getMock();
-		$user = new \board3\portal\tests\mock\user($language, '\phpbb\datetime');
+		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
+		$this->language = new \board3\portal\tests\mock\language($this->language_file_loader);
+		$user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$request =new \phpbb_mock_request();
 
 		$config = new \phpbb\config\config(array());
@@ -48,12 +47,12 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
 		$controller_helper->add_route('board3_portal_controller', 'portal');
-		$modules_helper = new \board3\portal\includes\modules_helper($auth, $config, $controller_helper, $this->request);
+		$modules_helper = new \board3\portal\includes\modules_helper($auth, $config, $controller_helper, $request);
 
 		$portal_helper = new \board3\portal\includes\helper(array(
 			new \board3\portal\modules\clock($config, null),
 			new \board3\portal\modules\birthday_list($config, null, $this->db, $user),
-			new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $this->phpbb_root_path, $this->phpEx),
+			new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $phpbb_root_path, $phpEx),
 			new \board3\portal\modules\donation($config, $request, null, $user, $modules_helper),
 		));
 
@@ -84,7 +83,7 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 			->with($this->anything())
 			->will($this->returnArgument(2));
 		$db = $this->db;
-		$user->set(array(
+		$this->language->set(array(
 			'UNABLE_TO_MOVE'	=> 'UNABLE_TO_MOVE',
 			'UNABLE_TO_MOVE_ROW'	=> 'UNABLE_TO_MOVE_ROW',
 		));
@@ -112,7 +111,7 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 			new \board3\portal\tests\mock\template($this),
 			$user,
 			$this->path_helper,
-			$this->portal_helper,
+			$portal_helper,
 			$phpbb_root_path,
 			$phpEx
 		);

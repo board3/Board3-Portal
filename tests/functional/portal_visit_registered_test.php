@@ -103,8 +103,8 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 		$crawler = self::request('GET', 'app.php/portal');
 
 		$legend = $crawler->filter('dd.portal-responsive-show p em')->text();
-		$this->assertContains('Administrators', $legend);
-		$this->assertContains('Global moderators', $legend);
+		$this->assertStringContainsString('Administrators', $legend);
+		$this->assertStringContainsString('Global moderators', $legend);
 	}
 
 	public function test_setup_hidden_forum()
@@ -121,7 +121,7 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 		$form = $crawler->selectButton('Submit')->form();
 		$form['forum_perm_from']->select(2);
 		$crawler = self::submit($form);
-		$this->assertContains('Forum created successfully', $crawler->text());
+		$this->assertStringContainsString('Forum created successfully', $crawler->text());
 
 		// Hide forum using permissions from registered users
 		$crawler = self::request('GET', 'adm/index.php?i=acp_permissions&mode=setting_group_local&sid=' . $this->sid);
@@ -180,8 +180,8 @@ class phpbb_functional_portal_visit_registered_test extends \board3\portal\tests
 		$this->logout();
 		$this->login('standard-user');
 		$crawler = self::request('GET', 'index.php');
-		$this->assertNotContains('Hidden forum', $crawler->text());
+		$this->assertStringNotContainsString('Hidden forum', $crawler->text());
 		$crawler = self::request('GET', 'app.php/portal');
-		$this->assertNotContains('Hidden topic', $crawler->text());
+		$this->assertStringNotContainsString('Hidden topic', $crawler->text());
 	}
 }

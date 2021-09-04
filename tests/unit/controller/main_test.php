@@ -44,8 +44,12 @@ class main_test extends \board3\portal\tests\testframework\database_test_case
 		$cache = new \phpbb\cache\driver\dummy();
 
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
-		$this->language = new \phpbb\language\language($this->language_file_loader);
-		$user = new \board3\portal\tests\mock\user($this->language, '\phpbb\datetime');
+		$this->language = new \board3\portal\tests\mock\language($this->language_file_loader);
+		$this->language->set([
+			'S_PORTAL_ALL'		=> 'S_PORTAL_ALL',
+		]);
+		$user = new \phpbb\user($this->language, '\phpbb\datetime');
+		$user->style['style_path'] = 'prosilver';
 
 		$config_table = $table_prefix . 'portal_config';
 		$modules_table = $table_prefix . 'portal_modules';
@@ -103,15 +107,35 @@ class main_test extends \board3\portal\tests\testframework\database_test_case
 		$this->template->assert_same(true, 'S_PORTAL_ALL');
 		$this->template->delete_var('S_PORTAL_ALL');
 		$this->assertNull($this->controller_main->handle(array('left' => 1)));
-		$this->template->assert_same(null, 'S_PORTAL_ALL');
+		$this->template->assert_not_exist('S_PORTAL_ALL');
 	}
 
 	public function test_is_enabled_side_column()
 	{
-		$this->assertFalse($this->controller_main->get_module_template(array(), new \board3\portal\modules\clock($this->config, $this->template)));
+		$this->assertFalse($this->controller_main->get_module_template(
+			[
+				'module_column'		=> 1,
+				'module_id'		=> 1,
+				'module_image_width'	=> 16,
+				'module_image_height'	=> 16,
+				'module_image_src'		=> '',
+				'module_name'			=> 'foo',
+			],
+			new \board3\portal\modules\clock($this->config, $this->template)
+		));
 		$this->assertNull($this->controller_main->handle(array('left' => 1)));
 		$this->template->assert_same(true, 'S_PORTAL_ALL');
 		$this->config['board3_left_column'] = false;
-		$this->assertSame('clock_side.html', $this->controller_main->get_module_template(array('module_column' => 1), new \board3\portal\modules\clock($this->config, $this->template)));
+		$this->assertSame('clock_side.html', $this->controller_main->get_module_template(
+			[
+				'module_column'		=> 1,
+				'module_id'		=> 1,
+				'module_image_width'	=> 16,
+				'module_image_height'	=> 16,
+				'module_image_src'		=> '',
+				'module_name'			=> 'foo',
+			],
+			new \board3\portal\modules\clock($this->config, $this->template)
+		));
 	}
 }

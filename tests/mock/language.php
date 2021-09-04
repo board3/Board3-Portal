@@ -9,15 +9,25 @@
 
 namespace board3\portal\tests\mock;
 
-class user extends \phpbb\user
+class language extends \phpbb\language\language
 {
-	public $lang = array();
-
 	public function set($data)
 	{
 		foreach ($data as $key => $column)
 		{
 			$this->lang[$key] = $column;
+		}
+	}
+
+	public function add_lang($component, $extension_name = null)
+	{
+		if (!$extension_name !== null)
+		{
+			$this->add_lang_ext($extension_name, $component);
+		}
+		else
+		{
+			parent::add_lang($component, $extension_name);
 		}
 	}
 
@@ -39,18 +49,13 @@ class user extends \phpbb\user
 
 		if (file_exists(dirname(__FILE__) . '/../../language/en/' . $lang_set . '.php'))
 		{
-			include_once(dirname(__FILE__) . '/../../language/en/' . $lang_set . '.php');
+			$foo = dirname(__FILE__) . '/../../language/en/' . $lang_set . '.php';
+			include(dirname(__FILE__) . '/../../language/en/' . $lang_set . '.php');
 
 			if (isset($lang))
 			{
 				$this->set($lang);
 			}
 		}
-	}
-
-	public function lang()
-	{
-		$args = func_get_args();
-		return $this->lang[$args[0]];
 	}
 }

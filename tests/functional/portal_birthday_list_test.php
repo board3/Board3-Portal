@@ -47,6 +47,6 @@ class phpbb_functional_portal_birthday_list_test extends \board3\portal\tests\te
 	public function test_after_announce()
 	{
 		$crawler = self::request('GET', 'app.php/portal');
-		$this->assertContains(date('d M', time() + 86400*2), $crawler->html());
+		$this->assertStringContainsString(date('d M', time() + 86400*2), $crawler->html());
 	}
 }

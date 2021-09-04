@@ -122,8 +122,8 @@ class listener_test extends \phpbb_template_template_test_case
 			),
 			new \phpbb\filesystem\filesystem(),
 			new \phpbb_mock_request(),
-			$this->phpbb_root_path,
-			$this->php_ext
+			$phpbb_root_path,
+			$phpEx
 		);
 
 		$this->controller = $this->getMockBuilder('\board3\portal\controller\main')
@@ -212,6 +212,7 @@ class listener_test extends \phpbb_template_template_test_case
 		$this->phpbb_dispatcher->addListener('core.page_header', array($this->listener, 'add_portal_link'));
 
 		$this->controller_helper->set_current_url('');
+		$vars = [];
 		$result = $this->phpbb_dispatcher->trigger_event('core.page_header', compact($vars));
 
 		$this->assertEmpty($result);

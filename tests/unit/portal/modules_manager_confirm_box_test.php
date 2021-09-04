@@ -44,8 +44,9 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		parent::setUp();
 
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
-		$this->language = new \phpbb\language\language($this->language_file_loader);
-		$user = new \board3\portal\tests\mock\user($this->language, '\phpbb\datetime');
+		$this->language = new \board3\portal\tests\mock\language($this->language_file_loader);
+		$this->language->add_lang_ext('board3/portal', 'portal_acp');
+		$user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$request =new \phpbb_mock_request();
 		$this->request = $request;
 		$this->user = $user;
@@ -60,7 +61,7 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		$this->portal_helper = new \board3\portal\includes\helper(array(
 			new \board3\portal\modules\clock($config, null),
 			new \board3\portal\modules\birthday_list($config, null, $this->db, $user),
-			new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $this->phpbb_root_path, $this->phpEx),
+			new \board3\portal\modules\welcome($config, new \phpbb_mock_request, $this->db, $user, $phpbb_root_path, $phpEx),
 			new \board3\portal\modules\donation($config, $this->request, null, $user, $modules_helper),
 		));
 
@@ -122,7 +123,15 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		// Build confirm box first
 		$this->modules_manager->set_u_action('adm/index.php?i=15&amp;mode=foobar')->set_acp_class('foo\bar');
 		self::$confirm = false;
-		$this->assertNull($this->modules_manager->reset_module(15, 'barfoo', 6, array()));
+		$module_data = [
+			'module_column'		=> 1,
+			'module_id'		=> 6,
+			'module_image_width'	=> 16,
+			'module_image_height'	=> 16,
+			'module_image_src'		=> '',
+			'module_name'			=> 'foo',
+		];
+		$this->assertNull($this->modules_manager->reset_module(15, 'barfoo', 6, $module_data));
 		$this->assertEquals('<input type="hidden" name="i" value="15" />
 <input type="hidden" name="mode" value="barfoo" />
 <input type="hidden" name="module_reset" value="1" />
@@ -132,13 +141,13 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		// Actually reset module
 		phpbb_acp_move_module_test::$override_trigger_error = true;
 		self::$confirm = true;
-		$this->assertNull($this->modules_manager->reset_module(15, 'barfoo', 6, array()));
+		$this->assertNull($this->modules_manager->reset_module(15, 'barfoo', 6, $module_data));
 		$this->assertEquals(array(
 			'seconds'	=> 3,
 			'link'		=> 'adm/index.php?i=-foo-bar&amp;mode=config&amp;module_id=6',
 		), self::$meta_refresh);
-		$this->assertEquals(phpbb_acp_move_module_test::$error_type, E_USER_NOTICE);
-		$this->assertEquals(phpbb_acp_move_module_test::$error, 'adm/index.php?i=15&amp;mode=foobar&amp;module_id=6');
+		$this->assertEquals(E_USER_NOTICE, phpbb_acp_move_module_test::$error_type);
+		$this->assertEquals($this->language->lang('MODULE_RESET_SUCCESS') . 'adm/index.php?i=15&amp;mode=foobar&amp;module_id=6', phpbb_acp_move_module_test::$error);
 		phpbb_acp_move_module_test::$override_trigger_error = false;
 	}
 
@@ -182,7 +191,7 @@ class modules_manager_confirm_box_test extends \board3\portal\tests\testframewor
 		modules_manager_confirm_box_test::$confirm = true;
 		$this->assertNull($this->modules_manager->module_delete(6, 'foobar', 'module_delete', 6));
 		$this->assertEquals(E_USER_NOTICE, phpbb_acp_move_module_test::$error_type);
-		$this->assertEquals('adm/index.php?i=15&amp;mode=foobar', phpbb_acp_move_module_test::$error);
+		$this->assertEquals($this->language->lang('SUCCESS_DELETE'). 'adm/index.php?i=15&amp;mode=foobar', phpbb_acp_move_module_test::$error);
 		phpbb_acp_move_module_test::$override_trigger_error = false;
 	}
 }

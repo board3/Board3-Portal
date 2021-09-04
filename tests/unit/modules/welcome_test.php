@@ -45,9 +45,10 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 		$request = $this->request;
 		$this->template = new \board3\portal\tests\mock\template($this);
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
-		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$this->language = new \board3\portal\tests\mock\language($this->language_file_loader);
 		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$user = $this->user;
+		$user->data['user_options'] = 0;
 		$cache = $this->getMockBuilder('\phpbb\cache\driver\dummy')
 			->setMethods(['destroy', 'sql_exists', 'get', 'put', 'sql_load'])
 			->getMock();
@@ -172,6 +173,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 
 	public function test_update_welcome()
 	{
+		\set_portal_config('board3_welcome_message_' . 5, 'Welcome to my Community!');
 		$this->welcome->update_welcome('foobar', 5);
 		$this->template->assert_same(true, 'S_EDIT');
 		$this->request->overwrite('preview', true, \phpbb\request\request_interface::POST);
@@ -205,7 +207,7 @@ class phpbb_unit_modules_welcome_test extends \board3\portal\tests\testframework
 		$this->welcome = new \board3\portal\modules\welcome($this->config, $this->request, $this->template, $this->user, '', '');
 		$this->request->overwrite('submit', true, \phpbb\request\request_interface::POST);
 		$this->request->overwrite('welcome_message', '');
-		$this->setExpectedTriggerError(E_USER_WARNING);
+		$this->setExpectedTriggerError(E_WARNING);
 		check_form_key::$form_key_valid = true;
 		$this->welcome->update_welcome('foobar', 5);
 	}

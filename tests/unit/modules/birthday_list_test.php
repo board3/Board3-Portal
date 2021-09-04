@@ -40,7 +40,10 @@ class phpbb_unit_modules_birthday_list_test extends \board3\portal\tests\testfra
 		$this->template = new \board3\portal\tests\mock\template($this);
 		$this->config = new \phpbb\config\config(array());
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
-		$this->language = new \phpbb\language\language($this->language_file_loader);
+		$this->language = new \board3\portal\tests\mock\language($this->language_file_loader);
+		$this->language->set([
+			'BIRTHDAYS_AHEAD'		=> 'BIRTHDAYS_AHEAD',
+		]);
 		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$this->user->timezone = new \DateTimeZone('UTC');
 		$this->user->add_lang('common');

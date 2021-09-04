@@ -17,8 +17,8 @@ class board3_includes_helper_test extends \board3\portal\tests\testframework\tes
 	{
 		global $phpbb_root_path;
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
-		$this->language = new \phpbb\language\language($this->language_file_loader);
-		$user = new \board3\portal\tests\mock\user($this->language, '\phpbb\datetime');
+		$this->language = new \board3\portal\tests\mock\language($this->language_file_loader);
+		$user = new \phpbb\user($this->language, '\phpbb\datetime');
 
 		$config = new \phpbb\config\config(array());
 		$this->modules = array(

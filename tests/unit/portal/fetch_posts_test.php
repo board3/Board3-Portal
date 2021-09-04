@@ -22,14 +22,17 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 
 	public function setUp(): void
 	{
-		global $auth, $cache, $phpbb_dispatcher, $phpbb_root_path, $phpEx, $template, $user;
+		global $auth, $cache, $config, $phpbb_dispatcher, $phpbb_root_path, $phpEx, $template, $user;
 
 		parent::setUp();
 
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
 		$this->language = new \phpbb\language\language($this->language_file_loader);
 		$user = new \phpbb\user($this->language, '\phpbb\datetime');
-		$user->data['user_id'] = 2;
+		$user->data = [
+			'user_id' => 2,
+			'user_options' => 0,
+		];
 		$user->timezone = new \DateTimeZone('UTC');
 		$user->add_lang('common');
 		$user->add_lang('../../ext/board3/portal/language/en/portal');
@@ -54,10 +57,16 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 			->with($this->anything())
 			->will($this->returnArgument(2));
 		require_once(dirname(__FILE__) . '/../../../../../../includes/functions_content.php');
-		$this->config = new \phpbb\config\config(array('allow_attachments' => 1));
+		$this->config = new \phpbb\config\config([
+			'allow_attachments'	=> 1,
+			'allow_smilies'		=> 1,
+		]);
+		$config = $this->config;
 		$auth = new \phpbb\auth\auth();
 		$userdata = array(
 			'user_id'	=> 2,
+			'user_permissions' => '',
+			'user_type'		=> USER_NORMAL,
 		);
 		$auth->acl($userdata);
 		// Pretend to allow downloads
