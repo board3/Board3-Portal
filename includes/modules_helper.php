@@ -25,6 +25,9 @@ class modules_helper
 	*/
 	protected $config;
 
+	/** @var \phpbb\db\driver\driver_interface */
+	protected $db;
+
 	/** @var \phpbb\controller\helper Controller helper */
 	protected $controller_helper;
 
@@ -34,6 +37,9 @@ class modules_helper
 	*/
 	protected $request;
 
+	/** @var string Styles table */
+	protected $styles_table;
+
 	/**
 	* Constructor
 	* NOTE: The parameters of this method must match in order and type with
@@ -41,14 +47,18 @@ class modules_helper
 	* @param \phpbb\auth\auth $auth Auth object
 	* @param \phpbb\config\config $config phpBB config
 	* @param \phpbb\controller\helper $controller_helper Controller helper
+	* @param \phpbb\db\driver\driver_interface $db Dbal connection
 	* @param \phpbb\request\request $request phpBB request
+	* @param string $styles_table Styles table
 	*/
-	public function __construct($auth, $config, $controller_helper, $request)
+	public function __construct($auth, $config, $controller_helper, $db, $request, string $styles_table)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
 		$this->controller_helper = $controller_helper;
+		$this->db = $db;
 		$this->request = $request;
+		$this->styles_table = $styles_table;
 	}
 
 	/**
@@ -187,5 +197,45 @@ class modules_helper
 		$value = $this->request->variable($key, 0);
 
 		$this->config->set($key, $value);
+	}
+
+	/**
+	* Show available styles
+	*
+	* @return string Select with available styles
+	*/
+	public function display_fa_styles(): string
+	{
+		$portal_fa_styles = json_decode($this->config->offsetGet('board3_portal_fa_styles'));
+		if (!$portal_fa_styles)
+		{
+			$portal_fa_styles = [];
+		}
+		$options = '';
+		$query = 'SELECT style_name
+			FROM ' . $this->styles_table;
+		$result = $this->db->sql_query($query);
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			$options .= '<option value="' . $row['style_name'] . '"';
+			if (in_array($row['style_name'], $portal_fa_styles))
+			{
+				$options .= ' selected';
+			}
+			$options .= '>' . $row['style_name'] . '</option>';
+		}
+		$this->db->sql_freeresult($result);
+		return '<select id="board3_fa_styles" name="board3_fa_styles[]" multiple>' . $options . '</select>';
+	}
+
+	/**
+	* Save styles that have been set as Font Awesome styles
+	*
+	* @param string $key Key of the parameter
+	*/
+	public function store_fa_styles(string $key): void
+	{
+		$style_array = $this->request->variable($key, ['']);
+		$this->config->set('board3_portal_fa_styles', json_encode($style_array));
 	}
 }

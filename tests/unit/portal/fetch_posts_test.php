@@ -22,7 +22,7 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 
 	public function setUp(): void
 	{
-		global $auth, $cache, $config, $phpbb_dispatcher, $phpbb_root_path, $phpEx, $template, $user;
+		global $auth, $cache, $config, $phpbb_dispatcher, $phpbb_root_path, $phpEx, $template, $user, $table_prefix;
 
 		parent::setUp();
 
@@ -76,7 +76,7 @@ class phpbb_portal_fetch_posts_test extends \board3\portal\tests\testframework\d
 		$this->auth = $auth;
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
 		$controller_helper->add_route('board3_portal_controller', 'portal');
-		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $controller_helper, new phpbb_mock_request());
+		$this->modules_helper = new \board3\portal\includes\modules_helper($auth, $this->config, $controller_helper, $this->db, new phpbb_mock_request(), $table_prefix . 'styles');
 		$this->user = $user;
 		$template = $this->getMockBuilder('\phpbb\template')
 			->setMethods(['set_filenames', 'destroy_block_vars', 'assign_block_vars', 'assign_display'])

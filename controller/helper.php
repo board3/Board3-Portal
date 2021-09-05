@@ -230,6 +230,9 @@ class helper
 	*/
 	public function assign_module_vars($row, $template_module)
 	{
+		$fa_styles = json_decode($this->config['board3_portal_fa_styles']);
+		$use_fa = !empty($fa_styles) && in_array($this->user->style['style_name'], $fa_styles);
+
 		if (is_array($template_module))
 		{
 			$this->template->assign_block_vars('modules_' . $this->portal_columns->number_to_string($row['module_column']), array(
@@ -240,6 +243,9 @@ class helper
 				'MODULE_ID'			=> $row['module_id'],
 				'IMAGE_WIDTH'			=> $row['module_image_width'],
 				'IMAGE_HEIGHT'			=> $row['module_image_height'],
+				'FA_ICON'				=> isset($row['module_fa_icon']) ? utf8_htmlspecialchars($row['module_fa_icon']) : '',
+				'FA_SIZE'				=> $row['module_fa_size'] ?? '',
+				'FA_ENABLED'			=> $use_fa,
 			));
 		}
 		else
@@ -251,6 +257,9 @@ class helper
 				'IMAGE_HEIGHT'			=> $row['module_image_height'],
 				'MODULE_ID'			=> $row['module_id'],
 				'TITLE'				=> (isset($this->user->lang[$row['module_name']])) ? $this->user->lang[$row['module_name']] : utf8_normalize_nfc($row['module_name']),
+				'FA_ICON'			=> isset($row['module_fa_icon']) ? utf8_htmlspecialchars($row['module_fa_icon']) : '',
+				'FA_SIZE'			=> $row['module_fa_size'] ?? '',
+				'FA_ENABLED'		=> $use_fa,
 			));
 		}
 	}

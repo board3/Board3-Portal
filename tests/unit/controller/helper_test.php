@@ -43,6 +43,7 @@ class helper_test extends \board3\portal\tests\testframework\test_case
 		$this->language = new \board3\portal\tests\mock\language($this->language_file_loader);
 		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$this->user->data['group_id'] = 2;
+		$this->user->style['style_name'] = 'prosilver';
 		$this->phpbb_root_path = dirname(__FILE__) . '/../../../../../../';
 		$phpbb_extension_manager = new \phpbb_mock_extension_manager($this->phpbb_root_path, array('board3/portal'));
 		$this->language_file_loader->set_extension_manager($phpbb_extension_manager);

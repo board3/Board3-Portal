@@ -38,7 +38,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 	public function setUp(): void
 	{
 		parent::setUp();
-		global $cache, $config, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request, $user;
+		global $cache, $config, $phpbb_root_path, $phpEx, $phpbb_dispatcher, $request, $user, $table_prefix;
 
 		$this->path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request(
@@ -65,7 +65,7 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 		$this->template = new \board3\portal\tests\mock\template($this);
 		$controller_helper = new \board3\portal\tests\mock\controller_helper($phpbb_root_path, $phpEx);
 		$controller_helper->add_route('board3_portal_controller', 'portal');
-		$modules_helper = new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), new \phpbb\config\config(array()), $controller_helper, new \phpbb_mock_request());
+		$modules_helper = new \board3\portal\includes\modules_helper(new \phpbb\auth\auth(), new \phpbb\config\config(array()), $controller_helper, $this->db, new \phpbb_mock_request(), $table_prefix . 'styles');
 		$request = $this->request = new \phpbb_mock_request();
 		$this->language_file_loader = new \phpbb\language\language_file_loader($phpbb_root_path, 'php');
 		$this->language = new \board3\portal\tests\mock\language($this->language_file_loader);
