@@ -1,7 +1,7 @@
-<!-- IF S_PORTAL_ALL === true -->
+{% if S_PORTAL_ALL === true %}
 <div id="portal-page-body">
 <div id="portal-body">
 <div class="portal-body-wrapper">
-	<!-- INCLUDE portal/_block_config.html -->
-	<div class="portal-body-center" style="margin: <!-- IF S_CONTENT_DIRECTION eq 'rtl' -->0 <!-- IF S_LEFT_COLUMN -->{S_PORTAL_LEFT_COLUMN}px<!-- ELSE -->-{$BLOCK_DISTANCE}<!-- ENDIF --> 0 <!-- IF S_RIGHT_COLUMN -->{S_PORTAL_RIGHT_COLUMN}px<!-- ELSE -->-{$BLOCK_DISTANCE}<!-- ENDIF --><!-- ELSE -->0 <!-- IF S_RIGHT_COLUMN -->{S_PORTAL_RIGHT_COLUMN}px<!-- ELSE -->-{$BLOCK_DISTANCE}<!-- ENDIF --> 0 <!-- IF S_LEFT_COLUMN -->{S_PORTAL_LEFT_COLUMN}px<!-- ELSE -->-{$BLOCK_DISTANCE}<!-- ENDIF --><!-- ENDIF -->; padding: 0 {$BLOCK_DISTANCE};">
-<!-- ENDIF -->
+	{% INCLUDE 'portal/_block_config.html' %}
+	<div class="portal-body-center" style="margin: {% if S_CONTENT_DIRECTION eq 'rtl' %}0 {% if S_LEFT_COLUMN %}{{ S_PORTAL_LEFT_COLUMN }}px{% else %}-{{ definition.BLOCK_DISTANCE }}{% endif %} 0 {% if S_RIGHT_COLUMN %}{{ S_PORTAL_RIGHT_COLUMN }}px{% else %}-{{ definition.BLOCK_DISTANCE }}{% endif %}{% else %}0 {% if S_RIGHT_COLUMN %}{{ S_PORTAL_RIGHT_COLUMN }}px{% else %}-{{ definition.BLOCK_DISTANCE }}{% endif %} 0 {% if S_LEFT_COLUMN %}{{ S_PORTAL_LEFT_COLUMN }}px{% else %}-{{ definition.BLOCK_DISTANCE }}{% endif %}{% endif %}; padding: 0 {{ definition.BLOCK_DISTANCE }};">
+{% endif %}

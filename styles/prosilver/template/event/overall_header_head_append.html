@@ -1,9 +1,9 @@
-<!-- IF T_EXT_THEME_PATH -->
-<!-- INCLUDECSS ../theme/portal.css -->
-<!-- IF S_PORTAL_ALL -->
-<!-- INCLUDECSS ../theme/portal_all.css -->
-<!-- INCLUDECSS ../theme/portal_all_responsive.css -->
-<!-- ELSE -->
-<!-- INCLUDECSS ../theme/portal_responsive.css -->
-<!-- ENDIF -->
-<!-- ENDIF -->
+{% if T_EXT_THEME_PATH %}
+{% INCLUDECSS '@board3_portal/portal.css' %}
+{% if S_PORTAL_ALL %}
+{% INCLUDECSS '@board3_portal/portal_all.css' %}
+{% INCLUDECSS '@board3_portal/portal_all_responsive.css' %}
+{% else %}
+{% INCLUDECSS '@board3_portal/portal_responsive.css' %}
+{% endif %}
+{% endif %}

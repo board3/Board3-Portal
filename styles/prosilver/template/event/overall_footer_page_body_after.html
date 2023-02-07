@@ -1,46 +1,46 @@
-<!-- IF S_PORTAL_ALL === true -->
+{% if S_PORTAL_ALL === true %}
 	</div>
 </div>
 	<!-- [+] left module area -->
-	<!-- IF S_LEFT_COLUMN -->
-	<div id="portal-left" style="width: {S_PORTAL_LEFT_COLUMN}px;">
-	<!-- BEGIN modules_left -->
-		<!-- DEFINE $TEMPLATE_FILE = '{modules_left.TEMPLATE_FILE}' -->
-		<!-- DEFINE $IMAGE_SRC = '{modules_left.IMAGE_SRC}' -->
-		<!-- DEFINE $IMAGE_WIDTH = '{modules_left.IMAGE_WIDTH}' -->
-		<!-- DEFINE $IMAGE_HEIGHT = '{modules_left.IMAGE_HEIGHT}' -->
-		<!-- DEFINE $CUSTOM_CODE = '{modules_left.CODE}' -->
-		<!-- DEFINE $TITLE = '{modules_left.TITLE}' -->
-		<!-- DEFINE $MODULE_ID = '{modules_left.MODULE_ID}' -->
-		<!-- DEFINE $FA_ICON = '{modules_left.FA_ICON}' -->
-		<!-- DEFINE $FA_SIZE = '{modules_left.FA_SIZE}' -->
-		<!-- DEFINE $FA_ENABLED = '{modules_left.FA_ENABLED}' -->
-		<!-- INCLUDE {$TEMPLATE_FILE} -->
-	<!-- END modules_left -->
+	{% if S_LEFT_COLUMN %}
+	<div id="portal-left" style="width: {{ S_PORTAL_LEFT_COLUMN }}px;">
+	{% for modules_left in loops.modules_left %}
+		{% DEFINE TEMPLATE_FILE = ''~ modules_left.TEMPLATE_FILE ~'' %}
+		{% DEFINE IMAGE_SRC = ''~ modules_left.IMAGE_SRC ~'' %}
+		{% DEFINE IMAGE_WIDTH = ''~ modules_left.IMAGE_WIDTH ~'' %}
+		{% DEFINE IMAGE_HEIGHT = ''~ modules_left.IMAGE_HEIGHT ~'' %}
+		{% DEFINE CUSTOM_CODE = ''~ modules_left.CODE ~'' %}
+		{% DEFINE TITLE = ''~ modules_left.TITLE ~'' %}
+		{% DEFINE MODULE_ID = ''~ modules_left.MODULE_ID ~'' %}
+		{% DEFINE FA_ICON = ''~ modules_left.FA_ICON ~'' %}
+		{% DEFINE FA_SIZE = ''~ modules_left.FA_SIZE ~'' %}
+		{% DEFINE FA_ENABLED = ''~ modules_left.FA_ENABLED ~'' %}
+		{% INCLUDE ''~ definition.TEMPLATE_FILE ~'' %}
+	{% endfor %}
 	</div>
-	<!-- ENDIF -->
+	{% endif %}
 	<!-- [-] left module area -->
 
 	<!-- [+] right module area -->
-	<!-- IF S_RIGHT_COLUMN -->
-	<div id="portal-right" style="width: {S_PORTAL_RIGHT_COLUMN}px; margin-<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->right<!-- ELSE -->left<!-- ENDIF -->: -{S_PORTAL_RIGHT_COLUMN}px;" data-width="{S_PORTAL_RIGHT_COLUMN}" role="gridcell">
-		<!-- BEGIN modules_right -->
-		<!-- DEFINE $TEMPLATE_FILE = '{modules_right.TEMPLATE_FILE}' -->
-		<!-- DEFINE $IMAGE_SRC = '{modules_right.IMAGE_SRC}' -->
-		<!-- DEFINE $IMAGE_WIDTH = '{modules_right.IMAGE_WIDTH}' -->
-		<!-- DEFINE $IMAGE_HEIGHT = '{modules_right.IMAGE_HEIGHT}' -->
-		<!-- DEFINE $CUSTOM_CODE = '{modules_right.CODE}' -->
-		<!-- DEFINE $TITLE = '{modules_right.TITLE}' -->
-		<!-- DEFINE $FA_ICON = '{modules_right.FA_ICON}' -->
-		<!-- DEFINE $FA_SIZE = '{modules_right.FA_SIZE}' -->
-		<!-- DEFINE $FA_ENABLED = '{modules_right.FA_ENABLED}' -->
-		<!-- DEFINE $MODULE_ID = '{modules_right.MODULE_ID}' -->
-		<!-- INCLUDE {$TEMPLATE_FILE} -->
-		<!-- END modules_right -->
+	{% if S_RIGHT_COLUMN %}
+	<div id="portal-right" style="width: {{ S_PORTAL_RIGHT_COLUMN }}px; margin-{% if S_CONTENT_DIRECTION eq 'rtl' %}right{% else %}left{% endif %}: -{{ S_PORTAL_RIGHT_COLUMN }}px;" data-width="{{ S_PORTAL_RIGHT_COLUMN }}" role="gridcell">
+		{% for modules_right in loops.modules_right %}
+		{% DEFINE TEMPLATE_FILE = ''~ modules_right.TEMPLATE_FILE ~'' %}
+		{% DEFINE IMAGE_SRC = ''~ modules_right.IMAGE_SRC ~'' %}
+		{% DEFINE IMAGE_WIDTH = ''~ modules_right.IMAGE_WIDTH ~'' %}
+		{% DEFINE IMAGE_HEIGHT = ''~ modules_right.IMAGE_HEIGHT ~'' %}
+		{% DEFINE CUSTOM_CODE = ''~ modules_right.CODE ~'' %}
+		{% DEFINE TITLE = ''~ modules_right.TITLE ~'' %}
+		{% DEFINE FA_ICON = ''~ modules_right.FA_ICON ~'' %}
+		{% DEFINE FA_SIZE = ''~ modules_right.FA_SIZE ~'' %}
+		{% DEFINE FA_ENABLED = ''~ modules_right.FA_ENABLED ~'' %}
+		{% DEFINE MODULE_ID = ''~ modules_right.MODULE_ID ~'' %}
+		{% INCLUDE ''~ definition.TEMPLATE_FILE ~'' %}
+		{% endfor %}
 		</div>
-		<!-- ENDIF -->
+		{% endif %}
 		<!-- [-] right module area -->
 		<br class="portal-clear" />
 		</div>
 	</div>
-<!-- ENDIF -->
+{% endif %}
