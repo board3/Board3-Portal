@@ -33,7 +33,7 @@ class phpbb_unit_modules_birthday_list_test extends \board3\portal\tests\testfra
 
 	public function setUp(): void
 	{
-		global $auth, $phpbb_dispatcher, $phpbb_root_path;
+		global $auth, $phpbb_dispatcher, $user, $phpbb_root_path;
 
 		parent::setUp();
 
@@ -47,6 +47,7 @@ class phpbb_unit_modules_birthday_list_test extends \board3\portal\tests\testfra
 		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$this->user->timezone = new \DateTimeZone('UTC');
 		$this->user->add_lang('common');
+		$user = $this->user;
 		$this->birthday_list = new \board3\portal\modules\birthday_list($this->config, $this->template, $this->new_dbal(), $this->user);
 		$auth = $this->getMockBuilder('\phpbb\auth\auth')
 			->setMethods(['acl_get'])
