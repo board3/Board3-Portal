@@ -5,5 +5,15 @@
 		<column>user_id</column>
 		<column>user_colour</column>
 		<column>user_birthday</column>
+		<column>user_permissions</column>
+		<column>user_sig</column>
+		<row>
+			<value>test</value>
+			<value>5</value>
+			<value>FF00FF</value>
+			<value>2000-01-01</value>
+			<value></value>
+			<value></value>
+		</row>
 	</table>
 </dataset>
