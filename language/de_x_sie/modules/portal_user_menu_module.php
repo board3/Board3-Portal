@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package Board3 Portal v2.3 - Welcome
+* @package Board3 Portal v2.3 - User Menu
 * @copyright (c) 2023 Board3 Group ( www.board3.de )
 * @license GNU General Public License, version 2 (GPL-2.0-only)
 *
@@ -17,7 +17,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -31,13 +31,15 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
-$lang = array_merge($lang, array(
-	'PORTAL_WELCOME'		=> 'Welcome Message',
-
-	// ACP
-	'ACP_PORTAL_WELCOME_SETTINGS'			=> 'Welcome Message Settings',
-	'TOO_FEW_CHARS'							=> 'The message you entered is not long enough.',
-	'ACP_PORTAL_WELCOME_PREVIEW'			=> 'Welcome Message Preview',
-	'ACP_PORTAL_WELCOME_MESSAGE'			=> 'Welcome Message',
-	'ACP_PORTAL_WELCOME_MESSAGE_EXP'		=> 'You can change the welcome message in the textbox. BBCode, Images and URLs are allowed.',
-));
+$lang = array_merge($lang, [
+	'USER_MENU'					=> 'Benutzer-Menü',
+	'UM_LOG_ME_IN'				=> 'Mich bei jedem Besuch automatisch anmelden',
+	'UM_HIDE_ME'				=> 'Meinen Online-Status während dieser Sitzung verbergen',
+	'UM_REGISTER_NOW'			=> 'Registriern Sie sich jetzt!',
+	'UM_MAIN_SUBSCRIBED'		=> 'Benachrichtigungen verwalten',
+	'UM_BOOKMARKS'				=> 'Lesezeichen verwalten',
+	'M_MENU' 					=> 'Menü',
+	'M_ACP'						=> 'Administrations-Bereich',
+	'USER_MENU_SETTINGS'		=> 'Benutzer-Menü Einstellungen',
+	'USER_MENU_REGISTER'		=> 'Zeige Registrierungs-Link in Benutzer-Menü',
+]);

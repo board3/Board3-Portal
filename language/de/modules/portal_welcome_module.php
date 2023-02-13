@@ -36,7 +36,7 @@ $lang = array_merge($lang, array(
 
 	// ACP
 	'ACP_PORTAL_WELCOME_SETTINGS'			=> 'Einstellungen für die Willkommens-Nachricht',
-	'ACP_PORTAL_WELCOME_MESSAGE_SHORT'		=> 'Die eingegebene Nachricht ist nicht lang genug.',
+	'TOO_FEW_CHARS'							=> 'Die eingegebene Nachricht ist nicht lang genug.',
 	'ACP_PORTAL_WELCOME_PREVIEW'			=> 'Willkommens-Nachricht Vorschau',
 	'ACP_PORTAL_WELCOME_MESSAGE'			=> 'Willkommens-Nachricht',
 	'ACP_PORTAL_WELCOME_MESSAGE_EXP'		=> 'Du kannst die Willkommens-Nachricht in der Textbox verändern. BBCode, Bilder und Links sind erlaubt.',

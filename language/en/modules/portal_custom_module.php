@@ -37,7 +37,7 @@ $lang = array_merge($lang, array(
 	// ACP
 	'ACP_PORTAL_CUSTOM_SETTINGS'			=> 'Custom Block Settings',
 	'ACP_PORTAL_CUSTOM_SETTINGS_EXP'		=> 'Here you can edit your custom block',
-	'ACP_PORTAL_CUSTOM_CODE_SHORT'			=> 'The code you entered is not long enough.',
+	'TOO_FEW_CHARS'							=> 'The code you entered is not long enough.',
 	'ACP_PORTAL_CUSTOM_PREVIEW'				=> 'Preview',
 	'ACP_PORTAL_CUSTOM_CODE'				=> 'Custom Block Code',
 	'ACP_PORTAL_CUSTOM_CODE_EXP'			=> 'Change the code for the small custom block (HTML or BBCode) here.',

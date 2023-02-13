@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package Board3 Portal v2.3 - Welcome
+* @package Board3 Portal v2.3 - Latest Members
 * @copyright (c) 2023 Board3 Group ( www.board3.de )
 * @license GNU General Public License, version 2 (GPL-2.0-only)
 *
@@ -17,7 +17,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -31,13 +31,12 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
-$lang = array_merge($lang, array(
-	'PORTAL_WELCOME'		=> 'Welcome Message',
+$lang = array_merge($lang, [
+	'LATEST_MEMBERS'				=> 'Neue Mitglieder',
 
 	// ACP
-	'ACP_PORTAL_WELCOME_SETTINGS'			=> 'Welcome Message Settings',
-	'TOO_FEW_CHARS'							=> 'The message you entered is not long enough.',
-	'ACP_PORTAL_WELCOME_PREVIEW'			=> 'Welcome Message Preview',
-	'ACP_PORTAL_WELCOME_MESSAGE'			=> 'Welcome Message',
-	'ACP_PORTAL_WELCOME_MESSAGE_EXP'		=> 'You can change the welcome message in the textbox. BBCode, Images and URLs are allowed.',
-));
+	'ACP_PORTAL_MEMBERS_SETTINGS'				=> 'Einstellungen für neue Mitglieder',
+	'ACP_PORTAL_MEMBERS_SETTINGS_EXP'			=> 'Hier können Sie die Einstellungen für neue Mitglieder ändern.',
+	'PORTAL_MAX_LAST_MEMBER'					=> 'Anzahl der anzuzeigenden Mitglieder',
+	'PORTAL_MAX_LAST_MEMBER_EXP'				=> '0 bedeutet unbegrenzt',
+]);

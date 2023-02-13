@@ -89,7 +89,7 @@ $lang = array_merge($lang, array(
 	'PORTAL_RIGHT_COLUMN'					=> 'Enable right column',
 	'PORTAL_RIGHT_COLUMN_EXP'				=> 'Switch to no if you wish to turn off the right column',
 	'PORTAL_DISPLAY_JUMPBOX'				=> 'Display jumpbox',
-	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Display the jumpbox on the portal. The jumpbox will only be displayed if it is also enabled in the board features.',
+	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Display the jumpbox on the portal. The jumpbox will only be displayed if it is also enabled in Server configuration/Load settings.',
 	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'		=> 'Left and right column width settings',
 	'PORTAL_LEFT_COLUMN_WIDTH'				=> 'Width of the left column',
 	'PORTAL_LEFT_COLUMN_WIDTH_EXP'			=> 'Change the width of the left column in pixels; recommended value is 180',
@@ -111,7 +111,7 @@ $lang = array_merge($lang, array(
 	'ACP_FA'				=> 'Font Awesome styles',
 	'ACP_FA_EXP'			=> 'Here you can define which styles should use the Font Awesome icons.',
 	'MODULE_FA'				=> 'Font Awesome icon',
-	'MODULE_FA_EXP'			=> 'Here you can select a Font Awesome icon. This will be used when your selected style uses Font Awesome icons.',
+	'MODULE_FA_EXP'			=> 'Here you can select a <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank" rel="noopener noreferrer"><strong>Font Awesome</strong></a> icon. This will be used when your selected style uses Font Awesome icons.',
 	'MODULE_FA_SIZE'		=> 'Font Awesome icon size',
 	'MODULE_FA_SIZE_EXP'	=> 'Here you can change the size of the Font Awesome icon in pixel.',
 ));

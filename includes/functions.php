@@ -9,8 +9,8 @@
 */
 
 /**
- * @ignore
- */
+* @ignore
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -70,10 +70,10 @@ function set_portal_config($config_name, $config_value)
 }
 
 /**
- * Get portal modules
- *
- * @return array Portal modules array
- */
+* Get portal modules
+*
+* @return array Portal modules array
+*/
 function obtain_portal_modules()
 {
 	global $db;

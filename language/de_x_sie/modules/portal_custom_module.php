@@ -17,7 +17,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -31,7 +31,7 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'PORTAL_CUSTOM'		=> 'Eigener Block',
 
 	// ACP
@@ -40,9 +40,9 @@ $lang = array_merge($lang, array(
 	'TOO_FEW_CHARS'							=> 'Der eingegebene Code ist nicht lang genug.',
 	'ACP_PORTAL_CUSTOM_PREVIEW'				=> 'Vorschau',
 	'ACP_PORTAL_CUSTOM_CODE'				=> 'Code für den eigenen Block',
-	'ACP_PORTAL_CUSTOM_CODE_EXP'			=> 'Ändere den Code für deinen eigenen Block (HTML oder BBCode).',
+	'ACP_PORTAL_CUSTOM_CODE_EXP'			=> 'Änderen Sie den Code für Ihre eigenen Block (HTML oder BBCode).',
 	'ACP_PORTAL_CUSTOM_PERMISSION'			=> 'Berechtigungen für den eigenen Block',
-	'ACP_PORTAL_CUSTOM_PERMISSION_EXP'		=> 'Wähle die Gruppen aus, die den eigenen Block sehen dürfen. <br />Wähle mehrere Gruppen aus/ab, indem du beim Klicken die <samp>Strg</samp>-Taste drückst.',
+	'ACP_PORTAL_CUSTOM_PERMISSION_EXP'		=> 'Wählen Sie die Gruppen aus, die den eigenen Block sehen dürfen. <br />Wählen Sie mehrere Gruppen aus/ab, indem Sie beim Klicken die <samp>Strg</samp>-Taste gedrückt halten.',
 	'ACP_PORTAL_CUSTOM_BBCODE'				=> 'BBCode für den eigenen Block aktivieren',
 	'ACP_PORTAL_CUSTOM_BBCODE_EXP'			=> 'BBCode kann dann in diesem Block benutzt werden. Ansonsten wird HTML direkt geparst.',
-));
+]);

@@ -37,4 +37,5 @@ $lang = array_merge($lang, array(
 	'PORTAL'			=> 'Portal',
 	'VIEWING_PORTAL'	=> 'Betrachtet das Portal',
 	'BACK'				=> 'Zurück',
+	'B3P_WRONG_METHOD_CALL'		=> 'Falscher Aufruf der Methode %s',
 ));

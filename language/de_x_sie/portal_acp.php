@@ -17,7 +17,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -33,9 +33,9 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	// Portal Module
-	'ACP_PORTAL_MODULES_EXP'		=> 'Du kannst deine Portal Module hier verwalten. Falls du alle Module deaktivierst, dann deaktiviere bitte auch das Portal.',
+	'ACP_PORTAL_MODULES_EXP'		=> 'Sie können Ihre Portal Module hier verwalten. Falls Sie alle Module deaktivieren, dann deaktivieren Sie bitte auch das Portal.',
 
 	'MODULE_POS_TOP'				=> 'Oben',
 	'MODULE_POS_LEFT'				=> 'Linke Spalte',
@@ -51,25 +51,24 @@ $lang = array_merge($lang, array(
 	'MOVE_RIGHT'					=> 'Nach rechts',
 	'MOVE_LEFT'						=> 'Nach links',
 	'B3P_FILE_NOT_FOUND'			=> 'Die angegebene Datei konnte nicht gefunden werden',
-	'UNABLE_TO_ADD_MODULE'			=> 'Es ist nicht möglich den Block in die gewählte Spalte hinzuzufügen.',
 	'UNABLE_TO_MOVE'				=> 'Es ist nicht möglich den Block in die gewählte Spalte zu verschieben.',
-	'UNABLE_TO_MOVE_ROW'			=> 'Es ist nicht möglich den Block in die gewählte Reihe zu verschieben.',
-	'DELETE_MODULE_CONFIRM'			=> 'Bist du sicher, dass du das Modul "%1$s" löschen möchtest?',
+	'UNABLE_TO_ADD_MODULE'			=> 'Es ist nicht möglich den Block in die gewählte Spalte hinzuzufügen.',
+	'DELETE_MODULE_CONFIRM'			=> 'Sind Sie sicher, dass Sie das Modul "%1$s" löschen möchtest?',
 	'MODULE_RESET_SUCCESS'			=> 'Modul Einstellungen erfolgreich zurückgesetzt.',
-	'MODULE_RESET_CONFIRM'			=> 'Bist du sicher, dass du die Einstellungen des Moduls "%1$s" zurücksetzen willst?',
+	'MODULE_RESET_CONFIRM'			=> 'Sind Sie sicher, dass Sie diese Einstellungen des Moduls "%1$s" zurücksetzen möchten?',
 	'MODULE_NOT_EXISTS'				=> 'Das gewählte Modul existiert nicht.',
 
 	'MODULE_OPTIONS'			=> 'Modul Optionen',
 	'MODULE_NAME'				=> 'Modul Name',
-	'MODULE_NAME_EXP'			=> 'Gebe den Namen ein der für das Modul in der Modul Konfiguration angezeigt werden soll.',
+	'MODULE_NAME_EXP'			=> 'Geben Sie hier den Namen ein der für das Modul in der Modul Konfiguration angezeigt werden soll.',
 	'MODULE_IMAGE'				=> 'Modul Bild',
-	'MODULE_IMAGE_EXP'			=> 'Gebe den Dateinamen des Modul Bildes ein. Das Bild muss sich in allen styles/{Dein Style}/theme/images/portal/ Ordnern befinden.',
+	'MODULE_IMAGE_EXP'			=> 'Geben Sie hier den Dateinamen des Modul Bildes ein. Das Bild muss sich in allen styles/{Dein Style}/theme/images/portal/ Ordnern befinden.',
 	'MODULE_PERMISSIONS'		=> 'Modul Berechtigungen',
-	'MODULE_PERMISSIONS_EXP'	=> 'Wähle die Gruppen aus, die berechtigt sein sollen, das Modul zu sehen. Sollen alle Benutzer das Modul sehen können, wähle nichts aus.<br />An- / abwählen mehrerer Gruppen indem man <samp>Strg</samp> gedrückt hält und klickt.',
+	'MODULE_PERMISSIONS_EXP'	=> 'Wählen Sie die Gruppen aus, die berechtigt sein sollen, das Modul zu sehen. Sollen alle Benutzer das Modul sehen können, wählen Sie nichts aus.<br />An- / abwählen mehrerer Gruppen indem man <samp>Strg</samp> gedrückt hält und klickt.',
 	'MODULE_IMAGE_WIDTH'		=> 'Modul Bild Breite',
-	'MODULE_IMAGE_WIDTH_EXP'	=> 'Gebe die breite des Modul Bildes in Pixeln ein',
+	'MODULE_IMAGE_WIDTH_EXP'	=> 'Geben Sie hier die Breite des Modul Bildes in Pixeln ein',
 	'MODULE_IMAGE_HEIGHT'		=> 'Modul Bild Höhe',
-	'MODULE_IMAGE_HEIGHT_EXP'	=> 'Gebe die Höhe des Modul Bildes in Pixeln ein',
+	'MODULE_IMAGE_HEIGHT_EXP'	=> 'Geben Sie hier die Höhe des Modul Bildes in Pixeln ein',
 	'MODULE_RESET'				=> 'Modul Einstellungen zurücksetzen',
 	'MODULE_RESET_EXP'			=> 'Dies wird alle Einstellungen des Moduls auf die Standardeinstellungen zurücksetzen!',
 	'MODULE_STATUS'				=> 'Aktiviere Modul',
@@ -80,7 +79,7 @@ $lang = array_merge($lang, array(
 	// general
 	'ACP_PORTAL_CONFIG_INFO'				=> 'Allgemeine Einstellungen',
 	'ACP_PORTAL_GENERAL_TITLE'				=> 'Portal Verwaltung',
-	'ACP_PORTAL_GENERAL_TITLE_EXP'			=> 'Danke, dass du dich für board3 Portal entschieden hast. Auf dieser Seite kannst du dein Portal verwalten. Diese Anzeige gibt dir einen schnellen Überblick über die verschiedenen Portal-Einstellungen.',
+	'ACP_PORTAL_GENERAL_TITLE_EXP'			=> 'Danke, dass Sie sich für board3 Portal entschieden haben. Auf dieser Seite können Sie Ihr Portal verwalten. Diese Anzeige gibt Ihnen einen schnellen Überblick über die verschiedenen Portal-Einstellungen.',
 	'ACP_PORTAL_SHOW_ALL'					=> 'Zeige portal auf allen Seiten',
 	'ACP_PORTAL_SHOW_ALL_EXP'				=> 'Zeigt das Portal auf allen Seiten des Forums an.',
 	'PORTAL_ENABLE'							=> 'Portal aktivieren',
@@ -91,13 +90,13 @@ $lang = array_merge($lang, array(
 	'PORTAL_RIGHT_COLUMN_EXP'				=> 'Die Rechte Spalte auf dem Portal anzeigen',
 	'ACP_PORTAL_COLUMN_WIDTH_SETTINGS'		=> 'Breiteneinstellung der rechten und linken Spalte',
 	'PORTAL_LEFT_COLUMN_WIDTH'				=> 'Breite der linken Spalte',
-	'PORTAL_LEFT_COLUMN_WIDTH_EXP'			=> 'Ändere hier die Breite der linken Spalte in Pixel, empfohlener Wert 180',
+	'PORTAL_LEFT_COLUMN_WIDTH_EXP'			=> 'Änderen Sie hier die Breite der linken Spalte in Pixel, empfohlener Wert 180',
 	'PORTAL_RIGHT_COLUMN_WIDTH'				=> 'Breite der rechten Spalte',
-	'PORTAL_RIGHT_COLUMN_WIDTH_EXP'			=> 'Ändere hier die Breite der rechten Spalte in Pixel, empfohlener Wert 180',
+	'PORTAL_RIGHT_COLUMN_WIDTH_EXP'			=> 'Änderen Sie hier die Breite der rechten Spalte in Pixel, empfohlener Wert 180',
 	'PORTAL_DISPLAY_JUMPBOX'				=> 'Zeige Jumpbox',
 	'PORTAL_DISPLAY_JUMPBOX_EXP'			=> 'Die Jumpbox auf dem Portal anzeigen. Die Jumpbox wird nur angezeigt, wenn sie gleichzeitig unter Server-Konfiguration/Serverlast aktiviert ist.',
 	'PORTAL_SHOW_ALL_SIDE'					=> 'Spalte die auf allen Seiten angezeigt werden soll',
-	'PORTAL_SHOW_ALL_SIDE_EXP'				=> 'Wähle welche Spalte auf allen seiten des Portals angezeigt werden soll.',
+	'PORTAL_SHOW_ALL_SIDE_EXP'				=> 'Wählen Sie aus welche Spalte auf allen seiten des Portals angezeigt werden soll.',
 	'PORTAL_SHOW_ALL_LEFT'					=> 'Links',
 	'PORTAL_SHOW_ALL_RIGHT'					=> 'Rechts',
 
@@ -110,9 +109,9 @@ $lang = array_merge($lang, array(
 
 	// Font Awesome
 	'ACP_FA'				=> 'Font Awesome Styles',
-	'ACP_FA_EXP'			=> 'Hier kannst du einstellen welche Styles Font Awesome Icons nutzen sollen.',
+	'ACP_FA_EXP'			=> 'Hier können Sie einstellen welche Styles Font Awesome Icons nutzen sollen.',
 	'MODULE_FA'				=> 'Font Awesome Icon',
-	'MODULE_FA_EXP'			=> 'Hier kannst du ein <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank" rel="noopener noreferrer"><strong>Font Awesome</strong></a> Icon einstellen. Dieses wird verwendet wenn der Style Font Awesome verwendet.',
+	'MODULE_FA_EXP'			=> 'Hier können Sie ein <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank" rel="noopener noreferrer"><strong>Font Awesome</strong></a> Icon einstellen. Dieses wird verwendet wenn der Style Font Awesome verwendet.',
 	'MODULE_FA_SIZE'		=> 'Font Awesome Icongröße',
-	'MODULE_FA_SIZE_EXP'	=> 'Hier kannst du die Größe des Font Awesome Icons einstellen (in Pixel).',
-));
+	'MODULE_FA_SIZE_EXP'	=> 'Hier können Sie die Größe des Font Awesome Icons einstellen (in Pixel).',
+]);

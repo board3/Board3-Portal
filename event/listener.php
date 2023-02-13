@@ -66,7 +66,7 @@ class listener implements EventSubscriberInterface
 	*
 	* @return array
 	*/
-	static public function getSubscribedEvents()
+	public static function getSubscribedEvents()
 	{
 		return array(
 			'core.user_setup'			=> 'load_portal_language',
@@ -112,11 +112,16 @@ class listener implements EventSubscriberInterface
 	*
 	* @return null
 	*/
-	public function add_portal_link()
+	public function add_portal_link($event)
 	{
 		if (!$this->has_portal_access())
 		{
 			return;
+		}
+
+		if ($this->config['board3_show_all_pages'])
+		{
+			$event['display_online_list'] = true;
 		}
 
 		if (strpos($this->controller_helper->get_current_url(), '/portal') === false)

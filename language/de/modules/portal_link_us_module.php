@@ -33,5 +33,7 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	'LINK_US'							=> 'Link zu uns ',
-	'LINK_US_TXT'					=> 'Benutze bitte diesen Link um <strong>%s</strong> bei dir zu verlinken:',
+	'LINK_US_HTML'		=> 'HTML',
+	'LINK_US_BBCODE'	=> 'BBCode',
+	'LINK_US_TXT'		=> 'Benutze bitte diesen Link um <em><strong>"%s"</strong></em> bei dir zu verlinken:',
 ));
