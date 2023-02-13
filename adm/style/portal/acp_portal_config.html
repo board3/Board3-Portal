@@ -1,109 +1,109 @@
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
 <a name="maincontent"></a>
 
-<h1>{L_TITLE}</h1>
+<h1>{{ lang('TITLE') }}</h1>
 
-<p>{L_TITLE_EXPLAIN}</p>
+<p>{{ lang('TITLE_EXPLAIN') }}</p>
 
-<!-- IF S_ERROR -->
+{% if S_ERROR %}
 	<div class="errorbox">
-		<h3>{L_WARNING}</h3>
-		<p>{ERROR_MSG}</p>
+		<h3>{{ lang('WARNING') }}</h3>
+		<p>{{ ERROR_MSG }}</p>
 	</div>
-<!-- ENDIF -->
+{% endif %}
 
-<form id="acp_portal_config" method="post" action="{B3P_U_ACTION}">
-<!-- IF SHOW_MODULE_OPTIONS -->
+<form id="acp_portal_config" method="post" action="{{ B3P_U_ACTION }}">
+{% if SHOW_MODULE_OPTIONS %}
 		<fieldset>
-			<legend>{L_MODULE_OPTIONS}</legend>
-			<!-- IF MODULE_NAME -->
+			<legend>{{ lang('MODULE_OPTIONS') }}</legend>
+			{% if MODULE_NAME %}
 			<dl>
-				<dt><label for="module_name">{L_MODULE_NAME}{L_COLON}</label><br /><span>{L_MODULE_NAME_EXP}</span></dt>
-				<dd><input id="module_name" type="text" value="{MODULE_NAME}" name="module_name" maxlength="255" size="64" /></dd>
+				<dt><label for="module_name">{{ lang('MODULE_NAME') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_NAME_EXP') }}</span></dt>
+				<dd><input id="module_name" type="text" value="{{ MODULE_NAME }}" name="module_name" maxlength="255" size="64" /></dd>
 			</dl>
-			<!-- ENDIF -->
-			<!-- IF MODULE_SHOW_IMAGE -->
+			{% endif %}
+			{% if MODULE_SHOW_IMAGE %}
 			<dl>
-				<dt><label for="module_image">{L_MODULE_IMAGE}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_EXP}</span></dt>
-				<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
-				<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
+				<dt><label for="module_image">{{ lang('MODULE_IMAGE') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_IMAGE_EXP') }}</span></dt>
+				<dd><input id="module_image" type="text" value="{{ MODULE_IMAGE }}" name="module_image" maxlength="255" size="64" /></dd>
+				{% if MODULE_IMAGE_SRC %}<dd><img src="{{ MODULE_IMAGE_SRC }}" alt="{{ lang('MODULE_IMAGE') }}" /></dd>{% endif %}
 			</dl>
-			<!-- IF MODULE_IMAGE_SRC -->
+			{% if MODULE_IMAGE_SRC %}
 			<dl>
-				<dt><label for="module_img_width">{L_MODULE_IMAGE_WIDTH}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_WIDTH_EXP}</span></dt>
-				<dd><input id="module_img_width" type="text" value="{MODULE_IMAGE_WIDTH}" name="module_img_width" maxlength="3" size="3" />px</dd>
-			</dl>
-			<dl>
-				<dt><label for="module_img_height">{L_MODULE_IMAGE_HEIGHT}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_HEIGHT_EXP}</span></dt>
-				<dd><input id="module_img_height" type="text" value="{MODULE_IMAGE_HEIGHT}" name="module_img_height" maxlength="3" size="3" />px</dd>
-			</dl>
-			<!-- ENDIF -->
-			<dl>
-				<dt><label for="module_fa">{L_MODULE_FA}{L_COLON}</label><br/><span>{L_MODULE_FA_EXP}</span></dt>
-				<dd><input id="module_fa" type="text" value="{MODULE_FA}" name="module_fa" maxlength="255" size="64"/></dd>
+				<dt><label for="module_img_width">{{ lang('MODULE_IMAGE_WIDTH') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_IMAGE_WIDTH_EXP') }}</span></dt>
+				<dd><input id="module_img_width" type="number" value="{{ MODULE_IMAGE_WIDTH }}" name="module_img_width"  min="1" />&nbsp;{{ lang('PIXEL') }}</dd>
 			</dl>
 			<dl>
-				<dt><label for="module_fa_size">{L_MODULE_FA_SIZE}{L_COLON}</label><br/><span>{L_MODULE_FA_SIZE_EXP}</span></dt>
-				<dd><input id="module_fa_size" type="number" value="{MODULE_FA_SIZE}" name="module_fa_size" min="1"/>&nbsp;{L_PIXEL}</dd>
+				<dt><label for="module_img_height">{{ lang('MODULE_IMAGE_HEIGHT') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_IMAGE_HEIGHT_EXP') }}</span></dt>
+				<dd><input id="module_img_height" type="number" value="{{ MODULE_IMAGE_HEIGHT }}" name="module_img_height" min="1" />&nbsp;{{ lang('PIXEL') }}</dd>
 			</dl>
-			<!-- ENDIF -->
+			{% endif %}
 			<dl>
-				<dt><label for="module_reset">{L_MODULE_RESET}{L_COLON}</label><br /><span style="color: #BC2A4D;">{L_MODULE_RESET_EXP}</span></dt>
+				<dt><label for="module_fa">{{ lang('MODULE_FA') }}{{ lang('COLON') }}</label><br/><span>{{ lang('MODULE_FA_EXP') }}</span></dt>
+				<dd><input id="module_fa" type="text" value="{{ MODULE_FA }}" name="module_fa" maxlength="255" size="64"/></dd>
+			</dl>
+			<dl>
+				<dt><label for="module_fa_size">{{ lang('MODULE_FA_SIZE') }}{{ lang('COLON') }}</label><br/><span>{{ lang('MODULE_FA_SIZE_EXP') }}</span></dt>
+				<dd><input id="module_fa_size" type="number" value="{{ MODULE_FA_SIZE }}" name="module_fa_size" min="1"/>&nbsp;{{ lang('PIXEL') }}</dd>
+			</dl>
+			{% endif %}
+			<dl>
+				<dt><label for="module_reset">{{ lang('MODULE_RESET') }}{{ lang('COLON') }}</label><br /><span style="color: #BC2A4D;">{{ lang('MODULE_RESET_EXP') }}</span></dt>
 				<dd><input id="module_reset" type="checkbox" value="1" name="module_reset" /></dd>
 			</dl>
 			<dl>
-				<dt><label for="module_status">{L_MODULE_STATUS}{L_COLON}</label></dt>
+				<dt><label for="module_status">{{ lang('MODULE_STATUS') }}{{ lang('COLON') }}</label></dt>
 				<dd>
-					<label><input type="radio" class="radio" name="module_status" value="1" id="module_status"<!-- IF MODULE_ENABLED --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
-					<label><input type="radio" class="radio" name="module_status" value="0"<!-- IF not MODULE_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+					<label><input type="radio" class="radio" name="module_status" value="1" id="module_status"{% if MODULE_ENABLED %} checked="checked"{% endif %} />{{ lang('YES') }}</label>
+					<label><input type="radio" class="radio" name="module_status" value="0"{% if not MODULE_ENABLED %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 				</dd>
 			</dl>
-			<!-- IF .permission_setting -->
+			{% if loops.permission_setting|length %}
 			<dl>
-				<dt><label for="permission-setting">{L_MODULE_PERMISSIONS}{L_COLON}</label><br /><span>{L_MODULE_PERMISSIONS_EXP}</span></dt>
+				<dt><label for="permission-setting">{{ lang('MODULE_PERMISSIONS') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_PERMISSIONS_EXP') }}</span></dt>
 				<dd>
 					<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
-						<!-- BEGIN permission_setting -->
-						<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
-						<!-- END permission_setting -->
+						{% for permission_setting in loops.permission_setting %}
+						<option value="{{ permission_setting.GROUP_ID }}"{% if permission_setting.SELECTED %}selected="selected"{% endif %}>{{ permission_setting.GROUP_NAME }}</option>
+						{% endfor %}
 					</select>
 				</dd>
 			</dl>
-			<!-- ENDIF -->
+			{% endif %}
 		</fieldset>
-<!-- ENDIF -->
-<!-- BEGIN options -->
-	<!-- IF options.S_LEGEND -->
-		<!-- IF not options.S_FIRST_ROW -->
+{% endif %}
+{% for options in loops.options %}
+	{% if options.S_LEGEND %}
+		{% if not options.S_FIRST_ROW %}
 			</fieldset>
-		<!-- ENDIF -->
+		{% endif %}
 		<fieldset>
-			<legend>{options.LEGEND}</legend>
-	<!-- ELSE -->
+			<legend>{{ options.LEGEND }}</legend>
+	{% else %}
 
 		<dl>
-			<dt><label for="{options.KEY}">{options.TITLE}{L_COLON}</label><!-- IF options.S_EXPLAIN --><br /><span>{options.TITLE_EXPLAIN}</span><!-- ENDIF --></dt>
-			<dd>{options.CONTENT}</dd>
+			<dt><label for="{{ options.KEY }}">{{ options.TITLE }}{{ lang('COLON') }}</label>{% if options.S_EXPLAIN %}<br /><span>{{ options.TITLE_EXPLAIN }}</span>{% endif %}</dt>
+			<dd>{{ options.CONTENT }}</dd>
 		</dl>
 
-	<!-- ENDIF -->
-<!-- BEGINELSE -->
+	{% endif %}
+{% else %}
 	<fieldset>
-<!-- END options -->
+{% endfor %}
 
-<!-- IF S_AUTH -->
-	<!-- BEGIN auth_tpl -->
-		{auth_tpl.TPL}
-	<!-- END auth_tpl -->
-<!-- ENDIF -->
+{% if S_AUTH %}
+	{% for auth_tpl in loops.auth_tpl %}
+		{{ auth_tpl.TPL }}
+	{% endfor %}
+{% endif %}
 
 	<p class="submit-buttons">
-		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
 	</p>
-	{S_FORM_TOKEN}
+	{{ S_FORM_TOKEN }}
 </fieldset>
 </form>
 
-<!-- INCLUDE overall_footer.html -->
+{% INCLUDE 'overall_footer.html' %}

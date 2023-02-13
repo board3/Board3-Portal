@@ -1,6 +1,6 @@
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
-<!-- INCLUDEJS portal/acp_editor.js -->
+{% INCLUDEJS 'portal/acp_editor.js' %}
 <script type="text/javascript">
 // <![CDATA[
 /**
@@ -29,28 +29,28 @@ var upload = false;
 
 // Define the bbCode tags
 var bbcode = new Array();
-var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->);
+var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'{% for custom_tags in loops.custom_tags %}, {{ custom_tags.BBCODE_NAME }}{% endfor %});
 var imageTag = false;
 
 // Helpline messages
 var help_line = {
-	b: '{LA_BBCODE_B_HELP}',
-	i: '{LA_BBCODE_I_HELP}',
-	u: '{LA_BBCODE_U_HELP}',
-	q: '{LA_BBCODE_Q_HELP}',
-	c: '{LA_BBCODE_C_HELP}',
-	l: '{LA_BBCODE_L_HELP}',
-	o: '{LA_BBCODE_O_HELP}',
-	p: '{LA_BBCODE_P_HELP}',
-	w: '{LA_BBCODE_W_HELP}',
-	a: '{LA_BBCODE_A_HELP}',
-	s: '{LA_BBCODE_S_HELP}',
-	f: '{LA_BBCODE_F_HELP}',
-	e: '{LA_BBCODE_E_HELP}',
-	d: '{LA_BBCODE_D_HELP}'
-	<!-- BEGIN custom_tags -->
-		,cb_{custom_tags.BBCODE_ID}: '{custom_tags.A_BBCODE_HELPLINE}'
-	<!-- END custom_tags -->
+	b: '{{ lang('BBCODE_B_HELP')|escape('js') }}',
+	i: '{{ lang('BBCODE_I_HELP')|escape('js') }}',
+	u: '{{ lang('BBCODE_U_HELP')|escape('js') }}',
+	q: '{{ lang('BBCODE_Q_HELP')|escape('js') }}',
+	c: '{{ lang('BBCODE_C_HELP')|escape('js') }}',
+	l: '{{ lang('BBCODE_L_HELP')|escape('js') }}',
+	o: '{{ lang('BBCODE_O_HELP')|escape('js') }}',
+	p: '{{ lang('BBCODE_P_HELP')|escape('js') }}',
+	w: '{{ lang('BBCODE_W_HELP')|escape('js') }}',
+	a: '{{ lang('BBCODE_A_HELP')|escape('js') }}',
+	s: '{{ lang('BBCODE_S_HELP')|escape('js') }}',
+	f: '{{ lang('BBCODE_F_HELP')|escape('js') }}',
+	e: '{{ lang('BBCODE_E_HELP')|escape('js') }}',
+	d: '{{ lang('BBCODE_D_HELP')|escape('js') }}'
+	{% for custom_tags in loops.custom_tags %}
+		,cb_{{ custom_tags.BBCODE_ID }}: '{{ custom_tags.A_BBCODE_HELPLINE }}'
+	{% endfor %}
 }
 
 function change_palette()
@@ -60,11 +60,11 @@ function change_palette()
 
 	if (e.style.display == 'block')
 	{
-		document.getElementById('bbpalette').value = '{LA_FONT_COLOR_HIDE}';
+		document.getElementById('bbpalette').value = '{{ lang('FONT_COLOR_HIDE')|escape('js') }}';
 	}
 	else
 	{
-		document.getElementById('bbpalette').value = '{LA_FONT_COLOR}';
+		document.getElementById('bbpalette').value = '{{ lang('FONT_COLOR')|escape('js') }}';
 	}
 }
 
@@ -73,92 +73,92 @@ function change_palette()
 
 <a name="maincontent"></a>
 
-<h1>{L_TITLE}</h1>
+<h1>{{ lang('TITLE') }}</h1>
 
-<p>{L_TITLE_EXPLAIN}</p>
+<p>{{ lang('TITLE_EXPLAIN') }}</p>
 
-<!-- IF S_ERROR -->
+{% if S_ERROR %}
 	<div class="errorbox">
-		<h3>{L_WARNING}</h3>
-		<p>{ERROR_MSG}</p>
+		<h3>{{ lang('WARNING') }}</h3>
+		<p>{{ ERROR_MSG }}</p>
 	</div>
-<!-- ENDIF -->
-<form id="acp_portal_config" method="post" action="{B3P_U_ACTION}">
-<!-- IF SHOW_MODULE_OPTIONS -->
+{% endif %}
+<form id="acp_portal_config" method="post" action="{{ B3P_U_ACTION }}">
+{% if SHOW_MODULE_OPTIONS %}
 		<fieldset>
-			<legend>{L_MODULE_OPTIONS}</legend>
+			<legend>{{ lang('MODULE_OPTIONS') }}</legend>
 			<dl>
-				<dt><label for="module_name">{L_MODULE_NAME}{L_COLON}</label><br /><span>{L_MODULE_NAME_EXP}</span></dt>
-				<dd><input id="module_name" type="text" value="{MODULE_NAME}" name="module_name" maxlength="255" size="64" /></dd>
+				<dt><label for="module_name">{{ lang('MODULE_NAME') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_NAME_EXP') }}</span></dt>
+				<dd><input id="module_name" type="text" value="{{ MODULE_NAME }}" name="module_name" maxlength="255" size="64" /></dd>
 			</dl>
-			<!-- IF MODULE_SHOW_IMAGE -->
+			{% if MODULE_SHOW_IMAGE %}
 			<dl>
-				<dt><label for="module_image">{L_MODULE_IMAGE}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_EXP}</span></dt>
-				<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
-				<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
+				<dt><label for="module_image">{{ lang('MODULE_IMAGE') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_IMAGE_EXP') }}</span></dt>
+				<dd><input id="module_image" type="text" value="{{ MODULE_IMAGE }}" name="module_image" maxlength="255" size="64" /></dd>
+				{% if MODULE_IMAGE_SRC %}<dd><img src="{{ MODULE_IMAGE_SRC }}" alt="{{ lang('MODULE_IMAGE') }}" /></dd>{% endif %}
 			</dl>
-			<!-- IF MODULE_IMAGE_SRC -->
+			{% if MODULE_IMAGE_SRC %}
 			<dl>
-				<dt><label for="module_img_width">{L_MODULE_IMAGE_WIDTH}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_WIDTH_EXP}</span></dt>
-				<dd><input id="module_img_width" type="text" value="{MODULE_IMAGE_WIDTH}" name="module_img_width" maxlength="3" size="3" />px</dd>
-			</dl>
-			<dl>
-				<dt><label for="module_img_height">{L_MODULE_IMAGE_HEIGHT}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_HEIGHT_EXP}</span></dt>
-				<dd><input id="module_img_height" type="text" value="{MODULE_IMAGE_HEIGHT}" name="module_img_height" maxlength="3" size="3" />px</dd>
-			</dl>
-			<!-- ENDIF -->
-			<dl>
-				<dt><label for="module_fa">{L_MODULE_FA}{L_COLON}</label><br/><span>{L_MODULE_FA_EXP}</span></dt>
-				<dd><input id="module_fa" type="text" value="{MODULE_FA}" name="module_fa" maxlength="255" size="64"/></dd>
+				<dt><label for="module_img_width">{{ lang('MODULE_IMAGE_WIDTH') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_IMAGE_WIDTH_EXP') }}</span></dt>
+				<dd><input id="module_img_width" type="number" value="{{ MODULE_IMAGE_WIDTH }}" name="module_img_width" min="1" />&nbsp;{{ lang('PIXEL') }}</dd>
 			</dl>
 			<dl>
-				<dt><label for="module_fa_size">{L_MODULE_FA_SIZE}{L_COLON}</label><br/><span>{L_MODULE_FA_SIZE_EXP}</span></dt>
-				<dd><input id="module_fa_size" type="number" value="{MODULE_FA_SIZE}" name="module_fa_size" min="1"/>&nbsp;{L_PIXEL}</dd>
+				<dt><label for="module_img_height">{{ lang('MODULE_IMAGE_HEIGHT') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_IMAGE_HEIGHT_EXP') }}</span></dt>
+				<dd><input id="module_img_height" type="number" value="{{ MODULE_IMAGE_HEIGHT }}" name="module_img_height" min="1" />&nbsp;{{ lang('PIXEL') }}</dd>
 			</dl>
-			<!-- ENDIF -->
+			{% endif %}
 			<dl>
-				<dt><label for="module_reset">{L_MODULE_RESET}{L_COLON}</label><br /><span style="color: #BC2A4D;">{L_MODULE_RESET_EXP}</span></dt>
+				<dt><label for="module_fa">{{ lang('MODULE_FA') }}{{ lang('COLON') }}</label><br/><span>{{ lang('MODULE_FA_EXP') }}</span></dt>
+				<dd><input id="module_fa" type="text" value="{{ MODULE_FA }}" name="module_fa" maxlength="255" size="64"/></dd>
+			</dl>
+			<dl>
+				<dt><label for="module_fa_size">{{ lang('MODULE_FA_SIZE') }}{{ lang('COLON') }}</label><br/><span>{{ lang('MODULE_FA_SIZE_EXP') }}</span></dt>
+				<dd><input id="module_fa_size" type="number" value="{{ MODULE_FA_SIZE }}" name="module_fa_size" min="1"/>&nbsp;{{ lang('PIXEL') }}</dd>
+			</dl>
+			{% endif %}
+			<dl>
+				<dt><label for="module_reset">{{ lang('MODULE_RESET') }}{{ lang('COLON') }}</label><br /><span style="color: #BC2A4D;">{{ lang('MODULE_RESET_EXP') }}</span></dt>
 				<dd><input id="module_reset" type="checkbox" value="1" name="module_reset" /></dd>
 			</dl>
 			<dl>
-				<dt><label for="module_status">{L_MODULE_STATUS}{L_COLON}</label></dt>
+				<dt><label for="module_status">{{ lang('MODULE_STATUS') }}{{ lang('COLON') }}</label></dt>
 				<dd>
-					<label><input type="radio" class="radio" name="module_status" value="1" id="module_status"<!-- IF MODULE_ENABLED --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
-					<label><input type="radio" class="radio" name="module_status" value="0"<!-- IF not MODULE_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+					<label><input type="radio" class="radio" name="module_status" value="1" id="module_status"{% if MODULE_ENABLED %} checked="checked"{% endif %} />{{ lang('YES') }}</label>
+					<label><input type="radio" class="radio" name="module_status" value="0"{% if not MODULE_ENABLED %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 				</dd>
 			</dl>
-			<!-- IF .permission_setting -->
+			{% if loops.permission_setting|length %}
 			<dl>
-				<dt><label for="permission-setting">{L_ACP_PORTAL_CUSTOM_PERMISSION}{L_COLON}</label><br /><span>{L_ACP_PORTAL_CUSTOM_PERMISSION_EXP}</span></dt>
+				<dt><label for="permission-setting">{{ lang('ACP_PORTAL_CUSTOM_PERMISSION') }}{{ lang('COLON') }}</label><br /><span>{{ lang('ACP_PORTAL_CUSTOM_PERMISSION_EXP') }}</span></dt>
 				<dd>
 					<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
-						<!-- BEGIN permission_setting -->
-						<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
-						<!-- END permission_setting -->
+						{% for permission_setting in loops.permission_setting %}
+						<option value="{{ permission_setting.GROUP_ID }}"{% if permission_setting.SELECTED %}selected="selected"{% endif %}>{{ permission_setting.GROUP_NAME }}</option>
+						{% endfor %}
 					</select>
 				</dd>
 			</dl>
-			<!-- ENDIF -->
+			{% endif %}
 		</fieldset>
-<!-- ENDIF -->
-		<!-- IF S_PREVIEW -->
+{% endif %}
+		{% if S_PREVIEW %}
 		<fieldset>
-			<legend>{L_ACP_PORTAL_CUSTOM_PREVIEW}</legend>
+			<legend>{{ lang('ACP_PORTAL_CUSTOM_PREVIEW') }}</legend>
 		<dl>
 			<dt style="border: none; width: 100%;">
-				{PREVIEW_TEXT}
+				{{ PREVIEW_TEXT }}
 			</dt>
 		</dl>
 		</fieldset>
-		<!-- ENDIF -->
+		{% endif %}
 		<fieldset>
-			<legend>{L_PORTAL_CUSTOM}</legend>
-		<dl id="bbcode-buttons"<!-- IF not CUSTOM_USE_BBCODE --> style="display: none;"<!-- ENDIF -->>
+			<legend>{{ lang('PORTAL_CUSTOM') }}</legend>
+		<dl id="bbcode-buttons"{% if not CUSTOM_USE_BBCODE %} style="display: none;"{% endif %}>
 			<dt></dt>
 			<dd>
 				<div id="colour_palette" style="display: none;">
 					<dl style="clear: left;">
-						<dt style="border: none;"><label>{L_FONT_COLOR}{L_COLON}</label></dt>
+						<dt style="border: none;"><label>{{ lang('FONT_COLOR') }}{{ lang('COLON') }}</label></dt>
 						<dd></dd>
 					</dl>
 					<dl style="clear: left;">
@@ -167,73 +167,73 @@ function change_palette()
 					</dl>
 				</div>
 				<div id="format-buttons">
-					<input type="button" class="button2" accesskey="b" name="addbbcode0" value=" B " style="font-weight:bold; width: 30px" onclick="bbstyle(0)" title="{L_BBCODE_B_HELP}" />
-					<input type="button" class="button2" accesskey="i" name="addbbcode2" value=" i " style="font-style:italic; width: 30px" onclick="bbstyle(2)" title="{L_BBCODE_I_HELP}" />
-					<input type="button" class="button2" accesskey="u" name="addbbcode4" value=" u " style="text-decoration: underline; width: 30px" onclick="bbstyle(4)" title="{L_BBCODE_U_HELP}" />
-					<!-- IF S_BBCODE_QUOTE -->
-						<input type="button" class="button2" accesskey="q" name="addbbcode6" value="Quote" style="width: 50px" onclick="bbstyle(6)" title="{L_BBCODE_Q_HELP}" />
-					<!-- ENDIF -->
-					<input type="button" class="button2" accesskey="c" name="addbbcode8" value="Code" style="width: 40px" onclick="bbstyle(8)" title="{L_BBCODE_C_HELP}" />
-					<input type="button" class="button2" accesskey="l" name="addbbcode10" value="List" style="width: 40px" onclick="bbstyle(10)" title="{L_BBCODE_L_HELP}" />
-					<input type="button" class="button2" accesskey="o" name="addbbcode12" value="List=" style="width: 40px" onclick="bbstyle(12)" title="{L_BBCODE_O_HELP}" />
-					<input type="button" class="button2" accesskey="t" name="addlitsitem" value="[*]" style="width: 40px" onclick="bbstyle(-1)" title="{L_BBCODE_LISTITEM_HELP}" />
-					<!-- IF S_BBCODE_IMG -->
-						<input type="button" class="button2" accesskey="p" name="addbbcode14" value="Img" style="width: 40px" onclick="bbstyle(14)" title="{L_BBCODE_P_HELP}" />
-					<!-- ENDIF -->
-					<!-- IF S_LINKS_ALLOWED -->
-						<input type="button" class="button2" accesskey="w" name="addbbcode16" value="URL" style="text-decoration: underline; width: 40px" onclick="bbstyle(16)" title="{L_BBCODE_W_HELP}" />
-					<!-- ENDIF -->
-					<!-- IF S_BBCODE_FLASH -->
-						<input type="button" class="button2" accesskey="d" name="addbbcode18" value="Flash" onclick="bbstyle(18)" title="{L_BBCODE_D_HELP}" />
-					<!-- ENDIF -->
-					<select name="addbbcode20" onchange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]');this.form.addbbcode20.selectedIndex = 2;" title="{L_BBCODE_F_HELP}">
-						<option value="50">{L_FONT_TINY}</option>
-						<option value="85">{L_FONT_SMALL}</option>
-						<option value="100" selected="selected">{L_FONT_NORMAL}</option>
-						<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 150 -->
-							<option value="150">{L_FONT_LARGE}</option>
-							<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 200 -->
-								<option value="200">{L_FONT_HUGE}</option>
-							<!-- ENDIF -->
-						<!-- ENDIF -->
+					<input type="button" class="button2" accesskey="b" name="addbbcode0" value=" B " style="font-weight:bold; width: 30px" onclick="bbstyle(0)" title="{{ lang('BBCODE_B_HELP') }}" />
+					<input type="button" class="button2" accesskey="i" name="addbbcode2" value=" i " style="font-style:italic; width: 30px" onclick="bbstyle(2)" title="{{ lang('BBCODE_I_HELP') }}" />
+					<input type="button" class="button2" accesskey="u" name="addbbcode4" value=" u " style="text-decoration: underline; width: 30px" onclick="bbstyle(4)" title="{{ lang('BBCODE_U_HELP') }}" />
+					{% if S_BBCODE_QUOTE %}
+						<input type="button" class="button2" accesskey="q" name="addbbcode6" value="Quote" style="width: 50px" onclick="bbstyle(6)" title="{{ lang('BBCODE_Q_HELP') }}" />
+					{% endif %}
+					<input type="button" class="button2" accesskey="c" name="addbbcode8" value="Code" style="width: 40px" onclick="bbstyle(8)" title="{{ lang('BBCODE_C_HELP') }}" />
+					<input type="button" class="button2" accesskey="l" name="addbbcode10" value="List" style="width: 40px" onclick="bbstyle(10)" title="{{ lang('BBCODE_L_HELP') }}" />
+					<input type="button" class="button2" accesskey="o" name="addbbcode12" value="List=" style="width: 40px" onclick="bbstyle(12)" title="{{ lang('BBCODE_O_HELP') }}" />
+					<input type="button" class="button2" accesskey="t" name="addlitsitem" value="[*]" style="width: 40px" onclick="bbstyle(-1)" title="{{ lang('BBCODE_LISTITEM_HELP') }}" />
+					{% if S_BBCODE_IMG %}
+						<input type="button" class="button2" accesskey="p" name="addbbcode14" value="Img" style="width: 40px" onclick="bbstyle(14)" title="{{ lang('BBCODE_P_HELP') }}" />
+					{% endif %}
+					{% if S_LINKS_ALLOWED %}
+						<input type="button" class="button2" accesskey="w" name="addbbcode16" value="URL" style="text-decoration: underline; width: 40px" onclick="bbstyle(16)" title="{{ lang('BBCODE_W_HELP') }}" />
+					{% endif %}
+					{% if S_BBCODE_FLASH %}
+						<input type="button" class="button2" accesskey="d" name="addbbcode18" value="Flash" onclick="bbstyle(18)" title="{{ lang('BBCODE_D_HELP') }}" />
+					{% endif %}
+					<select name="addbbcode20" onchange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]');this.form.addbbcode20.selectedIndex = 2;" title="{{ lang('BBCODE_F_HELP') }}">
+						<option value="50">{{ lang('FONT_TINY') }}</option>
+						<option value="85">{{ lang('FONT_SMALL') }}</option>
+						<option value="100" selected="selected">{{ lang('FONT_NORMAL') }}</option>
+						{% if not MAX_FONT_SIZE or MAX_FONT_SIZE >= 150 %}
+							<option value="150">{{ lang('FONT_LARGE') }}</option>
+							{% if not MAX_FONT_SIZE or MAX_FONT_SIZE >= 200 %}
+								<option value="200">{{ lang('FONT_HUGE') }}</option>
+							{% endif %}
+						{% endif %}
 					</select>
-					<input type="button" class="button2" name="bbpalette" id="bbpalette" value="{L_FONT_COLOR}" onclick="change_palette();" title="{L_BBCODE_S_HELP}" />
-					<!-- BEGIN custom_tags -->
-						<input type="button" class="button2" name="addbbcode{custom_tags.BBCODE_ID}" value="{custom_tags.BBCODE_TAG}" onclick="bbstyle({custom_tags.BBCODE_ID})" title="{custom_tags.BBCODE_HELPLINE}" />
-					<!-- END custom_tags -->
+					<input type="button" class="button2" name="bbpalette" id="bbpalette" value="{{ lang('FONT_COLOR') }}" onclick="change_palette();" title="{{ lang('BBCODE_S_HELP') }}" />
+					{% for custom_tags in loops.custom_tags %}
+						<input type="button" class="button2" name="addbbcode{{ custom_tags.BBCODE_ID }}" value="{{ custom_tags.BBCODE_TAG }}" onclick="bbstyle({{ custom_tags.BBCODE_ID }})" title="{{ custom_tags.BBCODE_HELPLINE }}" />
+					{% endfor %}
 				</div>
 			</dd>
 		</dl>
 		<dl>
 			<dt>
-				<label for="custom_code">{L_ACP_PORTAL_CUSTOM_CODE}{L_COLON}</label><br />
-				<span>{L_ACP_PORTAL_CUSTOM_CODE_EXP}</span>
+				<label for="custom_code">{{ lang('ACP_PORTAL_CUSTOM_CODE') }}{{ lang('COLON') }}</label><br />
+				<span>{{ lang('ACP_PORTAL_CUSTOM_CODE_EXP') }}</span>
 			</dt>
-			<dd><textarea name="custom_code" id="custom_code" cols="6" rows="12">{CUSTOM_CODE}</textarea></dd>
+			<dd><textarea name="custom_code" id="custom_code" cols="6" rows="12">{{ CUSTOM_CODE }}</textarea></dd>
 		</dl>
 		<dl>
 			<dt>
-				<label for="custom_use_bbcode">{L_ACP_PORTAL_CUSTOM_BBCODE}</label><br />
-				<span>{L_ACP_PORTAL_CUSTOM_BBCODE_EXP}</span>
+				<label for="custom_use_bbcode">{{ lang('ACP_PORTAL_CUSTOM_BBCODE') }}</label><br />
+				<span>{{ lang('ACP_PORTAL_CUSTOM_BBCODE_EXP') }}</span>
 			</dt>
 			<dd>
-				<label><input onchange="phpbb.toggleDisplay('bbcode-buttons', 1)" class="radio" type="radio" value="1" name="custom_use_bbcode" id="custom_use_bbcode"<!-- IF CUSTOM_USE_BBCODE --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
-				<label><input onchange="phpbb.toggleDisplay('bbcode-buttons', -1)" class="radio" type="radio" value="0" name="custom_use_bbcode"<!-- IF not CUSTOM_USE_BBCODE --> checked="checked"<!-- ENDIF --> />{L_NO}</label>
+				<label><input onchange="phpbb.toggleDisplay('bbcode-buttons', 1)" class="radio" type="radio" value="1" name="custom_use_bbcode" id="custom_use_bbcode"{% if CUSTOM_USE_BBCODE %} checked="checked"{% endif %} />{{ lang('YES') }}</label>
+				<label><input onchange="phpbb.toggleDisplay('bbcode-buttons', -1)" class="radio" type="radio" value="0" name="custom_use_bbcode"{% if not CUSTOM_USE_BBCODE %} checked="checked"{% endif %} />{{ lang('NO') }}</label>
 			</dd>
 		</dl>
-<!-- IF S_AUTH -->
-	<!-- BEGIN auth_tpl -->
-		{auth_tpl.TPL}
-	<!-- END auth_tpl -->
-<!-- ENDIF -->
+{% if S_AUTH %}
+	{% for auth_tpl in loops.auth_tpl %}
+		{{ auth_tpl.TPL }}
+	{% endfor %}
+{% endif %}
 
 	<p class="submit-buttons">
-		<input class="button2" type="submit" id="preview" name="preview" value="{L_PREVIEW}" />&nbsp;
-		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		<input class="button2" type="submit" id="preview" name="preview" value="{{ lang('PREVIEW') }}" />&nbsp;
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
 	</p>
-	{S_FORM_TOKEN}
+	{{ S_FORM_TOKEN }}
 </fieldset>
 </form>
 
-<!-- INCLUDE overall_footer.html -->
+{% INCLUDE 'overall_footer.html' %}

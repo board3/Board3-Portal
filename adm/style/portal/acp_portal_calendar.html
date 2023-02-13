@@ -1,206 +1,206 @@
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
 <a name="maincontent"></a>
 
-<h1>{L_TITLE}</h1>
+<h1>{{ lang('TITLE') }}</h1>
 
-<p>{L_TITLE_EXPLAIN}</p>
+<p>{{ lang('TITLE_EXPLAIN') }}</p>
 
-<!-- IF S_ERROR -->
+{% if S_ERROR %}
 	<div class="errorbox">
-		<h3>{L_WARNING}</h3>
-		<p>{ERROR_MSG}</p>
+		<h3>{{ lang('WARNING') }}</h3>
+		<p>{{ ERROR_MSG }}</p>
 	</div>
-<!-- ENDIF -->
+{% endif %}
 
-<!-- IF S_EDIT -->
-	<form id="acp_portal_links" method="post" action="{B3P_U_ACTION}">
+{% if S_EDIT %}
+	<form id="acp_portal_links" method="post" action="{{ B3P_U_ACTION }}">
 
 	<fieldset>
-		<legend>{L_ACP_PORTAL_EVENTS}</legend>
+		<legend>{{ lang('ACP_PORTAL_EVENTS') }}</legend>
 	<dl>
-		<dt><label for="event_title">{L_EVENT_TITLE}{L_COLON}</label></dt>
-		<dd><input name="event_title" type="text" id="event_title" value="{EVENT_TITLE}" maxlength="255" /></dd>
+		<dt><label for="event_title">{{ lang('EVENT_TITLE') }}{{ lang('COLON') }}</label></dt>
+		<dd><input name="event_title" type="text" id="event_title" value="{{ EVENT_TITLE }}" maxlength="255" /></dd>
 	</dl>
 	<dl>
-		<dt><label for="event_desc">{L_EVENT_DESC}{L_COLON}</label></dt>
-		<dd><textarea id="event_desc" rows="6" cols="6" name="event_desc">{EVENT_DESC}</textarea></dd>
+		<dt><label for="event_desc">{{ lang('EVENT_DESC') }}{{ lang('COLON') }}</label></dt>
+		<dd><textarea id="event_desc" rows="6" cols="6" name="event_desc">{{ EVENT_DESC }}</textarea></dd>
 	</dl>
 	<dl>
 		<dt>
-			<label for="event_start_date">{L_ACP_PORTAL_EVENT_START_DATE}{L_COLON}</label><br />
-			<span>{L_ACP_PORTAL_EVENT_START_DATE_EXP}</span>
+			<label for="event_start_date">{{ lang('ACP_PORTAL_EVENT_START_DATE') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('ACP_PORTAL_EVENT_START_DATE_EXP') }}</span>
 		</dt>
-		<dd><input name="event_start_date" type="text" id="event_start_date" value="{EVENT_START_DATE}" maxlength="255" /></dd>
+		<dd><input name="event_start_date" type="text" id="event_start_date" value="{{ EVENT_START_DATE }}" maxlength="255" /></dd>
 	</dl>
 	<dl>
-		<dt><label for="event_all_day">{L_EVENT_ALL_DAY}{L_COLON}</label></dt>
+		<dt><label for="event_all_day">{{ lang('EVENT_ALL_DAY') }}{{ lang('COLON') }}</label></dt>
 		<dd>
-			<label><input onchange="phpbb.toggleDisplay('end', -1)" type="radio" class="radio" name="event_all_day" value="1" id="event_all_day"<!-- IF EVENT_ALL_DAY --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
-			<label><input onchange="phpbb.toggleDisplay('end', 1)" type="radio" class="radio" name="event_all_day" value="0"<!-- IF not EVENT_ALL_DAY --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			<label><input onchange="phpbb.toggleDisplay('end', -1)" type="radio" class="radio" name="event_all_day" value="1" id="event_all_day"{% if EVENT_ALL_DAY %} checked="checked"{% endif %} />{{ lang('YES') }}</label>
+			<label><input onchange="phpbb.toggleDisplay('end', 1)" type="radio" class="radio" name="event_all_day" value="0"{% if not EVENT_ALL_DAY %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 		</dd>
 	</dl>
-	<div id="end"<!-- IF EVENT_ALL_DAY -->style="display: none;"<!-- ENDIF -->>
+	<div id="end"{% if EVENT_ALL_DAY %}style="display: none;"{% endif %}>
 	<dl>
 		<dt>
-			<label for="event_end_date">{L_ACP_PORTAL_EVENT_END_DATE}{L_COLON}</label><br />
-			<span>{L_ACP_PORTAL_EVENT_END_DATE_EXP}</span>
+			<label for="event_end_date">{{ lang('ACP_PORTAL_EVENT_END_DATE') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('ACP_PORTAL_EVENT_END_DATE_EXP') }}</span>
 		</dt>
-		<dd><input name="event_end_date" type="text" id="event_end_date" value="{EVENT_END_DATE}" maxlength="255" /></dd>
+		<dd><input name="event_end_date" type="text" id="event_end_date" value="{{ EVENT_END_DATE }}" maxlength="255" /></dd>
 	</dl>
 	</div>
 	<dl>
 		<dt>
-			<label for="event_url">{L_EVENT_LINK}{L_COLON}</label><br />
-			<span>{L_EVENT_LINK_EXP}</span>
+			<label for="event_url">{{ lang('EVENT_LINK') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('EVENT_LINK_EXP') }}</span>
 		</dt>
-		<dd><input name="event_url" type="text" id="event_url" value="{EVENT_URL}" maxlength="255" /></dd>
+		<dd><input name="event_url" type="text" id="event_url" value="{{ EVENT_URL }}" maxlength="255" /></dd>
 	</dl>
 	<dl>
 		<dt>
-			<label for="permission-setting-calendar">{L_ACP_PORTAL_CALENDAR_PERMISSION}{L_COLON}</label><br />
-			<span>{L_ACP_PORTAL_CALENDAR_PERMISSION_EXP}</span>
+			<label for="permission-setting-calendar">{{ lang('ACP_PORTAL_CALENDAR_PERMISSION') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('ACP_PORTAL_CALENDAR_PERMISSION_EXP') }}</span>
 		</dt>
 		<dd>
 			<select id="permission-setting-calendar" size="10" multiple="multiple" name="permission-setting-calendar[]">
-				<!-- BEGIN permission_setting_calendar -->
-				<option value="{permission_setting_calendar.GROUP_ID}"<!-- IF permission_setting_calendar.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting_calendar.GROUP_NAME}</option>
-				<!-- END permission_setting_calendar -->
+				{% for permission_setting_calendar in loops.permission_setting_calendar %}
+				<option value="{{ permission_setting_calendar.GROUP_ID }}"{% if permission_setting_calendar.SELECTED %}selected="selected"{% endif %}>{{ permission_setting_calendar.GROUP_NAME }}</option>
+				{% endfor %}
 			</select>
 		</dd>
 	</dl>
 	<p class="submit-buttons">
 		<input type="hidden" name="action" value="save" />
 
-		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
-		{S_FORM_TOKEN}
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
+		{{ S_FORM_TOKEN }}
 	</p>
 	</fieldset>
 	</form>
 
-<!-- ELSE -->
-	<form id="acp_portal_calendar" method="post" action="{B3P_U_ACTION}">
-	<!-- IF SHOW_MODULE_OPTIONS -->
+{% else %}
+	<form id="acp_portal_calendar" method="post" action="{{ B3P_U_ACTION }}">
+	{% if SHOW_MODULE_OPTIONS %}
 	<fieldset>
-		<legend>{L_MODULE_OPTIONS}</legend>
+		<legend>{{ lang('MODULE_OPTIONS') }}</legend>
 		<dl>
-			<dt><label for="module_name">{L_MODULE_NAME}{L_COLON}</label><br /><span>{L_MODULE_NAME_EXP}</span></dt>
-			<dd><input id="module_name" type="text" value="{MODULE_NAME}" name="module_name" maxlength="255" size="64" /></dd>
+			<dt><label for="module_name">{{ lang('MODULE_NAME') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_NAME_EXP') }}</span></dt>
+			<dd><input id="module_name" type="text" value="{{ MODULE_NAME }}" name="module_name" maxlength="255" size="64" /></dd>
 		</dl>
-		<!-- IF MODULE_SHOW_IMAGE -->
+		{% if MODULE_SHOW_IMAGE %}
 		<dl>
-			<dt><label for="module_image">{L_MODULE_IMAGE}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_EXP}</span></dt>
-			<dd><input id="module_image" type="text" value="{MODULE_IMAGE}" name="module_image" maxlength="255" size="64" /></dd>
-			<!-- IF MODULE_IMAGE_SRC --><dd><img src="{MODULE_IMAGE_SRC}" alt="{L_MODULE_IMAGE}" /></dd><!-- ENDIF -->
+			<dt><label for="module_image">{{ lang('MODULE_IMAGE') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_IMAGE_EXP') }}</span></dt>
+			<dd><input id="module_image" type="text" value="{{ MODULE_IMAGE }}" name="module_image" maxlength="255" size="64" /></dd>
+			{% if MODULE_IMAGE_SRC %}<dd><img src="{{ MODULE_IMAGE_SRC }}" alt="{{ lang('MODULE_IMAGE') }}" /></dd>{% endif %}
 		</dl>
-		<!-- IF MODULE_IMAGE_SRC -->
+		{% if MODULE_IMAGE_SRC %}
 		<dl>
-			<dt><label for="module_img_width">{L_MODULE_IMAGE_WIDTH}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_WIDTH_EXP}</span></dt>
-			<dd><input id="module_img_width" type="text" value="{MODULE_IMAGE_WIDTH}" name="module_img_width" maxlength="3" size="3" />px</dd>
-		</dl>
-		<dl>
-			<dt><label for="module_img_height">{L_MODULE_IMAGE_HEIGHT}{L_COLON}</label><br /><span>{L_MODULE_IMAGE_HEIGHT_EXP}</span></dt>
-			<dd><input id="module_img_height" type="text" value="{MODULE_IMAGE_HEIGHT}" name="module_img_height" maxlength="3" size="3" />px</dd>
-		</dl>
-		<!-- ENDIF -->
-		<dl>
-			<dt><label for="module_fa">{L_MODULE_FA}{L_COLON}</label><br/><span>{L_MODULE_FA_EXP}</span></dt>
-			<dd><input id="module_fa" type="text" value="{MODULE_FA}" name="module_fa" maxlength="255" size="64"/></dd>
+			<dt><label for="module_img_width">{{ lang('MODULE_IMAGE_WIDTH') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_IMAGE_WIDTH_EXP') }}</span></dt>
+			<dd><input id="module_img_width" type="number" value="{{ MODULE_IMAGE_WIDTH }}" name="module_img_width" min="1" />&nbsp;{{ lang('PIXEL') }}</dd>
 		</dl>
 		<dl>
-			<dt><label for="module_fa_size">{L_MODULE_FA_SIZE}{L_COLON}</label><br/><span>{L_MODULE_FA_SIZE_EXP}</span></dt>
-			<dd><input id="module_fa_size" type="number" value="{MODULE_FA_SIZE}" name="module_fa_size" min="1"/>&nbsp;{L_PIXEL}</dd>
+			<dt><label for="module_img_height">{{ lang('MODULE_IMAGE_HEIGHT') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_IMAGE_HEIGHT_EXP') }}</span></dt>
+			<dd><input id="module_img_height" type="number" value="{{ MODULE_IMAGE_HEIGHT }}" name="module_img_height" min="1" />&nbsp;{{ lang('PIXEL') }}</dd>
 		</dl>
-		<!-- ENDIF -->
+		{% endif %}
 		<dl>
-			<dt><label for="module_reset">{L_MODULE_RESET}{L_COLON}</label><br /><span style="color: #BC2A4D;">{L_MODULE_RESET_EXP}</span></dt>
+			<dt><label for="module_fa">{{ lang('MODULE_FA') }}{{ lang('COLON') }}</label><br/><span>{{ lang('MODULE_FA_EXP') }}</span></dt>
+			<dd><input id="module_fa" type="text" value="{{ MODULE_FA }}" name="module_fa" maxlength="255" size="64"/></dd>
+		</dl>
+		<dl>
+			<dt><label for="module_fa_size">{{ lang('MODULE_FA_SIZE') }}{{ lang('COLON') }}</label><br/><span>{{ lang('MODULE_FA_SIZE_EXP') }}</span></dt>
+			<dd><input id="module_fa_size" type="number" value="{{ MODULE_FA_SIZE }}" name="module_fa_size" min="1"/>&nbsp;{{ lang('PIXEL') }}</dd>
+		</dl>
+		{% endif %}
+		<dl>
+			<dt><label for="module_reset">{{ lang('MODULE_RESET') }}{{ lang('COLON') }}</label><br /><span style="color: #BC2A4D;">{{ lang('MODULE_RESET_EXP') }}</span></dt>
 			<dd><input id="module_reset" type="checkbox" value="1" name="module_reset" /></dd>
 		</dl>
 		<dl>
-			<dt><label for="module_status">{L_MODULE_STATUS}{L_COLON}</label></dt>
+			<dt><label for="module_status">{{ lang('MODULE_STATUS') }}{{ lang('COLON') }}</label></dt>
 			<dd>
-				<label><input type="radio" class="radio" name="module_status" value="1" id="module_status"<!-- IF MODULE_ENABLED --> checked="checked"<!-- ENDIF --> />{L_YES}</label>
-				<label><input type="radio" class="radio" name="module_status" value="0"<!-- IF not MODULE_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				<label><input type="radio" class="radio" name="module_status" value="1" id="module_status"{% if MODULE_ENABLED %} checked="checked"{% endif %} />{{ lang('YES') }}</label>
+				<label><input type="radio" class="radio" name="module_status" value="0"{% if not MODULE_ENABLED %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
-		<!-- IF .permission_setting -->
+		{% if loops.permission_setting|length %}
 		<dl>
-			<dt><label for="permission-setting">{L_MODULE_PERMISSIONS}{L_COLON}</label><br /><span>{L_MODULE_PERMISSIONS_EXP}</span></dt>
+			<dt><label for="permission-setting">{{ lang('MODULE_PERMISSIONS') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_PERMISSIONS_EXP') }}</span></dt>
 			<dd>
 				<select id="permission-setting" size="10" multiple="multiple" name="permission-setting[]">
-					<!-- BEGIN permission_setting -->
-					<option value="{permission_setting.GROUP_ID}"<!-- IF permission_setting.SELECTED -->selected="selected"<!-- ENDIF -->>{permission_setting.GROUP_NAME}</option>
-					<!-- END permission_setting -->
+					{% for permission_setting in loops.permission_setting %}
+					<option value="{{ permission_setting.GROUP_ID }}"{% if permission_setting.SELECTED %}selected="selected"{% endif %}>{{ permission_setting.GROUP_NAME }}</option>
+					{% endfor %}
 				</select>
 			</dd>
 		</dl>
-		<!-- ENDIF -->
+		{% endif %}
 	</fieldset>
-	<!-- ENDIF -->
-<!-- BEGIN options -->
-	<!-- IF options.S_LEGEND -->
-		<!-- IF not options.S_FIRST_ROW -->
+	{% endif %}
+{% for options in loops.options %}
+	{% if options.S_LEGEND %}
+		{% if not options.S_FIRST_ROW %}
 			</fieldset>
-		<!-- ENDIF -->
+		{% endif %}
 		<fieldset>
-			<legend>{options.LEGEND}</legend>
-	<!-- ELSE -->
+			<legend>{{ options.LEGEND }}</legend>
+	{% else %}
 
 		<dl>
-			<dt><label for="{options.KEY}">{options.TITLE}{L_COLON}</label><!-- IF options.S_EXPLAIN --><br /><span>{options.TITLE_EXPLAIN}</span><!-- ENDIF --></dt>
-			<dd>{options.CONTENT}</dd>
+			<dt><label for="{{ options.KEY }}">{{ options.TITLE }}{{ lang('COLON') }}</label>{% if options.S_EXPLAIN %}<br /><span>{{ options.TITLE_EXPLAIN }}</span>{% endif %}</dt>
+			<dd>{{ options.CONTENT }}</dd>
 		</dl>
 
-	<!-- ENDIF -->
-<!-- END options -->
+	{% endif %}
+{% endfor %}
 	</fieldset>
 
 	<fieldset>
-		<legend>{L_ACP_PORTAL_EVENTS}</legend>
+		<legend>{{ lang('ACP_PORTAL_EVENTS') }}</legend>
 		<fieldset class="tabulated">
 
 		<p class="quick">
-			<input class="button2" name="add" type="submit" value="{L_ADD_EVENT}" />
+			<input class="button2" name="add" type="submit" value="{{ lang('ADD_EVENT') }}" />
 		</p>
 
 		<table style="cellspacing: 1;">
 		<thead>
 		<tr>
-			<th>{L_EVENT_TITLE}</th>
-			<th>{L_EVENT_DESC}</th>
-			<th>{L_EVENT_TIME}</th>
-			<th>{L_EVENT_LINK}</th>
-			<th>{L_ACTION}</th>
+			<th>{{ lang('EVENT_TITLE') }}</th>
+			<th>{{ lang('EVENT_DESC') }}</th>
+			<th>{{ lang('EVENT_TIME') }}</th>
+			<th>{{ lang('EVENT_LINK') }}</th>
+			<th>{{ lang('ACTION') }}</th>
 		</tr>
 		</thead>
 		<tbody>
-		<!-- BEGIN events -->
-			<!-- IF events.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
-			<td style="text-align: center;">{events.EVENT_TITLE}</td>
-			<td style="text-align: center;">{events.EVENT_DESC}</td>
-			<td style="text-align: center;"><!-- IF events.EVENT_END -->{L_EVENT_START}{L_COLON}&nbsp;{events.EVENT_START}&nbsp;&#124;&nbsp;{L_EVENT_END}{L_COLON}&nbsp;{events.EVENT_END}<!-- ELSE -->{L_EVENT_TIME}{L_COLON}&nbsp;{events.EVENT_START}<!-- IF events.EVENT_ALL_DAY -->&nbsp;&#124;&nbsp;{L_EVENT_ALL_DAY}<!-- ENDIF --><!-- ENDIF --></td>
-			<td style="text-align: center;"><a href="{events.EVENT_URL}" alt="{events.EVENT_TITLE}">{events.EVENT_URL_RAW}</td>
+		{% for events in loops.events %}
+			{% if events.S_ROW_COUNT is even %}<tr class="row1">{% else %}<tr class="row2">{% endif %}
+			<td style="text-align: center;">{{ events.EVENT_TITLE }}</td>
+			<td style="text-align: center;">{{ events.EVENT_DESC }}</td>
+			<td style="text-align: center;">{% if events.EVENT_END %}{{ lang('EVENT_START') }}{{ lang('COLON') }}&nbsp;{{ events.EVENT_START }}&nbsp;&#124;&nbsp;{{ lang('EVENT_END') }}{{ lang('COLON') }}&nbsp;{{ events.EVENT_END }}{% else %}{{ lang('EVENT_TIME') }}{{ lang('COLON') }}&nbsp;{{ events.EVENT_START }}{% if events.EVENT_ALL_DAY %}&nbsp;&#124;&nbsp;{{ lang('EVENT_ALL_DAY') }}{% endif %}{% endif %}</td>
+			<td style="text-align: center;"><a href="{{ events.EVENT_URL }}" alt="{{ events.EVENT_TITLE }}">{{ events.EVENT_URL_RAW }}</td>
 			<td style="text-align: center;">
-				<a href="{events.U_EDIT}">{ICON_EDIT}</a> <a href="{events.U_DELETE}">{ICON_DELETE}</a>
+				<a href="{{ events.U_EDIT }}">{{ ICON_EDIT }}</a> <a href="{{ events.U_DELETE }}">{{ ICON_DELETE }}</a>
 			</td>
 		</tr>
-		<!-- BEGINELSE -->
+		{% else %}
 		<tr class="row1">
-			<td style="text-align: center;" colspan="5">{L_NO_EVENTS}</td>
+			<td style="text-align: center;" colspan="5">{{ lang('NO_EVENTS') }}</td>
 		</tr>
-		<!-- END events -->
+		{% endfor %}
 		</tbody>
 		</table>
 		<p class="submit-buttons">
-			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
 		</p>
-		{S_FORM_TOKEN}
+		{{ S_FORM_TOKEN }}
 		</fieldset>
 	</fieldset>
 	</form>
 
-<!-- ENDIF -->
+{% endif %}
 
-<!-- INCLUDE overall_footer.html -->
+{% INCLUDE 'overall_footer.html' %}
