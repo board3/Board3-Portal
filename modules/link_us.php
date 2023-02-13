@@ -75,7 +75,8 @@ class link_us extends module_base
 		// Assign specific vars
 		$this->template->assign_vars(array(
 			'LINK_US_TXT'		=> sprintf($this->user->lang['LINK_US_TXT'], $this->config['sitename']),
-			'U_LINK_US'			=> '&lt;a&nbsp;href=&quot;' . $u_link . '&quot;&nbsp;' . (($this->config['site_desc']) ? 'title=&quot;' . $this->config['site_desc'] . '&quot;' : '' ) . '&gt;' . (($this->config['sitename']) ? $this->config['sitename'] : $u_link ) . '&lt;/a&gt;',
+			'U_LINK_US_HTML'	=> '&lt;a&nbsp;href=&quot;' . $u_link . '&quot;&nbsp;' . (($this->config['sitename']) ? 'title=&quot;' . $this->config['sitename'] . '&quot;' : '' ) . '&gt;' . (($this->config['sitename']) ? $this->config['sitename'] : $u_link ) . '&lt;/a&gt;',
+			'U_LINK_US_BB'		=> '[url=' . $u_link . ']' . (($this->config['sitename']) ? $this->config['sitename'] : $u_link ) . '[/url]',
 		));
 
 		return 'link_us_side.html';

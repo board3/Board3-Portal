@@ -116,7 +116,7 @@ class leaders extends module_base
 							AND ug.user_pending = 0
 						)
 					WHERE g.group_legend >= 1
-						AND (g.group_type <> ' . GROUP_HIDDEN . ' OR ug.user_id = ' . $this->user->data['user_id'] . ')
+						AND (g.group_type <> ' . GROUP_HIDDEN . ' OR ug.user_id = ' . (int) $this->user->data['user_id'] . ')
 					ORDER BY g.' . $order_legend . ' ASC';
 			}
 			$result = $this->db->sql_query($sql, 600);

@@ -223,8 +223,8 @@ class announcements extends module_base
 						OR topic_type = ' . POST_ANNOUNCE . ')
 						AND topic_visibility = 1
 						AND topic_moved_id = 0
-						' . $post_time . '
-						' . $str_where;
+						' . $this->db->sql_escape($post_time) . '
+						' . $this->db->sql_escape($str_where);
 					$result = $this->db->sql_query($sql, 30);
 					$total_announcements = (int) $this->db->sql_fetchfield('num_topics');
 					$this->db->sql_freeresult($result);
@@ -317,6 +317,7 @@ class announcements extends module_base
 						'ATTACH_ICON_IMG'		=> ($fetch_news[$i]['attachment'] && $this->config['allow_attachments']) ? $this->user->img('icon_topic_attach', $this->user->lang['TOTAL_ATTACHMENTS']) : '',
 						'FORUM_NAME'			=> ($forum_id) ? $fetch_news[$i]['forum_name'] : '',
 						'TITLE'					=> $fetch_news[$i]['topic_title'],
+						'MINI_POST'				=> $unread_topic ? $this->user->lang['UNREAD_POST'] : $this->user->lang['POST'],
 						'POSTER'				=> $fetch_news[$i]['username'],
 						'POSTER_FULL'			=> $fetch_news[$i]['username_full'],
 						'USERNAME_FULL_LAST'	=> $fetch_news[$i]['username_full_last'],
@@ -447,9 +448,9 @@ class announcements extends module_base
 			'vars'	=> array(
 				'legend1'									=> 'ACP_PORTAL_ANNOUNCE_SETTINGS',
 				'board3_announcements_style_' . $module_id				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_STYLE'		 	,	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
-				'board3_number_of_announcements_' . $module_id			=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-				'board3_announcements_day_' . $module_id				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-				'board3_announcements_length_' . $module_id				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'board3_number_of_announcements_' . $module_id			=> array('lang' => 'PORTAL_NUMBER_OF_ANNOUNCEMENTS'		,	'validate' => 'int',	'type' => 'number:0:999',		'explain' => true),
+				'board3_announcements_day_' . $module_id				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_DAY'			,	'validate' => 'int',	'type' => 'number:0:999',		'explain' => true),
+				'board3_announcements_length_' . $module_id				=> array('lang' => 'PORTAL_ANNOUNCEMENTS_LENGTH'		,	'validate' => 'int',	'type' => 'number:0:999',		'explain' => true),
 				'board3_global_announcements_forum_' . $module_id		=> array('lang' => 'PORTAL_GLOBAL_ANNOUNCEMENTS_FORUM'	,	'validate' => 'string',	'type' => 'custom',			'explain' => true, 'method' => array('board3.portal.modules_helper', 'generate_forum_select'), 'submit' => array('board3.portal.modules_helper', 'store_selected_forums')),
 				'board3_announcements_forum_exclude_' . $module_id		=> array('lang' => 'PORTAL_ANNOUNCEMENTS_FORUM_EXCLUDE',	'validate' => 'string', 'type' => 'radio:yes_no',	'explain' => true),
 				'board3_announcements_archive_' . $module_id			=> array('lang' => 'PORTAL_ANNOUNCEMENTS_ARCHIVE',			'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),

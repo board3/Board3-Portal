@@ -189,7 +189,7 @@ class welcome extends module_base
 				// first check for obvious errors, we don't want to waste server resources
 				if (empty($welcome_message))
 				{
-					trigger_error($this->user->lang['ACP_PORTAL_WELCOME_MESSAGE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['TOO_FEW_CHARS']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				// set_portal_config will take care of escaping the welcome message

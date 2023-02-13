@@ -127,7 +127,7 @@ class poll extends module_base
 				'legend1'							=> 'ACP_PORTAL_POLLS_SETTINGS',
 				'board3_poll_topic_id_' . $module_id	=> array('lang' => 'PORTAL_POLL_TOPIC_ID'				,	'validate' => 'string',		'type' => 'custom',			'explain' => true, 'method' => array('board3.portal.modules_helper', 'generate_forum_select'), 'submit' => array('board3.portal.modules_helper', 'store_selected_forums')),
 				'board3_poll_exclude_id_' . $module_id	=> array('lang' => 'PORTAL_POLL_EXCLUDE_ID'				,	'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
-				'board3_poll_limit_' . $module_id		=> array('lang' => 'PORTAL_POLL_LIMIT'					,	'validate' => 'int',		'type' => 'text:3:3',	 	'explain' => true),
+				'board3_poll_limit_' . $module_id		=> array('lang' => 'PORTAL_POLL_LIMIT'					,	'validate' => 'int',		'type' => 'number:1:999',	 	'explain' => true),
 				'board3_poll_allow_vote_' . $module_id	=> array('lang' => 'PORTAL_POLL_ALLOW_VOTE'				,	'validate' => 'ibool',		'type' => 'radio:yes_no',	 'explain' => true),
 				'board3_poll_hide_' . $module_id		=> array('lang' => 'PORTAL_POLL_HIDE'					,	'validate' => 'bool',		'type' => 'radio:yes_no',	 'explain' => true),
 			)
@@ -474,6 +474,7 @@ class poll extends module_base
 					}
 
 					$data['poll_title'] = censor_text($data['poll_title']);
+					decode_message($data['poll_title'], $data['bbcode_uid']);
 
 					if ($poll_bbcode !== false)
 					{
@@ -517,6 +518,7 @@ class poll extends module_base
 						}
 
 						$pd['poll_option_text'] = censor_text($pd['poll_option_text']);
+						decode_message($pd['poll_option_text'], $data['bbcode_uid']);
 
 						if ($poll_bbcode !== false)
 						{
@@ -542,7 +544,7 @@ class poll extends module_base
 			$this->db->sql_freeresult($result);
 
 			$this->template->assign_vars(array(
-				'S_HAS_POLL'			=> $has_poll,
+				'S_HAS_B3P_POLL'			=> $has_poll,
 				'POLL_LEFT_CAP_IMG'		=> $this->user->img('poll_left'),
 				'POLL_RIGHT_CAP_IMG'	=> $this->user->img('poll_right'),
 			));

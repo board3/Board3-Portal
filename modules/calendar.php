@@ -193,14 +193,14 @@ class calendar extends module_base
 
 		$this->template->assign_block_vars('minical', array(
 			'S_SUNDAY_FIRST'	=> ($this->config['board3_sunday_first_' . $module_id]) ? true : false,
-			'L_MINI_CAL_MONTH'	=> (($this->config['board3_long_month_' . $module_id]) ? $this->user->lang(['mini_cal', 'long_month'], $this->day[0][1]) : $this->user->lang(['mini_cal', 'month'], $this->day[0][1])) . " " . $this->day[0][2],
-			'L_MINI_CAL_SUN'	=> '<span style="color: ' . $this->config['board3_calendar_sunday_color_' . $module_id] . ';">' . $this->user->lang(['mini_cal', 'day'], 1) . '</span>',
-			'L_MINI_CAL_MON'	=> $this->user->lang(['mini_cal', 'day'], 2),
-			'L_MINI_CAL_TUE'	=> $this->user->lang(['mini_cal', 'day'], 3),
-			'L_MINI_CAL_WED'	=> $this->user->lang(['mini_cal', 'day'], 4),
-			'L_MINI_CAL_THU'	=> $this->user->lang(['mini_cal', 'day'], 5),
-			'L_MINI_CAL_FRI'	=> $this->user->lang(['mini_cal', 'day'], 6),
-			'L_MINI_CAL_SAT'	=> $this->user->lang(['mini_cal', 'day'], 7),
+			'L_MINI_CAL_MONTH'	=> (($this->config['board3_long_month_' . $module_id]) ? $this->user->lang['mini_cal']['long_month'][$this->day[0][1]] : $this->user->lang['mini_cal']['month'][$this->day[0][1]]) . " " . $this->day[0][2],
+			'L_MINI_CAL_SUN'	=> '<span style="color: ' . $this->config['board3_calendar_sunday_color_' . $module_id] . ';">' . $this->user->lang['mini_cal']['day'][1] . '</span>',
+			'L_MINI_CAL_MON'	=> $this->user->lang['mini_cal']['day'][2],
+			'L_MINI_CAL_TUE'	=> $this->user->lang['mini_cal']['day'][3],
+			'L_MINI_CAL_WED'	=> $this->user->lang['mini_cal']['day'][4],
+			'L_MINI_CAL_THU'	=> $this->user->lang['mini_cal']['day'][5],
+			'L_MINI_CAL_FRI'	=> $this->user->lang['mini_cal']['day'][6],
+			'L_MINI_CAL_SAT'	=> $this->user->lang['mini_cal']['day'][7],
 			'U_PREV_MONTH'		=> $prev_month,
 			'U_NEXT_MONTH'		=> $next_month,
 			'S_DISPLAY_EVENTS'	=> ($this->config['board3_display_events_' . $module_id]) ? true : false,
@@ -503,7 +503,7 @@ class calendar extends module_base
 						'end_time'		=> $end_time,
 						'all_day'		=> $event_all_day,
 						'permission'	=> $event_permission,
-						'url'			=> htmlspecialchars_decode($event_url),
+						'url'			=> htmlentities($event_url, ENT_QUOTES | ENT_SUBSTITUTE),
 					);
 
 					$this->log->add('admin', $this->user->data['user_id'], $this->user->data['user_ip'], 'LOG_PORTAL_EVENT_UPDATED', false, array($event_title));

@@ -102,7 +102,7 @@ class latest_members extends module_base
 			'title'	=> 'ACP_PORTAL_MEMBERS_SETTINGS',
 			'vars'	=> array(
 				'legend1'							=> 'ACP_PORTAL_MEMBERS_SETTINGS',
-				'board3_max_last_member_' . $module_id			=> array('lang' => 'PORTAL_MAX_LAST_MEMBER'			 ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+				'board3_max_last_member_' . $module_id			=> array('lang' => 'PORTAL_MAX_LAST_MEMBER'			 ,	'validate' => 'int',		'type' => 'number:0:999',		 'explain' => true),
 			)
 		);
 	}

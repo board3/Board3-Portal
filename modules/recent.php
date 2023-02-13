@@ -134,7 +134,7 @@ class recent extends module_base
 				AND topic_visibility = ' . ITEM_APPROVED . '
 				AND (topic_type = ' . POST_ANNOUNCE . ' OR topic_type = ' . POST_GLOBAL . ')
 				AND topic_moved_id = 0
-				' . $sql_where .  $forum_sql . '
+				' . $this->db->sql_escape($sql_where) .  $this->db->sql_escape($forum_sql) . '
 			ORDER BY topic_time DESC';
 		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id], 0 , 30);
 
@@ -158,9 +158,9 @@ class recent extends module_base
 		$sql = 'SELECT topic_title, forum_id, topic_id
 			FROM ' . TOPICS_TABLE . ' t
 			WHERE topic_visibility = ' . ITEM_APPROVED . '
-				AND topic_posts_approved >' . $this->config['hot_threshold'] . '
+				AND topic_posts_approved >' . (int) $this->config['hot_threshold'] . '
 				AND topic_moved_id = 0
-				' . $sql_where . $forum_sql . '
+				' . $this->db->sql_escape($sql_where) . $this->db->sql_escape($forum_sql) . '
 			ORDER BY topic_time DESC';
 		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id], 0, 30);
 
@@ -187,7 +187,7 @@ class recent extends module_base
 				AND topic_visibility = ' . ITEM_APPROVED . '
 				AND topic_type = ' . POST_NORMAL . '
 				AND topic_moved_id = 0
-				' . $sql_where . $forum_sql . '
+				' . $this->db->sql_escape($sql_where) . $this->db->sql_escape($forum_sql) . '
 			ORDER BY topic_time DESC';
 		$result = $this->db->sql_query_limit($sql, $this->config['board3_max_topics_' . $module_id], 0, 30);
 
@@ -217,8 +217,8 @@ class recent extends module_base
 			'title'	=> 'ACP_PORTAL_RECENT_SETTINGS',
 			'vars'	=> array(
 				'legend1'							=> 'ACP_PORTAL_RECENT_SETTINGS',
-				'board3_max_topics_' . $module_id				=> array('lang' => 'PORTAL_MAX_TOPIC',			'validate' => 'int',		'type' => 'text:3:3',		'explain' => true),
-				'board3_recent_title_limit_' . $module_id		=> array('lang' => 'PORTAL_RECENT_TITLE_LIMIT',	'validate' => 'int',		'type' => 'text:3:3',		'explain' => true),
+				'board3_max_topics_' . $module_id				=> array('lang' => 'PORTAL_MAX_TOPIC',			'validate' => 'int',		'type' => 'number:0:999',		'explain' => true),
+				'board3_recent_title_limit_' . $module_id		=> array('lang' => 'PORTAL_RECENT_TITLE_LIMIT',	'validate' => 'int',		'type' => 'number:0:999',		'explain' => true),
 				'board3_recent_forum_' . $module_id				=> array('lang' => 'PORTAL_RECENT_FORUM',		'validate' => 'string',		'type' => 'custom',			'explain' => true, 'method' => array('board3.portal.modules_helper', 'generate_forum_select'), 'submit' => array('board3.portal.modules_helper', 'store_selected_forums')),
 				'board3_recent_exclude_forums_' . $module_id	=> array('lang' => 'PORTAL_EXCLUDE_FORUM',		'validate' => 'bool',		'type' => 'radio:yes_no',	'explain' => true),
 			)

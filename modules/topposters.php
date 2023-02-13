@@ -89,11 +89,11 @@ class topposters extends module_base
 
 		while (($row = $this->db->sql_fetchrow($result)))
 		{
-			$this->template->assign_block_vars('topposters', array(
+			$this->template->assign_block_vars('topposters', [
 				'S_SEARCH_ACTION'	=> append_sid("{$this->phpbb_root_path}search.{$this->php_ext}", 'author_id=' . $row['user_id'] . '&amp;sr=posts'),
 				'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
 				'POSTER_POSTS'		=> $row['user_posts'],
-			));
+			]);
 		}
 		$this->db->sql_freeresult($result);
 
@@ -105,13 +105,13 @@ class topposters extends module_base
 	*/
 	public function get_template_acp($module_id)
 	{
-		return array(
+		return [
 			'title'	=> 'TOPPOSTERS_CONFIG',
-			'vars'	=> array(
+			'vars'	=> [
 				'legend1'							=> 'TOPPOSTERS',
-				'board3_topposters_' . $module_id	=> array('lang' => 'NUM_TOPPOSTERS',		'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
-			),
-		);
+				'board3_topposters_' . $module_id	=> ['lang' => 'NUM_TOPPOSTERS',		'validate' => 'int',	'type' => 'number:1:999',		'explain' => true],
+			],
+		];
 	}
 
 	/**
@@ -128,9 +128,9 @@ class topposters extends module_base
 	*/
 	public function uninstall($module_id, $db)
 	{
-		$del_config = array(
+		$del_config = [
 			'board3_topposters_' . $module_id,
-		);
+		];
 		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
 			WHERE ' . $db->sql_in_set('config_name', $del_config);
 		return $db->sql_query($sql);

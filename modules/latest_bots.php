@@ -114,7 +114,7 @@ class latest_bots extends module_base
 			'title'	=> 'ACP_PORTAL_BOTS_SETTINGS',
 			'vars'	=> array(
 				'legend1'							=> 'ACP_PORTAL_BOTS_SETTINGS',
-				'board3_last_visited_bots_number_' . $module_id	=> array('lang' => 'PORTAL_LAST_VISITED_BOTS_NUMBER' ,	'validate' => 'int',		'type' => 'text:3:3',		 'explain' => true),
+				'board3_last_visited_bots_number_' . $module_id	=> array('lang' => 'PORTAL_LAST_VISITED_BOTS_NUMBER' ,	'validate' => 'int',		'type' => 'number:0:999',		 'explain' => true),
 			)
 		);
 	}

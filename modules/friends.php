@@ -98,7 +98,7 @@ class friends extends module_base
 				)
 			),
 
-			'WHERE'		=> 'z.user_id = ' . $this->user->data['user_id'] . '
+			'WHERE'		=> 'z.user_id = ' . (int) $this->user->data['user_id'] . '
 				AND z.friend = 1
 				AND u.user_id = z.zebra_id',
 			'GROUP_BY'	=> 'z.zebra_id, u.user_id, u.username, u.username_clean, u.user_allow_viewonline, u.user_colour',
@@ -139,7 +139,7 @@ class friends extends module_base
 			'title'	=> 'ACP_PORTAL_FRIENDS_SETTINGS',
 			'vars'	=> array(
 				'legend1'					=> 'ACP_PORTAL_FRIENDS_SETTINGS',
-				'board3_max_online_friends_' . $module_id	=> array('lang' => 'PORTAL_MAX_ONLINE_FRIENDS',	'validate' => 'int',	'type' => 'text:3:3', 'explain' => true),
+				'board3_max_online_friends_' . $module_id	=> array('lang' => 'PORTAL_MAX_ONLINE_FRIENDS',	'validate' => 'int',	'type' => 'number:1:999', 'explain' => true),
 			)
 		);
 	}

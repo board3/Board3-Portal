@@ -355,7 +355,7 @@ class main_menu extends module_base
 
 					$links[$link_id] = array(
 						'title' 		=> $link_title,
-						'url'			=> htmlspecialchars_decode($link_url),
+						'url'			=> htmlentities($link_url, ENT_QUOTES | ENT_SUBSTITUTE),
 						'type'			=> $link_type,
 						'permission'	=> $link_permissions,
 					);
@@ -372,7 +372,7 @@ class main_menu extends module_base
 					}
 					$links[] = array(
 						'title' 		=> $link_title,
-						'url'			=> htmlspecialchars_decode($link_url),
+						'url'			=> htmlentities($link_url, ENT_QUOTES | ENT_SUBSTITUTE),
 						'type'			=> $link_type,
 						'permission'	=> $link_permissions,
 					);

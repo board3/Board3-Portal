@@ -114,12 +114,12 @@ class birthday_list extends module_base
 				),
 				'WHERE'		=> "(b.ban_id IS NULL
 						OR b.ban_exclude = 1)
-					AND (u.user_birthday " . $this->db->sql_like_expression($this->db->get_any_char() . sprintf('%2d-%2d-', $now['mday'], $now['mon']) . $this->db->get_any_char()) . " {$sql_days})
+					AND (u.user_birthday " . $this->db->sql_like_expression($this->db->get_any_char() . sprintf('%2d-%2d-', $this->db->sql_escape($now['mday']), $this->db->sql_escape($now['mon'])) . $this->db->get_any_char()) . " {$sql_days})
 					AND " . $this->db->sql_in_set('u.user_type', array(USER_NORMAL , USER_FOUNDER)),
 				'ORDER BY'	=> $order_by,
 			);
 			$sql = $this->db->sql_build_query('SELECT', $sql_array);
-			$result = $this->db->sql_query($sql, 300);
+			$result = $this->db->sql_query($sql, 15);
 			$today = sprintf('%2d-%2d-', $now['mday'], $now['mon']);
 
 			while ($row = $this->db->sql_fetchrow($result))
@@ -166,7 +166,7 @@ class birthday_list extends module_base
 			'title'	=> 'ACP_PORTAL_BIRTHDAYS_SETTINGS',
 			'vars'	=> array(
 				'legend1'					=> 'ACP_PORTAL_BIRTHDAYS_SETTINGS',
-				'board3_birthdays_ahead_' . $module_id	=> array('lang' => 'PORTAL_BIRTHDAYS_AHEAD',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+				'board3_birthdays_ahead_' . $module_id	=> ['lang' => 'PORTAL_BIRTHDAYS_AHEAD',	'validate' => 'int',	'type' => 'number:0:999',		'explain' => true],
 			),
 		);
 	}
