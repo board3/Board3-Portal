@@ -5,15 +5,19 @@
 }
 
 a {
-	display: inline-block;
+	display: inline;
 }
 
 ul {
-	list-style-type: disc !important;
+	list-style-type: disc;
 }
 
 .portal-navigation{
 	width: auto;
+}
+
+.b3p-post {
+	margin-bottom: 0;
 }
 
 .portal-navigation ul{
@@ -197,11 +201,24 @@ a.portal-forumtitle {
 
 .portal-poll-subtext {
 	font-size: 1.0em !important;
-	width: 10em;
+	width: 100%;
+}
+
+p.portal-side-poll-subtext {
+	width: 11em;
+	font-size: 1em;
+}
+
+.portal-poll-subtext a {
+	display: inline-block;
 }
 
 .portal-poll-vote {
 	border-top: none;
+}
+
+.portal-poll-side-resultbar {
+	width: 70% !important;
 }
 
 .portal-poll-side-option dt {
@@ -223,8 +240,7 @@ a.portal-forumtitle {
 
 .portal-poll-side-checkbox input {
 	vertical-align: top;
-	margin-left: 39px;
-	margin-top: 0;
+	margin-left: 3px;
 }
 
 /**

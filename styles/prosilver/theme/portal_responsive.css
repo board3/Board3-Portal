@@ -52,6 +52,17 @@
 }
 
 @media (max-width: 700px) {
+	div#portal-left .header dt, div#portal-right .header dt {
+		margin-bottom: -7px !important;
+	}
+
+	.jumpbox {
+		margin: 15px auto;
+	}
+	.copyright {
+		clear: both;
+	}
+
 	.responsive-portal-news dd.lastpost, .responsive-portal-announcements dd.lastpost { display: none !important; }
 	.responsive-portal-news dt .list-inner, .responsive-portal-announcements dt .list-inner { margin-right: 0 !important; }
 	.responsive-portal-news dt, .responsive-portal-announcements dt { width: 100% !important; }

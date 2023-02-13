@@ -1,4 +1,4 @@
-@media only screen and (max-width: 870px), only screen and (max-device-width: 870px) {
+@media (max-width: 870px) {
 	.portal-body-center dd.posts, .portal-body-center dd.views, .portal-body-center dd.topics {
 		display: none !important;
 	}
@@ -24,18 +24,26 @@
 	.portal-body-center dd.lastpost { width: auto; }
 }
 
-@media only screen and (max-width: 740px), only screen and (max-device-width: 740px) {
-	#portal-left ul.topiclist dd, #portal-right ul.topiclist dd { display: block !important; }
-
+@media (max-width: 740px)) {
 	#portal-right > .portal-clear, #portal-body > .portal-clear, #portal-left > .portal-clear,
 	#portal-center > .portal-clear, #portal-login-box .portal-clear { display: none !important; }
 }
 
-@media only screen and (max-width: 700px), only screen and (max-device-width: 700px) {
+@media (max-width: 700px) {
+	#portal-left ul.topiclist dd, #portal-right ul.topiclist dd { display: block !important; }
+
 	.portal-body-center dt { width: 100% !important; }
+
+	div#portal-left .header dt, div#portal-right .header dt {
+		margin-bottom: -7px !important;
+	}
+
+	.portal-body-center ul.topiclist dt .list-inner {
+		margin-right: 0;
+	}
 }
 
-@media only screen and (max-width: 540px), only screen and (max-device-width: 540px) {
+@media (max-width: 540px) {
 	#portal-left, #portal-right {
 		display: none;
 	}
