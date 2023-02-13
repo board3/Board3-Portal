@@ -9,6 +9,8 @@
 
 namespace board3\portal\modules;
 
+use PHPUnit\Framework\Exception;
+
 require_once dirname(__FILE__) . '/../../mock/check_form_key.php';
 require_once dirname(__FILE__) . '/../../../../../../includes/functions_compatibility.php';
 
@@ -357,12 +359,9 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 		{
 			if (!empty($expected_error_message))
 			{
-				$this->setExpectedTriggerError($expected_error, $expected_error_message);
+				$this->expectExceptionMessage($expected_error_message);
 			}
-			else
-			{
-				$this->setExpectedTriggerError($expected_error);
-			}
+			$this->expectException(Exception::class);
 		}
 
 		$this->calendar->update_events('foobar', 5);
@@ -372,4 +371,12 @@ class phpbb_unit_modules_calendar_test extends \board3\portal\tests\testframewor
 function set_config($config_name, $config_value, $is_dynamic = false)
 {
 	phpbb_unit_modules_calendar_test::$config->set($config_name, $config_value, !$is_dynamic);
+}
+
+if (!function_exists('trigger_error'))
+{
+	function trigger_error($input, $type = E_USER_NOTICE)
+	{
+		throw new Exception($input, $type);
+	}
 }

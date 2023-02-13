@@ -9,6 +9,8 @@
 
 namespace board3\portal\portal\modules;
 
+use PHPUnit\Framework\Exception;
+
 class board3_portal_modules_manager_test extends \board3\portal\tests\testframework\database_test_case
 {
 	protected $portal_columns;
@@ -147,7 +149,8 @@ class board3_portal_modules_manager_test extends \board3\portal\tests\testframew
 
 	public function test_get_horizontal_move_action()
 	{
-		$this->setExpectedTriggerError(E_USER_NOTICE, 'UNABLE_TO_MOVE');
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage('UNABLE_TO_MOVE');
 		$this->modules_manager->get_horizontal_move_action(array(), 6);
 	}
 

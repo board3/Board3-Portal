@@ -46,6 +46,7 @@ class phpbb_unit_modules_birthday_list_test extends \board3\portal\tests\testfra
 		]);
 		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$this->user->timezone = new \DateTimeZone('UTC');
+		$this->user->data['user_id'] = 2;
 		$this->user->add_lang('common');
 		$user = $this->user;
 		$this->birthday_list = new \board3\portal\modules\birthday_list($this->config, $this->template, $this->new_dbal(), $this->user);

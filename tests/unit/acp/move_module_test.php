@@ -9,6 +9,8 @@
 
 namespace board3\portal\portal\modules;
 
+use PHPUnit\Framework\Exception;
+
 class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\database_test_case
 {
 	static public $redirected = false;
@@ -238,8 +240,9 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$this->modules_manager->move_module_vertical(2, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_UP);
 		$this->assertTrue(self::$redirected);
 
-		$this->setExpectedTriggerError(E_USER_NOTICE, $this->language->lang('UNABLE_TO_MOVE_ROW'));
 		self::$redirected = false;
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage($this->language->lang('UNABLE_TO_MOVE_ROW'));
 		$this->modules_manager->move_module_vertical(2, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_UP);
 		$this->assertFalse(self::$redirected);
 	}
@@ -250,8 +253,9 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 		$this->modules_manager->move_module_vertical(3, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_DOWN);
 		$this->assertTrue(self::$redirected);
 
-		$this->setExpectedTriggerError(E_USER_NOTICE, $this->language->lang('UNABLE_TO_MOVE_ROW'));
 		self::$redirected = false;
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage($this->language->lang('UNABLE_TO_MOVE_ROW'));
 		$this->modules_manager->move_module_vertical(3, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_DOWN);
 		$this->assertFalse(self::$redirected);
 	}
@@ -272,7 +276,8 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	{
 		if ($error)
 		{
-			$this->setExpectedTriggerError(E_USER_NOTICE, $this->language->lang($error));
+			$this->expectException(Exception::class);
+			$this->expectExceptionMessage($this->language->lang($error));
 		}
 		else
 		{
@@ -306,7 +311,8 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	{
 		if ($column_start > 3)
 		{
-			$this->setExpectedTriggerError(E_USER_ERROR, 'CLASS_NOT_FOUND');
+			$this->expectException(Exception::class);
+			$this->expectExceptionMessage('CLASS_NOT_FOUND');
 			$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_RIGHT);
 			return;
 		}
@@ -325,7 +331,9 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			$column_start++;
 			$this->update_portal_modules();
 		}
-		$this->setExpectedTriggerError(E_USER_NOTICE, $this->language->lang('UNABLE_TO_MOVE'));
+
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage($this->language->lang('UNABLE_TO_MOVE'));
 		$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_RIGHT);
 	}
 
@@ -348,7 +356,8 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 	{
 		if ($column_start > 3)
 		{
-			$this->setExpectedTriggerError(E_USER_ERROR, 'CLASS_NOT_FOUND');
+			$this->expectException(Exception::class);
+			$this->expectExceptionMessage('CLASS_NOT_FOUND');
 			$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_LEFT);
 			return;
 		}
@@ -378,7 +387,9 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 			$this->update_portal_modules();
 			$column_start--;
 		}
-		$this->setExpectedTriggerError(E_USER_NOTICE, $this->language->lang('UNABLE_TO_MOVE'));
+
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage($this->language->lang('UNABLE_TO_MOVE'));
 		$this->modules_manager->move_module_horizontal($module_id, \board3\portal\portal\modules\database_handler::MOVE_DIRECTION_LEFT);
 	}
 
@@ -422,7 +433,8 @@ class phpbb_acp_move_module_test extends \board3\portal\tests\testframework\data
 
 	public function test_main_wrong_mode()
 	{
-		$this->setExpectedTriggerError(E_USER_ERROR, 'NO_MODE');
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage('NO_MODE');
 		$this->portal_module->main(5, 'foobar');
 	}
 
@@ -461,7 +473,7 @@ function trigger_error($input, $type = E_USER_NOTICE)
 {
 	if (!phpbb_acp_move_module_test::$override_trigger_error)
 	{
-		\trigger_error($input, $type);
+		throw new Exception($input, $type);
 	}
 	phpbb_acp_move_module_test::$error = $input;
 	phpbb_acp_move_module_test::$error_type = $type;

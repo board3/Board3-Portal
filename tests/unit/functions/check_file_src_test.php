@@ -7,11 +7,14 @@
 *
 */
 
-require_once(dirname(__FILE__) . '/../../../../../../includes/functions_acp.php');
-require_once(dirname(__FILE__) . '/../../../../../../includes/functions.php');
+namespace board3\portal\tests\unit\functions;
 
-class phpbb_functions_check_file_src_test extends \board3\portal\tests\testframework\database_test_case
+use PHPUnit\Framework\Exception;
+
+class check_file_src_test extends \board3\portal\tests\testframework\database_test_case
 {
+	public static $redirected = false;
+
 	public function setUp(): void
 	{
 		global $phpbb_root_path, $portal_root_path;
@@ -44,8 +47,8 @@ class phpbb_functions_check_file_src_test extends \board3\portal\tests\testframe
 	{
 		global $phpbb_dispatcher;
 
-		$phpbb_dispatcher = new phpbb_mock_event_dispatcher;
-		$this->setExpectedTriggerError(E_USER_WARNING);
+		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher;
+		$this->expectException(Exception::class);
 		$this->assertEquals(': styles/all/theme/images/portal/portal_foobar.png<br />', check_file_src('portal_foobar.png', '', 15));
 	}
 }
