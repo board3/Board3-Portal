@@ -1,4 +1,10 @@
-{{ definition.C_BLOCK_H_L }}{% if U_VIEWONLINE %}<a href="{{ U_VIEWONLINE }}">{{ definition.TITLE }}</a>{% else %}{{ definition.TITLE }}{% endif %}{{ definition.C_BLOCK_H_R }}
+{{ definition.C_BLOCK_H_L }}{% if definition.S_BLOCK_ICON %}
+{% if definition.FA_ENABLED %}
+	<i class="icon b3p-icon fa {{ definition.FA_ICON }}" style="font-size: {{ definition.FA_SIZE }}px;" aria-hidden="true"></i>
+{% else %}
+	<img src="{{ definition.IMAGE_SRC }}" width="{{ definition.IMAGE_WIDTH }}" height="{{ definition.IMAGE_HEIGHT }}" alt="" />
+{% endif %}
+{% endif %}{% if U_VIEWONLINE %}<a href="{{ U_VIEWONLINE }}">{{ definition.TITLE }}</a>{% else %}{{ definition.TITLE }}{% endif %}{{ definition.C_BLOCK_H_R }}
 	<ul class="topiclist bg1">
 		<li>
 			<dl>

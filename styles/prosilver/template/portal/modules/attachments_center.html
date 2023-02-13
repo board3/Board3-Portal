@@ -1,4 +1,10 @@
-{{ definition.C_BLOCK_H_L }}{{ definition.TITLE }}{{ definition.C_BLOCK_H_R }}
+{{ definition.C_BLOCK_H_L }}{% if definition.S_BLOCK_ICON %}
+{% if definition.FA_ENABLED %}
+	<i class="icon b3p-icon fa {{ definition.FA_ICON }}" style="font-size: {{ definition.FA_SIZE }}px;" aria-hidden="true"></i>
+{% else %}
+	<img src="{{ definition.IMAGE_SRC }}" width="{{ definition.IMAGE_WIDTH }}" height="{{ definition.IMAGE_HEIGHT }}" alt="" />
+{% endif %}
+{% endif %}{{ definition.TITLE }}{{ definition.C_BLOCK_H_R }}
 <div class="panel bg1 portal-no-margin">
 	<div class="inner">
 	{% if loops.attach_center|length %}

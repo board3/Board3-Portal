@@ -101,7 +101,7 @@ class portal_module
 						'board3_display_jumpbox'	=> array('lang' => 'PORTAL_DISPLAY_JUMPBOX',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 
 						'legend2'					=> 'ACP_PORTAL_COLUMN_WIDTH_SETTINGS',
-						'board3_left_column_width'	=> array('lang' => 'PORTAL_LEFT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'text:3:3',		'explain' => true),
+						'board3_left_column_width'	=> ['lang' => 'PORTAL_LEFT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'number:150:400',		'explain' => true, 'append' => ' ' . $this->user->lang('PIXEL')],
 						'board3_right_column_width'	=> ['lang' => 'PORTAL_RIGHT_COLUMN_WIDTH',	'validate' => 'int',	'type' => 'number:150:400',		'explain' => true, 'append' => ' ' . $this->user->lang('PIXEL')],
 
 						'legend3'					=> 'ACP_PORTAL_SHOW_ALL',
@@ -145,7 +145,7 @@ class portal_module
 							'MODULE_FA'				=> $module_data['module_fa_icon'],
 							'MODULE_FA_SIZE'		=> $module_data['module_fa_size'],
 							'MODULE_ENABLED'		=> ($module_data['module_status']) ? true : false,
-							'MODULE_SHOW_IMAGE'		=> (in_array($this->portal_columns->number_to_string($module_data['module_column']), array('center', 'top', 'bottom'))) ? false : true,
+							'MODULE_SHOW_IMAGE'		=> (in_array($this->portal_columns->number_to_string($module_data['module_column']), array(''))) ? false : true,
 						));
 
 						if ($module_data['module_classname'] != '\board3\portal\modules\custom')

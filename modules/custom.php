@@ -405,8 +405,7 @@ class custom extends module_base
 				'template'	=> 'custom_' . $type . '.html',
 				'title'		=> $title,
 				'code'		=> $assign_code,
-				// no image for center blocks
-				'image_src'	=> ($type === 'center') ? '' : ((!empty($this->config['board3_custom_' . $module_id . '_image_src'])) ? $this->config['board3_custom_' . $module_id . '_image_src'] : $this->image_src),
+				'image_src'	=> ((!empty($this->config['board3_custom_' . $module_id . '_image_src'])) ? $this->config['board3_custom_' . $module_id . '_image_src'] : $this->image_src),
 			);
 		}
 	}

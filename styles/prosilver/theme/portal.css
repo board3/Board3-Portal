@@ -12,6 +12,10 @@ ul {
 	list-style-type: disc;
 }
 
+.b3p-icon {
+	vertical-align: sub;
+}
+
 .portal-navigation{
 	width: auto;
 }
