@@ -1,51 +1,51 @@
-{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON -->
-<!-- IF $FA_ENABLED -->
-<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
-<!-- ELSE -->
-<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
-<!-- ENDIF -->
-<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
-       <div class="portal-centered-content">
-            {USERNAME_FULL}<br />
-            <!-- IF B3P_AVATAR_IMG -->
-                <a href="{U_PROFILE}">{B3P_AVATAR_IMG}</a>
-            <!-- ELSEIF $NO_AVATAR_IMG -->
-                <a href="{U_PROFILE}"><img src="{T_THEME_PATH}{$NO_AVATAR_IMG}" alt="" /></a>
-            <!-- ENDIF -->
-            <!-- IF B3P_RANK_TITLE --><br /><span class="gensmall">{B3P_RANK_TITLE}</span><!-- ENDIF -->
-            <!-- IF B3P_RANK_IMG --><br />{B3P_RANK_IMG}<!-- ENDIF -->
-        </div>
-       <hr class="dashed" />
-       <div class="portal-navigation">
-          <div class="menutitle">{L_M_MENU}</div>
-             <ul>
-                <!-- IF S_DISPLAY_SEARCH -->
-                   <li><a href="{U_NEW_POSTS}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{L_NEW_POSTS}</span></a></li>
-                   <li><a href="{U_UNREAD_POSTS}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{L_UNREAD_POSTS}</span></a></li>
-                   <li><a href="{U_SELF_POSTS}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{L_SELF_POSTS}</span></a></li>
-                <!-- ENDIF -->
-                <!-- IF U_UM_BOOKMARKS -->
-                   <li><a href="{U_UM_BOOKMARKS}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{L_UM_BOOKMARKS}</span></a></li>
-                <!-- ENDIF -->
-                <!-- IF S_DISPLAY_SUBSCRIPTIONS -->
-                   <li><a href="{U_UM_MAIN_SUBSCRIBED}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{L_UM_MAIN_SUBSCRIBED}</span></a></li>
-                <!-- ENDIF -->
-                <!-- IF S_NOTIFICATIONS_DISPLAY -->
-                <li data-skip-responsive="true">
-                   <a href="{U_VIEW_ALL_NOTIFICATIONS}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{L_NOTIFICATIONS} [</span><strong>{NOTIFICATIONS_COUNT}</strong><span>]</span></a>
-                </li>
-                <!-- ENDIF -->
-                <!-- IF S_DISPLAY_PM -->
-                   <li><a href="{U_PRIVATEMSGS}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{L_PRIVATE_MESSAGES} [</span><strong>{PRIVATE_MESSAGE_COUNT}</strong><span>]</span></a></li>
-                <!-- ENDIF -->
-                <li><a href="{U_PROFILE}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{L_PROFILE}</span></a></li>
-                <!-- IF U_UM_MCP -->
-                   <li><a href="{U_UM_MCP}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{L_MCP}</span></a></li>
-                <!-- ENDIF -->
-                <!-- IF U_ACP -->
-                   <li><a href="{U_ACP}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{L_M_ACP}</span></a></li>
-                <!-- ENDIF -->
-                <li><a href="{U_LOGIN_LOGOUT}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{L_LOGIN_LOGOUT}</span></a></li>
-             </ul>
-       </div>
-{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+{{ definition.LR_BLOCK_H_L }}{% if definition.S_BLOCK_ICON %}
+{% if definition.FA_ENABLED %}
+<i class="icon fa {{ definition.FA_ICON }}" style="font-size: {{ definition.FA_SIZE }}px;" aria-hidden="true"></i>
+{% else %}
+<img src="{{ definition.IMAGE_SRC }}" width="{{ definition.IMAGE_WIDTH }}" height="{{ definition.IMAGE_HEIGHT }}" alt="" />
+{% endif %}
+{% endif %}{{ definition.TITLE }}{{ definition.LR_BLOCK_H_R }}
+		<div class="portal-centered-content">
+			{{ USERNAME_FULL }}<br />
+			{% if B3P_AVATAR_IMG %}
+				<a href="{{ U_PROFILE }}">{{ B3P_AVATAR_IMG }}</a>
+			{% elseif definition.NO_AVATAR_IMG %}
+				<a href="{{ U_PROFILE }}"><img src="{{ T_THEME_PATH }}{{ definition.NO_AVATAR_IMG }}" alt="" /></a>
+			{% endif %}
+			{% if B3P_RANK_TITLE %}<br /><span class="gensmall">{{ B3P_RANK_TITLE }}</span>{% endif %}
+			{% if B3P_RANK_IMG %}<br />{{ B3P_RANK_IMG }}{% endif %}
+		</div>
+		<hr class="dashed" />
+		<div class="portal-navigation">
+		<div class="menutitle">{{ lang('M_MENU') }}</div>
+			 <ul>
+				{% if S_DISPLAY_SEARCH %}
+					<li><a href="{{ U_NEW_POSTS }}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{{ lang('NEW_POSTS') }}</span></a></li>
+					<li><a href="{{ U_UNREAD_POSTS }}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{{ lang('UNREAD_POSTS') }}</span></a></li>
+					<li><a href="{{ U_SELF_POSTS }}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{{ lang('SELF_POSTS') }}</span></a></li>
+				{% endif %}
+				{% if U_UM_BOOKMARKS %}
+					<li><a href="{{ U_UM_BOOKMARKS }}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{{ lang('UM_BOOKMARKS') }}</span></a></li>
+				{% endif %}
+				{% if S_DISPLAY_SUBSCRIPTIONS %}
+					<li><a href="{{ U_UM_MAIN_SUBSCRIBED }}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{{ lang('UM_MAIN_SUBSCRIBED') }}</span></a></li>
+				{% endif %}
+				{% if S_NOTIFICATIONS_DISPLAY %}
+				<li data-skip-responsive="true">
+					<a href="{{ U_VIEW_ALL_NOTIFICATIONS }}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{{ lang('NOTIFICATIONS') }} [</span><strong>{{ NOTIFICATIONS_COUNT }}</strong><span>]</span></a>
+				</li>
+				{% endif %}
+				{% if S_DISPLAY_PM %}
+					<li><a href="{{ U_PRIVATEMSGS }}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{{ lang('PRIVATE_MESSAGES') }} [</span><strong>{{ PRIVATE_MESSAGE_COUNT }}</strong><span>]</span></a></li>
+				{% endif %}
+				<li><a href="{{ U_PROFILE }}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{{ lang('PROFILE') }}</span></a></li>
+				{% if U_UM_MCP %}
+					<li><a href="{{ U_UM_MCP }}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{{ lang('MCP') }}</span></a></li>
+				{% endif %}
+				{% if U_ACP %}
+					<li><a href="{{ U_ACP }}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{{ lang('M_ACP') }}</span></a></li>
+				{% endif %}
+				<li><a href="{{ U_LOGIN_LOGOUT }}"><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{{ lang('LOGIN_LOGOUT') }}</span></a></li>
+			 </ul>
+		</div>
+{{ definition.LR_BLOCK_F_L }}{{ definition.LR_BLOCK_F_R }}

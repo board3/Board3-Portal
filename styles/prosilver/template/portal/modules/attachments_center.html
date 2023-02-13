@@ -1,17 +1,17 @@
-{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
+{{ definition.C_BLOCK_H_L }}{{ definition.TITLE }}{{ definition.C_BLOCK_H_R }}
 <div class="panel bg1 portal-no-margin">
 	<div class="inner">
-	<!-- IF .attach_center -->
-		<span class="portal-title-span"><strong>{L_FILENAME}</strong></span><br />
-		<!-- BEGIN attach_center -->
-			<span class="portal-title-span icon fa-paperclip fa-fw" aria-hidden="true">&nbsp;</span>&nbsp;<a class="portal-title-link" href="{attach_center.U_TOPIC}" title="{attach_center.REAL_FILENAME}"><strong>{attach_center.FILENAME}</strong></a><br class="portal-clear" />
-			<span class="portal-text-span">{L_FILESIZE}{L_COLON}</span><span class="portal-data-span portal-gensmall"><strong>{attach_center.FILESIZE}</strong></span><br class="portal-clear" />
-			<span class="portal-text-span">{L_DOWNLOADS}{L_COLON}</span><span class="portal-data-span portal-gensmall"><strong>{attach_center.DOWNLOAD_COUNT}</strong></span><br class="portal-clear" />
-			<!-- IF not attach_center.S_LAST_ROW --><hr class="dashed" /><!-- ENDIF -->
-		<!-- END attach_center -->
-	<!-- ELSE -->
-		<span class="portal-title-span portal-gensmall"><strong>{L_NO_ATTACHMENTS}</strong></span><br />
-	<!-- ENDIF -->
+	{% if loops.attach_center|length %}
+		<span class="portal-title-span"><strong>{{ lang('FILENAME') }}</strong></span><br />
+		{% for attach_center in loops.attach_center %}
+			<span class="portal-title-span icon fa-paperclip fa-fw" aria-hidden="true">&nbsp;</span>&nbsp;<a class="portal-title-link" href="{{ attach_center.U_TOPIC }}" title="{{ attach_center.REAL_FILENAME }}"><strong>{{ attach_center.FILENAME }}</strong></a><br class="portal-clear" />
+			<span class="portal-text-span">{{ lang('FILESIZE') }}{{ lang('COLON') }}</span><span class="portal-data-span portal-gensmall"><strong>{{ attach_center.FILESIZE }}</strong></span><br class="portal-clear" />
+			<span class="portal-text-span">{{ lang('DOWNLOADS') }}{{ lang('COLON') }}</span><span class="portal-data-span portal-gensmall"><strong>{{ attach_center.DOWNLOAD_COUNT }}</strong></span><br class="portal-clear" />
+			{% if not attach_center.S_LAST_ROW %}<hr class="dashed" />{% endif %}
+		{% endfor %}
+	{% else %}
+		<span class="portal-title-span portal-gensmall"><strong>{{ lang('NO_ATTACHMENTS') }}</strong></span><br />
+	{% endif %}
 	</div>
 </div>
-{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+{{ definition.C_BLOCK_F_L }}{{ definition.C_BLOCK_F_R }}

@@ -1,30 +1,30 @@
-<form action="{S_LOGIN_ACTION}" method="post" id="portal-login-box">
-<div>
-{$LR_BLOCK_H_L}<a href="{U_LOGIN_LOGOUT}"><!-- IF $S_BLOCK_ICON -->
-	<!-- IF $FA_ENABLED -->
-	<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
-	<!-- ELSE -->
-	<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
-	<!-- ENDIF -->
-	<!-- ENDIF -->{$TITLE}</a>{$LR_BLOCK_H_R}
-	<span class="genmed">{L_USERNAME}{L_COLON}</span><br />
-	<input type="text" tabindex="1" name="username" id="username" value="" class="inputbox autowidth" /><br /><br /> 
-	<span class="genmed">{L_PASSWORD}{L_COLON}</span><br />
-	<input type="password" tabindex="2" id="password" name="password" class="inputbox autowidth" /> 
-	<!-- IF S_DISPLAY_FULL_LOGIN -->			
-		<br /><br />
-		<!-- IF S_AUTOLOGIN_ENABLED -->
-			<input type="checkbox" class="radio" name="autologin" tabindex="3" /> <span class="gensmall">{L_UM_LOG_ME_IN}</span><br />
-		<!-- ENDIF -->
-	<!-- ENDIF -->
-	<!-- IF S_SHOW_REGISTER and S_REGISTER_ENABLED -->
-		<br /><a href="{U_REGISTER}">{L_UM_REGISTER_NOW}</a><br />
-	<!-- ENDIF -->
-	<br />
-	<input type="hidden" name="redirect" value="{U_PORTAL_REDIRECT}" />
-	<input type="submit" name="login" tabindex="5" value="{L_LOGIN}" class="button1" />
-	{S_LOGIN_REDIRECT}
-	{S_FORM_TOKEN_LOGIN}
-{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
-</div>
+<form action="{{ S_LOGIN_ACTION }}" method="post" id="portal-login-box">
+	<div>
+		{{ definition.LR_BLOCK_H_L }}<a href="{{ U_LOGIN_LOGOUT }}">{% if definition.S_BLOCK_ICON %}
+			{% if definition.FA_ENABLED %}
+			<i class="icon fa {{ definition.FA_ICON }}" style="font-size: {{ definition.FA_SIZE }}px;" aria-hidden="true"></i>
+			{% else %}
+			<img src="{{ definition.IMAGE_SRC }}" width="{{ definition.IMAGE_WIDTH }}" height="{{ definition.IMAGE_HEIGHT }}" alt="" />
+			{% endif %}
+			{% endif %}{{ definition.TITLE }}</a>{{ definition.LR_BLOCK_H_R }}
+			<span class="genmed">{{ lang('USERNAME') }}{{ lang('COLON') }}</span><br />
+			<input type="text" tabindex="-1" name="username" id="username" value="" class="inputbox autowidth" /><br /><br /> 
+			<span class="genmed">{{ lang('PASSWORD') }}{{ lang('COLON') }}</span><br />
+			<input type="password" tabindex="0" id="password" name="password" class="inputbox autowidth" /> 
+			{% if S_DISPLAY_FULL_LOGIN %}
+				<br /><br />
+				{% if S_AUTOLOGIN_ENABLED %}
+					<input type="checkbox" class="radio" name="autologin" tabindex="3" /> <span class="gensmall">{{ lang('UM_LOG_ME_IN') }}</span><br />
+				{% endif %}
+			{% endif %}
+			{% if S_SHOW_REGISTER and S_REGISTER_ENABLED %}
+				<br /><a href="{{ U_REGISTER }}">{{ lang('UM_REGISTER_NOW') }}</a><br />
+			{% endif %}
+			<br />
+			<input type="hidden" name="redirect" value="{{ U_PORTAL_REDIRECT }}" />
+			<input type="submit" name="login" tabindex="5" value="{{ lang('LOGIN') }}" class="button1" />
+			{{ S_LOGIN_REDIRECT }}
+			{{ S_FORM_TOKEN_LOGIN }}
+		{{ definition.LR_BLOCK_F_L }}{{ definition.LR_BLOCK_F_R }}
+	</div>
 </form>

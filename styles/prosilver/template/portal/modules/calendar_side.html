@@ -1,94 +1,94 @@
-<!-- BEGIN minical -->
-<!-- IF minical.MODULE_ID eq $MODULE_ID -->
-<a id="minical{minical.MODULE_ID}"></a>
-{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON -->
-<!-- IF $FA_ENABLED -->
-	<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
-<!-- ELSE -->
-	<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
-<!-- ENDIF -->
-<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+{% for minical in loops.minical %}
+{% if minical.MODULE_ID eq definition.MODULE_ID %}
+<a id="minical{{ minical.MODULE_ID }}"></a>
+{{ definition.LR_BLOCK_H_L }}{% if definition.S_BLOCK_ICON %}
+{% if definition.FA_ENABLED %}
+	<i class="icon fa {{ definition.FA_ICON }}" style="font-size: {{ definition.FA_SIZE }}px;" aria-hidden="true"></i>
+{% else %}
+	<img src="{{ definition.IMAGE_SRC }}" width="{{ definition.IMAGE_WIDTH }}" height="{{ definition.IMAGE_HEIGHT }}" alt="" />
+{% endif %}
+{% endif %}{{ definition.TITLE }}{{ definition.LR_BLOCK_H_R }}
 	<table class="portal-module-postbody">
 		<tr>
-			<td class="portal-calendar-go-previous" colspan="2"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{minical.U_NEXT_MONTH}<!-- ELSE -->{minical.U_PREV_MONTH}<!-- ENDIF --></td>
-			<td colspan="3" class="portal-calendar-current-month"><span class="genmed">{minical.L_MINI_CAL_MONTH}</span></td>
-			<td class="portal-calendar-go-next" colspan="2"><!-- IF S_CONTENT_DIRECTION eq 'rtl' -->{minical.U_PREV_MONTH}<!-- ELSE -->{minical.U_NEXT_MONTH}<!-- ENDIF --></td>
+			<td class="portal-calendar-go-previous" colspan="2">{% if S_CONTENT_DIRECTION eq 'rtl' %}{{ minical.U_NEXT_MONTH }}{% else %}{{ minical.U_PREV_MONTH }}{% endif %}</td>
+			<td colspan="3" class="portal-calendar-current-month"><span class="genmed">{{ minical.L_MINI_CAL_MONTH }}</span></td>
+			<td class="portal-calendar-go-next" colspan="2">{% if S_CONTENT_DIRECTION eq 'rtl' %}{{ minical.U_PREV_MONTH }}{% else %}{{ minical.U_NEXT_MONTH }}{% endif %}</td>
 		</tr>
 		<tr class="portal-calendar-days-title">
-			<!-- IF minical.S_SUNDAY_FIRST -->
-				<td><span class="gensmall">{minical.L_MINI_CAL_SUN}</span></td>
-			<!-- ENDIF -->
-				<td><span class="gensmall">{minical.L_MINI_CAL_MON}</span></td>
-				<td><span class="gensmall">{minical.L_MINI_CAL_TUE}</span></td>
-				<td><span class="gensmall">{minical.L_MINI_CAL_WED}</span></td>
-				<td><span class="gensmall">{minical.L_MINI_CAL_THU}</span></td>
-				<td><span class="gensmall">{minical.L_MINI_CAL_FRI}</span></td>
-				<td><span class="gensmall">{minical.L_MINI_CAL_SAT}</span></td>
-			<!-- IF not minical.S_SUNDAY_FIRST -->
-				<td><span class="gensmall">{minical.L_MINI_CAL_SUN}</span></td>
-			<!-- ENDIF -->
+			{% if minical.S_SUNDAY_FIRST %}
+				<td><span class="gensmall">{{ minical.L_MINI_CAL_SUN }}</span></td>
+			{% endif %}
+				<td><span class="gensmall">{{ minical.L_MINI_CAL_MON }}</span></td>
+				<td><span class="gensmall">{{ minical.L_MINI_CAL_TUE }}</span></td>
+				<td><span class="gensmall">{{ minical.L_MINI_CAL_WED }}</span></td>
+				<td><span class="gensmall">{{ minical.L_MINI_CAL_THU }}</span></td>
+				<td><span class="gensmall">{{ minical.L_MINI_CAL_FRI }}</span></td>
+				<td><span class="gensmall">{{ minical.L_MINI_CAL_SAT }}</span></td>
+			{% if not minical.S_SUNDAY_FIRST %}
+				<td><span class="gensmall">{{ minical.L_MINI_CAL_SUN }}</span></td>
+			{% endif %}
 		</tr>
-		<!-- BEGIN mini_cal_row -->
-		<!-- IF minical.mini_cal_row.MODULE_ID eq $MODULE_ID -->
+		{% for mini_cal_row in minical.mini_cal_row %}
+		{% if mini_cal_row.MODULE_ID eq definition.MODULE_ID %}
 		<tr class="portal-calendar-days">
-			<!-- BEGIN mini_cal_days -->
-				<td><span class="gensmall">{minical.mini_cal_row.mini_cal_days.MINI_CAL_DAY}</span></td>
-			<!-- END mini_cal_days -->
+			{% for mini_cal_days in mini_cal_row.mini_cal_days %}
+				<td><span class="gensmall">{{ mini_cal_days.MINI_CAL_DAY }}</span></td>
+			{% endfor %}
 		</tr>
-		<!-- ENDIF -->
-		<!-- END mini_cal_row -->
+		{% endif %}
+		{% endfor %}
 	</table>
-	<!-- IF minical.S_DISPLAY_EVENTS -->
+	{% if minical.S_DISPLAY_EVENTS %}
 	<hr class="dashed" />
-	<div class="menutitle portal-calendar-events-heading">{L_CURRENT_EVENTS}{L_COLON}</div>
+	<div class="menutitle portal-calendar-events-heading">{{ lang('CURRENT_EVENTS') }}{{ lang('COLON') }}</div>
 	<ul class="portal-events">
-		<!-- BEGIN cur_events -->
+		{% for cur_events in minical.cur_events %}
 
 		<li class="row">
 			<dl class="row-item">
 				<dt class="portal-calendar-event-listing">
-					<!-- IF minical.cur_events.EVENT_URL --><a href="{minical.cur_events.EVENT_URL}" title="{minical.cur_events.EVENT_TITLE}" <!-- IF minical.cur_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.cur_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
-					<span class="portal-calendar-event-title">{minical.cur_events.EVENT_TITLE}{L_COLON}</span><br />
-					<!-- IF minical.cur_events.ALL_DAY -->{L_EVENT_START}{L_COLON}&nbsp;{minical.cur_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
-					<!-- ELSEIF not minical.cur_events.ALL_DAY and minical.cur_events.END_TIME -->{L_EVENT_START}{L_COLON}&nbsp;{minical.cur_events.START_TIME}<br />{L_EVENT_END}{L_COLON}&nbsp;{minical.cur_events.END_TIME}<br />
-					<!-- ELSE -->{L_EVENT_ALL_DAY}<br />
-					<!-- ENDIF -->
-					<!-- IF minical.cur_events.EVENT_DESC --><span class="portal-calendar-event-description">{minical.cur_events.EVENT_DESC}</span><!-- ENDIF -->
-					<!-- IF minical.cur_events.EVENT_URL --></a><!-- ENDIF -->
+					{% if cur_events.EVENT_URL %}<a href="{{ cur_events.EVENT_URL }}" title="{{ cur_events.EVENT_TITLE }}" {% if cur_events.EVENT_URL_NEW_WINDOW %}onclick="window.open('{{ cur_events.EVENT_URL }}'); return false;"{% endif %}>{% endif %}
+					<span class="portal-calendar-event-title">{{ cur_events.EVENT_TITLE }}{{ lang('COLON') }}</span><br />
+					{% if cur_events.ALL_DAY %}{{ lang('EVENT_START') }}{{ lang('COLON') }}&nbsp;{{ cur_events.START_TIME }}<br />{{ lang('EVENT_ALL_DAY') }}<br />
+					{% elseif not cur_events.ALL_DAY and cur_events.END_TIME %}{{ lang('EVENT_START') }}{{ lang('COLON') }}&nbsp;{{ cur_events.START_TIME }}<br />{{ lang('EVENT_END') }}{{ lang('COLON') }}&nbsp;{{ cur_events.END_TIME }}<br />
+					{% else %}{{ lang('EVENT_ALL_DAY') }}<br />
+					{% endif %}
+					{% if cur_events.EVENT_DESC %}<span class="portal-calendar-event-description">{{ cur_events.EVENT_DESC }}</span>{% endif %}
+					{% if cur_events.EVENT_URL %}</a>{% endif %}
 				</dt>
 			</dl>
 		</li>
 
-		<!-- BEGINELSE -->
-		<li class="calendar-info"><span class="gensmall portal-title-span"><strong>{L_NO_CUR_EVENTS}</strong></span><br /></li>
-		<!-- END cur_events -->
+		{% else %}
+		<li class="calendar-info"><span class="gensmall portal-title-span"><strong>{{ lang('NO_CUR_EVENTS') }}</strong></span><br /></li>
+		{% endfor %}
 	</ul>
 	<hr class="portal-calendar-divider" />
-	<div class="menutitle portal-calendar-events-heading">{L_UPCOMING_EVENTS}{L_COLON}</div>
+	<div class="menutitle portal-calendar-events-heading">{{ lang('UPCOMING_EVENTS') }}{{ lang('COLON') }}</div>
 	<ul class="portal-events">
-		<!-- BEGIN upcoming_events -->
+		{% for upcoming_events in minical.upcoming_events %}
 
 		<li class="row">
 			<dl class="row-item">
 				<dt class="portal-calendar-event-listing">
-					<!-- IF minical.upcoming_events.EVENT_URL --><a href="{minical.upcoming_events.EVENT_URL}" title="{minical.upcoming_events.EVENT_TITLE}" <!-- IF minical.upcoming_events.EVENT_URL_NEW_WINDOW -->onclick="window.open('{minical.upcoming_events.EVENT_URL}'); return false;"<!-- ENDIF -->><!-- ENDIF -->
-					<span class="portal-calendar-event-title">{minical.upcoming_events.EVENT_TITLE}{L_COLON}</span><br />
-					<!-- IF not minical.upcoming_events.ALL_DAY and not minical.upcoming_events.END_TIME -->{L_EVENT_TIME}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />
-					<!-- ELSEIF not minical.upcoming_events.ALL_DAY and minical.upcoming_events.END_TIME -->{L_EVENT_START}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_END}{L_COLON}&nbsp;{minical.upcoming_events.END_TIME}<br />
-					<!-- ELSE -->{L_EVENT_TIME}{L_COLON}&nbsp;{minical.upcoming_events.START_TIME}<br />{L_EVENT_ALL_DAY}<br />
-					<!-- ENDIF -->
-					<!-- IF minical.upcoming_events.EVENT_DESC --><span class="portal-calendar-event-description">{minical.upcoming_events.EVENT_DESC}</span><br /><!-- ENDIF -->
-					<!-- IF minical.upcoming_events.EVENT_URL --></a><!-- ENDIF -->
+					{% if upcoming_events.EVENT_URL %}<a href="{{ upcoming_events.EVENT_URL }}" title="{{ upcoming_events.EVENT_TITLE }}" {% if upcoming_events.EVENT_URL_NEW_WINDOW %}onclick="window.open('{{ upcoming_events.EVENT_URL }}'); return false;"{% endif %}>{% endif %}
+					<span class="portal-calendar-event-title">{{ upcoming_events.EVENT_TITLE }}{{ lang('COLON') }}</span><br />
+					{% if not upcoming_events.ALL_DAY and not upcoming_events.END_TIME %}{{ lang('EVENT_TIME') }}{{ lang('COLON') }}&nbsp;{{ upcoming_events.START_TIME }}<br />
+					{% elseif not upcoming_events.ALL_DAY and upcoming_events.END_TIME %}{{ lang('EVENT_START') }}{{ lang('COLON') }}&nbsp;{{ upcoming_events.START_TIME }}<br />{{ lang('EVENT_END') }}{{ lang('COLON') }}&nbsp;{{ upcoming_events.END_TIME }}<br />
+					{% else %}{{ lang('EVENT_TIME') }}{{ lang('COLON') }}&nbsp;{{ upcoming_events.START_TIME }}<br />{{ lang('EVENT_ALL_DAY') }}<br />
+					{% endif %}
+					{% if upcoming_events.EVENT_DESC %}<span class="portal-calendar-event-description">{{ upcoming_events.EVENT_DESC }}</span><br />{% endif %}
+					{% if upcoming_events.EVENT_URL %}</a>{% endif %}
 				</dt>
 			</dl>
 		</li>
 
-		<!-- BEGINELSE -->
-		<li class="calendar-info"><span class="gensmall portal-title-span"><strong>{L_NO_UPCOMING_EVENTS}</strong></span><br /></li>
-		<!-- END upcoming_events -->
+		{% else %}
+		<li class="calendar-info"><span class="gensmall portal-title-span"><strong>{{ lang('NO_UPCOMING_EVENTS') }}</strong></span><br /></li>
+		{% endfor %}
 	</ul>
 	<br />
-	<!-- ENDIF -->
-{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
-<!-- ENDIF -->
-<!-- END minical -->
+	{% endif %}
+{{ definition.LR_BLOCK_F_L }}{{ definition.LR_BLOCK_F_R }}
+{% endif %}
+{% endfor %}

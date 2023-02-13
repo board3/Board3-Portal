@@ -1,94 +1,94 @@
-<!-- BEGIN announcements -->
-<!-- IF announcements.MODULE_ID eq $MODULE_ID -->
-<!-- BEGIN center_row -->
-<!-- IF announcements.center_row.S_NO_TOPICS -->
-{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
+{% for announcements in loops.announcements %}
+{% if announcements.MODULE_ID eq definition.MODULE_ID %}
+{% for center_row in announcements.center_row %}
+{% if center_row.S_NO_TOPICS %}
+{{ definition.C_BLOCK_H_L }}{{ definition.TITLE }}{{ definition.C_BLOCK_H_R }}
 	<div class="post bg2 portal-no-margin">
 		<div class="inner">
-			<span><strong>{L_NO_ANNOUNCEMENTS}</strong></span>
+			<span><strong>{{ lang('NO_ANNOUNCEMENTS') }}</strong></span>
 		</div>
 	</div>
-{$C_BLOCK_F_L}{$C_BLOCK_F_R}
-<!-- ELSE -->
-<!-- IF announcements.center_row.S_FIRST_ROW -->
-{$CC_BLOCK_H_L}
-	<dt id="a_{$MODULE_ID}">{$TITLE}</dt>
-	<!-- IF announcements.S_DISPLAY_ANNOUNCEMENTS_RVS -->
-		<dd class="posts responsive-portal-announcements">{L_REPLIES}</dd>
-		<dd class="views responsive-portal-announcements">{L_VIEWS}</dd>
-	<!-- ENDIF -->
-	<dd class="lastpost responsive-portal-announcements"><span>{L_LAST_POST}</span></dd>
-{$CC_BLOCK_H_R}
+{{ definition.C_BLOCK_F_L }}{{ definition.C_BLOCK_F_R }}
+{% else %}
+{% if center_row.S_FIRST_ROW %}
+{{ definition.CC_BLOCK_H_L }}
+	<dt id="a_{{ definition.MODULE_ID }}">{{ definition.TITLE }}</dt>
+	{% if announcements.S_DISPLAY_ANNOUNCEMENTS_RVS %}
+		<dd class="posts responsive-portal-announcements">{{ lang('REPLIES') }}</dd>
+		<dd class="views responsive-portal-announcements">{{ lang('VIEWS') }}</dd>
+	{% endif %}
+	<dd class="lastpost responsive-portal-announcements"><span>{{ lang('LAST_POST') }}</span></dd>
+{{ definition.CC_BLOCK_H_R }}
 <ul class="topiclist topics responsive-portal-announcements">
-<!-- ENDIF -->
-	<li class="row<!-- IF announcements.center_row.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
-		<dl class="row-item {announcements.center_row.TOPIC_IMG_STYLE}">
-			<dt style="<!-- IF announcements.center_row.TOPIC_ICON_IMG and S_TOPIC_ICONS -->background-image: url({T_ICONS_PATH}{announcements.center_row.TOPIC_ICON_IMG}); background-repeat: no-repeat;<!-- ENDIF -->" title="{announcements.center_row.TOPIC_FOLDER_IMG_ALT}">
-				<!-- IF announcements.center_row.S_UNREAD_INFO and not S_IS_BOT --><a href="{announcements.center_row.U_VIEW_UNREAD}" class="row-item-link"></a><!-- ENDIF -->
+{% endif %}
+	<li class="row{% if center_row.S_ROW_COUNT is even %} bg1{% else %} bg2{% endif %}">
+		<dl class="row-item {{ center_row.TOPIC_IMG_STYLE }}">
+			<dt title="{{ center_row.TOPIC_FOLDER_IMG_ALT }}">
+				{% if center_row.S_UNREAD_INFO and not S_IS_BOT %}<a href="{{ center_row.U_VIEW_UNREAD }}" class="row-item-link"></a>{% endif %}
 				<div class="list-inner">
-							<a href="{announcements.center_row.U_VIEW_COMMENTS}" title="{announcements.center_row.TITLE}" class="topictitle">{announcements.center_row.TITLE}</a>
-					<!-- IF announcements.center_row.pagination -->
+							<a href="{{ center_row.U_VIEW_COMMENTS }}" title="{{ center_row.TITLE }}" class="topictitle">{{ center_row.TITLE }}</a>
+					{% if center_row.pagination %}
 					<div class="pagination">
 						<span><i class="icon fa-clone fa-fw" aria-hidden="true"></i></span>
 						<ul>
-							<!-- BEGIN pagination -->
-							<!-- IF announcements.center_row.pagination.S_IS_PREV -->
-							<!-- ELSEIF announcements.center_row.pagination.S_IS_CURRENT --><li><a class="button" href="{announcements.center_row.pagination.PAGE_URL}">{announcements.center_row.pagination.PAGE_NUMBER}</a></li>
-							<!-- ELSEIF announcements.center_row.pagination.S_IS_ELLIPSIS --><li class="ellipsis"><span>{L_ELLIPSIS}</span></li>
-							<!-- ELSEIF announcements.center_row.pagination.S_IS_NEXT -->
-							<!-- ELSE --><li><a class="button" href="{announcements.center_row.pagination.PAGE_URL}">{announcements.center_row.pagination.PAGE_NUMBER}</a></li>
-							<!-- ENDIF -->
-							<!-- END pagination -->
+							{% for pagination in center_row.pagination %}
+							{% if pagination.S_IS_PREV %}
+							{% elseif pagination.S_IS_CURRENT %}<li><a class="button" href="{{ pagination.PAGE_URL }}">{{ pagination.PAGE_NUMBER }}</a></li>
+							{% elseif pagination.S_IS_ELLIPSIS %}<li class="ellipsis"><span>{{ lang('ELLIPSIS') }}</span></li>
+							{% elseif pagination.S_IS_NEXT %}
+							{% else %}<li><a class="button" href="{{ pagination.PAGE_URL }}">{{ pagination.PAGE_NUMBER }}</a></li>
+							{% endif %}
+							{% endfor %}
 						</ul>
 					</div>
-					<!-- ENDIF -->
-					<!-- IF not S_IS_BOT -->
+					{% endif %}
+					{% if not S_IS_BOT %}
 						<div class="responsive-show" style="display: none;">
-							{L_LAST_POST} {L_POST_BY_AUTHOR} {announcements.center_row.USERNAME_FULL_LAST} &raquo; <a href="{announcements.center_row.U_LAST_COMMENTS}" title="{L_GOTO_LAST_POST}"> {announcements.center_row.LAST_POST_TIME}</a>
+							{{ lang('LAST_POST') }} {{ lang('POST_BY_AUTHOR') }} {{ center_row.USERNAME_FULL_LAST }} &raquo; <a href="{{ center_row.U_LAST_COMMENTS }}" title="{{ lang('GOTO_LAST_POST') }}"> {{ center_row.LAST_POST_TIME }}</a>
 						</div>
-					<!-- ELSE -->
+					{% else %}
 					<br />
-					<!-- ENDIF -->
+					{% endif %}
 
 						<div class="responsive-hide">
-							<!-- IF announcements.center_row.ATTACH_ICON_IMG --><i class="icon fa-paperclip fa-fw" aria-hidden="true"></i><!-- ENDIF -->
-							<!-- IF announcements.center_row.S_POLL --><i class="icon fa-bar-chart fa-fw" aria-hidden="true"></i><!-- ENDIF -->
-							{L_POST_BY_AUTHOR} {announcements.center_row.POSTER_FULL} &raquo; {announcements.center_row.TIME}
+							{% if center_row.ATTACH_ICON_IMG %}<i class="icon fa-paperclip fa-fw" aria-hidden="true"></i>{% endif %}
+							{% if center_row.S_POLL %}<i class="icon fa-bar-chart fa-fw" aria-hidden="true"></i>{% endif %}
+							{{ lang('POST_BY_AUTHOR') }} {{ center_row.POSTER_FULL }} &raquo; {{ center_row.TIME }}
 						</div>
-					<!-- IF U_VIEW_UNREAD_POST and not S_IS_BOT --> &bull; <a href="{U_VIEW_UNREAD_POST}">{L_VIEW_UNREAD_POST}</a> &bull; <!-- ENDIF -->
-					<!-- IF announcements.center_row.FORUM_NAME -->
-						{L_FORUM}{L_COLON} <a href="{announcements.center_row.U_VIEWFORUM}" class="portal-forumtitle">{announcements.center_row.FORUM_NAME}</a>
-					<!-- ELSE -->
-						<br />{L_GLOBAL_ANNOUNCEMENT}
-					<!-- ENDIF -->
-					<!-- IF not announcements.S_DISPLAY_ANNOUNCEMENTS_RVS --><!-- IF announcements.center_row.FORUM_NAME -->&bull; <!-- ENDIF -->{L_REPLIES}{L_COLON} <strong>{announcements.center_row.REPLIES}</strong>  &bull; {L_VIEWS}{L_COLON} <strong>{announcements.center_row.TOPIC_VIEWS}</strong><!-- ENDIF -->
+					{% if U_VIEW_UNREAD_POST and not S_IS_BOT %} &bull; <a href="{{ U_VIEW_UNREAD_POST }}">{{ lang('VIEW_UNREAD_POST') }}</a> &bull; {% endif %}
+					{% if center_row.FORUM_NAME %}
+						{{ lang('FORUM') }}{{ lang('COLON') }} <a href="{{ center_row.U_VIEWFORUM }}" class="portal-forumtitle">{{ center_row.FORUM_NAME }}</a>
+					{% else %}
+						<br />{{ lang('GLOBAL_ANNOUNCEMENT') }}
+					{% endif %}
+					{% if not announcements.S_DISPLAY_ANNOUNCEMENTS_RVS %}{% if center_row.FORUM_NAME %}&bull; {% endif %}{{ lang('REPLIES') }}{{ lang('COLON') }} <strong>{{ center_row.REPLIES }}</strong>  &bull; {{ lang('VIEWS') }}{{ lang('COLON') }} <strong>{{ center_row.TOPIC_VIEWS }}</strong>{% endif %}
 				</div>
 			</dt>
-			<!-- IF announcements.S_DISPLAY_ANNOUNCEMENTS_RVS -->
-				<dd class="posts">{announcements.center_row.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
-				<dd class="views">{announcements.center_row.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
-			<!-- ENDIF -->
-			<dd class="lastpost"><span><dfn>{L_LAST_POST}</dfn>{L_POST_BY_AUTHOR} {announcements.center_row.USERNAME_FULL_LAST} <!-- IF not S_IS_BOT --><!-- IF announcements.center_row.S_UNREAD_INFO --><a href="{announcements.center_row.U_VIEW_UNREAD}" title="{L_VIEW_NEWEST_POST}"><i class="icon fa-external-link-square fa-fw icon-red icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span></a><!-- ELSE --><a href="{announcements.center_row.U_LAST_COMMENTS}" title="{L_VIEW_LATEST_POST}"><i class="icon fa-external-link-square fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span></a><!-- ENDIF --><br />
-				{announcements.center_row.LAST_POST_TIME}</span><!-- ENDIF -->
+			{% if announcements.S_DISPLAY_ANNOUNCEMENTS_RVS %}
+				<dd class="posts">{{ center_row.REPLIES }} <dfn>{{ lang('REPLIES') }}</dfn></dd>
+				<dd class="views">{{ center_row.TOPIC_VIEWS }} <dfn>{{ lang('VIEWS') }}</dfn></dd>
+			{% endif %}
+			<dd class="lastpost"><span><dfn>{{ lang('LAST_POST') }}</dfn>{{ lang('POST_BY_AUTHOR') }} {{ center_row.USERNAME_FULL_LAST }} {% if not S_IS_BOT %}{% if center_row.S_UNREAD_INFO %}<a href="{{ center_row.U_VIEW_UNREAD }}" title="{{ lang('VIEW_NEWEST_POST') }}"><i class="icon fa-external-link-square fa-fw icon-red icon-md" aria-hidden="true"></i><span class="sr-only">{{ lang('VIEW_LATEST_POST') }}</span></a>{% else %}<a href="{{ center_row.U_LAST_COMMENTS }}" title="{{ lang('VIEW_LATEST_POST') }}"><i class="icon fa-external-link-square fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">{{ lang('VIEW_LATEST_POST') }}</span></a>{% endif %}<br />
+				{{ center_row.LAST_POST_TIME }}</span>{% endif %}
 			</dd>
 		</dl>
 	</li>
-<!-- IF announcements.center_row.S_LAST_ROW -->
-	<!-- IF announcements.AP_PAGINATION or announcements.TOTAL_ANNOUNCEMENTS -->
-	<li class="row<!-- IF announcements.center_row.S_ROW_COUNT is even --> bg2<!-- ELSE --> bg1<!-- ENDIF --> portal-news-pagination">
+{% if center_row.S_LAST_ROW %}
+	{% if announcements.AP_PAGINATION or announcements.TOTAL_ANNOUNCEMENTS %}
+	<li class="row{% if center_row.S_ROW_COUNT is even %} bg2{% else %} bg1{% endif %} portal-news-pagination">
 		<div class="topic-actions">
 			<div class="pagination">
 				<span><i class="icon fa-clone fa-fw" aria-hidden="true"></i></span>
-				{announcements.TOTAL_ANNOUNCEMENTS}
-				<!-- IF announcements.AP_PAGE_NUMBER --><!-- IF announcements.AP_PAGINATION --> &bull; {announcements.AP_PAGE_NUMBER} &bull; {announcements.AP_PAGINATION}<!-- ELSE --> &bull; {announcements.AP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF --> &nbsp;
+				{{ announcements.TOTAL_ANNOUNCEMENTS }}
+				{% if announcements.AP_PAGE_NUMBER %}{% if announcements.AP_PAGINATION %} &bull; {{ announcements.AP_PAGE_NUMBER }} &bull; {{ announcements.AP_PAGINATION }}{% else %} &bull; {{ announcements.AP_PAGE_NUMBER }}{% endif %}{% endif %} &nbsp;
 			</div>
 		</div>
 	</li>
-	<!-- ENDIF -->
+	{% endif %}
 	</ul>
-{$C_BLOCK_F_L}{$C_BLOCK_F_R}
-<!-- ENDIF -->
-<!-- ENDIF -->
-<!-- END center_row -->
-<!-- ENDIF -->
-<!-- END announcements -->
+{{ definition.C_BLOCK_F_L }}{{ definition.C_BLOCK_F_R }}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}

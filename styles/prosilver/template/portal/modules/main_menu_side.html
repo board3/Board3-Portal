@@ -1,27 +1,27 @@
-<!-- BEGIN portal_menu -->
-<!-- IF portal_menu.MODULE_ID eq $MODULE_ID -->
-{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON -->
-<!-- IF $FA_ENABLED -->
-<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
-<!-- ELSE -->
-<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
-<!-- ENDIF -->
-<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+{% for portal_menu in loops.portal_menu %}
+{% if portal_menu.MODULE_ID eq definition.MODULE_ID %}
+{{ definition.LR_BLOCK_H_L }}{% if definition.S_BLOCK_ICON %}
+{% if definition.FA_ENABLED %}
+<i class="icon fa {{ definition.FA_ICON }}" style="font-size: {{ definition.FA_SIZE }}px;" aria-hidden="true"></i>
+{% else %}
+<img src="{{ definition.IMAGE_SRC }}" width="{{ definition.IMAGE_WIDTH }}" height="{{ definition.IMAGE_HEIGHT }}" alt="" />
+{% endif %}
+{% endif %}{{ definition.TITLE }}{{ definition.LR_BLOCK_H_R }}
 	<div class="portal-navigation" role="menu">
-   <!-- BEGIN category -->
-      <div class="menutitle">{portal_menu.category.CAT_TITLE}</div>
-         <ul>
-         <!-- BEGIN links -->
-            <li><a href="{portal_menu.category.links.LINK_URL}" role="menuitem" <!-- IF portal_menu.category.links.NEW_WINDOW -->onclick="window.open('{portal_menu.category.links.LINK_URL}'); return false;"<!-- ENDIF -->><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{portal_menu.category.links.LINK_TITLE}</span></a></li>
-         <!-- END links -->
-         </ul>
-      <hr class="dashed" />
-   <!-- BEGINELSE -->
-      <ul>
-         <li><span class="portal-title-span gensmall"><strong>{L_MENU_NO_LINKS}</strong></span><br /></li>
-      </ul>
-   <!-- END category -->
-   </div>
-{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
-<!-- ENDIF -->
-<!-- END portal_menu -->
+		{% for category in portal_menu.category %}
+			<div class="menutitle">{{ category.CAT_TITLE }}</div>
+			<ul>
+				{% for links in category.links %}
+				<li><a href="{{ links.LINK_URL }}" role="menuitem" {% if links.NEW_WINDOW %}onclick="window.open('{{ links.LINK_URL }}'); return false;"{% endif %}><i class="icon fa-arrow-circle-o-right fa-fw" aria-hidden="true"></i><span>{{ links.LINK_TITLE }}</span></a></li>
+				{% endfor %}
+			</ul>
+		  <hr class="dashed" />
+		{% else %}
+			<ul>
+				<li><span class="portal-title-span gensmall"><strong>{{ lang('MENU_NO_LINKS') }}</strong></span><br /></li>
+			</ul>
+		{% endfor %}
+	</div>
+{{ definition.LR_BLOCK_F_L }}{{ definition.LR_BLOCK_F_R }}
+{% endif %}
+{% endfor %}

@@ -1,20 +1,20 @@
-{$LR_BLOCK_H_L}
-	<!-- IF $S_BLOCK_ICON -->
-		<!-- IF $FA_ENABLED -->
-			<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
-		<!-- ELSE -->
-			<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
-		<!-- ENDIF -->
-	<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
-	<!-- IF .attach_side -->
-		<span class="portal-title-span"><strong>{L_FILENAME}</strong></span><br />
-		<!-- BEGIN attach_side -->
-			<span class="portal-title-span portal-gensmall icon fa-paperclip fa-fw" aria-hidden="true">&nbsp;</span>&nbsp;<a class="portal-title-link" href="{attach_side.U_TOPIC}" title="{attach_side.REAL_FILENAME}"><strong>{attach_side.FILENAME}</strong></a><br class="portal-clear" />
-			<span class="portal-text-span">{L_FILESIZE}{L_COLON}</span><span class="portal-data-span portal-gensmall"><strong>{attach_side.FILESIZE}</strong></span><br class="portal-clear" />
-			<span class="portal-text-span">{L_DOWNLOADS}{L_COLON}</span><span class="portal-data-span portal-gensmall"><strong>{attach_side.DOWNLOAD_COUNT}</strong></span><br class="portal-clear" />
-			<!-- IF not attach_side.S_LAST_ROW --><hr class="dashed" /><!-- ENDIF -->
-		<!-- END attach_side -->
-	<!-- ELSE -->
-		<span class="portal-title-span portal-gensmall"><strong>{L_NO_ATTACHMENTS}</strong></span><br />
-	<!-- ENDIF -->
-{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
+{{ definition.LR_BLOCK_H_L }}
+	{% if definition.S_BLOCK_ICON %}
+		{% if definition.FA_ENABLED %}
+			<i class="icon fa {{ definition.FA_ICON }}" style="font-size: {{ definition.FA_SIZE }}px;" aria-hidden="true"></i>
+		{% else %}
+			<img src="{{ definition.IMAGE_SRC }}" width="{{ definition.IMAGE_WIDTH }}" height="{{ definition.IMAGE_HEIGHT }}" alt="" />
+		{% endif %}
+	{% endif %}{{ definition.TITLE }}{{ definition.LR_BLOCK_H_R }}
+	{% if loops.attach_side|length %}
+		<span class="portal-title-span"><strong>{{ lang('FILENAME') }}</strong></span><br />
+		{% for attach_side in loops.attach_side %}
+			<span class="portal-title-span portal-gensmall icon fa-paperclip fa-fw" aria-hidden="true">&nbsp;</span>&nbsp;<a class="portal-title-link" href="{{ attach_side.U_TOPIC }}" title="{{ attach_side.REAL_FILENAME }}"><strong>{{ attach_side.FILENAME }}</strong></a><br class="portal-clear" />
+			<span class="portal-text-span">{{ lang('FILESIZE') }}{{ lang('COLON') }}</span><span class="portal-data-span portal-gensmall"><strong>{{ attach_side.FILESIZE }}</strong></span><br class="portal-clear" />
+			<span class="portal-text-span">{{ lang('DOWNLOADS') }}{{ lang('COLON') }}</span><span class="portal-data-span portal-gensmall"><strong>{{ attach_side.DOWNLOAD_COUNT }}</strong></span><br class="portal-clear" />
+			{% if not attach_side.S_LAST_ROW %}<hr class="dashed" />{% endif %}
+		{% endfor %}
+	{% else %}
+		<span class="portal-title-span portal-gensmall"><strong>{{ lang('NO_ATTACHMENTS') }}</strong></span><br />
+	{% endif %}
+{{ definition.LR_BLOCK_F_L }}{{ definition.LR_BLOCK_F_R }}

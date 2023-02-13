@@ -1,67 +1,67 @@
-{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
-<!-- IF $S_POSTBODY_TOP --><div class="postbody portal-module-postbody"><!-- ENDIF -->
-	<!-- BEGIN news -->
-	<!-- IF news.MODULE_ID eq $MODULE_ID -->
-	<!-- BEGIN news_row -->
-		<!-- IF news.news_row.S_NO_TOPICS  -->
-			<div class="post bg2">
+{{ definition.C_BLOCK_H_L }}{{ definition.TITLE }}{{ definition.C_BLOCK_H_R }}
+{% if definition.S_POSTBODY_TOP %}<div class="postbody portal-module-postbody">{% endif %}
+	{% for news in loops.news %}
+	{% if news.MODULE_ID eq definition.MODULE_ID %}
+	{% for news_row in news.news_row %}
+		{% if news_row.S_NO_TOPICS  %}
+			<div class="post b3p-post bg2">
 				<div class="inner">
-					<span><strong>{L_NO_NEWS}</strong></span>
+					<span><strong>{{ lang('NO_NEWS') }}</strong></span>
 				</div>
 			</div>
-		<!-- ELSE -->
-			<div class="post <!-- IF news.news_row.S_ROW_COUNT is odd -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
+		{% else %}
+			<div class="post b3p-post {% if news_row.S_ROW_COUNT is odd %}bg1{% else %}bg2{% endif %}">
 				<div class="inner">
 					<h4 class="first">
-						<a id="n_{$MODULE_ID}_{news.news_row.N_ID}"></a><!-- IF news.news_row.S_UNREAD_INFO --><a href="{news.news_row.U_VIEW_UNREAD}" title="{postrow.MINI_POST}"><!-- ELSE --><a href="{news.news_row.U_LAST_COMMENTS}"><!-- ENDIF -->
-							<i class="icon fa-file fa-fw <!-- IF news.news_row.S_UNREAD_INFO -->icon-red<!-- ELSE -->icon-lightgray<!-- ENDIF --> icon-md" aria-hidden="true"></i><span class="sr-only">{postrow.MINI_POST}</span>
+						<a id="n_{{ definition.MODULE_ID }}_{{ news_row.N_ID }}"></a>{% if news_row.S_UNREAD_INFO %}<a href="{{ news_row.U_VIEW_UNREAD }}" title="{{ news_row.MINI_POST }}">{% else %}<a href="{{ news_row.U_LAST_COMMENTS }}" title="{{ news_row.MINI_POST }}">{% endif %}
+							<i class="icon fa-file fa-fw {% if news_row.S_UNREAD_INFO %}icon-red{% else %}icon-lightgray{% endif %} icon-md" aria-hidden="true"></i><span class="sr-only">{{ news_row.MINI_POST }}</span>
 						</a>
-					<!-- IF news.news_row.S_UNREAD_INFO --><a class="unread" href="{news.news_row.U_VIEW_UNREAD}" title="{postrow.MINI_POST}"></a><!-- ELSE --><a href="{news.news_row.U_LAST_COMMENTS}"></a><!-- ENDIF --><!-- IF news.news_row.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{news.news_row.POST_ICON_IMG}" width="{news.news_row.POST_ICON_IMG_WIDTH}" height="{news.news_row.POST_ICON_IMG_HEIGHT}" alt="" /> <!-- ENDIF --><a href="{news.news_row.U_VIEW_COMMENTS}"><strong>{news.news_row.TITLE}</strong></a>
+						<a href="{{ news_row.U_VIEW_COMMENTS }}"><strong>{{ news_row.TITLE }}</strong></a>
 					</h4>
-					<!-- IF news.news_row.PAGINATION --><strong class="pagination"><span>{news.news_row.PAGINATION}</span></strong><!-- ENDIF -->
+					{% if news_row.PAGINATION %}<strong class="pagination"><span>{{ news_row.PAGINATION }}</span></strong>{% endif %}
 						<ul class="linklist">
-							<li>{news.POSTED_BY_TEXT} {L_POST_BY_AUTHOR}{L_COLON} {news.news_row.POSTER_FULL} &raquo; <a href="{news.news_row.U_LAST_COMMENTS}" title="{L_GOTO_LAST_POST}"> {news.news_row.TIME}</a></li>
-							<li class="rightside">{L_FORUM}{L_COLON} <strong><a href="{news.news_row.U_VIEWFORUM}">{news.news_row.FORUM_NAME}</a></strong></li>
+							<li>{{ news.POSTED_BY_TEXT }} {{ lang('POST_BY_AUTHOR') }}{{ lang('COLON') }} {{ news_row.POSTER_FULL }} &raquo; <a href="{{ news_row.U_LAST_COMMENTS }}" title="{{ lang('GOTO_LAST_POST') }}"> {{ news_row.TIME }}</a></li>
+							<li class="rightside">{{ lang('FORUM') }}{{ lang('COLON') }} <strong><a href="{{ news_row.U_VIEWFORUM }}">{{ news_row.FORUM_NAME }}</a></strong></li>
 						</ul>
-						<!-- IF not $S_POSTBODY_TOP --><div class="postbody portal-module-postbody"><!-- ENDIF -->
+						{% if not definition.S_POSTBODY_TOP %}<div class="postbody portal-module-postbody">{% endif %}
 							<div class="content">
-								<br />{news.news_row.TEXT}
+								<br />{{ news_row.TEXT }}
 							</div>
-					<!-- IF news.news_row.S_HAS_ATTACHMENTS -->
-					<dl class="attachbox">
-					<dt>{L_ATTACHMENTS}</dt>
-					<!-- BEGIN attachment -->
-						<dd>{news.news_row.attachment.DISPLAY_ATTACHMENT}</dd>
-					<!-- END attachment -->
-					</dl>
-					<!-- ENDIF -->
+					{% if news_row.S_HAS_ATTACHMENTS %}
+						<dl class="attachbox">
+							<dt>{{ lang('ATTACHMENTS') }}</dt>
+							{% for attachment in news_row.attachment %}
+								<dd>{{ attachment.DISPLAY_ATTACHMENT }}</dd>
+							{% endfor %}
+						</dl>
+					{% endif %}
 					<br class="portal-clear" />
-					<span class="portal-title-span">{L_TOPIC_VIEWS}{L_COLON} {news.news_row.TOPIC_VIEWS} &nbsp;&bull;&nbsp; <a href="{news.news_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}{L_COLON} {news.news_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{news.news_row.U_POST_COMMENT}">{L_PORTAL_POST_REPLY}</a></span>
-					<span class="portal-read-all-link">{news.news_row.OPEN}<a href="{news.news_row.U_READ_FULL}">{news.news_row.L_READ_FULL}</a>{news.news_row.CLOSE}</span>
+					<span class="portal-title-span">{{ lang('TOPIC_VIEWS') }}{{ lang('COLON') }} {{ news_row.TOPIC_VIEWS }} &nbsp;&bull;&nbsp; <a href="{{ news_row.U_VIEW_COMMENTS }}" title="{{ lang('VIEW_COMMENTS') }}">{{ lang('COMMENTS') }}{{ lang('COLON') }} {{ news_row.REPLIES }}</a> &nbsp;&bull;&nbsp; <a href="{{ news_row.U_POST_COMMENT }}">{{ lang('PORTAL_POST_REPLY') }}</a></span>
+					<span class="portal-read-all-link">{{ news_row.OPEN }}<a href="{{ news_row.U_READ_FULL }}">{{ news_row.L_READ_FULL }}</a>{{ news_row.CLOSE }}</span>
 					<div class="back2top">
-						<a href="#top" class="top" title="{L_BACK_TO_TOP}">
+						<a href="#top" class="top" title="{{ lang('BACK_TO_TOP') }}">
 							<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
-							<span class="sr-only">{L_BACK_TO_TOP}</span>
+							<span class="sr-only">{{ lang('BACK_TO_TOP') }}</span>
 						</a>
 					</div>
-					<!-- IF news.news_row.S_NOT_LAST --><br class="portal-clear" /><!-- ENDIF -->
-					<!-- IF news.news_row.S_LAST_ROW -->
-					<!-- IF not news.news_row.S_NO_TOPICS  -->
-					<!-- IF news.NP_PAGINATION or news.TOTAL_NEWS -->
+					{% if news_row.S_NOT_LAST %}<br class="portal-clear" />{% endif %}
+					{% if news_row.S_LAST_ROW %}
+					{% if not news_row.S_NO_TOPICS  %}
+					{% if news.NP_PAGINATION or news.TOTAL_NEWS %}
 						<hr class="dashed" />
 						<div class="pagination">
-							{news.TOTAL_NEWS}
-							<!-- IF news.NP_PAGE_NUMBER --><!-- IF news.NP_PAGINATION --> &bull; {news.NP_PAGE_NUMBER} &bull; {news.NP_PAGINATION}<!-- ELSE --> &bull; {news.NP_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+							{{ news.TOTAL_NEWS }}
+							{% if news.NP_PAGE_NUMBER %}{% if news.NP_PAGINATION %} &bull; {{ news.NP_PAGE_NUMBER }} &bull; {{ news.NP_PAGINATION }}{% else %} &bull; {{ news.NP_PAGE_NUMBER }}{% endif %}{% endif %}
 						</div>
-					<!-- ENDIF -->
-					<!-- ENDIF -->
-					<!-- ENDIF -->
-					<!-- IF not $S_POSTBODY_TOP --></div><!-- ENDIF -->
+					{% endif %}
+					{% endif %}
+					{% endif %}
+					{% if not definition.S_POSTBODY_TOP %}</div>{% endif %}
 				</div>
 			</div>
-		<!-- ENDIF -->
-	<!-- END news_row -->
-	<!-- ENDIF -->
-	<!-- END news -->
-<!-- IF $S_POSTBODY_TOP --></div><!-- ENDIF -->
-{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+		{% endif %}
+	{% endfor %}
+	{% endif %}
+	{% endfor %}
+{% if definition.S_POSTBODY_TOP %}</div>{% endif %}
+{{ definition.C_BLOCK_F_L }}{{ definition.C_BLOCK_F_R }}

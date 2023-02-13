@@ -1,14 +1,14 @@
-<!-- IF S_STYLE_OPTIONS -->
-{$LR_BLOCK_H_L}<!-- IF $S_BLOCK_ICON -->
-<!-- IF $FA_ENABLED -->
-<i class="icon fa {$FA_ICON}" style="font-size: {$FA_SIZE}px;" aria-hidden="true"></i>
-<!-- ELSE -->
-<img src="{$IMAGE_SRC}" width="{$IMAGE_WIDTH}" height="{$IMAGE_HEIGHT}" alt="" />
-<!-- ENDIF -->
-<!-- ENDIF -->{$TITLE}{$LR_BLOCK_H_R}
+{% if S_STYLE_OPTIONS %}
+{{ definition.LR_BLOCK_H_L }}{% if definition.S_BLOCK_ICON %}
+{% if definition.FA_ENABLED %}
+	<i class="icon fa {{ definition.FA_ICON }}" style="font-size: {{ definition.FA_SIZE }}px;" aria-hidden="true"></i>
+{% else %}
+<img src="{{ definition.IMAGE_SRC }}" width="{{ definition.IMAGE_WIDTH }}" height="{{ definition.IMAGE_HEIGHT }}" alt="" />
+{% endif %}
+{% endif %}{{ definition.TITLE }}{{ definition.LR_BLOCK_H_R }}
 	<select class="portal-stylechanger-select" name="demo" id="demo" role="listbox" onchange="document.location.href = this.options[this.selectedIndex].value;">
-		{STYLE_SELECT}
+		{{ STYLE_SELECT }}
 	</select>
 <br />
-{$LR_BLOCK_F_L}{$LR_BLOCK_F_R}
-<!-- ENDIF -->
+{{ definition.LR_BLOCK_F_L }}{{ definition.LR_BLOCK_F_R }}
+{% endif %}

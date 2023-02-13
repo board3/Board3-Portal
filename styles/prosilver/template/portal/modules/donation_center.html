@@ -1,36 +1,36 @@
-{$C_BLOCK_H_L}{$TITLE}{$C_BLOCK_H_R}
+{{ definition.C_BLOCK_H_L }}{{ definition.TITLE }}{{ definition.C_BLOCK_H_R }}
 	<ul class="topiclist bg1">
 		<li><dl><dt></dt>
 			<dd class="portal-donation-center-content portal-responsive-show">
 				<div>
-			<strong>{SITENAME}</strong> {L_DONATION_TEXT}
-			<br />
-			<div class="portal-paypal-icon">&nbsp;</div>
-		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" class="portal-donation-form">
-		<div>
-			<input type="hidden" name="cmd" value="_xclick" />
-			<input type="hidden" name="business" value="{PAY_ACC_CENTER}" />
-			<input type="hidden" name="item_name" value="{L_PAY_ITEM}" />
-			<input type="hidden" name="no_note" value="1" />
-			<input type="hidden" name="no_shipping" value="2" />
-			<input type="hidden" name="bn" value="PP-DonationsBF" />
-			<input type="hidden" name="tax" value="0" />
-			<!-- IF PAY_CUSTOM_CENTER -->
-			<input type="hidden" name="custom" value="{PAY_CUSTOM_CENTER}" />
-			<!-- ENDIF -->
-			<input type="text" tabindex="11" name="amount" size="10" maxlength="6" value="" class="inputbox autowidth" title="{L_PAY_MSG}" />
-			<select name="currency_code" class="autowidth">
-			<!-- BEGIN b3p_donation_currency_center -->
-				<option value="{b3p_donation_currency_center.VALUE}"<!-- IF b3p_donation_currency_center.SELECTED --> selected="selected"<!-- ENDIF -->>{b3p_donation_currency_center.TITLE}</option>
-			<!-- END b3p_donation_currency_center -->
-			</select>
-			<input type="submit" name="submit" value="{L_DONATION}" class="button1" />
-		</div>
-		</form>
-			<br />
-			<strong>{L_PAY_MSG}</strong>
-		</div>
+					<strong>{{ SITENAME }}</strong> {{ lang('DONATION_TEXT') }}
+					<br />
+					<div class="portal-paypal-icon">&nbsp;</div>
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" class="portal-donation-form">
+						<div>
+							<input type="hidden" name="cmd" value="_xclick" />
+							<input type="hidden" name="business" value="{{ PAY_ACC_CENTER }}" />
+							<input type="hidden" name="item_name" value="{{ lang('PAY_ITEM') }}" />
+							<input type="hidden" name="no_note" value="1" />
+							<input type="hidden" name="no_shipping" value="2" />
+							<input type="hidden" name="bn" value="PP-DonationsBF" />
+							<input type="hidden" name="tax" value="0" />
+							{% if PAY_CUSTOM_CENTER %}
+							<input type="hidden" name="custom" value="{{ PAY_CUSTOM_CENTER }}" />
+							{% endif %}
+							<input type="text" tabindex="11" name="amount" size="10" maxlength="6" value="" class="inputbox autowidth" title="{{ lang('PAY_MSG') }}" />
+							<select name="currency_code" class="autowidth">
+							{% for b3p_donation_currency_center in loops.b3p_donation_currency_center %}
+								<option value="{{ b3p_donation_currency_center.VALUE }}"{% if b3p_donation_currency_center.SELECTED %} selected="selected"{% endif %}>{{ b3p_donation_currency_center.TITLE }}</option>
+							{% endfor %}
+							</select>
+							<input type="submit" name="submit" value="{{ lang('DONATION') }}" class="button1" />
+						</div>
+					</form>
+					<br />
+					<strong>{{ lang('PAY_MSG') }}</strong>
+				</div>
 			</dd>
 		</dl></li>
 	</ul>
-{$C_BLOCK_F_L}{$C_BLOCK_F_R}
+{{ definition.C_BLOCK_F_L }}{{ definition.C_BLOCK_F_R }}

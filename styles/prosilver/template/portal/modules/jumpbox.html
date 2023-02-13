@@ -1,19 +1,19 @@
-<!-- IF S_DISPLAY_JUMPBOX -->
-   <div class="jumpbox dropdown-container dropdown-container-right<!-- IF not S_IN_MCP --> dropdown-up<!-- ENDIF --> dropdown-{S_CONTENT_FLOW_BEGIN} dropdown-button-control" id="jumpbox">
-         <span title="<!-- IF S_IN_MCP and S_MERGE_SELECT -->{L_SELECT_TOPICS_FROM}<!-- ELSEIF S_IN_MCP -->{L_MODERATE_FORUM}<!-- ELSE -->{L_JUMP_TO}<!-- ENDIF -->" class="button button-secondary dropdown-trigger dropdown-select">
-            <span><!-- IF S_IN_MCP and S_MERGE_SELECT -->{L_SELECT_TOPICS_FROM}<!-- ELSEIF S_IN_MCP -->{L_MODERATE_FORUM}<!-- ELSE -->{L_JUMP_TO}<!-- ENDIF --></span>
-            <span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
-         </span>
-      <div class="dropdown">
-         <div class="pointer"><div class="pointer-inner"></div></div>
-         <ul class="dropdown-contents">
-            <!-- BEGIN jumpbox_forums -->
-            <!-- IF jumpbox_forums.FORUM_ID neq -1 -->
-            <li><a href="{jumpbox_forums.LINK}" class="<!-- IF jumpbox_forums.level -->jumpbox-sub-link<!-- ELSEIF jumpbox_forums.S_IS_CAT -->jumpbox-cat-link<!-- ELSE -->jumpbox-forum-link<!-- ENDIF -->"><!-- BEGIN level --><span class="spacer"></span><!-- END level --> <span><!-- IF jumpbox_forums.level --> &#8627; &nbsp;<!-- ENDIF --> {jumpbox_forums.FORUM_NAME}</span></a></li>
-            <!-- ENDIF -->
-                <!-- END jumpbox_forums -->
-         </ul>
-      </div>
-   </div>
+{% if S_DISPLAY_JUMPBOX %}
+	<div class="jumpbox dropdown-container dropdown-container-right{% if not S_IN_MCP %} dropdown-up{% endif %} dropdown-{{ S_CONTENT_FLOW_BEGIN }} dropdown-button-control" id="jumpbox">
+			 <span title="{% if S_IN_MCP and S_MERGE_SELECT %}{{ lang('SELECT_TOPICS_FROM') }}{% elseif S_IN_MCP %}{{ lang('MODERATE_FORUM') }}{% else %}{{ lang('JUMP_TO') }}{% endif %}" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>{% if S_IN_MCP and S_MERGE_SELECT %}{{ lang('SELECT_TOPICS_FROM') }}{% elseif S_IN_MCP %}{{ lang('MODERATE_FORUM') }}{% else %}{{ lang('JUMP_TO') }}{% endif %}</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+				{% for jumpbox_forums in loops.jumpbox_forums %}
+				{% if jumpbox_forums.FORUM_ID neq -1 %}
+					<li><a href="{{ jumpbox_forums.LINK }}" class="{% if jumpbox_forums.level %}jumpbox-sub-link{% elseif jumpbox_forums.S_IS_CAT %}jumpbox-cat-link{% else %}jumpbox-forum-link{% endif %}">{% for level in jumpbox_forums.level %}<span class="spacer"></span>{% endfor %} <span>{% if jumpbox_forums.level %} &#8627; &nbsp;{% endif %} {{ jumpbox_forums.FORUM_NAME }}</span></a></li>
+				{% endif %}
+				{% endfor %}
+				</ul>
+		</div>
+	</div>
 <br />
-<!-- ENDIF -->
+{% endif %}
