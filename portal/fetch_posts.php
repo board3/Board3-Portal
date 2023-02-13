@@ -251,7 +251,7 @@ class fetch_posts
 				),
 			),
 			'WHERE' => $this->topic_type . '
-					' . $post_time . '
+					' . $this->db->sql_escape($post_time) . '
 					AND t.topic_status <> ' . ITEM_MOVED . '
 					AND t.topic_visibility = 1
 					AND t.topic_moved_id = 0
@@ -266,11 +266,11 @@ class fetch_posts
 		// Cache queries for 30 seconds
 		if ($number_of_posts != 0)
 		{
-			$result = $this->db->sql_query_limit($sql, $number_of_posts, $start, 30);
+			$result = $this->db->sql_query_limit($sql, $number_of_posts, $start, 10);
 		}
 		else
 		{
-			$result = $this->db->sql_query($sql, 30);
+			$result = $this->db->sql_query($sql, 15);
 		}
 
 		return $result;
@@ -634,7 +634,7 @@ class fetch_posts
 		}
 		else
 		{
-			$message = str_replace("\n", '<br/> ', $row['post_text']);
+			$message = str_replace("\n", "\r", $row['post_text']);
 		}
 
 		return $message;
