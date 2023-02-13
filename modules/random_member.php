@@ -56,18 +56,28 @@ class random_member extends module_base
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var string PHP file extension */
+	protected $php_ext;
+
+	/** @var string phpBB root path */
+	protected $phpbb_root_path;
+
 	/**
 	* Construct a random member object
 	*
 	* @param \phpbb\db\driver $db phpBB database system
 	* @param \phpbb\template $template phpBB template
 	* @param \phpbb\user $user phpBB user object
+	* @param string $phpbb_root_path phpBB root path
+	* @param string $phpEx PHP file extension
 	*/
-	public function __construct($db, $template, $user)
+	public function __construct($db, $template, $user, $phpbb_root_path, $phpEx)
 	{
 		$this->db = $db;
 		$this->template = $template;
 		$this->user = $user;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->php_ext = $phpEx;
 	}
 
 	/**
@@ -106,8 +116,12 @@ class random_member extends module_base
 		$result = $this->db->sql_query_limit($sql, 1);
 		$row = $this->db->sql_fetchrow($result);
 
-		$avatar_img = phpbb_get_avatar(\phpbb\avatar\manager::clean_row($row, 'user'), 'USER_AVATAR');
+		if (!function_exists('phpbb_get_user_rank'))
+		{
+			include($this->phpbb_root_path . 'includes/functions_display.' . $this->php_ext);
+		}
 
+		$avatar_img = phpbb_get_user_avatar($row);
 		$rank_data = phpbb_get_user_rank($row, $row['user_posts']);
 
 		$username = $row['username'];

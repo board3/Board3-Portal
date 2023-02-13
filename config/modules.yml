@@ -223,6 +223,8 @@ services:
             - '@dbal.conn'
             - '@template'
             - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
         tags:
             - { name: board3.portal.module }
 
