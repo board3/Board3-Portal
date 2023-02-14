@@ -4,20 +4,25 @@
 	"description": "Adds a portal with several blocks to your forum. You can change the settings, move the blocks, add new blocks and more in the ACP.",
 	"homepage": "https://www.board3.de",
 	"version": "2.3.0",
-	"time": "2023-01-30 21:00:14",
+	"time": "2023-02-14 20:53:38",
 	"license": "GPL-2.0-only",
 	"authors": [{
 			"name": "Marc Alexander",
 			"email": "admin@m-a-styles.de",
-			"homepage": "http://www.m-a-styles.de",
-			"role": "Lead Developer"
+			"homepage": "https://www.m-a-styles.de",
+			"role": "Developer"
 		},
 		{
 			"name": "Joas Schilling",
-			"email": "nickvergessen@gmx.de",
-			"homepage": "http://mods.flying-bits.org",
+			"homepage": "https://www.schilljs.com/",
+			"role": "Former Developer"
+		},
+		{
+			"name": "Kirk",
+			"homepage": "https://reyno41.bplaced.net/phpbb/",
 			"role": "Developer"
-		}],
+		}
+	],
 	"require": {
 		"php": ">=7.1.0,<8.3.0",
 		"marc1706/phpbb-text-shortener": "^0.3.0"
