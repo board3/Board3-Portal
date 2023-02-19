@@ -132,7 +132,7 @@ phpbb.b3pFlipClock = function(identifierUp, identifierDown, val, type) {
 								'margin-top': '0px'
 							});
 						}
-					} 
+					}
 				);
 			}
 		}

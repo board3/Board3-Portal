@@ -567,12 +567,12 @@ dd.responsive-portal-news:last-of-type, dd.responsive-portal-announcements:last-
 
 .portal-clock-front-minutes-down-left {
 	background-position: 0 -22px;
-	margin: 21px 0 0 42px;
+	margin: 21px 0 0 43px;
 }
 
 .portal-clock-front-minutes-down-right {
 	background-position: 0 -65px;
-	margin: 21px 0 0 63px;
+	margin: 21px 0 0 64px;
 }
 
 /* Seconds start
@@ -609,12 +609,12 @@ dd.responsive-portal-news:last-of-type, dd.responsive-portal-announcements:last-
 
 .portal-clock-front-seconds-down-left {
 	background-position: 0 -22px;
-	margin: 21px 0 0 84px;
+	margin: 21px 0 0 85px;
 }
 
 .portal-clock-front-seconds-down-right {
 	background-position: 0 -65px;
-	margin: 21px 0 0 105px;
+	margin: 21px 0 0 106px;
 }
 
 /* Hours start
