@@ -38,7 +38,6 @@ $lang = array_merge($lang, array(
 	// ACP
 	'ACP_PORTAL_CUSTOM_SETTINGS'			=> 'إعدادات الموديل الخاص',
 	'ACP_PORTAL_CUSTOM_SETTINGS_EXP'		=> 'من هنا تستطيع تخصيص الموديل الخاص',
-	'ACP_PORTAL_CUSTOM_CODE_SHORT'			=> 'الكود البرمجي الذي أدخلته غير كافي. يجب زيادة الكود.',
 	'ACP_PORTAL_CUSTOM_PREVIEW'				=> 'استعراض',
 	'ACP_PORTAL_CUSTOM_CODE'				=> 'المحتوى ',
 	'ACP_PORTAL_CUSTOM_CODE_EXP'			=> 'أدخل الكود الذي سيظهر في هذا الموديل ( المسموح به هو HTML أو BBCode ).',

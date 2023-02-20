@@ -33,7 +33,6 @@ $lang = array_merge($lang, array(
 	'PORTAL_WELCOME'		=> 'Welkomsbericht',
 	// ACP
 	'ACP_PORTAL_WELCOME_SETTINGS'			=> 'Welkomsbericht instellingen',
-	'ACP_PORTAL_WELCOME_MESSAGE_SHORT'		=> 'Het bericht wat je hebt ingevoerd is niet lang genoeg.',
 	'ACP_PORTAL_WELCOME_PREVIEW'			=> 'Welkomsbericht voorbeeld',
 	'ACP_PORTAL_WELCOME_MESSAGE'			=> 'Welkomsbericht',
 	'ACP_PORTAL_WELCOME_MESSAGE_EXP'		=> 'Je kan het welkomsbericht veranderen in het tekstvak. BBCode, afbeeldingen en URLs zijn toegestaan.',

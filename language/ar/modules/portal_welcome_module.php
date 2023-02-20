@@ -37,7 +37,6 @@ $lang = array_merge($lang, array(
 
 	// ACP
 	'ACP_PORTAL_WELCOME_SETTINGS'			=> 'إعدادات رسالة الترحيب',
-	'ACP_PORTAL_WELCOME_MESSAGE_SHORT'		=> 'الرسالة التي أدخلتها قصيرة جداً.',
 	'ACP_PORTAL_WELCOME_PREVIEW'			=> 'استعراض رسالة الترحيب',
 	'ACP_PORTAL_WELCOME_MESSAGE'			=> 'رسالة الترحيب ',
 	'ACP_PORTAL_WELCOME_MESSAGE_EXP'		=> 'من هنا تستطيع تغيير رسالة الترحيب. أكواد BBCode / الصور / الروابط مسموح بها.',

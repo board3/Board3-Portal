@@ -36,7 +36,6 @@ $lang = array_merge($lang, array(
 
 	// ACP
 	'ACP_PORTAL_WELCOME_SETTINGS'			=> 'Configuración de Mensaje de Bienvenida',
-	'ACP_PORTAL_WELCOME_MESSAGE_SHORT'		=> 'El mensaje que has introducido no es lo suficientemente largo.',
 	'ACP_PORTAL_WELCOME_PREVIEW'			=> 'Vista previa del mensaje de bienvenida',
 	'ACP_PORTAL_WELCOME_MESSAGE'			=> 'Mensaje de Bienvenida',
 	'ACP_PORTAL_WELCOME_MESSAGE_EXP'		=> 'Puede editar el mensaje de bienvenida en este cuadro de texto. BBCodes, imágenes y URLs están permitidos.',

@@ -34,7 +34,6 @@ $lang = array_merge($lang, array(
 	// ACP
 	'ACP_PORTAL_CUSTOM_SETTINGS'			=> 'Aangepast blok Instelingen',
 	'ACP_PORTAL_CUSTOM_SETTINGS_EXP'		=> 'Hier kan je het aangepaste blok aanpassen',
-	'ACP_PORTAL_CUSTOM_CODE_SHORT'			=> 'De code die je hebt ingevoerd is niet lang genoeg.',
 	'ACP_PORTAL_CUSTOM_PREVIEW'				=> 'Voorbeeld',
 	'ACP_PORTAL_CUSTOM_CODE'				=> 'Code aangepast blok',
 	'ACP_PORTAL_CUSTOM_CODE_EXP'			=> 'Verander de code voor het smalle aangepaste blok (HTML of BBCode) hier.',

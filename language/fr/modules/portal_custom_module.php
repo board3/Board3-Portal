@@ -38,7 +38,6 @@ $lang = array_merge($lang, array(
 	// ACP
 	'ACP_PORTAL_CUSTOM_SETTINGS'			=> 'Paramètres du bloc personnalisé',
 	'ACP_PORTAL_CUSTOM_SETTINGS_EXP'		=> 'Ici vous personnalisez le bloc personnalisé.',
-	'ACP_PORTAL_CUSTOM_CODE_SHORT'			=> 'Le code que vous avez entré n’est pas assez long.',
 	'ACP_PORTAL_CUSTOM_PREVIEW'				=> 'Aperçu',
 	'ACP_PORTAL_CUSTOM_CODE'				=> 'Code du bloc personnalisé',
 	'ACP_PORTAL_CUSTOM_CODE_EXP'			=> 'Saisir le code pour le bloc personnalisé (HTML ou BBCode) ici.',
