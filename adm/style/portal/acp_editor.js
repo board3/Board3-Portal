@@ -283,7 +283,7 @@ function split_lines(text)
 					j++;
 				}
 			}
-			while(splitAt != -1)
+			while (splitAt != -1)
 		}
 	}
 	return splitLines;

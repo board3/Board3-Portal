@@ -1,6 +1,6 @@
 {% for minical in loops.minical %}
 {% if minical.MODULE_ID eq definition.MODULE_ID %}
-<a id="minical{{ minical.MODULE_ID }}"></a>
+<a style="display: inline;" id="minical{{ minical.MODULE_ID }}"></a>
 {{ definition.LR_BLOCK_H_L }}{% if definition.S_BLOCK_ICON %}
 {% if definition.FA_ENABLED %}
 	<i class="icon b3p-icon fa {{ definition.FA_ICON }}" style="font-size: {{ definition.FA_SIZE }}px;" aria-hidden="true"></i>

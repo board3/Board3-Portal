@@ -54,12 +54,31 @@ class v230_fa extends migration
 			'\board3\portal\modules\calendar'		=> 'fa-calendar',
 			'\board3\portal\modules\leaders'		=> 'fa-users',
 			'\board3\portal\modules\latest_bots'	=> 'fa-android',
-			'\board3\portal\modules\links'	=> 'fa-link',
+			'\board3\portal\modules\links'			=> 'fa-link',
+			'\board3\portal\modules\welcome'		=> 'fa-hand-spock-o',
+			'\board3\portal\modules\recent'			=> 'fa-newspaper-o',
+			'\board3\portal\modules\announcements'	=> 'fa-bullhorn',
+			'\board3\portal\modules\news'			=> 'fa-file-text',
+			'\board3\portal\modules\poll'			=> 'fa-area-chart',
+			'\board3\portal\modules\whois_online'	=> 'fa-group',
 		];
 		foreach ($fa_icons as $key => $value)
 		{
 			$query = 'UPDATE ' . $this->table_prefix . "portal_modules
 				SET module_fa_icon = '" . $value . "'
+				WHERE module_classname = '" . $this->db->sql_escape($key) . "'";
+			$this->db->sql_query($query);
+		}
+		$module_image = [
+			'\board3\portal\modules\welcome'		=> 'portal_welcome.png',
+			'\board3\portal\modules\recent'			=> 'portal_recent.png',
+			'\board3\portal\modules\news'			=> 'portal_latest_news.png',
+			'\board3\portal\modules\announcements'	=> 'portal_announcement.png',
+		];
+		foreach ($module_image as $key => $value)
+		{
+			$query = 'UPDATE ' . $this->table_prefix . "portal_modules
+				SET module_image_src = '" . $value . "'
 				WHERE module_classname = '" . $this->db->sql_escape($key) . "'";
 			$this->db->sql_query($query);
 		}

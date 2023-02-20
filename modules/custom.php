@@ -266,7 +266,7 @@ class custom extends module_base
 				// first check for obvious errors, we don't want to waste server resources
 				if (empty($custom_code))
 				{
-					trigger_error($this->user->lang['ACP_PORTAL_CUSTOM_CODE_SHORT']. adm_back_link($u_action), E_USER_WARNING);
+					trigger_error($this->user->lang['TOO_FEW_CHARS']. adm_back_link($u_action), E_USER_WARNING);
 				}
 
 				if ($custom_bbcode)

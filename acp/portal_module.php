@@ -275,8 +275,8 @@ class portal_module
 
 					$sql_ary = array(
 						'module_image_src'		=> $this->request->variable('module_image', ''),
-						'module_image_width'	=> $this->request->variable('module_img_width', 0),
-						'module_image_height'	=> $this->request->variable('module_img_height', 0),
+						'module_image_width'	=> $this->request->variable('module_img_width', 16),
+						'module_image_height'	=> $this->request->variable('module_img_height', 16),
 						'module_fa_icon'		=> $this->request->variable('module_fa', ''),
 						'module_fa_size'		=> $this->request->variable('module_fa_size', 16),
 						'module_group_ids'		=> $module_permission,

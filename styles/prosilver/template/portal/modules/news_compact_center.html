@@ -19,7 +19,7 @@
 {% if news_row.S_FIRST_ROW  %}
 {{ definition.CC_BLOCK_H_L }}{% if definition.S_BLOCK_ICON %}
 {% if definition.FA_ENABLED %}
-	<dt style="margin-top: 1px;" id="a_{{ definition.MODULE_ID }}"><i class="icon b3p-icon fa {{ definition.FA_ICON }}" style="font-size: {{ definition.FA_SIZE }}px;" aria-hidden="true"></i>&nbsp;{{ definition.TITLE }}</dt>
+	<dt style="margin-top: -1px;" id="a_{{ definition.MODULE_ID }}"><i class="icon b3p-icon fa {{ definition.FA_ICON }}" style="font-size: {{ definition.FA_SIZE }}px;" aria-hidden="true"></i>&nbsp;{{ definition.TITLE }}</dt>
 	{% if news.S_DISPLAY_NEWS_RVS %}
 		<dd class="posts responsive-portal-news">{{ lang('REPLIES') }}</dd>
 		<dd class="views responsive-portal-news">{{ lang('VIEWS') }}</dd>

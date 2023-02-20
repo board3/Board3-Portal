@@ -5,7 +5,7 @@
 }
 
 a {
-	display: inline;
+	display: inline-block;
 }
 
 ul {
@@ -13,7 +13,8 @@ ul {
 }
 
 .b3p-icon {
-	vertical-align: sub;
+	vertical-align: middle;
+	padding: 0 1px 3px 2px;
 }
 
 .portal-navigation{
