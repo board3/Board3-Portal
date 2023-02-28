@@ -18,8 +18,8 @@ function helpline(help)
 /**
 * Fix a bug involving the TextRange object. From
 * http://www.frostjedi.com/terra/scripts/demo/caretBug.html
-*/ 
-function initInsertions() 
+*/
+function initInsertions()
 {
 	var doc;
 
@@ -27,7 +27,7 @@ function initInsertions()
 	{
 		doc = document;
 	}
-	else 
+	else
 	{
 		doc = opener.document;
 	}
@@ -45,12 +45,12 @@ function initInsertions()
 * bbstyle
 */
 function bbstyle(bbnumber)
-{	
+{
 	if (bbnumber != -1)
 	{
 		bbfontstyle(bbtags[bbnumber], bbtags[bbnumber+1]);
-	} 
-	else 
+	}
+	else
 	{
 		insert_text('[*]');
 		document.getElementById(text_name).focus();
@@ -92,7 +92,7 @@ function bbfontstyle(bbopen, bbclose)
 
 	//The new position for the cursor after adding the bbcode
 	var caret_pos = getCaretPosition(textarea).start;
-	var new_pos = caret_pos + bbopen.length;		
+	var new_pos = caret_pos + bbopen.length;
 
 	// Open tag
 	insert_text(bbopen + bbclose);
@@ -103,7 +103,7 @@ function bbfontstyle(bbopen, bbclose)
 	{
 		textarea.selectionStart = new_pos;
 		textarea.selectionEnd = new_pos;
-	}	
+	}
 	// IE
 	else if (document.selection)
 	{
@@ -124,15 +124,15 @@ function insert_text(text, spaces, popup)
 {
 	var textarea;
 
-	if (!popup) 
+	if (!popup)
 	{
 		textarea = document.getElementById(text_name);
-	} 
-	else 
+	}
+	else
 	{
 		textarea = opener.document.getElementById(text_name);
 	}
-	if (spaces) 
+	if (spaces)
 	{
 		text = ' ' + text + ' ';
 	}
@@ -148,7 +148,7 @@ function insert_text(text, spaces, popup)
 	}
 	else if (textarea.createTextRange && textarea.caretPos)
 	{
-		if (baseHeight != textarea.caretPos.boundingHeight) 
+		if (baseHeight != textarea.caretPos.boundingHeight)
 		{
 			textarea.focus();
 			storeCaret(textarea);
@@ -161,7 +161,7 @@ function insert_text(text, spaces, popup)
 	{
 		textarea.value = textarea.value + text;
 	}
-	if (!popup) 
+	if (!popup)
 	{
 		textarea.focus();
 	}
@@ -298,7 +298,7 @@ function mozWrap(txtarea, open, close)
 	var selEnd = txtarea.selectionEnd;
 	var scrollTop = txtarea.scrollTop;
 
-	if (selEnd == 1 || selEnd == 2) 
+	if (selEnd == 1 || selEnd == 2)
 	{
 		selEnd = selLength;
 	}
@@ -424,7 +424,7 @@ function getCaretPosition(txtarea)
 		// calculate selection start point by moving beginning of range_all to beginning of range
 		var sel_start;
 		for (sel_start = 0; range_all.compareEndPoints('StartToStart', range) < 0; sel_start++)
-		{		
+		{
 			range_all.moveStart('character', 1);
 		}
 
@@ -432,7 +432,7 @@ function getCaretPosition(txtarea)
 
 		// we ignore the end value for IE, this is already dirty enough and we don't need it
 		caretPos.start = txtarea.sel_start;
-		caretPos.end = txtarea.sel_start;			
+		caretPos.end = txtarea.sel_start;
 	}
 
 	return caretPos;

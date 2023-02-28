@@ -32,7 +32,6 @@ phpbb.b3p_fix_right_column_margin = function() {
 		marginRight = 'margin-left';
 	}
 
-
 	if (width <= (895 - $.getScrollbarWidth())) {
 		// Get correct margin-left for portal-right and add 10px for padding
 		if ($portal_left.width() > 0) {
