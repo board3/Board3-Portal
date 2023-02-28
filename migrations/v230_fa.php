@@ -47,12 +47,12 @@ class v230_fa extends migration
 			'\board3\portal\modules\search'			=> 'fa-search',
 			'\board3\portal\modules\attachments'	=> 'fa-paperclip',
 			'\board3\portal\modules\topposters'		=> 'fa-pencil-square-o',
-			'\board3\portal\modules\latest_members'	=> 'fa-users',
+			'\board3\portal\modules\latest_members'	=> 'fa-user-plus',
 			'\board3\portal\modules\link_us'		=> 'fa-external-link',
 			'\board3\portal\modules\user_menu'		=> 'fa-user',
 			'\board3\portal\modules\statistics'		=> 'fa-bar-chart',
 			'\board3\portal\modules\calendar'		=> 'fa-calendar',
-			'\board3\portal\modules\leaders'		=> 'fa-users',
+			'\board3\portal\modules\leaders'		=> 'fa-user-secret',
 			'\board3\portal\modules\latest_bots'	=> 'fa-android',
 			'\board3\portal\modules\links'			=> 'fa-link',
 			'\board3\portal\modules\welcome'		=> 'fa-hand-spock-o',
@@ -60,7 +60,7 @@ class v230_fa extends migration
 			'\board3\portal\modules\announcements'	=> 'fa-bullhorn',
 			'\board3\portal\modules\news'			=> 'fa-file-text',
 			'\board3\portal\modules\poll'			=> 'fa-area-chart',
-			'\board3\portal\modules\whois_online'	=> 'fa-group',
+			'\board3\portal\modules\whois_online'	=> 'fa-user-o',
 		];
 		foreach ($fa_icons as $key => $value)
 		{
