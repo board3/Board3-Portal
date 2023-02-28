@@ -71,7 +71,7 @@ $lang = array_merge($lang, array(
 	'MODULE_IMAGE_HEIGHT'		=> 'Modul Bild Höhe',
 	'MODULE_IMAGE_HEIGHT_EXP'	=> 'Gebe die Höhe des Modul Bildes in Pixeln ein',
 	'MODULE_RESET'				=> 'Modul Einstellungen zurücksetzen',
-	'MODULE_RESET_EXP'			=> 'Dies wird alle Einstellungen des Moduls auf die Standardeinstellungen zurücksetzen!',
+	'MODULE_RESET_EXP'			=> 'Dies wird alle Einstellungen des Moduls auf die Standardeinstellungen zurücksetzen!<br>Aus technischen Gründen muss nach dem Zurücksetzen auf die Standardeinstellungen, das FA Icon erneut eingeben werden!<br>Passende Icons können der <a href="https://github.com/board3/Board3-Portal/wiki#empfohlene-fa-icons--recommended-fa-icons" target="_blank" rel="noopener noreferrer"><strong>Liste empfohlener FA-Icons</strong></a> entnommen werden.',
 	'MODULE_STATUS'				=> 'Aktiviere Modul',
 	'MODULE_ADD_ONCE'			=> 'Diese Modul kann nur ein Mal hinzugefügt werden.',
 	'MODULE_IMAGE_ERROR'		=> 'Während dem Prüfen des Modul Bildes sind ein oder mehrere Fehler aufgetreten:',

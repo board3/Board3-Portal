@@ -70,7 +70,7 @@ $lang = array_merge($lang, array(
 	'MODULE_IMAGE_HEIGHT'		=> 'Module image height',
 	'MODULE_IMAGE_HEIGHT_EXP'	=> 'Enter the height of the module image in pixels',
 	'MODULE_RESET'				=> 'Reset module configuration',
-	'MODULE_RESET_EXP'			=> 'This will reset all settings to the default!',
+	'MODULE_RESET_EXP'			=> 'This will reset all settings to the default!<br>Due to technical reason, Font Awesome Icons will have to be set manually again after the reset!<br>Fitting icons can be selected from the <a href="https://github.com/board3/Board3-Portal/wiki#empfohlene-fa-icons--recommended-fa-icons" target="_blank" rel="noopener noreferrer"><strong>list of recommended FA icons</strong></a>.',
 	'MODULE_STATUS'				=> 'Enable module',
 	'MODULE_ADD_ONCE'			=> 'This module can only be added once.',
 	'MODULE_IMAGE_ERROR'		=> 'There was an error while checking for the module image:',
