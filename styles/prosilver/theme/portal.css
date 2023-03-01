@@ -143,6 +143,10 @@ ul {
 	min-height: 1em;
 }
 
+.portal-module-postbody .portal-module-content li {
+	display: list-item;
+}
+
 .portal-stylechanger-select {
 	width: 150px;
 }
