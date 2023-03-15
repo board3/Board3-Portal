@@ -33,7 +33,7 @@ class forumlist extends module_base
 	* Default module-image:
 	* file must be in "{T_THEME_PATH}/images/portal/"
 	*/
-	public $image_src = 'portal_custom.png';
+	public $image_src = '';
 
 	/**
 	* module-language file

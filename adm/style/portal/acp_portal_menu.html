@@ -88,11 +88,11 @@
 		{% if MODULE_IMAGE_SRC %}
 		<dl>
 			<dt><label for="module_img_width">{{ lang('MODULE_IMAGE_WIDTH') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_IMAGE_WIDTH_EXP') }}</span></dt>
-			<dd><input id="module_img_width" type="number" value="{{ MODULE_IMAGE_WIDTH }}" name="module_img_width" min="1" />&nbsp;{{ lang('PIXEL') }}</dd>
+			<dd><input id="module_img_width" type="number" value="{{ MODULE_IMAGE_WIDTH }}" name="module_img_width" min="0" />&nbsp;{{ lang('PIXEL') }}</dd>
 		</dl>
 		<dl>
 			<dt><label for="module_img_height">{{ lang('MODULE_IMAGE_HEIGHT') }}{{ lang('COLON') }}</label><br /><span>{{ lang('MODULE_IMAGE_HEIGHT_EXP') }}</span></dt>
-			<dd><input id="module_img_height" type="number" value="{{ MODULE_IMAGE_HEIGHT }}" name="module_img_height" min="1" />&nbsp;{{ lang('PIXEL') }}</dd>
+			<dd><input id="module_img_height" type="number" value="{{ MODULE_IMAGE_HEIGHT }}" name="module_img_height" min="0" />&nbsp;{{ lang('PIXEL') }}</dd>
 		</dl>
 		{% endif %}
 		<dl>
@@ -101,7 +101,7 @@
 		</dl>
 		<dl>
 			<dt><label for="module_fa_size">{{ lang('MODULE_FA_SIZE') }}{{ lang('COLON') }}</label><br/><span>{{ lang('MODULE_FA_SIZE_EXP') }}</span></dt>
-			<dd><input id="module_fa_size" type="number" value="{{ MODULE_FA_SIZE }}" name="module_fa_size" min="1"/>&nbsp;{{ lang('PIXEL') }}</dd>
+			<dd><input id="module_fa_size" type="number" value="{{ MODULE_FA_SIZE }}" name="module_fa_size" min="0"/>&nbsp;{{ lang('PIXEL') }}</dd>
 		</dl>
 		{% endif %}
 		<dl>

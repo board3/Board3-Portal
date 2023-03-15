@@ -33,4 +33,5 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	'PORTAL_FORUMLIST'		=> 'Forumlist',
+	'PORTAL_FORUMLIST_EXP'		=> '<span style="color: #BC2A4D;">A module image or font awesome icon can’t be displayed in this module!</span>',
 ));
