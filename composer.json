@@ -4,7 +4,7 @@
 	"description": "Adds a portal with several blocks to your forum. You can change the settings, move the blocks, add new blocks and more in the ACP.",
 	"homepage": "https://www.board3.de",
 	"version": "2.3.0",
-	"time": "2023-02-14 20:53:38",
+	"time": "2023-03-19 09:58:18",
 	"license": "GPL-2.0-only",
 	"authors": [{
 			"name": "Marc Alexander",

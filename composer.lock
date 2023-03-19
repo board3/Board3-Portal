@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d77f6f3d8d4a1ef8b426abdb1ac09644",
+    "content-hash": "a9605bea31820bc73c4bd7d142cbba7c",
     "packages": [
         {
             "name": "marc1706/phpbb-text-shortener",
@@ -72,7 +72,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1.0,<8.2.0"
+        "php": ">=7.1.0,<8.3.0"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
